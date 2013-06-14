@@ -1,0 +1,19 @@
+//
+// Prefix header for all source files of the 'EliteHui' target in the 'EliteHui' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import "Util.h"
+    #import "GrandHeader.h"
+    #import "EliteHuiHttp.h"
+    #import "MKNetworkKit.h"
+    #import "SVProgressHUD.h"
+#endif
