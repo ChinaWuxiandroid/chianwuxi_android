@@ -94,6 +94,7 @@ public class FragmentManagers {
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.add(FRAME_CONTENT, saveFragment,arg);
 		ft.addToBackStack(null);
+		
 		ft.commit();
 	}
 

@@ -36,7 +36,6 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
-		// TODO Auto-generated method stub
 
 		switch (checkedId) {
 
