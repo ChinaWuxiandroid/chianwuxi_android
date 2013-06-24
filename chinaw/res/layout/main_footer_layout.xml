@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <RadioGroup
+        android:id="@+id/main_tab_radiogroup"
+        android:layout_marginTop="5dip"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/main_tab_index"
+            style="@style/main_tab_bottom"
+            android:checked="true"
+            android:drawableTop="@drawable/main_tab_index_style"
+            android:text="首页" />
+
+        <RadioButton
+            android:id="@+id/main_tab_search"
+            style="@style/main_tab_bottom"
+            android:drawableTop="@drawable/main_tab_search_style"
+            android:text="搜索" />
+
+        <RadioButton
+            android:id="@+id/main_tab_collect"
+            style="@style/main_tab_bottom"
+            android:drawableTop="@drawable/main_tab_collect_style"
+            android:text="收藏" />
+
+        <RadioButton
+            android:id="@+id/main_tab_mine"
+            style="@style/main_tab_bottom"
+            android:drawableTop="@drawable/main_tab_mine_style"
+            android:text="我的" />
+
+        <RadioButton
+            android:id="@+id/main_tab_more"
+            style="@style/main_tab_bottom"
+            android:drawableTop="@drawable/main_tab_more_style"
+            android:text="设置" />
+    </RadioGroup>
+
+</RelativeLayout>

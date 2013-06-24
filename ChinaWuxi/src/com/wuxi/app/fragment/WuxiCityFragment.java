@@ -35,7 +35,7 @@ public class WuxiCityFragment extends BaseFragment implements OnClickListener,
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		view = inflater.inflate(R.layout.wuxi_city_layout, null);
+		//view = inflater.inflate(R.layout.wuxi_city_layout, null);
 
 		this.inflater = inflater;
 		initUI();
@@ -55,7 +55,7 @@ public class WuxiCityFragment extends BaseFragment implements OnClickListener,
 		ib_nextItems = (ImageButton) view.findViewById(R.id.btn_next_screen);
 		ib_nextItems.setOnClickListener(this);
 
-		bindFragment(new ContentFragment());
+		bindFragment(new ContentFragment2());
 
 	}
 
@@ -67,8 +67,9 @@ public class WuxiCityFragment extends BaseFragment implements OnClickListener,
 	private List<TitleItemAction> getItems() {
 		List<TitleItemAction> items = new ArrayList<TitleItemAction>();
 
-		items.add(new TitleItemAction("无锡概览", new ContentFragment()));
-		items.add(new TitleItemAction("好友往来", new TestSwitchFragment()));
+		items.add(new TitleItemAction("无锡概览", new ContentFragment2()));
+		items.add(new TitleItemAction("好友往来", new TestSwitchFragment1()));
+		items.add(new TitleItemAction("好友往来", new TestSwitchFragment2()));
 		items.add(new TitleItemAction("无锡人文", null));
 		items.add(new TitleItemAction("大事记", null));
 		items.add(new TitleItemAction("无锡年鉴", null));
@@ -101,6 +102,7 @@ public class WuxiCityFragment extends BaseFragment implements OnClickListener,
 		ft.replace(R.id.model_main, fragment);// 替换内容界面
 
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+		ft.addToBackStack(null);	
 		ft.commit();
 	}
 }

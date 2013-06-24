@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RadioGroup
+            android:id="@+id/main_tab_radiogroup"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/main_tab_index"
+                style="@style/index_newstab_style"
+                android:background="@drawable/index_newstab_style"
+                android:checked="true"
+                android:text="头条新闻" />
+
+            <RadioButton
+                android:id="@+id/main_tab_search"
+                style="@style/index_newstab_style"
+                android:background="@drawable/index_newstab_style"
+                android:text="推荐公告" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/index_news_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#FCFCFC" />
+
+</LinearLayout>

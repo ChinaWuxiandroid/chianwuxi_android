@@ -8,13 +8,13 @@ import android.view.ViewGroup;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 
-public class TestSwitchFragment extends BaseFragment {
+public class TestSwitchFragment2 extends BaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 	
-		return inflater.inflate(R.layout.model_main_child1_layout,null);
+		return inflater.inflate(R.layout.model_main_child2_layout,null);
 	}
 
 	
