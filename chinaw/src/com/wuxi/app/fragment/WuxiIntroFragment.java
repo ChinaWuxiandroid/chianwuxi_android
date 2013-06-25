@@ -21,10 +21,15 @@ public class WuxiIntroFragment extends NavigatorFragment {
 
 		List<NavigatorItmeAction> naItems = new ArrayList<NavigatorItmeAction>();
 
+		int i=0;
 		for (String navigatorName : navigatorNames) {
 
 			naItems.add(new NavigatorItmeAction(navigatorName, DataFragment
-					.Instance(0)));
+					.Instance(i)));
+			i++;
+			if(i%4==0){
+				i=0;
+			}
 		}
 
 		return naItems;

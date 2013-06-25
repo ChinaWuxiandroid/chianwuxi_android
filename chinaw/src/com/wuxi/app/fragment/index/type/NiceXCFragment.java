@@ -85,6 +85,8 @@ public class NiceXCFragment extends BaseSlideFragment implements
 		items.add(new TitleItemAction("城市名片", null));
 		items.add(new TitleItemAction("城市地图", null));
 		items.add(new TitleItemAction("拉拉拉", null));
+		
+		items.add(new TitleItemAction("拉拉拉", null));
 
 		return items;
 	}

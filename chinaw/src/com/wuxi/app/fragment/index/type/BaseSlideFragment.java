@@ -47,6 +47,9 @@ public class BaseSlideFragment extends Fragment {
 			
 		}
 	};
+	
+	
+	
 
 	public void OpenOrCloseMenu(View souce) {
 		 fragment.OpearnLeft();
