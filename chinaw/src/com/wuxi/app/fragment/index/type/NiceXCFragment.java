@@ -15,8 +15,6 @@ import android.widget.ImageButton;
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.FriendlyFragment;
 import com.wuxi.app.fragment.WuxiIntroFragment;
-import com.wuxi.app.fragment.TestSwitchFragment1;
-import com.wuxi.app.fragment.TestSwitchFragment2;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.view.TitleScrollLayout;
 import com.wuxi.domain.TitleItemAction;
