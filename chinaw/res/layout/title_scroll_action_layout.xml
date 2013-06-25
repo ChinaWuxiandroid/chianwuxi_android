@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dip"
-    android:background="#C5D5E1" >
+    android:background="@drawable/title_na_bg" >
 
    <com.wuxi.app.view.TitleScrollLayout
         android:id="@+id/title_scroll_action"
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="5dip"
+        android:layout_marginRight="3dip"
         android:background="@drawable/title_scroll_next" />
 
 </RelativeLayout>

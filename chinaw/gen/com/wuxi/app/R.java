@@ -53,10 +53,15 @@ public final class R {
         public static final int main_tab_mine_style=0x7f02001d;
         public static final int main_tab_more_style=0x7f02001e;
         public static final int main_tab_search_style=0x7f02001f;
-        public static final int slide_back_btn=0x7f020020;
-        public static final int slide_member_btn=0x7f020021;
-        public static final int slide_open_close_btn=0x7f020022;
-        public static final int title_scroll_next=0x7f020023;
+        public static final int navgator_back=0x7f020020;
+        public static final int naviga_leftitem_back=0x7f020021;
+        public static final int slide_back_btn=0x7f020022;
+        public static final int slide_member_btn=0x7f020023;
+        public static final int slide_open_close_btn=0x7f020024;
+        public static final int title_item_bg=0x7f020025;
+        public static final int title_item_select_bg=0x7f020026;
+        public static final int title_na_bg=0x7f020027;
+        public static final int title_scroll_next=0x7f020028;
     }
     public static final class id {
         public static final int Title_Text=0x7f080002;
@@ -82,7 +87,7 @@ public final class R {
         public static final int left_tab_public_service=0x7f08001f;
         public static final int left_tab_xicheng=0x7f08001c;
         public static final int ll_main=0x7f080006;
-        public static final int lv_left_navigator =0x7f080004;
+        public static final int lv_left_navigator=0x7f080004;
         public static final int main_content=0x7f080015;
         public static final int main_tab_collect=0x7f080012;
         public static final int main_tab_index=0x7f08000a;

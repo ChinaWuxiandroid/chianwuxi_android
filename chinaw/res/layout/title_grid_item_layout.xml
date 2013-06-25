@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/title_item_bg"
+     >
 
     <TextView
         android:id="@+id/tv_actionname"
-        android:layout_width="45dip"
-        android:layout_height="45dip"
-        android:background="#1579C7"
+        android:layout_width="36dip"
+        android:layout_height="40dip"
+      	android:textSize="12sp"
         android:padding="5dip"
         android:text="无锡橄榄"
-        android:textColor="#ffffff" />
+        android:textStyle="bold"
+        android:textColor="#177CCA"
+         />
 
 </LinearLayout>

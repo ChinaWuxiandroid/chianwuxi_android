@@ -5,6 +5,8 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Scroller;
+import android.widget.TextView;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
@@ -35,7 +38,7 @@ public class TitleScrollLayout extends ViewGroup {
 	private Scroller mScroller;
 	private int mCurScreen;// 当前屏
 	private int totalScreenNum;// 总屏数
-
+	private int checkPostion = -1;
 	private int mDefaultScreen = 0;
 	private VelocityTracker mVelocityTracker;
 	private float mLastMotionX;
@@ -47,8 +50,18 @@ public class TitleScrollLayout extends ViewGroup {
 	private static final String TAG = "TITLESCROLLLAYOUT";
 	private int mTouchSlop;
 	private List<TitleItemAction> items = new ArrayList<TitleItemAction>();// 按钮数据
-	private LayoutInflater minflater;
+
 	private InitializContentLayoutListner initializContentLayoutListner;// 该自定义控件所在的fragment
+	private int perscreenCount = PERSCREEN_ITEM_COUNT;// 每屏数量,默认为7
+	private int checkPositons[];// 选中的坐标
+
+	public int getPerscreenCount() {
+		return perscreenCount;
+	}
+
+	public void setPerscreenCount(int perscreenCount) {
+		this.perscreenCount = perscreenCount;
+	}
 
 	public void setInitializContentLayoutListner(
 			InitializContentLayoutListner initializContentLayoutListner) {
@@ -160,14 +173,14 @@ public class TitleScrollLayout extends ViewGroup {
 	 * 下一屏
 	 */
 	public void goNextScreen() {
+
 		if (mCurScreen == totalScreenNum) {
-			
+
 			snapToScreen(0);
-		
-		}else{
+
+		} else {
 			snapToScreen(mCurScreen + 1);
 		}
-	
 
 	}
 
@@ -181,7 +194,7 @@ public class TitleScrollLayout extends ViewGroup {
 
 		final int action = event.getAction();
 		final float x = event.getX();
-		final float y = event.getY();
+		// final float y = event.getY();
 
 		switch (action) {
 		case MotionEvent.ACTION_DOWN:
@@ -283,16 +296,22 @@ public class TitleScrollLayout extends ViewGroup {
 		if (items == null) {
 			return;
 		}
-		minflater = inflater;
+
 		int i = 0;
-		totalScreenNum = items.size() / PERSCREEN_ITEM_COUNT;// 屏数
+		totalScreenNum = items.size() / getPerscreenCount();// 屏数
+
+		checkPositons = new int[totalScreenNum + 1];
+		for (int j = 0; j < checkPositons.length; j++) {// 初始化头部安选中的下标
+			checkPositons[j] = -1;
+		}
+
 		int currentScreen = 0;// 当前屏
 
 		List<TitleItemAction> onScreenItems = null;// 一个屏上的图标
 
 		for (TitleItemAction item : items) {
 
-			if (i % PERSCREEN_ITEM_COUNT == 0) {
+			if (i % getPerscreenCount() == 0) {
 				currentScreen++;
 				if (onScreenItems != null) {
 					GridView child = (GridView) inflater.inflate(
@@ -329,6 +348,7 @@ public class TitleScrollLayout extends ViewGroup {
 
 				child.setOnItemClickListener(new btnClickListener());
 				addView(child);
+
 			}
 
 			i++;
@@ -343,6 +363,33 @@ public class TitleScrollLayout extends ViewGroup {
 
 			TitleItemAction tAction = (TitleItemAction) parent
 					.getItemAtPosition(position);
+
+			/**
+			 * 切换选中与未选择的样式
+			 */
+			if (checkPositons[mCurScreen] != position) {
+				View checkView = parent.getChildAt(position);
+				checkView.setBackground(getResources().getDrawable(
+						R.drawable.title_item_select_bg));
+				TextView tv_Check = (TextView) checkView
+						.findViewById(R.id.tv_actionname);
+				tv_Check.setTextColor(Color.WHITE);
+
+				View oldCheckView = parent
+						.getChildAt(checkPositons[mCurScreen]);
+				if (null != oldCheckView) {
+					oldCheckView.setBackground(getResources().getDrawable(
+							R.drawable.title_item_bg));
+
+					TextView tv_oldCheck = (TextView) oldCheckView
+							.findViewById(R.id.tv_actionname);
+					tv_oldCheck.setTextColor(Color.parseColor("#177CCA"));
+
+				}
+
+				checkPositons[mCurScreen] = position;
+			}
+
 			BaseFragment fragment = tAction.getBaseFragment();
 			if (fragment == null) {
 				return;
