@@ -5,8 +5,12 @@ import java.util.List;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.ContentNavigatorAdapter;
+import com.wuxi.app.engine.ChannelService;
+import com.wuxi.app.util.CacheUtil;
+import com.wuxi.domain.Channel;
 import com.wuxi.domain.NavigatorItmeAction;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,6 +34,10 @@ public abstract class NavigatorFragment extends BaseFragment implements
 	protected View view;
 	protected ListView mListView;// 左侧ListView
 	protected LayoutInflater mInflater;
+	private Channel parentChannel;// 父频道
+	private Context context;
+
+	private List<Channel> channels;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,13 +45,40 @@ public abstract class NavigatorFragment extends BaseFragment implements
 
 		view = inflater.inflate(R.layout.content_navigator_layout, null);
 		mListView = (ListView) view.findViewById(R.id.lv_left_navigator);
-		
-		Drawable drawable=getResources().getDrawable(R.drawable.navgator_back);
+
+		Drawable drawable = getResources()
+				.getDrawable(R.drawable.navgator_back);
 		mListView.setSelector(drawable);
 		mInflater = inflater;
+		context=getActivity();
 		initData();
 
 		return view;
+
+	}
+
+	@SuppressWarnings("unchecked")
+	private void loadData() {
+
+		if (null != CacheUtil.get(parentChannel.getChannelId())) {// 从缓存中查找
+			channels = (List<Channel>) CacheUtil.get(parentChannel
+					.getChannelId());
+
+		} else {// 从网络加载
+
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+
+					ChannelService channelService=new ChannelService(context);
+					
+				}
+			}
+
+			).start();
+
+		}
 
 	}
 
@@ -62,8 +97,6 @@ public abstract class NavigatorFragment extends BaseFragment implements
 
 		}
 
-		
-
 	}
 
 	@Override
@@ -72,7 +105,7 @@ public abstract class NavigatorFragment extends BaseFragment implements
 		NavigatorItmeAction naItem = (NavigatorItmeAction) parent
 				.getItemAtPosition(position);
 		DataFragment df = (DataFragment) naItem.getFrament();
-		
+
 		showContentFragment(df);
 
 	}
@@ -98,4 +131,7 @@ public abstract class NavigatorFragment extends BaseFragment implements
 
 	}
 
+	public void setParentChannel(Channel parentChannel) {
+		this.parentChannel = parentChannel;
+	}
 }

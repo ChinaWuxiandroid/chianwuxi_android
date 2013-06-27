@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="50dip"
     android:background="@drawable/title_na_bg" >
-
+	
    <com.wuxi.app.view.TitleScrollLayout
         android:id="@+id/title_scroll_action"
         android:layout_width="fill_parent"

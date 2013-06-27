@@ -1,8 +1,6 @@
 package com.wuxi.app.adapter;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,24 +8,32 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.wuxi.app.R;
+import com.wuxi.domain.MenuItem;
+
 public class IndexGridAdapter extends BasicAdapter {
 
-	List<Map<String, Object>> List = new ArrayList<Map<String, Object>>();
+	private List<MenuItem> menuItems;
+	int[] image = { R.drawable.index_msg_public, R.drawable.index_meili_wuxi,
+			R.drawable.index_msg_center, R.drawable.index_gover_holl,
+			R.drawable.index_server_public, R.drawable.index_hudong,
+			R.drawable.index_hudong, R.drawable.index_hudong,
+			R.drawable.index_hudong, };
 
-	public IndexGridAdapter(LayoutInflater inflater, int view, int[] viewId,List<Map<String, Object>> data, String[] dataName) {
+	public IndexGridAdapter(LayoutInflater inflater, int view, int[] viewId,
+			List<MenuItem> menuItems, String[] dataName) {
 		super(inflater, view, viewId, dataName);
-		// TODO Auto-generated constructor stub
-		this.List = data;
+		this.menuItems = menuItems;
 	}
 
 	@Override
 	public int getCount() {
-		return List.size();
+		return menuItems.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return List.get(position);
+		return menuItems.get(position);
 	}
 
 	@Override
@@ -39,25 +45,27 @@ public class IndexGridAdapter extends BasicAdapter {
 		public ImageView image;
 		public TextView title_text;
 	}
-	
-	
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Map<String, Object> map= List.get(position);
+		MenuItem menuItem = menuItems.get(position);
 		ViewHolder viewHolder = null;
 		if (convertView == null) {
 			convertView = getInflater().inflate(getView(), null);
 			int[] viewId = getViewId();
 			viewHolder = new ViewHolder();
 			viewHolder.image = (ImageView) convertView.findViewById(viewId[0]);
-			viewHolder.title_text = (TextView) convertView.findViewById(viewId[1]);
+			viewHolder.title_text = (TextView) convertView
+					.findViewById(viewId[1]);
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		String[] dataName = getDataName();
-		viewHolder.image.setImageResource(Integer.parseInt(map.get(dataName[0]).toString()));
-		viewHolder.title_text.setText(map.get(dataName[1]).toString());
+		if (position > 5) {
+			position = 0;
+		}
+		viewHolder.image.setImageResource(image[position]);// 图片暂时做死了，
+		viewHolder.title_text.setText(menuItem.getName());
 		return convertView;
 	}
 

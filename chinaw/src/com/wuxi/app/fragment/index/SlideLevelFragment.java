@@ -12,9 +12,10 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.index.type.BaseSlideFragment;
-import com.wuxi.app.fragment.index.type.NiceXCFragment;
+import com.wuxi.app.fragment.index.type.ChannelFragment;
 import com.wuxi.app.fragment.index.type.PublicGoverMsgFragment;
 import com.wuxi.app.view.SlideMenuLayout;
+import com.wuxi.domain.MenuItem;
 
 public class SlideLevelFragment extends BaseFragment implements
 		OnCheckedChangeListener {
@@ -24,17 +25,24 @@ public class SlideLevelFragment extends BaseFragment implements
 	private SlideMenuLayout mSlideMenuLayout;
 	private RadioGroup radioGroup;
 	private int mCurrentFragmentId = 0;
+	private MenuItem menuItem;// 首页选中的菜单
+
+	public void setMenuItem(MenuItem menuItem) {
+		this.menuItem = menuItem;
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		view = inflater.inflate(R.layout.slide_level_layout, null);
-		mSlideMenuLayout = (SlideMenuLayout) view.findViewById(R.id.slide_menu_layout);
+		mSlideMenuLayout = (SlideMenuLayout) view
+				.findViewById(R.id.slide_menu_layout);
 		mSlideMenuLayout.setLeftSlideMenuId(R.id.left_menu);
 		mSlideMenuLayout.setRightSlideMenuId(R.id.right_menu);
 		mSlideMenuLayout.reset();
-		radioGroup = (RadioGroup) view.findViewById(R.id.slide_left_tab_radiogroup);
+		radioGroup = (RadioGroup) view
+				.findViewById(R.id.slide_left_tab_radiogroup);
 		radioGroup.setOnCheckedChangeListener(this);
 		return view;
 	}
@@ -45,6 +53,7 @@ public class SlideLevelFragment extends BaseFragment implements
 		super.onCreate(savedInstanceState);
 		init();
 	}
+
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		// TODO Auto-generated method stub
@@ -52,11 +61,11 @@ public class SlideLevelFragment extends BaseFragment implements
 		switch (checkedId) {
 
 		case R.id.left_tab_public_goverment:// 政府信息公开
-			onTransaction(new PublicGoverMsgFragment(),checkedId);
+			onTransaction(new PublicGoverMsgFragment(), checkedId);
 			break;
 
 		case R.id.left_tab_xicheng:// 魅力锡城
-			onTransaction(new NiceXCFragment(), checkedId);
+			onTransaction(new ChannelFragment(), checkedId);
 			break;
 
 		case R.id.left_tab_msg_center:// 资讯中心
@@ -76,21 +85,24 @@ public class SlideLevelFragment extends BaseFragment implements
 			break;
 		}
 	}
-	
+
 	private void init() {
-		switch (this.position) {
+		switch (menuItem.getType()) {// 菜单类型
 		case 0:
-			onTransaction(new PublicGoverMsgFragment(), R.id.left_tab_public_goverment);
+			onTransaction(new PublicGoverMsgFragment(),
+					R.id.left_tab_public_goverment);
 			break;
 
-		case 1:
-			onTransaction(new NiceXCFragment(), R.id.left_tab_xicheng);
+		case MenuItem.CHANNEL_MENU:// 如果点击的频道菜单
+			ChannelFragment ch = new ChannelFragment();
+			ch.setMenuItem(menuItem);
+			onTransaction(ch, R.id.left_tab_xicheng);
 			break;
 		case 2:
-			
+
 			break;
 		}
-		
+
 	}
 
 	private void onTransaction(BaseSlideFragment fragment, int id) {
@@ -101,7 +113,7 @@ public class SlideLevelFragment extends BaseFragment implements
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(FRAME_CONTENT, fragment);
 		fragment.setFragment(this);
-		
+
 		ft.addToBackStack(null);
 		ft.commit();
 	}
@@ -129,16 +141,16 @@ public class SlideLevelFragment extends BaseFragment implements
 	public void setUnTouchableOffset(float start, float end) {
 		mSlideMenuLayout.setUnTouchableOffset(start, end);
 	}
-	
-	public void OpearnLeft(){
-		if(isLeftMenuEnabled())
+
+	public void OpearnLeft() {
+		if (isLeftMenuEnabled())
 			closeSlideMenu();
 		else
 			openLeftSlideMenu();
 	}
-	
-	public void OpearnRight(){
-		if(isRightMenuEnabled())
+
+	public void OpearnRight() {
+		if (isRightMenuEnabled())
 			closeSlideMenu();
 		else
 			openRightSlideMenu();

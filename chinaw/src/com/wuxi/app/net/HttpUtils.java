@@ -62,7 +62,10 @@ public final class HttpUtils {
 		String result = null;
 		try {
 			entity = httpResponse.getEntity();
-			result = EntityUtils.toString(entity, "UTF-8");
+			if(entity!=null){
+				result = EntityUtils.toString(entity, "UTF-8");
+			}
+			
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

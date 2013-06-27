@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,9 +23,10 @@ import android.widget.TextView;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.adapter.TitleActionAdapter;
+import com.wuxi.app.adapter.TitleChannelAdapter;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
-import com.wuxi.domain.TitleItemAction;
+import com.wuxi.domain.Channel;import com.wuxi.domain.Channel;
+
 
 /**
  * 头部可滑动自定义view
@@ -48,7 +50,7 @@ public class TitleScrollLayout extends ViewGroup {
 	private static final int SNAP_VELOCITY = 1200;
 	private static final String TAG = "TITLESCROLLLAYOUT";
 	private int mTouchSlop;
-	private List<TitleItemAction> items = new ArrayList<TitleItemAction>();// 按钮数据
+	private List<Channel> items = new ArrayList<Channel>();//  pindao 
 
 	private InitializContentLayoutListner initializContentLayoutListner;// 该自定义控件所在的fragment
 	private int perscreenCount = PERSCREEN_ITEM_COUNT;// 每屏数量,默认为7
@@ -67,7 +69,7 @@ public class TitleScrollLayout extends ViewGroup {
 		this.initializContentLayoutListner = initializContentLayoutListner;
 	}
 
-	public void setItems(List<TitleItemAction> items) {
+	public void setItems(List<Channel> items) {
 		this.items = items;
 	}
 
@@ -306,9 +308,9 @@ public class TitleScrollLayout extends ViewGroup {
 
 		int currentScreen = 0;// 当前屏
 
-		List<TitleItemAction> onScreenItems = null;// 一个屏上的图标
+		List<Channel> onScreenItems = null;// 一个屏上的图标
 
-		for (TitleItemAction item : items) {
+		for (Channel item : items) {
 
 			if (i % getPerscreenCount() == 0) {
 				currentScreen++;
@@ -316,7 +318,7 @@ public class TitleScrollLayout extends ViewGroup {
 					GridView child = (GridView) inflater.inflate(
 							R.layout.title_action_gridview_layout, null);
 
-					child.setAdapter(new TitleActionAdapter(LayoutInflater
+					child.setAdapter(new TitleChannelAdapter(LayoutInflater
 							.from(context), R.layout.title_grid_item_layout,
 							new int[] { R.id.tv_actionname }, null,
 							onScreenItems));
@@ -325,13 +327,13 @@ public class TitleScrollLayout extends ViewGroup {
 					addView(child);
 				}
 
-				onScreenItems = new ArrayList<TitleItemAction>();
+				onScreenItems = new ArrayList<Channel>();
 			}
 
 			// 最后一屏操作
 			if (currentScreen > totalScreenNum + 1) {
 
-				onScreenItems = new ArrayList<TitleItemAction>();
+				onScreenItems = new ArrayList<Channel>();
 			}
 
 			onScreenItems.add(item);
@@ -341,7 +343,7 @@ public class TitleScrollLayout extends ViewGroup {
 				GridView child = (GridView) inflater.inflate(
 						R.layout.title_action_gridview_layout, null);
 
-				child.setAdapter(new TitleActionAdapter(LayoutInflater
+				child.setAdapter(new TitleChannelAdapter(LayoutInflater
 						.from(context), R.layout.title_grid_item_layout,
 						new int[] { R.id.tv_actionname }, null, onScreenItems));
 
@@ -360,7 +362,7 @@ public class TitleScrollLayout extends ViewGroup {
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
 
-			TitleItemAction tAction = (TitleItemAction) parent
+			Channel channel = (Channel) parent
 					.getItemAtPosition(position);
 
 			/**
@@ -389,7 +391,7 @@ public class TitleScrollLayout extends ViewGroup {
 				checkPositons[mCurScreen] = position;
 			}
 
-			BaseFragment fragment = tAction.getBaseFragment();
+			Fragment fragment = channel.getFragment();
 			if (fragment == null) {
 				return;
 			}

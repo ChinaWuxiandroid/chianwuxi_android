@@ -39,29 +39,24 @@
                     android:background="#00000000"
                     android:orientation="horizontal" >
 
-                    <!--
-                <GridView
-                    android:id="@+id/gridview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="#FCFCFC"
-                    android:horizontalSpacing="1dip" >
-                </GridView>
-                    -->
-
                     <com.wuxi.app.view.MyGridView
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         android:id="@+id/gridview"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:background="#FCFCFC"
+                        android:gravity="center"
                         android:horizontalSpacing="1dip"
                         android:verticalSpacing="1dip" >
                     </com.wuxi.app.view.MyGridView>
                 </LinearLayout>
             </HorizontalScrollView>
+
+            <ProgressBar
+                android:id="@+id/index_progess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal" />
 
             <LinearLayout
                 android:layout_width="fill_parent"

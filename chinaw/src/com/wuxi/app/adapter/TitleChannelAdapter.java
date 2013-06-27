@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.wuxi.domain.Channel;
 import com.wuxi.domain.TitleItemAction;
 
 /**
@@ -16,13 +17,13 @@ import com.wuxi.domain.TitleItemAction;
  * @author wanglu
  * 
  */
-public class TitleActionAdapter extends BasicAdapter {
+public class TitleChannelAdapter extends BasicAdapter {
 
 
-	private List<TitleItemAction> items = new ArrayList<TitleItemAction>();
+	private List<Channel> items ;
 
-	public TitleActionAdapter(LayoutInflater inflater, int view, int[] viewId,
-			String[] dataName, List<TitleItemAction> items) {
+	public TitleChannelAdapter(LayoutInflater inflater, int view, int[] viewId,
+			String[] dataName, List<Channel> items) {
 		super(inflater, view, viewId, dataName);
 		this.items = items;
 
@@ -53,7 +54,7 @@ public class TitleActionAdapter extends BasicAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		String actionName = items.get(position).getActionName();
+		String chanelName = items.get(position).getChannelName();//pin dao name
 		ViewHolder viewHolder = null;
 
 		if (convertView == null) {
@@ -68,7 +69,7 @@ public class TitleActionAdapter extends BasicAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		viewHolder.title_text.setText(actionName);
+		viewHolder.title_text.setText(chanelName);
 		return convertView;
 	}
 
