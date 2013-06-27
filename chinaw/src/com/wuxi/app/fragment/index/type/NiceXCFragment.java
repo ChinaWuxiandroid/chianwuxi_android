@@ -76,6 +76,8 @@ public class NiceXCFragment extends BaseSlideFragment implements
 	 */
 	private List<TitleItemAction> getItems() {
 		List<TitleItemAction> items = new ArrayList<TitleItemAction>();
+		
+		
 
 		items.add(new TitleItemAction("无锡概览", new WuxiIntroFragment()));
 		items.add(new TitleItemAction("友好往来", new FriendlyFragment()));

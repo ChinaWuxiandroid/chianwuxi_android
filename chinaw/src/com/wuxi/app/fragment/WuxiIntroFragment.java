@@ -19,6 +19,7 @@ public class WuxiIntroFragment extends NavigatorFragment {
 	@Override
 	protected List<NavigatorItmeAction> getNavigatorItmeActions() {
 
+		
 		List<NavigatorItmeAction> naItems = new ArrayList<NavigatorItmeAction>();
 
 		int i=0;
