@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,8 @@ public class IndexNewsListAdapter extends BasicAdapter {
 
 	List<Map<String, Object>> List = new ArrayList<Map<String, Object>>();
 
-	public IndexNewsListAdapter(LayoutInflater inflater, int view, int[] viewId,List<Map<String, Object>> data, String[] dataName) {
-		super(inflater, view, viewId, dataName);
+	public IndexNewsListAdapter(Context context, int view, int[] viewId,List<Map<String, Object>> data, String[] dataName) {
+		super(context, view, viewId, dataName);
 		// TODO Auto-generated constructor stub
 		this.List = data;
 	}

@@ -11,7 +11,9 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.LogUtil;
+import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NetException;
 
@@ -110,7 +112,12 @@ public class MenuSevice extends Service {
 									.getString("linkMenuItemName"));
 
 							menuItems.add(menu);
-							LogUtil.i(TAG, jb.toString());
+
+							if (jb.getInt("type") == MenuItem.CHANNEL_MENU) {// 如果是频道菜单，获取子频道，并放入缓存中
+								new Thread(new ChannelTask(menu.getChannelId()))
+										.start();
+							}
+							// LogUtil.i(TAG, jb.toString());
 
 						}
 
@@ -130,6 +137,38 @@ public class MenuSevice extends Service {
 		}
 
 		return null;
+
+	}
+
+	/**
+	 * 
+	 * @author wanglu 泰得利通 频道菜单的子频道获取任务
+	 * 
+	 */
+	private final class ChannelTask implements Runnable {
+		private String channelId;
+
+		public ChannelTask(String channelId) {
+			this.channelId = channelId;
+
+		}
+
+		@Override
+		public void run() {
+			ChannelService channelService = new ChannelService(context);
+			try {
+				List<Channel> channels = channelService
+						.getSubChannels(channelId);
+
+				if (channels != null) {
+					CacheUtil.put(channelId, channels);// 将频道菜单的子菜单放入缓存
+				}
+
+			} catch (NetException e) {
+				e.printStackTrace();
+			}
+
+		}
 
 	}
 }

@@ -4,10 +4,12 @@
     android:layout_height="fill_parent"
     android:columnWidth="20dip"
     android:gravity="center"
-    android:horizontalSpacing="2dip"
+    android:horizontalSpacing="5dip"
     android:numColumns="7"
-    android:padding="5dip"
-    android:stretchMode="columnWidth"
+   	android:paddingTop="5dip"
+    android:paddingBottom="5dip"
+    android:paddingLeft="5dip"
+    android:paddingRight="15dip"
     android:listSelector="@android:color/transparent" >
 
 </GridView>

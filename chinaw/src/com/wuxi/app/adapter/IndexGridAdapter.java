@@ -2,6 +2,7 @@ package com.wuxi.app.adapter;
 
 import java.util.List;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +21,9 @@ public class IndexGridAdapter extends BasicAdapter {
 			R.drawable.index_hudong, R.drawable.index_hudong,
 			R.drawable.index_hudong, };
 
-	public IndexGridAdapter(LayoutInflater inflater, int view, int[] viewId,
+	public IndexGridAdapter(Context context, int view, int[] viewId,
 			List<MenuItem> menuItems, String[] dataName) {
-		super(inflater, view, viewId, dataName);
+		super(context, view, viewId, dataName);
 		this.menuItems = menuItems;
 	}
 

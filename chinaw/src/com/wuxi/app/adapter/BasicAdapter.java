@@ -1,5 +1,6 @@
 package com.wuxi.app.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
 
@@ -15,16 +16,20 @@ public abstract class BasicAdapter extends BaseAdapter {
 	private int mView;
 	private int[] mViewId;
 	private String[] mDataName;
+	protected Context context;
+	
 
-	public BasicAdapter(LayoutInflater inflater, int view, int[] viewId,String[] dataName) {
-		this.mInflater = inflater;
+	public BasicAdapter(Context context, int view, int[] viewId,String[] dataName) {
+		
 		this.mView = view;
 		this.mViewId = viewId;
 		this.mDataName = dataName;
+		this.context=context;
 	}
 
 	protected LayoutInflater getInflater() {
-		return mInflater;
+		
+		return LayoutInflater.from(context);
 	}
 
 	protected int getView() {

@@ -17,6 +17,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.GridView;
 import android.widget.Scroller;
 import android.widget.TextView;
@@ -24,9 +25,10 @@ import android.widget.TextView;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.TitleChannelAdapter;
+import com.wuxi.app.fragment.NavigatorChannelFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
-import com.wuxi.domain.Channel;import com.wuxi.domain.Channel;
-
+import com.wuxi.domain.Channel;
+import com.wuxi.domain.Channel;
 
 /**
  * 头部可滑动自定义view
@@ -50,7 +52,7 @@ public class TitleScrollLayout extends ViewGroup {
 	private static final int SNAP_VELOCITY = 1200;
 	private static final String TAG = "TITLESCROLLLAYOUT";
 	private int mTouchSlop;
-	private List<Channel> items = new ArrayList<Channel>();//  pindao 
+	// private List<Channel> items = new ArrayList<Channel>();// pindao
 
 	private InitializContentLayoutListner initializContentLayoutListner;// 该自定义控件所在的fragment
 	private int perscreenCount = PERSCREEN_ITEM_COUNT;// 每屏数量,默认为7
@@ -69,10 +71,9 @@ public class TitleScrollLayout extends ViewGroup {
 		this.initializContentLayoutListner = initializContentLayoutListner;
 	}
 
-	public void setItems(List<Channel> items) {
-		this.items = items;
-	}
-
+	/*
+	 * public void setItems(List<Channel> items) { this.items = items; }
+	 */
 	public TitleScrollLayout(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
 	}
@@ -293,7 +294,8 @@ public class TitleScrollLayout extends ViewGroup {
 	/*
 	 * 初始化屏
 	 */
-	public void initScreen(Activity context, LayoutInflater inflater) {
+	public void initScreen(Context context, LayoutInflater inflater,
+			List<Channel> items) {
 		if (items == null) {
 			return;
 		}
@@ -306,6 +308,7 @@ public class TitleScrollLayout extends ViewGroup {
 			checkPositons[j] = -1;
 		}
 
+		checkPositons[0] = 0;// 默认选中第一屏第一个Chanel
 		int currentScreen = 0;// 当前屏
 
 		List<Channel> onScreenItems = null;// 一个屏上的图标
@@ -313,17 +316,18 @@ public class TitleScrollLayout extends ViewGroup {
 		for (Channel item : items) {
 
 			if (i % getPerscreenCount() == 0) {
-				currentScreen++;
+				
 				if (onScreenItems != null) {
 					GridView child = (GridView) inflater.inflate(
 							R.layout.title_action_gridview_layout, null);
 
-					child.setAdapter(new TitleChannelAdapter(LayoutInflater
-							.from(context), R.layout.title_grid_item_layout,
+					child.setAdapter(new TitleChannelAdapter(context,
+							R.layout.title_grid_item_layout,
 							new int[] { R.id.tv_actionname }, null,
-							onScreenItems));
+							onScreenItems, currentScreen));
 
-					child.setOnItemClickListener(new btnClickListener());
+					child.setOnItemClickListener(new TitleChannelOnclick());
+					currentScreen++;
 					addView(child);
 				}
 
@@ -343,11 +347,12 @@ public class TitleScrollLayout extends ViewGroup {
 				GridView child = (GridView) inflater.inflate(
 						R.layout.title_action_gridview_layout, null);
 
-				child.setAdapter(new TitleChannelAdapter(LayoutInflater
-						.from(context), R.layout.title_grid_item_layout,
-						new int[] { R.id.tv_actionname }, null, onScreenItems));
+				child.setAdapter(new TitleChannelAdapter(context,
+						R.layout.title_grid_item_layout,
+						new int[] { R.id.tv_actionname }, null, onScreenItems,
+						currentScreen));
 
-				child.setOnItemClickListener(new btnClickListener());
+				child.setOnItemClickListener(new TitleChannelOnclick());
 				addView(child);
 
 			}
@@ -356,34 +361,34 @@ public class TitleScrollLayout extends ViewGroup {
 		}
 	}
 
-	class btnClickListener implements OnItemClickListener {
+	private class TitleChannelOnclick implements OnItemClickListener {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
 
-			Channel channel = (Channel) parent
-					.getItemAtPosition(position);
+			Channel channel = (Channel) parent.getItemAtPosition(position);
 
 			/**
 			 * 切换选中与未选择的样式
 			 */
 			if (checkPositons[mCurScreen] != position) {
 				View checkView = parent.getChildAt(position);
-				checkView.setBackground(getResources().getDrawable(
-						R.drawable.title_item_select_bg));
+
 				TextView tv_Check = (TextView) checkView
 						.findViewById(R.id.tv_actionname);
+				tv_Check.setBackground(getResources().getDrawable(
+						R.drawable.title_item_select_bg));
 				tv_Check.setTextColor(Color.WHITE);
 
 				View oldCheckView = parent
 						.getChildAt(checkPositons[mCurScreen]);
 				if (null != oldCheckView) {
-					oldCheckView.setBackground(getResources().getDrawable(
-							R.drawable.title_item_bg));
 
 					TextView tv_oldCheck = (TextView) oldCheckView
 							.findViewById(R.id.tv_actionname);
+					tv_oldCheck.setBackground(getResources().getDrawable(
+							R.drawable.title_item_bg));
 					tv_oldCheck.setTextColor(Color.parseColor("#177CCA"));
 
 				}
@@ -391,14 +396,30 @@ public class TitleScrollLayout extends ViewGroup {
 				checkPositons[mCurScreen] = position;
 			}
 
-			Fragment fragment = channel.getFragment();
-			if (fragment == null) {
-				return;
-			}
+			Class<? extends Fragment> fragmentClass = channel
+					.getContentFragment();
+			Fragment fragment;
+			try {
+				fragment = (Fragment) fragmentClass.newInstance();
 
-			if (initializContentLayoutListner != null && fragment != null) {
-				initializContentLayoutListner.bindContentLayout(fragment);
+				if (fragment == null) {
+					return;
+				}
 
+				NavigatorChannelFragment nafragment = null;
+				if (fragment instanceof NavigatorChannelFragment) {
+					nafragment = (NavigatorChannelFragment) fragment;
+					nafragment.setParentChannel(channel);
+				}
+
+				if (initializContentLayoutListner != null && nafragment != null) {
+					initializContentLayoutListner.bindContentLayout(nafragment);
+
+				}
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
 			}
 
 		}

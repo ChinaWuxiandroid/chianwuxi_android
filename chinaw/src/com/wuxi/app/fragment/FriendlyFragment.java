@@ -11,11 +11,11 @@ import com.wuxi.domain.NavigatorItmeAction;
  * @author wanglu
  * 
  */
-public class FriendlyFragment extends NavigatorFragment {
+public class FriendlyFragment extends NavigatorChannelFragment {
 
 	private String[] navigatorNames = new String[] { "最近动态", "国籍好友", "荣誉市民" };
 
-	@Override
+	/*@Override
 	protected List<NavigatorItmeAction> getNavigatorItmeActions() {
 
 		List<NavigatorItmeAction> naItems = new ArrayList<NavigatorItmeAction>();
@@ -24,6 +24,6 @@ public class FriendlyFragment extends NavigatorFragment {
 					.Instance(2)));
 		}
 		return naItems;
-	}
+	}*/
 
 }

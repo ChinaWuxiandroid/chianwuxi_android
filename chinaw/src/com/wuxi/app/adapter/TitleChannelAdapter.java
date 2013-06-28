@@ -1,15 +1,16 @@
 package com.wuxi.app.adapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.wuxi.app.R;
 import com.wuxi.domain.Channel;
-import com.wuxi.domain.TitleItemAction;
 
 /**
  * 头部滑动模块数据适配器
@@ -19,13 +20,14 @@ import com.wuxi.domain.TitleItemAction;
  */
 public class TitleChannelAdapter extends BasicAdapter {
 
+	private List<Channel> items;
+	private int screenIndex;
 
-	private List<Channel> items ;
-
-	public TitleChannelAdapter(LayoutInflater inflater, int view, int[] viewId,
-			String[] dataName, List<Channel> items) {
-		super(inflater, view, viewId, dataName);
+	public TitleChannelAdapter(Context context, int view, int[] viewId,
+			String[] dataName, List<Channel> items, int screenIndex) {
+		super(context, view, viewId, dataName);
 		this.items = items;
+		this.screenIndex = screenIndex;
 
 	}
 
@@ -54,7 +56,7 @@ public class TitleChannelAdapter extends BasicAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		String chanelName = items.get(position).getChannelName();//pin dao name
+		String chanelName = items.get(position).getChannelName();// 频道名称
 		ViewHolder viewHolder = null;
 
 		if (convertView == null) {
@@ -64,6 +66,16 @@ public class TitleChannelAdapter extends BasicAdapter {
 
 			viewHolder.title_text = (TextView) convertView
 					.findViewById(viewId[0]);
+
+			if (screenIndex == 0 && position == 0) {
+
+				viewHolder.title_text.setBackground(context.getResources()
+						.getDrawable(R.drawable.title_item_select_bg));
+
+				viewHolder.title_text.setTextColor(Color.WHITE);
+
+			}
+
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();

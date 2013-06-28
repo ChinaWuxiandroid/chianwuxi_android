@@ -1,5 +1,7 @@
 package com.wuxi.app.listeners;
 
+import com.wuxi.app.fragment.NavigatorChannelFragment;
+
 import android.support.v4.app.Fragment;
 
 /**

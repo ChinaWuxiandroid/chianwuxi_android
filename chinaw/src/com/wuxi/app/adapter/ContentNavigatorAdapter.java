@@ -9,32 +9,36 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.wuxi.app.R;
-import com.wuxi.domain.NavigatorItmeAction;
+import com.wuxi.domain.Channel;
 
 /**
- * 左侧导航适配器
+ * 左侧导航频道适配器
+ * 
  * @author wanglu
- *
+ * 
  */
 public class ContentNavigatorAdapter extends BaseAdapter {
-	
-	private List<NavigatorItmeAction> naItems;
+
+	private List<Channel> channels;
 	private LayoutInflater mInflater;
-	public ContentNavigatorAdapter(LayoutInflater inflater,List<NavigatorItmeAction> naItems){
-		mInflater=inflater;
-		this.naItems=naItems;
+
+	public ContentNavigatorAdapter(LayoutInflater inflater,
+			List<Channel> channels) {
+		mInflater = inflater;
+		this.channels = channels;
 	}
+	
 
 	@Override
 	public int getCount() {
 
-		return naItems.size();
+		return channels.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
 
-		return naItems.get(position);
+		return channels.get(position);
 	}
 
 	@Override
@@ -51,7 +55,7 @@ public class ContentNavigatorAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		String actionName = naItems.get(position).getActionName();
+		String channelName = channels.get(position).getChannelName();
 		ViewHolder viewHolder = null;
 
 		if (convertView == null) {
@@ -67,9 +71,9 @@ public class ContentNavigatorAdapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		viewHolder.title_text.setText(actionName);
+		viewHolder.title_text.setText(channelName);
 		return convertView;
 
 	}
-	
+
 }

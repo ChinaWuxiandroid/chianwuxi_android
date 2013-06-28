@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.wuxi.app.fragment.WuxiIntroFragment;
+import com.wuxi.app.fragment.NavigatorChannelFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Channel;
 import com.wuxi.exception.NetException;
@@ -61,7 +61,7 @@ public class ChannelService extends Service {
 						channel.setChannelId(jb.getString("channelId"));
 						channel.setChannelName(jb.getString("channelName"));
 						channel.setContents(jb.getString("contents"));
-						channel.setFragment(new WuxiIntroFragment());
+						channel.setContentFragment(NavigatorChannelFragment.class);
 						channels.add(channel);
 						
 					}

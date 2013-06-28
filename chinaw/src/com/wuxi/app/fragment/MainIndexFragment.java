@@ -162,14 +162,14 @@ public class MainIndexFragment extends BaseFragment {
 		gridView.setColumnWidth(itemWidth);
 		gridView.setStretchMode(GridView.NO_STRETCH);
 		gridView.setNumColumns(size / 2);
-		gridAdapter = new IndexGridAdapter(LayoutInflater.from(context),
+		gridAdapter = new IndexGridAdapter(context,
 				R.layout.index_gridview_layout, Grid_viewid, menuItems, null);
 		gridView.setAdapter(gridAdapter);
 	}
 
 	private void loadList() {
 		List<Map<String, Object>> list = getListData();
-		listAdapter = new IndexNewsListAdapter(LayoutInflater.from(context),
+		listAdapter = new IndexNewsListAdapter(context,
 				R.layout.index_newslist_layout, newslist_viewid, list,
 				newslist_dataName);
 		listView.setAdapter(listAdapter);

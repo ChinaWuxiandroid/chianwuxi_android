@@ -1,6 +1,5 @@
 package com.wuxi.app.fragment.index.type;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -18,13 +17,13 @@ import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.engine.ChannelService;
-import com.wuxi.app.fragment.FriendlyFragment;
-import com.wuxi.app.fragment.WuxiIntroFragment;
+import com.wuxi.app.fragment.NavigatorChannelFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
+import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.LogUtil;
 import com.wuxi.app.view.TitleScrollLayout;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
-import com.wuxi.domain.TitleItemAction;
 import com.wuxi.exception.NetException;
 
 /**
@@ -41,6 +40,7 @@ public class ChannelFragment extends BaseSlideFragment implements
 	private static final int MANCOTENT_ID = R.id.model_main;
 	private static final int TITLE__LOAD_SUCESS = 0;
 	private static final int TITLE_LOAD_ERROR = 1;
+	protected static final String TAG = "ChannelFragment";
 	private LayoutInflater inflater;
 	private ImageButton ib_nextItems;
 	private MenuItem menuItem;// 菜单项
@@ -50,9 +50,9 @@ public class ChannelFragment extends BaseSlideFragment implements
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			String tip = "";
-			if (msg.obj != null) {
-				tip = msg.obj.toString();
-			}
+			
+			if (msg.obj != null) { tip = msg.obj.toString(); }
+			 
 			switch (msg.what) {
 			case TITLE__LOAD_SUCESS:
 				showTitleData();
@@ -92,14 +92,28 @@ public class ChannelFragment extends BaseSlideFragment implements
 	private void initUI() {
 		mtitleScrollLayout = (TitleScrollLayout) view
 				.findViewById(R.id.title_scroll_action);// 头部控件
+		mtitleScrollLayout.setInitializContentLayoutListner(this);// 设置绑定内容界面监听器
 
 		ib_nextItems = (ImageButton) view.findViewById(R.id.btn_next_screen);// 头部下一个按钮
 		ib_nextItems.setOnClickListener(this);
 
 		loadTitleData();
+		
 
-		bindFragment(new WuxiIntroFragment());
+		
 
+	}
+
+	/**
+	 * 
+	 *wanglu 泰得利通
+	 *初始化界面
+	 */
+	private void initData(Channel parentChannel) {
+	
+		NavigatorChannelFragment navigatorChannelFragment=new NavigatorChannelFragment();
+		navigatorChannelFragment.setParentChannel(parentChannel);
+		bindFragment(navigatorChannelFragment);
 	}
 
 	/**
@@ -107,6 +121,14 @@ public class ChannelFragment extends BaseSlideFragment implements
 	 * wanglu 泰得利通 加载头部Channel
 	 */
 	public void loadTitleData() {
+
+		if (CacheUtil.get(menuItem.getChannelId()) != null) {// 从缓存获取
+
+			titleChannels = (List<Channel>) CacheUtil.get(menuItem
+					.getChannelId());
+			showTitleData();
+			return;
+		}
 
 		new Thread(new Runnable() {
 
@@ -118,6 +140,7 @@ public class ChannelFragment extends BaseSlideFragment implements
 					titleChannels = channelService.getSubChannels(menuItem
 							.getChannelId());
 					if (null != titleChannels) {
+						CacheUtil.put(menuItem.getChannelId(), titleChannels);// 缓存起来
 						handler.sendEmptyMessage(TITLE__LOAD_SUCESS);
 
 					} else {
@@ -127,6 +150,8 @@ public class ChannelFragment extends BaseSlideFragment implements
 					}
 
 				} catch (NetException e) {
+
+					LogUtil.i(TAG, "出错");
 					e.printStackTrace();
 					Message message = handler.obtainMessage();
 					message.obj = e.getMessage();
@@ -146,9 +171,10 @@ public class ChannelFragment extends BaseSlideFragment implements
 	 * 显示头部数据 wanglu 泰得利通
 	 */
 	private void showTitleData() {
-		mtitleScrollLayout.setItems(titleChannels);// 设置头部显示的数据
-		mtitleScrollLayout.initScreen(getActivity(), inflater);// 初始化头部空间
-		mtitleScrollLayout.setInitializContentLayoutListner(this);// 设置绑定内容界面监听器
+
+		mtitleScrollLayout.initScreen(context, inflater, titleChannels);// 初始化头部空间
+		initData(titleChannels.get(0));//默认显示第一个channel的子channel页
+
 	}
 
 	@Override
@@ -163,6 +189,7 @@ public class ChannelFragment extends BaseSlideFragment implements
 	}
 
 	private void bindFragment(Fragment fragment) {
+	
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		ft.replace(MANCOTENT_ID, fragment);// 替换内容界面
 

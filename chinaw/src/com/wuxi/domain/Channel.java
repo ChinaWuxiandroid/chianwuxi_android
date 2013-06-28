@@ -13,12 +13,14 @@ public class Channel {
   private Channel childrens[];//频道子频道
   private String channelId;//频道Id
   private String channelName;//频道名
-  private Fragment fragment;//
-public Fragment getFragment() {
-	return fragment;
+  private Class<? extends Fragment> contentFragment;
+
+
+public Class<? extends Fragment> getContentFragment() {
+	return contentFragment;
 }
-public void setFragment(Fragment fragment) {
-	this.fragment = fragment;
+public void setContentFragment(Class<? extends Fragment> contentFragment) {
+	this.contentFragment = contentFragment;
 }
 public Boolean getIsNull() {
 	return isNull;

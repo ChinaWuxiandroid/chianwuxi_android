@@ -61,10 +61,14 @@ public final class HttpUtils {
 		HttpEntity entity = null;
 		String result = null;
 		try {
-			entity = httpResponse.getEntity();
-			if(entity!=null){
-				result = EntityUtils.toString(entity, "UTF-8");
+			if(httpResponse!=null){
+				entity = httpResponse.getEntity();
+				if(entity!=null){
+					result = EntityUtils.toString(entity, "UTF-8");
+				}
 			}
+			
+		
 			
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
