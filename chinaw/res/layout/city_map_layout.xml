@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+   >
 
     <RadioGroup
         android:id="@+id/city_map_rg_tab"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:background="#F7EBE7" >
 
         <RadioButton
             android:id="@+id/rb_search"
@@ -186,7 +188,7 @@
             android:id="@+id/ll_search3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#666600"
+           
             android:orientation="horizontal"
             android:visibility="gone" >
         </LinearLayout>

@@ -2,6 +2,8 @@ package com.wuxi.app.engine;
 
 import java.util.List;
 
+import org.json.JSONException;
+
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.MenuItem;
@@ -22,8 +24,9 @@ public class TestMenuSevice extends AndroidTestCase {
 	 * 菜单获取测试
 	 * 
 	 * @throws NetException
+	 * @throws JSONException 
 	 */
-	public void testGetMenu() throws NetException {
+	public void testGetMenu() throws NetException, JSONException {
 		MenuSevice menuSevice = new MenuSevice(getContext());
 
 		List<MenuItem> items = menuSevice

@@ -6,12 +6,16 @@
 
     <include
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dip"
+        android:layout_weight="1"
         layout="@layout/child_fragmend_header_layout" />
 
    
      <include 
        android:id="@+id/ll_main"
+       android:layout_width="fill_parent"
+       android:layout_height="0dip"
+       android:layout_weight="9"
        layout="@layout/model_fragment_layout"
        />
 

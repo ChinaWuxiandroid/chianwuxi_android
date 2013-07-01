@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
@@ -90,11 +92,11 @@ public class MainIndexFragment extends BaseFragment {
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.main_index_fragment_layout, null);
 		context = this.getActivity();
-		InitUI();
+		initUI();
 		return view;
 	}
 
-	private void InitUI() {
+	private void initUI() {
 		gridView = (GridView) view.findViewById(R.id.gridview);
 		listView = (ListView) view.findViewById(R.id.index_news_list);
 		pb = (ProgressBar) view.findViewById(R.id.index_progess);
@@ -108,7 +110,8 @@ public class MainIndexFragment extends BaseFragment {
 	 */
 	@SuppressWarnings("unchecked")
 	private void LoadGrid() {
-
+	
+		
 		if (CacheUtil.get(MENUITEM_CACKE_KEY) != null) {// 从缓存加载
 
 			menuItems = (List<MenuItem>) CacheUtil.get(MENUITEM_CACKE_KEY);
@@ -131,20 +134,29 @@ public class MainIndexFragment extends BaseFragment {
 								CacheUtil.put(MENUITEM_CACKE_KEY, menuItems);// 将菜单数据放入缓存
 							} else {
 								Message msg = handler.obtainMessage();
+								msg.what=MENUITEM_LOAD_ERROR;
 								msg.obj = "加载错误";
-								handler.sendEmptyMessage(MENUITEM_LOAD_ERROR);// 加载错误
+								handler.sendMessage(msg);// 加载错误
 							}
 						} catch (NetException e) {
 							e.printStackTrace();
 							Message msg = handler.obtainMessage();
 							msg.obj = e.getMessage();
-							handler.sendEmptyMessage(MENUITEM_LOAD_ERROR);// 加载错误
+							msg.what=MENUITEM_LOAD_ERROR;
+							handler.sendMessage(msg);// 加载错误
+						} catch (JSONException e) {
+							e.printStackTrace();
+							Message msg = handler.obtainMessage();
+							msg.obj = "网络出错";
+							msg.what=MENUITEM_LOAD_ERROR;
+							handler.sendMessage(msg);// 加载错误
 						}
 
 					}
 				}
 
 		).start();
+		
 
 	}
 

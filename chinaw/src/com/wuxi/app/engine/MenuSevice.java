@@ -23,7 +23,7 @@ import com.wuxi.exception.NetException;
  * 
  */
 public class MenuSevice extends Service {
-	//private static final String TAG = "MenuSevice";
+	// private static final String TAG = "MenuSevice";
 
 	public MenuSevice(Context context) {
 		super(context);
@@ -36,8 +36,10 @@ public class MenuSevice extends Service {
 	 * @param url
 	 * @return
 	 * @throws NetException
+	 * @throws JSONException
 	 */
-	public List<MenuItem> getHomeMenuItems(String url) throws NetException {
+	public List<MenuItem> getHomeMenuItems(String url) throws NetException,
+			JSONException {
 		return getMenuItems(url);
 	}
 
@@ -48,8 +50,10 @@ public class MenuSevice extends Service {
 	 * @param url
 	 * @return
 	 * @throws NetException
+	 * @throws JSONException
 	 */
-	public List<MenuItem> getSubMenuItems(String url) throws NetException {
+	public List<MenuItem> getSubMenuItems(String url) throws NetException,
+			JSONException {
 		return getMenuItems(url);
 	}
 
@@ -60,76 +64,69 @@ public class MenuSevice extends Service {
 	 * @param url
 	 * @return
 	 * @throws NetException
+	 * @throws JSONException
 	 */
 
-	private List<MenuItem> getMenuItems(String url) throws NetException {
+	private List<MenuItem> getMenuItems(String url) throws NetException,
+			JSONException {
 
 		if (!checkNet()) {
 			Toast.makeText(context, NET_ERROR, Toast.LENGTH_LONG).show();
 			throw new NetException(NET_ERROR);
 		} else {
 
-			try {
+			String reslutStr = httpUtils.executeGetToString(url, 500);
+			List<MenuItem> menuItems;
+			// LogUtil.i(TAG, reslutStr);
+			if (null != reslutStr) {
+				menuItems = new ArrayList<MenuItem>();
+				JSONObject jsonObject = new JSONObject(reslutStr);
+				JSONArray jresult = jsonObject.getJSONArray("result");
 
-				String reslutStr = httpUtils.executeGetToString(url, 500);
-				List<MenuItem> menuItems;
-				// LogUtil.i(TAG, reslutStr);
-				if (null != reslutStr) {
-					menuItems = new ArrayList<MenuItem>();
-					JSONObject jsonObject = new JSONObject(reslutStr);
-					JSONArray jresult = jsonObject.getJSONArray("result");
+				if (jresult != null && jresult.length() > 0) {
 
-					if (jresult != null && jresult.length() > 0) {
+					for (int i = 0; i < jresult.length(); i++) {
 
-						for (int i = 0; i < jresult.length(); i++) {
-
-							JSONObject jb = jresult.getJSONObject(i);
-							MenuItem menu = new MenuItem();
-							menu.setName(jb.getString("name"));
-							menu.setId(jb.getString("id"));
-							menu.setType(jb.getInt("type"));
-							menu.setDisabled(jb.getBoolean("disabled"));
-							menu.setDes(jb.getString("desc"));
-							menu.setSort(jb.getInt("sort"));
-							if (jb.getJSONArray("childrens") != null) {
-								menu.setHasChildern(true);// 有子菜单存在
-							}
-
-							menu.setCreateDate(jb.getString("createDate"));
-							menu.setChannelId(jb.getString("channelId"));
-							menu.setChannelName(jb.getString("channelName"));
-							menu.setFavorites(jb.getBoolean("favorites"));
-							menu.setContentId(jb.getString("contentId"));
-							menu.setDeleted(jb.getBoolean("deleted"));
-							menu.setAppUI(jb.getString("appUI"));
-							menu.setWapURI(jb.getString("wapURI"));
-							menu.setParentMenuId(jb.getString("parentMenuId"));
-							menu.setLinkMenuItemId(jb
-									.getString("linkMenuItemID"));
-							menu.setContentName(jb.getString("contentName"));
-							menu.setLinkMenuItemName(jb
-									.getString("linkMenuItemName"));
-
-							menuItems.add(menu);
-
-							if (jb.getInt("type") == MenuItem.CHANNEL_MENU) {// 如果是频道菜单，获取子频道，并放入缓存中
-								new Thread(new ChannelTask(menu.getChannelId()))
-										.start();
-							}
-							// LogUtil.i(TAG, jb.toString());
-
+						JSONObject jb = jresult.getJSONObject(i);
+						MenuItem menu = new MenuItem();
+						menu.setName(jb.getString("name"));
+						menu.setId(jb.getString("id"));
+						menu.setType(jb.getInt("type"));
+						menu.setDisabled(jb.getBoolean("disabled"));
+						menu.setDes(jb.getString("desc"));
+						menu.setSort(jb.getInt("sort"));
+						if (jb.getJSONArray("childrens") != null) {
+							menu.setHasChildern(true);// 有子菜单存在
 						}
+
+						menu.setCreateDate(jb.getString("createDate"));
+						menu.setChannelId(jb.getString("channelId"));
+						menu.setChannelName(jb.getString("channelName"));
+						menu.setFavorites(jb.getBoolean("favorites"));
+						menu.setContentId(jb.getString("contentId"));
+						menu.setDeleted(jb.getBoolean("deleted"));
+						menu.setAppUI(jb.getString("appUI"));
+						menu.setWapURI(jb.getString("wapURI"));
+						menu.setParentMenuId(jb.getString("parentMenuId"));
+						menu.setLinkMenuItemId(jb.getString("linkMenuItemID"));
+						menu.setContentName(jb.getString("contentName"));
+						menu.setLinkMenuItemName(jb
+								.getString("linkMenuItemName"));
+
+						menuItems.add(menu);
+
+						if (jb.getInt("type") == MenuItem.CHANNEL_MENU) {// 如果是频道菜单，获取子频道，并放入缓存中
+							new Thread(new ChannelTask(menu.getChannelId()))
+									.start();
+						}
+						// LogUtil.i(TAG, jb.toString());
 
 					}
 
-					Collections.sort(menuItems);// 排序
-					return menuItems;
-
 				}
 
-			} catch (JSONException e) {
-				e.printStackTrace();
-				Toast.makeText(context, "数据出错", Toast.LENGTH_LONG).show();
+				Collections.sort(menuItems);// 排序
+				return menuItems;
 
 			}
 

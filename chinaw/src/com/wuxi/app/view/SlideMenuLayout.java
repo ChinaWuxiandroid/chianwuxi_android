@@ -18,11 +18,11 @@ public class SlideMenuLayout extends ViewGroup {
 	protected static final float SCROLL_COEFFICIENT = 1.0F;
 	protected static final int CLICK_CORRECTION_COEFFICIENT = 1;
 
-	private float mLeftMenuWidth = 0.25F;
+	private float mLeftMenuWidth = 0.45F;
 	private int mLeftMenuWidthPixels = 0;
 	private View mLeftSlideMenu;
 	private boolean mLeftSlideMenuEnabled = false;
-	private float mRightMenuWidth = 0.75F;
+	private float mRightMenuWidth = 0.55F;
 	private int mRightMenuWidthPixels = 0;
 	private View mRightSlideMenu;
 	private boolean mRightSlideMenuEnabled = false;
@@ -190,7 +190,7 @@ public class SlideMenuLayout extends ViewGroup {
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
-		final int action = ev.getAction();
+		/*final int action = ev.getAction();
 		if (action == MotionEvent.ACTION_MOVE && mTouchState == TOUCH_STATE_SCROLLING)
 			return true;
 		switch (action) {
@@ -228,13 +228,13 @@ public class SlideMenuLayout extends ViewGroup {
 				return true;
 			}
 			break;
-		}
+		}*/
 		return super.onInterceptTouchEvent(ev);
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
-		switch (ev.getAction()) {
+		/*switch (ev.getAction()) {
 		case MotionEvent.ACTION_MOVE:
 			mMoveTimesCounter++;
 			if (mMoveTimesCounter > CLICK_CORRECTION_COEFFICIENT&& TOUCH_STATE_FORECAST == mTouchState)
@@ -255,7 +255,7 @@ public class SlideMenuLayout extends ViewGroup {
 			else
 				reset();
 			break;
-		}
+		}*/
 		return mGestureDetector.onTouchEvent(ev);
 	}
 

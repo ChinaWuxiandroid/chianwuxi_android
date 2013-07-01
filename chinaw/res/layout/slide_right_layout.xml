@@ -2,12 +2,106 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF5151"
     android:orientation="vertical" >
 
-    <Button
-        android:layout_width="75dip"
-        android:layout_height="75dip"
-        android:text="用户登录" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_head_bg"
+        android:paddingTop="10dip" >
+
+        <ImageView
+            android:id="@+id/login_iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dip"
+            android:layout_marginLeft="10dip"
+            android:background="@drawable/login_log" />
+
+        <TextView
+            android:id="@+id/login_tv_userlogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@+id/login_iv_icon"
+            android:text="用户登录"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/login_tv_user_regisster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_tv_userlogin"
+            android:layout_marginLeft="10dip"
+            android:layout_marginTop="10dip"
+            android:layout_toRightOf="@+id/login_iv_icon"
+            android:text="用户注册"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:background="@drawable/login_item_bg">
+
+        <RadioButton
+            android:layout_width="fill_parent"
+            android:background="@drawable/login_item_bg"
+            android:button="@null"
+            android:drawableLeft="@drawable/login_my_collect_icon"
+            android:drawablePadding="10dip"
+            android:padding="10dip"
+            android:text="我的收藏" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:background="#C1C2C3" />
+
+        <RadioButton
+            android:layout_width="fill_parent"
+            android:background="@drawable/login_item_bg"
+            android:button="@null"
+            android:drawableLeft="@drawable/login_my_mzhd_icon"
+            android:drawablePadding="10dip"
+            android:padding="10dip"
+            android:text="我的民政互动" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:background="#C1C2C3" />
+
+        <RadioButton
+            android:layout_width="fill_parent"
+            android:background="@drawable/login_item_bg"
+            android:button="@null"
+            android:drawableLeft="@drawable/login_my_download_icon"
+            android:drawablePadding="10dip"
+            android:padding="10dip"
+            android:text="我的下载" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:background="#C1C2C3" />
+
+        <RadioButton
+            android:layout_width="fill_parent"
+            android:background="@drawable/login_item_bg"
+            android:button="@null"
+            android:drawableLeft="@drawable/login_my_settion_icon"
+            android:drawablePadding="10dip"
+            android:padding="10dip"
+            android:text="我的设置" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:background="#C1C2C3" />
+    </RadioGroup>
 
 </LinearLayout>
