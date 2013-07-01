@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -61,6 +62,7 @@ public class MainIndexFragment extends BaseFragment {
 	private static final String MENUITEM_CACKE_KEY = "man_menu_item";
 	protected static final int MENUITEM_LOAD_ERROR = 0;// 菜单加载失败标志
 
+	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 
 		@Override

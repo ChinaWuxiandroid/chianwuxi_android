@@ -11,6 +11,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.wuxi.app.fragment.NavigatorChannelFragment;
+import com.wuxi.app.fragment.index.type.CityMapFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Channel;
 import com.wuxi.exception.NetException;
@@ -61,9 +62,14 @@ public class ChannelService extends Service {
 						channel.setChannelId(jb.getString("channelId"));
 						channel.setChannelName(jb.getString("channelName"));
 						channel.setContents(jb.getString("contents"));
-						channel.setContentFragment(NavigatorChannelFragment.class);
+						if (channel.getChannelName().equals("城市地图")) {//处理城市题图显示的视图
+							channel.setContentFragment(CityMapFragment.class);
+						} else {
+							channel.setContentFragment(NavigatorChannelFragment.class);
+						}
+
 						channels.add(channel);
-						
+
 					}
 
 				}

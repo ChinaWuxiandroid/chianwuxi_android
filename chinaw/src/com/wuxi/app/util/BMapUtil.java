@@ -3,6 +3,11 @@ package com.wuxi.app.util;
 import android.graphics.Bitmap;
 import android.view.View;
 
+/**
+ * 
+ * @author wanglu 泰得利通
+ *
+ */
 public class BMapUtil {
     	
 	/**

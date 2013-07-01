@@ -10,6 +10,7 @@ import com.wuxi.app.util.CacheUtil;
 import com.wuxi.domain.Channel;
 import com.wuxi.exception.NetException;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import android.widget.AdapterView.OnItemClickListener;
  * @author wanglu
  * 
  */
+
 public class NavigatorChannelFragment extends BaseFragment implements
 		OnItemClickListener {
 	private static final int DETAIL_ID = R.id.details;// 点击左侧导航时右侧要显示内容区域的ID
@@ -43,8 +45,10 @@ public class NavigatorChannelFragment extends BaseFragment implements
 	private Context context;
 
 	private List<Channel> channels;
+	
 
-	private Handler handler = new Handler() {
+	@SuppressLint("HandlerLeak")
+	private Handler  handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			String tip = "";
 

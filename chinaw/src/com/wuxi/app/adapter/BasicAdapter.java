@@ -12,7 +12,7 @@ import android.widget.BaseAdapter;
  */
 public abstract class BasicAdapter extends BaseAdapter {
 
-	private LayoutInflater mInflater;
+
 	private int mView;
 	private int[] mViewId;
 	private String[] mDataName;

@@ -12,7 +12,6 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.wuxi.app.util.CacheUtil;
-import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NetException;
@@ -24,7 +23,7 @@ import com.wuxi.exception.NetException;
  * 
  */
 public class MenuSevice extends Service {
-	private static final String TAG = "MenuSevice";
+	//private static final String TAG = "MenuSevice";
 
 	public MenuSevice(Context context) {
 		super(context);

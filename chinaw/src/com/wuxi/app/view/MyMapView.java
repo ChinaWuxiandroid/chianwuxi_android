@@ -7,6 +7,12 @@ import android.view.MotionEvent;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.PopupOverlay;
 
+/**
+ * 
+ * @author wanglu 泰得利通
+ * 地图
+ *
+ */
 public class MyMapView extends MapView {
 
 public static PopupOverlay   pop  = null;//弹出泡泡图层，浏览节点时使用

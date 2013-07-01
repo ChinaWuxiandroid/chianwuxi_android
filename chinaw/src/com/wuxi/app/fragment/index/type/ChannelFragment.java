@@ -2,6 +2,7 @@ package com.wuxi.app.fragment.index.type;
 
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,7 +15,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import com.wuxi.app.R;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.fragment.NavigatorChannelFragment;
@@ -47,6 +47,7 @@ public class ChannelFragment extends BaseSlideFragment implements
 	private List<Channel> titleChannels;// 头部频道
 	private Context context;
 
+	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			String tip = "";
@@ -120,6 +121,7 @@ public class ChannelFragment extends BaseSlideFragment implements
 	 * 
 	 * wanglu 泰得利通 加载头部Channel
 	 */
+	@SuppressWarnings("unchecked")
 	public void loadTitleData() {
 
 		if (CacheUtil.get(menuItem.getChannelId()) != null) {// 从缓存获取

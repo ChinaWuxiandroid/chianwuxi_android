@@ -75,6 +75,8 @@ public class CityMapFragment extends Fragment implements
 	private Activity context;
 	private View view;
 	private LayoutInflater mInflater;
+	private static final int BUS = 0;// 公交
+	private static final int DRIVER = 1;// 公交
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,7 +91,7 @@ public class CityMapFragment extends Fragment implements
 
 		mMapView = (MyMapView) view.findViewById(R.id.bmapView);
 		initUI();
-		
+
 		mMapView.setBuiltInZoomControls(true);
 		MapController mapController = mMapView.getController();
 		GeoPoint point = new GeoPoint((int) (LATITUDE * 1E6),
@@ -169,8 +171,9 @@ public class CityMapFragment extends Fragment implements
 			rb_search.setTextColor(Color.parseColor("#ffffff"));
 			rb_bus.setTextColor(Color.parseColor("#6E4325"));
 			rb_car.setTextColor(Color.parseColor("#6E4325"));
-			mBtnPre.setVisibility(View.VISIBLE);
-			mBtnNext.setVisibility(View.VISIBLE);
+			mBtnPre.setVisibility(View.INVISIBLE);
+			mBtnNext.setVisibility(View.INVISIBLE);
+			mMapView.setBuiltInZoomControls(true);
 			break;
 		case R.id.rb_bus:
 			mseach1.setVisibility(LinearLayout.INVISIBLE);
@@ -180,6 +183,8 @@ public class CityMapFragment extends Fragment implements
 			rb_search.setTextColor(Color.parseColor("#6E4325"));
 			rb_bus.setTextColor(Color.parseColor("#ffffff"));
 			rb_car.setTextColor(Color.parseColor("#6E4325"));
+
+			mMapView.setBuiltInZoomControls(false);
 			break;
 		case R.id.rb_car:
 			mseach1.setVisibility(LinearLayout.INVISIBLE);
@@ -189,7 +194,7 @@ public class CityMapFragment extends Fragment implements
 			rb_search.setTextColor(Color.parseColor("#6E4325"));
 			rb_bus.setTextColor(Color.parseColor("#6E4325"));
 			rb_car.setTextColor(Color.parseColor("#ffffff"));
-
+			mMapView.setBuiltInZoomControls(false);
 			break;
 		case R.id.pre:
 			nodeClick(mBtnPre);
@@ -206,7 +211,7 @@ public class CityMapFragment extends Fragment implements
 	 * 
 	 * @param v
 	 */
-	private void searchRoute() {
+	private void searchRoute(int type) {
 		if (pop != null) {
 			pop.hidePop();
 		}
@@ -232,8 +237,14 @@ public class CityMapFragment extends Fragment implements
 		stNode.name = startName;
 		MKPlanNode enNode = new MKPlanNode();
 		enNode.name = endName;
+		if (DRIVER == type) {
+			mSearch.drivingSearch(CITY, stNode, CITY, enNode);// 驾车查询
+		}
 
-		mSearch.transitSearch(CITY, stNode, enNode);// 搜索工具路线
+		if (BUS == type) {
+
+		}
+		mSearch.transitSearch(CITY, stNode, enNode);// 搜索公交路线
 
 	}
 
@@ -328,7 +339,20 @@ public class CityMapFragment extends Fragment implements
 			mSearch.poiSearchInCity(CITY, keyWords);
 			break;
 		case R.id.city_map_tv_bus_rote:
-			searchRoute();
+			if (rb_bus.isChecked()) {
+				searchRoute(BUS);//公交查询
+			}
+
+			if (rb_car.isChecked()) {
+				searchRoute(DRIVER);//驾车查询
+			}
+
+			break;
+		case R.id.pre:
+			nodeClick(mBtnPre);//上一个节点
+			break;
+		case R.id.next:
+			nodeClick(mBtnNext);//下一个节点
 			break;
 
 		}
@@ -410,6 +434,10 @@ public class CityMapFragment extends Fragment implements
 			}
 		}
 
+		/**
+		 * 关键词搜索哦
+		 */
+
 		@Override
 		public void onGetPoiResult(MKPoiResult res, int type, int error) {
 
@@ -451,6 +479,10 @@ public class CityMapFragment extends Fragment implements
 		public void onGetSuggestionResult(MKSuggestionResult arg0, int arg1) {
 
 		}
+
+		/**
+		 * 公交
+		 */
 
 		@Override
 		public void onGetTransitRouteResult(MKTransitRouteResult res, int error) {

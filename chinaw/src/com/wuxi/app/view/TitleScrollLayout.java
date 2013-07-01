@@ -3,7 +3,6 @@ package com.wuxi.app.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
@@ -17,17 +16,15 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.GridView;
 import android.widget.Scroller;
 import android.widget.TextView;
 
-import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.TitleChannelAdapter;
 import com.wuxi.app.fragment.NavigatorChannelFragment;
+import com.wuxi.app.fragment.index.type.CityMapFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
-import com.wuxi.domain.Channel;
 import com.wuxi.domain.Channel;
 
 /**
@@ -41,11 +38,11 @@ public class TitleScrollLayout extends ViewGroup {
 	private Scroller mScroller;
 	private int mCurScreen;// 当前屏
 	private int totalScreenNum;// 总屏数
-	private int checkPostion = -1;
+	// private int checkPostion = -1;
 	private int mDefaultScreen = 0;
 	private VelocityTracker mVelocityTracker;
 	private float mLastMotionX;
-	private float mLastMotionY;
+	// private float mLastMotionY;
 	private static final int TOUCH_STATE_REST = 0;
 	private static final int TOUCH_STATE_SCROLLING = 1;
 	private int mTouchState = TOUCH_STATE_REST;
@@ -260,7 +257,7 @@ public class TitleScrollLayout extends ViewGroup {
 		}
 
 		final float x = ev.getX();
-		final float y = ev.getY();
+		// final float y = ev.getY();
 
 		switch (action) {
 		case MotionEvent.ACTION_MOVE:
@@ -275,7 +272,7 @@ public class TitleScrollLayout extends ViewGroup {
 		case MotionEvent.ACTION_DOWN:
 			Log.e(TAG, "onInterceptTouchEvent down");
 			mLastMotionX = x;
-			mLastMotionY = y;
+			// mLastMotionY = y;
 			Log.e(TAG, mScroller.isFinished() + "");
 			mTouchState = mScroller.isFinished() ? TOUCH_STATE_REST
 					: TOUCH_STATE_SCROLLING;
@@ -316,7 +313,7 @@ public class TitleScrollLayout extends ViewGroup {
 		for (Channel item : items) {
 
 			if (i % getPerscreenCount() == 0) {
-				
+
 				if (onScreenItems != null) {
 					GridView child = (GridView) inflater.inflate(
 							R.layout.title_action_gridview_layout, null);
@@ -407,13 +404,25 @@ public class TitleScrollLayout extends ViewGroup {
 				}
 
 				NavigatorChannelFragment nafragment = null;
+				CityMapFragment cityNCityMapFragment = null;
 				if (fragment instanceof NavigatorChannelFragment) {
 					nafragment = (NavigatorChannelFragment) fragment;
 					nafragment.setParentChannel(channel);
 				}
 
-				if (initializContentLayoutListner != null && nafragment != null) {
-					initializContentLayoutListner.bindContentLayout(nafragment);
+				if (fragment instanceof CityMapFragment) {
+					cityNCityMapFragment = (CityMapFragment) fragment;
+
+				}
+
+				if (initializContentLayoutListner != null) {
+					if (nafragment != null) {
+						initializContentLayoutListner
+								.bindContentLayout(nafragment);
+					} else {
+						initializContentLayoutListner
+								.bindContentLayout(cityNCityMapFragment);
+					}
 
 				}
 			} catch (InstantiationException e) {
