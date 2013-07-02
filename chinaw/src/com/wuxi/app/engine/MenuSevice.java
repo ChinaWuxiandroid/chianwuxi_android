@@ -1,5 +1,10 @@
 package com.wuxi.app.engine;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,9 +14,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.os.Environment;
 import android.widget.Toast;
 
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NetException;
@@ -75,6 +82,17 @@ public class MenuSevice extends Service {
 			throw new NetException(NET_ERROR);
 		} else {
 
+			boolean fileFlag = false;
+			if (Environment.getExternalStorageState().equals(
+					Environment.MEDIA_MOUNTED)) {// SDK可用
+				File file = new File(Constants.APPFiles.MENU_ICON_PATH);
+				fileFlag = true;
+				if (!file.exists()) {
+					file.mkdirs();// 建立菜单图标存放目录
+					
+				}
+			}
+
 			String reslutStr = httpUtils.executeGetToString(url, 500);
 			List<MenuItem> menuItems;
 			// LogUtil.i(TAG, reslutStr);
@@ -86,7 +104,6 @@ public class MenuSevice extends Service {
 				if (jresult != null && jresult.length() > 0) {
 
 					for (int i = 0; i < jresult.length(); i++) {
-
 						JSONObject jb = jresult.getJSONObject(i);
 						MenuItem menu = new MenuItem();
 						menu.setName(jb.getString("name"));
@@ -98,7 +115,6 @@ public class MenuSevice extends Service {
 						if (jb.getJSONArray("childrens") != null) {
 							menu.setHasChildern(true);// 有子菜单存在
 						}
-
 						menu.setCreateDate(jb.getString("createDate"));
 						menu.setChannelId(jb.getString("channelId"));
 						menu.setChannelName(jb.getString("channelName"));
@@ -113,14 +129,35 @@ public class MenuSevice extends Service {
 						menu.setLinkMenuItemName(jb
 								.getString("linkMenuItemName"));
 
-						menuItems.add(menu);
-
 						if (jb.getInt("type") == MenuItem.CHANNEL_MENU) {// 如果是频道菜单，获取子频道，并放入缓存中
 							new Thread(new ChannelTask(menu.getChannelId()))
 									.start();
 						}
-						// LogUtil.i(TAG, jb.toString());
 
+						// 图标处理
+						String iconUrl = jb.getString("icon");
+						if (!iconUrl.equals("null") && !iconUrl.equals("")
+								&& fileFlag) {
+							String iconName = iconUrl.substring(iconUrl
+									.lastIndexOf("/") + 1);// 取出图标名称
+
+							File fileIcon = new File(
+									Constants.APPFiles.MENU_ICON_PATH
+											+ iconName);
+
+							if (!fileIcon.exists()) {// 如果不存在，下载图标并保存到本地
+
+								new Thread(
+										new IconTask(iconUrl, menu, fileIcon))
+										.start();
+
+							} else {// 本地SDK已存在图标
+								menu.setIcon(iconName);
+							}
+
+						}
+						// LogUtil.i(TAG, jb.toString());
+						menuItems.add(menu);
 					}
 
 				}
@@ -133,6 +170,53 @@ public class MenuSevice extends Service {
 		}
 
 		return null;
+
+	}
+
+	/**
+	 * 
+	 * @author wanglu 泰得利通 菜单图标下载任务
+	 * 
+	 */
+	private final class IconTask implements Runnable {
+
+		private String iconUrl;// 图标地址
+		private MenuItem menuItem;
+		private File fileIcon;
+
+		public IconTask(String iconUrl, MenuItem menuItem, File fileIcon) {
+
+			this.iconUrl = iconUrl;
+			this.menuItem = menuItem;
+			this.fileIcon = fileIcon;
+		}
+
+		@Override
+		public void run() {
+
+			InputStream is = httpUtils.executeGet(iconUrl, 5000);
+			String iconName = iconUrl.substring(iconUrl.lastIndexOf("/") + 1);
+
+			try {
+				FileOutputStream fos = new FileOutputStream(fileIcon);
+				int len = 0;
+				byte buffer[] = new byte[1024];
+				while ((len = is.read(buffer)) != -1) {
+					fos.write(buffer, 0, len);
+				}
+
+				fos.flush();
+				fos.close();
+				is.close();
+				menuItem.setIcon(iconName);
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
 
 	}
 
