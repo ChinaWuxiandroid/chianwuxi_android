@@ -1,14 +1,17 @@
 package com.wuxi.app.adapter;
 
+import java.io.File;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wuxi.app.R;
+import com.wuxi.app.util.Constants;
 import com.wuxi.domain.MenuItem;
 
 public class IndexGridAdapter extends BasicAdapter {
@@ -64,7 +67,18 @@ public class IndexGridAdapter extends BasicAdapter {
 		if (position > 5) {
 			position = 0;
 		}
-		viewHolder.image.setImageResource(image[position]);// 图片暂时做死了，
+		String icon = menuItem.getIcon();
+		if (icon != null) {
+			File iconFile = new File(Constants.APPFiles.MENU_ICON_PATH + icon);
+			if (iconFile.exists()) {
+				viewHolder.image.setImageBitmap(BitmapFactory
+						.decodeFile(Constants.APPFiles.MENU_ICON_PATH + icon));
+			}
+
+		} else {
+			viewHolder.image.setImageResource(image[position]);// 图片暂时做死了，
+		}
+
 		viewHolder.title_text.setText(menuItem.getName());
 		return convertView;
 	}
