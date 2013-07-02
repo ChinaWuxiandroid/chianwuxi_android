@@ -1,5 +1,7 @@
 package com.wuxi.app.util;
 
+import android.os.Environment;
+
 /**
  * 常量类
  * 
@@ -27,6 +29,27 @@ public class Constants {
 		 */
 		public static final String CHANNEL_URL = "http://3g.wuxi.gov.cn/api/channel/{channelId}/channels.json";
 
+	}
+	
+	
+	/**
+	 * 
+	 * @author wanglu 泰得利通
+	 * 存储地址
+	 *
+	 */
+	public static final class APPFiles{
+		
+		/**
+		 * 项目外部文件存储路径
+		 */
+		public static final String APP_PATH=Environment.getExternalStorageDirectory().getPath()+"/chinawi/";
+		
+		/**
+		 * 项目菜单图标存储路径
+		 */
+		public static final String MENU_ICON_PATH=APP_PATH+"menu/icon/";
+		
 	}
 
 }
