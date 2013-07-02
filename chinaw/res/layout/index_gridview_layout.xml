@@ -6,8 +6,8 @@
 
         <ImageView
             android:id="@+id/index_gridview_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
             android:layout_centerInParent="true"
             android:layout_margin="15dip"
             android:src="@drawable/index_meili_wuxi" />
