@@ -58,6 +58,15 @@ public class MenuItem implements Comparable<MenuItem> {
 	private String linkMenuItemName;
 	private String linkMenuItemId;// 连接菜单Id
 	private boolean isHasChildern;// 是否子菜单
+	private String icon;//图标
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 
 	public boolean isHasChildern() {
 		return isHasChildern;
