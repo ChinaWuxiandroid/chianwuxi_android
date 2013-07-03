@@ -9,8 +9,8 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
+import com.wuxi.app.fragment.CityMapFragment;
 import com.wuxi.app.fragment.NavigatorChannelFragment;
-import com.wuxi.app.fragment.index.type.CityMapFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Channel;
 import com.wuxi.exception.NetException;
