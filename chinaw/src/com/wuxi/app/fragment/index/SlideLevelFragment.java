@@ -79,6 +79,10 @@ public class SlideLevelFragment extends BaseFragment {
 				informationCenterFragment.setMenuItem(menuItem);
 				onTransaction(informationCenterFragment);
 
+			}else if(menuItem.getName().equals("政府信息公开")){
+				PublicGoverMsgFragment publicGoverMsgFragment=new PublicGoverMsgFragment();
+				
+				
 			}
 
 			break;
