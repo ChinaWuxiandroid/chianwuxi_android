@@ -2,7 +2,6 @@ package com.wuxi.app.fragment.index;
 
 import java.util.List;
 
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,12 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.LeftMenuAdapter;
 import com.wuxi.app.fragment.index.type.BaseSlideFragment;
 import com.wuxi.app.fragment.index.type.ChannelFragment;
+import com.wuxi.app.fragment.index.type.InformationCenterFragment;
 import com.wuxi.app.fragment.index.type.PublicGoverMsgFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.view.SlideMenuLayout;
@@ -72,8 +71,16 @@ public class SlideLevelFragment extends BaseFragment {
 	private void init() {
 		switch (menuItem.getType()) {// 菜单类型
 
-		case 0:
-			onTransaction(new PublicGoverMsgFragment());
+		case MenuItem.CUSTOM_MENU:
+
+			if (menuItem.getName().equals("咨询中心")) {
+
+				InformationCenterFragment informationCenterFragment = new InformationCenterFragment();
+				informationCenterFragment.setMenuItem(menuItem);
+				onTransaction(informationCenterFragment);
+
+			}
+
 			break;
 
 		case MenuItem.CHANNEL_MENU:// 如果点击的频道菜单

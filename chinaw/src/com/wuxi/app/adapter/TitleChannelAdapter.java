@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.wuxi.app.R;
 import com.wuxi.domain.Channel;
+import com.wuxi.domain.MenuItem;
 
 /**
  * 头部滑动模块数据适配器
@@ -19,13 +20,16 @@ import com.wuxi.domain.Channel;
  */
 public class TitleChannelAdapter extends BasicAdapter {
 
-	private List<Channel> items;
+	@SuppressWarnings("rawtypes")
+	private List items;
 	private int screenIndex;
 
+	@SuppressWarnings("rawtypes")
 	public TitleChannelAdapter(Context context, int view, int[] viewId,
-			String[] dataName, List<Channel> items, int screenIndex) {
+			String[] dataName, List items, int screenIndex) {
 		super(context, view, viewId, dataName);
-		this.items = items;
+		
+		this.items=items;
 		this.screenIndex = screenIndex;
 
 	}
@@ -55,7 +59,15 @@ public class TitleChannelAdapter extends BasicAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		String chanelName = items.get(position).getChannelName();// 频道名称
+		
+		Object item=items.get(position);
+		String chanelName ="";// 频道名称
+		if(item instanceof Channel){
+			chanelName=((Channel)item).getChannelName();
+		}else if(item instanceof MenuItem){
+			chanelName=((MenuItem)item).getName();
+		}
+		
 		ViewHolder viewHolder = null;
 
 		if (convertView == null) {

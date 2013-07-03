@@ -23,11 +23,19 @@ public class Constants {
 		 * recursions false Int 返回层次,不输入则为2,为0则返回所有
 		 */
 		public static final String MENU_URL = "http://3g.wuxi.gov.cn/api/menu/tree.json";
+		
+		/**
+		 * 获取子菜单接口
+		 * {id}要获取子菜单的Id
+		 */
+		public static final String SUB_MENU_URL="http://3g.wuxi.gov.cn/api/menu/{id}/menus.json";
 
 		/**
 		 * 获取子频道URL {channelId}频道ID占位符
 		 */
 		public static final String CHANNEL_URL = "http://3g.wuxi.gov.cn/api/channel/{channelId}/channels.json";
+		
+		
 
 	}
 	
@@ -49,6 +57,33 @@ public class Constants {
 		 * 项目菜单图标存储路径
 		 */
 		public static final String MENU_ICON_PATH=APP_PATH+"menu/icon/";
+		
+	}
+	
+	
+	/**
+	 * 
+	 * @author wanglu 泰得利通
+	 * 异常信息常量
+	 *
+	 */
+	public static final class ExceptionMessage{
+		
+		/**
+		 * 没有获取到数据
+		 */
+		public static final String NODATA_MEG="没有获取到数据";
+		
+		/**
+		 * 没有网络连接
+		 */
+		public static final String NO_NET="没有网络连接";
+		
+		
+		/**
+		 * 数据格式不正确异常
+		 */
+		public static final String DATA_FORMATE="数据格式错误";
 		
 	}
 

@@ -26,6 +26,7 @@ import com.wuxi.app.fragment.NavigatorChannelFragment;
 import com.wuxi.app.fragment.index.type.CityMapFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.domain.Channel;
+import com.wuxi.domain.MenuItem;
 
 /**
  * 头部可滑动自定义view
@@ -289,16 +290,16 @@ public class TitleScrollLayout extends ViewGroup {
 	}
 
 	/*
-	 * 初始化屏
+	 * 初始化屏频道
 	 */
-	public void initScreen(Context context, LayoutInflater inflater,
-			List<Channel> items) {
-		if (items == null) {
+	public void initChannelScreen(Context context, LayoutInflater inflater,
+			List<Channel> chanItems) {
+		if (chanItems == null) {
 			return;
 		}
 
 		int i = 0;
-		totalScreenNum = items.size() / getPerscreenCount();// 屏数
+		totalScreenNum = chanItems.size() / getPerscreenCount();// 屏数
 
 		checkPositons = new int[totalScreenNum + 1];
 		for (int j = 0; j < checkPositons.length; j++) {// 初始化头部安选中的下标
@@ -310,7 +311,7 @@ public class TitleScrollLayout extends ViewGroup {
 
 		List<Channel> onScreenItems = null;// 一个屏上的图标
 
-		for (Channel item : items) {
+		for (Channel item : chanItems) {
 
 			if (i % getPerscreenCount() == 0) {
 
@@ -323,7 +324,7 @@ public class TitleScrollLayout extends ViewGroup {
 							new int[] { R.id.tv_actionname }, null,
 							onScreenItems, currentScreen));
 
-					child.setOnItemClickListener(new TitleChannelOnclick());
+					child.setOnItemClickListener(new TitleItemlOnclick());
 					currentScreen++;
 					addView(child);
 				}
@@ -340,7 +341,7 @@ public class TitleScrollLayout extends ViewGroup {
 			onScreenItems.add(item);
 
 			// add last category screen //最后一屏
-			if (i == items.size() - 1) {
+			if (i == chanItems.size() - 1) {
 				GridView child = (GridView) inflater.inflate(
 						R.layout.title_action_gridview_layout, null);
 
@@ -349,7 +350,7 @@ public class TitleScrollLayout extends ViewGroup {
 						new int[] { R.id.tv_actionname }, null, onScreenItems,
 						currentScreen));
 
-				child.setOnItemClickListener(new TitleChannelOnclick());
+				child.setOnItemClickListener(new TitleItemlOnclick());
 				addView(child);
 
 			}
@@ -358,13 +359,87 @@ public class TitleScrollLayout extends ViewGroup {
 		}
 	}
 
-	private class TitleChannelOnclick implements OnItemClickListener {
+	public void initMenuItemScreen(Context context, LayoutInflater inflater,
+			List<MenuItem> menuItems) {
+		if (menuItems == null) {
+			return;
+		}
+
+		int i = 0;
+		totalScreenNum = menuItems.size() / getPerscreenCount();// 屏数
+
+		checkPositons = new int[totalScreenNum + 1];
+		for (int j = 0; j < checkPositons.length; j++) {// 初始化头部安选中的下标
+			checkPositons[j] = -1;
+		}
+
+		checkPositons[0] = 0;// 默认选中第一屏第一个Chanel
+		int currentScreen = 0;// 当前屏
+
+		List<MenuItem> onScreenItems = null;// 一个屏上的图标
+
+		for (MenuItem item : menuItems) {
+
+			if (i % getPerscreenCount() == 0) {
+
+				if (onScreenItems != null) {
+					GridView child = (GridView) inflater.inflate(
+							R.layout.title_action_gridview_layout, null);
+
+					child.setAdapter(new TitleChannelAdapter(context,
+							R.layout.title_grid_item_layout,
+							new int[] { R.id.tv_actionname }, null,
+							onScreenItems, currentScreen));
+
+					child.setOnItemClickListener(new TitleItemlOnclick());
+					currentScreen++;
+					addView(child);
+				}
+
+				onScreenItems = new ArrayList<MenuItem>();
+			}
+
+			// 最后一屏操作
+			if (currentScreen > totalScreenNum + 1) {
+
+				onScreenItems = new ArrayList<MenuItem>();
+			}
+
+			onScreenItems.add(item);
+
+			// add last category screen //最后一屏
+			if (i == menuItems.size() - 1) {
+				GridView child = (GridView) inflater.inflate(
+						R.layout.title_action_gridview_layout, null);
+
+				child.setAdapter(new TitleChannelAdapter(context,
+						R.layout.title_grid_item_layout,
+						new int[] { R.id.tv_actionname }, null, onScreenItems,
+						currentScreen));
+
+				child.setOnItemClickListener(new TitleItemlOnclick());
+				addView(child);
+
+			}
+
+			i++;
+		}
+	}
+
+	private class TitleItemlOnclick implements OnItemClickListener {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
 
-			Channel channel = (Channel) parent.getItemAtPosition(position);
+			Channel channel = null;
+			MenuItem menuItem = null;
+			Object item = parent.getItemAtPosition(position);
+			if (item instanceof Channel) {
+				channel = (Channel) item;
+			} else if (item instanceof MenuItem) {
+				menuItem = (MenuItem) item;
+			}
 
 			/**
 			 * 切换选中与未选择的样式
@@ -393,44 +468,50 @@ public class TitleScrollLayout extends ViewGroup {
 				checkPositons[mCurScreen] = position;
 			}
 
-			Class<? extends Fragment> fragmentClass = channel
-					.getContentFragment();
-			Fragment fragment;
-			try {
-				fragment = (Fragment) fragmentClass.newInstance();
+			
+			/**
+			 * 频道处理
+			 */
+			if (channel != null) {
+				Class<? extends Fragment> fragmentClass = channel
+						.getContentFragment();
+				Fragment fragment;
+				try {
+					fragment = (Fragment) fragmentClass.newInstance();
 
-				if (fragment == null) {
-					return;
-				}
-
-				NavigatorChannelFragment nafragment = null;
-				CityMapFragment cityNCityMapFragment = null;
-				if (fragment instanceof NavigatorChannelFragment) {
-					nafragment = (NavigatorChannelFragment) fragment;
-					nafragment.setParentChannel(channel);
-				}
-
-				if (fragment instanceof CityMapFragment) {
-					cityNCityMapFragment = (CityMapFragment) fragment;
-
-				}
-
-				if (initializContentLayoutListner != null) {
-					if (nafragment != null) {
-						initializContentLayoutListner
-								.bindContentLayout(nafragment);
-					} else {
-						initializContentLayoutListner
-								.bindContentLayout(cityNCityMapFragment);
+					if (fragment == null) {
+						return;
 					}
 
-				}
-			} catch (InstantiationException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
+					NavigatorChannelFragment nafragment = null;
+					CityMapFragment cityNCityMapFragment = null;
+					if (fragment instanceof NavigatorChannelFragment) {
+						nafragment = (NavigatorChannelFragment) fragment;
+						nafragment.setParentChannel(channel);
+					}
 
+					if (fragment instanceof CityMapFragment) {
+						cityNCityMapFragment = (CityMapFragment) fragment;
+
+					}
+
+					if (initializContentLayoutListner != null) {
+						if (nafragment != null) {
+							initializContentLayoutListner
+									.bindContentLayout(nafragment);
+						} else {
+							initializContentLayoutListner
+									.bindContentLayout(cityNCityMapFragment);
+						}
+
+					}
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+
+			}
 		}
 	}
 

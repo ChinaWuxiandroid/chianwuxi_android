@@ -33,6 +33,7 @@ import com.wuxi.app.fragment.index.SlideLevelFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.MenuItem;
+import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
@@ -110,8 +111,7 @@ public class MainIndexFragment extends BaseFragment {
 	 */
 	@SuppressWarnings("unchecked")
 	private void LoadGrid() {
-	
-		
+
 		if (CacheUtil.get(MENUITEM_CACKE_KEY) != null) {// 从缓存加载
 
 			menuItems = (List<MenuItem>) CacheUtil.get(MENUITEM_CACKE_KEY);
@@ -128,13 +128,14 @@ public class MainIndexFragment extends BaseFragment {
 						MenuSevice menuSevice = new MenuSevice(context);
 						try {
 							menuItems = menuSevice
-									.getHomeMenuItems(Constants.Urls.MENU_URL);
+									.getHomeMenuItems(Constants.Urls.MENU_URL
+											+ "?recursions=0");
 							if (menuItems != null) {
 								handler.sendEmptyMessage(MENUITEM_LOAD_SUCESS);// 发送消息
 								CacheUtil.put(MENUITEM_CACKE_KEY, menuItems);// 将菜单数据放入缓存
 							} else {
 								Message msg = handler.obtainMessage();
-								msg.what=MENUITEM_LOAD_ERROR;
+								msg.what = MENUITEM_LOAD_ERROR;
 								msg.obj = "加载错误";
 								handler.sendMessage(msg);// 加载错误
 							}
@@ -142,13 +143,19 @@ public class MainIndexFragment extends BaseFragment {
 							e.printStackTrace();
 							Message msg = handler.obtainMessage();
 							msg.obj = e.getMessage();
-							msg.what=MENUITEM_LOAD_ERROR;
+							msg.what = MENUITEM_LOAD_ERROR;
 							handler.sendMessage(msg);// 加载错误
 						} catch (JSONException e) {
 							e.printStackTrace();
 							Message msg = handler.obtainMessage();
-							msg.obj = "网络出错";
-							msg.what=MENUITEM_LOAD_ERROR;
+							msg.obj = "网络格式出错";
+							msg.what = MENUITEM_LOAD_ERROR;
+							handler.sendMessage(msg);// 加载错误
+						} catch (NODataException e) {
+							e.printStackTrace();
+							Message msg = handler.obtainMessage();
+							msg.obj = "获取数据异常";
+							msg.what = MENUITEM_LOAD_ERROR;
 							handler.sendMessage(msg);// 加载错误
 						}
 
@@ -156,7 +163,6 @@ public class MainIndexFragment extends BaseFragment {
 				}
 
 		).start();
-		
 
 	}
 

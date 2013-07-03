@@ -15,8 +15,7 @@ public class Service {
 	protected Context context;
 	protected NetworkUtil networkUtil = NetworkUtil.getInstance();
 	protected HttpUtils httpUtils = HttpUtils.getInstance();
-	protected static final  String NET_ERROR="请检查网络连接";
-	protected static final String DATA_FORMATE_ERROR="数据格式有误";
+	
 
 	public Service(Context context) {
 		this.context = context;

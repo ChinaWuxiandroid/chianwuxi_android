@@ -8,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.wuxi.app.fragment.NavigatorChannelFragment;
 import com.wuxi.app.fragment.index.type.CityMapFragment;
@@ -40,7 +39,7 @@ public class ChannelService extends Service {
 
 		if (!checkNet()) {
 
-			throw new NetException(NET_ERROR);
+			throw new NetException(Constants.ExceptionMessage.NO_NET);
 
 		}
 
@@ -76,8 +75,7 @@ public class ChannelService extends Service {
 
 			} catch (JSONException e) {
 				e.printStackTrace();
-				Toast.makeText(context, DATA_FORMATE_ERROR, Toast.LENGTH_LONG)
-						.show();
+				
 			}
 
 			return channels;

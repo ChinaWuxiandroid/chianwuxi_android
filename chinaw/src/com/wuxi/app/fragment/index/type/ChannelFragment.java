@@ -100,9 +100,6 @@ public class ChannelFragment extends BaseSlideFragment implements
 
 		loadTitleData();
 		
-
-		
-
 	}
 
 	/**
@@ -174,7 +171,7 @@ public class ChannelFragment extends BaseSlideFragment implements
 	 */
 	private void showTitleData() {
 
-		mtitleScrollLayout.initScreen(context, inflater, titleChannels);// 初始化头部空间
+		mtitleScrollLayout.initChannelScreen(context, inflater, titleChannels);// 初始化头部空间
 		initData(titleChannels.get(0));//默认显示第一个channel的子channel页
 
 	}
