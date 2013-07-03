@@ -82,6 +82,7 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 	 */
 	private void showTitleData() {
 
+		
 		mtitleScrollLayout
 				.initMenuItemScreen(context, inflater, titleMenuItems);// 初始化头部空间
 		// initData(titleChannels.get(0));//默认显示第一个channel的子channel页
