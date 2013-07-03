@@ -170,7 +170,7 @@ public class ChannelFragment extends BaseSlideFragment implements
 	 * 显示头部数据 wanglu 泰得利通
 	 */
 	private void showTitleData() {
-
+		
 		mtitleScrollLayout.initChannelScreen(context, inflater, titleChannels);// 初始化头部空间
 		initData(titleChannels.get(0));//默认显示第一个channel的子channel页
 
