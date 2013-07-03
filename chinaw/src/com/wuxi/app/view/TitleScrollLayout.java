@@ -22,8 +22,8 @@ import android.widget.TextView;
 
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.TitleChannelAdapter;
+import com.wuxi.app.fragment.CityMapFragment;
 import com.wuxi.app.fragment.NavigatorChannelFragment;
-import com.wuxi.app.fragment.index.type.CityMapFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
