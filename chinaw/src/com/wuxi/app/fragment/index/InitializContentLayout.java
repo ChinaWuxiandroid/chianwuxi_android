@@ -12,7 +12,7 @@ import com.wuxi.domain.MenuItem;
 public class InitializContentLayout {
 	public static void initMenuItemContentLayout(MenuItem menuItem){
 //		if(menuItem.getName().equals("最新公开信息"))
-			menuItem.setContentFragment(NavigatorWithContentFragment.class);
+		  	menuItem.setContentFragment(NavigatorWithContentFragment.class);
 	}
 	
 	public static void initChannelContentLayout(Channel channel){
