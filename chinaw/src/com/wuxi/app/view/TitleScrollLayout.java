@@ -23,12 +23,10 @@ import android.widget.TextView;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.TitleChannelAdapter;
 import com.wuxi.app.fragment.CityMapFragment;
-<<<<<<< HEAD
+
 import com.wuxi.app.fragment.LeaderWindowFragment;
-import com.wuxi.app.fragment.NavigatorChannelFragment;
-=======
 import com.wuxi.app.fragment.NavigatorWithContentFragment;
->>>>>>> 9fb117c2f706391dad94f554716c55a221937941
+
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
@@ -482,11 +480,11 @@ public class TitleScrollLayout extends ViewGroup {
 			if (channel != null) {
 				Class<? extends Fragment> fragmentClass = channel
 						.getContentFragment();
-				if(fragmentClass==null){
+				if (fragmentClass == null) {
 					return;
 				}
 				Fragment fragment;
-				
+
 				try {
 					fragment = (Fragment) fragmentClass.newInstance();
 
@@ -496,7 +494,7 @@ public class TitleScrollLayout extends ViewGroup {
 
 					NavigatorWithContentFragment nafragment = null;
 					CityMapFragment cityNCityMapFragment = null;
-					
+
 					if (fragment instanceof NavigatorWithContentFragment) {
 						nafragment = (NavigatorWithContentFragment) fragment;
 						nafragment.setParentChannel(channel);
@@ -524,25 +522,17 @@ public class TitleScrollLayout extends ViewGroup {
 				}
 
 			}
-<<<<<<< HEAD
 
-			if (menuItem != null) {// 头部菜单点击处理
-
-				Class<? extends Fragment> fragmentClass = menuItem
-						.getContentFragment();
-				if(fragmentClass==null){
-					return ;
-				}
-=======
-			
 			/**
 			 * 普通菜单处理
 			 * */
-			if(menuItem!=null){
+			if (menuItem != null) {
 				Class<? extends Fragment> fragmentClass = menuItem
 						.getContentFragment();
->>>>>>> 9fb117c2f706391dad94f554716c55a221937941
+
 				Fragment fragment;
+				if (fragmentClass == null)
+					return;
 				try {
 					fragment = (Fragment) fragmentClass.newInstance();
 
@@ -550,7 +540,6 @@ public class TitleScrollLayout extends ViewGroup {
 						return;
 					}
 
-<<<<<<< HEAD
 					LeaderWindowFragment leaderWindowFragment = null;
 
 					if (fragment instanceof LeaderWindowFragment) {
@@ -559,49 +548,36 @@ public class TitleScrollLayout extends ViewGroup {
 
 					}
 
+					NavigatorWithContentFragment nafragment = null;
+
+					if (fragment instanceof NavigatorWithContentFragment) {
+						nafragment = (NavigatorWithContentFragment) fragment;
+						nafragment.setParentMenuItem(menuItem);
+						nafragment
+								.setDataType(NavigatorWithContentFragment.DATA_TPYE_MENUITEM);
+					}
+
 					if (initializContentLayoutListner != null) {
 						if (leaderWindowFragment != null) {
 							initializContentLayoutListner
 									.bindContentLayout(leaderWindowFragment);
 						}
-=======
-					NavigatorWithContentFragment nafragment = null;
-					
-					if (fragment instanceof NavigatorWithContentFragment) {
-						nafragment = (NavigatorWithContentFragment) fragment;
-						nafragment.setParentMenuItem(menuItem);
-						nafragment.setDataType(NavigatorWithContentFragment.DATA_TPYE_MENUITEM);
-					}
 
-//					if (fragment instanceof CityMapFragment) {
-//						cityNCityMapFragment = (CityMapFragment) fragment;
-//
-//					}
-
-					if (initializContentLayoutListner != null) {
 						if (nafragment != null) {
 							initializContentLayoutListner
 									.bindContentLayout(nafragment);
-						} 
-//						else {
-//							initializContentLayoutListner
-//									.bindContentLayout(cityNCityMapFragment);
-//						}
->>>>>>> 9fb117c2f706391dad94f554716c55a221937941
+						}
 
 					}
+
 				} catch (InstantiationException e) {
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
 					e.printStackTrace();
 				}
-<<<<<<< HEAD
 
 			}
 
-=======
-			}
->>>>>>> 9fb117c2f706391dad94f554716c55a221937941
 		}
 	}
 
