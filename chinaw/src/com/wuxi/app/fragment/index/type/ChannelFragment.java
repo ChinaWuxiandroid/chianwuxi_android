@@ -111,6 +111,7 @@ public class ChannelFragment extends BaseSlideFragment implements
 	
 		NavigatorWithContentFragment navigatorChannelFragment=new NavigatorWithContentFragment();
 		navigatorChannelFragment.setParentChannel(parentChannel);
+		navigatorChannelFragment.setDataType(0);
 		bindFragment(navigatorChannelFragment);
 	}
 

@@ -18,6 +18,8 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.MenuService;
+import com.wuxi.app.fragment.NavigatorWithContentFragment;
+import com.wuxi.app.fragment.SimpleListViewFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.LogUtil;
@@ -73,9 +75,8 @@ InitializContentLayoutListner, OnClickListener{
 
 	private void initData(MenuItem parentMenuItem) {
 
-		//		NavigatorChannelFragment navigatorChannelFragment=new NavigatorChannelFragment();
-		//		navigatorChannelFragment.setParentChannel(parentMenuItem);
-		//		bindFragment(navigatorChannelFragment);
+		SimpleListViewFragment simpleListViewFragment=new SimpleListViewFragment();
+		bindFragment(simpleListViewFragment);
 	}
 
 
@@ -142,7 +143,7 @@ InitializContentLayoutListner, OnClickListener{
 	private void showTitleData() {
 		mtitleScrollLayout.setPerscreenCount(5);     //设置滑动头选项每屏为5个
 		mtitleScrollLayout.initMenuItemScreen(context, inflater, titleMenus);// 初始化头部空间
-		//		initData(titleMenus.get(0));//默认显示第一个channel的子channel页
+		initData(titleMenus.get(0));//默认显示第一个menuItem的子页
 
 	}
 

@@ -1,7 +1,10 @@
 package com.wuxi.app.fragment.index;
 
+
 import com.wuxi.app.fragment.CityMapFragment;
 import com.wuxi.app.fragment.NavigatorWithContentFragment;
+import com.wuxi.app.fragment.SimpleListViewFragment;
+import com.wuxi.app.fragment.WorkSuggestionBoxFragment;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 
@@ -10,9 +13,31 @@ import com.wuxi.domain.MenuItem;
  * @author 杨宸 智佳
  * */
 public class InitializContentLayout {
+	
+	
+	static final String[] navigatorContentLayoutTypeNames={"信息公开工作年度报告",
+		"依申请展开","新闻发布会"};
+	static final String[] simpleListViewLayoutTypeNames={"最新信息公开","信息公开指南","信息公开制度"};
+	
+	
+//	static Map<String,String[]> UIInfoContainer=new HashMap<String,String[]>();
+//			
+//	
+//	public static void init(){
+//		UIInfoContainer.put("NavigatorWithContentFragment", navigatorContentLayoutTypeNames);
+//		UIInfoContainer.put("SimpleListViewFragment", simpleListViewLayoutTypeNames);
+//	}
+	
+	
 	public static void initMenuItemContentLayout(MenuItem menuItem){
-//		if(menuItem.getName().equals("最新公开信息"))
+		if(menuItem.getName().equals("工作意见箱"))
+			menuItem.setContentFragment(WorkSuggestionBoxFragment.class);
+		else if(judgeBelongNavigatorContentLayout(menuItem.getName(),navigatorContentLayoutTypeNames))
 		  	menuItem.setContentFragment(NavigatorWithContentFragment.class);
+		else if(judgeBelongSimpleListViewLayout(menuItem.getName(),simpleListViewLayoutTypeNames))
+			menuItem.setContentFragment(SimpleListViewFragment.class);
+		else
+			menuItem.setContentFragment(NavigatorWithContentFragment.class);
 	}
 	
 	public static void initChannelContentLayout(Channel channel){
@@ -22,4 +47,24 @@ public class InitializContentLayout {
 			channel.setContentFragment(NavigatorWithContentFragment.class);
 		}
 	}
+	
+	/*
+	 * 判断是否属于NavigatorWithContentFragment
+	 * */
+	private static boolean judgeBelongNavigatorContentLayout(String menuItemName,String[] names){
+		for(int i=0;i<names.length;i++){
+			if(menuItemName.equals(names[i]))
+				return true;
+		}
+		return false;
+	}
+	
+	private static boolean judgeBelongSimpleListViewLayout(String menuItemName,String[] names){
+		for(int i=0;i<names.length;i++){
+			if(menuItemName.equals(names[i]))
+				return true;
+		}
+		return false;
+	}
+	
 }

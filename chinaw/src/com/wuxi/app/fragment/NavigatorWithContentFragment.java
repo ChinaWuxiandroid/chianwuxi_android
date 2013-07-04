@@ -32,8 +32,8 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 /**
- * 具有左右导航视图
- * 
+ * 具有左右导航视图  跳转时必须调用方法setParentChannel(Channel parentChannel)或setParentMenuItem(MenuItem parentMenuItem)
+ *                          和方法public void setDataType(int type)
  * @author wanglu
  * 
  */
@@ -255,7 +255,7 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 	public void setParentMenuItem(MenuItem parentMenuItem) {
 		this.parentMenuItem = parentMenuItem;
 	}
-	
+
 	public void setDataType(int type){
 		dataType=type;
 	}

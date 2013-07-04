@@ -24,6 +24,8 @@ import com.wuxi.app.R;
 import com.wuxi.app.adapter.TitleChannelAdapter;
 import com.wuxi.app.fragment.CityMapFragment;
 import com.wuxi.app.fragment.NavigatorWithContentFragment;
+import com.wuxi.app.fragment.SimpleListViewFragment;
+import com.wuxi.app.fragment.WorkSuggestionBoxFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
@@ -533,6 +535,8 @@ public class TitleScrollLayout extends ViewGroup {
 					}
 
 					NavigatorWithContentFragment nafragment = null;
+					SimpleListViewFragment listviewfragment = null;
+					WorkSuggestionBoxFragment workSuggestionBoxFragment=null;
 					
 					if (fragment instanceof NavigatorWithContentFragment) {
 						nafragment = (NavigatorWithContentFragment) fragment;
@@ -540,20 +544,27 @@ public class TitleScrollLayout extends ViewGroup {
 						nafragment.setDataType(NavigatorWithContentFragment.DATA_TPYE_MENUITEM);
 					}
 
-//					if (fragment instanceof CityMapFragment) {
-//						cityNCityMapFragment = (CityMapFragment) fragment;
-//
-//					}
+					if (fragment instanceof SimpleListViewFragment) {
+						listviewfragment = (SimpleListViewFragment) fragment;
+					}
+					
+					if (fragment instanceof WorkSuggestionBoxFragment) {
+						workSuggestionBoxFragment = (WorkSuggestionBoxFragment) fragment;
+					}
 
 					if (initializContentLayoutListner != null) {
 						if (nafragment != null) {
 							initializContentLayoutListner
 									.bindContentLayout(nafragment);
 						} 
-//						else {
-//							initializContentLayoutListner
-//									.bindContentLayout(cityNCityMapFragment);
-//						}
+						else if(listviewfragment!=null) {
+							initializContentLayoutListner
+									.bindContentLayout(listviewfragment);
+						}
+						else {
+							initializContentLayoutListner
+									.bindContentLayout(workSuggestionBoxFragment);
+						}
 
 					}
 				} catch (InstantiationException e) {
