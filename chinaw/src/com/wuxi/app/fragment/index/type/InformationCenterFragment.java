@@ -2,20 +2,29 @@ package com.wuxi.app.fragment.index.type;
 
 import java.util.List;
 
+import org.json.JSONException;
+
 import com.wuxi.app.R;
+import com.wuxi.app.engine.MenuSevice;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.view.TitleScrollLayout;
 import com.wuxi.domain.MenuItem;
+import com.wuxi.exception.NODataException;
+import com.wuxi.exception.NetException;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 /**
  * 
@@ -31,7 +40,28 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 	private List<MenuItem> titleMenuItems;// 头部子菜单
 	private TitleScrollLayout mtitleScrollLayout;
 	private ImageButton ib_nextItems;
+	private static final int MANCOTENT_ID = R.id.model_main;
+	private  static final int TITLE_LOAD_SUCCESS = 0;//头部加载成功
+	protected static final int TITLE_LOAD_FAIL = 1;//加载失败
 
+	private Handler handler=new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			
+			switch(msg.what){
+			case TITLE_LOAD_FAIL:
+				String tip="";
+				if(msg.obj!=null){
+					tip=msg.obj.toString();
+					Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
+				}
+				break;
+			case TITLE_LOAD_SUCCESS:
+				showTitleData();
+				break;
+			}
+			
+		};
+	};
 	public void setMenuItem(MenuItem menuItem) {
 		this.menuItem = menuItem;
 	}
@@ -69,11 +99,44 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 		if (CacheUtil.get(menuItem.getId()) != null) {// 从缓存中查找子菜单
 			titleMenuItems = (List<MenuItem>) CacheUtil.get(menuItem.getId());
 			showTitleData();
-		}else{//从网络加载获取
-			
-			
-			
+			return ;
 		}
+
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					
+					MenuSevice menuSevice=new MenuSevice(context);
+					try {
+						titleMenuItems=menuSevice.getSubMenuItems(menuItem.getId());
+						if(titleMenuItems!=null){
+							handler.sendEmptyMessage(TITLE_LOAD_SUCCESS);
+							CacheUtil.put(menuItem.getId(), titleMenuItems);//放入缓存
+						}
+						
+					} catch (NetException e) {
+						e.printStackTrace();
+						Message msg=handler.obtainMessage();
+						msg.obj=e.getMessage();
+						msg.what=TITLE_LOAD_FAIL;
+						handler.sendMessage(msg);
+					} catch (NODataException e) {
+						e.printStackTrace();
+						Message msg=handler.obtainMessage();
+						msg.obj=e.getMessage();
+						msg.what=TITLE_LOAD_FAIL;
+						handler.sendMessage(msg);
+					} catch (JSONException e) {
+						e.printStackTrace();
+						Message msg=handler.obtainMessage();
+						msg.obj=e.getMessage();
+						msg.what=TITLE_LOAD_FAIL;
+						handler.sendMessage(msg);
+					}
+				}
+			}).start();
+		
 
 	}
 
@@ -82,21 +145,36 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 	 */
 	private void showTitleData() {
 
-		mtitleScrollLayout.setPerscreenCount(4);
 		mtitleScrollLayout
 				.initMenuItemScreen(context, inflater, titleMenuItems);// 初始化头部空间
-		// initData(titleChannels.get(0));//默认显示第一个channel的子channel页
 
 	}
 
 	@Override
 	public void onClick(View v) {
 
+		switch (v.getId()) {
+		case R.id.btn_next_screen:// 下一屏
+			mtitleScrollLayout.goNextScreen();
+			break;
+
+		}
+
 	}
 
 	@Override
 	public void bindContentLayout(Fragment fragment) {
+		bindFragment(fragment);
+	}
 
+	private void bindFragment(Fragment fragment) {
+
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
+		ft.replace(MANCOTENT_ID, fragment);// 替换内容界面
+
+		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+		ft.addToBackStack(null);
+		ft.commit();
 	}
 
 }

@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.TitleChannelAdapter;
 import com.wuxi.app.fragment.CityMapFragment;
+import com.wuxi.app.fragment.LeaderWindowFragment;
 import com.wuxi.app.fragment.NavigatorChannelFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.domain.Channel;
@@ -50,7 +51,6 @@ public class TitleScrollLayout extends ViewGroup {
 	private static final int SNAP_VELOCITY = 1200;
 	private static final String TAG = "TITLESCROLLLAYOUT";
 	private int mTouchSlop;
-	
 
 	private InitializContentLayoutListner initializContentLayoutListner;// 该自定义控件所在的fragment
 	private int perscreenCount = PERSCREEN_ITEM_COUNT;// 每屏数量,默认为7
@@ -318,7 +318,7 @@ public class TitleScrollLayout extends ViewGroup {
 				if (onScreenItems != null) {
 					GridView child = (GridView) inflater.inflate(
 							R.layout.title_action_gridview_layout, null);
-					child.setNumColumns(perscreenCount);        //设置GridView的每列显示view个数
+					child.setNumColumns(perscreenCount); // 设置GridView的每列显示view个数
 					child.setAdapter(new TitleChannelAdapter(context,
 							R.layout.title_grid_item_layout,
 							new int[] { R.id.tv_actionname }, null,
@@ -344,7 +344,7 @@ public class TitleScrollLayout extends ViewGroup {
 			if (i == chanItems.size() - 1) {
 				GridView child = (GridView) inflater.inflate(
 						R.layout.title_action_gridview_layout, null);
-				child.setNumColumns(perscreenCount);        //设置GridView的每列显示view个数
+				child.setNumColumns(perscreenCount); // 设置GridView的每列显示view个数
 				child.setAdapter(new TitleChannelAdapter(context,
 						R.layout.title_grid_item_layout,
 						new int[] { R.id.tv_actionname }, null, onScreenItems,
@@ -385,7 +385,7 @@ public class TitleScrollLayout extends ViewGroup {
 				if (onScreenItems != null) {
 					GridView child = (GridView) inflater.inflate(
 							R.layout.title_action_gridview_layout, null);
-					child.setNumColumns(perscreenCount);        //设置GridView的每列显示view个数
+					child.setNumColumns(perscreenCount); // 设置GridView的每列显示view个数
 					child.setAdapter(new TitleChannelAdapter(context,
 							R.layout.title_grid_item_layout,
 							new int[] { R.id.tv_actionname }, null,
@@ -411,7 +411,7 @@ public class TitleScrollLayout extends ViewGroup {
 			if (i == menuItems.size() - 1) {
 				GridView child = (GridView) inflater.inflate(
 						R.layout.title_action_gridview_layout, null);
-				child.setNumColumns(perscreenCount);        //设置GridView的每列显示view个数
+				child.setNumColumns(perscreenCount); // 设置GridView的每列显示view个数
 				child.setAdapter(new TitleChannelAdapter(context,
 						R.layout.title_grid_item_layout,
 						new int[] { R.id.tv_actionname }, null, onScreenItems,
@@ -450,8 +450,8 @@ public class TitleScrollLayout extends ViewGroup {
 				TextView tv_Check = (TextView) checkView
 						.findViewById(R.id.tv_actionname);
 				tv_Check.setBackgroundResource(R.drawable.title_item_select_bg);
-//				tv_Check.setBackground(getResources().getDrawable(
-//						R.drawable.title_item_select_bg));
+				// tv_Check.setBackground(getResources().getDrawable(
+				// R.drawable.title_item_select_bg));
 				tv_Check.setTextColor(Color.WHITE);
 
 				View oldCheckView = parent
@@ -461,8 +461,8 @@ public class TitleScrollLayout extends ViewGroup {
 					TextView tv_oldCheck = (TextView) oldCheckView
 							.findViewById(R.id.tv_actionname);
 					tv_oldCheck.setBackgroundResource(R.drawable.title_item_bg);
-//					tv_oldCheck.setBackground(getResources().getDrawable(
-//							R.drawable.title_item_bg));
+					// tv_oldCheck.setBackground(getResources().getDrawable(
+					// R.drawable.title_item_bg));
 					tv_oldCheck.setTextColor(Color.parseColor("#177CCA"));
 
 				}
@@ -470,14 +470,17 @@ public class TitleScrollLayout extends ViewGroup {
 				checkPositons[mCurScreen] = position;
 			}
 
-			
 			/**
 			 * 频道处理
 			 */
 			if (channel != null) {
 				Class<? extends Fragment> fragmentClass = channel
 						.getContentFragment();
+				if(fragmentClass==null){
+					return;
+				}
 				Fragment fragment;
+				
 				try {
 					fragment = (Fragment) fragmentClass.newInstance();
 
@@ -514,6 +517,45 @@ public class TitleScrollLayout extends ViewGroup {
 				}
 
 			}
+
+			if (menuItem != null) {// 头部菜单点击处理
+
+				Class<? extends Fragment> fragmentClass = menuItem
+						.getContentFragment();
+				if(fragmentClass==null){
+					return ;
+				}
+				Fragment fragment;
+				try {
+					fragment = (Fragment) fragmentClass.newInstance();
+
+					if (fragment == null) {
+						return;
+					}
+
+					LeaderWindowFragment leaderWindowFragment = null;
+
+					if (fragment instanceof LeaderWindowFragment) {
+						leaderWindowFragment = (LeaderWindowFragment) fragment;
+						leaderWindowFragment.setParentItem(menuItem);
+
+					}
+
+					if (initializContentLayoutListner != null) {
+						if (leaderWindowFragment != null) {
+							initializContentLayoutListner
+									.bindContentLayout(leaderWindowFragment);
+						}
+
+					}
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+
+			}
+
 		}
 	}
 

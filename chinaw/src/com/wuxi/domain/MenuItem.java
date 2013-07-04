@@ -1,5 +1,7 @@
 package com.wuxi.domain;
 
+import android.support.v4.app.Fragment;
+
 /**
  * 菜单
  * 
@@ -59,6 +61,16 @@ public class MenuItem implements Comparable<MenuItem> {
 	private String linkMenuItemId;// 连接菜单Id
 	private boolean isHasChildern;// 是否子菜单
 	private String icon;//图标
+	private Class<? extends Fragment> contentFragment;
+	
+
+	public Class<? extends Fragment> getContentFragment() {
+		return contentFragment;
+	}
+
+	public void setContentFragment(Class<? extends Fragment> contentFragment) {
+		this.contentFragment = contentFragment;
+	}
 
 	public String getIcon() {
 		return icon;
