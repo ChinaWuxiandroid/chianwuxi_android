@@ -318,7 +318,7 @@ public class TitleScrollLayout extends ViewGroup {
 				if (onScreenItems != null) {
 					GridView child = (GridView) inflater.inflate(
 							R.layout.title_action_gridview_layout, null);
-
+					child.setNumColumns(perscreenCount);        //设置GridView的每列显示view个数
 					child.setAdapter(new TitleChannelAdapter(context,
 							R.layout.title_grid_item_layout,
 							new int[] { R.id.tv_actionname }, null,
@@ -344,7 +344,7 @@ public class TitleScrollLayout extends ViewGroup {
 			if (i == chanItems.size() - 1) {
 				GridView child = (GridView) inflater.inflate(
 						R.layout.title_action_gridview_layout, null);
-
+				child.setNumColumns(perscreenCount);        //设置GridView的每列显示view个数
 				child.setAdapter(new TitleChannelAdapter(context,
 						R.layout.title_grid_item_layout,
 						new int[] { R.id.tv_actionname }, null, onScreenItems,
@@ -385,7 +385,7 @@ public class TitleScrollLayout extends ViewGroup {
 				if (onScreenItems != null) {
 					GridView child = (GridView) inflater.inflate(
 							R.layout.title_action_gridview_layout, null);
-
+					child.setNumColumns(perscreenCount);        //设置GridView的每列显示view个数
 					child.setAdapter(new TitleChannelAdapter(context,
 							R.layout.title_grid_item_layout,
 							new int[] { R.id.tv_actionname }, null,
@@ -411,7 +411,7 @@ public class TitleScrollLayout extends ViewGroup {
 			if (i == menuItems.size() - 1) {
 				GridView child = (GridView) inflater.inflate(
 						R.layout.title_action_gridview_layout, null);
-
+				child.setNumColumns(perscreenCount);        //设置GridView的每列显示view个数
 				child.setAdapter(new TitleChannelAdapter(context,
 						R.layout.title_grid_item_layout,
 						new int[] { R.id.tv_actionname }, null, onScreenItems,
@@ -449,8 +449,9 @@ public class TitleScrollLayout extends ViewGroup {
 
 				TextView tv_Check = (TextView) checkView
 						.findViewById(R.id.tv_actionname);
-				tv_Check.setBackground(getResources().getDrawable(
-						R.drawable.title_item_select_bg));
+				tv_Check.setBackgroundResource(R.drawable.title_item_select_bg);
+//				tv_Check.setBackground(getResources().getDrawable(
+//						R.drawable.title_item_select_bg));
 				tv_Check.setTextColor(Color.WHITE);
 
 				View oldCheckView = parent
@@ -459,8 +460,9 @@ public class TitleScrollLayout extends ViewGroup {
 
 					TextView tv_oldCheck = (TextView) oldCheckView
 							.findViewById(R.id.tv_actionname);
-					tv_oldCheck.setBackground(getResources().getDrawable(
-							R.drawable.title_item_bg));
+					tv_oldCheck.setBackgroundResource(R.drawable.title_item_bg);
+//					tv_oldCheck.setBackground(getResources().getDrawable(
+//							R.drawable.title_item_bg));
 					tv_oldCheck.setTextColor(Color.parseColor("#177CCA"));
 
 				}
