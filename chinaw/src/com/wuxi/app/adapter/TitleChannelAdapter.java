@@ -79,9 +79,9 @@ public class TitleChannelAdapter extends BasicAdapter {
 					.findViewById(viewId[0]);
 
 			if (screenIndex == 0 && position == 0) {
-
-				viewHolder.title_text.setBackground(context.getResources()
-						.getDrawable(R.drawable.title_item_select_bg));
+				viewHolder.title_text.setBackgroundResource(R.drawable.title_item_select_bg);
+//				viewHolder.title_text.setBackground(context.getResources()
+//						.getDrawable(R.drawable.title_item_select_bg));
 
 				viewHolder.title_text.setTextColor(Color.WHITE);
 
