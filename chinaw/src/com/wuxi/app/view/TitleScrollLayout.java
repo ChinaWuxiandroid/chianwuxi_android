@@ -50,7 +50,7 @@ public class TitleScrollLayout extends ViewGroup {
 	private static final int SNAP_VELOCITY = 1200;
 	private static final String TAG = "TITLESCROLLLAYOUT";
 	private int mTouchSlop;
-	// private List<Channel> items = new ArrayList<Channel>();// pindao
+	
 
 	private InitializContentLayoutListner initializContentLayoutListner;// 该自定义控件所在的fragment
 	private int perscreenCount = PERSCREEN_ITEM_COUNT;// 每屏数量,默认为7
