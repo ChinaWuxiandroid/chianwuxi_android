@@ -23,7 +23,7 @@ import android.widget.TextView;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.TitleChannelAdapter;
 import com.wuxi.app.fragment.CityMapFragment;
-import com.wuxi.app.fragment.NavigatorChannelFragment;
+import com.wuxi.app.fragment.NavigatorWithContentFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
@@ -437,8 +437,10 @@ public class TitleScrollLayout extends ViewGroup {
 			Object item = parent.getItemAtPosition(position);
 			if (item instanceof Channel) {
 				channel = (Channel) item;
+				System.out.println("是channel");
 			} else if (item instanceof MenuItem) {
 				menuItem = (MenuItem) item;
+				System.out.println("是menuitem");
 			}
 
 			/**
@@ -485,10 +487,11 @@ public class TitleScrollLayout extends ViewGroup {
 						return;
 					}
 
-					NavigatorChannelFragment nafragment = null;
+					NavigatorWithContentFragment nafragment = null;
 					CityMapFragment cityNCityMapFragment = null;
-					if (fragment instanceof NavigatorChannelFragment) {
-						nafragment = (NavigatorChannelFragment) fragment;
+					
+					if (fragment instanceof NavigatorWithContentFragment) {
+						nafragment = (NavigatorWithContentFragment) fragment;
 						nafragment.setParentChannel(channel);
 					}
 
@@ -513,6 +516,51 @@ public class TitleScrollLayout extends ViewGroup {
 					e.printStackTrace();
 				}
 
+			}
+			
+			/**
+			 * 普通菜单处理
+			 * */
+			if(menuItem!=null){
+				Class<? extends Fragment> fragmentClass = menuItem
+						.getContentFragment();
+				Fragment fragment;
+				try {
+					fragment = (Fragment) fragmentClass.newInstance();
+
+					if (fragment == null) {
+						return;
+					}
+
+					NavigatorWithContentFragment nafragment = null;
+					
+					if (fragment instanceof NavigatorWithContentFragment) {
+						nafragment = (NavigatorWithContentFragment) fragment;
+						nafragment.setParentMenuItem(menuItem);
+						nafragment.setDataType(NavigatorWithContentFragment.DATA_TPYE_MENUITEM);
+					}
+
+//					if (fragment instanceof CityMapFragment) {
+//						cityNCityMapFragment = (CityMapFragment) fragment;
+//
+//					}
+
+					if (initializContentLayoutListner != null) {
+						if (nafragment != null) {
+							initializContentLayoutListner
+									.bindContentLayout(nafragment);
+						} 
+//						else {
+//							initializContentLayoutListner
+//									.bindContentLayout(cityNCityMapFragment);
+//						}
+
+					}
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}

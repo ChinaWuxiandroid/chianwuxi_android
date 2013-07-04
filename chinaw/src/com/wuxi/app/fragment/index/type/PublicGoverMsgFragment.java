@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import com.wuxi.app.R;
-import com.wuxi.app.engine.MenuSevice;
+import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.LogUtil;
@@ -88,51 +89,51 @@ InitializContentLayoutListner, OnClickListener{
 			showTitleData();
 			return;
 		}
-		
 
-//		new Thread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//
-//				MenuSevice menuSevice = new MenuSevice(context);
-//				try {
-//					titleMenus= menuSevice.getSubMenuItems(menuItem.getId());
-//
-//					if (null != titleMenus) {
-//						CacheUtil.put(menuItem.getId(), titleMenus);// 缓存起来
-//						handler.sendEmptyMessage(TITLE__LOAD_SUCESS);
-//
-//					} else {
-//						Message message = handler.obtainMessage();
-//						message.obj = "error";
-//						handler.sendEmptyMessage(TITLE_LOAD_ERROR);
-//					}
-//
-//				} catch (NetException e) {
-//
-//					LogUtil.i(TAG, "出错");
-//					e.printStackTrace();
-//					Message message = handler.obtainMessage();
-//					message.obj = e.getMessage();
-//
-//					handler.sendEmptyMessage(TITLE_LOAD_ERROR);
-//
-//				} catch (JSONException e) {
-//					LogUtil.i(TAG, "json error");
-//					e.printStackTrace();
-//					Message message = handler.obtainMessage();
-//					message.obj = e.getMessage();
-//				} catch (NODataException e) {
-//					LogUtil.i(TAG, "no data");
-//					e.printStackTrace();
-//					Message message = handler.obtainMessage();
-//					message.obj = e.getMessage();
-//				}
-//			}
-//		}
-//
-//				).start();
+
+		//		new Thread(new Runnable() {
+		//
+		//			@Override
+		//			public void run() {
+		//
+		//				MenuSevice menuSevice = new MenuSevice(context);
+		//				try {
+		//					titleMenus= menuSevice.getSubMenuItems(menuItem.getId());
+		//
+		//					if (null != titleMenus) {
+		//						CacheUtil.put(menuItem.getId(), titleMenus);// 缓存起来
+		//						handler.sendEmptyMessage(TITLE__LOAD_SUCESS);
+		//
+		//					} else {
+		//						Message message = handler.obtainMessage();
+		//						message.obj = "error";
+		//						handler.sendEmptyMessage(TITLE_LOAD_ERROR);
+		//					}
+		//
+		//				} catch (NetException e) {
+		//
+		//					LogUtil.i(TAG, "出错");
+		//					e.printStackTrace();
+		//					Message message = handler.obtainMessage();
+		//					message.obj = e.getMessage();
+		//
+		//					handler.sendEmptyMessage(TITLE_LOAD_ERROR);
+		//
+		//				} catch (JSONException e) {
+		//					LogUtil.i(TAG, "json error");
+		//					e.printStackTrace();
+		//					Message message = handler.obtainMessage();
+		//					message.obj = e.getMessage();
+		//				} catch (NODataException e) {
+		//					LogUtil.i(TAG, "no data");
+		//					e.printStackTrace();
+		//					Message message = handler.obtainMessage();
+		//					message.obj = e.getMessage();
+		//				}
+		//			}
+		//		}
+		//
+		//				).start();
 	}
 
 	/**
@@ -141,21 +142,35 @@ InitializContentLayoutListner, OnClickListener{
 	private void showTitleData() {
 		mtitleScrollLayout.setPerscreenCount(5);     //设置滑动头选项每屏为5个
 		mtitleScrollLayout.initMenuItemScreen(context, inflater, titleMenus);// 初始化头部空间
-//		initData(titleMenus.get(0));//默认显示第一个channel的子channel页
+		//		initData(titleMenus.get(0));//默认显示第一个channel的子channel页
 
 	}
 
 	@Override
 	public void onClick(View v) {
-	
+		switch (v.getId()) {
+		case R.id.btn_next_screen:// 下一屏
+			mtitleScrollLayout.goNextScreen();
+			break;
+
+		}
 	}
 
 
 	@Override
 	public void bindContentLayout(Fragment fragment) {
-		
+		bindFragment(fragment);
 	}
 
+	private void bindFragment(Fragment fragment) {
+
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
+		ft.replace(MANCOTENT_ID, fragment);// 替换内容界面
+
+		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+		ft.addToBackStack(null);
+		ft.commit();
+	}
 	public void setMenuItem(MenuItem menuItem) {
 		this.menuItem = menuItem;
 	}

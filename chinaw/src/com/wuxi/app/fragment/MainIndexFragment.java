@@ -28,7 +28,7 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.IndexGridAdapter;
 import com.wuxi.app.adapter.IndexNewsListAdapter;
-import com.wuxi.app.engine.MenuSevice;
+import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.fragment.index.SlideLevelFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
@@ -125,7 +125,7 @@ public class MainIndexFragment extends BaseFragment {
 					@Override
 					public void run() {
 
-						MenuSevice menuSevice = new MenuSevice(context);
+						MenuService menuSevice = new MenuService(context);
 						try {
 							menuItems = menuSevice
 									.getHomeMenuItems(Constants.Urls.MENU_URL

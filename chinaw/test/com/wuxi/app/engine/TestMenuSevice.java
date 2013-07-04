@@ -29,7 +29,7 @@ public class TestMenuSevice extends AndroidTestCase {
 	 * @throws NODataException 
 	 */
 	public void testGetMenu() throws NetException, JSONException, NODataException {
-		MenuSevice menuSevice = new MenuSevice(getContext());
+		MenuService menuSevice = new MenuService(getContext());
 
 		List<MenuItem> items = menuSevice
 				.getHomeMenuItems(Constants.Urls.MENU_URL);
@@ -44,7 +44,7 @@ public class TestMenuSevice extends AndroidTestCase {
 	}
 	
 	public void testGetSubMenu() throws NetException, JSONException, NODataException {
-		MenuSevice menuSevice = new MenuSevice(getContext());
+		MenuService menuSevice = new MenuService(getContext());
 
 		List<MenuItem> items = menuSevice
 				.getSubMenuItems("402881de3f758726013f75873bce00d9");
