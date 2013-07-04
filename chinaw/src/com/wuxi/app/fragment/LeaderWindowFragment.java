@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.engine.MenuSevice;
+import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
@@ -100,7 +100,7 @@ public class LeaderWindowFragment extends BaseFragment {
 			@Override
 			public void run() {
 				
-				MenuSevice menuSevice=new MenuSevice(context);
+				MenuService menuSevice=new MenuService(context);
 				try {
 					headItems=menuSevice.getSubMenuItems(parentItem.getId());
 					if(headItems!=null){

@@ -30,10 +30,10 @@ import com.wuxi.exception.NetException;
  * @author wanglu
  * 
  */
-public class MenuSevice extends Service {
+public class MenuService extends Service {
 	// private static final String TAG = "MenuSevice";
 
-	public MenuSevice(Context context) {
+	public MenuService(Context context) {
 		super(context);
 	}
 

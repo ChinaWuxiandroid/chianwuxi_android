@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.wuxi.app.R;
 import com.wuxi.domain.Channel;
+import com.wuxi.domain.MenuItem;
 
 /**
  * 左侧导航频道适配器
@@ -19,26 +20,47 @@ import com.wuxi.domain.Channel;
  */
 public class ContentNavigatorAdapter extends BaseAdapter {
 
-	private List<Channel> channels;
+	private List<Channel> channels=null;
+	private List<MenuItem> menuItems=null;
 	private LayoutInflater mInflater;
+	private int type=1;          //穿入的消息类型，和api里消息的type一样，默认为Channel
 
 	public ContentNavigatorAdapter(LayoutInflater inflater,
-			List<Channel> channels) {
+			List<Channel> channels,List<MenuItem> menuItems) {
 		mInflater = inflater;
-		this.channels = channels;
+		if(channels!=null){
+			this.channels=channels;
+			type=1;
+		}		
+		if(menuItems!=null){
+			this.menuItems=menuItems;
+			type=0;
+		}
 	}
 	
 
+
 	@Override
 	public int getCount() {
-
-		return channels.size();
+		int size=0;
+		switch(type){
+		case 1:
+			size= channels.size();
+			break;
+		case 0:
+			size= menuItems.size();
+			break;
+		}
+		return size;
 	}
 
 	@Override
 	public Object getItem(int position) {
-
-		return channels.get(position);
+		if(type==1)
+			return channels.get(position);
+		else if(type==0)
+			return menuItems.get(position);
+		return null;
 	}
 
 	@Override
@@ -54,8 +76,15 @@ public class ContentNavigatorAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-
-		String channelName = channels.get(position).getChannelName();
+		String name ="";
+		if(channels!=null){
+			name = channels.get(position).getChannelName();
+		}
+		else if(menuItems!=null){
+			name = menuItems.get(position).getName();
+		}
+		
+		
 		ViewHolder viewHolder = null;
 
 		if (convertView == null) {
@@ -71,7 +100,7 @@ public class ContentNavigatorAdapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		viewHolder.title_text.setText(channelName);
+		viewHolder.title_text.setText(name);
 		return convertView;
 
 	}

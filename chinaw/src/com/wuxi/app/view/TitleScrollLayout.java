@@ -23,8 +23,12 @@ import android.widget.TextView;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.TitleChannelAdapter;
 import com.wuxi.app.fragment.CityMapFragment;
+<<<<<<< HEAD
 import com.wuxi.app.fragment.LeaderWindowFragment;
 import com.wuxi.app.fragment.NavigatorChannelFragment;
+=======
+import com.wuxi.app.fragment.NavigatorWithContentFragment;
+>>>>>>> 9fb117c2f706391dad94f554716c55a221937941
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
@@ -437,8 +441,10 @@ public class TitleScrollLayout extends ViewGroup {
 			Object item = parent.getItemAtPosition(position);
 			if (item instanceof Channel) {
 				channel = (Channel) item;
+				System.out.println("是channel");
 			} else if (item instanceof MenuItem) {
 				menuItem = (MenuItem) item;
+				System.out.println("是menuitem");
 			}
 
 			/**
@@ -488,10 +494,11 @@ public class TitleScrollLayout extends ViewGroup {
 						return;
 					}
 
-					NavigatorChannelFragment nafragment = null;
+					NavigatorWithContentFragment nafragment = null;
 					CityMapFragment cityNCityMapFragment = null;
-					if (fragment instanceof NavigatorChannelFragment) {
-						nafragment = (NavigatorChannelFragment) fragment;
+					
+					if (fragment instanceof NavigatorWithContentFragment) {
+						nafragment = (NavigatorWithContentFragment) fragment;
 						nafragment.setParentChannel(channel);
 					}
 
@@ -517,6 +524,7 @@ public class TitleScrollLayout extends ViewGroup {
 				}
 
 			}
+<<<<<<< HEAD
 
 			if (menuItem != null) {// 头部菜单点击处理
 
@@ -525,6 +533,15 @@ public class TitleScrollLayout extends ViewGroup {
 				if(fragmentClass==null){
 					return ;
 				}
+=======
+			
+			/**
+			 * 普通菜单处理
+			 * */
+			if(menuItem!=null){
+				Class<? extends Fragment> fragmentClass = menuItem
+						.getContentFragment();
+>>>>>>> 9fb117c2f706391dad94f554716c55a221937941
 				Fragment fragment;
 				try {
 					fragment = (Fragment) fragmentClass.newInstance();
@@ -533,6 +550,7 @@ public class TitleScrollLayout extends ViewGroup {
 						return;
 					}
 
+<<<<<<< HEAD
 					LeaderWindowFragment leaderWindowFragment = null;
 
 					if (fragment instanceof LeaderWindowFragment) {
@@ -546,6 +564,30 @@ public class TitleScrollLayout extends ViewGroup {
 							initializContentLayoutListner
 									.bindContentLayout(leaderWindowFragment);
 						}
+=======
+					NavigatorWithContentFragment nafragment = null;
+					
+					if (fragment instanceof NavigatorWithContentFragment) {
+						nafragment = (NavigatorWithContentFragment) fragment;
+						nafragment.setParentMenuItem(menuItem);
+						nafragment.setDataType(NavigatorWithContentFragment.DATA_TPYE_MENUITEM);
+					}
+
+//					if (fragment instanceof CityMapFragment) {
+//						cityNCityMapFragment = (CityMapFragment) fragment;
+//
+//					}
+
+					if (initializContentLayoutListner != null) {
+						if (nafragment != null) {
+							initializContentLayoutListner
+									.bindContentLayout(nafragment);
+						} 
+//						else {
+//							initializContentLayoutListner
+//									.bindContentLayout(cityNCityMapFragment);
+//						}
+>>>>>>> 9fb117c2f706391dad94f554716c55a221937941
 
 					}
 				} catch (InstantiationException e) {
@@ -553,9 +595,13 @@ public class TitleScrollLayout extends ViewGroup {
 				} catch (IllegalAccessException e) {
 					e.printStackTrace();
 				}
+<<<<<<< HEAD
 
 			}
 
+=======
+			}
+>>>>>>> 9fb117c2f706391dad94f554716c55a221937941
 		}
 	}
 

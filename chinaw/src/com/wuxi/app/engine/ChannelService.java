@@ -2,15 +2,11 @@ package com.wuxi.app.engine;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.content.Context;
-
-import com.wuxi.app.fragment.CityMapFragment;
-import com.wuxi.app.fragment.NavigatorChannelFragment;
+import com.wuxi.app.fragment.index.InitializContentLayout;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Channel;
 import com.wuxi.exception.NetException;
@@ -61,11 +57,7 @@ public class ChannelService extends Service {
 						channel.setChannelId(jb.getString("channelId"));
 						channel.setChannelName(jb.getString("channelName"));
 						channel.setContents(jb.getString("contents"));
-						if (channel.getChannelName().equals("城市地图")) {//处理城市题图显示的视图
-							channel.setContentFragment(CityMapFragment.class);
-						} else {
-							channel.setContentFragment(NavigatorChannelFragment.class);
-						}
+						InitializContentLayout.initChannelContentLayout(channel);
 
 						channels.add(channel);
 

@@ -23,7 +23,7 @@ public class MenuItem implements Comparable<MenuItem> {
 	/**
 	 * 内容菜单 一般它需要绑定到一个channel上，它的子内容由绑定的channel的子content确定
 	 */
-	public static final  int CONTENT_MENU = 2;
+	public static final int CONTENT_MENU = 2;
 
 	/**
 	 * APP菜单 一般会指向一个APP的UI
@@ -33,12 +33,12 @@ public class MenuItem implements Comparable<MenuItem> {
 	/**
 	 * WAP PAGE菜单 一般会指向一个wab url
 	 */
-	public static final  int WAP_MENU = 4;
+	public static final int WAP_MENU = 4;
 
 	/**
 	 * link菜单 会指向另外一个muenitem
 	 */
-	public static final  int LINK_MENU = 5;
+	public static final int LINK_MENU = 5;
 
 	private String name;// 菜单名称
 	private String id;// ID 唯一标识
@@ -60,9 +60,9 @@ public class MenuItem implements Comparable<MenuItem> {
 	private String linkMenuItemName;
 	private String linkMenuItemId;// 连接菜单Id
 	private boolean isHasChildern;// 是否子菜单
-	private String icon;//图标
+	private String icon;// 图标
+
 	private Class<? extends Fragment> contentFragment;
-	
 
 	public Class<? extends Fragment> getContentFragment() {
 		return contentFragment;

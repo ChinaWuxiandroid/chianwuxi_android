@@ -17,7 +17,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.ChannelService;
-import com.wuxi.app.fragment.NavigatorChannelFragment;
+import com.wuxi.app.fragment.NavigatorWithContentFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.LogUtil;
@@ -109,7 +109,7 @@ public class ChannelFragment extends BaseSlideFragment implements
 	 */
 	private void initData(Channel parentChannel) {
 	
-		NavigatorChannelFragment navigatorChannelFragment=new NavigatorChannelFragment();
+		NavigatorWithContentFragment navigatorChannelFragment=new NavigatorWithContentFragment();
 		navigatorChannelFragment.setParentChannel(parentChannel);
 		bindFragment(navigatorChannelFragment);
 	}
@@ -158,7 +158,6 @@ public class ChannelFragment extends BaseSlideFragment implements
 					handler.sendEmptyMessage(TITLE_LOAD_ERROR);
 
 				}
-
 			}
 		}
 

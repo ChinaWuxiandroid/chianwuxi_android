@@ -5,7 +5,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import com.wuxi.app.R;
-import com.wuxi.app.engine.MenuSevice;
+import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.view.TitleScrollLayout;
@@ -107,7 +107,7 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 				@Override
 				public void run() {
 					
-					MenuSevice menuSevice=new MenuSevice(context);
+					MenuService menuSevice=new MenuService(context);
 					try {
 						titleMenuItems=menuSevice.getSubMenuItems(menuItem.getId());
 						if(titleMenuItems!=null){
