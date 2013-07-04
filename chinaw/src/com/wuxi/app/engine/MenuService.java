@@ -108,7 +108,10 @@ public class MenuService extends Service {
 					menu.setLinkMenuItemName(jb.getString("linkMenuItemName"));
 					
 					InitializContentLayout.initMenuItemContentLayout(menu);   //设置menu的布局Fragment
-					menuItems.add(menu);
+					if(!menu.isDeleted()){//已经删除标记的不显示
+						menuItems.add(menu);
+					}
+					
 				}
 
 				return menuItems;
@@ -222,7 +225,10 @@ public class MenuService extends Service {
 					}
 
 					// LogUtil.i(TAG, jb.toString());
-					menuItems.add(menu);
+					if(!menu.isDeleted()){//已经删除标记的不显示
+						menuItems.add(menu);
+					}
+					
 				}
 
 			}
