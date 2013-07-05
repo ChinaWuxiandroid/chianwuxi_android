@@ -1,12 +1,9 @@
 package com.wuxi.app.fragment;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.json.JSONException;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
@@ -23,13 +20,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.IndexGridAdapter;
 import com.wuxi.app.adapter.IndexNewsListAdapter;
 import com.wuxi.app.engine.MenuService;
-import com.wuxi.app.fragment.index.SlideLevelFragment;
+import com.wuxi.app.fragment.homepage.SlideLevelFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.MenuItem;
@@ -60,12 +56,11 @@ public class MainIndexFragment extends BaseFragment {
 	private IndexGridAdapter gridAdapter;
 	public static final int[] Grid_viewid = { R.id.index_gridview_image,
 			R.id.index_gridview_texttitle };
-	
+
 	private List<MenuItem> menuItems;// 菜单数据
 	private static final int MENUITEM_LOAD_SUCESS = 1;// 菜单加载成功标识
 	private static final String MENUITEM_CACKE_KEY = "man_menu_item";
 	protected static final int MENUITEM_LOAD_ERROR = 0;// 菜单加载失败标志
-	
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -95,14 +90,14 @@ public class MainIndexFragment extends BaseFragment {
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.main_index_fragment_layout, null);
 		context = this.getActivity();
-		mInflater=inflater;
+		mInflater = inflater;
 		initUI();
 		return view;
 	}
 
 	private void initUI() {
 		gridView = (GridView) view.findViewById(R.id.gridview);
-		
+
 		listView = (ListView) view.findViewById(R.id.index_news_list);
 		pb = (ProgressBar) view.findViewById(R.id.index_progess);
 		loadList();
@@ -174,8 +169,6 @@ public class MainIndexFragment extends BaseFragment {
 	 * 显示菜单数据
 	 */
 	private void showGridData() {
-		
-		
 		int size = menuItems.size();
 		int column;
 		if (size % 2 == 0) {
@@ -194,10 +187,10 @@ public class MainIndexFragment extends BaseFragment {
 		gridView.setLayoutParams(params);
 		gridView.setColumnWidth(itemWidth);
 		gridView.setStretchMode(GridView.NO_STRETCH);
-		
 		gridView.setNumColumns(column);
 		gridAdapter = new IndexGridAdapter(context,
-				R.layout.index_gridview_item_layout, Grid_viewid, menuItems, null);
+				R.layout.index_gridview_item_layout, Grid_viewid, menuItems,
+				null);
 		gridView.setAdapter(gridAdapter);
 	}
 

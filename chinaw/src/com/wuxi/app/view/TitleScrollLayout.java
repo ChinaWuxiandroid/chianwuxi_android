@@ -2,7 +2,6 @@ package com.wuxi.app.view;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
@@ -19,13 +18,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Scroller;
 import android.widget.TextView;
-
 import com.wuxi.app.R;
-import com.wuxi.app.adapter.TitleChannelAdapter;
 
-import com.wuxi.app.fragment.NavigatorWithContentFragment;
-import com.wuxi.app.fragment.index.type.buttywuxi.CityMapFragment;
-import com.wuxi.app.fragment.index.type.infocenter.LeaderWindowFragment;
+import com.wuxi.app.adapter.TitleChannelAdapter;
+import com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment;
+import com.wuxi.app.fragment.homepage.fantasticwuxi.CityMapFragment;
+import com.wuxi.app.listeners.GoverMsgInitLayoutListener;
 
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.domain.Channel;
@@ -439,10 +437,8 @@ public class TitleScrollLayout extends ViewGroup {
 			Object item = parent.getItemAtPosition(position);
 			if (item instanceof Channel) {
 				channel = (Channel) item;
-				System.out.println("是channel");
 			} else if (item instanceof MenuItem) {
 				menuItem = (MenuItem) item;
-				System.out.println("是menuitem");
 			}
 
 			/**
@@ -454,8 +450,7 @@ public class TitleScrollLayout extends ViewGroup {
 				TextView tv_Check = (TextView) checkView
 						.findViewById(R.id.tv_actionname);
 				tv_Check.setBackgroundResource(R.drawable.title_item_select_bg);
-				// tv_Check.setBackground(getResources().getDrawable(
-				// R.drawable.title_item_select_bg));
+
 				tv_Check.setTextColor(Color.WHITE);
 
 				View oldCheckView = parent
@@ -465,8 +460,7 @@ public class TitleScrollLayout extends ViewGroup {
 					TextView tv_oldCheck = (TextView) oldCheckView
 							.findViewById(R.id.tv_actionname);
 					tv_oldCheck.setBackgroundResource(R.drawable.title_item_bg);
-					// tv_oldCheck.setBackground(getResources().getDrawable(
-					// R.drawable.title_item_bg));
+
 					tv_oldCheck.setTextColor(Color.parseColor("#177CCA"));
 
 				}
@@ -526,56 +520,10 @@ public class TitleScrollLayout extends ViewGroup {
 			/**
 			 * 普通菜单处理
 			 * */
-			if (menuItem != null) {
-				Class<? extends Fragment> fragmentClass = menuItem
-						.getContentFragment();
 
-				Fragment fragment;
-				if (fragmentClass == null)
-					return;
-				try {
-					fragment = (Fragment) fragmentClass.newInstance();
-
-					if (fragment == null) {
-						return;
-					}
-
-					LeaderWindowFragment leaderWindowFragment = null;
-
-					if (fragment instanceof LeaderWindowFragment) {
-						leaderWindowFragment = (LeaderWindowFragment) fragment;
-						leaderWindowFragment.setParentItem(menuItem);
-
-					}
-
-					NavigatorWithContentFragment nafragment = null;
-
-					if (fragment instanceof NavigatorWithContentFragment) {
-						nafragment = (NavigatorWithContentFragment) fragment;
-						nafragment.setParentMenuItem(menuItem);
-						nafragment
-								.setDataType(NavigatorWithContentFragment.DATA_TPYE_MENUITEM);
-					}
-
-					if (initializContentLayoutListner != null) {
-						if (leaderWindowFragment != null) {
-							initializContentLayoutListner
-									.bindContentLayout(leaderWindowFragment);
-						}
-
-						if (nafragment != null) {
-							initializContentLayoutListner
-									.bindContentLayout(nafragment);
-						}
-
-					}
-
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
-
+			if(menuItem!=null){	
+				GoverMsgInitLayoutListener.setInitializContentLayoutListner(initializContentLayoutListner);
+				GoverMsgInitLayoutListener.init(menuItem);			
 			}
 
 		}

@@ -1,8 +1,7 @@
 package com.wuxi.app.fragment.index;
-
-import com.wuxi.app.fragment.NavigatorWithContentFragment;
-import com.wuxi.app.fragment.index.type.buttywuxi.CityMapFragment;
-import com.wuxi.app.fragment.index.type.infocenter.LeaderWindowFragment;
+import com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment;
+import com.wuxi.app.fragment.homepage.fantasticwuxi.CityMapFragment;
+import com.wuxi.app.fragment.homepage.informationcenter.LeaderWindowFragment;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 

@@ -99,11 +99,11 @@ public final class R {
     }
     public static final class id {
         public static final int Title_Text=0x7f080002;
-        public static final int action_settings=0x7f08003f;
+        public static final int action_settings=0x7f080041;
         public static final int back_btn=0x7f080001;
         public static final int bmapView=0x7f080010;
         public static final int btn=0x7f080028;
-        public static final int btn_next_screen=0x7f08003e;
+        public static final int btn_next_screen=0x7f080040;
         public static final int city_map_et_end=0x7f08000d;
         public static final int city_map_et_key=0x7f080009;
         public static final int city_map_et_start=0x7f08000c;
@@ -112,7 +112,7 @@ public final class R {
         public static final int city_map_tv_showmap=0x7f08000a;
         public static final int details=0x7f080014;
         public static final int gridview=0x7f08002e;
-        public static final int gv_title=0x7f08003b;
+        public static final int gv_title=0x7f08003d;
         public static final int index_gridview_image=0x7f08001b;
         public static final int index_gridview_texttitle=0x7f08001c;
         public static final int index_gv_menuitem=0x7f08001d;
@@ -123,16 +123,16 @@ public final class R {
         public static final int index_progess=0x7f08002f;
         public static final int layout_bottom=0x7f08002d;
         public static final int leader_wv_main=0x7f080025;
-        public static final int left_menu=0x7f080035;
+        public static final int left_menu=0x7f080037;
         public static final int ll_main=0x7f08001a;
         public static final int ll_search1=0x7f080008;
         public static final int ll_search2=0x7f08000b;
         public static final int ll_search3=0x7f08000f;
-        public static final int login_iv_icon=0x7f080038;
-        public static final int login_tv_user_regisster=0x7f08003a;
-        public static final int login_tv_userlogin=0x7f080039;
+        public static final int login_iv_icon=0x7f08003a;
+        public static final int login_tv_user_regisster=0x7f08003c;
+        public static final int login_tv_userlogin=0x7f08003b;
         public static final int lv_left_navigator=0x7f080013;
-        public static final int lv_menu=0x7f080032;
+        public static final int lv_menu=0x7f080034;
         public static final int main_content=0x7f08002c;
         public static final int main_tab_collect=0x7f080029;
         public static final int main_tab_index=0x7f08001f;
@@ -152,14 +152,16 @@ public final class R {
         public static final int rb_bus=0x7f080006;
         public static final int rb_car=0x7f080007;
         public static final int rb_search=0x7f080005;
-        public static final int right_menu=0x7f080034;
-        public static final int slide_main_content=0x7f080036;
-        public static final int slide_menu_layout=0x7f080033;
+        public static final int right_menu=0x7f080036;
+        public static final int simple_listView_textView_name=0x7f080032;
+        public static final int simple_listview_fragment=0x7f080033;
+        public static final int slide_main_content=0x7f080038;
+        public static final int slide_menu_layout=0x7f080035;
         public static final int textcache=0x7f080017;
         public static final int title_scroll=0x7f080030;
-        public static final int title_scroll_action=0x7f08003d;
-        public static final int tv_actionname=0x7f08003c;
-        public static final int tv_left_menu_name=0x7f080037;
+        public static final int title_scroll_action=0x7f08003f;
+        public static final int tv_actionname=0x7f08003e;
+        public static final int tv_left_menu_name=0x7f080039;
         public static final int tv_navigator_name=0x7f080027;
         public static final int wb_progress=0x7f080026;
     }
@@ -186,13 +188,16 @@ public final class R {
         public static final int model_fragment_layout=0x7f030013;
         public static final int model_main_child1_layout=0x7f030014;
         public static final int model_main_child2_layout=0x7f030015;
-        public static final int slide_left_layout=0x7f030016;
-        public static final int slide_level_layout=0x7f030017;
-        public static final int slide_navigator_item=0x7f030018;
-        public static final int slide_right_layout=0x7f030019;
-        public static final int title_action_gridview_layout=0x7f03001a;
-        public static final int title_grid_item_layout=0x7f03001b;
-        public static final int title_scroll_action_layout=0x7f03001c;
+        public static final int simple_listview_fragment_cell_point=0x7f030016;
+        public static final int simple_listview_layout=0x7f030017;
+        public static final int slide_left_layout=0x7f030018;
+        public static final int slide_level_layout=0x7f030019;
+        public static final int slide_navigator_item=0x7f03001a;
+        public static final int slide_right_layout=0x7f03001b;
+        public static final int title_action_gridview_layout=0x7f03001c;
+        public static final int title_grid_item_layout=0x7f03001d;
+        public static final int title_scroll_action_layout=0x7f03001e;
+        public static final int worksuggestionbox_layout=0x7f03001f;
     }
     public static final class menu {
         public static final int main=0x7f070000;
