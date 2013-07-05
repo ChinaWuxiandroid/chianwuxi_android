@@ -187,7 +187,7 @@ public class MainIndexFragment extends BaseFragment {
 		DisplayMetrics dm = new DisplayMetrics();
 		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
 		float density = dm.density;
-		int allWidth = (int) (110 * (column) * density);
+		int allWidth = (int) (115 * (column) * density);
 		int itemWidth = (int) (100 * density);
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 				allWidth, LinearLayout.LayoutParams.WRAP_CONTENT);
