@@ -20,6 +20,7 @@ import com.wuxi.app.R;
 import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment;
+import com.wuxi.app.fragment.commonfragment.SimpleListViewFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.LeaderWindowFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.util.CacheUtil;
@@ -89,6 +90,7 @@ InitializContentLayoutListner, OnClickListener{
 
 			titleMenus = (List<MenuItem>) CacheUtil.get(menuItem
 					.getId());
+
 			showTitleData();
 			return;
 		}
@@ -145,6 +147,7 @@ InitializContentLayoutListner, OnClickListener{
 	private void showTitleData() {
 		initializSubFragmentsLayout();
 		mtitleScrollLayout.setPerscreenCount(5);     //设置滑动头选项每屏为5个
+		
 		mtitleScrollLayout.initMenuItemScreen(context, inflater, titleMenus);// 初始化头部空间
 		//		initData(titleMenus.get(0));//默认显示第一个channel的子channel页
 
@@ -182,9 +185,16 @@ InitializContentLayoutListner, OnClickListener{
 	///初始化子列表的布局格式
 	@Override
 	public void initializSubFragmentsLayout() {
+		
 		for(MenuItem menu:titleMenus){
-//			if(menu.getName().equals(""))
-			menu.setContentFragment(NavigatorWithContentFragment.class);
+			if(menu.getName().equals("最新信息公开")
+					||menu.getName().equals("信息公开指南")
+					||menu.getName().equals("信息公开制度"))
+			menu.setContentFragment(SimpleListViewFragment.class);
+			else if(menu.getName().equals("工作意见箱"))
+				menu.setContentFragment(WorkSuggestionBoxFragment.class);
+			else
+				menu.setContentFragment(NavigatorWithContentFragment.class);
 		}
 	}
 	

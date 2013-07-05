@@ -36,7 +36,6 @@ public class TitleChannelAdapter extends BasicAdapter {
 
 	@Override
 	public int getCount() {
-
 		return items.size();
 	}
 
