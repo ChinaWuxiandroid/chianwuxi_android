@@ -183,6 +183,7 @@ InitializContentLayoutListner, OnClickListener{
 	@Override
 	public void initializSubFragmentsLayout() {
 		for(MenuItem menu:titleMenus){
+//			if(menu.getName().equals(""))
 			menu.setContentFragment(NavigatorWithContentFragment.class);
 		}
 	}
