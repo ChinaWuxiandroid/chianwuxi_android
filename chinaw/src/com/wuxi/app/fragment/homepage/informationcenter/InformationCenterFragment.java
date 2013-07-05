@@ -1,4 +1,5 @@
 package com.wuxi.app.fragment.homepage.informationcenter;
+
 import java.util.List;
 import org.json.JSONException;
 import com.wuxi.app.R;
@@ -179,9 +180,9 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 	public void initializSubFragmentsLayout() {
 
 		for (MenuItem menu : titleMenuItems) {
-			// if (menuItem.getName().equals("最新公开信息")) {
-			menu.setContentFragment((LeaderWindowFragment.class));
-			// }
+			if (menuItem.getName().equals("领导之窗")) {
+				menu.setContentFragment((LeaderWindowFragment.class));
+			}
 		}
 
 	}
