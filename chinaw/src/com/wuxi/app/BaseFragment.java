@@ -26,5 +26,9 @@ public class BaseFragment extends Fragment {
 		this.position = position;
 	}
 
+	//大部分Fragment需要实现初始化它的子布局
+	public void initializSubFragmentsLayout(){
+		
+	}
 }
  

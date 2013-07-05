@@ -6,7 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Context;
-import com.wuxi.app.fragment.index.InitializContentLayout;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Channel;
 import com.wuxi.exception.NetException;
@@ -57,8 +56,7 @@ public class ChannelService extends Service {
 						channel.setChannelId(jb.getString("channelId"));
 						channel.setChannelName(jb.getString("channelName"));
 						channel.setContents(jb.getString("contents"));
-						InitializContentLayout.initChannelContentLayout(channel);
-
+						
 						channels.add(channel);
 
 					}

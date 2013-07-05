@@ -8,15 +8,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.content.Context;
 import android.os.Environment;
-
-import com.wuxi.app.fragment.index.InitializContentLayout;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Channel;
@@ -107,7 +103,6 @@ public class MenuService extends Service {
 					menu.setContentName(jb.getString("contentName"));
 					menu.setLinkMenuItemName(jb.getString("linkMenuItemName"));
 					
-					InitializContentLayout.initMenuItemContentLayout(menu);   //设置menu的布局Fragment
 					menuItems.add(menu);
 				}
 
