@@ -1,11 +1,14 @@
 package com.wuxi.app.engine;
 
-import java.sql.Wrapper;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.content.Context;
 
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Content;
@@ -20,6 +23,10 @@ import com.wuxi.exception.NetException;
  */
 public class ContentService extends Service {
 
+	public ContentService(Context context) {
+		super(context);
+	}
+
 	/**
 	 * 
 	 * wanglu 泰得利通 根据id 获取content集合
@@ -28,11 +35,34 @@ public class ContentService extends Service {
 	 *            MenuItem Id 或ChannelId
 	 * @return content集合
 	 * @throws NetException
+	 * @throws JSONException
+	 * @throws NODataException
 	 */
-	public List<Content> getContentsById(String id) throws NetException {
+	public List<Content> getContentsById(String id) throws NetException,
+			JSONException, NODataException {
 
+		if (!checkNet()) {
+			throw new NetException(Constants.ExceptionMessage.NO_NET);
+		}
 		String url = Constants.Urls.CHANNEL_CONTENT_URL.replace("{id}", id);
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+
+		if (resultStr != null) {
+
+			JSONObject jObject = new JSONObject(resultStr);
+			JSONArray jData = jObject.getJSONArray("result");
+			if (jData != null) {
+				return parseData(jData);
+			}
+
+		} else {
+
+			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);// 没有获取到数据异常
+
+		}
+
 		return null;
+
 	}
 
 	/**
@@ -47,20 +77,20 @@ public class ContentService extends Service {
 	 * @return ContentWrapper content包装对象
 	 * @throws NetException
 	 * @throws JSONException
-	 * @throws NODataException 
+	 * @throws NODataException
 	 */
 	public ContentWrapper getPageContentsById(String id, int start, int end)
 			throws NetException, JSONException, NODataException {
-		String url = Constants.Urls.CHANNEL_CONTENT_P_URL.replace("{id}", id)
-				.replace("{start}", start + "").replace("{end}", end + "");
 
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
-
+		String url = Constants.Urls.CHANNEL_CONTENT_P_URL.replace("{id}", id)
+				.replace("{start}", start + "").replace("{end}", end + "");
 		String resultStr = httpUtils.executeGetToString(url, 5000);
 		if (resultStr != null) {
-			JSONObject jresult = new JSONObject("result");
+			JSONObject jsonObject = new JSONObject(resultStr);
+			JSONObject jresult = jsonObject.getJSONObject("result");
 			ContentWrapper contentWrapper = new ContentWrapper();
 			contentWrapper.setEnd(jresult.getInt("end"));
 			contentWrapper.setStart(jresult.getInt("start"));
@@ -76,19 +106,58 @@ public class ContentService extends Service {
 			return contentWrapper;
 
 		} else {
-			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);//没有获取到数据异常
+			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);// 没有获取到数据异常
 		}
 
 	}
 
-	private List<Content> parseData(JSONArray jData) {
+	/**
+	 * ID wanglu 泰得利通
+	 * 
+	 * @param jData
+	 * @return
+	 * @throws JSONException
+	 */
 
-		
-		
-		
-		
-		
-		
+	private List<Content> parseData(JSONArray jData) throws JSONException {
+
+		if (jData != null) {
+			List<Content> contents = new ArrayList<Content>();
+
+			for (int index = 0; index < jData.length(); index++) {
+
+				JSONObject jb = jData.getJSONObject(index);
+				if (!jb.getBoolean("delete")) {// 不是标记删除的
+					Content content = new Content();
+					content.setStatus(jb.getInt("status"));
+					content.setOrganization(jb.getString("organization"));
+					content.setContentId(jb.getString("contentId"));
+					content.setTitle(jb.getString("title"));
+					content.setBrowseCount(jb.getInt("browseCount"));
+					content.setOrderId(jb.getInt("orderId"));
+					content.setBuildTime(jb.getString("buildTime"));
+					content.setHangingParentChannelId(jb
+							.getString("hangingParentChannelId"));
+					content.setLocalUpdateDate(jb.getString("localUpdateDate"));
+					content.setContentSource(jb.getString("contentSource"));
+					content.setUpFile(jb.getString("upFile"));
+					content.setDocSummary(jb.getString("docSummary"));
+					content.setPutTop(jb.getBoolean("putTop"));
+					content.setWapUrl(jb.getString("wapUrl"));
+					content.setPushWap(jb.getBoolean("pushWap"));
+					content.setUpdateTime(jb.getString("updateTime"));
+					content.setPublishTime(jb.getString("publishTime"));
+					content.setParentId(jb.getString("parentId"));
+					content.setDelete(jb.getBoolean("delete"));
+					contents.add(content);
+				}
+
+			}
+
+			return contents;
+
+		}
+
 		return null;
 	}
 }

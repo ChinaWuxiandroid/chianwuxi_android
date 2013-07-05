@@ -1,4 +1,4 @@
-package com.wuxi.app.fragment;
+package com.wuxi.app.fragment.index.type.buttywuxi;
 
 import android.app.Activity;
 import android.graphics.Color;

@@ -22,10 +22,10 @@ import android.widget.TextView;
 
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.TitleChannelAdapter;
-import com.wuxi.app.fragment.CityMapFragment;
 
-import com.wuxi.app.fragment.LeaderWindowFragment;
 import com.wuxi.app.fragment.NavigatorWithContentFragment;
+import com.wuxi.app.fragment.index.type.buttywuxi.CityMapFragment;
+import com.wuxi.app.fragment.index.type.infocenter.LeaderWindowFragment;
 
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.domain.Channel;

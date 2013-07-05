@@ -1,4 +1,4 @@
-package com.wuxi.app.fragment;
+package com.wuxi.app.fragment.index.type.infocenter;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

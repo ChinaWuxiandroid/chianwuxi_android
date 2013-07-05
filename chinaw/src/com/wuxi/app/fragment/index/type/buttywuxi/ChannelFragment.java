@@ -1,4 +1,4 @@
-package com.wuxi.app.fragment.index.type;
+package com.wuxi.app.fragment.index.type.buttywuxi;
 
 import java.util.List;
 
@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.fragment.NavigatorWithContentFragment;
+import com.wuxi.app.fragment.index.type.BaseSlideFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.LogUtil;
