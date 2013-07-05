@@ -5,6 +5,7 @@ import org.json.JSONException;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.fragment.BaseSlideFragment;
+import com.wuxi.app.listeners.InfoCenterInitLayoutImpl;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.view.TitleScrollLayout;
@@ -81,6 +82,8 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 		mtitleScrollLayout = (TitleScrollLayout) view
 				.findViewById(R.id.title_scroll_action);// 头部控件
 		mtitleScrollLayout.setInitializContentLayoutListner(this);// 设置绑定内容界面监听器
+		mtitleScrollLayout
+				.setMenuItemInitLayoutListener(new InfoCenterInitLayoutImpl());// 设置界面监听处理类
 
 		ib_nextItems = (ImageButton) view.findViewById(R.id.btn_next_screen);// 头部下一个按钮
 		ib_nextItems.setOnClickListener(this);
@@ -143,7 +146,7 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 	 * 显示头部数据 wanglu 泰得利通
 	 */
 	private void showTitleData() {
-		initializSubFragmentsLayout();
+		//initializSubFragmentsLayout();
 		mtitleScrollLayout
 				.initMenuItemScreen(context, inflater, titleMenuItems);// 初始化头部空间
 
@@ -176,15 +179,15 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 		ft.commit();
 	}
 
-	@Override
+	/*@Override
 	public void initializSubFragmentsLayout() {
 
 		for (MenuItem menu : titleMenuItems) {
-			if (menuItem.getName().equals("领导之窗")) {
+			if (menu.getName().equals("领导之窗")) {
 				menu.setContentFragment((LeaderWindowFragment.class));
 			}
 		}
 
-	}
+	}*/
 
 }
