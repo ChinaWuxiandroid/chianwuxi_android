@@ -2,6 +2,7 @@ package com.wuxi.app.listeners;
 
 import com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment;
 import com.wuxi.app.fragment.commonfragment.SimpleListViewFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.MunicipalGovInfoPublicDirecFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.WorkSuggestionBoxFragment;
 import com.wuxi.domain.MenuItem;
 import android.support.v4.app.Fragment;
@@ -29,15 +30,19 @@ public class GoverMsgInitLayoutImpl implements MenuItemInitLayoutListener {
 
 			NavigatorWithContentFragment nafragment = null;
 			SimpleListViewFragment listviewfragment = null;
+			MunicipalGovInfoPublicDirecFragment municipalGovInfoPublicDirecFragment=null;
 			WorkSuggestionBoxFragment workSuggestionBoxFragment = null;
 
 			if (fragment instanceof NavigatorWithContentFragment) {
 				nafragment = (NavigatorWithContentFragment) fragment;
 				nafragment.setParentMenuItem(menuItem);
-				nafragment
-						.setDataType(NavigatorWithContentFragment.DATA_TPYE_MENUITEM);
+				nafragment.setDataType(NavigatorWithContentFragment.DATA_TPYE_MENUITEM);
 			}
 
+			if (fragment instanceof MunicipalGovInfoPublicDirecFragment) {
+				municipalGovInfoPublicDirecFragment = (MunicipalGovInfoPublicDirecFragment) fragment;
+			}
+			
 			if (fragment instanceof SimpleListViewFragment) {
 				listviewfragment = (SimpleListViewFragment) fragment;
 			}
@@ -51,9 +56,11 @@ public class GoverMsgInitLayoutImpl implements MenuItemInitLayoutListener {
 					initLayoutListner.bindContentLayout(nafragment);
 				} else if (listviewfragment != null) {
 					initLayoutListner.bindContentLayout(listviewfragment);
-				} else {
-					initLayoutListner
-							.bindContentLayout(workSuggestionBoxFragment);
+				} else if(municipalGovInfoPublicDirecFragment!=null){
+					initLayoutListner.bindContentLayout(municipalGovInfoPublicDirecFragment);
+				}
+				else{
+					initLayoutListner.bindContentLayout(workSuggestionBoxFragment);
 				}
 
 			}

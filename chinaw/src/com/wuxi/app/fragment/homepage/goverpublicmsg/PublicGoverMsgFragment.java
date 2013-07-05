@@ -22,6 +22,8 @@ import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment;
 import com.wuxi.app.fragment.commonfragment.SimpleListViewFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.LeaderWindowFragment;
+import com.wuxi.app.listeners.GoverMsgInitLayoutImpl;
+import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.app.view.TitleScrollLayout;
@@ -34,7 +36,7 @@ import com.wuxi.exception.NetException;
  * @author 杨宸 智佳
  * */
 
-public class PublicGoverMsgFragment extends BaseSlideFragment implements
+public class PublicGoverMsgFragment extends BaseSlideFragment implements InitializContentLayoutListner,
 OnClickListener{
 	private TitleScrollLayout mtitleScrollLayout;
 	private static final int MANCOTENT_ID = R.id.model_main;
@@ -66,7 +68,7 @@ OnClickListener{
 		mtitleScrollLayout = (TitleScrollLayout) view
 				.findViewById(R.id.title_scroll_action);// 头部控件
 		mtitleScrollLayout.setInitializContentLayoutListner(this);// 设置绑定内容界面监听器
-
+		mtitleScrollLayout.setMenuItemInitLayoutListener(new GoverMsgInitLayoutImpl());
 		ib_nextItems = (ImageButton) view.findViewById(R.id.btn_next_screen);// 头部下一个按钮
 		ib_nextItems.setOnClickListener(this);
 
@@ -76,9 +78,9 @@ OnClickListener{
 
 	private void initData(MenuItem parentMenuItem) {
 
-		//		NavigatorChannelFragment navigatorChannelFragment=new NavigatorChannelFragment();
-		//		navigatorChannelFragment.setParentChannel(parentMenuItem);
-		//		bindFragment(navigatorChannelFragment);
+//		NavigatorChannelFragment navigatorChannelFragment=new NavigatorChannelFragment();
+//		navigatorChannelFragment.setParentChannel(parentMenuItem);
+//		bindFragment(navigatorChannelFragment);
 	}
 
 
@@ -89,7 +91,7 @@ OnClickListener{
 
 			titleMenus = (List<MenuItem>) CacheUtil.get(menuItem
 					.getId());
-
+			System.out.println("szie"+titleMenus.size());
 			showTitleData();
 			return;
 		}
@@ -146,8 +148,9 @@ OnClickListener{
 	private void showTitleData() {
 		initializSubFragmentsLayout();
 		mtitleScrollLayout.setPerscreenCount(5);     //设置滑动头选项每屏为5个
-		
+	
 		mtitleScrollLayout.initMenuItemScreen(context, inflater, titleMenus);// 初始化头部空间
+	
 		//		initData(titleMenus.get(0));//默认显示第一个channel的子channel页
 
 	}
@@ -184,18 +187,21 @@ OnClickListener{
 	///初始化子列表的布局格式
 	@Override
 	public void initializSubFragmentsLayout() {
-		
+
 		for(MenuItem menu:titleMenus){
-			if(menu.getName().equals("最新信息公开")
-					||menu.getName().equals("信息公开指南")
-					||menu.getName().equals("信息公开制度"))
-			menu.setContentFragment(SimpleListViewFragment.class);
-			else if(menu.getName().equals("工作意见箱"))
+			String nameStr=menu.getName();
+			if(nameStr.equals("最新信息公开")
+					||nameStr.equals("信息公开指南")
+					||nameStr.equals("信息公开制度"))
+				menu.setContentFragment(SimpleListViewFragment.class);
+			else if(nameStr.equals("工作意见箱"))
 				menu.setContentFragment(WorkSuggestionBoxFragment.class);
+			else if(nameStr.equals("市政府信息公开目录"))
+				menu.setContentFragment(MunicipalGovInfoPublicDirecFragment.class);
 			else
 				menu.setContentFragment(NavigatorWithContentFragment.class);
 		}
 	}
-	
-	
+
+
 }
