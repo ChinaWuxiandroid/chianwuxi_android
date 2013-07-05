@@ -28,8 +28,8 @@ public class TitleChannelAdapter extends BasicAdapter {
 	public TitleChannelAdapter(Context context, int view, int[] viewId,
 			String[] dataName, List items, int screenIndex) {
 		super(context, view, viewId, dataName);
-		
-		this.items=items;
+
+		this.items = items;
 		this.screenIndex = screenIndex;
 
 	}
@@ -59,15 +59,15 @@ public class TitleChannelAdapter extends BasicAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		
-		Object item=items.get(position);
-		String chanelName ="";// 频道名称
-		if(item instanceof Channel){
-			chanelName=((Channel)item).getChannelName();
-		}else if(item instanceof MenuItem){
-			chanelName=((MenuItem)item).getName();
+
+		Object item = items.get(position);
+		String chanelName = "";// 频道名称
+		if (item instanceof Channel) {
+			chanelName = ((Channel) item).getChannelName();
+		} else if (item instanceof MenuItem) {
+			chanelName = ((MenuItem) item).getName();
 		}
-		
+
 		ViewHolder viewHolder = null;
 
 		if (convertView == null) {
@@ -79,10 +79,9 @@ public class TitleChannelAdapter extends BasicAdapter {
 					.findViewById(viewId[0]);
 
 			if (screenIndex == 0 && position == 0) {
-				viewHolder.title_text.setBackgroundResource(R.drawable.title_item_select_bg);
-//				viewHolder.title_text.setBackground(context.getResources()
-//						.getDrawable(R.drawable.title_item_select_bg));
 
+				viewHolder.title_text
+						.setBackgroundResource(R.drawable.title_item_select_bg);
 				viewHolder.title_text.setTextColor(Color.WHITE);
 
 			}

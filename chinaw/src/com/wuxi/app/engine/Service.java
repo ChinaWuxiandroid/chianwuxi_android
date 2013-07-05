@@ -15,7 +15,10 @@ public class Service {
 	protected Context context;
 	protected NetworkUtil networkUtil = NetworkUtil.getInstance();
 	protected HttpUtils httpUtils = HttpUtils.getInstance();
-	
+
+	public Service() {
+
+	}
 
 	public Service(Context context) {
 		this.context = context;

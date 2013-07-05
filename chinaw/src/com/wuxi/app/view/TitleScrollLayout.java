@@ -49,7 +49,6 @@ public class TitleScrollLayout extends ViewGroup {
 	private static final int SNAP_VELOCITY = 1200;
 	private static final String TAG = "TITLESCROLLLAYOUT";
 	private int mTouchSlop;
-	// private List<Channel> items = new ArrayList<Channel>();// pindao
 
 	private InitializContentLayoutListner initializContentLayoutListner;// 该自定义控件所在的fragment
 	private int perscreenCount = PERSCREEN_ITEM_COUNT;// 每屏数量,默认为7
@@ -317,7 +316,7 @@ public class TitleScrollLayout extends ViewGroup {
 				if (onScreenItems != null) {
 					GridView child = (GridView) inflater.inflate(
 							R.layout.title_action_gridview_layout, null);
-					child.setNumColumns(perscreenCount);        //设置GridView的每列显示view个数
+					child.setNumColumns(perscreenCount); // 设置GridView的每列显示view个数
 					child.setAdapter(new TitleChannelAdapter(context,
 							R.layout.title_grid_item_layout,
 							new int[] { R.id.tv_actionname }, null,
@@ -343,7 +342,7 @@ public class TitleScrollLayout extends ViewGroup {
 			if (i == chanItems.size() - 1) {
 				GridView child = (GridView) inflater.inflate(
 						R.layout.title_action_gridview_layout, null);
-				child.setNumColumns(perscreenCount);        //设置GridView的每列显示view个数
+				child.setNumColumns(perscreenCount); // 设置GridView的每列显示view个数
 				child.setAdapter(new TitleChannelAdapter(context,
 						R.layout.title_grid_item_layout,
 						new int[] { R.id.tv_actionname }, null, onScreenItems,
@@ -384,7 +383,7 @@ public class TitleScrollLayout extends ViewGroup {
 				if (onScreenItems != null) {
 					GridView child = (GridView) inflater.inflate(
 							R.layout.title_action_gridview_layout, null);
-					child.setNumColumns(perscreenCount);        //设置GridView的每列显示view个数
+					child.setNumColumns(perscreenCount); // 设置GridView的每列显示view个数
 					child.setAdapter(new TitleChannelAdapter(context,
 							R.layout.title_grid_item_layout,
 							new int[] { R.id.tv_actionname }, null,
@@ -410,7 +409,7 @@ public class TitleScrollLayout extends ViewGroup {
 			if (i == menuItems.size() - 1) {
 				GridView child = (GridView) inflater.inflate(
 						R.layout.title_action_gridview_layout, null);
-				child.setNumColumns(perscreenCount);        //设置GridView的每列显示view个数
+				child.setNumColumns(perscreenCount); // 设置GridView的每列显示view个数
 				child.setAdapter(new TitleChannelAdapter(context,
 						R.layout.title_grid_item_layout,
 						new int[] { R.id.tv_actionname }, null, onScreenItems,
@@ -467,14 +466,17 @@ public class TitleScrollLayout extends ViewGroup {
 				checkPositons[mCurScreen] = position;
 			}
 
-			
 			/**
 			 * 频道处理
 			 */
 			if (channel != null) {
 				Class<? extends Fragment> fragmentClass = channel
 						.getContentFragment();
+				if (fragmentClass == null) {
+					return;
+				}
 				Fragment fragment;
+
 				try {
 					fragment = (Fragment) fragmentClass.newInstance();
 
@@ -484,7 +486,7 @@ public class TitleScrollLayout extends ViewGroup {
 
 					NavigatorWithContentFragment nafragment = null;
 					CityMapFragment cityNCityMapFragment = null;
-					
+
 					if (fragment instanceof NavigatorWithContentFragment) {
 						nafragment = (NavigatorWithContentFragment) fragment;
 						nafragment.setParentChannel(channel);
@@ -512,14 +514,16 @@ public class TitleScrollLayout extends ViewGroup {
 				}
 
 			}
-			
+
 			/**
 			 * 普通菜单处理
 			 * */
+
 			if(menuItem!=null){	
 				GoverMsgInitLayoutListener.setInitializContentLayoutListner(initializContentLayoutListner);
-				GoverMsgInitLayoutListener.init(menuItem);	
+				GoverMsgInitLayoutListener.init(menuItem);			
 			}
+
 		}
 	}
 
