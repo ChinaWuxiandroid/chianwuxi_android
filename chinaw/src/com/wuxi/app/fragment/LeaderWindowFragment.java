@@ -1,36 +1,17 @@
 package com.wuxi.app.fragment;
 
-import java.util.List;
-
-import org.json.JSONException;
-
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.engine.MenuService;
-import com.wuxi.app.util.CacheUtil;
-import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.MenuItem;
-import com.wuxi.exception.NODataException;
-import com.wuxi.exception.NetException;
 
 /**
  * 
@@ -41,7 +22,7 @@ public class LeaderWindowFragment extends BaseFragment {
 
 	private View view;
 	private MenuItem parentItem;
-	private Context context;
+	
 
 	private WebView mWb_leader;
 	private ProgressBar wb_pb;
@@ -55,7 +36,6 @@ public class LeaderWindowFragment extends BaseFragment {
 			Bundle savedInstanceState) {
 
 		view = inflater.inflate(R.layout.leader_window_layout, null);
-		context = getActivity();
 		initUI();
 		return view;
 	}
