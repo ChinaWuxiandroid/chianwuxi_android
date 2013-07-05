@@ -1,20 +1,16 @@
 package com.wuxi.app.fragment.homepage.informationcenter;
 
 import java.util.List;
-
 import org.json.JSONException;
-
 import com.wuxi.app.R;
 import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.fragment.BaseSlideFragment;
-import com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.view.TitleScrollLayout;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -43,17 +39,17 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 	private TitleScrollLayout mtitleScrollLayout;
 	private ImageButton ib_nextItems;
 	private static final int MANCOTENT_ID = R.id.model_main;
-	private  static final int TITLE_LOAD_SUCCESS = 0;//头部加载成功
-	protected static final int TITLE_LOAD_FAIL = 1;//加载失败
+	private static final int TITLE_LOAD_SUCCESS = 0;// 头部加载成功
+	protected static final int TITLE_LOAD_FAIL = 1;// 加载失败
 
-	private Handler handler=new Handler(){
+	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
-			
-			switch(msg.what){
+
+			switch (msg.what) {
 			case TITLE_LOAD_FAIL:
-				String tip="";
-				if(msg.obj!=null){
-					tip=msg.obj.toString();
+				String tip = "";
+				if (msg.obj != null) {
+					tip = msg.obj.toString();
 					Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				}
 				break;
@@ -61,9 +57,10 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 				showTitleData();
 				break;
 			}
-			
+
 		};
 	};
+
 	public void setMenuItem(MenuItem menuItem) {
 		this.menuItem = menuItem;
 	}
@@ -101,44 +98,44 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 		if (CacheUtil.get(menuItem.getId()) != null) {// 从缓存中查找子菜单
 			titleMenuItems = (List<MenuItem>) CacheUtil.get(menuItem.getId());
 			showTitleData();
-			return ;
+			return;
 		}
 
-			new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					
-					MenuService menuSevice=new MenuService(context);
-					try {
-						titleMenuItems=menuSevice.getSubMenuItems(menuItem.getId());
-						if(titleMenuItems!=null){
-							handler.sendEmptyMessage(TITLE_LOAD_SUCCESS);
-							CacheUtil.put(menuItem.getId(), titleMenuItems);//放入缓存
-						}
-						
-					} catch (NetException e) {
-						e.printStackTrace();
-						Message msg=handler.obtainMessage();
-						msg.obj=e.getMessage();
-						msg.what=TITLE_LOAD_FAIL;
-						handler.sendMessage(msg);
-					} catch (NODataException e) {
-						e.printStackTrace();
-						Message msg=handler.obtainMessage();
-						msg.obj=e.getMessage();
-						msg.what=TITLE_LOAD_FAIL;
-						handler.sendMessage(msg);
-					} catch (JSONException e) {
-						e.printStackTrace();
-						Message msg=handler.obtainMessage();
-						msg.obj=e.getMessage();
-						msg.what=TITLE_LOAD_FAIL;
-						handler.sendMessage(msg);
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+
+				MenuService menuSevice = new MenuService(context);
+				try {
+					titleMenuItems = menuSevice.getSubMenuItems(menuItem
+							.getId());
+					if (titleMenuItems != null) {
+						handler.sendEmptyMessage(TITLE_LOAD_SUCCESS);
+						CacheUtil.put(menuItem.getId(), titleMenuItems);// 放入缓存
 					}
+
+				} catch (NetException e) {
+					e.printStackTrace();
+					Message msg = handler.obtainMessage();
+					msg.obj = e.getMessage();
+					msg.what = TITLE_LOAD_FAIL;
+					handler.sendMessage(msg);
+				} catch (NODataException e) {
+					e.printStackTrace();
+					Message msg = handler.obtainMessage();
+					msg.obj = e.getMessage();
+					msg.what = TITLE_LOAD_FAIL;
+					handler.sendMessage(msg);
+				} catch (JSONException e) {
+					e.printStackTrace();
+					Message msg = handler.obtainMessage();
+					msg.obj = e.getMessage();
+					msg.what = TITLE_LOAD_FAIL;
+					handler.sendMessage(msg);
 				}
-			}).start();
-		
+			}
+		}).start();
 
 	}
 
@@ -178,18 +175,16 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 		ft.addToBackStack(null);
 		ft.commit();
 	}
-	
+
 	@Override
 	public void initializSubFragmentsLayout() {
 
-		for(MenuItem menu:titleMenuItems){
-//			if (menuItem.getName().equals("最新公开信息")) {
-			menu.setContentFragment((LeaderWindowFragment.class));
-//			}
+		for (MenuItem menu : titleMenuItems) {
+			if (menuItem.getName().equals("领导之窗")) {
+				menu.setContentFragment((LeaderWindowFragment.class));
+			}
 		}
-			
 
-		
 	}
 
 }

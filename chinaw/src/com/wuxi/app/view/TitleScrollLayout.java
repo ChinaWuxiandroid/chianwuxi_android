@@ -2,6 +2,7 @@ package com.wuxi.app.view;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
@@ -18,12 +19,13 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Scroller;
 import android.widget.TextView;
+
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.TitleChannelAdapter;
 import com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.CityMapFragment;
-import com.wuxi.app.listeners.GoverMsgInitLayoutListener;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
+import com.wuxi.app.listeners.MenuItemInitLayoutListener;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 
@@ -53,6 +55,16 @@ public class TitleScrollLayout extends ViewGroup {
 	private InitializContentLayoutListner initializContentLayoutListner;// 该自定义控件所在的fragment
 	private int perscreenCount = PERSCREEN_ITEM_COUNT;// 每屏数量,默认为7
 	private int checkPositons[];// 选中的坐标
+	private MenuItemInitLayoutListener menuItemInitLayoutListener;// 菜单点击与指点界面绑定监听器
+
+	public MenuItemInitLayoutListener getMenuItemInitLayoutListener() {
+		return menuItemInitLayoutListener;
+	}
+
+	public void setMenuItemInitLayoutListener(
+			MenuItemInitLayoutListener menuItemInitLayoutListener) {
+		this.menuItemInitLayoutListener = menuItemInitLayoutListener;
+	}
 
 	public int getPerscreenCount() {
 		return perscreenCount;
@@ -518,9 +530,11 @@ public class TitleScrollLayout extends ViewGroup {
 			 * 普通菜单处理
 			 * */
 
-			if(menuItem!=null){	
-				GoverMsgInitLayoutListener.setInitializContentLayoutListner(initializContentLayoutListner);
-				GoverMsgInitLayoutListener.init(menuItem);			
+			if (menuItem != null&&initializContentLayoutListner!=null) {
+
+				menuItemInitLayoutListener.bindMenuItemLayout(
+						initializContentLayoutListner, menuItem);
+
 			}
 
 		}

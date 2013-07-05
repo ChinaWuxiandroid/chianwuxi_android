@@ -43,6 +43,14 @@ public class Content {
  private boolean pushWap;//是否发布到wap
  private String updateTime;//更新时间
  private String parentId;//父几点 ID
+ private String publishTime;//发布时间
+ 
+public String getPublishTime() {
+	return publishTime;
+}
+public void setPublishTime(String publishTime) {
+	this.publishTime = publishTime;
+}
 public String getOrganization() {
 	return organization;
 }

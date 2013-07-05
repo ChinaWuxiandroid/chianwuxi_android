@@ -15,11 +15,9 @@ public class Service {
 	protected Context context;
 	protected NetworkUtil networkUtil = NetworkUtil.getInstance();
 	protected HttpUtils httpUtils = HttpUtils.getInstance();
+	protected static final int TIME_OUT=5000;
 
-	public Service() {
-
-	}
-
+	
 	public Service(Context context) {
 		this.context = context;
 

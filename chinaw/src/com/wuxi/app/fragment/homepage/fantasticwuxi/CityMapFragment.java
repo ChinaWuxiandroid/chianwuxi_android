@@ -16,7 +16,6 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.baidu.mapapi.BMapManager;
 import com.baidu.mapapi.map.MKEvent;
 import com.baidu.mapapi.map.MapController;

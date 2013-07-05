@@ -1,5 +1,4 @@
 package com.wuxi.app.fragment;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +42,7 @@ public class MainIndexFragment extends BaseFragment {
 	private View view;
 	private Context context;
 	private ProgressBar pb;
+	private LayoutInflater mInflater;
 
 	/** —————————ListView——————————— **/
 	private ListView listView;
@@ -90,12 +90,14 @@ public class MainIndexFragment extends BaseFragment {
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.main_index_fragment_layout, null);
 		context = this.getActivity();
+		mInflater = inflater;
 		initUI();
 		return view;
 	}
 
 	private void initUI() {
 		gridView = (GridView) view.findViewById(R.id.gridview);
+
 		listView = (ListView) view.findViewById(R.id.index_news_list);
 		pb = (ProgressBar) view.findViewById(R.id.index_progess);
 		loadList();
@@ -168,19 +170,27 @@ public class MainIndexFragment extends BaseFragment {
 	 */
 	private void showGridData() {
 		int size = menuItems.size();
+		int column;
+		if (size % 2 == 0) {
+			column = size / 2;
+
+		} else {
+			column = size / 2 + 1;
+		}
 		DisplayMetrics dm = new DisplayMetrics();
 		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
 		float density = dm.density;
-		int allWidth = (int) (110 * (size / 2) * density);
+		int allWidth = (int) (115 * (column) * density);
 		int itemWidth = (int) (100 * density);
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 				allWidth, LinearLayout.LayoutParams.WRAP_CONTENT);
 		gridView.setLayoutParams(params);
 		gridView.setColumnWidth(itemWidth);
 		gridView.setStretchMode(GridView.NO_STRETCH);
-		gridView.setNumColumns(size / 2);
+		gridView.setNumColumns(column);
 		gridAdapter = new IndexGridAdapter(context,
-				R.layout.index_gridview_layout, Grid_viewid, menuItems, null);
+				R.layout.index_gridview_item_layout, Grid_viewid, menuItems,
+				null);
 		gridView.setAdapter(gridAdapter);
 	}
 

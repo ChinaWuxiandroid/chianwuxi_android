@@ -13,10 +13,15 @@ import android.widget.ListView;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.LeftMenuAdapter;
+
+
+
+
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InformationCenterFragment;
+
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.view.SlideMenuLayout;
 import com.wuxi.domain.MenuItem;
