@@ -46,6 +46,7 @@ public class MainIndexFragment extends BaseFragment {
 	private View view;
 	private Context context;
 	private ProgressBar pb;
+	private LayoutInflater mInflater;
 
 	/** —————————ListView——————————— **/
 	private ListView listView;
@@ -59,11 +60,12 @@ public class MainIndexFragment extends BaseFragment {
 	private IndexGridAdapter gridAdapter;
 	public static final int[] Grid_viewid = { R.id.index_gridview_image,
 			R.id.index_gridview_texttitle };
-
+	
 	private List<MenuItem> menuItems;// 菜单数据
 	private static final int MENUITEM_LOAD_SUCESS = 1;// 菜单加载成功标识
 	private static final String MENUITEM_CACKE_KEY = "man_menu_item";
 	protected static final int MENUITEM_LOAD_ERROR = 0;// 菜单加载失败标志
+	
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -93,12 +95,14 @@ public class MainIndexFragment extends BaseFragment {
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.main_index_fragment_layout, null);
 		context = this.getActivity();
+		mInflater=inflater;
 		initUI();
 		return view;
 	}
 
 	private void initUI() {
 		gridView = (GridView) view.findViewById(R.id.gridview);
+		
 		listView = (ListView) view.findViewById(R.id.index_news_list);
 		pb = (ProgressBar) view.findViewById(R.id.index_progess);
 		loadList();
@@ -170,20 +174,30 @@ public class MainIndexFragment extends BaseFragment {
 	 * 显示菜单数据
 	 */
 	private void showGridData() {
+		
+		
 		int size = menuItems.size();
+		int column;
+		if (size % 2 == 0) {
+			column = size / 2;
+
+		} else {
+			column = size / 2 + 1;
+		}
 		DisplayMetrics dm = new DisplayMetrics();
 		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
 		float density = dm.density;
-		int allWidth = (int) (110 * (size / 2) * density);
+		int allWidth = (int) (110 * (column) * density);
 		int itemWidth = (int) (100 * density);
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 				allWidth, LinearLayout.LayoutParams.WRAP_CONTENT);
 		gridView.setLayoutParams(params);
 		gridView.setColumnWidth(itemWidth);
 		gridView.setStretchMode(GridView.NO_STRETCH);
-		gridView.setNumColumns(size / 2);
+		
+		gridView.setNumColumns(column);
 		gridAdapter = new IndexGridAdapter(context,
-				R.layout.index_gridview_layout, Grid_viewid, menuItems, null);
+				R.layout.index_gridview_item_layout, Grid_viewid, menuItems, null);
 		gridView.setAdapter(gridAdapter);
 	}
 
@@ -232,7 +246,6 @@ public class MainIndexFragment extends BaseFragment {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			// TODO Auto-generated method stub
 			MenuItem checkMenuItem = (MenuItem) parent
 					.getItemAtPosition(position);
 			SlideLevelFragment saveFragment = new SlideLevelFragment();
