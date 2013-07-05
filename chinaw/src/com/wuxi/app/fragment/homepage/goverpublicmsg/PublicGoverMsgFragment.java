@@ -163,7 +163,7 @@ InitializContentLayoutListner, OnClickListener{
 
 	@Override
 	public void bindContentLayout(Fragment fragment) {
-		bindFragment(fragment);
+		bindFragment(fragment); 
 	}
 
 	private void bindFragment(Fragment fragment) {
