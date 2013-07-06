@@ -102,9 +102,8 @@ public class MenuService extends Service {
 					menu.setLinkMenuItemId(jb.getString("linkMenuItemID"));
 					menu.setContentName(jb.getString("contentName"));
 					menu.setLinkMenuItemName(jb.getString("linkMenuItemName"));
-					
 
-					if(!menu.isDeleted()){//已经删除标记的不显示
+					if (!menu.isDeleted()) {// 已经删除标记的不显示
 						menuItems.add(menu);
 					}
 				}
@@ -220,10 +219,10 @@ public class MenuService extends Service {
 					}
 
 					// LogUtil.i(TAG, jb.toString());
-					if(!menu.isDeleted()){//已经删除标记的不显示
+					if (!menu.isDeleted()) {// 已经删除标记的不显示
 						menuItems.add(menu);
 					}
-					
+
 				}
 
 			}

@@ -374,7 +374,6 @@ public class TitleScrollLayout extends ViewGroup {
 		if (menuItems == null) {
 			return;
 		}
-
 		int i = 0;
 		totalScreenNum = menuItems.size() / getPerscreenCount();// 屏数
 
