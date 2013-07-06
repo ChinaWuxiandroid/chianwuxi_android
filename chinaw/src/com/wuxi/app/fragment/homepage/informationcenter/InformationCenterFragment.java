@@ -1,17 +1,10 @@
 package com.wuxi.app.fragment.homepage.informationcenter;
 
 import java.util.List;
+
 import org.json.JSONException;
-import com.wuxi.app.R;
-import com.wuxi.app.engine.MenuService;
-import com.wuxi.app.fragment.BaseSlideFragment;
-import com.wuxi.app.listeners.InfoCenterInitLayoutImpl;
-import com.wuxi.app.listeners.InitializContentLayoutListner;
-import com.wuxi.app.util.CacheUtil;
-import com.wuxi.app.view.TitleScrollLayout;
-import com.wuxi.domain.MenuItem;
-import com.wuxi.exception.NODataException;
-import com.wuxi.exception.NetException;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,6 +17,17 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.wuxi.app.R;
+import com.wuxi.app.engine.MenuService;
+import com.wuxi.app.fragment.BaseSlideFragment;
+import com.wuxi.app.listeners.InfoCenterInitLayoutImpl;
+import com.wuxi.app.listeners.InitializContentLayoutListner;
+import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.view.TitleScrollLayout;
+import com.wuxi.domain.MenuItem;
+import com.wuxi.exception.NODataException;
+import com.wuxi.exception.NetException;
 
 /**
  * 
@@ -43,6 +47,7 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 	private static final int TITLE_LOAD_SUCCESS = 0;// 头部加载成功
 	protected static final int TITLE_LOAD_FAIL = 1;// 加载失败
 
+	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 
@@ -146,7 +151,8 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 	 * 显示头部数据 wanglu 泰得利通
 	 */
 	private void showTitleData() {
-		//initializSubFragmentsLayout();
+		initializSubFragmentsLayout();
+
 		mtitleScrollLayout
 				.initMenuItemScreen(context, inflater, titleMenuItems);// 初始化头部空间
 
@@ -179,15 +185,16 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 		ft.commit();
 	}
 
-	/*@Override
+	@Override
 	public void initializSubFragmentsLayout() {
 
 		for (MenuItem menu : titleMenuItems) {
 			if (menu.getName().equals("领导之窗")) {
-				menu.setContentFragment((LeaderWindowFragment.class));
+
+				menu.setContentFragment(LeaderWindowFragment.class);
 			}
 		}
 
-	}*/
+	}
 
 }

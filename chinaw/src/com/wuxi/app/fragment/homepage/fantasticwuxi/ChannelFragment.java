@@ -52,9 +52,11 @@ public class ChannelFragment extends BaseSlideFragment implements
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			String tip = "";
-			
-			if (msg.obj != null) { tip = msg.obj.toString(); }
-			 
+
+			if (msg.obj != null) {
+				tip = msg.obj.toString();
+			}
+
 			switch (msg.what) {
 			case TITLE__LOAD_SUCESS:
 				showTitleData();
@@ -100,17 +102,16 @@ public class ChannelFragment extends BaseSlideFragment implements
 		ib_nextItems.setOnClickListener(this);
 
 		loadTitleData();
-		
+
 	}
 
 	/**
 	 * 
-	 *wanglu 泰得利通
-	 *初始化界面
+	 * wanglu 泰得利通 初始化界面
 	 */
 	private void initData(Channel parentChannel) {
-	
-		NavigatorWithContentFragment navigatorChannelFragment=new NavigatorWithContentFragment();
+
+		NavigatorWithContentFragment navigatorChannelFragment = new NavigatorWithContentFragment();
 		navigatorChannelFragment.setParentChannel(parentChannel);
 		bindFragment(navigatorChannelFragment);
 	}
@@ -170,9 +171,9 @@ public class ChannelFragment extends BaseSlideFragment implements
 	 * 显示头部数据 wanglu 泰得利通
 	 */
 	private void showTitleData() {
-		
+		initializSubFragmentsLayout();
 		mtitleScrollLayout.initChannelScreen(context, inflater, titleChannels);// 初始化头部空间
-		initData(titleChannels.get(0));//默认显示第一个channel的子channel页
+		initData(titleChannels.get(0));// 默认显示第一个channel的子channel页
 
 	}
 
@@ -188,7 +189,7 @@ public class ChannelFragment extends BaseSlideFragment implements
 	}
 
 	private void bindFragment(Fragment fragment) {
-	
+
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		ft.replace(MANCOTENT_ID, fragment);// 替换内容界面
 
@@ -199,5 +200,17 @@ public class ChannelFragment extends BaseSlideFragment implements
 
 	public void setMenuItem(MenuItem menuItem) {
 		this.menuItem = menuItem;
+	}
+
+	@Override
+	public void initializSubFragmentsLayout() {
+
+		for (Channel channel : titleChannels) {
+			if (channel.getChannelName().equals("城市地图")) {
+				channel.setContentFragment(CityMapFragment.class);
+			} else {
+				channel.setContentFragment(NavigatorWithContentFragment.class);
+			}
+		}
 	}
 }

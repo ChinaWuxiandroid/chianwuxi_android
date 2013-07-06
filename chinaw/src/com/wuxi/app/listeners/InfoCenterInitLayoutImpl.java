@@ -19,6 +19,9 @@ public class InfoCenterInitLayoutImpl implements MenuItemInitLayoutListener {
 
 		Class<? extends Fragment> fragmentClass = menuItem.getContentFragment();
 		Fragment fragment;
+		if(fragmentClass==null){
+			return ;
+		}
 
 		try {
 			fragment = (Fragment) fragmentClass.newInstance();
@@ -31,6 +34,7 @@ public class InfoCenterInitLayoutImpl implements MenuItemInitLayoutListener {
 
 			if (fragment instanceof LeaderWindowFragment) {
 				leaderWindowFragment = (LeaderWindowFragment) fragment;
+				leaderWindowFragment.setParentItem(menuItem);
 				initLayoutListner.bindContentLayout(leaderWindowFragment);
 			}
 

@@ -16,14 +16,14 @@
             android:orientation="horizontal" >
 
             <RadioButton
-                android:id="@+id/main_tab_index"
+                android:id="@+id/index_rb_news"
                 style="@style/index_newstab_style"
                 android:background="@drawable/index_newstab_style"
                 android:checked="true"
                 android:text="头条新闻" />
 
             <RadioButton
-                android:id="@+id/main_tab_search"
+                android:id="@+id/index_rb_announcements"
                 style="@style/index_newstab_style"
                 android:background="@drawable/index_newstab_style"
                 android:text="推荐公告" />

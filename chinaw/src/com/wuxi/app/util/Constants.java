@@ -44,6 +44,19 @@ public class Constants {
 		 * 获取频道内容分页接口 {id}频道占位符 {start}开始位置占位符 {end}结束位置占位符
 		 */
 		public static final String CHANNEL_CONTENT_P_URL = "http://3g.wuxi.gov.cn/api/channel/{id}/contents_p.json?start={start}&end={end}";
+		
+		
+		/**
+		 * 推荐公告URL
+		 */
+		
+		public static final String ANNOUNCENTS_URL="http://3g.wuxi.gov.cn/api/main/announcements.json";
+		
+		
+		/**
+		 * 无锡推荐信息URL
+		 */
+		public static final String IMPORT_NEWS_URL="http://3g.wuxi.gov.cn/api/main/wuiximportantnews.json";
 
 	}
 

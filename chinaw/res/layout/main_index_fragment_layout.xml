@@ -7,13 +7,13 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="40dip"
+        android:layout_height="30dip"
         android:background="@drawable/logo_test" >
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scrollbars="none" >
 
         <LinearLayout
@@ -26,58 +26,52 @@
                 android:layout_height="wrap_content"
                 layout="@layout/index_news_layout" />
 
-            <HorizontalScrollView
+            <View
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dip"
-                android:background="#00000000"
-                android:scrollbars="none" >
+                android:layout_height="1dip"
+                android:background="#E1E1E0" />
 
-                <LinearLayout
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="190dip"
+                android:background="#F9F9F9" >
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpagerLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+
+                <ProgressBar
+                    android:id="@+id/index_progess"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#00000000"
-                    android:orientation="horizontal" >
+                    android:layout_gravity="center_vertical|center_horizontal" />
+            </FrameLayout>
 
-                    <com.wuxi.app.view.MyGridView
-                        xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:id="@+id/gridview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="#FCFCFC"
-                        android:gravity="center"
-                        android:horizontalSpacing="1dip"
-                        android:verticalSpacing="1dip" >
-                    </com.wuxi.app.view.MyGridView>
-                </LinearLayout>
-            </HorizontalScrollView>
-           
-            <ProgressBar
-                android:id="@+id/index_progess"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="#C7C7C7" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:background="#E1E1E1"
                 android:orientation="horizontal" >
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dip"
+                    android:layout_height="50dip"
                     android:layout_margin="5dip"
                     android:layout_weight="1"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/index_bottom_test1" />
+                    android:background="@drawable/index_bottom_test1" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dip"
+                    android:layout_height="50dip"
                     android:layout_margin="5dip"
                     android:layout_weight="1"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/index_bottom_test2" />
+                    android:background="@drawable/index_bottom_test2" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -14,9 +14,6 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.LeftMenuAdapter;
 
-
-
-
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
@@ -84,8 +81,8 @@ public class SlideLevelFragment extends BaseFragment {
 				informationCenterFragment.setMenuItem(menuItem);
 				onTransaction(informationCenterFragment);
 
-			}else if(menuItem.getName().equals("政府信息公开")){
-				PublicGoverMsgFragment publicGoverMsgFragment=new PublicGoverMsgFragment();
+			} else if (menuItem.getName().equals("政府信息公开")) {
+				PublicGoverMsgFragment publicGoverMsgFragment = new PublicGoverMsgFragment();
 				publicGoverMsgFragment.setMenuItem(menuItem);
 				onTransaction(publicGoverMsgFragment);
 			}

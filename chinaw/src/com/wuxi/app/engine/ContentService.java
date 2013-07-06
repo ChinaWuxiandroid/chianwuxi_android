@@ -65,6 +65,42 @@ public class ContentService extends Service {
 	}
 
 	/**
+	 * '
+	 * 
+	 * wanglu 泰得利通 根据URL地址获取内容，列推荐新闻，推荐公告API调用
+	 * 
+	 * @param url
+	 * @return
+	 * @throws NetException
+	 * @throws JSONException
+	 * @throws NODataException
+	 */
+	public List<Content> getContentsByUrl(String url) throws NetException,
+			JSONException, NODataException {
+		if (!checkNet()) {
+			throw new NetException(Constants.ExceptionMessage.NO_NET);
+		}
+
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+
+		if (resultStr != null) {
+
+			JSONObject jObject = new JSONObject(resultStr);
+			JSONArray jData = jObject.getJSONArray("result");
+			if (jData != null) {
+				return parseData(jData);
+			}
+
+		} else {
+
+			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);// 没有获取到数据异常
+
+		}
+
+		return null;
+	}
+
+	/**
 	 * 
 	 * wanglu 泰得利通 根据开始位置结束位置
 	 * 

@@ -1,8 +1,6 @@
 package com.wuxi.app.adapter;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import android.content.Context;
 import android.view.View;
@@ -10,24 +8,31 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.wuxi.domain.Content;
+
+/**
+ * 
+ * @author wanglu 泰得利通 首页新闻和公告适配器
+ */
 public class IndexNewsListAdapter extends BasicAdapter {
 
-	List<Map<String, Object>> List = new ArrayList<Map<String, Object>>();
+	private List<Content> contents;
 
-	public IndexNewsListAdapter(Context context, int view, int[] viewId,List<Map<String, Object>> data, String[] dataName) {
+	public IndexNewsListAdapter(Context context, int view, int[] viewId,
+			List<Content> contents, String[] dataName) {
 		super(context, view, viewId, dataName);
-		// TODO Auto-generated constructor stub
-		this.List = data;
+
+		this.contents = contents;
 	}
 
 	@Override
 	public int getCount() {
-		return List.size();
+		return contents.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return List.get(position);
+		return contents.get(position);
 	}
 
 	@Override
@@ -37,27 +42,42 @@ public class IndexNewsListAdapter extends BasicAdapter {
 
 	class ViewHolder {
 		public ImageView image;
-		public TextView numText,title_text;
+		public TextView numText, title_text;
 	}
-	
-	
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Map<String, Object> map= List.get(position);
+		Content content = contents.get(position);
+		
 		ViewHolder viewHolder = null;
 		if (convertView == null) {
 			convertView = getInflater().inflate(getView(), null);
 			int[] viewId = getViewId();
 			viewHolder = new ViewHolder();
 			viewHolder.numText = (TextView) convertView.findViewById(viewId[0]);
-			viewHolder.title_text = (TextView) convertView.findViewById(viewId[1]);
+			viewHolder.title_text = (TextView) convertView
+					.findViewById(viewId[1]);
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		String[] dataName = getDataName();
-		viewHolder.numText.setText(map.get(dataName[0]).toString());
-		viewHolder.title_text.setText(map.get(dataName[1]).toString());
+
+		viewHolder.numText.setText((position + 1) + "");
+		String textStr = "";
+		String title = content.getTitle();
+		String docSummary = content.getDocSummary();
+		if (docSummary != null && !docSummary.equals("")) {
+			if (docSummary.length() >= 10) {
+				docSummary = docSummary.substring(0, 10) + "...";
+			}
+		}
+		if(docSummary!=null&&!docSummary.equals("")){
+			textStr = title + ":" + docSummary;
+		}else{
+			textStr = title;
+		}
+		
+		viewHolder.title_text.setText(textStr);
 		return convertView;
 	}
 
