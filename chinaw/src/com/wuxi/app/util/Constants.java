@@ -44,19 +44,28 @@ public class Constants {
 		 * 获取频道内容分页接口 {id}频道占位符 {start}开始位置占位符 {end}结束位置占位符
 		 */
 		public static final String CHANNEL_CONTENT_P_URL = "http://3g.wuxi.gov.cn/api/channel/{id}/contents_p.json?start={start}&end={end}";
-		
-		
+
 		/**
 		 * 推荐公告URL
 		 */
-		
-		public static final String ANNOUNCENTS_URL="http://3g.wuxi.gov.cn/api/main/announcements.json";
-		
-		
+
+		public static final String ANNOUNCENTS_URL = "http://3g.wuxi.gov.cn/api/main/announcements.json";
+
 		/**
 		 * 无锡推荐信息URL
 		 */
-		public static final String IMPORT_NEWS_URL="http://3g.wuxi.gov.cn/api/main/wuiximportantnews.json";
+		public static final String IMPORT_NEWS_URL = "http://3g.wuxi.gov.cn/api/main/wuiximportantnews.json";
+
+		/**
+		 * 用户登录URL
+		 * {username}用户名占位符
+		 * {pwd}密码占位符
+		 */
+
+		public static final String LOGIN_URL = "http://3g.wuxi.gov.cn/api/login.json?username={username}&password={pwd}";
+		
+		
+		public static final String REGIST_URL="http://3g.wuxi.gov.cn/api/register.json";
 
 	}
 
@@ -102,6 +111,23 @@ public class Constants {
 		 */
 		public static final String DATA_FORMATE = "数据格式错误";
 
+	}
+
+	/**
+	 * 
+	 * @author wanglu 泰得利通 fragment名字
+	 * 
+	 */
+	public enum FragmentName {
+		/**
+		 * 登录fragment
+		 */
+		LOGIN_FRAGMENT,
+
+		/**
+		 * 注册 fragments
+		 */
+		REGIST_FRAGMENT;
 	}
 
 }

@@ -30,7 +30,7 @@
             android:layout_weight="1"/>
 
         <RadioButton
-            android:id="@+id/main_tab_collect"
+            android:id="@+id/main_tab_login_reg"
             style="@style/main_tab_bottom"
             
             android:drawableTop="@drawable/index_login_icon"

@@ -7,16 +7,18 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
-import com.wuxi.app.fragment.MainCollectFragment;
 import com.wuxi.app.fragment.MainIndexFragment;
 import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.fragment.MainSettingFragment;
+import com.wuxi.app.fragment.homepage.SlideLevelFragment;
+import com.wuxi.app.util.Constants;
 
 /**
- * 主要架构 
+ * 主要架构
+ * 
  * @author 方庆银
- *
+ * 
  */
 public class MainActivity extends FragmentActivity implements
 		OnCheckedChangeListener {
@@ -56,8 +58,14 @@ public class MainActivity extends FragmentActivity implements
 			ChangeFragment(new MainSearchFragment(), checkedId);
 			break;
 
-		case R.id.main_tab_collect:
-			ChangeFragment(new MainCollectFragment(), checkedId);
+		case R.id.main_tab_login_reg:// 登录注册
+			SlideLevelFragment slideLevelFragment = new SlideLevelFragment();
+
+			slideLevelFragment
+					.setFragmentName(Constants.FragmentName.LOGIN_FRAGMENT);//标识是登录
+			
+			fragmentManagers.IntentFragment(slideLevelFragment);
+
 			break;
 
 		case R.id.main_tab_mine:
@@ -80,6 +88,7 @@ public class MainActivity extends FragmentActivity implements
 
 	/**
 	 * 在主界面的tab基础上切换界面 fragment
+	 * 
 	 * @param saveFragment
 	 * @param id
 	 */
@@ -90,18 +99,20 @@ public class MainActivity extends FragmentActivity implements
 		fragmentManagers.ChangeFragment(saveFragment);
 	}
 
-
 	@Override
 	public void onBackPressed() {
-		if (fragmentManagers.fragments == null || fragmentManagers.fragments.size() <= 0) {
+		if (fragmentManagers.fragments == null
+				|| fragmentManagers.fragments.size() <= 0) {
 			final long currentTimeMillis = System.currentTimeMillis();
 			if (currentTimeMillis - mLastBackPressedTimeMillis > BACK_PRESSED_INTERVAL_MILLIS)
-				Toast.makeText(getApplicationContext(), "再按一次退出程序！",Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "再按一次退出程序！",
+						Toast.LENGTH_SHORT).show();
 			else
 				System.exit(0);
 			mLastBackPressedTimeMillis = currentTimeMillis;
 		} else {
-			fragmentManagers.BackPress(fragmentManagers.fragments.get(fragmentManagers.fragments.size() - 1));
+			fragmentManagers.BackPress(fragmentManagers.fragments
+					.get(fragmentManagers.fragments.size() - 1));
 			return;
 		}
 
