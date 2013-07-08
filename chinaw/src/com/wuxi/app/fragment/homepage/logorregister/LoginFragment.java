@@ -58,6 +58,7 @@ public class LoginFragment extends BaseSlideFragment implements OnClickListener 
 			SlideLevelFragment slideLevelFragment = new SlideLevelFragment();
 			slideLevelFragment
 					.setFragmentName(Constants.FragmentName.REGIST_FRAGMENT);
+			
 			managers.IntentFragment(slideLevelFragment);
 			
 			
@@ -65,5 +66,4 @@ public class LoginFragment extends BaseSlideFragment implements OnClickListener 
 
 		}
 	}
-
 }

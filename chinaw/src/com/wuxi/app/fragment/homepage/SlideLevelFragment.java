@@ -2,7 +2,6 @@ package com.wuxi.app.fragment.homepage;
 
 import java.util.List;
 
-import android.media.FaceDetector;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -59,6 +58,7 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener {
 		mlvMenu = (ListView) view.findViewById(R.id.lv_menu);
 
 		initLeftMenu();// 初始化左侧菜单数据
+		
 		return view;
 	}
 
