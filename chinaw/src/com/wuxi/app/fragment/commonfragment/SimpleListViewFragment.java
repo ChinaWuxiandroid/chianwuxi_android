@@ -31,7 +31,6 @@ public class SimpleListViewFragment extends BaseFragment{
 		
 		initView();
 		return view;
-
 	}
 
 	public void initView(){
