@@ -32,6 +32,7 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
 		setContentView(R.layout.main_fragment_layout);
 		init();
 		radioGroup = (RadioGroup) findViewById(R.id.main_tab_radiogroup);

@@ -15,7 +15,7 @@ public class BaseSlideFragment extends BaseFragment {
 	public ImageView OPearn_btn, Member_btnm,back_btn;
 	public TextView Title_text;
 
-	public void InitBtn() {
+	public void InitBtn() {  
 		OPearn_btn = (ImageView) view.findViewById(R.id.open_close_left_btn);
 		Member_btnm = (ImageView) view.findViewById(R.id.member_btn);
 		Title_text = (TextView) view.findViewById(R.id.Title_Text);
