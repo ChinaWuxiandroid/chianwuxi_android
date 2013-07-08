@@ -6,12 +6,13 @@ import android.widget.TextView;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.homepage.SlideLevelFragment;
+import com.wuxi.app.listeners.SlideLinstener;
 
 
 public class BaseSlideFragment extends BaseFragment {
 
 	public View view = null;
-	public SlideLevelFragment fragment;
+	public SlideLinstener slideLinstener;
 	public ImageView OPearn_btn, Member_btnm,back_btn;
 	public TextView Title_text;
 
@@ -51,18 +52,18 @@ public class BaseSlideFragment extends BaseFragment {
 	
 
 	public void OpenOrCloseMenu(View souce) {
-		 fragment.OpearnLeft();
+		slideLinstener.OpearnLeft();
 	}
 
 	public void MemberMenu(View souce) {
-		 fragment.OpearnRight();
+		slideLinstener.OpearnRight();
 	}
 	
 	public void setFragmentTitle(String Title){
 		Title_text.setText(Title);
 	}
 
-	public void setFragment(SlideLevelFragment fragment) {
-		this.fragment = fragment;
+	public void setFragment(SlideLinstener slideLinstener) {
+		this.slideLinstener = slideLinstener;
 	}
 }

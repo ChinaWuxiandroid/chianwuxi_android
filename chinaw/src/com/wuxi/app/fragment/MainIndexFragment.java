@@ -314,7 +314,7 @@ public class MainIndexFragment extends BaseFragment implements
 			MenuItem checkMenuItem = (MenuItem) parent
 					.getItemAtPosition(position);
 			SlideLevelFragment saveFragment = new SlideLevelFragment();
-			saveFragment.setManagers(managers);
+
 			saveFragment.setPosition(position);
 			saveFragment.setMenuItem(checkMenuItem);//
 			managers.IntentFragment(saveFragment);
@@ -392,7 +392,7 @@ public class MainIndexFragment extends BaseFragment implements
 		if (news != null) {
 			showNews();
 			return;
-		} else if ((CacheUtil.get(NEW_CACHE_KEY)) != null) {//看缓存中有没有
+		} else if ((CacheUtil.get(NEW_CACHE_KEY)) != null) {// 看缓存中有没有
 			news = (List<Content>) CacheUtil.get(NEW_CACHE_KEY);
 			showNews();
 			return;
@@ -461,10 +461,10 @@ public class MainIndexFragment extends BaseFragment implements
 		if (announcements != null) {
 			showAnnouncements();
 			return;
-		}else if((CacheUtil.get(ANNOUNCE_CACHE_KEY))!=null){//查看缓存数据
-			announcements=(List<Content>) CacheUtil.get(ANNOUNCE_CACHE_KEY);
+		} else if ((CacheUtil.get(ANNOUNCE_CACHE_KEY)) != null) {// 查看缓存数据
+			announcements = (List<Content>) CacheUtil.get(ANNOUNCE_CACHE_KEY);
 			showAnnouncements();
-			return  ;
+			return;
 		}
 		new Thread(new Runnable() {
 
@@ -477,7 +477,7 @@ public class MainIndexFragment extends BaseFragment implements
 					announcements = announcementsService.getAnnouncements();
 					if (announcements != null) {
 						handler.sendEmptyMessage(ANNOUNCE_LOAD_SUCCESS);
-						CacheUtil.put(ANNOUNCE_CACHE_KEY, announcements);//放入缓存
+						CacheUtil.put(ANNOUNCE_CACHE_KEY, announcements);// 放入缓存
 					} else {
 						Message msg = handler.obtainMessage();
 						msg.obj = "获取公告列表失败";
