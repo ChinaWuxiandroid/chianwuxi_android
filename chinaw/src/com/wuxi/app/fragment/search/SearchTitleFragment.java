@@ -12,13 +12,14 @@ import android.widget.TextView;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
+import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.fragment.homepage.SlideLevelFragment;
 
 /**
  * 搜索栏目的title fragment
  * @author 杨宸 智佳
  * */
-public class SearchTitleFragment extends BaseFragment{
+public class SearchTitleFragment extends MainSearchFragment{
 	public View view = null;
 	public SlideLevelFragment fragment;
 	public ImageView OPearn_btn, Member_btnm,back_btn;

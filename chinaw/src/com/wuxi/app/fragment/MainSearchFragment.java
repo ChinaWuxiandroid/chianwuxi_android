@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.search.AdvancedSearchFragment;
+import com.wuxi.app.fragment.search.AdvancedSearchResultListFragment;
 import com.wuxi.app.fragment.search.NormalSearchFragment;
 import com.wuxi.app.fragment.search.SearchTitleFragment;
 
@@ -26,6 +27,7 @@ public class MainSearchFragment extends BaseFragment{
 	public SearchTitleFragment searchTitleFragment;
 	public NormalSearchFragment normalSearchFragment;
 	public AdvancedSearchFragment advancedSearchFragment;
+	public AdvancedSearchResultListFragment advancedSearchResultListFragment;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,5 +65,17 @@ public class MainSearchFragment extends BaseFragment{
 		transaction.replace(R.id.search_content_fragment,  advancedSearchFragment); 
 		transaction.commit(); 
 
+	}
+	
+	/*
+	 * 初始化
+	 * */
+	public void initAdvancedSearchResultView(){
+		transaction=getFragmentManager().beginTransaction();
+		//init title	
+		advancedSearchResultListFragment=new AdvancedSearchResultListFragment();  
+		
+		transaction.replace(R.id.search_content_fragment,  advancedSearchResultListFragment); 
+		transaction.commit(); 
 	}
 }

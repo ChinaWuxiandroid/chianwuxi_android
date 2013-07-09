@@ -9,6 +9,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -29,6 +30,7 @@ public class AdvancedSearchFragment extends MainSearchFragment{
 	private Spinner infoType_spinner,resultsPerPage_spinner,contentType_spinner;    //三种spinner
 	private ImageButton searchNow_Btn;   //立即搜索
 	private EditText keyWord_editText;   //关键字
+	private EditText startDate_editText,endDate_editText;
 	private Context context; 
 
 	private static  String[] infoType_arr;  
@@ -65,22 +67,52 @@ public class AdvancedSearchFragment extends MainSearchFragment{
 		resultsPerPage_spinner.setAdapter(resultsPerPage_adapter);  
 		resultsPerPage_spinner.setVisibility(View.VISIBLE); 
 
-//		ArrayAdapter contentType_Spinner_adapter = ArrayAdapter.createFromResource(context, R.array.contentType, android.R.layout.simple_spinner_item);  
-//		contentType_Spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);  
-//		contentType_spinner.setAdapter(contentType_Spinner_adapter);  
-//		contentType_spinner.setVisibility(View.VISIBLE); 
+		ArrayAdapter contentType_Spinner_adapter = ArrayAdapter.createFromResource(context, R.array.contentType, android.R.layout.simple_spinner_item);  
+		contentType_Spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);  
+		contentType_spinner.setAdapter(contentType_Spinner_adapter);  
+		contentType_spinner.setVisibility(View.VISIBLE); 
 		//        spinner2.setOnItemSelectedListener(new SpinnerXMLSelectedListener());  
 
-		SearchSpinnerAdapter adapter=new SearchSpinnerAdapter(context, R.array.contentType, contentType_arr);
-		contentType_spinner.setAdapter(adapter);
+//		SearchSpinnerAdapter adapter=new SearchSpinnerAdapter(context, R.array.contentType, contentType_arr);
+//		contentType_spinner.setAdapter(adapter);
 
 
 		toNormalSearch_Btn=(ImageButton)view.findViewById(R.id.search_imageButton_to_normal_search);
 		keyWord_editText=(EditText)view.findViewById(R.id.search_advanced_edittext_keyword);
+		startDate_editText=(EditText)view.findViewById(R.id.search_advanced_edittext_startDate);
+		
+		endDate_editText=(EditText)view.findViewById(R.id.search_advanced_edittext_endDate);
 		searchNow_Btn=(ImageButton)view.findViewById(R.id.search_imageButton_search_now);
 
 		toNormalSearch_Btn.setOnClickListener(toNormalSearchClick);
 		searchNow_Btn.setOnClickListener(searchNowClick);
+		
+		startDate_editText.setOnFocusChangeListener(new OnFocusChangeListener(){
+
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if(hasFocus==true){
+					Toast.makeText(context, "startDate  ", 1000);
+				}
+				else{
+					Toast.makeText(context, "startDate close ", 1000);
+				}
+			}});
+		
+
+		endDate_editText.setOnFocusChangeListener(new OnFocusChangeListener(){
+
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if(hasFocus==true){
+					Toast.makeText(context, "startDate  ", 1000);
+				}
+				else{
+					Toast.makeText(context, "startDate close ", 1000);
+				}
+			}});
+		
+		
 	}
 
 	private OnClickListener toNormalSearchClick = new OnClickListener() {
@@ -94,10 +126,9 @@ public class AdvancedSearchFragment extends MainSearchFragment{
 	private OnClickListener searchNowClick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			Toast.makeText(context, "立即搜索", 2000).show();
+			initAdvancedSearchResultView();
+//			Toast.makeText(context, "立即搜索", 2000).show();
 		}
 	};
 	
-	
-
 }

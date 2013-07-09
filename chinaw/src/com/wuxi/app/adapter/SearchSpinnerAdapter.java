@@ -2,6 +2,7 @@ package com.wuxi.app.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +33,8 @@ public class SearchSpinnerAdapter extends ArrayAdapter{
   
         TextView tv = (TextView) convertView  
                 .findViewById(android.R.id.text1);  
+        tv.setGravity(Gravity.LEFT);
         tv.setText(items[position]);  
-//        tv.setTextColor(Color.BLUE);  
         tv.setTextSize(15);  
         return convertView;  
     }  
@@ -52,7 +53,7 @@ public class SearchSpinnerAdapter extends ArrayAdapter{
         TextView tv = (TextView) convertView  
                 .findViewById(android.R.id.text1);  
         tv.setText(items[position]);
-//        tv.setTextColor(Color.BLUE);  
+        tv.setGravity(Gravity.LEFT);
         tv.setTextSize(15);  
         return convertView;  
     }
