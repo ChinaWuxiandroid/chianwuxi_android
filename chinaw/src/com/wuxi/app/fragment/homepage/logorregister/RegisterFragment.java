@@ -7,15 +7,24 @@ import android.view.ViewGroup;
 
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.BaseSlideFragment;
+import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
 
-public class RegisterFragment extends BaseSlideFragment{
+public class RegisterFragment extends HomeBaseSlideLevelFragment{
+
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.index_login_regist_layout, null);
-		InitBtn();
-		this.setFragmentTitle("登录/注册");// 设置头部名称
-
-		return view;
+	protected int getLayoutId() {
+		return R.layout.regist_slide_layout;
 	}
+
+	@Override
+	protected void onBack() {
+		
+	}
+
+	@Override
+	protected String getTtitle() {
+		
+		return "登录注册";
+	}
+	
 }

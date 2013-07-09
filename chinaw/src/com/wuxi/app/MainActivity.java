@@ -11,7 +11,9 @@ import com.wuxi.app.fragment.MainIndexFragment;
 import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.fragment.MainSettingFragment;
+import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
 import com.wuxi.app.fragment.homepage.SlideLevelFragment;
+import com.wuxi.app.fragment.homepage.logorregister.LoginFragment;
 import com.wuxi.app.util.Constants;
 
 /**
@@ -60,17 +62,17 @@ public class MainActivity extends FragmentActivity implements
 			break;
 
 		case R.id.main_tab_login_reg:// 登录注册
-			SlideLevelFragment slideLevelFragment = new SlideLevelFragment();
-
-			slideLevelFragment
-					.setFragmentName(Constants.FragmentName.LOGIN_FRAGMENT);//标识是登录
 			
-			fragmentManagers.IntentFragment(slideLevelFragment);
-
+		
+			HomeBaseSlideLevelFragment loginFragment=new LoginFragment();
+			fragmentManagers.IntentFragment(loginFragment);
+			//ChangeFragment(loginFragment, checkedId);
+			
 			break;
 
 		case R.id.main_tab_mine:
 			ChangeFragment(new MainMineFragment(), checkedId);
+			
 			break;
 
 		case R.id.main_tab_more:
