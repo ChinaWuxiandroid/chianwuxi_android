@@ -21,6 +21,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <ProgressBar
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/pb_regist"
+                android:visibility="gone"/>
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -39,6 +47,7 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/et_username"
                     android:layout_width="0dip"
                     android:layout_height="20dip"
                     android:layout_gravity="center_vertical|center_horizontal"
@@ -66,6 +75,7 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/et_truename"
                     android:layout_width="0dip"
                     android:layout_height="20dip"
                     android:layout_gravity="center_vertical|center_horizontal"
@@ -93,12 +103,14 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/et_password"
                     android:layout_width="0dip"
                     android:layout_height="20dip"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:layout_marginRight="10dip"
                     android:layout_weight="2"
                     android:background="#ffffff"
+                    android:inputType="textPassword"
                     android:maxLength="20" />
             </LinearLayout>
 
@@ -120,12 +132,14 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/et_confimpassword"
                     android:layout_width="0dip"
                     android:layout_height="20dip"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:layout_marginRight="10dip"
                     android:layout_weight="2"
                     android:background="#ffffff"
+                    android:inputType="textPassword"
                     android:maxLength="20" />
             </LinearLayout>
 
@@ -147,6 +161,7 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/et_findpass_question"
                     android:layout_width="0dip"
                     android:layout_height="20dip"
                     android:layout_gravity="center_vertical|center_horizontal"
@@ -174,6 +189,7 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/et_findpass_answer"
                     android:layout_width="0dip"
                     android:layout_height="20dip"
                     android:layout_gravity="center_vertical|center_horizontal"
@@ -201,12 +217,14 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/et_email"
                     android:layout_width="0dip"
                     android:layout_height="20dip"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:layout_marginRight="10dip"
                     android:layout_weight="2"
                     android:background="#ffffff"
+                    android:inputType="textEmailAddress"
                     android:maxLength="20" />
             </LinearLayout>
 
@@ -228,12 +246,14 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/et_tel"
                     android:layout_width="0dip"
                     android:layout_height="20dip"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:layout_marginRight="10dip"
                     android:layout_weight="2"
                     android:background="#ffffff"
+                    android:inputType="phone"
                     android:maxLength="20" />
             </LinearLayout>
 
@@ -255,12 +275,14 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/et_phonenumber"
                     android:layout_width="0dip"
                     android:layout_height="20dip"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:layout_marginRight="10dip"
                     android:layout_weight="2"
                     android:background="#ffffff"
+                    android:inputType="phone"
                     android:maxLength="20" />
             </LinearLayout>
 
@@ -268,26 +290,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dip"
-                android:orientation="horizontal"
                 android:layout_marginLeft="20dip"
-                 android:layout_marginRight="20dip"  >
+                android:layout_marginRight="20dip"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
 
                 <Button
+                    android:id="@+id/regist_btn_submit"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/login_btn_bg"
-                    android:text="提交" 
-                    android:textColor="#ffffff"/>
+                    android:text="提交"
+                    android:textColor="#ffffff" />
 
                 <Button
+                    android:id="@+id/regist_btn_cancle"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginLeft="10dip"
+                    android:layout_weight="1"
                     android:background="@drawable/login_btn_bg"
-                    android:text="取消" 
+                    android:text="取消"
                     android:textColor="#ffffff" />
             </LinearLayout>
         </LinearLayout>

@@ -4,10 +4,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.SimpleListViewFragmentAdapter;
 import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
-
 import com.wuxi.app.fragment.search.AdvancedSearchFragment;
 
 

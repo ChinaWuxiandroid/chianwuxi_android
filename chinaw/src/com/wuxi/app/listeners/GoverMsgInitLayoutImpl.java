@@ -1,11 +1,12 @@
 package com.wuxi.app.listeners;
 
+import android.support.v4.app.Fragment;
+
 import com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment;
 import com.wuxi.app.fragment.commonfragment.SimpleListViewFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.MunicipalGovInfoPublicDirecFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.WorkSuggestionBoxFragment;
 import com.wuxi.domain.MenuItem;
-import android.support.v4.app.Fragment;
 
 /**
  * 政府公开信息 头部滑动条 点击事件的布局处理 监听事件

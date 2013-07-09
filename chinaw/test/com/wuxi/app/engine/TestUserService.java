@@ -5,13 +5,13 @@ import java.util.Map;
 
 import org.json.JSONException;
 
+import android.test.AndroidTestCase;
+
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.User;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 import com.wuxi.exception.ResultException;
-
-import android.test.AndroidTestCase;
 
 /**
  * 

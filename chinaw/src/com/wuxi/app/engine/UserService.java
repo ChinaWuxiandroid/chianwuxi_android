@@ -51,9 +51,14 @@ public class UserService extends Service {
 		if (resultStr != null) {
 
 			JSONObject jsonObject = new JSONObject(resultStr);
-			JSONObject jb = jsonObject.getJSONObject("result");
+			Object jres = jsonObject.get("result");
 
-			return paserUser(jb);
+			if (!jres.toString().equals("null")) {
+				return paserUser((JSONObject) jres);
+			} else {
+				return null;
+			}
+
 		} else {
 			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);
 		}
@@ -95,42 +100,45 @@ public class UserService extends Service {
 
 			JSONObject jsonObject = new JSONObject(resultStr);
 
-			JSONObject jb = jsonObject.getJSONObject("result");
+			Object o = jsonObject.get("result");
+			if (!o.toString().equals("null")) {
 
-			if (jb.has("message") && jb.getString("message") != null
-					&& jb.getString("errorCode").equals(ERROR_CODE)) {
-				throw new ResultException(jb.getString("message"));//处理注册错误信息
+				JSONObject jb = (JSONObject) o;
 
+				if (jb.has("message") && jb.getString("message") != null
+						&& jb.getString("errorCode").equals(ERROR_CODE)) {
+					throw new ResultException(jb.getString("message"));// 处理注册错误信息
+
+				}
+
+				return paserUser(jb);
 			}
-
-			return paserUser(jb);
 
 		} else {
 			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);
 		}
+		return null;
 
 	}
 
 	private User paserUser(JSONObject jb) throws JSONException {
-		if (jb != null) {
 
-			User user = new User();
-			user.setUserName(jb.getString("userName"));
-			user.setAccessToken(jb.getString("accessToken"));
-			user.setRefreshToken(jb.getString("refreshToken"));
-			user.setExpireIn(jb.getString("expiresIn"));
-			user.setMobile(jb.getString("mobile"));
-			user.setPerProjectId(jb.getString("perProjectId"));
-			user.setUserId(jb.getString("userId"));
-			user.setTrueName(jb.getString("trueName"));
-			user.setSex(jb.getString("sex"));
-			user.setBirthday(jb.getString("birthday"));
-			user.setIdcard(jb.getString("idcard"));
-			user.setEmail(jb.getString("email"));
-			user.setToeknCreateTime(jb.getString("tokenCreateTime"));
+		User user = new User();
+		user.setUserName(jb.getString("userName"));
+		user.setAccessToken(jb.getString("accessToken"));
+		user.setRefreshToken(jb.getString("refreshToken"));
+		user.setExpireIn(jb.getString("expiresIn"));
+		user.setMobile(jb.getString("mobile"));
+		user.setPerProjectId(jb.getString("perProjectId"));
+		user.setUserId(jb.getString("userId"));
+		user.setTrueName(jb.getString("trueName"));
+		user.setSex(jb.getString("sex"));
+		user.setBirthday(jb.getString("birthday"));
+		user.setIdcard(jb.getString("idcard"));
+		user.setEmail(jb.getString("email"));
+		user.setToeknCreateTime(jb.getString("tokenCreateTime"));
 
-			return user;
-		}
-		return null;
+		return user;
+
 	}
 }

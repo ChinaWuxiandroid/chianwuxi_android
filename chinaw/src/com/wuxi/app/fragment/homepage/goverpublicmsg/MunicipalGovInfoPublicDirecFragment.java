@@ -14,12 +14,9 @@ import android.widget.ImageButton;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment;
 import com.wuxi.app.fragment.commonfragment.SimpleListViewFragment;
-import com.wuxi.app.fragment.homepage.SlideLevelFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
-import com.wuxi.app.view.TitleScrollLayout;
 import com.wuxi.domain.MenuItem;
 
 /**

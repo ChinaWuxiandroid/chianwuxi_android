@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;

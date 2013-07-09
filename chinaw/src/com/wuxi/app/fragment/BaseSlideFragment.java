@@ -3,9 +3,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.fragment.homepage.SlideLevelFragment;
 import com.wuxi.app.listeners.SlideLinstener;
 
 

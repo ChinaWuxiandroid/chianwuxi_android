@@ -1,24 +1,15 @@
 package com.wuxi.app.fragment.search;
 
-import com.wuxi.app.BaseFragment;
-import com.wuxi.app.R;
-import com.wuxi.app.adapter.SearchSpinnerAdapter;
-import com.wuxi.app.fragment.MainSearchFragment;
-import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
-
 import android.content.Context;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
+
+import com.wuxi.app.R;
+import com.wuxi.app.fragment.MainSearchFragment;
+import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
 
 /**
  * 高级搜索的fragment  

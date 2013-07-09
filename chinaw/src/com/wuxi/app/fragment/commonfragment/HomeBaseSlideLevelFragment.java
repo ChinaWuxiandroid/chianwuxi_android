@@ -16,6 +16,7 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.LeftMenuAdapter;
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.Constants;
 import com.wuxi.app.view.SlideMenuLayout;
 import com.wuxi.domain.MenuItem;
 
@@ -32,7 +33,7 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 	protected Context context;
 	protected SlideMenuLayout mSlideMenuLayout;
 	protected ListView mlvMenu;// 左侧菜单列表
-	protected static final String MENUITEM_CACKE_KEY = "man_menu_item";
+	protected static final String MENUITEM_CACKE_KEY = Constants.CacheKey.HOME_MENUITEM_KEY;
 	private ImageView oPearn_btn, member_btnm, back_btn;
 	private TextView tv_title;
 
@@ -43,7 +44,8 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 		this.inflater=inflater;
 		context=getActivity();
 		initUI(); 
-		
+		context = getActivity();
+		initUI();
 		initLeftMenu();// 初始化左侧菜单数据
 
 		return view;
