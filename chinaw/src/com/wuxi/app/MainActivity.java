@@ -58,7 +58,9 @@ public class MainActivity extends FragmentActivity implements
 			break;
 
 		case R.id.main_tab_search:
-			ChangeFragment(new MainSearchFragment(), checkedId);
+			HomeBaseSlideLevelFragment searchFragment=new MainSearchFragment();
+			fragmentManagers.IntentFragment(searchFragment);
+//			ChangeFragment(new MainSearchFragment(), checkedId);
 			break;
 
 		case R.id.main_tab_login_reg:// 登录注册

@@ -5,215 +5,228 @@
     android:background="#ffffff"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <ImageButton
-            android:id="@+id/search_imageButton_advanced_search"
-            android:layout_width="90dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/search_advanced_in_advacedfragment" />
-
-        <ImageButton
-            android:id="@+id/search_imageButton_to_normal_search"
-            android:layout_width="90dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/search_noraml_in_advacedfragment" >
-        </ImageButton>
-    </LinearLayout>
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        layout="@layout/child_fragmend_header_layout" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal" >
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="9"
+        android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
+            android:layout_height="60dp"
+            android:gravity="center"
             android:orientation="horizontal" >
 
-            <TextView
-                android:layout_width="0dp"
+            <ImageButton
+                android:id="@+id/search_imageButton_advanced_search"
+                android:layout_width="90dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="left|center_vertical"
-                android:text="信息类型："
-                android:textSize="11sp"
-                android:textStyle="bold" />
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/search_advanced_in_advacedfragment" />
 
-            <Spinner
-                android:id="@+id/search_spinner_infoType"
-                android:layout_width="0dp"
+            <ImageButton
+                android:id="@+id/search_imageButton_to_normal_search"
+                android:layout_width="90dp"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1.3" />
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/search_noraml_in_advacedfragment" >
+            </ImageButton>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1" >
+            android:layout_height="40dp"
+            android:orientation="horizontal" >
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.2"
-                android:gravity="center"
-                android:text="每页结果数："
-                android:textSize="11sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/search_spinner_resultsperpage"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:baselineAligned="false"
-        android:orientation="horizontal" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1.2" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical|left"
-                android:text="日期检索："
-                android:textSize="11sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/search_advanced_edittext_startDate"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1.5"
-                android:background="@drawable/search_keyword_edittext_back"
-                android:editable="false"
-                android:paddingLeft="5dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1.5" >
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:gravity="center"
-                android:text="到："
-                android:textSize="11sp"
-                android:textStyle="bold" />
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
 
-            <EditText
-                android:id="@+id/search_advanced_edittext_endDate"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:text="信息类型："
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/search_spinner_infoType"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1.3" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/search_keyword_edittext_back"
-                android:paddingLeft="5dp" />
-        </LinearLayout>
-    </LinearLayout>
+                android:layout_marginRight="20dp"
+                android:layout_weight="1" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:baselineAligned="false"
-        android:orientation="horizontal" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.2"
+                    android:gravity="center"
+                    android:text="每页结果数："
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1.2" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.0"
-                android:gravity="left|center_vertical"
-                android:text="内容检索："
-                android:textSize="11sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/search_spinner_contentType"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1.1" />
+                <Spinner
+                    android:id="@+id/search_spinner_resultsperpage"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1" >
+            android:layout_height="40dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal" >
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="关键字:"
-                android:textSize="11sp"
-                android:textStyle="bold" />
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1.2" >
 
-            <EditText
-                android:id="@+id/search_advanced_edittext_keyword"
-                android:layout_width="0dp"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|left"
+                    android:text="日期检索："
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/search_advanced_edittext_startDate"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/search_keyword_edittext_back"
+                    android:editable="false"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="2"
-                android:background="@drawable/search_keyword_edittext_back"
-                android:paddingLeft="5dp" />
+                android:layout_marginRight="20dp"
+                android:layout_weight="1.5" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:gravity="center"
+                    android:text="到："
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/search_advanced_edittext_endDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_keyword_edittext_back"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1.2" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.0"
+                    android:gravity="left|center_vertical"
+                    android:text="内容检索："
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/search_spinner_contentType"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1.1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="关键字:"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/search_advanced_edittext_keyword"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/search_keyword_edittext_back"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="支持多个关键字检索，多个关键字间隔用逗号分隔"
+            android:textColor="#646363"
+            android:textSize="10dip" />
+
+        <ImageButton
+            android:id="@+id/search_imageButton_search_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#ffffff"
+            android:src="@drawable/search_searchnow_selector" />
     </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:text="支持多个关键字检索，多个关键字间隔用逗号分隔"
-        android:textColor="#646363"
-        android:textSize="10dip" />
-
-    <ImageButton
-        android:id="@+id/search_imageButton_search_now"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="#ffffff"
-        android:src="@drawable/search_searchnow_selector" />
 
 </LinearLayout>

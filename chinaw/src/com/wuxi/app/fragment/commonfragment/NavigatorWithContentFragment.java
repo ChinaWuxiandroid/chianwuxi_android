@@ -4,17 +4,6 @@ import java.util.List;
 
 import org.json.JSONException;
 
-import com.wuxi.app.BaseFragment;
-import com.wuxi.app.R;
-import com.wuxi.app.adapter.ContentNavigatorAdapter;
-import com.wuxi.app.engine.ChannelService;
-import com.wuxi.app.engine.MenuService;
-import com.wuxi.app.util.CacheUtil;
-import com.wuxi.domain.Channel;
-import com.wuxi.domain.MenuItem;
-import com.wuxi.exception.NODataException;
-import com.wuxi.exception.NetException;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -27,9 +16,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
+
+import com.wuxi.app.BaseFragment;
+import com.wuxi.app.R;
+import com.wuxi.app.adapter.ContentNavigatorAdapter;
+import com.wuxi.app.engine.ChannelService;
+import com.wuxi.app.engine.MenuService;
+import com.wuxi.app.util.CacheUtil;
+import com.wuxi.domain.Channel;
+import com.wuxi.domain.MenuItem;
+import com.wuxi.exception.NODataException;
+import com.wuxi.exception.NetException;
 
 /**
  * 具有左右导航视图  跳转时必须调用方法setParentChannel(Channel parentChannel)或setParentMenuItem(MenuItem parentMenuItem)

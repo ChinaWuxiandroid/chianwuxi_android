@@ -64,9 +64,7 @@ public class ChannelFragment extends BaseSlideFragment implements
 			case TITLE_LOAD_ERROR:
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
-
 			}
-
 		};
 	};
 

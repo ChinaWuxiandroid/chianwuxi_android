@@ -4,6 +4,7 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.SearchSpinnerAdapter;
 import com.wuxi.app.fragment.MainSearchFragment;
+import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -23,39 +25,41 @@ import android.widget.Toast;
  * @author 杨宸 智佳
  * */
 
-public class AdvancedSearchFragment extends MainSearchFragment{
-	protected View view;
-	protected LayoutInflater mInflater;
+public class AdvancedSearchFragment extends HomeBaseSlideLevelFragment{
+	private Context context; 
 	private ImageButton toNormalSearch_Btn;   //跳转到普通检索  的按钮
 	private Spinner infoType_spinner,resultsPerPage_spinner,contentType_spinner;    //三种spinner
 	private ImageButton searchNow_Btn;   //立即搜索
 	private EditText keyWord_editText;   //关键字
 	private EditText startDate_editText,endDate_editText;
-	private Context context; 
 
-	private static  String[] infoType_arr;  
-	private static  String[] resultsPerPage_arr;  
-	private static  String[] contentType_arr;  
+
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.advanced_search_layout, null);
-		mInflater = inflater;
+	protected void initUI() {
 		context = getActivity();
-
-		initView();
-		return view;
+		super.initUI();
+		findView();
 	}
 
-	public void initView(){
-//		infoType_arr=getResources().getStringArray(R.array.infoType);
-//		resultsPerPage_arr=getResources().getStringArray(R.array.resultsPerPage);
-		contentType_arr=getResources().getStringArray(R.array.contentType);
+	public void findView(){
+		toNormalSearch_Btn=(ImageButton)view.findViewById(R.id.search_imageButton_to_normal_search);
+		keyWord_editText=(EditText)view.findViewById(R.id.search_advanced_edittext_keyword);
+		startDate_editText=(EditText)view.findViewById(R.id.search_advanced_edittext_startDate);
+
+		endDate_editText=(EditText)view.findViewById(R.id.search_advanced_edittext_endDate);
+		searchNow_Btn=(ImageButton)view.findViewById(R.id.search_imageButton_search_now);
 
 		infoType_spinner=(Spinner)view.findViewById(R.id.search_spinner_infoType);
 		resultsPerPage_spinner=(Spinner)view.findViewById(R.id.search_spinner_resultsperpage);
 		contentType_spinner=(Spinner)view.findViewById(R.id.search_spinner_contentType);
 
+		toNormalSearch_Btn.setOnClickListener(this);
+		searchNow_Btn.setOnClickListener(this);
+		setSpinnerAdapter();
+	}
+
+
+	public void setSpinnerAdapter(){
 
 		ArrayAdapter infoType_Spinner_adapter = ArrayAdapter.createFromResource(context, R.array.infoType, android.R.layout.simple_spinner_item);  
 		infoType_Spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);  
@@ -70,65 +74,44 @@ public class AdvancedSearchFragment extends MainSearchFragment{
 		ArrayAdapter contentType_Spinner_adapter = ArrayAdapter.createFromResource(context, R.array.contentType, android.R.layout.simple_spinner_item);  
 		contentType_Spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);  
 		contentType_spinner.setAdapter(contentType_Spinner_adapter);  
-		contentType_spinner.setVisibility(View.VISIBLE); 
-		//        spinner2.setOnItemSelectedListener(new SpinnerXMLSelectedListener());  
-
-//		SearchSpinnerAdapter adapter=new SearchSpinnerAdapter(context, R.array.contentType, contentType_arr);
-//		contentType_spinner.setAdapter(adapter);
-
-
-		toNormalSearch_Btn=(ImageButton)view.findViewById(R.id.search_imageButton_to_normal_search);
-		keyWord_editText=(EditText)view.findViewById(R.id.search_advanced_edittext_keyword);
-		startDate_editText=(EditText)view.findViewById(R.id.search_advanced_edittext_startDate);
-		
-		endDate_editText=(EditText)view.findViewById(R.id.search_advanced_edittext_endDate);
-		searchNow_Btn=(ImageButton)view.findViewById(R.id.search_imageButton_search_now);
-
-		toNormalSearch_Btn.setOnClickListener(toNormalSearchClick);
-		searchNow_Btn.setOnClickListener(searchNowClick);
-		
-		startDate_editText.setOnFocusChangeListener(new OnFocusChangeListener(){
-
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if(hasFocus==true){
-					Toast.makeText(context, "startDate  ", 1000);
-				}
-				else{
-					Toast.makeText(context, "startDate close ", 1000);
-				}
-			}});
-		
-
-		endDate_editText.setOnFocusChangeListener(new OnFocusChangeListener(){
-
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if(hasFocus==true){
-					Toast.makeText(context, "startDate  ", 1000);
-				}
-				else{
-					Toast.makeText(context, "startDate close ", 1000);
-				}
-			}});
-		
-		
+		contentType_spinner.setVisibility(View.VISIBLE); 	
 	}
 
-	private OnClickListener toNormalSearchClick = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			//跳转到普通搜索页面
-			initNormalSearchView();
-		}
-	};
+	@Override
+	public void onClick(View v) {
+		super.onClick(v);
 
-	private OnClickListener searchNowClick = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			initAdvancedSearchResultView();
-//			Toast.makeText(context, "立即搜索", 2000).show();
+		switch (v.getId()) {
+		case R.id.search_imageButton_to_normal_search:
+			HomeBaseSlideLevelFragment normalSearchFragment = new MainSearchFragment();
+			managers.IntentFragment(normalSearchFragment);
+
+			break;
+		case R.id.search_imageButton_search_now:
+			HomeBaseSlideLevelFragment searchAdvancedResultListFragment = new AdvancedSearchResultListFragment();
+			managers.IntentFragment(searchAdvancedResultListFragment);
+			break;
 		}
-	};
-	
+	}
+
+
+	@Override
+	protected int getLayoutId() {
+		return R.layout.slide_search_advanced_layout;
+	}
+
+	@Override
+	protected void onBack() {
+		// TODO Auto-generated method stub	
+	}
+
+	@Override
+	protected String getTtitle() {
+		return "全站搜索";
+	}
+
+
+
+
+
 }

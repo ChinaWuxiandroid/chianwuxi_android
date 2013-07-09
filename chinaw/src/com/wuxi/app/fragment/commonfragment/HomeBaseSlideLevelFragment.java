@@ -2,8 +2,7 @@ package com.wuxi.app.fragment.commonfragment;
 
 import java.util.List;
 
-import org.xmlpull.v1.XmlPullParser;
-
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +28,8 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 		OnClickListener {
 
 	protected View view;
+	protected LayoutInflater inflater;
+	protected Context context;
 	protected SlideMenuLayout mSlideMenuLayout;
 	protected ListView mlvMenu;// 左侧菜单列表
 	protected static final String MENUITEM_CACKE_KEY = "man_menu_item";
@@ -39,8 +40,9 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(getLayoutId(), null);
-
-		initUI();
+		this.inflater=inflater;
+		context=getActivity();
+		initUI(); 
 		
 		initLeftMenu();// 初始化左侧菜单数据
 
@@ -58,6 +60,7 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 	protected void initUI() {
 		mSlideMenuLayout = (SlideMenuLayout) view
 				.findViewById(R.id.slide_menu_layout);
+		
 		mSlideMenuLayout.setLeftSlideMenuId(R.id.left_menu);
 		mSlideMenuLayout.setRightSlideMenuId(R.id.right_menu);
 		mSlideMenuLayout.reset();
