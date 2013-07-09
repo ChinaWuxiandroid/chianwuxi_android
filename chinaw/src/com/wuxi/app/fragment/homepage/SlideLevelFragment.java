@@ -2,7 +2,6 @@ package com.wuxi.app.fragment.homepage;
 
 import java.util.List;
 
-import android.media.FaceDetector;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,11 +17,8 @@ import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InformationCenterFragment;
-import com.wuxi.app.fragment.homepage.logorregister.LoginFragment;
-import com.wuxi.app.fragment.homepage.logorregister.RegisterFragment;
 import com.wuxi.app.listeners.SlideLinstener;
 import com.wuxi.app.util.CacheUtil;
-import com.wuxi.app.util.Constants;
 import com.wuxi.app.view.SlideMenuLayout;
 import com.wuxi.domain.MenuItem;
 
@@ -34,13 +30,9 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener {
 
 	private MenuItem menuItem;// 首页选中的菜单
 	private ListView mlvMenu;// 左侧菜单列表
-	private Constants.FragmentName fragmentName;
-
-	public void setFragmentName(Constants.FragmentName fragmentName) {
-		this.fragmentName = fragmentName;
-	}
 
 	private static final String MENUITEM_CACKE_KEY = "man_menu_item";
+	private static final String TAG = "SlideLevelFragment";
 
 	public void setMenuItem(MenuItem menuItem) {
 		this.menuItem = menuItem;
@@ -59,6 +51,7 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener {
 		mlvMenu = (ListView) view.findViewById(R.id.lv_menu);
 
 		initLeftMenu();// 初始化左侧菜单数据
+
 		return view;
 	}
 
@@ -76,6 +69,7 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		init();
 	}
 
@@ -109,20 +103,6 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener {
 				break;
 
 			}
-		} else {
-			switch (fragmentName) {
-			case LOGIN_FRAGMENT:
-				LoginFragment loginFragment = new LoginFragment();// 登录
-				loginFragment.setManagers(managers);
-				onTransaction(loginFragment);
-				break;
-			case REGIST_FRAGMENT:
-				RegisterFragment reg=new RegisterFragment();//注册
-				
-				onTransaction(reg);
-				break;
-			}
-
 		}
 
 	}
@@ -134,6 +114,7 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener {
 		fragment.setFragment(this);
 		ft.addToBackStack(null);
 		ft.commit();
+
 	}
 
 	public void openLeftSlideMenu() {
