@@ -10,11 +10,9 @@ import android.widget.Toast;
 import com.wuxi.app.fragment.MainIndexFragment;
 import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.MainSearchFragment;
-import com.wuxi.app.fragment.MainSettingFragment;
 import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
-import com.wuxi.app.fragment.homepage.SlideLevelFragment;
 import com.wuxi.app.fragment.homepage.logorregister.LoginFragment;
-import com.wuxi.app.util.Constants;
+import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
 
 /**
  * 主要架构
@@ -36,7 +34,7 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		
+
 		setContentView(R.layout.main_fragment_layout);
 		init();
 		radioGroup = (RadioGroup) findViewById(R.id.main_tab_radiogroup);
@@ -62,21 +60,23 @@ public class MainActivity extends FragmentActivity implements
 			break;
 
 		case R.id.main_tab_login_reg:// 登录注册
-			
-		
-			HomeBaseSlideLevelFragment loginFragment=new LoginFragment();
+
+			HomeBaseSlideLevelFragment loginFragment = new LoginFragment();
 			fragmentManagers.IntentFragment(loginFragment);
-			//ChangeFragment(loginFragment, checkedId);
-			
+			mCurrentFragmentId = checkedId;
+
 			break;
 
 		case R.id.main_tab_mine:
 			ChangeFragment(new MainMineFragment(), checkedId);
-			
+
 			break;
 
 		case R.id.main_tab_more:
-			ChangeFragment(new MainSettingFragment(), checkedId);
+			HomeBaseSlideLevelFragment systemSetFragment = new SystemSetFragment();
+			fragmentManagers.IntentFragment(systemSetFragment);
+			mCurrentFragmentId = checkedId;
+
 			break;
 		}
 	}

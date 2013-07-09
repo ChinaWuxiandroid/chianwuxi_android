@@ -42,4 +42,24 @@ public class MD5Encoder {
 			return null;
 		}
 	}
+	
+	/*
+	 * 获取登录密码MD5编码
+	 */
+	public static String getLoginPWDMD5(String str, String encoding) throws Exception {
+	    MessageDigest md = MessageDigest.getInstance("MD5");
+	    md.update(str.getBytes(encoding));
+	    byte[] result = md.digest();
+	    StringBuffer sb = new StringBuffer(32);
+	    for (int i = 0; i < result.length; i++) {
+	        int val = result[i] & 0xff;
+	        if (val < 0xf) {
+	           sb.append("0");
+	        }
+	       sb.append(Integer.toHexString(val)).append("-");
+	    }
+	    String md5= sb.toString().toUpperCase();
+	    return md5.substring(0,md5.length()-1);
+	}
+	
 }

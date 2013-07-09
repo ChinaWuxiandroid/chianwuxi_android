@@ -112,7 +112,49 @@ public class Constants {
 		public static final String DATA_FORMATE = "数据格式错误";
 
 	}
+	
+	/**
+	 * 
+	 * @author wanglu 泰得利通
+	 * 缓存键
+	 *
+	 */
+	public static final class CacheKey{
+		
+		/**
+		 * 首页导航菜单缓存key名称
+		 */
+		public static final String HOME_MENUITEM_KEY="man_menu_item";
+		
+		/**
+		 * 登录的用户key
+		 */
+		public static final String LOGIN_USER="login_user";
+		
+	}
 
+	
+	/**
+	 * 
+	 * @author wanglu 泰得利通
+	 *Sharepreference 保存常量
+	 */
+	public static final class SharepreferenceKey{
+		/**
+		 * shareprefer名称
+		 */
+		public static final String SHARE_CONFIG="chinawuxi_sp_config";
+		
+		/**
+		 * 令牌
+		 */
+		public static final String ACCESSTOKEN="accessToken";
+		
+		public static final String REFRESHTOKEN="refreshToken";
+		
+		public static final String USERNAME="userName";
+		
+	}
 	/**
 	 * 
 	 * @author wanglu 泰得利通 fragment名字

@@ -65,7 +65,7 @@ public class MainIndexFragment extends BaseFragment implements
 	private RadioGroup main_tab_radiogroup;
 	private List<MenuItem> menuItems;// 菜单数据
 	private static final int MENUITEM_LOAD_SUCESS = 1;// 菜单加载成功标识
-	private static final String MENUITEM_CACKE_KEY = "man_menu_item";
+	private static final String MENUITEM_CACKE_KEY = Constants.CacheKey.HOME_MENUITEM_KEY;
 	private static final String ANNOUNCE_CACHE_KEY = "announce";
 	private static final String NEW_CACHE_KEY = "news";
 	private static final int MENUITEM_LOAD_ERROR = 0;// 菜单加载失败标志
