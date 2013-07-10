@@ -3,7 +3,7 @@
     android:layout_width="20dip"
     android:layout_height="40dip"
     android:orientation="horizontal"
-    android:background="@drawable/title_item_bg"
+     android:background="@drawable/title_item_bg"
      >
 
     <TextView

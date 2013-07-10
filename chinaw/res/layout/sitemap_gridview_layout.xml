@@ -1,0 +1,18 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <com.wuxi.app.view.MyGridView
+        android:id="@+id/sitemap_gv_menuitem"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:columnWidth="60dip"
+        android:gravity="center"
+        android:horizontalSpacing="2dip"
+        android:numColumns="5"
+        android:stretchMode="spacingWidth"
+        android:verticalSpacing="2dip" >
+    </com.wuxi.app.view.MyGridView>
+
+</LinearLayout>
