@@ -101,9 +101,7 @@ public class LoginFragment extends HomeBaseSlideLevelFragment {
 		switch (v.getId()) {
 		case R.id.login_btn_login:
 			if (validate()) {
-
 				doLogin();
-
 			}
 			break;
 		case R.id.login_btn_regist:
@@ -171,7 +169,6 @@ public class LoginFragment extends HomeBaseSlideLevelFragment {
 
 	@Override
 	protected int getLayoutId() {
-
 		return R.layout.login_slide_layout;
 	}
 

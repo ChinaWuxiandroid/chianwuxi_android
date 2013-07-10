@@ -4,18 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <FrameLayout
-        android:id="@+id/search_title_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="9"
-        android:background="#00000000" >
-    </FrameLayout>
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        layout="@layout/child_fragmend_header_layout" />
 
-    <FrameLayout
-        android:id="@+id/search_content_fragment"
+    
+      <include
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_height="0dip"
+        android:layout_weight="9"
+        layout="@layout/normal_search_layout" />
+      
 
 </LinearLayout>

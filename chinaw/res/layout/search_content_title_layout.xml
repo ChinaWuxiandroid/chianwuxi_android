@@ -16,28 +16,28 @@
         android:id="@+id/search_Title_Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/search_content_back_btn"
+         android:layout_centerVertical="true"
         android:singleLine="true"
-        android:text="全站搜索"
-        android:textSize="20dip" />
+        android:textSize="20dip"
+        android:text="全站搜索" />
 
     <ImageView
         android:id="@+id/search_content_show_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/search_content_list"
+         android:layout_toLeftOf="@+id/search_content_list"
         android:src="@drawable/slide_open_close_btn" />
-
+    
     <ImageView
         android:id="@+id/search_content_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/search_content_share"
+          android:layout_toLeftOf="@+id/search_content_share"
         android:src="@drawable/slide_open_close_btn" />
-
+    
     <ImageView
         android:id="@+id/search_content_share"
         android:layout_width="wrap_content"

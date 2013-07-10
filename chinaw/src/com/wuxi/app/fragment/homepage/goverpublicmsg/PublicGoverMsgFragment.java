@@ -2,34 +2,26 @@ package com.wuxi.app.fragment.homepage.goverpublicmsg;
 
 
 import java.util.List;
-import org.json.JSONException;
-import android.annotation.SuppressLint;
+
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.Toast;
+
 import com.wuxi.app.R;
-import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment;
 import com.wuxi.app.fragment.commonfragment.SimpleListViewFragment;
-import com.wuxi.app.fragment.homepage.informationcenter.LeaderWindowFragment;
 import com.wuxi.app.listeners.GoverMsgInitLayoutImpl;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.util.CacheUtil;
-import com.wuxi.app.util.LogUtil;
 import com.wuxi.app.view.TitleScrollLayout;
 import com.wuxi.domain.MenuItem;
-import com.wuxi.exception.NODataException;
-import com.wuxi.exception.NetException;
 
 /**
  * 政府公开信息Fragment

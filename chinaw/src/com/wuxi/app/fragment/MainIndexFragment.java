@@ -2,7 +2,9 @@ package com.wuxi.app.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.json.JSONException;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
+
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.IndexGridAdapter;

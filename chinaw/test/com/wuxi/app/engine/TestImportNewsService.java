@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import android.test.AndroidTestCase;
+
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.Content;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
-
-import android.test.AndroidTestCase;
 
 public class TestImportNewsService extends AndroidTestCase {
 

@@ -1,7 +1,5 @@
 package com.wuxi.app.fragment.homepage.more;
 
-import android.widget.ListView;
-
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
 

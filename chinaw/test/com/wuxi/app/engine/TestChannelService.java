@@ -2,11 +2,11 @@ package com.wuxi.app.engine;
 
 import java.util.List;
 
+import android.test.AndroidTestCase;
+
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.Channel;
 import com.wuxi.exception.NetException;
-
-import android.test.AndroidTestCase;
 
 /**
  * 

@@ -1,9 +1,9 @@
 package com.wuxi.app.engine;
 
+import android.content.Context;
+
 import com.wuxi.app.net.HttpUtils;
 import com.wuxi.app.net.NetworkUtil;
-
-import android.content.Context;
 
 /**
  * 

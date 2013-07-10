@@ -29,9 +29,10 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 		OnClickListener {
 
 	protected View view;
+	protected LayoutInflater inflater;
+	protected Context context;
 	protected SlideMenuLayout mSlideMenuLayout;
 	protected ListView mlvMenu;// 左侧菜单列表
-	protected Context context;
 	protected static final String MENUITEM_CACKE_KEY = Constants.CacheKey.HOME_MENUITEM_KEY;
 	private ImageView oPearn_btn, member_btnm, back_btn;
 	private TextView tv_title;
@@ -40,9 +41,11 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(getLayoutId(), null);
+		this.inflater=inflater;
+		context=getActivity();
+		initUI(); 
 		context = getActivity();
 		initUI();
-
 		initLeftMenu();// 初始化左侧菜单数据
 
 		return view;
@@ -59,6 +62,7 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 	protected void initUI() {
 		mSlideMenuLayout = (SlideMenuLayout) view
 				.findViewById(R.id.slide_menu_layout);
+		
 		mSlideMenuLayout.setLeftSlideMenuId(R.id.left_menu);
 		mSlideMenuLayout.setRightSlideMenuId(R.id.right_menu);
 		mSlideMenuLayout.reset();

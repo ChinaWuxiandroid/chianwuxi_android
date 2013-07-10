@@ -1,11 +1,12 @@
 package com.wuxi.app.adapter;
 
-import com.wuxi.app.R;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.wuxi.app.R;
 
 /**
  * simple listview 的适配器
