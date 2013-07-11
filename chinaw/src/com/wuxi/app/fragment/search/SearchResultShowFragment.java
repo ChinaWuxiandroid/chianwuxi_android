@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.MainSearchFragment;
@@ -53,20 +54,20 @@ public class SearchResultShowFragment extends MainSearchFragment{
 
 		switch (v.getId()) {
 		case R.id.search_content_back_btn:
-			HomeBaseSlideLevelFragment searchNormalFragment = new MainSearchFragment();
-			managers.IntentFragment(searchNormalFragment);
-
+//			HomeBaseSlideLevelFragment searchNormalFragment = new MainSearchFragment();
+//			managers.IntentFragment(searchNormalFragment);
+			managers.BackPress(this);
 			break;
 		case R.id.search_content_show_list:
-			
+			HomeBaseSlideLevelFragment searchNormalFragment = new MainSearchFragment();
+			managers.IntentFragment(searchNormalFragment);
 			break;
 		case R.id.search_content_setting:
-			
+			Toast.makeText(context, "显示设置", 2000).show();
 			break;
 			
 		case R.id.search_content_share:
-			HomeBaseSlideLevelFragment searchAdvancedFragment = new AdvancedSearchFragment();
-			managers.IntentFragment(searchAdvancedFragment);
+			Toast.makeText(context, "分享", 2000).show();
 			break;
 		}
 	}

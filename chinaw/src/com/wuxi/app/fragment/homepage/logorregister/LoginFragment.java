@@ -89,7 +89,7 @@ public class LoginFragment extends HomeBaseSlideLevelFragment {
 		editor.putString(Constants.SharepreferenceKey.USERNAME,
 				user.getUserName());
 		editor.commit();//tijiao
-		
+
 		Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
 
 	}

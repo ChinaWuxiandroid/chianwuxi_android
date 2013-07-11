@@ -4,10 +4,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btn"
+    <include
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="我的政民互动" />
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        layout="@layout/child_fragmend_header_layout" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="9"
+        android:background="#ffffff" >
+
+        <ListView
+            android:id="@+id/gover_interact_people_mainmenu_listview"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="#e4e4e4"
+            >
+        </ListView>
+
+        <FrameLayout
+            android:id="@+id/gover_interact_people_maincontent_fragment"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="4"
+            android:background="#eeeeee" >
+        </FrameLayout>
+    </LinearLayout>
 
 </LinearLayout>
