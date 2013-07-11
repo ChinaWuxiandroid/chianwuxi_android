@@ -13,7 +13,21 @@ public class Channel {
   private Channel childrens[];//频道子频道
   private String channelId;//频道Id
   private String channelName;//频道名
-  private Class<? extends Fragment> contentFragment;
+  private int childrenChannelsCount;//子频道数目
+  private int childrenContentsCount;//子内容个数
+  public int getChildrenChannelsCount() {
+	return childrenChannelsCount;
+}
+public void setChildrenChannelsCount(int childrenChannelsCount) {
+	this.childrenChannelsCount = childrenChannelsCount;
+}
+public int getChildrenContentsCount() {
+	return childrenContentsCount;
+}
+public void setChildrenContentsCount(int childrenContentsCount) {
+	this.childrenContentsCount = childrenContentsCount;
+}
+private Class<? extends Fragment> contentFragment;
 
 
 public Class<? extends Fragment> getContentFragment() {

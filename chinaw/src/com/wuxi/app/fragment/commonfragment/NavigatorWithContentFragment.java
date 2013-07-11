@@ -25,6 +25,7 @@ import com.wuxi.app.R;
 import com.wuxi.app.adapter.ContentNavigatorAdapter;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.engine.MenuService;
+import com.wuxi.app.fragment.homepage.fantasticwuxi.WuxiChannelContentFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
@@ -214,6 +215,17 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+		
+		Object object=parent.getItemAtPosition(position);
+		
+		if(object instanceof Channel){//如果是频道 
+			
+			WuxiChannelContentFragment wuxiChannelContentFragment=new WuxiChannelContentFragment();
+			Channel ch=(Channel)object;
+			wuxiChannelContentFragment.setChannel(ch);
+			showContentFragment(wuxiChannelContentFragment);
+			
+		}
 
 		/*
 		 * NavigatorItmeAction naItem = (NavigatorItmeAction) parent

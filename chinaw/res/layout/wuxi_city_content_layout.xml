@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/navgator_back"
+    android:orientation="vertical" >
+
+    <HorizontalScrollView
+        android:id="@+id/wucity_channel_hs"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" >
+
+        <RadioGroup
+            android:padding="20dip"
+            android:id="@+id/wuxicity_rg_title_chanel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:orientation="horizontal" >
+        </RadioGroup>
+    </HorizontalScrollView>
+
+    <ListView
+        android:id="@+id/wucity_content_lv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" >
+    </ListView>
+
+    <include layout="@layout/wuxi_city_detailcontent_layout" />
+
+</LinearLayout>
