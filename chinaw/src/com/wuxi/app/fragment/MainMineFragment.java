@@ -2,23 +2,17 @@ package com.wuxi.app.fragment;
 
 import java.util.List;
 
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.GoverInteractPeopleNevigationAdapter;
 import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleMineFragment;
-import com.wuxi.app.fragment.search.AdvancedSearchFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.domain.MenuItem;
 

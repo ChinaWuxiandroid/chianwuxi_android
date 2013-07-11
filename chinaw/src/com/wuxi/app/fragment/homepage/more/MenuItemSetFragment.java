@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
-import com.wuxi.app.adapter.IndexNewsListAdapter;
 import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;

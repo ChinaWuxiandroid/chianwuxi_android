@@ -2,22 +2,15 @@ package com.wuxi.app.adapter;
 
 import java.util.List;
 
-import com.wuxi.app.FragmentManagers;
-import com.wuxi.app.R;
-import com.wuxi.app.adapter.SimpleListViewFragmentAdapter.ViewHolder;
-import com.wuxi.app.fragment.MainMineFragment;
-import com.wuxi.app.fragment.MainSearchFragment;
-import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleMineFragment;
-import com.wuxi.domain.MenuItem;
-
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.wuxi.app.FragmentManagers;
+import com.wuxi.app.R;
+import com.wuxi.domain.MenuItem;
 
 public class GoverInteractPeopleNevigationAdapter extends BaseAdapter{
 	private LayoutInflater mInflater;

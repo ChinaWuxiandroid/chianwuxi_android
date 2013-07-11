@@ -9,7 +9,6 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.wuxi.app.R;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleMineFragment;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
 
 /**
