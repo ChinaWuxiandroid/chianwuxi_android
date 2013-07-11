@@ -13,8 +13,10 @@ import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
+import com.wuxi.app.listeners.OnChangedListener;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.view.SlipButton;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 
@@ -26,6 +28,7 @@ import com.wuxi.domain.MenuItem;
 public class MenuItemSetFragment extends HomeBaseSlideLevelFragment {
 	private LinearLayout menuset_ll;
 	private List<MenuItem> items;
+	private View subView;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -43,6 +46,11 @@ public class MenuItemSetFragment extends HomeBaseSlideLevelFragment {
 
 	}
 
+	/**
+	 * 
+	 *wanglu 泰得利通
+	 *初始化界面及数据
+	 */
 	private void initViewData() {
 
 		for (MenuItem item : items) {
@@ -51,10 +59,11 @@ public class MenuItemSetFragment extends HomeBaseSlideLevelFragment {
 					LinearLayout.LayoutParams.WRAP_CONTENT,
 					LinearLayout.LayoutParams.WRAP_CONTENT);
 			TextView tv = new TextView(context);
-			layoutParams.topMargin = 20;
-			layoutParams.leftMargin = 50;
+			layoutParams.topMargin = 5;
+			layoutParams.bottomMargin = 5;
+			layoutParams.leftMargin = 15;
 			tv.setText(item.getName());
-			tv.setTextSize(14);
+			tv.setTextSize(16);
 			tv.setTextColor(Color.BLACK);
 
 			menuset_ll.addView(tv, layoutParams);
@@ -76,28 +85,18 @@ public class MenuItemSetFragment extends HomeBaseSlideLevelFragment {
 			channels = (List<Channel>) CacheUtil.get(item.getChannelId());
 		}
 
-		/*
-		 * LinearLayout.LayoutParams layoutParams = new
-		 * LinearLayout.LayoutParams( LinearLayout.LayoutParams.WRAP_CONTENT,
-		 * LinearLayout.LayoutParams.WRAP_CONTENT);
-		 */
+		subView = View.inflate(context, R.layout.menuset_listview_layout, null);
 
-		View subView = View.inflate(context, R.layout.menuset_listview_layout,
-				null);
-
-		// ListView lv = new ListView(context);
 		ListView lv = (ListView) subView.findViewById(R.id.menuset_lv);
-		//lv.setDivider(null);
-		// lv.setLayoutParams(layoutParams);
-		// lv.setBackgroundResource(R.drawable.system_set_shape);
+
 		if (menuItems != null && channels == null) {
 			lv.setAdapter(new MenuSetAdapter(menuItems));
-			setViewHeight(lv);
+
 		} else if (menuItems == null && channels != null) {
 			lv.setAdapter(new MenuSetAdapter(channels));
-			setViewHeight(lv);
+
 		}
-		
+		setViewHeight(lv);// 动态设置listView高度
 
 		menuset_ll.addView(subView);
 
@@ -119,7 +118,14 @@ public class MenuItemSetFragment extends HomeBaseSlideLevelFragment {
 		listView.setLayoutParams(params);
 	}
 
-	private class MenuSetAdapter extends BaseAdapter {
+	static class ViewHolder {
+
+		public TextView title_text;
+		public SlipButton slipButton;
+	}
+
+	private class MenuSetAdapter extends BaseAdapter implements
+			OnChangedListener {
 
 		@SuppressWarnings("rawtypes")
 		private List items;
@@ -143,11 +149,6 @@ public class MenuItemSetFragment extends HomeBaseSlideLevelFragment {
 			return position;
 		}
 
-		class ViewHolder {
-
-			public TextView title_text;
-		}
-
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -168,13 +169,25 @@ public class MenuItemSetFragment extends HomeBaseSlideLevelFragment {
 
 				viewHolder.title_text = (TextView) convertView
 						.findViewById(R.id.menuset_tv_name);
+				SlipButton slipButton = (SlipButton) convertView
+						.findViewById(R.id.slipButton);
+
+				viewHolder.slipButton = slipButton;
+
 				convertView.setTag(viewHolder);
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
 
 			viewHolder.title_text.setText(name);
+			viewHolder.slipButton.setChecked(true);
+			viewHolder.slipButton.SetOnChangedListener("", this);
 			return convertView;
+
+		}
+
+		@Override
+		public void OnChanged(String strName, boolean CheckState) {
 
 		}
 

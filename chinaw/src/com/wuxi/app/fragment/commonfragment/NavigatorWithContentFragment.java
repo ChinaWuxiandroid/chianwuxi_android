@@ -214,6 +214,17 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+		
+		Object object=parent.getItemAtPosition(position);
+		
+		if(object instanceof Channel){//如果是频道 
+			
+			WuxiChannelContentFragment wuxiChannelContentFragment=new WuxiChannelContentFragment();
+			Channel ch=(Channel)object;
+			wuxiChannelContentFragment.setChannel(ch);
+			showContentFragment(wuxiChannelContentFragment);
+			
+		}
 
 		/*
 		 * NavigatorItmeAction naItem = (NavigatorItmeAction) parent

@@ -59,7 +59,11 @@ public class ChannelService extends Service {
 						channel.setChannelId(jb.getString("channelId"));
 						channel.setChannelName(jb.getString("channelName"));
 						channel.setContents(jb.getString("contents"));
-						
+						channel.setChildrenChannelsCount(jb
+								.getInt("childrenChannelsCount"));
+						channel.setChildrenContentsCount(jb
+								.getInt("childrenContentsCount"));
+
 						channels.add(channel);
 
 					}
@@ -68,7 +72,7 @@ public class ChannelService extends Service {
 
 			} catch (JSONException e) {
 				e.printStackTrace();
-				
+
 			}
 
 			return channels;
