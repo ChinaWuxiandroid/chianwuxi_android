@@ -39,7 +39,6 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/transparentback"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
                 android:text="我收藏的回信"

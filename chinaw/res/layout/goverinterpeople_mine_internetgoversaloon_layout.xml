@@ -37,7 +37,6 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/transparentback"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="我的申报列表"

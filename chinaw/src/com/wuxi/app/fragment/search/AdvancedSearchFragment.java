@@ -101,8 +101,4 @@ public class AdvancedSearchFragment extends HomeBaseSlideLevelFragment{
 		return "全站搜索";
 	}
 
-
-
-
-
 }

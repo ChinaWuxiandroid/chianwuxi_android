@@ -8,11 +8,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.GoverInteractPeopleNevigationAdapter;
 import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeople12345Fragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleMineFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePetitionReceptFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleSuggestFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.domain.MenuItem;
 
@@ -36,12 +41,20 @@ public class MainMineFragment extends HomeBaseSlideLevelFragment {
 	protected void initUI() {
 		super.initUI();
 		loadListData(id);
-		findView();
+		if(listMenus!=null){
+			findView();
+			initView();
+		}
+		else{
+			Toast.makeText(context, "我的互动菜单列表加载失败！", 2000).show();
+			//			onBack();
+		}
+
 	}
 
 	public void findView(){
 		mainMenu_listView=(ListView)view.findViewById(R.id.gover_interact_people_mainmenu_listview);
-		 adapter=new GoverInteractPeopleNevigationAdapter(inflater,listMenus,managers);
+		adapter=new GoverInteractPeopleNevigationAdapter(inflater,listMenus,managers);
 		mainMenu_listView.setDividerHeight(0);
 		mainMenu_listView.setSelection(0);
 		mainMenu_listView.setAdapter(adapter);
@@ -128,16 +141,61 @@ public class MainMineFragment extends HomeBaseSlideLevelFragment {
 		//				).start();
 	}
 
+	public void initView(){
+		GoverInterPeopleMineFragment g=new GoverInterPeopleMineFragment();
+		onTransaction(g);
+	}
+
 	public class listViewOnItemClickListener  implements OnItemClickListener{
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			
-			adapter.setSelectedPosition(position);
+
+			adapter.setSelectedPosition(position);   //刷新左侧导航listView背景
 			adapter.notifyDataSetInvalidated();
-			GoverInterPeopleMineFragment g=new GoverInterPeopleMineFragment();
-			onTransaction(g);
+
+			switch(position){
+			case 0:
+				initView();
+				break;
+			case 1:
+				MainMineFragment g1=new GoverInterPeople12345Fragment();
+				onTransaction(g1);
+				break;
+			case 2:
+				MainMineFragment g2=new GoverInterPeopleSuggestFragment();
+				onTransaction(g2);
+				break;
+			case 3:
+				GoverInterPeople12345Fragment g3=new GoverInterPeople12345Fragment();
+				onTransaction(g3);
+				break;
+			case 4:
+				GoverInterPeople12345Fragment g4=new GoverInterPeople12345Fragment();
+				onTransaction(g4);
+				break;
+			case 5:
+				GoverInterPeople12345Fragment g5=new GoverInterPeople12345Fragment();
+				onTransaction(g5);
+				break;
+			case 6:
+				GoverInterPeople12345Fragment g6=new GoverInterPeople12345Fragment();
+				onTransaction(g6);
+				break;
+			case 7:
+				GoverInterPeople12345Fragment g7=new GoverInterPeople12345Fragment();
+				onTransaction(g7);
+				break;
+			case 8:
+				MainMineFragment g8=new GoverInterPeoplePublicSuperviseFragment();
+				onTransaction(g8);
+				break;
+			case 9:
+				MainMineFragment g9=new GoverInterPeoplePetitionReceptFragment();
+				onTransaction(g9);
+				break;
+			}
 		}
 
 	}
