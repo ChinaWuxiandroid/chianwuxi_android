@@ -44,8 +44,6 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 		this.inflater=inflater;
 		context=getActivity();
 		initUI(); 
-		context = getActivity();
-		initUI();
 		initLeftMenu();// 初始化左侧菜单数据
 
 		return view;

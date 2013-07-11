@@ -27,7 +27,7 @@
 
     <include
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/index_sytem_set" />
+        android:layout_height="fill_parent"
+        layout="@layout/sitemap_layout" />
 
 </com.wuxi.app.view.SlideMenuLayout>
