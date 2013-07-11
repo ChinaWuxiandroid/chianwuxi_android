@@ -74,7 +74,7 @@ public class MainSearchFragment extends HomeBaseSlideLevelFragment{
 
 	@Override
 	protected void onBack() {
-		// TODO Auto-generated method stub	
+		managers.BackPress(this);
 	}
 
 	@Override

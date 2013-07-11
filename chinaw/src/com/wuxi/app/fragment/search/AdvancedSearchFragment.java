@@ -93,7 +93,7 @@ public class AdvancedSearchFragment extends HomeBaseSlideLevelFragment{
 
 	@Override
 	protected void onBack() {
-		// TODO Auto-generated method stub	
+		managers.BackPress(this);
 	}
 
 	@Override

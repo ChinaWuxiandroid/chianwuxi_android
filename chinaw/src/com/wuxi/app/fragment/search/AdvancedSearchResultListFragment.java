@@ -75,7 +75,7 @@ public class AdvancedSearchResultListFragment extends HomeBaseSlideLevelFragment
 
 	@Override
 	protected void onBack() {
-		// TODO Auto-generated method stub
+		managers.BackPress(this);
 		
 	}
 
