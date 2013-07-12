@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.engine.ChannelService;
-import com.wuxi.app.engine.ContentService;
 import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.listeners.InfoCenterInitLayoutImpl;
@@ -28,7 +27,6 @@ import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.view.TitleScrollLayout;
 import com.wuxi.domain.Channel;
-import com.wuxi.domain.ContentWrapper;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;

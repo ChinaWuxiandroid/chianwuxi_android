@@ -5,7 +5,6 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;

@@ -9,7 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.wuxi.app.R;
-
 import com.wuxi.domain.Content;
 
 /**
