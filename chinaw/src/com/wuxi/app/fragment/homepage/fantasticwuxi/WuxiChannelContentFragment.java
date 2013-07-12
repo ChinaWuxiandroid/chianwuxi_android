@@ -1,6 +1,7 @@
 ﻿package com.wuxi.app.fragment.homepage.fantasticwuxi;
 
 import java.util.List;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
