@@ -20,7 +20,6 @@ public class Service {
 	
 	public Service(Context context) {
 		this.context = context;
-
 	}
 
 	/**

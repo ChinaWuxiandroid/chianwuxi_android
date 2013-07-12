@@ -14,7 +14,9 @@ import com.wuxi.app.R;
 import com.wuxi.app.adapter.GoverInteractPeopleNevigationAdapter;
 import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeople12345Fragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleMineFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePetitionReceptFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleSuggestFragment;
@@ -180,11 +182,11 @@ public class MainMineFragment extends HomeBaseSlideLevelFragment {
 				onTransaction(g5);
 				break;
 			case 6:
-				GoverInterPeople12345Fragment g6=new GoverInterPeople12345Fragment();
+				MainMineFragment g6=new GoverInterPeopleHotReviewFragment();
 				onTransaction(g6);
 				break;
 			case 7:
-				GoverInterPeople12345Fragment g7=new GoverInterPeople12345Fragment();
+				MainMineFragment g7=new GoverInterPeopleOpenTelFragment();
 				onTransaction(g7);
 				break;
 			case 8:

@@ -66,6 +66,16 @@ public class Constants {
 		
 		
 		public static final String REGIST_URL="http://3g.wuxi.gov.cn/api/register.json";
+		
+		/**
+		 * 公开电话 URL
+		 * */
+		public static final String OPENTEL_URL="http://3g.wuxi.gov.cn/api/opentel/list.json";
+		
+		/**
+		 * 热点话题列表 URL
+		 * */
+		public static final String HOTREVIEW_LIST_URL="http://3g.wuxi.gov.cn/api/hotreview/list.json";
 
 	}
 

@@ -131,8 +131,7 @@ public class ContentService extends Service {
 			contentWrapper.setStart(jresult.getInt("start"));
 			contentWrapper.setNext(jresult.getBoolean("next"));
 			contentWrapper.setPrevious(jresult.getBoolean("previous"));
-			contentWrapper
-					.setTotalRowsAmount(jresult.getInt("totalRowsAmount"));
+			contentWrapper.setTotalRowsAmount(jresult.getInt("totalRowsAmount"));
 			JSONArray jData = jresult.getJSONArray("data");
 			if (jData != null) {
 				contentWrapper.setContents(parseData(jData));// 解析数组
@@ -143,7 +142,6 @@ public class ContentService extends Service {
 		} else {
 			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);// 没有获取到数据异常
 		}
-
 	}
 
 	/**

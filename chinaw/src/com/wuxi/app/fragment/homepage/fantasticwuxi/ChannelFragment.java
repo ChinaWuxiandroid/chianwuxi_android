@@ -36,7 +36,7 @@ import com.wuxi.exception.NetException;
  */
 
 public class ChannelFragment extends BaseSlideFragment implements
-		InitializContentLayoutListner, OnClickListener {
+InitializContentLayoutListner, OnClickListener {
 
 	private TitleScrollLayout mtitleScrollLayout;
 	private static final int MANCOTENT_ID = R.id.model_main;
@@ -162,7 +162,7 @@ public class ChannelFragment extends BaseSlideFragment implements
 			}
 		}
 
-		).start();
+				).start();
 
 	}
 
