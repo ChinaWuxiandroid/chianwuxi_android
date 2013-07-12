@@ -2,7 +2,9 @@ package com.wuxi.app.listeners;
 
 import android.support.v4.app.Fragment;
 
-import com.wuxi.app.fragment.homepage.informationcenter.LeaderWindowFragment;
+import com.wuxi.app.fragment.homepage.informationcenter.ContentListFragment;
+import com.wuxi.app.fragment.homepage.informationcenter.InfoNavigatorWithContentFragment;
+import com.wuxi.app.fragment.homepage.informationcenter.WapFragment;
 import com.wuxi.domain.MenuItem;
 
 /**
@@ -19,8 +21,8 @@ public class InfoCenterInitLayoutImpl implements MenuItemInitLayoutListener {
 
 		Class<? extends Fragment> fragmentClass = menuItem.getContentFragment();
 		Fragment fragment;
-		if(fragmentClass==null){
-			return ;
+		if (fragmentClass == null) {
+			return;
 		}
 
 		try {
@@ -30,12 +32,21 @@ public class InfoCenterInitLayoutImpl implements MenuItemInitLayoutListener {
 				return;
 			}
 
-			LeaderWindowFragment leaderWindowFragment = null;
-
-			if (fragment instanceof LeaderWindowFragment) {
-				leaderWindowFragment = (LeaderWindowFragment) fragment;
+			WapFragment leaderWindowFragment = null;
+			ContentListFragment contentListFragment = null;
+			InfoNavigatorWithContentFragment contentNavigatorWithContentFragment=null;
+			if (fragment instanceof WapFragment) {
+				leaderWindowFragment = (WapFragment) fragment;
 				leaderWindowFragment.setParentItem(menuItem);
 				initLayoutListner.bindContentLayout(leaderWindowFragment);
+			} else if (fragment instanceof ContentListFragment) {
+				contentListFragment = (ContentListFragment) fragment;
+				contentListFragment.setParentItem(menuItem);
+				initLayoutListner.bindContentLayout(contentListFragment);
+			}else if(fragment instanceof InfoNavigatorWithContentFragment){
+				contentNavigatorWithContentFragment=(InfoNavigatorWithContentFragment)fragment;
+				contentNavigatorWithContentFragment.setParentMenuItem(menuItem);
+				initLayoutListner.bindContentLayout(contentNavigatorWithContentFragment);
 			}
 
 		} catch (InstantiationException e) {

@@ -5,33 +5,37 @@ import java.util.List;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.wuxi.domain.MenuItem;
+import com.wuxi.app.R;
+
+import com.wuxi.domain.Content;
 
 /**
  * 
- * @author wanglu 泰得利通 左侧菜单适配器
+ * @author wanglu 泰得利通 内容列表适配器
  * 
  */
-public class LeftMenuAdapter extends BasicAdapter {
+public class ContentListAdapter extends BaseAdapter {
 
-	private List<MenuItem> menuItems;
+	private List<Content> contents;
+	private Context context;
 
-	public LeftMenuAdapter(Context context, int view, int[] viewId,
-			List<MenuItem> menuItems, String[] dataName) {
-		super(context, view, viewId, dataName);
-		this.menuItems = menuItems;
+	public ContentListAdapter(List<Content> contents, Context context) {
+
+		this.contents = contents;
+		this.context=context;
 	}
 
 	@Override
 	public int getCount() {
-		return menuItems.size();
+		return contents.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return menuItems.get(position);
+		return contents.get(position);
 	}
 
 	@Override
@@ -40,28 +44,32 @@ public class LeftMenuAdapter extends BasicAdapter {
 	}
 
 	static class ViewHolder {
-
-		public TextView title_text;
+		TextView title_text;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		MenuItem menuItem = menuItems.get(position);
+
+		Content content = contents.get(position);
 		ViewHolder viewHolder = null;
 		if (convertView == null) {
-			convertView = getInflater().inflate(getView(), null);
-			int[] viewId = getViewId();
+			convertView = View.inflate(context,
+					R.layout.content_list_item_layout, null);
 			viewHolder = new ViewHolder();
 
 			viewHolder.title_text = (TextView) convertView
-					.findViewById(viewId[0]);
+					.findViewById(R.id.content_list_tv_title);
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		viewHolder.title_text.setText(menuItem.getName());
+		viewHolder.title_text.setText(content.getTitle());
 		return convertView;
+	}
+
+	public void addItem(Content content) {
+		this.contents.add(content);
 	}
 
 }

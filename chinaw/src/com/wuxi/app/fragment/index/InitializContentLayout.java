@@ -1,7 +1,7 @@
 package com.wuxi.app.fragment.index;
 import com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.CityMapFragment;
-import com.wuxi.app.fragment.homepage.informationcenter.LeaderWindowFragment;
+import com.wuxi.app.fragment.homepage.informationcenter.WapFragment;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 
@@ -14,7 +14,7 @@ public class InitializContentLayout {
 	public static void initMenuItemContentLayout(MenuItem menuItem) {
 		// if(menuItem.getName().equals("最新公开信息"))
 		if (menuItem.getName().equals("领导之窗")) {
-			menuItem.setContentFragment(LeaderWindowFragment.class);
+			menuItem.setContentFragment(WapFragment.class);
 		}
 		if (menuItem.getName().equals("最新公开信息")) {
 			menuItem.setContentFragment(NavigatorWithContentFragment.class);

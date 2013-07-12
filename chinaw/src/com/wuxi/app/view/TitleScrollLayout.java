@@ -433,6 +433,18 @@ public class TitleScrollLayout extends ViewGroup {
 
 			i++;
 		}
+		
+		
+		/**
+		 * 显示一个的子界面
+		 */
+		if (menuItems.get(0) != null&&initializContentLayoutListner!=null) {
+
+			menuItemInitLayoutListener.bindMenuItemLayout(
+					initializContentLayoutListner, menuItems.get(0));
+
+		}
+
 	}
 
 	private class TitleItemlOnclick implements OnItemClickListener {

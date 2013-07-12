@@ -49,7 +49,11 @@ public class ChannelService extends Service {
 			List<Channel> channels = null;
 			try {
 				JSONObject jobject = new JSONObject(resultStr);
-				JSONArray jresult = jobject.getJSONArray("result");
+				Object o = jobject.get("result");
+				if (o.toString().equals("[]")) {
+					return null;
+				}
+				JSONArray jresult = (JSONArray) o;
 				if (null != jresult) {
 					channels = new ArrayList<Channel>();
 					for (int index = 0; index < jresult.length(); index++) {
