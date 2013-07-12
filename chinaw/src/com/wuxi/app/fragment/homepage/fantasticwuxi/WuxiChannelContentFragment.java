@@ -168,7 +168,7 @@ public class WuxiChannelContentFragment extends BaseFragment {
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.WRAP_CONTENT,
 					20);
-			params.leftMargin = 50;
+			params.leftMargin = 80;
 			RadioButton radioButton = new RadioButton(context);
 			radioButton.setBackground(getResources().getDrawable(
 					R.drawable.wuxicity_content_channel_item_selector));
