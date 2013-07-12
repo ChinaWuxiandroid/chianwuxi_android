@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp" >
+
+        <RadioGroup
+            android:id="@+id/goverinterpeople_12345_radioGroup"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/goverinterpeople_12345_radioButton_mayorMailBox"
+                style="@style/goverinterpeople_mine_radiobutton_style"
+                android:layout_height="40dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/title_item_select_bg"
+                android:checked="true"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="市长      信箱"
+                android:textColor="@android:color/white"
+                android:textSize="10sp" />
+
+            <RadioButton
+                android:id="@+id/goverinterpeople_12345_radioButton_complaint"
+                style="@style/goverinterpeople_mine_radiobutton_style"
+                android:layout_height="40dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/title_item_bg"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="建议咨询投诉"
+                android:textColor="@color/gip_button_blue"
+                android:textSize="10sp" />
+
+            <RadioButton
+                android:id="@+id/goverinterpeople_12345_radioButton_partmentLeaderMailBox"
+                style="@style/goverinterpeople_mine_radiobutton_style"
+                android:layout_height="40dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/title_item_bg"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="部门领导信箱"
+                android:textColor="@color/gip_button_blue"
+                android:textSize="10sp" />
+
+            <RadioButton
+                android:id="@+id/goverinterpeople_12345_radioButton_countryMayorMailBox"
+                style="@style/goverinterpeople_mine_radiobutton_style"
+                android:layout_height="40dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/title_item_bg"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="区市长信箱"
+                android:textColor="@color/gip_button_blue"
+                android:textSize="10sp" />
+
+            <RadioButton
+                android:id="@+id/goverinterpeople_12345_radioButton_hotMail"
+                style="@style/goverinterpeople_mine_radiobutton_style"
+                android:layout_height="40dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/title_item_bg"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="热门信件选登"
+                android:textColor="@color/gip_button_blue"
+                android:textSize="10sp" />
+            
+            
+            <RadioButton
+                android:id="@+id/goverinterpeople_12345_radioButton_answerStatistics"
+                style="@style/goverinterpeople_mine_radiobutton_style"
+                android:layout_height="40dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/title_item_bg"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="答复率统计"
+                android:textColor="@color/gip_button_blue"
+                android:textSize="10sp" />
+            
+            
+            <RadioButton
+                android:id="@+id/goverinterpeople_12345_radioButton_iwantmail"
+                style="@style/goverinterpeople_mine_radiobutton_style"
+                android:layout_height="40dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/title_item_bg"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="我要     写信"
+                android:textColor="@color/gip_button_blue"
+                android:textSize="10sp" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/goverinterpeople_12345_content_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </FrameLayout>
+
+</LinearLayout>

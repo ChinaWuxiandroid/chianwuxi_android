@@ -1,15 +1,9 @@
 package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.wuxi.app.R;
-import com.wuxi.app.util.GIPRadioButtonStyleChange;
+import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 
 
 /**
@@ -17,40 +11,18 @@ import com.wuxi.app.util.GIPRadioButtonStyleChange;
  * @author 杨宸 智佳
  * */
 
-public class GIPMineInternetGoverSaloonFragment extends GoverInterPeopleMineFragment
-implements OnCheckedChangeListener{
+public class GIPMineInternetGoverSaloonFragment extends RadioButtonChangeFragment{
 
-	public View view = null;
-
-	protected LayoutInflater mInflater;
-	private RadioGroup radioGroup;
 	private final  int[] radioButtonIds={
 			R.id.gip_mine_saloon_radioButton_onlineinquire,
 			R.id.gip_mine_saloon_radioButton_declarationlist
 	};
-
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.goverinterpeople_mine_internetgoversaloon_layout, null);
-		mInflater = inflater;
-		context = getActivity();
-		radioGroup = (RadioGroup) view.findViewById(R.id.gip_mine_saloon_radioGroup);
-		radioGroup.setOnCheckedChangeListener(this);
-
-
-		return view;
-	}
-
+	
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-		GIPRadioButtonStyleChange radioButtonStyleChange
-		=new GIPRadioButtonStyleChange(R.drawable.gip_button_selected_bk,
-				0,Color.WHITE,R.color.gip_second_frame_button_brown);
+		super.onCheckedChanged(group, checkedId);
 
-		radioButtonStyleChange.refreshRadioButtonStyle(view,radioButtonIds,checkedId);
 		switch (checkedId) {
 
 		case R.id.gip_mine_saloon_radioButton_onlineinquire:
@@ -61,5 +33,35 @@ implements OnCheckedChangeListener{
 			break;
 
 		}
+	}
+
+	@Override
+	protected int getLayoutId() {
+		// TODO Auto-generated method stub
+		return R.layout.goverinterpeople_mine_internetgoversaloon_layout;
+	}
+
+	@Override
+	protected int getRadioGroupId() {
+		// TODO Auto-generated method stub
+		return R.id.gip_mine_saloon_radioGroup;
+	}
+
+	@Override
+	protected int[] getRadioButtonIds() {
+		// TODO Auto-generated method stub
+		return radioButtonIds;
+	}
+
+	@Override
+	protected int getContentFragmentId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected void init() {
+		// TODO Auto-generated method stub
+		
 	}
 }

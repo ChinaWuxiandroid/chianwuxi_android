@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string-array name="infoType">
-        <item >全部</item>
-        <item >要闻</item>
-        <item >公文</item>
-        <item >办事</item>
-        <item >公告</item>
+        <item>全部</item>
+        <item>要闻</item>
+        <item>公文</item>
+        <item>办事</item>
+        <item>公告</item>
     </string-array>
     <string-array name="resultsPerPage">
-        <item >10</item>
-        <item >20</item>
-        <item >30</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
     </string-array>
     <string-array name="contentType">
-        <item >全部</item>
-        <item >正文</item>
-        <item >标题</item>
+        <item>全部</item>
+        <item>正文</item>
+        <item>标题</item>
     </string-array>
-    
+    <string-array name="spinnerYear">
+        <item>2013年</item>
+        <item>2012年</item>
+        <item>2011年</item>
+        <item>2010年</item>
+    </string-array>
+
 </resources>

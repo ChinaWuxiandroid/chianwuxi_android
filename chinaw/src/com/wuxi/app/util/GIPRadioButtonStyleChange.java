@@ -61,7 +61,7 @@ public class GIPRadioButtonStyleChange {
 				rBtn=(RadioButton)view.findViewById
 						(radioButtonIds[i]);
 				if(noSelectedDrawable==0)
-					rBtn.setBackgroundResource(R.drawable.transparentback);
+					rBtn.setBackgroundResource(0);
 				else
 					rBtn.setBackgroundResource(noSelectedDrawable);
 				rBtn.setTextColor(noSelectedTextColor);

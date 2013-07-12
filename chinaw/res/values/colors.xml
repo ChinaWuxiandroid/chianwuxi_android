@@ -3,5 +3,6 @@
 
     <color name="gip_button_blue">#0567b2</color>
     <color name="gip_second_frame_button_brown">#555555</color>
+    <color name="gip_background_gray">#eeeeee</color>
 
 </resources>
