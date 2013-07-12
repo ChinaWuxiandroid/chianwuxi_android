@@ -12,7 +12,6 @@
         android:visibility="gone" >
 
         <RadioGroup
-            android:padding="20dip"
             android:id="@+id/wuxicity_rg_title_chanel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
