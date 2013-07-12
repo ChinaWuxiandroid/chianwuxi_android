@@ -20,35 +20,42 @@ import com.wuxi.domain.MenuItem;
  */
 public class ContentNavigatorAdapter extends BaseAdapter {
 
-	private List<Channel> channels=null;
-	private List<MenuItem> menuItems=null;
+	private List<Channel> channels = null;
+	private List<MenuItem> menuItems = null;
 	private LayoutInflater mInflater;
-	private int type=1;          //穿入的消息类型，和api里消息的type一样，默认为Channel
+	private int type = 1; // 穿入的消息类型，和api里消息的type一样，默认为Channel
+	private int selectedPosition;// 选中的位置
+
+	public int getSelectedPosition() {
+		return selectedPosition;
+	}
+
+	public void setSelectedPosition(int selectedPosition) {
+		this.selectedPosition = selectedPosition;
+	}
 
 	public ContentNavigatorAdapter(LayoutInflater inflater,
-			List<Channel> channels,List<MenuItem> menuItems) {
+			List<Channel> channels, List<MenuItem> menuItems) {
 		mInflater = inflater;
-		if(channels!=null){
-			this.channels=channels;
-			type=1;
-		}		
-		if(menuItems!=null){
-			this.menuItems=menuItems;
-			type=0;
+		if (channels != null) {
+			this.channels = channels;
+			type = 1;
+		}
+		if (menuItems != null) {
+			this.menuItems = menuItems;
+			type = 0;
 		}
 	}
-	
-
 
 	@Override
 	public int getCount() {
-		int size=0;
-		switch(type){
+		int size = 0;
+		switch (type) {
 		case 1:
-			size= channels.size();
+			size = channels.size();
 			break;
 		case 0:
-			size= menuItems.size();
+			size = menuItems.size();
 			break;
 		}
 		return size;
@@ -56,9 +63,9 @@ public class ContentNavigatorAdapter extends BaseAdapter {
 
 	@Override
 	public Object getItem(int position) {
-		if(type==1)
+		if (type == 1)
 			return channels.get(position);
-		else if(type==0)
+		else if (type == 0)
 			return menuItems.get(position);
 		return null;
 	}
@@ -69,22 +76,20 @@ public class ContentNavigatorAdapter extends BaseAdapter {
 		return position;
 	}
 
-	class ViewHolder {
+	static class ViewHolder {
 
 		public TextView title_text;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		String name ="";
-		if(channels!=null){
+		String name = "";
+		if (channels != null) {
 			name = channels.get(position).getChannelName();
-		}
-		else if(menuItems!=null){
+		} else if (menuItems != null) {
 			name = menuItems.get(position).getName();
 		}
-		
-		
+
 		ViewHolder viewHolder = null;
 
 		if (convertView == null) {
@@ -98,6 +103,14 @@ public class ContentNavigatorAdapter extends BaseAdapter {
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
+		}
+
+		if (selectedPosition == position) {
+			viewHolder.title_text
+					.setBackgroundResource(R.drawable.listview_item_selected);
+		} else {
+			viewHolder.title_text
+					.setBackgroundResource(R.drawable.listview_item_textview_back);
 		}
 
 		viewHolder.title_text.setText(name);

@@ -19,12 +19,16 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
+import com.wuxi.app.engine.ChannelService;
+import com.wuxi.app.engine.ContentService;
 import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.listeners.InfoCenterInitLayoutImpl;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.view.TitleScrollLayout;
+import com.wuxi.domain.Channel;
+import com.wuxi.domain.ContentWrapper;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -151,7 +155,7 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 	 * 显示头部数据 wanglu 泰得利通
 	 */
 	private void showTitleData() {
-		initializSubFragmentsLayout();
+		initializSubFragmentsLayout();// 绑定子界面
 
 		mtitleScrollLayout
 				.initMenuItemScreen(context, inflater, titleMenuItems);// 初始化头部空间
@@ -188,11 +192,38 @@ public class InformationCenterFragment extends BaseSlideFragment implements
 	@Override
 	public void initializSubFragmentsLayout() {
 
-		for (MenuItem menu : titleMenuItems) {
-			if (menu.getName().equals("领导之窗")) {
+		for (final MenuItem menu : titleMenuItems) {
+			
+			if (menu.getType() == MenuItem.WAP_MENU) {// wap类型菜单
 
-				menu.setContentFragment(LeaderWindowFragment.class);
+				menu.setContentFragment(WapFragment.class);
+			} else if (menu.getType() == MenuItem.CHANNEL_MENU) {// 如果菜单上频道菜单
+
+				new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						ChannelService channelService = new ChannelService(
+								context);
+						try {
+							List<Channel> channels = channelService
+									.getSubChannels(menu.getChannelId());
+
+							if (channels != null) {
+								menu.setContentFragment(InfoNavigatorWithContentFragment.class);
+							}else{
+								menu.setContentFragment(ContentListFragment.class);//内容列表界面
+							}
+						} catch (NetException e) {
+							e.printStackTrace();
+						}
+					}
+				}).start();
+
+			}else if(menu.getType() == MenuItem.CUSTOM_MENU){////普通菜单
+				menu.setContentFragment(InfoNavigatorWithContentFragment.class);
 			}
+			
 		}
 
 	}

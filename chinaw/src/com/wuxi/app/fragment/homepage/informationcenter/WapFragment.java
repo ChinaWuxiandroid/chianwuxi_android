@@ -19,7 +19,7 @@ import com.wuxi.domain.MenuItem;
  * @author wanglu 泰得利通 领导之窗fragment
  * 
  */
-public class LeaderWindowFragment extends BaseFragment {
+public class WapFragment extends BaseFragment {
 
 	private View view;
 	private MenuItem parentItem;
@@ -60,6 +60,8 @@ public class LeaderWindowFragment extends BaseFragment {
 			}
 		});
 
+		mWb_leader.getSettings().setUseWideViewPort(true); 
+		mWb_leader.getSettings().setLoadWithOverviewMode(true);
 		mWb_leader.loadUrl(parentItem.getWapURI());
 
 	}

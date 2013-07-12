@@ -113,10 +113,21 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener {
 		ft.replace(FRAME_CONTENT, fragment);
 		fragment.setFragment(this);
 		ft.addToBackStack(null);
+		fragment.setManagers(managers);//传递管理器
 		ft.commit();
+		
 
 	}
-
+	
+	/**
+	 * 
+	 *wanglu 泰得利通
+	 *返回
+	 */
+	@Override
+	public void onBack(){
+		managers.BackPress(this);
+	}
 	public void openLeftSlideMenu() {
 		mSlideMenuLayout.openLeftSlideMenu();
 	}

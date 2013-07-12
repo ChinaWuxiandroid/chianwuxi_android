@@ -24,4 +24,7 @@ public interface SlideLinstener {
 	public void OpearnLeft();
 
 	public void OpearnRight();
+	
+	
+	public void onBack();
 }

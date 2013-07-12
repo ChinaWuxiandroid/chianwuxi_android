@@ -6,7 +6,6 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -33,8 +32,10 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- * 具有左右导航视图  跳转时必须调用方法setParentChannel(Channel parentChannel)或setParentMenuItem(MenuItem parentMenuItem)
- *                          和方法public void setDataType(int type)
+ * 具有左右导航视图 跳转时必须调用方法setParentChannel(Channel
+ * parentChannel)或setParentMenuItem(MenuItem parentMenuItem) 和方法public void
+ * setDataType(int type)
+ * 
  * @author wanglu
  * 
  */
@@ -45,26 +46,26 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 	protected static final int LEFT_CHANNEL_DATA__LOAD_SUCCESS = 1;// 左侧频道(菜单)加载
 	protected static final int LEFT_MENUITEM_DATA__LOAD_SUCCESS = 2;// 左侧频道(菜单)加载
 	protected static final int LEFT_DATA__LOAD_ERROR = 0;// 左侧频道(菜单)加载失败
-	
-	public static final int DATA_TPYE_MENUITEM=0;    //加载的数据类型为MenuItem
-	public static final int DATA_TYPE_CHANNEL=1;     //加载的数据类型为Channel,后续消息类型未加。。。
-	
+
+	public static final int DATA_TPYE_MENUITEM = 0; // 加载的数据类型为MenuItem
+	public static final int DATA_TYPE_CHANNEL = 1; // 加载的数据类型为Channel,后续消息类型未加。。。
+
 	protected View view;
 	protected ListView mListView;// 左侧ListView
 	protected LayoutInflater mInflater;
 	private Context context;
-	
+
 	private Channel parentChannel;// 父频道
 	private List<Channel> channels;
-	
-	private MenuItem parentMenuItem; //父菜单
+
+	private MenuItem parentMenuItem; // 父菜单
 	private List<MenuItem> menuItems;
-	
-	private int dataType=1;                 //消息类型，默认为Channel ,因为@wanglu 最先定义用作加载Channel消息类型
-	
+	private ContentNavigatorAdapter adapter;
+
+	private int dataType = 1; // 消息类型，默认为Channel ,因为@wanglu 最先定义用作加载Channel消息类型
 
 	@SuppressLint("HandlerLeak")
-	private Handler  handler = new Handler() {
+	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			String tip = "";
 
@@ -95,13 +96,10 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 		view = inflater.inflate(R.layout.content_navigator_layout, null);
 		mListView = (ListView) view.findViewById(R.id.lv_left_navigator);
 
-		Drawable drawable = getResources()
-				.getDrawable(R.drawable.navgator_back);
-		mListView.setSelector(drawable);
 		mInflater = inflater;
 		context = getActivity();
 
-		switch(dataType){
+		switch (dataType) {
 		case DATA_TYPE_CHANNEL:
 			loadChannelData();
 			break;
@@ -137,7 +135,7 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 						if (channels != null) {
 							handler.sendEmptyMessage(LEFT_CHANNEL_DATA__LOAD_SUCCESS);
 							CacheUtil.put(parentChannel.getChannelId(),
-									channels);//放入缓存
+									channels);// 放入缓存
 						}
 
 					} catch (NetException e) {
@@ -154,13 +152,12 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 		}
 
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private void loadMenuItemData() {
 
 		if (null != CacheUtil.get(parentMenuItem.getId())) {// 从缓存中查找
-			menuItems = (List<MenuItem>) CacheUtil.get(parentMenuItem
-					.getId());
+			menuItems = (List<MenuItem>) CacheUtil.get(parentMenuItem.getId());
 			showLeftMenuItemData();
 			return;
 
@@ -174,11 +171,11 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 					MenuService menuService = new MenuService(context);
 
 					try {
-						menuItems = menuService.getSubMenuItems(parentMenuItem.getId());
+						menuItems = menuService.getSubMenuItems(parentMenuItem
+								.getId());
 						if (menuItems != null) {
 							handler.sendEmptyMessage(LEFT_MENUITEM_DATA__LOAD_SUCCESS);
-							CacheUtil.put(parentMenuItem.getId(),
-									menuItems);//放入缓存
+							CacheUtil.put(parentMenuItem.getId(), menuItems);// 放入缓存
 						}
 
 					} catch (NetException e) {
@@ -197,52 +194,54 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 			).start();
 		}
 	}
-	
 
 	/**
 	 * 
 	 * wanglu 泰得利通 显示数据
 	 */
 	private void showLeftChannelData() {
-		mListView.setAdapter(new ContentNavigatorAdapter(mInflater,channels,null));// 设置适配器
+		adapter = new ContentNavigatorAdapter(mInflater, channels, null);
+		adapter.setSelectedPosition(0);
+		mListView.setAdapter(adapter);// 设置适配器
 		mListView.setOnItemClickListener(this);
+		if (channels.size() > 0) {
+			showChannelContentFragment(channels.get(0));// 显示第一个Channel数据
+		}
+
 	}
-	
+
 	private void showLeftMenuItemData() {
-		mListView.setAdapter(new ContentNavigatorAdapter(mInflater, null,menuItems));// 设置适配器
+		mListView.setAdapter(new ContentNavigatorAdapter(mInflater, null,
+				menuItems));// 设置适配器
 		mListView.setOnItemClickListener(this);
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		
-		Object object=parent.getItemAtPosition(position);
-		
-		if(object instanceof Channel){//如果是频道 
-			
-			WuxiChannelContentFragment wuxiChannelContentFragment=new WuxiChannelContentFragment();
-			Channel ch=(Channel)object;
-			wuxiChannelContentFragment.setChannel(ch);
-			showContentFragment(wuxiChannelContentFragment);
-			
-		}
 
-		/*
-		 * NavigatorItmeAction naItem = (NavigatorItmeAction) parent
-		 * .getItemAtPosition(position); DataFragment df = (DataFragment)
-		 * naItem.getFrament();
-		 * 
-		 * showContentFragment(df);
-		 */
+		Object object = parent.getItemAtPosition(position);
+
+		if (object instanceof Channel) {// 如果是频道
+			adapter.setSelectedPosition(position); // 刷新左侧导航listView背景
+			adapter.notifyDataSetInvalidated();
+			showChannelContentFragment((Channel) object);
+		}
 
 	}
 
 	/**
-	 * 获取左侧导航数据及点击导航显示的右侧数据视图的封装集合
 	 * 
-	 * @return
+	 * wanglu 泰得利通 显示频道内容信息
 	 */
-	// protected abstract List<NavigatorItmeAction> getNavigatorItmeActions();
+	private void showChannelContentFragment(Channel channel) {
+
+		WuxiChannelContentFragment wuxiChannelContentFragment = new WuxiChannelContentFragment();
+
+		wuxiChannelContentFragment.setChannel(channel);
+		showContentFragment(wuxiChannelContentFragment);
+
+	}
+
 
 	/**
 	 * 显示替换主要内容区域
@@ -263,12 +262,12 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 	public void setParentChannel(Channel parentChannel) {
 		this.parentChannel = parentChannel;
 	}
-	
+
 	public void setParentMenuItem(MenuItem parentMenuItem) {
 		this.parentMenuItem = parentMenuItem;
 	}
 
-	public void setDataType(int type){
-		dataType=type;
+	public void setDataType(int type) {
+		dataType = type;
 	}
 }

@@ -43,7 +43,7 @@ public class BaseSlideFragment extends BaseFragment {
 		
 		@Override
 		public void onClick(View v) {
-
+			slideLinstener.onBack();
 			
 		}
 	};

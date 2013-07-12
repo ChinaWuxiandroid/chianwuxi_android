@@ -39,7 +39,7 @@ public class LeftMenuAdapter extends BasicAdapter {
 		return position;
 	}
 
-	class ViewHolder {
+	static class ViewHolder {
 
 		public TextView title_text;
 	}
