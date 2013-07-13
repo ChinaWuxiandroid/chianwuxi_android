@@ -1,8 +1,9 @@
 package com.wuxi.app.util;
 
-import android.annotation.SuppressLint;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import android.annotation.SuppressLint;
 
 /**
  * 

@@ -19,7 +19,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.baidu.platform.comapi.b.g;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.ContentNavigatorAdapter;
 import com.wuxi.app.engine.ChannelService;
