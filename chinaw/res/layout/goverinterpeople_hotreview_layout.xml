@@ -53,7 +53,7 @@
         android:background="@android:color/white" />
 
     <ListView
-        android:id="@+id/goverinterpeople_hottopic_listview"
+        android:id="@+id/gip_suggest_people_listview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:divider="@android:color/white"

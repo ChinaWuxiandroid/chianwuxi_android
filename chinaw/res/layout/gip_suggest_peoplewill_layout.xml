@@ -44,12 +44,17 @@
         </RadioGroup>
     </LinearLayout>
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
         <ListView
-            android:id="@+id/goverinterpeople_mine_12345_listview"
+            android:id="@+id/gip_suggest_peoplewill_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
         </ListView>

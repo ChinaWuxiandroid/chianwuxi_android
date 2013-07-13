@@ -76,7 +76,20 @@ public class Constants {
 		 * 热点话题列表 URL
 		 * */
 		public static final String HOTREVIEW_LIST_URL="http://3g.wuxi.gov.cn/api/hotreview/list.json";
-
+		
+		/**
+		 * 分页获取立法征求意见和民意征集 URL
+		 * */
+		public static final String POLITICS_LIST_URL="http://3g.wuxi.gov.cn/api//politics/list.json";
+	
+		/**
+		 * 获取当前用户 立法征求意见和民意征集 URL
+		 * */
+		public static final String MY_POLITICS_LIST_URL="http://3g.wuxi.gov.cn/politics/mylist.json";
+		/**
+		 *  获取市长信箱列表 URL
+		 * */
+		public static final String MAYOR_MAILBOX_URL="http://3g.wuxi.gov.cn/api/letter/mayorletter.json";
 	}
 
 	/**

@@ -112,7 +112,7 @@ public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment
 	@Override
 	protected void init() {
 		// TODO Auto-generated method stub
-		mListView=(ListView) view.findViewById(R.id.goverinterpeople_hottopic_listview);
+		mListView=(ListView) view.findViewById(R.id.gip_suggest_people_listview);
 	
 		loadData();
 	}

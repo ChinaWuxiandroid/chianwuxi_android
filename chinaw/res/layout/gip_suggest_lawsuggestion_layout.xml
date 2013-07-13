@@ -25,9 +25,17 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </LinearLayout>
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
+
+    <ListView
+        android:id="@+id/gip_suggest_lawsuggest_listView_poloticsList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="@android:color/white"
+        android:dividerHeight="1dp" >
+    </ListView>
 
 </LinearLayout>
