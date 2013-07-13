@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,6 +34,7 @@ import com.wuxi.exception.NetException;
  * @author wanglu 泰得利通 内容列表菜单
  * 
  */
+@SuppressLint("HandlerLeak")
 public class ContentListFragment extends BaseFragment implements
 		OnScrollListener {
 
@@ -50,9 +52,11 @@ public class ContentListFragment extends BaseFragment implements
 	private int visibleLastIndex;
 	private ContentListAdapter adapter;
 	private int visibleItemCount;// 当前显示的总条数
-	private Boolean isFirstLoad = true;// 是不是首次加载数据
+	private boolean isFirstLoad = true;// 是不是首次加载数据
+	private boolean isLoading = false;
 
 	private Handler handler = new Handler() {
+		@SuppressLint("HandlerLeak")
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case CONTENT_LOAD_SUCCESS:
@@ -94,6 +98,7 @@ public class ContentListFragment extends BaseFragment implements
 				isFirstLoad = false;
 				content_list_lv.setAdapter(adapter);
 				content_list_pb.setVisibility(ProgressBar.GONE);
+				isLoading = false;
 			} else {
 
 				for (Content content : contents) {
@@ -103,6 +108,7 @@ public class ContentListFragment extends BaseFragment implements
 				adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
 				content_list_lv.setSelection(visibleLastIndex
 						- visibleItemCount + 1); // 设置选中项
+				isLoading = false;
 			}
 
 		}
@@ -125,7 +131,7 @@ public class ContentListFragment extends BaseFragment implements
 
 			@Override
 			public void run() {
-
+				isLoading = true;// 正在加载数据
 				Message msg = handler.obtainMessage();
 				ContentService contentService = new ContentService(context);
 				try {
@@ -160,6 +166,18 @@ public class ContentListFragment extends BaseFragment implements
 		}).start();
 	}
 
+	public void loadMore(View view) {
+		if (isLoading) {
+			return;
+		} else {
+			loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_SIZE);
+		}
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 初始化界面
+	 */
 	private void initUI() {
 		content_list_lv = (ListView) view.findViewById(R.id.content_list_lv);
 		content_list_pb = (ProgressBar) view.findViewById(R.id.content_list_pb);
@@ -196,7 +214,7 @@ public class ContentListFragment extends BaseFragment implements
 			if (contentWrapper != null && contentWrapper.isNext()) {// 还有下一条记录
 
 				loadMoreButton.setText("loading.....");
-				loadData(visibleLastIndex + 1, PAGE_SIZE);
+				loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_SIZE);
 			}
 
 		}

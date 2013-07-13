@@ -438,7 +438,7 @@ public class TitleScrollLayout extends ViewGroup {
 		/**
 		 * 显示一个的子界面
 		 */
-		if (menuItems.get(0) != null&&initializContentLayoutListner!=null) {
+		if (menuItems.get(0) != null&&initializContentLayoutListner!=null&&menuItemInitLayoutListener!=null) {
 
 			menuItemInitLayoutListener.bindMenuItemLayout(
 					initializContentLayoutListner, menuItems.get(0));
@@ -542,7 +542,7 @@ public class TitleScrollLayout extends ViewGroup {
 			 * 普通菜单处理
 			 * */
 
-			if (menuItem != null&&initializContentLayoutListner!=null) {
+			if (menuItem != null&&initializContentLayoutListner!=null&&menuItemInitLayoutListener!=null) {
 
 				menuItemInitLayoutListener.bindMenuItemLayout(
 						initializContentLayoutListner, menuItem);

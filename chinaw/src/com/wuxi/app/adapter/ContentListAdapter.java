@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.wuxi.app.R;
+import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.Content;
 
 /**
@@ -24,7 +25,7 @@ public class ContentListAdapter extends BaseAdapter {
 	public ContentListAdapter(List<Content> contents, Context context) {
 
 		this.contents = contents;
-		this.context=context;
+		this.context = context;
 	}
 
 	@Override
@@ -43,7 +44,8 @@ public class ContentListAdapter extends BaseAdapter {
 	}
 
 	static class ViewHolder {
-		TextView title_text;
+		TextView title_text;// 标题
+		TextView title_time;// 时间
 	}
 
 	@Override
@@ -58,12 +60,22 @@ public class ContentListAdapter extends BaseAdapter {
 
 			viewHolder.title_text = (TextView) convertView
 					.findViewById(R.id.content_list_tv_title);
+			viewHolder.title_time = (TextView) convertView
+					.findViewById(R.id.content_list_tv_time);
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		viewHolder.title_text.setText(content.getTitle());
+		String title = "";
+		title = content.getTitle();
+		if (title != null && title.length() > 10) {
+			title = title.substring(0, 10) + "...";
+		}
+		viewHolder.title_text.setText("." + title);
+		viewHolder.title_time.setText("("
+				+ TimeFormateUtil.formateTime(content.getPublishTime(),
+						TimeFormateUtil.DATE_PATTERN) + ")");
 		return convertView;
 	}
 
