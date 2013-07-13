@@ -16,7 +16,9 @@ import com.wuxi.app.adapter.LeftMenuAdapter;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
+import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InformationCenterFragment;
+import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
 import com.wuxi.app.listeners.SlideLinstener;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.view.SlideMenuLayout;
@@ -89,6 +91,14 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener {
 					PublicGoverMsgFragment publicGoverMsgFragment = new PublicGoverMsgFragment();
 					publicGoverMsgFragment.setMenuItem(menuItem);
 					onTransaction(publicGoverMsgFragment);
+				} else if (menuItem.getName().equals("公共服务")) {
+					PublicServiceFragment publicServiceFragment = new PublicServiceFragment();
+					publicServiceFragment.setMenuItem(menuItem);
+					onTransaction(publicServiceFragment);
+				} else if (menuItem.getName().equals("政务大厅")) {
+					GoverSaloonFragment saloonFragment = new GoverSaloonFragment();
+					saloonFragment.setParentMenuItem(menuItem);
+					onTransaction(saloonFragment);
 				}
 
 				break;
@@ -113,21 +123,20 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener {
 		ft.replace(FRAME_CONTENT, fragment);
 		fragment.setFragment(this);
 		ft.addToBackStack(null);
-		fragment.setManagers(managers);//传递管理器
+		fragment.setManagers(managers);// 传递管理器
 		ft.commit();
-		
 
 	}
-	
+
 	/**
 	 * 
-	 *wanglu 泰得利通
-	 *返回
+	 * wanglu 泰得利通 返回
 	 */
 	@Override
-	public void onBack(){
+	public void onBack() {
 		managers.BackPress(this);
 	}
+
 	public void openLeftSlideMenu() {
 		mSlideMenuLayout.openLeftSlideMenu();
 	}

@@ -4,6 +4,7 @@
     <color name="gip_button_blue">#0567b2</color>
     <color name="gip_second_frame_button_brown">#555555</color>
     <color name="gip_background_gray">#eeeeee</color>
+    <color name="content_background">#EEEEEE</color>
     <color name="gip_txt_green">#fc3b00</color>
     <color name="gip_txt_gray">#555555</color>
 

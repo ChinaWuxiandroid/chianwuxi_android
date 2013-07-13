@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/content_background"
+    android:orientation="vertical" >
+
+    <RadioGroup
+        android:id="@+id/goversaloon_title_search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:layout_marginTop="5dip">
+
+        <RadioButton
+            android:id="@+id/search_bything"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_weight="1"
+            android:background="@drawable/goversaloon_search_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="办事事项检索"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/search_bydeparent"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_weight="1"
+            android:background="@drawable/goversaloon_search_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="按范围赛选事项"
+            android:textColor="#ffffff"
+            android:textSize="12sp" >
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/search_byrange"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_weight="1"
+            android:background="@drawable/goversaloon_search_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="按部门赛选事项"
+            android:textColor="#ffffff"
+            android:textSize="12sp" >
+        </RadioButton>
+    </RadioGroup>
+
+</LinearLayout>
