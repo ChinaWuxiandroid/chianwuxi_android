@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/gip_mine_12345_textView_title"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="信件编号："
+                android:textColor="@color/gip_txt_gray"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/gip_mine_12345_textView_code"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="wx20130409070"
+                android:textColor="@color/gip_txt_gray"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:text="答复："
+                android:textColor="@color/gip_txt_gray"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/gip_mine_12345_textView_reply"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="2013-04-09"
+                android:textColor="@color/gip_txt_gray"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
