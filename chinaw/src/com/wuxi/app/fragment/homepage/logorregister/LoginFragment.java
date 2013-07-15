@@ -82,6 +82,7 @@ public class LoginFragment extends HomeBaseSlideLevelFragment {
 						Context.MODE_PRIVATE);
 
 		Editor editor = sp.edit();
+	
 		editor.putString(Constants.SharepreferenceKey.ACCESSTOKEN,
 				user.getAccessToken());
 		editor.putString(Constants.SharepreferenceKey.REFRESHTOKEN,

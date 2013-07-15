@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment{
 	private Spinner chooseYear_spinner;
 	
 	private ListView mListView;
+	private ProgressBar list_pb;
 	private PoliticsWrapper politicsWrapper;
 	private List<PoliticsWrapper.Politics> politics;
 	protected static final String TAG = "GIPSuggestLawSuggestionFragment";
@@ -55,6 +57,8 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment{
 			}
 			switch (msg.what) {
 			case DATA__LOAD_SUCESS:
+				System.out.println("success");
+				list_pb.setVisibility(View.INVISIBLE);
 				showPoloticsList();
 				break;
 			case DATA_LOAD_ERROR:
@@ -97,7 +101,9 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment{
 		chooseYear_spinner.setVisibility(View.VISIBLE); 
 		
 		mListView=(ListView) view.findViewById(R.id.gip_suggest_lawsuggest_listView_poloticsList);
-		System.out.println("init");
+		list_pb=(ProgressBar)view.findViewById(R.id.gip_suggest_lawsuggest_listView_poloticsList_pb);
+
+		list_pb.setVisibility(View.VISIBLE);
 		loadData();
 		
 	}
@@ -122,7 +128,6 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment{
 					if (null != politicsWrapper) {
 						//						CacheUtil.put(menuItem.getChannelId(), titleChannels);// 缓存起来
 						politics=politicsWrapper.getData();
-						System.out.println("获取列表成功");
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 
 					} else {

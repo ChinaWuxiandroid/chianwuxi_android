@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
+import com.wuxi.domain.MenuItem;
 
 
 /**
@@ -19,6 +20,7 @@ public class WorkSuggestionBoxFragment extends BaseFragment{
 	protected View view;
 	protected LayoutInflater mInflater;
 	private Context context;
+	private MenuItem parentMenuItem; // 父菜单
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,5 +36,9 @@ public class WorkSuggestionBoxFragment extends BaseFragment{
 
 	public void initView(){
 
+	}
+	
+	public void setParentMenuItem(MenuItem parentMenuItem) {
+		this.parentMenuItem = parentMenuItem;
 	}
 }

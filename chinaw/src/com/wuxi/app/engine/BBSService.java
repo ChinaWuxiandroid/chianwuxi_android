@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import android.content.Context;
 
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.BBSWrapper;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -46,7 +47,7 @@ public class BBSService extends Service{
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 		url=url+"?start="+startIndex+"&end="+endIndex;
-		
+
 		String resultStr = httpUtils.executeGetToString(url, 5000);
 
 		if (resultStr != null) {
@@ -98,7 +99,8 @@ public class BBSService extends Service{
 				bbs.setDoProjectID(jb.getString("doProjectID"));
 				bbs.setDataNO(jb.getInt("title"));
 				bbs.setTitle(jb.getString("dataNo"));
-//				bbs.setBeginTime(jb.getString("beginTime"));		
+				bbs.setBeginTime(TimeFormateUtil.formateTime
+						(String.valueOf(jb.getLong("beginTime")), TimeFormateUtil.DATE_PATTERN));
 				bbs.setViewpath(jb.getString("viewpath"));
 				bbs.setResultCount(jb.getInt("resultCount"));
 				bbsList.add(bbs);

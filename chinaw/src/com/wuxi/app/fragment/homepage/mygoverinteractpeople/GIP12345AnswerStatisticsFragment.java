@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -45,6 +46,8 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 	private Spinner month_Spinnner;
 
 	private ImageButton startStatic_imgBtn;   //统计
+
+	private ProgressBar list_pb;
 
 	private ListView mListView;
 	protected static final String TAG = "GIP12345AnswerStatisticsFragment";
@@ -82,6 +85,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 				showAllCounts();
 				break;
 			case LETTERSTATISTICS_LOAD_SUCESS:
+				list_pb.setVisibility(View.INVISIBLE);
 				showReplyLettersList();
 				break;
 			case DATA_LOAD_ERROR:
@@ -163,15 +167,17 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 
 		startStatic_imgBtn=(ImageButton)view.findViewById(R.id.gip_12345_answerstati_imagebutton_startstati);
 		startStatic_imgBtn.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				list_pb.setVisibility(View.VISIBLE);
 				loadLettersReplyCountData();
 			}
 		});
-		
+
 		mListView=(ListView) view.findViewById(R.id.gip_12345_answerstati_listview);
+		list_pb=(ProgressBar)view.findViewById(R.id.gip_12345_answerstati_listview_pb);
 
 		loadAllCountData();	
 	}
@@ -296,7 +302,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 
 	public void showReplyLettersList(){
 		LettersListViewAdapter adapter=new LettersListViewAdapter();
-	
+
 		if(letters==null||letters.size()==0){
 			Toast.makeText(context, "对不起，暂无信息", 2000).show();
 		}
@@ -359,7 +365,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 			else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			
+
 			viewHolder.depName_text.setText(letters.get(position).getDepname());
 			viewHolder.acceptedNum_text.setText(String.valueOf(letters.get(position).getAcceptedNum()));
 			viewHolder.replyNum_text.setText(String.valueOf(letters.get(position).getReplyNum()));

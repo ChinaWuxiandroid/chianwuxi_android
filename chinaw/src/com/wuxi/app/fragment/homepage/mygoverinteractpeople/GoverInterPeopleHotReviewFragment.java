@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import com.wuxi.exception.NetException;
 
 public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment{
 	private ListView mListView;
+	private ProgressBar list_pb;
 	private HotReviewWrapper hotReviewWrapper;
 	private List<HotReviewWrapper.HotReview> hotReviews;
 	protected static final String TAG = "GoverInterPeopleHotReviewFragment";
@@ -56,6 +58,7 @@ public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment
 
 			switch (msg.what) {
 			case DATA__LOAD_SUCESS:
+				list_pb.setVisibility(View.INVISIBLE);
 				showHotReviews();
 				break;
 			case DATA_LOAD_ERROR:
@@ -113,7 +116,9 @@ public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment
 	protected void init() {
 		// TODO Auto-generated method stub
 		mListView=(ListView) view.findViewById(R.id.gip_suggest_people_listview);
-	
+		list_pb=(ProgressBar)view.findViewById(R.id.gip_suggest_people_listview_pb);
+
+		list_pb.setVisibility(View.VISIBLE);
 		loadData();
 	}
 	
@@ -224,8 +229,8 @@ public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
 			viewHolder.title_text.setText(hotReviews.get(position).getTitle());
-//			viewHolder.startTime_text.setText(hotReviews.get(position).getStartTime());
-//			viewHolder.endTime_text.setText(hotReviews.get(position).getEndTime());
+			viewHolder.startTime_text.setText(hotReviews.get(position).getStartTime());
+			viewHolder.endTime_text.setText(hotReviews.get(position).getEndTime());
 
 			return convertView;
 		}

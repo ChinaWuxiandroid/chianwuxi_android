@@ -2,7 +2,10 @@ package com.wuxi.app.listeners;
 
 import android.support.v4.app.Fragment;
 
-import com.wuxi.app.fragment.homepage.publicservice.PublicServiceWithContentFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.WorkSuggestionBoxFragment;
+import com.wuxi.app.fragment.homepage.informationcenter.ContentListFragment;
+import com.wuxi.app.fragment.homepage.informationcenter.InfoNavigatorWithContentFragment;
+import com.wuxi.app.fragment.homepage.informationcenter.WapFragment;
 import com.wuxi.domain.MenuItem;
 
 /**
@@ -16,7 +19,7 @@ public class PublicServiceInitLayoutImpl implements MenuItemInitLayoutListener {
 	@Override
 	public void bindMenuItemLayout(
 			InitializContentLayoutListner initLayoutListner, MenuItem menuItem) {
-
+		System.out.println("bind lis in PublicServiceInitLayoutImpl");
 		Class<? extends Fragment> fragmentClass = menuItem.getContentFragment();
 		Fragment fragment;
 		if (fragmentClass == null) {
@@ -29,13 +32,28 @@ public class PublicServiceInitLayoutImpl implements MenuItemInitLayoutListener {
 			if (fragment == null) {
 				return;
 			}
-
-			
-			PublicServiceWithContentFragment publicServiceWithContentFragment=null;
-			if(fragment instanceof PublicServiceWithContentFragment){
-				publicServiceWithContentFragment=(PublicServiceWithContentFragment)fragment;
-				publicServiceWithContentFragment.setParentMenuItem(menuItem);
-				initLayoutListner.bindContentLayout(publicServiceWithContentFragment);
+		
+			WapFragment leaderWindowFragment = null;
+			ContentListFragment contentListFragment = null;
+			InfoNavigatorWithContentFragment contentNavigatorWithContentFragment=null;
+			WorkSuggestionBoxFragment workSuggestionBoxFragment=null;
+			if (fragment instanceof WapFragment) {
+				leaderWindowFragment = (WapFragment) fragment;
+				leaderWindowFragment.setParentItem(menuItem);
+				initLayoutListner.bindContentLayout(leaderWindowFragment);
+			} else if (fragment instanceof ContentListFragment) {
+				contentListFragment = (ContentListFragment) fragment;
+				contentListFragment.setParentItem(menuItem);
+				initLayoutListner.bindContentLayout(contentListFragment);
+			}else if(fragment instanceof InfoNavigatorWithContentFragment){
+				contentNavigatorWithContentFragment=(InfoNavigatorWithContentFragment)fragment;
+				contentNavigatorWithContentFragment.setParentMenuItem(menuItem);
+				initLayoutListner.bindContentLayout(contentNavigatorWithContentFragment);
+			}
+			else if(fragment instanceof WorkSuggestionBoxFragment){
+				workSuggestionBoxFragment=(WorkSuggestionBoxFragment)fragment;
+				workSuggestionBoxFragment.setParentMenuItem(menuItem);
+				initLayoutListner.bindContentLayout(workSuggestionBoxFragment);
 			}
 
 		} catch (InstantiationException e) {

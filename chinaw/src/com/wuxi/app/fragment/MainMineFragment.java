@@ -213,5 +213,9 @@ public class MainMineFragment extends HomeBaseSlideLevelFragment {
 	public void setMenuItem(MenuItem menuItem) {
 		this.menuItem = menuItem;
 	}
+	
+	public void setParentMenuItem(MenuItem parentMenuItem) {
+		this.menuItem = parentMenuItem;
+	}
 
 }

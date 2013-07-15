@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="2013-06-30"
+            android:text="2013-06-3"
             android:textColor="@color/gip_second_frame_button_brown"
             android:textSize="9sp" />
 

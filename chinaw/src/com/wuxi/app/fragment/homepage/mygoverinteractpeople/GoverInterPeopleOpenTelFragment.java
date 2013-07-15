@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ import com.wuxi.exception.NetException;
 
 public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment{
 	private ListView mListView;
+	private ProgressBar list_pb;
 	private OpenTelWrapper openTelWrapper;
 	private List<OpenTel> tels;
 	protected static final String TAG = "GoverInterPeopleOpenTelFragment";
@@ -50,6 +52,7 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment{
 
 			switch (msg.what) {
 			case DATA__LOAD_SUCESS:
+				list_pb.setVisibility(View.INVISIBLE);
 				showTels();
 				break;
 			case DATA_LOAD_ERROR:
@@ -87,9 +90,9 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment{
 	@Override
 	protected void init() {
 		mListView=(ListView) view.findViewById(R.id.gip_opentel_listview);
+		list_pb=(ProgressBar)view.findViewById(R.id.gip_opentel_listview_pb);
 
-
-
+		list_pb.setVisibility(View.VISIBLE);
 		loadData();
 	}
 

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ import com.wuxi.exception.NetException;
 public class GIP12345MayorMaiBoxFragment  extends RadioButtonChangeFragment{
 
 	private ListView mListView;
+	private ProgressBar list_pb;
 	private LetterWrapper letterWrapper;
 	private List<LetterWrapper.Letter> letters;
 	protected static final String TAG = "GIP12345MayorMaiBoxFragment";
@@ -59,6 +61,7 @@ public class GIP12345MayorMaiBoxFragment  extends RadioButtonChangeFragment{
 			}
 			switch (msg.what) {
 			case DATA__LOAD_SUCESS:
+				list_pb.setVisibility(View.INVISIBLE);
 				showLettersList();
 				break;
 			case DATA_LOAD_ERROR:
@@ -114,6 +117,9 @@ public class GIP12345MayorMaiBoxFragment  extends RadioButtonChangeFragment{
 	@Override
 	protected void init() {
 		mListView=(ListView) view.findViewById(R.id.gip_12345_mayorbox_listView);
+		list_pb=(ProgressBar)view.findViewById(R.id.gip_12345_mayorbox_listView_pb);
+
+		list_pb.setVisibility(View.VISIBLE);
 		loadData();	
 	}
 
@@ -237,7 +243,7 @@ public class GIP12345MayorMaiBoxFragment  extends RadioButtonChangeFragment{
 			viewHolder.title_text.setText(letters.get(position).getTitle());
 			viewHolder.code_text.setText(letters.get(position).getCode());
 			viewHolder.type_text.setText(letters.get(position).getType());
-//			viewHolder.answerDate_text.setText(letters.get(position).getAnswerdate());
+			viewHolder.answerDate_text.setText(letters.get(position).getAnswerdate());
 			viewHolder.readCount_text.setText(String.valueOf(letters.get(position).getReadcount()));
 			viewHolder.appraise_text.setText(letters.get(position).getAppraise());
 
