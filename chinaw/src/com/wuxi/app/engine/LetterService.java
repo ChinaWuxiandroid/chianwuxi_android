@@ -34,6 +34,17 @@ public class LetterService extends Service{
 	}
 	
 	/**
+	 * 获取我的信箱列表
+	 * @throws NODataException 
+	 * @throws JSONException 
+	 * @throws NetException 
+	 * */
+	public LetterWrapper getMyLettersList(String url,String access_token,int startIndex,int endIndex) throws NetException, JSONException, NODataException{
+		url=url+"?access_token="+access_token+"&start="+startIndex+"&end="+endIndex;
+		return getLettersWrapper(url);
+	}
+	
+	/**
 	 * 
 	 * 杨宸 智佳 
 	 * @param start 开始索引

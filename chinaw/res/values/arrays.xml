@@ -19,10 +19,24 @@
         <item>标题</item>
     </string-array>
     <string-array name="spinnerYear">
-        <item>2013年</item>
-        <item>2012年</item>
-        <item>2011年</item>
-        <item>2010年</item>
+        <item>2013</item>
+        <item>2012</item>
+        <item>2011</item>
+        <item>2010</item>
+    </string-array>
+    <string-array name="spinnerMonth">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
     </string-array>
 
 </resources>

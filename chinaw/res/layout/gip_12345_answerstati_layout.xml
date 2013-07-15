@@ -32,10 +32,10 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/gip_12345_answerstati_textview_complaintcount"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="54866封"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -58,10 +58,10 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/gip_12345_answerstati_textview_mayorbox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="21251封"
                     android:textSize="12sp" />
             </LinearLayout>
 
@@ -78,10 +78,10 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/gip_12345_answerstati_textview_leaderbox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="9690封"
                     android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
@@ -142,18 +142,71 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:orientation="vertical" >
+        android:orientation="horizontal" >
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1" >
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <RadioButton
+                    android:id="@+id/gip_12345_answerstati_radiobutton_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="年份" />
+
+                <RadioButton
+                    android:id="@+id/gip_12345_answerstati_radiobutton_month"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="月份" />
+            </RadioGroup>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" >
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" >
+
+                <Spinner
+                    android:id="@+id/gip_12345_answerstati_spinner_yearalone"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" >
+
+                <Spinner
+                    android:id="@+id/gip_12345_answerstati_spinner_yeara"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent" />
+
+                <Spinner
+                    android:id="@+id/gip_12345_answerstati_spinner_month"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent" />
+
+                <ImageButton
+                    android:id="@+id/gip_12345_answerstati_imagebutton_startstati"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
@@ -162,7 +215,7 @@
         android:layout_height="match_parent" >
 
         <ListView
-            android:id="@+id/goverinterpeople_mine_12345_listview"
+            android:id="@+id/gip_12345_answerstati_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
         </ListView>

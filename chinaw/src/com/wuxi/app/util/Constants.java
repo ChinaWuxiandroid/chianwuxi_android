@@ -90,6 +90,32 @@ public class Constants {
 		 *  获取市长信箱列表 URL
 		 * */
 		public static final String MAYOR_MAILBOX_URL="http://3g.wuxi.gov.cn/api/letter/mayorletter.json";
+		
+		/**
+		 *  获取建议咨询信件列表 URL
+		 * */
+		public static final String SUGGESTLETTER_URL="http://3g.wuxi.gov.cn/api/letter/suggestletter.json";
+		
+		/**
+		 *  获取热门信件列表 URL
+		 * */
+		public static final String HOTMAIL_URL="http://3g.wuxi.gov.cn/api/letter/hotletter.json";
+		
+		/**
+		 *  获取我的信件列表 URL
+		 * */
+		public static final String MY_LETTER_URL="http://3g.wuxi.gov.cn/api/letter/myletters.json";
+		
+		/**
+		 *  获取答复率总数统计 URL
+		 * */
+		public static final String LETTERS_ALLCOUNT_URL="http://3g.wuxi.gov.cn/api/letter/allcount.json";
+		
+		/**
+		 *  获取信箱各部门答复率总数统计 URL
+		 * */
+		public static final String LETTERS_STATISTICS_URL="http://3g.wuxi.gov.cn/api/letter/statistics.json";
+		
 	}
 
 	/**
