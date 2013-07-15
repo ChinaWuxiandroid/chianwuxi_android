@@ -70,14 +70,9 @@ OnCheckedChangeListener {
 			break;
 
 		case R.id.main_tab_mine:
-<<<<<<< HEAD
 			HomeBaseSlideLevelFragment mainMineFragment = new MainMineFragment();
 			fragmentManagers.IntentFragment(mainMineFragment);
 			mCurrentFragmentId = checkedId;
-=======
-		//	ChangeFragment(new MainMineFragment(), checkedId);
-			fragmentManagers.IntentFragment(new MainMineFragment());
->>>>>>> ebb30636f7e156a3c347cd56d855797a4cb61c50
 			break;
 
 		case R.id.main_tab_more:
