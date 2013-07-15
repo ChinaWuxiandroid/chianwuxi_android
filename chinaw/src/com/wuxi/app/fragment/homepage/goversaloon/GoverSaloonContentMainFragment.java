@@ -43,8 +43,24 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 		goversaloon_title_search = (RadioGroup) view
 				.findViewById(R.id.goversaloon_title_search);
 		goversaloon_title_search.setOnCheckedChangeListener(this);
-		if (menuItem.getName().equals("我的政务大厅")) {
-			onTransaction(new MyGoverSaloon());
+		if (menuItem.getType()==MenuItem.CUSTOM_MENU) {
+			
+			if(menuItem.getName().equals("我的政务大厅")){
+				onTransaction(new MyGoverSaloonFragment());
+			}else if(menuItem.getName().equals("效能投诉")){
+				onTransaction(new EfficacyComplaintFragment());
+			}else if(menuItem.getName().equals("行政事项")){
+				onTransaction(new AdministrativeItemFragment());
+			}
+			
+		} else if (menuItem.getType() == MenuItem.CHANNEL_MENU) {
+			onTransaction(new GoverMangeFragment());
+		} else if (menuItem.getType() == MenuItem.APP_MENU) {
+			if (menuItem.getAppUI().equals("OnlineApproval")) {
+				onTransaction(new OnlineApprovalFragment());
+			}else if(menuItem.getAppUI().equals("TableDownloads")){
+				onTransaction(new TableDownloadsFragment());
+			}
 		}
 
 	}
@@ -69,9 +85,10 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 		}
 	}
 
-	private void onTransaction(Fragment fragment) {
+	private void onTransaction(BaseFragment fragment) {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
+		fragment.setManagers(managers);// 传递managers
 		ft.replace(CONTENT_MAIN_ID, fragment);
 
 		ft.addToBackStack(null);

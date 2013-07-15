@@ -14,6 +14,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
+import com.wuxi.app.adapter.MyOnlineApplyAdapter;
 import com.wuxi.app.adapter.MyOnlineAskAdapter;
 
 /**
@@ -21,7 +22,7 @@ import com.wuxi.app.adapter.MyOnlineAskAdapter;
  * @author wanglu 泰得利通 我的政务大厅
  * 
  */
-public class MyGoverSaloon extends BaseFragment implements
+public class MyGoverSaloonFragment extends BaseFragment implements
 		OnCheckedChangeListener {
 
 	private View view;
@@ -34,6 +35,7 @@ public class MyGoverSaloon extends BaseFragment implements
 			"2.关于在新区梅园镇建立垃圾回收的问题咨询的问题的咨询(2013-5-3)" };
 	private MyOnlineAskAdapter myOnlineAskAdapter;
 
+	private MyOnlineApplyAdapter myOnlineApplyAdapter;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -60,8 +62,8 @@ public class MyGoverSaloon extends BaseFragment implements
 	private void initData() {
 		RadioButton rb = (RadioButton) gover_btn_rg.getChildAt(0);
 		rb.setChecked(true);
-		myOnlineAskAdapter = new MyOnlineAskAdapter(itemString, context);
-
+		myOnlineAskAdapter = new MyOnlineAskAdapter(itemString, context,managers);
+		myOnlineApplyAdapter=new MyOnlineApplyAdapter(itemString, context);
 		gover_saloon_lvmygover.setAdapter(myOnlineAskAdapter);
 	}
 
@@ -73,7 +75,7 @@ public class MyGoverSaloon extends BaseFragment implements
 			gover_saloon_lvmygover.setAdapter(myOnlineAskAdapter);
 			break;
 		case R.id.gover_sallon_my_apply:// 我的申报列表
-
+			gover_saloon_lvmygover.setAdapter(myOnlineApplyAdapter);
 			break;
 		}
 

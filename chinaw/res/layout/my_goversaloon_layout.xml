@@ -30,7 +30,7 @@
             android:background="@drawable/gover_saloon_btn_selector"
             android:button="@null"
             android:gravity="center"
-            android:text="我的在线咨询"
+            android:text="我的申报列表"
             android:textSize="12sp" />
     </RadioGroup>
 

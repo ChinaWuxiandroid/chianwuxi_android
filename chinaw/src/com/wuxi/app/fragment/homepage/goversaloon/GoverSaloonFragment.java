@@ -19,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.ContentNavigatorAdapter;
 import com.wuxi.app.engine.ChannelService;
@@ -257,9 +258,10 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 	 * 
 	 * @param menuItem
 	 */
-	private Fragment showMenItemContentFragment(MenuItem menuItem) {
+	private BaseFragment showMenItemContentFragment(MenuItem menuItem) {
 
 		GoverSaloonContentMainFragment goverSaloonContentMainFragment = new GoverSaloonContentMainFragment();
+		
 		goverSaloonContentMainFragment.setMenuItem(menuItem);
 		return goverSaloonContentMainFragment;
 	};
@@ -268,7 +270,7 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 	 * 
 	 * wanglu 泰得利通 显示频道内容信息 具体显示哪个Fragment由子类实现 返回需要展示的ContentFragment
 	 */
-	private Fragment showChannelContentFragment(Channel channel) {
+	private BaseFragment showChannelContentFragment(Channel channel) {
 		return null;
 	};
 
@@ -277,11 +279,11 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 	 * 
 	 * @param fragment
 	 */
-	private void showContentFragment(Fragment fragment) {
+	private void showContentFragment(BaseFragment fragment) {
 		if (fragment != null) {
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
 			ft.replace(DETAIL_ID, fragment);// 替换视图
-
+			fragment.setManagers(managers);//传递mangers
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 			ft.commit();
 		}

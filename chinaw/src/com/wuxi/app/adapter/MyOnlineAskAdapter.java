@@ -2,27 +2,32 @@ package com.wuxi.app.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.wuxi.app.FragmentManagers;
 import com.wuxi.app.R;
-import com.wuxi.domain.MenuItem;
+import com.wuxi.app.fragment.homepage.goversaloon.MyOnlineAskFragment;
 
 /**
  * 
  * @author wanglu 泰得利通 我的在线咨询 适配器
  * 
  */
-public class MyOnlineAskAdapter extends BaseAdapter {
+public class MyOnlineAskAdapter extends BaseAdapter implements OnClickListener {
 
 	private String[] itemStr;
 	private Context context;
+	private FragmentManagers managers;
 
-	public MyOnlineAskAdapter(String[] itemStr, Context context) {
+	public MyOnlineAskAdapter(String[] itemStr, Context context,
+			FragmentManagers managers) {
 		this.itemStr = itemStr;
 		this.context = context;
+		this.managers = managers;
 	}
 
 	@Override
@@ -68,10 +73,30 @@ public class MyOnlineAskAdapter extends BaseAdapter {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
+		if (text.length() > 10) {
+			text = text.substring(0, 10) + "...";
+		}
 
 		viewHolder.tv_title.setText(text);
+		viewHolder.iv_view.setOnClickListener(this);
+		viewHolder.iv_goask.setOnClickListener(this);
 		return convertView;
 
+	}
+
+	@Override
+	public void onClick(View v) {
+		MyOnlineAskFragment myOnlineAskFragment = new MyOnlineAskFragment();
+		switch (v.getId()) {
+		case R.id.gover_onlineask_view:
+			myOnlineAskFragment.setShowType(MyOnlineAskFragment.MYASK);
+			break;
+		case R.id.gover_onlineask_goask:
+			myOnlineAskFragment.setShowType(MyOnlineAskFragment.GOASK);
+			break;
+		}
+
+		managers.IntentFragment(myOnlineAskFragment);
 	}
 
 }

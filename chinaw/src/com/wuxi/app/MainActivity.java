@@ -70,8 +70,8 @@ public class MainActivity extends FragmentActivity implements
 			break;
 
 		case R.id.main_tab_mine:
-			ChangeFragment(new MainMineFragment(), checkedId);
-
+		//	ChangeFragment(new MainMineFragment(), checkedId);
+			fragmentManagers.IntentFragment(new MainMineFragment());
 			break;
 
 		case R.id.main_tab_more:
