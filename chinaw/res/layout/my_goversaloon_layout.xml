@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RadioGroup
+        android:id="@+id/gover_btn_rg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="10dip"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/gover_sallon_my_ask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gover_saloon_btn_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="我的在线咨询"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/gover_sallon_my_apply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dip"
+            android:background="@drawable/gover_saloon_btn_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="我的申报列表"
+            android:textSize="12sp" />
+    </RadioGroup>
+
+    <ListView
+        android:id="@+id/gover_saloon_lvmygover"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+</LinearLayout>
