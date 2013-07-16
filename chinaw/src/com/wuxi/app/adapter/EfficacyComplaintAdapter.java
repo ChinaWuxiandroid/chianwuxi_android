@@ -11,6 +11,7 @@ import com.wuxi.app.R;
 /**
  * 
  * @author wanglu 泰得利通  
+ * 能效评价适配器
  * 
  * 
  */
