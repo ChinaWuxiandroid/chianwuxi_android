@@ -1,5 +1,7 @@
 package com.wuxi.app.adapter;
 
+import java.util.List;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,30 +9,31 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.wuxi.app.R;
+import com.wuxi.domain.MyApply;
 
 /**
  * 
- * @author wanglu 泰得利通 我的在线咨询 适配器
+ * @author wanglu 泰得利通 我的申报列表 适配器
  * 
  */
 public class MyOnlineApplyAdapter extends BaseAdapter {
 
-	private String[] itemStr;
+	private List<MyApply> myApplies;
 	private Context context;
 
-	public MyOnlineApplyAdapter(String[] itemStr, Context context) {
-		this.itemStr = itemStr;
+	public MyOnlineApplyAdapter(List<MyApply> myApplies, Context context) {
+		this.myApplies = myApplies;
 		this.context = context;
 	}
 
 	@Override
 	public int getCount() {
-		return itemStr.length;
+		return myApplies.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return itemStr[position];
+		return myApplies.get(position);
 	}
 
 	@Override
@@ -47,7 +50,8 @@ public class MyOnlineApplyAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		String text = itemStr[position];
+		MyApply myApply = myApplies.get(position);
+
 		ViewHolder viewHolder = null;
 		if (convertView == null) {
 			convertView = View.inflate(context,
@@ -64,13 +68,17 @@ public class MyOnlineApplyAdapter extends BaseAdapter {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		if (text.length() > 10) {
-			text = text.substring(0, 10) + "...";
-		}
+		String title = myApply.getTitle();
 
-		viewHolder.tv_title.setText(text);
+		viewHolder.tv_title.setText(title);
+		viewHolder.tv_state.setText("状态:"+myApply.getStatue());
 		return convertView;
 
+	}
+	
+	
+	public void addItem(MyApply myApply){
+		myApplies.add(myApply);
 	}
 
 }

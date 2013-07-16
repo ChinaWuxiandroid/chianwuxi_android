@@ -117,7 +117,7 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 
 		mlvMenu.setAdapter(new LeftMenuAdapter(getActivity(),
 				R.layout.slide_navigator_item,
-				new int[] { R.id.tv_left_menu_name }, leftMenuItems, null));
+				new int[] { R.id.tv_left_menu_name,R.id.left_iv_icon }, leftMenuItems, null,position));
 	}
 
 	public void openLeftSlideMenu() {

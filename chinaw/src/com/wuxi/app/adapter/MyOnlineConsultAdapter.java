@@ -1,6 +1,9 @@
 package com.wuxi.app.adapter;
 
+import java.util.List;
+
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -11,33 +14,37 @@ import android.widget.TextView;
 import com.wuxi.app.FragmentManagers;
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.homepage.goversaloon.MyOnlineAskFragment;
+import com.wuxi.app.util.TimeFormateUtil;
+import com.wuxi.domain.Myconsult;
 
 /**
  * 
  * @author wanglu 泰得利通 我的在线咨询 适配器
  * 
  */
-public class MyOnlineAskAdapter extends BaseAdapter implements OnClickListener {
+public class MyOnlineConsultAdapter extends BaseAdapter implements
+		OnClickListener {
 
-	private String[] itemStr;
+	private List<Myconsult> myconsults;
 	private Context context;
 	private FragmentManagers managers;
+	private Myconsult selectMyconsult;
 
-	public MyOnlineAskAdapter(String[] itemStr, Context context,
+	public MyOnlineConsultAdapter(List<Myconsult> myconsults, Context context,
 			FragmentManagers managers) {
-		this.itemStr = itemStr;
+		this.myconsults = myconsults;
 		this.context = context;
 		this.managers = managers;
 	}
 
 	@Override
 	public int getCount() {
-		return itemStr.length;
+		return myconsults.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return itemStr[position];
+		return myconsults.get(position);
 	}
 
 	@Override
@@ -54,7 +61,7 @@ public class MyOnlineAskAdapter extends BaseAdapter implements OnClickListener {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		String text = itemStr[position];
+		Myconsult myconsult = myconsults.get(position);
 		ViewHolder viewHolder = null;
 		if (convertView == null) {
 			convertView = View.inflate(context,
@@ -73,13 +80,14 @@ public class MyOnlineAskAdapter extends BaseAdapter implements OnClickListener {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		if (text.length() > 10) {
-			text = text.substring(0, 10) + "...";
-		}
+		String text = myconsult.getTitle();
 
-		viewHolder.tv_title.setText(text);
+		String time = TimeFormateUtil.formateTime(myconsult.getSendDate(),
+				TimeFormateUtil.DATE_PATTERN);
+		viewHolder.tv_title.setText(text + " (" + time + " )");
 		viewHolder.iv_view.setOnClickListener(this);
 		viewHolder.iv_goask.setOnClickListener(this);
+		selectMyconsult=myconsult;
 		return convertView;
 
 	}
@@ -95,8 +103,13 @@ public class MyOnlineAskAdapter extends BaseAdapter implements OnClickListener {
 			myOnlineAskFragment.setShowType(MyOnlineAskFragment.GOASK);
 			break;
 		}
-
+		
+		myOnlineAskFragment.setMyconsult(selectMyconsult);
 		managers.IntentFragment(myOnlineAskFragment);
+	}
+
+	public void addItem(Myconsult myconsult) {
+		myconsults.add(myconsult);
 	}
 
 }

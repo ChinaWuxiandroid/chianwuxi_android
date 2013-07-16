@@ -26,10 +26,21 @@
             android:src="@drawable/iwantwritemail_ibtn_bk" />
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/gover_eff_lv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </ListView>
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gover_eff_pb" 
+            android:layout_gravity="center"/>
+
+        <ListView
+            android:id="@+id/gover_eff_lv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </ListView>
+    </FrameLayout>
 
 </LinearLayout>

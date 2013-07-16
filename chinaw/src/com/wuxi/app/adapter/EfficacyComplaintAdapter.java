@@ -1,37 +1,43 @@
 package com.wuxi.app.adapter;
 
+import java.util.List;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.baidu.mapapi.utils.e;
 import com.wuxi.app.R;
+import com.wuxi.app.util.TimeFormateUtil;
+import com.wuxi.domain.EfficaComplain;
 
 /**
  * 
- * @author wanglu 泰得利通  
+ * @author wanglu 泰得利通 能效评价适配器
  * 
  * 
  */
 public class EfficacyComplaintAdapter extends BaseAdapter {
 
-	private String[] itemStr;
+	private List<EfficaComplain> efficaComplains;
 	private Context context;
 
-	public EfficacyComplaintAdapter(String[] itemStr, Context context) {
-		this.itemStr = itemStr;
+	public EfficacyComplaintAdapter(List<EfficaComplain> efficaComplains,
+			Context context) {
+		this.efficaComplains = efficaComplains;
 		this.context = context;
 	}
 
 	@Override
 	public int getCount() {
-		return itemStr.length;
+		return efficaComplains.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return itemStr[position];
+		return efficaComplains.get(position);
 	}
 
 	@Override
@@ -48,11 +54,12 @@ public class EfficacyComplaintAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		String text = itemStr[position];
+		EfficaComplain eff = efficaComplains.get(position);
+
 		ViewHolder viewHolder = null;
 		if (convertView == null) {
-			convertView = View.inflate(context,
-					R.layout.gover_effcom_item, null);
+			convertView = View.inflate(context, R.layout.gover_effcom_item,
+					null);
 
 			viewHolder = new ViewHolder();
 
@@ -65,14 +72,20 @@ public class EfficacyComplaintAdapter extends BaseAdapter {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		if (text.length() > 10) {
-			text = text.substring(0, 10) + "...";
-		}
 
-		viewHolder.tv_title.setText(text);
-		viewHolder.tv_state.setText("答复部门：无锡市行政服务中心 答复时间: 2013-4-23");
+		viewHolder.tv_title.setText(eff.getTitle());
+
+		viewHolder.tv_state.setText("答复部门："
+				+ eff.getDoDpetname()
+				+ " 答复时间: "
+				+ TimeFormateUtil.formateTime(eff.getEndTime(),
+						TimeFormateUtil.DATE_PATTERN));
+
 		return convertView;
 
 	}
 
+	public void addItem(EfficaComplain eff) {
+		this.efficaComplains.add(eff);
+	}
 }

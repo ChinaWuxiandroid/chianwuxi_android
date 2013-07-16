@@ -7,6 +7,7 @@ import android.widget.RadioGroup;
 
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
+import com.wuxi.domain.Myconsult;
 
 /**
  * 
@@ -24,6 +25,11 @@ public class MyOnlineAskFragment extends HomeBaseSlideLevelFragment implements
 	public static final int MYASK = 1;// 我的咨询内容标识
 	public static final int GOASK = 2;// 继续咨询标识
 	private int showType = MYASK;
+	private Myconsult myconsult;
+
+	public void setMyconsult(Myconsult myconsult) {
+		this.myconsult = myconsult;
+	}
 
 	public void setShowType(int showType) {
 		this.showType = showType;
@@ -53,8 +59,9 @@ public class MyOnlineAskFragment extends HomeBaseSlideLevelFragment implements
 			gover_myonlineask_detail.setVisibility(LinearLayout.VISIBLE);
 			gover_myonline_goonask.setVisibility(LinearLayout.GONE);
 			gover_btn_rg.check(R.id.gover_myonlineask_detail);
-			gover_sallon_my_ask_detail.setBackground(getResources().getDrawable(
-					R.drawable.goversaloon_menuitem_bg));
+			gover_sallon_my_ask_detail.setBackground(getResources()
+					.getDrawable(R.drawable.goversaloon_menuitem_bg));
+			gover_sallon_my_ask_detail.setTextColor(Color.WHITE);
 			break;
 		case GOASK:
 			gover_myonlineask_detail.setVisibility(LinearLayout.GONE);
@@ -62,8 +69,13 @@ public class MyOnlineAskFragment extends HomeBaseSlideLevelFragment implements
 			gover_btn_rg.check(R.id.gover_myonline_goonask);
 			gover_sallon_my_goon_ask.setBackground(getResources().getDrawable(
 					R.drawable.goversaloon_menuitem_bg));
+			gover_sallon_my_goon_ask.setTextColor(Color.WHITE);
 			break;
 		}
+	}
+
+	private void showMyConsultData() {
+
 	}
 
 	@Override

@@ -316,11 +316,20 @@ public class MainIndexFragment extends BaseFragment implements
 				long id) {
 			MenuItem checkMenuItem = (MenuItem) parent
 					.getItemAtPosition(position);
-			SlideLevelFragment saveFragment = new SlideLevelFragment();
+			if (checkMenuItem.getName().equals("政民互动")) {//为回退特殊处理
 
-			saveFragment.setPosition(position);
-			saveFragment.setMenuItem(checkMenuItem);//
-			managers.IntentFragment(saveFragment);
+				MainMineFragment mainMineFragment = new MainMineFragment();
+				mainMineFragment.setMenuItem(checkMenuItem);
+				mainMineFragment.setMenuItem(checkMenuItem);//
+				managers.IntentFragment(mainMineFragment);
+			} else {
+				SlideLevelFragment saveFragment = new SlideLevelFragment();
+
+				saveFragment.setPosition(position);
+				saveFragment.setMenuItem(checkMenuItem);//
+				managers.IntentFragment(saveFragment);
+			}
+
 		}
 	};
 

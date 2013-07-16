@@ -34,10 +34,29 @@
             android:textSize="12sp" />
     </RadioGroup>
 
-    <ListView
-        android:id="@+id/gover_saloon_lvmygover"
+    <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
+        android:layout_height="fill_parent" >
+
+        <ProgressBar
+            android:id="@+id/gover_pb_myonlineapply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <ListView
+            android:id="@+id/gover_saloon_lv_myconsult"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" >
+        </ListView>
+
+        <ListView
+            android:id="@+id/gover_saloon_lv_myapply"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" >
+        </ListView>
+    </FrameLayout>
 
 </LinearLayout>
