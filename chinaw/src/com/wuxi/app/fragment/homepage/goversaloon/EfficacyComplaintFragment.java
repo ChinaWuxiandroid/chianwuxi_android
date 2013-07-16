@@ -21,13 +21,10 @@ import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.adapter.ContentListAdapter;
 import com.wuxi.app.adapter.EfficacyComplaintAdapter;
 import com.wuxi.app.engine.EfficaComplainService;
-import com.wuxi.domain.Content;
 import com.wuxi.domain.EfficaComplain;
 import com.wuxi.domain.EfficaComplainWrapper;
-import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NetException;
 import com.wuxi.exception.ResultException;
 

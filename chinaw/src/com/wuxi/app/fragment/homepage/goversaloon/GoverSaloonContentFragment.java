@@ -1,14 +1,11 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
-import org.xmlpull.v1.XmlPullParser;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;

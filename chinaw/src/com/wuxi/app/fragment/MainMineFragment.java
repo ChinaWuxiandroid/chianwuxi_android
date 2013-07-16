@@ -20,7 +20,6 @@ import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpen
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePetitionReceptFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleSuggestFragment;
-import com.wuxi.app.listeners.SlideLinstener;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.domain.MenuItem;
 
