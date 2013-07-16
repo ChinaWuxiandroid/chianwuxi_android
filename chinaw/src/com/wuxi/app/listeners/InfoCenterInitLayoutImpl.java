@@ -19,6 +19,7 @@ public class InfoCenterInitLayoutImpl implements MenuItemInitLayoutListener {
 	public void bindMenuItemLayout(
 			InitializContentLayoutListner initLayoutListner, MenuItem menuItem) {
 
+
 		Class<? extends Fragment> fragmentClass = menuItem.getContentFragment();
 		Fragment fragment;
 		if (fragmentClass == null) {

@@ -203,6 +203,11 @@ public class Constants {
 		
 		public static final String USERNAME="userName";
 		
+		/**
+		 * 测试用户      用户名：youngii  密码：123123  的ACCESSTOKEN
+		 * */
+		public static final String TEST_ACCESSTOKEN="873778da0396423a8831af27956e097d";
+		
 	}
 	/**
 	 * 

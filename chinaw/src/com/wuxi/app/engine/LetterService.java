@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import android.content.Context;
 
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.LetterWrapper;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -41,6 +42,7 @@ public class LetterService extends Service{
 	 * */
 	public LetterWrapper getMyLettersList(String url,String access_token,int startIndex,int endIndex) throws NetException, JSONException, NODataException{
 		url=url+"?access_token="+access_token+"&start="+startIndex+"&end="+endIndex;
+		System.out.println("url:"+url);
 		return getLettersWrapper(url);
 	}
 	
@@ -113,8 +115,9 @@ public class LetterService extends Service{
 				letters.setTitle(jb.getString("title"));
 				letters.setCode(jb.getString("code"));
 				letters.setAppraise(jb.getString("appraise"));
-				letters.setDepname(jb.getString("depname"));
-//				letters.setStartTime(jb.getString("beginTime"));		
+				letters.setDepname(jb.getString("depname"));	
+				letters.setAnswerdate(TimeFormateUtil.formateTime
+						(String.valueOf(jb.getLong("answerdate")), TimeFormateUtil.DATE_PATTERN));	
 				letters.setReadcount(jb.getInt("readcount"));		
 				letterList.add(letters);
 			}

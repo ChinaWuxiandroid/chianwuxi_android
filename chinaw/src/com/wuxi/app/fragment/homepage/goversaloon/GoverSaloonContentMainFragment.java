@@ -1,7 +1,6 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -12,7 +11,6 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.domain.MenuItem;
 
 /**

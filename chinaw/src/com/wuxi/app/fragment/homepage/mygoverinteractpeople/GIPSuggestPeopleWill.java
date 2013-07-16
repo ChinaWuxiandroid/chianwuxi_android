@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ import com.wuxi.exception.NetException;
 public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 
 	private ListView mListView;
+	private ProgressBar list_pb;
 	private PoliticsWrapper politicsWrapper;
 	private List<PoliticsWrapper.Politics> politics;
 	protected static final String TAG = "GIPSuggestPeopleWill";
@@ -61,6 +63,7 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 			}
 			switch (msg.what) {
 			case DATA__LOAD_SUCESS:
+				list_pb.setVisibility(View.INVISIBLE);
 				showPoloticsList();
 				break;
 			case DATA_LOAD_ERROR:
@@ -115,7 +118,9 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 	protected void init() {
 
 		mListView=(ListView) view.findViewById(R.id.gip_suggest_peoplewill_listview);
-		System.out.println("init");
+		list_pb=(ProgressBar)view.findViewById(R.id.gip_suggest_peoplewill_listview_pb);
+
+		list_pb.setVisibility(View.VISIBLE);
 		loadData();
 
 	}
@@ -201,6 +206,9 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 
 		class ViewHolder {
 			public TextView title_text;
+			public TextView beginTime_text;
+			public TextView endTime_text;
+			public TextView depName_text;
 		}
 
 		@Override
@@ -215,6 +223,12 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 
 				viewHolder.title_text = (TextView) convertView
 						.findViewById(R.id.gip_suggest_peoplewill_listitem_tile);
+				viewHolder.beginTime_text = (TextView) convertView
+						.findViewById(R.id.gip_suggest_peoplewill_textview_begintime);
+				viewHolder.endTime_text = (TextView) convertView
+						.findViewById(R.id.gip_suggest_peoplewill_textview_endtime);
+				viewHolder.depName_text = (TextView) convertView
+						.findViewById(R.id.gip_suggest_peoplewill_textview_depname);
 
 				convertView.setTag(viewHolder);
 			}
@@ -222,6 +236,9 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
 			viewHolder.title_text.setText(politics.get(position).getTitle());
+			viewHolder.beginTime_text.setText(politics.get(position).getBeginTime());
+			viewHolder.endTime_text.setText(politics.get(position).getEndTime());
+			//			viewHolder.depName_text.setText(politics.get(position).ge);
 
 			return convertView;
 		}

@@ -21,7 +21,7 @@ import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
  * 
  */
 public class MainActivity extends FragmentActivity implements
-		OnCheckedChangeListener {
+OnCheckedChangeListener {
 
 	private RadioGroup radioGroup;
 	private int mCurrentFragmentId = 0;
@@ -47,7 +47,7 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
-		
+
 
 		switch (checkedId) {
 
@@ -58,7 +58,7 @@ public class MainActivity extends FragmentActivity implements
 		case R.id.main_tab_search:
 			HomeBaseSlideLevelFragment searchFragment=new MainSearchFragment();
 			fragmentManagers.IntentFragment(searchFragment);
-//			ChangeFragment(new MainSearchFragment(), checkedId);
+			//			ChangeFragment(new MainSearchFragment(), checkedId);
 			break;
 
 		case R.id.main_tab_login_reg:// 登录注册
@@ -70,8 +70,9 @@ public class MainActivity extends FragmentActivity implements
 			break;
 
 		case R.id.main_tab_mine:
-		//	ChangeFragment(new MainMineFragment(), checkedId);
-			fragmentManagers.IntentFragment(new MainMineFragment());
+			HomeBaseSlideLevelFragment mainMineFragment = new MainMineFragment();
+			fragmentManagers.IntentFragment(mainMineFragment);
+			mCurrentFragmentId = checkedId;
 			break;
 
 		case R.id.main_tab_more:

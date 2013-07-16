@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import android.content.Context;
 
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.HotReviewWrapper;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -92,8 +93,12 @@ public class HotReviewService extends Service{
 				HotReviewWrapper.HotReview hotReview = h.new HotReview();
 				hotReview.setId(jb.getString("id"));
 				hotReview.setTitle(jb.getString("title"));			
-//				hotReview.setStartTime(jb.getString("beginTime"));		
-//				hotReview.setEndTime(jb.getString("endTime"));		
+		
+				hotReview.setStartTime(TimeFormateUtil.formateTime
+						(String.valueOf(jb.getLong("beginTime")), TimeFormateUtil.DATE_PATTERN));		
+
+				hotReview.setEndTime(TimeFormateUtil.formateTime
+						(String.valueOf(jb.getLong("endTime")), TimeFormateUtil.DATE_PATTERN));	
 				totReviews.add(hotReview);
 			}
 			return totReviews;

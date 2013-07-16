@@ -23,7 +23,6 @@ public class InformationCenterFragment extends MenuItemMainFragment {
 		for (final MenuItem menu : items) {
 
 			if (menu.getType() == MenuItem.WAP_MENU) {// wap类型菜单
-
 				menu.setContentFragment(WapFragment.class);
 			} else if (menu.getType() == MenuItem.CHANNEL_MENU) {// 如果菜单上频道菜单
 
@@ -51,9 +50,7 @@ public class InformationCenterFragment extends MenuItemMainFragment {
 			} else if (menu.getType() == MenuItem.CUSTOM_MENU) {// //普通菜单
 				menu.setContentFragment(InfoNavigatorWithContentFragment.class);
 			}
-
 		}
-
 	}
 
 	@Override

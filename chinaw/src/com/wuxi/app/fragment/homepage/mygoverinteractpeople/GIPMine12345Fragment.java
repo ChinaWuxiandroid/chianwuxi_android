@@ -129,8 +129,9 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment{
 
 				LetterService letterService = new LetterService(context);
 				try {
-					letterWrapper = letterService.getLetterLitstWrapper
-							(Constants.Urls.MAYOR_MAILBOX_URL,
+
+					letterWrapper = letterService.getMyLettersList
+							(Constants.Urls.MY_LETTER_URL,Constants.SharepreferenceKey.TEST_ACCESSTOKEN,
 									startIndex,endIndex);
 					if (null != letterWrapper) {
 						//						CacheUtil.put(menuItem.getChannelId(), titleChannels);// 缓存起来
@@ -224,10 +225,10 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment{
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
 			String title_str=(position+1)+"."+"["+letters.get(position).getType()+"]"
-			+letters.get(position).getTitle();
+					+letters.get(position).getTitle();
 			viewHolder.title_text.setText(title_str);
 			viewHolder.code_text.setText(letters.get(position).getCode());
-			
+
 			//			viewHolder.answerDate_text.setText(letters.get(position).getAnswerdate());
 
 			return convertView;

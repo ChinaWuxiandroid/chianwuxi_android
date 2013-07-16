@@ -36,6 +36,7 @@
                 android:textSize="10sp" />
 
             <TextView
+                android:id="@+id/gip_suggest_peoplewill_textview_begintime"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="2013-06-04"
@@ -51,6 +52,7 @@
                 android:textSize="10sp" />
 
             <TextView
+                android:id="@+id/gip_suggest_peoplewill_textview_endtime"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="2013-06-30"
@@ -72,6 +74,7 @@
                 android:textSize="10sp" />
 
             <TextView
+                android:id="@+id/gip_suggest_peoplewill_textview_depname"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/gip_suggest_peoplewill_dep"

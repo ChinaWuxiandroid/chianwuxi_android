@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ import com.wuxi.exception.NetException;
 
 public class GIP12345HotMail extends RadioButtonChangeFragment{
 	private ListView mListView;
+	private ProgressBar list_pb;
 	private LetterWrapper letterWrapper;
 	private List<LetterWrapper.Letter> letters;
 	protected static final String TAG = "GIP12345HotMail";
@@ -49,6 +51,7 @@ public class GIP12345HotMail extends RadioButtonChangeFragment{
 			}
 			switch (msg.what) {
 			case DATA__LOAD_SUCESS:
+				list_pb.setVisibility(View.INVISIBLE);
 				showLettersList();
 				break;
 			case DATA_LOAD_ERROR:
@@ -85,6 +88,9 @@ public class GIP12345HotMail extends RadioButtonChangeFragment{
 	@Override
 	protected void init() {
 		mListView=(ListView) view.findViewById(R.id.gip_12345_hotmail_listView);
+		list_pb=(ProgressBar)view.findViewById(R.id.gip_12345_hotmail_listView_pb);
+
+		list_pb.setVisibility(View.VISIBLE);
 		loadData();	
 	}
 
@@ -199,7 +205,7 @@ public class GIP12345HotMail extends RadioButtonChangeFragment{
 			}
 			viewHolder.title_text.setText(letters.get(position).getTitle());
 			viewHolder.depname_text.setText(letters.get(position).getDepname());
-			//			viewHolder.answerDate_text.setText(letters.get(position).getAnswerdate());
+			viewHolder.answerDate_text.setText(letters.get(position).getAnswerdate());
 
 
 			return convertView;
