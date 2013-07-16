@@ -50,8 +50,9 @@ public class ContentListFragment extends BaseFragment implements
 	private Context context;
 
 	private int visibleLastIndex;
-	private ContentListAdapter adapter;
 	private int visibleItemCount;// 当前显示的总条数
+	private ContentListAdapter adapter;
+	
 	private boolean isFirstLoad = true;// 是不是首次加载数据
 	private boolean isLoading = false;
 

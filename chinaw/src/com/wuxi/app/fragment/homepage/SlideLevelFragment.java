@@ -11,11 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.wuxi.app.BaseFragment;
-import com.wuxi.app.FragmentManagers;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.LeftMenuAdapter;
 import com.wuxi.app.fragment.BaseSlideFragment;
-import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonFragment;
@@ -67,7 +65,7 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener {
 
 		mlvMenu.setAdapter(new LeftMenuAdapter(getActivity(),
 				R.layout.slide_navigator_item,
-				new int[] { R.id.tv_left_menu_name }, leftMenuItems, null));
+				new int[] { R.id.tv_left_menu_name ,R.id.left_iv_icon}, leftMenuItems, null,position));
 	}
 
 	@Override
@@ -101,13 +99,6 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener {
 					GoverSaloonFragment saloonFragment = new GoverSaloonFragment();
 					saloonFragment.setParentMenuItem(menuItem);
 					onTransaction(saloonFragment);
-				} else if (menuItem.getName().equals("政民互动")) {
-					FragmentManagers fragmentManagers;
-					fragmentManagers = FragmentManagers.getInstance();
-					MainMineFragment mainMineFragment = new MainMineFragment();
-					mainMineFragment.setMenuItem(menuItem);
-					fragmentManagers.IntentFragment(mainMineFragment);
-				
 				}
 
 				break;
