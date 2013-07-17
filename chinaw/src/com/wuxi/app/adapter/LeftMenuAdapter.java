@@ -71,11 +71,11 @@ public class LeftMenuAdapter extends BasicAdapter {
 		viewHolder.title_text.setText(menuItem.getName());
 		if (selectPosition == position) {
 			viewHolder.title_text.setTextColor(Color.parseColor("#AD1010"));
-			viewHolder.iv_icon.setBackground(context.getResources()
-					.getDrawable(R.drawable.left_select_logo));
 
-			convertView.setBackground(context.getResources().getDrawable(
-					R.drawable.left_item_select_bg));
+			viewHolder.iv_icon.setBackgroundResource(R.drawable.left_select_logo);
+
+			convertView.setBackgroundResource(R.drawable.left_item_select_bg);
+
 		}
 		return convertView;
 	}

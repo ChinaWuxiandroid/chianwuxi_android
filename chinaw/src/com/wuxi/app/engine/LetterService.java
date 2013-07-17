@@ -33,7 +33,7 @@ public class LetterService extends Service{
 		url=url+"?start="+startIndex+"&end="+endIndex;
 		return getLettersWrapper(url);
 	}
-	
+
 	/**
 	 * 获取我的信箱列表
 	 * @throws NODataException 
@@ -45,7 +45,7 @@ public class LetterService extends Service{
 		System.out.println("url:"+url);
 		return getLettersWrapper(url);
 	}
-	
+
 	/**
 	 * 
 	 * 杨宸 智佳 
@@ -65,8 +65,8 @@ public class LetterService extends Service{
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
-		
-		
+
+
 		String resultStr = httpUtils.executeGetToString(url, 5000);
 
 		if (resultStr != null) {
@@ -125,4 +125,9 @@ public class LetterService extends Service{
 		}
 		return null;
 	}
+
+	/**
+	 * 我要写信
+	 * */
+
 }
