@@ -22,6 +22,10 @@ public class LeftMenuAdapter extends BasicAdapter {
 	private List<MenuItem> menuItems;
 	private int selectPosition = -1;// 选中的的item
 
+	public void setSelectPosition(int selectPosition) {
+		this.selectPosition = selectPosition;
+	}
+
 	public LeftMenuAdapter(Context context, int view, int[] viewId,
 			List<MenuItem> menuItems, String[] dataName, int selectPostion) {
 		super(context, view, viewId, dataName);
@@ -76,6 +80,13 @@ public class LeftMenuAdapter extends BasicAdapter {
 
 			convertView.setBackground(context.getResources().getDrawable(
 					R.drawable.left_item_select_bg));
+		} else {
+
+			viewHolder.title_text.setTextColor(Color.parseColor("#000000"));
+			viewHolder.iv_icon.setBackground(context.getResources()
+					.getDrawable(R.drawable.side_navigator_icon));
+
+			convertView.setBackgroundColor(Color.TRANSPARENT);
 		}
 		return convertView;
 	}
