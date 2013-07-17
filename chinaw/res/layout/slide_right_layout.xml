@@ -43,11 +43,13 @@
     </RelativeLayout>
 
     <RadioGroup
+        android:id="@+id/right_menu_rg"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" 
         android:background="@drawable/login_item_bg">
 
         <RadioButton
+            android:id="@+id/right_menu_rb_collect"
             android:layout_width="fill_parent"
             android:background="@drawable/login_item_bg"
             android:button="@null"
@@ -62,6 +64,7 @@
             android:background="#C1C2C3" />
 
         <RadioButton
+            android:id="@+id/right_menu_rb_mzhd"
             android:layout_width="fill_parent"
             android:background="@drawable/login_item_bg"
             android:button="@null"
@@ -76,6 +79,7 @@
             android:background="#C1C2C3" />
 
         <RadioButton
+            android:id="@+id/right_menu_rb_mydownload"
             android:layout_width="fill_parent"
             android:background="@drawable/login_item_bg"
             android:button="@null"
@@ -90,6 +94,7 @@
             android:background="#C1C2C3" />
 
         <RadioButton
+            android:id="@+id/right_menu_rb_myset"
             android:layout_width="fill_parent"
             android:background="@drawable/login_item_bg"
             android:button="@null"

@@ -191,11 +191,11 @@ public final class R {
     }
     public static final class id {
         public static final int Title_Text=0x7f0a000b;
-        public static final int action_settings=0x7f0a0158;
+        public static final int action_settings=0x7f0a015d;
         public static final int back_btn=0x7f0a000a;
         public static final int bmapView=0x7f0a0019;
         public static final int btn=0x7f0a0114;
-        public static final int btn_next_screen=0x7f0a014e;
+        public static final int btn_next_screen=0x7f0a0153;
         public static final int city_map_et_end=0x7f0a0016;
         public static final int city_map_et_key=0x7f0a0012;
         public static final int city_map_et_start=0x7f0a0015;
@@ -411,7 +411,7 @@ public final class R {
         public static final int goversaloon_btn_statesearch=0x7f0a00e2;
         public static final int goversaloon_sp=0x7f0a00e1;
         public static final int goversaloon_title_search=0x7f0a00e4;
-        public static final int gv_title=0x7f0a014b;
+        public static final int gv_title=0x7f0a0150;
         public static final int index_gridview_image=0x7f0a00e8;
         public static final int index_gridview_texttitle=0x7f0a00e9;
         public static final int index_gv_menuitem=0x7f0a009e;
@@ -455,7 +455,7 @@ public final class R {
         public static final int my_spinner_textview_text1=0x7f0a012a;
         public static final int next=0x7f0a001b;
         public static final int open_close_left_btn=0x7f0a0009;
-        public static final int pb_content_wb=0x7f0a0156;
+        public static final int pb_content_wb=0x7f0a015b;
         public static final int pb_login=0x7f0a00ec;
         public static final int pb_regist=0x7f0a00ef;
         public static final int popdown=0x7f0a0025;
@@ -469,6 +469,11 @@ public final class R {
         public static final int regist_btn_cancle=0x7f0a00fa;
         public static final int regist_btn_submit=0x7f0a00f9;
         public static final int right_menu=0x7f0a0112;
+        public static final int right_menu_rb_collect=0x7f0a014c;
+        public static final int right_menu_rb_mydownload=0x7f0a014e;
+        public static final int right_menu_rb_myset=0x7f0a014f;
+        public static final int right_menu_rb_mzhd=0x7f0a014d;
+        public static final int right_menu_rg=0x7f0a014b;
         public static final int search_Title_Text=0x7f0a0131;
         public static final int search_advanced_edittext_endDate=0x7f0a0005;
         public static final int search_advanced_edittext_keyword=0x7f0a0007;
@@ -521,20 +526,20 @@ public final class R {
         public static final int sys_use_help=0x7f0a010b;
         public static final int textcache=0x7f0a0024;
         public static final int title_scroll=0x7f0a0123;
-        public static final int title_scroll_action=0x7f0a014d;
-        public static final int tv_actionname=0x7f0a014c;
+        public static final int title_scroll_action=0x7f0a0152;
+        public static final int tv_actionname=0x7f0a0151;
         public static final int tv_left_menu_name=0x7f0a0147;
         public static final int tv_navigator_name=0x7f0a010f;
         public static final int viewpagerLayout=0x7f0a011c;
         public static final int wb_progress=0x7f0a010e;
-        public static final int wucity_channel_hs=0x7f0a014f;
-        public static final int wucity_content_lv=0x7f0a0151;
-        public static final int wuxi_decontent_tvbrowcount=0x7f0a0155;
-        public static final int wuxi_decontent_tvtime=0x7f0a0154;
-        public static final int wuxicity_decontent_ll=0x7f0a0152;
-        public static final int wuxicity_decontent_title=0x7f0a0153;
-        public static final int wuxicity_decontent_wb=0x7f0a0157;
-        public static final int wuxicity_rg_title_chanel=0x7f0a0150;
+        public static final int wucity_channel_hs=0x7f0a0154;
+        public static final int wucity_content_lv=0x7f0a0156;
+        public static final int wuxi_decontent_tvbrowcount=0x7f0a015a;
+        public static final int wuxi_decontent_tvtime=0x7f0a0159;
+        public static final int wuxicity_decontent_ll=0x7f0a0157;
+        public static final int wuxicity_decontent_title=0x7f0a0158;
+        public static final int wuxicity_decontent_wb=0x7f0a015c;
+        public static final int wuxicity_rg_title_chanel=0x7f0a0155;
     }
     public static final class layout {
         public static final int advanced_search_layout=0x7f030000;
