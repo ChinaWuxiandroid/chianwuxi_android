@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,6 +17,8 @@ import android.widget.TextView;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.LeftMenuAdapter;
+import com.wuxi.app.fragment.MainMineFragment;
+import com.wuxi.app.fragment.homepage.SlideLevelFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.view.SlideMenuLayout;
@@ -26,7 +30,32 @@ import com.wuxi.domain.MenuItem;
  * 
  */
 public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
-		OnClickListener {
+		OnClickListener, OnItemClickListener {
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View arg1, int position,
+			long arg3) {
+
+		if (position == this.position)
+			return;
+		MenuItem checkMenuItem = (MenuItem) parent.getItemAtPosition(position);
+		if (checkMenuItem.getName().equals("政民互动")) {// 为回退特殊处理
+
+			MainMineFragment mainMineFragment = new MainMineFragment();
+			mainMineFragment.setMenuItem(checkMenuItem);
+			mainMineFragment.setMenuItem(checkMenuItem);//
+			managers.IntentFragment(mainMineFragment);
+			mainMineFragment.setPosition(position);
+		} else {
+
+			SlideLevelFragment saveFragment = new SlideLevelFragment();
+			saveFragment.setPosition(position);
+			saveFragment.setMenuItem(checkMenuItem);//
+			managers.IntentFragment(saveFragment);
+
+		}
+
+	}
 
 	protected View view;
 	protected LayoutInflater inflater;
@@ -41,9 +70,9 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(getLayoutId(), null);
-		this.inflater=inflater;
-		context=getActivity();
-		initUI(); 
+		this.inflater = inflater;
+		context = getActivity();
+		initUI();
 		initLeftMenu();// 初始化左侧菜单数据
 
 		return view;
@@ -60,7 +89,7 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 	protected void initUI() {
 		mSlideMenuLayout = (SlideMenuLayout) view
 				.findViewById(R.id.slide_menu_layout);
-		
+
 		mSlideMenuLayout.setLeftSlideMenuId(R.id.left_menu);
 		mSlideMenuLayout.setRightSlideMenuId(R.id.right_menu);
 		mSlideMenuLayout.reset();
@@ -76,7 +105,7 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 		member_btnm.setOnClickListener(this);
 		back_btn.setOnClickListener(this);
 		tv_title.setText(getTtitle());
-
+		mlvMenu.setOnItemClickListener(this);
 	}
 
 	@Override
@@ -116,8 +145,10 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 				.get(MENUITEM_CACKE_KEY);// 直接从缓存中取出菜单
 
 		mlvMenu.setAdapter(new LeftMenuAdapter(getActivity(),
-				R.layout.slide_navigator_item,
-				new int[] { R.id.tv_left_menu_name,R.id.left_iv_icon }, leftMenuItems, null,position));
+				R.layout.slide_navigator_item, new int[] {
+						R.id.tv_left_menu_name, R.id.left_iv_icon },
+				leftMenuItems, null, position));
+
 	}
 
 	public void openLeftSlideMenu() {

@@ -218,4 +218,6 @@ public class MainMineFragment extends HomeBaseSlideLevelFragment {
 		this.menuItem = parentMenuItem;
 	}
 
+	
+
 }

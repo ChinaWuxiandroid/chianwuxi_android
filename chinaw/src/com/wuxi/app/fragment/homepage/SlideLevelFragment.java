@@ -2,18 +2,22 @@ package com.wuxi.app.fragment.homepage;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.LeftMenuAdapter;
 import com.wuxi.app.fragment.BaseSlideFragment;
+import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonFragment;
@@ -21,10 +25,12 @@ import com.wuxi.app.fragment.homepage.informationcenter.InformationCenterFragmen
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
 import com.wuxi.app.listeners.SlideLinstener;
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.LogUtil;
 import com.wuxi.app.view.SlideMenuLayout;
 import com.wuxi.domain.MenuItem;
 
-public class SlideLevelFragment extends BaseFragment implements SlideLinstener {
+public class SlideLevelFragment extends BaseFragment implements SlideLinstener,
+		OnItemClickListener {
 
 	protected static final int FRAME_CONTENT = R.id.slide_main_content;
 	private View view;
@@ -35,6 +41,7 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener {
 
 	private static final String MENUITEM_CACKE_KEY = "man_menu_item";
 	private static final String TAG = "SlideLevelFragment";
+	private LeftMenuAdapter leftMenuAdapter;
 
 	public void setMenuItem(MenuItem menuItem) {
 		this.menuItem = menuItem;
@@ -51,8 +58,10 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener {
 		mSlideMenuLayout.reset();
 
 		mlvMenu = (ListView) view.findViewById(R.id.lv_menu);
+		mlvMenu.setOnItemClickListener(this);
 
 		initLeftMenu();// 初始化左侧菜单数据
+		init();
 
 		return view;
 	}
@@ -63,16 +72,11 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener {
 		List<MenuItem> leftMenuItems = (List<MenuItem>) CacheUtil
 				.get(MENUITEM_CACKE_KEY);// 直接从缓存中取出菜单
 
-		mlvMenu.setAdapter(new LeftMenuAdapter(getActivity(),
-				R.layout.slide_navigator_item,
-				new int[] { R.id.tv_left_menu_name ,R.id.left_iv_icon}, leftMenuItems, null,position));
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		init();
+		leftMenuAdapter = new LeftMenuAdapter(getActivity(),
+				R.layout.slide_navigator_item, new int[] {
+						R.id.tv_left_menu_name, R.id.left_iv_icon },
+				leftMenuItems, null, position);
+		mlvMenu.setAdapter(leftMenuAdapter);
 	}
 
 	private void init() {
@@ -173,6 +177,31 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener {
 			closeSlideMenu();
 		else
 			openRightSlideMenu();
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View arg1, int position,
+			long id) {
+
+		MenuItem checkMenuItem = (MenuItem) parent.getItemAtPosition(position);
+		if (checkMenuItem.getName().equals("政民互动")) {// 为回退特殊处理
+
+			MainMineFragment mainMineFragment = new MainMineFragment();
+			mainMineFragment.setMenuItem(checkMenuItem);
+			mainMineFragment.setMenuItem(checkMenuItem);//
+			mainMineFragment.setPosition(position);
+			managers.IntentFragment(mainMineFragment);
+
+		} else {
+
+			this.menuItem = checkMenuItem;
+			this.position = position;
+			leftMenuAdapter.setSelectPosition(position);
+			leftMenuAdapter.notifyDataSetChanged();
+
+			init();
+		}
+
 	}
 
 }
