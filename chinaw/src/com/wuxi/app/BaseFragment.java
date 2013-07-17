@@ -12,7 +12,7 @@ public class BaseFragment extends Fragment {
 
 	public FragmentManagers managers;
 
-	public int position = 0;
+	public int position = -1;
 
 	/**
 	 * 传递管理类
