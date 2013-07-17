@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import android.test.AndroidTestCase;
+
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.EfficaComplain;
 import com.wuxi.domain.EfficaComplainWrapper;
 import com.wuxi.exception.NetException;
 import com.wuxi.exception.ResultException;
-
-import android.test.AndroidTestCase;
 
 public class TestEffComService extends AndroidTestCase {
 

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.baidu.mapapi.utils.e;
 import com.wuxi.app.R;
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.EfficaComplain;

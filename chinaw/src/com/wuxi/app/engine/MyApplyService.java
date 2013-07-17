@@ -7,13 +7,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.MyApply;
 import com.wuxi.domain.MyApplyWrapper;
 import com.wuxi.exception.NetException;
 import com.wuxi.exception.ResultException;
-
-import android.content.Context;
 
 /**
  * 

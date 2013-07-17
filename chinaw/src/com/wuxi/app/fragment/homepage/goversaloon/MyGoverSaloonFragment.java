@@ -19,17 +19,15 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.adapter.ContentListAdapter;
 import com.wuxi.app.adapter.MyOnlineApplyAdapter;
 import com.wuxi.app.adapter.MyOnlineConsultAdapter;
 import com.wuxi.app.engine.MyApplyService;
 import com.wuxi.app.engine.MyconsultService;
-import com.wuxi.domain.Content;
 import com.wuxi.domain.MyApply;
 import com.wuxi.domain.MyApplyWrapper;
 import com.wuxi.domain.Myconsult;
