@@ -1,4 +1,5 @@
 package com.wuxi.app.fragment.homepage;
+
 import java.util.ArrayList;
 import java.util.List;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.LeftMenuAdapter;
 import com.wuxi.app.fragment.BaseSlideFragment;
+import com.wuxi.app.fragment.MainIndexFragment;
 import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
@@ -39,7 +41,6 @@ import com.wuxi.domain.MenuItem;
 public class SlideLevelFragment extends BaseFragment implements SlideLinstener,
 
 OnItemClickListener, OnClickListener, OnCheckedChangeListener {
-
 
 	protected static final int FRAME_CONTENT = R.id.slide_main_content;
 	private View view;
@@ -115,8 +116,8 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 		leftMenuAdapter = new LeftMenuAdapter(getActivity(),
 				R.layout.slide_navigator_item, new int[] {
-			R.id.tv_left_menu_name, R.id.left_iv_icon },
-			leftMenuItems, null, position);
+						R.id.tv_left_menu_name, R.id.left_iv_icon },
+				leftMenuItems, null, position);
 		mlvMenu.setAdapter(leftMenuAdapter);
 	}
 
@@ -212,11 +213,15 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 		if (fragments.size() == 1) {// 退出到首页
 
-			managers.BackPress(this);
+			if (managers.fragments.size() > 1) {
+				managers.BackPress(this);
+			} else {
+				managers.ChangeFragment(new MainIndexFragment());
+
+			}
 
 		} else {
 			FragmentWapper f = fragments.get(fragments.size() - 2);
-
 			this.menuItem = f.menuItem;
 			this.position = f.position;
 			this.fragmentName = f.fName;
@@ -277,9 +282,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		MenuItem checkMenuItem = (MenuItem) parent.getItemAtPosition(position);
 		if (checkMenuItem.getName().equals("政民互动")) {// 为回退特殊处理
 
-
 			this.fragmentName = Constants.FragmentName.MAINMINEFRAGMENT;
-
 
 		} else {
 			this.fragmentName = null;
@@ -297,7 +300,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 		switch (v.getId()) {
 		case R.id.login_tv_userlogin:// 登录处理
-			
+
 			this.menuItem = null;
 
 			this.fragmentName = Constants.FragmentName.LOGIN_FRAGMENT;

@@ -1,7 +1,5 @@
 package com.wuxi.app.fragment;
 
-import org.xmlpull.v1.XmlPullParser;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,7 +15,7 @@ import com.wuxi.app.listeners.SlideLinstener;
 
 public abstract class BaseSlideFragment extends BaseFragment {
 
-	protected View view = null;
+	protected View view ;
 	protected SlideLinstener slideLinstener;
 	public ImageView OPearn_btn, Member_btnm, back_btn;
 	public TextView Title_text;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -20,6 +21,13 @@ public class FragmentManagers {
 		if (instance == null)
 			instance = new FragmentManagers();
 		return instance;
+	}
+	
+	public void popFragment(){
+		
+		FragmentManager manager = fragmentActivity.getSupportFragmentManager();
+		manager.popBackStack();
+		fragments.remove(fragments.size()-1);
 	}
 
 	/***
@@ -49,7 +57,6 @@ public class FragmentManagers {
 	public void ChangeFragment(BaseFragment saveFragment) {
 		saveFragment.setManagers(this);
 		RemoveAllFragment();
-
 		onTransaction(saveFragment);
 	}
 
@@ -92,8 +99,10 @@ public class FragmentManagers {
 		FragmentManager manager = fragmentActivity.getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(FRAME_CONTENT, saveFragment);
+		ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
 		ft.addToBackStack(null);
 		ft.commit();
+
 	}
 
 	public void onTransaction(BaseFragment saveFragment, String arg,
@@ -101,7 +110,9 @@ public class FragmentManagers {
 		FragmentManager manager = fragmentActivity.getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.add(FRAME_CONTENT, saveFragment, fragments.size() + "");
-		ft.addToBackStack(null);// 保存状态大堆栈
+		if (isSave) {
+			ft.addToBackStack(null);// 保存状态大堆栈
+		}
 		ft.commit();
 
 	}

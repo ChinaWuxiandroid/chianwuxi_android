@@ -8,7 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@android:id/tabcontent"
-        android:background="#D6CFCE" >
+        android:background="@android:color/transparent" >
     </FrameLayout>
 
     <FrameLayout

@@ -60,33 +60,36 @@ public class MainActivity extends FragmentActivity implements
 		
 			slideLevelFragment
 					.setFragmentName(Constants.FragmentName.MAINSEARCH_FRAGMENT);
-			fragmentManagers.IntentFragment(slideLevelFragment);
+			fragmentManagers.ChangeFragment(slideLevelFragment);
+			mCurrentFragmentId = checkedId;
 			break;
 
 		case R.id.main_tab_login_reg:// 登录注册
-
 			
 			slideLevelFragment
 					.setFragmentName(Constants.FragmentName.LOGIN_FRAGMENT);
-			fragmentManagers.IntentFragment(slideLevelFragment);
-			mCurrentFragmentId = checkedId;
 
+		
+			fragmentManagers.ChangeFragment(slideLevelFragment);
+			mCurrentFragmentId = checkedId;
+			
+			
 			break;
 
 		case R.id.main_tab_mine:
-			
-
+		
 			slideLevelFragment
 					.setFragmentName(Constants.FragmentName.MAINMINEFRAGMENT);
-			fragmentManagers.IntentFragment(slideLevelFragment);
+			fragmentManagers.ChangeFragment(slideLevelFragment);
 			mCurrentFragmentId = checkedId;
+
 			break;
 
 		case R.id.main_tab_more:
 			
 			slideLevelFragment
 					.setFragmentName(Constants.FragmentName.SYSTEMSETF_RAGMENT);
-			fragmentManagers.IntentFragment(slideLevelFragment);
+			fragmentManagers.ChangeFragment(slideLevelFragment);
 			mCurrentFragmentId = checkedId;
 
 			break;
@@ -98,6 +101,18 @@ public class MainActivity extends FragmentActivity implements
 		fragmentManagers.setFragmentActivity(getContext());
 		fragmentManagers.ChangeFragment(new MainIndexFragment());
 		ChangeFragment(new MainIndexFragment(), R.id.main_tab_index);
+
+	}
+
+	public void clearFragment() {
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				fragmentManagers.RemoveAllFragment();
+			}
+		}).start();
 
 	}
 
