@@ -74,6 +74,13 @@ public class Constants {
 		 * */
 		public static final String HOTREVIEW_LIST_URL = "http://3g.wuxi.gov.cn/api/hotreview/list.json";
 
+		
+		/**
+		 * 热点话题内容 URL
+		 * */
+		public static final String HOTREVIEWCONTENT_LIST_URL = "http://3g.wuxi.gov.cn/api/hotreview/{id}.json";
+		
+		
 		/**
 		 * 分页获取立法征求意见和民意征集 URL
 		 * */

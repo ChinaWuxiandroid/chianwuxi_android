@@ -17,8 +17,11 @@ import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotR
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleMineFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePetitionReceptFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleSuggestFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleWeibosFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.domain.MenuItem;
 
@@ -62,18 +65,18 @@ public class MainMineFragment extends BaseSlideFragment {
 		mainMenu_listView.setSelection(0);
 		mainMenu_listView.setAdapter(adapter);
 		mainMenu_listView
-				.setOnItemClickListener(new listViewOnItemClickListener());
+		.setOnItemClickListener(new listViewOnItemClickListener());
 	}
 
-	
+
 
 	@Override
 	protected int getLayoutId() {
 		return R.layout.main_me_fragment_layout;
 	}
 
-	
-	
+
+
 	/*
 	 * 暂时未知怎样获取 期布局MenuItem 先根据其Id固定获取 id= "402881de3f758726013f75873a3200a6"
 	 */
@@ -144,45 +147,67 @@ public class MainMineFragment extends BaseSlideFragment {
 			adapter.setSelectedPosition(position); // 刷新左侧导航listView背景
 			adapter.notifyDataSetInvalidated();
 
-			switch (position) {
-			case 0:
-				initView();
+			switch (listMenus.get(position).getType()) {
+
+			case MenuItem.CUSTOM_MENU:
+				if(listMenus.get(position).getName().equals("征求意见平台")){
+					MainMineFragment g2 = new GoverInterPeopleSuggestFragment();
+					onTransaction(g2);
+				}
+				else if(listMenus.get(position).getName().equals("政务微博群")){
+					MainMineFragment g4 = new GoverInterPeopleWeibosFragment();
+					onTransaction(g4);
+				}
 				break;
-			case 1:
-				MainMineFragment g1 = new GoverInterPeople12345Fragment();
-				onTransaction(g1);
+
+			case MenuItem.CHANNEL_MENU:
+				if(listMenus.get(position).getName().equals("魅力锡城")){
+
+				}
+				else if(listMenus.get(position).getName().equals("信访接待")){
+					MainMineFragment g9 = new GoverInterPeoplePetitionReceptFragment();
+					onTransaction(g9);
+				}
 				break;
-			case 2:
-				MainMineFragment g2 = new GoverInterPeopleSuggestFragment();
-				onTransaction(g2);
+			case MenuItem.APP_MENU:
+				//我的政民互动
+				if(listMenus.get(position).getAppUI().equals("MyPoliticalInteraction")){
+					initView();
+				}
+				//1345来信办理平台
+				else if(listMenus.get(position).getAppUI().equals("Letter12345")){
+					MainMineFragment g1 = new GoverInterPeople12345Fragment();
+					onTransaction(g1);
+				}
+				//视频直播平台
+				else if(listMenus.get(position).getAppUI().equals("VideoBroadcastPlatform")){
+					MainMineFragment g3 = new GoverInterPeopleVideoLiveFragment();
+					onTransaction(g3);
+				}
+				//公众论坛
+				else if(listMenus.get(position).getAppUI().equals("PublicBBS")){
+					MainMineFragment g5 = new GoverInterPeoplePublicForumFragment();
+					onTransaction(g5);
+				}
+				//热点话题
+				else if(listMenus.get(position).getAppUI().equals("HotTopic")){
+					MainMineFragment g6 = new GoverInterPeopleHotReviewFragment();
+					onTransaction(g6);
+				}
+				//公开电话
+				else if(listMenus.get(position).getAppUI().equals("PublicTel")){
+					MainMineFragment g7 = new GoverInterPeopleOpenTelFragment();
+					onTransaction(g7);
+				}
+				//公众监督
+				else if(listMenus.get(position).getAppUI().equals("PublicOversight")){
+					MainMineFragment g8 = new GoverInterPeoplePublicSuperviseFragment();
+					onTransaction(g8);
+				}
 				break;
-			case 3:
-				GoverInterPeople12345Fragment g3 = new GoverInterPeople12345Fragment();
-				onTransaction(g3);
+			case MenuItem.WAP_MENU:
 				break;
-			case 4:
-				GoverInterPeople12345Fragment g4 = new GoverInterPeople12345Fragment();
-				onTransaction(g4);
-				break;
-			case 5:
-				GoverInterPeople12345Fragment g5 = new GoverInterPeople12345Fragment();
-				onTransaction(g5);
-				break;
-			case 6:
-				MainMineFragment g6 = new GoverInterPeopleHotReviewFragment();
-				onTransaction(g6);
-				break;
-			case 7:
-				MainMineFragment g7 = new GoverInterPeopleOpenTelFragment();
-				onTransaction(g7);
-				break;
-			case 8:
-				MainMineFragment g8 = new GoverInterPeoplePublicSuperviseFragment();
-				onTransaction(g8);
-				break;
-			case 9:
-				MainMineFragment g9 = new GoverInterPeoplePetitionReceptFragment();
-				onTransaction(g9);
+			case MenuItem.LINK_MENU:
 				break;
 			}
 		}
@@ -209,7 +234,4 @@ public class MainMineFragment extends BaseSlideFragment {
 	protected String getTitleText() {
 		return "政民互动";
 	}
-
-	
-
 }
