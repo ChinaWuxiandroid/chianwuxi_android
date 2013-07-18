@@ -13,6 +13,8 @@ import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.LetterWrapper;
 import com.wuxi.domain.MyLetter;
+import com.wuxi.domain.PoliticsWrapper;
+import com.wuxi.domain.PoliticsWrapper.Politics;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -134,7 +136,9 @@ public class LetterService extends Service{
 	 * @throws NODataException 
 	 * */
 	public boolean submitMyLetter(MyLetter myLetter) throws NetException, JSONException, NODataException{
+
 		if (!checkNet()) {
+			System.out.println("net error");
 			throw new NetException(Constants.ExceptionMessage.NO_NET); // 检查网络
 		}
 
@@ -148,20 +152,18 @@ public class LetterService extends Service{
 				.replace("{msgstatus}",String.valueOf(myLetter.getMsgStatus()) );
 
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+
 		if (resultStr != null) {
-
 			JSONObject jsonObject = new JSONObject(resultStr);
-			Object jres = jsonObject.get("result");
-
-			if (!jres.toString().equals("null")) {
-				return ((JSONObject) jres).getBoolean("success");
-			} else {
-				return false;
-			}
-
+//			JSONObject jresult = jsonObject.getJSONObject("result");
+//			
+//			System.out.println("jresult:"+jresult);
+			
+			return  jsonObject.getBoolean("success");
 		} else {
 			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);
 		}
+		
 	}
-	
+
 }

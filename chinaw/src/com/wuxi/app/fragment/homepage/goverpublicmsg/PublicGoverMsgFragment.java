@@ -22,7 +22,7 @@ import com.wuxi.exception.NetException;
 
 public class PublicGoverMsgFragment extends MenuItemMainFragment{
 
-	
+
 	@Override
 	public void initializSubFragmentsLayout(List<MenuItem> items) {
 		// TODO Auto-generated method stub
@@ -45,6 +45,7 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 									.getSubChannels(menu.getChannelId());
 
 							if (channels != null) {
+								System.out.println("channels:"+channels.get(0).getChannelName());
 								menu.setContentFragment(InfoNavigatorWithContentFragment.class);
 							} else {
 								menu.setContentFragment(ContentListFragment.class);// 内容列表界面
@@ -69,7 +70,7 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 			}
 		}
 	}
-	
+
 
 	@Override
 	protected int getTitlePerScreenItemCount() {
@@ -93,6 +94,4 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 		return menuItem.getName();
 	}
 
-	
-	
 }

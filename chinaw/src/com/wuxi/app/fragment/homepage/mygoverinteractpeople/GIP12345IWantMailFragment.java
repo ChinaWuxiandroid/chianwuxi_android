@@ -2,6 +2,8 @@ package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
 import org.json.JSONException;
 
+import android.annotation.SuppressLint;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -27,8 +29,11 @@ import com.wuxi.exception.NetException;
  * @author 杨宸 智佳
  * */
 
-public class GIP12345IWantMailFragment extends RadioButtonChangeFragment
-		implements OnClickListener {
+public class GIP12345IWantMailFragment extends RadioButtonChangeFragment {
+
+	private final static int SEND_SUCCESS=1;
+	private final static int SEND_FAILED=0;
+
 
 	private MyLetter myLetter;
 
@@ -56,48 +61,94 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment
 	ImageButton upload;
 	ImageButton send;
 
+
 	private final int[] radioButtonIds = {
+
 			R.id.gip_12345_iwantmail_radioButton_iwantmail,
 			R.id.gip_12345_iwantmail_radioButton_mustKonwMail,
 			R.id.gip_12345_iwantmail_radioButton_mayorBoxRule };
 
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
+	@SuppressLint("HandlerLeak")
+	private Handler handler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			String tip = "";
 
-		switch (v.getId()) {
-
-		case R.id.gip_12345_iwantmail_imageBtn_upload:
-			Toast.makeText(context, "上传附件（功能暂未实现）", 1000).show();
-			break;
-		case R.id.gip_12345_iwantmail_imageBtn_send:
-			myLetter.setAccess_token(Constants.SharepreferenceKey.TEST_ACCESSTOKEN);
-			myLetter.setTitle(title_editText.getText().toString());
-			myLetter.setContent(content_editText.getText().toString());
-			try {
-				submitMyLetter();
-			} catch (NetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NODataException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if (msg.obj != null) {
+				tip = msg.obj.toString();
 			}
-			break;
+			switch (msg.what) {
+			case SEND_SUCCESS:
+				Toast.makeText(context, "提交成功！", 2000).show();
+				break;
+			case SEND_FAILED:
+				Toast.makeText(context, "提交失败！", 2000).show();
+				break;
+			}
+		};
+	};
+
+
+	public class OnClick implements OnClickListener{
+
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+
+			switch (v.getId()) {
+
+			case R.id.gip_12345_iwantmail_imageBtn_upload:
+				Toast.makeText(context, "上传附件（功能暂未实现）", 1000).show();
+				break;
+			case R.id.gip_12345_iwantmail_imageBtn_send:
+				myLetter.setAccess_token(Constants.SharepreferenceKey.TEST_ACCESSTOKEN);
+				myLetter.setTitle(title_editText.getText().toString());
+				myLetter.setContent(content_editText.getText().toString());
+				try {
+					submitMyLetter();
+				} catch (NetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NODataException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			}
 		}
+
 	}
 
-	public void submitMyLetter() throws NetException, JSONException,
-			NODataException {
-		LetterService service = new LetterService(context);
-		if (service.submitMyLetter(myLetter))
-			Toast.makeText(context, "提交成功！", 2000).show();
-		else
-			Toast.makeText(context, "提交失败！", 2000).show();
 
+
+	public void submitMyLetter() throws NetException, JSONException, NODataException{
+
+		new Thread(new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				LetterService service=new LetterService(context);
+				try {
+					if(service.submitMyLetter(myLetter)){
+						handler.sendEmptyMessage(SEND_SUCCESS);					
+					}						
+					else {
+						handler.sendEmptyMessage(SEND_FAILED);	
+					}
+
+				} catch (NetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NODataException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}}).start();
 	}
 
 	@Override
@@ -190,7 +241,7 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment
 				.createFromResource(context, R.array.mailBoxType,
 						R.layout.my_spinner_small_item);
 		mailBoxType_Spinner_adapter
-				.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);
+		.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);
 		mailBoxType.setAdapter(mailBoxType_Spinner_adapter);
 		mailBoxType.setVisibility(View.VISIBLE);
 
@@ -209,8 +260,8 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment
 		isReplyMail_radioGroup.setOnCheckedChangeListener(this);
 		isReplyMsg_radioGroup.setOnCheckedChangeListener(this);
 
-		upload.setOnClickListener(this);
-		send.setOnClickListener(this);
+		upload.setOnClickListener(new OnClick());
+		send.setOnClickListener(new OnClick());
 
 		mailBoxType.setOnItemSelectedListener(new OnItemSelectedListener() {
 
