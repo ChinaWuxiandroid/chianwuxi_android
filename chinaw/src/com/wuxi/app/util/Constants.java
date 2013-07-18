@@ -270,9 +270,15 @@ public class Constants {
 		 */
 		SYSTEMSETF_RAGMENT,
 		/**
-		 * 
+		 *首页常用栏设置 
 		 */
-		MENUITEMSET_FRAGMENT
+		MENUITEMSET_FRAGMENT,
+		
+		/**
+		 * 网站地图
+		 */
+		
+		SITEMAP_FRAGMENT
 		;
 		
 	}
