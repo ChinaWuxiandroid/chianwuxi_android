@@ -255,7 +255,23 @@ public class Constants {
 		/**
 		 * 注册 fragments
 		 */
-		REGIST_FRAGMENT;
+		REGIST_FRAGMENT,
+		
+		/**
+		 * 全站搜索
+		 */
+		MAINSEARCH_FRAGMENT,
+		/**
+		 * 政务大厅
+		 */
+		MAINMINEFRAGMENT,
+		/**
+		 * 系统设置
+		 */
+		SYSTEMSETF_RAGMENT
+		
+		;
+		
 	}
 
 }

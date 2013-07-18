@@ -9,6 +9,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -16,7 +17,7 @@ import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.engine.UserService;
-import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
+import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.MD5Encoder;
@@ -28,7 +29,7 @@ import com.wuxi.exception.NetException;
  * 
  * @author wanglu 泰得利通 登录
  */
-public class LoginFragment extends HomeBaseSlideLevelFragment {
+public class LoginFragment extends BaseSlideFragment implements OnClickListener {
 
 	private static final int LOGIN_SUCCESS = 0;// 登录成功
 	protected static final int LOGIN_FAIL = 1;// 登录失败
@@ -60,7 +61,8 @@ public class LoginFragment extends HomeBaseSlideLevelFragment {
 	};
 
 	@Override
-	protected void initUI() {
+	public void initUI() {
+		slideLinstener.closeSlideMenu();//关掉左右
 		super.initUI();
 		login_btn_login = (Button) view.findViewById(R.id.login_btn_login);
 		login_btn_regist = (Button) view.findViewById(R.id.login_btn_regist);
@@ -82,14 +84,14 @@ public class LoginFragment extends HomeBaseSlideLevelFragment {
 						Context.MODE_PRIVATE);
 
 		Editor editor = sp.edit();
-	
+
 		editor.putString(Constants.SharepreferenceKey.ACCESSTOKEN,
 				user.getAccessToken());
 		editor.putString(Constants.SharepreferenceKey.REFRESHTOKEN,
 				user.getRefreshToken());
 		editor.putString(Constants.SharepreferenceKey.USERNAME,
 				user.getUserName());
-		editor.commit();//tijiao
+		editor.commit();// tijiao
 
 		Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
 
@@ -97,7 +99,6 @@ public class LoginFragment extends HomeBaseSlideLevelFragment {
 
 	@Override
 	public void onClick(View v) {
-		super.onClick(v);
 
 		switch (v.getId()) {
 		case R.id.login_btn_login:
@@ -106,7 +107,7 @@ public class LoginFragment extends HomeBaseSlideLevelFragment {
 			}
 			break;
 		case R.id.login_btn_regist:
-			HomeBaseSlideLevelFragment registFragment = new RegisterFragment();
+			RegisterFragment registFragment = new RegisterFragment();
 			managers.IntentFragment(registFragment);
 			break;
 		}
@@ -168,21 +169,6 @@ public class LoginFragment extends HomeBaseSlideLevelFragment {
 
 	}
 
-	@Override
-	protected int getLayoutId() {
-		return R.layout.login_slide_layout;
-	}
-
-	@Override
-	protected void onBack() {
-		managers.BackPress(this);
-	}
-
-	@Override
-	protected String getTtitle() {
-		return "登录注册";
-	}
-
 	/**
 	 * 
 	 * wanglu 泰得利通 验证登录
@@ -202,6 +188,19 @@ public class LoginFragment extends HomeBaseSlideLevelFragment {
 		}
 
 		return true;
+
+	}
+
+	@Override
+	protected String getTitleText() {
+
+		return "登录/注册";
+	}
+
+	@Override
+	protected int getLayoutId() {
+
+		return R.layout.index_login_layout;
 
 	}
 }

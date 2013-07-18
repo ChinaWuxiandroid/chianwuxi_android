@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
-import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
+import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.listeners.OnChangedListener;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
@@ -25,14 +25,14 @@ import com.wuxi.domain.MenuItem;
  * @author wanglu 泰得利通 首页常用栏设置
  * 
  */
-public class MenuItemSetFragment extends HomeBaseSlideLevelFragment {
+public class MenuItemSetFragment extends BaseSlideFragment {
 	private LinearLayout menuset_ll;
 	private List<MenuItem> items;
 	private View subView;
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void initUI() {
+	public  void initUI() {
 		super.initUI();
 		menuset_ll = (LinearLayout) view.findViewById(R.id.menuset_ll);
 		items = (List<MenuItem>) CacheUtil
@@ -196,18 +196,14 @@ public class MenuItemSetFragment extends HomeBaseSlideLevelFragment {
 	@Override
 	protected int getLayoutId() {
 
-		return R.layout.menuitem_set_slide_layout;
+		return R.layout.index_menuitem_set_layout;
 	}
 
 	@Override
-	protected void onBack() {
-
-		managers.BackPress(this);
-	}
-
-	@Override
-	protected String getTtitle() {
+	protected String getTitleText() {
+		
 		return "首页常用栏设置";
 	}
 
+	
 }

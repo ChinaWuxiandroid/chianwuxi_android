@@ -36,18 +36,19 @@ import com.wuxi.exception.NetException;
  */
 
 public class ChannelFragment extends BaseSlideFragment implements
-InitializContentLayoutListner, OnClickListener {
+		InitializContentLayoutListner, OnClickListener {
+
+	
 
 	private TitleScrollLayout mtitleScrollLayout;
 	private static final int MANCOTENT_ID = R.id.model_main;
 	private static final int TITLE__LOAD_SUCESS = 0;
 	private static final int TITLE_LOAD_ERROR = 1;
 	protected static final String TAG = "ChannelFragment";
-	private LayoutInflater inflater;
+
 	private ImageButton ib_nextItems;
 	private MenuItem menuItem;// 菜单项
 	private List<Channel> titleChannels;// 头部频道
-	private Context context;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -70,29 +71,9 @@ InitializContentLayoutListner, OnClickListener {
 	};
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.fragment_chanel_layout, null);
-		this.InitBtn();
-		this.setFragmentTitle(menuItem.getChannelName());// 设置头部频道名称
-		this.inflater = inflater;
-		context = this.getActivity();
-		initUI();
-		return view;
-	}
+	public void initUI() {
 
-	@Override
-	public void bindContentLayout(Fragment fragment) {
-
-		bindFragment(fragment);
-
-	}
-
-	/**
-	 * 
-	 * wanglu 泰得利通 初始化界面
-	 */
-	private void initUI() {
+		super.initUI();
 		mtitleScrollLayout = (TitleScrollLayout) view
 				.findViewById(R.id.title_scroll_action);// 头部控件
 		mtitleScrollLayout.setInitializContentLayoutListner(this);// 设置绑定内容界面监听器
@@ -101,6 +82,12 @@ InitializContentLayoutListner, OnClickListener {
 		ib_nextItems.setOnClickListener(this);
 
 		loadTitleData();
+	}
+
+	@Override
+	public void bindContentLayout(Fragment fragment) {
+
+		bindFragment(fragment);
 
 	}
 
@@ -162,7 +149,7 @@ InitializContentLayoutListner, OnClickListener {
 			}
 		}
 
-				).start();
+		).start();
 
 	}
 
@@ -171,7 +158,7 @@ InitializContentLayoutListner, OnClickListener {
 	 */
 	private void showTitleData() {
 		initializSubFragmentsLayout();
-		mtitleScrollLayout.initChannelScreen(context, inflater, titleChannels);// 初始化头部空间
+		mtitleScrollLayout.initChannelScreen(context, mInflater, titleChannels);// 初始化头部空间
 		initData(titleChannels.get(0));// 默认显示第一个channel的子channel页
 
 	}
@@ -191,10 +178,9 @@ InitializContentLayoutListner, OnClickListener {
 
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		ft.replace(MANCOTENT_ID, fragment);// 替换内容界面
-
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-		ft.addToBackStack(null);
 		ft.commit();
+		
 	}
 
 	public void setMenuItem(MenuItem menuItem) {
@@ -211,5 +197,16 @@ InitializContentLayoutListner, OnClickListener {
 				channel.setContentFragment(NavigatorWithContentFragment.class);
 			}
 		}
+	}
+
+	@Override
+	protected int getLayoutId() {
+		return R.layout.fragment_chanel_layout;
+	}
+
+	@Override
+	protected String getTitleText() {
+
+		return menuItem.getName();
 	}
 }

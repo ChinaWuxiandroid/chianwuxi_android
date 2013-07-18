@@ -10,16 +10,16 @@ import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.MainSearchFragment;
-import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
 
 /**
  * 搜索内容 fragment
+ * 
  * @author 杨宸 智佳
  * */
 
-public class SearchResultShowFragment extends MainSearchFragment{
+public class SearchResultShowFragment extends MainSearchFragment {
 	public View view = null;
-	public ImageView back_btn, toList_btn,setting_btn,share_btn;
+	public ImageView back_btn, toList_btn, setting_btn, share_btn;
 	public TextView Title_text;
 
 	protected LayoutInflater mInflater;
@@ -31,41 +31,44 @@ public class SearchResultShowFragment extends MainSearchFragment{
 		mInflater = inflater;
 		context = getActivity();
 		findView();
-		
+
 		return view;
 	}
 
-	public void findView(){
-		back_btn=(ImageView)view.findViewById(R.id.search_content_back_btn);
-		toList_btn=(ImageView)view.findViewById(R.id.search_content_show_list);
-		setting_btn=(ImageView)view.findViewById(R.id.search_content_setting);
-		share_btn=(ImageView)view.findViewById(R.id.search_content_share);
-		
+	public void findView() {
+		back_btn = (ImageView) view.findViewById(R.id.search_content_back_btn);
+		toList_btn = (ImageView) view
+				.findViewById(R.id.search_content_show_list);
+		setting_btn = (ImageView) view
+				.findViewById(R.id.search_content_setting);
+		share_btn = (ImageView) view.findViewById(R.id.search_content_share);
+
 		back_btn.setOnClickListener(this);
 		toList_btn.setOnClickListener(this);
 		setting_btn.setOnClickListener(this);
 		share_btn.setOnClickListener(this);
-		
+
 	}
-	
+
 	@Override
 	public void onClick(View v) {
 		super.onClick(v);
 
 		switch (v.getId()) {
 		case R.id.search_content_back_btn:
-//			HomeBaseSlideLevelFragment searchNormalFragment = new MainSearchFragment();
-//			managers.IntentFragment(searchNormalFragment);
+			// HomeBaseSlideLevelFragment searchNormalFragment = new
+			// MainSearchFragment();
+			// managers.IntentFragment(searchNormalFragment);
 			managers.BackPress(this);
 			break;
 		case R.id.search_content_show_list:
-			HomeBaseSlideLevelFragment searchNormalFragment = new MainSearchFragment();
+			MainSearchFragment searchNormalFragment = new MainSearchFragment();
 			managers.IntentFragment(searchNormalFragment);
 			break;
 		case R.id.search_content_setting:
 			Toast.makeText(context, "显示设置", 2000).show();
 			break;
-			
+
 		case R.id.search_content_share:
 			Toast.makeText(context, "分享", 2000).show();
 			break;

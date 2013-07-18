@@ -1,7 +1,5 @@
 package com.wuxi.app.fragment.search;
 
-import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -9,29 +7,27 @@ import android.widget.ListView;
 
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.SimpleListViewFragmentAdapter;
-import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
+import com.wuxi.app.fragment.BaseSlideFragment;
 
 /**
  * 高级搜索的结果列表的fragment
  * @author 杨宸 智佳
  * */
 
-public class AdvancedSearchResultListFragment extends HomeBaseSlideLevelFragment{
+public class AdvancedSearchResultListFragment extends BaseSlideFragment{
 	
 	
 	
 	
 	
-	private Context context; 
-	protected LayoutInflater mInflater;
+
 	private ListView advanced_result_listView;
 	
 	
 	
 	@Override
-	protected void initUI() {
-		context = getActivity();
-		mInflater=inflater;
+	public void initUI() {
+		
 		super.initUI();
 		findView();
 	}
@@ -55,7 +51,7 @@ public class AdvancedSearchResultListFragment extends HomeBaseSlideLevelFragment
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long id) {
-				HomeBaseSlideLevelFragment searchResultFragment = new SearchResultShowFragment();
+				SearchResultShowFragment searchResultFragment = new SearchResultShowFragment();
 				managers.IntentFragment(searchResultFragment);
 				
 			}});
@@ -63,25 +59,17 @@ public class AdvancedSearchResultListFragment extends HomeBaseSlideLevelFragment
 	}
 
 	
-	@Override
-	public void onClick(View v) {
-		super.onClick(v);
-	}
+	
 	@Override
 	protected int getLayoutId() {
-		// TODO Auto-generated method stub
-		return R.layout.slide_search_advanced_result_layout;
+		return R.layout.search_advanced_searchresult_layout;
 	}
 
 	@Override
-	protected void onBack() {
-		managers.BackPress(this);
-		
-	}
-
-	@Override
-	protected String getTtitle() {
-		// TODO Auto-generated method stub
+	protected String getTitleText() {
 		return "全站搜索";
 	}
+
+	
+
 }

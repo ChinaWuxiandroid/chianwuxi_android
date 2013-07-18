@@ -5,6 +5,7 @@ import org.json.JSONException;
 import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -23,48 +24,57 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- *12345来信办理平台  主Fragment --我要写信  fragment
+ * 12345来信办理平台 主Fragment --我要写信 fragment
+ * 
  * @author 杨宸 智佳
  * */
 
+<<<<<<< HEAD
 public class GIP12345IWantMailFragment extends RadioButtonChangeFragment{
 
 	private final static int SEND_SUCCESS=1;
 	private final static int SEND_FAILED=0;
+=======
+public class GIP12345IWantMailFragment extends RadioButtonChangeFragment
+		implements OnClickListener {
+>>>>>>> 0ff2f65410b4072861a6ebc127badd2cd7d786b2
 
 	private MyLetter myLetter;
 
 	RadioGroup mailType_radioGroup;
-	public final String doprojectid_mayorBox="6b8e124e-1e5c-4a11-8dd3-c6623c809eff";  //市长信箱
-	public final String doprojectid_suggestAndComplaint="bfffa273-086a-47cb-a7a8-7ae8140550db";  //市长信箱
+	public final String doprojectid_mayorBox = "6b8e124e-1e5c-4a11-8dd3-c6623c809eff"; // 市长信箱
+	public final String doprojectid_suggestAndComplaint = "bfffa273-086a-47cb-a7a8-7ae8140550db"; // 市长信箱
 
 	RadioGroup isOpen_radioGroup;
-	public final int open=1;
-	public final int notopen=0;
+	public final int open = 1;
+	public final int notopen = 0;
 
 	RadioGroup isReplyMail_radioGroup;
-	public final int replyMail=1;
-	public final int notreplyMail=0;
+	public final int replyMail = 1;
+	public final int notreplyMail = 0;
 
 	RadioGroup isReplyMsg_radioGroup;
-	public final int replyMsg=1;
-	public final int notreplyMsg=0;
+	public final int replyMsg = 1;
+	public final int notreplyMsg = 0;
 
 	Spinner mailBoxType;
 
-	EditText title_editText; 
-	EditText content_editText; 
+	EditText title_editText;
+	EditText content_editText;
 
 	ImageButton upload;
 	ImageButton send;
 
+<<<<<<< HEAD
 
 
 	private final  int[] radioButtonIds={
+=======
+	private final int[] radioButtonIds = {
+>>>>>>> 0ff2f65410b4072861a6ebc127badd2cd7d786b2
 			R.id.gip_12345_iwantmail_radioButton_iwantmail,
 			R.id.gip_12345_iwantmail_radioButton_mustKonwMail,
-			R.id.gip_12345_iwantmail_radioButton_mayorBoxRule
-	};	
+			R.id.gip_12345_iwantmail_radioButton_mayorBoxRule };
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -89,7 +99,7 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment{
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		super.onClick(v);
+
 		switch (v.getId()) {
 
 		case R.id.gip_12345_iwantmail_imageBtn_upload:
@@ -110,11 +120,12 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment{
 			} catch (NODataException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}		
+			}
 			break;
 		}
 	}
 
+<<<<<<< HEAD
 	public void submitMyLetter() throws NetException, JSONException, NODataException{
 
 		new Thread(new Runnable(){
@@ -143,6 +154,15 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment{
 				}
 			}}).start();
 
+=======
+	public void submitMyLetter() throws NetException, JSONException,
+			NODataException {
+		LetterService service = new LetterService(context);
+		if (service.submitMyLetter(myLetter))
+			Toast.makeText(context, "提交成功！", 2000).show();
+		else
+			Toast.makeText(context, "提交失败！", 2000).show();
+>>>>>>> 0ff2f65410b4072861a6ebc127badd2cd7d786b2
 
 	}
 
@@ -153,14 +173,13 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment{
 		switch (checkedId) {
 
 		case R.id.gip_12345_iwantmail_radioButton_iwantmail:
-			//			init();
+			// init();
 			break;
 
-		case R.id.gip_12345_iwantmail_radioButton_mustKonwMail:	
+		case R.id.gip_12345_iwantmail_radioButton_mustKonwMail:
 			break;
 
-
-		case R.id.gip_12345_iwantmail_radioButton_mayorBoxRule:	
+		case R.id.gip_12345_iwantmail_radioButton_mayorBoxRule:
 			break;
 
 		case R.id.gip_12345_iwantmail_radiobutton_mayorbox:
@@ -220,25 +239,36 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment{
 	@Override
 	protected void init() {
 		// TODO Auto-generated method stub
-		myLetter=new MyLetter();
+		myLetter = new MyLetter();
 
-		mailType_radioGroup=(RadioGroup)view.findViewById(R.id.gip_12345_iwantmail_radiogroup_mailType);
-		isOpen_radioGroup=(RadioGroup)view.findViewById(R.id.gip_12345_iwantmail_radiogroup_isopen);
-		isReplyMail_radioGroup=(RadioGroup)view.findViewById(R.id.gip_12345_iwantmail_radiogroup_isNeedMailRaply);
-		isReplyMsg_radioGroup=(RadioGroup)view.findViewById(R.id.gip_12345_iwantmail_radiogroup_isNeedMsgRaply);
+		mailType_radioGroup = (RadioGroup) view
+				.findViewById(R.id.gip_12345_iwantmail_radiogroup_mailType);
+		isOpen_radioGroup = (RadioGroup) view
+				.findViewById(R.id.gip_12345_iwantmail_radiogroup_isopen);
+		isReplyMail_radioGroup = (RadioGroup) view
+				.findViewById(R.id.gip_12345_iwantmail_radiogroup_isNeedMailRaply);
+		isReplyMsg_radioGroup = (RadioGroup) view
+				.findViewById(R.id.gip_12345_iwantmail_radiogroup_isNeedMsgRaply);
 
+		mailBoxType = (Spinner) view
+				.findViewById(R.id.gip_12345_iwantmail_spinner_type);
+		ArrayAdapter mailBoxType_Spinner_adapter = ArrayAdapter
+				.createFromResource(context, R.array.mailBoxType,
+						R.layout.my_spinner_small_item);
+		mailBoxType_Spinner_adapter
+				.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);
+		mailBoxType.setAdapter(mailBoxType_Spinner_adapter);
+		mailBoxType.setVisibility(View.VISIBLE);
 
-		mailBoxType=(Spinner)view.findViewById(R.id.gip_12345_iwantmail_spinner_type);
-		ArrayAdapter mailBoxType_Spinner_adapter = ArrayAdapter.createFromResource(context, R.array.mailBoxType, R.layout.my_spinner_small_item);  
-		mailBoxType_Spinner_adapter.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);  
-		mailBoxType.setAdapter(mailBoxType_Spinner_adapter);  
-		mailBoxType.setVisibility(View.VISIBLE); 
+		title_editText = (EditText) view
+				.findViewById(R.id.gip_12345_iwantmail_editText_title);
+		content_editText = (EditText) view
+				.findViewById(R.id.gip_12345_iwantmail_editText_content);
 
-		title_editText=(EditText)view.findViewById(R.id.gip_12345_iwantmail_editText_title);
-		content_editText=(EditText)view.findViewById(R.id.gip_12345_iwantmail_editText_content);
-
-		upload=(ImageButton)view.findViewById(R.id.gip_12345_iwantmail_imageBtn_upload);
-		send=(ImageButton)view.findViewById(R.id.gip_12345_iwantmail_imageBtn_send);
+		upload = (ImageButton) view
+				.findViewById(R.id.gip_12345_iwantmail_imageBtn_upload);
+		send = (ImageButton) view
+				.findViewById(R.id.gip_12345_iwantmail_imageBtn_send);
 
 		mailType_radioGroup.setOnCheckedChangeListener(this);
 		isOpen_radioGroup.setOnCheckedChangeListener(this);
@@ -251,10 +281,10 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment{
 		mailBoxType.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
-			public void onItemSelected(AdapterView<?> arg0, View view,
-					int p, long arg3) {
+			public void onItemSelected(AdapterView<?> arg0, View view, int p,
+					long arg3) {
 				// TODO Auto-generated method stub
-				myLetter.setDoprojectid(String.valueOf((p+1)));
+				myLetter.setDoprojectid(String.valueOf((p + 1)));
 			}
 
 			@Override

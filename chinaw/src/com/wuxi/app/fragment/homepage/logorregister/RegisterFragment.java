@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -16,7 +17,7 @@ import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.engine.UserService;
-import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
+import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.domain.MD5Encoder;
 import com.wuxi.domain.User;
 import com.wuxi.exception.NODataException;
@@ -28,7 +29,7 @@ import com.wuxi.exception.ResultException;
  * @author wanglu 泰得利通 注册
  * 
  */
-public class RegisterFragment extends HomeBaseSlideLevelFragment {
+public class RegisterFragment extends BaseSlideFragment implements OnClickListener {
 
 	protected static final int REGIST_SUCCESS = 1;// 登录成功
 
@@ -60,7 +61,7 @@ public class RegisterFragment extends HomeBaseSlideLevelFragment {
 	};
 
 	@Override
-	protected void initUI() {
+	public  void initUI() {
 		super.initUI();
 		et_username = (EditText) view.findViewById(R.id.et_username);
 		et_truename = (EditText) view.findViewById(R.id.et_truename);
@@ -89,7 +90,7 @@ public class RegisterFragment extends HomeBaseSlideLevelFragment {
 
 	@Override
 	public void onClick(View v) {
-		super.onClick(v);
+		
 		switch (v.getId()) {
 		case R.id.regist_btn_submit:// 提交
 			if (validate()) {
@@ -251,18 +252,16 @@ public class RegisterFragment extends HomeBaseSlideLevelFragment {
 
 	@Override
 	protected int getLayoutId() {
-		return R.layout.regist_slide_layout;
+		return R.layout.index_login_regist_layout;
 	}
 
 	@Override
-	protected void onBack() {
-		managers.BackPress(this);
+	protected String getTitleText() {
+		return "登录/注册";
 	}
 
-	@Override
-	protected String getTtitle() {
+	
 
-		return "登录注册";
-	}
+
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -20,6 +21,13 @@ public class FragmentManagers {
 		if (instance == null)
 			instance = new FragmentManagers();
 		return instance;
+	}
+	
+	public void popFragment(){
+		
+		FragmentManager manager = fragmentActivity.getSupportFragmentManager();
+		manager.popBackStack();
+		fragments.remove(fragments.size()-1);
 	}
 
 	/***
@@ -49,7 +57,6 @@ public class FragmentManagers {
 	public void ChangeFragment(BaseFragment saveFragment) {
 		saveFragment.setManagers(this);
 		RemoveAllFragment();
-
 		onTransaction(saveFragment);
 	}
 
@@ -92,16 +99,31 @@ public class FragmentManagers {
 		FragmentManager manager = fragmentActivity.getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(FRAME_CONTENT, saveFragment);
+		ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
 		ft.addToBackStack(null);
 		ft.commit();
-	}
 
+	}
 
 	public void onTransaction(BaseFragment saveFragment, String arg,
 			boolean isSave) {
 		FragmentManager manager = fragmentActivity.getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.add(FRAME_CONTENT, saveFragment, fragments.size() + "");
+		if (isSave) {
+			ft.addToBackStack(null);// 保存状态大堆栈
+		}
+		ft.commit();
+
+	}
+
+	public void AddAndRemove(BaseFragment oldFragment,
+			BaseFragment newFragment, String arg) {
+		newFragment.setManagers(this);
+		FragmentManager manager = fragmentActivity.getSupportFragmentManager();
+		FragmentTransaction ft = manager.beginTransaction();
+		ft.remove(oldFragment).add(FRAME_CONTENT, newFragment, arg);
+		clear(oldFragment);
 		ft.addToBackStack(null);// 保存状态大堆栈
 		ft.commit();
 
@@ -114,7 +136,6 @@ public class FragmentManagers {
 		ft.addToBackStack(null);
 		ft.commit();
 
-
 	}
 
 	public void RemoveAllFragment() {
@@ -125,15 +146,15 @@ public class FragmentManagers {
 		}
 	}
 
-	//帮助类，打印  栈内所有Fragment
-//	public void printAllFragmentsInStack(String tag){
-//		int count=0;
-//		System.out.println("----"+tag+"------start---------");
-//		for(BaseFragment f:fragments){
-//			count++;
-//			System.out.println("----"+count+"  f:"+f.toString());
-//		}
-//		System.out.println("----------end---------");
-//	}
+	// 帮助类，打印 栈内所有Fragment
+	// public void printAllFragmentsInStack(String tag){
+	// int count=0;
+	// System.out.println("----"+tag+"------start---------");
+	// for(BaseFragment f:fragments){
+	// count++;
+	// System.out.println("----"+count+"  f:"+f.toString());
+	// }
+	// System.out.println("----------end---------");
+	// }
 
 }
