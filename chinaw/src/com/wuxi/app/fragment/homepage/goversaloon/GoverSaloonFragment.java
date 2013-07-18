@@ -5,14 +5,10 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -44,8 +40,6 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 	protected static final int LEFT_DATA__LOAD_ERROR = 0;// 左侧频道(菜单)加载失败
 
 	protected ListView mListView;// 左侧ListView
-	protected LayoutInflater mInflater;
-	private Context context;
 
 	private List<Channel> channels;
 	private List<MenuItem> menuItems;
@@ -81,23 +75,17 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 	};
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public void initUI() {
 
-		view = inflater.inflate(R.layout.goversaloon_main_layout, null);
+		super.initUI();
+
 		mListView = (ListView) view.findViewById(R.id.lv_left_navigator);
-		this.InitBtn();
-		this.setFragmentTitle(parentMenuItem.getName());// 设置头部名称
-		mInflater = inflater;
-		context = getActivity();
 		if (parentMenuItem.getType() == MenuItem.CHANNEL_MENU) {
 			loadChannelData();
 		} else if (parentMenuItem.getType() == MenuItem.CUSTOM_MENU) {// 普通菜单
 			loadMenuItemData();// 加载子菜单
 
 		}
-
-		return view;
 
 	}
 
@@ -260,7 +248,7 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 	private BaseFragment showMenItemContentFragment(MenuItem menuItem) {
 
 		GoverSaloonContentMainFragment goverSaloonContentMainFragment = new GoverSaloonContentMainFragment();
-		
+
 		goverSaloonContentMainFragment.setMenuItem(menuItem);
 		return goverSaloonContentMainFragment;
 	};
@@ -282,7 +270,7 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 		if (fragment != null) {
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
 			ft.replace(DETAIL_ID, fragment);// 替换视图
-			fragment.setManagers(managers);//传递mangers
+			fragment.setManagers(managers);// 传递mangers
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 			ft.commit();
 		}
@@ -291,6 +279,16 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 
 	public void setParentMenuItem(MenuItem parentMenuItem) {
 		this.parentMenuItem = parentMenuItem;
+	}
+
+	@Override
+	protected int getLayoutId() {
+		return R.layout.goversaloon_main_layout;
+	}
+
+	@Override
+	protected String getTitleText() {
+		return parentMenuItem.getName();
 	}
 
 }

@@ -5,16 +5,12 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -43,8 +39,8 @@ import com.wuxi.exception.NetException;
 public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 		InitializContentLayoutListner, OnClickListener {
 
-	private LayoutInflater inflater;
-	protected Context context;
+	
+	
 	protected MenuItem menuItem;
 	protected List<MenuItem> titleMenuItems;// 头部子菜单
 	protected TitleScrollLayout mtitleScrollLayout;
@@ -77,23 +73,14 @@ public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 		this.menuItem = menuItem;
 	}
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.fragment_chanel_layout, null);
-		this.InitBtn();
-		this.setFragmentTitle(menuItem.getName());// 设置头部名称
-		this.inflater = inflater;
-		context = this.getActivity();
-		initUI();
-		return view;
-	}
+	
 
 	/**
 	 * 
 	 * wanglu 泰得利通 初始化界面
 	 */
-	protected void initUI() {
+	public void initUI() {
+		super.initUI();
 		mtitleScrollLayout = (TitleScrollLayout) view
 				.findViewById(R.id.title_scroll_action);// 头部控件
 		mtitleScrollLayout.setInitializContentLayoutListner(this);// 设置绑定内容界面监听器
@@ -182,7 +169,7 @@ public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 		initializSubFragmentsLayout(titleMenuItems);// 绑定子界面
 
 		mtitleScrollLayout
-				.initMenuItemScreen(context, inflater, titleMenuItems);// 初始化头部空间
+				.initMenuItemScreen(context, mInflater, titleMenuItems);// 初始化头部空间
 
 	}
 
@@ -207,9 +194,7 @@ public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		ft.replace(MANCOTENT_ID, fragment);// 替换内容界面
-
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-		ft.addToBackStack(null);
 		ft.commit();
 	}
 

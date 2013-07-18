@@ -2,22 +2,23 @@ package com.wuxi.app.fragment.search;
 
 import android.content.Context;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.wuxi.app.R;
+import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.MainSearchFragment;
-import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
 
 /**
  * 高级搜索的fragment  
  * @author 杨宸 智佳
  * */
 
-public class AdvancedSearchFragment extends HomeBaseSlideLevelFragment{
-	private Context context; 
+public class AdvancedSearchFragment extends BaseSlideFragment implements OnClickListener{
+
 	private ImageButton toNormalSearch_Btn;   //跳转到普通检索  的按钮
 	private Spinner infoType_spinner,resultsPerPage_spinner,contentType_spinner;    //三种spinner
 	private ImageButton searchNow_Btn;   //立即搜索
@@ -26,8 +27,8 @@ public class AdvancedSearchFragment extends HomeBaseSlideLevelFragment{
 
 
 	@Override
-	protected void initUI() {
-		context = getActivity();
+	public  void initUI() {
+		
 		super.initUI();
 		findView();
 	}
@@ -70,16 +71,16 @@ public class AdvancedSearchFragment extends HomeBaseSlideLevelFragment{
 
 	@Override
 	public void onClick(View v) {
-		super.onClick(v);
+		
 
 		switch (v.getId()) {
 		case R.id.search_imageButton_to_normal_search:
-			HomeBaseSlideLevelFragment normalSearchFragment = new MainSearchFragment();
+			MainSearchFragment normalSearchFragment = new MainSearchFragment();
 			managers.IntentFragment(normalSearchFragment);
 
 			break;
 		case R.id.search_imageButton_search_now:
-			HomeBaseSlideLevelFragment searchAdvancedResultListFragment = new AdvancedSearchResultListFragment();
+			AdvancedSearchResultListFragment searchAdvancedResultListFragment = new AdvancedSearchResultListFragment();
 			managers.IntentFragment(searchAdvancedResultListFragment);
 			break;
 		}
@@ -88,17 +89,14 @@ public class AdvancedSearchFragment extends HomeBaseSlideLevelFragment{
 
 	@Override
 	protected int getLayoutId() {
-		return R.layout.slide_search_advanced_layout;
+		return R.layout.advanced_search_layout;
 	}
 
 	@Override
-	protected void onBack() {
-		managers.BackPress(this);
-	}
-
-	@Override
-	protected String getTtitle() {
+	protected String getTitleText() {
+		
 		return "全站搜索";
 	}
+
 
 }

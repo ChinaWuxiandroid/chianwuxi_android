@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
-import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
+import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Channel;
@@ -25,12 +25,12 @@ import com.wuxi.domain.MenuItem;
  * 
  * @author wanglu 泰得利通 网站地图
  */
-public class SiteMapFragment extends HomeBaseSlideLevelFragment {
+public class SiteMapFragment extends BaseSlideFragment {
 
 	private ExpandableListView site_map_elv;
 
 	@Override
-	protected void initUI() {
+	public  void initUI() {
 		super.initUI();
 		
 		site_map_elv = (ExpandableListView) view
@@ -260,18 +260,14 @@ public class SiteMapFragment extends HomeBaseSlideLevelFragment {
 
 	@Override
 	protected int getLayoutId() {
-		return R.layout.sitemap_slide_layout;
+		return R.layout.sitemap_layout;
 	}
 
 	@Override
-	protected void onBack() {
-
-		managers.BackPress(this);
-	}
-
-	@Override
-	protected String getTtitle() {
+	protected String getTitleText() {
 		return "网站地图";
 	}
+
+	
 
 }

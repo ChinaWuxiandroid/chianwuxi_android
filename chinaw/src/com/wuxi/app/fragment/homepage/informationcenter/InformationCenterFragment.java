@@ -2,6 +2,7 @@ package com.wuxi.app.fragment.homepage.informationcenter;
 
 import java.util.List;
 
+import com.wuxi.app.R;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
 import com.wuxi.app.listeners.InfoCenterInitLayoutImpl;
@@ -63,6 +64,18 @@ public class InformationCenterFragment extends MenuItemMainFragment {
 	protected int getTitlePerScreenItemCount() {
 		
 		return 7;
+	}
+
+	@Override
+	protected int getLayoutId() {
+		
+		return R.layout.fragment_chanel_layout;
+	}
+
+	@Override
+	protected String getTitleText() {
+		
+		return menuItem.getName();
 	}
 
 }

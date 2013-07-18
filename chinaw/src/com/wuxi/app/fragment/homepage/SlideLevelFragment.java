@@ -1,5 +1,6 @@
 package com.wuxi.app.fragment.homepage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
@@ -10,27 +11,30 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.LeftMenuAdapter;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.MainMineFragment;
+import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InformationCenterFragment;
 import com.wuxi.app.fragment.homepage.logorregister.LoginFragment;
-import com.wuxi.app.fragment.homepage.logorregister.RegisterFragment;
+import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
 import com.wuxi.app.listeners.SlideLinstener;
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.app.view.SlideMenuLayout;
 import com.wuxi.domain.MenuItem;
 
@@ -54,6 +58,13 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener,
 	private RadioButton right_menu_rb_mydownload;
 	private RadioButton right_menu_rb_myset;
 	private LeftMenuAdapter leftMenuAdapter;
+	private Constants.FragmentName fragmentName;// 显示的fragmentName名称
+	private FragmentManager manager;
+	private List<FragmentWapper> fragments = new ArrayList<FragmentWapper>(); // 记录每次切换到fragment信息以便回退
+
+	public void setFragmentName(Constants.FragmentName fragmentName) {
+		this.fragmentName = fragmentName;
+	}
 
 	public void setMenuItem(MenuItem menuItem) {
 		this.menuItem = menuItem;
@@ -91,7 +102,7 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener,
 		mlvMenu.setOnItemClickListener(this);
 
 		initLeftMenu();// 初始化左侧菜单数据
-		init();
+		initFragment();
 
 		return view;
 	}
@@ -109,8 +120,8 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener,
 		mlvMenu.setAdapter(leftMenuAdapter);
 	}
 
-	private void init() {
-		if (menuItem != null) {//
+	private void initFragment() {
+		if (menuItem != null && !menuItem.getName().equals("政民互动")) {//
 			switch (menuItem.getType()) {// 菜单类型
 
 			case MenuItem.CUSTOM_MENU:
@@ -147,18 +158,47 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener,
 				break;
 
 			}
+		} else {
+
+			switch (fragmentName) {
+			case LOGIN_FRAGMENT:// 登录
+				LoginFragment loginFragment = new LoginFragment();
+				onTransaction(loginFragment);
+				break;
+			case REGIST_FRAGMENT:// 注册
+				break;
+			case MAINSEARCH_FRAGMENT:// 全站搜索
+				MainSearchFragment searchFragment = new MainSearchFragment();
+				onTransaction(searchFragment);
+				break;
+			case MAINMINEFRAGMENT:// 政务名互动
+				MainMineFragment mainMineFragment = new MainMineFragment();
+				mainMineFragment.setMenuItem(menuItem);
+				onTransaction(mainMineFragment);
+				break;
+			case SYSTEMSETF_RAGMENT:// 系统设置
+				SystemSetFragment systemSetFragment = new SystemSetFragment();
+				onTransaction(systemSetFragment);
+				break;
+
+			}
+
 		}
 
 	}
 
 	private void onTransaction(BaseSlideFragment fragment) {
-		FragmentManager manager = getActivity().getSupportFragmentManager();
+		manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(FRAME_CONTENT, fragment);
 		fragment.setFragment(this);
 		ft.addToBackStack(null);
 		fragment.setManagers(managers);// 传递管理器
 		ft.commit();
+		FragmentWapper f = new FragmentWapper(this.menuItem, this.position,
+				this.fragmentName);
+
+		fragments.add(f);
 
 	}
 
@@ -168,7 +208,25 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener,
 	 */
 	@Override
 	public void onBack() {
-		managers.BackPress(this);
+
+		if (fragments.size() == 1) {// 退出到首页
+
+			managers.BackPress(this);
+
+		} else {
+			FragmentWapper f = fragments.get(fragments.size() - 2);
+
+			this.menuItem = f.menuItem;
+			this.position = f.position;
+			this.fragmentName = f.fName;
+			leftMenuAdapter.setSelectPosition(position);
+			leftMenuAdapter.notifyDataSetChanged();
+			initFragment();
+			fragments.remove(fragments.size() - 1);
+			fragments.remove(fragments.size() - 2);
+
+		}
+
 	}
 
 	public void openLeftSlideMenu() {
@@ -213,24 +271,21 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener,
 	public void onItemClick(AdapterView<?> parent, View arg1, int position,
 			long id) {
 
+		if (position == this.position)
+			return;
 		MenuItem checkMenuItem = (MenuItem) parent.getItemAtPosition(position);
 		if (checkMenuItem.getName().equals("政民互动")) {// 为回退特殊处理
 
-			MainMineFragment mainMineFragment = new MainMineFragment();
-			mainMineFragment.setMenuItem(checkMenuItem);
-			mainMineFragment.setMenuItem(checkMenuItem);//
-			mainMineFragment.setPosition(position);
-			managers.IntentFragment(mainMineFragment);
+			this.fragmentName = Constants.FragmentName.MAINMINEFRAGMENT;
 
 		} else {
-
-			this.menuItem = checkMenuItem;
-			this.position = position;
-			leftMenuAdapter.setSelectPosition(position);
-			leftMenuAdapter.notifyDataSetChanged();
-
-			init();
+			this.fragmentName = null;
 		}
+		this.menuItem = checkMenuItem;
+		this.position = position;
+		leftMenuAdapter.setSelectPosition(position);
+		leftMenuAdapter.notifyDataSetChanged();
+		initFragment();
 
 	}
 
@@ -239,13 +294,18 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener,
 
 		switch (v.getId()) {
 		case R.id.login_tv_userlogin:// 登录处理
-			LoginFragment loginFragment = new LoginFragment();
-			managers.IntentFragment(loginFragment);
+			// managers.BackPress(this);
+			// LoginFragment loginFragment = new LoginFragment();
+			// managers.IntentFragment(loginFragment);
+			this.menuItem = null;
 
+			this.fragmentName = Constants.FragmentName.LOGIN_FRAGMENT;
+			initFragment();
 			break;
-		case R.id.login_btn_regist:// 注册
-			RegisterFragment registerFragment = new RegisterFragment();
-			managers.IntentFragment(registerFragment);
+		case R.id.login_tv_user_regisster:// 注册
+			// managers.BackPress(this);
+			// RegisterFragment registerFragment = new RegisterFragment();
+			// managers.IntentFragment(registerFragment);
 			break;
 
 		}
@@ -266,6 +326,20 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener,
 
 		case R.id.right_menu_rb_myset:// 我的设置
 			break;
+		}
+	}
+
+	public class FragmentWapper {
+		MenuItem menuItem;
+		int position;
+		Constants.FragmentName fName;
+
+		public FragmentWapper(MenuItem menuItem, int position,
+				Constants.FragmentName fName) {
+			this.menuItem = menuItem;
+			this.position = position;
+			this.fName = fName;
+
 		}
 	}
 

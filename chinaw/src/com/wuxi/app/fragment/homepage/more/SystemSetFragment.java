@@ -1,23 +1,24 @@
 package com.wuxi.app.fragment.homepage.more;
 
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 
 import com.wuxi.app.R;
-import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
+import com.wuxi.app.fragment.BaseSlideFragment;
 
 /**
  * 
  * @author wanglu 泰得利通 系统设置
  */
-public class SystemSetFragment extends HomeBaseSlideLevelFragment {
+public class SystemSetFragment extends BaseSlideFragment implements OnClickListener {
 
 	private RelativeLayout sys_menu_set, sys_clear_cache, sys_score, sys_share,
 			sys_idea, sys_software_update, sys_about_us, sys_site_map,
 			sys_use_help, sys_join_twiiter;
 
 	@Override
-	protected void initUI() {
+	public  void initUI() {
 		super.initUI();
 		sys_menu_set = (RelativeLayout) view.findViewById(R.id.sys_menu_set);
 		sys_clear_cache = (RelativeLayout) view
@@ -48,21 +49,17 @@ public class SystemSetFragment extends HomeBaseSlideLevelFragment {
 
 	@Override
 	protected int getLayoutId() {
-		return R.layout.systemset_slide_layout;
+		return R.layout.index_sytem_set;
 	}
 
-	@Override
-	protected void onBack() {
-		managers.BackPress(this);
-	}
 
 	@Override
 	public void onClick(View v) {
-		super.onClick(v);
+		
 
 		switch (v.getId()) {
 		case R.id.sys_menu_set:// 常用栏设置
-			HomeBaseSlideLevelFragment menusetFragment = new MenuItemSetFragment();
+			MenuItemSetFragment menusetFragment = new MenuItemSetFragment();
 			managers.IntentFragment(menusetFragment);
 			break;
 		case R.id.sys_clear_cache:// 清楚缓存
@@ -78,7 +75,7 @@ public class SystemSetFragment extends HomeBaseSlideLevelFragment {
 		case R.id.sys_about_us:// 关于我们
 			break;
 		case R.id.sys_site_map:// 网站地图
-			HomeBaseSlideLevelFragment siteMapFragment = new SiteMapFragment();
+			SiteMapFragment siteMapFragment = new SiteMapFragment();
 			managers.IntentFragment(siteMapFragment);
 			break;
 		case R.id.sys_use_help:// 使用帮组
@@ -90,8 +87,11 @@ public class SystemSetFragment extends HomeBaseSlideLevelFragment {
 	}
 
 	@Override
-	protected String getTtitle() {
+	protected String getTitleText() {
+		
 		return "系统设置";
 	}
+
+	
 
 }

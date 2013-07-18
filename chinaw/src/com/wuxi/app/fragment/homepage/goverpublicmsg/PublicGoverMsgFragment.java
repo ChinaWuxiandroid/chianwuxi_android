@@ -3,6 +3,7 @@ package com.wuxi.app.fragment.homepage.goverpublicmsg;
 
 import java.util.List;
 
+import com.wuxi.app.R;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.ContentListFragment;
@@ -72,14 +73,24 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 
 	@Override
 	protected int getTitlePerScreenItemCount() {
-		// TODO Auto-generated method stub
 		return 5;
 	}
 
 	@Override
 	protected MenuItemInitLayoutListener getMenuItemInitLayoutListener() {
-		// TODO Auto-generated method stub
 		return new PublicServiceInitLayoutImpl();
+	}
+
+
+	@Override
+	protected int getLayoutId() {
+		return R.layout.fragment_chanel_layout;
+	}
+
+
+	@Override
+	protected String getTitleText() {
+		return menuItem.getName();
 	}
 
 	

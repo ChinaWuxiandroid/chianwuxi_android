@@ -6,7 +6,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.wuxi.app.R;
-import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
+import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.domain.Myconsult;
 
 /**
@@ -14,7 +14,7 @@ import com.wuxi.domain.Myconsult;
  * @author wanglu 泰得利通 我的在线咨询
  * 
  */
-public class MyOnlineAskFragment extends HomeBaseSlideLevelFragment implements
+public class MyOnlineAskFragment extends BaseSlideFragment implements
 		android.widget.RadioGroup.OnCheckedChangeListener {
 
 	private RadioGroup gover_btn_rg;
@@ -36,7 +36,7 @@ public class MyOnlineAskFragment extends HomeBaseSlideLevelFragment implements
 	}
 
 	@Override
-	protected void initUI() {
+	public void initUI() {
 		super.initUI();
 		gover_btn_rg = (RadioGroup) view.findViewById(R.id.gover_btn_rg);
 		gover_myonlineask_detail = (LinearLayout) view
@@ -80,17 +80,7 @@ public class MyOnlineAskFragment extends HomeBaseSlideLevelFragment implements
 
 	@Override
 	protected int getLayoutId() {
-		return R.layout.myonlineask_slide_layout;
-	}
-
-	@Override
-	protected void onBack() {
-		managers.BackPress(this);
-	}
-
-	@Override
-	protected String getTtitle() {
-		return "我的在线咨询";
+		return R.layout.gover_myonline_ask_layout;
 	}
 
 	@Override
@@ -120,6 +110,12 @@ public class MyOnlineAskFragment extends HomeBaseSlideLevelFragment implements
 		}
 
 		showUI();
+	}
+
+	@Override
+	protected String getTitleText() {
+
+		return "我的在线咨询";
 	}
 
 }

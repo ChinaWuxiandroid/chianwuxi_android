@@ -285,7 +285,6 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 		if (fragment != null) {
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
 			ft.replace(DETAIL_ID, fragment);// 替换视图
-
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 			ft.commit();
 		}

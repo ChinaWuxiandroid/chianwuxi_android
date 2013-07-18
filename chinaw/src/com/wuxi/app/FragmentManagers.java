@@ -98,12 +98,23 @@ public class FragmentManagers {
 		ft.commit();
 	}
 
-	
 	public void onTransaction(BaseFragment saveFragment, String arg,
 			boolean isSave) {
 		FragmentManager manager = fragmentActivity.getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.add(FRAME_CONTENT, saveFragment, fragments.size() + "");
+		ft.addToBackStack(null);// 保存状态大堆栈
+		ft.commit();
+
+	}
+
+	public void AddAndRemove(BaseFragment oldFragment,
+			BaseFragment newFragment, String arg) {
+		newFragment.setManagers(this);
+		FragmentManager manager = fragmentActivity.getSupportFragmentManager();
+		FragmentTransaction ft = manager.beginTransaction();
+		ft.remove(oldFragment).add(FRAME_CONTENT, newFragment, arg);
+		clear(oldFragment);
 		ft.addToBackStack(null);// 保存状态大堆栈
 		ft.commit();
 
@@ -116,7 +127,6 @@ public class FragmentManagers {
 		ft.addToBackStack(null);
 		ft.commit();
 
-		
 	}
 
 	public void RemoveAllFragment() {

@@ -2,6 +2,7 @@ package com.wuxi.app.fragment.homepage.publicservice;
 
 import java.util.List;
 
+import com.wuxi.app.R;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
@@ -24,7 +25,7 @@ public class PublicServiceFragment extends MenuItemMainFragment {
 
 			if (menu.getType() == MenuItem.WAP_MENU) {// wap类型菜单
 
-				//menu.setContentFragment(WapFragment.class);
+				// menu.setContentFragment(WapFragment.class);
 			} else if (menu.getType() == MenuItem.CHANNEL_MENU) {// 如果菜单上频道菜单
 
 				new Thread(new Runnable() {
@@ -40,7 +41,8 @@ public class PublicServiceFragment extends MenuItemMainFragment {
 							if (channels != null) {
 								menu.setContentFragment(PublicServiceWithContentFragment.class);
 							} else {
-								//menu.setContentFragment(ContentListFragment.class);// 内容列表界面
+								// menu.setContentFragment(ContentListFragment.class);//
+								// 内容列表界面
 							}
 						} catch (NetException e) {
 							e.printStackTrace();
@@ -65,6 +67,16 @@ public class PublicServiceFragment extends MenuItemMainFragment {
 	protected int getTitlePerScreenItemCount() {
 
 		return 4;
+	}
+
+	@Override
+	protected int getLayoutId() {
+		return R.layout.fragment_chanel_layout;
+	}
+
+	@Override
+	protected String getTitleText() {
+		return menuItem.getName();
 	}
 
 }

@@ -10,9 +10,10 @@ import android.widget.Toast;
 import com.wuxi.app.fragment.MainIndexFragment;
 import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.MainSearchFragment;
-import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
+import com.wuxi.app.fragment.homepage.SlideLevelFragment;
 import com.wuxi.app.fragment.homepage.logorregister.LoginFragment;
 import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
+import com.wuxi.app.util.Constants;
 
 /**
  * 主要架构
@@ -21,7 +22,7 @@ import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
  * 
  */
 public class MainActivity extends FragmentActivity implements
-OnCheckedChangeListener {
+		OnCheckedChangeListener {
 
 	private RadioGroup radioGroup;
 	private int mCurrentFragmentId = 0;
@@ -47,7 +48,7 @@ OnCheckedChangeListener {
 
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
-
+		SlideLevelFragment slideLevelFragment = new SlideLevelFragment();
 
 		switch (checkedId) {
 
@@ -56,28 +57,36 @@ OnCheckedChangeListener {
 			break;
 
 		case R.id.main_tab_search:
-			HomeBaseSlideLevelFragment searchFragment=new MainSearchFragment();
-			fragmentManagers.IntentFragment(searchFragment);
-			//			ChangeFragment(new MainSearchFragment(), checkedId);
+		
+			slideLevelFragment
+					.setFragmentName(Constants.FragmentName.MAINSEARCH_FRAGMENT);
+			fragmentManagers.IntentFragment(slideLevelFragment);
 			break;
 
 		case R.id.main_tab_login_reg:// 登录注册
 
-			HomeBaseSlideLevelFragment loginFragment = new LoginFragment();
-			fragmentManagers.IntentFragment(loginFragment);
+			
+			slideLevelFragment
+					.setFragmentName(Constants.FragmentName.LOGIN_FRAGMENT);
+			fragmentManagers.IntentFragment(slideLevelFragment);
 			mCurrentFragmentId = checkedId;
 
 			break;
 
 		case R.id.main_tab_mine:
-			HomeBaseSlideLevelFragment mainMineFragment = new MainMineFragment();
-			fragmentManagers.IntentFragment(mainMineFragment);
+			
+
+			slideLevelFragment
+					.setFragmentName(Constants.FragmentName.MAINMINEFRAGMENT);
+			fragmentManagers.IntentFragment(slideLevelFragment);
 			mCurrentFragmentId = checkedId;
 			break;
 
 		case R.id.main_tab_more:
-			HomeBaseSlideLevelFragment systemSetFragment = new SystemSetFragment();
-			fragmentManagers.IntentFragment(systemSetFragment);
+			
+			slideLevelFragment
+					.setFragmentName(Constants.FragmentName.SYSTEMSETF_RAGMENT);
+			fragmentManagers.IntentFragment(slideLevelFragment);
 			mCurrentFragmentId = checkedId;
 
 			break;

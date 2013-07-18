@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.GoverInteractPeopleNevigationAdapter;
-import com.wuxi.app.fragment.commonfragment.HomeBaseSlideLevelFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeople12345Fragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleMineFragment;
@@ -29,7 +28,7 @@ import com.wuxi.domain.MenuItem;
  * @author 杨宸 智佳
  * */
 
-public class MainMineFragment extends HomeBaseSlideLevelFragment {
+public class MainMineFragment extends BaseSlideFragment {
 	private ListView mainMenu_listView; // 政民互动 主菜单
 
 	private MenuItem menuItem;
@@ -40,7 +39,7 @@ public class MainMineFragment extends HomeBaseSlideLevelFragment {
 	private int FRAME_CONTENT = R.id.gover_interact_people_maincontent_fragment;
 
 	@Override
-	protected void initUI() {
+	public  void initUI() {
 		super.initUI();
 		loadListData(id);
 		if (listMenus != null) {
@@ -56,7 +55,7 @@ public class MainMineFragment extends HomeBaseSlideLevelFragment {
 	public void findView() {
 		mainMenu_listView = (ListView) view
 				.findViewById(R.id.gover_interact_people_mainmenu_listview);
-		adapter = new GoverInteractPeopleNevigationAdapter(inflater, listMenus,
+		adapter = new GoverInteractPeopleNevigationAdapter(mInflater, listMenus,
 				managers);
 		mainMenu_listView.setDividerHeight(0);
 		mainMenu_listView.setSelection(0);
@@ -65,28 +64,15 @@ public class MainMineFragment extends HomeBaseSlideLevelFragment {
 				.setOnItemClickListener(new listViewOnItemClickListener());
 	}
 
-	@Override
-	public void onClick(View v) {
-		super.onClick(v);
-	}
+	
 
 	@Override
 	protected int getLayoutId() {
-		return R.layout.slide_goverinteractpeople_layout;
+		return R.layout.main_me_fragment_layout;
 	}
 
-	@Override
-	protected void onBack() {
-
-		managers.BackPress(this);
-
-	}
-
-	@Override
-	protected String getTtitle() {
-		return "政民互动";
-	}
-
+	
+	
 	/*
 	 * 暂时未知怎样获取 期布局MenuItem 先根据其Id固定获取 id= "402881de3f758726013f75873a3200a6"
 	 */
@@ -216,6 +202,11 @@ public class MainMineFragment extends HomeBaseSlideLevelFragment {
 
 	public void setParentMenuItem(MenuItem parentMenuItem) {
 		this.menuItem = parentMenuItem;
+	}
+
+	@Override
+	protected String getTitleText() {
+		return "政民互动";
 	}
 
 	
