@@ -29,6 +29,7 @@ import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InformationCenterFragment;
 import com.wuxi.app.fragment.homepage.logorregister.LoginFragment;
+import com.wuxi.app.fragment.homepage.more.MenuItemSetFragment;
 import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
 import com.wuxi.app.listeners.SlideLinstener;
@@ -181,6 +182,11 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			case SYSTEMSETF_RAGMENT:// 系统设置
 				SystemSetFragment systemSetFragment = new SystemSetFragment();
 				onTransaction(systemSetFragment);
+				
+				break;
+			case MENUITEMSET_FRAGMENT://常用栏设置
+				MenuItemSetFragment menusetFragment = new MenuItemSetFragment();
+				onTransaction(menusetFragment);
 				break;
 
 			}
@@ -280,7 +286,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		if (position == this.position)
 			return;
 		MenuItem checkMenuItem = (MenuItem) parent.getItemAtPosition(position);
-		if (checkMenuItem.getName().equals("政民互动")) {// 为回退特殊处理
+		if (checkMenuItem.getName().equals("政民互动")) {
 
 			this.fragmentName = Constants.FragmentName.MAINMINEFRAGMENT;
 
@@ -345,6 +351,17 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			this.fName = fName;
 
 		}
+	}
+
+	@Override
+	public void replaceFragment(
+			MenuItem menuItem, int position, FragmentName fagmentName) {
+
+		this.menuItem = menuItem;
+		this.position = position;
+		this.fragmentName = fagmentName;
+		initFragment();
+
 	}
 
 }

@@ -6,19 +6,21 @@ import android.widget.RelativeLayout;
 
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.BaseSlideFragment;
+import com.wuxi.app.util.Constants;
 
 /**
  * 
  * @author wanglu 泰得利通 系统设置
  */
-public class SystemSetFragment extends BaseSlideFragment implements OnClickListener {
+public class SystemSetFragment extends BaseSlideFragment implements
+		OnClickListener {
 
 	private RelativeLayout sys_menu_set, sys_clear_cache, sys_score, sys_share,
 			sys_idea, sys_software_update, sys_about_us, sys_site_map,
 			sys_use_help, sys_join_twiiter;
 
 	@Override
-	public  void initUI() {
+	public void initUI() {
 		super.initUI();
 		sys_menu_set = (RelativeLayout) view.findViewById(R.id.sys_menu_set);
 		sys_clear_cache = (RelativeLayout) view
@@ -52,15 +54,14 @@ public class SystemSetFragment extends BaseSlideFragment implements OnClickListe
 		return R.layout.index_sytem_set;
 	}
 
-
 	@Override
 	public void onClick(View v) {
-		
 
 		switch (v.getId()) {
 		case R.id.sys_menu_set:// 常用栏设置
-			MenuItemSetFragment menusetFragment = new MenuItemSetFragment();
-			managers.IntentFragment(menusetFragment);
+
+			super.slideLinstener.replaceFragment( null, -1,
+					Constants.FragmentName.MENUITEMSET_FRAGMENT);
 			break;
 		case R.id.sys_clear_cache:// 清楚缓存
 			break;
@@ -88,10 +89,8 @@ public class SystemSetFragment extends BaseSlideFragment implements OnClickListe
 
 	@Override
 	protected String getTitleText() {
-		
+
 		return "系统设置";
 	}
-
-	
 
 }
