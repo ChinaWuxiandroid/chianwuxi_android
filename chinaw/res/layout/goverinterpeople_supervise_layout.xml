@@ -75,7 +75,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/worksuggestbox_edit_small_bk"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:paddingLeft="3dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -99,7 +100,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/worksuggestbox_edit_small_bk"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:paddingLeft="3dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -123,7 +125,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/worksuggestbox_edit_small_bk"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:paddingLeft="3dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -148,7 +151,9 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/worksuggestbox_edit_big_bk"
-                android:gravity="center_vertical" />
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:paddingLeft="3dp" />
         </LinearLayout>
 
         <RelativeLayout

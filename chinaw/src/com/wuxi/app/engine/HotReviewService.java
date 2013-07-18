@@ -105,5 +105,46 @@ public class HotReviewService extends Service{
 		}
 		return null;
 	}
+	
+	/**
+	 *
+	 * 杨宸 智佳
+	 * @return   HotReviewWrapper.HotReviewContent
+	 * @throws JSONException
+	 * @throws NetException 
+	 * @throws NODataException 
+	 */
+
+	private HotReviewWrapper.HotReviewContent getHotReviewContent(String id) throws JSONException, NetException, NODataException {
+
+		if (!checkNet()) {
+			System.out.println("net error");
+			throw new NetException(Constants.ExceptionMessage.NO_NET); // 检查网络
+		}
+
+		String url = Constants.Urls.HOTREVIEWCONTENT_LIST_URL.replace("{id}", id);
+
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+
+		if (resultStr != null) {
+			JSONObject jsonObject = new JSONObject(resultStr);
+			HotReviewWrapper wapper=new HotReviewWrapper();
+			HotReviewWrapper.HotReviewContent content=wapper.new HotReviewContent();
+			
+			content.setId(jsonObject.getString("id"));
+			content.setContent(jsonObject.getString("content"));
+			content.setEndTime(TimeFormateUtil.formateTime
+					(String.valueOf(jsonObject.getLong("endTime")), TimeFormateUtil.DATE_PATTERN));
+			content.setTitle(jsonObject.getString("title"));
+			content.setDepName(jsonObject.getString("depName"));
+			content.setCanReply(jsonObject.getBoolean("canReply"));
+			
+			return  content;
+		} else {
+			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);
+		}
+	}
+	
+	
 
 }
