@@ -192,19 +192,11 @@ public final class R {
     }
     public static final class id {
         public static final int Title_Text=0x7f0a000b;
-<<<<<<< HEAD
-        public static final int action_settings=0x7f0a0164;
+        public static final int action_settings=0x7f0a0169;
         public static final int back_btn=0x7f0a000a;
         public static final int bmapView=0x7f0a0019;
         public static final int btn=0x7f0a0120;
-        public static final int btn_next_screen=0x7f0a015a;
-=======
-        public static final int action_settings=0x7f0a015d;
-        public static final int back_btn=0x7f0a000a;
-        public static final int bmapView=0x7f0a0019;
-        public static final int btn=0x7f0a0114;
-        public static final int btn_next_screen=0x7f0a0153;
->>>>>>> f24275e6658fd6fa43783db49b93cc1bea32404f
+        public static final int btn_next_screen=0x7f0a015f;
         public static final int city_map_et_end=0x7f0a0016;
         public static final int city_map_et_key=0x7f0a0012;
         public static final int city_map_et_start=0x7f0a0015;
@@ -428,12 +420,11 @@ public final class R {
         public static final int goverpublic_imagebutton_externltitle_check=0x7f0a0028;
         public static final int goverpublic_imagebutton_externltitle_search=0x7f0a0029;
         public static final int goverpublic_titlebelow_content_layout=0x7f0a002a;
-<<<<<<< HEAD
         public static final int goversaloon_btn_count=0x7f0a00ef;
         public static final int goversaloon_btn_statesearch=0x7f0a00ee;
         public static final int goversaloon_sp=0x7f0a00ed;
         public static final int goversaloon_title_search=0x7f0a00f0;
-        public static final int gv_title=0x7f0a0157;
+        public static final int gv_title=0x7f0a015c;
         public static final int index_gridview_image=0x7f0a00f4;
         public static final int index_gridview_texttitle=0x7f0a00f5;
         public static final int index_gv_menuitem=0x7f0a00aa;
@@ -448,27 +439,6 @@ public final class R {
         public static final int leader_wv_main=0x7f0a0119;
         public static final int left_iv_icon=0x7f0a0152;
         public static final int left_menu=0x7f0a011f;
-=======
-        public static final int goversaloon_btn_count=0x7f0a00e3;
-        public static final int goversaloon_btn_statesearch=0x7f0a00e2;
-        public static final int goversaloon_sp=0x7f0a00e1;
-        public static final int goversaloon_title_search=0x7f0a00e4;
-        public static final int gv_title=0x7f0a0150;
-        public static final int index_gridview_image=0x7f0a00e8;
-        public static final int index_gridview_texttitle=0x7f0a00e9;
-        public static final int index_gv_menuitem=0x7f0a009e;
-        public static final int index_news_btn=0x7f0a0102;
-        public static final int index_news_list=0x7f0a00ff;
-        public static final int index_news_title=0x7f0a0101;
-        public static final int index_num_text=0x7f0a0100;
-        public static final int index_progess=0x7f0a011d;
-        public static final int index_rb_announcements=0x7f0a00fe;
-        public static final int index_rb_news=0x7f0a00fd;
-        public static final int layout_bottom=0x7f0a011b;
-        public static final int leader_wv_main=0x7f0a010d;
-        public static final int left_iv_icon=0x7f0a0146;
-        public static final int left_menu=0x7f0a0113;
->>>>>>> f24275e6658fd6fa43783db49b93cc1bea32404f
         public static final int ll_main=0x7f0a0027;
         public static final int ll_search1=0x7f0a0011;
         public static final int ll_search2=0x7f0a0014;
@@ -498,15 +468,9 @@ public final class R {
         public static final int my_spinner_textview_text1=0x7f0a0136;
         public static final int next=0x7f0a001b;
         public static final int open_close_left_btn=0x7f0a0009;
-<<<<<<< HEAD
-        public static final int pb_content_wb=0x7f0a0162;
+        public static final int pb_content_wb=0x7f0a0167;
         public static final int pb_login=0x7f0a00f8;
         public static final int pb_regist=0x7f0a00fb;
-=======
-        public static final int pb_content_wb=0x7f0a015b;
-        public static final int pb_login=0x7f0a00ec;
-        public static final int pb_regist=0x7f0a00ef;
->>>>>>> f24275e6658fd6fa43783db49b93cc1bea32404f
         public static final int popdown=0x7f0a0025;
         public static final int popinfo=0x7f0a0023;
         public static final int popleft=0x7f0a0022;
@@ -515,22 +479,15 @@ public final class R {
         public static final int rb_bus=0x7f0a000f;
         public static final int rb_car=0x7f0a0010;
         public static final int rb_search=0x7f0a000e;
-<<<<<<< HEAD
         public static final int regist_btn_cancle=0x7f0a0106;
         public static final int regist_btn_submit=0x7f0a0105;
         public static final int right_menu=0x7f0a011e;
+        public static final int right_menu_rb_collect=0x7f0a0158;
+        public static final int right_menu_rb_mydownload=0x7f0a015a;
+        public static final int right_menu_rb_myset=0x7f0a015b;
+        public static final int right_menu_rb_mzhd=0x7f0a0159;
+        public static final int right_menu_rg=0x7f0a0157;
         public static final int search_Title_Text=0x7f0a013d;
-=======
-        public static final int regist_btn_cancle=0x7f0a00fa;
-        public static final int regist_btn_submit=0x7f0a00f9;
-        public static final int right_menu=0x7f0a0112;
-        public static final int right_menu_rb_collect=0x7f0a014c;
-        public static final int right_menu_rb_mydownload=0x7f0a014e;
-        public static final int right_menu_rb_myset=0x7f0a014f;
-        public static final int right_menu_rb_mzhd=0x7f0a014d;
-        public static final int right_menu_rg=0x7f0a014b;
-        public static final int search_Title_Text=0x7f0a0131;
->>>>>>> f24275e6658fd6fa43783db49b93cc1bea32404f
         public static final int search_advanced_edittext_endDate=0x7f0a0005;
         public static final int search_advanced_edittext_keyword=0x7f0a0007;
         public static final int search_advanced_edittext_startDate=0x7f0a0004;
@@ -581,39 +538,21 @@ public final class R {
         public static final int sys_software_update=0x7f0a0114;
         public static final int sys_use_help=0x7f0a0117;
         public static final int textcache=0x7f0a0024;
-<<<<<<< HEAD
         public static final int title_scroll=0x7f0a012f;
-        public static final int title_scroll_action=0x7f0a0159;
-        public static final int tv_actionname=0x7f0a0158;
+        public static final int title_scroll_action=0x7f0a015e;
+        public static final int tv_actionname=0x7f0a015d;
         public static final int tv_left_menu_name=0x7f0a0153;
         public static final int tv_navigator_name=0x7f0a011b;
         public static final int viewpagerLayout=0x7f0a0128;
         public static final int wb_progress=0x7f0a011a;
-        public static final int wucity_channel_hs=0x7f0a015b;
-        public static final int wucity_content_lv=0x7f0a015d;
-        public static final int wuxi_decontent_tvbrowcount=0x7f0a0161;
-        public static final int wuxi_decontent_tvtime=0x7f0a0160;
-        public static final int wuxicity_decontent_ll=0x7f0a015e;
-        public static final int wuxicity_decontent_title=0x7f0a015f;
-        public static final int wuxicity_decontent_wb=0x7f0a0163;
-        public static final int wuxicity_rg_title_chanel=0x7f0a015c;
-=======
-        public static final int title_scroll=0x7f0a0123;
-        public static final int title_scroll_action=0x7f0a0152;
-        public static final int tv_actionname=0x7f0a0151;
-        public static final int tv_left_menu_name=0x7f0a0147;
-        public static final int tv_navigator_name=0x7f0a010f;
-        public static final int viewpagerLayout=0x7f0a011c;
-        public static final int wb_progress=0x7f0a010e;
-        public static final int wucity_channel_hs=0x7f0a0154;
-        public static final int wucity_content_lv=0x7f0a0156;
-        public static final int wuxi_decontent_tvbrowcount=0x7f0a015a;
-        public static final int wuxi_decontent_tvtime=0x7f0a0159;
-        public static final int wuxicity_decontent_ll=0x7f0a0157;
-        public static final int wuxicity_decontent_title=0x7f0a0158;
-        public static final int wuxicity_decontent_wb=0x7f0a015c;
-        public static final int wuxicity_rg_title_chanel=0x7f0a0155;
->>>>>>> f24275e6658fd6fa43783db49b93cc1bea32404f
+        public static final int wucity_channel_hs=0x7f0a0160;
+        public static final int wucity_content_lv=0x7f0a0162;
+        public static final int wuxi_decontent_tvbrowcount=0x7f0a0166;
+        public static final int wuxi_decontent_tvtime=0x7f0a0165;
+        public static final int wuxicity_decontent_ll=0x7f0a0163;
+        public static final int wuxicity_decontent_title=0x7f0a0164;
+        public static final int wuxicity_decontent_wb=0x7f0a0168;
+        public static final int wuxicity_rg_title_chanel=0x7f0a0161;
     }
     public static final class layout {
         public static final int advanced_search_layout=0x7f030000;

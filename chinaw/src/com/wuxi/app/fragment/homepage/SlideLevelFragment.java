@@ -10,12 +10,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
@@ -35,11 +35,9 @@ import com.wuxi.app.view.SlideMenuLayout;
 import com.wuxi.domain.MenuItem;
 
 public class SlideLevelFragment extends BaseFragment implements SlideLinstener,
-<<<<<<< HEAD
-OnItemClickListener {
-=======
-		OnItemClickListener, OnClickListener, OnCheckedChangeListener {
->>>>>>> f24275e6658fd6fa43783db49b93cc1bea32404f
+
+OnItemClickListener, OnClickListener, OnCheckedChangeListener {
+
 
 	protected static final int FRAME_CONTENT = R.id.slide_main_content;
 	private View view;
@@ -123,13 +121,13 @@ OnItemClickListener {
 					InformationCenterFragment informationCenterFragment = new InformationCenterFragment();
 					informationCenterFragment.setMenuItem(menuItem);
 					onTransaction(informationCenterFragment);
-			
+
 				} else if (menuItem.getName().equals("政府信息公开")) {
-		
+
 					PublicGoverMsgFragment publicGoverMsgFragment = new PublicGoverMsgFragment();
 					publicGoverMsgFragment.setMenuItem(menuItem);
 					onTransaction(publicGoverMsgFragment);
-					
+
 				} else if (menuItem.getName().equals("公共服务")) {
 					PublicServiceFragment publicServiceFragment = new PublicServiceFragment();
 					publicServiceFragment.setMenuItem(menuItem);
@@ -220,31 +218,31 @@ OnItemClickListener {
 
 		MenuItem checkMenuItem = (MenuItem) parent.getItemAtPosition(position);
 		if (checkMenuItem.getName().equals("政民互动")) {// 为回退特殊处理
-//			managers.BackPress(this);
+			//			managers.BackPress(this);
 			MainMineFragment mainMineFragment = new MainMineFragment();
 			mainMineFragment.setMenuItem(checkMenuItem);
 			//			mainMineFragment.setMenuItem(checkMenuItem);//
 			mainMineFragment.setPosition(position);
 			managers.IntentFragment(mainMineFragment);
 
-//			new Thread(
-//					new Runnable(){
-//
-//						@Override
-//						public void run() {
-//							// TODO Auto-generated method stub
-//							try {
-//								Thread.sleep(200);
-//								if(SlideLevelFragment.this!=null)
-//									managers.BackPress(SlideLevelFragment.this);
-//							} catch (InterruptedException e) {
-//								// TODO Auto-generated catch block
-//								e.printStackTrace();
-//							}
-//							
-//						}}
-//					).start();
-			
+			//			new Thread(
+			//					new Runnable(){
+			//
+			//						@Override
+			//						public void run() {
+			//							// TODO Auto-generated method stub
+			//							try {
+			//								Thread.sleep(200);
+			//								if(SlideLevelFragment.this!=null)
+			//									managers.BackPress(SlideLevelFragment.this);
+			//							} catch (InterruptedException e) {
+			//								// TODO Auto-generated catch block
+			//								e.printStackTrace();
+			//							}
+			//							
+			//						}}
+			//					).start();
+
 
 
 		} else {
