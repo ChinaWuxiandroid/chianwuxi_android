@@ -268,8 +268,11 @@ public class Constants {
 		/**
 		 * 系统设置
 		 */
-		SYSTEMSETF_RAGMENT
-		
+		SYSTEMSETF_RAGMENT,
+		/**
+		 * 
+		 */
+		MENUITEMSET_FRAGMENT
 		;
 		
 	}

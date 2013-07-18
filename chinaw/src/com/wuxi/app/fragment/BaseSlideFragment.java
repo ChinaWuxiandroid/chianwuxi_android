@@ -91,6 +91,7 @@ public abstract class BaseSlideFragment extends BaseFragment {
 	};
 
 	
+	
 	public void onBack(){
 		slideLinstener.onBack();
 	}
