@@ -16,7 +16,7 @@ import com.wuxi.app.listeners.SlideLinstener;
 public abstract class BaseSlideFragment extends BaseFragment {
 
 	protected View view ;
-	protected SlideLinstener slideLinstener;
+	public SlideLinstener slideLinstener;
 	public ImageView OPearn_btn, Member_btnm, back_btn;
 	public TextView Title_text;
 	protected LayoutInflater mInflater;

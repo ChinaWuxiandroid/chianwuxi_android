@@ -1,5 +1,6 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,11 +23,15 @@ public abstract class GoverSaloonContentFragment extends BaseFragment {
 	private RadioButton search_bything;
 	private RadioButton search_bydeparent;
 	private RadioButton search_byrange;
+	protected Context context;
+	protected LayoutInflater mInflater;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(getLayoutId(), null);
+		this.context=getActivity();
+		this.mInflater=inflater;
 		initUI();
 		
 		
@@ -34,7 +39,7 @@ public abstract class GoverSaloonContentFragment extends BaseFragment {
 	}
 
 	
-	private void initUI() {
+	protected void initUI() {
 		goversaloon_title_search=(RadioGroup) view.findViewById(R.id.goversaloon_title_search);
 		search_bything=(RadioButton) view.findViewById(R.id.search_bything);
 		search_bydeparent=(RadioButton) view.findViewById(R.id.search_bydeparent);

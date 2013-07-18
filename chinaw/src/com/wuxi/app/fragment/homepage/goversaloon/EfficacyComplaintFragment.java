@@ -4,13 +4,9 @@ import java.util.List;
 
 import org.json.JSONException;
 
-import android.content.Context;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
@@ -19,7 +15,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.EfficacyComplaintAdapter;
 import com.wuxi.app.engine.EfficaComplainService;
@@ -33,14 +28,13 @@ import com.wuxi.exception.ResultException;
  * @author wanglu 泰得利通 效能投诉Fragment
  * 
  */
-public class EfficacyComplaintFragment extends BaseFragment implements
-		OnScrollListener {
+public class EfficacyComplaintFragment extends GoverSaloonContentFragment
+		implements OnScrollListener {
 
-	private View view;
 	private ImageView gover_eff_btn_mail_search;
 	private ImageView gover_eff_btn_writemail;
 	private ListView gover_eff_lv;
-	private Context context;
+
 	private ProgressBar gover_eff_pb;
 	private static final int PAGE_SIZE = 10;
 	protected static final int LOAD_EFF_SUCCESS = 0;
@@ -52,9 +46,6 @@ public class EfficacyComplaintFragment extends BaseFragment implements
 	private int visibleLastIndex;
 	private int visibleItemCount;// 当前显示的总条数
 	private EfficacyComplaintAdapter efficacyComplaintAdapter;
-	private String[] itemStr = new String[] { "清西路的高烟囱何时拆掉？", "清西路的高烟囱何时拆掉？",
-
-	"清西路的高烟囱何时拆掉？" };
 
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -70,15 +61,6 @@ public class EfficacyComplaintFragment extends BaseFragment implements
 			}
 		};
 	};
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.gover_efficacycomplaint_layout, null);
-		context = getActivity();
-		initUI();
-		return view;
-	}
 
 	/**
 	 * 
@@ -118,7 +100,8 @@ public class EfficacyComplaintFragment extends BaseFragment implements
 
 	}
 
-	private void initUI() {
+	public void initUI() {
+		super.initUI();
 		gover_eff_btn_mail_search = (ImageView) view
 				.findViewById(R.id.gover_eff_btn_mail_search);
 		gover_eff_btn_writemail = (ImageView) view
@@ -206,6 +189,12 @@ public class EfficacyComplaintFragment extends BaseFragment implements
 			}
 
 		}
+	}
+
+	@Override
+	protected int getLayoutId() {
+
+		return R.layout.gover_efficacycomplaint_layout;
 	}
 
 }

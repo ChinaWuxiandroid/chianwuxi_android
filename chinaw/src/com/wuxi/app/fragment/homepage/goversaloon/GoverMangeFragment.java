@@ -5,11 +5,9 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -21,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.GoverManageAdapter;
 import com.wuxi.domain.Channel;
@@ -31,35 +28,23 @@ import com.wuxi.domain.Channel;
  * @author wanglu 泰得利通 组织管理
  * 
  */
-public class GoverMangeFragment extends BaseFragment implements OnPageChangeListener,
-		OnClickListener {
+public class GoverMangeFragment extends GoverSaloonContentFragment implements
+		OnPageChangeListener, OnClickListener {
 
-	private View view;
 	private ListView gover_mange_lv;
 	private ViewPager gover_viewpagerLayout;
 	private ImageView gover_mange_iv_next;
 	private List<View> titleGridViews;
 	private static final int PAGE_ITEM = 4;
 	private static final String TAG = "GoverMange";
-	private LayoutInflater mInflater;
-	private Context context;
+
 	private int checkPositons[];// 选中的坐标
 	private int pageNo = 0;
 	private String itemString[] = { "1.关于在新区梅园镇建立垃圾回收的问题咨询的问题的咨询(2013-5-3)",
-	"2.关于在新区梅园镇建立垃圾回收的问题咨询的问题的咨询(2013-5-3)" };
+			"2.关于在新区梅园镇建立垃圾回收的问题咨询的问题的咨询(2013-5-3)" };
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-
-		view = inflater.inflate(R.layout.gover_saloon_mange, null);
-		mInflater = inflater;
-		context = getActivity();
-		initUI();
-		return view;
-	}
-
-	private void initUI() {
+	public void initUI() {
+		super.initUI();
 		gover_mange_lv = (ListView) view.findViewById(R.id.gover_mange_lv);
 		gover_viewpagerLayout = (ViewPager) view
 				.findViewById(R.id.gover_viewpagerLayout);
@@ -68,10 +53,10 @@ public class GoverMangeFragment extends BaseFragment implements OnPageChangeList
 		gover_viewpagerLayout.setOnPageChangeListener(this);
 		gover_mange_iv_next.setOnClickListener(this);
 		showChannelData();
-		
-		GoverManageAdapter manageAdapter=new GoverManageAdapter(itemString, context);
+
+		GoverManageAdapter manageAdapter = new GoverManageAdapter(itemString,
+				context);
 		gover_mange_lv.setAdapter(manageAdapter);
-		
 
 	}
 
@@ -301,12 +286,18 @@ public class GoverMangeFragment extends BaseFragment implements OnPageChangeList
 
 		switch (v.getId()) {
 		case R.id.gover_mange_iv_next:
-			//gover_viewpagerLayout.setCurrentItem(pageNo+1);
-			gover_viewpagerLayout.setCurrentItem(pageNo+1, true);
+			// gover_viewpagerLayout.setCurrentItem(pageNo+1);
+			gover_viewpagerLayout.setCurrentItem(pageNo + 1, true);
 			break;
 
 		}
 
+	}
+
+	@Override
+	protected int getLayoutId() {
+
+		return R.layout.gover_saloon_mange;
 	}
 
 }

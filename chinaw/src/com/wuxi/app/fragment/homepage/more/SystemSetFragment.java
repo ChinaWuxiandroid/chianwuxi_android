@@ -61,7 +61,7 @@ public class SystemSetFragment extends BaseSlideFragment implements
 		case R.id.sys_menu_set:// 常用栏设置
 
 			super.slideLinstener.replaceFragment( null, -1,
-					Constants.FragmentName.MENUITEMSET_FRAGMENT);
+					Constants.FragmentName.MENUITEMSET_FRAGMENT,null);
 			break;
 		case R.id.sys_clear_cache:// 清楚缓存
 			break;
@@ -76,8 +76,9 @@ public class SystemSetFragment extends BaseSlideFragment implements
 		case R.id.sys_about_us:// 关于我们
 			break;
 		case R.id.sys_site_map:// 网站地图
-			SiteMapFragment siteMapFragment = new SiteMapFragment();
-			managers.IntentFragment(siteMapFragment);
+			slideLinstener.replaceFragment(null, -1, Constants.FragmentName.SITEMAP_FRAGMENT,null);
+			
+			
 			break;
 		case R.id.sys_use_help:// 使用帮组
 			break;

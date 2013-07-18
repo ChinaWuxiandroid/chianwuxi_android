@@ -1,10 +1,12 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentTransaction;
@@ -32,8 +34,12 @@ import com.wuxi.exception.NetException;
  * 
  */
 public class GoverSaloonFragment extends BaseSlideFragment implements
-		OnItemClickListener {
+		OnItemClickListener, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final int DETAIL_ID = R.id.details;// 点击左侧导航时右侧要显示内容区域的ID
 	protected static final int LEFT_CHANNEL_DATA__LOAD_SUCCESS = 1;// 左侧频道(菜单)加载
 	protected static final int LEFT_MENUITEM_DATA__LOAD_SUCCESS = 2;// 左侧频道(菜单)加载
@@ -250,6 +256,10 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 		GoverSaloonContentMainFragment goverSaloonContentMainFragment = new GoverSaloonContentMainFragment();
 
 		goverSaloonContentMainFragment.setMenuItem(menuItem);
+
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("BaseSlideFragment", this);
+		goverSaloonContentMainFragment.setArguments(bundle);// 将对象传递过去
 		return goverSaloonContentMainFragment;
 	};
 
@@ -272,6 +282,7 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 			ft.replace(DETAIL_ID, fragment);// 替换视图
 			fragment.setManagers(managers);// 传递mangers
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
 			ft.commit();
 		}
 

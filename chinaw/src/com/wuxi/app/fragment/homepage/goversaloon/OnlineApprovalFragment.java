@@ -17,31 +17,31 @@ import com.wuxi.app.adapter.GoverOnlineApproveAdapter;
  * @author wanglu 泰得利通 网上审批
  * 
  */
-public class OnlineApprovalFragment extends BaseFragment {
+public class OnlineApprovalFragment extends GoverSaloonContentFragment {
 
-	private View view;
+	
 	private Spinner gover_oline_filter;
 	private ListView gover_online_approval_lv;
-	private Context context;
+	
 	private String[] str = { "事项：伪造，编造，买卖计划生育证明", "事项：伪造，编造，买卖计划生育证明",
 			"事项：伪造，编造，买卖计划生育证明" };
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.gover_onlineapproval, null);
-		context = getActivity();
-		initUI();
-		return view;
-	}
+	
 
-	private void initUI() {
+	public void initUI() {
+		super.initUI();
 		gover_oline_filter = (Spinner) view
 				.findViewById(R.id.gover_oline_filter);
 		gover_online_approval_lv = (ListView) view
 				.findViewById(R.id.gover_online_approval_lv);
 		gover_online_approval_lv.setAdapter(new GoverOnlineApproveAdapter(str,
 				context));
+	}
+
+	@Override
+	protected int getLayoutId() {
+		
+		return R.layout.gover_onlineapproval;
 	}
 
 }

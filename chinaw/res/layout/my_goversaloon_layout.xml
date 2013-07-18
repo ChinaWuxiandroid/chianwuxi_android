@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
+
+    <include
+        android:id="@+id/search_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/goversaloon_title_search_layout" />
 
     <RadioGroup
         android:id="@+id/gover_btn_rg"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/search_head"
         android:layout_marginLeft="5dip"
         android:layout_marginTop="10dip"
         android:orientation="horizontal" >
@@ -34,29 +42,46 @@
             android:textSize="12sp" />
     </RadioGroup>
 
-    <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gover_btn_rg"
+        android:orientation="vertical" >
 
-        <ProgressBar
-            android:id="@+id/gover_pb_myonlineapply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-
-        <ListView
-            android:id="@+id/gover_saloon_lv_myconsult"
+        <FrameLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:visibility="invisible" >
-        </ListView>
+            android:layout_height="wrap_content" >
 
-        <ListView
-            android:id="@+id/gover_saloon_lv_myapply"
+            <ProgressBar
+                android:id="@+id/gover_pb_myonlineapply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <ListView
+                android:id="@+id/gover_saloon_lv_myconsult"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" >
+            </ListView>
+
+            <ListView
+                android:id="@+id/gover_saloon_lv_myapply"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" >
+            </ListView>
+        </FrameLayout>
+
+        <View
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:visibility="invisible" >
-        </ListView>
-    </FrameLayout>
+            android:layout_height="5dip" />
+    </LinearLayout>
 
-</LinearLayout>
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        layout="@layout/goversaloon_foot_search_layout" />
+
+</RelativeLayout>
