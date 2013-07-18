@@ -48,7 +48,7 @@ public class BBSService extends Service{
 		}
 		url=url+"?start="+startIndex+"&end="+endIndex;
 
-		String resultStr = httpUtils.executeGetToString(url, 5000);
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);

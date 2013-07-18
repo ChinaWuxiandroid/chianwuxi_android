@@ -2,6 +2,8 @@ package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
 import org.json.JSONException;
 
+import android.annotation.SuppressLint;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -27,6 +29,8 @@ import com.wuxi.exception.NetException;
 
 public class GIP12345IWantMailFragment extends RadioButtonChangeFragment{
 
+	private final static int SEND_SUCCESS=1;
+	private final static int SEND_FAILED=0;
 
 	private MyLetter myLetter;
 
@@ -54,11 +58,33 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment{
 	ImageButton upload;
 	ImageButton send;
 
+
+
 	private final  int[] radioButtonIds={
 			R.id.gip_12345_iwantmail_radioButton_iwantmail,
 			R.id.gip_12345_iwantmail_radioButton_mustKonwMail,
 			R.id.gip_12345_iwantmail_radioButton_mayorBoxRule
 	};	
+
+	@SuppressLint("HandlerLeak")
+	private Handler handler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			String tip = "";
+
+			if (msg.obj != null) {
+				tip = msg.obj.toString();
+			}
+			switch (msg.what) {
+			case SEND_SUCCESS:
+				Toast.makeText(context, "提交成功！", 2000).show();
+				break;
+			case SEND_FAILED:
+				Toast.makeText(context, "提交失败！", 2000).show();
+				break;
+			}
+		};
+	};
+
 
 	@Override
 	public void onClick(View v) {
@@ -90,11 +116,33 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment{
 	}
 
 	public void submitMyLetter() throws NetException, JSONException, NODataException{
-		LetterService service=new LetterService(context);
-		if(service.submitMyLetter(myLetter))
-			Toast.makeText(context, "提交成功！", 2000).show();
-		else 
-			Toast.makeText(context, "提交失败！", 2000).show();
+
+		new Thread(new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				LetterService service=new LetterService(context);
+				try {
+					if(service.submitMyLetter(myLetter)){
+						handler.sendEmptyMessage(SEND_SUCCESS);					
+					}						
+					else {
+						handler.sendEmptyMessage(SEND_FAILED);	
+					}
+
+				} catch (NetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NODataException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}}).start();
+
 
 	}
 
