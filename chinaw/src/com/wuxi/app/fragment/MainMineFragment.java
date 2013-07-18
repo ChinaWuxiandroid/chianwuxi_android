@@ -39,6 +39,7 @@ public class MainMineFragment extends BaseSlideFragment {
 	private int FRAME_CONTENT = R.id.gover_interact_people_maincontent_fragment;
 
 	@Override
+
 	public  void initUI() {
 		super.initUI();
 		loadListData(id);

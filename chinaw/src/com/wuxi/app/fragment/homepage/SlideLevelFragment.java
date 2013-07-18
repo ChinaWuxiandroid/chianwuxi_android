@@ -1,8 +1,6 @@
 package com.wuxi.app.fragment.homepage;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -39,7 +37,9 @@ import com.wuxi.app.view.SlideMenuLayout;
 import com.wuxi.domain.MenuItem;
 
 public class SlideLevelFragment extends BaseFragment implements SlideLinstener,
-		OnItemClickListener, OnClickListener, OnCheckedChangeListener {
+
+OnItemClickListener, OnClickListener, OnCheckedChangeListener {
+
 
 	protected static final int FRAME_CONTENT = R.id.slide_main_content;
 	private View view;
@@ -115,8 +115,8 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener,
 
 		leftMenuAdapter = new LeftMenuAdapter(getActivity(),
 				R.layout.slide_navigator_item, new int[] {
-						R.id.tv_left_menu_name, R.id.left_iv_icon },
-				leftMenuItems, null, position);
+			R.id.tv_left_menu_name, R.id.left_iv_icon },
+			leftMenuItems, null, position);
 		mlvMenu.setAdapter(leftMenuAdapter);
 	}
 
@@ -127,15 +127,16 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener,
 			case MenuItem.CUSTOM_MENU:
 
 				if (menuItem.getName().equals("咨询中心")) {
-
 					InformationCenterFragment informationCenterFragment = new InformationCenterFragment();
 					informationCenterFragment.setMenuItem(menuItem);
 					onTransaction(informationCenterFragment);
 
 				} else if (menuItem.getName().equals("政府信息公开")) {
+
 					PublicGoverMsgFragment publicGoverMsgFragment = new PublicGoverMsgFragment();
 					publicGoverMsgFragment.setMenuItem(menuItem);
 					onTransaction(publicGoverMsgFragment);
+
 				} else if (menuItem.getName().equals("公共服务")) {
 					PublicServiceFragment publicServiceFragment = new PublicServiceFragment();
 					publicServiceFragment.setMenuItem(menuItem);
@@ -276,7 +277,9 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener,
 		MenuItem checkMenuItem = (MenuItem) parent.getItemAtPosition(position);
 		if (checkMenuItem.getName().equals("政民互动")) {// 为回退特殊处理
 
+
 			this.fragmentName = Constants.FragmentName.MAINMINEFRAGMENT;
+
 
 		} else {
 			this.fragmentName = null;
@@ -294,9 +297,7 @@ public class SlideLevelFragment extends BaseFragment implements SlideLinstener,
 
 		switch (v.getId()) {
 		case R.id.login_tv_userlogin:// 登录处理
-			// managers.BackPress(this);
-			// LoginFragment loginFragment = new LoginFragment();
-			// managers.IntentFragment(loginFragment);
+			
 			this.menuItem = null;
 
 			this.fragmentName = Constants.FragmentName.LOGIN_FRAGMENT;

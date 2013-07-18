@@ -3,8 +3,6 @@ package com.wuxi.app;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.baidu.location.f;
-
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -136,5 +134,16 @@ public class FragmentManagers {
 			RemoveFragment(fragments.get(i));
 		}
 	}
+
+	// 帮助类，打印 栈内所有Fragment
+	// public void printAllFragmentsInStack(String tag){
+	// int count=0;
+	// System.out.println("----"+tag+"------start---------");
+	// for(BaseFragment f:fragments){
+	// count++;
+	// System.out.println("----"+count+"  f:"+f.toString());
+	// }
+	// System.out.println("----------end---------");
+	// }
 
 }

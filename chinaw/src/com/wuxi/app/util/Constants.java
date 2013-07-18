@@ -125,19 +125,30 @@ public class Constants {
 		 * {end}结束位置占位符
 		 */
 		public static final String MYCONSULT_URL = "http://3g.wuxi.gov.cn/api/zhengwu/myconsult.json?access_token={access_token}&start={start}&end={end}";
-		
+
 		/**
 		 * 效能投诉列表
 		 * {start}开始占位符
 		 * {end}结束占位符
 		 */
 		public static final String TOUSU_URL="http://3g.wuxi.gov.cn/api/zhengwu/tousu.json?start={start}&end={end}";
-		
-		
+
+
 		/**
 		 * 政务大厅 部门获取url
 		 */
 		public static final String DEPT_URL="http://3g.wuxi.gov.cn/api/zhengwu/depts.json";
+
+		/**
+		 * 我要写信 
+		 *  {access_token} access_token
+		 *  {doprojectid}  提交信箱的项目编号占位符
+		 *  {typeid}  咨询类型 占位符  {title}标题   {content}内容占位符
+		 *  {openstate}是否公开   {sentmailback}是否邮件回复  {msgstatus}是否短信回复
+		 * */
+		public static final String IWANTMAIL_URL="http://3g.wuxi.gov.cn/api/letter/submit.json?" +
+				"access_token={access_token}&doprojectid={doprojectid}&typeid={typeid}&title={title}" +
+				"&content={content}&openstate={openstate}&sentmailback={sentmailback}&msgstatus={msgstatus}";
 
 	}
 

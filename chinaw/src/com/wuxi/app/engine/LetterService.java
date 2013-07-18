@@ -12,6 +12,7 @@ import android.content.Context;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.LetterWrapper;
+import com.wuxi.domain.MyLetter;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -33,7 +34,7 @@ public class LetterService extends Service{
 		url=url+"?start="+startIndex+"&end="+endIndex;
 		return getLettersWrapper(url);
 	}
-	
+
 	/**
 	 * 获取我的信箱列表
 	 * @throws NODataException 
@@ -45,7 +46,7 @@ public class LetterService extends Service{
 		System.out.println("url:"+url);
 		return getLettersWrapper(url);
 	}
-	
+
 	/**
 	 * 
 	 * 杨宸 智佳 
@@ -65,8 +66,8 @@ public class LetterService extends Service{
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
-		
-		
+
+
 		String resultStr = httpUtils.executeGetToString(url, 5000);
 
 		if (resultStr != null) {
@@ -125,4 +126,42 @@ public class LetterService extends Service{
 		}
 		return null;
 	}
+
+	/**
+	 * 我要写信
+	 * @throws NetException 
+	 * @throws JSONException 
+	 * @throws NODataException 
+	 * */
+	public boolean submitMyLetter(MyLetter myLetter) throws NetException, JSONException, NODataException{
+		if (!checkNet()) {
+			throw new NetException(Constants.ExceptionMessage.NO_NET); // 检查网络
+		}
+
+		String url = Constants.Urls.IWANTMAIL_URL.replace("{access_token}", myLetter.getAccess_token())
+				.replace("{doprojectid}", myLetter.getDoprojectid())
+				.replace("{typeid}", myLetter.getTypeid())
+				.replace("{title}", myLetter.getTitle())
+				.replace("{content}", myLetter.getContent())
+				.replace("{openstate}", String.valueOf(myLetter.getOpenState()))
+				.replace("{sentmailback}", String.valueOf(myLetter.getSentMailBack()))
+				.replace("{msgstatus}",String.valueOf(myLetter.getMsgStatus()) );
+
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+		if (resultStr != null) {
+
+			JSONObject jsonObject = new JSONObject(resultStr);
+			Object jres = jsonObject.get("result");
+
+			if (!jres.toString().equals("null")) {
+				return ((JSONObject) jres).getBoolean("success");
+			} else {
+				return false;
+			}
+
+		} else {
+			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);
+		}
+	}
+	
 }
