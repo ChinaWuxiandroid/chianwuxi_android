@@ -19,6 +19,8 @@ import com.wuxi.app.R;
 import com.wuxi.app.adapter.LeftMenuAdapter;
 import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.homepage.SlideLevelFragment;
+import com.wuxi.app.fragment.homepage.logorregister.LoginFragment;
+import com.wuxi.app.fragment.homepage.logorregister.RegisterFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.view.SlideMenuLayout;
@@ -32,6 +34,17 @@ import com.wuxi.domain.MenuItem;
 public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 		OnClickListener, OnItemClickListener {
 
+	protected View view;
+	protected LayoutInflater inflater;
+	protected Context context;
+	protected SlideMenuLayout mSlideMenuLayout;
+	protected ListView mlvMenu;// 左侧菜单列表
+	protected static final String MENUITEM_CACKE_KEY = Constants.CacheKey.HOME_MENUITEM_KEY;
+	private ImageView oPearn_btn, member_btnm, back_btn;
+	private TextView tv_title;
+	
+	private TextView login_tv_userlogin;
+	private TextView login_tv_user_regisster;
 	@Override
 	public void onItemClick(AdapterView<?> parent, View arg1, int position,
 			long arg3) {
@@ -57,14 +70,7 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 
 	}
 
-	protected View view;
-	protected LayoutInflater inflater;
-	protected Context context;
-	protected SlideMenuLayout mSlideMenuLayout;
-	protected ListView mlvMenu;// 左侧菜单列表
-	protected static final String MENUITEM_CACKE_KEY = Constants.CacheKey.HOME_MENUITEM_KEY;
-	private ImageView oPearn_btn, member_btnm, back_btn;
-	private TextView tv_title;
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,7 +106,13 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 		member_btnm = (ImageView) view.findViewById(R.id.member_btn);
 		tv_title = (TextView) view.findViewById(R.id.Title_Text);
 		back_btn = (ImageView) view.findViewById(R.id.back_btn);
-
+		
+		login_tv_userlogin = (TextView) view
+				.findViewById(R.id.login_tv_userlogin);
+		login_tv_user_regisster = (TextView) view
+				.findViewById(R.id.login_tv_user_regisster);
+		login_tv_userlogin.setOnClickListener(this);
+		login_tv_user_regisster.setOnClickListener(this);
 		oPearn_btn.setOnClickListener(this);
 		member_btnm.setOnClickListener(this);
 		back_btn.setOnClickListener(this);
@@ -119,6 +131,15 @@ public abstract class HomeBaseSlideLevelFragment extends BaseFragment implements
 			break;
 		case R.id.back_btn:
 			onBack();
+			break;
+		case R.id.login_tv_userlogin:// 登录处理
+			LoginFragment loginFragment = new LoginFragment();
+			managers.IntentFragment(loginFragment);
+
+			break;
+		case R.id.login_btn_regist:// 注册
+			RegisterFragment registerFragment = new RegisterFragment();
+			managers.IntentFragment(registerFragment);
 			break;
 
 		}

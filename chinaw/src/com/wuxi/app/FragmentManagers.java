@@ -102,7 +102,6 @@ public class FragmentManagers {
 		FragmentManager manager = fragmentActivity.getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.add(FRAME_CONTENT, saveFragment, fragments.size() + "");
-
 		ft.addToBackStack(null);// 保存状态大堆栈
 		ft.commit();
 
