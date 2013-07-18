@@ -1,5 +1,7 @@
 package com.wuxi.app.listeners;
 
+import android.os.Bundle;
+
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.MenuItem;
@@ -31,6 +33,14 @@ public interface SlideLinstener {
 
 	public void onBack();
 
+	/**
+	 * 
+	 *wanglu 泰得利通 
+	 * @param menuItem
+	 * @param position
+	 * @param fagmentName
+	 * @param bundle 传递的参数
+	 */
 	public void replaceFragment(MenuItem menuItem, int position,
-			Constants.FragmentName fagmentName);
+			Constants.FragmentName fagmentName,Bundle bundle);
 }

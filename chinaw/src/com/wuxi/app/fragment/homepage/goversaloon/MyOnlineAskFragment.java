@@ -37,6 +37,13 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 
 	@Override
 	public void initUI() {
+		Myconsult myconsult = (Myconsult) this.getArguments().get(
+				"selectMyconsult");
+		if (myconsult != null) {
+			showType = MYASK;
+		} else {
+			showType = GOASK;
+		}
 		super.initUI();
 		gover_btn_rg = (RadioGroup) view.findViewById(R.id.gover_btn_rg);
 		gover_myonlineask_detail = (LinearLayout) view

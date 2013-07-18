@@ -5,24 +5,10 @@
     android:background="@color/content_background"
     android:orientation="vertical" >
 
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.8"
-        layout="@layout/goversaloon_title_search_layout" />
-
     <FrameLayout
         android:id="@+id/gover_content_main"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="8.84" 
-        >
+        android:layout_height="match_parent" >
     </FrameLayout>
-
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.8"
-        layout="@layout/goversaloon_foot_search_layout" />
 
 </LinearLayout>

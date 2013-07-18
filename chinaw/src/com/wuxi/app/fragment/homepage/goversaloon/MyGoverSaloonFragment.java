@@ -4,14 +4,10 @@ import java.util.List;
 
 import org.json.JSONException;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
@@ -22,12 +18,12 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
-import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.MyOnlineApplyAdapter;
 import com.wuxi.app.adapter.MyOnlineConsultAdapter;
 import com.wuxi.app.engine.MyApplyService;
 import com.wuxi.app.engine.MyconsultService;
+import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.domain.MyApply;
 import com.wuxi.domain.MyApplyWrapper;
 import com.wuxi.domain.Myconsult;
@@ -40,18 +36,17 @@ import com.wuxi.exception.ResultException;
  * @author wanglu 泰得利通 我的政务大厅
  * 
  */
-public class MyGoverSaloonFragment extends BaseFragment implements
+public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 		OnCheckedChangeListener {
 
-	private View view;
 	private RadioGroup gover_btn_rg;
 	private RadioButton gover_sallon_myconsult;
 	private RadioButton gover_sallon_my_apply;
 	private ListView gover_saloon_lv_myapply;// 我的申请
 	private ListView gover_saloon_lv_myconsult;// 我的在线咨询
 	private static final String ACCESS_TOKEN = "bd58fcdfe5b54f4c95ed5f2e3a945f7c";
-	private Context context;
-	private static final int PAGE_SIZE = 10;
+
+	private static final int PAGE_SIZE = 4;
 	private static final int MYCONSULT_CHECKED = 0;// 标识哪个按钮选中
 	private static final int MYCONAPPLY_CHECKED = 1;
 	protected static final int MYCONSULT_LOADSUCCESS = 0;// 咨询列表加载成功
@@ -96,17 +91,6 @@ public class MyGoverSaloonFragment extends BaseFragment implements
 		};
 	};
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-
-		view = inflater.inflate(R.layout.my_goversaloon_layout, null);
-		context = getActivity();
-		initUI();
-		// initData();
-		return view;
-	}
-
 	/**
 	 * 
 	 * wanglu 泰得利通 显示申报列表数据
@@ -144,7 +128,8 @@ public class MyGoverSaloonFragment extends BaseFragment implements
 
 	}
 
-	private void initUI() {
+	protected void initUI() {
+		super.initUI();
 		gover_pb_myonlineapply = (ProgressBar) view
 				.findViewById(R.id.gover_pb_myonlineapply);
 		gover_btn_rg = (RadioGroup) view.findViewById(R.id.gover_btn_rg);
@@ -183,7 +168,7 @@ public class MyGoverSaloonFragment extends BaseFragment implements
 		gover_sallon_myconsult.setChecked(true);
 		switchRadionButtonStyle();
 
-		loadMyConsultData(0, 10);// 加载我的咨询数据
+		loadMyConsultData(0, PAGE_SIZE);// 加载我的咨询数据
 	}
 
 	private void loadMyConsultData(final int start, final int end) {
@@ -246,8 +231,9 @@ public class MyGoverSaloonFragment extends BaseFragment implements
 		List<Myconsult> myconsults = myconsultWrapper.getMyconsults();
 		if (myconsults != null && myconsults.size() > 0) {
 			if (isFristLoadMyConsultData) {
+				BaseSlideFragment baseSlideFragment=(BaseSlideFragment)this.getArguments().get("BaseSlideFragment");
 				myOnlineConsultAdapter = new MyOnlineConsultAdapter(myconsults,
-						context, managers);
+						context, managers,baseSlideFragment);
 				isFristLoadMyConsultData = false;
 				gover_saloon_lv_myconsult.setAdapter(myOnlineConsultAdapter);
 				gover_pb_myonlineapply.setVisibility(ProgressBar.GONE);
@@ -417,6 +403,11 @@ public class MyGoverSaloonFragment extends BaseFragment implements
 			}
 
 		}
+	}
+
+	@Override
+	protected int getLayoutId() {
+		return R.layout.my_goversaloon_layout;
 	}
 
 }

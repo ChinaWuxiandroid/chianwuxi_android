@@ -278,7 +278,11 @@ public class Constants {
 		 * 网站地图
 		 */
 		
-		SITEMAP_FRAGMENT
+		SITEMAP_FRAGMENT,
+		/**
+		 *在线咨询
+		 */
+		MYONLINEASKFRAGMENT
 		;
 		
 	}

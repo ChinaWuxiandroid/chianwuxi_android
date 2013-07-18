@@ -3,6 +3,7 @@ package com.wuxi.app.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -12,7 +13,9 @@ import android.widget.TextView;
 
 import com.wuxi.app.FragmentManagers;
 import com.wuxi.app.R;
+import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.MyOnlineAskFragment;
+import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.Myconsult;
 
@@ -28,12 +31,14 @@ public class MyOnlineConsultAdapter extends BaseAdapter implements
 	private Context context;
 	private FragmentManagers managers;
 	private Myconsult selectMyconsult;
+	public BaseSlideFragment baseSlideFragment;
 
 	public MyOnlineConsultAdapter(List<Myconsult> myconsults, Context context,
-			FragmentManagers managers) {
+			FragmentManagers managers, BaseSlideFragment baseSlideFragment) {
 		this.myconsults = myconsults;
 		this.context = context;
 		this.managers = managers;
+		this.baseSlideFragment = baseSlideFragment;
 	}
 
 	@Override
@@ -86,25 +91,29 @@ public class MyOnlineConsultAdapter extends BaseAdapter implements
 		viewHolder.tv_title.setText(text + " (" + time + " )");
 		viewHolder.iv_view.setOnClickListener(this);
 		viewHolder.iv_goask.setOnClickListener(this);
-		selectMyconsult=myconsult;
+		selectMyconsult = myconsult;
 		return convertView;
 
 	}
 
 	@Override
 	public void onClick(View v) {
-		MyOnlineAskFragment myOnlineAskFragment = new MyOnlineAskFragment();
+
 		switch (v.getId()) {
 		case R.id.gover_onlineask_view:
-			myOnlineAskFragment.setShowType(MyOnlineAskFragment.MYASK);
+
 			break;
 		case R.id.gover_onlineask_goask:
-			myOnlineAskFragment.setShowType(MyOnlineAskFragment.GOASK);
+			selectMyconsult = null;
 			break;
 		}
-		
-		myOnlineAskFragment.setMyconsult(selectMyconsult);
-		managers.IntentFragment(myOnlineAskFragment);
+
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("selectMyconsult", selectMyconsult);
+
+		baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+				Constants.FragmentName.MYONLINEASKFRAGMENT, bundle);
+
 	}
 
 	public void addItem(Myconsult myconsult) {

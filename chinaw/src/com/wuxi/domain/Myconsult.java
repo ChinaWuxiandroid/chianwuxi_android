@@ -1,13 +1,19 @@
 package com.wuxi.domain;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author wanglu 泰得利通
  * 我在线咨询对象
  *
  */
-public class Myconsult {
+public class Myconsult implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String title;
 	private String statue;

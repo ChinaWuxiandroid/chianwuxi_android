@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/content_background"
     android:orientation="vertical" >
 
-    <RelativeLayout
+     <include
+        android:id="@+id/search_head"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/goversaloon_title_search_layout" />
+    <RelativeLayout
+        android:id="@+id/btn_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_head" >
 
         <ImageView
             android:id="@+id/gover_eff_btn_mail_search"
@@ -27,6 +35,7 @@
     </RelativeLayout>
 
     <FrameLayout
+        android:layout_below="@+id/btn_rl"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
 
@@ -42,5 +51,9 @@
             android:layout_height="wrap_content" >
         </ListView>
     </FrameLayout>
-
-</LinearLayout>
+  <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        layout="@layout/goversaloon_foot_search_layout" />
+</RelativeLayout>

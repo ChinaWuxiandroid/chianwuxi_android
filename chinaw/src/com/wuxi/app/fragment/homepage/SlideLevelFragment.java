@@ -27,6 +27,7 @@ import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonFragment;
+import com.wuxi.app.fragment.homepage.goversaloon.MyOnlineAskFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InformationCenterFragment;
 import com.wuxi.app.fragment.homepage.logorregister.LoginFragment;
 import com.wuxi.app.fragment.homepage.more.MenuItemSetFragment;
@@ -105,7 +106,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		mlvMenu.setOnItemClickListener(this);
 
 		initLeftMenu();// 初始化左侧菜单数据
-		initFragment();
+		initFragment(null);
 
 		return view;
 	}
@@ -123,7 +124,14 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		mlvMenu.setAdapter(leftMenuAdapter);
 	}
 
-	private void initFragment() {
+	/**
+	 * 
+	 * wanglu 泰得利通
+	 * 
+	 * @param bundle
+	 *            传递的参数
+	 */
+	private void initFragment(Bundle bundle) {
 		if (menuItem != null && !menuItem.getName().equals("政民互动")) {//
 			switch (menuItem.getType()) {// 菜单类型
 
@@ -132,22 +140,22 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				if (menuItem.getName().equals("咨询中心")) {
 					InformationCenterFragment informationCenterFragment = new InformationCenterFragment();
 					informationCenterFragment.setMenuItem(menuItem);
-					onTransaction(informationCenterFragment);
+					onTransaction(informationCenterFragment, null);
 
 				} else if (menuItem.getName().equals("政府信息公开")) {
 
 					PublicGoverMsgFragment publicGoverMsgFragment = new PublicGoverMsgFragment();
 					publicGoverMsgFragment.setMenuItem(menuItem);
-					onTransaction(publicGoverMsgFragment);
+					onTransaction(publicGoverMsgFragment, null);
 
 				} else if (menuItem.getName().equals("公共服务")) {
 					PublicServiceFragment publicServiceFragment = new PublicServiceFragment();
 					publicServiceFragment.setMenuItem(menuItem);
-					onTransaction(publicServiceFragment);
+					onTransaction(publicServiceFragment, null);
 				} else if (menuItem.getName().equals("政务大厅")) {
 					GoverSaloonFragment saloonFragment = new GoverSaloonFragment();
 					saloonFragment.setParentMenuItem(menuItem);
-					onTransaction(saloonFragment);
+					onTransaction(saloonFragment, null);
 				}
 
 				break;
@@ -155,7 +163,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			case MenuItem.CHANNEL_MENU:// 如果点击的频道菜单
 				ChannelFragment ch = new ChannelFragment();
 				ch.setMenuItem(menuItem);
-				onTransaction(ch);
+				onTransaction(ch, null);
 				break;
 			case 2:
 
@@ -167,31 +175,36 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			switch (fragmentName) {
 			case LOGIN_FRAGMENT:// 登录
 				LoginFragment loginFragment = new LoginFragment();
-				onTransaction(loginFragment);
+
+				onTransaction(loginFragment, bundle);
 				break;
 			case REGIST_FRAGMENT:// 注册
 				break;
 			case MAINSEARCH_FRAGMENT:// 全站搜索
 				MainSearchFragment searchFragment = new MainSearchFragment();
-				onTransaction(searchFragment);
+				onTransaction(searchFragment, bundle);
 				break;
 			case MAINMINEFRAGMENT:// 政务名互动
 				MainMineFragment mainMineFragment = new MainMineFragment();
 				mainMineFragment.setMenuItem(menuItem);
-				onTransaction(mainMineFragment);
+				onTransaction(mainMineFragment, bundle);
 				break;
 			case SYSTEMSETF_RAGMENT:// 系统设置
 				SystemSetFragment systemSetFragment = new SystemSetFragment();
-				onTransaction(systemSetFragment);
+				onTransaction(systemSetFragment, bundle);
 
 				break;
 			case MENUITEMSET_FRAGMENT:// 常用栏设置
 				MenuItemSetFragment menusetFragment = new MenuItemSetFragment();
-				onTransaction(menusetFragment);
+				onTransaction(menusetFragment, bundle);
 				break;
 			case SITEMAP_FRAGMENT:// 网站地图
 				SiteMapFragment siteMapFragment = new SiteMapFragment();
-				onTransaction(siteMapFragment);
+				onTransaction(siteMapFragment, bundle);
+				break;
+			case MYONLINEASKFRAGMENT:// 在线咨询
+				MyOnlineAskFragment myOnlineAskFragment = new MyOnlineAskFragment();
+				onTransaction(myOnlineAskFragment, bundle);
 				break;
 
 			}
@@ -200,16 +213,19 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 	}
 
-	private void onTransaction(BaseSlideFragment fragment) {
+	private void onTransaction(BaseSlideFragment fragment, Bundle bundle) {
 		manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(FRAME_CONTENT, fragment);
+		if (bundle != null) {
+			fragment.setArguments(bundle);
+		}
 		fragment.setFragment(this);
 		ft.addToBackStack(null);
 		fragment.setManagers(managers);// 传递管理器
 		ft.commit();
 		FragmentWapper f = new FragmentWapper(this.menuItem, this.position,
-				this.fragmentName);
+				this.fragmentName, bundle);
 
 		fragments.add(f);
 
@@ -238,7 +254,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			this.fragmentName = f.fName;
 			leftMenuAdapter.setSelectPosition(position);
 			leftMenuAdapter.notifyDataSetChanged();
-			initFragment();
+			initFragment(f.bundle);
 			fragments.remove(fragments.size() - 1);
 			fragments.remove(fragments.size() - 2);
 
@@ -302,7 +318,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		this.position = position;
 		leftMenuAdapter.setSelectPosition(position);
 		leftMenuAdapter.notifyDataSetChanged();
-		initFragment();
+		initFragment(null);
 
 	}
 
@@ -315,7 +331,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			this.menuItem = null;
 
 			this.fragmentName = Constants.FragmentName.LOGIN_FRAGMENT;
-			initFragment();
+			initFragment(null);
 			break;
 		case R.id.login_tv_user_regisster:// 注册
 			// managers.BackPress(this);
@@ -348,24 +364,26 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		MenuItem menuItem;
 		int position;
 		Constants.FragmentName fName;
+		Bundle bundle;
 
 		public FragmentWapper(MenuItem menuItem, int position,
-				Constants.FragmentName fName) {
+				Constants.FragmentName fName, Bundle bundle) {
 			this.menuItem = menuItem;
 			this.position = position;
 			this.fName = fName;
+			this.bundle = bundle;
 
 		}
 	}
 
 	@Override
 	public void replaceFragment(MenuItem menuItem, int position,
-			FragmentName fagmentName) {
+			FragmentName fagmentName, Bundle bundle) {
 
 		this.menuItem = menuItem;
 		this.position = position;
 		this.fragmentName = fagmentName;
-		initFragment();
+		initFragment(bundle);
 
 	}
 

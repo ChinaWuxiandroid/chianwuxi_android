@@ -5,7 +5,6 @@
     android:background="#F8F8F8"
     android:orientation="horizontal" >
 
-    
     <Spinner
         android:id="@+id/goversaloon_sp"
         android:layout_width="0dip"
@@ -15,21 +14,19 @@
     <Button
         android:id="@+id/goversaloon_btn_statesearch"
         android:layout_width="0dip"
-        android:layout_height="wrap_content"
+        android:layout_height="30dip"
         android:layout_weight="1"
         android:text="状态查询"
         android:textSize="12sp" />
-    
 
     <Button
         android:id="@+id/goversaloon_btn_count"
         android:layout_width="0dip"
-        android:layout_height="wrap_content"
+        android:layout_height="25dip"
         android:layout_weight="1"
-        android:text="办件统计"
         android:background="@drawable/goversaloon_search_bg"
-        android:textSize="12sp"
+        android:text="办件统计"
         android:textColor="#ffffff"
-         />
+        android:textSize="12sp" />
 
 </LinearLayout>
