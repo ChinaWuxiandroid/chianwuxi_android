@@ -10,8 +10,11 @@ import org.json.JSONObject;
 import android.content.Context;
 
 import com.wuxi.app.util.Constants;
+
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.LetterWrapper;
+import com.wuxi.domain.MyLetter;
+import com.wuxi.domain.User;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -128,6 +131,39 @@ public class LetterService extends Service{
 
 	/**
 	 * 我要写信
+	 * @throws NetException 
+	 * @throws JSONException 
+	 * @throws NODataException 
 	 * */
+	public boolean submitMyLetter(MyLetter myLetter) throws NetException, JSONException, NODataException{
+		if (!checkNet()) {
+			throw new NetException(Constants.ExceptionMessage.NO_NET); // 检查网络
+		}
 
+		String url = Constants.Urls.IWANTMAIL_URL.replace("{access_token}", myLetter.getAccess_token())
+				.replace("{doprojectid}", myLetter.getDoprojectid())
+				.replace("{typeid}", myLetter.getTypeid())
+				.replace("{title}", myLetter.getTitle())
+				.replace("{content}", myLetter.getContent())
+				.replace("{openstate}", String.valueOf(myLetter.getOpenState()))
+				.replace("{sentmailback}", String.valueOf(myLetter.getSentMailBack()))
+				.replace("{msgstatus}",String.valueOf(myLetter.getMsgStatus()) );
+
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+		if (resultStr != null) {
+
+			JSONObject jsonObject = new JSONObject(resultStr);
+			Object jres = jsonObject.get("result");
+
+			if (!jres.toString().equals("null")) {
+				return ((JSONObject) jres).getBoolean("success");
+			} else {
+				return false;
+			}
+
+		} else {
+			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);
+		}
+	}
+	
 }

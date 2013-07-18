@@ -1,4 +1,4 @@
-package com.wuxi.app.util;
+package com.wuxi.domain;
 
 public class MyLetter {
 	private String access_token;    //OAuth Token

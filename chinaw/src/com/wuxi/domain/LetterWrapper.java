@@ -22,6 +22,8 @@ public class LetterWrapper extends CommonDataWrapper{
 		private String depname;  //部门名称
 		private String answerdate;  //回复时间
 		private int readcount;  //阅读次数
+		
+		
 		public String getId() {
 			return id;
 		}

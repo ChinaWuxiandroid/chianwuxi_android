@@ -40,7 +40,7 @@ public class MainMineFragment extends HomeBaseSlideLevelFragment {
 	private int FRAME_CONTENT = R.id.gover_interact_people_maincontent_fragment;
 
 	@Override
-	protected void initUI() {
+	public void initUI() {
 		super.initUI();
 		loadListData(id);
 		if (listMenus != null) {
