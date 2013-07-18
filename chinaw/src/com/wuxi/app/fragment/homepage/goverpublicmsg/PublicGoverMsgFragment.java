@@ -83,9 +83,6 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 	}
 
 
-<<<<<<< HEAD
-
-=======
 	@Override
 	protected int getLayoutId() {
 		return R.layout.fragment_chanel_layout;
@@ -97,7 +94,4 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 		return menuItem.getName();
 	}
 
-	
-	
->>>>>>> 0ff2f65410b4072861a6ebc127badd2cd7d786b2
 }

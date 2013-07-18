@@ -29,15 +29,11 @@ import com.wuxi.exception.NetException;
  * @author 杨宸 智佳
  * */
 
-<<<<<<< HEAD
-public class GIP12345IWantMailFragment extends RadioButtonChangeFragment{
+public class GIP12345IWantMailFragment extends RadioButtonChangeFragment {
 
 	private final static int SEND_SUCCESS=1;
 	private final static int SEND_FAILED=0;
-=======
-public class GIP12345IWantMailFragment extends RadioButtonChangeFragment
-		implements OnClickListener {
->>>>>>> 0ff2f65410b4072861a6ebc127badd2cd7d786b2
+
 
 	private MyLetter myLetter;
 
@@ -65,13 +61,9 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment
 	ImageButton upload;
 	ImageButton send;
 
-<<<<<<< HEAD
 
-
-	private final  int[] radioButtonIds={
-=======
 	private final int[] radioButtonIds = {
->>>>>>> 0ff2f65410b4072861a6ebc127badd2cd7d786b2
+
 			R.id.gip_12345_iwantmail_radioButton_iwantmail,
 			R.id.gip_12345_iwantmail_radioButton_mustKonwMail,
 			R.id.gip_12345_iwantmail_radioButton_mayorBoxRule };
@@ -96,36 +88,40 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment
 	};
 
 
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
+	public class OnClick implements OnClickListener{
 
-		switch (v.getId()) {
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
 
-		case R.id.gip_12345_iwantmail_imageBtn_upload:
-			Toast.makeText(context, "上传附件（功能暂未实现）", 1000).show();
-			break;
-		case R.id.gip_12345_iwantmail_imageBtn_send:
-			myLetter.setAccess_token(Constants.SharepreferenceKey.TEST_ACCESSTOKEN);
-			myLetter.setTitle(title_editText.getText().toString());
-			myLetter.setContent(content_editText.getText().toString());
-			try {
-				submitMyLetter();
-			} catch (NetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NODataException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			switch (v.getId()) {
+
+			case R.id.gip_12345_iwantmail_imageBtn_upload:
+				Toast.makeText(context, "上传附件（功能暂未实现）", 1000).show();
+				break;
+			case R.id.gip_12345_iwantmail_imageBtn_send:
+				myLetter.setAccess_token(Constants.SharepreferenceKey.TEST_ACCESSTOKEN);
+				myLetter.setTitle(title_editText.getText().toString());
+				myLetter.setContent(content_editText.getText().toString());
+				try {
+					submitMyLetter();
+				} catch (NetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NODataException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
 			}
-			break;
 		}
+
 	}
 
-<<<<<<< HEAD
+
+
 	public void submitMyLetter() throws NetException, JSONException, NODataException{
 
 		new Thread(new Runnable(){
@@ -153,17 +149,6 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment
 					e.printStackTrace();
 				}
 			}}).start();
-
-=======
-	public void submitMyLetter() throws NetException, JSONException,
-			NODataException {
-		LetterService service = new LetterService(context);
-		if (service.submitMyLetter(myLetter))
-			Toast.makeText(context, "提交成功！", 2000).show();
-		else
-			Toast.makeText(context, "提交失败！", 2000).show();
->>>>>>> 0ff2f65410b4072861a6ebc127badd2cd7d786b2
-
 	}
 
 	@Override
@@ -256,7 +241,7 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment
 				.createFromResource(context, R.array.mailBoxType,
 						R.layout.my_spinner_small_item);
 		mailBoxType_Spinner_adapter
-				.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);
+		.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);
 		mailBoxType.setAdapter(mailBoxType_Spinner_adapter);
 		mailBoxType.setVisibility(View.VISIBLE);
 
@@ -275,8 +260,8 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment
 		isReplyMail_radioGroup.setOnCheckedChangeListener(this);
 		isReplyMsg_radioGroup.setOnCheckedChangeListener(this);
 
-		upload.setOnClickListener(this);
-		send.setOnClickListener(this);
+		upload.setOnClickListener(new OnClick());
+		send.setOnClickListener(new OnClick());
 
 		mailBoxType.setOnItemSelectedListener(new OnItemSelectedListener() {
 
