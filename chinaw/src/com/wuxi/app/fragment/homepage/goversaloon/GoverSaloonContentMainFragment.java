@@ -45,6 +45,8 @@ public class GoverSaloonContentMainFragment extends BaseFragment {
 				onTransaction(new EfficacyComplaintFragment());
 			} else if (menuItem.getName().equals("行政事项")) {
 				onTransaction(new AdministrativeItemFragment());
+			}else if(menuItem.getName().equals("办事指南")){
+				onTransaction(new BusinessGuideFragment());
 			}
 
 		} else if (menuItem.getType() == MenuItem.CHANNEL_MENU) {
