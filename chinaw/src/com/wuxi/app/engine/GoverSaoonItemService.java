@@ -6,15 +6,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.JAsonPaserUtil;
-import com.wuxi.domain.ContentWrapper;
 import com.wuxi.domain.GoverSaoonItem;
 import com.wuxi.domain.GoverSaoonItemWrapper;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
-
-import android.content.Context;
 
 public class GoverSaoonItemService extends Service {
 

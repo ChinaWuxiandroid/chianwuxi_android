@@ -298,19 +298,17 @@ public class Constants {
 		/**
 		 * 在线咨询
 		 */
-<<<<<<< HEAD
+
 		MYONLINEASKFRAGMENT,
 		
 		/**
 		 * 热点话题内容
 		 * */
-		HOTREVIEW_CONTENT_FRAGMENT
-		;
+		HOTREVIEW_CONTENT_FRAGMENT;
 		
-=======
-		MYONLINEASKFRAGMENT;
 
->>>>>>> 3c9248ddaca6d916ddd6eea02963b1cf26f15e97
+
+
 	}
 
 }

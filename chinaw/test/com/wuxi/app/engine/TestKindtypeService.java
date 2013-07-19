@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import android.test.AndroidTestCase;
+
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.Kindtype;
 import com.wuxi.exception.NetException;
-
-import android.test.AndroidTestCase;
 
 public class TestKindtypeService extends AndroidTestCase {
 

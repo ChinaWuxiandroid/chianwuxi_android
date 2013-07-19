@@ -2,12 +2,12 @@ package com.wuxi.app.engine;
 
 import org.json.JSONException;
 
+import android.test.AndroidTestCase;
+
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.GoverSaoonItemWrapper;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
-
-import android.test.AndroidTestCase;
 
 /**'
  * 

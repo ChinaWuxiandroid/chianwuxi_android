@@ -1,14 +1,12 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
-<<<<<<< HEAD
-=======
+
 import java.util.List;
 
 import org.json.JSONException;
 
 import android.os.Handler;
 import android.os.Message;
->>>>>>> 3c9248ddaca6d916ddd6eea02963b1cf26f15e97
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;

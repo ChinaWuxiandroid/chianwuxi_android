@@ -319,22 +319,16 @@ public class MainIndexFragment extends BaseFragment implements
 					.getItemAtPosition(position);
 			SlideLevelFragment saveFragment = new SlideLevelFragment();
 			if (checkMenuItem.getName().equals("政民互动")) {
-
 				saveFragment
 						.setFragmentName(Constants.FragmentName.MAINMINEFRAGMENT);
-<<<<<<< HEAD
-=======
 
 			}
 			saveFragment.setPosition(position);
 			saveFragment.setMenuItem(checkMenuItem);
 			managers.IntentFragment(saveFragment);
->>>>>>> 3c9248ddaca6d916ddd6eea02963b1cf26f15e97
 
-			}
-			saveFragment.setPosition(position);
-			saveFragment.setMenuItem(checkMenuItem);
-			managers.IntentFragment(saveFragment);
+
+			
 		}
 	};
 
