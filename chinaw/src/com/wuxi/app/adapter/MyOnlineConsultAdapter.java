@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.wuxi.app.FragmentManagers;
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.BaseSlideFragment;
-import com.wuxi.app.fragment.homepage.goversaloon.MyOnlineAskFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.Myconsult;

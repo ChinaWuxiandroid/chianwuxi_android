@@ -1,6 +1,5 @@
 package com.wuxi.app.fragment.search;
 
-import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;

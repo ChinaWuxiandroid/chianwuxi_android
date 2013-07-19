@@ -10,11 +10,8 @@ import org.json.JSONObject;
 import android.content.Context;
 
 import com.wuxi.app.util.Constants;
-import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.LetterWrapper;
 import com.wuxi.domain.MyLetter;
-import com.wuxi.domain.PoliticsWrapper;
-import com.wuxi.domain.PoliticsWrapper.Politics;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -109,8 +106,9 @@ public class LetterService extends Service{
 			List<LetterWrapper.Letter> letterList = new ArrayList<LetterWrapper.Letter>();
 
 			for (int index = 0; index < jData.length(); index++) {
-
+				
 				JSONObject jb = jData.getJSONObject(index);
+				System.out.println(jb.toString());
 				LetterWrapper h=new LetterWrapper();
 				LetterWrapper.Letter letters = h.new Letter();
 				letters.setId(jb.getString("id"));
@@ -119,8 +117,8 @@ public class LetterService extends Service{
 				letters.setCode(jb.getString("code"));
 				letters.setAppraise(jb.getString("appraise"));
 				letters.setDepname(jb.getString("depname"));	
-				letters.setAnswerdate(TimeFormateUtil.formateTime
-						(String.valueOf(jb.getLong("answerdate")), TimeFormateUtil.DATE_PATTERN));	
+//				letters.setAnswerdate(TimeFormateUtil.formateTime
+//						(String.valueOf(jb.getLong("answerdate")), TimeFormateUtil.DATE_PATTERN));	
 				letters.setReadcount(jb.getInt("readcount"));		
 				letterList.add(letters);
 			}

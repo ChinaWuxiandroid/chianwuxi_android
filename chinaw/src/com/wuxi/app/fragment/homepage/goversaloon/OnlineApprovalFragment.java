@@ -1,14 +1,8 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.GoverOnlineApproveAdapter;
 

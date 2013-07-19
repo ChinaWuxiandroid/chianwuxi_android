@@ -66,16 +66,15 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 			gover_myonlineask_detail.setVisibility(LinearLayout.VISIBLE);
 			gover_myonline_goonask.setVisibility(LinearLayout.GONE);
 			gover_btn_rg.check(R.id.gover_myonlineask_detail);
-			gover_sallon_my_ask_detail.setBackground(getResources()
-					.getDrawable(R.drawable.goversaloon_menuitem_bg));
+			gover_sallon_my_ask_detail.setBackgroundResource(R.drawable.goversaloon_menuitem_bg);
 			gover_sallon_my_ask_detail.setTextColor(Color.WHITE);
 			break;
 		case GOASK:
 			gover_myonlineask_detail.setVisibility(LinearLayout.GONE);
 			gover_myonline_goonask.setVisibility(LinearLayout.VISIBLE);
 			gover_btn_rg.check(R.id.gover_myonline_goonask);
-			gover_sallon_my_goon_ask.setBackground(getResources().getDrawable(
-					R.drawable.goversaloon_menuitem_bg));
+			
+			gover_sallon_my_goon_ask.setBackgroundResource(R.drawable.goversaloon_menuitem_bg);
 			gover_sallon_my_goon_ask.setTextColor(Color.WHITE);
 			break;
 		}

@@ -8,11 +8,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
 import com.wuxi.app.fragment.MainIndexFragment;
-import com.wuxi.app.fragment.MainMineFragment;
-import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.fragment.homepage.SlideLevelFragment;
-import com.wuxi.app.fragment.homepage.logorregister.LoginFragment;
-import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
 import com.wuxi.app.util.Constants;
 
 /**

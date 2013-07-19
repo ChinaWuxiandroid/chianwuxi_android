@@ -74,9 +74,7 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 			case LEFT_DATA__LOAD_ERROR:
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
-
 			}
-
 		};
 	};
 
@@ -157,9 +155,7 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 		mListView.setOnItemClickListener(this);
 
 		if (menuItems.size() > 0) {
-
 			showContentFragment(showMenItemContentFragment(menuItems.get(0)));// 默认显示第一个ConentFragment
-
 		}
 	}
 
@@ -223,7 +219,6 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 		if (channels.size() > 0) {
 			showContentFragment(showChannelContentFragment(channels.get(0)));// 显示第一个Channel数据
 		}
-
 	}
 
 	@Override
@@ -238,11 +233,8 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 		} else if (object instanceof MenuItem) {
 			adapter.setSelectedPosition(position); // 刷新左侧导航listView背景
 			adapter.notifyDataSetInvalidated();
-
 			showContentFragment(showMenItemContentFragment((MenuItem) object));
-
 		}
-
 	}
 
 	/**
@@ -285,7 +277,6 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 
 			ft.commit();
 		}
-
 	}
 
 	public void setParentMenuItem(MenuItem parentMenuItem) {
