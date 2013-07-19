@@ -31,6 +31,7 @@ import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.MyOnlineAskFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InformationCenterFragment;
 import com.wuxi.app.fragment.homepage.logorregister.LoginFragment;
+import com.wuxi.app.fragment.homepage.logorregister.RegisterFragment;
 import com.wuxi.app.fragment.homepage.more.MenuItemSetFragment;
 import com.wuxi.app.fragment.homepage.more.SiteMapFragment;
 import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
@@ -181,6 +182,8 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				onTransaction(loginFragment, bundle);
 				break;
 			case REGIST_FRAGMENT:// 注册
+				RegisterFragment registerFragment = new RegisterFragment();
+				onTransaction(registerFragment, bundle);
 				break;
 			case MAINSEARCH_FRAGMENT:// 全站搜索
 				MainSearchFragment searchFragment = new MainSearchFragment();
@@ -339,8 +342,10 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			break;
 		case R.id.login_tv_user_regisster:// 注册
 			// managers.BackPress(this);
-			// RegisterFragment registerFragment = new RegisterFragment();
-			// managers.IntentFragment(registerFragment);
+			this.menuItem = null;
+			this.fragmentName = Constants.FragmentName.REGIST_FRAGMENT;
+			initFragment(null);
+
 			break;
 
 		}

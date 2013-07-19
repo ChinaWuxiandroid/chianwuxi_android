@@ -74,13 +74,11 @@ public class Constants {
 		 * */
 		public static final String HOTREVIEW_LIST_URL = "http://3g.wuxi.gov.cn/api/hotreview/list.json";
 
-		
 		/**
 		 * 热点话题内容 URL
 		 * */
 		public static final String HOTREVIEWCONTENT_LIST_URL = "http://3g.wuxi.gov.cn/api/hotreview/{id}.json";
-		
-		
+
 		/**
 		 * 分页获取立法征求意见和民意征集 URL
 		 * */
@@ -127,35 +125,41 @@ public class Constants {
 		public static final String MY_APPLY_URL = "http://3g.wuxi.gov.cn/api/zhengwu/myapply.json?access_token={access_token}&start={start}&end={end}";
 
 		/**
-		 * 获取我的在线咨询列表
-		 * {access_token} access_token 占位符 {start} 开始位置暂占位符
+		 * 获取我的在线咨询列表 {access_token} access_token 占位符 {start} 开始位置暂占位符
 		 * {end}结束位置占位符
 		 */
 		public static final String MYCONSULT_URL = "http://3g.wuxi.gov.cn/api/zhengwu/myconsult.json?access_token={access_token}&start={start}&end={end}";
 
 		/**
-		 * 效能投诉列表
-		 * {start}开始占位符
-		 * {end}结束占位符
+		 * 效能投诉列表 {start}开始占位符 {end}结束占位符
 		 */
-		public static final String TOUSU_URL="http://3g.wuxi.gov.cn/api/zhengwu/tousu.json?start={start}&end={end}";
-
+		public static final String TOUSU_URL = "http://3g.wuxi.gov.cn/api/zhengwu/tousu.json?start={start}&end={end}";
 
 		/**
 		 * 政务大厅 部门获取url
 		 */
-		public static final String DEPT_URL="http://3g.wuxi.gov.cn/api/zhengwu/depts.json";
+		public static final String DEPT_URL = "http://3g.wuxi.gov.cn/api/zhengwu/depts.json";
 
 		/**
-		 * 我要写信 
-		 *  {access_token} access_token
-		 *  {doprojectid}  提交信箱的项目编号占位符
-		 *  {typeid}  咨询类型 占位符  {title}标题   {content}内容占位符
-		 *  {openstate}是否公开   {sentmailback}是否邮件回复  {msgstatus}是否短信回复
+		 * 我要写信 {access_token} access_token {doprojectid} 提交信箱的项目编号占位符 {typeid}
+		 * 咨询类型 占位符 {title}标题 {content}内容占位符 {openstate}是否公开
+		 * {sentmailback}是否邮件回复 {msgstatus}是否短信回复
 		 * */
-		public static final String IWANTMAIL_URL="http://3g.wuxi.gov.cn/api/letter/submit.json?" +
-				"access_token={access_token}&doprojectid={doprojectid}&typeid={typeid}&title={title}" +
-				"&content={content}&openstate={openstate}&sentmailback={sentmailback}&msgstatus={msgstatus}";
+		public static final String IWANTMAIL_URL = "http://3g.wuxi.gov.cn/api/letter/submit.json?"
+				+ "access_token={access_token}&doprojectid={doprojectid}&typeid={typeid}&title={title}"
+				+ "&content={content}&openstate={openstate}&sentmailback={sentmailback}&msgstatus={msgstatus}";
+
+		/**
+		 * 政务大厅，办件分类获取 type 01：个人身份 02：个人办事 03：企业行业 04：企业办事 05：港澳台侨、外国人 06：主题服务
+		 */
+		public static final String KIND_TYPE_URL = "http://3g.wuxi.gov.cn/api/zhengwu/kindtype.json?type={type}";
+		
+		
+		
+		/**
+		 * 政务大厅，根据部们获取部门ID获取办件信息
+		 */
+		public static final String GETITEM_BYDEPT_URL="http://3g.wuxi.gov.cn/api/zhengwu/itemlistdept.json?deptid={deptid}&start={start}&end={end}";
 
 	}
 
@@ -220,6 +224,11 @@ public class Constants {
 		 */
 		public static final String LOGIN_USER = "login_user";
 
+		/**
+		 * 政务大厅中部门信息
+		 */
+		public static final String DEPT_KEY = "gover_dept";
+
 	}
 
 	/**
@@ -263,7 +272,7 @@ public class Constants {
 		 * 注册 fragments
 		 */
 		REGIST_FRAGMENT,
-		
+
 		/**
 		 * 全站搜索
 		 */
@@ -277,18 +286,19 @@ public class Constants {
 		 */
 		SYSTEMSETF_RAGMENT,
 		/**
-		 *首页常用栏设置 
+		 * 首页常用栏设置
 		 */
 		MENUITEMSET_FRAGMENT,
-		
+
 		/**
 		 * 网站地图
 		 */
-		
+
 		SITEMAP_FRAGMENT,
 		/**
-		 *在线咨询
+		 * 在线咨询
 		 */
+<<<<<<< HEAD
 		MYONLINEASKFRAGMENT,
 		
 		/**
@@ -297,6 +307,10 @@ public class Constants {
 		HOTREVIEW_CONTENT_FRAGMENT
 		;
 		
+=======
+		MYONLINEASKFRAGMENT;
+
+>>>>>>> 3c9248ddaca6d916ddd6eea02963b1cf26f15e97
 	}
 
 }

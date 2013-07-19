@@ -322,6 +322,14 @@ public class MainIndexFragment extends BaseFragment implements
 
 				saveFragment
 						.setFragmentName(Constants.FragmentName.MAINMINEFRAGMENT);
+<<<<<<< HEAD
+=======
+
+			}
+			saveFragment.setPosition(position);
+			saveFragment.setMenuItem(checkMenuItem);
+			managers.IntentFragment(saveFragment);
+>>>>>>> 3c9248ddaca6d916ddd6eea02963b1cf26f15e97
 
 			}
 			saveFragment.setPosition(position);
