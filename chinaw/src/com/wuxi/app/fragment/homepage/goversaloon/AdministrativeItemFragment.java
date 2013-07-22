@@ -3,7 +3,11 @@ package com.wuxi.app.fragment.homepage.goversaloon;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
+
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -17,10 +21,15 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.GoverManageAdapter;
+import com.wuxi.app.engine.MenuService;
 import com.wuxi.domain.Channel;
+import com.wuxi.domain.MenuItem;
+import com.wuxi.exception.NODataException;
+import com.wuxi.exception.NetException;
 
 /**
  * 
@@ -36,11 +45,30 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	private List<View> titleGridViews;
 	private static final int PAGE_ITEM = 4;
 	private static final String TAG = "AdministrativeItemFragment";
+	protected static final int TITLE_ITEM_LOADSUCCESS = 0;
+	protected static final int TITLE_ITEM_LOADFAIL = 1;
 
 	private int checkPositons[];// 选中的坐标
 	private int pageNo = 0;
 	private String itemString[] = { "1.关于在新区梅园镇建立垃圾回收的问题咨询的问题的咨询(2013-5-3)",
 			"2.关于在新区梅园镇建立垃圾回收的问题咨询的问题的咨询(2013-5-3)" };
+	private MenuItem menuItem;
+	private List<MenuItem> menuItems;
+	private Handler handler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case TITLE_ITEM_LOADSUCCESS:
+				showTitleData();
+
+				break;
+			case TITLE_ITEM_LOADFAIL:
+				String tip = msg.obj.toString();
+				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
+				break;
+			}
+
+		};
+	};
 
 	public void initUI() {
 		super.initUI();
@@ -51,30 +79,73 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 				.findViewById(R.id.gover_mange_iv_next);
 		gover_viewpagerLayout.setOnPageChangeListener(this);
 		gover_mange_iv_next.setOnClickListener(this);
-		showChannelData();
 
-		GoverManageAdapter manageAdapter = new GoverManageAdapter(itemString,
-				context);
-		gover_mange_lv.setAdapter(manageAdapter);
+		menuItem = (MenuItem) getArguments().get("menuItem");
+		loadTitleItems(menuItem.getId());
+		// showChannelData();
+
+		/*
+		 * GoverManageAdapter manageAdapter = new GoverManageAdapter(itemString,
+		 * context);
+		 */
+		// gover_mange_lv.setAdapter(manageAdapter);
 
 	}
 
-	private void showChannelData() {
+	/**
+	 * 
+	 * wanglu 泰得利通 加载头部信息
+	 * 
+	 * @param id
+	 */
+	private void loadTitleItems(final String id) {
 
-		List<Channel> channles = new ArrayList<Channel>();
+		new Thread(new Runnable() {
 
-		for (int i = 0; i < 10; i++) {
-			Channel channel = new Channel();
-			channel.setChannelName("专栏新闻");
-			channles.add(channel);
-		}
+			@Override
+			public void run() {
+				Message msg = handler.obtainMessage();
+
+				MenuService menuService = new MenuService(context);
+				try {
+					menuItems = menuService.getSubMenuItems(id);
+					if (menuItems != null) {
+						msg.what = TITLE_ITEM_LOADSUCCESS;
+					} else {
+						msg.what = TITLE_ITEM_LOADFAIL;
+						msg.obj = "加载数据失败";
+					}
+					handler.sendMessage(msg);
+				} catch (NetException e) {
+					e.printStackTrace();
+					msg.what = TITLE_ITEM_LOADFAIL;
+					msg.obj = e.getMessage();
+					handler.sendMessage(msg);
+				} catch (NODataException e) {
+					e.printStackTrace();
+					msg.what = TITLE_ITEM_LOADFAIL;
+					msg.obj = e.getMessage();
+					handler.sendMessage(msg);
+				} catch (JSONException e) {
+					e.printStackTrace();
+					msg.what = TITLE_ITEM_LOADFAIL;
+					msg.obj = "数据格式错误";
+					handler.sendMessage(msg);
+				}
+
+			}
+		}).start();
+
+	}
+
+	private void showTitleData() {
 
 		int i = 0;
-		List<Channel> onScreenItems = null;
+		List<MenuItem> onScreenItems = null;
 		titleGridViews = new ArrayList<View>();
 		int currentScreen = 0;// 当前屏
 
-		int totalScreenNum = channles.size() / PAGE_ITEM;// 屏数
+		int totalScreenNum = menuItems.size() / PAGE_ITEM;// 屏数
 		checkPositons = new int[totalScreenNum + 1];
 		for (int j = 0; j < checkPositons.length; j++) {// 初始化头部安选中的下标
 			checkPositons[j] = -1;
@@ -82,7 +153,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 
 		checkPositons[0] = 0;// 默认选中第一屏第一个Chanel
 
-		for (Channel item : channles) {
+		for (MenuItem item : menuItems) {
 
 			if (i % PAGE_ITEM == 0) {
 
@@ -94,19 +165,19 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 
 				}
 
-				onScreenItems = new ArrayList<Channel>();
+				onScreenItems = new ArrayList<MenuItem>();
 			}
 
 			// 最后一屏操作
 			if (currentScreen > totalScreenNum + 1) {
 
-				onScreenItems = new ArrayList<Channel>();
+				onScreenItems = new ArrayList<MenuItem>();
 			}
 
 			onScreenItems.add(item);
 
 			// add last category screen //最后一屏
-			if (i == channles.size() - 1) {
+			if (i == menuItems.size() - 1) {
 
 				titleGridViews.add(bulidGridView(onScreenItems, currentScreen));
 
@@ -115,17 +186,17 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 			i++;
 		}
 
-		gover_viewpagerLayout.setAdapter(new ChannelItemViewPageAdapter(
+		gover_viewpagerLayout.setAdapter(new MenuItemViewPageAdapter(
 				titleGridViews));// 设置ViewPage适配器
 
 	}
 
-	private GridView bulidGridView(List<Channel> items, int screenIndex) {
+	private GridView bulidGridView(List<MenuItem> items, int screenIndex) {
 		GridView gridView = (GridView) mInflater.inflate(
 				R.layout.gover_mange_title_gridview_layout, null);
 		gridView.setColumnWidth(PAGE_ITEM);
 
-		gridView.setAdapter(new ChannelGridViewAdaptger(items, screenIndex));
+		gridView.setAdapter(new MenuItemGridViewAdaptger(items, screenIndex));
 		gridView.setOnItemClickListener(GridviewOnclick);
 		return gridView;
 	}
@@ -134,24 +205,25 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 		TextView tv_title;
 	}
 
-	private class ChannelGridViewAdaptger extends BaseAdapter {
+	private class MenuItemGridViewAdaptger extends BaseAdapter {
 
-		public List<Channel> channels;
+		public List<MenuItem> menuItems;
 		public int screenIndex;
 
-		public ChannelGridViewAdaptger(List<Channel> channels, int screenIndex) {
-			this.channels = channels;
+		public MenuItemGridViewAdaptger(List<MenuItem> menuItems,
+				int screenIndex) {
+			this.menuItems = menuItems;
 			this.screenIndex = screenIndex;
 		}
 
 		@Override
 		public int getCount() {
-			return channels.size();
+			return menuItems.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			return channels.get(position);
+			return menuItems.get(position);
 		}
 
 		@Override
@@ -161,7 +233,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			Channel channel = channels.get(position);
+			MenuItem menuItem = menuItems.get(position);
 			ViewHolder viewHolder = null;
 			if (convertView == null) {
 				convertView = mInflater.inflate(
@@ -185,17 +257,17 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
 
-			viewHolder.tv_title.setText(channel.getChannelName());
+			viewHolder.tv_title.setText(menuItem.getName());
 			return convertView;
 		}
 
 	}
 
-	private class ChannelItemViewPageAdapter extends PagerAdapter {
+	private class MenuItemViewPageAdapter extends PagerAdapter {
 
 		private List<View> mListViews;
 
-		public ChannelItemViewPageAdapter(List<View> mGridViews) {
+		public MenuItemViewPageAdapter(List<View> mGridViews) {
 
 			this.mListViews = mGridViews;
 		}
@@ -296,7 +368,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	@Override
 	protected int getLayoutId() {
 
-		return R.layout.gover_saloon_mange;
+		return R.layout.gover_saloon_administrative;
 	}
 
 }

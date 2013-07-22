@@ -153,13 +153,25 @@ public class Constants {
 		 * 政务大厅，办件分类获取 type 01：个人身份 02：个人办事 03：企业行业 04：企业办事 05：港澳台侨、外国人 06：主题服务
 		 */
 		public static final String KIND_TYPE_URL = "http://3g.wuxi.gov.cn/api/zhengwu/kindtype.json?type={type}";
-		
-		
-		
+
 		/**
 		 * 政务大厅，根据部们获取部门ID获取办件信息
 		 */
-		public static final String GETITEM_BYDEPT_URL="http://3g.wuxi.gov.cn/api/zhengwu/itemlistdept.json?deptid={deptid}&start={start}&end={end}";
+		public static final String GETITEM_BYDEPT_URL = "http://3g.wuxi.gov.cn/api/zhengwu/itemlistdept.json?deptid={deptid}&start={start}&end={end}";
+
+		/**
+		 * 
+		 * 政务大厅根据，kindType类型获办件列表
+		 */
+		public static final String GETITEM_BYKINDTYPE_URL = "http://3g.wuxi.gov.cn/api/zhengwu/itemlist.json?type={type}&kindtype={kindtype}&start={start}&end={end}";
+
+		/**
+		 * 政务大厅多条件查询接口
+		 * 
+		 * 参数:itemname false String 办件名称，模糊查询 qltype false String 办件类型 deptid false
+		 * String 部门id year true Int 年份 start true Int 分页开始 end true Int 分页结束
+		 */
+		public static final String GETITEM_QUERY_URL = "http://3g.wuxi.gov.cn/api/zhengwu/itemlist/query.json";
 
 	}
 
@@ -300,14 +312,11 @@ public class Constants {
 		 */
 
 		MYONLINEASKFRAGMENT,
-		
+
 		/**
 		 * 热点话题内容
 		 * */
 		HOTREVIEW_CONTENT_FRAGMENT;
-		
-
-
 
 	}
 

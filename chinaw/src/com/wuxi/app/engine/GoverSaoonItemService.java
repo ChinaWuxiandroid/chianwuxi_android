@@ -1,6 +1,7 @@
 package com.wuxi.app.engine;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,12 +39,62 @@ public class GoverSaoonItemService extends Service {
 			int start, int end) throws JSONException, NetException,
 			NODataException {
 
-		if (!checkNet()) {
-			throw new NetException(Constants.ExceptionMessage.NO_NET);
-		}
 		String url = Constants.Urls.GETITEM_BYDEPT_URL
 				.replace("{deptid}", deptId).replace("{start}", start + "")
 				.replace("{end}", end + "");
+
+		return getGoverSaoonItemsByURL(url);
+	}
+
+	/**
+	 * 
+	 * 
+	 * 获取办件信息多条件信息 wanglu 泰得利通
+	 * 
+	 * @param params
+	 *            参数
+	 * @return
+	 * @throws JSONException
+	 * @throws NetException
+	 * @throws NODataException
+	 */
+	public GoverSaoonItemWrapper getGoverSaoonItemsByParas(
+			Map<String, String> params) throws JSONException, NetException,
+			NODataException {
+
+		StringBuffer sb = new StringBuffer();
+		for (Map.Entry<String, String> paramSet : params.entrySet()) {
+
+			sb.append(paramSet.getKey()).append("=")
+					.append(paramSet.getValue()).append("&");
+
+		}
+
+		sb.deleteCharAt(sb.length() - 1);// 删除最后一个字符
+
+		String url = Constants.Urls.GETITEM_QUERY_URL + "?" + sb.toString();
+
+		return getGoverSaoonItemsByURL(url);
+
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 根据URL获取办件列表
+	 * 
+	 * @param url
+	 * @return
+	 * @throws JSONException
+	 * @throws NetException
+	 * @throws NODataException
+	 */
+	public GoverSaoonItemWrapper getGoverSaoonItemsByURL(String url)
+			throws JSONException, NetException, NODataException {
+
+		if (!checkNet()) {
+			throw new NetException(Constants.ExceptionMessage.NO_NET);
+		}
+
 		String resultStr = httpUtils.executeGetToString(url, 5000);
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
@@ -79,6 +130,25 @@ public class GoverSaoonItemService extends Service {
 		} else {
 			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);// 没有获取到数据异常
 		}
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 根据kindType获取办件信息
+	 * 
+	 * @return
+	 * @throws NODataException
+	 * @throws NetException
+	 * @throws JSONException
+	 */
+	public GoverSaoonItemWrapper getGoverSaoonItemsByKindType(String type,
+			String kindType, int start, int end) throws JSONException,
+			NetException, NODataException {
+		String url = Constants.Urls.GETITEM_BYKINDTYPE_URL
+				.replace("{type}", type).replace("{kindtype}", kindType)
+				.replace("{start}", start + "").replace("{end}", end + "");
+
+		return getGoverSaoonItemsByURL(url);
 	}
 
 }

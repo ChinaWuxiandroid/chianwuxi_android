@@ -28,7 +28,7 @@ public class MyOnlineConsultAdapter extends BaseAdapter implements
 
 	private List<Myconsult> myconsults;
 	private Context context;
-	private FragmentManagers managers;
+
 	private Myconsult selectMyconsult;
 	public BaseSlideFragment baseSlideFragment;
 
@@ -36,7 +36,7 @@ public class MyOnlineConsultAdapter extends BaseAdapter implements
 			FragmentManagers managers, BaseSlideFragment baseSlideFragment) {
 		this.myconsults = myconsults;
 		this.context = context;
-		this.managers = managers;
+		
 		this.baseSlideFragment = baseSlideFragment;
 	}
 

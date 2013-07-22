@@ -19,22 +19,20 @@ public class GoverSaloonContentMainFragment extends BaseFragment {
 
 	private MenuItem menuItem;
 	private View view;
-	
 
 	private static final int CONTENT_MAIN_ID = R.id.gover_content_main;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-	
 		view = inflater.inflate(R.layout.goversaloon_content_layout, null);
 		initUI();
 		return view;
 	}
 
 	private void initUI() {
-		
+
 		if (menuItem.getType() == MenuItem.CUSTOM_MENU) {
 
 			if (menuItem.getName().equals("我的政务大厅")) {
@@ -42,13 +40,18 @@ public class GoverSaloonContentMainFragment extends BaseFragment {
 			} else if (menuItem.getName().equals("效能投诉")) {
 				onTransaction(new EfficacyComplaintFragment());
 			} else if (menuItem.getName().equals("行政事项")) {
+				this.getArguments().putSerializable("menuItem", menuItem);
 				onTransaction(new AdministrativeItemFragment());
-			}else if(menuItem.getName().equals("办事指南")){
+			} else if (menuItem.getName().equals("办事指南")) {
 				onTransaction(new BusinessGuideFragment());
 			}
 
 		} else if (menuItem.getType() == MenuItem.CHANNEL_MENU) {
-			onTransaction(new GoverMangeFragment());
+			GoverMangeFragment goverMangeFragment = new GoverMangeFragment();
+
+			this.getArguments().putSerializable("menuItem", menuItem);
+
+			onTransaction(goverMangeFragment);
 		} else if (menuItem.getType() == MenuItem.APP_MENU) {
 			if (menuItem.getAppUI().equals("OnlineApproval")) {
 				onTransaction(new OnlineApprovalFragment());
@@ -63,11 +66,9 @@ public class GoverSaloonContentMainFragment extends BaseFragment {
 		this.menuItem = menuItem;
 	}
 
-	
-
 	private void onTransaction(BaseFragment fragment) {
-		
-		fragment.setArguments(this.getArguments());//传递主框架对象
+
+		fragment.setArguments(this.getArguments());// 传递主框架对象
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		fragment.setManagers(managers);// 传递managers

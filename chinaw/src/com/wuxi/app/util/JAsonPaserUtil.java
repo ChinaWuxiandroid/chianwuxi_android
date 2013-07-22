@@ -84,7 +84,7 @@ public class JAsonPaserUtil {
 	 * 
 	 *wanglu 泰得利通 
 	 * @param t
-	 * @param fileNames  属性名称
+	 * @param fileNames  要解析的字段属性名称
 	 * @param jsArray
 	 * @return
 	 * @throws JSONException

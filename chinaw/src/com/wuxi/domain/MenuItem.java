@@ -1,5 +1,7 @@
 package com.wuxi.domain;
 
+import java.io.Serializable;
+
 import android.support.v4.app.Fragment;
 
 /**
@@ -8,7 +10,7 @@ import android.support.v4.app.Fragment;
  * @author wanglu
  * 
  */
-public class MenuItem implements Comparable<MenuItem> {
+public class MenuItem implements Comparable<MenuItem>, Serializable {
 
 	/**
 	 * 普通菜单 一般它的下级也可以认为是menuitem
