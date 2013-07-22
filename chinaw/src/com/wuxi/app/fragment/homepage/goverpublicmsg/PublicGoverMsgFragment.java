@@ -9,6 +9,7 @@ import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.ContentListFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InfoNavigatorWithContentFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.WapFragment;
+import com.wuxi.app.listeners.GoverPublicMsgInitLayoutImpl;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
 import com.wuxi.app.listeners.PublicServiceInitLayoutImpl;
 import com.wuxi.domain.Channel;
@@ -79,7 +80,7 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 
 	@Override
 	protected MenuItemInitLayoutListener getMenuItemInitLayoutListener() {
-		return new PublicServiceInitLayoutImpl();
+		return new GoverPublicMsgInitLayoutImpl();
 	}
 
 

@@ -32,11 +32,11 @@ public class PublicServiceInitLayoutImpl implements MenuItemInitLayoutListener {
 			if (fragment == null) {
 				return;
 			}
-		
+
 			WapFragment leaderWindowFragment = null;
 			ContentListFragment contentListFragment = null;
 			InfoNavigatorWithContentFragment contentNavigatorWithContentFragment=null;
-			WorkSuggestionBoxFragment workSuggestionBoxFragment=null;
+
 			if (fragment instanceof WapFragment) {
 				leaderWindowFragment = (WapFragment) fragment;
 				leaderWindowFragment.setParentItem(menuItem);
@@ -50,11 +50,7 @@ public class PublicServiceInitLayoutImpl implements MenuItemInitLayoutListener {
 				contentNavigatorWithContentFragment.setParentMenuItem(menuItem);
 				initLayoutListner.bindContentLayout(contentNavigatorWithContentFragment);
 			}
-			else if(fragment instanceof WorkSuggestionBoxFragment){
-				workSuggestionBoxFragment=(WorkSuggestionBoxFragment)fragment;
-				workSuggestionBoxFragment.setParentMenuItem(menuItem);
-				initLayoutListner.bindContentLayout(workSuggestionBoxFragment);
-			}
+
 
 		} catch (InstantiationException e) {
 			e.printStackTrace();
