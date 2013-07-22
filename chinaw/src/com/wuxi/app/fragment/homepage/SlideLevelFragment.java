@@ -2,6 +2,7 @@ package com.wuxi.app.fragment.homepage;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -34,6 +35,7 @@ import com.wuxi.app.fragment.homepage.logorregister.RegisterFragment;
 import com.wuxi.app.fragment.homepage.more.MenuItemSetFragment;
 import com.wuxi.app.fragment.homepage.more.SiteMapFragment;
 import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewContentFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
 import com.wuxi.app.listeners.SlideLinstener;
 import com.wuxi.app.util.CacheUtil;
@@ -187,9 +189,9 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				MainSearchFragment searchFragment = new MainSearchFragment();
 				onTransaction(searchFragment, bundle);
 				break;
-			case MAINMINEFRAGMENT:// 政务名互动
-				MainMineFragment mainMineFragment = new MainMineFragment();
-				mainMineFragment.setMenuItem(menuItem);
+			case MAINMINEFRAGMENT:// 政务名互动		
+				MainMineFragment mainMineFragment = new MainMineFragment();		
+				mainMineFragment.setParentMenuItem(menuItem);
 				onTransaction(mainMineFragment, bundle);
 				break;
 			case SYSTEMSETF_RAGMENT:// 系统设置
@@ -209,11 +211,13 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				MyOnlineAskFragment myOnlineAskFragment = new MyOnlineAskFragment();
 				onTransaction(myOnlineAskFragment, bundle);
 				break;
+			case HOTREVIEW_CONTENT_FRAGMENT:// test
+				HotReviewContentFragment hotReviewContentFragment = new HotReviewContentFragment();
+				onTransaction(hotReviewContentFragment, bundle);
+				break;
 
 			}
-
 		}
-
 	}
 
 	private void onTransaction(BaseSlideFragment fragment, Bundle bundle) {
@@ -384,7 +388,6 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	@Override
 	public void replaceFragment(MenuItem menuItem, int position,
 			FragmentName fagmentName, Bundle bundle) {
-
 		this.menuItem = menuItem;
 		this.position = position;
 		this.fragmentName = fagmentName;

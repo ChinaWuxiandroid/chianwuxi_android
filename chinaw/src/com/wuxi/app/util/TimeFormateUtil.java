@@ -25,10 +25,9 @@ public class TimeFormateUtil {
 	@SuppressLint("SimpleDateFormat")
 	public static String formateTime(String time, String pattern) {
 
-		Date date = new Date(Long.parseLong(time));
-		SimpleDateFormat formater = new SimpleDateFormat(pattern);
-		return formater.format(date);
-
+			Date date = new Date(Long.parseLong(time));
+			SimpleDateFormat formater = new SimpleDateFormat(pattern);
+			return formater.format(date);
 	}
 
 }

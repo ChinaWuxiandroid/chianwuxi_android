@@ -35,7 +35,7 @@ public abstract class BaseSlideFragment extends BaseFragment {
 		return view;
 	}
 	
-	public  void initUI(){
+	public void initUI(){
 		
 	}
 
@@ -85,13 +85,10 @@ public abstract class BaseSlideFragment extends BaseFragment {
 
 		@Override
 		public void onClick(View v) {
-			
 			onBack();
 		}
 	};
 
-	
-	
 	public void onBack(){
 		slideLinstener.onBack();
 	}
@@ -102,7 +99,6 @@ public abstract class BaseSlideFragment extends BaseFragment {
 	public void MemberMenu(View souce) {
 		slideLinstener.OpearnRight();
 	}
-
 
 	public void setFragment(SlideLinstener slideLinstener) {
 		this.slideLinstener = slideLinstener;

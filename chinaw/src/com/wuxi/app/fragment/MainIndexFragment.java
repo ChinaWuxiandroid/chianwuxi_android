@@ -314,11 +314,11 @@ public class MainIndexFragment extends BaseFragment implements
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
+		
 			MenuItem checkMenuItem = (MenuItem) parent
 					.getItemAtPosition(position);
 			SlideLevelFragment saveFragment = new SlideLevelFragment();
 			if (checkMenuItem.getName().equals("政民互动")) {
-
 				saveFragment
 						.setFragmentName(Constants.FragmentName.MAINMINEFRAGMENT);
 
@@ -327,6 +327,8 @@ public class MainIndexFragment extends BaseFragment implements
 			saveFragment.setMenuItem(checkMenuItem);
 			managers.IntentFragment(saveFragment);
 
+
+			
 		}
 	};
 

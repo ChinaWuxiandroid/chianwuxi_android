@@ -2,7 +2,6 @@ package com.wuxi.app.listeners;
 
 import android.os.Bundle;
 
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.MenuItem;
 

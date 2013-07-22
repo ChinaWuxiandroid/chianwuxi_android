@@ -23,8 +23,6 @@ public class GoverSaloonContentMainFragment extends BaseFragment {
 
 	private static final int CONTENT_MAIN_ID = R.id.gover_content_main;
 	
-	
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

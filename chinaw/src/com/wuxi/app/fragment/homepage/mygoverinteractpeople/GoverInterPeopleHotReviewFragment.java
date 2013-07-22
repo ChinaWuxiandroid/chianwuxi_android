@@ -9,6 +9,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.engine.HotReviewService;
+import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
@@ -27,6 +30,9 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment{
+
+	
+	
 	private ListView mListView;
 	private ProgressBar list_pb;
 	private HotReviewWrapper hotReviewWrapper;
@@ -113,7 +119,7 @@ public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment
 	}
 
 	@Override
-	protected void init() {
+	protected void init() {	
 		// TODO Auto-generated method stub
 		mListView=(ListView) view.findViewById(R.id.gip_suggest_people_listview);
 		list_pb=(ProgressBar)view.findViewById(R.id.gip_suggest_people_listview_pb);
@@ -172,17 +178,24 @@ public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment
 	}
 	
 	public void showHotReviews(){
-		HotReviewListViewAdapter adapter=new HotReviewListViewAdapter();
+		BaseSlideFragment baseSlideFragment=(BaseSlideFragment)this.getArguments().get("BaseSlideFragment");
+		HotReviewListViewAdapter adapter=new HotReviewListViewAdapter(baseSlideFragment);
+		
 		if(hotReviews==null||hotReviews.size()==0){
 			Toast.makeText(context, "对不起，暂无热点话题信息", 2000).show();
 		}
 		else{
 			mListView.setAdapter(adapter);
+			mListView.setOnItemClickListener(adapter);
 		}
 	}
 
-	public class HotReviewListViewAdapter extends BaseAdapter{
-
+	public class HotReviewListViewAdapter extends BaseAdapter implements OnItemClickListener{
+		BaseSlideFragment baseSlideFragment;
+		public HotReviewListViewAdapter(BaseSlideFragment baseSlideFragment){
+			this.baseSlideFragment=baseSlideFragment;
+		}
+		
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
@@ -234,6 +247,16 @@ public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment
 
 			return convertView;
 		}
-		
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+				long arg3) {
+			// TODO Auto-generated method stub
+			baseSlideFragment.slideLinstener.replaceFragment(null, position,
+					Constants.FragmentName.HOTREVIEW_CONTENT_FRAGMENT, null);
+
+		}
+
+	
 	}
 }
