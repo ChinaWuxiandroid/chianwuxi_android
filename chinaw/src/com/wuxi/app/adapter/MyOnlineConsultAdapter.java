@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.wuxi.app.FragmentManagers;
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.BaseSlideFragment;
-import com.wuxi.app.fragment.homepage.goversaloon.MyOnlineAskFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.Myconsult;
@@ -29,7 +28,7 @@ public class MyOnlineConsultAdapter extends BaseAdapter implements
 
 	private List<Myconsult> myconsults;
 	private Context context;
-	private FragmentManagers managers;
+
 	private Myconsult selectMyconsult;
 	public BaseSlideFragment baseSlideFragment;
 
@@ -37,7 +36,7 @@ public class MyOnlineConsultAdapter extends BaseAdapter implements
 			FragmentManagers managers, BaseSlideFragment baseSlideFragment) {
 		this.myconsults = myconsults;
 		this.context = context;
-		this.managers = managers;
+		
 		this.baseSlideFragment = baseSlideFragment;
 	}
 

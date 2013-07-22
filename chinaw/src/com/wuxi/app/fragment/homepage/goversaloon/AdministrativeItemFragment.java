@@ -3,7 +3,6 @@ package com.wuxi.app.fragment.homepage.goversaloon;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
