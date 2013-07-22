@@ -24,9 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
-import com.wuxi.app.adapter.GoverManageAdapter;
 import com.wuxi.app.engine.MenuService;
-import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;

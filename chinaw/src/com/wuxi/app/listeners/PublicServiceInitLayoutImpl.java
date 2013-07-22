@@ -2,13 +2,7 @@ package com.wuxi.app.listeners;
 
 import android.support.v4.app.Fragment;
 
-<<<<<<< HEAD
-import com.wuxi.app.fragment.homepage.informationcenter.ContentListFragment;
-import com.wuxi.app.fragment.homepage.informationcenter.InfoNavigatorWithContentFragment;
-import com.wuxi.app.fragment.homepage.informationcenter.WapFragment;
-=======
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceWithContentFragment;
->>>>>>> b2bd5b26d505fe7d413d33e88ef7d6914d767b63
 import com.wuxi.domain.MenuItem;
 
 /**
