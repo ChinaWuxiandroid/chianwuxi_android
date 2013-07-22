@@ -14,7 +14,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true" />
 
-      
+        <TextView
+            android:id="@+id/gover_manage_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/gover_manage_title"
+            android:gravity="right" />
     </RelativeLayout>
 
 </LinearLayout>

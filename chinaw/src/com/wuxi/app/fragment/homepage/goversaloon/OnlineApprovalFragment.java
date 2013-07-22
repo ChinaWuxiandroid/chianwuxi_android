@@ -66,7 +66,7 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 				showDept();
 				break;
 			case GOVERITEM_LOAD_SUCCESS:
-				showItemDetail();
+				showItemList();
 				break;
 			case GOVERITEM_LOAD_FIAL:
 			case LOAD_DEPT_FAIL:
@@ -133,7 +133,7 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 	 * 
 	 * wanglu 泰得利通 显示办件事项详细信息
 	 */
-	protected void showItemDetail() {
+	protected void showItemList() {
 
 		if (goverSaoonItemWrapper.isNext()) {
 			loadMoreButton.setText("more");

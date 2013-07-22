@@ -30,6 +30,7 @@ import com.wuxi.app.R;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.engine.ContentService;
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.Content;
 import com.wuxi.exception.NODataException;
@@ -106,9 +107,10 @@ public class WuxiChannelContentFragment extends BaseFragment {
 		int browCount = content.getBrowseCount();
 
 		wuxicity_decontent_title.setText(title);
-		wuxi_decontent_tvtime.setText(wuxi_decontent_tvtime.getText()
-				.toString() + time);// 时间
-		wuxi_decontent_tvbrowcount.setText(wuxi_decontent_tvbrowcount.getText()
+		wuxi_decontent_tvtime.setText("时间:"
+				+ TimeFormateUtil.formateTime(time,
+						TimeFormateUtil.DATE_PATTERN));// 时间
+		wuxi_decontent_tvbrowcount.setText("浏览次数:"
 				.toString() + browCount);// 浏览次数
 
 		wuxicity_decontent_wb.getSettings().setJavaScriptEnabled(true);

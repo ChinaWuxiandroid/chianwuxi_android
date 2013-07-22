@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:visibility="visible" >
+    android:visibility="gone" >
 
     <TextView
         android:id="@+id/wuxicity_decontent_title"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dip"
-        android:text="建置沿革"
+        android:text=""
         android:textColor="#0E71BE"
         android:textSize="14sp" />
 
@@ -27,14 +27,14 @@
             android:id="@+id/wuxi_decontent_tvtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="时间: 2013年5月24日" />
+            android:text="" />
 
         <TextView
             android:id="@+id/wuxi_decontent_tvbrowcount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dip"
-            android:text="浏览次数 : 8" />
+            android:text="" />
     </LinearLayout>
 
     <FrameLayout

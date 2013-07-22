@@ -9,6 +9,7 @@
         android:id="@+id/gover_manger_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:textSize="12sp"/>
+        android:textSize="12sp"
+        android:gravity="center"/>
 
 </LinearLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical" >
 
     <include
@@ -29,16 +29,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="10dip"
+            android:layout_marginRight="5dip"
             android:background="@drawable/gover_manger_next" />
     </FrameLayout>
 
-    <ListView
-        android:id="@+id/gover_mange_lv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/fl_title_item" >
-    </ListView>
+    <HorizontalScrollView
+        android:id="@+id/hs_subchannel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fl_title_item" 
+        >
+
+        <LinearLayout
+            android:id="@+id/ll_subchannel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hs_subchannel" >
+
+        <ListView
+            android:id="@+id/gover_mange_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/fl_title_item" >
+        </ListView>
+
+        <ProgressBar
+            android:id="@+id/pb_mange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
 
     <include
         android:layout_width="match_parent"
