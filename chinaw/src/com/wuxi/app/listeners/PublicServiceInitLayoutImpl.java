@@ -2,7 +2,6 @@ package com.wuxi.app.listeners;
 
 import android.support.v4.app.Fragment;
 
-import com.wuxi.app.fragment.homepage.goverpublicmsg.WorkSuggestionBoxFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.ContentListFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InfoNavigatorWithContentFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.WapFragment;

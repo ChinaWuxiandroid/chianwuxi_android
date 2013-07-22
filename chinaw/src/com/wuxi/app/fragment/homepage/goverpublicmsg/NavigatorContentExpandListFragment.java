@@ -22,6 +22,7 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -49,6 +50,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment{
 	private ProgressBar processBar;
 
 	protected List<MenuItem> MenuItems;
+	protected List<Channel> Channels;
 
 	private static final int DATA__LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
@@ -68,6 +70,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment{
 				showChannelList();
 				break;
 			case DATA_LOAD_ERROR:
+				processBar.setVisibility(View.INVISIBLE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
 			}
@@ -103,6 +106,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment{
 	private void loadData(){
 		if (CacheUtil.get(parentItem.getId()) != null) {// 从缓存中查找子菜单
 			MenuItems = (List<MenuItem>) CacheUtil.get(parentItem.getId());
+			processBar.setVisibility(View.INVISIBLE);
 			showChannelList();
 			return;
 		}
@@ -117,9 +121,15 @@ public class NavigatorContentExpandListFragment extends BaseFragment{
 					MenuItems = menuSevice.getSubMenuItems(parentItem
 							.getId());
 					if (MenuItems != null) {
-						System.out.println("name :---"+MenuItems.get(0).getName());
+						System.out.println("  ()"+MenuItems.get(0).getName());
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 						CacheUtil.put(parentItem.getId(), MenuItems);// 放入缓存
+					}
+					else{
+						Message msg = handler.obtainMessage();
+						msg.obj = "暂无信息";
+						msg.what = DATA_LOAD_ERROR;
+						handler.sendMessage(msg);
 					}
 
 				} catch (NetException e) {
@@ -149,8 +159,6 @@ public class NavigatorContentExpandListFragment extends BaseFragment{
 		ChannelListAdapter adapter=new ChannelListAdapter();
 
 		listview.setAdapter(adapter);
-
-
 
 	}
 
@@ -195,7 +203,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment{
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
 			if(viewHolder.title_text!=null)
-				viewHolder.title_text.setText(MenuItems.get(position).getChannelName());
+				viewHolder.title_text.setText(MenuItems.get(position).getName());
 			return convertView;
 		}
 
