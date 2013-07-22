@@ -17,12 +17,24 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/search_head" />
 
-    <ListView
-        android:id="@+id/gover_online_approval_lv"
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/gover_oline_filter" >
-    </ListView>
+
+        <ListView
+            android:id="@+id/gover_online_approval_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gover_oline_filter" >
+        </ListView>
+
+        <ProgressBar
+            android:id="@+id/pb_approval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_gravity="center"/>
+    </FrameLayout>
 
     <include
         android:layout_width="match_parent"

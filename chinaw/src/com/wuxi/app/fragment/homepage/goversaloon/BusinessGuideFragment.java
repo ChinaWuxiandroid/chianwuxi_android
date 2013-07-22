@@ -58,6 +58,7 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 		gv = (GridView) view.findViewById(R.id.gover_guide_gv_kindtype);
 		gover_buness_guide_rg = (RadioGroup) view
 				.findViewById(R.id.gover_buness_guide_rg);
+		gover_buness_guide_rg.check(R.id.rb_personal);
 		gover_buness_guide_rg.setOnCheckedChangeListener(this);
 		loadKindTypeData(types[1]);
 

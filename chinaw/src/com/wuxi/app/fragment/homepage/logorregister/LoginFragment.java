@@ -20,6 +20,7 @@ import com.wuxi.app.engine.UserService;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.MD5Encoder;
 import com.wuxi.domain.User;
 import com.wuxi.exception.NODataException;
@@ -62,7 +63,7 @@ public class LoginFragment extends BaseSlideFragment implements OnClickListener 
 
 	@Override
 	public void initUI() {
-		slideLinstener.closeSlideMenu();//关掉左右
+		slideLinstener.closeSlideMenu();// 关掉左右
 		super.initUI();
 		login_btn_login = (Button) view.findViewById(R.id.login_btn_login);
 		login_btn_regist = (Button) view.findViewById(R.id.login_btn_regist);
@@ -107,8 +108,9 @@ public class LoginFragment extends BaseSlideFragment implements OnClickListener 
 			}
 			break;
 		case R.id.login_btn_regist:
-			RegisterFragment registFragment = new RegisterFragment();
-			managers.IntentFragment(registFragment);
+			slideLinstener.replaceFragment(null, -1,
+					FragmentName.REGIST_FRAGMENT, null);
+
 			break;
 		}
 	}
