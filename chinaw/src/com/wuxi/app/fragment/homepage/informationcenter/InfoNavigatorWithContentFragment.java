@@ -3,6 +3,7 @@ package com.wuxi.app.fragment.homepage.informationcenter;
 import android.support.v4.app.Fragment;
 
 import com.wuxi.app.fragment.commonfragment.MenuItemNavigatorWithContentFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.NavigatorContentExpandListFragment;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 
@@ -23,6 +24,12 @@ public class InfoNavigatorWithContentFragment extends
 			wapFragment.setParentItem(menuItem);
 			return wapFragment;
 		}
+		else if(menuItem.getType() == MenuItem.CUSTOM_MENU||menuItem.getType() == MenuItem.CHANNEL_MENU){
+			NavigatorContentExpandListFragment navigatorContentExpandListFragment=new NavigatorContentExpandListFragment();
+			navigatorContentExpandListFragment.setParentItem(menuItem);
+			return navigatorContentExpandListFragment;
+		}
+		
 
 		return null;
 	}
