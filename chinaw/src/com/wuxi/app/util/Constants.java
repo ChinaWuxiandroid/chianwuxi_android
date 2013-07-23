@@ -172,6 +172,23 @@ public class Constants {
 		 * String 部门id year true Int 年份 start true Int 分页开始 end true Int 分页结束
 		 */
 		public static final String GETITEM_QUERY_URL = "http://3g.wuxi.gov.cn/api/zhengwu/itemlist/query.json";
+		
+		
+		/**
+		 * 政务大厅获取表格下载列表
+		 * {deptid} 部门ID
+		 * {start}开始记录
+		 * {end} 结束记录
+		 */
+		public static final String GETTABLE_DOWNLOADS_URL="http://3g.wuxi.gov.cn/api/zhengwu/downloadfiles.json?deptid={deptid}&start={start}&end={end}";
+		
+		
+		/**
+		 * 政务大厅获取好办件详情信息  
+		 * {type} 类型
+		 * {id} id 
+		 */
+		public static final String GETGOVER_ITEMDETIAL_URL="http://3g.wuxi.gov.cn/api/zhengwu/item/{type}.json?id={id}";
 
 	}
 
@@ -316,8 +333,12 @@ public class Constants {
 		/**
 		 * 热点话题内容
 		 * */
-		HOTREVIEW_CONTENT_FRAGMENT;
+		HOTREVIEW_CONTENT_FRAGMENT,
 
+		/**
+		 * 政务大厅办件详情
+		 */
+		GOVERSALOONDETAILFRAGMENT;
 	}
 
 }

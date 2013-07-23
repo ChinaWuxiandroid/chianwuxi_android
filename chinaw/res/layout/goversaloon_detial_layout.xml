@@ -20,10 +20,363 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <ExpandableListView
+            <TableLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-            </ExpandableListView>
+                android:layout_height="wrap_content"
+                android:background="#DDDDDD"
+                android:orientation="vertical" >
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0.25dip"
+                    android:background="#DDDDDD" >
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="事项名称"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_ssmc_name"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="0.5dip"
+                        android:layout_weight="7"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:drawableRight="@drawable/gover_item_detail_expa_up"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="5dip"
+                        android:text="事项名称"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/tl_tb_detail"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#DDDDDD"
+                android:orientation="vertical" >
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0.25dip"
+                    android:background="#DDDDDD" >
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="事项编码"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="0.5dip"
+                        android:layout_weight="7"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="5dip"
+                        android:text="事项名称"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0.25dip"
+                    android:background="#DDDDDD" >
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="承诺时限"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="0.5dip"
+                        android:layout_weight="7"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="5dip"
+                        android:text="事项名称"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0.25dip"
+                    android:background="#DDDDDD" >
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="受理机关"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="0.5dip"
+                        android:layout_weight="7"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="5dip"
+                        android:text="事项名称"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0.25dip"
+                    android:background="#DDDDDD" >
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="决定机关"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="0.5dip"
+                        android:layout_weight="7"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="5dip"
+                        android:text="事项名称"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0.25dip"
+                    android:background="#DDDDDD" >
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="监督电话"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="0.5dip"
+                        android:layout_weight="7"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="5dip"
+                        android:text="事项名称"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0.25dip"
+                    android:background="#DDDDDD" >
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="常见问题"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="0.5dip"
+                        android:layout_weight="7"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="5dip"
+                        android:text="事项名称"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0.25dip"
+                    android:background="#DDDDDD" >
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="联系电话"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="0.5dip"
+                        android:layout_weight="7"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="5dip"
+                        android:text="事项名称"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0.25dip"
+                    android:background="#DDDDDD" >
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="是否即办理"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="0.5dip"
+                        android:layout_weight="7"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="5dip"
+                        android:text="事项名称"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0.25dip"
+                    android:background="#DDDDDD" >
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="是否发证"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="0.5dip"
+                        android:layout_weight="7"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="5dip"
+                        android:text="事项名称"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0.25dip"
+                    android:background="#DDDDDD" >
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="3"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="是否收费"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="0.5dip"
+                        android:layout_weight="7"
+                        android:background="@drawable/gover_item_detail_bg"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="5dip"
+                        android:text="事项名称"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </TableRow>
+            </TableLayout>
 
             <HorizontalScrollView
                 android:layout_width="wrap_content"
@@ -100,24 +453,27 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
                 android:orientation="horizontal" >
 
                 <Button
                     android:layout_width="0dip"
-                    android:layout_height="wrap_content"
+                    android:layout_height="25dip"
                     android:layout_weight="1"
                     android:background="@drawable/gover_online_sub_bg"
                     android:text="在线办理"
-                    android:textColor="#ffffff" />
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
 
                 <Button
                     android:layout_width="0dip"
-                    android:layout_height="wrap_content"
+                    android:layout_height="25dip"
                     android:layout_marginLeft="5dip"
                     android:layout_weight="1"
                     android:background="@drawable/gover_online_sub_bg"
                     android:text="在线咨询"
-                    android:textColor="#ffffff" />
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

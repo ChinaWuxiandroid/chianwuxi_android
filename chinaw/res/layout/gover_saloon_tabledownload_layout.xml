@@ -47,12 +47,24 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/search_ll" />
 
-    <ListView
-        android:id="@+id/gover_tabledowload_lv"
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/gover_table_down_deptsp" >
-    </ListView>
+
+        <ListView
+            android:id="@+id/gover_tabledowload_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gover_table_down_deptsp" >
+        </ListView>
+
+        <ProgressBar
+            android:id="@+id/pb_table_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
 
     <include
         android:layout_width="match_parent"

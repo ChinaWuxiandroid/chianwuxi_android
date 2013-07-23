@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
+import com.wuxi.app.fragment.BaseSlideFragment;
 
 /**
  * 
@@ -25,7 +26,7 @@ public abstract class GoverSaloonContentFragment extends BaseFragment {
 	private RadioButton search_byrange;
 	protected Context context;
 	protected LayoutInflater mInflater;
-
+	protected BaseSlideFragment baseSlideFragment;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public abstract class GoverSaloonContentFragment extends BaseFragment {
 		this.context=getActivity();
 		this.mInflater=inflater;
 		initUI();
-		
+		baseSlideFragment=(BaseSlideFragment) getArguments().get("BaseSlideFragment");
 		
 		return view;
 	}
