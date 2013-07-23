@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.ListView;
@@ -24,6 +26,7 @@ import com.wuxi.app.engine.DeptService;
 import com.wuxi.app.engine.GoverSaoonItemService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.Dept;
 import com.wuxi.domain.GoverSaoonItem;
 import com.wuxi.domain.GoverSaoonItemWrapper;
@@ -36,7 +39,7 @@ import com.wuxi.exception.NetException;
  * 
  */
 public class OnlineApprovalFragment extends GoverSaloonContentFragment
-		implements OnScrollListener, OnItemSelectedListener {
+		implements OnScrollListener, OnItemSelectedListener, OnItemClickListener {
 
 	protected static final int LOAD_DEPT_SUCCESS = 0;
 	protected static final int LOAD_DEPT_FAIL = 1;
@@ -58,6 +61,7 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 
 	private List<Dept> depts;// 部门
 
+	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 
@@ -84,7 +88,7 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 	 */
 	private void loadItem(final String deptId, final int start, final int end) {
 
-		if (isFirstLoadGoverItem||isSwitchDept) {//首次加载时或切换部门时显示进度条
+		if (isFirstLoadGoverItem || isSwitchDept) {// 首次加载时或切换部门时显示进度条
 
 			pb_approval.setVisibility(ProgressBar.VISIBLE);
 		}
@@ -188,6 +192,7 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 		gover_oline_filter.setOnItemSelectedListener(this);
 		gover_online_approval_lv = (ListView) view
 				.findViewById(R.id.gover_online_approval_lv);
+		gover_online_approval_lv.setOnItemClickListener(this);
 
 		pb_approval = (ProgressBar) view.findViewById(R.id.pb_approval);
 
@@ -204,15 +209,15 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 	 * 
 	 * wanglu 泰得利通 获取部门信息
 	 */
-	@SuppressWarnings("unchecked")
+
 	private void loadDept() {
 
-		if (CacheUtil.get(Constants.CacheKey.DEPT_KEY) != null) {
+		/*if (CacheUtil.get(Constants.CacheKey.DEPT_KEY) != null) {
 			depts = (List<Dept>) CacheUtil.get(Constants.CacheKey.DEPT_KEY);
 			showDept();
 			return;
 		}
-
+*/
 		new Thread(new Runnable() {
 
 			@Override
@@ -253,10 +258,11 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 	private void showDept() {
 
 		gover_oline_filter.setAdapter(new DeptSpinnerAdapter(depts, context));
+
 		gover_oline_filter.setSelection(0);
 		currentDeptId = depts.get(0).getId();
-		
-		loadItem(currentDeptId, 0, PAGE_SIZE);//加载第一个部门数据
+		loadItem(currentDeptId, 0, PAGE_SIZE);// 加载第一个部门数据
+
 	}
 
 	@Override
@@ -287,7 +293,7 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 				isSwitchDept = false;
 				loadItem(currentDeptId, visibleLastIndex + 1, visibleLastIndex
 						+ 1 + PAGE_SIZE);
-				
+
 			}
 
 		}
@@ -297,17 +303,25 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View arg1, int postion,
 			long arg3) {
-		
-		Dept dept=(Dept) parent.getItemAtPosition(postion);
-		this.currentDeptId=dept.getId();
-		loadItem(currentDeptId, 0, PAGE_SIZE);
-		isSwitchDept=true;
-		
+
+		Dept dept = (Dept) parent.getItemAtPosition(postion);
+		if (dept.getId() != null) {
+			this.currentDeptId = dept.getId();
+			loadItem(currentDeptId, 0, PAGE_SIZE);
+			isSwitchDept = true;
+		}
+
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
+
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		
+		baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.GOVERSALOONDETAILFRAGMENT, null);
 		
 	}
 

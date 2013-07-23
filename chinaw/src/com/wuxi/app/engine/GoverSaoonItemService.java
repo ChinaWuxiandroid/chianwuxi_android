@@ -1,6 +1,7 @@
 package com.wuxi.app.engine;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -11,7 +12,9 @@ import android.content.Context;
 
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.JAsonPaserUtil;
+import com.wuxi.domain.GoverMaterials;
 import com.wuxi.domain.GoverSaoonItem;
+import com.wuxi.domain.GoverSaoonItemDetail;
 import com.wuxi.domain.GoverSaoonItemWrapper;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -149,6 +152,94 @@ public class GoverSaoonItemService extends Service {
 				.replace("{start}", start + "").replace("{end}", end + "");
 
 		return getGoverSaoonItemsByURL(url);
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 获取办件详情
+	 * 
+	 * @param type 分类
+	 * @param id   主键 
+	 * @return
+	 * @throws NetException
+	 * @throws NODataException
+	 * @throws JSONException
+	 */
+	public GoverSaoonItemDetail getGoverItemDetailById(String type, String id)
+			throws NetException, NODataException, JSONException {
+		if (!checkNet()) {
+			throw new NetException(Constants.ExceptionMessage.NO_NET);
+		}
+
+		String url = Constants.Urls.GETGOVER_ITEMDETIAL_URL.replace("{type}",
+				type).replace("{id}", id);
+
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+		if (resultStr != null) {
+
+			JSONObject jobject = new JSONObject(resultStr);
+			JSONObject jresult = jobject.getJSONObject("result");
+			GoverSaoonItemDetail goverSaoonItemDetail = new GoverSaoonItemDetail();
+			goverSaoonItemDetail.setSszt(jresult.getString("sszt"));
+			goverSaoonItemDetail.setSsztbm(jresult.getString("ssztbm"));
+			goverSaoonItemDetail.setSsztxz(jresult.getString("ssztxz"));
+			goverSaoonItemDetail.setWtjg(jresult.getString("wtjg"));
+			goverSaoonItemDetail.setBslc(jresult.getString("bslc"));
+			goverSaoonItemDetail.setFlfg(jresult.getString("flfg"));
+			goverSaoonItemDetail.setFwzn(jresult.getString("fwzn"));
+			goverSaoonItemDetail.setSfbz(jresult.getString("sfbz"));
+			goverSaoonItemDetail.setSltj(jresult.getString("sltj"));
+			goverSaoonItemDetail.setItemcode(jresult.getString("itemcode"));
+			goverSaoonItemDetail.setSupertel(jresult.getString("supertel"));
+			Object o = jresult.get("materials");
+			if (!o.toString().equals("[]") && !o.toString().equals("null")) {
+				JSONArray jmaterials = (JSONArray) o;
+				try {
+					List<GoverMaterials> meGoverMaterials = JAsonPaserUtil
+							.getListByJassory(GoverMaterials.class, jmaterials);
+					goverSaoonItemDetail.setGoverMaterials(meGoverMaterials);
+				} catch (IllegalArgumentException e) {
+
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+
+				} catch (InvocationTargetException e) {
+
+					e.printStackTrace();
+				}
+
+			}
+
+			goverSaoonItemDetail.setTimelimit(jresult.getString("timelimit"));
+			goverSaoonItemDetail.setSlbm(jresult.getString("slbm"));
+			goverSaoonItemDetail.setJdbm(jresult.getString("jdbm"));
+			goverSaoonItemDetail.setLinktel(jresult.getString("linktel"));
+			goverSaoonItemDetail.setBjtype(jresult.getString("bjtype"));
+			goverSaoonItemDetail.setCert(jresult.getString("cert"));
+
+			goverSaoonItemDetail.setCharge(jresult.getString("charge"));
+			goverSaoonItemDetail.setZxbl(jresult.getString("zxbl"));
+			goverSaoonItemDetail.setOtherAddr(jresult.getString("otherAddr"));
+			goverSaoonItemDetail.setIswssb(jresult.getBoolean("iswssb"));
+			goverSaoonItemDetail.setIsout(jresult.getBoolean("isout"));
+			goverSaoonItemDetail.setOuturl(jresult.getString("outurl"));
+			goverSaoonItemDetail.setName(jresult.getString("name"));
+			goverSaoonItemDetail.setId(jresult.getString("id"));
+			goverSaoonItemDetail.setDeptid(jresult.getString("deptid"));
+			goverSaoonItemDetail.setDeptname(jresult.getString("deptname"));
+
+			return goverSaoonItemDetail;
+
+		} else {
+			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);// 没有获取到数据异常
+		}
+
 	}
 
 }
