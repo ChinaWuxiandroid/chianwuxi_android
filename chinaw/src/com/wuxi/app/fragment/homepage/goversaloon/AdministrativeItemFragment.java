@@ -9,6 +9,7 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
@@ -43,6 +44,7 @@ import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
+import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.Dept;
 import com.wuxi.domain.GoverSaoonItem;
 import com.wuxi.domain.GoverSaoonItemWrapper;
@@ -58,7 +60,7 @@ import com.wuxi.exception.NetException;
 @SuppressLint("HandlerLeak")
 public class AdministrativeItemFragment extends GoverSaloonContentFragment
 		implements OnPageChangeListener, OnClickListener, OnScrollListener,
-		OnItemSelectedListener {
+		OnItemSelectedListener, OnItemClickListener {
 
 	private ListView gover_mange_lv;
 	private ViewPager gover_viewpagerLayout;
@@ -141,7 +143,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 		gover_mange_lv.addFooterView(loadMoreView);
 		gover_mange_lv.setOnScrollListener(this);
 		menuItem = (MenuItem) getArguments().get("menuItem");
-
+		gover_mange_lv.setOnItemClickListener(this);
 		loadTitleItems(menuItem.getId());// 加载滑动菜单
 		loadDept();// 加载部门
 		initYear();
@@ -659,7 +661,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 		} else if (name.contains("处罚")) {
 			return "CF";
 		} else if (name.contains("验收")) {
-			return "YS";
+			return "ZS";
 		} else if (name.contains("强制")) {
 			return "QZ";
 		} else if (name.contains("其它")) {
@@ -733,5 +735,19 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
 
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
+	
+		GoverSaoonItem goverSaoonItem=(GoverSaoonItem) adapterView.getItemAtPosition(position);
+		if(goverSaoonItem.getType().equals("XK")){
+			Bundle bundle=new Bundle();
+			bundle.putSerializable("goverSaoonItem", goverSaoonItem);
+			
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.GOVERSALOONDETAILFRAGMENT, bundle);
+		}
+		
+		
 	}
 }

@@ -66,7 +66,8 @@
             android:id="@+id/gover_mange_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/fl_title_item" >
+            android:divider="@android:color/white"
+            android:dividerHeight="1dip" >
         </ListView>
 
         <ProgressBar

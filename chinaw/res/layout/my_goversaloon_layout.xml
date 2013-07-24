@@ -62,14 +62,18 @@
                 android:id="@+id/gover_saloon_lv_myconsult"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:visibility="invisible" >
+                android:visibility="invisible" 
+                 android:divider="@android:color/white"
+            android:dividerHeight="1dip">
             </ListView>
 
             <ListView
                 android:id="@+id/gover_saloon_lv_myapply"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:visibility="invisible" >
+                android:visibility="invisible"
+                 android:divider="@android:color/white"
+            android:dividerHeight="1dip" >
             </ListView>
         </FrameLayout>
 

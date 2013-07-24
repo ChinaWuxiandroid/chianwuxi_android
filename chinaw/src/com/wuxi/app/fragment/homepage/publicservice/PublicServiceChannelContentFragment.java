@@ -56,7 +56,7 @@ public class PublicServiceChannelContentFragment extends BaseFragment {
 	private View view;
 	private LinearLayout wuxicity_decontent_ll;// 内容
 
-	private ListView wucity_content_lv; // 内容列表
+	//private ListView wucity_content_lv; // 内容列表
 	private HorizontalScrollView wucity_channel_hs;// 头部Channel
 	private List<Channel> titleChannels;
 	private Context context;
@@ -137,8 +137,8 @@ public class PublicServiceChannelContentFragment extends BaseFragment {
 	private void initUI() {
 		wuxicity_decontent_ll = (LinearLayout) view
 				.findViewById(R.id.wuxicity_decontent_ll);
-		wucity_content_lv = (ListView) view
-				.findViewById(R.id.wucity_content_lv);
+	/*	wucity_content_lv = (ListView) view
+				.findViewById(R.id.wucity_content_lv);*/
 		wucity_channel_hs = (HorizontalScrollView) view
 				.findViewById(R.id.wucity_channel_hs);
 		wuxicity_rg_title_chanel = (RadioGroup) view
@@ -158,7 +158,7 @@ public class PublicServiceChannelContentFragment extends BaseFragment {
 				&& channel.getChildrenContentsCount() >= 0) {// 既有子频道也有内容的情况
 																// //至显示频道
 			wucity_channel_hs.setVisibility(HorizontalScrollView.VISIBLE);// 隐藏头部布局
-			wucity_content_lv.setVisibility(ListView.GONE);// 隐藏列表布局
+		//	wucity_content_lv.setVisibility(ListView.GONE);// 隐藏列表布局
 			wuxicity_decontent_ll.setVisibility(LinearLayout.GONE);// 显示具体内容布局
 
 			loadTitleChannel();
@@ -167,7 +167,7 @@ public class PublicServiceChannelContentFragment extends BaseFragment {
 				&& channel.getChildrenContentsCount() == 1) {// 只有一个内容的情况下
 																// //显示内容
 			wucity_channel_hs.setVisibility(HorizontalScrollView.GONE);// 隐藏头部布局
-			wucity_content_lv.setVisibility(ListView.GONE);// 隐藏列表布局
+		//	wucity_content_lv.setVisibility(ListView.GONE);// 隐藏列表布局
 			wuxicity_decontent_ll.setVisibility(LinearLayout.VISIBLE);// 显示具体内容布局
 
 			loadContentData(this.channel);
@@ -175,7 +175,7 @@ public class PublicServiceChannelContentFragment extends BaseFragment {
 		} else if (channel.getChildrenChannelsCount() == 0
 				&& channel.getChildrenContentsCount() > 1) {// 有很多内容的情况下 显示内容列表
 			wucity_channel_hs.setVisibility(HorizontalScrollView.GONE);// 隐藏头部布局
-			wucity_content_lv.setVisibility(ListView.VISIBLE);// 隐藏列表布局
+		//	wucity_content_lv.setVisibility(ListView.VISIBLE);// 隐藏列表布局
 			wuxicity_decontent_ll.setVisibility(LinearLayout.GONE);// 显示具体内容布局
 
 			LoadContentsData(this.channel);// 加载内容列表
@@ -183,7 +183,7 @@ public class PublicServiceChannelContentFragment extends BaseFragment {
 		} else if (channel.getChildrenChannelsCount() == 0
 				&& channel.getChildrenContentsCount() == 0) {
 			wucity_channel_hs.setVisibility(HorizontalScrollView.GONE);// 隐藏头部布局
-			wucity_content_lv.setVisibility(ListView.GONE);// 隐藏列表布局
+		//	wucity_content_lv.setVisibility(ListView.GONE);// 隐藏列表布局
 			wuxicity_decontent_ll.setVisibility(LinearLayout.GONE);// 显示具体内容布局
 			return;
 		}

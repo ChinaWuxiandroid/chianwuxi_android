@@ -2,7 +2,7 @@ package com.wuxi.app.listeners;
 
 import android.support.v4.app.Fragment;
 
-import com.wuxi.app.fragment.homepage.informationcenter.ContentListFragment;
+import com.wuxi.app.fragment.homepage.informationcenter.InforContentListFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InfoNavigatorWithContentFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.WapFragment;
 import com.wuxi.domain.MenuItem;
@@ -34,14 +34,14 @@ public class InfoCenterInitLayoutImpl implements MenuItemInitLayoutListener {
 			}
 
 			WapFragment leaderWindowFragment = null;
-			ContentListFragment contentListFragment = null;
+			InforContentListFragment contentListFragment = null;
 			InfoNavigatorWithContentFragment contentNavigatorWithContentFragment=null;
 			if (fragment instanceof WapFragment) {
 				leaderWindowFragment = (WapFragment) fragment;
 				leaderWindowFragment.setParentItem(menuItem);
 				initLayoutListner.bindContentLayout(leaderWindowFragment);
-			} else if (fragment instanceof ContentListFragment) {
-				contentListFragment = (ContentListFragment) fragment;
+			} else if (fragment instanceof InforContentListFragment) {
+				contentListFragment = (InforContentListFragment) fragment;
 				contentListFragment.setParentItem(menuItem);
 				initLayoutListner.bindContentLayout(contentListFragment);
 			}else if(fragment instanceof InfoNavigatorWithContentFragment){

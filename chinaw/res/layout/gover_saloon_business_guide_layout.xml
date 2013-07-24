@@ -82,7 +82,9 @@
         <ListView
             android:id="@+id/gover_guid_lv_content"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+             android:divider="@android:color/white"
+            android:dividerHeight="1dip" >
         </ListView>
     </FrameLayout>
 

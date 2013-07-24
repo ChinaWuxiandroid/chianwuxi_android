@@ -40,7 +40,7 @@ public class InformationCenterFragment extends MenuItemMainFragment {
 							if (channels != null) {
 								menu.setContentFragment(InfoNavigatorWithContentFragment.class);
 							} else {
-								menu.setContentFragment(ContentListFragment.class);// 内容列表界面
+								menu.setContentFragment(InforContentListFragment.class);// 内容列表界面
 							}
 						} catch (NetException e) {
 							e.printStackTrace();

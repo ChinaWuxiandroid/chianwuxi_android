@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.wuxi.app.adapter.KindTypeAdapter;
 import com.wuxi.app.engine.GoverSaoonItemService;
 import com.wuxi.app.engine.KindTypeService;
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.GoverSaoonItem;
 import com.wuxi.domain.GoverSaoonItemWrapper;
 import com.wuxi.domain.Kindtype;
@@ -46,18 +48,18 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 	protected static final int KINDTYPE_LOAD_FAIL = 1;
 	protected static final int GOVERITEM_LOAD_SUCCESS = 2;
 	protected static final int GOVERITEM_LOAD_FIAL = 3;
-	private static final int PAGE_SIZE =10;
+	private static final int PAGE_SIZE = 10;
 	private GridView gv;
 	private String[] types = new String[] { "01", "02", "03", "04", "05", "06" };
 	private List<Kindtype> kindtypes;
 	private KindTypeAdapter kindTypeAdapter;
 	private boolean isFistLoadKindData = true;
-	
+
 	private RadioGroup gover_buness_guide_rg;
 	private ProgressBar gover_guide_pb;
 	private GoverSaoonItemWrapper goverSaoonItemWrapper;
-	private boolean isFirstLoadGoverItem=true;
-	private boolean isSwitchDept=false;
+	private boolean isFirstLoadGoverItem = true;
+	private boolean isSwitchDept = false;
 	private GoverOnlineApproveAdapter goverOnlineApproveAdapter;
 	private ListView gover_guid_lv_content;
 	private View loadMoreView;// 加载更多视图
@@ -93,12 +95,12 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 		gv.setOnItemClickListener(this);
 		gover_buness_guide_rg = (RadioGroup) view
 				.findViewById(R.id.gover_buness_guide_rg);
-		gover_guide_pb=(ProgressBar) view.findViewById(R.id.gover_guide_pb);
-		gover_guid_lv_content=(ListView) view.findViewById(R.id.gover_guid_lv_content);
+		gover_guide_pb = (ProgressBar) view.findViewById(R.id.gover_guide_pb);
+		gover_guid_lv_content = (ListView) view
+				.findViewById(R.id.gover_guid_lv_content);
 		gover_buness_guide_rg.check(R.id.rb_personal);
-		
-		
-		
+
+		gover_guid_lv_content.setOnItemClickListener(this);
 
 		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
 				null);
@@ -106,19 +108,19 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 				.findViewById(R.id.loadMoreButton);
 		gover_guid_lv_content.addFooterView(loadMoreView);
 		gover_guid_lv_content.setOnScrollListener(this);
-		
+
 		gover_buness_guide_rg.setOnCheckedChangeListener(this);
 		loadKindTypeData(types[1]);
 
 	}
 
-	
 	/**
 	 * 获取办件信息
 	 */
-	private void loadItem(final String type,final String kindType, final int start, final int end) {
+	private void loadItem(final String type, final String kindType,
+			final int start, final int end) {
 
-		if (isFirstLoadGoverItem||isSwitchDept) {//首次加载时或切换部门时显示进度条
+		if (isFirstLoadGoverItem || isSwitchDept) {// 首次加载时或切换部门时显示进度条
 
 			gover_guide_pb.setVisibility(ProgressBar.VISIBLE);
 		}
@@ -132,7 +134,8 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 						context);
 				try {
 					goverSaoonItemWrapper = goverSaoonItemService
-							.getGoverSaoonItemsByKindType(type, kindType, start, end);
+							.getGoverSaoonItemsByKindType(type, kindType,
+									start, end);
 					if (goverSaoonItemWrapper != null) {
 						msg.what = GOVERITEM_LOAD_SUCCESS;
 					} else {
@@ -207,6 +210,7 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 		}
 
 	}
+
 	/**
 	 * 
 	 * wanglu 泰得利通 显示kindType数据
@@ -216,15 +220,14 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 			isFistLoadKindData = false;
 			kindTypeAdapter = new KindTypeAdapter(kindtypes, context);
 			gv.setAdapter(kindTypeAdapter);
-			
-			loadItem(kindtypes.get(0).getKindType(),kindtypes.get(0).getSubKindType() , 0, PAGE_SIZE);//加载办件第一个办件信息
+
+			loadItem(kindtypes.get(0).getKindType(), kindtypes.get(0)
+					.getSubKindType(), 0, PAGE_SIZE);// 加载办件第一个办件信息
 		} else {
 			kindTypeAdapter.setKindTypes(kindtypes);
 			kindTypeAdapter.notifyDataSetChanged();
 		}
 
-		
-		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -297,15 +300,13 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 		loadKindTypeData(types[typeIndex]);
 	}
 
-
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
 		this.visibleItemCount = visibleItemCount;
 		visibleLastIndex = firstVisibleItem + visibleItemCount - 1;// 最后一条索引号
-		
-	}
 
+	}
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -318,22 +319,37 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 
 				loadMoreButton.setText("loading.....");
 				isSwitchDept = false;
-				loadItem(currentKindtype.getKindType(),currentKindtype.getSubKindType(), visibleLastIndex + 1, visibleLastIndex
-						+ 1 + PAGE_SIZE);
-				
+				loadItem(currentKindtype.getKindType(),
+						currentKindtype.getSubKindType(), visibleLastIndex + 1,
+						visibleLastIndex + 1 + PAGE_SIZE);
+
 			}
 
 		}
-		
+
 	}
 
-
 	@Override
-	public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
-		this.isSwitchDept=true;
-		Kindtype kindtype=(Kindtype) parent.getItemAtPosition(position);
-		this.currentKindtype=kindtype;
-		loadItem(kindtype.getKindType(), kindtype.getSubKindType(), 0, PAGE_SIZE);
-		
+	public void onItemClick(AdapterView<?> parent, View arg1, int position,
+			long arg3) {
+		Object o = parent.getItemAtPosition(position);
+
+		if (o instanceof Kindtype) {
+			this.isSwitchDept = true;
+			Kindtype kindtype = (Kindtype) o;
+			this.currentKindtype = kindtype;
+			loadItem(kindtype.getKindType(), kindtype.getSubKindType(), 0,
+					PAGE_SIZE);
+		} else if (o instanceof GoverSaoonItem) {
+			GoverSaoonItem goverSaoonItem = (GoverSaoonItem) o;
+			if (goverSaoonItem.getType().equals("XK")) {
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("goverSaoonItem", goverSaoonItem);
+
+				baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+						FragmentName.GOVERSALOONDETAILFRAGMENT, bundle);
+			}
+		}
+
 	}
 }

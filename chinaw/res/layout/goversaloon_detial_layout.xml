@@ -15,14 +15,26 @@
         android:layout_height="0dip"
         android:layout_weight="9" >
 
-        <LinearLayout
+        <FrameLayout 
+             android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+            <ProgressBar 
+                android:id="@+id/pb_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                />
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <TableLayout
+                android:id="@+id/tb_title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
                 android:background="#DDDDDD"
                 android:orientation="vertical" >
 
@@ -51,7 +63,7 @@
                         android:layout_marginLeft="0.5dip"
                         android:layout_weight="7"
                         android:background="@drawable/gover_item_detail_bg"
-                        android:drawableRight="@drawable/gover_item_detail_expa_up"
+                        android:drawableRight="@drawable/gover_item_detail_expa_down"
                         android:gravity="left|center_vertical"
                         android:paddingLeft="5dip"
                         android:text="事项名称"
@@ -64,8 +76,10 @@
                 android:id="@+id/tl_tb_detail"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/tb_title"
                 android:background="#DDDDDD"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:visibility="gone" >
 
                 <TableRow
                     android:layout_width="fill_parent"
@@ -85,6 +99,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_ssbm"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -93,7 +108,7 @@
                         android:background="@drawable/gover_item_detail_bg"
                         android:gravity="left|center_vertical"
                         android:paddingLeft="5dip"
-                        android:text="事项名称"
+                        
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </TableRow>
@@ -116,6 +131,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_clss"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -124,7 +140,7 @@
                         android:background="@drawable/gover_item_detail_bg"
                         android:gravity="left|center_vertical"
                         android:paddingLeft="5dip"
-                        android:text="事项名称"
+                       
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </TableRow>
@@ -147,6 +163,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_sljg"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -155,7 +172,7 @@
                         android:background="@drawable/gover_item_detail_bg"
                         android:gravity="left|center_vertical"
                         android:paddingLeft="5dip"
-                        android:text="事项名称"
+                        
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </TableRow>
@@ -178,6 +195,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_jdjg"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -186,7 +204,7 @@
                         android:background="@drawable/gover_item_detail_bg"
                         android:gravity="left|center_vertical"
                         android:paddingLeft="5dip"
-                        android:text="事项名称"
+                       
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </TableRow>
@@ -209,6 +227,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_jddh"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -217,7 +236,7 @@
                         android:background="@drawable/gover_item_detail_bg"
                         android:gravity="left|center_vertical"
                         android:paddingLeft="5dip"
-                        android:text="事项名称"
+                       
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </TableRow>
@@ -240,6 +259,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_cjwt"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -248,7 +268,7 @@
                         android:background="@drawable/gover_item_detail_bg"
                         android:gravity="left|center_vertical"
                         android:paddingLeft="5dip"
-                        android:text="事项名称"
+                        
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </TableRow>
@@ -271,6 +291,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_lldh"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -279,7 +300,7 @@
                         android:background="@drawable/gover_item_detail_bg"
                         android:gravity="left|center_vertical"
                         android:paddingLeft="5dip"
-                        android:text="事项名称"
+                        
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </TableRow>
@@ -302,6 +323,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_sfzabl"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -310,7 +332,7 @@
                         android:background="@drawable/gover_item_detail_bg"
                         android:gravity="left|center_vertical"
                         android:paddingLeft="5dip"
-                        android:text="事项名称"
+                       
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </TableRow>
@@ -333,6 +355,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_sffz"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -341,7 +364,7 @@
                         android:background="@drawable/gover_item_detail_bg"
                         android:gravity="left|center_vertical"
                         android:paddingLeft="5dip"
-                        android:text="事项名称"
+                       
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </TableRow>
@@ -364,6 +387,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_sfsf"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -372,15 +396,17 @@
                         android:background="@drawable/gover_item_detail_bg"
                         android:gravity="left|center_vertical"
                         android:paddingLeft="5dip"
-                        android:text="事项名称"
+                       
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </TableRow>
             </TableLayout>
 
             <HorizontalScrollView
+                android:id="@+id/hs_channel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/tl_tb_detail"
                 android:layout_marginTop="5dip" >
 
                 <RadioGroup
@@ -448,34 +474,36 @@
 
             <TextView
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-
-            <LinearLayout
-                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:orientation="horizontal" >
-
-                <Button
-                    android:layout_width="0dip"
-                    android:layout_height="25dip"
-                    android:layout_weight="1"
-                    android:background="@drawable/gover_online_sub_bg"
-                    android:text="在线办理"
-                    android:textColor="#ffffff"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:layout_width="0dip"
-                    android:layout_height="25dip"
-                    android:layout_marginLeft="5dip"
-                    android:layout_weight="1"
-                    android:background="@drawable/gover_online_sub_bg"
-                    android:text="在线咨询"
-                    android:textColor="#ffffff"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </LinearLayout>
+                android:layout_below="@+id/hs_channel" />
+        </RelativeLayout>
+        </FrameLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal" >
+
+        <Button
+            android:layout_width="0dip"
+            android:layout_height="25dip"
+            android:layout_weight="1"
+            android:background="@drawable/gover_online_sub_bg"
+            android:text="在线办理"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+        <Button
+            android:layout_width="0dip"
+            android:layout_height="25dip"
+            android:layout_marginLeft="5dip"
+            android:layout_weight="1"
+            android:background="@drawable/gover_online_sub_bg"
+            android:text="在线咨询"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+    </LinearLayout>
 
 </LinearLayout>

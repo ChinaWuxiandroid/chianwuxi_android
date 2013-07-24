@@ -37,8 +37,7 @@
         android:id="@+id/hs_subchannel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/fl_title_item" 
-        >
+        android:layout_below="@+id/fl_title_item" >
 
         <LinearLayout
             android:id="@+id/ll_subchannel"
@@ -58,7 +57,8 @@
             android:id="@+id/gover_mange_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/fl_title_item" >
+            android:divider="@android:color/white"
+            android:dividerHeight="1dip" >
         </ListView>
 
         <ProgressBar

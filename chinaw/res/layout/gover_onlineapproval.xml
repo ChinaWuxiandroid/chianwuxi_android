@@ -26,7 +26,9 @@
             android:id="@+id/gover_online_approval_lv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/gover_oline_filter" >
+            android:layout_below="@+id/gover_oline_filter"
+             android:divider="@android:color/white"
+            android:dividerHeight="1dip" >
         </ListView>
 
         <ProgressBar

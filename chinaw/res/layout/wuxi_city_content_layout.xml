@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:visibility="gone" >
-		
+
         <RadioGroup
             android:id="@+id/wuxicity_rg_title_chanel"
             android:layout_width="wrap_content"
@@ -20,12 +20,12 @@
         </RadioGroup>
     </HorizontalScrollView>
 
-    <ListView
-        android:id="@+id/wucity_content_lv"
+    <FrameLayout
+        android:id="@+id/wucity_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:visibility="gone" >
-    </ListView>
+    </FrameLayout>
 
     <include layout="@layout/wuxi_city_detailcontent_layout" />
 

@@ -48,7 +48,10 @@
         <ListView
             android:id="@+id/gover_eff_lv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+             android:divider="@android:color/white"
+            android:dividerHeight="1dip"
+            >
         </ListView>
     </FrameLayout>
   <include
