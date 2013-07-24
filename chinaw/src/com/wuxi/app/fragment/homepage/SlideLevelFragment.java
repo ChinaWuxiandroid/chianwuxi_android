@@ -26,6 +26,7 @@ import com.wuxi.app.fragment.MainIndexFragment;
 import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
+import com.wuxi.app.fragment.homepage.fantasticwuxi.WuxiChannelContentDetailFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonFragment;
@@ -219,6 +220,10 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			case GOVERSALOONDETAILFRAGMENT://政务大厅办件详情
 				GoverSaloonDetailFragment goverSaloonDetailFragment=new GoverSaloonDetailFragment();
 				onTransaction(goverSaloonDetailFragment, bundle);
+				break;
+			case WUXICHANNELCONTENTDETAILFRAGMENT://魅力锡城内容页
+				WuxiChannelContentDetailFragment wuxiChannelContentDetailFragment=new WuxiChannelContentDetailFragment();
+				onTransaction(wuxiChannelContentDetailFragment, bundle);
 				break;
 
 			}

@@ -50,7 +50,7 @@
             android:id="@+id/main_tab_more"
             style="@style/main_tab_bottom"
             android:drawableTop="@drawable/main_tab_more_style"
-            android:text="更多" 
+            android:text="设置" 
             android:textSize="12sp"
             android:layout_weight="1"/>
     </RadioGroup>

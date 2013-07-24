@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -39,7 +40,8 @@ import com.wuxi.exception.NetException;
  * 
  */
 public class OnlineApprovalFragment extends GoverSaloonContentFragment
-		implements OnScrollListener, OnItemSelectedListener, OnItemClickListener {
+		implements OnScrollListener, OnItemSelectedListener,
+		OnItemClickListener {
 
 	protected static final int LOAD_DEPT_SUCCESS = 0;
 	protected static final int LOAD_DEPT_FAIL = 1;
@@ -212,12 +214,11 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 
 	private void loadDept() {
 
-		/*if (CacheUtil.get(Constants.CacheKey.DEPT_KEY) != null) {
-			depts = (List<Dept>) CacheUtil.get(Constants.CacheKey.DEPT_KEY);
-			showDept();
-			return;
-		}
-*/
+		/*
+		 * if (CacheUtil.get(Constants.CacheKey.DEPT_KEY) != null) { depts =
+		 * (List<Dept>) CacheUtil.get(Constants.CacheKey.DEPT_KEY); showDept();
+		 * return; }
+		 */
 		new Thread(new Runnable() {
 
 			@Override
@@ -319,10 +320,19 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		
-		baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.GOVERSALOONDETAILFRAGMENT, null);
-		
+	public void onItemClick(AdapterView<?> adapterView, View arg1,
+			int position, long arg3) {
+		GoverSaoonItem goverSaoonItem = (GoverSaoonItem) adapterView
+				.getItemAtPosition(position);
+
+		if (goverSaoonItem.getType().equals("XK")) {
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("goverSaoonItem", goverSaoonItem);
+
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+					FragmentName.GOVERSALOONDETAILFRAGMENT, bundle);
+		}
+
 	}
 
 }

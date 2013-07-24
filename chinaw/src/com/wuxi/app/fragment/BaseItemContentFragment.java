@@ -14,17 +14,17 @@ import com.wuxi.app.R;
  * */
 public abstract class BaseItemContentFragment extends BaseSlideFragment{
 	
-	public ImageView Setting_btn, Share_btn, Download_btn;
+	protected ImageView setting_btn, share_btn, download_btn;
 		
 	@Override
 	protected int getLayoutId() {
-		// TODO Auto-generated method stub
+		
 		return getContentLayoutId();
 	}
 
 	@Override
 	protected String getTitleText() {
-		// TODO Auto-generated method stub
+		
 		return getContentTitleText();
 	}
 	
@@ -35,13 +35,13 @@ public abstract class BaseItemContentFragment extends BaseSlideFragment{
 	@Override
 	public void initBtn() {
 		super.initBtn();
-		Setting_btn = (ImageView) view.findViewById(R.id.content_setting);
-		Share_btn = (ImageView) view.findViewById(R.id.content_share);
-		Download_btn = (ImageView) view.findViewById(R.id.content_download);
+		setting_btn = (ImageView) view.findViewById(R.id.content_setting);
+		share_btn = (ImageView) view.findViewById(R.id.content_share);
+		download_btn = (ImageView) view.findViewById(R.id.content_download);
 				
-		Setting_btn.setOnClickListener(SettingClick);
-		Share_btn.setOnClickListener(ShareClick);
-		Download_btn.setOnClickListener(DownloadClick);
+		setting_btn.setOnClickListener(SettingClick);
+		share_btn.setOnClickListener(ShareClick);
+		download_btn.setOnClickListener(DownloadClick);
 		
 	}
 	

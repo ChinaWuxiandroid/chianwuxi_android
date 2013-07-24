@@ -1,13 +1,19 @@
 package com.wuxi.domain;
 
+import java.io.Serializable;
+
 /**'
  * 
  * @author wanglu 泰得利通
  * 政务大厅网上办件 javaBean
  *
  */
-public class GoverSaoonItem {
+public class GoverSaoonItem implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String type;
 	private int num;
 	private int kindtype;

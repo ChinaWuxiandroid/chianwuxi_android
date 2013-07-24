@@ -1,8 +1,10 @@
 package com.wuxi.app.fragment.homepage.fantasticwuxi;
 
+import java.io.Serializable;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
@@ -32,10 +34,14 @@ import com.wuxi.exception.NetException;
  */
 
 public class ChannelFragment extends BaseSlideFragment implements
-		InitializContentLayoutListner, OnClickListener {
+		InitializContentLayoutListner, OnClickListener, Serializable {
 
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private TitleScrollLayout mtitleScrollLayout;
 	private static final int MANCOTENT_ID = R.id.model_main;
 	private static final int TITLE__LOAD_SUCESS = 0;
@@ -172,6 +178,9 @@ public class ChannelFragment extends BaseSlideFragment implements
 
 	private void bindFragment(Fragment fragment) {
 
+		Bundle bundle=new Bundle();
+		bundle.putSerializable("BaseSlideFragment", this);
+		fragment.setArguments(bundle);
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		ft.replace(MANCOTENT_ID, fragment);// 替换内容界面
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -189,8 +198,10 @@ public class ChannelFragment extends BaseSlideFragment implements
 		for (Channel channel : titleChannels) {
 			if (channel.getChannelName().equals("城市地图")) {
 				channel.setContentFragment(CityMapFragment.class);
-			} else {
+			} else if(channel.getChildrenChannelsCount()>0){
 				channel.setContentFragment(NavigatorWithContentFragment.class);
+			}else if(channel.getChildrenContentsCount()>0){
+				channel.setContentFragment(ChannelContentListFragment.class);
 			}
 		}
 	}

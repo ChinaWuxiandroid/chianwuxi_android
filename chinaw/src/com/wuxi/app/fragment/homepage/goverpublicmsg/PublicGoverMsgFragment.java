@@ -6,7 +6,7 @@ import java.util.List;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
-import com.wuxi.app.fragment.homepage.informationcenter.ContentListFragment;
+import com.wuxi.app.fragment.homepage.informationcenter.InforContentListFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InfoNavigatorWithContentFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.WapFragment;
 import com.wuxi.app.listeners.GoverPublicMsgInitLayoutImpl;
@@ -48,7 +48,7 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 								System.out.println("channels:"+channels.get(0).getChannelName());
 								menu.setContentFragment(InfoNavigatorWithContentFragment.class);
 							} else {
-								menu.setContentFragment(ContentListFragment.class);// 内容列表界面
+								menu.setContentFragment(InforContentListFragment.class);// 内容列表界面
 							}
 						} catch (NetException e) {
 							e.printStackTrace();

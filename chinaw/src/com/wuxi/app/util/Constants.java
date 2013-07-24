@@ -338,7 +338,13 @@ public class Constants {
 		/**
 		 * 政务大厅办件详情
 		 */
-		GOVERSALOONDETAILFRAGMENT;
+		GOVERSALOONDETAILFRAGMENT,
+		
+		/**
+		 * 魅力锡城内容页
+		 */
+		WUXICHANNELCONTENTDETAILFRAGMENT
+		;
 	}
 
 }

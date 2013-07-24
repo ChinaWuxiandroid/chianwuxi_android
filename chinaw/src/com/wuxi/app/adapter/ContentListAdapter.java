@@ -20,6 +20,10 @@ import com.wuxi.domain.Content;
 public class ContentListAdapter extends BaseAdapter {
 
 	private List<Content> contents;
+	public void setContents(List<Content> contents) {
+		this.contents = contents;
+	}
+
 	private Context context;
 
 	public ContentListAdapter(List<Content> contents, Context context) {
@@ -69,9 +73,9 @@ public class ContentListAdapter extends BaseAdapter {
 
 		String title = "";
 		title = content.getTitle();
-		if (title != null && title.length() > 10) {
+		/*if (title != null && title.length() > 10) {
 			title = title.substring(0, 10) + "...";
-		}
+		}*/
 		viewHolder.title_text.setText("." + title);
 		viewHolder.title_time.setText("("
 				+ TimeFormateUtil.formateTime(content.getPublishTime(),

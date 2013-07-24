@@ -52,6 +52,7 @@ public class LeftMenuAdapter extends BasicAdapter {
 
 		public TextView title_text;
 		public ImageView iv_icon;
+		public ImageView iv_select_logo;
 	}
 
 	@Override
@@ -67,27 +68,27 @@ public class LeftMenuAdapter extends BasicAdapter {
 					.findViewById(viewId[0]);
 			viewHolder.iv_icon = (ImageView) convertView
 					.findViewById(viewId[1]);
+			/*viewHolder.iv_select_logo = (ImageView) convertView
+					.findViewById(viewId[2]);*/
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
 		viewHolder.title_text.setText(menuItem.getName());
-		if (selectPosition == position) {
+		if (selectPosition == position) {// 选中样式
 			viewHolder.title_text.setTextColor(Color.parseColor("#AD1010"));
-
-
-			viewHolder.iv_icon.setBackgroundResource(R.drawable.left_select_logo);
-
+			viewHolder.title_text.setTextSize(16);
+			//viewHolder.iv_select_logo.setVisibility(ImageView.VISIBLE);
+			viewHolder.iv_icon.setVisibility(ImageView.GONE);
 			convertView.setBackgroundResource(R.drawable.left_item_select_bg);
-
 
 		} else {
 
 			viewHolder.title_text.setTextColor(Color.parseColor("#000000"));
-
-			viewHolder.iv_icon.setBackgroundResource(R.drawable.side_navigator_icon);
-
+			viewHolder.title_text.setTextSize(14);
+			//viewHolder.iv_select_logo.setVisibility(ImageView.GONE);
+			viewHolder.iv_icon.setVisibility(ImageView.VISIBLE);
 			convertView.setBackgroundColor(Color.TRANSPARENT);
 
 		}

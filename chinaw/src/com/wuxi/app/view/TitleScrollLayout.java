@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.TitleChannelAdapter;
 import com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment;
+import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelContentListFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.CityMapFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
@@ -509,7 +510,7 @@ public class TitleScrollLayout extends ViewGroup {
 
 					NavigatorWithContentFragment nafragment = null;
 					CityMapFragment cityNCityMapFragment = null;
-
+					ChannelContentListFragment channelContentListFragment=null;
 					if (fragment instanceof NavigatorWithContentFragment) {
 						nafragment = (NavigatorWithContentFragment) fragment;
 						nafragment.setParentChannel(channel);
@@ -519,14 +520,21 @@ public class TitleScrollLayout extends ViewGroup {
 						cityNCityMapFragment = (CityMapFragment) fragment;
 
 					}
+					
+					if(fragment instanceof ChannelContentListFragment){
+						channelContentListFragment=(ChannelContentListFragment)fragment;
+						channelContentListFragment.setChannel(channel);
+					}
 
 					if (initializContentLayoutListner != null) {
 						if (nafragment != null) {
 							initializContentLayoutListner
 									.bindContentLayout(nafragment);
-						} else {
+						} else if(cityNCityMapFragment!=null){
 							initializContentLayoutListner
 									.bindContentLayout(cityNCityMapFragment);
+						}else if(channelContentListFragment!=null){
+							initializContentLayoutListner.bindContentLayout(channelContentListFragment);
 						}
 
 					}

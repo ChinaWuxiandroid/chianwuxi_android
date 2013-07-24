@@ -56,7 +56,9 @@
             android:id="@+id/gover_tabledowload_lv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/gover_table_down_deptsp" >
+            android:layout_below="@+id/gover_table_down_deptsp"
+            android:divider="@android:color/white"
+            android:dividerHeight="1dip" >
         </ListView>
 
         <ProgressBar

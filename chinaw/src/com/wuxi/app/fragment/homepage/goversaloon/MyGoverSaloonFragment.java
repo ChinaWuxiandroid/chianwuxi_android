@@ -46,7 +46,7 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 	private ListView gover_saloon_lv_myconsult;// 我的在线咨询
 	private static final String ACCESS_TOKEN = "bd58fcdfe5b54f4c95ed5f2e3a945f7c";
 
-	private static final int PAGE_SIZE = 4;
+	private static final int PAGE_SIZE = 10;
 	private static final int MYCONSULT_CHECKED = 0;// 标识哪个按钮选中
 	private static final int MYCONAPPLY_CHECKED = 1;
 	protected static final int MYCONSULT_LOADSUCCESS = 0;// 咨询列表加载成功
