@@ -45,10 +45,11 @@ public class GoverSaloonDetailFragment extends BaseItemContentFragment
 		case R.id.tv_ssmc_name:
 			if(tl_tb_detail.getVisibility()==TableLayout.VISIBLE){
 				tl_tb_detail.setVisibility(TableLayout.GONE);
-				//tv_ssmc_name.setCompoundDrawables(left, top, right, bottom)
+				tv_ssmc_name.setCompoundDrawables(null, null, getResources().getDrawable(R.drawable.gover_item_detail_expa_up), null);
 				//drawableRight
 			}else if(tl_tb_detail.getVisibility()==TableLayout.GONE){
 				tl_tb_detail.setVisibility(TableLayout.VISIBLE);
+				tv_ssmc_name.setCompoundDrawables(null, null, null, null);
 			}
 			
 			
