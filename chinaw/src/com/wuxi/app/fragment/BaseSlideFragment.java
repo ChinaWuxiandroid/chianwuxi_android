@@ -17,7 +17,7 @@ public abstract class BaseSlideFragment extends BaseFragment {
 
 	protected View view ;
 	public SlideLinstener slideLinstener;
-	public ImageView OPearn_btn, Member_btnm, back_btn;
+	protected ImageView opearn_btn, member_btnm, back_btn;
 	public TextView Title_text;
 	protected LayoutInflater mInflater;
 	protected Context context;
@@ -48,12 +48,12 @@ public abstract class BaseSlideFragment extends BaseFragment {
 	protected abstract int getLayoutId();
 
 	public void initBtn() {
-		OPearn_btn = (ImageView) view.findViewById(R.id.open_close_left_btn);
-		Member_btnm = (ImageView) view.findViewById(R.id.member_btn);
+		opearn_btn = (ImageView) view.findViewById(R.id.open_close_left_btn);
+		member_btnm = (ImageView) view.findViewById(R.id.member_btn);
 		Title_text = (TextView) view.findViewById(R.id.Title_Text);
 		back_btn = (ImageView) view.findViewById(R.id.back_btn);
-		OPearn_btn.setOnClickListener(LeftClick);
-		Member_btnm.setOnClickListener(MemberClick);
+		opearn_btn.setOnClickListener(LeftClick);
+		member_btnm.setOnClickListener(MemberClick);
 		back_btn.setOnClickListener(BackClick);
 		
 		Title_text.setText(getTitleText());

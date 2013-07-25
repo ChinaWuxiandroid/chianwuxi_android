@@ -73,9 +73,7 @@ public class ContentListAdapter extends BaseAdapter {
 
 		String title = "";
 		title = content.getTitle();
-		/*if (title != null && title.length() > 10) {
-			title = title.substring(0, 10) + "...";
-		}*/
+		
 		viewHolder.title_text.setText("." + title);
 		viewHolder.title_time.setText("("
 				+ TimeFormateUtil.formateTime(content.getPublishTime(),

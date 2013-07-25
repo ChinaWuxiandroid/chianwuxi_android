@@ -343,7 +343,11 @@ public class Constants {
 		/**
 		 * 魅力锡城内容页
 		 */
-		WUXICHANNELCONTENTDETAILFRAGMENT
+		WUXICHANNELCONTENTDETAILFRAGMENT,
+		/**
+		 * 资讯中心->热点专题内容页
+		 */
+		HOTTOPICCONTENTFRAGMENT
 		;
 	}
 

@@ -1,10 +1,12 @@
 package com.wuxi.app.fragment.commonfragment;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
@@ -37,7 +39,7 @@ import com.wuxi.exception.NetException;
  * 
  */
 public abstract class MenuItemMainFragment extends BaseSlideFragment implements
-		InitializContentLayoutListner, OnClickListener {
+		InitializContentLayoutListner, OnClickListener, Serializable {
 
 	
 	
@@ -48,7 +50,7 @@ public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 	private static final int MANCOTENT_ID = R.id.model_main;
 	private static final int TITLE_LOAD_SUCCESS = 0;// 头部加载成功
 	protected static final int TITLE_LOAD_FAIL = 1;// 加载失败
-
+	public static final String ROOTFRAGMENT_KEY="BaseSlideFragment";
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -191,7 +193,9 @@ public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 	}
 
 	private void bindFragment(Fragment fragment) {
-
+		Bundle bundle=new Bundle();
+		bundle.putSerializable(ROOTFRAGMENT_KEY, this);
+		fragment.setArguments(bundle);//将外层框架传递给子内容框架
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		ft.replace(MANCOTENT_ID, fragment);// 替换内容界面
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
