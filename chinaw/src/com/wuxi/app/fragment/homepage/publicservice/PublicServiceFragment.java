@@ -21,40 +21,40 @@ public class PublicServiceFragment extends MenuItemMainFragment {
 	@Override
 	public void initializSubFragmentsLayout(List<MenuItem> items) {
 
-		for (final MenuItem menu : items) {
-
-			if (menu.getType() == MenuItem.WAP_MENU) {// wap类型菜单
-
-				// menu.setContentFragment(WapFragment.class);
-			} else if (menu.getType() == MenuItem.CHANNEL_MENU) {// 如果菜单上频道菜单
-
-				new Thread(new Runnable() {
-
-					@Override
-					public void run() {
-						ChannelService channelService = new ChannelService(
-								context);
-						try {
-							List<Channel> channels = channelService
-									.getSubChannels(menu.getChannelId());
-
-							if (channels != null) {
-								menu.setContentFragment(PublicServiceWithContentFragment.class);
-							} else {
-								// menu.setContentFragment(ContentListFragment.class);//
-								// 内容列表界面
-							}
-						} catch (NetException e) {
-							e.printStackTrace();
-						}
-					}
-				}).start();
-
-			} else if (menu.getType() == MenuItem.CUSTOM_MENU) {// //普通菜单
-				menu.setContentFragment(PublicServiceWithContentFragment.class);
-			}
-
-		}
+//		for (final MenuItem menu : items) {
+//
+//			if (menu.getType() == MenuItem.WAP_MENU) {// wap类型菜单
+//
+//				// menu.setContentFragment(WapFragment.class);
+//			} else if (menu.getType() == MenuItem.CHANNEL_MENU) {// 如果菜单上频道菜单
+//
+//				new Thread(new Runnable() {
+//
+//					@Override
+//					public void run() {
+//						ChannelService channelService = new ChannelService(
+//								context);
+//						try {
+//							List<Channel> channels = channelService
+//									.getSubChannels(menu.getChannelId());
+//
+//							if (channels != null) {
+//								menu.setContentFragment(PublicServiceWithContentFragment.class);
+//							} else {
+//								// menu.setContentFragment(ContentListFragment.class);//
+//								// 内容列表界面
+//							}
+//						} catch (NetException e) {
+//							e.printStackTrace();
+//						}
+//					}
+//				}).start();
+//
+//			} else if (menu.getType() == MenuItem.CUSTOM_MENU) {// //普通菜单
+//				menu.setContentFragment(PublicServiceWithContentFragment.class);
+//			}
+//
+//		}
 	}
 
 	@Override

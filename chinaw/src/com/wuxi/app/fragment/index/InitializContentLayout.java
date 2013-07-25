@@ -1,9 +1,18 @@
 package com.wuxi.app.fragment.index;
+import java.util.List;
+
+import android.content.Context;
+
+import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.CityMapFragment;
+import com.wuxi.app.fragment.homepage.informationcenter.InfoNavigatorWithContentFragment;
+import com.wuxi.app.fragment.homepage.informationcenter.InforContentListFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.WapFragment;
+import com.wuxi.app.fragment.homepage.publicservice.PublicServiceWithContentFragment;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
+import com.wuxi.exception.NetException;
 
 /**
  * 根据MenuItem、Channel等消息类型的name(之后为APPUI)来set Fragment
@@ -11,15 +20,94 @@ import com.wuxi.domain.MenuItem;
  * @author 杨宸 智佳
  * */
 public class InitializContentLayout {
-	public static void initMenuItemContentLayout(MenuItem menuItem) {
-		// if(menuItem.getName().equals("最新公开信息"))
-		if (menuItem.getName().equals("领导之窗")) {
-			menuItem.setContentFragment(WapFragment.class);
-		}
-		if (menuItem.getName().equals("最新公开信息")) {
-			menuItem.setContentFragment(NavigatorWithContentFragment.class);
-		}
+	/**
+	 * 
+	 *wanglu 泰得利通 
+	 * @param menuItem 首页导航模块菜单
+	 * @param subMenuItems 导航菜单子菜单
+	 * @param context
+	 */
+	public static void initMenuItemContentLayout(MenuItem menuItem,List<MenuItem> subMenuItems,final Context context) {
+		
+		if(menuItem.getName().equals("咨询中心")){
+			
+			for (final MenuItem menu : subMenuItems) {
 
+				if (menu.getType() == MenuItem.WAP_MENU) {// wap类型菜单
+					menu.setContentFragment(WapFragment.class);
+				} else if (menu.getType() == MenuItem.CHANNEL_MENU) {// 如果菜单上频道菜单
+
+					new Thread(new Runnable() {
+
+						@Override
+						public void run() {
+							ChannelService channelService = new ChannelService(
+									context);
+							try {
+								List<Channel> channels = channelService
+										.getSubChannels(menu.getChannelId());
+
+								if (channels != null) {
+									menu.setContentFragment(InfoNavigatorWithContentFragment.class);
+								} else {
+									menu.setContentFragment(InforContentListFragment.class);// 内容列表界面
+								}
+							} catch (NetException e) {
+								e.printStackTrace();
+							}
+						}
+					}).start();
+
+				} else if (menu.getType() == MenuItem.CUSTOM_MENU) {// //普通菜单
+					menu.setContentFragment(InfoNavigatorWithContentFragment.class);
+				}
+			}
+			
+			
+		}else if(menuItem.getName().equals("公共服务")){
+			
+			for (final MenuItem menu : subMenuItems) {
+
+				if (menu.getType() == MenuItem.WAP_MENU) {// wap类型菜单
+
+					// menu.setContentFragment(WapFragment.class);
+				} else if (menu.getType() == MenuItem.CHANNEL_MENU) {// 如果菜单上频道菜单
+
+					new Thread(new Runnable() {
+
+						@Override
+						public void run() {
+							ChannelService channelService = new ChannelService(
+									context);
+							try {
+								List<Channel> channels = channelService
+										.getSubChannels(menu.getChannelId());
+
+								if (channels != null) {
+									menu.setContentFragment(PublicServiceWithContentFragment.class);
+								} else {
+									// menu.setContentFragment(ContentListFragment.class);//
+									// 内容列表界面
+								}
+							} catch (NetException e) {
+								e.printStackTrace();
+							}
+						}
+					}).start();
+
+				} else if (menu.getType() == MenuItem.CUSTOM_MENU) {// //普通菜单
+					menu.setContentFragment(PublicServiceWithContentFragment.class);
+				}
+
+			}
+			
+			
+		}
+		
+		
+		
+		
+		
 	}
 
 	public static void initChannelContentLayout(Channel channel) {

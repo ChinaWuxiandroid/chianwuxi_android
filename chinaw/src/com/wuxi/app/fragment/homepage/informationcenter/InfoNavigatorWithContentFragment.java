@@ -24,19 +24,18 @@ public class InfoNavigatorWithContentFragment extends
 			wapFragment.setParentItem(menuItem);
 			return wapFragment;
 		}
-		else if(menuItem.getType() == MenuItem.CUSTOM_MENU||menuItem.getType() == MenuItem.CHANNEL_MENU){
-			NavigatorContentExpandListFragment navigatorContentExpandListFragment=new NavigatorContentExpandListFragment();
-			navigatorContentExpandListFragment.setParentItem(menuItem);
-			return navigatorContentExpandListFragment;
-		}
-		
+	
 
 		return null;
 	}
 
+	
 	@Override
 	protected Fragment showChannelContentFragment(Channel channel) {
-		return null;
+		InforContentListFragment inforContentListFragment=new InforContentListFragment();
+		inforContentListFragment.setArguments(this.getArguments());//传递外层框架
+		inforContentListFragment.setChannel(channel);
+		return inforContentListFragment;
 	}
 
 	

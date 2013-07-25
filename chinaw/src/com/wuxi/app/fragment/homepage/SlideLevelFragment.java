@@ -31,6 +31,7 @@ import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.MyOnlineAskFragment;
+import com.wuxi.app.fragment.homepage.informationcenter.HotTopicContentFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InformationCenterFragment;
 import com.wuxi.app.fragment.homepage.logorregister.LoginFragment;
 import com.wuxi.app.fragment.homepage.logorregister.RegisterFragment;
@@ -224,6 +225,10 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			case WUXICHANNELCONTENTDETAILFRAGMENT://魅力锡城内容页
 				WuxiChannelContentDetailFragment wuxiChannelContentDetailFragment=new WuxiChannelContentDetailFragment();
 				onTransaction(wuxiChannelContentDetailFragment, bundle);
+				break;
+			case HOTTOPICCONTENTFRAGMENT://咨询中心->热点专题内容页
+				HotTopicContentFragment hotTopicContentFragment=new HotTopicContentFragment();
+				onTransaction(hotTopicContentFragment,bundle);
 				break;
 
 			}

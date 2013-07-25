@@ -150,7 +150,7 @@ public abstract class ContentListFragment extends BaseFragment implements
 					if (channel != null) {
 						channelId = channel.getChannelId();
 					} else if (parentItem != null) {
-						channelId = channel.getChannelId();
+						channelId = parentItem.getChannelId();
 					}
 					contentWrapper = contentService.getPageContentsById(
 							channelId, start, end);

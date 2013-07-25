@@ -68,8 +68,7 @@ public class LeftMenuAdapter extends BasicAdapter {
 					.findViewById(viewId[0]);
 			viewHolder.iv_icon = (ImageView) convertView
 					.findViewById(viewId[1]);
-			/*viewHolder.iv_select_logo = (ImageView) convertView
-					.findViewById(viewId[2]);*/
+		
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
@@ -79,7 +78,6 @@ public class LeftMenuAdapter extends BasicAdapter {
 		if (selectPosition == position) {// 选中样式
 			viewHolder.title_text.setTextColor(Color.parseColor("#AD1010"));
 			viewHolder.title_text.setTextSize(16);
-			//viewHolder.iv_select_logo.setVisibility(ImageView.VISIBLE);
 			viewHolder.iv_icon.setVisibility(ImageView.GONE);
 			convertView.setBackgroundResource(R.drawable.left_item_select_bg);
 
@@ -87,7 +85,6 @@ public class LeftMenuAdapter extends BasicAdapter {
 
 			viewHolder.title_text.setTextColor(Color.parseColor("#000000"));
 			viewHolder.title_text.setTextSize(14);
-			//viewHolder.iv_select_logo.setVisibility(ImageView.GONE);
 			viewHolder.iv_icon.setVisibility(ImageView.VISIBLE);
 			convertView.setBackgroundColor(Color.TRANSPARENT);
 

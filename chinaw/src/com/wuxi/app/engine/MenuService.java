@@ -8,14 +8,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.content.Context;
 import android.os.Environment;
 
+import com.wuxi.app.fragment.index.InitializContentLayout;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Channel;
@@ -191,12 +190,12 @@ public class MenuService extends Service {
 					menu.setLinkMenuItemName(jb.getString("linkMenuItemName"));
 
 					int type = jb.getInt("type");
-					if (type == MenuItem.CHANNEL_MENU) {// 如果是频道菜单，获取子频道，并放入缓存中
+					if (type == MenuItem.CHANNEL_MENU&&!menu.isDeleted()) {// 如果是频道菜单，获取子频道，并放入缓存中
 						new Thread(new ChannelTask(menu.getChannelId()))
 								.start();
-					} else if (type == MenuItem.CUSTOM_MENU) {// 如果是普通菜单,将该菜单的子菜单提前获取好，放入缓存
+					} else if (type == MenuItem.CUSTOM_MENU&&!menu.isDeleted()) {// 如果是普通菜单,将该菜单的子菜单提前获取好，放入缓存
 
-						new Thread(new SubMenuItemsTask(menu.getId())).start();
+						new Thread(new SubMenuItemsTask(menu)).start();
 
 					}
 
@@ -246,21 +245,22 @@ public class MenuService extends Service {
 	 */
 	private final class SubMenuItemsTask implements Runnable {
 
-		private String menuId;
+		private MenuItem menuItem;
 
-		public SubMenuItemsTask(String menuId) {
-			this.menuId = menuId;
+		public SubMenuItemsTask(MenuItem menuItem) {
+			this.menuItem = menuItem;
 		}
 
 		@Override
 		public void run() {
 
 			try {
-				List<MenuItem> items = getSubMenuItems(menuId);
+				List<MenuItem> items = getSubMenuItems(menuItem.getId());
 
 				if (items != null) {
 
-					CacheUtil.put(menuId, items);// 将菜单的子菜单放入缓存
+					CacheUtil.put(menuItem.getId(), items);// 将菜单的子菜单放入缓存
+					InitializContentLayout.initMenuItemContentLayout(menuItem, items, context);
 				}
 			} catch (NetException e) {
 				e.printStackTrace();

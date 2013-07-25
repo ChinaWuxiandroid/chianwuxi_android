@@ -16,12 +16,20 @@ public class PublicServiceWithContentFragment extends
 
 	@Override
 	protected Fragment showChannelContentFragment(Channel channel) {
-		
-		PublicServiceChannelContentFragment ch=new PublicServiceChannelContentFragment();
-		ch.setChannel(channel);
-		return ch;
-	}
 
-	
+		if (channel.getChildrenChannelsCount() > 0) {
+			PublicServiceChannelContentFragment ch = new PublicServiceChannelContentFragment();
+			ch.setChannel(channel);
+			return ch;
+		} else if (channel.getChildrenContentsCount() > 0) {
+			PublicServiceContentListFragment publicServiceContentListFragment = new PublicServiceContentListFragment();
+
+			publicServiceContentListFragment.setChannel(channel);
+			return publicServiceContentListFragment;
+
+		}
+
+		return null;
+	}
 
 }
