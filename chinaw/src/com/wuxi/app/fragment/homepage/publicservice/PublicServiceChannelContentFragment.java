@@ -1,4 +1,4 @@
-﻿package com.wuxi.app.fragment.homepage.publicservice;
+package com.wuxi.app.fragment.homepage.publicservice;
 
 import java.util.List;
 
@@ -18,7 +18,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
