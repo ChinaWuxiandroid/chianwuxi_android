@@ -26,6 +26,7 @@ import com.wuxi.app.fragment.MainIndexFragment;
 import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
+import com.wuxi.app.fragment.homepage.fantasticwuxi.WuxiChannelContentDetailFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonFragment;
