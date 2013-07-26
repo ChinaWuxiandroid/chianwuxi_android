@@ -6,8 +6,6 @@ import java.util.List;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
-import com.wuxi.app.fragment.homepage.informationcenter.InfoNavigatorWithContentFragment;
-import com.wuxi.app.fragment.homepage.informationcenter.InforContentListFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.WapFragment;
 import com.wuxi.app.listeners.GoverPublicMsgInitLayoutImpl;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
@@ -46,9 +44,9 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 
 							if (channels != null) {
 								System.out.println("channels:"+channels.get(0).getChannelName());
-								menu.setContentFragment(InfoNavigatorWithContentFragment.class);
+								menu.setContentFragment(GoverMsgNaviWithContentFragment.class);
 							} else {
-								menu.setContentFragment(InforContentListFragment.class);// 内容列表界面
+								menu.setContentFragment(GoverMsgContentListFragment.class);// 内容列表界面
 							}
 						} catch (NetException e) {
 							e.printStackTrace();
@@ -59,7 +57,7 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 			} 
 			// 普通菜单
 			else if (menu.getType() == MenuItem.CUSTOM_MENU) {
-				menu.setContentFragment(InfoNavigatorWithContentFragment.class);
+				menu.setContentFragment(GoverMsgNaviWithContentFragment.class);
 			}
 			//定制菜单
 			else if(menu.getType() == MenuItem.APP_MENU){
