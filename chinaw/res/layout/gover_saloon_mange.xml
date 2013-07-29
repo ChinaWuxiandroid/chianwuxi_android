@@ -4,18 +4,18 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <include
+   <!--  <include
         android:id="@+id/search_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        layout="@layout/goversaloon_title_search_layout" />
+        layout="@layout/goversaloon_title_search_layout" /> -->
 
     <FrameLayout
         android:id="@+id/fl_title_item"
         android:layout_width="match_parent"
         android:layout_height="40dip"
-        android:layout_below="@+id/search_head"
+     
         android:layout_marginTop="8dip"
         android:orientation="horizontal" >
 
@@ -68,10 +68,10 @@
             android:layout_gravity="center" />
     </FrameLayout>
 
-    <include
+    <!-- <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        layout="@layout/goversaloon_foot_search_layout" />
+        layout="@layout/goversaloon_foot_search_layout" /> -->
 
 </RelativeLayout>

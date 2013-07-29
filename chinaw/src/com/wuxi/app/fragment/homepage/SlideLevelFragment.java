@@ -13,12 +13,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.wuxi.app.BaseFragment;
+import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.LeftMenuAdapter;
 import com.wuxi.app.fragment.BaseSlideFragment;
@@ -69,6 +71,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	private LeftMenuAdapter leftMenuAdapter;
 	private Constants.FragmentName fragmentName;// 显示的fragmentName名称
 	private FragmentManager manager;
+	private PopWindowManager popWindowManager;
 	private List<FragmentWapper> fragments = new ArrayList<FragmentWapper>(); // 记录每次切换到fragment信息以便回退
 
 	public void setFragmentName(Constants.FragmentName fragmentName) {
@@ -83,6 +86,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.slide_level_layout, null);
+		popWindowManager=PopWindowManager.getInstance();
 		mSlideMenuLayout = (SlideMenuLayout) view
 				.findViewById(R.id.slide_menu_layout);
 		mSlideMenuLayout.setLeftSlideMenuId(R.id.left_menu);
@@ -231,6 +235,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	}
 
 	private void onTransaction(BaseSlideFragment fragment, Bundle bundle) {
+		popWindowManager.removePowWIndows();
 		manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(FRAME_CONTENT, fragment);
@@ -261,7 +266,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				managers.BackPress(this);
 			} else {
 				managers.ChangeFragment(new MainIndexFragment());
-
+				popWindowManager.removePowWIndows();
 			}
 
 		} else {
@@ -281,10 +286,12 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 	public void openLeftSlideMenu() {
 		mSlideMenuLayout.openLeftSlideMenu();
+		popWindowManager.removePowWIndows();
 	}
 
 	public void openRightSlideMenu() {
 		mSlideMenuLayout.openRightSlideMenu();
+		popWindowManager.removePowWIndows();
 	}
 
 	public void closeSlideMenu() {
@@ -320,7 +327,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	@Override
 	public void onItemClick(AdapterView<?> parent, View arg1, int position,
 			long id) {
-
+		
 		if (position == this.position)
 			return;
 		MenuItem checkMenuItem = (MenuItem) parent.getItemAtPosition(position);

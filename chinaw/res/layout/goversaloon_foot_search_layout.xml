@@ -6,7 +6,7 @@
     android:orientation="horizontal" >
 
     <Spinner
-        android:id="@+id/goversaloon_sp"
+        android:id="@+id/goversaloon_sp_szxk"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_weight="1" />

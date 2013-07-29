@@ -20,10 +20,7 @@ import com.wuxi.app.fragment.BaseSlideFragment;
 public abstract class GoverSaloonContentFragment extends BaseFragment {
 
 	protected View view;
-	private RadioGroup goversaloon_title_search;
-	private RadioButton search_bything;
-	private RadioButton search_bydeparent;
-	private RadioButton search_byrange;
+
 	protected Context context;
 	protected LayoutInflater mInflater;
 	protected BaseSlideFragment baseSlideFragment;
@@ -41,11 +38,7 @@ public abstract class GoverSaloonContentFragment extends BaseFragment {
 
 	
 	protected void initUI() {
-		goversaloon_title_search=(RadioGroup) view.findViewById(R.id.goversaloon_title_search);
-		search_bything=(RadioButton) view.findViewById(R.id.search_bything);
-		search_bydeparent=(RadioButton) view.findViewById(R.id.search_bydeparent);
-		search_byrange=(RadioButton) view.findViewById(R.id.search_byrange);
-	
+		
 	}
 
 	/**

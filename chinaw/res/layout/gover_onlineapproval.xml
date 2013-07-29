@@ -4,18 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include
+    <!-- <include
         android:id="@+id/search_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         layout="@layout/goversaloon_title_search_layout" />
-
+ -->
     <Spinner
         android:id="@+id/gover_oline_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/search_head" />
+         />
 
     <FrameLayout
         android:layout_width="fill_parent"
@@ -38,10 +38,10 @@
             android:layout_gravity="center"/>
     </FrameLayout>
 
-    <include
+   <!--  <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        layout="@layout/goversaloon_foot_search_layout" />
+        layout="@layout/goversaloon_foot_search_layout" /> -->
 
 </RelativeLayout>

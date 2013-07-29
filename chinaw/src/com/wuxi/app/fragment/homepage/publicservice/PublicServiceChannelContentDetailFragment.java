@@ -24,13 +24,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.platform.comapi.map.l;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.ContentChannelAdapter;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.util.CacheUtil;
-import com.wuxi.app.util.Constants.CacheKey;
 import com.wuxi.domain.Channel;
 import com.wuxi.exception.NetException;
 
