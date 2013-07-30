@@ -234,14 +234,12 @@ public abstract class ContentListFragment extends BaseFragment implements
 		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
 		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
 				&& visibleLastIndex == lastIndex) {
-
 			if (contentWrapper != null && contentWrapper.isNext()) {// 还有下一条记录
 
 				isSwitch = false;
 				loadMoreButton.setText("loading.....");
 				loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_SIZE);
 			}
-
 		}
 	}
 
