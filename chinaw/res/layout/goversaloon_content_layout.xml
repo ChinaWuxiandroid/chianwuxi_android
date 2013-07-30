@@ -13,13 +13,54 @@
         layout="@layout/goversaloon_title_search_layout" />
 
     <FrameLayout
-        android:layout_marginTop="50dip"
         android:id="@+id/gover_content_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dip" >
     </FrameLayout>
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_head"
+        android:orientation="vertical" >
+
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/goversaloon_searchby_thing_layout" />
+
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/goversaloon_searchby_department_layout" />
+
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/goversaloon_searchby_range_layout" />
+    </LinearLayout>
+
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/search_foot"
+        android:orientation="vertical" >
+
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/goversaloon_item_count_pop_layout" />
+
+        <include
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/goversaloon_searchby_state_layout" />
+       
+    </LinearLayout>
     <include
+        android:id="@+id/search_foot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

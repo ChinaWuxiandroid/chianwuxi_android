@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#E0E0E0"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:visibility="gone"
+    android:id="@+id/ll_itemcount" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,24 +15,69 @@
         <LinearLayout
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:orientation="vertical" 
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="20dip"
+                android:text="办件统计"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:text="累计接件:22121\n累计办件:2421" />
         </LinearLayout>
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="fill_parent"
+            android:background="@android:color/white" />
 
         <LinearLayout
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="20dip"
+                android:text="即时信息"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:text="累计接件:22121\n累计办件:2421" />
         </LinearLayout>
     </LinearLayout>
-    
-    
 
-    <View 
+    <View
         android:layout_width="fill_parent"
         android:layout_height="1dip"
-        android:background="@android:color/white"
-        />
+        android:background="@android:color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dip"
+        android:layout_marginTop="20dip"
+        android:text="自从2012年1月1日起"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

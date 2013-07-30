@@ -3,9 +3,12 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="#E0E0E0"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:visibility="gone"
+    android:id="@+id/ll_state">
 
     <Spinner
+        android:id="@+id/sp_xzstate"
         android:layout_width="fill_parent"
         android:layout_height="50dip" />
 
@@ -20,12 +23,14 @@
             android:text="办件编号：" />
 
         <EditText
+            android:id="@+id/et_state_itemcode"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="0.72"
             android:background="@android:color/white" />
 
         <Button
+            android:id="@+id/btn_search_bystate"
             android:layout_width="65dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dip"
