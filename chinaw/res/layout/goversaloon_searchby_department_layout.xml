@@ -3,9 +3,13 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="#E0E0E0"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:visibility="gone"
+    android:id="@+id/ll_searchby_dept"
+     >
 
     <Spinner
+        android:id="@+id/sp_dept"
         android:layout_width="180dip"
         android:layout_height="50dip" />
 
@@ -15,11 +19,15 @@
         android:orientation="horizontal" >
 
         <Spinner
+            
             android:layout_width="180dip"
-            android:layout_height="45dip" />
+            android:layout_height="45dip" 
+            android:id="@+id/sp_dept_range"
+            />
 
        
         <Button
+            android:id="@+id/btn_search_bydept"
             android:layout_width="65dp"
             android:layout_height="30dp"
             android:layout_marginLeft="5dip"

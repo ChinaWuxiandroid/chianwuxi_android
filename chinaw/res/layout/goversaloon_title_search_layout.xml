@@ -32,7 +32,7 @@
             android:background="@drawable/goversaloon_search_bg"
             android:button="@null"
             android:gravity="center"
-            android:text="按范围赛选事项"
+            android:text="按部门筛选事项"
             android:textColor="#ffffff"
             android:textSize="12sp" >
         </RadioButton>
@@ -45,7 +45,7 @@
             android:background="@drawable/goversaloon_search_bg"
             android:button="@null"
             android:gravity="center"
-            android:text="按部门赛选事项"
+            android:text="按范围筛选事项"
             android:textColor="#ffffff"
             android:textSize="12sp" >
         </RadioButton>

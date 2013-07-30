@@ -4,18 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <!-- <include
-        android:id="@+id/search_head"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        layout="@layout/goversaloon_title_search_layout" />
- -->
+  
     <Spinner
         android:id="@+id/gover_oline_filter"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-         />
+        android:layout_height="wrap_content" />
 
     <FrameLayout
         android:layout_width="fill_parent"
@@ -26,22 +19,23 @@
             android:id="@+id/gover_online_approval_lv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/gover_oline_filter"
-             android:divider="@android:color/white"
+            android:divider="@android:color/white"
             android:dividerHeight="1dip" >
         </ListView>
 
         <ProgressBar
             android:id="@+id/pb_approval"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            android:layout_gravity="center"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
     </FrameLayout>
 
-   <!--  <include
+    <!--
+         <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        layout="@layout/goversaloon_foot_search_layout" /> -->
+        layout="@layout/goversaloon_foot_search_layout" />
+    -->
 
 </RelativeLayout>

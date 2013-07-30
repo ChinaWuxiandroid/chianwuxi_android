@@ -1,26 +1,40 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.StringTokenizer;
+
+import org.json.JSONException;
+
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.PopupWindow;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
-import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
+import com.wuxi.app.adapter.DeptSpinnerAdapter;
+import com.wuxi.app.engine.DeptService;
+import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.Constants;
+import com.wuxi.domain.Dept;
 import com.wuxi.domain.MenuItem;
+import com.wuxi.exception.NetException;
 
 /**
  * 
@@ -36,23 +50,62 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 	private RadioButton search_bydeparent;
 	private RadioButton search_byrange;
 	private Context context;
-	private PopupWindow bythingPopWindow, bydeptPopWindow, byRangPopWindow,
-			byStatePopupWindow;
-	private PopWindowManager popWindowManager;
+
 	private static final int CONTENT_MAIN_ID = R.id.gover_content_main;
 	private static final int SEARCH_BYTHING = 0, SEARCH_BYDEPARENT = 1,
-			SEARCH_BYRANGE = 2, SEARCH_BYSTATE = 3;
+			SEARCH_BYRANGE = 2, SEARCH_BYSTATE = 3, COUNTPOP_WINDOW = 4;
+	protected static final int LOAD_DEPT_SUCCESS = 1;
+	protected static final int LOAD_DEPT_FAIL = 0;
+
 	private Spinner goversaloon_sp_szxk;
 	private Button goversaloon_btn_statesearch;
+	private Button goversaloon_btn_count;
+	private Spinner sp_item_type;
+	private Spinner sp_dept;// 部门
+	private Spinner sp_dept_range;// 范围
+	private Spinner sp_range;// 范围
+	private String[] itemType = new String[] { "事项名称", "事项编码" };
+	private String[] rangType = new String[] { "全部事项", "当前栏目", "网上审批" };
+	private String[] xzType = new String[] { "行政许可", "行政处罚", "行政征收", "行政强制",
+			"其它" };
+	private String[] xzState = new String[] { "行政许可状态查询", "行政处罚状态查询",
+			"行政征收状态查询", "行政强制状态查询", "其它状态查询" };
+	private Spinner sp_xzstate;
+
+	private LinearLayout ll_searchbything, ll_searchby_dept, ll_searchby_range,
+			ll_itemcount, ll_state;
+	private Button btn_searchbything, btn_search_bydept, btn_searchbyrange,
+			btn_search_bystate;
+	private EditText et_searchbying_content, et_state_itemcode;
+	private List<Dept> depts;
+
+	private Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+
+			switch (msg.what) {
+			case LOAD_DEPT_SUCCESS:
+				showDept();
+				break;
+			case LOAD_DEPT_FAIL:
+				String tip = msg.obj.toString();
+				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
+				break;
+			}
+
+		}
+
+	};
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		view = inflater.inflate(R.layout.goversaloon_content_layout, null);
+
 		context = getActivity();
+
 		initUI();
-		popWindowManager = PopWindowManager.getInstance();
+
 		return view;
 	}
 
@@ -66,13 +119,57 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 		search_byrange = (RadioButton) view.findViewById(R.id.search_byrange);
 		goversaloon_sp_szxk = (Spinner) view
 				.findViewById(R.id.goversaloon_sp_szxk);
+		goversaloon_sp_szxk.setAdapter(new ArrayAdapter<String>(context,
+				R.layout.my_simple_spinner_item_layout, xzType));
+
 		goversaloon_btn_statesearch = (Button) view
 				.findViewById(R.id.goversaloon_btn_statesearch);
+		goversaloon_btn_count = (Button) view
+				.findViewById(R.id.goversaloon_btn_count);
+		ll_searchbything = (LinearLayout) view
+				.findViewById(R.id.ll_searchbything);
+		ll_searchby_dept = (LinearLayout) view
+				.findViewById(R.id.ll_searchby_dept);
+		ll_searchby_range = (LinearLayout) view
+				.findViewById(R.id.ll_searchby_range);
+		ll_itemcount = (LinearLayout) view.findViewById(R.id.ll_itemcount);
+		ll_state = (LinearLayout) view.findViewById(R.id.ll_state);
+		sp_item_type = (Spinner) view.findViewById(R.id.sp_item_type);// 办事事项搜索下拉框
+
+		sp_item_type.setAdapter(new ArrayAdapter<String>(context,
+				R.layout.my_simple_spinner_item_layout, itemType));
+		sp_dept = (Spinner) view.findViewById(R.id.sp_dept);
+		loadDeptData();
+		sp_dept_range = (Spinner) view.findViewById(R.id.sp_dept_range);
+		sp_dept_range.setAdapter(new ArrayAdapter<String>(context,
+				R.layout.my_simple_spinner_item_layout, rangType));
+
+		sp_range = (Spinner) view.findViewById(R.id.sp_range);
+		sp_range.setAdapter(new ArrayAdapter<String>(context,
+				R.layout.my_simple_spinner_item_layout, rangType));
+
+		sp_xzstate = (Spinner) view.findViewById(R.id.sp_xzstate);
+		sp_xzstate.setAdapter(new ArrayAdapter<String>(context,
+				R.layout.my_simple_spinner_item_layout, xzState));// 行政状态
+		btn_searchbything = (Button) view.findViewById(R.id.btn_searchbything);
+		et_searchbying_content = (EditText) view
+				.findViewById(R.id.et_searchbying_content);
+		et_state_itemcode = (EditText) view
+				.findViewById(R.id.et_state_itemcode);
+		btn_search_bydept = (Button) view.findViewById(R.id.btn_search_bydept);
+		btn_searchbyrange = (Button) view.findViewById(R.id.btn_searchbyrange);
+		btn_search_bystate = (Button) view
+				.findViewById(R.id.btn_search_bystate);
 		goversaloon_title_search.setOnCheckedChangeListener(this);
 		goversaloon_btn_statesearch.setOnClickListener(this);
 		search_bything.setOnClickListener(this);
 		search_bydeparent.setOnClickListener(this);
 		search_byrange.setOnClickListener(this);
+		goversaloon_btn_count.setOnClickListener(this);
+		btn_searchbything.setOnClickListener(this);
+		btn_search_bydept.setOnClickListener(this);
+		btn_searchbyrange.setOnClickListener(this);
+		btn_search_bystate.setOnClickListener(this);
 
 		if (menuItem.getType() == MenuItem.CUSTOM_MENU) {
 
@@ -103,6 +200,50 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 
 	}
 
+	/**
+	 * 
+	 * wanglu 泰得利通 加载部门数据
+	 */
+	private void loadDeptData() {
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				Message msg = handler.obtainMessage();
+				DeptService deptService = new DeptService(context);
+				try {
+					depts = deptService.getDepts();
+					if (depts != null) {
+						msg.what = LOAD_DEPT_SUCCESS;
+						CacheUtil.put(Constants.CacheKey.DEPT_KEY, depts);// 放入缓存
+					} else {
+						msg.what = LOAD_DEPT_FAIL;
+						msg.obj = "没有获取到数据";
+					}
+					handler.sendMessage(msg);
+				} catch (NetException e) {
+					e.printStackTrace();
+					msg.what = LOAD_DEPT_FAIL;
+					msg.obj = e.getMessage();
+					handler.sendMessage(msg);
+				} catch (JSONException e) {
+					e.printStackTrace();
+					msg.what = LOAD_DEPT_SUCCESS;
+					msg.obj = "数据格式错误";
+					handler.sendMessage(msg);
+				}
+
+			}
+		}).start();
+
+	}
+
+	private void showDept() {
+
+		sp_dept.setAdapter(new DeptSpinnerAdapter(depts, context));
+	};
+
 	public void setMenuItem(MenuItem menuItem) {
 		this.menuItem = menuItem;
 	}
@@ -124,128 +265,46 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 
 	}
 
-	/**
-	 * 
-	 * wanglu 泰得利通 按办事事项搜索
-	 */
-	private void showSearchPopWindow(int type) {
-		int location[] = new int[2];
-
-		search_bything.getLocationInWindow(location);
-		int showX = location[0];
-		int showY = location[1] + search_bything.getHeight();
-		int endlocation[] = new int[2];
-		search_byrange.getLocationInWindow(endlocation);
-		int width = (endlocation[0] + search_byrange.getWidth()) - showX - 30;
-		View contentView = null;
-
-		int bottomLocation[] = new int[2];
-		goversaloon_sp_szxk.getLocationInWindow(bottomLocation);
-		int bottomSowY= bottomLocation[1]-75;
-		switch (type) {
-		case SEARCH_BYTHING:// 按事项搜索
-			contentView = View.inflate(context,
-					R.layout.goversaloon_searchby_thing_layout, null);
-			bythingPopWindow = new PopupWindow(contentView, width,
-					LayoutParams.WRAP_CONTENT);
-
-			bythingPopWindow.showAtLocation(view, Gravity.LEFT | Gravity.TOP,
-					showX, showY);
-
-			popWindowManager.addPopWindow(bythingPopWindow);
-			break;
-		case SEARCH_BYDEPARENT:// 按部门搜索
-
-			contentView = View.inflate(context,
-					R.layout.goversaloon_searchby_department_layout, null);
-			bydeptPopWindow = new PopupWindow(contentView, width,
-					LayoutParams.WRAP_CONTENT);
-
-			bydeptPopWindow.showAtLocation(view, Gravity.LEFT | Gravity.TOP,
-					showX, showY);
-
-			popWindowManager.addPopWindow(bydeptPopWindow);
-
-			break;
-		case SEARCH_BYRANGE:// 按范围搜索
-
-			contentView = View.inflate(context,
-					R.layout.goversaloon_searchby_range_layout, null);
-			byRangPopWindow = new PopupWindow(contentView, width,
-					LayoutParams.WRAP_CONTENT);
-
-			byRangPopWindow.showAtLocation(view, Gravity.LEFT | Gravity.TOP,
-					showX, showY);
-
-			popWindowManager.addPopWindow(byRangPopWindow);
-			break;
-		case SEARCH_BYSTATE:// 状态查询
-			contentView = View.inflate(context,
-					R.layout.goversaloon_searchby_state_layout, null);
-			byStatePopupWindow = new PopupWindow(contentView, width,
-					LayoutParams.WRAP_CONTENT);
-
-			byStatePopupWindow.showAtLocation(view, Gravity.LEFT | Gravity.TOP,
-					showX, bottomSowY);
-
-			popWindowManager.addPopWindow(byStatePopupWindow);
-			break;
-
-		}
-
-	}
-
-	private void dismissPopWindow(int type) {
+	private void showSearchView(int type) {
 
 		switch (type) {
 		case SEARCH_BYTHING:
-
-			popWindowManager.dissMissPopWindow(bydeptPopWindow);
-			bydeptPopWindow = null;
-
-			popWindowManager.dissMissPopWindow(byRangPopWindow);
-			byRangPopWindow = null;
-
-			popWindowManager.dissMissPopWindow(byStatePopupWindow);
-			byStatePopupWindow = null;
+			ll_searchbything.setVisibility(LinearLayout.VISIBLE);
+			ll_searchby_dept.setVisibility(LinearLayout.GONE);
+			ll_searchby_range.setVisibility(LinearLayout.GONE);
+			ll_itemcount.setVisibility(LinearLayout.GONE);
+			ll_state.setVisibility(LinearLayout.GONE);
 			break;
 		case SEARCH_BYDEPARENT:
-
-			popWindowManager.dissMissPopWindow(bythingPopWindow);
-			bythingPopWindow = null;
-
-			popWindowManager.dissMissPopWindow(byRangPopWindow);
-			byRangPopWindow = null;
-
-			popWindowManager.dissMissPopWindow(byStatePopupWindow);
-			byStatePopupWindow = null;
+			ll_searchbything.setVisibility(LinearLayout.GONE);
+			ll_searchby_dept.setVisibility(LinearLayout.VISIBLE);
+			ll_searchby_range.setVisibility(LinearLayout.GONE);
+			ll_itemcount.setVisibility(LinearLayout.GONE);
+			ll_state.setVisibility(LinearLayout.GONE);
 			break;
 		case SEARCH_BYRANGE:
-
-			popWindowManager.dissMissPopWindow(bythingPopWindow);
-			bythingPopWindow = null;
-
-			popWindowManager.dissMissPopWindow(bydeptPopWindow);
-			bydeptPopWindow = null;
-
-			popWindowManager.dissMissPopWindow(byStatePopupWindow);
-			byStatePopupWindow = null;
-
+			ll_searchbything.setVisibility(LinearLayout.GONE);
+			ll_searchby_dept.setVisibility(LinearLayout.GONE);
+			ll_searchby_range.setVisibility(LinearLayout.VISIBLE);
+			ll_itemcount.setVisibility(LinearLayout.GONE);
+			ll_state.setVisibility(LinearLayout.GONE);
+			break;
+		case COUNTPOP_WINDOW:
+			ll_searchbything.setVisibility(LinearLayout.GONE);
+			ll_searchby_dept.setVisibility(LinearLayout.GONE);
+			ll_searchby_range.setVisibility(LinearLayout.GONE);
+			ll_itemcount.setVisibility(LinearLayout.VISIBLE);
+			ll_state.setVisibility(LinearLayout.GONE);
 			break;
 		case SEARCH_BYSTATE:
-
-			popWindowManager.dissMissPopWindow(bythingPopWindow);
-			bythingPopWindow = null;
-
-			popWindowManager.dissMissPopWindow(bydeptPopWindow);
-			bydeptPopWindow = null;
-
-			popWindowManager.dissMissPopWindow(byRangPopWindow);
-			byRangPopWindow = null;
+			ll_searchbything.setVisibility(LinearLayout.GONE);
+			ll_searchby_dept.setVisibility(LinearLayout.GONE);
+			ll_searchby_range.setVisibility(LinearLayout.GONE);
+			ll_itemcount.setVisibility(LinearLayout.GONE);
+			ll_state.setVisibility(LinearLayout.VISIBLE);
 			break;
 
 		}
-
 	}
 
 	@Override
@@ -253,51 +312,157 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 
 		switch (v.getId()) {
 		case R.id.search_bything:
-			if (popWindowManager.getPopupWindow(bythingPopWindow) != null) {
-				popWindowManager.dissMissPopWindow(bythingPopWindow);
-				bythingPopWindow = null;
-
+			if (ll_searchbything.getVisibility() == LinearLayout.GONE) {
+				showSearchView(SEARCH_BYTHING);
 			} else {
-				showSearchPopWindow(SEARCH_BYTHING);
-				dismissPopWindow(SEARCH_BYTHING);
+				ll_searchbything.setVisibility(LinearLayout.GONE);
 			}
 
 			break;
 		case R.id.search_bydeparent:
-			if (popWindowManager.getPopupWindow(bydeptPopWindow) != null) {
-				popWindowManager.dissMissPopWindow(bydeptPopWindow);
-				bydeptPopWindow = null;
-
+			if (ll_searchby_dept.getVisibility() == LinearLayout.GONE) {
+				showSearchView(SEARCH_BYDEPARENT);
 			} else {
-				showSearchPopWindow(SEARCH_BYDEPARENT);
-				dismissPopWindow(SEARCH_BYDEPARENT);
+				ll_searchby_dept.setVisibility(LinearLayout.GONE);
 			}
-
 			break;
 		case R.id.search_byrange:
-			if (popWindowManager.getPopupWindow(byRangPopWindow) != null) {
-				popWindowManager.dissMissPopWindow(byRangPopWindow);
-				byRangPopWindow = null;
-
+			if (ll_searchby_range.getVisibility() == LinearLayout.GONE) {
+				showSearchView(SEARCH_BYRANGE);
 			} else {
-				showSearchPopWindow(SEARCH_BYRANGE);
-				dismissPopWindow(SEARCH_BYRANGE);
+				ll_searchby_range.setVisibility(LinearLayout.GONE);
 			}
 
 			break;
 
 		case R.id.goversaloon_btn_statesearch:
-			if (popWindowManager.getPopupWindow(byStatePopupWindow) != null) {
-				popWindowManager.dissMissPopWindow(byStatePopupWindow);
-				byStatePopupWindow = null;
-
+			if (ll_state.getVisibility() == LinearLayout.GONE) {
+				showSearchView(SEARCH_BYSTATE);
 			} else {
-				showSearchPopWindow(SEARCH_BYSTATE);
-				dismissPopWindow(SEARCH_BYSTATE);
+				ll_state.setVisibility(LinearLayout.GONE);
 			}
+			break;
+		case R.id.goversaloon_btn_count:
+			if (ll_itemcount.getVisibility() == LinearLayout.GONE) {
+				showSearchView(COUNTPOP_WINDOW);
+			} else {
+				ll_itemcount.setVisibility(LinearLayout.GONE);
+			}
+			break;
+
+		case R.id.btn_searchbything:// 按事项检索按钮事件
+
+			searchHandler(SEARCH_BYTHING);
+
+			break;
+		case R.id.btn_search_bydept:// 按部门筛选
+			searchHandler(SEARCH_BYDEPARENT);
+			break;
+		case R.id.btn_searchbyrange:// 按范围筛选
+			searchHandler(SEARCH_BYRANGE);
+
+			break;
+		case R.id.btn_search_bystate:// 按行政状态查询
+			searchHandler(SEARCH_BYSTATE);
 			break;
 
 		}
 	}
 
+	/**
+	 * 
+	 * wanglu 泰得利通 搜索处理
+	 * 
+	 * @param type
+	 */
+	private void searchHandler(int type) {
+		Bundle bundle = this.getArguments();
+		HashMap<String, String> params = new HashMap<String, String>();
+		switch (type) {
+		case SEARCH_BYTHING:
+			String textContent = et_searchbying_content.getText().toString();
+			if (textContent.equals("")) {
+				Toast.makeText(context, "请输入检索类容", Toast.LENGTH_SHORT).show();
+				return;
+			}
+
+			if (sp_item_type.getSelectedItemPosition() == 0) {
+				params.put("itemname", textContent);
+			} else if (sp_item_type.getSelectedItemPosition() == 1) {
+				params.put("itemcode", textContent);
+			}
+			params.put("qltype", getType(SEARCH_BYRANGE));
+			break;
+		case SEARCH_BYDEPARENT:
+			Dept dept = (Dept) sp_dept.getSelectedItem();
+
+			params.put("deptid", dept.getId());
+			params.put("qltype", getType(SEARCH_BYRANGE));
+			break;
+		case SEARCH_BYRANGE:
+			params.put("qltype", getType(SEARCH_BYRANGE));
+			break;
+
+		case SEARCH_BYSTATE:
+			String itemCode = et_state_itemcode.getText().toString();
+			if (itemCode.equals("")) {
+				Toast.makeText(context, "请输入办件标编号", Toast.LENGTH_SHORT).show();
+				return;
+			}
+
+			params.put("itemcode", itemCode);
+			params.put("qltype", getType(SEARCH_BYSTATE));
+
+			break;
+		}
+
+		ll_searchbything.setVisibility(LinearLayout.GONE);
+		ll_searchby_dept.setVisibility(LinearLayout.GONE);
+		ll_searchby_range.setVisibility(LinearLayout.GONE);
+
+		ll_state.setVisibility(LinearLayout.GONE);
+
+		bundle.putSerializable(SearchResultFragment.PARAMS_KEY, params);
+		SearchResultFragment searchResultFragment = new SearchResultFragment();
+		searchResultFragment.setArguments(bundle);
+		onTransaction(searchResultFragment);
+
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 行政类型 { "行政许可", "行政处罚", "行政征收", "行政强制", "其它" };
+	 * 
+	 * @return
+	 */
+	private String getType(int searchType) {
+
+		int position = 0;
+		if (searchType != SEARCH_BYSTATE) {
+			position = goversaloon_sp_szxk.getSelectedItemPosition();
+		} else {
+			position = sp_xzstate.getSelectedItemPosition();
+		}
+		String type = "QT";
+		switch (position) {
+		case 0:
+			type = "XK";
+			break;
+		case 1:
+			type = "CF";
+			break;
+		case 2:
+			type = "ZS";
+			break;
+		case 3:
+			type = "QZ";
+			break;
+		case 4:
+			type = "QT";
+			break;
+
+		}
+
+		return type;
+	}
 }
