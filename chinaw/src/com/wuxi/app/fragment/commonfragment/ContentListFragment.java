@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
@@ -68,7 +69,6 @@ public abstract class ContentListFragment extends BaseFragment implements
 				String tip = msg.obj.toString();
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
-
 			}
 		};
 	};

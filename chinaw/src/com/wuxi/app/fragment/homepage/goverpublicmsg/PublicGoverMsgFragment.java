@@ -21,19 +21,24 @@ import com.wuxi.exception.NetException;
 public class PublicGoverMsgFragment extends MenuItemMainFragment{
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	@Override
 	public void initializSubFragmentsLayout(List<MenuItem> items) {
 		// TODO Auto-generated method stub
 		for (final MenuItem menu : items) {
-			// wap类型菜单
-			if (menu.getType() == MenuItem.WAP_MENU) {
-				menu.setContentFragment(WapFragment.class);
-			} 
+
+			// 普通菜单
+			if (menu.getType() == MenuItem.CUSTOM_MENU) {
+				menu.setContentFragment(GoverMsgNaviWithContentFragment.class);
+			}
 			// 如果菜单上频道菜单
 			else if (menu.getType() == MenuItem.CHANNEL_MENU) {
-
 				new Thread(new Runnable() {
-
 					@Override
 					public void run() {
 						ChannelService channelService = new ChannelService(
@@ -55,10 +60,6 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 				}).start();
 
 			} 
-			// 普通菜单
-			else if (menu.getType() == MenuItem.CUSTOM_MENU) {
-				menu.setContentFragment(GoverMsgNaviWithContentFragment.class);
-			}
 			//定制菜单
 			else if(menu.getType() == MenuItem.APP_MENU){
 				//目前就工作意见箱一个定制菜单
@@ -66,6 +67,12 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 					menu.setContentFragment(WorkSuggestionBoxFragment.class);
 				}
 			}
+			// wap类型菜单
+			else if (menu.getType() == MenuItem.WAP_MENU) {
+				menu.setContentFragment(GoverMsgWebFragment.class);
+			} 
+
+
 		}
 	}
 

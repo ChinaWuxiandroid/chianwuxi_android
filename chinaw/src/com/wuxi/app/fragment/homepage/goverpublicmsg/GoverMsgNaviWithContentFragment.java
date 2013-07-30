@@ -11,22 +11,19 @@ import com.wuxi.domain.MenuItem;
  * 政府信息公开  导航带内容类
  * @author 杨宸 智佳
  * */
-public class GoverMsgNaviWithContentFragment extends
-MenuItemNavigatorWithContentFragment{
+public class GoverMsgNaviWithContentFragment extends MenuItemNavigatorWithContentFragment{
 	@Override
 	protected Fragment showMenItemContentFragment(MenuItem menuItem) {
-		if (menuItem.getType() == MenuItem.WAP_MENU) {
-			WapFragment wapFragment = new WapFragment();
-			wapFragment.setParentItem(menuItem);
-			return wapFragment;
-		}
-		else if(menuItem.getType() == MenuItem.CUSTOM_MENU||menuItem.getType() == MenuItem.CHANNEL_MENU){
+		if(menuItem.getType() == MenuItem.CUSTOM_MENU||menuItem.getType() == MenuItem.CHANNEL_MENU){
 			NavigatorContentExpandListFragment navigatorContentExpandListFragment=new NavigatorContentExpandListFragment();
 			navigatorContentExpandListFragment.setParentItem(menuItem);
 			return navigatorContentExpandListFragment;
 		}
-
-
+		else if (menuItem.getType() == MenuItem.WAP_MENU) {
+			GoverMsgWebFragment wapFragment = new GoverMsgWebFragment();
+			wapFragment.setParentItem(menuItem);
+			return wapFragment;
+		}
 		return null;
 	}
 

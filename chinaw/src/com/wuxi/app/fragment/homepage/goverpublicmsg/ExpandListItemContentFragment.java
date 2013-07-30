@@ -9,9 +9,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -21,6 +26,7 @@ import android.widget.Toast;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.MenuService;
+import com.wuxi.app.fragment.homepage.publicservice.PublicServiceChannelContentDetailFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
@@ -46,7 +52,8 @@ public class ExpandListItemContentFragment extends BaseFragment{
 
 	private static final int DATA__LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
-	
+	protected static final int CHANNELCONTENT_ID=R.id.govermsg_custom_content;
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -88,6 +95,7 @@ public class ExpandListItemContentFragment extends BaseFragment{
 
 		listview = (ListView) view.findViewById(R.id.expand_channel_listview);
 		processBar = (ProgressBar) view.findViewById(R.id.expand_channel_progress);
+		
 
 		processBar.setVisibility(View.VISIBLE);
 		loadData();
@@ -112,7 +120,6 @@ public class ExpandListItemContentFragment extends BaseFragment{
 					MenuItems = menuSevice.getSubMenuItems(parentItem
 							.getId());
 					if (MenuItems != null) {
-						System.out.println("  ()"+MenuItems.get(0).getName());
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 						CacheUtil.put(parentItem.getId(), MenuItems);// 放入缓存
 					}
@@ -150,7 +157,7 @@ public class ExpandListItemContentFragment extends BaseFragment{
 		ChannelListAdapter adapter=new ChannelListAdapter();
 
 		listview.setAdapter(adapter);
-
+		
 	}
 
 	public class ChannelListAdapter extends BaseAdapter{
@@ -193,8 +200,17 @@ public class ExpandListItemContentFragment extends BaseFragment{
 			else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			if(viewHolder.title_text!=null)
+			if(viewHolder.title_text!=null){
 				viewHolder.title_text.setText(MenuItems.get(position).getName());
+				viewHolder.title_text.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						System.out.println("textview click");
+					}
+				});	
+			}
 			return convertView;
 		}
 
