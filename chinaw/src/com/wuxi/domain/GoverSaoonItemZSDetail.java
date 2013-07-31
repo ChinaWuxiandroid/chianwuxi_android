@@ -1,6 +1,5 @@
 package com.wuxi.domain;
 
-import java.util.StringTokenizer;
 
 /**
  * 

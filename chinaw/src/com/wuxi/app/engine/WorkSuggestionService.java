@@ -1,26 +1,19 @@
 package com.wuxi.app.engine;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.JAsonPaserUtil;
-import com.wuxi.domain.GoverSaoonItem;
 import com.wuxi.domain.MailBoxParameterItem;
-import com.wuxi.domain.OpenTel;
-import com.wuxi.domain.OpenTelWrapper;
 import com.wuxi.domain.WorkSuggestionBoxWrapper;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
-
-import android.content.Context;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 
 
 /**

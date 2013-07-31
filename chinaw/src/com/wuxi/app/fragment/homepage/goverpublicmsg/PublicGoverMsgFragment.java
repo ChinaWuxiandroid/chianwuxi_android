@@ -6,7 +6,6 @@ import java.util.List;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
-import com.wuxi.app.fragment.homepage.informationcenter.WapFragment;
 import com.wuxi.app.listeners.GoverPublicMsgInitLayoutImpl;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
 import com.wuxi.domain.Channel;

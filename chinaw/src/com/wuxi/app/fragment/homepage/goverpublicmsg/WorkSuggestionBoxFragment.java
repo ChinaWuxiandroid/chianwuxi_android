@@ -3,9 +3,9 @@ package com.wuxi.app.fragment.homepage.goverpublicmsg;
 import java.util.List;
 
 import org.json.JSONException;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -21,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.WorkSuggestionService;
@@ -230,9 +230,9 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 		}
 		WorkSuggestionService workSuggestionService=new WorkSuggestionService(context);
 		if(workSuggestionService.submitMailBox(access_token,boxWrapper))
-			Toast.makeText(context, "提交成功！", Toast.LENGTH_SHORT);
+			Toast.makeText(context, "提交成功！", Toast.LENGTH_SHORT).show();
 		else
-			Toast.makeText(context, "提交失败！", Toast.LENGTH_SHORT);
+			Toast.makeText(context, "提交失败！", Toast.LENGTH_SHORT).show();
 		
 	}
 }

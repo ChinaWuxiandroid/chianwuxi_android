@@ -2,7 +2,6 @@ package com.wuxi.app.fragment.homepage.goversaloon;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import org.json.JSONException;
 

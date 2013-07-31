@@ -6,9 +6,6 @@ import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgContentListFragment
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgNaviWithContentFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgWebFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.WorkSuggestionBoxFragment;
-import com.wuxi.app.fragment.homepage.informationcenter.InfoNavigatorWithContentFragment;
-import com.wuxi.app.fragment.homepage.informationcenter.InforContentListFragment;
-import com.wuxi.app.fragment.homepage.informationcenter.WapFragment;
 import com.wuxi.domain.MenuItem;
 
 public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener {
