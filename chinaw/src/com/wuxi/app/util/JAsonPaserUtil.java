@@ -1,6 +1,5 @@
 package com.wuxi.app.util;
 
-import android.annotation.SuppressLint;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -71,11 +70,8 @@ public class JAsonPaserUtil {
 							java.lang.String.class);
 					method.invoke(o, jb.getString(fileName));
 				}
-
 			}
-
 			ts.add(o);
-
 		}
 
 		return ts;

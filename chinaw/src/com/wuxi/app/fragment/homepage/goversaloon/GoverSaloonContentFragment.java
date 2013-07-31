@@ -5,11 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.wuxi.app.BaseFragment;
-import com.wuxi.app.R;
 import com.wuxi.app.fragment.BaseSlideFragment;
 
 /**

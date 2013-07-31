@@ -207,7 +207,11 @@ public final class R {
     }
     public static final class id {
         public static final int Title_Text=0x7f0a000b;
+<<<<<<< HEAD
         public static final int action_settings=0x7f0a01cb;
+=======
+        public static final int action_settings=0x7f0a01d0;
+>>>>>>> 361a9167e571180da7c3c109fe9302ae43f02096
         public static final int back_btn=0x7f0a000a;
         public static final int bmapView=0x7f0a001c;
         public static final int btn=0x7f0a016e;
@@ -534,7 +538,11 @@ public final class R {
         public static final int nomal_question=0x7f0a012a;
         public static final int open_close_left_btn=0x7f0a0009;
         public static final int pb_approval=0x7f0a00c2;
+<<<<<<< HEAD
         public static final int pb_content_wb=0x7f0a01c8;
+=======
+        public static final int pb_content_wb=0x7f0a01cd;
+>>>>>>> 361a9167e571180da7c3c109fe9302ae43f02096
         public static final int pb_detail=0x7f0a0111;
         public static final int pb_hottopic=0x7f0a0166;
         public static final int pb_item=0x7f0a013a;
@@ -657,6 +665,7 @@ public final class R {
         public static final int v_level1=0x7f0a018f;
         public static final int viewpagerLayout=0x7f0a0176;
         public static final int wb_progress=0x7f0a0168;
+<<<<<<< HEAD
         public static final int wucity_channel_hs=0x7f0a01c1;
         public static final int wucity_content=0x7f0a01c3;
         public static final int wuxi_content_author=0x7f0a01ca;
@@ -666,6 +675,24 @@ public final class R {
         public static final int wuxicity_decontent_title=0x7f0a01c5;
         public static final int wuxicity_decontent_wb=0x7f0a01c9;
         public static final int wuxicity_rg_title_chanel=0x7f0a01c2;
+=======
+        public static final int worksuggestbox_imgbutton_cancel=0x7f0a01c3;
+        public static final int worksuggestbox_imgbutton_submit=0x7f0a01c2;
+        public static final int worksuggestbox_layout=0x7f0a01c0;
+        public static final int worksuggestbox_progressbar=0x7f0a01bf;
+        public static final int worksuggestbox_submit_layout=0x7f0a01c1;
+        public static final int worksuggestionbox_mutiltxtbox_layout=0x7f0a01c4;
+        public static final int worksuggestionbox_singletxtbox_layout=0x7f0a01c5;
+        public static final int wucity_channel_hs=0x7f0a01c6;
+        public static final int wucity_content=0x7f0a01c8;
+        public static final int wuxi_content_author=0x7f0a01cf;
+        public static final int wuxi_decontent_tvbrowcount=0x7f0a01cc;
+        public static final int wuxi_decontent_tvtime=0x7f0a01cb;
+        public static final int wuxicity_decontent_ll=0x7f0a01c9;
+        public static final int wuxicity_decontent_title=0x7f0a01ca;
+        public static final int wuxicity_decontent_wb=0x7f0a01ce;
+        public static final int wuxicity_rg_title_chanel=0x7f0a01c7;
+>>>>>>> 361a9167e571180da7c3c109fe9302ae43f02096
     }
     public static final class layout {
         public static final int advanced_search_layout=0x7f030000;
@@ -810,9 +837,11 @@ public final class R {
         public static final int title_grid_item_layout=0x7f03008b;
         public static final int title_scroll_action_layout=0x7f03008c;
         public static final int worksuggestionbox_layout=0x7f03008d;
-        public static final int wuxi_city_content_layout=0x7f03008e;
-        public static final int wuxi_city_detailcontent_layout=0x7f03008f;
-        public static final int wuxicity_content_detial_layout=0x7f030090;
+        public static final int worksuggestionbox_mutilline_layout=0x7f03008e;
+        public static final int worksuggestionbox_singleline_layout=0x7f03008f;
+        public static final int wuxi_city_content_layout=0x7f030090;
+        public static final int wuxi_city_detailcontent_layout=0x7f030091;
+        public static final int wuxicity_content_detial_layout=0x7f030092;
     }
     public static final class menu {
         public static final int main=0x7f090000;

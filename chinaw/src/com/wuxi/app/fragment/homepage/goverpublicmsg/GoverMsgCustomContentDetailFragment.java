@@ -22,7 +22,6 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.PublicSericeChannelAdapter;
 import com.wuxi.app.engine.ChannelService;
-import com.wuxi.app.fragment.homepage.publicservice.PublicServiceContentListFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
@@ -81,8 +80,8 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 		govermsg_detail_lv_channel.setOnItemClickListener(this);
 		textView_title.setText(parentMenuItem.getName());
 		
-		loadContentList();
-//		showContentList(parentMenuItem);
+//		loadContentList();
+		showContentList(parentMenuItem);
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -153,8 +153,7 @@ public class LetterService extends Service{
 
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
-//			JSONObject jresult = jsonObject.getJSONObject("result");
-//			
+//			JSONObject jresult = jsonObject.getJSONObject("result");		
 //			System.out.println("jresult:"+jresult);
 			
 			return  jsonObject.getBoolean("success");

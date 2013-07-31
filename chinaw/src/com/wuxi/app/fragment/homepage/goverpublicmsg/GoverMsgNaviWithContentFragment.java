@@ -3,7 +3,6 @@ package com.wuxi.app.fragment.homepage.goverpublicmsg;
 import android.support.v4.app.Fragment;
 
 import com.wuxi.app.fragment.commonfragment.MenuItemNavigatorWithContentFragment;
-import com.wuxi.app.fragment.homepage.informationcenter.WapFragment;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 
@@ -29,6 +28,9 @@ public class GoverMsgNaviWithContentFragment extends MenuItemNavigatorWithConten
 
 	@Override
 	protected Fragment showChannelContentFragment(Channel channel) {
-		return null;
+		GoverMsgContentListFragment goverMsgContentListFragment=new GoverMsgContentListFragment();
+		goverMsgContentListFragment.setChannel(channel);
+		
+		return goverMsgContentListFragment;
 	}
 }

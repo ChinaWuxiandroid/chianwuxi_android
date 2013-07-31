@@ -9,8 +9,8 @@ import android.test.AndroidTestCase;
 
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.GoverSaoonItemQZDetail;
-import com.wuxi.domain.GoverSaoonItemXKDetail;
 import com.wuxi.domain.GoverSaoonItemWrapper;
+import com.wuxi.domain.GoverSaoonItemXKDetail;
 import com.wuxi.domain.GoverSaoonItemZSDetail;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
