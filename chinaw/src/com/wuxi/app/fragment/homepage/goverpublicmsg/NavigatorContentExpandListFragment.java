@@ -9,14 +9,18 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
@@ -32,7 +36,7 @@ import com.wuxi.exception.NetException;
  *@author 杨宸 智佳
  * */
 
-public class NavigatorContentExpandListFragment extends BaseFragment{
+public class NavigatorContentExpandListFragment extends BaseFragment implements OnItemClickListener{
 	@Override
 	public void onHiddenChanged(boolean hidden) {
 		// TODO Auto-generated method stub
@@ -53,7 +57,8 @@ public class NavigatorContentExpandListFragment extends BaseFragment{
 	protected List<Channel> Channels;
 
 	private static final int DATA__LOAD_SUCESS = 0;
-	private static final int DATA_LOAD_ERROR = 1;
+	private static final int DATA_LOAD_ERROR = 1;	
+	protected static final int CHANNELCONTENT_ID=R.id.govermsg_custom_content;
 
 
 	@SuppressLint("HandlerLeak")
@@ -97,6 +102,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment{
 
 		listview = (ListView) view.findViewById(R.id.expand_channel_listview);
 		processBar = (ProgressBar) view.findViewById(R.id.expand_channel_progress);
+		listview.setOnItemClickListener(this);
 
 		processBar.setVisibility(View.VISIBLE);
 		loadData();
@@ -121,7 +127,6 @@ public class NavigatorContentExpandListFragment extends BaseFragment{
 					MenuItems = menuSevice.getSubMenuItems(parentItem
 							.getId());
 					if (MenuItems != null) {
-						System.out.println("  ()"+MenuItems.get(0).getName());
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 						CacheUtil.put(parentItem.getId(), MenuItems);// 放入缓存
 					}
@@ -208,5 +213,17 @@ public class NavigatorContentExpandListFragment extends BaseFragment{
 		}
 
 	}
+	
+	@Override
+	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
+		MenuItem menuItem=(MenuItem) adapterView.getItemAtPosition(position);
+		GoverMsgCustomContentDetailFragment goverMsgCustomContentDetailFragment=new GoverMsgCustomContentDetailFragment();
+		goverMsgCustomContentDetailFragment.setParentMenuItem(menuItem);
+		FragmentManager manager = getActivity().getSupportFragmentManager();
+		FragmentTransaction ft = manager.beginTransaction();
 
+		ft.replace(CHANNELCONTENT_ID, goverMsgCustomContentDetailFragment);
+
+		ft.commit();
+	}
 }

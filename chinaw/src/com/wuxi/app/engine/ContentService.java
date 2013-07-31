@@ -33,7 +33,7 @@ public class ContentService extends Service {
 	 * @param id
 	 *            MenuItem Id 或ChannelId
 	 * @return content集合
-	 * @throws NetException
+	 * @throws NetExceptions
 	 * @throws JSONException
 	 * @throws NODataException
 	 */
