@@ -44,11 +44,11 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 						ChannelService channelService = new ChannelService(
 								context);
 						try {
+//							System.out.println("menu>name:"+menu.getName()+"  id:"+menu.getId()+"   channelId:"+menu.getChannelId());
 							List<Channel> channels = channelService
 									.getSubChannels(menu.getChannelId());
 
 							if (channels != null) {
-								System.out.println("channels:"+channels.get(0).getChannelName());
 								menu.setContentFragment(GoverMsgNaviWithContentFragment.class);
 							} else {
 								menu.setContentFragment(GoverMsgContentListFragment.class);// 内容列表界面
@@ -71,8 +71,6 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 			else if (menu.getType() == MenuItem.WAP_MENU) {
 				menu.setContentFragment(GoverMsgWebFragment.class);
 			} 
-
-
 		}
 	}
 

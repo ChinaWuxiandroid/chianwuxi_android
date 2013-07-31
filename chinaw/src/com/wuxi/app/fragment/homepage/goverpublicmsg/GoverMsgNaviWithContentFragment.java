@@ -29,6 +29,9 @@ public class GoverMsgNaviWithContentFragment extends MenuItemNavigatorWithConten
 
 	@Override
 	protected Fragment showChannelContentFragment(Channel channel) {
-		return null;
+		GoverMsgContentListFragment goverMsgContentListFragment=new GoverMsgContentListFragment();
+		goverMsgContentListFragment.setChannel(channel);
+		
+		return goverMsgContentListFragment;
 	}
 }

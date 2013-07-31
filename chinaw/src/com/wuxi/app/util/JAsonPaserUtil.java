@@ -69,11 +69,8 @@ public class JAsonPaserUtil {
 							java.lang.String.class);
 					method.invoke(o, jb.getString(fileName));
 				}
-
 			}
-
 			ts.add(o);
-
 		}
 
 		return ts;

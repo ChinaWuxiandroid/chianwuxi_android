@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/worksuggestionbox_singletxtbox_layout"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@drawable/worksuggestbox_back"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2.5"
+        android:gravity="center_vertical|right"
+        android:paddingRight="3dp"
+        android:text="您的姓名：" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:paddingLeft="3dp"
+        android:background="@drawable/worksuggestbox_edit_small_bk"
+        android:gravity="center_vertical"
+        android:text="123ad中文"
+        android:textSize="10sp" />
+
+</LinearLayout>

@@ -5,20 +5,15 @@
     android:background="@drawable/navgator_back"
     android:orientation="horizontal" >
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/lv_left_navigator"
         android:layout_width="0px"
         android:layout_height="match_parent"
+        android:layout_marginLeft="5dip"
         android:layout_weight="1"
-        android:background="@drawable/naviga_leftitem_back" >
-
-        <ListView
-            android:id="@+id/lv_left_navigator"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dip"
-            android:listSelector="@android:color/transparent" >
-        </ListView>
-    </LinearLayout>
+        android:background="@drawable/naviga_leftitem_back"
+        android:listSelector="@android:color/transparent" >
+    </ListView>
 
     <FrameLayout
         android:id="@+id/details"

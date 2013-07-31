@@ -81,8 +81,8 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 		govermsg_detail_lv_channel.setOnItemClickListener(this);
 		textView_title.setText(parentMenuItem.getName());
 		
-		loadContentList();
-//		showContentList(parentMenuItem);
+//		loadContentList();
+		showContentList(parentMenuItem);
 	}
 	
 	@SuppressWarnings("unchecked")

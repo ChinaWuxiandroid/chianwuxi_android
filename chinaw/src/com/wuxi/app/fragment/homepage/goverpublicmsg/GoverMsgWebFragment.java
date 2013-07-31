@@ -52,9 +52,7 @@ public class GoverMsgWebFragment extends BaseFragment{
 
 				if (progress == 100) {
 					wb_pb.setVisibility(ProgressBar.GONE);//移除进度条
-
 				}
-
 			}
 		});
 

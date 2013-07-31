@@ -190,6 +190,15 @@ public class Constants {
 		 */
 		public static final String GETGOVER_ITEMDETIAL_URL="http://3g.wuxi.gov.cn/api/zhengwu/item/{type}.json?id={id}";
 
+		/**
+		 * 政府信息公开  获取公开意见箱的APPUI布局数据
+		 * */
+		public static final String GOVERMSG_WORKSUGGESTIONBOX_LAYOUT_URL="http://3g.wuxi.gov.cn/api/selfforms/workopinion.json";
+		
+		/**
+		 * 政府信息公开  提交自定义表单信息的URL
+		 * */
+		public static final String SUBMIT_SELFFORM_URL="http://3g.wuxi.gov.cn/api/selfforms/submit.json";
 	}
 
 	/**
