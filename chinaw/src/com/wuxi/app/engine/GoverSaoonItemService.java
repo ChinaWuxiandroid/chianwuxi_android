@@ -14,8 +14,10 @@ import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.JAsonPaserUtil;
 import com.wuxi.domain.GoverMaterials;
 import com.wuxi.domain.GoverSaoonItem;
-import com.wuxi.domain.GoverSaoonItemDetail;
+import com.wuxi.domain.GoverSaoonItemQZDetail;
 import com.wuxi.domain.GoverSaoonItemWrapper;
+import com.wuxi.domain.GoverSaoonItemXKDetail;
+import com.wuxi.domain.GoverSaoonItemZSDetail;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -159,28 +161,30 @@ public class GoverSaoonItemService extends Service {
 	 * 
 	 * wanglu 泰得利通 获取办件详情
 	 * 
-	 * @param type 分类
-	 * @param id   主键 
+	 * @param type
+	 *            分类
+	 * @param id
+	 *            主键
 	 * @return
 	 * @throws NetException
 	 * @throws NODataException
 	 * @throws JSONException
 	 */
-	public GoverSaoonItemDetail getGoverItemDetailById(String type, String id)
+	public GoverSaoonItemXKDetail getGoverItemXKDetailById(String id)
 			throws NetException, NODataException, JSONException {
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 
-		String url = Constants.Urls.GETGOVER_ITEMDETIAL_URL.replace("{type}",
-				type).replace("{id}", id);
+		String url = Constants.Urls.GETGOVER_ITEMDETIAL_XK_URL.replace("{id}",
+				id);
 
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 		if (resultStr != null) {
 
 			JSONObject jobject = new JSONObject(resultStr);
 			JSONObject jresult = jobject.getJSONObject("result");
-			GoverSaoonItemDetail goverSaoonItemDetail = new GoverSaoonItemDetail();
+			GoverSaoonItemXKDetail goverSaoonItemDetail = new GoverSaoonItemXKDetail();
 			goverSaoonItemDetail.setSszt(jresult.getString("sszt"));
 			goverSaoonItemDetail.setSsztbm(jresult.getString("ssztbm"));
 			goverSaoonItemDetail.setSsztxz(jresult.getString("ssztxz"));
@@ -241,6 +245,100 @@ public class GoverSaoonItemService extends Service {
 			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);// 没有获取到数据异常
 		}
 
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 获取行政征收信息
+	 * 
+	 * @param id
+	 * @return
+	 * @throws NetException
+	 * @throws JSONException
+	 */
+	public GoverSaoonItemZSDetail getGoverSaoonItemZSDetailByid(String id)
+			throws NetException, JSONException {
+
+		if (!checkNet()) {
+			throw new NetException(Constants.ExceptionMessage.NO_NET);
+		}
+
+		String url = Constants.Urls.GETGOVER_ITEMDETIAL_ZS_URL.replace("{id}",
+				id);
+
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+		if (resultStr != null) {
+
+			JSONObject jobject = new JSONObject(resultStr);
+			JSONObject jresult = jobject.getJSONObject("result");
+
+			try {
+				GoverSaoonItemZSDetail goverSaoonItemZSDetail = JAsonPaserUtil
+						.getBeanByJASSON(GoverSaoonItemZSDetail.class, jresult);
+				return goverSaoonItemZSDetail;
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+		return null;
+	}
+
+	
+	
+	/**
+	 * 
+	 *wanglu 泰得利通 
+	 *行政强制 详情
+	 * @param id
+	 * @return
+	 * @throws NetException
+	 * @throws JSONException
+	 */
+	public GoverSaoonItemQZDetail getGoverSaoonItemQZDetailByid(String id)
+			throws NetException, JSONException {
+
+		if (!checkNet()) {
+			throw new NetException(Constants.ExceptionMessage.NO_NET);
+		}
+
+		String url = Constants.Urls.GETGOVER_ITEMDETIAL_QZ_URL.replace("{id}",
+				id);
+
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+		if (resultStr != null) {
+
+			JSONObject jobject = new JSONObject(resultStr);
+			JSONObject jresult = jobject.getJSONObject("result");
+
+			try {
+				GoverSaoonItemQZDetail goverSaoonItemQZDetail = JAsonPaserUtil
+						.getBeanByJASSON(GoverSaoonItemQZDetail.class, jresult);
+				return goverSaoonItemQZDetail;
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+		return null;
 	}
 
 }

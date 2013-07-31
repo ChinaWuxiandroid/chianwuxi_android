@@ -745,7 +745,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 			Bundle bundle=new Bundle();
 			bundle.putSerializable("goverSaoonItem", goverSaoonItem);
 			
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.GOVERSALOONDETAILFRAGMENT, bundle);
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.GOVERSALOONDETAIL_XK_FRAGMENT, bundle);
 		}
 		
 		

@@ -21,6 +21,10 @@ import com.wuxi.app.util.GIPRadioButtonStyleChange;
 
 public abstract class RadioButtonChangeFragment extends MainMineFragment
 implements OnCheckedChangeListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public View view = null;
 	protected LayoutInflater mInflater;
 	private RadioGroup radioGroup;

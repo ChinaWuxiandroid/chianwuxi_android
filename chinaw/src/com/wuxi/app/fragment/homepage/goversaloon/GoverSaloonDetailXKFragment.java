@@ -15,7 +15,7 @@ import com.wuxi.app.R;
 import com.wuxi.app.engine.GoverSaoonItemService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
 import com.wuxi.domain.GoverSaoonItem;
-import com.wuxi.domain.GoverSaoonItemDetail;
+import com.wuxi.domain.GoverSaoonItemXKDetail;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -25,7 +25,7 @@ import com.wuxi.exception.NetException;
  * @author wanglu 泰得利通 办件详情 fragment
  * 
  */
-public class GoverSaloonDetailFragment extends BaseItemContentFragment
+public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 		implements OnClickListener {
 
 	protected static final int LOAD_ITEM_DETIAL_SUCCESS = 0;
@@ -36,7 +36,7 @@ public class GoverSaloonDetailFragment extends BaseItemContentFragment
 	private TextView tv_ssbm, tv_clss, tv_sljg, tv_jdjg, tv_jddh, tv_cjwt,
 			tv_lldh, tv_sfzabl, tv_sffz, tv_sfsf;
 	private GoverSaoonItem goverSaoonItem;
-	private GoverSaoonItemDetail goverSaoonItemDetail;
+	private GoverSaoonItemXKDetail goverSaoonItemDetail;
 	private Handler handler = new Handler() {
 
 		public void handleMessage(android.os.Message msg) {
@@ -112,7 +112,7 @@ public class GoverSaloonDetailFragment extends BaseItemContentFragment
 						context);
 				try {
 					goverSaoonItemDetail = goverSaoonItemService
-							.getGoverItemDetailById(goverSaoonItem.getType(),
+							.getGoverItemXKDetailById(
 									goverSaoonItem.getId());
 
 					if (goverSaoonItemDetail != null) {
@@ -149,7 +149,7 @@ public class GoverSaloonDetailFragment extends BaseItemContentFragment
 
 	@Override
 	protected int getContentLayoutId() {
-		return R.layout.goversaloon_detial_layout;
+		return R.layout.goversaloon_xk_detial_layout;
 	}
 
 	@Override

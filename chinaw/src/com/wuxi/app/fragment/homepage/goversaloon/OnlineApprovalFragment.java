@@ -330,7 +330,7 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 			bundle.putSerializable("goverSaoonItem", goverSaoonItem);
 
 			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-					FragmentName.GOVERSALOONDETAILFRAGMENT, bundle);
+					FragmentName.GOVERSALOONDETAIL_XK_FRAGMENT, bundle);
 		}
 
 	}
