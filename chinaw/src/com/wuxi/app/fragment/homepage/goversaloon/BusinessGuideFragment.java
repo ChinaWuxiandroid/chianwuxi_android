@@ -347,7 +347,7 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 				bundle.putSerializable("goverSaoonItem", goverSaoonItem);
 
 				baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-						FragmentName.GOVERSALOONDETAILFRAGMENT, bundle);
+						FragmentName.GOVERSALOONDETAIL_XK_FRAGMENT, bundle);
 			}
 		}
 

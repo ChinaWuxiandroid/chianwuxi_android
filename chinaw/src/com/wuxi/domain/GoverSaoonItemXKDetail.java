@@ -4,10 +4,10 @@ import java.util.List;
 
 /**
  * 
- * @author wanglu 泰得利通 办件详细信息
+ * @author wanglu 泰得利通 办件行政许可详细信息
  * 
  */
-public class GoverSaoonItemDetail {
+public class GoverSaoonItemXKDetail {
 
 	private String sszt;
 	private String ssztbm;

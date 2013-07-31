@@ -43,6 +43,10 @@ public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected MenuItem menuItem;
 	protected List<MenuItem> titleMenuItems;// 头部子菜单
 	protected TitleScrollLayout mtitleScrollLayout;

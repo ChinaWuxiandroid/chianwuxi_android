@@ -5,17 +5,10 @@
     android:background="@color/content_background"
     android:orientation="vertical" >
 
-    <!--  <include
-        android:id="@+id/search_head"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        layout="@layout/goversaloon_title_search_layout" /> -->
     <RelativeLayout
         android:id="@+id/btn_rl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-         >
+        android:layout_height="wrap_content" >
 
         <ImageView
             android:id="@+id/gover_eff_btn_mail_search"
@@ -35,28 +28,28 @@
     </RelativeLayout>
 
     <FrameLayout
-        android:layout_below="@+id/btn_rl"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/btn_rl" >
 
         <ProgressBar
+            android:id="@+id/gover_eff_pb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/gover_eff_pb" 
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
         <ListView
             android:id="@+id/gover_eff_lv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-             android:divider="@android:color/white"
-            android:dividerHeight="1dip"
-            >
+            android:layout_height="wrap_content"
+            android:divider="@android:color/white"
+            android:dividerHeight="1dip" >
         </ListView>
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/goversaloon_search_mail_layout" />
     </FrameLayout>
-  <!-- <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        layout="@layout/goversaloon_foot_search_layout" /> -->
+
 </RelativeLayout>

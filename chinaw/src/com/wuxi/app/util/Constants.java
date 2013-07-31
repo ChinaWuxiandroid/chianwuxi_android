@@ -184,11 +184,32 @@ public class Constants {
 		
 		
 		/**
-		 * 政务大厅获取好办件详情信息  
-		 * {type} 类型
+		 * 政务大厅获取好办件 行政许可详情信息  
+		 * 
 		 * {id} id 
 		 */
-		public static final String GETGOVER_ITEMDETIAL_URL="http://3g.wuxi.gov.cn/api/zhengwu/item/{type}.json?id={id}";
+		public static final String GETGOVER_ITEMDETIAL_XK_URL="http://3g.wuxi.gov.cn/api/zhengwu/item/XK.json?id={id}";
+		
+		
+		/**
+		 * 政务大厅获取好办件 其他详情信息  
+		 */
+		public static final String GETGOVER_ITEMDETIAL_QT_URL="http://3g.wuxi.gov.cn/api/zhengwu/item/QT.json?id={id}";
+		
+		/**
+		 * 政务大厅获取好办件 处罚详情信息  
+		 */
+		public static final String GETGOVER_ITEMDETIAL_CF_URL="http://3g.wuxi.gov.cn/api/zhengwu/item/CF.json?id={id}";
+		
+		/**
+		 *  政务大厅获取好办件 征收详情信息  
+		 */
+		public static final String GETGOVER_ITEMDETIAL_ZS_URL="http://3g.wuxi.gov.cn/api/zhengwu/item/ZS.json?id={id}";
+		/**
+		 * 政务大厅获取好办件 强制详情信息  
+		 */
+		public static final String GETGOVER_ITEMDETIAL_QZ_URL="http://3g.wuxi.gov.cn/api/zhengwu/item/QZ.json?id={id}";
+		
 
 	}
 
@@ -336,9 +357,9 @@ public class Constants {
 		HOTREVIEW_CONTENT_FRAGMENT,
 
 		/**
-		 * 政务大厅办件详情
+		 * 政务大厅行政许可办件详情
 		 */
-		GOVERSALOONDETAILFRAGMENT,
+		GOVERSALOONDETAIL_XK_FRAGMENT,
 		
 		/**
 		 * 魅力锡城内容页

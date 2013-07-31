@@ -7,10 +7,12 @@ import org.json.JSONException;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -29,7 +31,7 @@ import com.wuxi.exception.ResultException;
  * 
  */
 public class EfficacyComplaintFragment extends GoverSaloonContentFragment
-		implements OnScrollListener {
+		implements OnScrollListener, OnClickListener {
 
 	private ImageView gover_eff_btn_mail_search;
 	private ImageView gover_eff_btn_writemail;
@@ -46,6 +48,7 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 	private int visibleLastIndex;
 	private int visibleItemCount;// 当前显示的总条数
 	private EfficacyComplaintAdapter efficacyComplaintAdapter;
+	private LinearLayout ll_mail;
 
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -115,6 +118,8 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 		gover_eff_lv.addFooterView(loadMoreView);
 		gover_eff_lv.setOnScrollListener(this);
 		gover_eff_pb = (ProgressBar) view.findViewById(R.id.gover_eff_pb);
+		ll_mail = (LinearLayout) view.findViewById(R.id.ll_mail);
+		gover_eff_btn_mail_search.setOnClickListener(this);
 
 		loadEffData(0, PAGE_SIZE);
 
@@ -195,6 +200,21 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 	protected int getLayoutId() {
 
 		return R.layout.gover_efficacycomplaint_layout;
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.gover_eff_btn_mail_search:
+			if (ll_mail.getVisibility() == LinearLayout.GONE) {
+				ll_mail.setVisibility(LinearLayout.VISIBLE);
+			} else {
+				ll_mail.setVisibility(LinearLayout.GONE);
+			}
+			break;
+
+		}
+
 	}
 
 }

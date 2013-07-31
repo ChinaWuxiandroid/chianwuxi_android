@@ -1,5 +1,6 @@
 package com.wuxi.app.util;
 
+import android.annotation.SuppressLint;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -64,7 +65,8 @@ public class JAsonPaserUtil {
 				} else if (tyeName.equals("boolean") && jb.has(fileName)) {
 					method = t.getDeclaredMethod(methodName, boolean.class);
 					method.invoke(o, jb.getBoolean(fileName));
-				} else if (tyeName.equals("java.lang.String")) {
+				} else if (tyeName.equals("java.lang.String")
+						&& jb.has(fileName)) {
 					method = t.getDeclaredMethod(methodName,
 							java.lang.String.class);
 					method.invoke(o, jb.getString(fileName));
@@ -82,9 +84,11 @@ public class JAsonPaserUtil {
 
 	/**
 	 * 
-	 *wanglu 泰得利通 
+	 * wanglu 泰得利通
+	 * 
 	 * @param t
-	 * @param fileNames  要解析的字段属性名称
+	 * @param fileNames
+	 *            要解析的字段属性名称
 	 * @param jsArray
 	 * @return
 	 * @throws JSONException
@@ -128,10 +132,11 @@ public class JAsonPaserUtil {
 				} else if (tyeName.equals("boolean") && jb.has(fileName)) {
 					method = t.getDeclaredMethod(methodName, boolean.class);
 					method.invoke(o, jb.getBoolean(fileName));
-				} else if (tyeName.equals("java.lang.String")) {
+				} else if (tyeName.equals("java.lang.String")
+						&& jb.has(fileName)) {
 					method = t.getDeclaredMethod(methodName,
 							java.lang.String.class);
-					method.invoke(o, jb.getString("fileName"));
+					method.invoke(o, jb.getString(fileName));
 				}
 
 			}
@@ -141,6 +146,62 @@ public class JAsonPaserUtil {
 		}
 
 		return ts;
+
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 根据jsonObject 解析得到序列化对象
+	 * 
+	 * @param t
+	 * @param jb
+	 * @return
+	 * @throws JSONException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws NoSuchMethodException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
+	public static <T> T getBeanByJASSON(Class<T> t, JSONObject jb)
+			throws JSONException, InstantiationException,
+			IllegalAccessException, NoSuchMethodException,
+			IllegalArgumentException, InvocationTargetException {
+
+		T o;
+
+		o = t.newInstance();
+
+		Field[] fields = t.getDeclaredFields();
+		for (Field field : fields) {
+			String fileName = field.getName();
+			String tyeName = field.getType().getName();
+			String methodName = "set" + fileName.substring(0, 1).toUpperCase()
+					+ fileName.substring(1);
+
+			Method method = null;
+
+			if (tyeName.equals("int") && jb.has(fileName)) {
+
+				method = t.getDeclaredMethod(methodName, int.class);
+				method.invoke(o, jb.getInt(fileName));
+
+			} else if (tyeName.equals("boolean") && jb.has(fileName)) {
+				method = t.getDeclaredMethod(methodName, boolean.class);
+				method.invoke(o, jb.getBoolean(fileName));
+			} else if (tyeName.equals("java.lang.String") && jb.has(fileName)) {
+
+				if (!jb.getString(fileName).equals("null")) {
+					method = t.getDeclaredMethod(methodName,
+							java.lang.String.class);
+					method.invoke(o, jb.getString(fileName));
+				}
+
+			}
+
+		}
+
+		return o;
 
 	}
 }
