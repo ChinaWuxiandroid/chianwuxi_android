@@ -406,5 +406,4 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 	protected int getLayoutId() {
 		return R.layout.my_goversaloon_layout;
 	}
-
 }

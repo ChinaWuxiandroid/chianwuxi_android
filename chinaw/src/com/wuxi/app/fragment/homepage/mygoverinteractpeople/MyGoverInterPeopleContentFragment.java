@@ -12,6 +12,10 @@ import com.wuxi.app.R;
 import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.domain.MenuItem;
 
+/**
+ * 政民互动的内容页面
+ * @author 杨宸 智佳
+ * */
 public class MyGoverInterPeopleContentFragment extends BaseFragment{
 	private MenuItem menuItem;
 	private View view;
@@ -32,21 +36,14 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment{
 
 		switch (menuItem.getType()) {
 		case MenuItem.CUSTOM_MENU:
-			if(menuItem.getName().equals("征求意见平台")){
-				MainMineFragment g2 = new GoverInterPeopleSuggestFragment();
-				onTransaction(g2);
-			}
-			else if(menuItem.getName().equals("政务微博群")){
+			if(menuItem.getName().equals("政务微博群")){
 				MainMineFragment g4 = new GoverInterPeopleWeibosFragment();
 				onTransaction(g4);
 			}
 			break;
 
 		case MenuItem.CHANNEL_MENU:
-			if(menuItem.getName().equals("魅力锡城")){
-
-			}
-			else if(menuItem.getName().equals("信访接待")){
+			if(menuItem.getName().equals("信访接待")){
 				MainMineFragment g9 = new GoverInterPeoplePetitionReceptFragment();
 				onTransaction(g9);
 			}
@@ -54,38 +51,35 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment{
 		case MenuItem.APP_MENU:
 			//我的政民互动
 			if(menuItem.getAppUI().equals("MyPoliticalInteraction")){
-				GoverInterPeopleMineFragment g = new GoverInterPeopleMineFragment();
-				onTransaction(g);
+				onTransaction(new GoverInterPeopleMineFragment());
 			}
 			//1345来信办理平台
 			else if(menuItem.getAppUI().equals("Letter12345")){
-				MainMineFragment g1 = new GoverInterPeople12345Fragment();
-				onTransaction(g1);
+				onTransaction(new GoverInterPeople12345Fragment());
 			}
+			// 征求意见平台
+			else if(menuItem.getAppUI().equals("QuestionnairePlatform")){
+				onTransaction(new GoverInterPeopleSuggestFragment());
+			}	
 			//视频直播平台
 			else if(menuItem.getAppUI().equals("VideoBroadcastPlatform")){
-				MainMineFragment g3 = new GoverInterPeopleVideoLiveFragment();
-				onTransaction(g3);
+				onTransaction(new GoverInterPeopleVideoLiveFragment());
 			}
 			//公众论坛
 			else if(menuItem.getAppUI().equals("PublicBBS")){
-				MainMineFragment g5 = new GoverInterPeoplePublicForumFragment();
-				onTransaction(g5);
+				onTransaction(new GoverInterPeoplePublicForumFragment());
 			}
 			//热点话题
 			else if(menuItem.getAppUI().equals("HotTopic")){
-				MainMineFragment g6 = new GoverInterPeopleHotReviewFragment();
-				onTransaction(g6);
+				onTransaction(new GoverInterPeopleHotReviewFragment());
 			}
 			//公开电话
 			else if(menuItem.getAppUI().equals("PublicTel")){
-				MainMineFragment g7 = new GoverInterPeopleOpenTelFragment();
-				onTransaction(g7);
+				onTransaction(new GoverInterPeopleOpenTelFragment());
 			}
 			//公众监督
 			else if(menuItem.getAppUI().equals("PublicOversight")){
-				MainMineFragment g8 = new GoverInterPeoplePublicSuperviseFragment();
-				onTransaction(g8);
+				onTransaction(new GoverInterPeoplePublicSuperviseFragment());
 			}
 			break;
 		case MenuItem.WAP_MENU:
@@ -93,8 +87,6 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment{
 		case MenuItem.LINK_MENU:
 			break;
 		}
-
-
 	}
 
 	public void setMenuItem(MenuItem menuItem) {

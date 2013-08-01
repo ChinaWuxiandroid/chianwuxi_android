@@ -94,7 +94,7 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 	}
 
 	@SuppressWarnings("unchecked")
-	private void loadMenuItemData() {
+	private void loadMenuItemData(){
 
 		if (null != CacheUtil.get(parentMenuItem.getId())) {
 			menuItems = (List<MenuItem>) CacheUtil.get(parentMenuItem.getId());
