@@ -337,8 +337,9 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 			if (index == 0) {
 				
 				radioButton.setTextColor(Color.WHITE);
-				radioButton.setBackground(getResources().getDrawable(
-						R.drawable.wuxi_content_channelselect_));
+				/*radioButton.setBackground(getResources().getDrawable(
+						R.drawable.wuxi_content_channelselect_));*/
+				radioButton.setBackgroundResource(R.drawable.wuxi_content_channelselect_);
 				LoadContentsData(channle);
 
 			}
@@ -372,15 +373,18 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 			RadioButton r = (RadioButton) group.getChildAt(i);
 
 			if(isFirstChange&&i==0){
-				r.setBackground(null);
+				r.setBackgroundColor(Color.TRANSPARENT);
 				r.setTextColor(Color.BLACK);	
 			}
 			
 			if (r.isChecked()) {
 
-				r.setBackground(getResources().getDrawable(
-						R.drawable.wuxicity_content_channel_item_selector));
+				/*r.setBackground(getResources().getDrawable(
+						R.drawable.wuxicity_content_channel_item_selector));*/
+				r.setBackgroundResource(R.drawable.wuxicity_content_channel_item_selector);
+				
 				r.setTextColor(Color.WHITE);
+				
 				contentListFragment.changeChannelOrMenItem(
 						titleChannels.get(i), null);
 

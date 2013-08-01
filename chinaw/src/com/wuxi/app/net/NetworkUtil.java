@@ -1,7 +1,5 @@
 package com.wuxi.app.net;
 
-
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -77,8 +75,7 @@ public class NetworkUtil {
 
 	public boolean checkInternet(Context context) {
 		if (!isConnet(context)) {
-			Toast.makeText(context, context.getString(R.string.check_internet),
-					Toast.LENGTH_SHORT).show();
+
 			return false;
 		} else
 			return true;

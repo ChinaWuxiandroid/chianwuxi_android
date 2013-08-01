@@ -231,18 +231,27 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 			RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(
 					RadioGroup.LayoutParams.WRAP_CONTENT, 20);
 			params.leftMargin = 5;
-			
+
 			RadioButton radioButton = new RadioButton(context);
 			if (index == 0) {
 
 				radioButton.setTextColor(Color.WHITE);
-				radioButton.setBackground(getResources().getDrawable(
-						R.drawable.public_service_channel_2bg));
+				/*
+				 * radioButton.setBackground(getResources().getDrawable(
+				 * R.drawable.public_service_channel_2bg));
+				 */
+				radioButton
+						.setBackgroundResource(R.drawable.public_service_channel_2bg);
 				showChannelView(channle, level);
 
-			}else{
-				radioButton.setBackground(getResources().getDrawable(
-						R.drawable.public_service_channel_3bg));
+			} else {
+				/*
+				 * radioButton.setBackground(getResources().getDrawable(
+				 * R.drawable.public_service_channel_3bg));
+				 */
+				radioButton
+						.setBackgroundResource(R.drawable.public_service_channel_3bg);
+
 			}
 			radioButton.setGravity(Gravity.CENTER);
 			radioButton.setText(channle.getChannelName());
@@ -423,21 +432,20 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 				RadioButton r = (RadioButton) group.getChildAt(i);
 
 				if (isFirst2Change && i == 0) {
-					r.setBackground(null);
+					r.setBackgroundColor(Color.TRANSPARENT);
 					r.setTextColor(Color.BLACK);
 				}
 
 				if (r.isChecked()) {
 
-					r.setBackground(getResources().getDrawable(
-							R.drawable.public_service_channel_2bg));
+					r.setBackgroundResource(R.drawable.public_service_channel_2bg);
 					r.setTextColor(Color.WHITE);
 
 					showChannelView(channels.get(i), 2);
 
 				} else {
-					r.setBackground(getResources().getDrawable(
-							R.drawable.public_service_channel_3bg));
+
+					r.setBackgroundResource(R.drawable.public_service_channel_3bg);
 					r.setTextColor(Color.BLACK);
 				}
 
@@ -466,21 +474,21 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 				RadioButton r = (RadioButton) group.getChildAt(i);
 
 				if (isFirst3Change && i == 0) {
-					r.setBackground(null);
+
+					r.setBackgroundColor(Color.TRANSPARENT);
 					r.setTextColor(Color.BLACK);
 				}
 
 				if (r.isChecked()) {
 
-					r.setBackground(getResources().getDrawable(
-							R.drawable.public_service_channel_2bg));
+					r.setBackgroundResource(R.drawable.public_service_channel_2bg);
 					r.setTextColor(Color.WHITE);
 
 					showChannelView(channels.get(i), 3);
 
 				} else {
-					r.setBackground(getResources().getDrawable(
-							R.drawable.public_service_channel_3bg));
+
+					r.setBackgroundResource(R.drawable.public_service_channel_3bg);
 					r.setTextColor(Color.BLACK);
 				}
 

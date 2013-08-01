@@ -14,6 +14,8 @@ import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.JAsonPaserUtil;
 import com.wuxi.domain.GoverMaterials;
 import com.wuxi.domain.GoverSaoonItem;
+import com.wuxi.domain.GoverSaoonItemCFDetail;
+import com.wuxi.domain.GoverSaoonItemQTDetail;
 import com.wuxi.domain.GoverSaoonItemQZDetail;
 import com.wuxi.domain.GoverSaoonItemWrapper;
 import com.wuxi.domain.GoverSaoonItemXKDetail;
@@ -112,7 +114,7 @@ public class GoverSaoonItemService extends Service {
 			goverSaoonItemWrapper.setTotalRowsAmount(jresult
 					.getInt("totalRowsAmount"));
 			Object o = jresult.get("data");
-			
+
 			if (!o.toString().equals("[]") && !o.equals("null")) {
 				JSONArray jData = (JSONArray) o;
 				try {
@@ -293,12 +295,10 @@ public class GoverSaoonItemService extends Service {
 		return null;
 	}
 
-	
-	
 	/**
 	 * 
-	 *wanglu 泰得利通 
-	 *行政强制 详情
+	 * wanglu 泰得利通 行政强制 详情
+	 * 
 	 * @param id
 	 * @return
 	 * @throws NetException
@@ -340,8 +340,146 @@ public class GoverSaoonItemService extends Service {
 
 		return null;
 	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 QT获取
+	 * 
+	 * @param id
+	 * @return
+	 * @throws NetException
+	 * @throws NODataException
+	 * @throws JSONException
+	 */
+	public GoverSaoonItemQTDetail getGoverItemQTDetailById(String id)
+			throws NetException, NODataException, JSONException {
+		if (!checkNet()) {
+			throw new NetException(Constants.ExceptionMessage.NO_NET);
+		}
+
+		String url = Constants.Urls.GETGOVER_ITEMDETIAL_QT_URL.replace("{id}",
+				id);
+
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+		if (resultStr != null) {
+
+			JSONObject jobject = new JSONObject(resultStr);
+			JSONObject jresult = jobject.getJSONObject("result");
+			GoverSaoonItemQTDetail goverSaoonItemQTDetail = new GoverSaoonItemQTDetail();
+			goverSaoonItemQTDetail.setBbh(jresult.getString("bbh"));
+			goverSaoonItemQTDetail.setBm(jresult.getString("bm"));
+			goverSaoonItemQTDetail.setJc(jresult.getString("jc"));
+			goverSaoonItemQTDetail.setLjdz(jresult.getString("ljdz"));
+			goverSaoonItemQTDetail.setSfsbssp(jresult.getString("sfsbssp"));
+			goverSaoonItemQTDetail.setSszt(jresult.getString("sszt"));
+			goverSaoonItemQTDetail.setSsztxz(jresult.getString("ssztxz"));
+			goverSaoonItemQTDetail.setSsztbm(jresult.getString("ssztbm"));
+			goverSaoonItemQTDetail.setWtjg(jresult.getString("wtjg"));
+			goverSaoonItemQTDetail.setXzqh(jresult.getString("xzqh"));
+			goverSaoonItemQTDetail.setBldate(jresult.getString("bldate"));
+			goverSaoonItemQTDetail.setBslc(jresult.getString("bslc"));
+			goverSaoonItemQTDetail.setCbm(jresult.getString("cbm"));
+			goverSaoonItemQTDetail.setCnsj(jresult.getString("cnsj"));
+			goverSaoonItemQTDetail.setCnsjms(jresult.getString("cnsjms"));
+			goverSaoonItemQTDetail.setFdcnsj(jresult.getString("fdcnsj"));
+			goverSaoonItemQTDetail.setFlfg(jresult.getString("flfg"));
+			goverSaoonItemQTDetail.setFwzn(jresult.getString("fwzn"));
+			goverSaoonItemQTDetail.setIsfz(jresult.getString("isfz"));
+			goverSaoonItemQTDetail.setIssf(jresult.getString("issf"));
+			goverSaoonItemQTDetail.setIswssb(jresult.getString("iswssb"));
+			goverSaoonItemQTDetail.setJdjg(jresult.getString("jdjg"));
+			goverSaoonItemQTDetail.setLxdh(jresult.getString("lxdh"));
+			goverSaoonItemQTDetail.setQtbldd(jresult.getString("qtbldd"));
+			goverSaoonItemQTDetail.setSfbz(jresult.getString("sfbz"));
+			goverSaoonItemQTDetail.setSfjbj(jresult.getString("sfjbj"));
+			goverSaoonItemQTDetail.setSltj(jresult.getString("sltj"));
+			goverSaoonItemQTDetail.setSqsljg(jresult.getString("sqsljg"));
+			goverSaoonItemQTDetail.setXzfwzxbl(jresult.getString("xzfwzxbl"));
+
+			Object o = jresult.get("materials");
+			if (!o.toString().equals("[]") && !o.toString().equals("null")) {
+				JSONArray jmaterials = (JSONArray) o;
+				try {
+					List<GoverMaterials> meGoverMaterials = JAsonPaserUtil
+							.getListByJassory(GoverMaterials.class, jmaterials);
+					goverSaoonItemQTDetail.setGoverMaterials(meGoverMaterials);
+				} catch (IllegalArgumentException e) {
+
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+
+				} catch (InvocationTargetException e) {
+
+					e.printStackTrace();
+				}
+
+			}
+
+			goverSaoonItemQTDetail.setName(jresult.getString("name"));
+			goverSaoonItemQTDetail.setId(jresult.getString("id"));
+			goverSaoonItemQTDetail.setDeptid(jresult.getString("deptid"));
+			goverSaoonItemQTDetail.setDeptname(jresult.getString("deptname"));
+
+			return goverSaoonItemQTDetail;
+
+		} else {
+			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);// 没有获取到数据异常
+		}
+
+	}
 	
 	
-	
+	/**
+	 * 
+	 *wanglu 泰得利通 
+	 * 行政处罚详情
+	 * @param id
+	 * @return
+	 * @throws NetException
+	 * @throws JSONException
+	 */
+	public GoverSaoonItemCFDetail getGoverSaoonItemCFDetailByid(String id)
+			throws NetException, JSONException {
+
+		if (!checkNet()) {
+			throw new NetException(Constants.ExceptionMessage.NO_NET);
+		}
+
+		String url = Constants.Urls.GETGOVER_ITEMDETIAL_CF_URL.replace("{id}",
+				id);
+
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+		if (resultStr != null) {
+
+			JSONObject jobject = new JSONObject(resultStr);
+			JSONObject jresult = jobject.getJSONObject("result");
+
+			try {
+				GoverSaoonItemCFDetail goverSaoonItemCFDetail = JAsonPaserUtil
+						.getBeanByJASSON(GoverSaoonItemCFDetail.class, jresult);
+				return goverSaoonItemCFDetail;
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+		return null;
+	}
+
 
 }

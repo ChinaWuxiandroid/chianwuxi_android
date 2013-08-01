@@ -242,9 +242,9 @@ public class CityMapFragment extends Fragment implements
 		}
 
 		if (BUS == type) {
-
+			mSearch.transitSearch(CITY, stNode, enNode);// 搜索公交路线
 		}
-		mSearch.transitSearch(CITY, stNode, enNode);// 搜索公交路线
+		
 
 	}
 
