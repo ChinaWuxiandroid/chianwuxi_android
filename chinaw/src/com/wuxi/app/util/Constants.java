@@ -369,6 +369,23 @@ public class Constants {
 		 * 政务大厅行政许可办件详情
 		 */
 		GOVERSALOONDETAIL_XK_FRAGMENT,
+		/**
+		 * 政务大厅行其它可办件详情
+		 */
+		GOVERSALOONDETAIL_QT_FRAGMENT,
+		/**
+		 * 政务大厅行处罚可办件详情
+		 */
+		GOVERSALOONDETAIL_CF_FRAGMENT,
+		/**
+		 * 政务大厅行强制可办件详情
+		 */
+		GOVERSALOONDETAIL_QZ_FRAGMENT,
+		/**
+		 * 政务大厅行征收可办件详情
+		 */
+		GOVERSALOONDETAIL_ZS_FRAGMENT,
+		
 		
 		/**
 		 * 魅力锡城内容页

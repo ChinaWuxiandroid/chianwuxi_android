@@ -341,13 +341,27 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 			loadItem(kindtype.getKindType(), kindtype.getSubKindType(), 0,
 					PAGE_SIZE);
 		} else if (o instanceof GoverSaoonItem) {
-			GoverSaoonItem goverSaoonItem = (GoverSaoonItem) o;
+			GoverSaoonItem goverSaoonItem = (GoverSaoonItem) parent
+					.getItemAtPosition(position);
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("goverSaoonItem", goverSaoonItem);
 			if (goverSaoonItem.getType().equals("XK")) {
-				Bundle bundle = new Bundle();
-				bundle.putSerializable("goverSaoonItem", goverSaoonItem);
+				
 
 				baseSlideFragment.slideLinstener.replaceFragment(null, -1,
 						FragmentName.GOVERSALOONDETAIL_XK_FRAGMENT, bundle);
+			}else if(goverSaoonItem.getType().equals("QT")){
+				baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+						FragmentName.GOVERSALOONDETAIL_QT_FRAGMENT, bundle);
+			}else if(goverSaoonItem.getType().equals("ZS")){
+				baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+						FragmentName.GOVERSALOONDETAIL_ZS_FRAGMENT, bundle);
+			}else if(goverSaoonItem.getType().equals("QZ")){
+				baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+						FragmentName.GOVERSALOONDETAIL_QZ_FRAGMENT, bundle);
+			}else if(goverSaoonItem.getType().equals("CF")){
+				baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+						FragmentName.GOVERSALOONDETAIL_CF_FRAGMENT, bundle);
 			}
 		}
 

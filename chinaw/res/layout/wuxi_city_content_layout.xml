@@ -9,7 +9,8 @@
         android:id="@+id/wucity_channel_hs"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone" >
+        android:visibility="gone"
+        android:layout_marginTop="10dip" >
 
         <RadioGroup
             android:id="@+id/wuxicity_rg_title_chanel"

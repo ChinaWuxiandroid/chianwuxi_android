@@ -660,7 +660,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 			return "XK";
 		} else if (name.contains("处罚")) {
 			return "CF";
-		} else if (name.contains("验收")) {
+		} else if (name.contains("收")) {
 			return "ZS";
 		} else if (name.contains("强制")) {
 			return "QZ";
@@ -740,12 +740,27 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
 	
-		GoverSaoonItem goverSaoonItem=(GoverSaoonItem) adapterView.getItemAtPosition(position);
-		if(goverSaoonItem.getType().equals("XK")){
-			Bundle bundle=new Bundle();
-			bundle.putSerializable("goverSaoonItem", goverSaoonItem);
+		GoverSaoonItem goverSaoonItem = (GoverSaoonItem) adapterView
+				.getItemAtPosition(position);
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("goverSaoonItem", goverSaoonItem);
+		if (goverSaoonItem.getType().equals("XK")) {
 			
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.GOVERSALOONDETAIL_XK_FRAGMENT, bundle);
+
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+					FragmentName.GOVERSALOONDETAIL_XK_FRAGMENT, bundle);
+		}else if(goverSaoonItem.getType().equals("QT")){
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+					FragmentName.GOVERSALOONDETAIL_QT_FRAGMENT, bundle);
+		}else if(goverSaoonItem.getType().equals("ZS")){
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+					FragmentName.GOVERSALOONDETAIL_ZS_FRAGMENT, bundle);
+		}else if(goverSaoonItem.getType().equals("QZ")){
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+					FragmentName.GOVERSALOONDETAIL_QZ_FRAGMENT, bundle);
+		}else if(goverSaoonItem.getType().equals("CF")){
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+					FragmentName.GOVERSALOONDETAIL_CF_FRAGMENT, bundle);
 		}
 		
 		

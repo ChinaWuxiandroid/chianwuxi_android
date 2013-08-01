@@ -79,7 +79,7 @@
                 android:layout_below="@+id/tb_title"
                 android:background="#DDDDDD"
                 android:orientation="vertical"
-                android:visibility="visible" >
+                android:visibility="gone" >
 
                 <TableRow
                     android:layout_width="fill_parent"
@@ -257,12 +257,12 @@
                         android:layout_weight="3"
                         android:background="@drawable/gover_item_detail_bg"
                         android:gravity="center_vertical|center_horizontal"
-                        android:text="是否即办理"
+                        android:text="是否即办件"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv_sfzabl"
+                        android:id="@+id/tv_sfjbj"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"

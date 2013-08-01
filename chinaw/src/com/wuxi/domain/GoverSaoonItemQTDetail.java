@@ -293,7 +293,12 @@ public class GoverSaoonItemQTDetail {
 	}
 
 	public String getXzfwzxbl() {
-		return xzfwzxbl;
+		if(xzfwzxbl.equals("1")){
+			return "是";
+		}else{
+			return "否";
+		}
+		
 	}
 
 	public void setXzfwzxbl(String xzfwzxbl) {

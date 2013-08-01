@@ -79,7 +79,7 @@
                 android:layout_below="@+id/tb_title"
                 android:background="#DDDDDD"
                 android:orientation="vertical"
-                android:visibility="visible" >
+                android:visibility="gone" >
 
                 <TableRow
                     android:layout_width="fill_parent"
