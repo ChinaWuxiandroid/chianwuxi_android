@@ -11,11 +11,11 @@ import java.net.URLEncoder;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.wuxi.app.util.Constants;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
+import com.wuxi.app.util.Constants;
 
 /**
  * 

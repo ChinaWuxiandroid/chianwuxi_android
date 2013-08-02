@@ -58,7 +58,6 @@ public class TitleChannelAdapter extends BasicAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		System.out.println("channel adapter getview");
 		Object item = items.get(position);
 		String chanelName = "";// 频道名称
 		if (item instanceof Channel) {
@@ -89,7 +88,6 @@ public class TitleChannelAdapter extends BasicAdapter {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		System.out.println("chanelName"+chanelName);
 		viewHolder.title_text.setText(chanelName);
 		return convertView;
 	}

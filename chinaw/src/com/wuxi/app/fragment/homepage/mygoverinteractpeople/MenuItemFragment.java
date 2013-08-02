@@ -28,7 +28,6 @@ import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.view.DynamicTitleLayout;
-import com.wuxi.app.view.TitleScrollLayout;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;

@@ -1,7 +1,5 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
-import java.util.List;
-
 import org.json.JSONException;
 
 import android.graphics.Bitmap;
@@ -23,12 +21,8 @@ import com.wuxi.app.R;
 import com.wuxi.app.engine.GoverSaoonItemService;
 import com.wuxi.app.engine.GoverSaoonWorkFlowImageService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
-import com.wuxi.domain.GoverMaterials;
 import com.wuxi.domain.GoverSaoonItem;
-import com.wuxi.domain.GoverSaoonItemQTDetail;
 import com.wuxi.domain.GoverSaoonItemQZDetail;
-import com.wuxi.domain.GoverSaoonItemZSDetail;
-import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
