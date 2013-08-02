@@ -63,7 +63,12 @@ public class GoverSaoonItemXKDetail {
 	}
 
 	public String getWtjg() {
-		return wtjg;
+		if(wtjg.equals("null")){
+			return "";
+		}else{
+			return wtjg;	
+		}
+		
 	}
 
 	public void setWtjg(String wtjg) {
@@ -71,7 +76,12 @@ public class GoverSaoonItemXKDetail {
 	}
 
 	public String getBslc() {
-		return bslc;
+		if(!bslc.equals("null")){
+			return bslc;
+		}else{
+			return null;
+		}
+		
 	}
 
 	public void setBslc(String bslc) {

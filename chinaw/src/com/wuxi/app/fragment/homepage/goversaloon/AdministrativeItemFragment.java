@@ -164,7 +164,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	 * 
 	 * wanglu 泰得利通 获取部门信息
 	 */
-	@SuppressWarnings("unchecked")
+	
 	private void loadDept() {
 
 		/*

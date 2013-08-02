@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -44,6 +45,7 @@ import com.wuxi.exception.NetException;
  * @author wanglu 泰得利通 组织管理
  * 
  */
+@SuppressLint("HandlerLeak")
 public class GoverMangeFragment extends GoverSaloonContentFragment implements
 		OnPageChangeListener, OnClickListener, OnScrollListener {
 
@@ -52,7 +54,7 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 	private ImageView gover_mange_iv_next;
 	private List<View> titleGridViews;
 	private static final int PAGE_ITEM = 4;
-	private static final String TAG = "GoverMange";
+
 	protected static final int LOAD_CHANNEL_SUCCESS = 1;
 	protected static final int LOAD_CHANNEL_FAIL = 0;
 	protected static final int CONTENT_LOAD_SUCCESS = 2;

@@ -13,6 +13,7 @@ import android.content.Context;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.JAsonPaserUtil;
 import com.wuxi.domain.GoverMaterials;
+import com.wuxi.domain.GoverSaoonCFCL;
 import com.wuxi.domain.GoverSaoonItem;
 import com.wuxi.domain.GoverSaoonItemCFDetail;
 import com.wuxi.domain.GoverSaoonItemQTDetail;
@@ -433,12 +434,11 @@ public class GoverSaoonItemService extends Service {
 		}
 
 	}
-	
-	
+
 	/**
 	 * 
-	 *wanglu 泰得利通 
-	 * 行政处罚详情
+	 * wanglu 泰得利通 行政处罚详情
+	 * 
 	 * @param id
 	 * @return
 	 * @throws NetException
@@ -463,6 +463,13 @@ public class GoverSaoonItemService extends Service {
 			try {
 				GoverSaoonItemCFDetail goverSaoonItemCFDetail = JAsonPaserUtil
 						.getBeanByJASSON(GoverSaoonItemCFDetail.class, jresult);
+				Object o = jresult.get("clList");
+				if (!o.toString().equals("null") && !o.toString().equals("[]")) {
+					JSONArray jarray = (JSONArray) o;
+					goverSaoonItemCFDetail.setGoverSaoonCFCLs(JAsonPaserUtil
+							.getListByJassory(GoverSaoonCFCL.class, jarray));
+				}
+
 				return goverSaoonItemCFDetail;
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
@@ -480,6 +487,5 @@ public class GoverSaoonItemService extends Service {
 
 		return null;
 	}
-
 
 }

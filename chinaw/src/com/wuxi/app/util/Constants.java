@@ -17,6 +17,11 @@ public class Constants {
 	 * 
 	 */
 	public static final class Urls {
+		
+		/**
+		 * 跟地址
+		 */
+		public static final String ROOT_URL="http://3g.wuxi.gov.cn/api";
 		/**
 		 * 菜单获取URL
 		 * 
@@ -209,6 +214,11 @@ public class Constants {
 		 * 政务大厅获取好办件 强制详情信息  
 		 */
 		public static final String GETGOVER_ITEMDETIAL_QZ_URL="http://3g.wuxi.gov.cn/api/zhengwu/item/QZ.json?id={id}";
+		
+		/**
+		 * 政务大厅流程图片获取
+		 */
+		public static final String GETLIUC_IMG_URL="http://3g.wuxi.gov.cn/api/zhengwu/lcimg/{id}.json";
 		
 
 		/**

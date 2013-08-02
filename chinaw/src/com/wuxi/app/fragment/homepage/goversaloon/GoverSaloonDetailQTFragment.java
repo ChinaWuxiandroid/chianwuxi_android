@@ -1,19 +1,29 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
+import java.util.List;
+
 import org.json.JSONException;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.engine.GoverSaoonItemService;
+import com.wuxi.app.engine.GoverSaoonWorkFlowImageService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
+import com.wuxi.domain.GoverMaterials;
 import com.wuxi.domain.GoverSaoonItem;
 import com.wuxi.domain.GoverSaoonItemQTDetail;
 import com.wuxi.exception.NODataException;
@@ -26,10 +36,12 @@ import com.wuxi.exception.NetException;
  * 
  */
 public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
-		implements OnClickListener {
+		implements OnClickListener, OnCheckedChangeListener {
 
 	protected static final int LOAD_ITEM_DETIAL_SUCCESS = 0;
 	protected static final int LOAD_ITEM_DETIAL_FAIL = 1;
+	protected static final int LC_LOADSCUCESS = 2;
+	protected static final int LC_LOADERROR = 3;
 	private TextView tv_ssmc_name;
 	private TableLayout tl_tb_detail;
 	private ProgressBar pb_detail;
@@ -37,6 +49,10 @@ public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
 			tv_sffz, tv_xzfwzxbl, tv_sfsf, tv_qtbldd;
 	private GoverSaoonItem goverSaoonItem;
 	private GoverSaoonItemQTDetail goverSaoonItemDetail;
+	private RadioGroup rg_detail;
+	private ImageView iv_lc;
+	private TextView tv_content;
+	private Bitmap bitmap;
 	private Handler handler = new Handler() {
 
 		public void handleMessage(android.os.Message msg) {
@@ -44,6 +60,10 @@ public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
 			case LOAD_ITEM_DETIAL_SUCCESS:
 				showItemDetail();
 				break;
+			case LC_LOADSCUCESS:
+				showLcImage();
+				break;
+			case LC_LOADERROR:
 			case LOAD_ITEM_DETIAL_FAIL:
 				String tip = msg.obj.toString();
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
@@ -51,6 +71,8 @@ public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
 			}
 
 		}
+
+		
 	};
 
 	@Override
@@ -71,14 +93,22 @@ public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
 		tv_xzfwzxbl=(TextView) view.findViewById(R.id.tv_xzfwzxbl);
 		tv_sfsf=(TextView) view.findViewById(R.id.tv_sfsf);
 		tv_qtbldd=(TextView) view.findViewById(R.id.tv_qtbldd);
-
+		rg_detail=(RadioGroup) view.findViewById(R.id.rg_detail);
+		rg_detail.setOnCheckedChangeListener(this);
+		tv_content=(TextView) view.findViewById(R.id.tv_content);
+		iv_lc=(ImageView) view.findViewById(R.id.iv_lc);
+		
 		goverSaoonItem = (GoverSaoonItem) getArguments().get("goverSaoonItem");
-
+		
 		loadItemDetail();
 
 		tv_ssmc_name.setOnClickListener(this);
 	}
 
+	private void showLcImage() {
+		iv_lc.setImageBitmap(bitmap);
+		
+	}
 	protected void showItemDetail() {
 		pb_detail.setVisibility(ProgressBar.INVISIBLE);
 		tv_ssmc_name.setText(goverSaoonItemDetail.getName());// 事项名称
@@ -92,7 +122,7 @@ public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
 		tv_xzfwzxbl.setText(goverSaoonItemDetail.getXzfwzxbl());//是否行政服务中心办理
 		tv_sfsf.setText(goverSaoonItemDetail.getIssf());// 是否收费
 		tv_qtbldd.setText(goverSaoonItemDetail.getQtbldd());// 其它办理地点
-		
+		rg_detail.check(R.id.rb_sszt);
 		
 
 	}
@@ -185,5 +215,125 @@ public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
 
 		}
 
+	}
+
+	@Override
+	public void onCheckedChanged(RadioGroup group, int checkedId) {
+		
+		
+		
+		if (goverSaoonItemDetail == null) {
+			return;
+		}
+		switch (checkedId) {
+		case R.id.rb_sszt:
+			iv_lc.setVisibility(ImageView.GONE);
+			tv_content.setVisibility(TextView.VISIBLE);
+			tv_content.setText("实施主体名称:" + goverSaoonItemDetail.getSszt()
+					+ "\r\n实施主体编码" + goverSaoonItemDetail.getSsztbm() + "\r\n"
+					+ "实施主体性质:" + goverSaoonItemDetail.getSsztxz()
+					+ "\r\n委托机关:" + goverSaoonItemDetail.getWtjg());
+
+			break;
+		case R.id.rb_sqcl:
+			iv_lc.setVisibility(ImageView.GONE);
+			tv_content.setVisibility(TextView.VISIBLE);
+			if (goverSaoonItemDetail.getGoverMaterials() != null
+					&& goverSaoonItemDetail.getGoverMaterials().size() > 0) {
+
+				List<GoverMaterials> materials = goverSaoonItemDetail
+						.getGoverMaterials();
+				StringBuffer sb = new StringBuffer();
+				for (int index = 0; index < materials.size(); index++) {
+
+					sb.append(materials.get(index).getName()).append("\r\n");
+
+				}
+
+				tv_content.setText(sb.toString());
+
+			}
+
+			break;
+		case R.id.rb_sfbz:
+			iv_lc.setVisibility(ImageView.GONE);
+			tv_content.setVisibility(TextView.VISIBLE);
+			tv_content.setText(goverSaoonItemDetail.getSfbz());
+			break;
+		case R.id.rb_flfg:
+			iv_lc.setVisibility(ImageView.GONE);
+			tv_content.setVisibility(TextView.VISIBLE);
+			tv_content.setText(goverSaoonItemDetail.getFlfg());
+			break;
+		case R.id.rb_sltj:
+			iv_lc.setVisibility(ImageView.GONE);
+			tv_content.setVisibility(TextView.VISIBLE);
+			tv_content.setText(goverSaoonItemDetail.getSltj());
+			break;
+		case R.id.rb_fwzn:
+			iv_lc.setVisibility(ImageView.GONE);
+			tv_content.setVisibility(TextView.VISIBLE);
+			tv_content.setText(goverSaoonItemDetail.getFwzn());
+			break;
+		case R.id.rb_gslc:
+			iv_lc.setVisibility(ImageView.VISIBLE);
+			tv_content.setVisibility(TextView.GONE);
+			if(this.bitmap!=null){
+				showLcImage();
+			}else{
+				if(goverSaoonItemDetail.getBslc()!=null){
+					loadLcImag();
+				}
+			}
+			
+			break;
+
+		}
+
+		for (int i = 0; i < group.getChildCount(); i++) {
+
+			RadioButton rb = (RadioButton) group.getChildAt(i);
+			if (rb.isChecked()) {
+				rb.setTextColor(Color.WHITE);
+			} else {
+				rb.setTextColor(Color.BLACK);
+			}
+		}
+
+		
+	}
+
+	private void loadLcImag() {
+		
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				Message msg = handler.obtainMessage();
+				GoverSaoonWorkFlowImageService goverSaoonWorkFlowImageService = new GoverSaoonWorkFlowImageService(
+						context);
+				try {
+					bitmap = goverSaoonWorkFlowImageService
+							.getBitMap(goverSaoonItemDetail.getBslc());
+					if (bitmap != null) {
+						msg.what = LC_LOADSCUCESS;
+
+					} else {
+						msg.what = LC_LOADERROR;
+						msg.obj = "获取流程图片失败";
+					}
+					handler.sendMessage(msg);
+				} catch (JSONException e) {
+
+					e.printStackTrace();
+					msg.what = LC_LOADERROR;
+					msg.obj = "数据格式错误";
+					handler.sendMessage(msg);
+				}
+
+			}
+		}).start();
+
+	
 	}
 }

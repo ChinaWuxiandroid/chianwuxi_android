@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@android:color/white" >
 
     <include
         android:layout_width="fill_parent"
@@ -25,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
@@ -34,7 +35,6 @@
                     android:id="@+id/tb_title"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
                     android:background="#DDDDDD"
                     android:orientation="vertical" >
 
@@ -76,7 +76,6 @@
                     android:id="@+id/tl_tb_detail"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tb_title"
                     android:background="#DDDDDD"
                     android:orientation="vertical"
                     android:visibility="gone" >
@@ -179,46 +178,60 @@
                     android:id="@+id/hs_channel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tl_tb_detail"
                     android:layout_marginTop="5dip" >
 
                     <RadioGroup
+                        android:id="@+id/rg_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal" >
 
                         <RadioButton
+                            android:id="@+id/rb_sszt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dip"
+                            android:background="@drawable/goversall_content_radiobutton__selector"
                             android:button="@null"
+                            android:padding="8dip"
                             android:text="实体主体"
                             android:textSize="12sp" />
 
-                      
                         <RadioButton
+                            android:id="@+id/rb_flfg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dip"
+                            android:background="@drawable/goversall_content_radiobutton__selector"
                             android:button="@null"
-                            android:text="法律规定"
+                            android:padding="8dip"
+                            android:text="法律法规"
                             android:textSize="12sp" />
 
                         <RadioButton
+                            android:id="@+id/rb_qzlc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dip"
+                            android:background="@drawable/goversall_content_radiobutton__selector"
                             android:button="@null"
+                            android:padding="8dip"
                             android:text="强制流程"
                             android:textSize="12sp" />
                     </RadioGroup>
                 </HorizontalScrollView>
 
                 <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/iv_lc"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/hs_channel" />
-            </RelativeLayout>
+                    android:visibility="gone" />
+            </LinearLayout>
         </FrameLayout>
     </ScrollView>
 

@@ -1,19 +1,29 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
+import java.util.List;
+
 import org.json.JSONException;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.engine.GoverSaoonItemService;
+import com.wuxi.app.engine.GoverSaoonWorkFlowImageService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
+import com.wuxi.domain.GoverMaterials;
 import com.wuxi.domain.GoverSaoonItem;
 import com.wuxi.domain.GoverSaoonItemQTDetail;
 import com.wuxi.domain.GoverSaoonItemQZDetail;
@@ -28,16 +38,22 @@ import com.wuxi.exception.NetException;
  * 
  */
 public class GoverSaloonDetailQZFragment extends BaseItemContentFragment
-		implements OnClickListener {
+		implements OnClickListener, OnCheckedChangeListener {
 
 	protected static final int LOAD_ITEM_DETIAL_SUCCESS = 0;
 	protected static final int LOAD_ITEM_DETIAL_FAIL = 1;
+	protected static final int LC_LOADSCUCESS = 2;
+	protected static final int LC_LOADERROR = 3;
 	private TextView tv_ssmc_name;
 	private TableLayout tl_tb_detail;
 	private ProgressBar pb_detail;
-	private TextView tv_ssbm, tv_bgdz,tv_jddh;
+	private TextView tv_ssbm, tv_bgdz, tv_jddh;
 	private GoverSaoonItem goverSaoonItem;
 	private GoverSaoonItemQZDetail goverSaoonItemDetail;
+	private RadioGroup rg_detail;
+	private TextView tv_content;
+	private ImageView iv_lc;
+	private Bitmap bitmap;
 	private Handler handler = new Handler() {
 
 		public void handleMessage(android.os.Message msg) {
@@ -45,6 +61,10 @@ public class GoverSaloonDetailQZFragment extends BaseItemContentFragment
 			case LOAD_ITEM_DETIAL_SUCCESS:
 				showItemDetail();
 				break;
+			case LC_LOADSCUCESS:
+				showLcImage();
+				break;
+			case LC_LOADERROR:
 			case LOAD_ITEM_DETIAL_FAIL:
 				String tip = msg.obj.toString();
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
@@ -65,7 +85,11 @@ public class GoverSaloonDetailQZFragment extends BaseItemContentFragment
 		tv_ssbm = (TextView) view.findViewById(R.id.tv_ssbm);
 		tv_bgdz = (TextView) view.findViewById(R.id.tv_bgdz);
 		tv_jddh = (TextView) view.findViewById(R.id.tv_jddh);
-		
+		rg_detail = (RadioGroup) view.findViewById(R.id.rg_detail);
+		rg_detail.setOnCheckedChangeListener(this);
+		tv_content = (TextView) view.findViewById(R.id.tv_content);
+		iv_lc = (ImageView) view.findViewById(R.id.iv_lc);
+		rg_detail.check(R.id.rb_sszt);
 		goverSaoonItem = (GoverSaoonItem) getArguments().get("goverSaoonItem");
 
 		loadItemDetail();
@@ -78,8 +102,7 @@ public class GoverSaloonDetailQZFragment extends BaseItemContentFragment
 		tv_ssmc_name.setText(goverSaoonItemDetail.getName());// 事项名称
 		tv_ssbm.setText(goverSaoonItemDetail.getBm());// 事项编码
 		tv_bgdz.setText(goverSaoonItemDetail.getBgdd());
-		tv_jddh.setText(goverSaoonItemDetail.getJddh());//监督电话
-		
+		tv_jddh.setText(goverSaoonItemDetail.getJddh());// 监督电话
 
 	}
 
@@ -101,7 +124,8 @@ public class GoverSaloonDetailQZFragment extends BaseItemContentFragment
 						context);
 				try {
 					goverSaoonItemDetail = goverSaoonItemService
-							.getGoverSaoonItemQZDetailByid(goverSaoonItem.getId());
+							.getGoverSaoonItemQZDetailByid(goverSaoonItem
+									.getId());
 
 					if (goverSaoonItemDetail != null) {
 						msg.what = LOAD_ITEM_DETIAL_SUCCESS;
@@ -117,7 +141,7 @@ public class GoverSaloonDetailQZFragment extends BaseItemContentFragment
 					msg.what = LOAD_ITEM_DETIAL_FAIL;
 					msg.obj = e.getMessage();
 					handler.sendMessage(msg);
-				}  catch (JSONException e) {
+				} catch (JSONException e) {
 					e.printStackTrace();
 					msg.what = LOAD_ITEM_DETIAL_FAIL;
 					msg.obj = "数据格式错误";
@@ -165,6 +189,93 @@ public class GoverSaloonDetailQZFragment extends BaseItemContentFragment
 			break;
 
 		}
+
+	}
+
+	@Override
+	public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+		if (goverSaoonItemDetail == null) {
+			return;
+		}
+		switch (checkedId) {
+		case R.id.rb_sszt:
+			iv_lc.setVisibility(ImageView.GONE);
+			tv_content.setVisibility(TextView.VISIBLE);
+			tv_content.setText("实施主体名称:" + goverSaoonItemDetail.getSszt()
+					+ "\r\n实施主体编码" + goverSaoonItemDetail.getSsztbm() + "\r\n"
+					+ "实施主体性质:" + goverSaoonItemDetail.getSsztxz()
+					+ "\r\n委托机关:" + goverSaoonItemDetail.getWtjg());
+
+			break;
+
+		case R.id.rb_flfg:
+			iv_lc.setVisibility(ImageView.GONE);
+			tv_content.setVisibility(TextView.VISIBLE);
+			tv_content.setText(goverSaoonItemDetail.getFlfg());
+			break;
+
+		case R.id.rb_qzlc:
+			iv_lc.setVisibility(ImageView.VISIBLE);
+			tv_content.setVisibility(TextView.GONE);
+			if (this.bitmap != null) {
+				showLcImage();
+			} else {
+				if (goverSaoonItemDetail.getQzcx() != null) {
+					loadLcImag();
+				}
+			}
+
+			break;
+
+		}
+
+		for (int i = 0; i < group.getChildCount(); i++) {
+
+			RadioButton rb = (RadioButton) group.getChildAt(i);
+			if (rb.isChecked()) {
+				rb.setTextColor(Color.WHITE);
+			} else {
+				rb.setTextColor(Color.BLACK);
+			}
+		}
+
+	}
+
+	private void showLcImage() {
+		iv_lc.setImageBitmap(bitmap);
+	}
+
+	private void loadLcImag() {
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				Message msg = handler.obtainMessage();
+				GoverSaoonWorkFlowImageService goverSaoonWorkFlowImageService = new GoverSaoonWorkFlowImageService(
+						context);
+				try {
+					bitmap = goverSaoonWorkFlowImageService
+							.getBitMap(goverSaoonItemDetail.getQzcx());
+					if (bitmap != null) {
+						msg.what = LC_LOADSCUCESS;
+
+					} else {
+						msg.what = LC_LOADERROR;
+						msg.obj = "获取流程图片失败";
+					}
+					handler.sendMessage(msg);
+				} catch (JSONException e) {
+
+					e.printStackTrace();
+					msg.what = LC_LOADERROR;
+					msg.obj = "数据格式错误";
+					handler.sendMessage(msg);
+				}
+
+			}
+		}).start();
 
 	}
 }

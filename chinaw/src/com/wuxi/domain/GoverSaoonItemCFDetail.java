@@ -1,5 +1,7 @@
 package com.wuxi.domain;
 
+import java.util.List;
+
 
 /**
  * 
@@ -23,6 +25,13 @@ public class GoverSaoonItemCFDetail {
 	private String id;
 	private String deptid;
 	private String deptname;
+	private List<GoverSaoonCFCL> goverSaoonCFCLs;
+	public List<GoverSaoonCFCL> getGoverSaoonCFCLs() {
+		return goverSaoonCFCLs;
+	}
+	public void setGoverSaoonCFCLs(List<GoverSaoonCFCL> goverSaoonCFCLs) {
+		this.goverSaoonCFCLs = goverSaoonCFCLs;
+	}
 	public String getAddress() {
 		return address;
 	}
@@ -42,7 +51,13 @@ public class GoverSaoonItemCFDetail {
 		this.cfyj = cfyj;
 	}
 	public String getSszt() {
-		return sszt;
+		if(sszt!=null&&sszt.equals("null")){
+			
+			return "";
+		}else{
+			return sszt;
+		}
+		
 	}
 	public void setSszt(String sszt) {
 		this.sszt = sszt;
@@ -65,7 +80,12 @@ public class GoverSaoonItemCFDetail {
 		this.ssztxz = ssztxz;
 	}
 	public String getWtjg() {
-		return wtjg;
+		if(wtjg!=null&&wtjg.equals("")){
+			return "";
+		}else{
+			return wtjg;
+		}
+		
 	}
 	public void setWtjg(String wtjg) {
 		this.wtjg = wtjg;

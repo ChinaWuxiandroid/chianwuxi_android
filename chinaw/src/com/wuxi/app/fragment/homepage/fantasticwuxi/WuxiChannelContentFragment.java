@@ -144,10 +144,7 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 	private void initUI() {
 		wuxicity_decontent_ll = (LinearLayout) view
 				.findViewById(R.id.wuxicity_decontent_ll);
-		/*
-		 * wucity_content_lv = (ListView) view
-		 * .findViewById(R.id.wucity_content_lv);
-		 */
+		
 		wucity_content = (FrameLayout) view.findViewById(R.id.wucity_content);
 		wucity_channel_hs = (HorizontalScrollView) view
 				.findViewById(R.id.wucity_channel_hs);
@@ -331,22 +328,21 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 		for (Channel channle : titleChannels) {
 
 			RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(
-					RadioGroup.LayoutParams.WRAP_CONTENT, 20);
+					RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
 			params.leftMargin = 5;
 			RadioButton radioButton = new RadioButton(context);
 			if (index == 0) {
 				
 				radioButton.setTextColor(Color.WHITE);
-				/*radioButton.setBackground(getResources().getDrawable(
-						R.drawable.wuxi_content_channelselect_));*/
+				
 				radioButton.setBackgroundResource(R.drawable.wuxi_content_channelselect_);
 				LoadContentsData(channle);
 
 			}
 
 			radioButton.setText(channle.getChannelName());
-			radioButton.setTextSize(12);
-			radioButton.setPadding(2, 2, 2, 2);
+			radioButton.setTextSize(14);
+			radioButton.setPadding(5, 5, 5, 5);
 			radioButton.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 			wuxicity_rg_title_chanel.addView(radioButton, params);
