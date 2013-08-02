@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/content_background"
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/ll_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:orientation="horizontal"
         android:padding="5dip" >
 
@@ -26,14 +28,17 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/v_level1"
         android:layout_width="fill_parent"
         android:layout_height="1dip"
+        android:layout_below="@+id/ll_title"
         android:background="@android:color/white" />
 
     <HorizontalScrollView
         android:id="@+id/publicservice_level1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/v_level1"
         android:scrollbars="none" >
 
         <LinearLayout
@@ -60,20 +65,22 @@
         android:id="@+id/dev_v_1"
         android:layout_width="fill_parent"
         android:layout_height="1dip"
+        android:layout_below="@+id/publicservice_level1"
         android:background="@android:color/white" />
 
     <HorizontalScrollView
         android:id="@+id/publicservice_level2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/dev_v_1"
         android:scrollbars="none" >
 
         <RadioGroup
             android:id="@+id/publicserivce_rb_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" 
-            android:padding="5dip">
+            android:orientation="horizontal"
+            android:padding="5dip" >
         </RadioGroup>
     </HorizontalScrollView>
 
@@ -81,12 +88,14 @@
         android:id="@+id/dev_v_2"
         android:layout_width="fill_parent"
         android:layout_height="1dip"
+        android:layout_below="@+id/publicservice_level2"
         android:background="@android:color/white" />
 
     <HorizontalScrollView
         android:id="@+id/publicservice_level3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/dev_v_2"
         android:orientation="horizontal"
         android:scrollbars="none" >
 
@@ -94,9 +103,8 @@
             android:id="@+id/publicserivce_rb_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" 
-             android:padding="5dip"
-            >
+            android:orientation="horizontal"
+            android:padding="5dip" >
         </RadioGroup>
     </HorizontalScrollView>
 
@@ -104,12 +112,14 @@
         android:id="@+id/dev_v_3"
         android:layout_width="fill_parent"
         android:layout_height="1dip"
+        android:layout_below="@+id/publicservice_level3"
         android:background="@android:color/white" />
 
     <FrameLayout
         android:id="@+id/publicservice_contentlist"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dev_v_3" >
     </FrameLayout>
 
-</LinearLayout>
+</RelativeLayout>

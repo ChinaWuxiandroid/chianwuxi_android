@@ -29,7 +29,11 @@ import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.WuxiChannelContentDetailFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
+import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailCFFragment;
+import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailQTFragment;
+import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailQZFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailXKFragment;
+import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailZSFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.MyOnlineAskFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InformationCenterFragment;
@@ -85,7 +89,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.slide_level_layout, null);
-		popWindowManager=PopWindowManager.getInstance();
+		popWindowManager = PopWindowManager.getInstance();
 		mSlideMenuLayout = (SlideMenuLayout) view
 				.findViewById(R.id.slide_menu_layout);
 		mSlideMenuLayout.setLeftSlideMenuId(R.id.left_menu);
@@ -194,8 +198,8 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				MainSearchFragment searchFragment = new MainSearchFragment();
 				onTransaction(searchFragment, bundle);
 				break;
-			case MAINMINEFRAGMENT:// 政务名互动		
-				MainMineFragment mainMineFragment = new MainMineFragment();		
+			case MAINMINEFRAGMENT:// 政务名互动
+				MainMineFragment mainMineFragment = new MainMineFragment();
 				mainMineFragment.setParentMenuItem(menuItem);
 				onTransaction(mainMineFragment, bundle);
 				break;
@@ -220,12 +224,31 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				HotReviewContentFragment hotReviewContentFragment = new HotReviewContentFragment();
 				onTransaction(hotReviewContentFragment, bundle);
 				break;
-			case GOVERSALOONDETAIL_XK_FRAGMENT://政务大厅办件详情
-				GoverSaloonDetailXKFragment goverSaloonDetailFragment=new GoverSaloonDetailXKFragment();
+			case GOVERSALOONDETAIL_XK_FRAGMENT:// 政务大厅办件详情
+				GoverSaloonDetailXKFragment goverSaloonDetailFragment = new GoverSaloonDetailXKFragment();
 				onTransaction(goverSaloonDetailFragment, bundle);
 				break;
-			case WUXICHANNELCONTENTDETAILFRAGMENT://魅力锡城内容页
-				WuxiChannelContentDetailFragment wuxiChannelContentDetailFragment=new WuxiChannelContentDetailFragment();
+			case GOVERSALOONDETAIL_QT_FRAGMENT:// 政务大厅办件详情
+				GoverSaloonDetailQTFragment goverSaloonDetailQTFragment = new GoverSaloonDetailQTFragment();
+				onTransaction(goverSaloonDetailQTFragment, bundle);
+				break;
+			case GOVERSALOONDETAIL_QZ_FRAGMENT:// 政务大厅 强制办件详情
+				GoverSaloonDetailQZFragment goverSaloonDetailQZFragment = new GoverSaloonDetailQZFragment();
+				onTransaction(goverSaloonDetailQZFragment, bundle);
+
+				break;
+			case GOVERSALOONDETAIL_ZS_FRAGMENT:// 政务大厅 征收办件详情
+				GoverSaloonDetailZSFragment goverSaloonDetailZSFragment = new GoverSaloonDetailZSFragment();
+				onTransaction(goverSaloonDetailZSFragment, bundle);
+
+				break;
+			case GOVERSALOONDETAIL_CF_FRAGMENT:// 政务大厅 处罚办件详情
+				GoverSaloonDetailCFFragment goverSaloonDetailCFFragment = new GoverSaloonDetailCFFragment();
+				onTransaction(goverSaloonDetailCFFragment, bundle);
+				break;
+
+			case WUXICHANNELCONTENTDETAILFRAGMENT:// 魅力锡城内容页
+				WuxiChannelContentDetailFragment wuxiChannelContentDetailFragment = new WuxiChannelContentDetailFragment();
 				onTransaction(wuxiChannelContentDetailFragment, bundle);
 				break;
 
@@ -326,7 +349,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	@Override
 	public void onItemClick(AdapterView<?> parent, View arg1, int position,
 			long id) {
-		
+
 		if (position == this.position)
 			return;
 		MenuItem checkMenuItem = (MenuItem) parent.getItemAtPosition(position);

@@ -98,8 +98,8 @@ public class GoverSaoonItemZSDetail {
 	}
 
 	public String getWtjg() {
-		if (wtjg.equals("null")) {
-			return null;
+		if (wtjg!=null&&wtjg.equals("null")) {
+			return "";
 		} else {
 			return wtjg;
 		}

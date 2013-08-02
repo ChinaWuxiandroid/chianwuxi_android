@@ -8,6 +8,8 @@ import org.json.JSONException;
 import android.test.AndroidTestCase;
 
 import com.wuxi.app.util.LogUtil;
+import com.wuxi.domain.GoverSaoonItemCFDetail;
+import com.wuxi.domain.GoverSaoonItemQTDetail;
 import com.wuxi.domain.GoverSaoonItemQZDetail;
 import com.wuxi.domain.GoverSaoonItemWrapper;
 import com.wuxi.domain.GoverSaoonItemXKDetail;
@@ -81,5 +83,27 @@ public class TestGoverSaItemService extends AndroidTestCase {
 		
 		
 		LogUtil.i(TAG, go.getFlfg());
+	}
+	
+	
+	public void testQT() throws JSONException, NetException, NODataException{
+		GoverSaoonItemService goverSaoonItemService=new GoverSaoonItemService(getContext());
+	
+		GoverSaoonItemQTDetail  go=goverSaoonItemService.getGoverItemQTDetailById("4028818a2ebc881e012ebd0f8f0c00f8");
+		
+		
+		
+		LogUtil.i(TAG, go.getFlfg());
+	}
+	
+	
+	public void testCF() throws JSONException, NetException, NODataException{
+		GoverSaoonItemService goverSaoonItemService=new GoverSaoonItemService(getContext());
+	
+		 GoverSaoonItemCFDetail  go=goverSaoonItemService.getGoverSaoonItemCFDetailByid("4028818a2cc61f37012cc9a6c18115f3");
+		
+		
+		
+		LogUtil.i(TAG, go.getAddress());
 	}
 }

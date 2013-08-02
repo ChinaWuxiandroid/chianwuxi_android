@@ -17,6 +17,11 @@ public class Constants {
 	 * 
 	 */
 	public static final class Urls {
+		
+		/**
+		 * 跟地址
+		 */
+		public static final String ROOT_URL="http://3g.wuxi.gov.cn/api";
 		/**
 		 * 菜单获取URL
 		 * 
@@ -210,6 +215,11 @@ public class Constants {
 		 */
 		public static final String GETGOVER_ITEMDETIAL_QZ_URL="http://3g.wuxi.gov.cn/api/zhengwu/item/QZ.json?id={id}";
 		
+		/**
+		 * 政务大厅流程图片获取
+		 */
+		public static final String GETLIUC_IMG_URL="http://3g.wuxi.gov.cn/api/zhengwu/lcimg/{id}.json";
+		
 
 		/**
 		 * 政府信息公开  获取公开意见箱的APPUI布局数据
@@ -369,6 +379,23 @@ public class Constants {
 		 * 政务大厅行政许可办件详情
 		 */
 		GOVERSALOONDETAIL_XK_FRAGMENT,
+		/**
+		 * 政务大厅行其它可办件详情
+		 */
+		GOVERSALOONDETAIL_QT_FRAGMENT,
+		/**
+		 * 政务大厅行处罚可办件详情
+		 */
+		GOVERSALOONDETAIL_CF_FRAGMENT,
+		/**
+		 * 政务大厅行强制可办件详情
+		 */
+		GOVERSALOONDETAIL_QZ_FRAGMENT,
+		/**
+		 * 政务大厅行征收可办件详情
+		 */
+		GOVERSALOONDETAIL_ZS_FRAGMENT,
+		
 		
 		/**
 		 * 魅力锡城内容页
