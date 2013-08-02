@@ -79,7 +79,7 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 			case LEFT_CHANNEL_DATA__LOAD_SUCCESS:
 				showLeftChannelData();
 				break;
-			case LEFT_MENUITEM_DATA__LOAD_SUCCESS:
+			case LEFT_MENUITEM_DATA__LOAD_SUCCESS:				
 				showLeftMenuItemData();
 				break;
 
@@ -259,7 +259,6 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 			showContentFragment(showMenItemContentFragment((MenuItem) object));
 
 		}
-
 	}
 
 	/**

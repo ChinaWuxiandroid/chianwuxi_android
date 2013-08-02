@@ -42,7 +42,7 @@ public class LetterService extends Service{
 	 * */
 	public LetterWrapper getMyLettersList(String url,String access_token,int startIndex,int endIndex) throws NetException, JSONException, NODataException{
 		url=url+"?access_token="+access_token+"&start="+startIndex+"&end="+endIndex;
-		System.out.println("url:"+url);
+//		System.out.println("url:"+url);
 		return getLettersWrapper(url);
 	}
 
@@ -108,7 +108,7 @@ public class LetterService extends Service{
 			for (int index = 0; index < jData.length(); index++) {
 				
 				JSONObject jb = jData.getJSONObject(index);
-				System.out.println(jb.toString());
+//				System.out.println(jb.toString());
 				LetterWrapper h=new LetterWrapper();
 				LetterWrapper.Letter letters = h.new Letter();
 				letters.setId(jb.getString("id"));

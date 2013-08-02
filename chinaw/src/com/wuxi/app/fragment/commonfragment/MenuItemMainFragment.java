@@ -41,8 +41,6 @@ import com.wuxi.exception.NetException;
 public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 		InitializContentLayoutListner, OnClickListener, Serializable {
 
-	
-	
 	/**
 	 * 
 	 */
