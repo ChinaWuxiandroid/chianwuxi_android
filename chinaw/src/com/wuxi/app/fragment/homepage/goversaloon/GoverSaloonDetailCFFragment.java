@@ -39,8 +39,8 @@ public class GoverSaloonDetailCFFragment extends BaseItemContentFragment
 
 	protected static final int LOAD_ITEM_DETIAL_SUCCESS = 0;
 	protected static final int LOAD_ITEM_DETIAL_FAIL = 1;
-	protected static final int LC_LOADSCUCESS = 0;
-	protected static final int LC_LOADERROR = 0;
+	protected static final int LC_LOADSCUCESS = 2;
+	protected static final int LC_LOADERROR = 3;
 	private TextView tv_ssmc_name;
 	private TableLayout tl_tb_detail;
 	private ProgressBar pb_detail;
@@ -58,6 +58,11 @@ public class GoverSaloonDetailCFFragment extends BaseItemContentFragment
 			case LOAD_ITEM_DETIAL_SUCCESS:
 				showItemDetail();
 				break;
+			case LC_LOADSCUCESS:
+				showLcImage();
+			break;
+			case LC_LOADERROR:
+				
 			case LOAD_ITEM_DETIAL_FAIL:
 				String tip = msg.obj.toString();
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();

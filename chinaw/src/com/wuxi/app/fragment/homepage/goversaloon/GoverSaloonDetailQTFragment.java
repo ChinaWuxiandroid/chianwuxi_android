@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Handler;
@@ -53,6 +54,7 @@ public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
 	private ImageView iv_lc;
 	private TextView tv_content;
 	private Bitmap bitmap;
+	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 
 		public void handleMessage(android.os.Message msg) {

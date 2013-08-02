@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -78,7 +79,9 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 	private EditText et_searchbying_content, et_state_itemcode;
 	private List<Dept> depts;
 
+	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
+		@SuppressLint("HandlerLeak")
 		public void handleMessage(Message msg) {
 
 			switch (msg.what) {

@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -55,6 +56,7 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 	private TextView tv_content;
 	private ImageView iv_lc;
 	private Bitmap bitmap;
+	private Button btn_bl;
 
 	private Handler handler = new Handler() {
 
@@ -95,8 +97,8 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 		tv_sfzabl = (TextView) view.findViewById(R.id.tv_sfzabl);
 		tv_sffz = (TextView) view.findViewById(R.id.tv_sffz);
 		tv_sfsf = (TextView) view.findViewById(R.id.tv_sfsf);
-
-		
+		btn_bl=(Button) view.findViewById(R.id.btn_bl);
+		btn_bl.setOnClickListener(this);
 
 		rg_detial = (RadioGroup) view.findViewById(R.id.rg_detial);
 		tv_content = (TextView) view.findViewById(R.id.tv_content);
@@ -216,6 +218,9 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 								R.drawable.gover_item_detail_expa_up), null);
 			}
 
+			break;
+		case R.id.btn_bl:
+			
 			break;
 
 		}
