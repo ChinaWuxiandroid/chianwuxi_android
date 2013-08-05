@@ -11,10 +11,14 @@
         android:layout_weight="1"
         layout="@layout/child_fragment_itemcontent_header_layout" />
 
-    <ScrollView
+     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="9" >
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
 
         <FrameLayout
             android:layout_width="fill_parent"
@@ -234,23 +238,28 @@
             </LinearLayout>
         </FrameLayout>
     </ScrollView>
+    <include layout="@layout/goversaoon_zxzx_layout" />
+    </FrameLayout>
 
-    <LinearLayout
+   <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="horizontal" >
 
         <Button
+            android:id="@+id/btn_bl"
             android:layout_width="0dip"
             android:layout_height="25dip"
             android:layout_weight="1"
             android:background="@drawable/gover_online_sub_bg"
             android:text="在线办理"
             android:textColor="#ffffff"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:visibility="gone"></Button>
 
         <Button
+            android:id="@+id/btn_zxzx"
             android:layout_width="0dip"
             android:layout_height="25dip"
             android:layout_marginLeft="5dip"
@@ -260,5 +269,6 @@
             android:textColor="#ffffff"
             android:textSize="12sp" />
     </LinearLayout>
+
 
 </LinearLayout>

@@ -11,7 +11,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -54,6 +56,8 @@ public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
 	private ImageView iv_lc;
 	private TextView tv_content;
 	private Bitmap bitmap;
+	private Button btn_bl,btn_zxzx;
+	private LinearLayout ll_zxbl,ll_zxnr;//在线办理
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 
@@ -105,6 +109,14 @@ public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
 		loadItemDetail();
 
 		tv_ssmc_name.setOnClickListener(this);
+		
+		
+		ll_zxbl=(LinearLayout) view.findViewById(R.id.ll_zxbl);
+		btn_bl=(Button) view.findViewById(R.id.btn_bl);
+		btn_bl.setOnClickListener(this);
+		btn_zxzx=(Button) view.findViewById(R.id.btn_zxzx);
+		btn_zxzx.setOnClickListener(this);
+		ll_zxnr=(LinearLayout) view.findViewById(R.id.ll_zxnr);
 	}
 
 	private void showLcImage() {
@@ -125,6 +137,10 @@ public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
 		tv_sfsf.setText(goverSaoonItemDetail.getIssf());// 是否收费
 		tv_qtbldd.setText(goverSaoonItemDetail.getQtbldd());// 其它办理地点
 		rg_detail.check(R.id.rb_sszt);
+		
+		if(goverSaoonItemDetail.getIswssb().equals("1")){//在线办理
+			btn_bl.setVisibility(Button.VISIBLE);
+		}
 		
 
 	}
@@ -214,8 +230,26 @@ public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
 			}
 
 			break;
-
+			
+		case R.id.btn_bl://在线办理
+			if(ll_zxbl.getVisibility()==LinearLayout.GONE){
+				ll_zxbl.setVisibility(LinearLayout.VISIBLE);
+				ll_zxnr.setVisibility(LinearLayout.GONE);
+			}else if(ll_zxbl.getVisibility()==LinearLayout.VISIBLE){
+				ll_zxbl.setVisibility(LinearLayout.GONE);
+			}
+			break;
+		case R.id.btn_zxzx://在线咨询
+			if(ll_zxnr.getVisibility()==LinearLayout.GONE){
+				ll_zxnr.setVisibility(LinearLayout.VISIBLE);
+				ll_zxbl.setVisibility(LinearLayout.GONE);
+			}else if(ll_zxnr.getVisibility()==LinearLayout.VISIBLE){
+				ll_zxnr.setVisibility(LinearLayout.GONE);
+			}
+			break;
 		}
+
+		
 
 	}
 

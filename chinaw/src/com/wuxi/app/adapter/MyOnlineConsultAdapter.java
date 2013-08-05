@@ -97,17 +97,17 @@ public class MyOnlineConsultAdapter extends BaseAdapter implements
 
 	@Override
 	public void onClick(View v) {
-
+		Bundle bundle = new Bundle();
 		switch (v.getId()) {
-		case R.id.gover_onlineask_view:
-
+		case R.id.gover_onlineask_view://咨询详情
+			bundle.putInt("showType", 0);
 			break;
-		case R.id.gover_onlineask_goask:
-			selectMyconsult = null;
+		case R.id.gover_onlineask_goask://继续咨询
+			bundle.putInt("showType", 1);
 			break;
 		}
 
-		Bundle bundle = new Bundle();
+		
 		bundle.putSerializable("selectMyconsult", selectMyconsult);
 
 		baseSlideFragment.slideLinstener.replaceFragment(null, -1,

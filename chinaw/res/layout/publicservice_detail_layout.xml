@@ -41,13 +41,13 @@
         android:layout_below="@+id/v_level1"
         android:scrollbars="none" >
 
-        <LinearLayout
+       <!--  <LinearLayout
             android:id="@+id/liear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal" > -->
 
-            <GridView
+          <!--   <GridView
                 android:id="@+id/dishtype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,10 +55,18 @@
                 android:columnWidth="35dip"
                 android:gravity="center"
                 android:horizontalSpacing="5.0dip"
-                android:stretchMode="none"
+                android:stretchMode="spacingWidth"
                 android:verticalSpacing="1.0dip" >
-            </GridView>
-        </LinearLayout>
+            </GridView> -->
+            
+          <RadioGroup
+            android:id="@+id/publicserivce_rb_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dip" >
+        </RadioGroup>
+        <!-- </LinearLayout> -->
     </HorizontalScrollView>
 
     <View
@@ -80,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dip" >
+            android:padding="10dip" >
         </RadioGroup>
     </HorizontalScrollView>
 
@@ -104,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dip" >
+            android:padding="10dip" >
         </RadioGroup>
     </HorizontalScrollView>
 

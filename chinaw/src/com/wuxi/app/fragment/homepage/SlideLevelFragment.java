@@ -118,7 +118,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		mlvMenu.setOnItemClickListener(this);
 
 		initLeftMenu();// 初始化左侧菜单数据
-		initFragment(null);
+		initFragment(this.getArguments());
 
 		return view;
 	}
@@ -152,22 +152,22 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				if (menuItem.getName().equals("咨询中心")) {
 					InformationCenterFragment informationCenterFragment = new InformationCenterFragment();
 					informationCenterFragment.setMenuItem(menuItem);
-					onTransaction(informationCenterFragment, null);
+					onTransaction(informationCenterFragment, bundle);
 
 				} else if (menuItem.getName().equals("政府信息公开")) {
 
 					PublicGoverMsgFragment publicGoverMsgFragment = new PublicGoverMsgFragment();
 					publicGoverMsgFragment.setMenuItem(menuItem);
-					onTransaction(publicGoverMsgFragment, null);
+					onTransaction(publicGoverMsgFragment, bundle);
 
 				} else if (menuItem.getName().equals("公共服务")) {
 					PublicServiceFragment publicServiceFragment = new PublicServiceFragment();
 					publicServiceFragment.setMenuItem(menuItem);
-					onTransaction(publicServiceFragment, null);
+					onTransaction(publicServiceFragment, bundle);
 				} else if (menuItem.getName().equals("政务大厅")) {
 					GoverSaloonFragment saloonFragment = new GoverSaloonFragment();
 					saloonFragment.setParentMenuItem(menuItem);
-					onTransaction(saloonFragment, null);
+					onTransaction(saloonFragment, bundle);
 				}
 
 				break;

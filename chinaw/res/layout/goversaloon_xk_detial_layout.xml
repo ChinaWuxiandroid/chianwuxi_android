@@ -501,21 +501,12 @@
             </FrameLayout>
         </ScrollView>
 
-        <LinearLayout
-            android:layout_marginTop="10dip"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="#E0E0E0"
-            android:visibility="gone" >
-
-            <TextView
-                android:id="@+id/tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="sdf" />
-        </LinearLayout>
+       <include 
+            layout="@layout/goversaoon_zxbl_layout"
+           />
+       <include 
+            layout="@layout/goversaoon_zxzx_layout"
+           />
     </FrameLayout>
 
     <LinearLayout
@@ -532,9 +523,11 @@
             android:background="@drawable/gover_online_sub_bg"
             android:text="在线办理"
             android:textColor="#ffffff"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:visibility="gone" />
 
         <Button
+            android:id="@+id/btn_zxzx"
             android:layout_width="0dip"
             android:layout_height="25dip"
             android:layout_marginLeft="5dip"
