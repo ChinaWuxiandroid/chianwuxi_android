@@ -53,6 +53,10 @@ public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 	private static final int TITLE_LOAD_SUCCESS = 0;// 头部加载成功
 	protected static final int TITLE_LOAD_FAIL = 1;// 加载失败
 	public static final String ROOTFRAGMENT_KEY="BaseSlideFragment";
+	public static final String SHOWITEM_LAYOUT_INDEXKEY="showitem_layout_index";
+	
+	
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -85,6 +89,11 @@ public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 	 */
 	public void initUI() {
 		super.initUI();
+		Bundle bundle =this.getArguments();
+		int showIndex=0;
+		if(bundle!=null){
+			showIndex=bundle.getInt(SHOWITEM_LAYOUT_INDEXKEY);
+		}
 		mtitleScrollLayout = (TitleScrollLayout) view
 				.findViewById(R.id.title_scroll_action);// 头部控件
 		mtitleScrollLayout.setInitializContentLayoutListner(this);// 设置绑定内容界面监听器
@@ -92,7 +101,7 @@ public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 				.setMenuItemInitLayoutListener(getMenuItemInitLayoutListener());// 设置界面监听处理类
 
 		mtitleScrollLayout.setPerscreenCount(getTitlePerScreenItemCount());
-
+		mtitleScrollLayout.setShowItemIndex(showIndex);//设置显示的默认布局
 		ib_nextItems = (ImageButton) view.findViewById(R.id.btn_next_screen);// 头部下一个按钮
 		ib_nextItems.setOnClickListener(this);
 

@@ -48,9 +48,11 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 	private int level;
 	private PublicServiceContentListFragment publicServiceContentListFragment;
 	private List<Channel> channels;
-	private GridView dishtype;
+	// private GridView dishtype;
 	private ContentChannelAdapter contentChannelAdapter;
-	private RadioGroup publicserivce_rb_2, publicserivce_rb_3;
+	private RadioGroup publicserivce_rb_1, publicserivce_rb_2,
+			publicserivce_rb_3;
+	private boolean isFirst1Change = true;
 	private boolean isFirst2Change = true;
 	private boolean isFirst3Change = true;
 	@SuppressLint("HandlerLeak")
@@ -96,6 +98,7 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 		dev_v_1 = (View) view.findViewById(R.id.dev_v_1);// 分割线
 		dev_v_2 = (View) view.findViewById(R.id.dev_v_2);
 		dev_v_3 = (View) view.findViewById(R.id.dev_v_3);
+		publicserivce_rb_1=(RadioGroup) view.findViewById(R.id.publicserivce_rb_1);
 		publicserivce_rb_2 = (RadioGroup) view
 				.findViewById(R.id.publicserivce_rb_2);
 
@@ -111,10 +114,10 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 		publicserivce_rb_3 = (RadioGroup) view
 				.findViewById(R.id.publicserivce_rb_3);
 
-		dishtype = (GridView) view.findViewById(R.id.dishtype);
+		// dishtype = (GridView) view.findViewById(R.id.dishtype);
 
 		public_detial_tv_title.setText(channel.getChannelName());
-		dishtype.setOnItemClickListener(this);
+		// dishtype.setOnItemClickListener(this);
 		if (channel.getChildrenChannelsCount() == 0
 				&& channel.getChildrenContentsCount() > 0) {// 没有子菜单，有content
 			hideSwitchView(0);
@@ -186,20 +189,26 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 		switch (level) {
 
 		case 1:
-			contentChannelAdapter = new ContentChannelAdapter(channels, context);
-			dishtype.setAdapter(contentChannelAdapter);
-			ViewGroup.LayoutParams params = dishtype.getLayoutParams();
+			//contentChannelAdapter = new ContentChannelAdapter(channels, context);
+			// dishtype.setAdapter(contentChannelAdapter);
+			// ViewGroup.LayoutParams params = dishtype.getLayoutParams();
 
-			int dishtypes = channels.size();
-			params.width = 50 * dishtypes;
+			// int dishtypes = channels.size();
+			// params.width = 50 * dishtypes;
 
-			dishtype.setLayoutParams(params);
+			// dishtype.setLayoutParams(params);
 
-			dishtype.setNumColumns(channels.size());
+			// dishtype.setNumColumns(channels.size());
 
-			Channel checkChannel = channels.get(0);
+			//Channel checkChannel = channels.get(0);
 
-			showChannelView(checkChannel, 1);
+			//showChannelView(checkChannel, 1);
+			
+			Level1ChannelChangeLister level1ChannelChangeLister = new Level1ChannelChangeLister(
+					channels);
+			publicserivce_rb_1
+					.setOnCheckedChangeListener(level1ChannelChangeLister);
+			buildSubChannelsView(1);
 			break;
 		case 2:
 			Level2ChannelChangeLister level2ChannelChangeLister = new Level2ChannelChangeLister(
@@ -229,26 +238,21 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 		for (Channel channle : channels) {
 
 			RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(
-					RadioGroup.LayoutParams.WRAP_CONTENT, 20);
+					RadioGroup.LayoutParams.WRAP_CONTENT,
+					RadioGroup.LayoutParams.WRAP_CONTENT);
 			params.leftMargin = 5;
 
 			RadioButton radioButton = new RadioButton(context);
 			if (index == 0) {
 
 				radioButton.setTextColor(Color.WHITE);
-				/*
-				 * radioButton.setBackground(getResources().getDrawable(
-				 * R.drawable.public_service_channel_2bg));
-				 */
+
 				radioButton
 						.setBackgroundResource(R.drawable.public_service_channel_2bg);
 				showChannelView(channle, level);
 
 			} else {
-				/*
-				 * radioButton.setBackground(getResources().getDrawable(
-				 * R.drawable.public_service_channel_3bg));
-				 */
+
 				radioButton
 						.setBackgroundResource(R.drawable.public_service_channel_3bg);
 
@@ -258,8 +262,9 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 			radioButton.setTextSize(12);
 			radioButton.setPadding(2, 2, 2, 2);
 			radioButton.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-			if (level == 2) {
+			if (level == 1) {
+				publicserivce_rb_1.addView(radioButton, params);
+			} else if (level == 2) {
 				publicserivce_rb_2.addView(radioButton, params);
 
 			} else if (level == 3) {
@@ -452,6 +457,48 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 			}
 
 			isFirst2Change = false;
+
+		}
+
+	};
+
+	private class Level1ChannelChangeLister implements
+			RadioGroup.OnCheckedChangeListener {
+
+		private List<Channel> channels;
+
+		public Level1ChannelChangeLister(List<Channel> channels) {
+			this.channels = channels;
+		}
+
+		@Override
+		public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+			for (int i = 0; i < group.getChildCount(); i++) {
+
+				RadioButton r = (RadioButton) group.getChildAt(i);
+
+				if (isFirst1Change && i == 0) {
+					r.setBackgroundColor(Color.TRANSPARENT);
+					r.setTextColor(Color.BLACK);
+				}
+
+				if (r.isChecked()) {
+
+					r.setBackgroundResource(R.drawable.public_service_channel_2bg);
+					r.setTextColor(Color.WHITE);
+
+					showChannelView(channels.get(i), 1);
+
+				} else {
+
+					r.setBackgroundResource(R.drawable.public_service_channel_3bg);
+					r.setTextColor(Color.BLACK);
+				}
+
+			}
+
+			isFirst1Change = false;
 
 		}
 

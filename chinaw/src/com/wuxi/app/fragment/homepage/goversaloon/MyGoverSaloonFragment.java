@@ -100,7 +100,7 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 			myapplyloadMoreButton.setText("more");
 
 		} else {
-			myapplyloadMoreButton.setText("没有数据了...");
+			myapplyloadMoreButton.setText(" ");
 		}
 
 		List<MyApply> myApplies = myApplyWrapper.getMyApplies();

@@ -176,7 +176,7 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 			loadMoreButton.setText("more");
 
 		} else {
-			loadMoreButton.setText("没有数据了...");
+			loadMoreButton.setText(" ");
 		}
 
 		List<GoverSaoonItem> goverSaoonItems = goverSaoonItemWrapper

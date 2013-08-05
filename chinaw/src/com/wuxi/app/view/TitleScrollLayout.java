@@ -57,6 +57,15 @@ public class TitleScrollLayout extends ViewGroup {
 	private int perscreenCount = PERSCREEN_ITEM_COUNT;// 每屏数量,默认为7
 	private int checkPositons[];// 选中的坐标
 	private MenuItemInitLayoutListener menuItemInitLayoutListener;// 菜单点击与指点界面绑定监听器
+	private int showItemIndex=0;//默认显示的item布局序号
+
+	public int getShowItemIndex() {
+		return showItemIndex;
+	}
+
+	public void setShowItemIndex(int showItemIndex) {
+		this.showItemIndex = showItemIndex;
+	}
 
 	public MenuItemInitLayoutListener getMenuItemInitLayoutListener() {
 		return menuItemInitLayoutListener;
@@ -328,7 +337,7 @@ public class TitleScrollLayout extends ViewGroup {
 					child.setAdapter(new TitleChannelAdapter(context,
 							R.layout.title_grid_item_layout,
 							new int[] { R.id.tv_actionname }, null,
-							onScreenItems, currentScreen));
+							onScreenItems, currentScreen,0));
 
 					child.setOnItemClickListener(new TitleItemlOnclick());
 					currentScreen++;
@@ -354,7 +363,7 @@ public class TitleScrollLayout extends ViewGroup {
 				child.setAdapter(new TitleChannelAdapter(context,
 						R.layout.title_grid_item_layout,
 						new int[] { R.id.tv_actionname }, null, onScreenItems,
-						currentScreen));
+						currentScreen,0));
 
 				child.setOnItemClickListener(new TitleItemlOnclick());
 				addView(child);
@@ -378,7 +387,7 @@ public class TitleScrollLayout extends ViewGroup {
 			checkPositons[j] = -1;
 		}
 
-		checkPositons[0] = 0;// 默认选中第一屏第一个Chanel
+		checkPositons[0] = showItemIndex;// 默认选中第一屏第一个Chanel
 		int currentScreen = 0;// 当前屏
 
 		List<MenuItem> onScreenItems = null;// 一个屏上的图标
@@ -394,7 +403,7 @@ public class TitleScrollLayout extends ViewGroup {
 					child.setAdapter(new TitleChannelAdapter(context,
 							R.layout.title_grid_item_layout,
 							new int[] { R.id.tv_actionname }, null,
-							onScreenItems, currentScreen));
+							onScreenItems, currentScreen,showItemIndex));
 
 					child.setOnItemClickListener(new TitleItemlOnclick());
 					currentScreen++;
@@ -420,7 +429,7 @@ public class TitleScrollLayout extends ViewGroup {
 				child.setAdapter(new TitleChannelAdapter(context,
 						R.layout.title_grid_item_layout,
 						new int[] { R.id.tv_actionname }, null, onScreenItems,
-						currentScreen));
+						currentScreen,showItemIndex));
 
 				child.setOnItemClickListener(new TitleItemlOnclick());
 				addView(child);
@@ -434,10 +443,10 @@ public class TitleScrollLayout extends ViewGroup {
 		/**
 		 * 显示一个的子界面
 		 */
-		if (menuItems.get(0) != null&&initializContentLayoutListner!=null&&menuItemInitLayoutListener!=null) {
+		if (menuItems.get(showItemIndex) != null&&initializContentLayoutListner!=null&&menuItemInitLayoutListener!=null) {
 
 			menuItemInitLayoutListener.bindMenuItemLayout(
-					initializContentLayoutListner, menuItems.get(0));
+					initializContentLayoutListner, menuItems.get(showItemIndex));
 
 		}
 

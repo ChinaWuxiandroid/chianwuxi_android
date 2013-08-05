@@ -350,7 +350,7 @@ public class DynamicTitleLayout extends ViewGroup {
 					child.setAdapter(new TitleChannelAdapter(context,
 							R.layout.title_grid_item_layout,
 							new int[] { R.id.tv_actionname }, null,
-							onScreenItems, currentScreen));
+							onScreenItems, currentScreen,0));
 
 					child.setOnItemClickListener(new TitleItemlOnclick());
 					currentScreen++;
@@ -376,7 +376,7 @@ public class DynamicTitleLayout extends ViewGroup {
 				child.setAdapter(new TitleChannelAdapter(context,
 						R.layout.title_grid_item_layout,
 						new int[] { R.id.tv_actionname }, null, onScreenItems,
-						currentScreen));
+						currentScreen,0));
 
 				child.setOnItemClickListener(new TitleItemlOnclick());
 				addView(child);
@@ -417,7 +417,7 @@ public class DynamicTitleLayout extends ViewGroup {
 					child.setAdapter(new TitleChannelAdapter(context,
 							R.layout.title_grid_item_layout,
 							new int[] { R.id.tv_actionname }, null,
-							onScreenItems, currentScreen));
+							onScreenItems, currentScreen,0));
 
 					child.setOnItemClickListener(new TitleItemlOnclick());
 					currentScreen++;
@@ -443,7 +443,7 @@ public class DynamicTitleLayout extends ViewGroup {
 				child.setAdapter(new TitleChannelAdapter(context,
 						R.layout.title_grid_item_layout,
 						new int[] { R.id.tv_actionname }, null, onScreenItems,
-						currentScreen));
+						currentScreen,0));
 
 				child.setOnItemClickListener(new TitleItemlOnclick());
 				addView(child);

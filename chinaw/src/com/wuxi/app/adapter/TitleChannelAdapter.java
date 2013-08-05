@@ -23,14 +23,15 @@ public class TitleChannelAdapter extends BasicAdapter {
 	@SuppressWarnings("rawtypes")
 	private List items;
 	private int screenIndex;
-
+	private int showIndex;
 	@SuppressWarnings("rawtypes")
 	public TitleChannelAdapter(Context context, int view, int[] viewId,
-			String[] dataName, List items, int screenIndex) {
+			String[] dataName, List items, int screenIndex,int showIndex) {
 		super(context, view, viewId, dataName);
 
 		this.items = items;
 		this.screenIndex = screenIndex;
+		this.showIndex=showIndex;
 
 	}
 
@@ -76,7 +77,7 @@ public class TitleChannelAdapter extends BasicAdapter {
 			viewHolder.title_text = (TextView) convertView
 					.findViewById(viewId[0]);
 
-			if (screenIndex == 0 && position == 0) {
+			if (screenIndex == 0 && position == showIndex) {
 
 				viewHolder.title_text
 				.setBackgroundResource(R.drawable.title_item_select_bg);

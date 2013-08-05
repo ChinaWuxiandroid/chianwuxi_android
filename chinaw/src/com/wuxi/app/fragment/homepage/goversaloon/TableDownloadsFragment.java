@@ -211,7 +211,7 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 			loadMoreButton.setText("more");
 
 		} else {
-			loadMoreButton.setText("没有数据了...");
+			loadMoreButton.setText(" ");
 		}
 
 		List<GoverTableDownLoad> goDownLoads = goverTableDownLoadWrapper

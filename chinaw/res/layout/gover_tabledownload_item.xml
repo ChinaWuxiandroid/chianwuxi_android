@@ -6,7 +6,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:layout_marginLeft="8dip">
 
         <TextView
             android:id="@+id/gover_tb_name"
@@ -15,6 +16,7 @@
             android:layout_alignParentTop="true" />
 
         <TextView
+            android:layout_marginTop="10dip"
             android:id="@+id/gover_tb_filename"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
