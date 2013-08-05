@@ -16,7 +16,7 @@
             android:layout_centerVertical="true"
             android:layout_margin="5dip"
             android:textColor="#2894FF"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/index_news_title"
@@ -25,12 +25,12 @@
             android:layout_centerInParent="true"
             android:layout_toLeftOf="@+id/index_news_btn"
             android:layout_toRightOf="@+id/index_num_text"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <ImageView
             android:id="@+id/index_news_btn"
             android:layout_width="wrap_content"
-            android:layout_height="36dip"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_margin="5dip"

@@ -17,9 +17,6 @@ import org.apache.http.util.EntityUtils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.widget.Toast;
-
-import com.wuxi.app.R;
 
 public class NetworkUtil {
 

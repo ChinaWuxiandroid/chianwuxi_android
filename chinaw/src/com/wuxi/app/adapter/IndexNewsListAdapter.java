@@ -48,7 +48,7 @@ public class IndexNewsListAdapter extends BasicAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Content content = contents.get(position);
-		
+
 		ViewHolder viewHolder = null;
 		if (convertView == null) {
 			convertView = getInflater().inflate(getView(), null);
@@ -64,19 +64,8 @@ public class IndexNewsListAdapter extends BasicAdapter {
 
 		viewHolder.numText.setText((position + 1) + "");
 		String textStr = "";
-		String title = content.getTitle();
-		String docSummary = content.getDocSummary();
-		if (docSummary != null && !docSummary.equals("")) {
-			if (docSummary.length() >= 10) {
-				docSummary = docSummary.substring(0, 10) + "...";
-			}
-		}
-		if(docSummary!=null&&!docSummary.equals("")){
-			textStr = title + ":" + docSummary;
-		}else{
-			textStr = title;
-		}
-		
+		textStr = content.getTitle();
+
 		viewHolder.title_text.setText(textStr);
 		return convertView;
 	}

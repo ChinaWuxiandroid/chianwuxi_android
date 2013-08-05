@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -20,20 +20,26 @@
                 style="@style/index_newstab_style"
                 android:background="@drawable/index_newstab_style"
                 android:checked="true"
-                android:text="头条新闻" />
+                android:text="无锡要闻" />
 
             <RadioButton
                 android:id="@+id/index_rb_announcements"
                 style="@style/index_newstab_style"
                 android:background="@drawable/index_newstab_style"
-                android:text="推荐公告" />
+                android:text="公告公示" />
         </RadioGroup>
     </LinearLayout>
 
-    <ListView
+     <android.support.v4.view.ViewPager
+        
+                    android:id="@+id/index_title_news_page"
+                    android:layout_width="fill_parent"
+                    android:layout_height="170dip" />
+    
+   <!--  <ListView
         android:id="@+id/index_news_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#FCFCFC" />
+        android:background="#FCFCFC" /> -->
 
 </LinearLayout>

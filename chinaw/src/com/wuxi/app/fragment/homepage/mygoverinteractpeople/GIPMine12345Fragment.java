@@ -109,7 +109,6 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment{
 
 	@Override
 	protected void init() {
-		System.out.println("init");
 		mListView=(ListView) view.findViewById(R.id.goverinterpeople_mine_12345_listview);
 		loadData();	
 	}
@@ -137,7 +136,6 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment{
 					if (null != letterWrapper) {
 						//						CacheUtil.put(menuItem.getChannelId(), titleChannels);// 缓存起来
 						letters=letterWrapper.getData();
-						System.out.println("load sueccess");
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 
 					} else {
@@ -167,7 +165,6 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment{
 
 
 	public void showLettersList(){
-		System.out.println("show");
 		LettersListViewAdapter adapter=new LettersListViewAdapter();
 		if(letters==null||letters.size()==0){
 			Toast.makeText(context, "对不起，暂无信息", 2000).show();

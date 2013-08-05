@@ -23,9 +23,7 @@ import com.wuxi.app.engine.GoverSaoonItemService;
 import com.wuxi.app.engine.GoverSaoonWorkFlowImageService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
 import com.wuxi.domain.GoverSaoonItem;
-import com.wuxi.domain.GoverSaoonItemQTDetail;
 import com.wuxi.domain.GoverSaoonItemZSDetail;
-import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**

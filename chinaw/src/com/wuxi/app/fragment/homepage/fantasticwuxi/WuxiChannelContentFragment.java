@@ -332,7 +332,7 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 			params.leftMargin = 5;
 			RadioButton radioButton = new RadioButton(context);
 			if (index == 0) {
-				
+			
 				radioButton.setTextColor(Color.WHITE);
 				
 				radioButton.setBackgroundResource(R.drawable.wuxi_content_channelselect_);

@@ -43,10 +43,13 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment{
 			break;
 
 		case MenuItem.CHANNEL_MENU:
-			if(menuItem.getName().equals("信访接待")){
-				MainMineFragment g9 = new GoverInterPeoplePetitionReceptFragment();
-				onTransaction(g9);
-			}
+//			if(menuItem.getName().equals("信访接待")){
+//				MainMineFragment g9 = new GoverInterPeoplePetitionReceptFragment();
+//				onTransaction(g9);
+//			}
+			GIPContentFragment gIPContentFragment=new GIPContentFragment();
+			gIPContentFragment.setParentItem(menuItem);
+			onTransaction(gIPContentFragment);
 			break;
 		case MenuItem.APP_MENU:
 			//我的政民互动

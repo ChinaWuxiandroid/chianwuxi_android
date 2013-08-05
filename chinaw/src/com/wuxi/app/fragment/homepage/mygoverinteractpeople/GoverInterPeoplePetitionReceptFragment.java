@@ -8,6 +8,10 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
 
 public class GoverInterPeoplePetitionReceptFragment extends RadioButtonChangeFragment{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final  int[] radioButtonIds={
 			R.id.goverinterpeople_recept_radioButton_receptDayInform,
 			R.id.goverinterpeople_recept_radioButton_petitonRule,

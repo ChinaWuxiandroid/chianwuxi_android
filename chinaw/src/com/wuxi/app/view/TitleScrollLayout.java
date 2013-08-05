@@ -110,25 +110,20 @@ public class TitleScrollLayout extends ViewGroup {
 					childView.layout(childLeft, 0, childLeft + childWidth,
 							childView.getMeasuredHeight());
 					childLeft += childWidth;
-
 				}
 			}
 		}
-
 	}
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
 		final int width = MeasureSpec.getSize(widthMeasureSpec);
 		final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
 		if (widthMode != MeasureSpec.EXACTLY) {
 			throw new IllegalStateException(
 					"ScrollLayout only canmCurScreen run at EXACTLY mode!");
 		}
-
 		final int heightMode = MeasureSpec.getMode(heightMeasureSpec);
 		if (heightMode != MeasureSpec.EXACTLY) {
 			throw new IllegalStateException(
@@ -144,12 +139,12 @@ public class TitleScrollLayout extends ViewGroup {
 		scrollTo(mCurScreen * width, 0);
 
 	}
-
+	
 	@Override
 	public void computeScroll() {
 		if (mScroller.computeScrollOffset()) {// 动画还没有结束
 			scrollTo(mScroller.getCurrX(), mScroller.getCurrY());// //
-																	// 产生平滑的动画效果，根据当前偏移量，每次滚动一点
+			// 产生平滑的动画效果，根据当前偏移量，每次滚动一点
 			postInvalidate();// // 此时同样也需要刷新View ，否则效果可能有误差
 		}
 	}
@@ -434,8 +429,8 @@ public class TitleScrollLayout extends ViewGroup {
 
 			i++;
 		}
-		
-		
+
+
 		/**
 		 * 显示一个的子界面
 		 */
@@ -520,7 +515,7 @@ public class TitleScrollLayout extends ViewGroup {
 						cityNCityMapFragment = (CityMapFragment) fragment;
 
 					}
-					
+
 					if(fragment instanceof ChannelContentListFragment){
 						channelContentListFragment=(ChannelContentListFragment)fragment;
 						channelContentListFragment.setChannel(channel);
@@ -529,10 +524,10 @@ public class TitleScrollLayout extends ViewGroup {
 					if (initializContentLayoutListner != null) {
 						if (nafragment != null) {
 							initializContentLayoutListner
-									.bindContentLayout(nafragment);
+							.bindContentLayout(nafragment);
 						} else if(cityNCityMapFragment!=null){
 							initializContentLayoutListner
-									.bindContentLayout(cityNCityMapFragment);
+							.bindContentLayout(cityNCityMapFragment);
 						}else if(channelContentListFragment!=null){
 							initializContentLayoutListner.bindContentLayout(channelContentListFragment);
 						}

@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ import com.wuxi.exception.NetException;
  * 
  */
 public class MainIndexFragment extends BaseFragment implements
-		OnCheckedChangeListener {
+		OnCheckedChangeListener, OnPageChangeListener {
 
 	private View view;
 	private Context context;
@@ -53,7 +54,7 @@ public class MainIndexFragment extends BaseFragment implements
 	private LayoutInflater mInflater;
 
 	/** —————————ListView——————————— **/
-	private ListView listView;
+	// private ListView listView;
 	private IndexNewsListAdapter listAdapter;
 	public static final int[] newslist_viewid = { R.id.index_num_text,
 			R.id.index_news_title };
@@ -78,7 +79,9 @@ public class MainIndexFragment extends BaseFragment implements
 	private static final int NEWS_LOAD_FAIL = 5;// 新闻加载失败
 	private static final int PAGE_ITEM = 6;// 每屏显示菜单数目;
 	private List<View> mGridViews;
+	private List<View> mListViews=new ArrayList<View>();
 	private ViewPager viewpagerLayout;
+	private ViewPager index_title_news_page;
 	private List<Content> announcements;// 公告集合
 	private List<Content> news;// 新闻集合
 
@@ -127,12 +130,21 @@ public class MainIndexFragment extends BaseFragment implements
 
 	private void initUI() {
 
-		listView = (ListView) view.findViewById(R.id.index_news_list);
+		
 		pb = (ProgressBar) view.findViewById(R.id.index_progess);
 		viewpagerLayout = (ViewPager) view.findViewById(R.id.viewpagerLayout);
+		index_title_news_page = (ViewPager) view
+				.findViewById(R.id.index_title_news_page);// 首页分页
+		
+		for(int i=0;i<2;i++){
+			mListViews.add(bulidListView());
+		}
+		index_title_news_page.setAdapter(new MainDataViewPageAdapter(mListViews));//设置适配器
+		index_title_news_page.setOnPageChangeListener(this);
 		main_tab_radiogroup = (RadioGroup) view
 				.findViewById(R.id.main_tab_radiogroup);
 		main_tab_radiogroup.setOnCheckedChangeListener(this);
+		
 
 		LoadGrid();
 		loadNews();// 加载新闻数据
@@ -243,7 +255,7 @@ public class MainIndexFragment extends BaseFragment implements
 			i++;
 		}
 
-		viewpagerLayout.setAdapter(new MenuItemViewPageAdapter(mGridViews));// 设置ViewPage适配器
+		viewpagerLayout.setAdapter(new MainDataViewPageAdapter(mGridViews));// 设置ViewPage适配器
 
 	}
 
@@ -267,6 +279,21 @@ public class MainIndexFragment extends BaseFragment implements
 		return gridView;
 	}
 
+	 /**
+	  * 
+	  *@author wanglu 泰得利通
+	  * @return
+	  */
+	private ListView bulidListView() {
+		
+		View layoutView=mInflater.inflate(
+				R.layout.index_news_announts_list_layout, null);
+		ListView listView = (ListView) layoutView.findViewById(R.id.index_news_lv);
+
+		return listView;
+
+	}
+
 	/**
 	 * 
 	 * wanglu 泰得利通 显示新闻或推荐信息数据
@@ -274,13 +301,15 @@ public class MainIndexFragment extends BaseFragment implements
 	 * @param list
 	 * 
 	 */
-	private void showNewsOrAnncountData(List<Content> list) {
-
+	private void showNewsOrAnncountData(ListView listView,List<Content> list) {
+		if (list.size() == 3) {
+			list.remove(2);
+		}
 		listAdapter = new IndexNewsListAdapter(context,
 				R.layout.index_newslist_layout, newslist_viewid, list,
 				newslist_dataName);
 		listView.setAdapter(listAdapter);
-		setViewHeight(listView);
+		 //setViewHeight(listView);
 	}
 
 	/**
@@ -303,6 +332,7 @@ public class MainIndexFragment extends BaseFragment implements
 		ViewGroup.LayoutParams params = listView.getLayoutParams();
 		params.height = totalHeight
 				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+		
 		listView.setLayoutParams(params);
 	}
 
@@ -314,7 +344,7 @@ public class MainIndexFragment extends BaseFragment implements
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-		
+
 			MenuItem checkMenuItem = (MenuItem) parent
 					.getItemAtPosition(position);
 			SlideLevelFragment saveFragment = new SlideLevelFragment();
@@ -327,8 +357,6 @@ public class MainIndexFragment extends BaseFragment implements
 			saveFragment.setMenuItem(checkMenuItem);
 			managers.IntentFragment(saveFragment);
 
-
-			
 		}
 	};
 
@@ -337,11 +365,11 @@ public class MainIndexFragment extends BaseFragment implements
 	 * @author wanglu 泰得利通 导航分页适配器
 	 * 
 	 */
-	private class MenuItemViewPageAdapter extends PagerAdapter {
+	private class MainDataViewPageAdapter extends PagerAdapter {
 
 		private List<View> mListViews;
 
-		public MenuItemViewPageAdapter(List<View> mGridViews) {
+		public MainDataViewPageAdapter(List<View> mGridViews) {
 
 			this.mListViews = mGridViews;
 		}
@@ -383,10 +411,10 @@ public class MainIndexFragment extends BaseFragment implements
 
 		switch (checkedId) {
 		case R.id.index_rb_announcements:// 推荐公告
-			loadAnnouncements();
+			//loadAnnouncements();
 			break;
 		case R.id.index_rb_news:// 新闻
-			loadNews();// 加载信息Content
+			//loadNews();// 加载信息Content
 			break;
 
 		}
@@ -423,7 +451,7 @@ public class MainIndexFragment extends BaseFragment implements
 						CacheUtil.put(NEW_CACHE_KEY, news);// 放入缓存
 					} else {
 						Message msg = handler.obtainMessage();
-						msg.obj = "获取新闻列表失败";
+						msg.obj = "获取要闻列表失败";
 						handler.sendMessage(msg);
 					}
 				} catch (JSONException e) {
@@ -458,8 +486,8 @@ public class MainIndexFragment extends BaseFragment implements
 	 * wanglu 泰得利通 显示新闻数据
 	 */
 	private void showNews() {
-
-		showNewsOrAnncountData(news);
+		ListView listView=(ListView) mListViews.get(0);
+		showNewsOrAnncountData(listView,news);
 	}
 
 	/**
@@ -526,6 +554,33 @@ public class MainIndexFragment extends BaseFragment implements
 	 * wanglu 泰得利通 显示推荐信息数据
 	 */
 	private void showAnnouncements() {
-		showNewsOrAnncountData(announcements);
+		ListView listView=(ListView) mListViews.get(1);
+		showNewsOrAnncountData(listView,announcements);
+	}
+
+	
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		
+	}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		
+	}
+
+	@Override
+	public void onPageSelected(int position) {
+		switch(position){
+		case 0:
+			main_tab_radiogroup.check(R.id.index_rb_news);
+			loadNews();
+			break;
+		case 1:
+			main_tab_radiogroup.check(R.id.index_rb_announcements);
+			loadAnnouncements();
+			break;
+		}
+		
 	}
 }

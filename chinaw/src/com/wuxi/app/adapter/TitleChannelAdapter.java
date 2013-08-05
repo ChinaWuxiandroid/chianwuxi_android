@@ -58,7 +58,6 @@ public class TitleChannelAdapter extends BasicAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-
 		Object item = items.get(position);
 		String chanelName = "";// 频道名称
 		if (item instanceof Channel) {
@@ -80,7 +79,7 @@ public class TitleChannelAdapter extends BasicAdapter {
 			if (screenIndex == 0 && position == 0) {
 
 				viewHolder.title_text
-						.setBackgroundResource(R.drawable.title_item_select_bg);
+				.setBackgroundResource(R.drawable.title_item_select_bg);
 				viewHolder.title_text.setTextColor(Color.WHITE);
 
 			}
@@ -89,7 +88,6 @@ public class TitleChannelAdapter extends BasicAdapter {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-
 		viewHolder.title_text.setText(chanelName);
 		return convertView;
 	}

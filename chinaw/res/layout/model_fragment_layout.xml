@@ -6,17 +6,16 @@
 
     <include
         android:id="@+id/title_scroll"
-        layout="@layout/title_scroll_action_layout"
-        android:layout_width="fill_parent" 
-        android:background="#CEDBE7"
+        android:layout_width="fill_parent"
         android:layout_height="0dip"
-        android:layout_weight="1.5"/>
+        android:layout_weight="1.5"
+        layout="@layout/title_scroll_action_layout"
+        android:background="#CEDBE7" />
 
     <FrameLayout
         android:id="@+id/model_main"
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="8.5"
-       />
+        android:layout_weight="8.5" />
 
 </LinearLayout>
