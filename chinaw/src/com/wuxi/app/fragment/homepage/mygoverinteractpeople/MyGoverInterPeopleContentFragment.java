@@ -36,33 +36,31 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment{
 
 		switch (menuItem.getType()) {
 		case MenuItem.CUSTOM_MENU:
-			if(menuItem.getName().equals("政务微博群")){
-				MainMineFragment g4 = new GoverInterPeopleWeibosFragment();
-				onTransaction(g4);
-			}
+			GIPContentFragment gIPMenuItemContentFragment=new GIPContentFragment();
+			gIPMenuItemContentFragment.setParentItem(menuItem);
+			onTransaction(gIPMenuItemContentFragment);
 			break;
 
 		case MenuItem.CHANNEL_MENU:
-//			if(menuItem.getName().equals("信访接待")){
-//				MainMineFragment g9 = new GoverInterPeoplePetitionReceptFragment();
-//				onTransaction(g9);
-//			}
-			GIPContentFragment gIPContentFragment=new GIPContentFragment();
-			gIPContentFragment.setParentItem(menuItem);
-			onTransaction(gIPContentFragment);
+			GIPContentFragment gIPChannelContentFragment=new GIPContentFragment();
+			gIPChannelContentFragment.setParentItem(menuItem);
+			onTransaction(gIPChannelContentFragment);
 			break;
 		case MenuItem.APP_MENU:
-			//我的政民互动
+			//我的政民互动*
 			if(menuItem.getAppUI().equals("MyPoliticalInteraction")){
 				onTransaction(new GoverInterPeopleMineFragment());
 			}
-			//1345来信办理平台
+			//1345来信办理平台*
 			else if(menuItem.getAppUI().equals("Letter12345")){
 				onTransaction(new GoverInterPeople12345Fragment());
 			}
-			// 征求意见平台
+			// 征求意见平台*
 			else if(menuItem.getAppUI().equals("QuestionnairePlatform")){
-				onTransaction(new GoverInterPeopleSuggestFragment());
+//				onTransaction(new GoverInterPeopleSuggestFragment());
+				GoverInterPeopleSuggestFragment goverInterPeopleSuggestFragment=new GoverInterPeopleSuggestFragment();
+				goverInterPeopleSuggestFragment.setParentItem(menuItem);
+				onTransaction(goverInterPeopleSuggestFragment);	
 			}	
 			//视频直播平台
 			else if(menuItem.getAppUI().equals("VideoBroadcastPlatform")){
@@ -80,7 +78,7 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment{
 			else if(menuItem.getAppUI().equals("PublicTel")){
 				onTransaction(new GoverInterPeopleOpenTelFragment());
 			}
-			//公众监督
+			//公众监督*
 			else if(menuItem.getAppUI().equals("PublicOversight")){
 				onTransaction(new GoverInterPeoplePublicSuperviseFragment());
 			}

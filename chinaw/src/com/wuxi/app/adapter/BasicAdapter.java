@@ -44,3 +44,4 @@ public abstract class BasicAdapter extends BaseAdapter {
 		return mDataName;
 	}
 }
+
