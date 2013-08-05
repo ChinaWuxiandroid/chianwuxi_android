@@ -9,7 +9,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -51,6 +53,8 @@ public class GoverSaloonDetailCFFragment extends BaseItemContentFragment
 	private RadioGroup rb_detail;
 	private TextView tv_content;
 	private ImageView iv_lc;
+	private Button btn_zxzx;
+	private LinearLayout ll_zxnr;// 在线办理
 	private Handler handler = new Handler() {
 
 		public void handleMessage(android.os.Message msg) {
@@ -60,9 +64,9 @@ public class GoverSaloonDetailCFFragment extends BaseItemContentFragment
 				break;
 			case LC_LOADSCUCESS:
 				showLcImage();
-			break;
+				break;
 			case LC_LOADERROR:
-				
+
 			case LOAD_ITEM_DETIAL_FAIL:
 				String tip = msg.obj.toString();
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
@@ -88,7 +92,9 @@ public class GoverSaloonDetailCFFragment extends BaseItemContentFragment
 		tv_content = (TextView) view.findViewById(R.id.tv_content);
 		rb_detail.setOnCheckedChangeListener(this);
 		goverSaoonItem = (GoverSaoonItem) getArguments().get("goverSaoonItem");
-
+		btn_zxzx = (Button) view.findViewById(R.id.btn_zxzx);
+		btn_zxzx.setOnClickListener(this);
+		ll_zxnr = (LinearLayout) view.findViewById(R.id.ll_zxnr);
 		loadItemDetail();
 
 		tv_ssmc_name.setOnClickListener(this);
@@ -185,6 +191,13 @@ public class GoverSaloonDetailCFFragment extends BaseItemContentFragment
 			}
 
 			break;
+		case R.id.btn_zxzx:// 在线咨询
+			if (ll_zxnr.getVisibility() == LinearLayout.GONE) {
+				ll_zxnr.setVisibility(LinearLayout.VISIBLE);
+
+			} else if (ll_zxnr.getVisibility() == LinearLayout.VISIBLE) {
+				ll_zxnr.setVisibility(LinearLayout.GONE);
+			}
 
 		}
 

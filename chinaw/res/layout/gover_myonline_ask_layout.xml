@@ -17,42 +17,37 @@
         android:layout_weight="9"
         android:orientation="vertical" >
 
-        <LinearLayout
+        <RadioGroup
+            android:id="@+id/gover_btn_rg"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_marginBottom="10dip"
+            android:layout_marginLeft="5dip"
+            android:layout_marginTop="10dip"
+            android:orientation="horizontal" >
 
-            <RadioGroup
-                android:id="@+id/gover_btn_rg"
-                android:layout_width="fill_parent"
+            <RadioButton
+                android:id="@+id/gover_sallon_my_ask_detail"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dip"
-                android:layout_marginLeft="5dip"
-                android:layout_marginTop="10dip"
-                android:orientation="horizontal" >
+                android:background="@drawable/gover_saloon_btn_selector"
+                android:button="@null"
+                android:padding="5dip"
+                android:text="我的咨询内容"
+                android:textSize="12sp" 
+                />
 
-                <RadioButton
-                    android:id="@+id/gover_sallon_my_ask_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/gover_saloon_btn_selector"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="我的咨询内容"
-                    android:textSize="12sp" />
-
-                <RadioButton
-                    android:id="@+id/gover_sallon_my_goon_ask"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dip"
-                    android:background="@drawable/gover_saloon_btn_selector"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="继续咨询"
-                    android:textSize="12sp" />
-            </RadioGroup>
-        </LinearLayout>
+            <RadioButton
+                android:id="@+id/gover_sallon_my_goon_ask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dip"
+                android:background="@drawable/gover_saloon_btn_selector"
+                android:button="@null"
+               android:padding="5dip"
+                android:text="继续咨询"
+                android:textSize="12sp" />
+        </RadioGroup>
 
         <LinearLayout
             android:id="@+id/gover_myonlineask_detail"
@@ -65,19 +60,22 @@
             android:visibility="gone" >
 
             <TextView
+                android:id="@+id/tv_itemid"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="办件序号: (40082015454545454545454545)"
+                android:text="办件序号:"
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/tv_content"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
-                android:text="咨询内容:关于申报高科技企业条件的咨询\n\n[2013-7-5 15:03:10]"
+                android:text="咨询内容:"
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/tv_answerContent"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"

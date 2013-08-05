@@ -216,6 +216,15 @@ public class Constants {
 		public static final String GETGOVER_ITEMDETIAL_QZ_URL="http://3g.wuxi.gov.cn/api/zhengwu/item/QZ.json?id={id}";
 		
 		/**
+		 * 政务大厅办件统计
+		 */
+		public static final String GETGOVEDR_ITEM_COUNT_URL="http://3g.wuxi.gov.cn/api/zhengwu/allcount.json";
+		
+		/**
+		 * 政务大厅，办件在线咨询详情
+		 */
+		public static final String GETGOVER_ONLINEASK_DETAIL_URL="http://3g.wuxi.gov.cn/api/zhengwu/consult/{id}.json?access_token={access_token}";
+		/**
 		 * 政务大厅流程图片获取
 		 */
 		public static final String GETLIUC_IMG_URL="http://3g.wuxi.gov.cn/api/zhengwu/lcimg/{id}.json";
@@ -230,6 +239,8 @@ public class Constants {
 		 * 政府信息公开  提交自定义表单信息的URL
 		 * */
 		public static final String SUBMIT_SELFFORM_URL="http://3g.wuxi.gov.cn/api/selfforms/submit.json";
+		
+		
 	}
 
 	/**

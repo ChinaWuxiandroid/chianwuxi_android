@@ -44,7 +44,7 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 	private RadioButton gover_sallon_my_apply;
 	private ListView gover_saloon_lv_myapply;// 我的申请
 	private ListView gover_saloon_lv_myconsult;// 我的在线咨询
-	private static final String ACCESS_TOKEN = "bd58fcdfe5b54f4c95ed5f2e3a945f7c";
+	public  static final String ACCESS_TOKEN = "bd58fcdfe5b54f4c95ed5f2e3a945f7c";
 
 	private static final int PAGE_SIZE = 10;
 	private static final int MYCONSULT_CHECKED = 0;// 标识哪个按钮选中

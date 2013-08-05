@@ -9,7 +9,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -49,6 +51,8 @@ public class GoverSaloonDetailZSFragment extends BaseItemContentFragment
 	private TextView tv_content;
 	private ImageView iv_zslc;
 	private Bitmap bitmap;
+	private Button btn_zxzx;
+	private LinearLayout ll_zxnr;// 在线办理
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 
@@ -91,6 +95,11 @@ public class GoverSaloonDetailZSFragment extends BaseItemContentFragment
 		loadItemDetail();
 
 		tv_ssmc_name.setOnClickListener(this);
+		
+		
+		btn_zxzx = (Button) view.findViewById(R.id.btn_zxzx);
+		btn_zxzx.setOnClickListener(this);
+		ll_zxnr = (LinearLayout) view.findViewById(R.id.ll_zxnr);
 	}
 
 	protected void showItemDetail() {
@@ -183,6 +192,13 @@ public class GoverSaloonDetailZSFragment extends BaseItemContentFragment
 			}
 
 			break;
+		case R.id.btn_zxzx:// 在线咨询
+			if (ll_zxnr.getVisibility() == LinearLayout.GONE) {
+				ll_zxnr.setVisibility(LinearLayout.VISIBLE);
+
+			} else if (ll_zxnr.getVisibility() == LinearLayout.VISIBLE) {
+				ll_zxnr.setVisibility(LinearLayout.GONE);
+			}
 
 		}
 

@@ -1,13 +1,27 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
+import org.json.JSONException;
+
+import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wuxi.app.R;
+import com.wuxi.app.engine.GoversaoonOnlineASKDetailService;
 import com.wuxi.app.fragment.BaseSlideFragment;
+import com.wuxi.app.util.TimeFormateUtil;
+import com.wuxi.domain.GoversaoonOnlineASKDetail;
 import com.wuxi.domain.Myconsult;
+import com.wuxi.exception.NODataException;
+import com.wuxi.exception.NetException;
 
 /**
  * 
@@ -20,67 +34,92 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 	private RadioGroup gover_btn_rg;
 	private LinearLayout gover_myonlineask_detail;// 咨询类容相信信息视图
 	private LinearLayout gover_myonline_goonask;// 继续咨询视图
-	private RadioButton gover_sallon_my_ask_detail;// 我的咨询内容
-	private RadioButton gover_sallon_my_goon_ask;// 咨询咨询
-	public static final int MYASK = 1;// 我的咨询内容标识
-	public static final int GOASK = 2;// 继续咨询标识
-	private int showType = MYASK;
+
+	protected static final int LOAD_DETAIL_SUCCESS = 1;
+	protected static final int LOAD_DETAIL_FAIL = 0;
+	private TextView tv_itemid, tv_content, tv_answerContent;
+
 	private Myconsult myconsult;
+	private GoversaoonOnlineASKDetail goversaoonOnlineASKDetail;
+	@SuppressLint("HandlerLeak")
+	private Handler handler = new Handler() {
 
-	public void setMyconsult(Myconsult myconsult) {
-		this.myconsult = myconsult;
-	}
-
-	public void setShowType(int showType) {
-		this.showType = showType;
-	}
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case LOAD_DETAIL_SUCCESS:
+				showAskDetail();
+				break;
+			case LOAD_DETAIL_FAIL:
+				String tip = msg.obj.toString();
+				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
+				break;
+			}
+		};
+	};
 
 	@Override
 	public void initUI() {
-		Myconsult myconsult = (Myconsult) this.getArguments().get(
-				"selectMyconsult");
-		if (myconsult != null) {
-			showType = MYASK;
-		} else {
-			showType = GOASK;
-		}
+		Bundle b = this.getArguments();
+		myconsult = (Myconsult) b.get("selectMyconsult");
+		int showIndex = b.getInt("showType");
+		super.slideLinstener.closeSlideMenu();
 		super.initUI();
 		gover_btn_rg = (RadioGroup) view.findViewById(R.id.gover_btn_rg);
 		gover_myonlineask_detail = (LinearLayout) view
 				.findViewById(R.id.gover_myonlineask_detail);
 		gover_myonline_goonask = (LinearLayout) view
 				.findViewById(R.id.gover_myonline_goonask);
-		gover_sallon_my_ask_detail = (RadioButton) view
-				.findViewById(R.id.gover_sallon_my_ask_detail);
-		gover_sallon_my_goon_ask = (RadioButton) view
-				.findViewById(R.id.gover_sallon_my_goon_ask);
+
 		gover_btn_rg.setOnCheckedChangeListener(this);
+		tv_itemid = (TextView) view.findViewById(R.id.tv_itemid);
+		tv_content = (TextView) view.findViewById(R.id.tv_content);
+		tv_answerContent = (TextView) view.findViewById(R.id.tv_answerContent);
+		if (showIndex == 0) {
 
-		showUI();
+			gover_btn_rg.check(R.id.gover_sallon_my_ask_detail);
+		} else if (showIndex == 1) {
 
-	}
-
-	public void showUI() {
-		switch (showType) {
-		case MYASK:
-			gover_myonlineask_detail.setVisibility(LinearLayout.VISIBLE);
-			gover_myonline_goonask.setVisibility(LinearLayout.GONE);
-			gover_btn_rg.check(R.id.gover_myonlineask_detail);
-			gover_sallon_my_ask_detail.setBackgroundResource(R.drawable.goversaloon_menuitem_bg);
-			gover_sallon_my_ask_detail.setTextColor(Color.WHITE);
-			break;
-		case GOASK:
-			gover_myonlineask_detail.setVisibility(LinearLayout.GONE);
-			gover_myonline_goonask.setVisibility(LinearLayout.VISIBLE);
-			gover_btn_rg.check(R.id.gover_myonline_goonask);
-			
-			gover_sallon_my_goon_ask.setBackgroundResource(R.drawable.goversaloon_menuitem_bg);
-			gover_sallon_my_goon_ask.setTextColor(Color.WHITE);
-			break;
+			gover_btn_rg.check(R.id.gover_sallon_my_goon_ask);
 		}
+
 	}
 
-	private void showMyConsultData() {
+	private void showAskDetail() {
+		tv_itemid.setText(tv_itemid.getText() + " ("
+				+ goversaoonOnlineASKDetail.getItemid() + ")");
+		if (goversaoonOnlineASKDetail.getContent() != null) {
+			String sendTime = goversaoonOnlineASKDetail.getSentTime();
+			String paseTime = "";
+
+			StringBuffer sb = new StringBuffer();
+			sb.append(tv_content.getText()).append(" ")
+					.append(goversaoonOnlineASKDetail.getContent() + "\n");
+
+			if (sendTime != null && sendTime.equals("")) {
+				paseTime = TimeFormateUtil.formateTime(sendTime,
+						TimeFormateUtil.DATE_TIME_PATTERN);
+				sb.append("[" + paseTime + "]");
+			}
+			tv_content.setText(sb.toString());
+		}
+
+		if (goversaoonOnlineASKDetail.getAnswerContent() != null) {
+
+			String sendTime = goversaoonOnlineASKDetail.getAnswerDate();
+			String paseTime = "";
+
+			StringBuffer sb = new StringBuffer();
+			sb.append(tv_answerContent.getText())
+					.append(" ")
+					.append(goversaoonOnlineASKDetail.getAnswerContent() + "\n");
+
+			if (sendTime != null && sendTime.equals("")) {
+				paseTime = TimeFormateUtil.formateTime(sendTime,
+						TimeFormateUtil.DATE_TIME_PATTERN);
+				sb.append("[" + paseTime + "]");
+			}
+			tv_answerContent.setText(sb.toString());
+		}
 
 	}
 
@@ -95,27 +134,79 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 		switch (checkedId) {
 
 		case R.id.gover_sallon_my_ask_detail:
-			this.showType = MYASK;
-			gover_sallon_my_ask_detail.setTextColor(Color.WHITE);
-			gover_sallon_my_goon_ask.setTextColor(Color.BLACK);
-			gover_sallon_my_ask_detail.setBackground(getResources()
-					.getDrawable(R.drawable.goversaloon_menuitem_bg));
-			gover_sallon_my_goon_ask.setBackgroundColor(getResources()
-					.getColor(R.color.content_background));
+			gover_myonlineask_detail.setVisibility(LinearLayout.VISIBLE);
+			gover_myonline_goonask.setVisibility(LinearLayout.GONE);
+			if (goversaoonOnlineASKDetail == null) {
+				loadMyOnlineAskDetail(myconsult.getId());
+			}
+
 			break;
 		case R.id.gover_sallon_my_goon_ask:
-			this.showType = GOASK;
-			gover_sallon_my_ask_detail.setTextColor(Color.BLACK);
-			gover_sallon_my_goon_ask.setTextColor(Color.WHITE);
-
-			gover_sallon_my_goon_ask.setBackground(getResources().getDrawable(
-					R.drawable.goversaloon_menuitem_bg));
-			gover_sallon_my_ask_detail.setBackgroundColor(getResources()
-					.getColor(R.color.content_background));
+			gover_myonlineask_detail.setVisibility(LinearLayout.GONE);
+			gover_myonline_goonask.setVisibility(LinearLayout.VISIBLE);
+			if (goversaoonOnlineASKDetail == null) {
+				loadMyOnlineAskDetail(myconsult.getId());
+			}
 			break;
 		}
 
-		showUI();
+		for (int index = 0; index < group.getChildCount(); index++) {
+
+			RadioButton rb = (RadioButton) group.getChildAt(index);
+			if (rb.isChecked()) {
+				rb.setTextColor(Color.WHITE);
+			} else {
+				rb.setTextColor(Color.BLACK);
+			}
+		}
+
+	}
+
+	private void loadMyOnlineAskDetail(final String id) {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+
+				Message msg = handler.obtainMessage();
+				GoversaoonOnlineASKDetailService goversaoonOnlineASKDetailService = new GoversaoonOnlineASKDetailService(
+						context);
+
+				try {
+					goversaoonOnlineASKDetail = goversaoonOnlineASKDetailService
+							.getGoversaoonOnlineASKDetail(id,
+									MyGoverSaloonFragment.ACCESS_TOKEN);
+					if (goversaoonOnlineASKDetail != null) {
+						msg.what = LOAD_DETAIL_SUCCESS;
+					} else {
+						msg.what = LOAD_DETAIL_FAIL;
+						msg.obj = "获取数据失败";
+
+					}
+					handler.sendMessage(msg);
+
+				} catch (NetException e) {
+
+					e.printStackTrace();
+					msg.what = LOAD_DETAIL_FAIL;
+					msg.obj = e.getMessage();
+					handler.sendMessage(msg);
+				} catch (JSONException e) {
+
+					e.printStackTrace();
+					msg.what = LOAD_DETAIL_FAIL;
+					msg.obj = "数据格式错误";
+					handler.sendMessage(msg);
+				} catch (NODataException e) {
+
+					e.printStackTrace();
+					msg.what = LOAD_DETAIL_FAIL;
+					msg.obj = e.getMessage();
+					handler.sendMessage(msg);
+				}
+
+			}
+		}).start();
 	}
 
 	@Override

@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -30,10 +31,13 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.DeptSpinnerAdapter;
 import com.wuxi.app.engine.DeptService;
+import com.wuxi.app.engine.GoverItemCountService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Dept;
+import com.wuxi.domain.GoverItemCount;
 import com.wuxi.domain.MenuItem;
+import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
@@ -56,6 +60,8 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 			SEARCH_BYRANGE = 2, SEARCH_BYSTATE = 3, COUNTPOP_WINDOW = 4;
 	protected static final int LOAD_DEPT_SUCCESS = 1;
 	protected static final int LOAD_DEPT_FAIL = 0;
+	protected static final int GOVER_ITEMCOUNT_LOAD_SUCCESS = 2;
+	protected static final int GOVER_ITEMCOUNT_LOAD_ERROR = 3;
 
 	private Spinner goversaloon_sp_szxk;
 	private Button goversaloon_btn_statesearch;
@@ -78,6 +84,8 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 			btn_search_bystate;
 	private EditText et_searchbying_content, et_state_itemcode;
 	private List<Dept> depts;
+	private GoverItemCount goverItemCount;
+	private TextView tv_item_count, tv_quick_info, tv_item_count_detail;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -88,10 +96,16 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 			case LOAD_DEPT_SUCCESS:
 				showDept();
 				break;
+
+			case GOVER_ITEMCOUNT_LOAD_SUCCESS:
+				showGoverItemCount();
+				break;
+			case GOVER_ITEMCOUNT_LOAD_ERROR:
 			case LOAD_DEPT_FAIL:
 				String tip = msg.obj.toString();
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
+
 			}
 
 		}
@@ -109,6 +123,22 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 		initUI();
 
 		return view;
+	}
+
+	/**
+	 * 
+	 *wanglu 泰得利通
+	 *显示办件统计
+	 */
+	private void showGoverItemCount() {
+
+		
+		
+		tv_item_count.setText("累计接件:"+goverItemCount.getLjjj()+"\n累计办件:"+goverItemCount.getLjbj());
+		tv_quick_info.setText("昨日受理:"+goverItemCount.getZrsl()+"\n昨日办结:"+goverItemCount.getZrbj());
+		tv_item_count_detail.setText("已受理:"+goverItemCount.getYsl()+" 已办结:"+goverItemCount.getYbj()+"\n"
+				+"上月受理:"+goverItemCount.getSysl()+" 上月办结:"+goverItemCount.getSybj()+"\n"+
+				"本月受理:"+goverItemCount.getBysl()+" 本月办结"+goverItemCount.getBybj());
 	}
 
 	private void initUI() {
@@ -172,6 +202,11 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 		btn_search_bydept.setOnClickListener(this);
 		btn_searchbyrange.setOnClickListener(this);
 		btn_search_bystate.setOnClickListener(this);
+		
+		
+		tv_item_count=(TextView) view.findViewById(R.id.tv_item_count);
+		tv_quick_info=(TextView) view.findViewById(R.id.tv_quick_info);
+		tv_item_count_detail=(TextView) view.findViewById(R.id.tv_item_count_detail);
 
 		if (menuItem.getType() == MenuItem.CUSTOM_MENU) {
 
@@ -200,6 +235,7 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 			}
 		}
 
+		loadGoverItemCount();//加载办件统计信息
 	}
 
 	/**
@@ -233,6 +269,53 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 					e.printStackTrace();
 					msg.what = LOAD_DEPT_SUCCESS;
 					msg.obj = "数据格式错误";
+					handler.sendMessage(msg);
+				}
+
+			}
+		}).start();
+
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 获取办件统计数据
+	 */
+	private void loadGoverItemCount() {
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+
+				Message msg = handler.obtainMessage();
+
+				GoverItemCountService goverItemCountService = new GoverItemCountService(
+						context);
+				try {
+					goverItemCount = goverItemCountService.getGoverItemCount();
+					if (goverItemCount != null) {
+						msg.what = GOVER_ITEMCOUNT_LOAD_SUCCESS;
+					} else {
+						msg.obj = "没有获取到数据";
+						msg.what = GOVER_ITEMCOUNT_LOAD_ERROR;
+					}
+					handler.sendMessage(msg);
+
+				} catch (NetException e) {
+					e.printStackTrace();
+					msg.obj = e.getMessage();
+					msg.what = GOVER_ITEMCOUNT_LOAD_ERROR;
+					handler.sendMessage(msg);
+				} catch (JSONException e) {
+					e.printStackTrace();
+					msg.obj = "数据格式错误";
+					msg.what = GOVER_ITEMCOUNT_LOAD_ERROR;
+					handler.sendMessage(msg);
+				} catch (NODataException e) {
+					e.printStackTrace();
+					msg.obj = e.getMessage();
+					msg.what = GOVER_ITEMCOUNT_LOAD_ERROR;
 					handler.sendMessage(msg);
 				}
 
