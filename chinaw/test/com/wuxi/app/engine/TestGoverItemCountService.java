@@ -2,11 +2,11 @@ package com.wuxi.app.engine;
 
 import org.json.JSONException;
 
+import android.test.AndroidTestCase;
+
 import com.wuxi.domain.GoverItemCount;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
-
-import android.test.AndroidTestCase;
 
 public class TestGoverItemCountService extends AndroidTestCase {
 

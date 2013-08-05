@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.domain.MenuItem;
 
 /**

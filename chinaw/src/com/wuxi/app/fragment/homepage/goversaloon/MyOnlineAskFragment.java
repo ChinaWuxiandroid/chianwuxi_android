@@ -3,7 +3,6 @@ package com.wuxi.app.fragment.homepage.goversaloon;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;

@@ -12,7 +12,6 @@ import android.widget.ProgressBar;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.domain.MenuItem;
 
 /**
  * web网页 界面

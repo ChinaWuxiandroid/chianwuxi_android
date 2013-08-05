@@ -2,7 +2,6 @@ package com.wuxi.app.listeners;
 
 import android.support.v4.app.Fragment;
 
-import com.wuxi.app.BaseFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345CMayorMailBoxFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment;
@@ -18,12 +17,6 @@ import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineSuggestionPla
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWill;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyFragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeople12345Fragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewFragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleMineFragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleSuggestFragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveFragment;
 import com.wuxi.domain.MenuItem;
 
 public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListener {

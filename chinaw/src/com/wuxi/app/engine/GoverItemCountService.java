@@ -5,13 +5,13 @@ import java.lang.reflect.InvocationTargetException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.JAsonPaserUtil;
 import com.wuxi.domain.GoverItemCount;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
-
-import android.content.Context;
 
 /**
  * 

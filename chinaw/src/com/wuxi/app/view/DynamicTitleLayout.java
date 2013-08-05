@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -157,59 +156,8 @@ public class DynamicTitleLayout extends ViewGroup {
 		child.setOnItemClickListener(new TitleItemlOnclick());
 		addView(child);
 		
-<<<<<<< HEAD
 		loadChannelContentList(chanItems.get(0));
 
-=======
-		int i = 0;
-		for (Channel item : chanItems) {
-
-			if (i % getPerscreenCount() == 0) {
-
-				if (onScreenItems != null) {
-					GridView child = (GridView) inflater.inflate(
-							R.layout.title_action_gridview_layout, null);
-					child.setNumColumns(perscreenCount); // 设置GridView的每列显示view个数
-					child.setAdapter(new TitleChannelAdapter(context,
-							R.layout.title_grid_item_layout,
-							new int[] { R.id.tv_actionname }, null,
-							onScreenItems, currentScreen,0));
-
-					child.setOnItemClickListener(new TitleItemlOnclick());
-					currentScreen++;
-					addView(child);
-				}
-
-				onScreenItems = new ArrayList<Channel>();
-			}
-
-			// 最后一屏操作
-			if (currentScreen > totalScreenNum + 1) {
-
-				onScreenItems = new ArrayList<Channel>();
-			}
-
-			onScreenItems.add(item);
-
-			// add last category screen //最后一屏
-			if (i == chanItems.size() - 1) {
-				GridView child = (GridView) inflater.inflate(
-						R.layout.title_action_gridview_layout, null);
-				child.setNumColumns(perscreenCount); // 设置GridView的每列显示view个数
-				child.setAdapter(new TitleChannelAdapter(context,
-						R.layout.title_grid_item_layout,
-						new int[] { R.id.tv_actionname }, null, onScreenItems,
-						currentScreen,0));
-
-				child.setOnItemClickListener(new TitleItemlOnclick());
-				addView(child);
-
-			}
-
-			i++;
-		}
-		postInvalidate();// // 此时同样也需要刷新View ，否则效果可能有误差
->>>>>>> a95fad0f8e5fe3f6a4bd97d156b033864ba1686a
 	}
 
 	public void initMenuItemScreen(Context context, LayoutInflater inflater,
@@ -217,69 +165,6 @@ public class DynamicTitleLayout extends ViewGroup {
 		if (menuItems == null) {
 			return;
 		}
-<<<<<<< HEAD
-=======
-		int i = 0;
-		totalScreenNum = menuItems.size() / getPerscreenCount();// 屏数
-
-		checkPositons = new int[totalScreenNum + 1];
-		for (int j = 0; j < checkPositons.length; j++) {// 初始化头部安选中的下标
-			checkPositons[j] = -1;
-		}
-
-		checkPositons[0] = 0;// 默认选中第一屏第一个Chanel
-		int currentScreen = 0;// 当前屏
-
-		List<MenuItem> onScreenItems = null;// 一个屏上的图标
-
-		for (MenuItem item : menuItems) {
-
-			if (i % getPerscreenCount() == 0) {
-
-				if (onScreenItems != null) {
-					GridView child = (GridView) inflater.inflate(
-							R.layout.title_action_gridview_layout, null);
-					child.setNumColumns(perscreenCount); // 设置GridView的每列显示view个数
-					child.setAdapter(new TitleChannelAdapter(context,
-							R.layout.title_grid_item_layout,
-							new int[] { R.id.tv_actionname }, null,
-							onScreenItems, currentScreen,0));
-
-					child.setOnItemClickListener(new TitleItemlOnclick());
-					currentScreen++;
-					addView(child);
-				}
-
-				onScreenItems = new ArrayList<MenuItem>();
-			}
-
-			// 最后一屏操作
-			if (currentScreen > totalScreenNum + 1) {
-
-				onScreenItems = new ArrayList<MenuItem>();
-			}
-
-			onScreenItems.add(item);
-
-			// add last category screen //最后一屏
-			if (i == menuItems.size() - 1) {
-				GridView child = (GridView) inflater.inflate(
-						R.layout.title_action_gridview_layout, null);
-				child.setNumColumns(perscreenCount); // 设置GridView的每列显示view个数
-				child.setAdapter(new TitleChannelAdapter(context,
-						R.layout.title_grid_item_layout,
-						new int[] { R.id.tv_actionname }, null, onScreenItems,
-						currentScreen,0));
-
-				child.setOnItemClickListener(new TitleItemlOnclick());
-				addView(child);
-
-			}
-
-			i++;
-		}
-
->>>>>>> a95fad0f8e5fe3f6a4bd97d156b033864ba1686a
 
 		checkPositon = 0;// 默认选中第一个Chanel
 		
