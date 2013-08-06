@@ -229,6 +229,25 @@ public class Constants {
 		 */
 		public static final String GETLIUC_IMG_URL="http://3g.wuxi.gov.cn/api/zhengwu/lcimg/{id}.json";
 		
+		/**
+		 * 政务大厅 在线咨询提交URL
+		 */
+		public static final String GOVER_ONLEINASK_COMMIT_URL="http://3g.wuxi.gov.cn/api/zhengwu/consult.json?id={id}&type={type}&content={content}&access_token={access_token}";
+		
+		
+		/**
+		 * 政务大厅表   在线办理表单提交
+		 */
+		
+		public static final String GOVER_APPLY_ONLINE_URL="http://3g.wuxi.gov.cn/api/zhengwu/applyonline.json";
+		
+		
+		/*
+		 * 政务大厅下 附近现在地址
+		 */
+		public static final String GOVER_FILE_DOWN_URL="http://3g.wuxi.gov.cn/api/zhengwu/file/{id}.json";
+		
+		
 
 		/**
 		 * 政府信息公开  获取公开意见箱的APPUI布局数据
@@ -260,6 +279,12 @@ public class Constants {
 		 * 项目菜单图标存储路径
 		 */
 		public static final String MENU_ICON_PATH = APP_PATH + "menu/icon/";
+		
+		
+		/**
+		 * 下载文件存放地址
+		 */
+		public static final String DOWNLOAF_FILE_PATH=APP_PATH+"file/";
 
 	}
 

@@ -8,7 +8,10 @@
     <Spinner
         android:id="@+id/gover_oline_filter"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" 
+        android:background="@drawable/spiner_bg"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"/>
 
     <FrameLayout
         android:layout_width="fill_parent"

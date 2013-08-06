@@ -43,14 +43,17 @@
         <Spinner
             android:id="@+id/sp_dept"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/spiner_bg" />
 
         <Spinner
             android:id="@+id/sp_dept_year"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="55dip"
+            android:layout_height="wrap_content" 
+            android:background="@drawable/spiner_bg"/>
 
         <ImageButton
+            android:layout_marginLeft="5dip"
             android:id="@+id/govver_admintrative_ib_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

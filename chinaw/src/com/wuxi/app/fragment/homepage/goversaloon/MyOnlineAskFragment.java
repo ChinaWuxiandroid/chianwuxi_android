@@ -7,7 +7,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -16,6 +21,7 @@ import android.widget.Toast;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.GoversaoonOnlineASKDetailService;
 import com.wuxi.app.fragment.BaseSlideFragment;
+import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.GoversaoonOnlineASKDetail;
 import com.wuxi.domain.Myconsult;
@@ -28,7 +34,7 @@ import com.wuxi.exception.NetException;
  * 
  */
 public class MyOnlineAskFragment extends BaseSlideFragment implements
-		android.widget.RadioGroup.OnCheckedChangeListener {
+		android.widget.RadioGroup.OnCheckedChangeListener, OnClickListener {
 
 	private RadioGroup gover_btn_rg;
 	private LinearLayout gover_myonlineask_detail;// 咨询类容相信信息视图
@@ -36,10 +42,16 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 
 	protected static final int LOAD_DETAIL_SUCCESS = 1;
 	protected static final int LOAD_DETAIL_FAIL = 0;
+	protected static final int COMMIT_SUCCESS = 2;
+	protected static final int COMMIT_ERROR = 3;
 	private TextView tv_itemid, tv_content, tv_answerContent;
 
 	private Myconsult myconsult;
 	private GoversaoonOnlineASKDetail goversaoonOnlineASKDetail;
+	private TextView tv_item;
+	private Button online_ask_submit, online_ask_reset;
+	private EditText et_content;
+	private ProgressBar pb_onlineask;
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 
@@ -48,6 +60,11 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 			case LOAD_DETAIL_SUCCESS:
 				showAskDetail();
 				break;
+			case COMMIT_SUCCESS:
+				pb_onlineask.setVisibility(ProgressBar.GONE);
+				Toast.makeText(context, "提交成功", Toast.LENGTH_SHORT).show();
+				break;
+			case COMMIT_ERROR:
 			case LOAD_DETAIL_FAIL:
 				String tip = msg.obj.toString();
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
@@ -68,11 +85,17 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 				.findViewById(R.id.gover_myonlineask_detail);
 		gover_myonline_goonask = (LinearLayout) view
 				.findViewById(R.id.gover_myonline_goonask);
-
+		tv_item = (TextView) view.findViewById(R.id.tv_item);
 		gover_btn_rg.setOnCheckedChangeListener(this);
 		tv_itemid = (TextView) view.findViewById(R.id.tv_itemid);
 		tv_content = (TextView) view.findViewById(R.id.tv_content);
 		tv_answerContent = (TextView) view.findViewById(R.id.tv_answerContent);
+		online_ask_submit = (Button) view.findViewById(R.id.online_ask_submit);
+		online_ask_reset = (Button) view.findViewById(R.id.online_ask_reset);
+		et_content = (EditText) view.findViewById(R.id.et_content);
+		pb_onlineask = (ProgressBar) view.findViewById(R.id.pb_onlineask);
+		online_ask_submit.setOnClickListener(this);
+		online_ask_reset.setOnClickListener(this);
 		if (showIndex == 0) {
 
 			gover_btn_rg.check(R.id.gover_sallon_my_ask_detail);
@@ -84,14 +107,16 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 	}
 
 	private void showAskDetail() {
-		tv_itemid.setText(tv_itemid.getText() + " ("
+		pb_onlineask.setVisibility(ProgressBar.GONE);
+		tv_itemid.setText("办件序号:" + " ("
 				+ goversaoonOnlineASKDetail.getItemid() + ")");
+		tv_item.setText(goversaoonOnlineASKDetail.getItemid());
 		if (goversaoonOnlineASKDetail.getContent() != null) {
 			String sendTime = goversaoonOnlineASKDetail.getSentTime();
 			String paseTime = "";
 
 			StringBuffer sb = new StringBuffer();
-			sb.append(tv_content.getText()).append(" ")
+			sb.append("咨询内容: ").append(" ")
 					.append(goversaoonOnlineASKDetail.getContent() + "\n");
 
 			if (sendTime != null && sendTime.equals("")) {
@@ -108,7 +133,7 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 			String paseTime = "";
 
 			StringBuffer sb = new StringBuffer();
-			sb.append(tv_answerContent.getText())
+			sb.append("答复内容: ")
 					.append(" ")
 					.append(goversaoonOnlineASKDetail.getAnswerContent() + "\n");
 
@@ -162,6 +187,7 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 	}
 
 	private void loadMyOnlineAskDetail(final String id) {
+		pb_onlineask.setVisibility(ProgressBar.VISIBLE);
 		new Thread(new Runnable() {
 
 			@Override
@@ -212,6 +238,72 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 	protected String getTitleText() {
 
 		return "我的在线咨询";
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.online_ask_submit:
+			if (et_content.getText().toString().equals("")) {
+				Toast.makeText(context, "请输入咨询内容", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			commitAsk();
+
+			break;
+		case R.id.online_ask_reset:
+			et_content.setText("");
+			break;
+		}
+
+	}
+
+	private void commitAsk() {
+		if (goversaoonOnlineASKDetail == null) {
+			Toast.makeText(context, "没有咨询信息，提交失败", Toast.LENGTH_SHORT).show();
+			return;
+		}
+
+		pb_onlineask.setVisibility(ProgressBar.VISIBLE);
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+
+				Message msg = handler.obtainMessage();
+				GoversaoonOnlineASKDetailService goversaoonOnlineASKDetailService = new GoversaoonOnlineASKDetailService(
+						context);
+				try {
+					GoversaoonOnlineASKDetail goversaoonOnlineDetail = goversaoonOnlineASKDetailService
+							.commitGoversaoonOnlineASKDetail(
+									goversaoonOnlineASKDetail.getId(),
+									goversaoonOnlineASKDetail.getItemtype(),
+									et_content.getText().toString(),
+									MyGoverSaloonFragment.ACCESS_TOKEN);
+					if (goversaoonOnlineDetail != null) {
+						msg.what = COMMIT_SUCCESS;
+					} else {
+						msg.what = COMMIT_ERROR;
+						msg.obj = "提交失败，稍后再试";
+					}
+					handler.sendMessage(msg);
+				} catch (NetException e) {
+					e.printStackTrace();
+					msg.what = COMMIT_ERROR;
+					msg.obj = e.getMessage();
+					handler.sendMessage(msg);
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+					msg.what = COMMIT_ERROR;
+					msg.obj = Constants.ExceptionMessage.DATA_FORMATE;
+					handler.sendMessage(msg);
+				}
+
+			}
+		}).start();
+
 	}
 
 }

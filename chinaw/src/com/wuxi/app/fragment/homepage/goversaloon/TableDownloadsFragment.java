@@ -1,16 +1,24 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
+import java.io.File;
 import java.util.List;
 
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.ListView;
@@ -22,6 +30,7 @@ import com.wuxi.app.R;
 import com.wuxi.app.adapter.DeptSpinnerAdapter;
 import com.wuxi.app.adapter.GoverTableDownLoadAdapter;
 import com.wuxi.app.engine.DeptService;
+import com.wuxi.app.engine.GoverSaoonFileService;
 import com.wuxi.app.engine.GoverTableDownLoadService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
@@ -38,12 +47,15 @@ import com.wuxi.exception.NetException;
  * 
  */
 public class TableDownloadsFragment extends GoverSaloonContentFragment
-		implements OnScrollListener, OnItemSelectedListener {
+		implements OnScrollListener, OnItemSelectedListener,
+		OnItemClickListener {
 
 	protected static final int LOAD_DEPT_SUCCESS = 0;
 	protected static final int LOAD_DEPT_FAIL = 1;
 	protected static final int GOVERITEM_LOAD_SUCCESS = 2;
 	protected static final int GOVERITEM_LOAD_FIAL = 3;
+	 private static final int FILE_DOWN_SUCCESS = 4;
+	 private static final int FILE_DOWN_ERROR=5;
 	private static final int PAGE_SIZE = 10;
 	private Spinner gover_table_down_deptsp;
 	private List<Dept> depts;
@@ -58,6 +70,7 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 	private String currentDeptId;
 	private boolean isSwitchDept = false;
 	private boolean isFisrtLoadItems = true;// 是否是首次加载
+	private ProgressDialog pd;
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -67,6 +80,12 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 				break;
 			case GOVERITEM_LOAD_SUCCESS:
 				showTableDownLoadItemList();
+				break;
+			case	FILE_DOWN_SUCCESS:
+				Toast.makeText(context, "下载成功", Toast.LENGTH_SHORT).show();
+				break;
+			case FILE_DOWN_ERROR:
+				Toast.makeText(context, "下载出错，稍后再试", Toast.LENGTH_SHORT).show();
 				break;
 			case GOVERITEM_LOAD_FIAL:
 			case LOAD_DEPT_FAIL:
@@ -96,11 +115,16 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 				.findViewById(R.id.loadMoreButton);
 		gover_tabledowload_lv.addFooterView(loadMoreView);
 		gover_tabledowload_lv.setOnScrollListener(this);
+		gover_tabledowload_lv.setOnItemClickListener(this);
 		gover_table_down_deptsp.setOnItemSelectedListener(this);
 		loadDept();
 
-	}
+		pd = new ProgressDialog(context);
 
+		pd.setMessage("正在下载表格....");
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+
+	}
 
 	private void loadDept() {
 
@@ -211,7 +235,7 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 			loadMoreButton.setText("more");
 
 		} else {
-			//loadMoreButton.setText(" ");
+			// loadMoreButton.setText(" ");
 			gover_tabledowload_lv.removeFooterView(loadMoreView);
 		}
 
@@ -296,4 +320,99 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 
 	}
 
+	private void showDownloadComfirmDialog(
+			final GoverTableDownLoad tableDownLoad) {
+		AlertDialog.Builder builder = new Builder(context);
+		builder.setIcon(R.drawable.logo);
+		builder.setTitle("下载提示");
+		builder.setMessage("确认要下载该" + tableDownLoad.getFilename()
+				+ "文件吗?\n 文件存放地址:" + Constants.APPFiles.DOWNLOAF_FILE_PATH
+				+ tableDownLoad.getFilename());
+		builder.setCancelable(false);
+		File file=new File(Constants.APPFiles.DOWNLOAF_FILE_PATH);
+		if(!file.exists()){
+			file.mkdirs();
+		}
+		builder.setPositiveButton("确认", new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+				if (Environment.getExternalStorageState().equals(
+						Environment.MEDIA_MOUNTED)) {
+
+					DownLoadThreadTask dowTask = new DownLoadThreadTask(
+							tableDownLoad.getId(),
+							Constants.APPFiles.DOWNLOAF_FILE_PATH+tableDownLoad.getFilename());
+
+					new Thread(dowTask).start();
+					pd.show();
+
+				} else {
+					Toast.makeText(context, "SDK不存在", 1).show();
+
+				}
+
+			}
+		});
+
+		builder.setNegativeButton("取消", new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+			}
+		});
+		builder.create().show();
+
+	}
+
+	private class DownLoadThreadTask implements Runnable {
+
+		
+		private String fileId;
+		private String filePath;
+
+		public DownLoadThreadTask(String fileId, String filePath) {
+
+			this.fileId = fileId;
+			this.filePath = filePath;
+		}
+
+		@Override
+		public void run() {
+
+			try {
+
+				GoverSaoonFileService goverSaoonFileService = new GoverSaoonFileService(
+						context);
+				File file = goverSaoonFileService.dowloadTable(fileId,
+						filePath, pd);
+				if(file!=null){
+					handler.sendEmptyMessage(FILE_DOWN_SUCCESS);
+				}
+				pd.dismiss();
+			} catch (Exception e) {
+
+				e.printStackTrace();
+				
+				pd.dismiss();
+				
+				
+				handler.sendEmptyMessage(FILE_DOWN_ERROR);
+			}
+
+		}
+
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> adapterView, View arg1,
+			int position, long arg3) {
+
+		GoverTableDownLoad tableDownLoad = (GoverTableDownLoad) adapterView
+				.getItemAtPosition(position);
+		showDownloadComfirmDialog(tableDownLoad);
+
+	}
 }

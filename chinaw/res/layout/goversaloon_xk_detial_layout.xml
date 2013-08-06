@@ -24,12 +24,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" >
 
-                <ProgressBar
-                    android:id="@+id/pb_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center" />
-
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -501,12 +495,15 @@
             </FrameLayout>
         </ScrollView>
 
-       <include 
-            layout="@layout/goversaoon_zxbl_layout"
-           />
-       <include 
-            layout="@layout/goversaoon_zxzx_layout"
-           />
+        <include layout="@layout/goversaoon_zxbl_layout" />
+
+        <include layout="@layout/goversaoon_zxzx_layout" />
+
+        <ProgressBar
+            android:id="@+id/pb_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
     </FrameLayout>
 
     <LinearLayout
