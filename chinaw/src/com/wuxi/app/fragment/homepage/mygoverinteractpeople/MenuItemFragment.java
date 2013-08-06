@@ -56,7 +56,6 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 	private static final int TITLEDATA_LOAD_ERROR = 2;	
 	protected static final int RIGHT_CONTENT_ID=R.id.gip_menuitem_content_fragmentlayout;
 
-
 	private ProgressBar titlePb;
 	protected DynamicTitleLayout mtitleLayout;
 
@@ -103,8 +102,9 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 	public void initTitleUI(){
 		titlePb=(ProgressBar)view.findViewById(R.id.gip_menuitem_progressbar);
 		mtitleLayout = (DynamicTitleLayout) view.findViewById(R.id.gip_menuitem_title_layout);// 头部控件
-		mtitleLayout.setInitializContentLayoutListner(this);// 设置绑定内容界面监听器
+		
 		mtitleLayout.setMenuItemInitLayoutListener(getMenuItemInitLayoutListener());// 设置界面监听处理类
+		mtitleLayout.setInitializContentLayoutListner(this);// 设置绑定内容界面监听器
 		
 		titlePb.setVisibility(View.VISIBLE);
 		
@@ -199,7 +199,6 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 						handler.sendEmptyMessage(CHANNEL_TITLEDATA__LOAD_SUCESS);
 						CacheUtil.put(parentItem.getChannelId(),
 								titleChannels);// 放入缓存
-					
 					}
 				} catch (NetException e) {
 					e.printStackTrace();
@@ -217,7 +216,8 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 		mtitleLayout.setPerscreenCount(titleChannels.size());
 //		initializSubFragmentsLayout(titleChannels);// 绑定子界面
 		mtitleLayout.initChannelScreen(context, mInflater, titleChannels);// 初始化头部空间
-		mtitleLayout.setVisibility(View.VISIBLE);
+		mtitleLayout.postInvalidate();
+		
 	}
 
 	protected abstract MenuItemInitLayoutListener getMenuItemInitLayoutListener();
@@ -226,13 +226,11 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void bindContentLayout(Fragment fragment) {
-		// TODO Auto-generated method stub
 		bindFragment(fragment);
 	}
 

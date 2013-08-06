@@ -2,8 +2,6 @@ package com.wuxi.app.fragment.homepage.informationcenter;
 
 import java.util.List;
 
-import android.os.Bundle;
-
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
 import com.wuxi.app.listeners.InfoCenterInitLayoutImpl;

@@ -4,6 +4,9 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -11,6 +14,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -30,6 +34,9 @@ import com.wuxi.exception.NetException;
  * */
 
 public class GIP12345IWantMailFragment extends RadioButtonChangeFragment {
+	private int contentType=0;   //内容类型，缺省为0-我要写信  1-写信须知   2-办理规则
+	protected static final int HIDEN_CONTENT_ID=R.id.gip_12345_iwantmail_content_framelayout;
+	private LinearLayout defaultLayout;
 
 	private final static int SEND_SUCCESS=1;
 	private final static int SEND_FAILED=0;
@@ -158,13 +165,21 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment {
 		switch (checkedId) {
 
 		case R.id.gip_12345_iwantmail_radioButton_iwantmail:
-			// init();
+			contentType=0;
+			defaultLayout.setVisibility(View.VISIBLE);
+			init();
 			break;
 
 		case R.id.gip_12345_iwantmail_radioButton_mustKonwMail:
+			contentType=1;
+			defaultLayout.setVisibility(View.GONE);
+			changeContent(contentType);
 			break;
 
 		case R.id.gip_12345_iwantmail_radioButton_mayorBoxRule:
+			contentType=2;
+			defaultLayout.setVisibility(View.GONE);
+			changeContent(contentType);
 			break;
 
 		case R.id.gip_12345_iwantmail_radiobutton_mayorbox:
@@ -224,6 +239,13 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment {
 	@Override
 	protected void init() {
 		// TODO Auto-generated method stub
+
+		defaultLayout=(LinearLayout) view
+				.findViewById(R.id.gip_12345_iwantmail_layout_iwantmail);
+
+
+
+
 		myLetter = new MyLetter();
 
 		mailType_radioGroup = (RadioGroup) view
@@ -280,4 +302,25 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment {
 		});
 	}
 
+	public void changeContent(int type){
+		GoverInterPeopleWebFragment goverInterPeopleWebFragment=new GoverInterPeopleWebFragment();
+		if(type==1){			
+			goverInterPeopleWebFragment.setUrl("http://www.wuxi.gov.cn/zmhd/6148280.shtml");
+			bindFragment(goverInterPeopleWebFragment);
+		}
+		else if(type==2){
+			goverInterPeopleWebFragment.setUrl("http://www.wuxi.gov.cn/zmhd/6148283.shtml");
+			bindFragment(goverInterPeopleWebFragment);
+		}
+		else{
+			init();
+		}
+	}
+
+	private void bindFragment(Fragment fragment) {		
+		FragmentManager manager = getActivity().getSupportFragmentManager();
+		FragmentTransaction ft = manager.beginTransaction();
+		ft.replace(HIDEN_CONTENT_ID, fragment);
+		ft.commit();	
+	}
 }

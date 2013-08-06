@@ -28,26 +28,24 @@ public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener 
 
 			GoverMsgWebFragment leaderWindowFragment = null;
 			GoverMsgContentListFragment contentListFragment = null;
-			GoverMsgNaviWithContentFragment contentNavigatorWithContentFragment=null;
-			WorkSuggestionBoxFragment workSuggestionBoxFragment=null;
+			GoverMsgNaviWithContentFragment contentNavigatorWithContentFragment = null;
+			WorkSuggestionBoxFragment workSuggestionBoxFragment = null;
 
-			if(fragment instanceof GoverMsgNaviWithContentFragment){
-				contentNavigatorWithContentFragment=(GoverMsgNaviWithContentFragment)fragment;
+			if (fragment instanceof GoverMsgNaviWithContentFragment) {
+				contentNavigatorWithContentFragment = (GoverMsgNaviWithContentFragment) fragment;
 				contentNavigatorWithContentFragment.setParentMenuItem(menuItem);
-				initLayoutListner.bindContentLayout(contentNavigatorWithContentFragment);
-			}
-			else if (fragment instanceof GoverMsgContentListFragment) {
+				initLayoutListner
+						.bindContentLayout(contentNavigatorWithContentFragment);
+			} else if (fragment instanceof GoverMsgContentListFragment) {
 				contentListFragment = (GoverMsgContentListFragment) fragment;
 				contentListFragment.setParentItem(menuItem);
 				initLayoutListner.bindContentLayout(contentListFragment);
-			}
-			else if (fragment instanceof GoverMsgWebFragment) {
+			} else if (fragment instanceof GoverMsgWebFragment) {
 				leaderWindowFragment = (GoverMsgWebFragment) fragment;
 				leaderWindowFragment.setParentItem(menuItem);
 				initLayoutListner.bindContentLayout(leaderWindowFragment);
-			}
-			else if(fragment instanceof WorkSuggestionBoxFragment){
-				workSuggestionBoxFragment=(WorkSuggestionBoxFragment)fragment;
+			} else if (fragment instanceof WorkSuggestionBoxFragment) {
+				workSuggestionBoxFragment = (WorkSuggestionBoxFragment) fragment;
 				workSuggestionBoxFragment.setParentMenuItem(menuItem);
 				initLayoutListner.bindContentLayout(workSuggestionBoxFragment);
 			}
@@ -61,4 +59,3 @@ public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener 
 	}
 
 }
-

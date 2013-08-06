@@ -73,7 +73,6 @@ public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 				showTitleData();
 				break;
 			}
-
 		};
 	};
 

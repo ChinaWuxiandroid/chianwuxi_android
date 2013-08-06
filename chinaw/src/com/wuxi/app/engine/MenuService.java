@@ -107,7 +107,7 @@ public class MenuService extends Service {
 					menu.setContentName(jb.getString("contentName"));
 					menu.setLinkMenuItemName(jb.getString("linkMenuItemName"));
 
-					if (!menu.isDeleted()) {// 已经删除标记的不显示
+					if (!menu.isDeleted()&&!menu.isDisabled()) {// 已经删除标记和弃用的不显示
 						menuItems.add(menu);
 					}
 				}

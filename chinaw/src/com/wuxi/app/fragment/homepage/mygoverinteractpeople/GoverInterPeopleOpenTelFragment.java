@@ -5,10 +5,17 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -31,7 +38,7 @@ import com.wuxi.exception.NetException;
  * @author 杨宸 智佳
  * */
 
-public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment{
+public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment implements OnItemClickListener{
 	private ListView mListView;
 	private ProgressBar list_pb;
 	private OpenTelWrapper openTelWrapper;
@@ -151,6 +158,7 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment{
 		}
 		else{
 			mListView.setAdapter(adapter);
+			mListView.setOnItemClickListener(this);
 		}
 	}
 
@@ -208,5 +216,34 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment{
 		}
 
 	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+		dial(tels.get(position).getTel());	
+	}
+	
+	public void dial(final String phoneNumber){
+		new AlertDialog.Builder(context)  
+		                .setTitle("提示")
+		                .setMessage("是否确定拨号\n"+phoneNumber+"  ?")
+		                .setPositiveButton("确定", new OnClickListener() {
+							
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								Uri telUri = Uri.parse("tel:"+phoneNumber);
+								Intent intent= new Intent(Intent.ACTION_DIAL, telUri);
+								startActivity(intent);
+							}
+						})
+		                .setNegativeButton("取消", new OnClickListener(){
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// TODO Auto-generated method stub
+								 dialog.dismiss();
+							}})
+		                .show();
+	} 
 
 }
