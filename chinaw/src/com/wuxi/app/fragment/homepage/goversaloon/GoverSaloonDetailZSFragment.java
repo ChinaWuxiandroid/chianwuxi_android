@@ -1,7 +1,5 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
-import java.util.UUID;
-
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
