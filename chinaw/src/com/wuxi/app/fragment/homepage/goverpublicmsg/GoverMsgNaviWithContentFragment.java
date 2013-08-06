@@ -13,6 +13,7 @@ import com.wuxi.domain.MenuItem;
 public class GoverMsgNaviWithContentFragment extends MenuItemNavigatorWithContentFragment{
 	@Override
 	protected Fragment showMenItemContentFragment(MenuItem menuItem) {
+
 		if(menuItem.getType() == MenuItem.CUSTOM_MENU||menuItem.getType() == MenuItem.CHANNEL_MENU){
 			NavigatorContentExpandListFragment navigatorContentExpandListFragment=new NavigatorContentExpandListFragment();
 			navigatorContentExpandListFragment.setParentItem(menuItem);
@@ -23,14 +24,40 @@ public class GoverMsgNaviWithContentFragment extends MenuItemNavigatorWithConten
 			wapFragment.setParentItem(menuItem);
 			return wapFragment;
 		}
+		else if(menuItem.getType() == MenuItem.APP_MENU){
+			//依申请公开   --各部门依申请公开
+			if(menuItem.getAppUI().equals("Applyopen_dept")){
+				GoverMsgDeptApplyOpenFragment goverMsgDeptApplyOpenFragment=new GoverMsgDeptApplyOpenFragment();
+				return goverMsgDeptApplyOpenFragment;
+			}
+			//依申请公开   --我的依申请公开办件答复
+			else if(menuItem.getAppUI().equals("myapplypage")){
+				
+			}
+		}
+
 		return null;
 	}
 
 	@Override
 	protected Fragment showChannelContentFragment(Channel channel) {
-		GoverMsgContentListFragment goverMsgContentListFragment=new GoverMsgContentListFragment();
-		goverMsgContentListFragment.setChannel(channel);
-		
-		return goverMsgContentListFragment;
+
+		if(channel.getChannelName().equals("部门年度报告")){
+			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment=new GoverMsgSearchContentListFragment();
+			goverMsgSearchContentListFragment.setChannel(channel);
+			return goverMsgSearchContentListFragment;
+		}
+		else if(channel.getChannelName().equals("县区政府年度报告")){
+			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment=new GoverMsgSearchContentListFragment();
+			goverMsgSearchContentListFragment.setChannel(channel);
+			return goverMsgSearchContentListFragment;
+		}
+		else{
+			GoverMsgContentListFragment goverMsgContentListFragment=new GoverMsgContentListFragment();
+			goverMsgContentListFragment.setChannel(channel);
+			return goverMsgContentListFragment;
+		}
+
+
 	}
 }

@@ -43,14 +43,20 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 						ChannelService channelService = new ChannelService(
 								context);
 						try {
-//							System.out.println("menu>name:"+menu.getName()+"  id:"+menu.getId()+"   channelId:"+menu.getChannelId());
 							List<Channel> channels = channelService
 									.getSubChannels(menu.getChannelId());
 
 							if (channels != null) {
 								menu.setContentFragment(GoverMsgNaviWithContentFragment.class);
-							} else {
-								menu.setContentFragment(GoverMsgContentListFragment.class);// 内容列表界面
+							} 
+							else {
+								if(menu.getName().equals("信息公开动态")){
+									menu.setContentFragment(GoverMsgSearchContentListFragment.class);// 内容列表界面
+								}
+								else{
+									menu.setContentFragment(GoverMsgContentListFragment.class);// 内容列表界面
+								}
+
 							}
 						} catch (NetException e) {
 							e.printStackTrace();

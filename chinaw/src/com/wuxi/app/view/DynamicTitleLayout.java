@@ -179,7 +179,10 @@ public class DynamicTitleLayout extends ViewGroup {
 		child.setAdapter(adapter);
 		child.setOnItemClickListener(new TitleItemlOnclick());
 		addView(child);
-
+		
+		
+		menuItemInitLayoutListener.bindMenuItemLayout(
+				initializContentLayoutListner, menuItems.get(0));
 
 
 	}

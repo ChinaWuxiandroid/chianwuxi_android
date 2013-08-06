@@ -19,7 +19,6 @@ public class GIPContentFragment extends MenuItemFragment {
 			
 			if(menu.getType() == MenuItem.APP_MENU){
 				//我的政民互动  里面的appui
-
 				if(menu.getAppUI().endsWith("Letter12345_C")){
 					menu.setContentFragment(GIPMine12345Fragment.class);
 				}
