@@ -385,7 +385,8 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 			loadMoreButton.setText("more");
 
 		} else {
-			loadMoreButton.setText(" ");
+			
+			gover_mange_lv.removeFooterView(loadMoreView);
 		}
 
 		List<GoverSaoonItem> goverSaoonItems = goverSaoonItemWrapper

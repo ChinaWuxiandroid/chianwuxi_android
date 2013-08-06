@@ -5,7 +5,9 @@
     android:background="#E0E0E0"
     android:orientation="vertical"
     android:id="@+id/ll_searchby_range"
-    android:visibility="gone" >
+    android:visibility="gone"
+    android:layout_marginLeft="5dip"
+    android:layout_marginRight="5dip" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +17,8 @@
         <Spinner
             android:id="@+id/sp_range"
             android:layout_width="180dip"
-            android:layout_height="50dip" />
+            android:layout_height="wrap_content" 
+            android:background="@drawable/spiner_bg"/>
 
         <Button
             android:id="@+id/btn_searchbyrange"

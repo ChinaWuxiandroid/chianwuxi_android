@@ -34,7 +34,7 @@
                 android:button="@null"
                 android:padding="5dip"
                 android:text="我的咨询内容"
-                android:textSize="12sp" 
+                android:textSize="14sp" 
                 />
 
             <RadioButton
@@ -46,9 +46,14 @@
                 android:button="@null"
                android:padding="5dip"
                 android:text="继续咨询"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
         </RadioGroup>
 
+        <FrameLayout 
+             android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+           
         <LinearLayout
             android:id="@+id/gover_myonlineask_detail"
             android:layout_width="fill_parent"
@@ -63,7 +68,7 @@
                 android:id="@+id/tv_itemid"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="办件序号:"
+                android:text=""
                 android:textSize="12sp" />
 
             <TextView
@@ -71,7 +76,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
-                android:text="咨询内容:"
+                android:text=""
                 android:textSize="12sp" />
 
             <TextView
@@ -79,7 +84,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
-                android:text="答复内容:"
+                android:text=""
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -105,7 +110,8 @@
                     android:text="咨询事项："
                     android:textStyle="bold" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/tv_item"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dip" />
@@ -126,10 +132,16 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/et_content"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginBottom="10dip"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dip"
-                    android:inputType="textMultiLine" />
+                    android:inputType="textMultiLine"
+                    android:lines="5" 
+                    android:background="#ffffff"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -147,17 +159,28 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/my_ask_form_sub_bg"
                     android:text="提交"
-                    android:textColor="#5298CC" />
+                    android:textColor="#5298CC" 
+                    android:id="@+id/online_ask_submit"/>
 
                 <Button
+                    android:id="@+id/online_ask_reset"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dip"
                     android:background="@drawable/my_ask_form_sub_bg"
                     android:text="重置"
-                    android:textColor="#5298CC" />
+                    android:textColor="#5298CC" 
+                    
+                    />
             </LinearLayout>
         </LinearLayout>
+         <ProgressBar 
+                android:id="@+id/pb_onlineask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                />
+        </FrameLayout>
     </LinearLayout>
 
 </LinearLayout>

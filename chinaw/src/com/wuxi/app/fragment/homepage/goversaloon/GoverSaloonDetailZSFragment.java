@@ -1,5 +1,7 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
+import java.util.UUID;
+
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
@@ -10,6 +12,7 @@ import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -23,9 +26,12 @@ import android.widget.Toast;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.GoverSaoonItemService;
 import com.wuxi.app.engine.GoverSaoonWorkFlowImageService;
+import com.wuxi.app.engine.GoversaoonOnlineASKDetailService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
+import com.wuxi.app.util.Constants;
 import com.wuxi.domain.GoverSaoonItem;
 import com.wuxi.domain.GoverSaoonItemZSDetail;
+import com.wuxi.domain.GoversaoonOnlineASKDetail;
 import com.wuxi.exception.NetException;
 
 /**
@@ -41,6 +47,8 @@ public class GoverSaloonDetailZSFragment extends BaseItemContentFragment
 	protected static final int LOAD_ITEM_DETIAL_FAIL = 1;
 	protected static final int LC_LOADSCUCESS = 2;
 	protected static final int LC_LOADERROR = 3;
+	protected static final int COMMIT_SUCCESS = 4;
+	protected static final int COMMIT_ERROR = 5;
 	private TextView tv_ssmc_name;
 	private TableLayout tl_tb_detail;
 	private ProgressBar pb_detail;
@@ -53,6 +61,9 @@ public class GoverSaloonDetailZSFragment extends BaseItemContentFragment
 	private Bitmap bitmap;
 	private Button btn_zxzx;
 	private LinearLayout ll_zxnr;// 在线办理
+	private TextView tv_item_name;
+	private EditText et_content;
+	private Button btn_ask_submit, btn_ask_reset;
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 
@@ -64,6 +75,11 @@ public class GoverSaloonDetailZSFragment extends BaseItemContentFragment
 			case LC_LOADSCUCESS:
 				showLcImage();
 				break;
+			case COMMIT_SUCCESS:
+				pb_detail.setVisibility(ProgressBar.GONE);
+				Toast.makeText(context, "提交成功", Toast.LENGTH_SHORT).show();
+				break;
+			case COMMIT_ERROR:
 			case LC_LOADERROR:
 			case LOAD_ITEM_DETIAL_FAIL:
 				String tip = msg.obj.toString();
@@ -95,11 +111,17 @@ public class GoverSaloonDetailZSFragment extends BaseItemContentFragment
 		loadItemDetail();
 
 		tv_ssmc_name.setOnClickListener(this);
-		
-		
+
 		btn_zxzx = (Button) view.findViewById(R.id.btn_zxzx);
 		btn_zxzx.setOnClickListener(this);
 		ll_zxnr = (LinearLayout) view.findViewById(R.id.ll_zxnr);
+
+		tv_item_name = (TextView) view.findViewById(R.id.tv_item_name);
+		et_content = (EditText) view.findViewById(R.id.et_content);
+		btn_ask_submit = (Button) view.findViewById(R.id.btn_ask_submit);
+		btn_ask_reset = (Button) view.findViewById(R.id.btn_ask_reset);
+		btn_ask_submit.setOnClickListener(this);
+		btn_ask_reset.setOnClickListener(this);
 	}
 
 	protected void showItemDetail() {
@@ -109,6 +131,7 @@ public class GoverSaloonDetailZSFragment extends BaseItemContentFragment
 		tv_bgdz.setText(goverSaoonItemDetail.getBgdd());
 		tv_jddh.setText(goverSaoonItemDetail.getJddh());// 监督电话
 		rg_deatil.check(R.id.rb_sszt);
+		tv_item_name.setText(goverSaoonItemDetail.getName());
 	}
 
 	/**
@@ -199,6 +222,17 @@ public class GoverSaloonDetailZSFragment extends BaseItemContentFragment
 			} else if (ll_zxnr.getVisibility() == LinearLayout.VISIBLE) {
 				ll_zxnr.setVisibility(LinearLayout.GONE);
 			}
+			break;
+		case R.id.btn_ask_submit:// 在线咨询提交
+			if (et_content.getText().toString().equals("")) {
+				Toast.makeText(context, "请输入您要提交的内容", Toast.LENGTH_SHORT)
+						.show();
+				return;
+			}
+			commitAsk();
+			break;
+		case R.id.btn_ask_reset:// 在线提交重置
+			et_content.setText("");
 
 		}
 
@@ -288,5 +322,53 @@ public class GoverSaloonDetailZSFragment extends BaseItemContentFragment
 
 	private void showLcImage() {
 		iv_zslc.setImageBitmap(bitmap);
+		
+	}
+
+	private void commitAsk() {
+		if (goverSaoonItemDetail == null) {
+			Toast.makeText(context, "没有咨询信息，提交失败", Toast.LENGTH_SHORT).show();
+			return;
+		}
+
+		pb_detail.setVisibility(ProgressBar.VISIBLE);
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+
+				Message msg = handler.obtainMessage();
+				GoversaoonOnlineASKDetailService goversaoonOnlineASKDetailService = new GoversaoonOnlineASKDetailService(
+						context);
+				try {
+					GoversaoonOnlineASKDetail goversaoonOnlineDetail = goversaoonOnlineASKDetailService
+							.commitGoversaoonOnlineASKDetail(
+									goverSaoonItemDetail.getId(), "XK",
+									et_content.getText().toString(),
+									MyGoverSaloonFragment.ACCESS_TOKEN);
+					if (goversaoonOnlineDetail != null) {
+						msg.what = COMMIT_SUCCESS;
+					} else {
+						msg.what = COMMIT_ERROR;
+						msg.obj = "提交失败，稍后再试";
+					}
+					handler.sendMessage(msg);
+				} catch (NetException e) {
+					e.printStackTrace();
+					msg.what = COMMIT_ERROR;
+					msg.obj = e.getMessage();
+					handler.sendMessage(msg);
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+					msg.what = COMMIT_ERROR;
+					msg.obj = Constants.ExceptionMessage.DATA_FORMATE;
+					handler.sendMessage(msg);
+				}
+
+			}
+		}).start();
+
 	}
 }

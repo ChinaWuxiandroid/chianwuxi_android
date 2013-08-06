@@ -36,6 +36,7 @@
             android:text="申请者类型:" />
 
         <Spinner
+            android:id="@+id/sp_sqtype"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="3"
@@ -51,6 +52,7 @@
         android:orientation="horizontal" >
 
         <TextView
+           
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dip"
@@ -59,6 +61,7 @@
             android:text="单位代码:" />
 
         <EditText
+             android:id="@+id/et_dwdm"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="3"
@@ -82,6 +85,7 @@
             android:text="地址:" />
 
         <EditText
+            android:id="@+id/et_dz"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="3"
@@ -105,6 +109,7 @@
             android:text="联系人:" />
 
         <EditText
+            android:id="@+id/et_lxr"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="3"
@@ -128,6 +133,7 @@
             android:text="电话:" />
 
         <EditText
+            android:id="@+id/et_dh"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="3"
@@ -151,6 +157,7 @@
             android:text="手机:" />
 
         <EditText
+            android:id="@+id/et_sj"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="3"
@@ -174,6 +181,7 @@
             android:text="证件名称:" />
 
         <EditText
+            android:id="@+id/et_zjmc"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="3"
@@ -197,6 +205,7 @@
             android:text="证件号码:" />
 
         <EditText
+            android:id="@+id/et_zjhm"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="3"
@@ -220,10 +229,12 @@
             android:text="申请事由简述:" />
 
         <EditText
+            android:id="@+id/et_jssy"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:background="#ffffff" />
+            android:background="#ffffff"
+            android:lines="5" />
     </LinearLayout>
 
     <LinearLayout
@@ -249,6 +260,7 @@
             android:orientation="horizontal" >
 
             <Button
+                android:id="@+id/apply_btn_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="30dip"
                 android:background="@drawable/my_ask_form_sub_bg"
@@ -257,6 +269,7 @@
                 android:textSize="12sp" />
 
             <Button
+                android:id="@+id/apply_btn_reset"
                 android:layout_width="wrap_content"
                 android:layout_height="30dip"
                 android:background="@drawable/my_ask_form_sub_bg"

@@ -10,7 +10,8 @@
     <Spinner
         android:id="@+id/sp_xzstate"
         android:layout_width="fill_parent"
-        android:layout_height="50dip" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/spiner_bg" />
 
     <LinearLayout
         android:layout_width="match_parent"

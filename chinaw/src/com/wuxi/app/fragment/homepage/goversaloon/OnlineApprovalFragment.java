@@ -145,7 +145,8 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 			loadMoreButton.setText("more");
 
 		} else {
-			loadMoreButton.setText(" ");
+			
+			gover_online_approval_lv.removeFooterView(loadMoreView);
 		}
 
 		List<GoverSaoonItem> goverSaoonItems = goverSaoonItemWrapper

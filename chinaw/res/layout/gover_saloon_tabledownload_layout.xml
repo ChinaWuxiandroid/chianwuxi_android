@@ -24,7 +24,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="表格名称:" />
+            android:text="表格名称:" 
+            android:textSize="12sp"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -32,20 +33,27 @@
             android:layout_weight="0.82"
             android:hint="输入关键字         "
             android:maxLength="20"
-            android:textSize="12sp" />
+            android:textSize="12sp" 
+            android:background="#ffffff"/>
 
         <Button
+            
             android:layout_width="wrap_content"
-            android:layout_height="30sp"
+            android:layout_height="20sp"
             android:text="检索"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:background="#DCDCDC"
+            android:layout_marginLeft="3dip" />
     </LinearLayout>
 
     <Spinner
         android:id="@+id/gover_table_down_deptsp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/search_ll" />
+        android:layout_below="@+id/search_ll"
+           android:background="@drawable/spiner_bg"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip" />
 
     <FrameLayout
         android:layout_width="wrap_content"
