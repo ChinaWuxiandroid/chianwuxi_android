@@ -331,7 +331,8 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 			loadMoreButton.setText("more");
 
 		} else {
-			loadMoreButton.setText(" ");
+			
+			gover_mange_lv.removeFooterView(loadMoreView);
 		}
 
 		List<Content> contents = contentWrapper.getContents();

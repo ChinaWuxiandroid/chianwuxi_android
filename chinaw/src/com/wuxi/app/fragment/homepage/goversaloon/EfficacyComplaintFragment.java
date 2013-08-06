@@ -74,7 +74,8 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 			loadMoreButton.setText("more");
 
 		} else {
-			loadMoreButton.setText(" ");
+			
+			gover_eff_lv.removeFooterView(loadMoreView);
 		}
 
 		List<EfficaComplain> efficaComplains = efficaWrapper

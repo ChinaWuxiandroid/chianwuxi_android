@@ -6,6 +6,7 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -89,7 +90,9 @@ public abstract class ContentListFragment extends BaseFragment implements
 			loadMoreButton.setText("more");
 
 		} else {
-			loadMoreButton.setText(" ");
+			//loadMoreButton.setText(" ");
+			//loadMoreButton.setBackgroundColor(Color.TRANSPARENT);
+			content_list_lv.removeFooterView(loadMoreView);
 		}
 
 		List<Content> contents = contentWrapper.getContents();

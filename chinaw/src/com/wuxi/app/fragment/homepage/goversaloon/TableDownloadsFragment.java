@@ -211,7 +211,8 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 			loadMoreButton.setText("more");
 
 		} else {
-			loadMoreButton.setText(" ");
+			//loadMoreButton.setText(" ");
+			gover_tabledowload_lv.removeFooterView(loadMoreView);
 		}
 
 		List<GoverTableDownLoad> goDownLoads = goverTableDownLoadWrapper

@@ -100,7 +100,8 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 			myapplyloadMoreButton.setText("more");
 
 		} else {
-			myapplyloadMoreButton.setText(" ");
+			
+			gover_saloon_lv_myapply.removeFooterView(myapplyloadMoreView);
 		}
 
 		List<MyApply> myApplies = myApplyWrapper.getMyApplies();
@@ -225,7 +226,8 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 			myconsultloadMoreButton.setText("more");
 
 		} else {
-			myconsultloadMoreButton.setText("没有数据了...");
+			//myconsultloadMoreButton.setText("没有数据了...");
+			gover_saloon_lv_myconsult.removeFooterView(myconsultloadMoreView);
 		}
 
 		List<Myconsult> myconsults = myconsultWrapper.getMyconsults();
