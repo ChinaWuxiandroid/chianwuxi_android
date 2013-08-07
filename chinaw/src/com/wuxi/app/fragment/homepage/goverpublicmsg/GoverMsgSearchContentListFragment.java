@@ -1,6 +1,5 @@
 package com.wuxi.app.fragment.homepage.goverpublicmsg;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -30,13 +29,11 @@ import android.widget.Toast;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.ApplyDeptService;
-import com.wuxi.app.engine.DeptService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.ApplyDept;
 import com.wuxi.domain.Channel;
-import com.wuxi.domain.Dept;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NetException;
 

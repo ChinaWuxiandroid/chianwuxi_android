@@ -5,7 +5,6 @@ import android.widget.RadioGroup;
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
-import com.wuxi.app.util.GIPRadioButtonStyleChange;
 
 /**
  * 我的政民互动之视频直播平台之走进直播间

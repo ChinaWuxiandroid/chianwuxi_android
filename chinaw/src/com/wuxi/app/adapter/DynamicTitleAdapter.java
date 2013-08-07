@@ -3,7 +3,6 @@ package com.wuxi.app.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.wuxi.app.R;
-import com.wuxi.app.adapter.TitleChannelAdapter.ViewHolder;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 

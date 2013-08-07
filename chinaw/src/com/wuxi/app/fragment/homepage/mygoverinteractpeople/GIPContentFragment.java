@@ -2,8 +2,6 @@ package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
 import java.util.List;
 
-import com.wuxi.app.R;
-import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
 import com.wuxi.app.listeners.GoverInterPeopleInitLayoutImpl;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
 import com.wuxi.domain.MenuItem;
