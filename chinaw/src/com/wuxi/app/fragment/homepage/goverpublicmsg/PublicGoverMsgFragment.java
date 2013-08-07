@@ -76,6 +76,9 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 			else if (menu.getType() == MenuItem.WAP_MENU) {
 				menu.setContentFragment(GoverMsgWebFragment.class);
 			} 
+			else if (menu.getType() == MenuItem.FRAGMENT_MENU) {
+				menu.setContentFragment(GoverMsgFragmentWebFragment.class);
+			} 
 		}
 	}
 

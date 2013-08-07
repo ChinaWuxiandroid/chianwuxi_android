@@ -207,7 +207,6 @@ public abstract class ContentListFragment extends BaseFragment implements
 
 		content_list_lv.addFooterView(loadMoreView);// 为listView添加底部视图
 		content_list_lv.setOnScrollListener(this);// 增加滑动监听
-
 	}
 
 	protected MenuItem parentItem;

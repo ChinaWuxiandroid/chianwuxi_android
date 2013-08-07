@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <ImageButton
-        android:id="@+id/gip_publicforum_imagebutton_post"
+        android:id="@+id/gip_forum_imagebtn"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginLeft="10dp"
@@ -13,20 +13,27 @@
         android:src="@drawable/iwantpost" />
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@android:color/white" />
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#ffffff" />
 
     <FrameLayout
-        android:id="@+id/goverinterpeople_recept_content_fragment"
+        android:id="@+id/gip_forum_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <ImageView
+        <ProgressBar
+            android:id="@+id/gip_forum_listview_pb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/useless" />
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/gip_forum_listview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
     </FrameLayout>
 
 </LinearLayout>

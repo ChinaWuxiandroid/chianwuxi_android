@@ -47,15 +47,15 @@ import com.wuxi.exception.NetException;
  * 
  */
 public class TableDownloadsFragment extends GoverSaloonContentFragment
-		implements OnScrollListener, OnItemSelectedListener,
-		OnItemClickListener {
+implements OnScrollListener, OnItemSelectedListener,
+OnItemClickListener {
 
 	protected static final int LOAD_DEPT_SUCCESS = 0;
 	protected static final int LOAD_DEPT_FAIL = 1;
 	protected static final int GOVERITEM_LOAD_SUCCESS = 2;
 	protected static final int GOVERITEM_LOAD_FIAL = 3;
-	 private static final int FILE_DOWN_SUCCESS = 4;
-	 private static final int FILE_DOWN_ERROR=5;
+	private static final int FILE_DOWN_SUCCESS = 4;
+	private static final int FILE_DOWN_ERROR=5;
 	private static final int PAGE_SIZE = 10;
 	private Spinner gover_table_down_deptsp;
 	private List<Dept> depts;
@@ -253,7 +253,7 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 
 				if (isSwitchDept) {// 切换部门
 					goverTableDownLoadAdapter
-							.setGoverTableDownLoads(goDownLoads);
+					.setGoverTableDownLoads(goDownLoads);
 					pb_table_download.setVisibility(ProgressBar.GONE);
 				} else {
 					for (GoverTableDownLoad goverTableDownLoad : goDownLoads) {
@@ -369,7 +369,7 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 
 	private class DownLoadThreadTask implements Runnable {
 
-		
+
 		private String fileId;
 		private String filePath;
 
@@ -395,10 +395,10 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 			} catch (Exception e) {
 
 				e.printStackTrace();
-				
+
 				pd.dismiss();
-				
-				
+
+
 				handler.sendEmptyMessage(FILE_DOWN_ERROR);
 			}
 

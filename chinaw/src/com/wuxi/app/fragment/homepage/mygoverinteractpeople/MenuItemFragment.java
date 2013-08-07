@@ -28,6 +28,7 @@ import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.view.DynamicTitleLayout;
+import com.wuxi.app.view.TitleScrollLayout;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
@@ -56,7 +57,7 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 	private static final int TITLEDATA_LOAD_ERROR = 2;	
 	protected static final int RIGHT_CONTENT_ID=R.id.gip_menuitem_content_fragmentlayout;
 
-	private ProgressBar titlePb;
+	//	private ProgressBar titlePb;
 	protected DynamicTitleLayout mtitleLayout;
 
 	@SuppressLint("HandlerLeak")
@@ -67,17 +68,17 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 				tip = msg.obj.toString();
 			}
 			switch (msg.what) {
-			
+
 			case MENUITEM_TITLEDATA__LOAD_SUCESS:
-				titlePb.setVisibility(View.INVISIBLE);
+				//				titlePb.setVisibility(View.INVISIBLE);
 				showMenuItemTitle();
 				break;
 			case CHANNEL_TITLEDATA__LOAD_SUCESS:
-				titlePb.setVisibility(View.INVISIBLE);
+				//				titlePb.setVisibility(View.INVISIBLE);
 				showChannelTitle();
 				break;
 			case TITLEDATA_LOAD_ERROR:
-				titlePb.setVisibility(View.INVISIBLE);
+				//				titlePb.setVisibility(View.INVISIBLE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
 			}
@@ -100,14 +101,11 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 	}
 
 	public void initTitleUI(){
-		titlePb=(ProgressBar)view.findViewById(R.id.gip_menuitem_progressbar);
-		mtitleLayout = (DynamicTitleLayout) view.findViewById(R.id.gip_menuitem_title_layout);// 头部控件
-		
-		mtitleLayout.setMenuItemInitLayoutListener(getMenuItemInitLayoutListener());// 设置界面监听处理类
-		mtitleLayout.setInitializContentLayoutListner(this);// 设置绑定内容界面监听器
-		
-		titlePb.setVisibility(View.VISIBLE);
-		
+		//		titlePb=(ProgressBar)view.findViewById(R.id.gip_menuitem_progressbar);
+
+
+		//		titlePb.setVisibility(View.VISIBLE);
+
 		if (parentItem.getType() == MenuItem.CHANNEL_MENU) {
 			loadChannelTitleData();
 		}
@@ -120,7 +118,7 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 	private void loadMenuItemTitleData(){
 		if (CacheUtil.get(parentItem.getId()) != null) {// 从缓存中查找子菜单
 			titleMenuItems = (List<MenuItem>) CacheUtil.get(parentItem.getId());
-			titlePb.setVisibility(View.INVISIBLE);
+			//			titlePb.setVisibility(View.INVISIBLE);
 			showMenuItemTitle();
 			return;
 		}
@@ -170,8 +168,12 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 
 	//显示普通菜单类型标题条
 	public void showMenuItemTitle(){
+		mtitleLayout = (DynamicTitleLayout) view.findViewById(R.id.gip_menuitem_title_layout);// 头部控件
+
+		mtitleLayout.setMenuItemInitLayoutListener(getMenuItemInitLayoutListener());// 设置界面监听处理类
+		mtitleLayout.setInitializContentLayoutListner(this);// 设置绑定内容界面监听器
+
 		mtitleLayout.setPerscreenCount(titleMenuItems.size());
-		System.out.println("titleMenuItems.size(): "+titleMenuItems.size());
 		initializSubFragmentsLayout(titleMenuItems);// 绑定子界面
 		mtitleLayout.initMenuItemScreen(context, mInflater, titleMenuItems);// 初始化头部空间
 	}
@@ -181,7 +183,7 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 		if (CacheUtil.get(parentItem.getChannelId()) != null) {// 从缓存中查找子菜单
 			titleChannels = (List<Channel>) CacheUtil.get(parentItem.getChannelId());
 			if (titleChannels != null) {
-				titlePb.setVisibility(View.INVISIBLE);
+				//				titlePb.setVisibility(View.INVISIBLE);
 				showChannelTitle();
 				return;
 			}	
@@ -214,10 +216,10 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 	//显示频道菜单类型标题条
 	public void showChannelTitle(){
 		mtitleLayout.setPerscreenCount(titleChannels.size());
-//		initializSubFragmentsLayout(titleChannels);// 绑定子界面
+		//		initializSubFragmentsLayout(titleChannels);// 绑定子界面
 		mtitleLayout.initChannelScreen(context, mInflater, titleChannels);// 初始化头部空间
 		mtitleLayout.postInvalidate();
-		
+
 	}
 
 	protected abstract MenuItemInitLayoutListener getMenuItemInitLayoutListener();
@@ -240,5 +242,4 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 		ft.replace(RIGHT_CONTENT_ID, fragment);
 		ft.commit();	
 	}
-
 }

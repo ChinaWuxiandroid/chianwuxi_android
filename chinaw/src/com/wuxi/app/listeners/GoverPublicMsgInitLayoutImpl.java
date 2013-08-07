@@ -3,6 +3,7 @@ package com.wuxi.app.listeners;
 import android.support.v4.app.Fragment;
 
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgContentListFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgFragmentWebFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgNaviWithContentFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgSearchContentListFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgWebFragment;
@@ -32,6 +33,7 @@ public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener 
 			GoverMsgNaviWithContentFragment contentNavigatorWithContentFragment = null;
 			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment=null;
 			WorkSuggestionBoxFragment workSuggestionBoxFragment = null;
+			GoverMsgFragmentWebFragment goverMsgFragmentWebFragment=null;
 
 			if (fragment instanceof GoverMsgNaviWithContentFragment) {
 				contentNavigatorWithContentFragment = (GoverMsgNaviWithContentFragment) fragment;
@@ -56,6 +58,11 @@ public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener 
 				workSuggestionBoxFragment = (WorkSuggestionBoxFragment) fragment;
 				workSuggestionBoxFragment.setParentMenuItem(menuItem);
 				initLayoutListner.bindContentLayout(workSuggestionBoxFragment);
+			}
+			else if (fragment instanceof GoverMsgFragmentWebFragment) {
+				goverMsgFragmentWebFragment = (GoverMsgFragmentWebFragment) fragment;
+				goverMsgFragmentWebFragment.setParentMenuItem(menuItem);
+				initLayoutListner.bindContentLayout(goverMsgFragmentWebFragment);
 			}
 
 		} catch (InstantiationException e) {

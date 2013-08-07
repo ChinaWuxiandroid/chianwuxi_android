@@ -103,7 +103,6 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 				break;
 			}
 		}
-
 	};
 
 	public void initUI() {

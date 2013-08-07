@@ -42,6 +42,8 @@ import com.wuxi.app.fragment.homepage.logorregister.RegisterFragment;
 import com.wuxi.app.fragment.homepage.more.MenuItemSetFragment;
 import com.wuxi.app.fragment.homepage.more.SiteMapFragment;
 import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumContentFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumPostFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewContentFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
 import com.wuxi.app.listeners.SlideLinstener;
@@ -131,8 +133,8 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 		leftMenuAdapter = new LeftMenuAdapter(getActivity(),
 				R.layout.slide_navigator_item, new int[] {
-						R.id.tv_left_menu_name, R.id.left_iv_icon },
-				leftMenuItems, null, position);
+			R.id.tv_left_menu_name, R.id.left_iv_icon },
+			leftMenuItems, null, position);
 		mlvMenu.setAdapter(leftMenuAdapter);
 	}
 
@@ -220,10 +222,19 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				MyOnlineAskFragment myOnlineAskFragment = new MyOnlineAskFragment();
 				onTransaction(myOnlineAskFragment, bundle);
 				break;
-			case HOTREVIEW_CONTENT_FRAGMENT:// test
+			case HOTREVIEW_CONTENT_FRAGMENT:// 热点话题
 				HotReviewContentFragment hotReviewContentFragment = new HotReviewContentFragment();
 				onTransaction(hotReviewContentFragment, bundle);
 				break;
+			case GIP_FOROUM_FRAGMENT://公众论坛帖子详细内容
+				ForumContentFragment forumContentFragment = new ForumContentFragment();
+				onTransaction(forumContentFragment, bundle);
+				break;
+			case GIP_FORUM_POST_FRAGMENT://公众论坛发表帖子界面	
+				ForumPostFragment forumPostFragment = new ForumPostFragment();
+				onTransaction(forumPostFragment, bundle);
+				break;
+
 			case GOVERSALOONDETAIL_XK_FRAGMENT:// 政务大厅办件详情
 				GoverSaloonDetailXKFragment goverSaloonDetailFragment = new GoverSaloonDetailXKFragment();
 				onTransaction(goverSaloonDetailFragment, bundle);

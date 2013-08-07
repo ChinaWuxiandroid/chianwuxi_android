@@ -41,6 +41,10 @@ public class MenuItem implements Comparable<MenuItem>, Serializable {
 	 * link菜单 会指向另外一个muenitem
 	 */
 	public static final int LINK_MENU = 5;
+	/**
+	 * 碎片菜单 
+	 */
+	public static final int FRAGMENT_MENU = 6;
 
 	private String name;// 菜单名称
 	private String id;// ID 唯一标识
@@ -63,6 +67,8 @@ public class MenuItem implements Comparable<MenuItem>, Serializable {
 	private String linkMenuItemId;// 连接菜单Id
 	private boolean isHasChildern;// 是否子菜单
 	private String icon;// 图标
+	private String pfId;  
+	private String pfBuildPath;  
 
 	private Class<? extends Fragment> contentFragment;
 
@@ -252,6 +258,22 @@ public class MenuItem implements Comparable<MenuItem>, Serializable {
 		} else {
 			return 0;
 		}
+	}
+
+	public String getPfId() {
+		return pfId;
+	}
+
+	public void setPfId(String pfId) {
+		this.pfId = pfId;
+	}
+
+	public String getPfBuildPath() {
+		return pfBuildPath;
+	}
+
+	public void setPfBuildPath(String pfBuildPath) {
+		this.pfBuildPath = pfBuildPath;
 	}
 
 }

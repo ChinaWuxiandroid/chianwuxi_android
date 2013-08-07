@@ -6,13 +6,13 @@
 
     <include
         android:layout_width="fill_parent"
-        android:layout_height="0dip"
+        android:layout_height="0dp"
         android:layout_weight="1"
         layout="@layout/child_fragmend_header_layout" />
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dip"
+        android:layout_height="0dp"
         android:layout_weight="9"
         android:background="#ffffff" >
 
@@ -21,8 +21,7 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:background="#e4e4e4"
-            >
+            android:background="#e4e4e4" >
         </ListView>
 
         <FrameLayout

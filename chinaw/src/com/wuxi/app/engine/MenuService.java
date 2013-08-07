@@ -105,7 +105,9 @@ public class MenuService extends Service {
 					menu.setParentMenuId(jb.getString("parentMenuId"));
 					menu.setLinkMenuItemId(jb.getString("linkMenuItemID"));
 					menu.setContentName(jb.getString("contentName"));
-					menu.setLinkMenuItemName(jb.getString("linkMenuItemName"));
+					menu.setLinkMenuItemName(jb.getString("linkMenuItemName"));				
+					menu.setPfId(jb.getString("pfId"));
+					menu.setPfBuildPath(jb.getString("pfBuildPath"));
 
 					if (!menu.isDeleted()&&!menu.isDisabled()) {// 已经删除标记和弃用的不显示
 						menuItems.add(menu);
@@ -190,6 +192,8 @@ public class MenuService extends Service {
 					menu.setLinkMenuItemId(jb.getString("linkMenuItemID"));
 					menu.setContentName(jb.getString("contentName"));
 					menu.setLinkMenuItemName(jb.getString("linkMenuItemName"));
+					menu.setPfId(jb.getString("pfId"));
+					menu.setPfBuildPath(jb.getString("pfBuildPath"));
 
 					int type = jb.getInt("type");
 					if (type == MenuItem.CHANNEL_MENU&&!menu.isDeleted()) {// 如果是频道菜单，获取子频道，并放入缓存中

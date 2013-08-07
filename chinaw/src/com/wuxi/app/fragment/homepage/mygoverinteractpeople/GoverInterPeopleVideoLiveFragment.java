@@ -29,7 +29,7 @@ public class GoverInterPeopleVideoLiveFragment  extends RadioButtonChangeFragmen
 			R.id.gip_video_bdroom_radioBtn_program,
 			R.id.gip_video_bdroom_radioBtn_schedule
 	};
-	
+
 	@Override
 	protected int getLayoutId() {
 		return R.layout.gip_video_broadcastroom_layout;
@@ -55,38 +55,37 @@ public class GoverInterPeopleVideoLiveFragment  extends RadioButtonChangeFragmen
 		MainMineFragment gipVedioLiveHomeFragment = new GoverInterPeopleVideoLiveHomeFragment();
 		onTransaction(gipVedioLiveHomeFragment);
 	}
-	
+
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
-		
-		GIPRadioButtonStyleChange radioButtonStyleChange=new GIPRadioButtonStyleChange();
-		radioButtonStyleChange.refreshRadioButtonStyle(view,radioBtnIds,checkedId);
-		
+
+		super.onCheckedChanged(group, checkedId);
+
 		switch (checkedId) {
 		case R.id.gip_video_bdroom_radioBtn_home:
 			init();
 			break;
-			
+
 		case R.id.gip_video_bdroom_radioBtn_review:
-			
+
 			break;
-			
+
 		case R.id.gip_video_bdroom_radioBtn_guest:
-			
+
 			break;
-			
+
 		case R.id.gip_video_bdroom_radioBtn_relative_info:
-			
+
 			break;
-			
+
 		case R.id.gip_video_bdroom_radioBtn_program:
-			
+
 			break;
-			
+
 		case R.id.gip_video_bdroom_radioBtn_schedule:
-			
+
 			break;
-			
+
 		default:
 			break;
 		}

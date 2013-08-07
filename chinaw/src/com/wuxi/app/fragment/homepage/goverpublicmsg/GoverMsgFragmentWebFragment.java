@@ -24,9 +24,9 @@ public class GoverMsgFragmentWebFragment extends BaseFragment{
 
 	private WebView wbView;
 	private ProgressBar wb_pb;
-	private String urlHeader="http://32.63.250.24:10169/wap";
+	private String urlHeader="http://www.wuxi.gov.cn";
 
-	public void setParentItem(MenuItem parentItem) {
+	public void setParentMenuItem(MenuItem parentItem) {
 		this.parentItem = parentItem;
 	}
 
@@ -44,6 +44,7 @@ public class GoverMsgFragmentWebFragment extends BaseFragment{
 	private void initUI() {
 
 		wbView = (WebView) view.findViewById(R.id.leader_wv_main);
+		
 		wb_pb = (ProgressBar) view.findViewById(R.id.wb_progress);
 		wbView.getSettings().setJavaScriptEnabled(true);
 
@@ -58,7 +59,7 @@ public class GoverMsgFragmentWebFragment extends BaseFragment{
 
 		wbView.getSettings().setUseWideViewPort(true); 
 		wbView.getSettings().setLoadWithOverviewMode(true);
-		//		wbView.loadUrl(urlHeader+parentItem.getp());
+		wbView.loadUrl(urlHeader+parentItem.getPfBuildPath());
 		//	mWb_leader.loadUrl("http://32.63.250.24:10169/wap/zxzx/ldzc/index.shtml");
 
 	}
