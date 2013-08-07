@@ -217,6 +217,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
 		MenuItem menuItem=(MenuItem) adapterView.getItemAtPosition(position);
+		
 		GoverMsgCustomContentDetailFragment goverMsgCustomContentDetailFragment=new GoverMsgCustomContentDetailFragment();
 		goverMsgCustomContentDetailFragment.setParentMenuItem(menuItem);
 		FragmentManager manager = getActivity().getSupportFragmentManager();

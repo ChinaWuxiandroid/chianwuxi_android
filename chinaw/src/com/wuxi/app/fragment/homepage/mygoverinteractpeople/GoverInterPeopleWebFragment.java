@@ -41,7 +41,7 @@ public class GoverInterPeopleWebFragment extends BaseFragment{
 
 	@SuppressLint("SetJavaScriptEnabled")
 	private void initUI() {
-		System.out.println("init ui");
+		
 		wbView = (WebView) view.findViewById(R.id.leader_wv_main);
 		wb_pb = (ProgressBar) view.findViewById(R.id.wb_progress);
 		wbView.getSettings().setJavaScriptEnabled(true);
@@ -58,6 +58,7 @@ public class GoverInterPeopleWebFragment extends BaseFragment{
 		wbView.getSettings().setUseWideViewPort(true); 
 		wbView.getSettings().setLoadWithOverviewMode(true);
 		wbView.loadUrl(wapUrl);
+//		wbView.loadUrl("http://www.yixing.gov.cn/default.php?mod=article&fid=424");
 	//	mWb_leader.loadUrl("http://32.63.250.24:10169/wap/zxzx/ldzc/index.shtml");
 
 	}

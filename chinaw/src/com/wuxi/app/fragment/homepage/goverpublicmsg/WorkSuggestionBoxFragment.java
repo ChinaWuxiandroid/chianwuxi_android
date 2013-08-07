@@ -226,6 +226,14 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 			EditText content_et=(EditText)subLayout.getChildAt(1);
 				
 			item.setValueList(content_et.getText().toString());
+			
+			if(item.getRequiredForm()==1){
+				if (content_et.getText().toString().equals("")) {
+					Toast.makeText(context, item.getAlias()+"  不能为空！", Toast.LENGTH_SHORT).show();
+					break;
+				}
+			}
+			
 			index++;
 		}
 		WorkSuggestionService workSuggestionService=new WorkSuggestionService(context);

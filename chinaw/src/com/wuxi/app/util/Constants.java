@@ -87,7 +87,7 @@ public class Constants {
 		/**
 		 * 分页获取立法征求意见和民意征集 URL
 		 * */
-		public static final String POLITICS_LIST_URL = "http://3g.wuxi.gov.cn/api//politics/list.json";
+		public static final String POLITICS_LIST_URL = "http://3g.wuxi.gov.cn/api/politics/list.json";
 
 		/**
 		 * 获取当前用户 立法征求意见和民意征集 URL
@@ -258,6 +258,11 @@ public class Constants {
 		 * 政府信息公开  提交自定义表单信息的URL
 		 * */
 		public static final String SUBMIT_SELFFORM_URL="http://3g.wuxi.gov.cn/api/selfforms/submit.json";
+		
+		/**
+		 * 政府信息公开  各部门依申请公开
+		 * */
+		public static final String APPLYDEPT_URL="http://3g.wuxi.gov.cn/api/applyopen/deps.json";
 		
 		
 	}

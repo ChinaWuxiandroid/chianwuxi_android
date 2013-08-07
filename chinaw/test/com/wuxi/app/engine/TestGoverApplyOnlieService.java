@@ -6,10 +6,10 @@ import java.util.UUID;
 
 import org.json.JSONException;
 
+import android.test.AndroidTestCase;
+
 import com.wuxi.domain.GoverApplyOnlie;
 import com.wuxi.exception.NetException;
-
-import android.test.AndroidTestCase;
 
 public class TestGoverApplyOnlieService extends AndroidTestCase {
 

@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.engine.PoliticsService;
-import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
@@ -46,7 +45,7 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 	public final int POLITICS_TYPE=1;    //politics类型，接口里0 为立法征集，1 为民意征集
 	private int startIndex=0;         //获取话题的起始坐标
 	private int endIndex=5;			//获取话题的结束坐标
-
+	private int passed=0;         //是否过期，可选参数，默认值是0    0: 当前      1:以往
 
 	private final  int[] radioButtonIds={
 			R.id.gip_suggest_peoplewill_radioButton_now,
@@ -80,12 +79,15 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 		switch (checkedId) {
 
 		case R.id.gip_suggest_peoplewill_radioButton_now:
+			passed=0;
 			init();
 			break;
 
 		case R.id.gip_suggest_peoplewill_radioButton_before:	
-			MainMineFragment suggestionPlatformFragment=new GIPMineSuggestionPlatformFragment();
-			onTransaction(suggestionPlatformFragment);
+			passed=1;
+			init();
+//			MainMineFragment suggestionPlatformFragment=new GIPMineSuggestionPlatformFragment();
+//			onTransaction(suggestionPlatformFragment);
 			break;
 		}
 	}
@@ -126,13 +128,6 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 	}
 
 	public void loadData(){
-		//		if (CacheUtil.get(menuItem.getChannelId()) != null) {// 从缓存获取
-		//
-		//			titleChannels = (List<Channel>) CacheUtil.get(menuItem
-		//					.getChannelId());
-		//			showTitleData();
-		//			return;
-		//		}
 
 		new Thread(new Runnable() {
 
@@ -141,7 +136,7 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 
 				PoliticsService politicsService = new PoliticsService(context);
 				try {
-					politicsWrapper = politicsService.getPoliticsWrapper(Constants.Urls.POLITICS_LIST_URL,POLITICS_TYPE,startIndex,endIndex);
+					politicsWrapper = politicsService.getPoliticsWrapper(Constants.Urls.POLITICS_LIST_URL,POLITICS_TYPE,startIndex,endIndex,passed);
 					if (null != politicsWrapper) {
 						//						CacheUtil.put(menuItem.getChannelId(), titleChannels);// 缓存起来
 						politics=politicsWrapper.getData();
@@ -239,7 +234,6 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 			viewHolder.beginTime_text.setText(politics.get(position).getBeginTime());
 			viewHolder.endTime_text.setText(politics.get(position).getEndTime());
 			//			viewHolder.depName_text.setText(politics.get(position).ge);
-
 			return convertView;
 		}
 

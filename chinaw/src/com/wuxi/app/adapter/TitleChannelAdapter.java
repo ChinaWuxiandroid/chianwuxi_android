@@ -59,7 +59,6 @@ public class TitleChannelAdapter extends BasicAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		System.out.println("position in channel :"+position);
 		Object item = items.get(position);
 		String chanelName = "";// 频道名称
 		if (item instanceof Channel) {

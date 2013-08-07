@@ -6,11 +6,11 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import com.wuxi.app.util.Constants;
-import com.wuxi.exception.NetException;
-
 import android.app.ProgressDialog;
 import android.content.Context;
+
+import com.wuxi.app.util.Constants;
+import com.wuxi.exception.NetException;
 
 /**
  * 

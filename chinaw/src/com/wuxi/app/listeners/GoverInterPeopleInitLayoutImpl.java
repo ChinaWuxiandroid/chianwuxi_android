@@ -17,6 +17,8 @@ import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineSuggestionPla
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWill;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeFragment;
 import com.wuxi.domain.MenuItem;
 
 public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListener {
@@ -44,7 +46,7 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 			GIPMineInternetGoverSaloonFragment gIPMineInternetGoverSaloonFragment=null;
 			GIPMineInfoPublicPlatformFragment gIPMineInfoPublicPlatformFragment=null;
 			GIPMinePublicForumFragment gIPMinePublicForumFragment=null;
-			
+
 			/**
 			 * 12345来信办理平台
 			 */
@@ -55,7 +57,7 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 			GIP12345HotMail gIP12345HotMail=null;
 			GIP12345AnswerStatisticsFragment gIP12345AnswerStatisticsFragment=null;
 			GIP12345IWantMailFragment gIP12345IWantMailFragment=null;
-			
+
 			/**
 			 * 征求意见平台
 			 */
@@ -66,9 +68,17 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 			 * 视频直播平台
 			 */
 			/**
+			 * 视频直播平台之走进直播间
+			 */
+			GoverInterPeopleVideoLiveFragment goverInterPeopleVideoLiveFragment = null;		
+			/**
+			 * 走进直播间之栏目首页
+			 */
+			GoverInterPeopleVideoLiveHomeFragment goverInterPeopleVideoLiveHomeFragment = null;
+			/**
 			 * 公众监督
 			 */
-			
+
 			/**
 			 * 我的政民互动
 			 */
@@ -158,6 +168,24 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 				gIPSuggestPeopleWill=(GIPSuggestPeopleWill)fragment;
 				gIPSuggestPeopleWill.setParentMenuItem(menuItem);
 				initLayoutListner.bindContentLayout(gIPSuggestPeopleWill);
+			}
+
+			/**
+			 * 走进直播间
+			 */
+			else if (fragment instanceof GoverInterPeopleVideoLiveFragment) {
+				goverInterPeopleVideoLiveFragment = (GoverInterPeopleVideoLiveFragment) fragment;
+				goverInterPeopleVideoLiveFragment.setParentMenuItem(menuItem);
+				initLayoutListner.bindContentLayout(goverInterPeopleVideoLiveFragment);
+			}
+
+			/**
+			 * 走进直播间之栏目主页
+			 */
+			else if (fragment instanceof GoverInterPeopleVideoLiveHomeFragment) {
+				goverInterPeopleVideoLiveHomeFragment = (GoverInterPeopleVideoLiveHomeFragment) fragment;
+				goverInterPeopleVideoLiveHomeFragment.setParentMenuItem(menuItem);
+				initLayoutListner.bindContentLayout(goverInterPeopleVideoLiveHomeFragment);
 			}
 
 		} catch (InstantiationException e) {

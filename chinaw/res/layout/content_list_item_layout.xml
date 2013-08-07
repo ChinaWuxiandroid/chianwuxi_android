@@ -14,13 +14,14 @@
         android:text="asdfas" />
 
     <TextView
-        android:layout_below="@+id/content_list_tv_title"
         android:id="@+id/content_list_tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_below="@+id/content_list_tv_title"
         android:layout_marginRight="8dip"
         android:gravity="right"
-        android:text="sadfasfd" />
+        android:text="sadfasfd"
+        android:textColor="@color/list_gray" />
 
 </RelativeLayout>

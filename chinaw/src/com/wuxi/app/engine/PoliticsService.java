@@ -34,9 +34,9 @@ public class PoliticsService extends Service{
 	 * @throws JSONException 
 	 * @throws NetException 
 	 * */
-	public PoliticsWrapper getPoliticsWrapper(String url,int type,int startIndex,int endIndex)
+	public PoliticsWrapper getPoliticsWrapper(String url,int type,int startIndex,int endIndex,int passed)
 			throws NetException, JSONException, NODataException{
-		url=url+"?type="+type+"&start="+startIndex+"&end="+endIndex;
+		url=url+"?type="+type+"&start="+startIndex+"&end="+endIndex+"&passed="+passed;
 		return getPoliticsWrapper(url);
 	}
 

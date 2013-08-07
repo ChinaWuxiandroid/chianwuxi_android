@@ -232,7 +232,7 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment i
 							public void onClick(DialogInterface dialog, int which) {
 								Uri telUri = Uri.parse("tel:"+phoneNumber);
 								Intent intent= new Intent(Intent.ACTION_DIAL, telUri);
-								startActivity(intent);
+								getActivity().startActivity(intent);
 							}
 						})
 		                .setNegativeButton("取消", new OnClickListener(){
