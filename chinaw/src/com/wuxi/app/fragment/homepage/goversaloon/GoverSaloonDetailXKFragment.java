@@ -7,6 +7,8 @@ import java.util.UUID;
 
 import org.json.JSONException;
 
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Handler;
@@ -408,6 +410,8 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 				rb.setTextColor(Color.BLACK);
 			}
 		}
+		
+		
 
 	}
 
