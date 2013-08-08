@@ -153,9 +153,7 @@ OnScrollListener, OnItemClickListener{
 						- visibleItemCount + 1); // 设置选中项
 				isLoading = false;
 			}
-
 		}
-
 	}
 
 	/**
