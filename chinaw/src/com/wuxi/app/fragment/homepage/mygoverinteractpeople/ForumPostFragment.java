@@ -4,6 +4,7 @@
 package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
 import org.json.JSONException;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;

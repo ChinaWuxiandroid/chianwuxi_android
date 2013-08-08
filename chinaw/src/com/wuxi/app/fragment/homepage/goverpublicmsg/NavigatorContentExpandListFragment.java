@@ -26,7 +26,6 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.engine.MenuService;
-import com.wuxi.app.listeners.GoverMsgInitInfoOpenListener;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;

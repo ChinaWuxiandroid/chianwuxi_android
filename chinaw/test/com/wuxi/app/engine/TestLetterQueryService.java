@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import android.test.AndroidTestCase;
+
 import com.wuxi.domain.ContentType;
 import com.wuxi.domain.LetterType;
 import com.wuxi.exception.NetException;
-
-import android.test.AndroidTestCase;
 /**
  * 
  * @author wanglu 泰得利通
