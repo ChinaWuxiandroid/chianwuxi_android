@@ -145,6 +145,46 @@ public class ContentService extends Service {
 	}
 
 	/**
+	 * 
+	 * 杨宸 智佳 根据开始位置结束位置
+	 * 
+	 * @param url  包含id start end 等后面 部门 地区 关键词 年份 可选项
+	 *            
+	 * @return ContentWrapper content包装对象
+	 * @throws NetException
+	 * @throws JSONException
+	 * @throws NODataException
+	 */
+	public ContentWrapper getPageContentsByUrl(String url)
+			throws NetException, JSONException, NODataException {
+
+		if (!checkNet()) {
+			throw new NetException(Constants.ExceptionMessage.NO_NET);
+		}
+		String resultStr = httpUtils.executeGetToString(url, 5000);
+		if (resultStr != null) {
+			JSONObject jsonObject = new JSONObject(resultStr);
+			JSONObject jresult = jsonObject.getJSONObject("result");
+			ContentWrapper contentWrapper = new ContentWrapper();
+			contentWrapper.setEnd(jresult.getInt("end"));
+			contentWrapper.setStart(jresult.getInt("start"));
+			contentWrapper.setNext(jresult.getBoolean("next"));
+			contentWrapper.setPrevious(jresult.getBoolean("previous"));
+			contentWrapper.setTotalRowsAmount(jresult.getInt("totalRowsAmount"));
+			JSONArray jData = jresult.getJSONArray("data");
+			if (jData != null) {
+				contentWrapper.setContents(parseData(jData));// 解析数组
+			}
+
+			return contentWrapper;
+
+		} else {
+			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);// 没有获取到数据异常
+		}
+	}
+
+	
+	/**
 	 * ID wanglu 泰得利通
 	 * 
 	 * @param jData
