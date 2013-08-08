@@ -47,7 +47,6 @@ import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumPostFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewContentFragment;
-import com.wuxi.app.fragment.homepage.publicservice.PublicServiceChannelContentDetailFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceContentDetailFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
 import com.wuxi.app.listeners.SlideLinstener;
