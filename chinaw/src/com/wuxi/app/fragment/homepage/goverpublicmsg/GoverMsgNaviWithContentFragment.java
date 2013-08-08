@@ -32,7 +32,7 @@ public class GoverMsgNaviWithContentFragment extends MenuItemNavigatorWithConten
 			}
 			//依申请公开   --我的依申请公开办件答复
 			else if(menuItem.getAppUI().equals("myapplypage")){
-				
+
 			}
 		}
 
@@ -44,11 +44,14 @@ public class GoverMsgNaviWithContentFragment extends MenuItemNavigatorWithConten
 
 		if(channel.getChannelName().equals("部门年度报告")){
 			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment=new GoverMsgSearchContentListFragment();
+			goverMsgSearchContentListFragment.setFifterType(GoverMsgSearchContentListFragment.DEPT_TYPE);
 			goverMsgSearchContentListFragment.setChannel(channel);
 			return goverMsgSearchContentListFragment;
 		}
 		else if(channel.getChannelName().equals("县区政府年度报告")){
+			
 			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment=new GoverMsgSearchContentListFragment();
+			goverMsgSearchContentListFragment.setFifterType(GoverMsgSearchContentListFragment.ZONE_TYPE);
 			goverMsgSearchContentListFragment.setChannel(channel);
 			return goverMsgSearchContentListFragment;
 		}

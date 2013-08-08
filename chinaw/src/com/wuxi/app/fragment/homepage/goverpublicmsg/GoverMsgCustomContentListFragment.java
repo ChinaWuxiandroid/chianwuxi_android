@@ -12,5 +12,4 @@ public class GoverMsgCustomContentListFragment extends ContentListFragment{
 		// TODO Auto-generated method stub
 		
 	}
-
 }

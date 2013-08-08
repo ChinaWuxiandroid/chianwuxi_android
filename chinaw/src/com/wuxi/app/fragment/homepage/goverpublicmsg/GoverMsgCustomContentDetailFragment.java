@@ -22,6 +22,7 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.PublicSericeChannelAdapter;
 import com.wuxi.app.engine.ChannelService;
+import com.wuxi.app.listeners.GoverMsgInitInfoOpenListener;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
@@ -31,8 +32,9 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 	private Context context;
 	private View view;
 	
-	private Channel channel;
+//	private Channel channel;
 	private MenuItem parentMenuItem;
+	private Channel parentChannel;
 	public List<Channel> subChannels;
 	
 	private ProgressBar pb_govermsg;
@@ -59,6 +61,22 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 		};
 	};
 	
+	public MenuItem getParentMenuItem() {
+		return parentMenuItem;
+	}
+
+	public void setParentMenuItem(MenuItem menuItem) {
+		this.parentMenuItem = menuItem;
+	}
+	
+	public Channel getParentChannel() {
+		return parentChannel;
+	}
+
+	public void setParentChannel(Channel parentChannel) {
+		this.parentChannel = parentChannel;
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -78,51 +96,16 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 				.findViewById(R.id.govermsg_detail_listview);
 		
 		govermsg_detail_lv_channel.setOnItemClickListener(this);
-		textView_title.setText(parentMenuItem.getName());
+		if(parentMenuItem!=null){
+			textView_title.setText(parentMenuItem.getName());
+		}
+		else if(parentChannel!=null){
+			textView_title.setText(parentChannel.getChannelName());
+		}
 		
-//		loadContentList();
-		showContentList(parentMenuItem);
+		showContentList();
 	}
 	
-	@SuppressWarnings("unchecked")
-	private void loadContentList() {
-
-		if (CacheUtil.get(channel.getChannelId()) != null) {
-			subChannels = (List<Channel>) CacheUtil.get(channel.getChannelId());
-			showChannelData();
-			return;
-		}
-
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-
-				Message msg = handler.obtainMessage();
-				ChannelService channelService = new ChannelService(context);
-				try {
-					subChannels = channelService.getSubChannels(channel
-							.getChannelId());
-
-					if (subChannels != null) {
-						msg.what = CHANNEL_LOAD_SUCESS;
-						CacheUtil.put(channel.getChannelId(), subChannels);// 放入缓存
-					} else {
-						msg.what = CHANNEL_LOAD_FAIL;
-					}
-					handler.sendMessage(msg);
-
-				} catch (NetException e) {
-					e.printStackTrace();
-					msg.what = CHANNEL_LOAD_FAIL;
-					msg.obj = e.getMessage();
-					handler.sendMessage(msg);
-				}
-			}
-		}).start();
-
-	}
-
 	private void showChannelData() {
 		pb_govermsg.setVisibility(ProgressBar.GONE);
 
@@ -130,25 +113,40 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 				subChannels, context));
 	}
 	
-	public MenuItem getParentMenuItem() {
-		return parentMenuItem;
-	}
+	
 
-	public void setParentMenuItem(MenuItem menuItem) {
-		this.parentMenuItem = menuItem;
-	}
-
-	private void showContentList(MenuItem parentMenuItem) {
-
-		GoverMsgCustomContentListFragment goverMsgCustomContentListFragment= new GoverMsgCustomContentListFragment();
-
-		goverMsgCustomContentListFragment.setParentItem(parentMenuItem);
-		FragmentManager manager = getActivity().getSupportFragmentManager();
-		FragmentTransaction ft = manager.beginTransaction();
-
-		ft.replace(CONTENT_LIST_ID, goverMsgCustomContentListFragment);
-
-		ft.commit();
+	private void showContentList() {
+		//在此加载四种类型的菜单
+		int fifterType=0;
+		if(parentMenuItem!=null){
+			 fifterType=GoverMsgInitInfoOpenListener.getMenuItemFragmentType(parentMenuItem);
+		}
+		else if(parentChannel!=null){
+			 fifterType=GoverMsgInitInfoOpenListener.getChannelFragmentType(parentChannel);
+		}
+		if(fifterType==0){
+			GoverMsgCustomContentListFragment goverMsgCustomContentListFragment= new GoverMsgCustomContentListFragment();
+			goverMsgCustomContentListFragment.setParentItem(parentMenuItem);
+			FragmentManager manager = getActivity().getSupportFragmentManager();
+			FragmentTransaction ft = manager.beginTransaction();
+			ft.replace(CONTENT_LIST_ID, goverMsgCustomContentListFragment);
+			ft.commit();
+		}
+		else{
+			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment= new GoverMsgSearchContentListFragment();
+			goverMsgSearchContentListFragment.setFifterType(fifterType);		
+			if(parentMenuItem!=null){
+				goverMsgSearchContentListFragment.setParentMenuItem(parentMenuItem);
+			}
+			else if(parentChannel!=null){
+				goverMsgSearchContentListFragment.setChannel(parentChannel);
+			}
+			FragmentManager manager = getActivity().getSupportFragmentManager();
+			FragmentTransaction ft = manager.beginTransaction();
+			ft.replace(CONTENT_LIST_ID, goverMsgSearchContentListFragment);
+			ft.commit();
+		}
+		
 
 	}
 

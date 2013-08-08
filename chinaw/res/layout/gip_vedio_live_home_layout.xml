@@ -8,7 +8,9 @@
         android:id="@+id/gip_vedio_live_home_notice_btn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="视频预告" />
+        android:background="#FFFFFF"
+        android:text="视频预告"
+        android:textColor="#FF4500" />
 
     <LinearLayout
         android:layout_width="fill_parent"
