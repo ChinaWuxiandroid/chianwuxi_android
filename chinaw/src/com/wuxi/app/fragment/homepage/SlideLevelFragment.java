@@ -82,6 +82,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	private FragmentManager manager;
 	private PopWindowManager popWindowManager;
 	private List<FragmentWapper> fragments = new ArrayList<FragmentWapper>(); // 记录每次切换到fragment信息以便回退
+	private List<BaseFragment> baseFragments = new ArrayList<BaseFragment>();
 
 	public void setFragmentName(Constants.FragmentName fragmentName) {
 		this.fragmentName = fragmentName;
@@ -137,8 +138,8 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 		leftMenuAdapter = new LeftMenuAdapter(getActivity(),
 				R.layout.slide_navigator_item, new int[] {
-			R.id.tv_left_menu_name, R.id.left_iv_icon },
-			leftMenuItems, null, position);
+						R.id.tv_left_menu_name, R.id.left_iv_icon },
+				leftMenuItems, null, position);
 		mlvMenu.setAdapter(leftMenuAdapter);
 	}
 
@@ -158,22 +159,22 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				if (menuItem.getName().equals("咨询中心")) {
 					InformationCenterFragment informationCenterFragment = new InformationCenterFragment();
 					informationCenterFragment.setMenuItem(menuItem);
-					onTransaction(informationCenterFragment, bundle);
+					onReplaceFragment(informationCenterFragment, bundle);
 
 				} else if (menuItem.getName().equals("政府信息公开")) {
 
 					PublicGoverMsgFragment publicGoverMsgFragment = new PublicGoverMsgFragment();
 					publicGoverMsgFragment.setMenuItem(menuItem);
-					onTransaction(publicGoverMsgFragment, bundle);
+					onReplaceFragment(publicGoverMsgFragment, bundle);
 
 				} else if (menuItem.getName().equals("公共服务")) {
 					PublicServiceFragment publicServiceFragment = new PublicServiceFragment();
 					publicServiceFragment.setMenuItem(menuItem);
-					onTransaction(publicServiceFragment, bundle);
+					onReplaceFragment(publicServiceFragment, bundle);
 				} else if (menuItem.getName().equals("政务大厅")) {
 					GoverSaloonFragment saloonFragment = new GoverSaloonFragment();
 					saloonFragment.setParentMenuItem(menuItem);
-					onTransaction(saloonFragment, bundle);
+					onReplaceFragment(saloonFragment, bundle);
 				}
 
 				break;
@@ -181,7 +182,9 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			case MenuItem.CHANNEL_MENU:// 如果点击的频道菜单
 				ChannelFragment ch = new ChannelFragment();
 				ch.setMenuItem(menuItem);
-				onTransaction(ch, null);
+				onReplaceFragment(ch, null);
+
+				// onAddTransaction(ch,null);
 				break;
 			case 2:
 
@@ -194,105 +197,120 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			case LOGIN_FRAGMENT:// 登录
 				LoginFragment loginFragment = new LoginFragment();
 
-				onTransaction(loginFragment, bundle);
+				onReplaceFragment(loginFragment, bundle);
 				break;
 			case REGIST_FRAGMENT:// 注册
 				RegisterFragment registerFragment = new RegisterFragment();
-				onTransaction(registerFragment, bundle);
+				onAddFragment(registerFragment, bundle);
 				break;
 			case MAINSEARCH_FRAGMENT:// 全站搜索
 				MainSearchFragment searchFragment = new MainSearchFragment();
-				onTransaction(searchFragment, bundle);
+				onReplaceFragment(searchFragment, bundle);
 				break;
 			case MAINMINEFRAGMENT:// 政务名互动
 				MainMineFragment mainMineFragment = new MainMineFragment();
 				mainMineFragment.setParentMenuItem(menuItem);
-				onTransaction(mainMineFragment, bundle);
+				onReplaceFragment(mainMineFragment, bundle);
 				break;
 			case SYSTEMSETF_RAGMENT:// 系统设置
 				SystemSetFragment systemSetFragment = new SystemSetFragment();
-				onTransaction(systemSetFragment, bundle);
+				onReplaceFragment(systemSetFragment, bundle);
 
 				break;
 			case MENUITEMSET_FRAGMENT:// 常用栏设置
 				MenuItemSetFragment menusetFragment = new MenuItemSetFragment();
-				onTransaction(menusetFragment, bundle);
+				onAddFragment(menusetFragment, bundle);
 				break;
 			case SITEMAP_FRAGMENT:// 网站地图
 				SiteMapFragment siteMapFragment = new SiteMapFragment();
-				onTransaction(siteMapFragment, bundle);
+				onAddFragment(siteMapFragment, bundle);
 				break;
 			case MYONLINEASKFRAGMENT:// 在线咨询
 				MyOnlineAskFragment myOnlineAskFragment = new MyOnlineAskFragment();
-				onTransaction(myOnlineAskFragment, bundle);
+				onAddFragment(myOnlineAskFragment, bundle);
+				
 				break;
 			case HOTREVIEW_CONTENT_FRAGMENT:// 热点话题
 				HotReviewContentFragment hotReviewContentFragment = new HotReviewContentFragment();
-				onTransaction(hotReviewContentFragment, bundle);
+				onReplaceFragment(hotReviewContentFragment, bundle);
 				break;
-			case GIP_FOROUM_FRAGMENT://公众论坛帖子详细内容
+			case GIP_FOROUM_FRAGMENT:// 公众论坛帖子详细内容
 				ForumContentFragment forumContentFragment = new ForumContentFragment();
-				onTransaction(forumContentFragment, bundle);
+				onReplaceFragment(forumContentFragment, bundle);
 				break;
-			case GIP_FORUM_POST_FRAGMENT://公众论坛发表帖子界面	
+			case GIP_FORUM_POST_FRAGMENT:// 公众论坛发表帖子界面
 				ForumPostFragment forumPostFragment = new ForumPostFragment();
-				onTransaction(forumPostFragment, bundle);
+				onReplaceFragment(forumPostFragment, bundle);
 				break;
 
 			case GOVERSALOONDETAIL_XK_FRAGMENT:// 政务大厅办件详情
 				GoverSaloonDetailXKFragment goverSaloonDetailFragment = new GoverSaloonDetailXKFragment();
-				onTransaction(goverSaloonDetailFragment, bundle);
+				
+				onAddFragment(goverSaloonDetailFragment, bundle);
 				break;
 			case GOVERSALOONDETAIL_QT_FRAGMENT:// 政务大厅办件详情
 				GoverSaloonDetailQTFragment goverSaloonDetailQTFragment = new GoverSaloonDetailQTFragment();
-				onTransaction(goverSaloonDetailQTFragment, bundle);
+			
+				onAddFragment(goverSaloonDetailQTFragment, bundle);
 				break;
 			case GOVERSALOONDETAIL_QZ_FRAGMENT:// 政务大厅 强制办件详情
 				GoverSaloonDetailQZFragment goverSaloonDetailQZFragment = new GoverSaloonDetailQZFragment();
-				onTransaction(goverSaloonDetailQZFragment, bundle);
+				
+				onAddFragment(goverSaloonDetailQZFragment, bundle);
 
 				break;
 			case GOVERSALOONDETAIL_ZS_FRAGMENT:// 政务大厅 征收办件详情
 				GoverSaloonDetailZSFragment goverSaloonDetailZSFragment = new GoverSaloonDetailZSFragment();
-				onTransaction(goverSaloonDetailZSFragment, bundle);
+				onAddFragment(goverSaloonDetailZSFragment, bundle);
+				
 
 				break;
 			case GOVERSALOONDETAIL_CF_FRAGMENT:// 政务大厅 处罚办件详情
 				GoverSaloonDetailCFFragment goverSaloonDetailCFFragment = new GoverSaloonDetailCFFragment();
-				onTransaction(goverSaloonDetailCFFragment, bundle);
+				onAddFragment(goverSaloonDetailCFFragment, bundle);
+				
 				break;
 
 			case WUXICHANNELCONTENTDETAILFRAGMENT:// 魅力锡城内容页
 				WuxiChannelContentDetailFragment wuxiChannelContentDetailFragment = new WuxiChannelContentDetailFragment();
-				onTransaction(wuxiChannelContentDetailFragment, bundle);
+
+				onAddFragment(wuxiChannelContentDetailFragment, bundle);
 				break;
-			case HOTTOPICCONTENTFRAGMENT://咨询中心热点专题
-				HotTopicContentFragment hotTopicContentFragment=new  HotTopicContentFragment();
-				onTransaction(hotTopicContentFragment, bundle);
+			case HOTTOPICCONTENTFRAGMENT:// 咨询中心热点专题
+				HotTopicContentFragment hotTopicContentFragment = new HotTopicContentFragment();
+				onAddFragment(hotTopicContentFragment, bundle);
+
 				break;
 			case INFOCENTER_FRAGMENT:
-				InfoCenterContentDetailFragment infoCenterContentDetailFragment=new InfoCenterContentDetailFragment();
-				onTransaction(infoCenterContentDetailFragment, bundle);
+				InfoCenterContentDetailFragment infoCenterContentDetailFragment = new InfoCenterContentDetailFragment();
+				onAddFragment(infoCenterContentDetailFragment, bundle);
 				break;
-			case LEARACTIVITY_FRAGMENT://领导活动集锦
-				LearActivityFragment learActivityFragment=new LearActivityFragment();
-				onTransaction(learActivityFragment, bundle);
+			case LEARACTIVITY_FRAGMENT:// 领导活动集锦
+				LearActivityFragment learActivityFragment = new LearActivityFragment();
+				onReplaceFragment(learActivityFragment, bundle);
 				break;
 			case FOURTOPIC_ACTIVITYFRAGMENT:
-				FourTopicActivityFragment fourTopicActivityFragment=new FourTopicActivityFragment();
-				onTransaction(fourTopicActivityFragment, bundle);
+				FourTopicActivityFragment fourTopicActivityFragment = new FourTopicActivityFragment();
+				onReplaceFragment(fourTopicActivityFragment, bundle);
 				break;
-			case PUBLICSERVICECONTENTDETAILFRAGMENT://公共那个服务内容页
-				PublicServiceContentDetailFragment publicServiceContentDetailFragment=new PublicServiceContentDetailFragment();
-				onTransaction(publicServiceContentDetailFragment,bundle);
+			case PUBLICSERVICECONTENTDETAILFRAGMENT:// 公共那个服务内容页
+				PublicServiceContentDetailFragment publicServiceContentDetailFragment = new PublicServiceContentDetailFragment();
+				onReplaceFragment(publicServiceContentDetailFragment, bundle);
 				break;
 
 			}
 		}
 	}
 
-	private void onTransaction(BaseSlideFragment fragment, Bundle bundle) {
-		popWindowManager.removePowWIndows();
+	/**
+	 * 
+	 * wanglu 泰得利通 替换视图
+	 * 
+	 * @param fragment
+	 * @param bundle
+	 */
+	private void onReplaceFragment(BaseSlideFragment fragment, Bundle bundle) {
+
 		manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(FRAME_CONTENT, fragment);
@@ -303,10 +321,26 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		ft.addToBackStack(null);
 		fragment.setManagers(managers);// 传递管理器
 		ft.commit();
-		FragmentWapper f = new FragmentWapper(this.menuItem, this.position,
-				this.fragmentName, bundle);
 
-		fragments.add(f);
+		baseFragments.clear();// 清楚所有add视图
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 添加Fragment
+	 * 
+	 * @param fragment
+	 * @param bundele
+	 */
+	private void onAddFragment(BaseSlideFragment fragment, Bundle bundele) {
+		fragment.setFragment(this);
+		fragment.setManagers(managers);
+		fragment.setArguments(bundele);
+		FragmentTransaction ft = manager.beginTransaction();
+		ft.addToBackStack(null);
+		ft.add(FRAME_CONTENT, fragment);
+		baseFragments.add(fragment);
+		ft.commit();
 
 	}
 
@@ -317,25 +351,18 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	@Override
 	public void onBack() {
 
-		if (fragments.size() == 1) {// 退出到首页
+		if (baseFragments.size() == 0) {// 退出到首页
 
-			if (managers.fragments.size() > 1) {
-				managers.BackPress(this);
-			} else {
-				managers.ChangeFragment(new MainIndexFragment());
-				popWindowManager.removePowWIndows();
-			}
+			managers.ChangeFragment(new MainIndexFragment());
 
 		} else {
-			FragmentWapper f = fragments.get(fragments.size() - 2);
-			this.menuItem = f.menuItem;
-			this.position = f.position;
-			this.fragmentName = f.fName;
-			leftMenuAdapter.setSelectPosition(position);
-			leftMenuAdapter.notifyDataSetChanged();
-			initFragment(f.bundle);
-			fragments.remove(fragments.size() - 1);
-			fragments.remove(fragments.size() - 2);
+			BaseFragment f = baseFragments.get(baseFragments.size() - 1);
+
+			FragmentTransaction ft = manager.beginTransaction();
+			ft.addToBackStack(null);
+			ft.remove(f);
+			ft.commit();
+			baseFragments.remove(baseFragments.size() - 1);
 
 		}
 

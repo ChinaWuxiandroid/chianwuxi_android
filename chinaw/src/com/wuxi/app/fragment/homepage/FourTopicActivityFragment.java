@@ -54,7 +54,7 @@ public class FourTopicActivityFragment extends BaseItemContentFragment {
 		wuxicity_decontent_wb.getSettings().setLoadWithOverviewMode(true);
 
 		wuxicity_decontent_wb
-				.loadUrl("http://www.wuxi.gov.cn//wap/zt/sgwx/index.shtml");
+				.loadUrl("http://www.wuxi.gov.cn/wap/zt/sgwx/index.shtml?showtoolbar=false");
 
 	}
 
