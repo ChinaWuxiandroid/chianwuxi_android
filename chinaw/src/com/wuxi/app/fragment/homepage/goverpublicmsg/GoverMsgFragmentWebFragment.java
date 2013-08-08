@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings.TextSize;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
@@ -47,7 +48,7 @@ public class GoverMsgFragmentWebFragment extends BaseFragment{
 		
 		wb_pb = (ProgressBar) view.findViewById(R.id.wb_progress);
 		wbView.getSettings().setJavaScriptEnabled(true);
-
+		wbView.getSettings().setTextSize(TextSize.LARGER);
 		wbView.setWebChromeClient(new WebChromeClient() {
 			public void onProgressChanged(WebView view, int progress) {
 
@@ -59,9 +60,8 @@ public class GoverMsgFragmentWebFragment extends BaseFragment{
 
 		wbView.getSettings().setUseWideViewPort(true); 
 		wbView.getSettings().setLoadWithOverviewMode(true);
+		wbView.getSettings().setDefaultTextEncodingName("GB2312");
 		wbView.loadUrl(urlHeader+parentItem.getPfBuildPath());
-		//	mWb_leader.loadUrl("http://32.63.250.24:10169/wap/zxzx/ldzc/index.shtml");
-
 	}
 
 }
