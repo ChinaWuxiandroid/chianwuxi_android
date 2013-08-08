@@ -34,6 +34,7 @@ import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.ApplyDept;
 import com.wuxi.domain.Channel;
+import com.wuxi.domain.FifterContentWrapper;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NetException;
 
@@ -275,15 +276,36 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 
 	//开始检索
 	public void search(){
-
+		GoverMsgFifterContentListFragment goverMsgFifterContentListFragment=new GoverMsgFifterContentListFragment();
+		String id=null;
+		if (channel != null) {
+			id = channel.getChannelId();
+		} else if (parentMenuItem != null) {
+			id = parentMenuItem.getChannelId();
+		}
+		FifterContentWrapper fifter=new FifterContentWrapper(id);
 		switch(filterType){
 		//按部门 时间  检索
 		case 0:
+			if(DEFAULT_DEPT_FIFTER.equals(deptStrFifter))
+				deptStrFifter=null;
+			if(yearFifter==DEFAULT_YEAR_FIFTER)
+				yearFifter=-1;
+			fifter.setDept(deptStrFifter);
+			fifter.setYear(yearFifter);
 			break;
 			//按区县 时间  检索
 		case 1:
+			if(zoneStrFifter.equals(DEFAULT_ZONE_FIFTER))
+				zoneStrFifter=null;
+			if(yearFifter==DEFAULT_YEAR_FIFTER)
+				yearFifter=-1;
+			fifter.setZone(zoneStrFifter);
+			fifter.setYear(yearFifter);
 			break;
 		}
+		goverMsgFifterContentListFragment.setContentFifter(fifter);
+		bindFragment(goverMsgFifterContentListFragment);
 	}
 
 	private void loadContentList(){
