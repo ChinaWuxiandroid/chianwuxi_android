@@ -36,6 +36,8 @@ import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailXKFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailZSFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.MyOnlineAskFragment;
+import com.wuxi.app.fragment.homepage.informationcenter.HotTopicContentFragment;
+import com.wuxi.app.fragment.homepage.informationcenter.InfoCenterContentDetailFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InformationCenterFragment;
 import com.wuxi.app.fragment.homepage.logorregister.LoginFragment;
 import com.wuxi.app.fragment.homepage.logorregister.RegisterFragment;
@@ -45,6 +47,8 @@ import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumPostFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewContentFragment;
+import com.wuxi.app.fragment.homepage.publicservice.PublicServiceChannelContentDetailFragment;
+import com.wuxi.app.fragment.homepage.publicservice.PublicServiceContentDetailFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
 import com.wuxi.app.listeners.SlideLinstener;
 import com.wuxi.app.util.CacheUtil;
@@ -261,6 +265,26 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			case WUXICHANNELCONTENTDETAILFRAGMENT:// 魅力锡城内容页
 				WuxiChannelContentDetailFragment wuxiChannelContentDetailFragment = new WuxiChannelContentDetailFragment();
 				onTransaction(wuxiChannelContentDetailFragment, bundle);
+				break;
+			case HOTTOPICCONTENTFRAGMENT://咨询中心热点专题
+				HotTopicContentFragment hotTopicContentFragment=new  HotTopicContentFragment();
+				onTransaction(hotTopicContentFragment, bundle);
+				break;
+			case INFOCENTER_FRAGMENT:
+				InfoCenterContentDetailFragment infoCenterContentDetailFragment=new InfoCenterContentDetailFragment();
+				onTransaction(infoCenterContentDetailFragment, bundle);
+				break;
+			case LEARACTIVITY_FRAGMENT://领导活动集锦
+				LearActivityFragment learActivityFragment=new LearActivityFragment();
+				onTransaction(learActivityFragment, bundle);
+				break;
+			case FOURTOPIC_ACTIVITYFRAGMENT:
+				FourTopicActivityFragment fourTopicActivityFragment=new FourTopicActivityFragment();
+				onTransaction(fourTopicActivityFragment, bundle);
+				break;
+			case PUBLICSERVICECONTENTDETAILFRAGMENT://公共那个服务内容页
+				PublicServiceContentDetailFragment publicServiceContentDetailFragment=new PublicServiceContentDetailFragment();
+				onTransaction(publicServiceContentDetailFragment,bundle);
 				break;
 
 			}

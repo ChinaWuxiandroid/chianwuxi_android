@@ -70,7 +70,7 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 	private ProgressBar pb_content_wb;// webView加载进度条
 	private Content content;
 	private WebView wuxicity_decontent_wb;// 加载数据的webView
-	private TextView wuxicity_decontent_title;// 标题
+	//private TextView wuxicity_decontent_title;// 标题
 	private TextView wuxi_decontent_tvtime;// 时间
 	private TextView wuxi_decontent_tvbrowcount;// 浏览次数
 	private boolean isFirstChange = true;// 是否是首次加载
@@ -114,7 +114,7 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 		String time = content.getPublishTime();
 		int browCount = content.getBrowseCount();
 
-		wuxicity_decontent_title.setText(title);
+	//	wuxicity_decontent_title.setText(title);
 		wuxi_decontent_tvtime.setText("时间:"
 				+ TimeFormateUtil.formateTime(time,
 						TimeFormateUtil.DATE_PATTERN));// 时间
@@ -132,6 +132,9 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 
 			}
 		});
+		wuxicity_decontent_wb.getSettings().setUseWideViewPort(true);
+		wuxicity_decontent_wb.getSettings().setBuiltInZoomControls(true);
+		wuxicity_decontent_wb.getSettings().setLoadWithOverviewMode(true);
 
 		wuxicity_decontent_wb.loadUrl(wapUrl);
 
@@ -156,9 +159,9 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 
 		wuxicity_decontent_wb = (WebView) view
 				.findViewById(R.id.wuxicity_decontent_wb);// 加载数据的webView
-		wuxicity_decontent_title = (TextView) view
+	/*	wuxicity_decontent_title = (TextView) view
 				.findViewById(R.id.wuxicity_decontent_title);// 标题
-		wuxi_decontent_tvtime = (TextView) view
+*/		wuxi_decontent_tvtime = (TextView) view
 				.findViewById(R.id.wuxi_decontent_tvtime);// 时间
 		wuxi_decontent_tvbrowcount = (TextView) view
 				.findViewById(R.id.wuxi_decontent_tvbrowcount);// 浏览次数

@@ -458,7 +458,24 @@ public class Constants {
 		/**
 		 * 资讯中心->热点专题内容页
 		 */
-		HOTTOPICCONTENTFRAGMENT
+		HOTTOPICCONTENTFRAGMENT,
+		/**
+		 * 咨询中心内容页
+		 */
+		INFOCENTER_FRAGMENT,
+		/**
+		 * 领导活动集锦
+		 */
+		LEARACTIVITY_FRAGMENT,
+		/**
+		 * 四个无锡专题
+		 */
+		FOURTOPIC_ACTIVITYFRAGMENT,
+		
+		/**
+		 * 公共服务内容页
+		 */
+		PUBLICSERVICECONTENTDETAILFRAGMENT
 		;
 	}
 

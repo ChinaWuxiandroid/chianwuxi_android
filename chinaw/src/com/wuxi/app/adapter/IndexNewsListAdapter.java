@@ -62,7 +62,7 @@ public class IndexNewsListAdapter extends BasicAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		viewHolder.numText.setText((position + 1) + "");
+		//viewHolder.numText.setText((position + 1) + "");
 		String textStr = "";
 		textStr = content.getTitle();
 

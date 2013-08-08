@@ -152,6 +152,7 @@ public class PublicServiceChannelContentFragment extends BaseFragment implements
 		Channel channel=(Channel) adapterView.getItemAtPosition(position);
 		
 		PublicServiceChannelContentDetailFragment publicServiceChannelContentDetailFragment=new PublicServiceChannelContentDetailFragment();
+		publicServiceChannelContentDetailFragment.setArguments(this.getArguments());
 		publicServiceChannelContentDetailFragment.setChannel(channel);
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();

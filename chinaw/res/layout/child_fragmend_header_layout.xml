@@ -28,7 +28,9 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:singleLine="true"
-        android:text="魅力锡城" />
+        android:text="魅力锡城" 
+        android:textSize="16sp"
+        android:textStyle="bold"/>
 
     <ImageView
         android:id="@+id/member_btn"

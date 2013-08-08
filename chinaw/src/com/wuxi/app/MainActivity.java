@@ -1,8 +1,12 @@
 package com.wuxi.app;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
@@ -18,14 +22,17 @@ import com.wuxi.app.util.Constants;
  * 
  */
 public class MainActivity extends FragmentActivity implements
-		OnCheckedChangeListener {
+		OnCheckedChangeListener, OnClickListener {
 
 	private RadioGroup radioGroup;
-	private int mCurrentFragmentId = 0;
+
 	public FragmentManagers fragmentManagers;
 
 	private static final long BACK_PRESSED_INTERVAL_MILLIS = 1500;
 	private long mLastBackPressedTimeMillis = 0;
+
+	private RadioButton main_tab_index, main_tab_search, main_tab_login_reg,
+			main_tab_mine, main_tab_more;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,19 @@ public class MainActivity extends FragmentActivity implements
 		init();
 		radioGroup = (RadioGroup) findViewById(R.id.main_tab_radiogroup);
 		radioGroup.setOnCheckedChangeListener(this);
+
+		main_tab_index = (RadioButton) findViewById(R.id.main_tab_index);
+		main_tab_search = (RadioButton) findViewById(R.id.main_tab_search);
+		main_tab_login_reg = (RadioButton) findViewById(R.id.main_tab_login_reg);
+		main_tab_mine = (RadioButton) findViewById(R.id.main_tab_mine);
+		main_tab_more = (RadioButton) findViewById(R.id.main_tab_more);
+
+		main_tab_index.setOnClickListener(this);
+		main_tab_search.setOnClickListener(this);
+		main_tab_login_reg.setOnClickListener(this);
+		main_tab_mine.setOnClickListener(this);
+		main_tab_more.setOnClickListener(this);
+
 	}
 
 	public FragmentActivity getContext() {
@@ -44,50 +64,19 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
-		SlideLevelFragment slideLevelFragment = new SlideLevelFragment();
 
-		switch (checkedId) {
+		for (int index = 0; index < group.getChildCount(); index++) {
 
-		case R.id.main_tab_index:
-			init();
-			break;
+			RadioButton rb = (RadioButton) group.getChildAt(index);
+			if (rb.isChecked()) {
+				rb.setTextColor(Color.parseColor("#EB5212"));
+			} else {
+				rb.setTextColor(Color.BLACK);
+			}
 
-		case R.id.main_tab_search:
-
-			slideLevelFragment
-					.setFragmentName(Constants.FragmentName.MAINSEARCH_FRAGMENT);
-			fragmentManagers.ChangeFragment(slideLevelFragment);
-			mCurrentFragmentId = checkedId;
-			break;
-
-		case R.id.main_tab_login_reg:// 登录注册
-
-			slideLevelFragment
-					.setFragmentName(Constants.FragmentName.LOGIN_FRAGMENT);
-
-			fragmentManagers.ChangeFragment(slideLevelFragment);
-			mCurrentFragmentId = checkedId;
-
-			break;
-
-		case R.id.main_tab_mine:
-
-			slideLevelFragment
-					.setFragmentName(Constants.FragmentName.MAINMINEFRAGMENT);
-			fragmentManagers.ChangeFragment(slideLevelFragment);
-			mCurrentFragmentId = checkedId;
-
-			break;
-
-		case R.id.main_tab_more:
-
-			slideLevelFragment
-					.setFragmentName(Constants.FragmentName.SYSTEMSETF_RAGMENT);
-			fragmentManagers.ChangeFragment(slideLevelFragment);
-			mCurrentFragmentId = checkedId;
-
-			break;
 		}
+		;
+
 	}
 
 	private void init() {
@@ -117,9 +106,9 @@ public class MainActivity extends FragmentActivity implements
 	 * @param id
 	 */
 	public void ChangeFragment(BaseFragment saveFragment, int id) {
-		if (id == mCurrentFragmentId)
-			return;
-		mCurrentFragmentId = id;
+		/*
+		 * if (id == mCurrentFragmentId) return; mCurrentFragmentId = id;
+		 */
 		fragmentManagers.ChangeFragment(saveFragment);
 	}
 
@@ -138,6 +127,52 @@ public class MainActivity extends FragmentActivity implements
 			fragmentManagers.BackPress(fragmentManagers.fragments
 					.get(fragmentManagers.fragments.size() - 1));
 			return;
+		}
+
+	}
+
+	@Override
+	public void onClick(View v) {
+		SlideLevelFragment slideLevelFragment = new SlideLevelFragment();
+		switch (v.getId()) {
+
+		case R.id.main_tab_index:
+			init();
+			break;
+
+		case R.id.main_tab_search:
+
+			slideLevelFragment
+					.setFragmentName(Constants.FragmentName.MAINSEARCH_FRAGMENT);
+			fragmentManagers.ChangeFragment(slideLevelFragment);
+
+			break;
+
+		case R.id.main_tab_login_reg:// 登录注册
+
+			slideLevelFragment
+					.setFragmentName(Constants.FragmentName.LOGIN_FRAGMENT);
+
+			fragmentManagers.ChangeFragment(slideLevelFragment);
+
+			break;
+
+		case R.id.main_tab_mine:
+
+			slideLevelFragment
+					.setFragmentName(Constants.FragmentName.MAINMINEFRAGMENT);
+			fragmentManagers.ChangeFragment(slideLevelFragment);
+
+			break;
+
+		case R.id.main_tab_more:
+
+			slideLevelFragment
+					.setFragmentName(Constants.FragmentName.SYSTEMSETF_RAGMENT);
+			fragmentManagers.ChangeFragment(slideLevelFragment);
+
+			break;
+
 		}
 
 	}

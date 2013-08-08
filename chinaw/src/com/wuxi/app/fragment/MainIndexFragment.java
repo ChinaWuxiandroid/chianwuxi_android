@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -38,6 +39,7 @@ import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
 import com.wuxi.app.fragment.homepage.SlideLevelFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.Content;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
@@ -45,8 +47,9 @@ import com.wuxi.exception.NetException;
 
 /**
  * 
- * @author 主页界面
- * 
+ * @author wanglu 泰得利通
+ * 首页
+ *
  */
 public class MainIndexFragment extends BaseFragment implements
 		OnCheckedChangeListener, OnPageChangeListener, OnClickListener {
@@ -88,7 +91,9 @@ public class MainIndexFragment extends BaseFragment implements
 	private List<Content> announcements;// 公告集合
 	private List<Content> news;// 新闻集合
 	private RadioButton index_rb_news, index_rb_announcements;
-
+	private ImageView iv_index_ldhd;//领导活动集锦
+	private ImageView iv_index_zt;//四个专题
+	
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 
@@ -157,8 +162,13 @@ public class MainIndexFragment extends BaseFragment implements
 
 		index_rb_news.setBackgroundResource(R.drawable.index_news_pre);
 		index_rb_announcements.setBackgroundResource(R.drawable.index_news);
+		iv_index_ldhd=(ImageView) view.findViewById(R.id.iv_index_ldhd);
+		iv_index_zt=(ImageView) view.findViewById(R.id.iv_index_zt);
+		iv_index_ldhd.setOnClickListener(this);
+		iv_index_zt.setOnClickListener(this);
 		LoadGrid();
 		loadNews();// 加载新闻数据
+		loadAnnouncements();
 
 	}
 
@@ -593,20 +603,36 @@ public class MainIndexFragment extends BaseFragment implements
 	@Override
 	public void onClick(View v) {
 		Bundle bundle = new Bundle();
+		SlideLevelFragment saveFragment = new SlideLevelFragment();
 		switch (v.getId()) {
 		case R.id.index_rb_news:
 			bundle.putInt(MenuItemMainFragment.SHOWITEM_LAYOUT_INDEXKEY, 1);
+			saveFragment.setArguments(bundle);
+			saveFragment.setPosition(position);
+			saveFragment.setMenuItem(menuItems.get(2));
 			break;
 		case R.id.index_rb_announcements:
 			bundle.putInt(MenuItemMainFragment.SHOWITEM_LAYOUT_INDEXKEY, 2);
+			saveFragment.setArguments(bundle);
+			saveFragment.setPosition(position);
+			saveFragment.setMenuItem(menuItems.get(2));
+			break;
+		case R.id.iv_index_ldhd:
+			saveFragment.setFragmentName(FragmentName.LEARACTIVITY_FRAGMENT);
+			
+			break;
+		case R.id.iv_index_zt:
+			saveFragment.setFragmentName(FragmentName.FOURTOPIC_ACTIVITYFRAGMENT);
+			
 			break;
 
 		}
-		SlideLevelFragment saveFragment = new SlideLevelFragment();
-		saveFragment.setArguments(bundle);
-		saveFragment.setPosition(position);
-		saveFragment.setMenuItem(menuItems.get(2));
+		
+		
 		managers.IntentFragment(saveFragment);
 
 	}
+	
+	
+	
 }
