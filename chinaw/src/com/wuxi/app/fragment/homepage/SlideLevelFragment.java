@@ -119,7 +119,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		login_tv_userlogin.setOnClickListener(this);
 		login_tv_user_regisster.setOnClickListener(this);
 		right_menu_rg.setOnCheckedChangeListener(this);
-
+		manager = getActivity().getSupportFragmentManager();
 		mlvMenu = (ListView) view.findViewById(R.id.lv_menu);
 		mlvMenu.setOnItemClickListener(this);
 
@@ -310,7 +310,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	 */
 	private void onReplaceFragment(BaseSlideFragment fragment, Bundle bundle) {
 
-		manager = getActivity().getSupportFragmentManager();
+		
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(FRAME_CONTENT, fragment);
 		if (bundle != null) {
