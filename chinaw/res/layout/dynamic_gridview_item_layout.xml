@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="20dip"
+    android:layout_height="40dip"
+    android:orientation="horizontal"
+     android:background="@drawable/title_item_bg"
+     >
+
+    <TextView
+        android:id="@+id/tv_actionname"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:padding="3dip"
+        android:gravity="center"
+        android:text="无锡橄榄"
+        android:textColor="#177CCA"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

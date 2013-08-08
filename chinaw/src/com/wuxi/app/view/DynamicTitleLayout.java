@@ -87,52 +87,21 @@ public class DynamicTitleLayout extends ViewGroup {
 				}
 			}
 		}
+		
+
 	}
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		final int width = MeasureSpec.getSize(widthMeasureSpec);
-//		final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-//		 if (widthMode != MeasureSpec.EXACTLY) {
-//		 throw new IllegalStateException(
-//		 "ScrollLayout only canmCurScreen run at EXACTLY mode!");
-//		 }
 
-		final int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-		 if (heightMode != MeasureSpec.EXACTLY) {
-		 throw new IllegalStateException(
-		 "ScrollLayout only can run at EXACTLY mode!");
-		 }
-
-		// The children are given the same width and height as the scrollLayout
 		final int count = getChildCount();
 		for (int i = 0; i < count; i++) {
-			getChildAt(i).measure(widthMeasureSpec, heightMeasureSpec);
+			getChildAt(i).measure(widthMeasureSpec, heightMeasureSpec);	
 		}
-
-		scrollTo(mCurScreen * width, 0);
-
+		
 	}
 
-	public static String getModeStr(int measureSpec) {
-
-		int specMode = MeasureSpec.getMode(measureSpec);
-		String str = "null";
-
-		switch (specMode) {
-		case MeasureSpec.UNSPECIFIED:
-			str = "UNSPECIFIED";
-			break;
-		case MeasureSpec.AT_MOST:
-			str = "AT_MOST";
-			break;
-		case MeasureSpec.EXACTLY:
-			str = "EXACTLY";
-			break;
-		}
-		return str;
-	}
 
 	/*
 	 * 初始化屏频道
@@ -174,17 +143,14 @@ public class DynamicTitleLayout extends ViewGroup {
 		adapter=new DynamicTitleAdapter(context,
 				R.layout.title_grid_item_layout,
 				new int[] { R.id.tv_actionname }, null,menuItems);
-		adapter.notifyDataSetChanged();
-		adapter.notifyDataSetInvalidated();
 		child.setAdapter(adapter);
 		child.setOnItemClickListener(new TitleItemlOnclick());
 		addView(child);
 		
+	
 		
 		menuItemInitLayoutListener.bindMenuItemLayout(
 				initializContentLayoutListner, menuItems.get(0));
-
-
 	}
 
 	private class TitleItemlOnclick implements OnItemClickListener {
@@ -247,7 +213,6 @@ public class DynamicTitleLayout extends ViewGroup {
 						initializContentLayoutListner, menuItem);
 
 			}
-
 		}
 	}
 	

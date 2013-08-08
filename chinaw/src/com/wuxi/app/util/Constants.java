@@ -17,7 +17,7 @@ public class Constants {
 	 * 
 	 */
 	public static final class Urls {
-		
+
 		/**
 		 * 跟地址
 		 */
@@ -68,6 +68,11 @@ public class Constants {
 		public static final String LOGIN_URL = "http://3g.wuxi.gov.cn/api/login.json?username={username}&password={pwd}";
 
 		public static final String REGIST_URL = "http://3g.wuxi.gov.cn/api/register.json";
+
+		/**
+		 * 公共论坛列表URL
+		 */
+		public static final String FORUM_LIST_URL = "http://3g.wuxi.gov.cn/api/publicbbs/list.json";
 
 		/**
 		 * 公开电话 URL
@@ -177,8 +182,8 @@ public class Constants {
 		 * String 部门id year true Int 年份 start true Int 分页开始 end true Int 分页结束
 		 */
 		public static final String GETITEM_QUERY_URL = "http://3g.wuxi.gov.cn/api/zhengwu/itemlist/query.json";
-		
-		
+
+
 		/**
 		 * 政务大厅获取表格下载列表
 		 * {deptid} 部门ID
@@ -186,26 +191,26 @@ public class Constants {
 		 * {end} 结束记录
 		 */
 		public static final String GETTABLE_DOWNLOADS_URL="http://3g.wuxi.gov.cn/api/zhengwu/downloadfiles.json?deptid={deptid}&start={start}&end={end}";
-		
-		
+
+
 		/**
 		 * 政务大厅获取好办件 行政许可详情信息  
 		 * 
 		 * {id} id 
 		 */
 		public static final String GETGOVER_ITEMDETIAL_XK_URL="http://3g.wuxi.gov.cn/api/zhengwu/item/XK.json?id={id}";
-		
-		
+
+
 		/**
 		 * 政务大厅获取好办件 其他详情信息  
 		 */
 		public static final String GETGOVER_ITEMDETIAL_QT_URL="http://3g.wuxi.gov.cn/api/zhengwu/item/QT.json?id={id}";
-		
+
 		/**
 		 * 政务大厅获取好办件 处罚详情信息  
 		 */
 		public static final String GETGOVER_ITEMDETIAL_CF_URL="http://3g.wuxi.gov.cn/api/zhengwu/item/CF.json?id={id}";
-		
+
 		/**
 		 *  政务大厅获取好办件 征收详情信息  
 		 */
@@ -214,12 +219,12 @@ public class Constants {
 		 * 政务大厅获取好办件 强制详情信息  
 		 */
 		public static final String GETGOVER_ITEMDETIAL_QZ_URL="http://3g.wuxi.gov.cn/api/zhengwu/item/QZ.json?id={id}";
-		
+
 		/**
 		 * 政务大厅办件统计
 		 */
 		public static final String GETGOVEDR_ITEM_COUNT_URL="http://3g.wuxi.gov.cn/api/zhengwu/allcount.json";
-		
+
 		/**
 		 * 政务大厅，办件在线咨询详情
 		 */
@@ -228,43 +233,43 @@ public class Constants {
 		 * 政务大厅流程图片获取
 		 */
 		public static final String GETLIUC_IMG_URL="http://3g.wuxi.gov.cn/api/zhengwu/lcimg/{id}.json";
-		
+
 		/**
 		 * 政务大厅 在线咨询提交URL
 		 */
 		public static final String GOVER_ONLEINASK_COMMIT_URL="http://3g.wuxi.gov.cn/api/zhengwu/consult.json?id={id}&type={type}&content={content}&access_token={access_token}";
-		
-		
+
+
 		/**
 		 * 政务大厅表   在线办理表单提交
 		 */
-		
+
 		public static final String GOVER_APPLY_ONLINE_URL="http://3g.wuxi.gov.cn/api/zhengwu/applyonline.json";
-		
-		
+
+
 		/*
 		 * 政务大厅下 附近现在地址
 		 */
 		public static final String GOVER_FILE_DOWN_URL="http://3g.wuxi.gov.cn/api/zhengwu/file/{id}.json";
-		
-		
+
+
 
 		/**
 		 * 政府信息公开  获取公开意见箱的APPUI布局数据
 		 * */
 		public static final String GOVERMSG_WORKSUGGESTIONBOX_LAYOUT_URL="http://3g.wuxi.gov.cn/api/selfforms/workopinion.json";
-		
+
 		/**
 		 * 政府信息公开  提交自定义表单信息的URL
 		 * */
 		public static final String SUBMIT_SELFFORM_URL="http://3g.wuxi.gov.cn/api/selfforms/submit.json";
-		
+
 		/**
 		 * 政府信息公开  各部门依申请公开
 		 * */
 		public static final String APPLYDEPT_URL="http://3g.wuxi.gov.cn/api/applyopen/deps.json";
-		
-		
+
+
 	}
 
 	/**
@@ -284,8 +289,8 @@ public class Constants {
 		 * 项目菜单图标存储路径
 		 */
 		public static final String MENU_ICON_PATH = APP_PATH + "menu/icon/";
-		
-		
+
+
 		/**
 		 * 下载文件存放地址
 		 */
@@ -410,6 +415,14 @@ public class Constants {
 		 */
 
 		MYONLINEASKFRAGMENT,
+		/**
+		 * 公共论坛帖子详细界面
+		 */
+		GIP_FOROUM_FRAGMENT,
+		/**
+		 * 公众论坛发表帖子碎片
+		 */
+		GIP_FORUM_POST_FRAGMENT,
 
 		/**
 		 * 热点话题内容
@@ -436,8 +449,8 @@ public class Constants {
 		 * 政务大厅行征收可办件详情
 		 */
 		GOVERSALOONDETAIL_ZS_FRAGMENT,
-		
-		
+
+
 		/**
 		 * 魅力锡城内容页
 		 */

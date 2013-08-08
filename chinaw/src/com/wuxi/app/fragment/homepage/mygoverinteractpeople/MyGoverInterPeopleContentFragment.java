@@ -87,6 +87,7 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment{
 		case MenuItem.LINK_MENU:
 			break;
 		}
+		
 	}
 
 	public void setMenuItem(MenuItem menuItem) {
@@ -94,7 +95,6 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment{
 	}
 
 	private void onTransaction(BaseFragment fragment) {
-
 		fragment.setArguments(this.getArguments());//传递主框架对象
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();

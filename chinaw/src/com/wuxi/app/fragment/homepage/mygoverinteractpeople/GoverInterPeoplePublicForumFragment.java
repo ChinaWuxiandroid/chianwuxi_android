@@ -8,46 +8,67 @@ import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
-import com.wuxi.app.engine.OpenTelService;
+import com.wuxi.app.engine.ForumService;
+import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
-import com.wuxi.domain.OpenTel;
-import com.wuxi.domain.OpenTelWrapper;
+import com.wuxi.domain.ForumWrapper;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- * 政民互动 之  公众论坛模块
+ * 政民互动 之 公众论坛模块
  * 
  * @author 杨宸 智佳
  * */
 
-public class GoverInterPeoplePublicForumFragment extends RadioButtonChangeFragment{
+@SuppressLint({ "HandlerLeak", "ShowToast" })
+public class GoverInterPeoplePublicForumFragment extends
+		RadioButtonChangeFragment {
 
-	private ListView mListView;               //贴子列表
-	private ImageButton postButton;             //我要发帖
-	private OpenTelWrapper openTelWrapper;
-	private List<OpenTel> tels;
-	protected static final String TAG = "GoverInterPeopleOpenTelFragment";
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected static final String TAG = "GoverInterPeoplePublicForumFragment";
+
+	// 贴子列表
+	private ListView mListView;
+	// 数据刷新进度条
+	private ProgressBar list_pb;
+	// 我要发帖按钮
+	private ImageButton postButton;
+
+	// 论坛包装类对象
+	private ForumWrapper forumWrapper;
+
+	// 论坛列表
+	private List<ForumWrapper.Forum> forums;
+
+	// 数据加载成功标志
 	private static final int DATA__LOAD_SUCESS = 0;
+	// 数据加载失败标志
 	private static final int DATA_LOAD_ERROR = 1;
-	
-	
-	public final int HOTREVIEW_TYPE_NOW=0;    //话题类型  当前话题
-	public final int HOTREVIEW_TYPE_BEFORE=1;//话题类型  以往话题
-	private int reviewType=HOTREVIEW_TYPE_NOW;   //默认为当前话题 
-	private int startIndex=0;         //获取话题的起始坐标
-	private int endIndex=5;			//获取话题的结束坐标
-	
+
+	// 获取帖子的起始坐标
+	private int startIndex = 0;
+	// 获取帖子的结束坐标
+	private int endIndex = 9;
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -59,78 +80,80 @@ public class GoverInterPeoplePublicForumFragment extends RadioButtonChangeFragme
 
 			switch (msg.what) {
 			case DATA__LOAD_SUCESS:
-				showPosts();
+				list_pb.setVisibility(View.GONE);
+				showForums();
 				break;
+
 			case DATA_LOAD_ERROR:
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
 			}
 		};
 	};
-	
-	
+
 	@Override
 	protected int getLayoutId() {
-		// TODO Auto-generated method stub
 		return R.layout.goverinterpeople_publicforum_layout;
 	}
 
 	@Override
 	protected int getRadioGroupId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	protected int[] getRadioButtonIds() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	protected int getContentFragmentId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	protected void init() {
-		// TODO Auto-generated method stub
-		mListView=(ListView) view.findViewById(R.id.gip_opentel_listview);
+		mListView = (ListView) view.findViewById(R.id.gip_forum_listview);
 
-
-
-//		loadData();
+		list_pb = (ProgressBar) view.findViewById(R.id.gip_forum_listview_pb);
+		list_pb.setVisibility(View.VISIBLE);
+		
+		postButton = (ImageButton) view.findViewById(R.id.gip_forum_imagebtn);
+		postButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				BaseSlideFragment baseSlideFragment = (BaseSlideFragment) GoverInterPeoplePublicForumFragment.this
+						.getArguments().get("BaseSlideFragment");
+				baseSlideFragment.slideLinstener.replaceFragment(null, position,
+						Constants.FragmentName.GIP_FORUM_POST_FRAGMENT, null);
+			}
+		});
+		
+		loadData();
 	}
 
-	public void loadData(){
-		//		if (CacheUtil.get(menuItem.getChannelId()) != null) {// 从缓存获取
-		//
-		//			titleChannels = (List<Channel>) CacheUtil.get(menuItem
-		//					.getChannelId());
-		//			showTitleData();
-		//			return;
-		//		}
-
+	/**
+	 * 加载数据
+	 */
+	private void loadData() {
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
+				ForumService forumService = new ForumService(context);
 
-				OpenTelService openTelService = new OpenTelService(context);
 				try {
-					openTelWrapper = openTelService.getOpenTelWrapper(Constants.Urls.OPENTEL_URL);
-					if (null != openTelWrapper) {
-						//						CacheUtil.put(menuItem.getChannelId(), titleChannels);// 缓存起来
-						tels=openTelWrapper.getData();
+					forumWrapper = forumService
+							.getForumWrapper(Constants.Urls.FORUM_LIST_URL,
+									startIndex, endIndex);
+					if (forumWrapper != null) {
+						forums = forumWrapper.getForums();
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
-
 					} else {
 						Message message = handler.obtainMessage();
 						message.obj = "error";
 						handler.sendEmptyMessage(DATA_LOAD_ERROR);
 					}
-
 				} catch (NetException e) {
 					LogUtil.i(TAG, "出错");
 					e.printStackTrace();
@@ -139,78 +162,126 @@ public class GoverInterPeoplePublicForumFragment extends RadioButtonChangeFragme
 					handler.sendEmptyMessage(DATA_LOAD_ERROR);
 
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (NODataException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-		}
-
-				).start();
-	}
-	
-
-	public void showPosts(){
-		OpenTelListViewAdapter adapter=new OpenTelListViewAdapter();
-		if(tels==null||tels.size()==0){
-			Toast.makeText(context, "对不起，暂无公开电话信息", 2000).show();
-		}
-		else{
-			mListView.setAdapter(adapter);
-		}
+		}).start();
 	}
 
-	public class OpenTelListViewAdapter extends BaseAdapter{
+	/**
+	 * 显示论坛列表
+	 */
+	private void showForums() {
+		BaseSlideFragment baseSlideFragment = (BaseSlideFragment) this
+				.getArguments().get("BaseSlideFragment");
+		ForumListAdapter forumListAdapter = new ForumListAdapter(
+				baseSlideFragment);
+
+		for (int i = 0; i < forums.size(); i++) {
+			System.out.println(forums.get(i).getTitle());
+		}
+		if (forums == null || forums.size() == 0) {
+			Toast.makeText(context, "对不起，暂无论坛信息", 2000).show();
+		} else {
+			mListView.setAdapter(forumListAdapter);
+			mListView.setOnItemClickListener(forumListAdapter);
+		}
+
+	}
+
+	/**
+	 * 
+	 * 论坛列表适配器
+	 * 
+	 * @author 智佳 罗森
+	 * 
+	 */
+	public class ForumListAdapter extends BaseAdapter implements
+			OnItemClickListener {
+
+		BaseSlideFragment baseSlideFragment;
+
+		/**
+		 * 构造方法
+		 * 
+		 * @param baseSlideFragment
+		 */
+		public ForumListAdapter(BaseSlideFragment baseSlideFragment) {
+			this.baseSlideFragment = baseSlideFragment;
+		}
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
-			return tels.size();
+			return forums.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
-			return tels.get(position);
+			return forums.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 
+		/**
+		 * 内部类，定义了列表项的布局控件
+		 * 
+		 * @author 智佳 罗森
+		 * 
+		 */
 		class ViewHolder {
-			public TextView depname_text;
-			public TextView tel_text;
+			public TextView title_text;
+			public TextView beginTime_text;
+			public TextView readCount_text;
+			public TextView resultCount_text;
+			public TextView sentUser_text;
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
-			ViewHolder viewHolder = null;
-			if(convertView==null){
-				convertView = mInflater.inflate(
-						R.layout.gip_opentel_listview_item, null);
+			ViewHolder holder = null;
 
-				viewHolder = new ViewHolder();
+			if (convertView == null) {
+				convertView = mInflater.inflate(R.layout.gip_forum_list_item,
+						null);
 
-				viewHolder.depname_text = (TextView) convertView
-						.findViewById(R.id.gip_opentel_listitem_depname);
-				viewHolder.tel_text = (TextView) convertView
-						.findViewById(R.id.gip_opentel_listitem_tel);
-				convertView.setTag(viewHolder);
+				holder = new ViewHolder();
+				holder.title_text = (TextView) convertView
+						.findViewById(R.id.gip_forum_list_title);
+				holder.beginTime_text = (TextView) convertView
+						.findViewById(R.id.gip_forum_begintime_text);
+				holder.readCount_text = (TextView) convertView
+						.findViewById(R.id.gip_forum_readCount_text);
+				holder.resultCount_text = (TextView) convertView
+						.findViewById(R.id.gip_forum_resultCount_text);
+				holder.sentUser_text = (TextView) convertView
+						.findViewById(R.id.gip_forum_sentUser_text);
+
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
 			}
-			else {
-				viewHolder = (ViewHolder) convertView.getTag();
-			}
-			viewHolder.depname_text.setText(tels.get(position).getDepname());
-			viewHolder.tel_text.setText(tels.get(position).getTel());
+
+			holder.title_text.setText(forums.get(position).getTitle());
+			holder.beginTime_text.setText(forums.get(position).getBeginTime());
+			holder.readCount_text.setText(forums.get(position).getReadCount());
+			holder.resultCount_text.setText(forums.get(position)
+					.getResultCount());
+			holder.sentUser_text.setText(forums.get(position).getSentUser());
 
 			return convertView;
 		}
 
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			baseSlideFragment.slideLinstener.replaceFragment(null, position,
+					Constants.FragmentName.GIP_FOROUM_FRAGMENT, null);
+		}
 	}
+
 }

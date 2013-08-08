@@ -89,4 +89,5 @@ public class GIPContentFragment extends MenuItemFragment {
 		// TODO Auto-generated method stub
 		return new GoverInterPeopleInitLayoutImpl();
 	}
+
 }

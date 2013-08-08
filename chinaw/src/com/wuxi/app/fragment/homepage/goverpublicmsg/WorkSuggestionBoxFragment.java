@@ -67,11 +67,11 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 
 			switch (msg.what) {
 			case DATA__LOAD_SUCESS:
-				processBar.setVisibility(View.INVISIBLE);
+//				processBar.setVisibility(View.INVISIBLE);
 				showLayout();
 				break;
 			case DATA_LOAD_ERROR:
-				processBar.setVisibility(View.INVISIBLE);
+//				processBar.setVisibility(View.INVISIBLE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
 			}
@@ -219,6 +219,7 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 	}
 	
 	public void submitMail(String access_token) throws NetException, JSONException, NODataException{
+		boolean submitError=false;
 		int index=0;
 		for(MailBoxParameterItem item:boxWrapper.getParameters()){
 			
@@ -227,20 +228,24 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 				
 			item.setValueList(content_et.getText().toString());
 			
+			//对必填选项进行空值判断
 			if(item.getRequiredForm()==1){
 				if (content_et.getText().toString().equals("")) {
 					Toast.makeText(context, item.getAlias()+"  不能为空！", Toast.LENGTH_SHORT).show();
+					submitError=true;
 					break;
 				}
 			}
 			
 			index++;
 		}
-		WorkSuggestionService workSuggestionService=new WorkSuggestionService(context);
-		if(workSuggestionService.submitMailBox(access_token,boxWrapper))
-			Toast.makeText(context, "提交成功！", Toast.LENGTH_SHORT).show();
-		else
-			Toast.makeText(context, "提交失败！", Toast.LENGTH_SHORT).show();
+		if(!submitError){
+			WorkSuggestionService workSuggestionService=new WorkSuggestionService(context);
+			if(workSuggestionService.submitMailBox(access_token,boxWrapper))
+				Toast.makeText(context, "提交成功！", Toast.LENGTH_SHORT).show();
+			else
+				Toast.makeText(context, "提交失败！", Toast.LENGTH_SHORT).show();
+		}
 		
 	}
 }
