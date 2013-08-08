@@ -6,6 +6,11 @@ import android.content.Context;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.CityMapFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgContentListFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgNaviWithContentFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgSearchContentListFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgWebFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.WorkSuggestionBoxFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InfoNavigatorWithContentFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InforContentListFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.WapFragment;
@@ -101,6 +106,57 @@ public class InitializContentLayout {
 
 			}
 			
+			
+		}else if(menuItem.getName().equals("政府信息公开")){
+			
+			for (final MenuItem menu : subMenuItems) {
+
+				// 普通菜单
+				if (menu.getType() == MenuItem.CUSTOM_MENU) {
+					menu.setContentFragment(GoverMsgNaviWithContentFragment.class);
+				}
+				// 如果菜单上频道菜单
+				else if (menu.getType() == MenuItem.CHANNEL_MENU) {
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							ChannelService channelService = new ChannelService(
+									context);
+							try {
+								List<Channel> channels = channelService
+										.getSubChannels(menu.getChannelId());
+
+								if (channels != null) {
+									menu.setContentFragment(GoverMsgNaviWithContentFragment.class);
+								} 
+								else {
+									if(menu.getName().equals("信息公开动态")){
+										menu.setContentFragment(GoverMsgSearchContentListFragment.class);// 内容列表界面
+									}
+									else{
+										menu.setContentFragment(GoverMsgContentListFragment.class);// 内容列表界面
+									}
+
+								}
+							} catch (NetException e) {
+								e.printStackTrace();
+							}
+						}
+					}).start();
+
+				} 
+				//定制菜单
+				else if(menu.getType() == MenuItem.APP_MENU){
+					//目前就工作意见箱一个定制菜单
+					if(menu.getName().endsWith("工作意见箱")){
+						menu.setContentFragment(WorkSuggestionBoxFragment.class);
+					}
+				}
+				// wap类型菜单
+				else if (menu.getType() == MenuItem.WAP_MENU) {
+					menu.setContentFragment(GoverMsgWebFragment.class);
+				} 
+			}
 			
 		}
 		

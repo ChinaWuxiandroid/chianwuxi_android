@@ -24,18 +24,27 @@ public class InforContentListFragment extends ContentListFragment {
 			int position, long arg3) {
 
 		Content content = (Content) adapterView.getItemAtPosition(position);
+		BaseSlideFragment baseSlideFragment = (BaseSlideFragment) getArguments()
+				.get(MenuItemMainFragment.ROOTFRAGMENT_KEY);
 		if (super.parentItem != null) {
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("content", content);
+			
 			if (parentItem.getName().equals("热点专题")) {
-				Bundle bundle = new Bundle();
-				bundle.putSerializable("content", content);
-
-				BaseSlideFragment baseSlideFragment = (BaseSlideFragment) getArguments()
-						.get(MenuItemMainFragment.ROOTFRAGMENT_KEY);
 				
 				baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.HOTTOPICCONTENTFRAGMENT, bundle);//跳转
 
+			}else{
+				
+				baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.INFOCENTER_FRAGMENT, bundle);//跳转
+				
 			}
+			
 
+		}else if(super.channel!=null){
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("content", content);
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.INFOCENTER_FRAGMENT, bundle);//跳转
 		}
 
 	}

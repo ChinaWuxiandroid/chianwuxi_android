@@ -29,7 +29,7 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 	@Override
 	public void initializSubFragmentsLayout(List<MenuItem> items) {
 		// TODO Auto-generated method stub
-		for (final MenuItem menu : items) {
+		/*for (final MenuItem menu : items) {
 
 			// 普通菜单
 			if (menu.getType() == MenuItem.CUSTOM_MENU) {
@@ -76,7 +76,7 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 			else if (menu.getType() == MenuItem.WAP_MENU) {
 				menu.setContentFragment(GoverMsgWebFragment.class);
 			} 
-		}
+		}*/
 	}
 
 

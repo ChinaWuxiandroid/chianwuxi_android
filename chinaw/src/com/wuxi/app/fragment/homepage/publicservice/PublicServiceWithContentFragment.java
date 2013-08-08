@@ -19,12 +19,14 @@ public class PublicServiceWithContentFragment extends
 
 		if (channel.getChildrenChannelsCount() > 0) {
 			PublicServiceChannelContentFragment ch = new PublicServiceChannelContentFragment();
+			ch.setArguments(this.getArguments());
 			ch.setChannel(channel);
 			return ch;
 		} else if (channel.getChildrenContentsCount() > 0) {
 			PublicServiceContentListFragment publicServiceContentListFragment = new PublicServiceContentListFragment();
 
 			publicServiceContentListFragment.setChannel(channel);
+			publicServiceContentListFragment.setArguments(getArguments());
 			return publicServiceContentListFragment;
 
 		}

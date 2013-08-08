@@ -225,10 +225,14 @@ public class CityMapFragment extends Fragment implements
 		String startName = et_start.getText().toString();
 		String endName = et_end.getText().toString();
 		if ("".equals(startName)) {
+			
 			Toast.makeText(context, "请输入起点地址", Toast.LENGTH_SHORT).show();
+			
 			return;
 		} else if ("".equals(endName)) {
+			
 			Toast.makeText(context, "请输入终点地址", Toast.LENGTH_SHORT).show();
+			
 			return;
 		}
 
@@ -340,11 +344,16 @@ public class CityMapFragment extends Fragment implements
 			break;
 		case R.id.city_map_tv_bus_rote:
 			if (rb_bus.isChecked()) {
+				tv_showBusRoute.setTextColor(Color.WHITE);
 				searchRoute(BUS);//公交查询
+				tv_showBusRoute.setTextColor(Color.WHITE);
+				
 			}
 
 			if (rb_car.isChecked()) {
+				tv_showBusRoute.setTextColor(Color.WHITE);
 				searchRoute(DRIVER);//驾车查询
+				tv_showBusRoute.setTextColor(Color.WHITE);
 			}
 
 			break;
@@ -388,10 +397,10 @@ public class CityMapFragment extends Fragment implements
 
 		@Override
 		public void onGetDrivingRouteResult(MKDrivingRouteResult res, int error) {
-
+			tv_showBusRoute.setTextColor(Color.BLACK);
 			// 起点或终点有歧义，需要选择具体的城市列表或地址列表
 			if (error == MKEvent.ERROR_ROUTE_ADDR) {
-
+				Toast.makeText(context, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
 				return;
 			}
 			// 错误号可参考MKEvent中的定义
@@ -486,10 +495,10 @@ public class CityMapFragment extends Fragment implements
 
 		@Override
 		public void onGetTransitRouteResult(MKTransitRouteResult res, int error) {
-
+			tv_showBusRoute.setTextColor(Color.BLACK);
 			// 起点或终点有歧义，需要选择具体的城市列表或地址列表
 			if (error == MKEvent.ERROR_ROUTE_ADDR) {
-
+				Toast.makeText(context, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
 				return;
 			}
 			if (error != 0 || res == null) {
