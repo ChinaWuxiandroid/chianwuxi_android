@@ -28,7 +28,8 @@
             android:button="@null"
             android:text="个人办事"
             android:textSize="12sp" 
-            android:id="@+id/rb_personal"/>
+            android:id="@+id/rb_personal"
+            android:textColor="#CC0000"/>
 
         <RadioButton
             android:layout_width="0dip"

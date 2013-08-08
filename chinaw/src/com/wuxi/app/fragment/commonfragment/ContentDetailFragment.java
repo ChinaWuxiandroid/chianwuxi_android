@@ -22,7 +22,7 @@ public abstract class ContentDetailFragment extends BaseItemContentFragment {
 	private ProgressBar pb_content_wb;// webView加载进度条
 	private Content content;
 	private WebView decontent_wb;// 加载数据的webView
-	// private TextView wuxicity_decontent_title;// 标题
+	
 	private TextView decontent_tvtime;// 时间
 	private TextView tvbrowcount;// 浏览次数
 	private TextView content_author;// 作者

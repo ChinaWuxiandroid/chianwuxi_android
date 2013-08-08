@@ -261,7 +261,18 @@ public class Constants {
 		 * 政务大厅下 附近现在地址
 		 */
 		public static final String GOVER_FILE_DOWN_URL="http://3g.wuxi.gov.cn/api/zhengwu/file/{id}.json";
+		
+		/**
+		 * 信件查询  内容分类下来
+		 */
 
+		public  static final String CONTENT_TYPE_URL="http://3g.wuxi.gov.cn/api/letter/contenttype.json";
+		
+		
+		/**
+		 * 信件查询  信件分类下拉
+		 */
+		public static final String LETTER_TYPE_URL="http://3g.wuxi.gov.cn/api/letter/lettertype.json";
 
 
 		/**

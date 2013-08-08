@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
@@ -172,13 +174,7 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 	 */
 	protected void showItemList() {
 
-		if (goverSaoonItemWrapper.isNext()) {
-			loadMoreButton.setText("more");
-
-		} else {
-			
-			gover_guid_lv_content.removeFooterView(loadMoreView);
-		}
+		
 
 		List<GoverSaoonItem> goverSaoonItems = goverSaoonItemWrapper
 				.getGoverSaoonItems();
@@ -209,6 +205,18 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 			}
 
 		}
+		
+		if (goverSaoonItemWrapper.isNext()) {
+			loadMoreButton.setText("more");
+
+		} else {
+			
+			
+			
+				gover_guid_lv_content.removeFooterView(loadMoreView);
+			
+			
+		}
 
 	}
 
@@ -219,13 +227,14 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 	private void showKindType() {
 		if (isFistLoadKindData) {
 			isFistLoadKindData = false;
-			kindTypeAdapter = new KindTypeAdapter(kindtypes, context);
+			kindTypeAdapter = new KindTypeAdapter(kindtypes, context,0);
 			gv.setAdapter(kindTypeAdapter);
 
 			loadItem(kindtypes.get(0).getKindType(), kindtypes.get(0)
 					.getSubKindType(), 0, PAGE_SIZE);// 加载办件第一个办件信息
 		} else {
 			kindTypeAdapter.setKindTypes(kindtypes);
+			kindTypeAdapter.setSelectPostion(0);
 			kindTypeAdapter.notifyDataSetChanged();
 		}
 
@@ -299,6 +308,15 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 
 		}
 		loadKindTypeData(types[typeIndex]);
+		
+		for(int index=0;index<group.getChildCount();index++){
+			RadioButton rb=(RadioButton) group.getChildAt(index);
+			if(rb.isChecked()){
+				rb.setTextColor(Color.RED);
+			}else{
+				rb.setTextColor(Color.BLACK);
+			}
+		}
 	}
 
 	@Override
@@ -341,6 +359,9 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 			this.currentKindtype = kindtype;
 			loadItem(kindtype.getKindType(), kindtype.getSubKindType(), 0,
 					PAGE_SIZE);
+			kindTypeAdapter.setSelectPostion(position);
+			kindTypeAdapter.notifyDataSetChanged();
+			
 		} else if (o instanceof GoverSaoonItem) {
 			GoverSaoonItem goverSaoonItem = (GoverSaoonItem) parent
 					.getItemAtPosition(position);
