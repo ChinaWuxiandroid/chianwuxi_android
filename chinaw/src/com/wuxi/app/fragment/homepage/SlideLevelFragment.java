@@ -47,7 +47,6 @@ import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumPostFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewContentFragment;
-import com.wuxi.app.fragment.homepage.publicservice.PublicServiceChannelContentDetailFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceContentDetailFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
 import com.wuxi.app.listeners.SlideLinstener;
@@ -120,7 +119,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		login_tv_userlogin.setOnClickListener(this);
 		login_tv_user_regisster.setOnClickListener(this);
 		right_menu_rg.setOnCheckedChangeListener(this);
-
+		manager = getActivity().getSupportFragmentManager();
 		mlvMenu = (ListView) view.findViewById(R.id.lv_menu);
 		mlvMenu.setOnItemClickListener(this);
 
@@ -311,7 +310,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	 */
 	private void onReplaceFragment(BaseSlideFragment fragment, Bundle bundle) {
 
-		manager = getActivity().getSupportFragmentManager();
+		
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(FRAME_CONTENT, fragment);
 		if (bundle != null) {

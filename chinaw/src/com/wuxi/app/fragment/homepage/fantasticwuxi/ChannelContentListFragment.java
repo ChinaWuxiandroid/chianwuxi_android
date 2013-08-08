@@ -23,6 +23,7 @@ public class ChannelContentListFragment extends ContentListFragment {
 		Content content=(Content) adapterView.getItemAtPosition(position);
 		Bundle bundle=new Bundle();
 		bundle.putSerializable("content", content);
+		
 		BaseSlideFragment baseSlideFragment=(BaseSlideFragment) getArguments().get("BaseSlideFragment");
 		baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.WUXICHANNELCONTENTDETAILFRAGMENT, bundle);
 		
