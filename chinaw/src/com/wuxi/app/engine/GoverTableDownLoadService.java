@@ -1,6 +1,8 @@
 package com.wuxi.app.engine;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URLEncoder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,10 +42,11 @@ public class GoverTableDownLoadService extends Service {
 	 * @throws NetException
 	 * @throws JSONException
 	 * @throws NODataException
+	 * @throws UnsupportedEncodingException 
 	 */
-	public GoverTableDownLoadWrapper getTableDownLoadsPage(String deptid,
+	public GoverTableDownLoadWrapper getTableDownLoadsPage(String deptid,String fileName,
 			int start, int end) throws NetException, JSONException,
-			NODataException {
+			NODataException, UnsupportedEncodingException {
 
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
@@ -52,6 +55,9 @@ public class GoverTableDownLoadService extends Service {
 		String url = Constants.Urls.GETTABLE_DOWNLOADS_URL
 				.replace("{deptid}", deptid).replace("{start}", start + "")
 				.replace("{end}", end + "");
+		if(fileName!=null&&!fileName.equals("")){
+			url=url+"&"+URLEncoder.encode(fileName, "utf-8");
+		}
 		String resultStr = httpUtils.executeGetToString(url, 5000);
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);

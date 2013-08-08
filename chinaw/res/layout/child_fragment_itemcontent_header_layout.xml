@@ -19,16 +19,15 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/back_btn"
         android:singleLine="true"
-        android:text="全站搜索" />
-    
-     <ImageView
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <ImageView
         android:id="@+id/member_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/open_close_left_btn"
-        />
-     
+        android:layout_toLeftOf="@+id/open_close_left_btn" />
 
     <ImageView
         android:id="@+id/open_close_left_btn"
@@ -60,8 +59,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/download"
-      
-         />
+        android:src="@drawable/download" />
 
 </RelativeLayout>

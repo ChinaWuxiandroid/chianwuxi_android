@@ -188,20 +188,7 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 		switch (level) {
 
 		case 1:
-			//contentChannelAdapter = new ContentChannelAdapter(channels, context);
-			// dishtype.setAdapter(contentChannelAdapter);
-			// ViewGroup.LayoutParams params = dishtype.getLayoutParams();
-
-			// int dishtypes = channels.size();
-			// params.width = 50 * dishtypes;
-
-			// dishtype.setLayoutParams(params);
-
-			// dishtype.setNumColumns(channels.size());
-
-			//Channel checkChannel = channels.get(0);
-
-			//showChannelView(checkChannel, 1);
+			
 			
 			Level1ChannelChangeLister level1ChannelChangeLister = new Level1ChannelChangeLister(
 					channels);
@@ -285,7 +272,7 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 	private void showContentList(Channel channel) {
 
 		publicServiceContentListFragment = new PublicServiceContentListFragment();
-
+		publicServiceContentListFragment.setArguments(this.getArguments());
 		publicServiceContentListFragment.setChannel(channel);
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();

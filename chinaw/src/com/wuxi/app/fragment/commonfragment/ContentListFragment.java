@@ -85,14 +85,7 @@ public abstract class ContentListFragment extends BaseFragment implements
 
 	protected void showContentData() {
 
-		if (contentWrapper.isNext()) {
-			loadMoreButton.setText("more");
-
-		} else {
-			//loadMoreButton.setText(" ");
-			//loadMoreButton.setBackgroundColor(Color.TRANSPARENT);
-			content_list_lv.removeFooterView(loadMoreView);
-		}
+	
 
 		List<Content> contents = contentWrapper.getContents();
 		if (contents != null && contents.size() > 0) {
@@ -120,6 +113,14 @@ public abstract class ContentListFragment extends BaseFragment implements
 				isLoading = false;
 			}
 
+		}
+		
+		if (contentWrapper.isNext()) {
+			loadMoreButton.setText("more");
+
+		} else {
+			
+			content_list_lv.removeFooterView(loadMoreView);
 		}
 
 	}

@@ -1,6 +1,7 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.json.JSONException;
@@ -21,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -47,15 +49,15 @@ import com.wuxi.exception.NetException;
  * 
  */
 public class TableDownloadsFragment extends GoverSaloonContentFragment
-implements OnScrollListener, OnItemSelectedListener,
-OnItemClickListener {
+		implements OnScrollListener, OnItemSelectedListener,
+		OnItemClickListener, android.view.View.OnClickListener {
 
 	protected static final int LOAD_DEPT_SUCCESS = 0;
 	protected static final int LOAD_DEPT_FAIL = 1;
 	protected static final int GOVERITEM_LOAD_SUCCESS = 2;
 	protected static final int GOVERITEM_LOAD_FIAL = 3;
 	private static final int FILE_DOWN_SUCCESS = 4;
-	private static final int FILE_DOWN_ERROR=5;
+	private static final int FILE_DOWN_ERROR = 5;
 	private static final int PAGE_SIZE = 10;
 	private Spinner gover_table_down_deptsp;
 	private List<Dept> depts;
@@ -70,6 +72,10 @@ OnItemClickListener {
 	private String currentDeptId;
 	private boolean isSwitchDept = false;
 	private boolean isFisrtLoadItems = true;// 是否是首次加载
+	private String currentFileName;
+	private EditText et_filename_keywords;
+	private Button btn_fileSearch;
+
 	private ProgressDialog pd;
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -81,7 +87,7 @@ OnItemClickListener {
 			case GOVERITEM_LOAD_SUCCESS:
 				showTableDownLoadItemList();
 				break;
-			case	FILE_DOWN_SUCCESS:
+			case FILE_DOWN_SUCCESS:
 				Toast.makeText(context, "下载成功", Toast.LENGTH_SHORT).show();
 				break;
 			case FILE_DOWN_ERROR:
@@ -108,6 +114,9 @@ OnItemClickListener {
 				.findViewById(R.id.pb_table_download);
 		gover_tabledowload_lv = (ListView) view
 				.findViewById(R.id.gover_tabledowload_lv);
+		et_filename_keywords = (EditText) view
+				.findViewById(R.id.et_filename_keywords);
+		btn_fileSearch = (Button) view.findViewById(R.id.btn_fileSearch);
 
 		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
 				null);
@@ -117,6 +126,7 @@ OnItemClickListener {
 		gover_tabledowload_lv.setOnScrollListener(this);
 		gover_tabledowload_lv.setOnItemClickListener(this);
 		gover_table_down_deptsp.setOnItemSelectedListener(this);
+		btn_fileSearch.setOnClickListener(this);
 		loadDept();
 
 		pd = new ProgressDialog(context);
@@ -171,14 +181,15 @@ OnItemClickListener {
 				context));
 
 		this.currentDeptId = depts.get(0).getId();
-		loadItem(currentDeptId, 0, PAGE_SIZE);
+		loadItem(currentDeptId, null, 0, PAGE_SIZE);
 
 	}
 
 	/**
 	 * 获取办件信息
 	 */
-	private void loadItem(final String deptId, final int start, final int end) {
+	private void loadItem(final String deptId, final String fileName,
+			final int start, final int end) {
 
 		if (isFisrtLoadItems || isSwitchDept) {// 首次加载时或切换部门时显示进度条
 
@@ -194,7 +205,7 @@ OnItemClickListener {
 						context);
 				try {
 					goverTableDownLoadWrapper = goverTableDownLoadService
-							.getTableDownLoadsPage(deptId, start, end);
+							.getTableDownLoadsPage(deptId, fileName, start, end);
 					if (goverTableDownLoadWrapper != null) {
 						msg.what = GOVERITEM_LOAD_SUCCESS;
 					} else {
@@ -218,6 +229,9 @@ OnItemClickListener {
 					msg.what = GOVERITEM_LOAD_FIAL;
 					msg.obj = e.getMessage();
 					handler.sendMessage(msg);
+				} catch (UnsupportedEncodingException e) {
+
+					e.printStackTrace();
 				}
 
 			}
@@ -253,7 +267,7 @@ OnItemClickListener {
 
 				if (isSwitchDept) {// 切换部门
 					goverTableDownLoadAdapter
-					.setGoverTableDownLoads(goDownLoads);
+							.setGoverTableDownLoads(goDownLoads);
 					pb_table_download.setVisibility(ProgressBar.GONE);
 				} else {
 					for (GoverTableDownLoad goverTableDownLoad : goDownLoads) {
@@ -296,8 +310,8 @@ OnItemClickListener {
 
 				loadMoreButton.setText("loading.....");
 				isSwitchDept = false;
-				loadItem(currentDeptId, visibleLastIndex + 1, visibleLastIndex
-						+ 1 + PAGE_SIZE);
+				loadItem(currentDeptId, currentFileName, visibleLastIndex + 1,
+						visibleLastIndex + 1 + PAGE_SIZE);
 
 			}
 
@@ -311,7 +325,7 @@ OnItemClickListener {
 		Dept dept = (Dept) adapterView.getItemAtPosition(position);
 		this.currentDeptId = dept.getId();
 		isSwitchDept = true;
-		loadItem(currentDeptId, 0, PAGE_SIZE);
+		loadItem(currentDeptId, currentFileName, 0, PAGE_SIZE);
 
 	}
 
@@ -329,8 +343,8 @@ OnItemClickListener {
 				+ "文件吗?\n 文件存放地址:" + Constants.APPFiles.DOWNLOAF_FILE_PATH
 				+ tableDownLoad.getFilename());
 		builder.setCancelable(false);
-		File file=new File(Constants.APPFiles.DOWNLOAF_FILE_PATH);
-		if(!file.exists()){
+		File file = new File(Constants.APPFiles.DOWNLOAF_FILE_PATH);
+		if (!file.exists()) {
 			file.mkdirs();
 		}
 		builder.setPositiveButton("确认", new OnClickListener() {
@@ -343,7 +357,8 @@ OnItemClickListener {
 
 					DownLoadThreadTask dowTask = new DownLoadThreadTask(
 							tableDownLoad.getId(),
-							Constants.APPFiles.DOWNLOAF_FILE_PATH+tableDownLoad.getFilename());
+							Constants.APPFiles.DOWNLOAF_FILE_PATH
+									+ tableDownLoad.getFilename());
 
 					new Thread(dowTask).start();
 					pd.show();
@@ -369,7 +384,6 @@ OnItemClickListener {
 
 	private class DownLoadThreadTask implements Runnable {
 
-
 		private String fileId;
 		private String filePath;
 
@@ -388,7 +402,7 @@ OnItemClickListener {
 						context);
 				File file = goverSaoonFileService.dowloadTable(fileId,
 						filePath, pd);
-				if(file!=null){
+				if (file != null) {
 					handler.sendEmptyMessage(FILE_DOWN_SUCCESS);
 				}
 				pd.dismiss();
@@ -397,7 +411,6 @@ OnItemClickListener {
 				e.printStackTrace();
 
 				pd.dismiss();
-
 
 				handler.sendEmptyMessage(FILE_DOWN_ERROR);
 			}
@@ -413,6 +426,24 @@ OnItemClickListener {
 		GoverTableDownLoad tableDownLoad = (GoverTableDownLoad) adapterView
 				.getItemAtPosition(position);
 		showDownloadComfirmDialog(tableDownLoad);
+
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btn_fileSearch:
+			if (et_filename_keywords.getText().toString().equals("")) {
+				Toast.makeText(context, "请输入关键字", Toast.LENGTH_SHORT).show();
+				currentFileName = null;
+				return;
+			}
+			currentFileName = et_filename_keywords.getText().toString();
+			loadItem(currentDeptId, currentFileName, 0, PAGE_SIZE);
+
+			break;
+
+		}
 
 	}
 }

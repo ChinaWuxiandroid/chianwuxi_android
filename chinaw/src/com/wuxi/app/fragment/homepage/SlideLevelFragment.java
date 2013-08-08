@@ -294,7 +294,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				break;
 			case PUBLICSERVICECONTENTDETAILFRAGMENT:// 公共那个服务内容页
 				PublicServiceContentDetailFragment publicServiceContentDetailFragment = new PublicServiceContentDetailFragment();
-				onReplaceFragment(publicServiceContentDetailFragment, bundle);
+				onAddFragment(publicServiceContentDetailFragment, bundle);
 				break;
 
 			}
