@@ -225,10 +225,10 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 	}
 	public void showChannelData(){
 		//没有子频道列表
-		GoverMsgSearchContentListFragment goverMsgSearchContentListFragment=new GoverMsgSearchContentListFragment();
-		goverMsgSearchContentListFragment.setParentMenuItem(parentItem);
-		goverMsgSearchContentListFragment.setFifterType(GoverMsgSearchContentListFragment.FOURDEPT_TYPE);
-		bindFragment(goverMsgSearchContentListFragment);
+		GoverMsgCustomContentDetailFragment goverMsgCustomContentDetailFragment=new GoverMsgCustomContentDetailFragment();
+		goverMsgCustomContentDetailFragment.setParentMenuItem(parentItem);
+		goverMsgCustomContentDetailFragment.setFifterType(GoverMsgSearchContentListFragment.DEPT_TYPE);
+		bindFragment(goverMsgCustomContentDetailFragment);
 	}
 
 	private void showMenuItemList(){
@@ -323,12 +323,22 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 
 		GoverMsgCustomContentDetailFragment goverMsgCustomContentDetailFragment=new GoverMsgCustomContentDetailFragment();
 
-		if(menuItem!=null)
+		if(menuItem!=null){
 			goverMsgCustomContentDetailFragment.setParentMenuItem(menuItem);
-		else 
-			goverMsgCustomContentDetailFragment.setParentChannel(channel);
-
-		bindFragment(goverMsgCustomContentDetailFragment);
+			bindFragment(goverMsgCustomContentDetailFragment);
+		}		
+		else{
+			System.out.println("name:"+channel.getChannelName()+"   channels count:"+channel.getChildrenChannelsCount());
+			if(channel.getChildrenChannelsCount()>0){
+				GoverMsgSubChannelsSearchFragment goverMsgSubChannelsSearchFragment=new GoverMsgSubChannelsSearchFragment();
+				goverMsgSubChannelsSearchFragment.setParentChannel(channel);
+				bindFragment(goverMsgSubChannelsSearchFragment);
+			}
+			else{
+				goverMsgCustomContentDetailFragment.setParentChannel(channel);
+				bindFragment(goverMsgCustomContentDetailFragment);
+			}
+		}
 	}
 
 	public void bindFragment(BaseFragment fragment){

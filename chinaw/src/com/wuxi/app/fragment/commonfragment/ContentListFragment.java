@@ -65,6 +65,7 @@ public abstract class ContentListFragment extends BaseFragment implements
 				showContentData();
 				break;
 			case CONTENT_LOAD_FAIL:
+				content_list_pb.setVisibility(ProgressBar.INVISIBLE);
 				String tip = msg.obj.toString();
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;

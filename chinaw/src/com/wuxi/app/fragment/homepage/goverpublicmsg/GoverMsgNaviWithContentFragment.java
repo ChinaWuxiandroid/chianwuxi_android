@@ -27,10 +27,18 @@ public class GoverMsgNaviWithContentFragment extends MenuItemNavigatorWithConten
 		else if(menuItem.getType() == MenuItem.APP_MENU){
 			//依申请公开   --各部门依申请公开
 			if(menuItem.getAppUI().equals("Applyopen_dept")){
-				GoverMsgDeptApplyOpenFragment goverMsgDeptApplyOpenFragment=new GoverMsgDeptApplyOpenFragment();
+				GoverMsgApplyDownloadFragment goverMsgDeptApplyOpenFragment=new GoverMsgApplyDownloadFragment();
 				return goverMsgDeptApplyOpenFragment;
 			}
 			//依申请公开   --我的依申请公开办件答复
+			else if(menuItem.getAppUI().equals("myapplypage")){
+
+			}
+			//依申请公开   --各市(县)区依申请公开
+			else if(menuItem.getAppUI().equals("myapplypage")){
+
+			}
+			//依申请公开   --网上办件统计
 			else if(menuItem.getAppUI().equals("myapplypage")){
 
 			}

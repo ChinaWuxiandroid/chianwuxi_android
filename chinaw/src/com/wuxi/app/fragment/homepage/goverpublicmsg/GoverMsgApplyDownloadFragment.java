@@ -26,7 +26,7 @@ import com.wuxi.app.util.Constants;
 import com.wuxi.domain.ApplyDept;
 import com.wuxi.exception.NetException;
 
-public class GoverMsgDeptApplyOpenFragment extends BaseFragment{
+public class GoverMsgApplyDownloadFragment extends BaseFragment{
 	protected View view;
 	protected LayoutInflater mInflater;
 	private Context context;

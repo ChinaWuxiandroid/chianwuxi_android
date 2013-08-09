@@ -6,6 +6,7 @@ import java.util.List;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
+import com.wuxi.app.fragment.index.InitializContentLayout;
 import com.wuxi.app.listeners.GoverPublicMsgInitLayoutImpl;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
 import com.wuxi.domain.Channel;
@@ -19,74 +20,16 @@ import com.wuxi.exception.NetException;
 
 public class PublicGoverMsgFragment extends MenuItemMainFragment{
 
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-
 	@Override
 	public void initializSubFragmentsLayout(List<MenuItem> items) {
 		// TODO Auto-generated method stub
-		for (final MenuItem menu : items) {
-
-			// 普通菜单
-			if (menu.getType() == MenuItem.CUSTOM_MENU) {
-				menu.setContentFragment(GoverMsgNaviWithContentFragment.class);
-			}
-			// 如果菜单上频道菜单
-			else if (menu.getType() == MenuItem.CHANNEL_MENU) {
-				new Thread(new Runnable() {
-					@Override
-					public void run() {
-						ChannelService channelService = new ChannelService(
-								context);
-						try {
-							List<Channel> channels = channelService
-									.getSubChannels(menu.getChannelId());
-
-							if (channels != null) {
-								menu.setContentFragment(GoverMsgNaviWithContentFragment.class);
-							} 
-							else {
-								if(menu.getName().equals("信息公开动态")){
-									menu.setContentFragment(GoverMsgSearchContentListFragment.class);// 内容列表界面
-								}
-								else{
-									menu.setContentFragment(GoverMsgContentListFragment.class);// 内容列表界面
-								}
-							}
-						} catch (NetException e) {
-							e.printStackTrace();
-						}
-					}
-				}).start();
-
-			} 
-			//定制菜单
-			else if(menu.getType() == MenuItem.APP_MENU){
-				//目前就工作意见箱一个定制菜单
-				if(menu.getName().endsWith("工作意见箱")){
-					menu.setContentFragment(WorkSuggestionBoxFragment.class);
-				}
-			}
-			// wap类型菜单
-			else if (menu.getType() == MenuItem.WAP_MENU) {
-				menu.setContentFragment(GoverMsgWebFragment.class);
-			} 
-			//碎片类型菜单
-			else if (menu.getType() == MenuItem.FRAGMENT_MENU) {
-				menu.setContentFragment(GoverMsgFragmentWebFragment.class);
-			} 
-		}
-
+		InitializContentLayout.initMenuItemContentLayout(menuItem, items, context);
 	}
 
 
 	@Override
 	protected int getTitlePerScreenItemCount() {
-		return 5;
+		return 4;
 	}
 
 	@Override
