@@ -2,17 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@color/content_background"
+    >
 
+   <LinearLayout 
+       android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_horizontal"
+       >
+       <ProgressBar 
+           android:id="@+id/pb_loadmoore"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           style="?android:attr/progressBarStyleSmall"
+           android:layout_gravity="center_vertical"
+           android:visibility="gone"
+           />
     <Button
+        android:layout_marginLeft="2dip"
         android:id="@+id/loadMoreButton"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="30dip"
-        android:text="load more"
-        android:textSize="12sp" />
+        android:text="点击加载更多"
+        android:textSize="12sp"
+        android:background="@color/content_background" />
+    </LinearLayout>
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="50dip" />
+        android:layout_height="30dip" />
 
 </LinearLayout>

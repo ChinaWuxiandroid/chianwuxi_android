@@ -82,6 +82,7 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 	private boolean isSwitch = false;
 	private Channel checkChannel;
 	private LinearLayout ll_subchannel;
+	private ProgressBar pb_loadmoore;
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 
@@ -120,11 +121,13 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 				null);
 		loadMoreButton = (Button) loadMoreView
 				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore=(ProgressBar) loadMoreView.findViewById(R.id.pb_loadmoore);
 		gover_mange_lv.addFooterView(loadMoreView);
 		gover_mange_lv.setOnScrollListener(this);
 		pb_mange = (ProgressBar) view.findViewById(R.id.pb_mange);
 		menuItem = (MenuItem) getArguments().get("menuItem");
 		loadChannle(CHANNEL_TYPE, menuItem.getChannelId());// 加载子Channel
+		loadMoreButton.setOnClickListener(this);
 
 	}
 
@@ -283,6 +286,8 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 
 		if (isFistLoad || isSwitch) {
 			pb_mange.setVisibility(ProgressBar.VISIBLE);
+		}else{
+			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
 		}
 
 		new Thread(new Runnable() {
@@ -326,14 +331,7 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 
 	protected void showContentData() {
 
-		if (contentWrapper.isNext()) {
-			loadMoreButton.setText("more");
-
-		} else {
-			
-			gover_mange_lv.removeFooterView(loadMoreView);
-		}
-
+		
 		List<Content> contents = contentWrapper.getContents();
 		if (contents != null && contents.size() > 0) {
 			if (isFistLoad) {
@@ -359,6 +357,16 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 
 			}
 		}
+		
+		if (contentWrapper.isNext()) {
+			loadMoreButton.setText("点击加载更多");
+			pb_loadmoore.setVisibility(ProgressBar.GONE);
+
+		} else {
+			
+			gover_mange_lv.removeFooterView(loadMoreView);
+		}
+
 
 	}
 
@@ -533,6 +541,17 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 			// gover_viewpagerLayout.setCurrentItem(pageNo+1);
 			gover_viewpagerLayout.setCurrentItem(pageNo + 1, true);
 			break;
+		case R.id.loadMoreButton:
+			if (contentWrapper != null && contentWrapper.isNext()) {// 还有下一条记录
+
+				loadMoreButton.setText("loading.....");
+				isSwitch = false;
+				loadContentsData(checkChannel.getChannelId(),
+						visibleLastIndex + 1, visibleLastIndex + 1 + PAGESIZE);
+
+			}
+
+			break;
 
 		}
 
@@ -554,7 +573,7 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		int itemsLastIndex = manageAdapter.getCount() - 1; // 数据集最后一项的索引
+		/*int itemsLastIndex = manageAdapter.getCount() - 1; // 数据集最后一项的索引
 		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
 		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
 				&& visibleLastIndex == lastIndex) {
@@ -568,7 +587,7 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 
 			}
 
-		}
+		}*/
 	}
 
 	@Override

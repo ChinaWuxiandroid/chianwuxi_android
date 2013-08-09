@@ -26,9 +26,10 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/slide_main_content"
+       android:id="@+id/slide_main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#DEE3E7" />
+        android:background="#DEE3E7" 
+        />
 
 </com.wuxi.app.view.SlideMenuLayout>

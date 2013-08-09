@@ -183,7 +183,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				ch.setMenuItem(menuItem);
 				onReplaceFragment(ch, null);
 
-				// onAddTransaction(ch,null);
+				
 				break;
 			case 2:
 
@@ -312,6 +312,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 		
 		FragmentTransaction ft = manager.beginTransaction();
+		
 		ft.replace(FRAME_CONTENT, fragment);
 		if (bundle != null) {
 			fragment.setArguments(bundle);

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
@@ -41,7 +42,7 @@ import com.wuxi.exception.NetException;
  */
 public class OnlineApprovalFragment extends GoverSaloonContentFragment
 		implements OnScrollListener, OnItemSelectedListener,
-		OnItemClickListener {
+		OnItemClickListener, OnClickListener {
 
 	protected static final int LOAD_DEPT_SUCCESS = 0;
 	protected static final int LOAD_DEPT_FAIL = 1;
@@ -62,7 +63,7 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 	private boolean isSwitchDept = false;
 
 	private List<Dept> depts;// 部门
-
+	private ProgressBar pb_loadmoore;
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -93,6 +94,8 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 		if (isFirstLoadGoverItem || isSwitchDept) {// 首次加载时或切换部门时显示进度条
 
 			pb_approval.setVisibility(ProgressBar.VISIBLE);
+		}else{
+			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
 		}
 
 		new Thread(new Runnable() {
@@ -141,13 +144,7 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 	 */
 	protected void showItemList() {
 
-		if (goverSaoonItemWrapper.isNext()) {
-			loadMoreButton.setText("more");
-
-		} else {
-			
-			gover_online_approval_lv.removeFooterView(loadMoreView);
-		}
+	
 
 		List<GoverSaoonItem> goverSaoonItems = goverSaoonItemWrapper
 				.getGoverSaoonItems();
@@ -178,6 +175,15 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 			}
 
 		}
+		
+		if (goverSaoonItemWrapper.isNext()) {
+			loadMoreButton.setText("点击加载更多 ");
+			pb_loadmoore.setVisibility(ProgressBar.GONE);
+
+		} else {
+			
+			gover_online_approval_lv.removeFooterView(loadMoreView);
+		}
 
 	}
 
@@ -203,8 +209,10 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 				null);
 		loadMoreButton = (Button) loadMoreView
 				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore=(ProgressBar) loadMoreView.findViewById(R.id.pb_loadmoore);
 		gover_online_approval_lv.addFooterView(loadMoreView);
 		gover_online_approval_lv.setOnScrollListener(this);
+		loadMoreButton.setOnClickListener(this);
 		loadDept();// 加载部门
 	}
 
@@ -284,7 +292,7 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-		int itemsLastIndex = goverOnlineApproveAdapter.getCount() - 1; // 数据集最后一项的索引
+		/*int itemsLastIndex = goverOnlineApproveAdapter.getCount() - 1; // 数据集最后一项的索引
 		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
 		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
 				&& visibleLastIndex == lastIndex) {
@@ -298,7 +306,7 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 
 			}
 
-		}
+		}*/
 
 	}
 
@@ -345,6 +353,26 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
 					FragmentName.GOVERSALOONDETAIL_CF_FRAGMENT, bundle);
 		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch(v.getId()){
+		
+		case R.id.loadMoreButton:
+			if (goverSaoonItemWrapper != null && goverSaoonItemWrapper.isNext()) {// 还有下一条记录
+
+				loadMoreButton.setText("loading.....");
+				isSwitchDept = false;
+				loadItem(currentDeptId, visibleLastIndex + 1, visibleLastIndex
+						+ 1 + PAGE_SIZE);
+
+			}
+
+			break;
+		
+		}
+		
 	}
 
 }

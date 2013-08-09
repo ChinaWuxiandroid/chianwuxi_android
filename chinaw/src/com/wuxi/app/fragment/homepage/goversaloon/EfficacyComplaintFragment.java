@@ -69,6 +69,7 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 	private ImageView iv_letter_query;
 	private List<ContentType> contentTypes;
 	private List<LetterType> letterTypes;
+	private ProgressBar pb_loadmoore;
 
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -99,13 +100,7 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 	 * wanglu 泰得利通 显示效能投诉列表数据
 	 */
 	protected void showEffData() {
-		if (efficaWrapper.isNext()) {
-			loadMoreButton.setText("more");
-
-		} else {
-
-			gover_eff_lv.removeFooterView(loadMoreView);
-		}
+		
 
 		List<EfficaComplain> efficaComplains = efficaWrapper
 				.getEfficaComplains();
@@ -129,6 +124,15 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 
 			}
 
+		}
+		
+		if (efficaWrapper.isNext()) {
+			loadMoreButton.setText("点击加载更多");
+			pb_loadmoore.setVisibility(ProgressBar.GONE);
+
+		} else {
+
+			gover_eff_lv.removeFooterView(loadMoreView);
 		}
 
 	}
@@ -250,6 +254,8 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 				null);
 		loadMoreButton = (Button) loadMoreView
 				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore=(ProgressBar) loadMoreView.findViewById(R.id.pb_loadmoore);
+		loadMoreButton.setOnClickListener(this);
 
 		gover_eff_lv = (ListView) view.findViewById(R.id.gover_eff_lv);
 		gover_eff_lv.addFooterView(loadMoreView);
@@ -278,6 +284,8 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 	private void loadEffData(final int start, final int end) {
 		if (isFistLoad) {
 			gover_eff_pb.setVisibility(ProgressBar.VISIBLE);
+		}else{
+			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
 		}
 
 		new Thread(new Runnable() {
@@ -331,9 +339,9 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		int itemsLastIndex = efficacyComplaintAdapter.getCount() - 1; // 数据集最后一项的索引
-		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
+		//int itemsLastIndex = efficacyComplaintAdapter.getCount() - 1; // 数据集最后一项的索引
+		//int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
+		/*if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
 				&& visibleLastIndex == lastIndex) {
 
 			if (efficaWrapper != null && efficaWrapper.isNext()) {// 还有下一条记录
@@ -343,7 +351,7 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 						+ PAGE_SIZE);
 			}
 
-		}
+		}*/
 	}
 
 	@Override
@@ -360,6 +368,15 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 				ll_mail.setVisibility(LinearLayout.VISIBLE);
 			} else {
 				ll_mail.setVisibility(LinearLayout.GONE);
+			}
+			break;
+		case R.id.loadMoreButton:
+
+			if (efficaWrapper != null && efficaWrapper.isNext()) {// 还有下一条记录
+
+				loadMoreButton.setText("loading.....");
+				loadEffData(visibleLastIndex + 1, visibleLastIndex + 1
+						+ PAGE_SIZE);
 			}
 			break;
 

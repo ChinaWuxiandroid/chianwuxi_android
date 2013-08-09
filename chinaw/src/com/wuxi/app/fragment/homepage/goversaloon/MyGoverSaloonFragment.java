@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
@@ -37,7 +38,7 @@ import com.wuxi.exception.ResultException;
  * 
  */
 public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
-		OnCheckedChangeListener {
+		OnCheckedChangeListener, OnClickListener {
 
 	private RadioGroup gover_btn_rg;
 	private RadioButton gover_sallon_myconsult;
@@ -71,6 +72,8 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 	private int myconsultvisibleLastIndex;// 我的在线咨询最后一条索引
 	private int myappvisibleItemCount;// 当前我的在申报列表显示条数
 	private int myappvisibleLastIndex;// 当前我的在申报列表最后一条索引
+	private ProgressBar pb_consultloadmoore,pb_applyloadmoore;
+	
 
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -96,13 +99,7 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 	 * wanglu 泰得利通 显示申报列表数据
 	 */
 	protected void showMyApplyData() {
-		if (myApplyWrapper.isNext()) {
-			myapplyloadMoreButton.setText("more");
-
-		} else {
-			
-			gover_saloon_lv_myapply.removeFooterView(myapplyloadMoreView);
-		}
+		
 
 		List<MyApply> myApplies = myApplyWrapper.getMyApplies();
 		if (myApplies != null && myApplies.size() > 0) {
@@ -125,6 +122,15 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 
 			}
 
+		}
+		
+		if (myApplyWrapper.isNext()) {
+			pb_applyloadmoore.setVisibility(ProgressBar.GONE);
+			myapplyloadMoreButton.setText("点击加载更多");
+
+		} else {
+			
+			gover_saloon_lv_myapply.removeFooterView(myapplyloadMoreView);
 		}
 
 	}
@@ -152,13 +158,17 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 
 		myconsultloadMoreView = View.inflate(context,
 				R.layout.list_loadmore_layout, null);
+		pb_consultloadmoore=(ProgressBar) myconsultloadMoreView.findViewById(R.id.pb_loadmoore);
+		
 		myapplyloadMoreView = View.inflate(context,
 				R.layout.myapply_list_loadmore_layout, null);
 		myconsultloadMoreButton = (Button) myconsultloadMoreView
 				.findViewById(R.id.loadMoreButton);
+		myconsultloadMoreButton.setOnClickListener(this);
 		myapplyloadMoreButton = (Button) myapplyloadMoreView
-				.findViewById(R.id.loadMoreButton);
-
+				.findViewById(R.id.loadapply_MoreButton);
+		myapplyloadMoreButton.setOnClickListener(this);
+		pb_applyloadmoore=(ProgressBar) myapplyloadMoreView.findViewById(R.id.pb_applyloadmoore);
 		gover_saloon_lv_myconsult.addFooterView(myconsultloadMoreView);// 为listView添加底部视图
 		gover_saloon_lv_myapply.addFooterView(myapplyloadMoreView);
 		gover_saloon_lv_myconsult
@@ -176,6 +186,8 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 
 		if (isFristLoadMyConsultData) {// 如果是首次加载显示进度条
 			gover_pb_myonlineapply.setVisibility(ProgressBar.VISIBLE);// 显示加载进度条
+		}else{
+			pb_consultloadmoore.setVisibility(ProgressBar.VISIBLE);
 		}
 
 		new Thread(new Runnable() {
@@ -222,13 +234,7 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 
 	protected void showMyConsultData() {
 
-		if (myconsultWrapper.isNext()) {
-			myconsultloadMoreButton.setText("more");
-
-		} else {
-			//myconsultloadMoreButton.setText("没有数据了...");
-			gover_saloon_lv_myconsult.removeFooterView(myconsultloadMoreView);
-		}
+		
 
 		List<Myconsult> myconsults = myconsultWrapper.getMyconsults();
 		if (myconsults != null && myconsults.size() > 0) {
@@ -254,6 +260,16 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 			}
 
 		}
+		
+		if (myconsultWrapper.isNext()) {
+			myconsultloadMoreButton.setText("点击加载更多");
+			pb_consultloadmoore.setVisibility(ProgressBar.GONE);
+
+		} else {
+			//myconsultloadMoreButton.setText("没有数据了...");
+			
+			gover_saloon_lv_myconsult.removeFooterView(myconsultloadMoreView);
+		}
 
 	}
 
@@ -270,7 +286,7 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 		public void onScrollStateChanged(AbsListView view, int scrollState) {
 			int itemsLastIndex = myOnlineConsultAdapter.getCount() - 1; // 数据集最后一项的索引
 			int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-			if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
+			/*if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
 					&& myconsultvisibleLastIndex == lastIndex) {
 
 				if (myconsultWrapper != null && myconsultWrapper.isNext()) {// 还有下一条记录
@@ -280,7 +296,7 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 							myconsultvisibleLastIndex + 1 + PAGE_SIZE);// 加载我的咨询数据
 				}
 
-			}
+			}*/
 		}
 
 	}
@@ -298,7 +314,7 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 		public void onScrollStateChanged(AbsListView view, int scrollState) {
 			int itemsLastIndex = myOnlineApplyAdapter.getCount() - 1; // 数据集最后一项的索引
 			int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-			if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
+			/*if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
 					&& myappvisibleLastIndex == lastIndex) {
 
 				if (myApplyWrapper != null && myApplyWrapper.isNext()) {// 还有下一条记录
@@ -308,7 +324,7 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 							myappvisibleLastIndex + 1 + PAGE_SIZE);// 加载我的咨询数据
 				}
 
-			}
+			}*/
 		}
 
 	}
@@ -347,6 +363,8 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 
 		if (isFistLoadMyApplyData) {// 如果是首次加载显示进度条
 			gover_pb_myonlineapply.setVisibility(ProgressBar.VISIBLE);// 显示加载进度条
+		}else{
+			pb_applyloadmoore.setVisibility(ProgressBar.VISIBLE);
 		}
 
 		new Thread(new Runnable() {
@@ -407,5 +425,30 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 	@Override
 	protected int getLayoutId() {
 		return R.layout.my_goversaloon_layout;
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch(v.getId()){
+		case R.id.loadMoreButton:
+			if (myconsultWrapper != null && myconsultWrapper.isNext()) {// 还有下一条记录
+
+				myconsultloadMoreButton.setText("loading.....");
+				loadMyConsultData(myconsultvisibleLastIndex + 1,
+						myconsultvisibleLastIndex + 1 + PAGE_SIZE);// 加载我的咨询数据
+			}
+			break;
+		case R.id.loadapply_MoreButton:
+			if (myApplyWrapper != null && myApplyWrapper.isNext()) {// 还有下一条记录
+
+				myapplyloadMoreButton.setText("loading.....");
+				loadMyAppLodata(myappvisibleLastIndex + 1,
+						myappvisibleLastIndex + 1 + PAGE_SIZE);// 加载我的咨询数据
+			}
+
+			break;
+		
+		}
+		
 	}
 }
