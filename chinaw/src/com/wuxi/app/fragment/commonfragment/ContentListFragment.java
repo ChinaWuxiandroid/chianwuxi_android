@@ -58,6 +58,7 @@ public abstract class ContentListFragment extends BaseFragment implements
 	private boolean isFirstLoad = true;// 是不是首次加载数据
 	private boolean isLoading = false;
 	private ProgressBar pb_loadmoore;
+	
 	private Handler handler = new Handler() {
 		@SuppressLint("HandlerLeak")
 		public void handleMessage(Message msg) {
@@ -120,7 +121,6 @@ public abstract class ContentListFragment extends BaseFragment implements
 			loadMoreButton.setText("点击加载更多");
 
 		} else {
-
 			content_list_lv.removeFooterView(loadMoreView);
 		}
 

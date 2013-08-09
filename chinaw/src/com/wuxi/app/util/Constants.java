@@ -128,6 +128,8 @@ public class Constants {
 		 * */
 		public static final String LETTERS_STATISTICS_URL = "http://3g.wuxi.gov.cn/api/letter/statistics.json";
 
+
+
 		/**
 		 * 获取我的申报列表 URL {access_token} access_token 占位符 {start} 开始位置暂占位符
 		 * {end}结束位置占位符
@@ -148,6 +150,10 @@ public class Constants {
 		 * 政民互动 公众论坛 评论
 		 */
 		public static final String FORUM_COMMENT_URL = "http://3g.wuxi.gov.cn/api/publicbbs/{id}/result_submit.json";
+		/**
+		 * 政民互动 视频直播平台 访谈实录
+		 */
+		public static final String MEMOIR_CONTENT_URL = "http://3g.wuxi.gov.cn/api/interview/{interViewId}/textrecords.json";
 
 
 		/**
@@ -261,14 +267,14 @@ public class Constants {
 		 * 政务大厅下 附近现在地址
 		 */
 		public static final String GOVER_FILE_DOWN_URL="http://3g.wuxi.gov.cn/api/zhengwu/file/{id}.json";
-		
+
 		/**
 		 * 信件查询  内容分类下来
 		 */
 
 		public  static final String CONTENT_TYPE_URL="http://3g.wuxi.gov.cn/api/letter/contenttype.json";
-		
-		
+
+
 		/**
 		 * 信件查询  信件分类下拉
 		 */
@@ -289,7 +295,16 @@ public class Constants {
 		 * 政府信息公开  各部门依申请公开
 		 * */
 		public static final String APPLYDEPT_URL="http://3g.wuxi.gov.cn/api/applyopen/deps.json";
+		/**
+		 * 政府信息公开  依申请公开网上办件统计
+		 * */
+		public static final String INTERNET_LETTERS_STATISTICS_URL = "http://3g.wuxi.gov.cn/api/applyopen/applycount.json";
 
+		/**
+		 * 政府信息公开  获取我的依申请公开列表 URL {access_token} access_token 占位符 {start} 开始位置暂占位符
+		 * {end}结束位置占位符
+		 */
+		public static final String MY_APPLYPAGE_URL = "http://3g.wuxi.gov.cn/api/applyopen/myapplypage.json?access_token={access_token}&start={start}&end={end}";
 
 	}
 

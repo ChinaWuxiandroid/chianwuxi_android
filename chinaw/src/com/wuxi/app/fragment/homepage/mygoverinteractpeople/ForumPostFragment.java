@@ -5,12 +5,8 @@ package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
 import org.json.JSONException;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -29,9 +25,6 @@ import com.wuxi.exception.NetException;
  */
 public class ForumPostFragment extends BaseItemContentFragment {
 
-	private View view = null;
-	private Context context = null;
-
 	// 留言主题输入框
 	private EditText postThemeEdit = null;
 	// 留言内容输入框
@@ -41,6 +34,7 @@ public class ForumPostFragment extends BaseItemContentFragment {
 	private ImageButton postSubmitImageBtn = null;
 
 	private ForumPostService postService = null;
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -60,14 +54,11 @@ public class ForumPostFragment extends BaseItemContentFragment {
 	protected String getContentTitleText() {
 		return "公众论坛";
 	}
-
+	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.forum_post_layout, null);
-		context = getActivity();
+	public void initUI() {
+		super.initUI();
 		initLayout();
-		return view;
 	}
 
 	/**

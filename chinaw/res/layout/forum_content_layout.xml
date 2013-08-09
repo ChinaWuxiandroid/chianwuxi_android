@@ -168,7 +168,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="发表评论"
-        android:background="@drawable/gover_online_sub_bg"
+        android:background="@drawable/vedio_home_saybtn"
         android:textColor="#FFFFFF"/>
     
     

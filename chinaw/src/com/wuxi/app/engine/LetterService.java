@@ -15,6 +15,9 @@ import com.wuxi.domain.MyLetter;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
+/**
+ * @author 杨宸 智佳
+ * */
 public class LetterService extends Service{
 
 	public LetterService(Context context) {
