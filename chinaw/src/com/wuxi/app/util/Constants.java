@@ -141,6 +141,16 @@ public class Constants {
 		public static final String MYCONSULT_URL = "http://3g.wuxi.gov.cn/api/zhengwu/myconsult.json?access_token={access_token}&start={start}&end={end}";
 
 		/**
+		 * 政民互动 公众论坛 发帖
+		 */
+		public static final String FOORUM_POST_URL = "http://3g.wuxi.gov.cn/api/publicbbs/newpost.json";
+		/**
+		 * 政民互动 公众论坛 评论
+		 */
+		public static final String FORUM_COMMENT_URL = "http://3g.wuxi.gov.cn/api/publicbbs/{id}/result_submit.json";
+
+
+		/**
 		 * 效能投诉列表 {start}开始占位符 {end}结束占位符
 		 */
 		public static final String TOUSU_URL = "http://3g.wuxi.gov.cn/api/zhengwu/tousu.json?start={start}&end={end}";
@@ -482,7 +492,7 @@ public class Constants {
 		 * 四个无锡专题
 		 */
 		FOURTOPIC_ACTIVITYFRAGMENT,
-		
+
 		/**
 		 * 公共服务内容页
 		 */

@@ -68,26 +68,25 @@ OnScrollListener, OnItemClickListener{
 
 	private String getURL(FifterContentWrapper fifter){
 		String url = Constants.Urls.CHANNEL_CONTENT_P_URL.replace("{id}", fifter.getId())
-				.replace("start", String.valueOf(fifter.getStart()))
-				.replace("end", String.valueOf(fifter.getEnd()));
+				.replace("{start}", String.valueOf(fifter.getStart()))
+				.replace("{end}", String.valueOf(fifter.getEnd()));
 		String dept=fifter.getDept();
 		String zone=fifter.getZone();
 		String typeword=fifter.getTypeword();
 		int year=fifter.getYear();
 
 		if(dept!=null&&!"".equals(dept)){
-			url=url+"?dept="+dept;
+			url=url+"&dept="+dept;
 		}
 		if(year!=-1){
-			url=url+"?year="+year;
+			url=url+"&year="+year;
 		}
 		if(typeword!=null&&!"".equals(typeword)){
-			url=url+"?typeword="+typeword;
+			url=url+"&typeword="+typeword;
 		}
 		if(zone!=null&&!"".equals(zone)){
-			url=url+"?zone="+zone;
+			url=url+"&zone="+zone;
 		}
-
 		return url;
 	}
 
@@ -100,6 +99,7 @@ OnScrollListener, OnItemClickListener{
 				break;
 			case CONTENT_LOAD_FAIL:
 				String tip = msg.obj.toString();
+				content_list_pb.setVisibility(ProgressBar.GONE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
 			}
@@ -180,7 +180,7 @@ OnScrollListener, OnItemClickListener{
 				Message msg = handler.obtainMessage();
 				ContentService contentService = new ContentService(context);
 				try {
-					
+
 					contentWrapper = contentService.getPageContentsByUrl(getURL(fifter));
 					if (contentWrapper != null) {
 						msg.what = CONTENT_LOAD_SUCCESS;

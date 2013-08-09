@@ -55,7 +55,6 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 	private static final int LOAD_YEAR_FAILED=4;
 	private static final int LOAD_CONTENTLIST_SUCCESS=5;
 	private static final int LOAD_CONTENTLIST_FAILED=6;
-	private static final String[] countryArr={"按县区筛选","江阴","宜兴","惠山","滨湖","崇安","南长 ","北塘","无锡新区"};
 
 	private MenuItem parentMenuItem;
 	private Channel channel;
@@ -66,18 +65,27 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 	private Spinner year_sp;
 	private Button search_imbtn;
 
-	private int filterType=0;  //检索过滤 类型  0-部门时间型   1-区县时间型  默认为部门时间型
-
-	private String DEFAULT_DEPT_FIFTER="按部门筛选";
-	private String DEFAULT_ZONE_FIFTER="按县区筛选";
+	private static String DEFAULT_DEPT_FIFTER="按部门筛选";
+	private static String DEFAULT_ZONE_FIFTER="按县区筛选";
 	private String deptStrFifter=DEFAULT_DEPT_FIFTER;
 	private String zoneStrFifter=DEFAULT_ZONE_FIFTER;
 	//年份默认今年
 	private int DEFAULT_YEAR_FIFTER=2013;
 	private int yearFifter=DEFAULT_YEAR_FIFTER;   //2013
 
+	private static final String[] zoneArr={DEFAULT_ZONE_FIFTER,"江阴","宜兴","惠山","滨湖","崇安","南长 ","北塘","无锡新区"};
+	private static final String[] fourDeptArr={DEFAULT_DEPT_FIFTER,"政府办","无锡市发展和改革委员会","无锡市经济和信息化委员会","无锡市信息化和无线电管理局"};
+	
+	
+	public static final int DEPT_TYPE=1;
+	public static final int ZONE_TYPE=2;
+	public static final int FOURDEPT_TYPE=3;
+	private int filterType=DEPT_TYPE;  //检索过滤 类型  1-部门时间型(缺省类型)   2-区县时间型  3-部门时间型（4部门型）
 
-
+	public void setFifterType(int type){
+		this.filterType=type;
+	}
+	
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -106,7 +114,6 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 		}
 	};
 
-
 	public void setParentMenuItem(MenuItem parentMenuItem){
 		this.parentMenuItem=parentMenuItem;
 	}
@@ -122,7 +129,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 		mInflater = inflater;
 		context = getActivity();
 
-		
+
 		initView();
 		return view;
 	}
@@ -132,18 +139,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 		year_sp=(Spinner)view.findViewById(R.id.govermsg_search_spinner_year);
 		search_imbtn=(Button)view.findViewById(R.id.govermsg_search_button_search);
 		search_imbtn.setOnClickListener(this);
-		//部门   时间  过滤 类型
-		if(channel!=null){
-			if(channel.getChannelName().equals("县区政府年度报告")){
-				filterType=1;
-			}
-			else{
-				filterType=0;
-			}
-		}
-		else if(parentMenuItem!=null){
-			filterType=0;
-		}	
+	
 		loadContentList();
 
 		initFilter(filterType);
@@ -154,21 +150,46 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 		DEFAULT_YEAR_FIFTER=c.get(Calendar.YEAR);   //2013
 		yearFifter=DEFAULT_YEAR_FIFTER;
 		switch(Type){
-		case 0:
+		case DEPT_TYPE:
 			loadDeptData();
 			initYearSpinner();
 			break;
-		case 1:
+		case ZONE_TYPE:
+			initCountrySpinner();
+			initYearSpinner();
+			break;
+		case FOURDEPT_TYPE:
 			initCountrySpinner();
 			initYearSpinner();
 			break;
 		}
 	}
 
+	public void initFourDeptSpinner(){
+		
+		ArrayAdapter<String> country_Spinner_adapter = new ArrayAdapter<String>(context,
+				R.layout.my_simple_spinner_item_layout, fourDeptArr);
+		country_Spinner_adapter.setDropDownViewResource(R.layout.my_spinner_medium_dropdown_item);
+		partment_sp.setAdapter(country_Spinner_adapter);
+		partment_sp.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View view,
+					int arg2, long arg3) {
+				deptStrFifter=((TextView)view).getText().toString();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+			}
+		});
+		partment_sp.setVisibility(View.VISIBLE);
+	}
+	
 	public void initCountrySpinner(){
 
 		ArrayAdapter<String> country_Spinner_adapter = new ArrayAdapter<String>(context,
-				R.layout.my_simple_spinner_item_layout, countryArr);
+				R.layout.my_simple_spinner_item_layout, zoneArr);
 		country_Spinner_adapter.setDropDownViewResource(R.layout.my_spinner_medium_dropdown_item);
 		partment_sp.setAdapter(country_Spinner_adapter);
 		partment_sp.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -177,7 +198,6 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 			public void onItemSelected(AdapterView<?> arg0, View view,
 					int arg2, long arg3) {
 				zoneStrFifter=((TextView)view).getText().toString();
-				System.out.println("zoneStrFifter:"+zoneStrFifter);
 			}
 
 			@Override
@@ -224,7 +244,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 	public void showDept(){
 		ApplyDept deptDefault=new ApplyDept();
 		deptDefault.setDepId("0");
-		deptDefault.setDepName("按部门筛选");
+		deptDefault.setDepName(DEFAULT_DEPT_FIFTER);
 		depts.add(0, deptDefault);
 
 		DeptAdapter partment_Spinner_adapter = new DeptAdapter();
@@ -255,7 +275,6 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 				else{
 					yearFifter=DEFAULT_YEAR_FIFTER;    //表示按年份来
 				}
-				System.out.println("yearFifter："+yearFifter);
 			}
 
 			@Override
@@ -286,7 +305,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 		FifterContentWrapper fifter=new FifterContentWrapper(id);
 		switch(filterType){
 		//按部门 时间  检索
-		case 0:
+		case DEPT_TYPE:
 			if(DEFAULT_DEPT_FIFTER.equals(deptStrFifter))
 				deptStrFifter=null;
 			if(yearFifter==DEFAULT_YEAR_FIFTER)
@@ -295,12 +314,20 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 			fifter.setYear(yearFifter);
 			break;
 			//按区县 时间  检索
-		case 1:
-			if(zoneStrFifter.equals(DEFAULT_ZONE_FIFTER))
+		case ZONE_TYPE:
+			if(DEFAULT_ZONE_FIFTER.equals(zoneStrFifter))
 				zoneStrFifter=null;
 			if(yearFifter==DEFAULT_YEAR_FIFTER)
 				yearFifter=-1;
 			fifter.setZone(zoneStrFifter);
+			fifter.setYear(yearFifter);
+			break;
+		case FOURDEPT_TYPE:
+			if(DEFAULT_DEPT_FIFTER.equals(deptStrFifter))
+				deptStrFifter=null;
+			if(yearFifter==DEFAULT_YEAR_FIFTER)
+				yearFifter=-1;
+			fifter.setDept(deptStrFifter);
 			fifter.setYear(yearFifter);
 			break;
 		}
@@ -374,7 +401,6 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 		public void onItemSelected(AdapterView<?> arg0, View arg1, int position,
 				long arg3) {
 			deptStrFifter= depts.get(position).getDepName();
-			System.out.println("deptStrFifter:"+deptStrFifter);
 		}
 
 		@Override

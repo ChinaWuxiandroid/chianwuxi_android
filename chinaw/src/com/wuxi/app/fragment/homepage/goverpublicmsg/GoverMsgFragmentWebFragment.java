@@ -57,6 +57,9 @@ public class GoverMsgFragmentWebFragment extends BaseFragment{
 				}
 			}
 		});
+		wbView.getSettings().setUseWideViewPort(true);
+		wbView.getSettings().setBuiltInZoomControls(true);
+		wbView.getSettings().setLoadWithOverviewMode(true);
 
 		wbView.getSettings().setUseWideViewPort(true); 
 		wbView.getSettings().setLoadWithOverviewMode(true);

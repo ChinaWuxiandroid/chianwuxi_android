@@ -23,19 +23,19 @@ public class GoverInterPeopleVideoLiveHomeFragment extends RadioButtonChangeFrag
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	protected static final int HOME_CONTENT_ID=R.id.gip_vedio_live_home_fragment;
-	
+
 	//内容类型：0->视频直播界面；1->访谈实录界面；2->留言提问界面
 	private int type = 0;
 
 	//存放该界面的RadioBtnID的数组
-		private final  int[] radioBtnIds={
-				R.id.gip_video_live_home_radioBtn_vediolive,
-				R.id.gip_video_live_home_radioBtn_memoir,
-				R.id.gip_video_live_home_radioBtn_message
-		};
-	
+	private final  int[] radioBtnIds={
+			R.id.gip_video_live_home_radioBtn_vediolive,
+			R.id.gip_video_live_home_radioBtn_memoir,
+			R.id.gip_video_live_home_radioBtn_message
+	};
+
 	@Override
 	protected int getLayoutId() {
 		return R.layout.gip_vedio_live_home_layout;
@@ -63,7 +63,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends RadioButtonChangeFrag
 		//绑定视频直播界面碎片
 		bindFragment(gipvlhlFragment);
 	}
-	
+
 	/**
 	 * 绑定碎片
 	 * @param fragment
@@ -74,7 +74,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends RadioButtonChangeFrag
 		ft.replace(HOME_CONTENT_ID, fragment);
 		ft.commit();	
 	}
-	
+
 	/**
 	 * 切换内容
 	 */
@@ -85,18 +85,20 @@ public class GoverInterPeopleVideoLiveHomeFragment extends RadioButtonChangeFrag
 			break;
 
 		case 2:
-			
+			LiveHomeMemoirFragment liveHomeMemoirFragment = new LiveHomeMemoirFragment();
+			bindFragment(liveHomeMemoirFragment);
+
 			break;
-			
+
 		case 3:
-			
+
 			break;
-			
+
 		default:
 			break;
 		}
 	}
-	
+
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		super.onCheckedChanged(group, checkedId);
@@ -109,11 +111,11 @@ public class GoverInterPeopleVideoLiveHomeFragment extends RadioButtonChangeFrag
 		case R.id.gip_video_live_home_radioBtn_memoir:
 			type = 1;
 			changeContent(type);
-			
+
 		case R.id.gip_video_live_home_radioBtn_message:
 			type = 2;
 			changeContent(type);
-			
+
 		default:
 			break;
 		}

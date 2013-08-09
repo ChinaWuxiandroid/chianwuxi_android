@@ -51,6 +51,8 @@ public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener 
 			}
 			else if (fragment instanceof GoverMsgSearchContentListFragment) {
 				goverMsgSearchContentListFragment = (GoverMsgSearchContentListFragment) fragment;
+				//在此设置搜索类型
+				
 				goverMsgSearchContentListFragment.setParentMenuItem(menuItem);
 				initLayoutListner.bindContentLayout(goverMsgSearchContentListFragment);
 			}

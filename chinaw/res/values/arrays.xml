@@ -47,5 +47,23 @@
         <item>表扬</item>
         <item>其他</item>
     </string-array>
+    <string-array name="zoneArr">
+        <item>按县区筛选</item>
+        <item>江阴</item>
+        <item>宜兴</item>
+        <item>惠山</item>
+        <item>滨湖</item>
+        <item>崇安</item>
+        <item>南长 </item>
+        <item>北塘</item>
+        <item>无锡新区</item>
+    </string-array>
+    <string-array name="fourDept">
+        <item>按部门筛选</item>
+        <item>政府办</item>
+        <item>无锡市发展和改革委员会</item>
+        <item>无锡市经济和信息化委员会</item>
+        <item>无锡市信息化和无线电管理局</item>
+    </string-array>
 
 </resources>

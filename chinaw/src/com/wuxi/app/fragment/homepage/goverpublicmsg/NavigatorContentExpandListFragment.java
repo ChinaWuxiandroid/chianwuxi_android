@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
+import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.domain.Channel;
@@ -53,11 +54,13 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 	private ListView listview;
 	private ProgressBar processBar;
 
-	protected List<MenuItem> MenuItems;
-	protected List<Channel> Channels;
+	protected List<MenuItem> menuItems;
+	protected List<Channel> channels;
 
-	private static final int DATA__LOAD_SUCESS = 0;
-	private static final int DATA_LOAD_ERROR = 1;	
+	private static final int MENUITEM_DATA_LOAD_SUCESS = 0;
+	private static final int CHANNEL_DATA_LOAD_SUCESS = 1;
+	private static final int DATA_LOAD_ERROR = 2;
+	private static final int LOAD_CHANNEL_DATA = 3;
 	protected static final int CHANNELCONTENT_ID=R.id.govermsg_custom_content;
 
 
@@ -70,10 +73,18 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 			}
 
 			switch (msg.what) {
-			case DATA__LOAD_SUCESS:
+			case MENUITEM_DATA_LOAD_SUCESS:
+				processBar.setVisibility(View.INVISIBLE);
+				showMenuItemList();
+				break;
+			case CHANNEL_DATA_LOAD_SUCESS:
 				processBar.setVisibility(View.INVISIBLE);
 				showChannelList();
 				break;
+			case LOAD_CHANNEL_DATA:
+				showChannelData();
+				break;
+
 			case DATA_LOAD_ERROR:
 				processBar.setVisibility(View.INVISIBLE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
@@ -105,15 +116,21 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 		listview.setOnItemClickListener(this);
 
 		processBar.setVisibility(View.VISIBLE);
-		loadData();
+		if(parentItem.getType()==MenuItem.CUSTOM_MENU){
+			loadMenuItemData();
+		}
+		else if(parentItem.getType()==MenuItem.CHANNEL_MENU){
+			loadChannelData();
+		}
+
 	}
 
 	@SuppressWarnings("unchecked")
-	private void loadData(){
+	private void loadMenuItemData(){
 		if (CacheUtil.get(parentItem.getId()) != null) {// 从缓存中查找子菜单
-			MenuItems = (List<MenuItem>) CacheUtil.get(parentItem.getId());
+			menuItems = (List<MenuItem>) CacheUtil.get(parentItem.getId());
 			processBar.setVisibility(View.INVISIBLE);
-			showChannelList();
+			showMenuItemList();
 			return;
 		}
 
@@ -124,11 +141,11 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 
 				MenuService menuSevice = new MenuService(context);
 				try {
-					MenuItems = menuSevice.getSubMenuItems(parentItem
+					menuItems = menuSevice.getSubMenuItems(parentItem
 							.getId());
-					if (MenuItems != null) {
-						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
-						CacheUtil.put(parentItem.getId(), MenuItems);// 放入缓存
+					if (menuItems != null) {
+						handler.sendEmptyMessage(MENUITEM_DATA_LOAD_SUCESS);
+						CacheUtil.put(parentItem.getId(), menuItems);// 放入缓存
 					}
 					else{
 						Message msg = handler.obtainMessage();
@@ -160,30 +177,103 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 		}).start();
 	}
 
-	private void showChannelList(){
-		ChannelListAdapter adapter=new ChannelListAdapter();
+	@SuppressWarnings("unchecked")
+	private void loadChannelData(){
+		if (CacheUtil.get(parentItem.getChannelId()) != null) {// 从缓存中查找子菜单
+			channels = (List<Channel>) CacheUtil.get(parentItem.getChannelId());
+			processBar.setVisibility(View.INVISIBLE);
+			showChannelList();
+			return;
+		}
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+
+				ChannelService channelSevice = new ChannelService(context);
+
+				try {
+					if(parentItem.getName().equals("业务工作")){
+						handler.sendEmptyMessage(LOAD_CHANNEL_DATA);
+
+					}
+					else{
+						channels = channelSevice.getSubChannels(parentItem.getChannelId());
+						if (channels != null) {
+							handler.sendEmptyMessage(CHANNEL_DATA_LOAD_SUCESS);
+							CacheUtil.put(parentItem.getChannelId(), channels);// 放入缓存
+						}
+						else{
+							Message msg = handler.obtainMessage();
+							msg.obj = "暂无信息";
+							msg.what = DATA_LOAD_ERROR;
+							handler.sendMessage(msg);
+						}
+					}
+
+
+				} catch (NetException e) {
+					e.printStackTrace();
+					Message msg = handler.obtainMessage();
+					msg.obj = e.getMessage();
+					msg.what = DATA_LOAD_ERROR;
+					handler.sendMessage(msg);
+				}
+			}
+		}).start();
+	}
+	public void showChannelData(){
+		//没有子频道列表
+		GoverMsgSearchContentListFragment goverMsgSearchContentListFragment=new GoverMsgSearchContentListFragment();
+		goverMsgSearchContentListFragment.setParentMenuItem(parentItem);
+		goverMsgSearchContentListFragment.setFifterType(GoverMsgSearchContentListFragment.FOURDEPT_TYPE);
+		bindFragment(goverMsgSearchContentListFragment);
+	}
+
+	private void showMenuItemList(){
+		MenuItemListAdapter adapter=new MenuItemListAdapter();
 
 		listview.setAdapter(adapter);
 
 	}
 
-	public class ChannelListAdapter extends BaseAdapter{
+	private void showChannelList(){
+		MenuItemListAdapter adapter=new MenuItemListAdapter();
+
+		listview.setAdapter(adapter);
+
+	}
+
+	public class MenuItemListAdapter extends BaseAdapter{
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
-			return MenuItems.size();
+			if(menuItems!=null){
+				return menuItems.size();
+			}
+			else if(channels!=null){
+				return channels.size();
+			}
+			else
+				return 0;
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
-			return MenuItems.get(position);
+			if(menuItems!=null){
+				return menuItems.get(position);
+			}
+			else if(channels!=null){
+				return channels.get(position);
+			}
+			else
+				return null;			
+
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 
@@ -207,23 +297,45 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 			else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			if(viewHolder.title_text!=null)
-				viewHolder.title_text.setText(MenuItems.get(position).getName());
+			if(viewHolder.title_text!=null){
+				if(menuItems!=null){
+					viewHolder.title_text.setText(menuItems.get(position).getName());
+				}
+				else if(channels!=null){
+					viewHolder.title_text.setText(channels.get(position).getChannelName());
+				}
+			}
 			return convertView;
 		}
-
 	}
-	
+
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
-		MenuItem menuItem=(MenuItem) adapterView.getItemAtPosition(position);
-		
+		Object object=(Object) adapterView.getItemAtPosition(position);
+
+		MenuItem menuItem=null;
+		Channel channel=null;
+		if (object instanceof MenuItem) {// 如果是频道
+			menuItem=(MenuItem)object;
+		} else if (object instanceof Channel) {
+			channel=(Channel)object;
+		}
+
 		GoverMsgCustomContentDetailFragment goverMsgCustomContentDetailFragment=new GoverMsgCustomContentDetailFragment();
-		goverMsgCustomContentDetailFragment.setParentMenuItem(menuItem);
+
+		if(menuItem!=null)
+			goverMsgCustomContentDetailFragment.setParentMenuItem(menuItem);
+		else 
+			goverMsgCustomContentDetailFragment.setParentChannel(channel);
+
+		bindFragment(goverMsgCustomContentDetailFragment);
+	}
+
+	public void bindFragment(BaseFragment fragment){
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 
-		ft.replace(CHANNELCONTENT_ID, goverMsgCustomContentDetailFragment);
+		ft.replace(CHANNELCONTENT_ID, fragment);
 
 		ft.commit();
 	}
