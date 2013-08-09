@@ -183,7 +183,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				ch.setMenuItem(menuItem);
 				onReplaceFragment(ch, null);
 
-				// onAddTransaction(ch,null);
+				
 				break;
 			case 2:
 
