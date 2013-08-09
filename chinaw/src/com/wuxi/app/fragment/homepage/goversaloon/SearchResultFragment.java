@@ -12,9 +12,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -24,6 +27,8 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.GoverOnlineApproveAdapter;
 import com.wuxi.app.engine.GoverSaoonItemService;
+import com.wuxi.app.fragment.BaseSlideFragment;
+import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.GoverSaoonItem;
 import com.wuxi.domain.GoverSaoonItemWrapper;
 import com.wuxi.exception.NODataException;
@@ -35,7 +40,7 @@ import com.wuxi.exception.NetException;
  * 
  */
 public class SearchResultFragment extends BaseFragment implements
-		OnScrollListener {
+		OnScrollListener, OnClickListener, OnItemClickListener {
 
 	protected static final int GOVERITEM_LOAD_SUCCESS = 1;
 	protected static final int GOVERITEM_LOAD_FIAL = 0;
@@ -53,6 +58,8 @@ public class SearchResultFragment extends BaseFragment implements
 	private Button loadMoreButton;
 	private int visibleLastIndex;
 	private int visibleItemCount;// 当前显示的总条数
+	private ProgressBar pb_loadmoore;
+	private BaseSlideFragment baseSlideFragment;
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -80,6 +87,7 @@ public class SearchResultFragment extends BaseFragment implements
 		initUI();
 		params = (Map<String, String>) getArguments().getSerializable(
 				PARAMS_KEY);
+		baseSlideFragment=(BaseSlideFragment) getArguments().get("BaseSlideFragment");
 		params.put("start", "0");
 		params.put("end", PAGE_SIZE + "");
 		loadItem(params);
@@ -96,8 +104,13 @@ public class SearchResultFragment extends BaseFragment implements
 				null);
 		loadMoreButton = (Button) loadMoreView
 				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
 		gover_search_reasult.addFooterView(loadMoreView);
+
 		gover_search_reasult.setOnScrollListener(this);
+		loadMoreButton.setOnClickListener(this);
+		gover_search_reasult.setOnItemClickListener(this);
 
 	}
 
@@ -109,6 +122,8 @@ public class SearchResultFragment extends BaseFragment implements
 		if (isFirstLoadGoverItem) {// 首次加载时或切换部门时显示进度条
 
 			pb_item.setVisibility(ProgressBar.VISIBLE);
+		} else {
+			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
 		}
 
 		new Thread(new Runnable() {
@@ -157,13 +172,6 @@ public class SearchResultFragment extends BaseFragment implements
 	 */
 	protected void showItemList() {
 
-		if (goverSaoonItemWrapper.isNext()) {
-			loadMoreButton.setText("more");
-
-		} else {
-			loadMoreButton.setText(" ");
-		}
-
 		List<GoverSaoonItem> goverSaoonItems = goverSaoonItemWrapper
 				.getGoverSaoonItems();
 		if (goverSaoonItems != null && goverSaoonItems.size() > 0) {
@@ -186,11 +194,20 @@ public class SearchResultFragment extends BaseFragment implements
 
 			}
 
-		}else{
-			
+		} else {
+
 			pb_item.setVisibility(ProgressBar.GONE);
 			Toast.makeText(context, "没有检索到数据", Toast.LENGTH_SHORT).show();
 		}
+
+		if (goverSaoonItemWrapper.isNext()) {
+			loadMoreButton.setText("点击加载更多");
+			pb_loadmoore.setVisibility(ProgressBar.GONE);
+
+		} else {
+			gover_search_reasult.removeFooterView(loadMoreView);
+		}
+
 	}
 
 	@Override
@@ -204,10 +221,31 @@ public class SearchResultFragment extends BaseFragment implements
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-		int itemsLastIndex = goverOnlineApproveAdapter.getCount() - 1; // 数据集最后一项的索引
-		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
-				&& visibleLastIndex == lastIndex) {
+		// int itemsLastIndex = goverOnlineApproveAdapter.getCount() - 1; //
+		// 数据集最后一项的索引
+		// int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
+		/*
+		 * if (scrollState == OnScrollListener.SCROLL_STATE_IDLE &&
+		 * visibleLastIndex == lastIndex) {
+		 * 
+		 * if (goverSaoonItemWrapper != null && goverSaoonItemWrapper.isNext())
+		 * {// 还有下一条记录
+		 * 
+		 * loadMoreButton.setText("loading.....");
+		 * 
+		 * params.put("start", (visibleLastIndex + 1) + ""); params.put("end",
+		 * (visibleLastIndex + 1 + PAGE_SIZE) + "");
+		 * 
+		 * loadItem(params); }
+		 * 
+		 * }
+		 */
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.loadMoreButton:
 
 			if (goverSaoonItemWrapper != null && goverSaoonItemWrapper.isNext()) {// 还有下一条记录
 
@@ -218,10 +256,37 @@ public class SearchResultFragment extends BaseFragment implements
 
 				loadItem(params);
 			}
-
+			break;
 		}
+
 	}
-	
-	
+
+	@Override
+	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
+		
+		GoverSaoonItem goverSaoonItem = (GoverSaoonItem) adapterView
+				.getItemAtPosition(position);
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("goverSaoonItem", goverSaoonItem);
+		if (goverSaoonItem.getType().equals("XK")) {
+			
+
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+					FragmentName.GOVERSALOONDETAIL_XK_FRAGMENT, bundle);
+		}else if(goverSaoonItem.getType().equals("QT")){
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+					FragmentName.GOVERSALOONDETAIL_QT_FRAGMENT, bundle);
+		}else if(goverSaoonItem.getType().equals("ZS")){
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+					FragmentName.GOVERSALOONDETAIL_ZS_FRAGMENT, bundle);
+		}else if(goverSaoonItem.getType().equals("QZ")){
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+					FragmentName.GOVERSALOONDETAIL_QZ_FRAGMENT, bundle);
+		}else if(goverSaoonItem.getType().equals("CF")){
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+					FragmentName.GOVERSALOONDETAIL_CF_FRAGMENT, bundle);
+		}
+		
+	}
 
 }

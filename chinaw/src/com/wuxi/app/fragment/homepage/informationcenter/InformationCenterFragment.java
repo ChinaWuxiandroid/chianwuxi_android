@@ -60,7 +60,7 @@ public class InformationCenterFragment extends MenuItemMainFragment {
 	@Override
 	protected int getTitlePerScreenItemCount() {
 		
-		return 7;
+		return 4;
 	}
 
 	@Override

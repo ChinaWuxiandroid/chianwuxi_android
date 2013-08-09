@@ -312,6 +312,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 		
 		FragmentTransaction ft = manager.beginTransaction();
+		
 		ft.replace(FRAME_CONTENT, fragment);
 		if (bundle != null) {
 			fragment.setArguments(bundle);

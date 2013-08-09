@@ -10,10 +10,11 @@
         android:id="@+id/tv_actionname"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:padding="5dip"
+        
         android:text="无锡橄榄"
         android:textColor="#177CCA"
         android:textSize="12sp"
-        android:textStyle="bold" />
+        android:textStyle="bold" 
+        android:gravity="center"/>
 
 </LinearLayout>

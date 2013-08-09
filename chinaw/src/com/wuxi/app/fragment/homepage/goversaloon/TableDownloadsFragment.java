@@ -75,6 +75,7 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 	private String currentFileName;
 	private EditText et_filename_keywords;
 	private Button btn_fileSearch;
+	private ProgressBar pb_loadmoore;
 
 	private ProgressDialog pd;
 	@SuppressLint("HandlerLeak")
@@ -122,11 +123,14 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 				null);
 		loadMoreButton = (Button) loadMoreView
 				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
 		gover_tabledowload_lv.addFooterView(loadMoreView);
 		gover_tabledowload_lv.setOnScrollListener(this);
 		gover_tabledowload_lv.setOnItemClickListener(this);
 		gover_table_down_deptsp.setOnItemSelectedListener(this);
 		btn_fileSearch.setOnClickListener(this);
+		loadMoreButton.setOnClickListener(this);
 		loadDept();
 
 		pd = new ProgressDialog(context);
@@ -194,6 +198,8 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 		if (isFisrtLoadItems || isSwitchDept) {// 首次加载时或切换部门时显示进度条
 
 			pb_table_download.setVisibility(ProgressBar.VISIBLE);
+		} else {
+			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
 		}
 
 		new Thread(new Runnable() {
@@ -245,14 +251,6 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 	 */
 	protected void showTableDownLoadItemList() {
 
-		if (goverTableDownLoadWrapper.isNext()) {
-			loadMoreButton.setText("more");
-
-		} else {
-			// loadMoreButton.setText(" ");
-			gover_tabledowload_lv.removeFooterView(loadMoreView);
-		}
-
 		List<GoverTableDownLoad> goDownLoads = goverTableDownLoadWrapper
 				.getGoverTableDownLoads();
 		if (goDownLoads != null && goDownLoads.size() > 0) {
@@ -283,6 +281,15 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 
 		}
 
+		if (goverTableDownLoadWrapper.isNext()) {
+			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
+			loadMoreButton.setText("点击加载更多");
+
+		} else {
+			// loadMoreButton.setText(" ");
+			gover_tabledowload_lv.removeFooterView(loadMoreView);
+		}
+
 	}
 
 	@Override
@@ -300,22 +307,24 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		int itemsLastIndex = goverTableDownLoadAdapter.getCount() - 1; // 数据集最后一项的索引
-		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
-				&& visibleLastIndex == lastIndex) {
-
-			if (goverTableDownLoadWrapper != null
-					&& goverTableDownLoadWrapper.isNext()) {// 还有下一条记录
-
-				loadMoreButton.setText("loading.....");
-				isSwitchDept = false;
-				loadItem(currentDeptId, currentFileName, visibleLastIndex + 1,
-						visibleLastIndex + 1 + PAGE_SIZE);
-
-			}
-
-		}
+		// int itemsLastIndex = goverTableDownLoadAdapter.getCount() - 1; //
+		// 数据集最后一项的索引
+		// int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
+		/*
+		 * if (scrollState == OnScrollListener.SCROLL_STATE_IDLE &&
+		 * visibleLastIndex == lastIndex) {
+		 * 
+		 * if (goverTableDownLoadWrapper != null &&
+		 * goverTableDownLoadWrapper.isNext()) {// 还有下一条记录
+		 * 
+		 * loadMoreButton.setText("loading....."); isSwitchDept = false;
+		 * loadItem(currentDeptId, currentFileName, visibleLastIndex + 1,
+		 * visibleLastIndex + 1 + PAGE_SIZE);
+		 * 
+		 * }
+		 * 
+		 * }
+		 */
 	}
 
 	@Override
@@ -441,6 +450,17 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 			currentFileName = et_filename_keywords.getText().toString();
 			loadItem(currentDeptId, currentFileName, 0, PAGE_SIZE);
 
+			break;
+		case R.id.loadMoreButton:
+			if (goverTableDownLoadWrapper != null
+					&& goverTableDownLoadWrapper.isNext()) {// 还有下一条记录
+
+				loadMoreButton.setText("loading.....");
+				isSwitchDept = false;
+				loadItem(currentDeptId, currentFileName, visibleLastIndex + 1,
+						visibleLastIndex + 1 + PAGE_SIZE);
+
+			}
 			break;
 
 		}

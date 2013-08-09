@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
@@ -44,7 +45,7 @@ import com.wuxi.exception.NetException;
  */
 @SuppressLint("HandlerLeak")
 public class BusinessGuideFragment extends GoverSaloonContentFragment implements
-		OnCheckedChangeListener, OnScrollListener, OnItemClickListener {
+		OnCheckedChangeListener, OnScrollListener, OnItemClickListener, OnClickListener {
 
 	protected static final int KINDTYPE_LOAD_SUCCESS = 0;
 	protected static final int KINDTYPE_LOAD_FAIL = 1;
@@ -69,6 +70,7 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 	private int visibleLastIndex;
 	private int visibleItemCount;// 当前显示的总条数
 	private Kindtype currentKindtype;
+	private ProgressBar pb_loadmoore;
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
@@ -108,9 +110,10 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 				null);
 		loadMoreButton = (Button) loadMoreView
 				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore=(ProgressBar) loadMoreView.findViewById(R.id.pb_loadmoore);
 		gover_guid_lv_content.addFooterView(loadMoreView);
 		gover_guid_lv_content.setOnScrollListener(this);
-
+		loadMoreButton.setOnClickListener(this);
 		gover_buness_guide_rg.setOnCheckedChangeListener(this);
 		loadKindTypeData(types[1]);
 
@@ -125,6 +128,8 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 		if (isFirstLoadGoverItem || isSwitchDept) {// 首次加载时或切换部门时显示进度条
 
 			gover_guide_pb.setVisibility(ProgressBar.VISIBLE);
+		}else{
+			this.pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
 		}
 
 		new Thread(new Runnable() {
@@ -207,7 +212,8 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 		}
 		
 		if (goverSaoonItemWrapper.isNext()) {
-			loadMoreButton.setText("more");
+			loadMoreButton.setText("点击加载更多");
+			this.pb_loadmoore.setVisibility(ProgressBar.GONE);
 
 		} else {
 			
@@ -329,9 +335,9 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		int itemsLastIndex = goverOnlineApproveAdapter.getCount() - 1; // 数据集最后一项的索引
-		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
+		//int itemsLastIndex = goverOnlineApproveAdapter.getCount() - 1; // 数据集最后一项的索引
+		//int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
+		/*if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
 				&& visibleLastIndex == lastIndex) {
 
 			if (goverSaoonItemWrapper != null && goverSaoonItemWrapper.isNext()) {// 还有下一条记录
@@ -344,7 +350,7 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 
 			}
 
-		}
+		}*/
 
 	}
 
@@ -387,5 +393,24 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 			}
 		}
 
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch(v.getId()){
+		case R.id.loadMoreButton:
+			if (goverSaoonItemWrapper != null && goverSaoonItemWrapper.isNext()) {// 还有下一条记录
+
+				loadMoreButton.setText("loading.....");
+				isSwitchDept = false;
+				loadItem(currentKindtype.getKindType(),
+						currentKindtype.getSubKindType(), visibleLastIndex + 1,
+						visibleLastIndex + 1 + PAGE_SIZE);
+
+			}
+
+			break;
+		}
+		
 	}
 }

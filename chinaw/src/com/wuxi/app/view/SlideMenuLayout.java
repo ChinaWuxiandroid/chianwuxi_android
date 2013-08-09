@@ -150,17 +150,23 @@ public class SlideMenuLayout extends ViewGroup {
 	public void openLeftSlideMenu() {
 		mLeftSlideMenuEnabled = true;
 		smoothHorizontalScrollTo((int) -getLeftMenuWidthF());
+		
 	}
 
 	public void openRightSlideMenu() {
 		mRightSlideMenuEnabled = true;
 		smoothHorizontalScrollTo((int) getRightMenuWidthF());
+		
 	}
 
 	public void reset() {
+		
 		smoothHorizontalScrollTo(0);
 		mLeftSlideMenuEnabled = false;
 		mRightSlideMenuEnabled = false;
+		
+		
+		
 	}
 
 	private void smoothHorizontalScrollTo(int fx) {
@@ -189,7 +195,8 @@ public class SlideMenuLayout extends ViewGroup {
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
-		/*final int action = ev.getAction();
+		/*
+		final int action = ev.getAction();
 		if (action == MotionEvent.ACTION_MOVE && mTouchState == TOUCH_STATE_SCROLLING)
 			return true;
 		switch (action) {
@@ -227,7 +234,8 @@ public class SlideMenuLayout extends ViewGroup {
 				return true;
 			}
 			break;
-		}*/
+		}
+		*/
 		return super.onInterceptTouchEvent(ev);
 	}
 

@@ -8,7 +8,7 @@
         android:id="@+id/title_scroll"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         layout="@layout/title_scroll_action_layout"
         android:background="#CEDBE7" />
 
@@ -16,6 +16,6 @@
         android:id="@+id/model_main"
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="9" />
+        android:layout_weight="8.8" />
 
 </LinearLayout>

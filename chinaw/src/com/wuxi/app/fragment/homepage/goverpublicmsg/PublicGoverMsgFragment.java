@@ -86,7 +86,7 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 
 	@Override
 	protected int getTitlePerScreenItemCount() {
-		return 5;
+		return 4;
 	}
 
 	@Override

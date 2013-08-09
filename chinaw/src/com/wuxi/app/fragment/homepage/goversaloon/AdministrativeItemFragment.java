@@ -95,6 +95,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	private String year = null;// 当前的年
 	private Spinner sp_dept_year;
 	private ImageButton govver_admintrative_ib_search;
+	private ProgressBar pb_loadmoore;
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
@@ -140,8 +141,10 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 				null);
 		loadMoreButton = (Button) loadMoreView
 				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore=(ProgressBar) loadMoreView.findViewById(R.id.pb_loadmoore);
 		gover_mange_lv.addFooterView(loadMoreView);
 		gover_mange_lv.setOnScrollListener(this);
+		loadMoreButton.setOnClickListener(this);
 		menuItem = (MenuItem) getArguments().get("menuItem");
 		gover_mange_lv.setOnItemClickListener(this);
 		loadTitleItems(menuItem.getId());// 加载滑动菜单
@@ -333,6 +336,8 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 		if (isFirstLoadGoverItem || isSwitch) {// 首次加载时或切换部门时显示进度条
 
 			pb_mange.setVisibility(ProgressBar.VISIBLE);
+		}else{
+			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
 		}
 
 		new Thread(new Runnable() {
@@ -381,14 +386,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	 */
 	protected void showItemList() {
 
-		if (goverSaoonItemWrapper.isNext()) {
-			loadMoreButton.setText("more");
-
-		} else {
-			
-			gover_mange_lv.removeFooterView(loadMoreView);
-		}
-
+		
 		List<GoverSaoonItem> goverSaoonItems = goverSaoonItemWrapper
 				.getGoverSaoonItems();
 		if (goverSaoonItems != null && goverSaoonItems.size() > 0) {
@@ -418,6 +416,16 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 			}
 
 		}
+		
+		if (goverSaoonItemWrapper.isNext()) {
+			pb_loadmoore.setVisibility(ProgressBar.GONE);
+			loadMoreButton.setText("点击加载更多");
+
+		} else {
+			
+			gover_mange_lv.removeFooterView(loadMoreView);
+		}
+
 
 	}
 
@@ -603,6 +611,21 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 					0, PAGE_SIZE);
 			loadItem(paMap);
 			break;
+		case R.id.loadMoreButton:
+			if (goverSaoonItemWrapper != null && goverSaoonItemWrapper.isNext()) {// 还有下一条记录
+
+				loadMoreButton.setText("loading.....");
+				isSwitch = false;
+
+				Map<String, String> parms = buildParams(null, qltype, deptid,
+						year, visibleLastIndex + 1, visibleLastIndex + 1
+								+ PAGE_SIZE);
+
+				loadItem(parms);
+
+			}
+
+			break;
 
 		}
 
@@ -684,9 +707,9 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-		int itemsLastIndex = goverOnlineApproveAdapter.getCount() - 1; // 数据集最后一项的索引
-		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
+	//	int itemsLastIndex = goverOnlineApproveAdapter.getCount() - 1; // 数据集最后一项的索引
+		//int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
+		/*if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
 				&& visibleLastIndex == lastIndex) {
 
 			if (goverSaoonItemWrapper != null && goverSaoonItemWrapper.isNext()) {// 还有下一条记录
@@ -702,7 +725,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 
 			}
 
-		}
+		}*/
 	}
 
 	/**
