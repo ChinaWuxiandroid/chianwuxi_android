@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/worksuggestbox_back"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:text="提交部门："
+                android:textSize="12sp" />
+
+            <Spinner
+                android:layout_width="150dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/worksuggestbox_back"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:text="*机构名称："
+                android:textSize="12sp" />
+
+            <EditText
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/worksuggestbox_edit_small_bk"
+                android:gravity="center_vertical"
+                android:paddingLeft="3dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/worksuggestbox_back"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:text="*组织机构代码："
+                android:textSize="12sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/worksuggestbox_edit_small_bk"
+                android:gravity="center_vertical"
+                android:paddingLeft="3dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/worksuggestbox_back"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:text="*法人代表："
+                android:textSize="12sp" />
+
+            <EditText
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/worksuggestbox_edit_small_bk"
+                android:gravity="center_vertical"
+                android:paddingLeft="3dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/worksuggestbox_back"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:text="*联系人姓名："
+                android:textSize="12sp" />
+
+            <EditText
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/worksuggestbox_edit_small_bk"
+                android:gravity="center_vertical"
+                android:paddingLeft="3dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/worksuggestbox_back"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:text="*联系地址："
+                android:textSize="12sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/worksuggestbox_edit_small_bk"
+                android:gravity="center_vertical"
+                android:paddingLeft="3dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/worksuggestbox_back"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:text="*联系人电话："
+                android:textSize="12sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/worksuggestbox_edit_small_bk"
+                android:gravity="center_vertical"
+                android:paddingLeft="3dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/worksuggestbox_back"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:text="*传真："
+                android:textSize="12sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/worksuggestbox_edit_small_bk"
+                android:gravity="center_vertical"
+                android:paddingLeft="3dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/worksuggestbox_back"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:text="*电子邮箱："
+                android:textSize="12sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/worksuggestbox_edit_small_bk"
+                android:gravity="center_vertical"
+                android:paddingLeft="3dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/worksuggestbox_back"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:text="*申请时间："
+                android:textSize="12sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/worksuggestbox_edit_small_bk"
+                android:gravity="center_vertical"
+                android:paddingLeft="3dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="115dp"
+            android:background="@drawable/worksuggestbox_big_back"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="top|right"
+                android:paddingTop="5dp"
+                android:text="*所需信息的  \n内容描述："
+                android:textSize="12sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/worksuggestbox_edit_big_bk"
+                android:gravity="top|left"
+                android:paddingLeft="3dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="115dp"
+            android:background="@drawable/worksuggestbox_big_back"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="top|right"
+                android:paddingTop="5dp"
+                android:text="*所需信息的  \n用途："
+                android:textSize="12sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/worksuggestbox_edit_big_bk"
+                android:gravity="top|left"
+                android:paddingLeft="3dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/worksuggestbox_back" >
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:text="所需信息提供方式："
+                android:textSize="12sp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginTop="7dp"
+                android:text="纸面"
+                android:textSize="12dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginTop="7dp"
+                android:text="电子邮件"
+                android:textSize="12dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginTop="7dp"
+                android:text="光盘"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/worksuggestbox_back" >
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:text="获取洗信息的方式："
+                android:textSize="12sp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginTop="7dp"
+                android:text="邮寄"
+                android:textSize="12dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginTop="7dp"
+                android:text="快递"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/worksuggestbox_submit_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal" >
+
+                <ImageButton
+                    android:id="@+id/worksuggestbox_imgbutton_submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:src="@drawable/submit_imagebutton_selector" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="#ffffff"
+                    android:src="@drawable/cancel_imagebutton_selector" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

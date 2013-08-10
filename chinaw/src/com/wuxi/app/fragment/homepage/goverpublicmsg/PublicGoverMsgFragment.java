@@ -4,14 +4,11 @@ package com.wuxi.app.fragment.homepage.goverpublicmsg;
 import java.util.List;
 
 import com.wuxi.app.R;
-import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
 import com.wuxi.app.fragment.index.InitializContentLayout;
 import com.wuxi.app.listeners.GoverPublicMsgInitLayoutImpl;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
-import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
-import com.wuxi.exception.NetException;
 
 /**
  * 政府公开信息Fragment

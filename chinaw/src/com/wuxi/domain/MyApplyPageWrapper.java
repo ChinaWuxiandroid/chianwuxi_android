@@ -20,15 +20,14 @@ public class MyApplyPageWrapper extends CommonDataWrapper{
 	public class MyApplyPage{
 		private String id;
 		private String content;
-		private int code;
+		private long code;
 		private String title;
 		private String applyDate;
-		private String readCount;
+		private int readCount;
 		private String answerDep;
 		private String answerDate;
 		private String answerUser;
 		private String answerContent;
-
 		public String getId() {
 			return id;
 		}
@@ -41,10 +40,10 @@ public class MyApplyPageWrapper extends CommonDataWrapper{
 		public void setContent(String content) {
 			this.content = content;
 		}
-		public int getCode() {
+		public long getCode() {
 			return code;
 		}
-		public void setCode(int code) {
+		public void setCode(long code) {
 			this.code = code;
 		}
 		public String getTitle() {
@@ -59,10 +58,10 @@ public class MyApplyPageWrapper extends CommonDataWrapper{
 		public void setApplyDate(String applyDate) {
 			this.applyDate = applyDate;
 		}
-		public String getReadCount() {
+		public int getReadCount() {
 			return readCount;
 		}
-		public void setReadCount(String readCount) {
+		public void setReadCount(int readCount) {
 			this.readCount = readCount;
 		}
 		public String getAnswerDep() {
@@ -89,5 +88,7 @@ public class MyApplyPageWrapper extends CommonDataWrapper{
 		public void setAnswerContent(String answerContent) {
 			this.answerContent = answerContent;
 		}
+
+		
 	}
 }

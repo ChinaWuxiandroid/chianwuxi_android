@@ -208,7 +208,7 @@ OnScrollListener, OnItemClickListener, OnClickListener{
 	protected void showContentData() {
 
 		objects = getContents();
-		
+		System.out.println("getContents over");
 		if (objects != null ) {
 			if(objects.size() <= 0){
 				content_list_pb.setVisibility(ProgressBar.GONE);

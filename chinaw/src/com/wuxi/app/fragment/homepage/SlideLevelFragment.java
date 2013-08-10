@@ -28,6 +28,8 @@ import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.WuxiChannelContentDetailFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyTableFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgOpenInfoDetailFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailCFFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailQTFragment;
@@ -296,7 +298,14 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				PublicServiceContentDetailFragment publicServiceContentDetailFragment = new PublicServiceContentDetailFragment();
 				onAddFragment(publicServiceContentDetailFragment, bundle);
 				break;
-
+			case GOVERMSG_APPLYTABLE_FRAGMENT://政府信息公开  公共那个服务内容页
+				GoverMsgApplyTableFragment goverMsgApplyTableFragment = new GoverMsgApplyTableFragment();
+				onAddOtherFragment(goverMsgApplyTableFragment, bundle);
+				break;
+			case GOVERMSG_INFOOPEN_DETAIL_FRAGMENT://政府信息公开  信息公开指南 和信息公开制度  内容页
+				GoverMsgOpenInfoDetailFragment goverMsgOpenInfoDetailFragment = new GoverMsgOpenInfoDetailFragment();
+				onAddOtherFragment(goverMsgOpenInfoDetailFragment, bundle);
+				break;
 			}
 		}
 	}
@@ -338,6 +347,17 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		fragment.setArguments(bundele);
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.addToBackStack(null);
+		ft.add(FRAME_CONTENT, fragment);
+		baseFragments.add(fragment);
+		ft.commit();
+
+	}
+	
+	//加载非BaseSlideFragment子类的 内容页
+	private void onAddOtherFragment(BaseFragment fragment, Bundle bundele) {
+		fragment.setManagers(managers);
+		fragment.setArguments(bundele);
+		FragmentTransaction ft = manager.beginTransaction();
 		ft.add(FRAME_CONTENT, fragment);
 		baseFragments.add(fragment);
 		ft.commit();

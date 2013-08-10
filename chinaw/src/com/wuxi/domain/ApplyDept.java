@@ -10,6 +10,7 @@ public class ApplyDept {
 	private String depId;
 	private String depName;
 	private boolean isNull;
+	private String zhinanUrl;
 	
 	public String getDoProjectId() {
 		return doProjectId;
@@ -34,5 +35,11 @@ public class ApplyDept {
 	}
 	public void setNull(boolean isNull) {
 		this.isNull = isNull;
+	}
+	public String getZhinanUrl() {
+		return zhinanUrl;
+	}
+	public void setZhinanUrl(String zhinanUrl) {
+		this.zhinanUrl = zhinanUrl;
 	}
 }

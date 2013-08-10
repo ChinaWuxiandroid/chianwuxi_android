@@ -48,6 +48,7 @@ public class ApplyDeptService extends Service {
 					dept.setDepName(jb.getString("depName"));
 					dept.setDoProjectId(jb.getString("doProjectId"));
 					dept.setNull(jb.getBoolean("null"));
+					dept.setZhinanUrl(jb.getString("zhinanUrl"));
 					depts.add(dept);
 				}
 				return depts;

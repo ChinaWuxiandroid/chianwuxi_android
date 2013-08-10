@@ -328,7 +328,6 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 			bindFragment(goverMsgCustomContentDetailFragment);
 		}		
 		else{
-			System.out.println("name:"+channel.getChannelName()+"   channels count:"+channel.getChildrenChannelsCount());
 			if(channel.getChildrenChannelsCount()>0){
 				GoverMsgSubChannelsSearchFragment goverMsgSubChannelsSearchFragment=new GoverMsgSubChannelsSearchFragment();
 				goverMsgSubChannelsSearchFragment.setParentChannel(channel);

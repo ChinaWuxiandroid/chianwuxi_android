@@ -10,9 +10,12 @@ import org.json.JSONObject;
 
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.JAsonPaserUtil;
+import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.GoverSaoonItem;
+import com.wuxi.domain.LetterWrapper;
 import com.wuxi.domain.MyApply;
 import com.wuxi.domain.MyApplyPageWrapper;
+import com.wuxi.domain.LetterWrapper.Letter;
 import com.wuxi.domain.MyApplyPageWrapper.MyApplyPage;
 import com.wuxi.domain.MyApplyWrapper;
 import com.wuxi.exception.NetException;
@@ -69,30 +72,57 @@ public class MyApplyPageService extends Service{
 			myApplyWrapper.setNext(jresult.getBoolean("next"));
 			myApplyWrapper
 					.setTotalRowsAmount(jresult.getInt("totalRowsAmount"));
-			
-			Object o = jresult.get("data");
-
-			if (!o.toString().equals("[]") && !o.equals("null")) {
-				JSONArray jData = (JSONArray) o;
-				try {
-					myApplyWrapper.setData(JAsonPaserUtil
-							.getListByJassory(MyApplyPage.class, jData));
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
+			JSONArray jData = jresult.getJSONArray("data");
+			if (jData != null) {
+				myApplyWrapper.setData(parseData(jData));// 解析数组
 			}
 			return myApplyWrapper;
 		}
 
 		return null;
+	}
+	
+	/**
+	 *
+	 * 杨宸 智佳
+	 * @param jData
+	 * @return   从 索引start 到  end-1   的  List<HotReview>
+	 * @throws JSONException
+	 */
 
+	private List<MyApplyPageWrapper.MyApplyPage> parseData(JSONArray jData) throws JSONException {
+
+		if (jData != null) {
+			List<MyApplyPageWrapper.MyApplyPage> ApplyPages = new ArrayList<MyApplyPageWrapper.MyApplyPage>();
+
+			for (int index = 0; index < jData.length(); index++) {
+				
+				JSONObject jb = jData.getJSONObject(index);
+				MyApplyPageWrapper w=new MyApplyPageWrapper();
+				MyApplyPage apply=w.new MyApplyPage();
+				apply.setId(jb.getString("id"));
+				apply.setContent(jb.getString("content"));	
+				apply.setCode(jb.getLong("code"));	
+				apply.setTitle(jb.getString("title"));
+				if(null!=jb.getString("applyDate")&&!"null".equals(jb.getString("applyDate"))){
+					System.out.println("date:"+jb.getString("applyDate"));
+					apply.setApplyDate(TimeFormateUtil.formateTime
+							(String.valueOf(jb.getLong("applyDate")), TimeFormateUtil.DATE_PATTERN));	
+				}
+				else{
+					apply.setApplyDate("");
+				}
+				
+				apply.setReadCount(jb.getInt("readCount"));
+				apply.setAnswerContent(jb.getString("answerContent"));	
+				apply.setAnswerDep(jb.getString("answerDep"));	
+				apply.setAnswerUser(jb.getString("answerUser"));	
+				apply.setAnswerDate(TimeFormateUtil.formateTime
+						(String.valueOf(jb.getLong("answerDate")), TimeFormateUtil.DATE_PATTERN));	
+				ApplyPages.add(apply);
+			}
+			return ApplyPages;
+		}
+		return null;
 	}
 }

@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
+import com.wuxi.app.R;
 import com.wuxi.app.engine.MyApplyPageService;
 import com.wuxi.app.fragment.commonfragment.PagingLoadListFragment;
 import com.wuxi.app.util.Constants;
@@ -33,8 +35,11 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 	protected List<Object> getContents() {
 		// TODO Auto-generated method stub
 		List<Object> objects=new ArrayList<Object>();
-		for(MyApplyPage apply:myApplyPageWrapper.getData()){
-			objects.add(apply);
+		if(myApplyPageWrapper.getData()!=null){
+			for(MyApplyPage apply:myApplyPageWrapper.getData()){
+				System.out.println("apply title:"+apply.getTitle());
+				objects.add(apply);
+			}
 		}
 		return objects;
 	}
@@ -95,25 +100,55 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			return 0;
+			return contents.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
 			// TODO Auto-generated method stub
-			return null;
+			return contents.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
 			// TODO Auto-generated method stub
-			return 0;
+			return position;
 		}
 
+		public class ViewHolder {
+			TextView title_text;// 标题
+			TextView code_text;
+			TextView dept_text;
+			TextView time_text;
+		}
+		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
-			return null;
+			MyApplyPage content = contents.get(position);
+			ViewHolder viewHolder = null;
+			if (convertView == null) {
+				convertView = View.inflate(context,
+						R.layout.myapplypage_list_item, null);
+				viewHolder = new ViewHolder();
+
+				viewHolder.title_text = (TextView) convertView
+						.findViewById(R.id.myapplypage_item_title);
+				viewHolder.code_text = (TextView) convertView
+						.findViewById(R.id.myapplypage_item_code);
+				viewHolder.dept_text = (TextView) convertView
+						.findViewById(R.id.myapplypage_item_answerDep);
+				viewHolder.time_text = (TextView) convertView
+						.findViewById(R.id.myapplypage_item_applydate);
+				convertView.setTag(viewHolder);
+			} else {
+				viewHolder = (ViewHolder) convertView.getTag();
+			}
+
+			viewHolder.title_text.setText(content.getTitle());
+			viewHolder.code_text.setText(String.valueOf(content.getCode()));
+			viewHolder.dept_text.setText(content.getAnswerDep());
+			viewHolder.time_text.setText(content.getApplyDate());
+			return convertView;
 		}
 		
 		public void addItem(MyApplyPage content) {

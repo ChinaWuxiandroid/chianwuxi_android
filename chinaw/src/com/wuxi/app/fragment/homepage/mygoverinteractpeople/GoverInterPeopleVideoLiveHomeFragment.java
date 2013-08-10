@@ -93,21 +93,18 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 	 */
 	private void changeContent(int type) {
 		switch (type) {
-		case 1:
+		case 0:
 			init();
 			break;
 
-		case 2:
+		case 1:
 			LiveHomeMemoirFragment liveHomeMemoirFragment = new LiveHomeMemoirFragment();
 			bindFragment(liveHomeMemoirFragment);
-
 			break;
 
-		case 3:
-
-			break;
-
-		default:
+		case 2:
+			LiveHomeLeaveMessageFragment leaveMessageFragment = new LiveHomeLeaveMessageFragment();
+			bindFragment(leaveMessageFragment);
 			break;
 		}
 	}
@@ -118,24 +115,31 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 		switch (checkedId) {
 		case R.id.gip_video_live_home_radioBtn_vediolive:
 			type = 0;
-			init();
+			home_saybtn.setVisibility(View.GONE);
+			home_askbtn.setVisibility(View.GONE);
+			changeContent(type);
 			break;
 
 		case R.id.gip_video_live_home_radioBtn_memoir:
 			type = 1;
+			home_saybtn.setVisibility(View.GONE);
+			home_askbtn.setVisibility(View.GONE);
 			changeContent(type);
+			break;
 
 		case R.id.gip_video_live_home_radioBtn_message:
 			type = 2;
-			changeContent(type);
 
-		default:
+			home_saybtn.setVisibility(View.VISIBLE);
+			home_askbtn.setVisibility(View.VISIBLE);
+			changeContent(type);
 			break;
 		}
 	}
 
 	private void initLayout() {
 		home_saybtn = (Button) view.findViewById(R.id.vedio_live_home_saybtn);
+
 		home_saybtn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -146,6 +150,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 		});
 
 		home_askbtn = (Button) view.findViewById(R.id.vedio_live_home_askbtn);
+
 		home_askbtn.setOnClickListener(new OnClickListener() {
 
 			@Override

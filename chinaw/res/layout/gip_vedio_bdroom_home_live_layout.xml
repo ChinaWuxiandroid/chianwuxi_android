@@ -98,7 +98,7 @@
                     android:id="@+id/bdroom_home_live_imageview"
                     android:layout_width="150dp"
                     android:layout_height="120dp"
-                    android:src="@drawable/login_log_icon" />
+                    android:src="@drawable/video_bg" />
 
                 <TextView
                     android:id="@+id/vedio_dbroom_home_live_click_text"

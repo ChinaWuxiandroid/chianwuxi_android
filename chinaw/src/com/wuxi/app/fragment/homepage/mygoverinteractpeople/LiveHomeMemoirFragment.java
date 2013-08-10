@@ -103,7 +103,7 @@ public class LiveHomeMemoirFragment extends BaseFragment {
 	private void initLayout() {
 		memoirListView = (ListView) view
 				.findViewById(R.id.gip_live_home_memoir_listview);
-
+		
 		memoirBar = (ProgressBar) view
 				.findViewById(R.id.gip_live_home_memoir_progressbar);
 		memoirBar.setVisibility(View.VISIBLE);
@@ -153,8 +153,6 @@ public class LiveHomeMemoirFragment extends BaseFragment {
 	 * 显示实录列表
 	 */
 	private void showMemoirList() {
-//		BaseSlideFragment baseSlideFragment = (BaseSlideFragment) this
-//				.getArguments().get("BaseSlideFragment");
 
 		MemoirListAdapter memoirListAdapter = new MemoirListAdapter();
 
@@ -178,17 +176,6 @@ public class LiveHomeMemoirFragment extends BaseFragment {
 	 * 
 	 */
 	public class MemoirListAdapter extends BaseAdapter {
-
-//		BaseSlideFragment baseSlideFragment;
-//
-//		/**
-//		 * 构造方法
-//		 * 
-//		 * @param baseSlideFragment
-//		 */
-//		public MemoirListAdapter(BaseSlideFragment baseSlideFragment) {
-//			this.baseSlideFragment = baseSlideFragment;
-//		}
 
 		@Override
 		public int getCount() {
@@ -241,11 +228,9 @@ public class LiveHomeMemoirFragment extends BaseFragment {
 			}
 
 			if ((memoirs.get(position).getAnswerType()) == 0) {
-				holder.pepole_text.setText("["
-						+ memoirs.get(position).getAnswerUser() + "：]");
+				holder.pepole_text.setText("[主持人：]");
 			} else if ((memoirs.get(position).getAnswerType()) == 1) {
-				holder.pepole_text.setText("["
-						+ memoirs.get(position).getAnswerUser() + "：]");
+				holder.pepole_text.setText("[嘉宾：]");
 			}
 			holder.content_text.setText(memoirs.get(position).getContent());
 			holder.time_text.setText("["

@@ -155,6 +155,15 @@ public class Constants {
 		 */
 		public static final String MEMOIR_CONTENT_URL = "http://3g.wuxi.gov.cn/api/interview/{interViewId}/textrecords.json";
 
+		/**
+		 * 政民互动 视频直播平台 留言提问
+		 */
+		public static final String LEAVE_MESSAGE_CONTENT_URL = "http://3g.wuxi.gov.cn/api/interview/{interViewId}/questions.json";
+		/**
+		 * 政民互动 视频直播平台 走进直播间 往期回顾
+		 */
+		public static final String VEDIO_REVIEW_CONTENT_URL = "http://3g.wuxi.gov.cn/api/interview/history.json";
+
 
 		/**
 		 * 效能投诉列表 {start}开始占位符 {end}结束占位符
@@ -292,6 +301,11 @@ public class Constants {
 		public static final String SUBMIT_SELFFORM_URL="http://3g.wuxi.gov.cn/api/selfforms/submit.json";
 
 		/**
+		 * 政府信息公开  市区县依申请公开
+		 * */
+		public static final String APPLYGOVER_URL="http://3g.wuxi.gov.cn/api/applyopen/quxian.json";
+
+		/**
 		 * 政府信息公开  各部门依申请公开
 		 * */
 		public static final String APPLYDEPT_URL="http://3g.wuxi.gov.cn/api/applyopen/deps.json";
@@ -306,6 +320,10 @@ public class Constants {
 		 */
 		public static final String MY_APPLYPAGE_URL = "http://3g.wuxi.gov.cn/api/applyopen/myapplypage.json?access_token={access_token}&start={start}&end={end}";
 
+		/**
+		 * 政府信息公开  获取 依申请公开的表格 下载地址 的URl
+		 * */
+		public static final String GOVERMSG_TABLE_DOWNLOAD_URL = "http://3g.wuxi.gov.cn/api/applyopen/doc.json";
 	}
 
 	/**
@@ -331,6 +349,11 @@ public class Constants {
 		 * 下载文件存放地址
 		 */
 		public static final String DOWNLOAF_FILE_PATH=APP_PATH+"file/";
+
+		/**
+		 * 政府信息公开中 依申请公开 唯一表格  文件名（服务器端未提供字段）
+		 */
+		public static final String GOVERMSG_APPLYOPEN_TABLENAME="无锡市人民政府办公室信息公开申请表.doc";
 
 	}
 
@@ -404,7 +427,7 @@ public class Constants {
 		/**
 		 * 测试用户 用户名：youngii 密码：123123 的ACCESSTOKEN
 		 * */
-		public static final String TEST_ACCESSTOKEN = "873778da0396423a8831af27956e097d";
+		public static final String TEST_ACCESSTOKEN = "5289a96c1f174b6bbf2a0019cbf9ca37";
 
 	}
 
@@ -449,6 +472,11 @@ public class Constants {
 		/**
 		 * 在线咨询
 		 */
+
+		/**
+		 * 政民互动  往期回顾 详情界面
+		 */
+		GIP_REVIEW_CONTENT_FRAGMENT,
 
 		MYONLINEASKFRAGMENT,
 		/**
@@ -511,7 +539,17 @@ public class Constants {
 		/**
 		 * 公共服务内容页
 		 */
-		PUBLICSERVICECONTENTDETAILFRAGMENT
+		PUBLICSERVICECONTENTDETAILFRAGMENT,
+
+		/**
+		 * 政府信息公开  各部门依申请公开内容页
+		 * */
+		GOVERMSG_APPLYTABLE_FRAGMENT,
+		/**
+		 * 政府信息公开  信息公开指南内容页 信息公开制度公开内容页
+		 * */
+		GOVERMSG_INFOOPEN_DETAIL_FRAGMENT
+		
 		;
 	}
 

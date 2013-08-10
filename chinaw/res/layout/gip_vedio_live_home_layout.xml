@@ -7,7 +7,6 @@
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="5sp"
         android:background="#ffffff" />
 
     <LinearLayout
@@ -54,13 +53,12 @@
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="5sp"
         android:background="#ffffff" />
 
     <FrameLayout
         android:id="@+id/gip_vedio_live_home_fragment"
         android:layout_width="match_parent"
-        android:layout_height="347dp"
+        android:layout_height="match_parent"
         android:layout_weight="1.07" >
     </FrameLayout>
 
@@ -76,7 +74,8 @@
             android:layout_height="35sp"
             android:background="@drawable/vedio_home_saybtn"
             android:text="我来说说"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff" 
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/vedio_live_home_askbtn"
@@ -85,7 +84,8 @@
             android:layout_marginLeft="5sp"
             android:background="@drawable/vedio_home_saybtn"
             android:text="我要提问"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

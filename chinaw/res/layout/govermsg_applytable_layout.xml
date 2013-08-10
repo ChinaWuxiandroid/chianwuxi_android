@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/header_back"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/govermsg_applytable_back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/slide_back_btn" />
+
+        <TextView
+            android:id="@+id/govermsg_applytable_Title_Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/govermsg_applytable_back_btn"
+            android:singleLine="true"
+            android:text="在线申请"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/govermsg_applytable_radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/govermsg_applytable_radioButton_citizen"
+                style="@style/goverinterpeople_mine_radiobutton_style"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_weight="1.3"
+                android:background="@drawable/title_item_select_bg"
+                android:checked="true"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="公民"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/govermsg_applytable_radioButton_legalperson"
+                style="@style/goverinterpeople_mine_radiobutton_style"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/title_item_bg"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="法人/其他组织"
+                android:textColor="@color/gip_button_blue"
+                android:textSize="12sp" />
+        </RadioGroup>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/govermsg_applytable_content_framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9" >
+    </FrameLayout>
+
+</LinearLayout>
