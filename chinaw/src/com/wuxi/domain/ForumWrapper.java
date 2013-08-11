@@ -3,6 +3,7 @@
  */
 package com.wuxi.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -37,8 +38,12 @@ public class ForumWrapper extends CommonDataWrapper {
 	 * @author 智佳 罗森
 	 * 
 	 */
-	public class Forum {
+	public class Forum implements Serializable {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		// 帖子ID
 		private String id;
 		// 帖子题目
@@ -57,7 +62,7 @@ public class ForumWrapper extends CommonDataWrapper {
 		private String doProjectID;
 		// 排序号
 		private String dataNo;
-		// 表单提交对于路径
+		// 类型
 		private String viewpath;
 
 		/**

@@ -75,6 +75,11 @@ public class Constants {
 		public static final String FORUM_LIST_URL = "http://3g.wuxi.gov.cn/api/publicbbs/list.json";
 
 		/**
+		 * 政民互动 公众论坛 获取帖子详情
+		 */
+		public static final String FORUM_CONTENT_URL = "http://3g.wuxi.gov.cn/api/publicbbs/{id}/details.json";
+
+		/**
 		 * 公开电话 URL
 		 * */
 		public static final String OPENTEL_URL = "http://3g.wuxi.gov.cn/api/opentel/list.json";
@@ -324,6 +329,17 @@ public class Constants {
 		 * 政府信息公开  获取 依申请公开的表格 下载地址 的URl
 		 * */
 		public static final String GOVERMSG_TABLE_DOWNLOAD_URL = "http://3g.wuxi.gov.cn/api/applyopen/doc.json";
+
+		/**
+		 * 全文检索  URL
+		 * */
+		public static final String SEARCH_URL = 
+				"http://3g.wuxi.gov.cn/contentsearch/getJson?jsonpCallback=?&query={query}&sitename={sitename}&countperpage={countperpage}&pagenum={pagenum}";
+
+		/**
+		 * 全文检索  sitename
+		 * */
+		public static final String SEARCH_SITENAME = "site_1374209144805";
 	}
 
 	/**
@@ -451,6 +467,21 @@ public class Constants {
 		 * 全站搜索
 		 */
 		MAINSEARCH_FRAGMENT,
+
+		/**
+		 * 全站高级搜索
+		 */
+		ADVANCED_SEARCH_FRAGMENT,
+
+		/**
+		 * 全站高级搜索列表
+		 */
+		ADVANCED_SEARCH_LIST_FRAGMENT,
+
+		/**
+		 * 搜索内容页
+		 */
+		SEARCH_DETAIL_FRAGMENT,
 		/**
 		 * 政务大厅
 		 */
@@ -549,7 +580,7 @@ public class Constants {
 		 * 政府信息公开  信息公开指南内容页 信息公开制度公开内容页
 		 * */
 		GOVERMSG_INFOOPEN_DETAIL_FRAGMENT
-		
+
 		;
 	}
 

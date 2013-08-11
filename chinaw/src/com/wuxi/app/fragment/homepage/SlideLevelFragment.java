@@ -51,6 +51,10 @@ import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumPostFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewContentFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceContentDetailFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
+import com.wuxi.app.fragment.search.AdvancedSearchFragment;
+import com.wuxi.app.fragment.search.AdvancedSearchReaultFragment;
+import com.wuxi.app.fragment.search.AdvancedSearchResultListFragment;
+import com.wuxi.app.fragment.search.SearchResultDetailFragment;
 import com.wuxi.app.listeners.SlideLinstener;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
@@ -139,8 +143,8 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 		leftMenuAdapter = new LeftMenuAdapter(getActivity(),
 				R.layout.slide_navigator_item, new int[] {
-						R.id.tv_left_menu_name, R.id.left_iv_icon },
-				leftMenuItems, null, position);
+			R.id.tv_left_menu_name, R.id.left_iv_icon },
+			leftMenuItems, null, position);
 		mlvMenu.setAdapter(leftMenuAdapter);
 	}
 
@@ -185,7 +189,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				ch.setMenuItem(menuItem);
 				onReplaceFragment(ch, null);
 
-				
+
 				break;
 			case 2:
 
@@ -208,6 +212,21 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				MainSearchFragment searchFragment = new MainSearchFragment();
 				onReplaceFragment(searchFragment, bundle);
 				break;
+			case ADVANCED_SEARCH_FRAGMENT:// 全站高级搜索
+				AdvancedSearchFragment advancedSearchFragment = new AdvancedSearchFragment();
+				onAddFragment(advancedSearchFragment, bundle);
+				break;
+
+			case ADVANCED_SEARCH_LIST_FRAGMENT:// 高级搜索列表
+				AdvancedSearchResultListFragment advancedSearchResultListFragment = new AdvancedSearchResultListFragment();
+				onAddFragment(advancedSearchResultListFragment, bundle);
+				break;
+
+			case SEARCH_DETAIL_FRAGMENT:// 搜索内容页
+				SearchResultDetailFragment searchResultDetailFragment = new SearchResultDetailFragment();
+				onAddFragment(searchResultDetailFragment, bundle);
+				break;
+
 			case MAINMINEFRAGMENT:// 政务名互动
 				MainMineFragment mainMineFragment = new MainMineFragment();
 				mainMineFragment.setParentMenuItem(menuItem);
@@ -229,7 +248,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			case MYONLINEASKFRAGMENT:// 在线咨询
 				MyOnlineAskFragment myOnlineAskFragment = new MyOnlineAskFragment();
 				onAddFragment(myOnlineAskFragment, bundle);
-				
+
 				break;
 			case HOTREVIEW_CONTENT_FRAGMENT:// 热点话题
 				HotReviewContentFragment hotReviewContentFragment = new HotReviewContentFragment();
@@ -246,30 +265,30 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 			case GOVERSALOONDETAIL_XK_FRAGMENT:// 政务大厅办件详情
 				GoverSaloonDetailXKFragment goverSaloonDetailFragment = new GoverSaloonDetailXKFragment();
-				
+
 				onAddFragment(goverSaloonDetailFragment, bundle);
 				break;
 			case GOVERSALOONDETAIL_QT_FRAGMENT:// 政务大厅办件详情
 				GoverSaloonDetailQTFragment goverSaloonDetailQTFragment = new GoverSaloonDetailQTFragment();
-			
+
 				onAddFragment(goverSaloonDetailQTFragment, bundle);
 				break;
 			case GOVERSALOONDETAIL_QZ_FRAGMENT:// 政务大厅 强制办件详情
 				GoverSaloonDetailQZFragment goverSaloonDetailQZFragment = new GoverSaloonDetailQZFragment();
-				
+
 				onAddFragment(goverSaloonDetailQZFragment, bundle);
 
 				break;
 			case GOVERSALOONDETAIL_ZS_FRAGMENT:// 政务大厅 征收办件详情
 				GoverSaloonDetailZSFragment goverSaloonDetailZSFragment = new GoverSaloonDetailZSFragment();
 				onAddFragment(goverSaloonDetailZSFragment, bundle);
-				
+
 
 				break;
 			case GOVERSALOONDETAIL_CF_FRAGMENT:// 政务大厅 处罚办件详情
 				GoverSaloonDetailCFFragment goverSaloonDetailCFFragment = new GoverSaloonDetailCFFragment();
 				onAddFragment(goverSaloonDetailCFFragment, bundle);
-				
+
 				break;
 
 			case WUXICHANNELCONTENTDETAILFRAGMENT:// 魅力锡城内容页
@@ -319,9 +338,9 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	 */
 	private void onReplaceFragment(BaseSlideFragment fragment, Bundle bundle) {
 
-		
+
 		FragmentTransaction ft = manager.beginTransaction();
-		
+
 		ft.replace(FRAME_CONTENT, fragment);
 		if (bundle != null) {
 			fragment.setArguments(bundle);
@@ -352,7 +371,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		ft.commit();
 
 	}
-	
+
 	//加载非BaseSlideFragment子类的 内容页
 	private void onAddOtherFragment(BaseFragment fragment, Bundle bundele) {
 		fragment.setManagers(managers);

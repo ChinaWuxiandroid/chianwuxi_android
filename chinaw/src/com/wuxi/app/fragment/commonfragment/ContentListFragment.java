@@ -40,7 +40,7 @@ import com.wuxi.exception.NetException;
 @SuppressLint("HandlerLeak")
 public abstract class ContentListFragment extends BaseFragment implements
 		OnScrollListener, OnItemClickListener, OnClickListener {
-
+	
 	protected static final int CONTENT_LOAD_SUCCESS = 0;
 	protected static final int CONTENT_LOAD_FAIL = 1;
 	private static final int PAGE_SIZE = 10;

@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.ForumWrapper;
+import com.wuxi.domain.ForumWrapper.Forum;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -67,7 +69,7 @@ public class GoverInterPeoplePublicForumFragment extends
 	// 获取帖子的起始坐标
 	private int startIndex = 0;
 	// 获取帖子的结束坐标
-	private int endIndex = 9;
+	private int endIndex = 60;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -179,9 +181,6 @@ public class GoverInterPeoplePublicForumFragment extends
 		ForumListAdapter forumListAdapter = new ForumListAdapter(
 				baseSlideFragment);
 
-		for (int i = 0; i < forums.size(); i++) {
-			System.out.println(forums.get(i).getTitle());
-		}
 		if (forums == null || forums.size() == 0) {
 			Toast.makeText(context, "对不起，暂无论坛信息", 2000).show();
 		} else {
@@ -277,10 +276,14 @@ public class GoverInterPeoplePublicForumFragment extends
 		}
 
 		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+		public void onItemClick(AdapterView<?>  adapterView, View arg1, int position,
 				long arg3) {
+			Forum forum=(Forum)adapterView.getItemAtPosition(position);
+			Bundle bundle=new Bundle();
+			bundle.putSerializable("forum", forum);
+			
 			baseSlideFragment.slideLinstener.replaceFragment(null, position,
-					Constants.FragmentName.GIP_FOROUM_FRAGMENT, null);
+					Constants.FragmentName.GIP_FOROUM_FRAGMENT, bundle);
 		}
 	}
 

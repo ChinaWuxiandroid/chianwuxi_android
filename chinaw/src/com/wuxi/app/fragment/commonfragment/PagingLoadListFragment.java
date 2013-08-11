@@ -30,16 +30,16 @@ import com.wuxi.domain.MenuItem;
 
 public abstract class PagingLoadListFragment extends BaseFragment implements
 OnScrollListener, OnItemClickListener, OnClickListener{
-
+	protected Context context;
 	protected static final int LIST_LOAD_SUCCESS = 0;
 	protected static final int LIST_LOAD_FAIL = 1;
 	private static final int PAGE_SIZE = 10;
 	protected View view;
 	protected ListView content_list_lv;
+	
 	private ProgressBar content_list_pb;
 	private View loadMoreView;// 加载更多视图
 	private Button loadMoreButton;
-	protected Context context;
 	private int visibleLastIndex;
 	private int visibleItemCount;// 当前显示的总条数
 	private boolean isSwitch = false;// 切换
@@ -181,6 +181,7 @@ OnScrollListener, OnItemClickListener, OnClickListener{
 		content_list_lv = (ListView) view.findViewById(R.id.content_list_lv);
 		content_list_lv.setOnItemClickListener(this);
 		content_list_pb = (ProgressBar) view.findViewById(R.id.content_list_pb);
+		
 		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
 				null);
 		loadMoreButton = (Button) loadMoreView
@@ -190,7 +191,6 @@ OnScrollListener, OnItemClickListener, OnClickListener{
 		content_list_lv.addFooterView(loadMoreView);// 为listView添加底部视图
 		content_list_lv.setOnScrollListener(this);// 增加滑动监听
 		loadMoreButton.setOnClickListener(this);
-		System.out.println("init over");
 	}
 
 	protected MenuItem parentItem;
