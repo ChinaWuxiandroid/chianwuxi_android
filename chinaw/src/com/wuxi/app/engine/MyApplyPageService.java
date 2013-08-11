@@ -1,6 +1,5 @@
 package com.wuxi.app.engine;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,20 +7,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+
 import com.wuxi.app.util.Constants;
-import com.wuxi.app.util.JAsonPaserUtil;
 import com.wuxi.app.util.TimeFormateUtil;
-import com.wuxi.domain.GoverSaoonItem;
-import com.wuxi.domain.LetterWrapper;
-import com.wuxi.domain.MyApply;
 import com.wuxi.domain.MyApplyPageWrapper;
-import com.wuxi.domain.LetterWrapper.Letter;
 import com.wuxi.domain.MyApplyPageWrapper.MyApplyPage;
-import com.wuxi.domain.MyApplyWrapper;
 import com.wuxi.exception.NetException;
 import com.wuxi.exception.ResultException;
-
-import android.content.Context;
 
 public class MyApplyPageService extends Service{
 

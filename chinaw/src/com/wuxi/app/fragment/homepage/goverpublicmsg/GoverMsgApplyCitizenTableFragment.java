@@ -5,12 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.adapter.SimpleListViewFragmentAdapter;
 
 public class GoverMsgApplyCitizenTableFragment extends BaseFragment{
 	protected View view;

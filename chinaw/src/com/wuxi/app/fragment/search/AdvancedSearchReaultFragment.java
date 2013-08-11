@@ -7,8 +7,6 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import com.wuxi.app.BaseFragment;
-import com.wuxi.app.fragment.BaseItemContentFragment;
 import com.wuxi.app.fragment.BaseSlideFragment;
 
 public class AdvancedSearchReaultFragment extends BaseSlideFragment implements

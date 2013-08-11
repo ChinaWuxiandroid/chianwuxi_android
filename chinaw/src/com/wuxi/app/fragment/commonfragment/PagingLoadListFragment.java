@@ -22,8 +22,6 @@ import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.adapter.ContentListAdapter;
-import com.wuxi.app.engine.ContentService;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.CommonDataWrapper;
 import com.wuxi.domain.MenuItem;

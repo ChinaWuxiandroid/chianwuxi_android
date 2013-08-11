@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,7 +13,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 
 import com.wuxi.app.util.Constants;
-import com.wuxi.domain.BBSWrapper;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 

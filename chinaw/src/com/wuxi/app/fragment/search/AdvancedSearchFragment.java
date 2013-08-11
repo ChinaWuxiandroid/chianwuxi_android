@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -23,8 +22,6 @@ import android.widget.TextView;
 
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.BaseSlideFragment;
-import com.wuxi.app.fragment.MainSearchFragment;
-import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyTableFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.AdvancedSearchUtil;
 

@@ -5,31 +5,25 @@ import java.util.List;
 
 import org.json.JSONException;
 
-import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AbsListView.OnScrollListener;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.SearchFragmentAdapter;
-import com.wuxi.app.adapter.SimpleListViewFragmentAdapter;
 import com.wuxi.app.engine.SearchService;
 import com.wuxi.app.fragment.BaseSlideFragment;
-import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.AdvancedSearchUtil;
 import com.wuxi.domain.SearchResultWrapper;

@@ -1,6 +1,5 @@
 package com.wuxi.app.adapter;
 
-import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -8,13 +7,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.webkit.WebSettings.TextSize;
+import android.webkit.WebView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.wuxi.app.R;
-import com.wuxi.domain.Content;
 import com.wuxi.domain.SearchResultWrapper.SearchResult;
 
 public class SearchFragmentAdapter extends BaseAdapter{

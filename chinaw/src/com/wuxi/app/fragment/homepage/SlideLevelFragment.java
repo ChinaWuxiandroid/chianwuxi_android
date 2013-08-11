@@ -52,7 +52,6 @@ import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewContentFrag
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceContentDetailFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
 import com.wuxi.app.fragment.search.AdvancedSearchFragment;
-import com.wuxi.app.fragment.search.AdvancedSearchReaultFragment;
 import com.wuxi.app.fragment.search.AdvancedSearchResultListFragment;
 import com.wuxi.app.fragment.search.SearchResultDetailFragment;
 import com.wuxi.app.listeners.SlideLinstener;

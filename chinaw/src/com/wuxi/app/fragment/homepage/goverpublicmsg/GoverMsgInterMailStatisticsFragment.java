@@ -22,7 +22,6 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.ReplyStatisticsService;
 import com.wuxi.app.util.Constants;
-import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.StatisticsLetter;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
