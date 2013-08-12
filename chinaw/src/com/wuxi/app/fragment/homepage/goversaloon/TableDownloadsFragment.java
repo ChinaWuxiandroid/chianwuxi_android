@@ -286,7 +286,7 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 			loadMoreButton.setText("点击加载更多");
 
 		} else {
-			// loadMoreButton.setText(" ");
+			
 			gover_tabledowload_lv.removeFooterView(loadMoreView);
 		}
 

@@ -7,13 +7,15 @@
 
     <include
         android:layout_width="fill_parent"
-        android:layout_height="42dip"
-        layout="@layout/child_fragmend_header_layout" />
+        android:layout_height="0dip"
+        layout="@layout/child_fragmend_header_layout"
+        android:layout_weight="1" />
 
     <ExpandableListView
         android:id="@+id/site_map_elv"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dip"
+        android:layout_weight="9" >
     </ExpandableListView>
 
 </LinearLayout>

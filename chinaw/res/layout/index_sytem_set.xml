@@ -7,12 +7,15 @@
 
     <include
         android:layout_width="fill_parent"
-        android:layout_height="42dip"
-        layout="@layout/child_fragmend_header_layout" />
+        android:layout_height="0dip"
+        layout="@layout/child_fragmend_header_layout" 
+        android:layout_weight="1"/>
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="0dip"
+        android:layout_weight="9"
+         >
 
         <LinearLayout
             android:layout_width="fill_parent"

@@ -40,6 +40,11 @@ public class TitleScrollLayout extends ViewGroup {
 	private static final int PERSCREEN_ITEM_COUNT = 7;// 每一屏item数量
 	private Scroller mScroller;
 	private int mCurScreen;// 当前屏
+
+	public void setmCurScreen(int mCurScreen) {
+		this.mCurScreen = mCurScreen;
+	}
+
 	private int totalScreenNum;// 总屏数
 	// private int checkPostion = -1;
 	private int mDefaultScreen = 0;
@@ -57,7 +62,7 @@ public class TitleScrollLayout extends ViewGroup {
 	private int perscreenCount = PERSCREEN_ITEM_COUNT;// 每屏数量,默认为7
 	private int checkPositons[];// 选中的坐标
 	private MenuItemInitLayoutListener menuItemInitLayoutListener;// 菜单点击与指点界面绑定监听器
-	private int showItemIndex=0;//默认显示的item布局序号
+	private int showItemIndex = 0;// 默认显示的item布局序号
 
 	public int getShowItemIndex() {
 		return showItemIndex;
@@ -148,7 +153,7 @@ public class TitleScrollLayout extends ViewGroup {
 		scrollTo(mCurScreen * width, 0);
 
 	}
-	
+
 	@Override
 	public void computeScroll() {
 		if (mScroller.computeScrollOffset()) {// 动画还没有结束
@@ -321,7 +326,7 @@ public class TitleScrollLayout extends ViewGroup {
 			checkPositons[j] = -1;
 		}
 
-		checkPositons[0] = 0;// 默认选中第一屏第一个Chanel
+		checkPositons[mCurScreen] = showItemIndex;// 默认选中第一屏第一个Chanel
 		int currentScreen = 0;// 当前屏
 
 		List<Channel> onScreenItems = null;// 一个屏上的图标
@@ -337,7 +342,8 @@ public class TitleScrollLayout extends ViewGroup {
 					child.setAdapter(new TitleChannelAdapter(context,
 							R.layout.title_grid_item_layout,
 							new int[] { R.id.tv_actionname }, null,
-							onScreenItems, currentScreen,0));
+							onScreenItems, currentScreen, showItemIndex,
+							mCurScreen));
 
 					child.setOnItemClickListener(new TitleItemlOnclick());
 					currentScreen++;
@@ -363,7 +369,7 @@ public class TitleScrollLayout extends ViewGroup {
 				child.setAdapter(new TitleChannelAdapter(context,
 						R.layout.title_grid_item_layout,
 						new int[] { R.id.tv_actionname }, null, onScreenItems,
-						currentScreen,0));
+						currentScreen, showItemIndex, mCurScreen));
 
 				child.setOnItemClickListener(new TitleItemlOnclick());
 				addView(child);
@@ -372,6 +378,18 @@ public class TitleScrollLayout extends ViewGroup {
 
 			i++;
 		}
+
+		int showLayoutIndex = this.mCurScreen * perscreenCount + showItemIndex;
+
+		/**
+		 * 显示默认界面
+		 */
+		if (chanItems.get(showLayoutIndex) != null) {
+
+			ShowChannelLayout(chanItems.get(showLayoutIndex));// 显示代开的默认布局界面
+
+		}
+
 	}
 
 	public void initMenuItemScreen(Context context, LayoutInflater inflater,
@@ -387,7 +405,7 @@ public class TitleScrollLayout extends ViewGroup {
 			checkPositons[j] = -1;
 		}
 
-		checkPositons[0] = showItemIndex;// 默认选中第一屏第一个Chanel
+		checkPositons[mCurScreen] = showItemIndex;// 默认选中第mCurScreen屏第showItemIndex个item
 		int currentScreen = 0;// 当前屏
 
 		List<MenuItem> onScreenItems = null;// 一个屏上的图标
@@ -403,7 +421,8 @@ public class TitleScrollLayout extends ViewGroup {
 					child.setAdapter(new TitleChannelAdapter(context,
 							R.layout.title_grid_item_layout,
 							new int[] { R.id.tv_actionname }, null,
-							onScreenItems, currentScreen,showItemIndex));
+							onScreenItems, currentScreen, showItemIndex,
+							mCurScreen));
 
 					child.setOnItemClickListener(new TitleItemlOnclick());
 					currentScreen++;
@@ -429,7 +448,7 @@ public class TitleScrollLayout extends ViewGroup {
 				child.setAdapter(new TitleChannelAdapter(context,
 						R.layout.title_grid_item_layout,
 						new int[] { R.id.tv_actionname }, null, onScreenItems,
-						currentScreen,showItemIndex));
+						currentScreen, showItemIndex, mCurScreen));
 
 				child.setOnItemClickListener(new TitleItemlOnclick());
 				addView(child);
@@ -439,14 +458,18 @@ public class TitleScrollLayout extends ViewGroup {
 			i++;
 		}
 
+		int showLayoutIndex = this.mCurScreen * perscreenCount + showItemIndex;
 
 		/**
 		 * 显示一个的子界面
 		 */
-		if (menuItems.get(showItemIndex) != null&&initializContentLayoutListner!=null&&menuItemInitLayoutListener!=null) {
+		if (menuItems.get(showLayoutIndex) != null
+				&& initializContentLayoutListner != null
+				&& menuItemInitLayoutListener != null) {
 
 			menuItemInitLayoutListener.bindMenuItemLayout(
-					initializContentLayoutListner, menuItems.get(showItemIndex));
+					initializContentLayoutListner,
+					menuItems.get(showLayoutIndex));
 
 		}
 
@@ -498,55 +521,7 @@ public class TitleScrollLayout extends ViewGroup {
 			 * 频道处理
 			 */
 			if (channel != null) {
-				Class<? extends Fragment> fragmentClass = channel
-						.getContentFragment();
-				if (fragmentClass == null) {
-					return;
-				}
-				Fragment fragment;
-
-				try {
-					fragment = (Fragment) fragmentClass.newInstance();
-
-					if (fragment == null) {
-						return;
-					}
-
-					NavigatorWithContentFragment nafragment = null;
-					CityMapFragment cityNCityMapFragment = null;
-					ChannelContentListFragment channelContentListFragment=null;
-					if (fragment instanceof NavigatorWithContentFragment) {
-						nafragment = (NavigatorWithContentFragment) fragment;
-						nafragment.setParentChannel(channel);
-					}
-
-					if (fragment instanceof CityMapFragment) {
-						cityNCityMapFragment = (CityMapFragment) fragment;
-
-					}
-
-					if(fragment instanceof ChannelContentListFragment){
-						channelContentListFragment=(ChannelContentListFragment)fragment;
-						channelContentListFragment.setChannel(channel);
-					}
-
-					if (initializContentLayoutListner != null) {
-						if (nafragment != null) {
-							initializContentLayoutListner
-							.bindContentLayout(nafragment);
-						} else if(cityNCityMapFragment!=null){
-							initializContentLayoutListner
-							.bindContentLayout(cityNCityMapFragment);
-						}else if(channelContentListFragment!=null){
-							initializContentLayoutListner.bindContentLayout(channelContentListFragment);
-						}
-
-					}
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
+				ShowChannelLayout(channel);
 
 			}
 
@@ -554,13 +529,72 @@ public class TitleScrollLayout extends ViewGroup {
 			 * 普通菜单处理
 			 * */
 
-			if (menuItem != null&&initializContentLayoutListner!=null&&menuItemInitLayoutListener!=null) {
+			if (menuItem != null && initializContentLayoutListner != null
+					&& menuItemInitLayoutListener != null) {
 
 				menuItemInitLayoutListener.bindMenuItemLayout(
 						initializContentLayoutListner, menuItem);
 
 			}
 
+		}
+
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 频道菜单显示
+	 * 
+	 * @param channel
+	 */
+	private void ShowChannelLayout(Channel channel) {
+		Class<? extends Fragment> fragmentClass = channel.getContentFragment();
+		if (fragmentClass == null) {
+			return;
+		}
+		Fragment fragment;
+
+		try {
+			fragment = (Fragment) fragmentClass.newInstance();
+
+			if (fragment == null) {
+				return;
+			}
+
+			NavigatorWithContentFragment nafragment = null;
+			CityMapFragment cityNCityMapFragment = null;
+			ChannelContentListFragment channelContentListFragment = null;
+			if (fragment instanceof NavigatorWithContentFragment) {
+				nafragment = (NavigatorWithContentFragment) fragment;
+				nafragment.setParentChannel(channel);
+			}
+
+			if (fragment instanceof CityMapFragment) {
+				cityNCityMapFragment = (CityMapFragment) fragment;
+
+			}
+
+			if (fragment instanceof ChannelContentListFragment) {
+				channelContentListFragment = (ChannelContentListFragment) fragment;
+				channelContentListFragment.setChannel(channel);
+			}
+
+			if (initializContentLayoutListner != null) {
+				if (nafragment != null) {
+					initializContentLayoutListner.bindContentLayout(nafragment);
+				} else if (cityNCityMapFragment != null) {
+					initializContentLayoutListner
+							.bindContentLayout(cityNCityMapFragment);
+				} else if (channelContentListFragment != null) {
+					initializContentLayoutListner
+							.bindContentLayout(channelContentListFragment);
+				}
+
+			}
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
 		}
 	}
 

@@ -53,6 +53,7 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 	private MenuItem parentMenuItem; // 父菜单
 
 	private ContentNavigatorAdapter adapter;
+	public static final String  SHOWLAYOUTINDEX="showLayout_index";
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -148,14 +149,20 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 	 * wanglu 泰得利通 显示左侧数据是MenuItem类型的数据
 	 */
 	private void showLeftMenuItemData() {
-
+		Bundle bundle=this.getArguments();
+		int showIndex=0;
+		if(bundle!=null){
+			showIndex=bundle.getInt(SHOWLAYOUTINDEX);
+		}
 		adapter = new ContentNavigatorAdapter(mInflater, null, menuItems);
-		adapter.setSelectedPosition(0);
+		adapter.setSelectedPosition(showIndex);
 		mListView.setAdapter(adapter);// 设置适配器
 		mListView.setOnItemClickListener(this);
 
+		
 		if (menuItems.size() > 0) {
-			showContentFragment(showMenItemContentFragment(menuItems.get(0)));// 默认显示第一个ConentFragment
+			
+			showContentFragment(showMenItemContentFragment(menuItems.get(showIndex)));// 默认显示第一个ConentFragment
 		}
 	}
 

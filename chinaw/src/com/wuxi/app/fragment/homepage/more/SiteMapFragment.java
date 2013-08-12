@@ -3,10 +3,13 @@ package com.wuxi.app.fragment.homepage.more;
 import java.util.List;
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -16,6 +19,12 @@ import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.BaseSlideFragment;
+import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
+import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
+import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonFragment;
+import com.wuxi.app.fragment.homepage.informationcenter.InformationCenterFragment;
+import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Channel;
@@ -30,9 +39,9 @@ public class SiteMapFragment extends BaseSlideFragment {
 	private ExpandableListView site_map_elv;
 
 	@Override
-	public  void initUI() {
+	public void initUI() {
 		super.initUI();
-		
+
 		site_map_elv = (ExpandableListView) view
 				.findViewById(R.id.site_map_elv);
 		site_map_elv.setDivider(null);
@@ -98,6 +107,10 @@ public class SiteMapFragment extends BaseSlideFragment {
 		@Override
 		public View getChildView(int groupPosition, int childPosition,
 				boolean isLastChild, View convertView, ViewGroup parent) {
+			View subView = View.inflate(context,
+					R.layout.sitemap_gridview_layout, null);
+			GridView gv = (GridView) subView
+					.findViewById(R.id.sitemap_gv_menuitem);
 			List<MenuItem> subMenuItems = null;
 			List<Channel> subChannels = null;
 			MenuItem item = items.get(groupPosition);
@@ -110,18 +123,14 @@ public class SiteMapFragment extends BaseSlideFragment {
 
 			}
 
-		
-			View subView=View.inflate(context, R.layout.sitemap_gridview_layout, null);
-			GridView gv =(GridView) subView.findViewById(R.id.sitemap_gv_menuitem);
-			
+			gv.setOnItemClickListener(new SiteMapClickLister(item));// 绑定事件
 
 			if (subMenuItems != null && subChannels == null) {
 				gv.setAdapter(new SiteMapAdapter(subMenuItems));
 			} else if (subMenuItems == null && subChannels != null) {
 				gv.setAdapter(new SiteMapAdapter(subChannels));
 			}
-			
-			
+
 			return subView;
 		}
 
@@ -133,10 +142,16 @@ public class SiteMapFragment extends BaseSlideFragment {
 			if (item.getType() == MenuItem.CUSTOM_MENU) { // 普通菜单
 				List<MenuItem> subMenuItems = (List<MenuItem>) CacheUtil
 						.get(item.getId());
+				if (subMenuItems == null) {
+					return 0;
+				}
 				return subMenuItems.size() > 0 ? 1 : 0;
 			} else if (item.getType() == MenuItem.CHANNEL_MENU) {
 				List<Channel> subChannels = (List<Channel>) CacheUtil.get(item
 						.getChannelId());
+				if (subChannels == null) {
+					return 0;
+				}
 				return subChannels.size() > 0 ? 1 : 0;
 			}
 			return 0;
@@ -170,7 +185,7 @@ public class SiteMapFragment extends BaseSlideFragment {
 			MenuItem menuItem = items.get(groupPosition);
 			TextView tv = new TextView(context);
 			AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(
-					90, ViewGroup.LayoutParams.WRAP_CONTENT);
+					200, ViewGroup.LayoutParams.WRAP_CONTENT);
 
 			tv.setBackgroundColor(Color.parseColor("#2890DF"));
 			tv.setGravity(Gravity.CENTER);
@@ -194,9 +209,6 @@ public class SiteMapFragment extends BaseSlideFragment {
 		}
 
 	}
-
-	
-	
 
 	private class SiteMapAdapter extends BaseAdapter {
 
@@ -268,6 +280,50 @@ public class SiteMapFragment extends BaseSlideFragment {
 		return "网站地图";
 	}
 
-	
+	private class SiteMapClickLister implements OnItemClickListener {
+
+		private MenuItem menuItem;
+
+		public SiteMapClickLister(MenuItem menuItem) {
+			this.menuItem = menuItem;
+
+		}
+
+		@Override
+		public void onItemClick(AdapterView<?> adapterView, View view,
+				int position, long arg3) {
+
+			Bundle bundle = new Bundle();
+
+			if (menuItem.getType() == MenuItem.CUSTOM_MENU) {
+
+				if (menuItem.getName().equals("政务大厅")) {
+
+					bundle.putInt(GoverSaloonFragment.SHOWLAYOUTINDEX, position);
+					slideLinstener.replaceFragment(menuItem, -1, null, bundle);
+
+				} else if (menuItem.getName().equals("政民互动")) {
+
+					bundle.putInt("checkPosition", position);
+					slideLinstener.replaceFragment(menuItem, -1,
+							Constants.FragmentName.MAINMINEFRAGMENT, bundle);
+				} else {
+					bundle.putInt(
+							MenuItemMainFragment.SHOWITEM_LAYOUT_INDEXKEY,
+							position);
+					slideLinstener.replaceFragment(menuItem, -1, null, bundle);
+
+				}
+			} else if (menuItem.getType() == MenuItem.CHANNEL_MENU) {
+				ChannelFragment ch = new ChannelFragment();
+				ch.setMenuItem(menuItem);
+				bundle.putInt(ChannelFragment.SHOWCHANNEL_LAYOUT_INDEXKEY,
+						position);
+				slideLinstener.replaceFragment(menuItem, -1, null, bundle);
+			}
+
+		}
+
+	}
 
 }

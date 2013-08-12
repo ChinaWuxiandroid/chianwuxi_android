@@ -91,16 +91,20 @@ public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 		Bundle bundle =this.getArguments();
 		int showIndex=0;
 		if(bundle!=null){
-			showIndex=bundle.getInt(SHOWITEM_LAYOUT_INDEXKEY);
+			showIndex=bundle.getInt(SHOWITEM_LAYOUT_INDEXKEY);//
 		}
 		mtitleScrollLayout = (TitleScrollLayout) view
 				.findViewById(R.id.title_scroll_action);// 头部控件
 		mtitleScrollLayout.setInitializContentLayoutListner(this);// 设置绑定内容界面监听器
 		mtitleScrollLayout
 				.setMenuItemInitLayoutListener(getMenuItemInitLayoutListener());// 设置界面监听处理类
-
-		mtitleScrollLayout.setPerscreenCount(getTitlePerScreenItemCount());
-		mtitleScrollLayout.setShowItemIndex(showIndex);//设置显示的默认布局
+		int perScreenItemCount=getTitlePerScreenItemCount();
+		mtitleScrollLayout.setPerscreenCount(perScreenItemCount);//美屏显示的菜单数量
+		int screenIndex=showIndex/perScreenItemCount;//第几屏
+		int showScreenIndex=showIndex%perScreenItemCount;//屏的序号
+		
+		mtitleScrollLayout.setShowItemIndex(showScreenIndex);//设置显示的默认布局
+		mtitleScrollLayout.setmCurScreen(screenIndex);
 		ib_nextItems = (ImageButton) view.findViewById(R.id.btn_next_screen);// 头部下一个按钮
 		ib_nextItems.setOnClickListener(this);
 

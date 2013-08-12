@@ -168,7 +168,7 @@ public class MainIndexFragment extends BaseFragment implements
 		iv_index_zt.setOnClickListener(this);
 		LoadGrid();
 		loadNews();// 加载新闻数据
-		loadAnnouncements();
+		//loadAnnouncements();
 
 	}
 
