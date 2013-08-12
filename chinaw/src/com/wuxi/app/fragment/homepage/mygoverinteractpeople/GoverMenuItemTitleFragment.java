@@ -7,6 +7,7 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,9 +16,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
@@ -26,18 +33,17 @@ import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
 import com.wuxi.app.util.CacheUtil;
-import com.wuxi.app.view.DynamicTitleLayout;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- * 相当于继承了MenuItemMainFragment，但是脱离了BaseSlideFragment，根据ParentMenuitems的个数动态加载按钮个数
+ * 类似了MenuItemMainFragment，但是脱离了BaseSlideFragment，根据ParentMenuitems的个数动态加载按钮个数
  * @author 杨宸 智佳
  * */
 
-public abstract  class MenuItemFragment extends BaseFragment implements
+public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 InitializContentLayoutListner, OnClickListener, Serializable{
 	/**
 	 * 
@@ -55,8 +61,9 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 	private static final int TITLEDATA_LOAD_ERROR = 2;	
 	protected static final int RIGHT_CONTENT_ID=R.id.gip_menuitem_content_fragmentlayout;
 
-	//	private ProgressBar titlePb;
-	protected DynamicTitleLayout mtitleLayout;
+	private ProgressBar titlePb;
+	private GridView Titles_gridView;	
+	private int checkPoint=0;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -68,15 +75,15 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 			switch (msg.what) {
 
 			case MENUITEM_TITLEDATA__LOAD_SUCESS:
-				//				titlePb.setVisibility(View.INVISIBLE);
+				titlePb.setVisibility(View.INVISIBLE);
 				showMenuItemTitle();
 				break;
 			case CHANNEL_TITLEDATA__LOAD_SUCESS:
-				//				titlePb.setVisibility(View.INVISIBLE);
+				titlePb.setVisibility(View.INVISIBLE);
 				showChannelTitle();
 				break;
 			case TITLEDATA_LOAD_ERROR:
-				//				titlePb.setVisibility(View.INVISIBLE);
+				titlePb.setVisibility(View.INVISIBLE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
 			}
@@ -91,7 +98,7 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		view = inflater.inflate(R.layout.gip_content_layout, null);
+		view = inflater.inflate(R.layout.gip_meuitem_fragment, null);
 		mInflater=inflater;
 		context = getActivity();
 		initTitleUI();
@@ -99,11 +106,8 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 	}
 
 	public void initTitleUI(){
-		//		titlePb=(ProgressBar)view.findViewById(R.id.gip_menuitem_progressbar);
-
-
-		//		titlePb.setVisibility(View.VISIBLE);
-
+		titlePb=(ProgressBar)view.findViewById(R.id.gip_menuitem_progressbar);
+		titlePb.setVisibility(View.VISIBLE);
 		if (parentItem.getType() == MenuItem.CHANNEL_MENU) {
 			loadChannelTitleData();
 		}
@@ -116,7 +120,7 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 	private void loadMenuItemTitleData(){
 		if (CacheUtil.get(parentItem.getId()) != null) {// 从缓存中查找子菜单
 			titleMenuItems = (List<MenuItem>) CacheUtil.get(parentItem.getId());
-			//			titlePb.setVisibility(View.INVISIBLE);
+			titlePb.setVisibility(View.INVISIBLE);
 			showMenuItemTitle();
 			return;
 		}
@@ -166,14 +170,15 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 
 	//显示普通菜单类型标题条
 	public void showMenuItemTitle(){
-		mtitleLayout = (DynamicTitleLayout) view.findViewById(R.id.gip_menuitem_title_layout);// 头部控件
+		checkPoint=0;  //默认选中第一个
+		Titles_gridView=(GridView) view.findViewById(R.id.gip_menuitem_gridview_title);
+		Titles_gridView.setNumColumns(titleMenuItems.size());
 
-		mtitleLayout.setMenuItemInitLayoutListener(getMenuItemInitLayoutListener());// 设置界面监听处理类
-		mtitleLayout.setInitializContentLayoutListner(this);// 设置绑定内容界面监听器
+		Titles_gridView.setAdapter(new GridViewAdaptger());
+		Titles_gridView.setOnItemClickListener(GridviewOnclick);
 
-		mtitleLayout.setPerscreenCount(titleMenuItems.size());
 		initializSubFragmentsLayout(titleMenuItems);// 绑定子界面
-		mtitleLayout.initMenuItemScreen(context, mInflater, titleMenuItems);// 初始化头部空间
+		loadMenuItemListLayout(titleMenuItems.get(checkPoint));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -181,7 +186,7 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 		if (CacheUtil.get(parentItem.getChannelId()) != null) {// 从缓存中查找子菜单
 			titleChannels = (List<Channel>) CacheUtil.get(parentItem.getChannelId());
 			if (titleChannels != null) {
-				//				titlePb.setVisibility(View.INVISIBLE);
+				titlePb.setVisibility(View.INVISIBLE);
 				showChannelTitle();
 				return;
 			}	
@@ -213,14 +218,17 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 
 	//显示频道菜单类型标题条
 	public void showChannelTitle(){
-		mtitleLayout.setPerscreenCount(titleChannels.size());
-		//		initializSubFragmentsLayout(titleChannels);// 绑定子界面
-		mtitleLayout.initChannelScreen(context, mInflater, titleChannels);// 初始化头部空间
-		mtitleLayout.postInvalidate();
+		checkPoint=0;  //默认选中第一个
+		Titles_gridView=(GridView) view.findViewById(R.id.gip_menuitem_gridview_title);
+		Titles_gridView.setNumColumns(titleChannels.size());
+
+		Titles_gridView.setAdapter(new GridViewAdaptger());
+		Titles_gridView.setOnItemClickListener(GridviewOnclick);
+
+		loadChannelContentList(titleChannels.get(checkPoint));
 
 	}
-
-	protected abstract MenuItemInitLayoutListener getMenuItemInitLayoutListener();
+	public  abstract MenuItemInitLayoutListener getMenuItemInitLayoutListener() ;
 
 	public abstract void initializSubFragmentsLayout(List<MenuItem> items);
 
@@ -239,5 +247,155 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(RIGHT_CONTENT_ID, fragment);
 		ft.commit();	
+	}
+
+	private class GridViewAdaptger extends BaseAdapter {
+
+
+		@Override
+		public int getCount() {
+			if(titleMenuItems!=null){
+				return titleMenuItems.size();
+			}
+			else if(titleChannels!=null){
+				return titleChannels.size();
+			}
+			return 0;
+		}
+
+		@Override
+		public Object getItem(int position) {
+			if(titleMenuItems!=null){
+				return titleMenuItems.get(position);
+			}
+			else if(titleChannels!=null){
+				return titleChannels.get(position);
+			}
+			return null;
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		public class ViewHolder {
+			TextView tv_title;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			MenuItem menuItem=null;
+			Channel channel=null ;
+			if(titleMenuItems!=null){
+				menuItem=titleMenuItems.get(position);
+			}
+			else if(titleChannels!=null){
+				channel=titleChannels.get(position);
+			}
+
+
+			ViewHolder viewHolder = null;
+			if (convertView == null) {
+				convertView = mInflater.inflate(
+						R.layout.gip_menuitem_gridview_item, null);
+
+				viewHolder = new ViewHolder();
+
+				viewHolder.tv_title = (TextView) convertView
+						.findViewById(R.id.gip_menu_tv_title);
+
+				if ( position == checkPoint) {
+
+					viewHolder.tv_title
+					.setBackgroundResource(R.drawable.title_item_select_bg);
+					viewHolder.tv_title.setTextColor(Color.WHITE);
+
+				}
+				else{
+					viewHolder.tv_title
+					.setBackgroundResource(R.drawable.title_item_bg);
+					viewHolder.tv_title.setTextColor(Color.parseColor("#177CCA"));
+				}
+
+				convertView.setTag(viewHolder);
+			} else {
+				viewHolder = (ViewHolder) convertView.getTag();
+			}
+			if(menuItem!=null){
+				viewHolder.tv_title.setText(menuItem.getName());
+			}
+			else if(channel!=null){
+				viewHolder.tv_title.setText(channel.getChannelName());
+			}
+
+			return convertView;
+		}
+	}
+
+	/**
+	 * 菜单点击
+	 */
+	private OnItemClickListener GridviewOnclick = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			MenuItem menuItem=null;
+			Channel channel =null;
+
+			Object object= (Object) parent.getItemAtPosition(position);
+			if(object instanceof MenuItem){
+				menuItem=(MenuItem)object;
+			}
+			else if (object instanceof Channel) {
+				channel=(Channel)object;
+			}
+
+
+			/**
+			 * 切换选中与未选择的样式
+			 */
+			if (checkPoint!= position) {
+				View checkView = parent.getChildAt(position);
+
+				TextView tv_Check = (TextView) checkView
+						.findViewById(R.id.gip_menu_tv_title);
+				tv_Check.setBackgroundResource(R.drawable.title_item_select_bg);
+
+				tv_Check.setTextColor(Color.WHITE);
+
+				View oldCheckView = parent.getChildAt(checkPoint);
+				if (null != oldCheckView) {
+
+					TextView tv_oldCheck = (TextView) oldCheckView
+							.findViewById(R.id.gip_menu_tv_title);
+					tv_oldCheck.setBackgroundResource(R.drawable.title_item_bg);
+
+					tv_oldCheck.setTextColor(Color.parseColor("#177CCA"));
+
+				}
+
+				checkPoint = position;
+			}
+
+			if(menuItem!=null&&getMenuItemInitLayoutListener()!=null){
+				loadMenuItemListLayout(menuItem);
+			}
+			else if(channel!=null){
+				loadChannelContentList(channel);
+			}
+		}
+	};
+
+	public void loadMenuItemListLayout(MenuItem menuItem){
+		getMenuItemInitLayoutListener().bindMenuItemLayout(
+				this, menuItem);
+	}
+
+	public void loadChannelContentList(Channel channel){
+		GIPChannelContentListFragment gIPContentListFragment = new GIPChannelContentListFragment();					
+		gIPContentListFragment.setChannel(channel);
+		bindContentLayout(gIPContentListFragment);
 	}
 }

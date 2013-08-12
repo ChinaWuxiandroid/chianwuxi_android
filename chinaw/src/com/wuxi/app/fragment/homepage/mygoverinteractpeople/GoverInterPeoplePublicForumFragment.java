@@ -69,7 +69,7 @@ public class GoverInterPeoplePublicForumFragment extends
 	// 获取帖子的起始坐标
 	private int startIndex = 0;
 	// 获取帖子的结束坐标
-	private int endIndex = 60;
+	private int endIndex = 200;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {

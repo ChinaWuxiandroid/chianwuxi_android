@@ -256,7 +256,7 @@ public class GoverMsgSubChannelsSearchFragment extends BaseFragment{
 				checkPoint = position;
 			}
 			
-			showContentList(subChannels.get(position));
+			showContentList(channel);
 		}
 	};
 }

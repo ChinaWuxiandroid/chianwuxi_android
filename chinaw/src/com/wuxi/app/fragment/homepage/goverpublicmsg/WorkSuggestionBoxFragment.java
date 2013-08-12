@@ -48,6 +48,8 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 
 	private static final int DATA__LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
+	private static final int DATA_SUBMIT_SUCCESS = 2;
+	private static final int DATA_SUBMIT_FAILED = 3;
 	protected static final int CHANNELCONTENT_ID=R.id.govermsg_custom_content;
 
 	private ProgressBar processBar;
@@ -64,16 +66,24 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 			if (msg.obj != null) {
 				tip = msg.obj.toString();
 			}
-
 			switch (msg.what) {
 			case DATA__LOAD_SUCESS:
-//				processBar.setVisibility(View.INVISIBLE);
+				processBar.setVisibility(View.INVISIBLE);
 				showLayout();
 				break;
 			case DATA_LOAD_ERROR:
-//				processBar.setVisibility(View.INVISIBLE);
+				processBar.setVisibility(View.INVISIBLE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
+			case DATA_SUBMIT_SUCCESS:
+				processBar.setVisibility(View.INVISIBLE);
+				Toast.makeText(context, "提交成功", Toast.LENGTH_SHORT).show();
+				break;
+			case DATA_SUBMIT_FAILED:
+				processBar.setVisibility(View.INVISIBLE);
+				Toast.makeText(context, "提交失败", Toast.LENGTH_SHORT).show();
+				break;
+				
 			}
 		};
 	};
@@ -99,12 +109,13 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 	}
 
 	private void loadData(){
-		//		if (CacheUtil.get(boxWrapper.getId()) != null) {// 从缓存中查找子菜单
-		//			boxWrapper = (WorkSuggestionBoxWrapper) CacheUtil.get(boxWrapper.getId());
-		//			processBar.setVisibility(View.INVISIBLE);
-		//			showLayout();
-		//			return;
-		//		}
+	
+		if (boxWrapper!=null&&CacheUtil.get(boxWrapper.getId()) != null) {// 从缓存中查找子菜单
+			boxWrapper = (WorkSuggestionBoxWrapper) CacheUtil.get(boxWrapper.getId());
+			processBar.setVisibility(View.INVISIBLE);
+			showLayout();
+			return;
+		}
 		new Thread(new Runnable() {
 
 			@Override
@@ -194,7 +205,6 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 		switch(v.getId()){
 		case R.id.worksuggestbox_imgbutton_submit:
 			String access_token=Constants.SharepreferenceKey.TEST_ACCESSTOKEN;
-//			access_token="";
 			if("".equals(access_token)){
 				Toast.makeText(context, "请先登录", Toast.LENGTH_SHORT).show();
 			}
@@ -218,11 +228,45 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 		}
 	}
 	
-	public void submitMail(String access_token) throws NetException, JSONException, NODataException{
+	public void submitMail(final String access_token) throws NetException, JSONException, NODataException{
+		processBar.setVisibility(View.VISIBLE);
+		if(!judgeIsLegal()){
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					WorkSuggestionService workSuggestionService=new WorkSuggestionService(context);
+					try {
+						boolean success=false;
+						success=workSuggestionService.submitMailBox(access_token,boxWrapper);
+						if(success){
+							handler.sendEmptyMessage(DATA_SUBMIT_SUCCESS);
+						}
+						else{
+							handler.sendEmptyMessage(DATA_SUBMIT_FAILED);
+						}
+					} catch (NetException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (NODataException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}).start();
+		}
+	}
+	
+	/**
+	 *判断输入情况是否合法 
+	 * */
+	public boolean judgeIsLegal(){
 		boolean submitError=false;
 		int index=0;
 		for(MailBoxParameterItem item:boxWrapper.getParameters()){
-			
 			LinearLayout subLayout = (LinearLayout) layout.getChildAt(index);
 			EditText content_et=(EditText)subLayout.getChildAt(1);
 				
@@ -239,13 +283,6 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 			
 			index++;
 		}
-		if(!submitError){
-			WorkSuggestionService workSuggestionService=new WorkSuggestionService(context);
-			if(workSuggestionService.submitMailBox(access_token,boxWrapper))
-				Toast.makeText(context, "提交成功！", Toast.LENGTH_SHORT).show();
-			else
-				Toast.makeText(context, "提交失败！", Toast.LENGTH_SHORT).show();
-		}
-		
+		return submitError;
 	}
 }

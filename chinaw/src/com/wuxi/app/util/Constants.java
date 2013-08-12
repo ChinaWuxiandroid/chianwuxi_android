@@ -579,7 +579,7 @@ public class Constants {
 		/**
 		 * 政府信息公开  信息公开指南内容页 信息公开制度公开内容页
 		 * */
-		GOVERMSG_INFOOPEN_DETAIL_FRAGMENT
+		GOVERMSG_WEBCONTENT_FARGMENT
 
 		;
 	}

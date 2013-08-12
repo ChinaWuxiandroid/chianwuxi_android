@@ -12,7 +12,7 @@ import com.wuxi.domain.MenuItem;
  * @author 杨宸 智佳
  * */
 public class GoverMsgNaviWithContentFragment extends
-		MenuItemNavigatorWithContentFragment {
+MenuItemNavigatorWithContentFragment {
 	@Override
 	protected Fragment showMenItemContentFragment(MenuItem menuItem) {
 
@@ -63,19 +63,20 @@ public class GoverMsgNaviWithContentFragment extends
 		if (channel.getChannelName().equals("部门年度报告")) {
 			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment = new GoverMsgSearchContentListFragment();
 			goverMsgSearchContentListFragment
-					.setFifterType(GoverMsgSearchContentListFragment.DEPT_TYPE);
+			.setFifterType(GoverMsgSearchContentListFragment.DEPT_TYPE);
 			goverMsgSearchContentListFragment.setChannel(channel);
 			return goverMsgSearchContentListFragment;
 		} else if (channel.getChannelName().equals("县区政府年度报告")) {
 
 			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment = new GoverMsgSearchContentListFragment();
 			goverMsgSearchContentListFragment
-					.setFifterType(GoverMsgSearchContentListFragment.ZONE_TYPE);
+			.setFifterType(GoverMsgSearchContentListFragment.ZONE_TYPE);
 			goverMsgSearchContentListFragment.setChannel(channel);
 			return goverMsgSearchContentListFragment;
 		} else {
 			GoverMsgContentListFragment goverMsgContentListFragment = new GoverMsgContentListFragment();
 			goverMsgContentListFragment.setChannel(channel);
+			goverMsgContentListFragment.setArguments(this.getArguments());//传递外层框架
 			return goverMsgContentListFragment;
 		}
 	}

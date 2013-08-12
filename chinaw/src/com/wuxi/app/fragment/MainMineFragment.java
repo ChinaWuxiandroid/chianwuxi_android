@@ -52,6 +52,7 @@ OnItemClickListener, Serializable {
 
 
 	private MenuItem parentMenuItem; // 父菜单
+	private int defaultCheckPosition=0;
 
 	private GoverInteractPeopleNevigationAdapter adapter;
 
@@ -80,12 +81,17 @@ OnItemClickListener, Serializable {
 		};
 	};
 
+	public void getArgumentsFromOtherFragment(){
+		defaultCheckPosition= (Integer) this.getArguments().get("checkPosition");
+	}
+	
 	@Override
 	public void initUI() {
-
 		super.initUI();
-
 		mListView = (ListView) view.findViewById(R.id.gover_interact_people_mainmenu_listview);
+		
+		getArgumentsFromOtherFragment();
+		
 		if(parentMenuItem==null){
 			loadMenuItemData(id);
 		}
@@ -151,13 +157,13 @@ OnItemClickListener, Serializable {
 	private void showLeftMenuItemData() {
 
 		adapter = new GoverInteractPeopleNevigationAdapter(mInflater, listMenus, managers);
-		adapter.setSelectedPosition(0);
+		adapter.setSelectedPosition(defaultCheckPosition);
 		mListView.setDividerHeight(0);
 		mListView.setAdapter(adapter);// 设置适配器
 		mListView.setOnItemClickListener(this);
 
 		if (listMenus.size() > 0) {
-			showContentFragment(showMenItemContentFragment(listMenus.get(0)));// 默认显示第一个ConentFragment
+			showContentFragment(showMenItemContentFragment(listMenus.get(defaultCheckPosition)));// 默认显示第一个ConentFragment
 		}
 	}
 
