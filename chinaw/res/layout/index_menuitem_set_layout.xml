@@ -8,20 +8,32 @@
     <include
         android:layout_width="fill_parent"
         android:layout_height="0dip"
-        layout="@layout/child_fragmend_header_layout"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        layout="@layout/child_fragmend_header_layout" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="9" >
+  
 
-        <LinearLayout
-            android:id="@+id/menuset_ll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-        </LinearLayout>
-    </ScrollView>
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+             android:layout_weight="9" >
+
+            <ListView
+                android:id="@+id/lv_fava"
+                android:layout_width="fill_parent"
+                android:layout_marginTop="10dip"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/system_set_shape" >
+            </ListView>
+            <ProgressBar 
+                android:id="@+id/pb_fava"
+                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                />
+        </FrameLayout>
+    
 
 </LinearLayout>

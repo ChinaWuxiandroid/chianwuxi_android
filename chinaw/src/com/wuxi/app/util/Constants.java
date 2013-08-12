@@ -1,5 +1,7 @@
 package com.wuxi.app.util;
 
+import java.util.StringTokenizer;
+
 import android.os.Environment;
 
 /**
@@ -221,6 +223,8 @@ public class Constants {
 		 * {end} 结束记录
 		 */
 		public static final String GETTABLE_DOWNLOADS_URL="http://3g.wuxi.gov.cn/api/zhengwu/downloadfiles.json?deptid={deptid}&start={start}&end={end}";
+		
+	
 
 
 		/**
@@ -293,6 +297,12 @@ public class Constants {
 		 * 信件查询  信件分类下拉
 		 */
 		public static final String LETTER_TYPE_URL="http://3g.wuxi.gov.cn/api/letter/lettertype.json";
+		
+		
+		/**
+		 * 获取收藏列表
+		 */
+		public static final String GET_FAVORITES_URL="http://3g.wuxi.gov.cn/api/menu/favorites.json";
 
 
 		/**
@@ -408,6 +418,11 @@ public class Constants {
 		 * 首页导航菜单缓存key名称
 		 */
 		public static final String HOME_MENUITEM_KEY = "man_menu_item";
+		
+		/**
+		 * 收藏列表菜单 
+		 */
+		public static final String FAVAITEMS_KEY="favaitems";
 
 		/**
 		 * 登录的用户key

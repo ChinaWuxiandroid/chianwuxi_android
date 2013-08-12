@@ -2,16 +2,21 @@ package com.wuxi.app.fragment.homepage.more;
 
 import java.util.List;
 
-import android.graphics.Color;
+import org.json.JSONException;
+
+import android.annotation.SuppressLint;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
+import com.wuxi.app.engine.FavoritesService;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.listeners.OnChangedListener;
 import com.wuxi.app.util.CacheUtil;
@@ -19,6 +24,7 @@ import com.wuxi.app.util.Constants;
 import com.wuxi.app.view.SlipButton;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
+import com.wuxi.exception.NetException;
 
 /**
  * 
@@ -26,96 +32,38 @@ import com.wuxi.domain.MenuItem;
  * 
  */
 public class MenuItemSetFragment extends BaseSlideFragment {
-	private LinearLayout menuset_ll;
-	private List<MenuItem> items;
-	private View subView;
+	protected static final int LOAD_ERROR = 1;
+	protected static final int LOAD_SUCCESS = 0;
 
-	@SuppressWarnings("unchecked")
+	private List<MenuItem> favaItems;
+	private ListView lv_fava;
+	private ProgressBar pb_fava;
+
+	@SuppressLint("HandlerLeak")
+	private Handler handler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case LOAD_SUCCESS:
+				showFavaItems();
+				break;
+			case LOAD_ERROR:
+				String tip = msg.obj.toString();
+				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
+				break;
+
+			}
+		};
+
+	};
+
 	@Override
-	public  void initUI() {
+	public void initUI() {
 		super.initUI();
-		menuset_ll = (LinearLayout) view.findViewById(R.id.menuset_ll);
-		items = (List<MenuItem>) CacheUtil
-				.get(Constants.CacheKey.HOME_MENUITEM_KEY);
-		if (items == null) {
-			Toast.makeText(context, "没有数据", Toast.LENGTH_SHORT).show();
-			return;
-		}
+		lv_fava = (ListView) view.findViewById(R.id.lv_fava);
+		pb_fava = (ProgressBar) view.findViewById(R.id.pb_fava);
 
-		initViewData();
+		loadFavaItems();
 
-	}
-
-	/**
-	 * 
-	 *wanglu 泰得利通
-	 *初始化界面及数据
-	 */
-	private void initViewData() {
-
-		for (MenuItem item : items) {
-
-			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.WRAP_CONTENT,
-					LinearLayout.LayoutParams.WRAP_CONTENT);
-			TextView tv = new TextView(context);
-			layoutParams.topMargin = 5;
-			layoutParams.bottomMargin = 5;
-			layoutParams.leftMargin = 15;
-			tv.setText(item.getName());
-			tv.setTextSize(16);
-			tv.setTextColor(Color.BLACK);
-
-			menuset_ll.addView(tv, layoutParams);
-
-			addSubMenuItemView(item);
-
-		}
-
-	}
-
-	@SuppressWarnings("unchecked")
-	private void addSubMenuItemView(MenuItem item) {
-
-		List<MenuItem> menuItems = null;
-		List<Channel> channels = null;
-		if (item.getType() == MenuItem.CUSTOM_MENU) {
-			menuItems = (List<MenuItem>) CacheUtil.get(item.getId());
-		} else if (item.getType() == MenuItem.CHANNEL_MENU) {
-			channels = (List<Channel>) CacheUtil.get(item.getChannelId());
-		}
-
-		subView = View.inflate(context, R.layout.menuset_listview_layout, null);
-
-		ListView lv = (ListView) subView.findViewById(R.id.menuset_lv);
-
-		if (menuItems != null && channels == null) {
-			lv.setAdapter(new MenuSetAdapter(menuItems));
-
-		} else if (menuItems == null && channels != null) {
-			lv.setAdapter(new MenuSetAdapter(channels));
-
-		}
-		setViewHeight(lv);// 动态设置listView高度
-
-		menuset_ll.addView(subView);
-
-	}
-
-	public void setViewHeight(ListView listView) {
-		MenuSetAdapter listAdapter = (MenuSetAdapter) listView.getAdapter();
-		if (listAdapter == null)
-			return;
-		int totalHeight = 0;
-		for (int i = 0; i < listAdapter.getCount(); i++) {
-			View listItem = listAdapter.getView(i, null, listView);
-			listItem.measure(0, 0);
-			totalHeight += listItem.getMeasuredHeight();
-		}
-		ViewGroup.LayoutParams params = listView.getLayoutParams();
-		params.height = totalHeight
-				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-		listView.setLayoutParams(params);
 	}
 
 	static class ViewHolder {
@@ -188,8 +136,63 @@ public class MenuItemSetFragment extends BaseSlideFragment {
 
 		@Override
 		public void OnChanged(String strName, boolean CheckState) {
-
+			Toast.makeText(context, "改功能在施工中", Toast.LENGTH_SHORT).show();
 		}
+
+	}
+
+	@SuppressWarnings("unchecked")
+	private void loadFavaItems() {
+
+		if (CacheUtil.get(Constants.CacheKey.FAVAITEMS_KEY) != null) {
+			favaItems = (List<MenuItem>) CacheUtil
+					.get(Constants.CacheKey.FAVAITEMS_KEY);
+			showFavaItems();// 显示收藏列表
+			return;
+		}
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				Message msg = handler.obtainMessage();
+				FavoritesService favoritesService = new FavoritesService(
+						context);
+
+				try {
+					favaItems = favoritesService.getFavorites();
+					if (favaItems != null) {
+						msg.what = LOAD_SUCCESS;
+						CacheUtil.put(Constants.CacheKey.FAVAITEMS_KEY,
+								favaItems);
+
+					} else {
+						msg.what = LOAD_ERROR;
+						msg.obj = "没有加载到数据";
+					}
+					handler.sendMessage(msg);
+				} catch (NetException e) {
+
+					e.printStackTrace();
+					msg.what = LOAD_ERROR;
+					msg.obj = e.getMessage();
+					handler.sendMessage(msg);
+				} catch (JSONException e) {
+
+					e.printStackTrace();
+					msg.what = LOAD_ERROR;
+					msg.obj = "数据格式有误";
+					handler.sendMessage(msg);
+				}
+
+			}
+		}).start();
+
+	}
+
+	private void showFavaItems() {
+		pb_fava.setVisibility(ProgressBar.GONE);
+		lv_fava.setAdapter(new MenuSetAdapter(favaItems));
 
 	}
 
@@ -201,9 +204,8 @@ public class MenuItemSetFragment extends BaseSlideFragment {
 
 	@Override
 	protected String getTitleText() {
-		
+
 		return "首页常用栏设置";
 	}
 
-	
 }

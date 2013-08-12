@@ -1,5 +1,6 @@
 package com.wuxi.app;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -13,7 +14,9 @@ import android.widget.Toast;
 
 import com.wuxi.app.fragment.MainIndexFragment;
 import com.wuxi.app.fragment.homepage.SlideLevelFragment;
+import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.Constants.CacheKey;
 
 /**
  * 主要架构
@@ -134,6 +137,11 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	public void onClick(View v) {
+		
+		if(CacheUtil.get(CacheKey.HOME_MENUITEM_KEY)==null){
+			Toast.makeText(this, "数据异常，请重启，或检查网络", Toast.LENGTH_SHORT).show();
+			return ;
+		}
 		SlideLevelFragment slideLevelFragment = new SlideLevelFragment();
 		switch (v.getId()) {
 
