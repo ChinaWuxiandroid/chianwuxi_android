@@ -24,14 +24,16 @@ public class TitleChannelAdapter extends BasicAdapter {
 	private List items;
 	private int screenIndex;
 	private int showIndex;
+	private int showScreenIndex=0;//要显示的屏的位置
 	@SuppressWarnings("rawtypes")
 	public TitleChannelAdapter(Context context, int view, int[] viewId,
-			String[] dataName, List items, int screenIndex,int showIndex) {
+			String[] dataName, List items, int screenIndex,int showIndex,int showScreenIndex) {
 		super(context, view, viewId, dataName);
 
 		this.items = items;
 		this.screenIndex = screenIndex;
 		this.showIndex=showIndex;
+		this.showScreenIndex=showScreenIndex;
 
 	}
 
@@ -77,7 +79,7 @@ public class TitleChannelAdapter extends BasicAdapter {
 			viewHolder.title_text = (TextView) convertView
 					.findViewById(viewId[0]);
 
-			if (screenIndex == 0 && position == showIndex) {
+			if (screenIndex == showScreenIndex && position == showIndex) {
 
 				viewHolder.title_text
 				.setBackgroundResource(R.drawable.title_item_select_bg);

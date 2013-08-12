@@ -181,7 +181,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			case MenuItem.CHANNEL_MENU:// 如果点击的频道菜单
 				ChannelFragment ch = new ChannelFragment();
 				ch.setMenuItem(menuItem);
-				onReplaceFragment(ch, null);
+				onReplaceFragment(ch, bundle);
 
 				
 				break;
@@ -411,7 +411,10 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	@Override
 	public void onItemClick(AdapterView<?> parent, View arg1, int position,
 			long id) {
-
+		
+		if(!mSlideMenuLayout.getLeftSlideMenuEnabled()){
+			return;
+		}
 		if (position == this.position)
 			return;
 		MenuItem checkMenuItem = (MenuItem) parent.getItemAtPosition(position);

@@ -36,8 +36,6 @@ import com.wuxi.exception.NetException;
 public class ChannelFragment extends BaseSlideFragment implements
 		InitializContentLayoutListner, OnClickListener, Serializable {
 
-	
-
 	/**
 	 * 
 	 */
@@ -47,11 +45,12 @@ public class ChannelFragment extends BaseSlideFragment implements
 	private static final int TITLE__LOAD_SUCESS = 0;
 	private static final int TITLE_LOAD_ERROR = 1;
 	protected static final String TAG = "ChannelFragment";
+	public  static final String SHOWCHANNEL_LAYOUT_INDEXKEY = "show_channel_layout_index";
 
 	private ImageButton ib_nextItems;
 	private MenuItem menuItem;// 菜单项
 	private List<Channel> titleChannels;// 头部频道
-
+	private int perCount = 4;
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -76,10 +75,22 @@ public class ChannelFragment extends BaseSlideFragment implements
 	public void initUI() {
 
 		super.initUI();
+
+		Bundle bundle = this.getArguments();
+		int showIndex = 0;
+		if (bundle != null) {
+			showIndex = bundle.getInt(SHOWCHANNEL_LAYOUT_INDEXKEY);//
+		}
+
 		mtitleScrollLayout = (TitleScrollLayout) view
 				.findViewById(R.id.title_scroll_action);// 头部控件
 		mtitleScrollLayout.setInitializContentLayoutListner(this);// 设置绑定内容界面监听器
-		mtitleScrollLayout.setPerscreenCount(4);
+		mtitleScrollLayout.setPerscreenCount(perCount);
+		int screenIndex = showIndex / perCount;// 第几屏
+		int showScreenIndex = showIndex % perCount;// 屏的
+
+		mtitleScrollLayout.setShowItemIndex(showScreenIndex);// 设置显示的默认布局
+		mtitleScrollLayout.setmCurScreen(screenIndex);
 		ib_nextItems = (ImageButton) view.findViewById(R.id.btn_next_screen);// 头部下一个按钮
 		ib_nextItems.setOnClickListener(this);
 
@@ -161,7 +172,8 @@ public class ChannelFragment extends BaseSlideFragment implements
 	private void showTitleData() {
 		initializSubFragmentsLayout();
 		mtitleScrollLayout.initChannelScreen(context, mInflater, titleChannels);// 初始化头部空间
-		initData(titleChannels.get(0));// 默认显示第一个channel的子channel页
+
+		//initData(titleChannels.get(0));// 默认显示第一个channel的子channel页
 
 	}
 
@@ -178,14 +190,14 @@ public class ChannelFragment extends BaseSlideFragment implements
 
 	private void bindFragment(Fragment fragment) {
 
-		Bundle bundle=new Bundle();
+		Bundle bundle = new Bundle();
 		bundle.putSerializable("BaseSlideFragment", this);
 		fragment.setArguments(bundle);
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		ft.replace(MANCOTENT_ID, fragment);// 替换内容界面
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 		ft.commit();
-		
+
 	}
 
 	public void setMenuItem(MenuItem menuItem) {
@@ -198,9 +210,9 @@ public class ChannelFragment extends BaseSlideFragment implements
 		for (Channel channel : titleChannels) {
 			if (channel.getChannelName().equals("城市地图")) {
 				channel.setContentFragment(CityMapFragment.class);
-			} else if(channel.getChildrenChannelsCount()>0){
+			} else if (channel.getChildrenChannelsCount() > 0) {
 				channel.setContentFragment(NavigatorWithContentFragment.class);
-			}else if(channel.getChildrenContentsCount()>0){
+			} else if (channel.getChildrenContentsCount() > 0) {
 				channel.setContentFragment(ChannelContentListFragment.class);
 			}
 		}
