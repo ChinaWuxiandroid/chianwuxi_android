@@ -16,6 +16,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
+import com.wuxi.domain.ApplyDept;
 
 public class GoverMsgApplyTableFragment extends BaseFragment implements OnCheckedChangeListener,OnClickListener{
 	protected View view;
@@ -28,12 +29,19 @@ public class GoverMsgApplyTableFragment extends BaseFragment implements OnChecke
 
 	private static final int[] radioButtonIds={R.id.govermsg_applytable_radioButton_citizen,R.id.govermsg_applytable_radioButton_legalperson};
 	private static final int TALBE_CONTENT_ID=R.id.govermsg_applytable_content_framelayout;
+	
+	private ApplyDept applyDept;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.govermsg_applytable_layout, null);
 		mInflater = inflater;
 		context = getActivity();
+		
+		Bundle bundle=this.getArguments();
+		if(bundle!=null){
+			applyDept=(ApplyDept) bundle.get("applyDept");
+		}
 
 		initView();
 		return view;
@@ -66,11 +74,13 @@ public class GoverMsgApplyTableFragment extends BaseFragment implements OnChecke
 
 	public void loadCitizenTable(){
 		GoverMsgApplyCitizenTableFragment goverMsgApplyCitizenTableFragment=new GoverMsgApplyCitizenTableFragment();
+		goverMsgApplyCitizenTableFragment.setDept(applyDept);
 		onTransaction(goverMsgApplyCitizenTableFragment);
 	}
 
 	public void loadLegalPersonTable(){
 		GoverMsgApplyLePersonTableFragment goverMsgApplyLePersonTableFragment=new GoverMsgApplyLePersonTableFragment();
+		goverMsgApplyLePersonTableFragment.setDept(applyDept);
 		onTransaction(goverMsgApplyLePersonTableFragment);
 	}
 

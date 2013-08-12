@@ -286,6 +286,7 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment{
 	public class ApplyDeptAdapter extends BaseAdapter implements OnClickListener{
 
 		BaseSlideFragment baseSlideFragment;
+		ApplyDept applyDept=null;
 
 		public ApplyDeptAdapter(BaseSlideFragment baseSlideFragment){
 			this.baseSlideFragment=baseSlideFragment;
@@ -336,7 +337,7 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment{
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-
+			applyDept=depts.get(position);
 			viewHolder.title_text.setText(depts.get(position).getDepName());
 			viewHolder.apply_imgbtn.setOnClickListener(ApplyDeptAdapter.this);
 			viewHolder.download_imgbtn.setOnClickListener(ApplyDeptAdapter.this);
@@ -352,8 +353,12 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment{
 			case R.id.govermsg_deptapply_item_guide:
 				break;
 			case R.id.govermsg_deptapply_item_apply:
-				baseSlideFragment.slideLinstener.replaceFragment(null, position,
-						Constants.FragmentName.GOVERMSG_APPLYTABLE_FRAGMENT, null);
+				Bundle bundle=new Bundle();
+				if(applyDept!=null){
+					bundle.putSerializable("applyDept", applyDept);
+					baseSlideFragment.slideLinstener.replaceFragment(null, position,
+							Constants.FragmentName.GOVERMSG_APPLYTABLE_FRAGMENT, bundle);
+				}
 				break;
 			}
 		}

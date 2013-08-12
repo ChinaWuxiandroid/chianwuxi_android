@@ -104,6 +104,7 @@ public class ForumContentFragment extends BaseItemContentFragment implements
 
 		comment_btn = (Button) view
 				.findViewById(R.id.forum_content_comment_btn);
+		comment_btn.setVisibility(View.GONE);
 		comment_btn.setOnClickListener(new OnClickListener() {
 
 			@Override

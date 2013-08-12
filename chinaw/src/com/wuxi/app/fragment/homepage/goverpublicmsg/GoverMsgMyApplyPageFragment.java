@@ -6,12 +6,15 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.MyApplyPageService;
 import com.wuxi.app.fragment.commonfragment.PagingLoadListFragment;
@@ -27,8 +30,12 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 	private MyApplyPageAdapter adapter;
 	
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		// TODO Auto-generated method stub
+	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
+		MyApplyPage myPage=(MyApplyPage) adapterView.getItemAtPosition(position);
+		
+		GoverMyApplyPageContentFragment goverMyApplyPageContentFragment=new GoverMyApplyPageContentFragment();
+		goverMyApplyPageContentFragment.setPage(myPage);
+		bindFragment(goverMyApplyPageContentFragment);
 	}
 
 	@Override
@@ -37,7 +44,6 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 		List<Object> objects=new ArrayList<Object>();
 		if(myApplyPageWrapper.getData()!=null){
 			for(MyApplyPage apply:myApplyPageWrapper.getData()){
-				System.out.println("apply title:"+apply.getTitle());
 				objects.add(apply);
 			}
 		}
@@ -154,5 +160,14 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 		public void addItem(MyApplyPage content) {
 			this.contents.add(content);
 		}
+	}
+	
+	public void bindFragment(BaseFragment fragment){
+		FragmentManager manager = getActivity().getSupportFragmentManager();
+		FragmentTransaction ft = manager.beginTransaction();
+
+		ft.replace(FRAMELAYOUT_ID, fragment);
+
+		ft.commit();
 	}
 }

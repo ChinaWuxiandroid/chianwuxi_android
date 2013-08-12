@@ -96,9 +96,8 @@ public class WorkSuggestionService extends Service{
 		for(MailBoxParameterItem item:boxWrapper.getParameters()){
 			url=url+"&"+item.getKeyName()+"="+item.getValueList();
 		}
-		url=url+"&selfFormId="+boxWrapper.getFormId();
+		url=url+"&selfFormId="+boxWrapper.getId();
 		
-		System.out.println("url:"+url);
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (resultStr != null) {
@@ -113,5 +112,5 @@ public class WorkSuggestionService extends Service{
 		
 	}
 	
-
+	
 }

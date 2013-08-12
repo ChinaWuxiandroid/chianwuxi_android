@@ -29,6 +29,8 @@ import android.widget.Toast;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.ApplyDeptService;
+import com.wuxi.app.fragment.BaseSlideFragment;
+import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
@@ -301,6 +303,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 
 	private void loadContentList(){
 		GoverMsgContentListFragment goverMsgContentListFragment=new GoverMsgContentListFragment();
+		goverMsgContentListFragment.setArguments(this.getArguments());//传递外层框架
 		if(parentMenuItem!=null){
 			goverMsgContentListFragment.setParentItem(parentMenuItem);
 		}

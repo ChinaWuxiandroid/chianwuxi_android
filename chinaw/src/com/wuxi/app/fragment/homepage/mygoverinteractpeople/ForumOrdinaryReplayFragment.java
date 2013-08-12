@@ -24,12 +24,20 @@ import android.widget.Toast;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.HotPostService;
+import com.wuxi.app.engine.NoticePostService;
+import com.wuxi.app.engine.OpinionPostService;
 import com.wuxi.app.engine.OrdinaryPostService;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.ForumWrapper.Forum;
 import com.wuxi.domain.HotPostWrapper;
 import com.wuxi.domain.HotPostWrapper.HotPostReplyWrapper;
 import com.wuxi.domain.HotPostWrapper.HotPostReplyWrapper.HotPostReply;
+import com.wuxi.domain.NoticePostWrapper;
+import com.wuxi.domain.NoticePostWrapper.NoticePostReplyWrapper;
+import com.wuxi.domain.NoticePostWrapper.NoticePostReplyWrapper.NoticePostReply;
+import com.wuxi.domain.OpinionPostWrapper;
+import com.wuxi.domain.OpinionPostWrapper.OpinionPostReplyWrapper;
+import com.wuxi.domain.OpinionPostWrapper.OpinionPostReplyWrapper.OpinionPostReply;
 import com.wuxi.domain.OrdinaryPostWrapper;
 import com.wuxi.domain.OrdinaryPostWrapper.OrdinaryPostRaplyWrapper;
 import com.wuxi.domain.OrdinaryPostWrapper.OrdinaryPostRaplyWrapper.OrdinaryPostRaply;
@@ -63,6 +71,14 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 	private HotPostWrapper hotPostWrapper = null;
 	private HotPostReplyWrapper hotPostReplyWrapper = null;
 	private List<HotPostReply> hotPostReplies = null;
+
+	private NoticePostWrapper noticePostWrapper = null;
+	private NoticePostReplyWrapper noticePostReplyWrapper = null;
+	private List<NoticePostReply> noticePostReplies = null;
+
+	private OpinionPostWrapper opinionPostWrapper = null;
+	private OpinionPostReplyWrapper opinionPostReplyWrapper = null;
+	private List<OpinionPostReply> opinionPostReplies = null;
 
 	// 数据加载成功标志
 	private static final int DATA__LOAD_SUCESS = 0;
@@ -155,7 +171,7 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 							handler.sendEmptyMessage(DATA_LOAD_ERROR);
 						}
 					}
-					// 热点话题帖子回复类容加载
+					// 热点话题帖子回复内容加载
 					else if (forum.getViewpath().equals("/HotReviewContent")) {
 						HotPostService hotPostService = new HotPostService(
 								context);
@@ -174,7 +190,47 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 							handler.sendEmptyMessage(DATA_LOAD_ERROR);
 						}
 					}
-
+					// 公告类帖子回复内容加载
+					else if (forum.getViewpath().equals(
+							"/LegislativeCommentsContent")) {
+						NoticePostService noticePostService = new NoticePostService(
+								context);
+						noticePostWrapper = noticePostService
+								.getNoticePostWrapper(forum.getId(),
+										forum.getViewpath(), startIndex,
+										endIndex);
+						if (noticePostWrapper != null) {
+							noticePostReplyWrapper = noticePostWrapper
+									.getNoticePostReplyWrapper();
+							noticePostReplies = noticePostReplyWrapper
+									.getNoticePostReplies();
+							handler.sendEmptyMessage(DATA__LOAD_SUCESS);
+						} else {
+							Message message = handler.obtainMessage();
+							message.obj = "error";
+							handler.sendEmptyMessage(DATA_LOAD_ERROR);
+						}
+					}
+					// 征求意见类帖子回复内容加载
+					else if (forum.getViewpath().equals("/JoinPoliticsContent")) {
+						OpinionPostService opinionPostService = new OpinionPostService(
+								context);
+						opinionPostWrapper = opinionPostService
+								.getOpinionPostWrapper(forum.getId(),
+										forum.getViewpath(), startIndex,
+										endIndex);
+						if (opinionPostWrapper != null) {
+							opinionPostReplyWrapper = opinionPostWrapper
+									.getOpinionPostReplyWrapper();
+							opinionPostReplies = opinionPostReplyWrapper
+									.getOpinionPostReplies();
+							handler.sendEmptyMessage(DATA__LOAD_SUCESS);
+						} else {
+							Message message = handler.obtainMessage();
+							message.obj = "error";
+							handler.sendEmptyMessage(DATA_LOAD_ERROR);
+						}
+					}
 				} catch (NetException e) {
 					LogUtil.i(TAG, "出错");
 					e.printStackTrace();
@@ -210,6 +266,18 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 			} else {
 				listView.setAdapter(ordinaryReplayListAdapter);
 			}
+		} else if (forum.getViewpath().equals("/LegislativeCommentsContent")) {
+			if (hotPostReplies == null || hotPostReplies.size() == 0) {
+				Toast.makeText(context, "对不起，暂无该论坛的回复信息", 2000).show();
+			} else {
+				listView.setAdapter(ordinaryReplayListAdapter);
+			}
+		} else if (forum.getViewpath().equals("/JoinPoliticsContent")) {
+			if (opinionPostReplies == null || opinionPostReplies.size() == 0) {
+				Toast.makeText(context, "对不起，暂无该论坛的回复信息", 2000).show();
+			} else {
+				listView.setAdapter(ordinaryReplayListAdapter);
+			}
 		}
 
 	}
@@ -226,9 +294,15 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 		public int getCount() {
 			if (forum.getViewpath().equals("/Get_UserBBSAnswerAll")) {
 				return postRaplies.size();
-			}else if (forum.getViewpath().equals("/HotReviewContent")) {
+			} else if (forum.getViewpath().equals("/HotReviewContent")) {
 				return hotPostReplies.size();
+			} else if (forum.getViewpath()
+					.equals("/LegislativeCommentsContent")) {
+				return noticePostReplies.size();
+			} else if (forum.getViewpath().equals("/JoinPoliticsContent")) {
+				return opinionPostReplies.size();
 			}
+
 			return 0;
 		}
 
@@ -236,8 +310,13 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 		public Object getItem(int position) {
 			if (forum.getViewpath().equals("/Get_UserBBSAnswerAll")) {
 				return postRaplies.get(position);
-			}else if (forum.getViewpath().equals("/HotReviewContent")) {
+			} else if (forum.getViewpath().equals("/HotReviewContent")) {
 				return hotPostReplies.get(position);
+			} else if (forum.getViewpath()
+					.equals("/LegislativeCommentsContent")) {
+				return noticePostReplies.get(position);
+			} else if (forum.getViewpath().equals("/JoinPoliticsContent")) {
+				return opinionPostReplies.get(position);
 			}
 			return null;
 		}
@@ -274,6 +353,7 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 				holder = (ViewHolder) convertView.getTag();
 			}
 
+			// 普通帖子
 			if (forum.getViewpath().equals("/Get_UserBBSAnswerAll")) {
 				holder.replay_name_text.setText(postRaplies.get(position)
 						.getUserName());
@@ -281,7 +361,9 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 						.getSentTime());
 				holder.replay_content_text.setText(postRaplies.get(position)
 						.getContent());
-			} else if (forum.getViewpath().equals("/HotReviewContent")) {
+			}
+			// 热点话题类帖子
+			else if (forum.getViewpath().equals("/HotReviewContent")) {
 				holder.replay_name_text.setText(hotPostReplies.get(position)
 						.getSenduser());
 				holder.replay_time_text.setText(hotPostReplies.get(position)
@@ -289,7 +371,24 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 				holder.replay_content_text.setText(hotPostReplies.get(position)
 						.getContent());
 			}
-
+			// 公告类帖子
+			else if (forum.getViewpath().equals("/LegislativeCommentsContent")) {
+				holder.replay_name_text.setText(noticePostReplies.get(position)
+						.getUserName());
+				holder.replay_time_text.setText(noticePostReplies.get(position)
+						.getSentTime());
+				holder.replay_content_text.setText(noticePostReplies.get(
+						position).getContent());
+			}
+			// 征求意见类帖子
+			else if (forum.getViewpath().equals("/JoinPoliticsContent")) {
+				holder.replay_name_text.setText(opinionPostReplies
+						.get(position).getUserName());
+				holder.replay_time_text.setText(opinionPostReplies
+						.get(position).getSentTime());
+				holder.replay_content_text.setText(opinionPostReplies.get(
+						position).getContent());
+			}
 			return convertView;
 		}
 

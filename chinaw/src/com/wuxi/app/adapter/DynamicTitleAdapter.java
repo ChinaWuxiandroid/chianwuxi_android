@@ -30,7 +30,6 @@ public class DynamicTitleAdapter extends BaseAdapter {
 	@SuppressWarnings("rawtypes")
 	public DynamicTitleAdapter(Context context, int view, int[] viewId,
 			String[] dataName, List items) {
-//		super(context, view, viewId, dataName);
 		this.view=view;
 		this.viewId=viewId;
 		this.items = items;
@@ -93,7 +92,6 @@ public class DynamicTitleAdapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		viewHolder.title_text.setText(chanelName);
-		System.out.println("position:"+position+"   item name:"+chanelName);
 		return convertView; 
 
 	}

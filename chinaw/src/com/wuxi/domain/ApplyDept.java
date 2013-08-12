@@ -1,11 +1,17 @@
 package com.wuxi.domain;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author 杨宸  智佳  依申请公告  部门
  */
 
-public class ApplyDept {
+public class ApplyDept implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String doProjectId;
 	private String depId;
 	private String depName;

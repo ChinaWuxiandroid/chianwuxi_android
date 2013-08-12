@@ -82,7 +82,10 @@ OnItemClickListener, Serializable {
 	};
 
 	public void getArgumentsFromOtherFragment(){
-		defaultCheckPosition= (Integer) this.getArguments().get("checkPosition");
+		Bundle bundle=this.getArguments();
+		if( bundle!=null&&this.getArguments().get("checkPosition")!=null){
+			defaultCheckPosition= (Integer) this.getArguments().get("checkPosition");
+		}
 	}
 	
 	@Override

@@ -308,7 +308,7 @@ public class Constants {
 		/**
 		 * 政府信息公开  市区县依申请公开
 		 * */
-		public static final String APPLYGOVER_URL="http://3g.wuxi.gov.cn/api/applyopen/quxian.json";
+		public static final String APPLYGOVER_URL="http://3g.wuxi.gov.cn/api/applyopen/quxians.json";
 
 		/**
 		 * 政府信息公开  各部门依申请公开
@@ -329,7 +329,17 @@ public class Constants {
 		 * 政府信息公开  获取 依申请公开的表格 下载地址 的URl
 		 * */
 		public static final String GOVERMSG_TABLE_DOWNLOAD_URL = "http://3g.wuxi.gov.cn/api/applyopen/doc.json";
+		
+		/**
+		 * 政府信息公开  个人依申请公开提交
+		 * */
+		public static final String CITIZEN_APPLY_SUBMIT_URL = "http://3g.wuxi.gov.cn/api/applyopen/personalapply.json";
 
+		/**
+		 * 政府信息公开    法人/组织依申请公开提交
+		 * */
+		public static final String LEGALPERSONAPPLY_SUBMIT_URL = "http://3g.wuxi.gov.cn/api/applyopen/orgapply.json";
+		
 		/**
 		 * 全文检索  URL
 		 * */
@@ -443,7 +453,7 @@ public class Constants {
 		/**
 		 * 测试用户 用户名：youngii 密码：123123 的ACCESSTOKEN
 		 * */
-		public static final String TEST_ACCESSTOKEN = "5289a96c1f174b6bbf2a0019cbf9ca37";
+		public static final String TEST_ACCESSTOKEN = "bd58fcdfe5b54f4c95ed5f2e3a945f7c";
 
 	}
 

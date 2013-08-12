@@ -33,8 +33,6 @@ public class GoverMsgContentListFragment extends ContentListFragment  {
 			bundle.putSerializable("fragmentTitle", channel.getChannelName());
 			baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.GOVERMSG_WEBCONTENT_FARGMENT, bundle);
 		}
-		
-		
 	}
 	
 }

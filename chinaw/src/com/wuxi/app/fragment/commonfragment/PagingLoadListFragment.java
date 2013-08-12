@@ -29,6 +29,7 @@ import com.wuxi.domain.MenuItem;
 public abstract class PagingLoadListFragment extends BaseFragment implements
 OnScrollListener, OnItemClickListener, OnClickListener{
 	protected Context context;
+	protected static final int FRAMELAYOUT_ID = R.id.paging_loading_list_fragmeLayout;
 	protected static final int LIST_LOAD_SUCCESS = 0;
 	protected static final int LIST_LOAD_FAIL = 1;
 	private static final int PAGE_SIZE = 10;
@@ -213,12 +214,11 @@ OnScrollListener, OnItemClickListener, OnClickListener{
 				Toast.makeText(context, "没有信息或加载信息失败", Toast.LENGTH_SHORT).show();
 			}
 			else{
-				System.out.println("objects.size():"+objects.size());
 				if (isFirstLoad) {
 
 					isFirstLoad = false;
-					System.out.println("setAdapter");
-					content_list_lv.setAdapter(getAdapter());
+					adapter=getAdapter();
+					content_list_lv.setAdapter(adapter);
 					/*
 					 * adapter = new ContentListAdapter(contents, context);
 					 * content_list_lv.setAdapter(adapter);
