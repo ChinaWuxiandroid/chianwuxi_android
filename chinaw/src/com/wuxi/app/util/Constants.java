@@ -1,5 +1,7 @@
 package com.wuxi.app.util;
 
+import java.util.StringTokenizer;
+
 import android.os.Environment;
 
 /**
@@ -221,6 +223,8 @@ public class Constants {
 		 * {end} 结束记录
 		 */
 		public static final String GETTABLE_DOWNLOADS_URL="http://3g.wuxi.gov.cn/api/zhengwu/downloadfiles.json?deptid={deptid}&start={start}&end={end}";
+		
+	
 
 
 		/**
@@ -293,6 +297,12 @@ public class Constants {
 		 * 信件查询  信件分类下拉
 		 */
 		public static final String LETTER_TYPE_URL="http://3g.wuxi.gov.cn/api/letter/lettertype.json";
+		
+		
+		/**
+		 * 获取收藏列表
+		 */
+		public static final String GET_FAVORITES_URL="http://3g.wuxi.gov.cn/api/menu/favorites.json";
 
 
 		/**
@@ -418,6 +428,11 @@ public class Constants {
 		 * 首页导航菜单缓存key名称
 		 */
 		public static final String HOME_MENUITEM_KEY = "man_menu_item";
+		
+		/**
+		 * 收藏列表菜单 
+		 */
+		public static final String FAVAITEMS_KEY="favaitems";
 
 		/**
 		 * 登录的用户key
@@ -589,7 +604,15 @@ public class Constants {
 		/**
 		 * 政府信息公开  信息公开指南内容页 信息公开制度公开内容页
 		 * */
-		GOVERMSG_WEBCONTENT_FARGMENT
+		GOVERMSG_WEBCONTENT_FARGMENT,
+		/**
+		 * 关于我们
+		 */
+		ABOUTUSFRAGMENT,
+		/**
+		 * 首页无锡要闻 公告公示内容页 
+		 */
+		NEWSANNACOUNTFRAGMENT
 
 		;
 	}

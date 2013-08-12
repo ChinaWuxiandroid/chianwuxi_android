@@ -1,5 +1,6 @@
 package com.wuxi.app;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -13,7 +14,9 @@ import android.widget.Toast;
 
 import com.wuxi.app.fragment.MainIndexFragment;
 import com.wuxi.app.fragment.homepage.SlideLevelFragment;
+import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.Constants.CacheKey;
 
 /**
  * 主要架构
@@ -40,7 +43,7 @@ public class MainActivity extends FragmentActivity implements
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		setContentView(R.layout.main_fragment_layout);
-		init();
+		
 		radioGroup = (RadioGroup) findViewById(R.id.main_tab_radiogroup);
 		radioGroup.setOnCheckedChangeListener(this);
 
@@ -49,7 +52,7 @@ public class MainActivity extends FragmentActivity implements
 		main_tab_login_reg = (RadioButton) findViewById(R.id.main_tab_login_reg);
 		main_tab_mine = (RadioButton) findViewById(R.id.main_tab_mine);
 		main_tab_more = (RadioButton) findViewById(R.id.main_tab_more);
-
+		init();
 		main_tab_index.setOnClickListener(this);
 		main_tab_search.setOnClickListener(this);
 		main_tab_login_reg.setOnClickListener(this);
@@ -75,14 +78,15 @@ public class MainActivity extends FragmentActivity implements
 			}
 
 		}
-		;
+		
 
 	}
 
 	private void init() {
+		main_tab_index.setTextColor(Color.parseColor("#EB5212"));
 		fragmentManagers = FragmentManagers.getInstance();
 		fragmentManagers.setFragmentActivity(getContext());
-		fragmentManagers.ChangeFragment(new MainIndexFragment());
+		
 		ChangeFragment(new MainIndexFragment(), R.id.main_tab_index);
 
 	}
@@ -133,6 +137,11 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	public void onClick(View v) {
+		
+		if(CacheUtil.get(CacheKey.HOME_MENUITEM_KEY)==null){
+			Toast.makeText(this, "数据异常，请重启，或检查网络", Toast.LENGTH_SHORT).show();
+			return ;
+		}
 		SlideLevelFragment slideLevelFragment = new SlideLevelFragment();
 		switch (v.getId()) {
 

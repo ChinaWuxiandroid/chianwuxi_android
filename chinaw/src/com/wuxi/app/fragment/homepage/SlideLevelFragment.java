@@ -43,6 +43,7 @@ import com.wuxi.app.fragment.homepage.informationcenter.InfoCenterContentDetailF
 import com.wuxi.app.fragment.homepage.informationcenter.InformationCenterFragment;
 import com.wuxi.app.fragment.homepage.logorregister.LoginFragment;
 import com.wuxi.app.fragment.homepage.logorregister.RegisterFragment;
+import com.wuxi.app.fragment.homepage.more.AboutUsFragment;
 import com.wuxi.app.fragment.homepage.more.MenuItemSetFragment;
 import com.wuxi.app.fragment.homepage.more.SiteMapFragment;
 import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
@@ -324,6 +325,14 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				GIPContentDetailWebFragment gIPContentDetailWebFragment = new GIPContentDetailWebFragment();
 				onAddFragment(gIPContentDetailWebFragment, bundle);
 				break;
+			case ABOUTUSFRAGMENT://关于我们
+				AboutUsFragment aboutUsFragment=new AboutUsFragment();
+				onAddFragment(aboutUsFragment, bundle);
+				break;
+			case NEWSANNACOUNTFRAGMENT://首页无锡要闻，公告公示内容页
+				NewsAnnAcountFragment newsAnnAcountFragment=new NewsAnnAcountFragment();
+				onReplaceFragment(newsAnnAcountFragment, bundle);
+				break;
 			}
 		}
 	}
@@ -392,6 +401,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		if (baseFragments.size() == 0) {// 退出到首页
 
 			managers.ChangeFragment(new MainIndexFragment());
+			//managers.BackPress(this);
 
 		} else {
 			BaseFragment f = baseFragments.get(baseFragments.size() - 1);
