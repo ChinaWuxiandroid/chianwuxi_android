@@ -157,7 +157,7 @@ OnItemClickListener, Serializable {
 	private void showLeftMenuItemData() {
 
 		adapter = new GoverInteractPeopleNevigationAdapter(mInflater, listMenus, managers);
-		adapter.setSelectedPosition(0);
+		adapter.setSelectedPosition(defaultCheckPosition);
 		mListView.setDividerHeight(0);
 		mListView.setAdapter(adapter);// 设置适配器
 		mListView.setOnItemClickListener(this);
