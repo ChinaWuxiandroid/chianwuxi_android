@@ -1,0 +1,19 @@
+package com.wuxi.app.engine;
+
+import com.wuxi.app.R;
+import com.wuxi.domain.UpdateInfo;
+
+import android.test.AndroidTestCase;
+
+public class TestUpdateInfoService extends AndroidTestCase {
+
+	
+	public void testUpdate() throws Exception{
+		UpdateInfoService updateInfoService=new UpdateInfoService(getContext());
+	UpdateInfo updateInfo=	updateInfoService.getUpdateInfo(R.string.updateurl);
+	
+	updateInfo.getDescription();
+		
+	}
+
+}

@@ -40,7 +40,7 @@ public class MainActivity extends FragmentActivity implements
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		setContentView(R.layout.main_fragment_layout);
-		init();
+		
 		radioGroup = (RadioGroup) findViewById(R.id.main_tab_radiogroup);
 		radioGroup.setOnCheckedChangeListener(this);
 
@@ -49,7 +49,7 @@ public class MainActivity extends FragmentActivity implements
 		main_tab_login_reg = (RadioButton) findViewById(R.id.main_tab_login_reg);
 		main_tab_mine = (RadioButton) findViewById(R.id.main_tab_mine);
 		main_tab_more = (RadioButton) findViewById(R.id.main_tab_more);
-
+		init();
 		main_tab_index.setOnClickListener(this);
 		main_tab_search.setOnClickListener(this);
 		main_tab_login_reg.setOnClickListener(this);
@@ -75,14 +75,15 @@ public class MainActivity extends FragmentActivity implements
 			}
 
 		}
-		;
+		
 
 	}
 
 	private void init() {
+		main_tab_index.setTextColor(Color.parseColor("#EB5212"));
 		fragmentManagers = FragmentManagers.getInstance();
 		fragmentManagers.setFragmentActivity(getContext());
-		fragmentManagers.ChangeFragment(new MainIndexFragment());
+		
 		ChangeFragment(new MainIndexFragment(), R.id.main_tab_index);
 
 	}

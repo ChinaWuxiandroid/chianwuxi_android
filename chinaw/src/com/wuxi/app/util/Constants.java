@@ -579,7 +579,15 @@ public class Constants {
 		/**
 		 * 政府信息公开  信息公开指南内容页 信息公开制度公开内容页
 		 * */
-		GOVERMSG_WEBCONTENT_FARGMENT
+		GOVERMSG_WEBCONTENT_FARGMENT,
+		/**
+		 * 关于我们
+		 */
+		ABOUTUSFRAGMENT,
+		/**
+		 * 首页无锡要闻 公告公示内容页 
+		 */
+		NEWSANNACOUNTFRAGMENT
 
 		;
 	}

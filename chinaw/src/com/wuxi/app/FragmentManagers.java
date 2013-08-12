@@ -15,6 +15,7 @@ public class FragmentManagers {
 	public List<BaseFragment> fragments = new ArrayList<BaseFragment>();
 	public Context context;
 	public FragmentActivity fragmentActivity;
+	public   boolean fistLoadAPP=true;
 
 	public synchronized static FragmentManagers getInstance() {
 		if (instance == null)

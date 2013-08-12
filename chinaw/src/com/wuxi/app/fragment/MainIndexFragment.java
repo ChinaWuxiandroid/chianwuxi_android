@@ -1,13 +1,24 @@
 package com.wuxi.app.fragment;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
@@ -33,15 +44,19 @@ import com.wuxi.app.R;
 import com.wuxi.app.adapter.IndexGridAdapter;
 import com.wuxi.app.adapter.IndexNewsListAdapter;
 import com.wuxi.app.engine.AnnouncementsService;
+import com.wuxi.app.engine.DownLoadTask;
 import com.wuxi.app.engine.ImportNewsService;
 import com.wuxi.app.engine.MenuService;
+import com.wuxi.app.engine.UpdateInfoService;
 import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
+import com.wuxi.app.fragment.homepage.NewsAnnAcountFragment;
 import com.wuxi.app.fragment.homepage.SlideLevelFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.Content;
 import com.wuxi.domain.MenuItem;
+import com.wuxi.domain.UpdateInfo;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -84,6 +99,9 @@ public class MainIndexFragment extends BaseFragment implements
 	private static final int NEWS_LOAD_SUCCESS = 4;// 新闻加载成功
 	private static final int NEWS_LOAD_FAIL = 5;// 新闻加载失败
 	private static final int PAGE_ITEM = 6;// 每屏显示菜单数目;
+	protected static final int UPDATE_APK = 7;
+	protected static final int NO_UPDATE_APK = 8;
+	public static final int DOWLOAD_ERROR = 9;
 	private List<View> mGridViews;
 	private List<View> mListViews = new ArrayList<View>();
 	private ViewPager viewpagerLayout;
@@ -93,6 +111,8 @@ public class MainIndexFragment extends BaseFragment implements
 	private RadioButton index_rb_news, index_rb_announcements;
 	private ImageView iv_index_ldhd;//领导活动集锦
 	private ImageView iv_index_zt;//四个专题
+	private UpdateInfo updateInfo;
+	private ProgressDialog pd;
 	
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -112,6 +132,12 @@ public class MainIndexFragment extends BaseFragment implements
 				break;
 			case NEWS_LOAD_SUCCESS:
 				showNews();
+				break;
+			case UPDATE_APK:
+				showUpdatDialog();
+				break;
+			case DOWLOAD_ERROR:
+				Toast.makeText(context, "下载出错", Toast.LENGTH_LONG).show();
 				break;
 			case ANNOUNCE_LOAD_FAIL:
 			case NEWS_LOAD_FAIL:
@@ -145,7 +171,7 @@ public class MainIndexFragment extends BaseFragment implements
 				.findViewById(R.id.index_title_news_page);// 首页分页
 
 		for (int i = 0; i < 2; i++) {
-			mListViews.add(bulidListView());
+			mListViews.add(bulidListView(i));
 		}
 		index_title_news_page
 				.setAdapter(new MainDataViewPageAdapter(mListViews));// 设置适配器
@@ -168,7 +194,20 @@ public class MainIndexFragment extends BaseFragment implements
 		iv_index_zt.setOnClickListener(this);
 		LoadGrid();
 		loadNews();// 加载新闻数据
-		//loadAnnouncements();
+		loadAnnouncements();
+		
+		
+
+		pd = new ProgressDialog(context);
+
+		pd.setMessage("正在下载");
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		
+		if(managers.fistLoadAPP){
+			checkUpdate();//监测软件是否有更新
+			managers.fistLoadAPP=false;
+		}
+		
 
 	}
 
@@ -305,17 +344,39 @@ public class MainIndexFragment extends BaseFragment implements
 	 * @author wanglu 泰得利通
 	 * @return
 	 */
-	private ListView bulidListView() {
+	private ListView bulidListView(int type) {
 
 		View layoutView = mInflater.inflate(
 				R.layout.index_news_announts_list_layout, null);
 		ListView listView = (ListView) layoutView
 				.findViewById(R.id.index_news_lv);
-
+		listView.setOnItemClickListener(new NewsOrAnncountClick(type));
 		return listView;
 
 	}
 
+	
+	private final class NewsOrAnncountClick implements OnItemClickListener{
+
+		private int type;
+		public NewsOrAnncountClick(int type){
+			this.type=type;
+		}
+		@Override
+		public void onItemClick(AdapterView<?> adapterView, View arg1, int position,
+				long arg3) {
+			
+			Content content=(Content) adapterView.getItemAtPosition(position);
+			SlideLevelFragment slideLevelFragment=new SlideLevelFragment();
+			slideLevelFragment.setFragmentName(FragmentName.NEWSANNACOUNTFRAGMENT);
+			Bundle bundle=new Bundle();
+			bundle.putSerializable("content", content);
+			bundle.putInt(NewsAnnAcountFragment.SHOWTYPE_KEY, type);
+			slideLevelFragment.setArguments(bundle);
+			managers.IntentFragment(slideLevelFragment);
+		}
+		
+	}
 	/**
 	 * 
 	 * wanglu 泰得利通 显示新闻或推荐信息数据
@@ -633,6 +694,179 @@ public class MainIndexFragment extends BaseFragment implements
 
 	}
 	
+	
+	
+	/**
+	 * 
+	 * wanglu 泰得利通 获取软件版本
+	 * 
+	 * @return
+	 */
+	private String getVersion() {
+		PackageManager pm = context.getPackageManager();
+		try {
+			PackageInfo paInfo = pm.getPackageInfo(context.getPackageName(), 0);
+			return paInfo.versionName;
+		} catch (NameNotFoundException e) {
+
+			e.printStackTrace();
+			return "未知版本";
+		}
+
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 安装APK
+	 * 
+	 * @param file
+	 */
+	private void install(File file) {
+		Intent intent = new Intent();
+		intent.setAction(Intent.ACTION_VIEW);
+		intent.setDataAndType(Uri.fromFile(file),
+				"application/vnd.android.package-archive");
+		this.getActivity().finish();
+		startActivity(intent);
+
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 是否要更新
+	 * 
+	 * @return
+	 */
+	public boolean isUpdate() {
+
+		String oldVerson = getVersion();
+		UpdateInfoService updateInfoService = new UpdateInfoService(context);
+		try {
+			updateInfo = updateInfoService.getUpdateInfo(R.string.updateurl);
+			if (!updateInfo.getVersion().equals(oldVerson)) {
+
+				return true;
+			} else {
+
+				return false;
+			}
+
+		} catch (Exception e) {
+
+			Toast.makeText(context, "监测更新出错", Toast.LENGTH_SHORT).show();
+
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+
+	/**
+	 * 监测更新 wanglu 泰得利通
+	 */
+	private void checkUpdate() {
+		
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+
+				boolean update = isUpdate();
+				if (update) {
+					handler.sendEmptyMessage(UPDATE_APK);
+				}else{
+					handler.sendEmptyMessage(NO_UPDATE_APK);
+				}
+			}
+		}).start();
+	}
+
+	/**
+	 * 更新对话框 wanglu 泰得利通
+	 */
+	private void showUpdatDialog() {
+		AlertDialog.Builder builder=new Builder(context);
+		builder.setIcon(R.drawable.logo);
+		builder.setTitle("更新消息");
+		builder.setMessage("版本"+updateInfo.getVersion()+" 更新信息:"+updateInfo.getDescription());
+		builder.setCancelable(false);
+		
+		
+		
+		builder.setPositiveButton("确定",new android.content.DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+					
+					File file = new File(Constants.APPFiles.DOWNLOAF_FILE_PATH);
+					if (!file.exists()) {
+						file.mkdirs();
+					}
+					DownLoadThreadTask dowTask=new DownLoadThreadTask(updateInfo.getUrl(), Constants.APPFiles.DOWNLOAF_FILE_PATH+"chinawuxi.apk");
+					
+					new Thread(dowTask).start();
+					pd.show();
+					
+				}else{
+					Toast.makeText(context, "SDK不存在", Toast.LENGTH_SHORT).show();
+					
+				}
+				
+				
+				
+			}
+		});
+		
+		
+		builder.setNegativeButton("取消",new android.content.DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+			
+				
+			}
+			
+		});
+		
+		builder.create().show();
+		
+		
+		
+	}
+
+	private class DownLoadThreadTask implements Runnable {
+
+		
+		private String path;
+		private String filePath;
+
+		public DownLoadThreadTask(String path, String filePath) {
+
+			this.path = path;
+			this.filePath = filePath;
+		}
+
+		@Override
+		public void run() {
+
+			try {
+				File file = DownLoadTask.dowLoadNewSoft(path, filePath, pd);
+				pd.dismiss();
+				install(file);// 安装 
+			} catch (Exception e) {
+
+				e.printStackTrace();
+				handler.sendEmptyMessage(DOWLOAD_ERROR);
+				pd.dismiss();
+				
+
+			}
+
+		}
+
+	}
 	
 	
 }

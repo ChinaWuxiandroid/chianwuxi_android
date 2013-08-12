@@ -29,8 +29,9 @@ public abstract class BaseSlideFragment extends BaseFragment {
 		view = inflater.inflate(getLayoutId(), null);
 		this.mInflater=inflater;
 		context=getActivity();
-		initBtn();
 		initUI();
+		initBtn();
+		
 		
 		return view;
 	}
