@@ -38,10 +38,12 @@ public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener 
 			if (fragment instanceof GoverMsgNaviWithContentFragment) {
 				contentNavigatorWithContentFragment = (GoverMsgNaviWithContentFragment) fragment;
 				contentNavigatorWithContentFragment.setParentMenuItem(menuItem);
+				
 				initLayoutListner
 						.bindContentLayout(contentNavigatorWithContentFragment);
 			} else if (fragment instanceof GoverMsgContentListFragment) {
 				contentListFragment = (GoverMsgContentListFragment) fragment;
+				
 				contentListFragment.setParentItem(menuItem);
 				initLayoutListner.bindContentLayout(contentListFragment);
 			} else if (fragment instanceof GoverMsgWebFragment) {

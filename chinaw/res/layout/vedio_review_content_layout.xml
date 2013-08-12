@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        layout="@layout/child_fragment_itemcontent_header_layout" />
+    
+    <TextView 
+        android:id="@+id/review_content_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10sp"
+        android:layout_marginBottom="10sp"
+        android:text="AAAAAAA"
+        android:textSize="15sp"/>
+    
+    <LinearLayout
+        android:layout_width="210sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" >
+
+        <RadioGroup
+            android:id="@+id/review_content_radiogroup"
+            android:layout_width="0dp"
+            android:layout_height="25sp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="2"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/review_content_radiobtn_review"
+                style="@style/goverinterpeople_mine_radiobutton_style"
+                android:layout_weight="1"
+                android:background="@drawable/public_service_channel_2bg"
+                android:checked="true"
+                android:text="往期回顾"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/review_content_radiobtn_memoir"
+                style="@style/goverinterpeople_mine_radiobutton_style"
+                android:layout_weight="1"
+                android:text="访谈实录"
+                android:textColor="@color/gip_second_frame_button_brown"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/review_content_radiobtn_message"
+                style="@style/goverinterpeople_mine_radiobutton_style"
+                android:layout_weight="1"
+                android:text="留言提问"
+                android:textColor="@color/gip_second_frame_button_brown"
+                android:textSize="12sp" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/vedio_review_content_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="8" >
+
+    </FrameLayout>
+
+</LinearLayout>

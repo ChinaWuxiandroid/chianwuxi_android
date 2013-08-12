@@ -10,12 +10,10 @@
         android:layout_weight="1"
         layout="@layout/child_fragmend_header_layout" />
 
-    
-      <include
+    <include
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="9"
         layout="@layout/normal_search_layout" />
-      
 
 </LinearLayout>

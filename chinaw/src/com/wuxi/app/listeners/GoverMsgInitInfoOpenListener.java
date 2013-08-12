@@ -9,23 +9,23 @@ import com.wuxi.domain.MenuItem;
  * */
 public class GoverMsgInitInfoOpenListener {
 	/**
-	 * 0 -没有过滤搜索条目类型    1-部门时间型   2-区县时间型  3-部门时间型（4部门型）
+	 * 0 -没有过滤搜索条目类型    1-部门时间型   2-区县时间型  
 	 * */
-	public static int getChannelFragmentType(Channel channel){
+	public static int getChannelFragmentType(Channel channel,int defaultType){
 
-		int fifterType=0;  //默认没有搜索条目类型
+		int fifterType=defaultType;  //默认没有搜索条目类型
 		String channleName=channel.getChannelName();
 		//规划计划
 		if(channleName.equals("中长期规划")||channleName.equals("年度规划计划")||
 				channleName.equals("专项规划计划")){
-			fifterType=3;
+			fifterType=1;
 		}
 		//工作报告
 		else if(channleName.equals("县区政府工作报告")){
 			fifterType=2;
 		}
 		else if(channleName.equals("部门工作总结")){
-			fifterType=3;
+			fifterType=1;
 		}
 		//业务工作
 		//财政信息
@@ -91,9 +91,9 @@ public class GoverMsgInitInfoOpenListener {
 		return fifterType;
 	}
 
-	public static int getMenuItemFragmentType(MenuItem menuItem){
+	public static int getMenuItemFragmentType(MenuItem menuItem,int defaultType){
 
-		int fifterType=0;  //默认没有搜索条目类型
+		int fifterType=defaultType;  //默认没有搜索条目类型
 		String menuName=menuItem.getName();
 		//政府概括 全是 0
 		//政策法规
@@ -102,7 +102,7 @@ public class GoverMsgInitInfoOpenListener {
 		}
 		else if(menuName.equals("部门文件")||menuName.equals("其它文件")||
 				menuName.equals("政策解读")){
-			fifterType=3;
+			fifterType=1;
 		}
 		//行政事项
 		else if(menuName.equals("行政许可")||menuName.equals("行政处罚")||

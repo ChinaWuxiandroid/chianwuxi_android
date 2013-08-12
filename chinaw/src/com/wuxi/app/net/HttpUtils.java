@@ -78,6 +78,31 @@ public final class HttpUtils {
 
 		return result;
 	}
+	
+
+	/** —————————get提交获取String——————————— **/
+	public String executeGetToStringGBK(String url, int timeout) {
+		HttpResponse httpResponse = executeGet_response(url, timeout);
+		HttpEntity entity = null;
+		String result = null;
+		try {
+			if(httpResponse!=null){
+				entity = httpResponse.getEntity();
+				if(entity!=null){
+					result = EntityUtils.toString(entity, "gb2312");
+				}
+			}
+			
+		
+			
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 
 	/** —————————post提交——————————— **/
 	public InputStream executePost(String url,List<NameValuePair> nameValuesPairs, int timeout, String charSet) {

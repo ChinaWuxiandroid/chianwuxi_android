@@ -255,9 +255,7 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 		} else if (object instanceof MenuItem) {
 			adapter.setSelectedPosition(position); // 刷新左侧导航listView背景
 			adapter.notifyDataSetInvalidated();
-
 			showContentFragment(showMenItemContentFragment((MenuItem) object));
-
 		}
 	}
 

@@ -7,6 +7,7 @@ import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.CityMapFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgContentListFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgFragmentWebFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgNaviWithContentFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgSearchContentListFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgWebFragment;
@@ -33,9 +34,9 @@ public class InitializContentLayout {
 	 * @param context
 	 */
 	public static void initMenuItemContentLayout(MenuItem menuItem,List<MenuItem> subMenuItems,final Context context) {
-		
+
 		if(menuItem.getName().equals("咨询中心")){
-			
+
 			for (final MenuItem menu : subMenuItems) {
 
 				if (menu.getType() == MenuItem.WAP_MENU) {// wap类型菜单
@@ -67,10 +68,10 @@ public class InitializContentLayout {
 					menu.setContentFragment(InfoNavigatorWithContentFragment.class);
 				}
 			}
-			
-			
+
+
 		}else if(menuItem.getName().equals("公共服务")){
-			
+
 			for (final MenuItem menu : subMenuItems) {
 
 				if (menu.getType() == MenuItem.WAP_MENU) {// wap类型菜单
@@ -105,10 +106,10 @@ public class InitializContentLayout {
 				}
 
 			}
-			
-			
+
+
 		}else if(menuItem.getName().equals("政府信息公开")){
-			
+
 			for (final MenuItem menu : subMenuItems) {
 
 				// 普通菜单
@@ -136,7 +137,6 @@ public class InitializContentLayout {
 									else{
 										menu.setContentFragment(GoverMsgContentListFragment.class);// 内容列表界面
 									}
-
 								}
 							} catch (NetException e) {
 								e.printStackTrace();
@@ -156,14 +156,20 @@ public class InitializContentLayout {
 				else if (menu.getType() == MenuItem.WAP_MENU) {
 					menu.setContentFragment(GoverMsgWebFragment.class);
 				} 
+				//碎片类型菜单
+				else if (menu.getType() == MenuItem.FRAGMENT_MENU) {
+					menu.setContentFragment(GoverMsgFragmentWebFragment.class);
+				} 
 			}
-			
+
+
+
 		}
-		
-		
-		
-		
-		
+
+
+
+
+
 	}
 
 	public static void initChannelContentLayout(Channel channel) {

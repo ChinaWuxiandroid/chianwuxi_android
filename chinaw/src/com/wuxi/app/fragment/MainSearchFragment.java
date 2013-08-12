@@ -1,14 +1,38 @@
 package com.wuxi.app.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONException;
+
+import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wuxi.app.R;
-import com.wuxi.app.adapter.SimpleListViewFragmentAdapter;
-import com.wuxi.app.fragment.search.AdvancedSearchFragment;
+import com.wuxi.app.adapter.SearchFragmentAdapter;
+import com.wuxi.app.engine.SearchService;
+import com.wuxi.app.util.Constants;
+import com.wuxi.domain.SearchResultWrapper;
+import com.wuxi.domain.SearchResultWrapper.SearchPage;
+import com.wuxi.domain.SearchResultWrapper.SearchResult;
+import com.wuxi.exception.NODataException;
+import com.wuxi.exception.NetException;
 
 
 
@@ -17,41 +41,125 @@ import com.wuxi.app.fragment.search.AdvancedSearchFragment;
  * @author 杨宸 智佳
  * */
 
-public class MainSearchFragment extends BaseSlideFragment implements OnClickListener{
+public class MainSearchFragment extends BaseSlideFragment implements OnClickListener,OnScrollListener, OnItemClickListener{
+	protected static final int RESULTS_LOAD_SUCESS = 0;// 搜索结果获取成功
+	protected static final int RESULTS_LOAD_FAIL = 1;// 搜索结果获取失败
+	protected static final int PAGE_COUNT = 5;// 每次加载的条数
 
 	private EditText wordKey_Edt;        //搜索关键字输入框
 	private ImageButton normalSearch_Btn,advancedSearch_Btn;   //普通搜索  和    跳转到高级搜索 按钮
 	protected ListView resultListView;						// 搜索结果ListView 
+	private ProgressBar normalSearch_pb;
+
+	private View loadMoreView;// 加载更多视图
+	private Button loadMoreButton;
+	private int visibleLastIndex;
+	private int visibleItemCount;// 当前显示的总条数
+	private boolean isSwitch = false;// 切换
+	private boolean isFirstLoad = true;// 是不是首次加载数据
+	private boolean isLoading = false;
+	private ProgressBar pb_loadmoore;
+	private SearchFragmentAdapter SearchFragmentAdapter;
+
+	private LinearLayout searchResultSummary_layout;
+	private TextView query_txtView;
+	private TextView result_textView;
+
+
+	protected SearchResultWrapper searchResultWrapper;
+	protected SearchPage page;
+	protected List<SearchResult> results=new ArrayList<SearchResultWrapper.SearchResult>();
+
+	private int pageNum=1;   //加载的页数  
+	private String queryContent="";
+
+	private Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case RESULTS_LOAD_SUCESS:
+				normalSearch_pb.setVisibility(ProgressBar.GONE);
+				showSearchResults();
+
+				break;
+
+			case RESULTS_LOAD_FAIL:
+				normalSearch_pb.setVisibility(ProgressBar.GONE);
+				String tip = msg.obj.toString();
+				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
+				break;
+			}
+		};
+	};
 
 	@Override
-	public  void initUI() {
+	public void initUI() {
 		super.initUI();
 		findView();
 	}
-	
+
 	public void findView(){
 		wordKey_Edt=(EditText)view.findViewById(R.id.search_editText_keyword);
 		normalSearch_Btn=(ImageButton)view.findViewById(R.id.search_imageButton_normal_search);
 		advancedSearch_Btn=(ImageButton)view.findViewById(R.id.search_imageButton_to_advanced_search);
 		resultListView=(ListView)view.findViewById(R.id.search_listView_result);
-		
+		normalSearch_pb=(ProgressBar) view.findViewById(R.id.search_normalsearch_pb);
+
+		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+				null);
+		loadMoreButton = (Button) loadMoreView
+				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
+		resultListView.addFooterView(loadMoreView);// 为listView添加底部视图
+		resultListView.setOnScrollListener(this);// 增加滑动监听
+		resultListView.setOnItemClickListener(this);
+		loadMoreButton.setOnClickListener(this);
+
+		searchResultSummary_layout=(LinearLayout)view.findViewById(R.id.search_resultsummary_layout);
+		query_txtView=(TextView)view.findViewById(R.id.search_result_title);
+		result_textView=(TextView)view.findViewById(R.id.search_result);
+
 		normalSearch_Btn.setOnClickListener(this);
 		advancedSearch_Btn.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
-		
 
 		switch (v.getId()) {
 		case R.id.search_imageButton_normal_search:
-			String keyWord=wordKey_Edt.getText().toString();
-			inflateResultListView();
+			queryContent=wordKey_Edt.getText().toString();
+			if(!"".equals(queryContent)){
+				//关闭软键盘
+				InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE); 
+				imm.hideSoftInputFromWindow(wordKey_Edt.getWindowToken(), 0);
+
+				normalSearch_pb.setVisibility(ProgressBar.VISIBLE);
+				
+				inflateResultListView(queryContent);
+			}
+			else{
+				Toast.makeText(context, "请输入搜索内容", Toast.LENGTH_SHORT).show();
+			}
+			
 
 			break;
 		case R.id.search_imageButton_to_advanced_search:
-			AdvancedSearchFragment searchAdvancedFragment = new AdvancedSearchFragment();
-			managers.IntentFragment(searchAdvancedFragment);
+			BaseSlideFragment baseSlideFragment=(BaseSlideFragment)this;
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+					Constants.FragmentName.ADVANCED_SEARCH_FRAGMENT, null);
+			break;
+
+		case R.id.loadMoreButton:
+
+			if (searchResultWrapper != null && searchResultWrapper.getPage()!=null) {// 还有下一条记录
+				SearchPage page=searchResultWrapper.getPage();
+				if((Integer.valueOf(page.getPagesize())*Integer.valueOf(page.getCurrentpage()))<Integer.valueOf(page.getHitcount())){
+					isSwitch = false;
+					loadMoreButton.setText("loading.....");
+					loadSearchResults(queryContent,PAGE_COUNT,++pageNum);
+				}
+			}
 			break;
 		}
 	}
@@ -59,14 +167,103 @@ public class MainSearchFragment extends BaseSlideFragment implements OnClickList
 	/*
 	 * 显示搜索结果
 	 * */
-	public void inflateResultListView(){
-		//测试数据
-		String[] testData={"无锡锡山山无锡 (关联度: 100%)无锡得名于山，传说战国末年，秦始皇派大将王翦大军打楚国时，军队常驻锡山，士兵发现刻有“有锡兵，天下争”，“无锡宁，天下清”等字句古碑，王翦经问百姓知http://www.wuxi.gov.cn/mlxc/wxrw/wxcs/6190478.shtml - 4.93 kB",
-				"无锡景（无锡民歌） (关联度: 99%)《无锡景》是江浙一带流行的典型曲调。主要叙述了在旧时无锡的一个茶楼里,游客面对著万顷碧波,憩歇品茶,一位歌女在一把二胡的伴下唱著“我有一段情,唱拨拉诸公听……”幽雅清脆的歌声为游客们助兴http://www.wuxi.gov.cn/mlxc/csmp/mqu/5895589.sht",
-		"宣传无锡 推介无锡 (关联度: 98%)大连软交会”登录处无锡指网生物识别科技有限公司展台人头攒动无锡全真通科技有限公司成展会亮点无锡物...数量800家。无锡展区以新颖的设计、先进的展品、高精的技术在整个展区脱颖而出。我市具有"};
-		resultListView.setAdapter(new SimpleListViewFragmentAdapter(mInflater,testData));
+	public void inflateResultListView(String query){
+		loadSearchResults(query,PAGE_COUNT,pageNum);
 	}
-	
+
+	public void loadSearchResults(final String query,final int countperpage,final int pagenum){
+		if (isFirstLoad || isSwitch) {
+			normalSearch_pb.setVisibility(ProgressBar.VISIBLE);
+		} else {
+			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
+		}
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				Message msg = handler.obtainMessage();
+				SearchService searchService = new SearchService(context);
+				try {
+					searchResultWrapper=searchService.getNormalSearchResult(query, Constants.Urls.SEARCH_SITENAME, countperpage, pagenum);
+					page=searchResultWrapper.getPage();
+					results=searchResultWrapper.getResults();
+					if (page != null&&results!=null) {
+						msg.what = RESULTS_LOAD_SUCESS;
+					} else {
+						msg.what = RESULTS_LOAD_FAIL;
+						msg.obj = "内容获取错误,稍后重试";
+					}
+					handler.sendMessage(msg);
+
+				} catch (NetException e) {
+					e.printStackTrace();
+					msg.what = RESULTS_LOAD_FAIL;
+					msg.obj = e.getMessage();
+					handler.sendMessage(msg);
+				} catch (JSONException e) {
+					e.printStackTrace();
+					msg.what = RESULTS_LOAD_FAIL;
+					msg.obj = e.getMessage();
+					handler.sendMessage(msg);
+				} catch (NODataException e) {
+					e.printStackTrace();
+					msg.what = RESULTS_LOAD_FAIL;
+					msg.obj = e.getMessage();
+					handler.sendMessage(msg);
+				}
+			}
+		}).start();
+	}
+
+	//	public void loadMore(View view) {
+	//		if (isLoading) {
+	//			return;
+	//		} else {
+	//			loadSearchResults(queryContent,PAGE_COUNT,++pageNum);
+	//		}
+	//	}
+
+	public void showSearchResults(){
+
+		searchResultSummary_layout.setVisibility(View.VISIBLE);
+		query_txtView.setText(queryContent);
+		result_textView.setText("共 "+page.getHitcount()+"项     以下是第  1-"+
+				(Integer.valueOf(page.getPagesize())*Integer.valueOf(page.getCurrentpage()))+
+				" 项 （搜索用时 "+page.getSearchtime()+" 秒）");
+		
+		if (isFirstLoad) {
+			SearchFragmentAdapter=new SearchFragmentAdapter(context,results);
+			isFirstLoad = false;
+			resultListView.setAdapter(SearchFragmentAdapter);
+			normalSearch_pb.setVisibility(ProgressBar.GONE);
+			isLoading = false;
+		} else {
+			results=searchResultWrapper.getResults();
+			if (isSwitch) {
+				SearchFragmentAdapter.setResults(results);
+				normalSearch_pb.setVisibility(ProgressBar.GONE);
+			} else {
+				SearchFragmentAdapter.addResults(results);
+				System.out.println("SearchFragmentAdapter.getCount():"+SearchFragmentAdapter.getCount());
+			}
+			SearchFragmentAdapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
+			resultListView.setSelection(visibleLastIndex
+					- visibleItemCount + 1); // 设置选中项
+			isLoading = false;
+		}
+
+		if (searchResultWrapper != null && searchResultWrapper.getPage()!=null) {// 还有下一条记录
+			SearchPage page=searchResultWrapper.getPage();
+			if((Integer.valueOf(page.getPagesize())*Integer.valueOf(page.getCurrentpage()))<Integer.valueOf(page.getHitcount())){
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+				loadMoreButton.setText("点击加载更多");
+			}
+		} else {
+			resultListView.removeFooterView(loadMoreView);
+		}
+
+	}
+
 	@Override
 	protected int getLayoutId() {
 		return R.layout.main_search_fragment_layout;
@@ -77,6 +274,26 @@ public class MainSearchFragment extends BaseSlideFragment implements OnClickList
 		return "全站搜索";
 	}
 
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+		// TODO Auto-generated method stub
+		BaseSlideFragment baseSlideFragment=(BaseSlideFragment)this;
+		baseSlideFragment.slideLinstener.replaceFragment(null, position,
+				Constants.FragmentName.SEARCH_DETAIL_FRAGMENT, null);
+	}
 
-	
+	@Override
+	public void onScroll(AbsListView view, int firstVisibleItem,
+			int visibleItemCount, int totalItemCount) {
+		this.visibleItemCount = visibleItemCount;
+		visibleLastIndex = firstVisibleItem + visibleItemCount - 1;// 最后一条索引号
+	}
+
+	@Override
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+		int itemsLastIndex = SearchFragmentAdapter.getCount() - 1; // 数据集最后一项的索引
+		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
+	}
+
+
 }

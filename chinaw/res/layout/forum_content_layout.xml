@@ -12,165 +12,66 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5sp"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5sp"
-            android:text="发帖人："
-            android:textColor="@color/gip_second_frame_button_brown"
-            android:textSize="10sp" />
-
-        <TextView
-            android:id="@+id/forum_content_sentUser_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="版主"
-            android:textColor="@color/gip_second_frame_button_brown"
-            android:textSize="10sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
-            android:text="发帖时间："
-            android:textColor="@color/gip_second_frame_button_brown"
-            android:textSize="10sp" />
-
-        <TextView
-            android:id="@+id/forum_content_begintime_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2013-06-03 14:30"
-            android:textColor="@color/gip_second_frame_button_brown"
-            android:textSize="10sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5sp"
-            android:text="截止时间："
-            android:textColor="@color/gip_second_frame_button_brown"
-            android:textSize="10sp" />
-
-        <TextView
-            android:id="@+id/forum_content_endtime_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2013-06-21 14:30"
-            android:textColor="@color/gip_second_frame_button_brown"
-            android:textSize="10sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
-            android:text="点击数："
-            android:textColor="@color/gip_second_frame_button_brown"
-            android:textSize="10sp" />
-
-        <TextView
-            android:id="@+id/forum_content_readnum_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="51"
-            android:textColor="@color/gip_second_frame_button_brown"
-            android:textSize="10sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
-            android:text="回复数："
-            android:textColor="@color/gip_second_frame_button_brown"
-            android:textSize="10sp" />
-
-        <TextView
-            android:id="@+id/forum_content_resurltnum_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textColor="@color/gip_second_frame_button_brown"
-            android:textSize="10sp" />
-
-        <TextView
-            android:id="@+id/forum_content_click_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
-            android:text="点击回复"
-            android:textColor="@color/gip_second_frame_button_brown"
-            android:textSize="10sp" />
-    </LinearLayout>
-
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="1dp" 
-        android:background="#ffffff"/>
-
-    <TextView
-        android:id="@+id/forum_content_title_text"
-        android:layout_width="fill_parent"
         android:layout_height="0dip"
-        android:layout_weight="1"
-        android:text="title"
-        android:gravity="center" >
-    </TextView>
-    
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="1dp" 
-        android:background="#ffffff"/>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="7"
-        android:background="#ffffff"
+        android:layout_weight="8"
         android:orientation="vertical" >
 
-        <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="0dip"
-            android:layout_weight="5" >
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="content" >
-            </TextView>
-        </ScrollView>
-
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dip"
-            android:layout_weight="2" >
+            android:layout_width="220sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" >
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="64dp"
-                android:text="time" />
+            <RadioGroup
+                android:id="@+id/forum_content_radiogroup"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="2"
+                android:orientation="horizontal" >
 
+                <RadioButton
+                    android:id="@+id/forum_content_info_radiobtn"
+                    style="@style/goverinterpeople_mine_radiobutton_style"
+                    android:layout_weight="1"
+                    android:background="@drawable/gip_button_selected_bk"
+                    android:checked="true"
+                    android:text="主题内容"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+                <RadioButton
+                    android:id="@+id/forum_content_comment_radiobtn"
+                    style="@style/goverinterpeople_mine_radiobutton_style"
+                    android:layout_marginLeft="10sp"
+                    android:layout_weight="1"
+                    android:text="网友评论和回复"
+                    android:textColor="@color/gip_second_frame_button_brown"
+                    android:textSize="12sp" />
+            </RadioGroup>
         </LinearLayout>
+        
+        <ImageView 
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#ffffff"
+            android:layout_marginTop="3sp"
+            android:layout_marginBottom="5sp"
+            />
+
+        <FrameLayout
+            android:id="@+id/forum_content_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </FrameLayout>
     </LinearLayout>
-    
-    <Button 
+
+    <Button
         android:id="@+id/forum_content_comment_btn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="发表评论"
-        android:background="@drawable/gover_online_sub_bg"
-        android:textColor="#FFFFFF"/>
-    
-    
+        android:background="@drawable/vedio_home_saybtn"
+        android:text="发表评论或回复"
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>

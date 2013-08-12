@@ -10,7 +10,7 @@ import com.wuxi.domain.MenuItem;
  * 
  * 
  * @author wanglu 信息中心具有左右导航的视图
- * 
+ * s
  */
 
 public class InfoNavigatorWithContentFragment extends
@@ -23,8 +23,6 @@ public class InfoNavigatorWithContentFragment extends
 			wapFragment.setParentItem(menuItem);
 			return wapFragment;
 		}
-	
-
 		return null;
 	}
 

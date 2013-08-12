@@ -74,13 +74,10 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 	private int yearFifter=DEFAULT_YEAR_FIFTER;   //2013
 
 	private static final String[] zoneArr={DEFAULT_ZONE_FIFTER,"江阴","宜兴","惠山","滨湖","崇安","南长 ","北塘","无锡新区"};
-	private static final String[] fourDeptArr={DEFAULT_DEPT_FIFTER,"政府办","无锡市发展和改革委员会","无锡市经济和信息化委员会","无锡市信息化和无线电管理局"};
-	
 	
 	public static final int DEPT_TYPE=1;
 	public static final int ZONE_TYPE=2;
-	public static final int FOURDEPT_TYPE=3;
-	private int filterType=DEPT_TYPE;  //检索过滤 类型  1-部门时间型(缺省类型)   2-区县时间型  3-部门时间型（4部门型）
+	private int filterType=DEPT_TYPE;  //检索过滤 类型  1-部门时间型(缺省类型)   2-区县时间型  
 
 	public void setFifterType(int type){
 		this.filterType=type;
@@ -158,32 +155,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 			initCountrySpinner();
 			initYearSpinner();
 			break;
-		case FOURDEPT_TYPE:
-			initCountrySpinner();
-			initYearSpinner();
-			break;
 		}
-	}
-
-	public void initFourDeptSpinner(){
-		
-		ArrayAdapter<String> country_Spinner_adapter = new ArrayAdapter<String>(context,
-				R.layout.my_simple_spinner_item_layout, fourDeptArr);
-		country_Spinner_adapter.setDropDownViewResource(R.layout.my_spinner_medium_dropdown_item);
-		partment_sp.setAdapter(country_Spinner_adapter);
-		partment_sp.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View view,
-					int arg2, long arg3) {
-				deptStrFifter=((TextView)view).getText().toString();
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-			}
-		});
-		partment_sp.setVisibility(View.VISIBLE);
 	}
 	
 	public void initCountrySpinner(){
@@ -320,14 +292,6 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 			if(yearFifter==DEFAULT_YEAR_FIFTER)
 				yearFifter=-1;
 			fifter.setZone(zoneStrFifter);
-			fifter.setYear(yearFifter);
-			break;
-		case FOURDEPT_TYPE:
-			if(DEFAULT_DEPT_FIFTER.equals(deptStrFifter))
-				deptStrFifter=null;
-			if(yearFifter==DEFAULT_YEAR_FIFTER)
-				yearFifter=-1;
-			fifter.setDept(deptStrFifter);
 			fifter.setYear(yearFifter);
 			break;
 		}

@@ -66,7 +66,8 @@ public class GoverInterPeopleVideoLiveFragment  extends RadioButtonChangeFragmen
 			break;
 
 		case R.id.gip_video_bdroom_radioBtn_review:
-
+			VedioReviewFragment reviewFragment = new VedioReviewFragment();
+			onTransaction(reviewFragment);
 			break;
 
 		case R.id.gip_video_bdroom_radioBtn_guest:

@@ -64,7 +64,6 @@ implements OnCheckedChangeListener{
 		=new GIPRadioButtonStyleChange(R.drawable.gip_button_selected_bk,
 				0,Color.WHITE,R.color.gip_second_frame_button_brown);
 		radioButtonStyleChange.refreshRadioButtonStyle(view,radioButtonIds,checkedId);
-		System.out.println("paret");
 	}
 	
 	/*

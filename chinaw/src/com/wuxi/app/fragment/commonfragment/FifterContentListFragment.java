@@ -11,9 +11,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
@@ -39,7 +41,7 @@ import com.wuxi.exception.NetException;
  * 
  */
 public abstract class FifterContentListFragment  extends BaseFragment implements
-OnScrollListener, OnItemClickListener{
+OnScrollListener, OnItemClickListener, OnClickListener {
 	protected static final int CONTENT_LOAD_SUCCESS = 0;
 	protected static final int CONTENT_LOAD_FAIL = 1;
 	private static final int PAGE_SIZE = 10;
@@ -56,7 +58,7 @@ OnScrollListener, OnItemClickListener{
 	private boolean isSwitch = false;// 切换
 	private boolean isFirstLoad = true;// 是不是首次加载数据
 	private boolean isLoading = false;
-
+	private ProgressBar pb_loadmoore;
 	/**
 	 * 过滤包装类
 	 * */
@@ -154,6 +156,14 @@ OnScrollListener, OnItemClickListener{
 				isLoading = false;
 			}
 		}
+		
+		if (contentWrapper.isNext()) {
+			pb_loadmoore.setVisibility(ProgressBar.GONE);
+			loadMoreButton.setText("点击加载更多");
+
+		} else {
+			content_list_lv.removeFooterView(loadMoreView);
+		}
 	}
 
 	/**
@@ -171,6 +181,8 @@ OnScrollListener, OnItemClickListener{
 	public void loadData(final int start, final int end) {
 		if (isFirstLoad || isSwitch) {
 			content_list_pb.setVisibility(ProgressBar.VISIBLE);
+		} else {
+			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
 		}
 		new Thread(new Runnable() {
 
@@ -231,9 +243,12 @@ OnScrollListener, OnItemClickListener{
 				null);
 		loadMoreButton = (Button) loadMoreView
 				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
 
 		content_list_lv.addFooterView(loadMoreView);// 为listView添加底部视图
 		content_list_lv.setOnScrollListener(this);// 增加滑动监听
+		loadMoreButton.setOnClickListener(this);
 	}
 
 	protected MenuItem parentItem;
@@ -259,15 +274,15 @@ OnScrollListener, OnItemClickListener{
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		int itemsLastIndex = adapter.getCount() - 1; // 数据集最后一项的索引
 		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
-				&& visibleLastIndex == lastIndex) {
-			if (contentWrapper != null && contentWrapper.isNext()) {// 还有下一条记录
-
-				isSwitch = false;
-				loadMoreButton.setText("loading.....");
-				loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_SIZE);
-			}
-		}
+//		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
+//				&& visibleLastIndex == lastIndex) {
+//			if (contentWrapper != null && contentWrapper.isNext()) {// 还有下一条记录
+//
+//				isSwitch = false;
+//				loadMoreButton.setText("loading.....");
+//				loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_SIZE);
+//			}
+//		}
 	}
 
 	public void changeChannelOrMenItem(Channel channel, MenuItem menuItem) {
@@ -276,6 +291,26 @@ OnScrollListener, OnItemClickListener{
 		this.channel = channel;
 		this.parentItem = menuItem;
 		loadData(0, PAGE_SIZE);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.loadMoreButton:
+			if (contentWrapper != null && contentWrapper.isNext()) {// 还有下一条记录
+
+				isSwitch = false;
+				loadMoreButton.setText("loading.....");
+				loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_SIZE);
+			}
+			break;
+		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

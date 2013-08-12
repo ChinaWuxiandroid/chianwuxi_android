@@ -114,6 +114,7 @@ public class GoverSaoonItemService extends Service {
 			goverSaoonItemWrapper.setPrevious(jresult.getBoolean("previous"));
 			goverSaoonItemWrapper.setTotalRowsAmount(jresult
 					.getInt("totalRowsAmount"));
+			
 			Object o = jresult.get("data");
 
 			if (!o.toString().equals("[]") && !o.equals("null")) {

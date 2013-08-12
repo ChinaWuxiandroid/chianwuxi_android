@@ -4,111 +4,170 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    
-    <LinearLayout 
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        
-        <ImageView
-        android:id="@+id/bdroom_home_live_imageview"
-        android:layout_width="150dp"
-        android:layout_height="120dp"
-        android:src="@drawable/login_log_icon" />
-        
-        <LinearLayout 
+        android:orientation="vertical" >
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-            
-        <TextView 
-            android:id="@+id/bdroom_home_live_theme_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="访问主题："
-            android:textColor="#FF4500"
-            />
-        
-        <TextView 
-            android:id="@+id/bdroom_home_live_theme_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="无锡地税局长丁源专访---“百姓身边的地税“"
-            />
-            
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
+                android:text="访问主题：" />
+
+            <TextView
+                android:id="@+id/bdroom_home_live_theme_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="锻炼过硬作风，创出过硬成果，在实现百姓“平安梦”中担当主力军" />
         </LinearLayout>
-        
-        
-        
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
+                android:text="访问时间：" />
+
+            <TextView
+                android:id="@+id/bdroom_home_live_time_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2013年5月10日上午10:00" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
+                android:text="访问嘉宾：" />
+
+            <TextView
+                android:id="@+id/bdroom_home_live_guest_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="无锡市副市长、公安局长 赵志新" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/vedio_bdroom_home_live_more_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="5sp"
+            android:text="更多 > >" />
     </LinearLayout>
-    
-    <LinearLayout 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        
-        <TextView 
-            android:id="@+id/bdroom_home_live_time_text"
-            android:layout_width="wrap_content"
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5sp"
+        android:background="#ffffff" />
+
+    <ScrollView
+        android:id="@+id/home_live_scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+       <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="访问时间："
-            android:textColor="#FF4500"
-            android:layout_marginLeft="5sp"
-            />
-        <TextView 
-            android:id="@+id/bdroom_home_live_time_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2013年4月19日上午10:00"
-            />
-    </LinearLayout>
-    
-    <LinearLayout 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        
-        <TextView 
-            android:id="@+id/bdroom_home_live_guest_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="访问嘉宾："
-            android:textColor="#FF4500"
-            android:layout_marginLeft="5sp"
-            />
-        <TextView 
-            android:id="@+id/bdroom_home_live_guest_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="无锡市地税局党组书记、局长  丁源"
-            />
-    </LinearLayout>
-    
-    <LinearLayout 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        
-        <TextView 
-            android:id="@+id/bdroom_home_live_info_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="主要内容："
-            android:textColor="#FF4500"
-            android:layout_marginLeft="5sp"
-            />
-        <TextView 
-            android:id="@+id/bdroom_home_live_info_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="围绕税收宣传月主题“税收、发展、民生”，介绍无锡百姓身边的地税机关，回答百姓关心的地税政策和热点问题"
-            />
-    </LinearLayout>
-    
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/bdroom_home_live_imageview"
+                    android:layout_width="150dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/video_bg" />
+
+                <TextView
+                    android:id="@+id/vedio_dbroom_home_live_click_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginTop="10sp"
+                    android:text="点击观看视频 > > >" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5sp"
+                    android:text="访问主题："
+                    android:textColor="#FF4500" />
+
+                <TextView
+                    android:id="@+id/bdroom_home_live_theme_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="无锡地税局长丁源专访---“百姓身边的地税“" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5sp"
+                    android:text="访问时间："
+                    android:textColor="#FF4500" />
+
+                <TextView
+                    android:id="@+id/bdroom_home_live_time_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2013年4月19日上午10:00" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5sp"
+                    android:text="访问嘉宾："
+                    android:textColor="#FF4500" />
+
+                <TextView
+                    android:id="@+id/bdroom_home_live_guest_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="无锡市地税局党组书记、局长  丁源" />
+            </LinearLayout>
+            
+         
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

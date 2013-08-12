@@ -29,10 +29,13 @@ public class TimeFormateUtil {
 
 	@SuppressLint("SimpleDateFormat")
 	public static String formateTime(String time, String pattern) {
-
-		Date date = new Date(Long.parseLong(time));
-		SimpleDateFormat formater = new SimpleDateFormat(pattern);
-		return formater.format(date);
+		if(time!=null){
+			Date date = new Date(Long.parseLong(time));
+			SimpleDateFormat formater = new SimpleDateFormat(pattern);
+			return formater.format(date);	
+		}
+		else
+			return null;
 	}
 
 	public static List<String> getYears(int startYear) {

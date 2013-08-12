@@ -11,11 +11,89 @@
         android:layout_weight="1"
         layout="@layout/child_fragmend_header_layout" />
 
-    <ListView
-        android:id="@+id/search_advanced_listview_result_list"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dip"
-        android:layout_weight="9" >
-    </ListView>
+        android:layout_weight="9"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/search_resultsummary_layout"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:orientation="vertical"
+            android:visibility="invisible" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:gravity="center_vertical"
+                    android:text="找到符合搜索   "
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/search_result_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:gravity="center_vertical"
+                    android:text="无锡 "
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:gravity="center_vertical"
+                    android:text="  的记录"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/search_result"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="共 28892项     以下是第  1-10 项 （搜索用时 0.484 秒）"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gip_background_gray" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <ProgressBar
+                    android:id="@+id/search_normalsearch_pb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone" />
+
+                <ListView
+                    android:id="@+id/search_listView_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:cacheColorHint="#00000000"
+                    android:descendantFocusability="blocksDescendants" >
+                </ListView>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

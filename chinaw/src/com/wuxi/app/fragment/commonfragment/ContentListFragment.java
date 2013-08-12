@@ -40,7 +40,7 @@ import com.wuxi.exception.NetException;
 @SuppressLint("HandlerLeak")
 public abstract class ContentListFragment extends BaseFragment implements
 		OnScrollListener, OnItemClickListener, OnClickListener {
-
+	
 	protected static final int CONTENT_LOAD_SUCCESS = 0;
 	protected static final int CONTENT_LOAD_FAIL = 1;
 	private static final int PAGE_SIZE = 10;
@@ -58,6 +58,7 @@ public abstract class ContentListFragment extends BaseFragment implements
 	private boolean isFirstLoad = true;// 是不是首次加载数据
 	private boolean isLoading = false;
 	private ProgressBar pb_loadmoore;
+	
 	private Handler handler = new Handler() {
 		@SuppressLint("HandlerLeak")
 		public void handleMessage(Message msg) {
@@ -66,6 +67,7 @@ public abstract class ContentListFragment extends BaseFragment implements
 				showContentData();
 				break;
 			case CONTENT_LOAD_FAIL:
+				content_list_pb.setVisibility(ProgressBar.INVISIBLE);
 				String tip = msg.obj.toString();
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
@@ -119,7 +121,6 @@ public abstract class ContentListFragment extends BaseFragment implements
 			loadMoreButton.setText("点击加载更多");
 
 		} else {
-
 			content_list_lv.removeFooterView(loadMoreView);
 		}
 

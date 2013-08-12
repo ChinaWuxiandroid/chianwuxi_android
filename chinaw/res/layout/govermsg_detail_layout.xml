@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="收起" />
+            android:text="收   起" />
     </RelativeLayout>
 
 </LinearLayout>
