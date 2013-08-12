@@ -16,5 +16,4 @@ public class HotReviewContentFragment extends BaseItemContentFragment{
 		// TODO Auto-generated method stub
 		return "热点话题";
 	}
-
 }

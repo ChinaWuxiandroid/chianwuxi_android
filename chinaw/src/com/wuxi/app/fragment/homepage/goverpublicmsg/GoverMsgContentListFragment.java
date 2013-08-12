@@ -23,15 +23,15 @@ public class GoverMsgContentListFragment extends ContentListFragment  {
 				.get(MenuItemMainFragment.ROOTFRAGMENT_KEY);
 		if (super.parentItem != null) {
 			Bundle bundle = new Bundle();
-			bundle.putSerializable("content", content);
+			bundle.putSerializable("url", content.getWapUrl());
 			bundle.putSerializable("fragmentTitle", parentItem.getName());
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.GOVERMSG_INFOOPEN_DETAIL_FRAGMENT, bundle);
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.GOVERMSG_WEBCONTENT_FARGMENT, bundle);
 
 		}else if(super.channel!=null){
 			Bundle bundle = new Bundle();
-			bundle.putSerializable("content", content);
+			bundle.putSerializable("url", content.getWapUrl());
 			bundle.putSerializable("fragmentTitle", channel.getChannelName());
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.GOVERMSG_INFOOPEN_DETAIL_FRAGMENT, bundle);
+			baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.GOVERMSG_WEBCONTENT_FARGMENT, bundle);
 		}
 		
 		

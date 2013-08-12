@@ -89,7 +89,6 @@ public class WorkSuggestionService extends Service{
 	 * */
 	public boolean submitMailBox(String access_token,WorkSuggestionBoxWrapper boxWrapper) throws NetException, JSONException, NODataException{
 		if (!checkNet()) {
-			System.out.println("net error");
 			throw new NetException(Constants.ExceptionMessage.NO_NET); // 检查网络
 		}
 
@@ -106,6 +105,7 @@ public class WorkSuggestionService extends Service{
 			JSONObject jsonObject = new JSONObject(resultStr);
 //			JSONObject jresult = jsonObject.getJSONObject("result");		
 //			System.out.println("jresult:"+jresult);
+			System.out.println("提交结果："+jsonObject.getBoolean("success"));
 			return  jsonObject.getBoolean("success");
 		} else {
 			return false;

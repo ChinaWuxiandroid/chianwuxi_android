@@ -28,8 +28,8 @@ import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.WuxiChannelContentDetailFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GIPContentDetailWebFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyTableFragment;
-import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgOpenInfoDetailFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailCFFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailQTFragment;
@@ -320,9 +320,9 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				GoverMsgApplyTableFragment goverMsgApplyTableFragment = new GoverMsgApplyTableFragment();
 				onAddOtherFragment(goverMsgApplyTableFragment, bundle);
 				break;
-			case GOVERMSG_INFOOPEN_DETAIL_FRAGMENT://政府信息公开  信息公开指南 和信息公开制度  内容页
-				GoverMsgOpenInfoDetailFragment goverMsgOpenInfoDetailFragment = new GoverMsgOpenInfoDetailFragment();
-				onAddOtherFragment(goverMsgOpenInfoDetailFragment, bundle);
+			case GOVERMSG_WEBCONTENT_FARGMENT://政府信息公开  信息公开指南 和信息公开制度  内容页
+				GIPContentDetailWebFragment gIPContentDetailWebFragment = new GIPContentDetailWebFragment();
+				onAddFragment(gIPContentDetailWebFragment, bundle);
 				break;
 			}
 		}

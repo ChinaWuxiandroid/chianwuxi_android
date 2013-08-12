@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -77,6 +78,7 @@ public class AdvancedSearchResultListFragment extends BaseSlideFragment  impleme
 			switch (msg.what) {
 			case RESULTS_LOAD_SUCESS:
 				normalSearch_pb.setVisibility(ProgressBar.GONE);
+				showSearchResults();
 				break;
 
 			case RESULTS_LOAD_FAIL:
@@ -240,10 +242,13 @@ public class AdvancedSearchResultListFragment extends BaseSlideFragment  impleme
 
 
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
+		SearchResult result=(SearchResult) adapterView.getItemAtPosition(position);
 		BaseSlideFragment baseSlideFragment=(BaseSlideFragment)this;
+		Bundle bundle=new Bundle();
+		bundle.putSerializable("result",result);
 		baseSlideFragment.slideLinstener.replaceFragment(null, position,
-				Constants.FragmentName.SEARCH_DETAIL_FRAGMENT, null);
+				Constants.FragmentName.SEARCH_DETAIL_FRAGMENT, bundle);
 	}
 
 	@Override

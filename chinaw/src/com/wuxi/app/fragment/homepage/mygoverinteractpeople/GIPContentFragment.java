@@ -6,7 +6,7 @@ import com.wuxi.app.listeners.GoverInterPeopleInitLayoutImpl;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
 import com.wuxi.domain.MenuItem;
 
-public class GIPContentFragment extends MenuItemFragment {
+public class GIPContentFragment extends GoverMenuItemTitleFragment {
 
 	/**
 	 * 
@@ -14,9 +14,15 @@ public class GIPContentFragment extends MenuItemFragment {
 	private static final long serialVersionUID = 1L;
 
 	@Override
+	public MenuItemInitLayoutListener getMenuItemInitLayoutListener() {
+		// TODO Auto-generated method stub
+		 return new GoverInterPeopleInitLayoutImpl();
+	}
+
+	@Override
 	public void initializSubFragmentsLayout(List<MenuItem> items) {
 		for (final MenuItem menu : items) {
-			
+
 			if(menu.getType() == MenuItem.APP_MENU){
 				//我的政民互动  里面的appui
 				if(menu.getAppUI().endsWith("Letter12345_C")){
@@ -81,13 +87,7 @@ public class GIPContentFragment extends MenuItemFragment {
 					menu.setContentFragment(GIPSuggestPeopleWill.class);
 				}
 			}
+
 		}
 	}
-
-	@Override
-	protected MenuItemInitLayoutListener getMenuItemInitLayoutListener() {
-		// TODO Auto-generated method stub
-		return new GoverInterPeopleInitLayoutImpl();
-	}
-
 }

@@ -92,7 +92,7 @@ public class SearchFragmentAdapter extends BaseAdapter{
 		viewHolder.link_text.setText(result.getLink()+"  - "+sizeKb);
 
 		viewHolder.webview.getSettings().setTextSize(TextSize.SMALLER);
-		viewHolder.webview.setClickable(false);
+		viewHolder.webview.setFocusable(false);
 //		viewHolder.webview.getSettings().setUseWideViewPort(true);
 //		viewHolder.webview.getSettings().setBuiltInZoomControls(true);
 //		viewHolder.webview.getSettings().setLoadWithOverviewMode(true);

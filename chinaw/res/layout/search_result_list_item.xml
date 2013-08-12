@@ -10,6 +10,7 @@
         android:layout_height="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
+        android:focusable="false"
         android:gravity="center_vertical"
         android:text="无锡景（无锡民歌） （关联度：99%）"
         android:textSize="15sp" />
@@ -17,8 +18,7 @@
     <WebView
         android:id="@+id/search_result_listitem_webview"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:clickable="false" />
+        android:layout_height="60dp" />
 
     <TextView
         android:id="@+id/search_result_listitem_link"
@@ -27,6 +27,7 @@
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:focusable="false"
         android:gravity="center_vertical"
         android:text="http://www.wuxi.gov.cn//wap/mlxc/wszg/wxryz/5893866.shtml"
         android:textSize="10sp" />

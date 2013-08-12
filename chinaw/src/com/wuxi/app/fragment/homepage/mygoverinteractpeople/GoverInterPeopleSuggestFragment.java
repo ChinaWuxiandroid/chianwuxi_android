@@ -10,7 +10,7 @@ import com.wuxi.domain.MenuItem;
  * 我的政民互动  主Fragment  之 征求意见平台  子fragment
  * @author 杨宸 智佳
  * */
-public class GoverInterPeopleSuggestFragment extends MenuItemFragment{
+public class GoverInterPeopleSuggestFragment extends GoverMenuItemTitleFragment{
 
 	/**
 	 * 
@@ -18,7 +18,7 @@ public class GoverInterPeopleSuggestFragment extends MenuItemFragment{
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected MenuItemInitLayoutListener getMenuItemInitLayoutListener() {
+	public MenuItemInitLayoutListener getMenuItemInitLayoutListener() {
 		// TODO Auto-generated method stub
 		return new GoverInterPeopleInitLayoutImpl();
 	}

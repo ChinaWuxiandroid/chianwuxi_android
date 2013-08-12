@@ -1,5 +1,6 @@
 package com.wuxi.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class SearchResultWrapper {
@@ -74,7 +75,11 @@ public class SearchResultWrapper {
 		}
 	} 
 
-	public class SearchResult{
+	public class SearchResult implements Serializable{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private String docid;
 		private String title;
 		private String summarycontent;
