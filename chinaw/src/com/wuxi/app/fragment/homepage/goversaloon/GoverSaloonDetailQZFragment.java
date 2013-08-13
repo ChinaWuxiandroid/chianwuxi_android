@@ -21,11 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
+import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.GoverSaoonItemService;
 import com.wuxi.app.engine.GoverSaoonWorkFlowImageService;
 import com.wuxi.app.engine.GoversaoonOnlineASKDetailService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.GoverSaoonItem;
 import com.wuxi.domain.GoverSaoonItemQZDetail;
 import com.wuxi.domain.GoversaoonOnlineASKDetail;
@@ -61,6 +63,7 @@ public class GoverSaloonDetailQZFragment extends BaseItemContentFragment
 	private TextView tv_item_name;
 	private EditText et_content;
 	private Button btn_ask_submit,btn_ask_reset;
+	private LoginDialog loginDialog;
 	private Handler handler = new Handler() {
 
 		public void handleMessage(android.os.Message msg) {
@@ -91,6 +94,7 @@ public class GoverSaloonDetailQZFragment extends BaseItemContentFragment
 	public void initUI() {
 
 		super.initUI();
+		loginDialog=new LoginDialog(context, this);
 		tv_ssmc_name = (TextView) view.findViewById(R.id.tv_ssmc_name);
 		tl_tb_detail = (TableLayout) view.findViewById(R.id.tl_tb_detail);
 		pb_detail = (ProgressBar) view.findViewById(R.id.pb_detail);
@@ -213,7 +217,12 @@ public class GoverSaloonDetailQZFragment extends BaseItemContentFragment
 			break;
 		case R.id.btn_zxzx:// 在线咨询
 			if (ll_zxnr.getVisibility() == LinearLayout.GONE) {
-				ll_zxnr.setVisibility(LinearLayout.VISIBLE);
+				if(loginDialog.checkLogin()){
+					ll_zxnr.setVisibility(LinearLayout.VISIBLE);
+				}else{
+					loginDialog.showDialog();
+				}
+				
 
 			} else if (ll_zxnr.getVisibility() == LinearLayout.VISIBLE) {
 				ll_zxnr.setVisibility(LinearLayout.GONE);
@@ -343,7 +352,7 @@ public class GoverSaloonDetailQZFragment extends BaseItemContentFragment
 									goverSaoonItemDetail.getId(),
 									"XK",
 									et_content.getText().toString(),
-									MyGoverSaloonFragment.ACCESS_TOKEN);
+									SystemUtil.getAccessToken(context));
 					if (goversaoonOnlineDetail != null) {
 						msg.what = COMMIT_SUCCESS;
 					} else {

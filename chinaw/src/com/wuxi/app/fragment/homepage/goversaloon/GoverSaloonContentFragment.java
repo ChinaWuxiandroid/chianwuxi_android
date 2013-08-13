@@ -27,8 +27,9 @@ public abstract class GoverSaloonContentFragment extends BaseFragment {
 		view = inflater.inflate(getLayoutId(), null);
 		this.context=getActivity();
 		this.mInflater=inflater;
-		initUI();
 		baseSlideFragment=(BaseSlideFragment) getArguments().get("BaseSlideFragment");
+		initUI();
+		
 		
 		return view;
 	}
