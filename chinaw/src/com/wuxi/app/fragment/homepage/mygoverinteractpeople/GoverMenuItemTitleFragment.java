@@ -394,7 +394,8 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 	}
 
 	public void loadChannelContentList(Channel channel){
-		GIPChannelContentListFragment gIPContentListFragment = new GIPChannelContentListFragment();					
+		GIPChannelContentListFragment gIPContentListFragment = new GIPChannelContentListFragment();	
+		gIPContentListFragment.setArguments(this.getArguments());
 		gIPContentListFragment.setChannel(channel);
 		bindContentLayout(gIPContentListFragment);
 	}

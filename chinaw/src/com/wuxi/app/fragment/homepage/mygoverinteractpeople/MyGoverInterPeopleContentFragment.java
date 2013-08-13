@@ -34,12 +34,15 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment{
 	private void initUI() {
 
 		switch (menuItem.getType()) {
+		
+		//普通菜单类型
 		case MenuItem.CUSTOM_MENU:
 			GIPContentFragment gIPMenuItemContentFragment=new GIPContentFragment();
 			gIPMenuItemContentFragment.setParentItem(menuItem);
 			onTransaction(gIPMenuItemContentFragment);
 			break;
-
+			
+		//频道菜单类型
 		case MenuItem.CHANNEL_MENU:
 			GIPContentFragment gIPChannelContentFragment=new GIPContentFragment();
 			gIPChannelContentFragment.setParentItem(menuItem);

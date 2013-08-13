@@ -28,7 +28,7 @@ import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.WuxiChannelContentDetailFragment;
-import com.wuxi.app.fragment.homepage.goverpublicmsg.GIPContentDetailWebFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgContentDetailWebFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyTableFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailCFFragment;
@@ -250,7 +250,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				onAddFragment(myOnlineAskFragment, bundle);
 
 				break;
-			case HOTREVIEW_CONTENT_FRAGMENT:// 热点话题
+			case HOTREVIEW_CONTENT_FRAGMENT:// 政民互动   热点话题内容页
 				HotReviewContentFragment hotReviewContentFragment = new HotReviewContentFragment();
 				onReplaceFragment(hotReviewContentFragment, bundle);
 				break;
@@ -261,6 +261,11 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			case GIP_FORUM_POST_FRAGMENT:// 公众论坛发表帖子界面
 				ForumPostFragment forumPostFragment = new ForumPostFragment();
 				onReplaceFragment(forumPostFragment, bundle);
+				break;
+				
+			case GIP_CHANNEL_CONTENT_DETAILWEB_FRAGMENT:// 政民互动  频道内容页
+				GoverMsgContentDetailWebFragment gIPContentDetailWebFragment = new GoverMsgContentDetailWebFragment();
+				onAddFragment(gIPContentDetailWebFragment, bundle);
 				break;
 
 			case GOVERSALOONDETAIL_XK_FRAGMENT:// 政务大厅办件详情
@@ -322,8 +327,8 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				onAddOtherFragment(goverMsgApplyTableFragment, bundle);
 				break;
 			case GOVERMSG_WEBCONTENT_FARGMENT://政府信息公开  信息公开指南 和信息公开制度  内容页
-				GIPContentDetailWebFragment gIPContentDetailWebFragment = new GIPContentDetailWebFragment();
-				onAddFragment(gIPContentDetailWebFragment, bundle);
+				GoverMsgContentDetailWebFragment goverContentDetailWebFragment = new GoverMsgContentDetailWebFragment();
+				onAddFragment(goverContentDetailWebFragment, bundle);
 				break;
 			case ABOUTUSFRAGMENT://关于我们
 				AboutUsFragment aboutUsFragment=new AboutUsFragment();

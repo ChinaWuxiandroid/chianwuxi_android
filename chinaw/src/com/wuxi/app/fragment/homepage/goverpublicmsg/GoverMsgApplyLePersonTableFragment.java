@@ -135,11 +135,13 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements 
 	@Override
 	public void onClick(View v) {
 		switch(v.getId()){
-		case R.id.worksuggestbox_imgbtn_submit:
+		case R.id.legalperson_imgbutton_submit:
 			submitData();
 
 			break;
-		case R.id.worksuggestbox_imgbtn_cancel:
+		case R.id.legalperson_imgbutton_cancel:
+			pb.setVisibility(ProgressBar.INVISIBLE);
+			Toast.makeText(context, "取消提交", Toast.LENGTH_SHORT).show();
 			break;
 		}
 
@@ -161,7 +163,7 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements 
 					SubmitListService submitListService=new SubmitListService(context);
 					try {
 						boolean success=false;
-						success=submitListService.submitByUrl(getUrl(Constants.Urls.CITIZEN_APPLY_SUBMIT_URL,
+						success=submitListService.submitByUrl(getUrl(Constants.Urls.LEGALPERSONAPPLY_SUBMIT_URL,
 								Constants.SharepreferenceKey.TEST_ACCESSTOKEN,
 								applyDept.getDoProjectId(),
 								applyDept.getDepId()));
@@ -187,11 +189,11 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements 
 	public String getUrl(String urlhead,String access_token,String doProjectId,String depid){
 		String url=urlhead+"?access_token="+access_token+"&doprojectid="+doProjectId+"&depid="+depid;
 
-		url="&organname="+organname+"&organid="+organid+"&ceo="+ceo+"&linkman="+linkman
+		url=url+"&organname="+organname+"&organid="+organid+"&ceo="+ceo+"&linkman="+linkman
 				+"&unitaddress="+unitaddress+"&tel="+tel+"&fax="+fax+"&email="+email
 				+"&content="+describe+"&title="+use;
-		url=url+"&offertype="+check_paper+" "+check_mail+" "+check_dis;
-		url=url+"&getinfotype="+check_post+" "+check_express;
+		url=url+"&offertype="+check_paper+"/"+check_mail+"/"+check_dis;
+		url=url+"&getinfotype="+check_post+"/"+check_express;
 		return url;
 	}
 

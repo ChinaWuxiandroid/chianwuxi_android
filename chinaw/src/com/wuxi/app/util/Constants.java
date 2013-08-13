@@ -533,6 +533,11 @@ public class Constants {
 		 * 政民互动  往期回顾 详情界面
 		 */
 		GIP_REVIEW_CONTENT_FRAGMENT,
+		
+		/**
+		 * 政民互动 频道内容页
+		 */
+		GIP_CHANNEL_CONTENT_DETAILWEB_FRAGMENT,
 
 		MYONLINEASKFRAGMENT,
 		/**

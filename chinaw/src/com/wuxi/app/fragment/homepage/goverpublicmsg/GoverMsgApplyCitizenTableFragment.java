@@ -139,6 +139,8 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements O
 
 			break;
 		case R.id.worksuggestbox_imgbtn_cancel:
+			pb.setVisibility(ProgressBar.INVISIBLE);
+			Toast.makeText(context, "取消提交", Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.citizen_apply_time_txt:
 			//			showDateSelectDialog(applyDate_txt);
@@ -190,8 +192,8 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements O
 		url=url+"&username="+name+"&workunit="+workadd+"&certificatetype="+papername+"&certificateno="+papernum
 				+"&address="+address+"&postalcode="+postcode+"&tel="+phone+"&fax="+fax+"&email="+email
 				+"&content="+describe+"&title="+use;
-		url=url+"&offertype="+check_paper+" "+check_mail+" "+check_dis;
-		url=url+"&getinfotype="+check_post+" "+check_express;
+		url=url+"&offertype="+check_paper+"/"+check_mail+"/"+check_dis;
+		url=url+"&getinfotype="+check_post+"/"+check_express;
 		return url;
 	}
 

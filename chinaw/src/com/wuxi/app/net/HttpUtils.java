@@ -67,9 +67,7 @@ public final class HttpUtils {
 					result = EntityUtils.toString(entity, "UTF-8");
 				}
 			}
-			
 		
-			
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
