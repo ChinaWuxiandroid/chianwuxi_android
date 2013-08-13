@@ -37,6 +37,7 @@ import com.baidu.mapapi.search.MKSuggestionResult;
 import com.baidu.mapapi.search.MKTransitRouteResult;
 import com.baidu.mapapi.search.MKWalkingRouteResult;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
+import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.util.BMapUtil;
 import com.wuxi.app.view.MyMapView;
@@ -47,7 +48,7 @@ import com.wuxi.app.view.MyPoiOverlay;
  * @author wanglu 泰得利通 城市地图
  * 
  */
-public class CityMapFragment extends Fragment implements
+public class CityMapFragment extends BaseFragment implements
 		OnCheckedChangeListener, OnClickListener {
 	private static final String KEY = "E1CDDDF289C13BC20A2320E02A058FBD9EBDDC1F";
 	private BMapManager mBMapMan = null;

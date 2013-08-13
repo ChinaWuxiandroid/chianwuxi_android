@@ -79,7 +79,7 @@ public class LoginDialog {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-						FragmentName.LOGIN_FRAGMENT, null);
+						FragmentName.LOGIN_FRAGMENT, null);//转向登录界面
 
 			}
 		});

@@ -257,8 +257,9 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 		goverSaloonContentMainFragment.setMenuItem(menuItem);
 
 		Bundle bundle = new Bundle();
-		bundle.putSerializable("BaseSlideFragment", this);
+		
 		goverSaloonContentMainFragment.setArguments(bundle);// 将对象传递过去
+		goverSaloonContentMainFragment.setBaseSlideFragment(this);
 		return goverSaloonContentMainFragment;
 	};
 

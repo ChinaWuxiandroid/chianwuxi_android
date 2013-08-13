@@ -1,5 +1,7 @@
 package com.wuxi.app;
 
+import com.wuxi.app.fragment.BaseSlideFragment;
+
 import android.support.v4.app.Fragment;
 
 /**
@@ -11,6 +13,7 @@ import android.support.v4.app.Fragment;
 public class BaseFragment extends Fragment {
 
 	public FragmentManagers managers;
+	public BaseSlideFragment baseSlideFragment;
 
 	public int position = -1;
 
@@ -22,6 +25,9 @@ public class BaseFragment extends Fragment {
 		this.managers = managers;
 	}
 
+	public void setBaseSlideFragment(BaseSlideFragment fragmnet){
+		this.baseSlideFragment=fragmnet;
+	}
 	public void setPosition(int position) {
 		this.position = position;
 	}
