@@ -22,6 +22,7 @@ import com.wuxi.app.R;
 import com.wuxi.app.engine.GoversaoonOnlineASKDetailService;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.GoversaoonOnlineASKDetail;
 import com.wuxi.domain.Myconsult;
@@ -52,6 +53,8 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 	private Button online_ask_submit, online_ask_reset;
 	private EditText et_content;
 	private ProgressBar pb_onlineask;
+	private String accessToken;
+	
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 
@@ -104,6 +107,7 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 			gover_btn_rg.check(R.id.gover_sallon_my_goon_ask);
 		}
 
+		accessToken=SystemUtil.getAccessToken(context);
 	}
 
 	private void showAskDetail() {
@@ -200,7 +204,7 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 				try {
 					goversaoonOnlineASKDetail = goversaoonOnlineASKDetailService
 							.getGoversaoonOnlineASKDetail(id,
-									MyGoverSaloonFragment.ACCESS_TOKEN);
+									accessToken);
 					if (goversaoonOnlineASKDetail != null) {
 						msg.what = LOAD_DETAIL_SUCCESS;
 					} else {
@@ -280,7 +284,7 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 									goversaoonOnlineASKDetail.getId(),
 									goversaoonOnlineASKDetail.getItemtype(),
 									et_content.getText().toString(),
-									MyGoverSaloonFragment.ACCESS_TOKEN);
+									accessToken);
 					if (goversaoonOnlineDetail != null) {
 						msg.what = COMMIT_SUCCESS;
 					} else {

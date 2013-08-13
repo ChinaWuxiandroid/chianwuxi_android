@@ -28,12 +28,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
+import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.GoverApplyOnlieService;
 import com.wuxi.app.engine.GoverSaoonItemService;
 import com.wuxi.app.engine.GoverSaoonWorkFlowImageService;
 import com.wuxi.app.engine.GoversaoonOnlineASKDetailService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.GoverApplyOnlie;
 import com.wuxi.domain.GoverMaterials;
 import com.wuxi.domain.GoverSaoonItem;
@@ -82,7 +84,8 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 			et_jssy;
 
 	private Button apply_btn_submit, apply_btn_reset;
-	private String [] applyType=new String[]{"个人","企业法人"};
+	private String[] applyType = new String[] { "个人", "企业法人" };
+	private LoginDialog loginDialog;
 	private Handler handler = new Handler() {
 
 		public void handleMessage(android.os.Message msg) {
@@ -98,7 +101,7 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 				pb_detail.setVisibility(ProgressBar.GONE);
 				Toast.makeText(context, "提交成功", Toast.LENGTH_SHORT).show();
 				break;
-			 
+
 			case COMMIT_APPLY_ERROR:
 			case COMMIT_ERROR:
 			case LC_LOADERROR:
@@ -116,6 +119,7 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 	public void initUI() {
 
 		super.initUI();
+		loginDialog = new LoginDialog(context, this);
 		tv_ssmc_name = (TextView) view.findViewById(R.id.tv_ssmc_name);
 		tl_tb_detail = (TableLayout) view.findViewById(R.id.tl_tb_detail);
 		pb_detail = (ProgressBar) view.findViewById(R.id.pb_detail);
@@ -153,27 +157,27 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 		btn_ask_reset = (Button) view.findViewById(R.id.btn_ask_reset);
 		btn_ask_submit.setOnClickListener(this);
 		btn_ask_reset.setOnClickListener(this);
-		
-		
-		sp_sqtype=(Spinner) view.findViewById(R.id.sp_sqtype);
-		et_dwdm =(EditText) view.findViewById(R.id.et_dwdm );
-		et_dz =(EditText) view.findViewById(R.id.et_dz );
-		et_lxr =(EditText) view.findViewById(R.id.et_lxr );
-		et_dh =(EditText) view.findViewById(R.id.et_dh );
-		et_sj =(EditText) view.findViewById(R.id.et_sj );
-		et_zjmc =(EditText) view.findViewById(R.id.et_zjmc );
-		et_zjhm =(EditText) view.findViewById(R.id.et_zjhm );
-		et_jssy =(EditText) view.findViewById(R.id.et_jssy );
-		
-		apply_btn_submit=(Button) view.findViewById(R.id.apply_btn_submit);
 
-		apply_btn_reset=(Button) view.findViewById(R.id.apply_btn_reset);
+		sp_sqtype = (Spinner) view.findViewById(R.id.sp_sqtype);
+		et_dwdm = (EditText) view.findViewById(R.id.et_dwdm);
+		et_dz = (EditText) view.findViewById(R.id.et_dz);
+		et_lxr = (EditText) view.findViewById(R.id.et_lxr);
+		et_dh = (EditText) view.findViewById(R.id.et_dh);
+		et_sj = (EditText) view.findViewById(R.id.et_sj);
+		et_zjmc = (EditText) view.findViewById(R.id.et_zjmc);
+		et_zjhm = (EditText) view.findViewById(R.id.et_zjhm);
+		et_jssy = (EditText) view.findViewById(R.id.et_jssy);
+
+		apply_btn_submit = (Button) view.findViewById(R.id.apply_btn_submit);
+
+		apply_btn_reset = (Button) view.findViewById(R.id.apply_btn_reset);
 
 		apply_btn_submit.setOnClickListener(this);
 		apply_btn_reset.setOnClickListener(this);
-		
-		sp_sqtype.setAdapter(new ArrayAdapter<String>(context, R.layout.my_simple_spinner_item_layout, applyType));
-		
+
+		sp_sqtype.setAdapter(new ArrayAdapter<String>(context,
+				R.layout.my_simple_spinner_item_layout, applyType));
+
 	}
 
 	protected void showItemDetail() {
@@ -291,16 +295,25 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 			break;
 		case R.id.btn_bl:// 在线办理
 			if (ll_zxbl.getVisibility() == LinearLayout.GONE) {
-				ll_zxbl.setVisibility(LinearLayout.VISIBLE);
-				ll_zxnr.setVisibility(LinearLayout.GONE);
+				if (loginDialog.checkLogin()) {
+					ll_zxbl.setVisibility(LinearLayout.VISIBLE);
+					ll_zxnr.setVisibility(LinearLayout.GONE);
+				} else {
+					loginDialog.showDialog();
+				}
+
 			} else if (ll_zxbl.getVisibility() == LinearLayout.VISIBLE) {
 				ll_zxbl.setVisibility(LinearLayout.GONE);
 			}
 			break;
 		case R.id.btn_zxzx:// 在线咨询
 			if (ll_zxnr.getVisibility() == LinearLayout.GONE) {
-				ll_zxnr.setVisibility(LinearLayout.VISIBLE);
-				ll_zxbl.setVisibility(LinearLayout.GONE);
+				if (loginDialog.checkLogin()) {
+					ll_zxnr.setVisibility(LinearLayout.VISIBLE);
+					ll_zxbl.setVisibility(LinearLayout.GONE);
+				}else{
+					loginDialog.showDialog();
+				}
 			} else if (ll_zxnr.getVisibility() == LinearLayout.VISIBLE) {
 				ll_zxnr.setVisibility(LinearLayout.GONE);
 			}
@@ -317,8 +330,8 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 			et_content.setText("");
 			break;
 		case R.id.apply_btn_submit:
-			if(validateApplyOnlieForm()){
-				commitApply();//提交在线办理信息
+			if (validateApplyOnlieForm()) {
+				commitApply();// 提交在线办理信息
 			}
 			break;
 		case R.id.apply_btn_reset:
@@ -408,8 +421,6 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 				rb.setTextColor(Color.BLACK);
 			}
 		}
-		
-		
 
 	}
 
@@ -449,9 +460,9 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 		}).start();
 
 	}
-	
-	public void applyonleReSet(){
-		et_dwdm.setText(""); 
+
+	public void applyonleReSet() {
+		et_dwdm.setText("");
 		et_dz.setText("");
 		et_lxr.setText("");
 		et_dh.setText("");
@@ -463,48 +474,49 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 
 	/**
 	 * 
-	 *wanglu 泰得利通 
-	 *表单验证
+	 * wanglu 泰得利通 表单验证
+	 * 
 	 * @return
 	 */
-	public boolean validateApplyOnlieForm(){
-		if(et_dwdm.getText().toString().equals("")){
+	public boolean validateApplyOnlieForm() {
+		if (et_dwdm.getText().toString().equals("")) {
 			Toast.makeText(context, "请输入单位代码", Toast.LENGTH_SHORT).show();
 			et_dwdm.requestFocus();
 			return false;
-		}else if(et_dz.getText().toString().equals("")){
+		} else if (et_dz.getText().toString().equals("")) {
 			Toast.makeText(context, "请输地址", Toast.LENGTH_SHORT).show();
 			et_dz.requestFocus();
 			return false;
-		}else if(et_lxr.getText().toString().equals("")){
+		} else if (et_lxr.getText().toString().equals("")) {
 			Toast.makeText(context, "请输入联系人", Toast.LENGTH_SHORT).show();
 			et_lxr.requestFocus();
 			return false;
-		}else if(et_dh.getText().toString().equals("")){
+		} else if (et_dh.getText().toString().equals("")) {
 			Toast.makeText(context, "请输电话", Toast.LENGTH_SHORT).show();
 			et_dh.requestFocus();
 			return false;
-		}else if(et_sj.getText().toString().equals("")){
+		} else if (et_sj.getText().toString().equals("")) {
 			Toast.makeText(context, "请输手机", Toast.LENGTH_SHORT).show();
 			et_sj.requestFocus();
 			return false;
-		}else if(et_zjmc.getText().toString().equals("")){
+		} else if (et_zjmc.getText().toString().equals("")) {
 			Toast.makeText(context, "请输入证件名称", Toast.LENGTH_SHORT).show();
 			et_zjmc.requestFocus();
 			return false;
-		}else if(et_zjhm.getText().toString().equals("")){
+		} else if (et_zjhm.getText().toString().equals("")) {
 			Toast.makeText(context, "请输入证件号码", Toast.LENGTH_SHORT).show();
 			et_zjhm.requestFocus();
 			return false;
-		}else if(et_jssy.getText().toString().equals("")){
+		} else if (et_jssy.getText().toString().equals("")) {
 			Toast.makeText(context, "请输入申请事由", Toast.LENGTH_SHORT).show();
 			et_jssy.requestFocus();
 			return false;
 		}
-		 
+
 		return true;
-		
+
 	}
+
 	/**
 	 * 
 	 * wanglu 泰得利通 在线办理提交参数
@@ -515,7 +527,7 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 		Map<String, String> params = new HashMap<String, String>();
 
 		params.put("id", UUID.randomUUID().toString());
-		params.put("sqzlx", sp_sqtype.getSelectedItemPosition()+"");// 申请者类型
+		params.put("sqzlx", sp_sqtype.getSelectedItemPosition() + "");// 申请者类型
 		params.put("sqzmc", "test");// 名称
 		params.put("dwdm", et_dwdm.getText().toString());// 单位代码
 		params.put("dz", et_dz.getText().toString());
@@ -527,11 +539,11 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 		params.put("sqsy", et_jssy.getText().toString());
 		params.put("itemid", goverSaoonItemDetail.getId());
 		params.put("itemtype", "XK");
-		params.put("access_token", MyGoverSaloonFragment.ACCESS_TOKEN);
+		params.put("access_token", SystemUtil.getAccessToken(context));
 
 		return params;
 	}
-	
+
 	private void commitApply() {
 		if (goverSaoonItemDetail == null) {
 			Toast.makeText(context, "没有咨询信息，提交失败", Toast.LENGTH_SHORT).show();
@@ -546,10 +558,12 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 			public void run() {
 
 				Message msg = handler.obtainMessage();
-				GoverApplyOnlieService goApplyOnlieService=new GoverApplyOnlieService(context);
+				GoverApplyOnlieService goApplyOnlieService = new GoverApplyOnlieService(
+						context);
 				try {
-					
-					GoverApplyOnlie apply=goApplyOnlieService.commitOnlieForm(getParams());
+
+					GoverApplyOnlie apply = goApplyOnlieService
+							.commitOnlieForm(getParams());
 					if (apply != null) {
 						msg.what = COMMIT_APPLY_SUCCESS;
 					} else {
@@ -596,7 +610,7 @@ public class GoverSaloonDetailXKFragment extends BaseItemContentFragment
 							.commitGoversaoonOnlineASKDetail(
 									goverSaoonItemDetail.getId(), "XK",
 									et_content.getText().toString(),
-									MyGoverSaloonFragment.ACCESS_TOKEN);
+									SystemUtil.getAccessToken(context));
 					if (goversaoonOnlineDetail != null) {
 						msg.what = COMMIT_SUCCESS;
 					} else {

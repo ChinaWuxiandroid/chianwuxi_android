@@ -29,12 +29,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
+import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.GoverApplyOnlieService;
 import com.wuxi.app.engine.GoverSaoonItemService;
 import com.wuxi.app.engine.GoverSaoonWorkFlowImageService;
 import com.wuxi.app.engine.GoversaoonOnlineASKDetailService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.GoverApplyOnlie;
 import com.wuxi.domain.GoverMaterials;
 import com.wuxi.domain.GoverSaoonItem;
@@ -81,6 +83,7 @@ public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
 			et_jssy;
 	private Button apply_btn_submit, apply_btn_reset;
 	private String[] applyType = new String[] { "个人", "企业法人" };
+	private LoginDialog loginDialog;
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 
@@ -116,6 +119,7 @@ public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
 	public void initUI() {
 
 		super.initUI();
+		loginDialog=new LoginDialog(context, this);
 		tv_ssmc_name = (TextView) view.findViewById(R.id.tv_ssmc_name);
 		tl_tb_detail = (TableLayout) view.findViewById(R.id.tl_tb_detail);
 		pb_detail = (ProgressBar) view.findViewById(R.id.pb_detail);
@@ -291,16 +295,26 @@ public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
 
 		case R.id.btn_bl:// 在线办理
 			if (ll_zxbl.getVisibility() == LinearLayout.GONE) {
-				ll_zxbl.setVisibility(LinearLayout.VISIBLE);
-				ll_zxnr.setVisibility(LinearLayout.GONE);
+				if(loginDialog.checkLogin()){
+					ll_zxbl.setVisibility(LinearLayout.VISIBLE);
+					ll_zxnr.setVisibility(LinearLayout.GONE);
+				}else{
+					loginDialog.showDialog();//显示
+				}
+				
 			} else if (ll_zxbl.getVisibility() == LinearLayout.VISIBLE) {
 				ll_zxbl.setVisibility(LinearLayout.GONE);
 			}
 			break;
 		case R.id.btn_zxzx:// 在线咨询
 			if (ll_zxnr.getVisibility() == LinearLayout.GONE) {
-				ll_zxnr.setVisibility(LinearLayout.VISIBLE);
-				ll_zxbl.setVisibility(LinearLayout.GONE);
+				if(loginDialog.checkLogin()){
+					ll_zxnr.setVisibility(LinearLayout.VISIBLE);
+					ll_zxbl.setVisibility(LinearLayout.GONE);
+				}else{
+					loginDialog.showDialog();
+				}
+				
 			} else if (ll_zxnr.getVisibility() == LinearLayout.VISIBLE) {
 				ll_zxnr.setVisibility(LinearLayout.GONE);
 			}
@@ -465,7 +479,7 @@ public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
 							.commitGoversaoonOnlineASKDetail(
 									goverSaoonItemDetail.getId(), "XK",
 									et_content.getText().toString(),
-									MyGoverSaloonFragment.ACCESS_TOKEN);
+									SystemUtil.getAccessToken(context));
 					if (goversaoonOnlineDetail != null) {
 						msg.what = COMMIT_SUCCESS;
 					} else {
@@ -569,7 +583,7 @@ public class GoverSaloonDetailQTFragment extends BaseItemContentFragment
 		params.put("sqsy", et_jssy.getText().toString());
 		params.put("itemid", goverSaoonItemDetail.getId());
 		params.put("itemtype", "XK");
-		params.put("access_token", MyGoverSaloonFragment.ACCESS_TOKEN);
+		params.put("access_token", SystemUtil.getAccessToken(context));
 
 		return params;
 	}
