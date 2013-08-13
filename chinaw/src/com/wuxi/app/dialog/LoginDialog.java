@@ -44,7 +44,6 @@ public class LoginDialog {
 		} else {
 			return true;
 		}
-
 	}
 
 	public String getAccessToken() {

@@ -5,51 +5,6 @@
     android:orientation="vertical" >
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="45dp" >
-
-        <RadioGroup
-            android:id="@+id/goverinterpeople_supervise_radioGroup"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/goverinterpeople_supervise_radioButton_12380"
-                style="@style/goverinterpeople_mine_radiobutton_style"
-                android:layout_height="40dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_marginTop="2dp"
-                android:layout_weight="1.3"
-                android:background="@drawable/title_item_select_bg"
-                android:checked="true"
-                android:lines="2"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
-                android:text="无锡市委组织部 12380		 		   网上举报"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
-
-            <RadioButton
-                android:id="@+id/goverinterpeople_supervise_radioButton_12388"
-                style="@style/goverinterpeople_mine_radiobutton_style"
-                android:layout_height="40dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_marginTop="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/title_item_bg"
-                android:lines="2"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
-                android:text="纪委监察局    					  12388网上举报"
-                android:textColor="@color/gip_button_blue"
-                android:textSize="12sp" />
-        </RadioGroup>
-    </LinearLayout>
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
@@ -68,6 +23,7 @@
                 android:textSize="12dp" />
 
             <EditText
+                android:id="@+id/gip_publicsupervise_et_sentUser"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
@@ -93,6 +49,7 @@
                 android:textSize="12dp" />
 
             <EditText
+                android:id="@+id/gip_publicsupervise_et_sentTel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
@@ -118,6 +75,7 @@
                 android:textSize="12dp" />
 
             <EditText
+                android:id="@+id/gip_publicsupervise_et_email"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
@@ -144,6 +102,7 @@
                 android:textSize="12dp" />
 
             <EditText
+                android:id="@+id/gip_publicsupervise_et_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
@@ -168,11 +127,13 @@
                 android:orientation="horizontal" >
 
                 <ImageButton
+                    android:id="@+id/gip_publicsupervise_ibtn_submit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/submit_imagebutton_selector" />
 
                 <ImageButton
+                    android:id="@+id/gip_publicsupervise_et_reset"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"

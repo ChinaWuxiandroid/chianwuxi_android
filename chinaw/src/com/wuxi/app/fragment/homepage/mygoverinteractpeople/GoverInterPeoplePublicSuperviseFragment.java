@@ -1,65 +1,41 @@
 package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 
+import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
+import com.wuxi.app.adapter.SimpleListViewFragmentAdapter;
 import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
 
-public class GoverInterPeoplePublicSuperviseFragment extends RadioButtonChangeFragment{
+public class GoverInterPeoplePublicSuperviseFragment extends BaseFragment{
 
-	private final  int[] radioButtonIds={
-			R.id.goverinterpeople_supervise_radioButton_12380,
-			R.id.goverinterpeople_supervise_radioButton_12388
-	};
-
+	protected View view;
+	protected LayoutInflater mInflater;
+	private Context context;
+	
+	private EditText sentUserName_et,tel_et,email_et,content_et;
+	
 	@Override
-	public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-		GIPRadioButtonStyleChange radioButtonStyleChange=new GIPRadioButtonStyleChange();
-		radioButtonStyleChange.refreshRadioButtonStyle(view,radioButtonIds,checkedId);
-		switch (checkedId) {
-
-		case R.id.goverinterpeople_supervise_radioButton_12380:
-			init();
-			break;
-
-		case R.id.goverinterpeople_supervise_radioButton_12388:	
-			MainMineFragment suggestionPlatformFragment=new GIPMineSuggestionPlatformFragment();
-			onTransaction(suggestionPlatformFragment);
-			break;
-		}
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		view = inflater.inflate(R.layout.goverinterpeople_supervise_layout, null);
+		mInflater = inflater;
+		context = getActivity();
+		
+		initView();
+		return view;
 	}
 
-	@Override
-	protected int getLayoutId() {
-		// TODO Auto-generated method stub
-		return R.layout.goverinterpeople_supervise_layout;
-	}
-
-	@Override
-	protected int getRadioGroupId() {
-		// TODO Auto-generated method stub
-		return R.id.goverinterpeople_supervise_radioGroup;
-	}
-
-	@Override
-	protected int[] getRadioButtonIds() {
-		// TODO Auto-generated method stub
-		return radioButtonIds;
-	}
-
-	@Override
-	protected int getContentFragmentId() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	protected void init() {
-		// TODO Auto-generated method stub
-
+	public void initView(){
 	}
 
 }

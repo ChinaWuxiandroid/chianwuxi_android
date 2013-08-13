@@ -172,7 +172,10 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 	public void showMenuItemTitle(){
 		checkPoint=0;  //默认选中第一个
 		Titles_gridView=(GridView) view.findViewById(R.id.gip_menuitem_gridview_title);
-		Titles_gridView.setNumColumns(titleMenuItems.size());
+		int titleSize=titleMenuItems.size();
+		if(titleSize<2)
+			titleSize=2;
+		Titles_gridView.setNumColumns(titleSize);
 
 		Titles_gridView.setAdapter(new GridViewAdaptger());
 		Titles_gridView.setOnItemClickListener(GridviewOnclick);
@@ -220,7 +223,10 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 	public void showChannelTitle(){
 		checkPoint=0;  //默认选中第一个
 		Titles_gridView=(GridView) view.findViewById(R.id.gip_menuitem_gridview_title);
-		Titles_gridView.setNumColumns(titleChannels.size());
+		int titleSize=titleChannels.size();
+		if(titleSize<2)
+			titleSize=2;
+		Titles_gridView.setNumColumns(titleSize);
 
 		Titles_gridView.setAdapter(new GridViewAdaptger());
 		Titles_gridView.setOnItemClickListener(GridviewOnclick);

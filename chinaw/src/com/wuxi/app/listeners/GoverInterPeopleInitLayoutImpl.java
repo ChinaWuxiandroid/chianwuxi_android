@@ -17,6 +17,7 @@ import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineSuggestionPla
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWill;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeFragment;
 import com.wuxi.domain.MenuItem;
@@ -78,6 +79,7 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 			/**
 			 * 公众监督
 			 */
+			GoverInterPeoplePublicSuperviseFragment goverInterPeoplePublicSuperviseFragment=null;
 
 			/**
 			 * 我的政民互动
@@ -186,6 +188,14 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 				goverInterPeopleVideoLiveHomeFragment = (GoverInterPeopleVideoLiveHomeFragment) fragment;
 				goverInterPeopleVideoLiveHomeFragment.setParentMenuItem(menuItem);
 				initLayoutListner.bindContentLayout(goverInterPeopleVideoLiveHomeFragment);
+			}
+			
+			/**
+			 * 公众监督
+			 */
+			else if (fragment instanceof GoverInterPeoplePublicSuperviseFragment) {
+				goverInterPeoplePublicSuperviseFragment = (GoverInterPeoplePublicSuperviseFragment) fragment;
+				initLayoutListner.bindContentLayout(goverInterPeoplePublicSuperviseFragment);
 			}
 
 		} catch (InstantiationException e) {

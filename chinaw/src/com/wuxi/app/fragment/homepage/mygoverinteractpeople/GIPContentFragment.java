@@ -81,10 +81,7 @@ public class GIPContentFragment extends GoverMenuItemTitleFragment {
 				}
 				//公众监督
 				else if(menu.getAppUI().endsWith("无锡市委组织部12380网上举报")){
-					menu.setContentFragment(GIPSuggestPeopleWill.class);
-				}
-				else if(menu.getAppUI().endsWith("纪委监察局12388网上举报")){
-					menu.setContentFragment(GIPSuggestPeopleWill.class);
+					menu.setContentFragment(GoverInterPeoplePublicSuperviseFragment.class);
 				}
 			}
 
