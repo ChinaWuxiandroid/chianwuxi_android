@@ -79,6 +79,7 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 	@Override
 	public void initUI() {
 		Bundle b = this.getArguments();
+		accessToken=SystemUtil.getAccessToken(context);
 		myconsult = (Myconsult) b.get("selectMyconsult");
 		int showIndex = b.getInt("showType");
 		super.slideLinstener.closeSlideMenu();
@@ -107,7 +108,7 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 			gover_btn_rg.check(R.id.gover_sallon_my_goon_ask);
 		}
 
-		accessToken=SystemUtil.getAccessToken(context);
+		
 	}
 
 	private void showAskDetail() {

@@ -70,7 +70,7 @@ InitializContentLayoutListner{
 
 	
 	@Override
-	public void bindContentLayout(Fragment fragment) {
+	public void bindContentLayout(BaseFragment fragment) {
 		// TODO Auto-generated method stub
 		
 	}

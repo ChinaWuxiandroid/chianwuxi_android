@@ -7,13 +7,13 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.fragment.BaseSlideFragment;
@@ -98,7 +98,7 @@ public class ChannelFragment extends BaseSlideFragment implements
 	}
 
 	@Override
-	public void bindContentLayout(Fragment fragment) {
+	public void bindContentLayout(BaseFragment fragment) {
 
 		bindFragment(fragment);
 
@@ -188,10 +188,11 @@ public class ChannelFragment extends BaseSlideFragment implements
 
 	}
 
-	private void bindFragment(Fragment fragment) {
+	private void bindFragment(BaseFragment fragment) {
 
 		Bundle bundle = new Bundle();
-		bundle.putSerializable("BaseSlideFragment", this);
+		
+		fragment.setBaseSlideFragment(this);
 		fragment.setArguments(bundle);
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		ft.replace(MANCOTENT_ID, fragment);// 替换内容界面

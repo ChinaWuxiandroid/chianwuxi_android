@@ -334,7 +334,7 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 	}
 
 	private void onTransaction(BaseFragment fragment) {
-
+		fragment.setBaseSlideFragment(this.baseSlideFragment);
 		fragment.setArguments(this.getArguments());// 传递主框架对象
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();

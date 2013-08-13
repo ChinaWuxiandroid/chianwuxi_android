@@ -1,5 +1,7 @@
 package com.wuxi.app.listeners;
 
+import com.wuxi.app.BaseFragment;
+
 import android.support.v4.app.Fragment;
 
 /**
@@ -15,5 +17,5 @@ public interface InitializContentLayoutListner {
 	 * @param fragment
 	 */
 	
-	public void bindContentLayout(Fragment fragment);
+	public void bindContentLayout(BaseFragment fragment);
 }

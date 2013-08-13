@@ -20,14 +20,14 @@ public abstract class GoverSaloonContentFragment extends BaseFragment {
 
 	protected Context context;
 	protected LayoutInflater mInflater;
-	protected BaseSlideFragment baseSlideFragment;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(getLayoutId(), null);
 		this.context=getActivity();
 		this.mInflater=inflater;
-		baseSlideFragment=(BaseSlideFragment) getArguments().get("BaseSlideFragment");
+		
 		initUI();
 		
 		

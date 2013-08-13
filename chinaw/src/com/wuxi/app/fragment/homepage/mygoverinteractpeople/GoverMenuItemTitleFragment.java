@@ -244,7 +244,7 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 	}
 
 	@Override
-	public void bindContentLayout(Fragment fragment) {
+	public void bindContentLayout(BaseFragment fragment) {
 		bindFragment(fragment);
 	}
 

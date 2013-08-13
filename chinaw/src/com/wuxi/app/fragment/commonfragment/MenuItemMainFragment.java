@@ -16,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.fragment.BaseSlideFragment;
@@ -44,7 +45,11 @@ public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 548858849836548351L;
+	/**
+	 * 
+	 */
+	
 	protected MenuItem menuItem;
 	protected List<MenuItem> titleMenuItems;// 头部子菜单
 	protected TitleScrollLayout mtitleScrollLayout;
@@ -52,7 +57,7 @@ public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 	private static final int MANCOTENT_ID = R.id.model_main;
 	private static final int TITLE_LOAD_SUCCESS = 0;// 头部加载成功
 	protected static final int TITLE_LOAD_FAIL = 1;// 加载失败
-	public static final String ROOTFRAGMENT_KEY="BaseSlideFragment";
+	//public static final String ROOTFRAGMENT_KEY="BaseSlideFragment";
 	public static final String SHOWITEM_LAYOUT_INDEXKEY="showitem_layout_index";
 	
 	
@@ -202,13 +207,14 @@ public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 	}
 
 	@Override
-	public void bindContentLayout(Fragment fragment) {
+	public void bindContentLayout(BaseFragment fragment) {
 		bindFragment(fragment);
 	}
 
-	private void bindFragment(Fragment fragment) {
+	private void bindFragment(BaseFragment fragment) {
 		Bundle bundle=new Bundle();
-		bundle.putSerializable(ROOTFRAGMENT_KEY, this);
+		//bundle.putSerializable(ROOTFRAGMENT_KEY, this);
+		fragment.setBaseSlideFragment(this);
 		fragment.setArguments(bundle);//将外层框架传递给子内容框架
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		ft.replace(MANCOTENT_ID, fragment);// 替换内容界面

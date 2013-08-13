@@ -25,15 +25,15 @@ public class PublicServiceContentListFragment extends ContentListFragment {
 		Content content=(Content) adapterView.getItemAtPosition(position);
 		
 	
-		BaseSlideFragment baseSlideFragment=(BaseSlideFragment) getArguments().get(MenuItemMainFragment.ROOTFRAGMENT_KEY);
+		
 		Bundle bundle=new Bundle();
 		bundle.putSerializable("content", content);
 		if(super.parentItem!=null){
 			
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.PUBLICSERVICECONTENTDETAILFRAGMENT, bundle);
+			this.baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.PUBLICSERVICECONTENTDETAILFRAGMENT, bundle);
 			
 		}else if(super.channel!=null){
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.PUBLICSERVICECONTENTDETAILFRAGMENT, bundle);
+			this.baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.PUBLICSERVICECONTENTDETAILFRAGMENT, bundle);
 		}
 		
 		

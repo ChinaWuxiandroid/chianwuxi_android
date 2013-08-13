@@ -216,6 +216,7 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 		contentListFragment = new ChannelContentListFragment();
 		contentListFragment.setChannel(channel);
 		contentListFragment.setArguments(this.getArguments());
+		contentListFragment.setBaseSlideFragment(this.baseSlideFragment);//传递最外层框架
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 
