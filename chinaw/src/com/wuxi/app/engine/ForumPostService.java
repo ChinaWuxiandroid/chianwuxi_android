@@ -46,7 +46,7 @@ public class ForumPostService extends Service {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 
-		String url = Constants.Urls.SUBMIT_SELFFORM_URL + "?title=" + theme
+		String url = Constants.Urls.FOORUM_POST_URL + "?title=" + theme
 				+ "&content=" + content + "&access_token=" + access_token;
 
 		System.out.println("url:" + url);

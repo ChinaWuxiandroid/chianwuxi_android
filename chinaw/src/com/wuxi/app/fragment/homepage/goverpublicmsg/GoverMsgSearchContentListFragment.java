@@ -160,25 +160,29 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 		}
 	}
 	
+	/**
+	 * 初始化区县过滤信息 （已屏蔽）
+	 * */
 	public void initCountrySpinner(){
 
-		ArrayAdapter<String> country_Spinner_adapter = new ArrayAdapter<String>(context,
-				R.layout.my_simple_spinner_item_layout, zoneArr);
-		country_Spinner_adapter.setDropDownViewResource(R.layout.my_spinner_medium_dropdown_item);
-		partment_sp.setAdapter(country_Spinner_adapter);
-		partment_sp.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View view,
-					int arg2, long arg3) {
-				zoneStrFifter=((TextView)view).getText().toString();
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-			}
-		});
-		partment_sp.setVisibility(View.VISIBLE);
+//		ArrayAdapter<String> country_Spinner_adapter = new ArrayAdapter<String>(context,
+//				R.layout.my_simple_spinner_item_layout, zoneArr);
+//		country_Spinner_adapter.setDropDownViewResource(R.layout.my_spinner_medium_dropdown_item);
+//		partment_sp.setAdapter(country_Spinner_adapter);
+//		partment_sp.setOnItemSelectedListener(new OnItemSelectedListener() {
+//
+//			@Override
+//			public void onItemSelected(AdapterView<?> arg0, View view,
+//					int arg2, long arg3) {
+//				zoneStrFifter=((TextView)view).getText().toString();
+//			}
+//
+//			@Override
+//			public void onNothingSelected(AdapterView<?> arg0) {
+//			}
+//		});
+//		partment_sp.setVisibility(View.VISIBLE);
+		partment_sp.setVisibility(View.GONE);
 	}
 
 	public void loadDeptData(){
@@ -222,9 +226,12 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 		depts.add(0, deptDefault);
 
 		DeptAdapter partment_Spinner_adapter = new DeptAdapter();
-		partment_sp.setAdapter(partment_Spinner_adapter);
-		partment_sp.setOnItemSelectedListener(partment_Spinner_adapter);
-		partment_sp.setVisibility(View.VISIBLE);
+		if(partment_sp.getVisibility()==View.VISIBLE){
+			partment_sp.setAdapter(partment_Spinner_adapter);
+			partment_sp.setOnItemSelectedListener(partment_Spinner_adapter);
+			partment_sp.setVisibility(View.VISIBLE);
+		}
+	
 	}
 
 	public void initYearSpinner(){

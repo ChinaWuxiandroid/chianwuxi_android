@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -24,8 +25,10 @@ import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
+import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.SubmitListService;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.ApplyDept;
 import com.wuxi.domain.ApplyGover;
 import com.wuxi.exception.NetException;
@@ -61,6 +64,8 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements 
 
 	private ApplyDept applyDept;
 
+	private LoginDialog loginDialog;
+	
 	public void setDept(ApplyDept applyDept){
 		this.applyDept=applyDept;
 	}
@@ -93,6 +98,13 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements 
 	}
 
 	public void initView(){
+		
+		loginDialog = new LoginDialog(context, baseSlideFragment);//实例化登录对话框
+		
+		if(!loginDialog.checkLogin()){
+			loginDialog.showDialog();
+		}
+		
 		calendar=Calendar.getInstance();
 		year=calendar.get(Calendar.YEAR);
 		month=calendar.get(Calendar.MONTH);
@@ -136,7 +148,16 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements 
 	public void onClick(View v) {
 		switch(v.getId()){
 		case R.id.legalperson_imgbutton_submit:
-			submitData();
+			//关闭软键盘
+			InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE); 
+			imm.hideSoftInputFromWindow(submit_ibtn.getWindowToken(), 0);
+			//检测登录状态
+			if(loginDialog.checkLogin()){
+				submitData();
+			}
+			else{
+				loginDialog.showDialog();
+			}
 
 			break;
 		case R.id.legalperson_imgbutton_cancel:
@@ -164,7 +185,7 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements 
 					try {
 						boolean success=false;
 						success=submitListService.submitByUrl(getUrl(Constants.Urls.LEGALPERSONAPPLY_SUBMIT_URL,
-								Constants.SharepreferenceKey.TEST_ACCESSTOKEN,
+								SystemUtil.getAccessToken(context),
 								applyDept.getDoProjectId(),
 								applyDept.getDepId()));
 						if(success){

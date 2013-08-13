@@ -13,6 +13,7 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -23,8 +24,10 @@ import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
+import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.SubmitListService;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.ApplyDept;
 import com.wuxi.exception.NetException;
 
@@ -58,6 +61,8 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements O
 	private int year,month,day;
 
 	private ApplyDept applyDept;
+	
+	private LoginDialog loginDialog;
 
 	public void setDept(ApplyDept applyDept){
 		this.applyDept=applyDept;
@@ -91,6 +96,13 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements O
 	}
 
 	public void initView(){
+		
+		loginDialog = new LoginDialog(context, baseSlideFragment);//实例化登录对话框
+		
+		if(!loginDialog.checkLogin()){
+			loginDialog.showDialog();
+		}
+		
 		calendar=Calendar.getInstance();
 		year=calendar.get(Calendar.YEAR);
 		month=calendar.get(Calendar.MONTH);
@@ -135,7 +147,17 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements O
 	public void onClick(View v) {
 		switch(v.getId()){
 		case R.id.worksuggestbox_imgbtn_submit:
-			submitData();
+			//关闭软键盘
+			InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE); 
+			imm.hideSoftInputFromWindow(submit_ibtn.getWindowToken(), 0);
+			//检测登录状态
+			if(loginDialog.checkLogin()){
+				submitData();
+			}
+			else{
+				loginDialog.showDialog();
+			}
+			
 
 			break;
 		case R.id.worksuggestbox_imgbtn_cancel:
@@ -165,7 +187,7 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements O
 					try {
 						boolean success=false;
 						success=submitListService.submitByUrl(getUrl(Constants.Urls.CITIZEN_APPLY_SUBMIT_URL,
-								Constants.SharepreferenceKey.TEST_ACCESSTOKEN,
+								SystemUtil.getAccessToken(context),
 								applyDept.getDoProjectId(),
 								applyDept.getDepId()));
 						if(success){

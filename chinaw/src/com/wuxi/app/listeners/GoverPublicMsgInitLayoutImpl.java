@@ -1,7 +1,10 @@
 package com.wuxi.app.listeners;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 
+import com.wuxi.app.dialog.LoginDialog;
+import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgContentListFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgFragmentWebFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgNaviWithContentFragment;
@@ -10,6 +13,10 @@ import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgWebFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.WorkSuggestionBoxFragment;
 import com.wuxi.domain.MenuItem;
 
+
+/**
+ * 政府信息公开的布局初始化监听类  使用前必须初始化 baseSlideFragment contextc,才能判断 登录与否
+ * */
 public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener {
 
 	@Override
@@ -38,12 +45,12 @@ public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener 
 			if (fragment instanceof GoverMsgNaviWithContentFragment) {
 				contentNavigatorWithContentFragment = (GoverMsgNaviWithContentFragment) fragment;
 				contentNavigatorWithContentFragment.setParentMenuItem(menuItem);
-				
+
 				initLayoutListner
-						.bindContentLayout(contentNavigatorWithContentFragment);
+				.bindContentLayout(contentNavigatorWithContentFragment);
 			} else if (fragment instanceof GoverMsgContentListFragment) {
 				contentListFragment = (GoverMsgContentListFragment) fragment;
-				
+
 				contentListFragment.setParentItem(menuItem);
 				initLayoutListner.bindContentLayout(contentListFragment);
 			} else if (fragment instanceof GoverMsgWebFragment) {
@@ -61,6 +68,7 @@ public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener 
 				workSuggestionBoxFragment = (WorkSuggestionBoxFragment) fragment;
 				workSuggestionBoxFragment.setParentMenuItem(menuItem);
 				initLayoutListner.bindContentLayout(workSuggestionBoxFragment);
+
 			}
 			else if (fragment instanceof GoverMsgFragmentWebFragment) {
 				goverMsgFragmentWebFragment = (GoverMsgFragmentWebFragment) fragment;

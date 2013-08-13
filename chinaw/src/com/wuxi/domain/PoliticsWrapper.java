@@ -1,5 +1,6 @@
 package com.wuxi.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class PoliticsWrapper extends CommonDataWrapper{
@@ -13,7 +14,11 @@ public class PoliticsWrapper extends CommonDataWrapper{
 		this.data = data;
 	}
 	
-	public class Politics{
+	public class Politics implements Serializable{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private String id;   //立法征求或民意征集的id
 		private String title;  //标题
 		private String doprojectid;  //项目编号

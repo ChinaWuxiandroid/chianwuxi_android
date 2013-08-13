@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/forum_post_linearlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    
     <TextView
         android:id="@+id/questionnaire_question_text"
         android:layout_width="fill_parent"
@@ -12,37 +14,13 @@
         android:layout_marginRight="5sp"
         android:text="1、您认为市总机关的办事效率："
         android:textSize="12sp" />
-
-    <RadioGroup
-        android:id="@+id/questionnaire_answer_radiogroup"
+    
+    <LinearLayout 
+        android:id="@+id/questionnaire_question_layout"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10sp"
-        android:layout_marginRight="5sp" >
+        android:layout_height="match_parent"
+        android:orientation="vertical" 
+        ></LinearLayout>
 
-        
-    </RadioGroup>
-
-    <LinearLayout
-        android:id="@+id/checkbox_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10sp"
-        android:layout_marginRight="5sp"
-        android:orientation="vertical"
-        android:visibility="gone" >
-
-        
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/answer_edittext"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10sp"
-        android:layout_marginRight="5sp"
-        android:hint="请输入您的意见"
-        android:textSize="10sp"
-        android:visibility="gone" />
-
+    
 </LinearLayout>

@@ -23,9 +23,11 @@ import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
+import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.WorkSuggestionService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.MailBoxParameterItem;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.domain.WorkSuggestionBoxWrapper;
@@ -59,6 +61,8 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 	private ImageButton submit_btn;
 	private ImageButton cancel_btn;
 
+	private LoginDialog loginDialog;
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -83,7 +87,7 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 				processBar.setVisibility(View.INVISIBLE);
 				Toast.makeText(context, "提交失败", Toast.LENGTH_SHORT).show();
 				break;
-				
+
 			}
 		};
 	};
@@ -101,6 +105,10 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 	}
 
 	public void initLayout(){
+		loginDialog=new LoginDialog(context, this.baseSlideFragment);
+		if(!loginDialog.checkLogin()){
+			loginDialog.showDialog();
+		}
 		processBar=(ProgressBar)view.findViewById(R.id.worksuggestbox_progressbar);
 		submit_layout=(RelativeLayout)view.findViewById(R.id.worksuggestbox_submit_layout);
 
@@ -109,7 +117,7 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 	}
 
 	private void loadData(){
-	
+
 		if (boxWrapper!=null&&CacheUtil.get(boxWrapper.getId()) != null) {// 从缓存中查找子菜单
 			boxWrapper = (WorkSuggestionBoxWrapper) CacheUtil.get(boxWrapper.getId());
 			processBar.setVisibility(View.INVISIBLE);
@@ -160,7 +168,7 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 	public void showLayout(){
 		parameterItems=boxWrapper.getParameters();
 		if(parameterItems!=null){
-			 layout = (LinearLayout) view.findViewById(R.id.worksuggestbox_layout);
+			layout = (LinearLayout) view.findViewById(R.id.worksuggestbox_layout);
 			for(MailBoxParameterItem item:parameterItems){
 				//根据InputType先判断单行文本还是多行文本
 				LinearLayout subLayout = null ;
@@ -204,11 +212,8 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 	public void onClick(View v) {
 		switch(v.getId()){
 		case R.id.worksuggestbox_imgbutton_submit:
-			String access_token=Constants.SharepreferenceKey.TEST_ACCESSTOKEN;
-			if("".equals(access_token)){
-				Toast.makeText(context, "请先登录", Toast.LENGTH_SHORT).show();
-			}
-			else{
+			if(loginDialog.checkLogin()){
+				String access_token=SystemUtil.getAccessToken(context);
 				try {
 					submitMail(access_token);
 				} catch (NetException e) {
@@ -222,12 +227,16 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 					e.printStackTrace();
 				}
 			}
+			else{
+				loginDialog.showDialog();
+			}
+
 			break;
 		case R.id.worksuggestbox_imgbutton_cancel:
 			break;
 		}
 	}
-	
+
 	public void submitMail(final String access_token) throws NetException, JSONException, NODataException{
 		processBar.setVisibility(View.VISIBLE);
 		if(!judgeIsLegal()){
@@ -259,7 +268,7 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 			}).start();
 		}
 	}
-	
+
 	/**
 	 *判断输入情况是否合法 
 	 * */
@@ -269,9 +278,9 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 		for(MailBoxParameterItem item:boxWrapper.getParameters()){
 			LinearLayout subLayout = (LinearLayout) layout.getChildAt(index);
 			EditText content_et=(EditText)subLayout.getChildAt(1);
-				
+
 			item.setValueList(content_et.getText().toString());
-			
+
 			//对必填选项进行空值判断
 			if(item.getRequiredForm()==1){
 				if (content_et.getText().toString().equals("")) {
@@ -280,7 +289,7 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 					break;
 				}
 			}
-			
+
 			index++;
 		}
 		return submitError;
