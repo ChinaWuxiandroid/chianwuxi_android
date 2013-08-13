@@ -248,8 +248,9 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 		bindFragment(fragment);
 	}
 
-	private void bindFragment(Fragment fragment) {		
+	private void bindFragment(BaseFragment fragment) {		
 		FragmentManager manager = getActivity().getSupportFragmentManager();
+		fragment.setBaseSlideFragment(this.baseSlideFragment);
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(RIGHT_CONTENT_ID, fragment);
 		ft.commit();	
@@ -358,7 +359,6 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 				channel=(Channel)object;
 			}
 
-
 			/**
 			 * 切换选中与未选择的样式
 			 */
@@ -401,7 +401,7 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 
 	public void loadChannelContentList(Channel channel){
 		GIPChannelContentListFragment gIPContentListFragment = new GIPChannelContentListFragment();	
-		gIPContentListFragment.setArguments(this.getArguments());
+		gIPContentListFragment.setBaseSlideFragment(this.baseSlideFragment);
 		gIPContentListFragment.setChannel(channel);
 		bindContentLayout(gIPContentListFragment);
 	}

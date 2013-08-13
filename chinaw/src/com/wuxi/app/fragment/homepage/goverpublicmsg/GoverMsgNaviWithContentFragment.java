@@ -18,7 +18,7 @@ MenuItemNavigatorWithContentFragment {
 
 		if(menuItem.getType() == MenuItem.CUSTOM_MENU||menuItem.getType() == MenuItem.CHANNEL_MENU){
 			NavigatorContentExpandListFragment navigatorContentExpandListFragment=new NavigatorContentExpandListFragment();
-			navigatorContentExpandListFragment.setArguments(this.getArguments());//传递外层框架
+			navigatorContentExpandListFragment.setBaseSlideFragment(this.baseSlideFragment);//传递外层框架
 			navigatorContentExpandListFragment.setParentItem(menuItem);
 			return navigatorContentExpandListFragment;
 		}
@@ -32,7 +32,7 @@ MenuItemNavigatorWithContentFragment {
 			if(menuItem.getAppUI().equals("Applyopen_dept")){
 				GoverMsgApplyDownloadFragment goverMsgDeptApplyOpenFragment=new GoverMsgApplyDownloadFragment();
 				goverMsgDeptApplyOpenFragment.setType(GoverMsgApplyDownloadFragment.DEPT_TYPE);
-				goverMsgDeptApplyOpenFragment.setArguments(this.getArguments());//传递外层框架
+				goverMsgDeptApplyOpenFragment.setBaseSlideFragment(this.baseSlideFragment);//传递外层框架
 				return goverMsgDeptApplyOpenFragment;
 			}
 			//依申请公开   --我的依申请公开办件答复
@@ -43,7 +43,7 @@ MenuItemNavigatorWithContentFragment {
 			//依申请公开   --各市(县)区依申请公开
 			else if(menuItem.getAppUI().equals("Applyopen_city")){
 				GoverMsgApplyDownloadFragment goverMsgDeptApplyOpenFragment=new GoverMsgApplyDownloadFragment();
-				goverMsgDeptApplyOpenFragment.setArguments(this.getArguments());//传递外层框架
+				goverMsgDeptApplyOpenFragment.setBaseSlideFragment(this.baseSlideFragment);//传递外层框架
 				goverMsgDeptApplyOpenFragment.setType(GoverMsgApplyDownloadFragment.GOVER_TYPE);
 				return goverMsgDeptApplyOpenFragment;
 			}
@@ -64,6 +64,7 @@ MenuItemNavigatorWithContentFragment {
 			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment = new GoverMsgSearchContentListFragment();
 			goverMsgSearchContentListFragment
 			.setFifterType(GoverMsgSearchContentListFragment.DEPT_TYPE);
+			goverMsgSearchContentListFragment.setBaseSlideFragment(this.baseSlideFragment);//传递外层框架
 			goverMsgSearchContentListFragment.setChannel(channel);
 			return goverMsgSearchContentListFragment;
 		} else if (channel.getChannelName().equals("县区政府年度报告")) {
@@ -71,12 +72,13 @@ MenuItemNavigatorWithContentFragment {
 			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment = new GoverMsgSearchContentListFragment();
 			goverMsgSearchContentListFragment
 			.setFifterType(GoverMsgSearchContentListFragment.ZONE_TYPE);
+			goverMsgSearchContentListFragment.setBaseSlideFragment(this.baseSlideFragment);//传递外层框架
 			goverMsgSearchContentListFragment.setChannel(channel);
 			return goverMsgSearchContentListFragment;
 		} else {
 			GoverMsgContentListFragment goverMsgContentListFragment = new GoverMsgContentListFragment();
 			goverMsgContentListFragment.setChannel(channel);
-			goverMsgContentListFragment.setArguments(this.getArguments());//传递外层框架
+			goverMsgContentListFragment.setBaseSlideFragment(this.baseSlideFragment);//传递外层框架
 			return goverMsgContentListFragment;
 		}
 	}

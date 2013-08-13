@@ -175,10 +175,7 @@ OnItemClickListener, Serializable {
 		MyGoverInterPeopleContentFragment myGoverInterPeopleContentFragment = new MyGoverInterPeopleContentFragment();
 
 		myGoverInterPeopleContentFragment.setMenuItem(menuItem);
-
-		Bundle bundle = new Bundle();
-		bundle.putSerializable("BaseSlideFragment", this);
-		myGoverInterPeopleContentFragment.setArguments(bundle);// 将对象传递过去
+		myGoverInterPeopleContentFragment.setBaseSlideFragment(this);
 		return myGoverInterPeopleContentFragment;
 	};
 

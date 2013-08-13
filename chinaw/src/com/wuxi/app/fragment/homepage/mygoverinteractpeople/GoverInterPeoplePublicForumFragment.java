@@ -124,8 +124,7 @@ public class GoverInterPeoplePublicForumFragment extends
 		postButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				BaseSlideFragment baseSlideFragment = (BaseSlideFragment) GoverInterPeoplePublicForumFragment.this
-						.getArguments().get("BaseSlideFragment");
+				BaseSlideFragment baseSlideFragment = GoverInterPeoplePublicForumFragment.this.baseSlideFragment;
 				baseSlideFragment.slideLinstener.replaceFragment(null, position,
 						Constants.FragmentName.GIP_FORUM_POST_FRAGMENT, null);
 			}
@@ -176,8 +175,7 @@ public class GoverInterPeoplePublicForumFragment extends
 	 * 显示论坛列表
 	 */
 	private void showForums() {
-		BaseSlideFragment baseSlideFragment = (BaseSlideFragment) this
-				.getArguments().get("BaseSlideFragment");
+		BaseSlideFragment baseSlideFragment = this.baseSlideFragment;
 		ForumListAdapter forumListAdapter = new ForumListAdapter(
 				baseSlideFragment);
 

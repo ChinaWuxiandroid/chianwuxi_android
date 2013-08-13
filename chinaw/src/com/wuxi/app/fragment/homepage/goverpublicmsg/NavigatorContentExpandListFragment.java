@@ -343,7 +343,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 	public void bindFragment(BaseFragment fragment){
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
-
+		fragment.setBaseSlideFragment(this.baseSlideFragment);
 		ft.replace(CHANNELCONTENT_ID, fragment);
 
 		ft.commit();

@@ -15,8 +15,7 @@ public class GIPChannelContentListFragment extends ContentListFragment {
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
 		Content content = (Content) adapterView.getItemAtPosition(position);
-		BaseSlideFragment baseSlideFragment = (BaseSlideFragment) getArguments()
-				.get(MenuItemMainFragment.ROOTFRAGMENT_KEY);
+		BaseSlideFragment baseSlideFragment = this.baseSlideFragment;
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("url", content.getWapUrl());
 		bundle.putSerializable("fragmentTitle", channel.getChannelName());

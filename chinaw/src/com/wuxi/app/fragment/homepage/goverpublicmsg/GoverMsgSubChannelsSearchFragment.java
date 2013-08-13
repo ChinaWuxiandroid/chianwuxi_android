@@ -145,6 +145,7 @@ public class GoverMsgSubChannelsSearchFragment extends BaseFragment{
 			goverMsgCustomContentListFragment.setChannel(channel);
 			FragmentManager manager = getActivity().getSupportFragmentManager();
 			FragmentTransaction ft = manager.beginTransaction();
+			goverMsgCustomContentListFragment.setBaseSlideFragment(this.baseSlideFragment);
 			ft.replace(CONTENT_LIST_ID, goverMsgCustomContentListFragment);
 			ft.commit();
 		}
@@ -154,6 +155,7 @@ public class GoverMsgSubChannelsSearchFragment extends BaseFragment{
 			goverMsgSearchContentListFragment.setChannel(channel);
 			FragmentManager manager = getActivity().getSupportFragmentManager();
 			FragmentTransaction ft = manager.beginTransaction();
+			goverMsgSearchContentListFragment.setBaseSlideFragment(this.baseSlideFragment);
 			ft.replace(CONTENT_LIST_ID, goverMsgSearchContentListFragment);
 			ft.commit();
 		}

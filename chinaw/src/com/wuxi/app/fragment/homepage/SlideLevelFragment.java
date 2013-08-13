@@ -252,15 +252,15 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				break;
 			case HOTREVIEW_CONTENT_FRAGMENT:// 政民互动   热点话题内容页
 				HotReviewContentFragment hotReviewContentFragment = new HotReviewContentFragment();
-				onReplaceFragment(hotReviewContentFragment, bundle);
+				onAddFragment(hotReviewContentFragment, bundle);
 				break;
 			case GIP_FOROUM_FRAGMENT:// 公众论坛帖子详细内容
 				ForumContentFragment forumContentFragment = new ForumContentFragment();
-				onReplaceFragment(forumContentFragment, bundle);
+				onAddFragment(forumContentFragment, bundle);
 				break;
 			case GIP_FORUM_POST_FRAGMENT:// 公众论坛发表帖子界面
 				ForumPostFragment forumPostFragment = new ForumPostFragment();
-				onReplaceFragment(forumPostFragment, bundle);
+				onAddFragment(forumPostFragment, bundle);
 				break;
 				
 			case GIP_CHANNEL_CONTENT_DETAILWEB_FRAGMENT:// 政民互动  频道内容页

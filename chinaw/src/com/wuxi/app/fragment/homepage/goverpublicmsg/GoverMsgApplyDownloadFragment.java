@@ -195,16 +195,14 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment{
 	}
 
 	public void showGoverList(){
-		BaseSlideFragment baseSlideFragment = (BaseSlideFragment) getArguments()
-				.get(MenuItemMainFragment.ROOTFRAGMENT_KEY);
+		BaseSlideFragment baseSlideFragment = this.baseSlideFragment;
 		if(govers!=null)
 			content_listView.setAdapter(new ApplyGoverAdapter(baseSlideFragment));
 	}
 
 	public void showDeptList(){
 
-		BaseSlideFragment baseSlideFragment = (BaseSlideFragment) getArguments()
-				.get(MenuItemMainFragment.ROOTFRAGMENT_KEY);
+		BaseSlideFragment baseSlideFragment =this.baseSlideFragment;
 		if(depts!=null)	
 			content_listView.setAdapter(new ApplyDeptAdapter(baseSlideFragment));
 	}
