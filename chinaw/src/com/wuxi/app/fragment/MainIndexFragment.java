@@ -753,7 +753,7 @@ public class MainIndexFragment extends BaseFragment implements
 
 		} catch (Exception e) {
 
-			Toast.makeText(context, "监测更新出错", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(context, "监测更新出错", Toast.LENGTH_SHORT).show();
 
 			e.printStackTrace();
 			return false;

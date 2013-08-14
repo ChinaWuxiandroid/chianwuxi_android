@@ -2,6 +2,7 @@ package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
 import java.util.List;
 
+import com.wuxi.app.BaseFragment;
 import com.wuxi.app.listeners.GoverInterPeopleInitLayoutImpl;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
 import com.wuxi.domain.MenuItem;
@@ -40,6 +41,8 @@ public class GoverInterPeopleSuggestFragment extends GoverMenuItemTitleFragment{
 			}
 		}
 	}
+
+	
 }
 
 //public class GoverInterPeopleSuggestFragment extends RadioButtonChangeFragment{

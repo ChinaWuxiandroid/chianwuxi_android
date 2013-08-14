@@ -100,6 +100,7 @@ public class FragmentManagers {
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(FRAME_CONTENT, saveFragment);
 		ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
+		
 		ft.addToBackStack(null);
 		ft.commit();
 

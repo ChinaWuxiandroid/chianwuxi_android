@@ -150,36 +150,37 @@ public class MainActivity extends FragmentActivity implements
 			break;
 
 		case R.id.main_tab_search:
-
+			fragmentManagers.RemoveAllFragment();
 			slideLevelFragment
 					.setFragmentName(Constants.FragmentName.MAINSEARCH_FRAGMENT);
 			fragmentManagers.ChangeFragment(slideLevelFragment);
-
+			
 			break;
 
 		case R.id.main_tab_login_reg:// 登录注册
-
+			
 			slideLevelFragment
 					.setFragmentName(Constants.FragmentName.LOGIN_FRAGMENT);
 
 			fragmentManagers.ChangeFragment(slideLevelFragment);
-
+			
 			break;
 
 		case R.id.main_tab_mine:
-
+			
 			slideLevelFragment
 					.setFragmentName(Constants.FragmentName.MAINMINEFRAGMENT);
 			fragmentManagers.ChangeFragment(slideLevelFragment);
+			
 
 			break;
 
 		case R.id.main_tab_more:
-
+			
 			slideLevelFragment
 					.setFragmentName(Constants.FragmentName.SYSTEMSETF_RAGMENT);
 			fragmentManagers.ChangeFragment(slideLevelFragment);
-
+			
 			break;
 
 		}

@@ -248,9 +248,10 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 	 * 
 	 * @param fragment
 	 */
-	protected void showContentFragment(Fragment fragment) {
+	protected void showContentFragment(BaseFragment fragment) {
 		if (fragment != null) {
 			fragment.setArguments(this.getArguments());
+			fragment.setBaseSlideFragment(this.baseSlideFragment);
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
 			ft.replace(DETAIL_ID, fragment);// 替换视图
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
