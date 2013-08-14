@@ -1,6 +1,5 @@
 package com.wuxi.app;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -17,6 +16,7 @@ import com.wuxi.app.fragment.homepage.SlideLevelFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.Constants.CacheKey;
+import com.wuxi.app.util.SystemUtil;
 
 /**
  * 主要架构
@@ -25,7 +25,7 @@ import com.wuxi.app.util.Constants.CacheKey;
  * 
  */
 public class MainActivity extends FragmentActivity implements
-		OnCheckedChangeListener, OnClickListener {
+OnCheckedChangeListener, OnClickListener {
 
 	private RadioGroup radioGroup;
 
@@ -35,7 +35,7 @@ public class MainActivity extends FragmentActivity implements
 	private long mLastBackPressedTimeMillis = 0;
 
 	private RadioButton main_tab_index, main_tab_search, main_tab_login_reg,
-			main_tab_mine, main_tab_more;
+	main_tab_mine, main_tab_more;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class MainActivity extends FragmentActivity implements
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		setContentView(R.layout.main_fragment_layout);
-		
+
 		radioGroup = (RadioGroup) findViewById(R.id.main_tab_radiogroup);
 		radioGroup.setOnCheckedChangeListener(this);
 
@@ -78,7 +78,7 @@ public class MainActivity extends FragmentActivity implements
 			}
 
 		}
-		
+
 
 	}
 
@@ -86,7 +86,7 @@ public class MainActivity extends FragmentActivity implements
 		main_tab_index.setTextColor(Color.parseColor("#EB5212"));
 		fragmentManagers = FragmentManagers.getInstance();
 		fragmentManagers.setFragmentActivity(getContext());
-		
+
 		ChangeFragment(new MainIndexFragment(), R.id.main_tab_index);
 
 	}
@@ -137,7 +137,7 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	public void onClick(View v) {
-		
+
 		if(CacheUtil.get(CacheKey.HOME_MENUITEM_KEY)==null){
 			Toast.makeText(this, "数据异常，请重启，或检查网络", Toast.LENGTH_SHORT).show();
 			return ;
@@ -152,7 +152,7 @@ public class MainActivity extends FragmentActivity implements
 		case R.id.main_tab_search:
 			fragmentManagers.RemoveAllFragment();
 			slideLevelFragment
-					.setFragmentName(Constants.FragmentName.MAINSEARCH_FRAGMENT);
+			.setFragmentName(Constants.FragmentName.MAINSEARCH_FRAGMENT);
 			fragmentManagers.ChangeFragment(slideLevelFragment);
 			
 			break;
@@ -160,25 +160,35 @@ public class MainActivity extends FragmentActivity implements
 		case R.id.main_tab_login_reg:// 登录注册
 			
 			slideLevelFragment
-					.setFragmentName(Constants.FragmentName.LOGIN_FRAGMENT);
+			.setFragmentName(Constants.FragmentName.LOGIN_FRAGMENT);
 
 			fragmentManagers.ChangeFragment(slideLevelFragment);
 			
 			break;
 
 		case R.id.main_tab_mine:
-			
-			slideLevelFragment
-					.setFragmentName(Constants.FragmentName.MAINMINEFRAGMENT);
-			fragmentManagers.ChangeFragment(slideLevelFragment);
-			
+
+			if("".equals(SystemUtil.getAccessToken(this))){
+				Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
+				slideLevelFragment
+				.setFragmentName(Constants.FragmentName.LOGIN_FRAGMENT);
+
+				fragmentManagers.ChangeFragment(slideLevelFragment);
+			}
+			else{
+				slideLevelFragment
+				.setFragmentName(Constants.FragmentName.MAINMINEFRAGMENT);
+				fragmentManagers.ChangeFragment(slideLevelFragment);
+			}
+
+
 
 			break;
 
 		case R.id.main_tab_more:
 			
 			slideLevelFragment
-					.setFragmentName(Constants.FragmentName.SYSTEMSETF_RAGMENT);
+			.setFragmentName(Constants.FragmentName.SYSTEMSETF_RAGMENT);
 			fragmentManagers.ChangeFragment(slideLevelFragment);
 			
 			break;

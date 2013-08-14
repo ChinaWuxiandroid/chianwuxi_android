@@ -226,6 +226,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 	public void showChannelData(){
 		//没有子频道列表
 		GoverMsgCustomContentDetailFragment goverMsgCustomContentDetailFragment=new GoverMsgCustomContentDetailFragment();
+		goverMsgCustomContentDetailFragment.setBaseSlideFragment(baseSlideFragment);
 		goverMsgCustomContentDetailFragment.setParentMenuItem(parentItem);
 		goverMsgCustomContentDetailFragment.setFifterType(GoverMsgSearchContentListFragment.DEPT_TYPE);
 		bindFragment(goverMsgCustomContentDetailFragment);

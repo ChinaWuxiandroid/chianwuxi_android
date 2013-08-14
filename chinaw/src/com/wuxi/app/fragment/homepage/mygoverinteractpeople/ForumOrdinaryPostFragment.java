@@ -87,6 +87,9 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 
 	private LinearLayout layout = null;
 
+	private LinearLayout questionnaire_question_layout = null;
+	private ScrollView questionnaire__scrollview = null;
+	
 	private Forum forum;
 
 	private OrdinaryPostWrapper postWrapper = null;
@@ -104,8 +107,8 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 	private QuestionnairePostWrapper questionnairePostWrapper = null;
 	private QuestionnaireAnswerWrapper questionnaireAnswerWrapper = null;
 	private List<QuestionnaireQuestionWrapper> questionnaireQuestionWrappers = null;
-	private List<QuestionnaireQuestion> questionnaireQuestions = null; 
-	
+	private List<QuestionnaireQuestion> questionnaireQuestions = null;
+
 	// 数据加载成功标志
 	private static final int DATA__LOAD_SUCESS = 0;
 	// 数据加载失败标志
@@ -117,7 +120,6 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 	private int endIndex = 60;
 
 	// 调查问卷类帖子相关控件
-	private ListView post_listview = null;
 	private TextView post_summary_text = null;
 
 	@SuppressLint("HandlerLeak")
@@ -198,11 +200,12 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 
 		post_scrollview = (ScrollView) view.findViewById(R.id.post_scrollview);
 
-		post_listview = (ListView) view.findViewById(R.id.post_listview);
-
 		post_summary_text = (TextView) view
 				.findViewById(R.id.post_summary_text);
 
+		
+		
+		
 		loadData();
 
 	}
@@ -222,7 +225,7 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 			replynum_text.setText(String.valueOf(postRaplyWrappers
 					.getTotalRowsAmount()));
 			post_summary_text.setVisibility(View.GONE);
-			
+
 			title_text.setText(postWrapper.getTitle());
 			content_text.setText("\u3000\u3000" + postWrapper.getContent());
 		}
@@ -233,7 +236,7 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 			} else {
 				sentpepole_text.setText(hotPostWrapper.getDepName());
 			}
-			
+
 			post_summary_text.setVisibility(View.GONE);
 
 			begintime_text.setVisibility(View.GONE);
@@ -258,8 +261,9 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 		// 公告类帖子数据显示
 		else if (forum.getViewpath().equals("/LegislativeCommentsContent")) {
 			sentpepole_text.setText("版主");
-			post_summary_text.setText("\u3000\u3000"+noticePostWrapper.getSummary());
-			
+			post_summary_text.setText("\u3000\u3000"
+					+ noticePostWrapper.getSummary());
+
 			begintime_text.setText(noticePostWrapper.getBegintime());
 			endtime_text.setText(noticePostWrapper.getEndtime());
 			readnum_text.setText(noticePostWrapper.getReadCount());
@@ -277,8 +281,9 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 		// 征求意见类帖子数据显示
 		else if (forum.getViewpath().equals("/JoinPoliticsContent")) {
 			sentpepole_text.setText("版主");
-			post_summary_text.setText("\u3000\u3000"+opinionPostWrapper.getSummary());
-			
+			post_summary_text.setText("\u3000\u3000"
+					+ opinionPostWrapper.getSummary());
+
 			begintime_text.setText(opinionPostWrapper.getBegintime());
 			endtime_text.setText(opinionPostWrapper.getEndtime());
 			readnum_text.setText(opinionPostWrapper.getReadCount());
@@ -295,9 +300,7 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 		}
 		// 问卷调查类帖子数据显示
 		else if (forum.getViewpath().equals("/SurveryContent")) {
-			QuestionnaireListAdapter listAdapter = new QuestionnaireListAdapter();
-			post_listview.setVisibility(View.VISIBLE);
-			
+		
 			content_text.setVisibility(View.GONE);
 			post_scrollview.setVisibility(View.GONE);
 
@@ -305,12 +308,44 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 			begintime_text.setText(questionnairePostWrapper.getCreateDate());
 			endtime_text.setText(questionnairePostWrapper.getEndDate());
 			readnum_text.setText(questionnairePostWrapper.getReadCount());
-			replynum_text.setText(String.valueOf(questionnaireAnswerWrapper.getTotalRowsAmount()));
-			
+			replynum_text.setText(String.valueOf(questionnaireAnswerWrapper
+					.getTotalRowsAmount()));
+
 			title_text.setText(questionnairePostWrapper.getTitle());
-			post_summary_text.setText("\u3000\u3000"+questionnairePostWrapper.getSummary());
+			post_summary_text.setText("\u3000\u3000"
+					+ questionnairePostWrapper.getSummary());
+
+			questionnaire__scrollview = (ScrollView) view.findViewById(R.id.questionnaire__scrollview);
+			questionnaire__scrollview.setVisibility(View.GONE);
+			questionnaire_question_layout = (LinearLayout) view.findViewById(R.id.questionnaire_question_layout);
 			
-			post_listview.setAdapter(listAdapter);
+			questionnaireQuestionWrappers = questionnairePostWrapper.getQuestionnaireQuestionWrappers();
+			for (QuestionnaireQuestionWrapper wrapper:questionnaireQuestionWrappers) {
+				LinearLayout subLayout = null;
+				if (wrapper.getQuestionType().equals("RADIO")) {
+					subLayout = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.forum_post_list_layout, null).findViewById(R.id.forum_post_linearlayout);
+					TextView textView = (TextView) subLayout.getChildAt(0);
+					LinearLayout linearLayout = (LinearLayout) subLayout.getChildAt(1);
+					
+					textView.setText(wrapper.getDescription());
+					
+					RadioGroup radioGroup = new RadioGroup(context);
+					
+					System.out.println("cdcdcdcdcdc:"+wrapper.getOptionCount());
+					
+					questionnaireQuestions= wrapper.getQuestionnaireQuestions();
+					
+					for (int i = 0; i < Integer.valueOf(wrapper.getOptionCount()); i++) {
+						RadioButton radioButton = new RadioButton(context);
+						radioButton.setText("AAAAA");
+						radioButton.setTextSize(10);
+						radioGroup.addView(radioButton);
+					}
+					linearLayout.addView(radioGroup);
+					questionnaire_question_layout.addView(subLayout);
+				}
+			}
+			
 		}
 	}
 
@@ -399,16 +434,28 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 							handler.sendEmptyMessage(DATA_LOAD_ERROR);
 						}
 					}
-					//调查问卷类帖子数据加载
+					// 调查问卷类帖子数据加载
 					else if (forum.getViewpath().equals("/SurveryContent")) {
-						QuestionnairePostService questionnairePostService = new QuestionnairePostService(context);
-						questionnairePostWrapper = questionnairePostService.getQuestionnairePostWrapper(forum.getId(), forum.getViewpath(), startIndex, endIndex);
+
+						QuestionnairePostService questionnairePostService = new QuestionnairePostService(
+								context);
+						questionnairePostWrapper = questionnairePostService
+								.getQuestionnairePostWrapper(forum.getId(),
+										forum.getViewpath(), startIndex,
+										endIndex);
 						if (questionnairePostWrapper != null) {
-							questionnaireQuestionWrappers = questionnairePostWrapper.getQuestionnaireQuestionWrappers();
-							questionnaireQuestions = questionnaireQuestionWrappers.get(12).getQuestionnaireQuestions();
-							questionnaireAnswerWrapper = questionnairePostWrapper.getQuestionnaireAnswerWrapper();
+							questionnaireQuestionWrappers = questionnairePostWrapper
+									.getQuestionnaireQuestionWrappers();
+							for (int i = 0; i < questionnaireQuestionWrappers
+									.size(); i++) {
+								questionnaireQuestions = questionnaireQuestionWrappers
+										.get(i).getQuestionnaireQuestions();
+							}
+
+							questionnaireAnswerWrapper = questionnairePostWrapper
+									.getQuestionnaireAnswerWrapper();
 							handler.sendEmptyMessage(DATA__LOAD_SUCESS);
-						}else {
+						} else {
 							Message message = handler.obtainMessage();
 							message.obj = "error";
 							handler.sendEmptyMessage(DATA_LOAD_ERROR);
@@ -428,100 +475,5 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 				}
 			}
 		}).start();
-	}
-
-	/**
-	 * 调查问卷类帖子列表适配器
-	 * 
-	 * @author 智佳 罗森
-	 * 
-	 */
-	public class QuestionnaireListAdapter extends BaseAdapter {
-
-		@Override
-		public int getCount() {
-			return questionnaireQuestionWrappers.size();
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return questionnaireQuestionWrappers.get(position);
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		class ViewHolder {
-			public TextView question_text;
-
-			public RadioGroup answer_radiogroup;
-
-			public LinearLayout checkbox_layout;
-
-			public EditText answer_edittext;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHolder holder = null;
-
-			if (convertView == null) {
-				holder = new ViewHolder();
-
-				convertView = LayoutInflater.from(context).inflate(
-						R.layout.forum_post_list_layout, null);
-
-				holder.question_text = (TextView) convertView
-						.findViewById(R.id.questionnaire_question_text);
-
-				holder.answer_radiogroup = (RadioGroup) convertView
-						.findViewById(R.id.questionnaire_answer_radiogroup);
-				
-				holder.checkbox_layout = (LinearLayout) convertView
-						.findViewById(R.id.checkbox_layout);
-
-
-				holder.answer_edittext = (EditText) convertView
-						.findViewById(R.id.answer_edittext);
-
-				convertView.setTag(holder);
-			} else {
-				holder = (ViewHolder) convertView.getTag();
-			}
-			
-			
-			holder.question_text.setText(questionnaireQuestionWrappers.get(position).getDescription());
-			
-			if (questionnaireQuestionWrappers.get(position).getQuestionType().equals("RADIO")) {
-				for (int i = 0; i < Integer.valueOf(questionnaireQuestionWrappers.get(position).getOptionCount())+1; i++) {
-					RadioButton radioButton = new RadioButton(context);
-					
-					radioButton.setText(questionnaireQuestions.get(i).getSerialNumber()+"、"+questionnaireQuestions.get(i).getOptionValue());
-					radioButton.setTextSize(10);
-					holder.answer_radiogroup.addView(radioButton);
-				}
-			}
-			
-			if (questionnaireQuestionWrappers.get(position).getQuestionType().equals("CHECK")) {
-				for (int j = 0; j < Integer.valueOf(questionnaireQuestionWrappers.get(position).getOptionCount())+1; j++) {
-					CheckBox checkBox = new CheckBox(context);
-					checkBox.setText(questionnaireQuestions.get(j).getSerialNumber()+"、"+questionnaireQuestions.get(j).getOptionValue());
-					checkBox.setTextSize(10);
-					holder.answer_radiogroup.setVisibility(View.GONE);
-					
-					holder.checkbox_layout.addView(checkBox);
-				}
-			}
-			
-			if (questionnaireQuestionWrappers.get(position).getQuestionType().equals("TEXT")) {
-				holder.answer_radiogroup.setVisibility(View.GONE);
-				holder.checkbox_layout.setVisibility(View.GONE);
-			}
-			
-			return convertView;
-		}
-
 	}
 }

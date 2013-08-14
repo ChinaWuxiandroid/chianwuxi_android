@@ -11,6 +11,8 @@ import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -28,6 +30,7 @@ import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
+import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.ApplyDeptService;
 import com.wuxi.app.engine.ApplyGoverService;
 import com.wuxi.app.engine.GoverSaoonFileService;
@@ -61,6 +64,8 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment{
 	private int dataType=GOVER_TYPE;  //默认加载政府公开
 
 	private ProgressDialog pd;
+
+
 
 	public void setType(int type){
 		this.dataType=type;
@@ -210,7 +215,8 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment{
 	public class ApplyGoverAdapter extends BaseAdapter implements OnClickListener{
 
 		BaseSlideFragment baseSlideFragment;
-
+		private ApplyGover gover;
+		
 		public ApplyGoverAdapter(BaseSlideFragment baseSlideFragment){
 			this.baseSlideFragment=baseSlideFragment;
 		}
@@ -260,8 +266,8 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment{
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-
-			viewHolder.title_text.setText(govers.get(position).getDepName());
+			gover=govers.get(position);
+			viewHolder.title_text.setText(gover.getDepName());
 			viewHolder.apply_imgbtn.setOnClickListener(ApplyGoverAdapter.this);
 			viewHolder.download_imgbtn.setOnClickListener(ApplyGoverAdapter.this);
 			return convertView;
@@ -274,13 +280,22 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment{
 				downloadTable();
 				break;
 			case R.id.govermsg_deptapply_item_guide:
+				openBrowser(gover.getZhinanUrl());
 				break;
 			case R.id.govermsg_deptapply_item_apply:
+				openBrowser(gover.getApplyUrl());
 				break;
 			}
 		}
 	}
 
+	public void openBrowser(String  url){
+        Uri uri = Uri.parse(url);                            
+        Intent intent = new Intent(Intent.ACTION_VIEW,uri);    
+        //建立Intent对象，传入uri  
+        getActivity().startActivity(intent);    
+	}
+	
 	public class ApplyDeptAdapter extends BaseAdapter implements OnClickListener{
 
 		BaseSlideFragment baseSlideFragment;
@@ -349,14 +364,17 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment{
 				downloadTable();
 				break;
 			case R.id.govermsg_deptapply_item_guide:
+				openBrowser(applyDept.getZhinanUrl());
 				break;
 			case R.id.govermsg_deptapply_item_apply:
+				//检测登录状态
 				Bundle bundle=new Bundle();
 				if(applyDept!=null){
 					bundle.putSerializable("applyDept", applyDept);
 					baseSlideFragment.slideLinstener.replaceFragment(null, position,
 							Constants.FragmentName.GOVERMSG_APPLYTABLE_FRAGMENT, bundle);
 				}
+
 				break;
 			}
 		}

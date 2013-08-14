@@ -175,8 +175,8 @@
             android:layout_marginTop="3sp"
             android:visibility="gone" />
 
-        <ListView
-            android:id="@+id/post_listview"
+        <ScrollView
+            android:id="@+id/questionnaire__scrollview"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="3sp"
@@ -184,7 +184,15 @@
             android:layout_marginRight="5sp"
             android:layout_marginTop="3sp"
             android:visibility="gone" >
-        </ListView>
+            
+            <LinearLayout 
+                android:id="@+id/questionnaire_question_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                ></LinearLayout>
+            
+        </ScrollView>
     </LinearLayout>
 
 </LinearLayout>

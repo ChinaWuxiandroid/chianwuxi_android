@@ -19,9 +19,11 @@ import android.widget.Toast;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.GoverInteractPeopleNevigationAdapter;
+import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.MyGoverInterPeopleContentFragment;
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -49,7 +51,7 @@ OnItemClickListener, Serializable {
 	private List<MenuItem> listMenus;// 头部菜单选项
 
 	//	private List<Channel> channels;
-
+	private LoginDialog loginDialog;
 
 	private MenuItem parentMenuItem; // 父菜单
 	private int defaultCheckPosition=0;
@@ -91,9 +93,15 @@ OnItemClickListener, Serializable {
 	@Override
 	public void initUI() {
 		super.initUI();
+		loginDialog=new LoginDialog(context, this);
 		mListView = (ListView) view.findViewById(R.id.gover_interact_people_mainmenu_listview);
 		
+		if("".equals(SystemUtil.getAccessToken(context))){
+			defaultCheckPosition=1;
+		}
 		getArgumentsFromOtherFragment();
+		
+		
 		
 		if(parentMenuItem==null){
 			loadMenuItemData(id);
@@ -171,9 +179,7 @@ OnItemClickListener, Serializable {
 	}
 
 	private BaseFragment showMenItemContentFragment(MenuItem menuItem) {
-
 		MyGoverInterPeopleContentFragment myGoverInterPeopleContentFragment = new MyGoverInterPeopleContentFragment();
-
 		myGoverInterPeopleContentFragment.setMenuItem(menuItem);
 		myGoverInterPeopleContentFragment.setBaseSlideFragment(this);
 		return myGoverInterPeopleContentFragment;
@@ -210,11 +216,17 @@ OnItemClickListener, Serializable {
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+		if(position==0){
+			if(!loginDialog.checkLogin()){
+				loginDialog.showDialog();
+			}
+		}
+		else{
+			Object object = parent.getItemAtPosition(position);
 
-		Object object = parent.getItemAtPosition(position);
-
-		adapter.setSelectedPosition(position); // 刷新左侧导航listView背景
-		adapter.notifyDataSetInvalidated();
-		showContentFragment(showMenItemContentFragment((MenuItem) object));
+			adapter.setSelectedPosition(position); // 刷新左侧导航listView背景
+			adapter.notifyDataSetInvalidated();
+			showContentFragment(showMenItemContentFragment((MenuItem) object));
+		}
 	}
 }

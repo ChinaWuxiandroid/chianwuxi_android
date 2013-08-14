@@ -15,6 +15,7 @@ import com.wuxi.app.R;
 import com.wuxi.app.engine.ForumPostService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.exception.NetException;
 
 /**
@@ -80,12 +81,9 @@ public class ForumPostFragment extends BaseItemContentFragment {
 				try {
 					postService = new ForumPostService(context);
 					
-					boolean issubmit = postService.submitPosts(Constants.SharepreferenceKey.TEST_ACCESSTOKEN, theme, content);
-					if (issubmit) {
-						Toast.makeText(context, "提交成功！", Toast.LENGTH_SHORT).show();
-					}else{
-						Toast.makeText(context, "提交失败！", Toast.LENGTH_SHORT).show();
-					}
+					boolean issubmit = postService.submitPosts(SystemUtil.getAccessToken(context), theme, content);
+					Toast.makeText(context, "提交成功，待审核...", Toast.LENGTH_SHORT)
+					.show();
 				} catch (NetException e) {
 					e.printStackTrace();
 				} catch (JSONException e) {

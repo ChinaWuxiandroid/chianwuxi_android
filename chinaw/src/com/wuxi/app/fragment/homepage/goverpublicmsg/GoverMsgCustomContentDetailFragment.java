@@ -23,8 +23,11 @@ import android.widget.Toast;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.PublicSericeChannelAdapter;
+import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.listeners.GoverMsgInitInfoOpenListener;
+import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.Channel;
+import com.wuxi.domain.Content;
 import com.wuxi.domain.MenuItem;
 
 public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
@@ -124,7 +127,6 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 	}
 
 	private void showContentList() {
-		System.out.println("show content list:");
 		// 在此加载四种类型的菜单
 		if (parentMenuItem != null) {
 			fifterType = GoverMsgInitInfoOpenListener.getMenuItemFragmentType(
@@ -162,9 +164,7 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View arg1,
 			int position, long arg3) {
-		// TODO Auto-generated method stub
-		// Channel channel=(Channel)adapterView.getItemAtPosition(position);
-		// showContentList(channel);
+		
 	}
 
 	@Override

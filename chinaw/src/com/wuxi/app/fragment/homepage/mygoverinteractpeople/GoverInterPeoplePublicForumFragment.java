@@ -276,12 +276,12 @@ public class GoverInterPeoplePublicForumFragment extends
 		@Override
 		public void onItemClick(AdapterView<?>  adapterView, View arg1, int position,
 				long arg3) {
-			Forum forum=(Forum)adapterView.getItemAtPosition(position);
-			Bundle bundle=new Bundle();
-			bundle.putSerializable("forum", forum);
-			
-			baseSlideFragment.slideLinstener.replaceFragment(null, position,
-					Constants.FragmentName.GIP_FOROUM_FRAGMENT, bundle);
+//			Forum forum=(Forum)adapterView.getItemAtPosition(position);
+//			Bundle bundle=new Bundle();
+//			bundle.putSerializable("forum", forum);
+//			
+//			baseSlideFragment.slideLinstener.replaceFragment(null, position,
+//					Constants.FragmentName.GIP_FOROUM_FRAGMENT, bundle);
 		}
 	}
 

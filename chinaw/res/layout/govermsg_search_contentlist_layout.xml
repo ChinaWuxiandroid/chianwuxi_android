@@ -33,6 +33,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
+            android:textSize="15sp"
             android:gravity="center"
             android:text="检  索" />
     </LinearLayout>

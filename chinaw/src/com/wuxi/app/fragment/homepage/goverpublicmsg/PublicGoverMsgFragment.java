@@ -17,12 +17,17 @@ import com.wuxi.domain.MenuItem;
 
 public class PublicGoverMsgFragment extends MenuItemMainFragment{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	@Override
 	public void initializSubFragmentsLayout(List<MenuItem> items) {
 		// TODO Auto-generated method stub
 		InitializContentLayout.initMenuItemContentLayout(menuItem, items, context);
 	}
-
 
 	@Override
 	protected int getTitlePerScreenItemCount() {
@@ -31,6 +36,7 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 
 	@Override
 	protected MenuItemInitLayoutListener getMenuItemInitLayoutListener() {
+
 		return new GoverPublicMsgInitLayoutImpl();
 	}
 

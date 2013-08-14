@@ -5,10 +5,13 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -23,6 +26,7 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.PoliticsWrapper;
+import com.wuxi.domain.PoliticsWrapper.Politics;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -45,7 +49,7 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment{
 	
 	public final int POLITICS_TYPE=0;    //politics类型，接口里0 为立法征集，1 为民意征集
 	private int startIndex=0;         //获取话题的起始坐标
-	private int endIndex=5;			//获取话题的结束坐标
+	private int endIndex=10;			//获取话题的结束坐标
 	private int passed=1;			 //是否过期，可选参数，默认值是0    0: 当前      1:以往
 	
 	@SuppressLint("HandlerLeak")
@@ -167,7 +171,7 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment{
 		}
 	}
 	
-	public class PoliticsListViewAdapter extends BaseAdapter{
+	public class PoliticsListViewAdapter extends BaseAdapter implements OnItemClickListener{
 
 		@Override
 		public int getCount() {
@@ -212,6 +216,16 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment{
 			viewHolder.title_text.setText(politics.get(position).getTitle());
 
 			return convertView;
+		}
+
+		@Override
+		public void onItemClick(AdapterView<?> adapterView, View arg1, int position,
+				long arg3) {
+			Politics politics = (Politics) adapterView.getItemAtPosition(position);
+			Bundle bundle=new Bundle();
+			bundle.putSerializable("politics", politics);
+			
+			
 		}
 		
 	}

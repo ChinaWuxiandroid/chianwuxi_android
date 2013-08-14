@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.SumPathEffect;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -33,12 +34,18 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- * 政民互动 之  公开电话模块
+ * 政民互动 之 公开电话模块
  * 
  * @author 杨宸 智佳
  * */
 
-public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment implements OnItemClickListener{
+public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment
+		implements OnItemClickListener {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private ListView mListView;
 	private ProgressBar list_pb;
 	private OpenTelWrapper openTelWrapper;
@@ -46,7 +53,6 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment i
 	protected static final String TAG = "GoverInterPeopleOpenTelFragment";
 	private static final int DATA__LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
-
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -68,7 +74,6 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment i
 			}
 		};
 	};
-
 
 	@Override
 	protected int getLayoutId() {
@@ -96,21 +101,21 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment i
 
 	@Override
 	protected void init() {
-		mListView=(ListView) view.findViewById(R.id.gip_opentel_listview);
-		list_pb=(ProgressBar)view.findViewById(R.id.gip_opentel_listview_pb);
+		mListView = (ListView) view.findViewById(R.id.gip_opentel_listview);
+		list_pb = (ProgressBar) view.findViewById(R.id.gip_opentel_listview_pb);
 
 		list_pb.setVisibility(View.VISIBLE);
 		loadData();
 	}
 
-	public void loadData(){
-		//		if (CacheUtil.get(menuItem.getChannelId()) != null) {// 从缓存获取
+	public void loadData() {
+		// if (CacheUtil.get(menuItem.getChannelId()) != null) {// 从缓存获取
 		//
-		//			titleChannels = (List<Channel>) CacheUtil.get(menuItem
-		//					.getChannelId());
-		//			showTitleData();
-		//			return;
-		//		}
+		// titleChannels = (List<Channel>) CacheUtil.get(menuItem
+		// .getChannelId());
+		// showTitleData();
+		// return;
+		// }
 
 		new Thread(new Runnable() {
 
@@ -119,10 +124,12 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment i
 
 				OpenTelService openTelService = new OpenTelService(context);
 				try {
-					openTelWrapper = openTelService.getOpenTelWrapper(Constants.Urls.OPENTEL_URL);
+					openTelWrapper = openTelService
+							.getOpenTelWrapper(Constants.Urls.OPENTEL_URL);
 					if (null != openTelWrapper) {
-						//						CacheUtil.put(menuItem.getChannelId(), titleChannels);// 缓存起来
-						tels=openTelWrapper.getData();
+						// CacheUtil.put(menuItem.getChannelId(),
+						// titleChannels);// 缓存起来
+						tels = openTelWrapper.getData();
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 
 					} else {
@@ -148,24 +155,20 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment i
 			}
 		}
 
-				).start();
+		).start();
 	}
 
-	public void showTels(){
-		OpenTelListViewAdapter adapter=new OpenTelListViewAdapter();
-		if(tels==null||tels.size()==0){
+	public void showTels() {
+		OpenTelListViewAdapter adapter = new OpenTelListViewAdapter();
+		if (tels == null || tels.size() == 0) {
 			Toast.makeText(context, "对不起，暂无公开电话信息", 2000).show();
-		}
-		else{
+		} else {
 			mListView.setAdapter(adapter);
 			mListView.setOnItemClickListener(this);
 		}
 	}
 
-
-
-
-	public class OpenTelListViewAdapter extends BaseAdapter{
+	public class OpenTelListViewAdapter extends BaseAdapter {
 
 		@Override
 		public int getCount() {
@@ -194,7 +197,7 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment i
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
 			ViewHolder viewHolder = null;
-			if(convertView==null){
+			if (convertView == null) {
 				convertView = mInflater.inflate(
 						R.layout.gip_opentel_listview_item, null);
 
@@ -205,8 +208,7 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment i
 				viewHolder.tel_text = (TextView) convertView
 						.findViewById(R.id.gip_opentel_listitem_tel);
 				convertView.setTag(viewHolder);
-			}
-			else {
+			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
 			viewHolder.depname_text.setText(tels.get(position).getDepname());
@@ -219,31 +221,60 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment i
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		dial(tels.get(position).getTel());	
+		dial(tels.get(position).getTel());
 	}
-	
-	public void dial(final String phoneNumber){
-		new AlertDialog.Builder(context)  
-		                .setTitle("提示")
-		                .setMessage("是否确定拨号\n"+phoneNumber+"  ?")
-		                .setPositiveButton("确定", new OnClickListener() {
-							
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								Uri telUri = Uri.parse("tel:"+phoneNumber);
-								Intent intent= new Intent(Intent.ACTION_DIAL, telUri);
-								getActivity().startActivity(intent);
-							}
-						})
-		                .setNegativeButton("取消", new OnClickListener(){
 
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// TODO Auto-generated method stub
-								 dialog.dismiss();
-							}})
-		                .show();
-	} 
+	public void dial(final String phoneNumber) {
+		final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setTitle("提示");
+
+		final CharSequence[] sNum = phoneNumber.split("，");
+
+		final ChoiceOnClickListener choiceListener = new ChoiceOnClickListener();
+
+		builder.setSingleChoiceItems(sNum, 0, choiceListener);
+
+		DialogInterface.OnClickListener btnListener = new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialogInterface, int which) {
+
+				int choiceWhich = choiceListener.getWhich();
+
+				String num = (String) sNum[choiceWhich];
+				Uri telUri = Uri.parse("tel:" + num);
+				Intent intent = new Intent(Intent.ACTION_DIAL, telUri);
+				getActivity().startActivity(intent);
+			}
+		};
+
+		builder.setPositiveButton("确定", btnListener);
+
+		builder.setNegativeButton("取消", new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				dialog.dismiss();
+			}
+		});
+		AlertDialog alertDialog = builder.create();
+		alertDialog.show();
+
+	}
+
+	private class ChoiceOnClickListener implements
+			DialogInterface.OnClickListener {
+
+		private int which = 0;
+
+		@Override
+		public void onClick(DialogInterface dialogInterface, int which) {
+			this.which = which;
+		}
+
+		public int getWhich() {
+			return which;
+		}
+	}
 
 }
