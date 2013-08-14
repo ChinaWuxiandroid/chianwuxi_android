@@ -29,6 +29,10 @@ import com.wuxi.domain.HotReviewWrapper;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
+/**
+ * 热点话题
+ * @author 杨宸 智佳
+ * */
 public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment{
 
 	

@@ -50,6 +50,7 @@ import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumPostFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewContentFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegislationContentFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceContentDetailFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
 import com.wuxi.app.fragment.search.AdvancedSearchFragment;
@@ -262,7 +263,13 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				ForumPostFragment forumPostFragment = new ForumPostFragment();
 				onAddFragment(forumPostFragment, bundle);
 				break;
-				
+
+			case GIP_LEGISLATION_CONTENT_FRAGMENT://征求意见平台 立法征求意见详细内容界面
+				LegislationContentFragment legislationContentFragment = new LegislationContentFragment();
+				onAddFragment(legislationContentFragment, bundle);
+				break;
+
+
 			case GIP_CHANNEL_CONTENT_DETAILWEB_FRAGMENT:// 政民互动  频道内容页
 				GoverMsgContentDetailWebFragment gIPContentDetailWebFragment = new GoverMsgContentDetailWebFragment();
 				onAddFragment(gIPContentDetailWebFragment, bundle);
@@ -464,7 +471,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	@Override
 	public void onItemClick(AdapterView<?> parent, View arg1, int position,
 			long id) {
-		
+
 		if(!mSlideMenuLayout.getLeftSlideMenuEnabled()){
 			return;
 		}

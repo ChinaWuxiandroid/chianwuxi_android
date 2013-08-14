@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebSettings.TextSize;
 import android.widget.ProgressBar;
 
 import com.wuxi.app.BaseFragment;
@@ -62,9 +63,11 @@ public class GoverMsgWebFragment extends BaseFragment{
 
 		wbView.getSettings().setUseWideViewPort(true); 
 		wbView.getSettings().setLoadWithOverviewMode(true);
+		if(parentItem.getName().equals("最新信息公开")){
+			wbView.getSettings().setDefaultTextEncodingName("gb2312");
+			wbView.getSettings().setTextSize(TextSize.LARGER);
+		}
 		wbView.loadUrl(parentItem.getWapURI());
-	//	mWb_leader.loadUrl("http://32.63.250.24:10169/wap/zxzx/ldzc/index.shtml");
-
 	}
 
 }
