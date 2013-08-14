@@ -1,8 +1,10 @@
 package com.wuxi.app;
 
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -11,8 +13,10 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
+import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.MainIndexFragment;
 import com.wuxi.app.fragment.homepage.SlideLevelFragment;
+import com.wuxi.app.listeners.HomeTabChangListner;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.Constants.CacheKey;
@@ -25,7 +29,7 @@ import com.wuxi.app.util.SystemUtil;
  * 
  */
 public class MainActivity extends FragmentActivity implements
-OnCheckedChangeListener, OnClickListener {
+		OnCheckedChangeListener, OnClickListener, HomeTabChangListner {
 
 	private RadioGroup radioGroup;
 
@@ -33,9 +37,10 @@ OnCheckedChangeListener, OnClickListener {
 
 	private static final long BACK_PRESSED_INTERVAL_MILLIS = 1500;
 	private long mLastBackPressedTimeMillis = 0;
+	private BaseSlideFragment currentBaseSlideFragment;
 
 	private RadioButton main_tab_index, main_tab_search, main_tab_login_reg,
-	main_tab_mine, main_tab_more;
+			main_tab_mine, main_tab_more;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,21 @@ OnCheckedChangeListener, OnClickListener {
 
 	}
 
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+
+		try {
+			super.onConfigurationChanged(newConfig);
+			if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+				// Log.v("Himi",
+				// "onConfigurationChanged_ORIENTATION_LANDSCAPE");
+			} else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+				// Log.v("Himi", "onConfigurationChanged_ORIENTATION_PORTRAIT");
+			}
+		} catch (Exception ex) {
+		}
+	}
+
 	public FragmentActivity getContext() {
 		return MainActivity.this;
 	}
@@ -79,15 +99,15 @@ OnCheckedChangeListener, OnClickListener {
 
 		}
 
-
 	}
 
 	private void init() {
 		main_tab_index.setTextColor(Color.parseColor("#EB5212"));
 		fragmentManagers = FragmentManagers.getInstance();
 		fragmentManagers.setFragmentActivity(getContext());
-
-		ChangeFragment(new MainIndexFragment(), R.id.main_tab_index);
+		MainIndexFragment mainIndexFragment=new MainIndexFragment();
+		mainIndexFragment.setHomeTabChangListner(this);
+		ChangeFragment(mainIndexFragment, R.id.main_tab_index);
 
 	}
 
@@ -138,62 +158,99 @@ OnCheckedChangeListener, OnClickListener {
 	@Override
 	public void onClick(View v) {
 
-		if(CacheUtil.get(CacheKey.HOME_MENUITEM_KEY)==null){
+		if (CacheUtil.get(CacheKey.HOME_MENUITEM_KEY) == null) {
 			Toast.makeText(this, "数据异常，请重启，或检查网络", Toast.LENGTH_SHORT).show();
-			return ;
+			return;
 		}
 		SlideLevelFragment slideLevelFragment = new SlideLevelFragment();
 		switch (v.getId()) {
 
 		case R.id.main_tab_index:
+			currentBaseSlideFragment = null;
 			init();
 			break;
 
 		case R.id.main_tab_search:
-			fragmentManagers.RemoveAllFragment();
+
 			slideLevelFragment
-			.setFragmentName(Constants.FragmentName.MAINSEARCH_FRAGMENT);
-			fragmentManagers.ChangeFragment(slideLevelFragment);
-			
+					.setFragmentName(Constants.FragmentName.MAINSEARCH_FRAGMENT);
+			slideLevelFragment.setHomeTabChangListner(this);
+			if (currentBaseSlideFragment != null) {
+				currentBaseSlideFragment.slideLinstener.replaceFragment(null,
+						-1, Constants.FragmentName.MAINSEARCH_FRAGMENT, null);
+			} else {
+				fragmentManagers.IntentFragment(slideLevelFragment);
+			}
+
 			break;
 
 		case R.id.main_tab_login_reg:// 登录注册
-			
-			slideLevelFragment
-			.setFragmentName(Constants.FragmentName.LOGIN_FRAGMENT);
 
-			fragmentManagers.ChangeFragment(slideLevelFragment);
-			
+			slideLevelFragment
+					.setFragmentName(Constants.FragmentName.LOGIN_FRAGMENT);
+
+			slideLevelFragment.setHomeTabChangListner(this);
+			if (currentBaseSlideFragment != null) {
+				currentBaseSlideFragment.slideLinstener.replaceFragment(null,
+						-1, Constants.FragmentName.LOGIN_FRAGMENT, null);
+			} else {
+				fragmentManagers.IntentFragment(slideLevelFragment);
+			}
+
 			break;
 
 		case R.id.main_tab_mine:
 
-			if("".equals(SystemUtil.getAccessToken(this))){
+			if ("".equals(SystemUtil.getAccessToken(this))) {
 				Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
 				slideLevelFragment
-				.setFragmentName(Constants.FragmentName.LOGIN_FRAGMENT);
-
-				fragmentManagers.ChangeFragment(slideLevelFragment);
-			}
-			else{
+						.setFragmentName(Constants.FragmentName.LOGIN_FRAGMENT);
+				slideLevelFragment.setHomeTabChangListner(this);
+				if (currentBaseSlideFragment != null) {
+					currentBaseSlideFragment.slideLinstener.replaceFragment(
+							null, -1, Constants.FragmentName.LOGIN_FRAGMENT,
+							null);
+				} else {
+					fragmentManagers.IntentFragment(slideLevelFragment);
+				}
+			} else {
 				slideLevelFragment
-				.setFragmentName(Constants.FragmentName.MAINMINEFRAGMENT);
+						.setFragmentName(Constants.FragmentName.MAINMINEFRAGMENT);
+				slideLevelFragment.setHomeTabChangListner(this);
 				fragmentManagers.ChangeFragment(slideLevelFragment);
+
+				if (currentBaseSlideFragment != null) {
+					currentBaseSlideFragment.slideLinstener.replaceFragment(
+							null, -1, Constants.FragmentName.MAINMINEFRAGMENT,
+							null);
+				} else {
+					fragmentManagers.IntentFragment(slideLevelFragment);
+				}
 			}
-
-
 
 			break;
 
 		case R.id.main_tab_more:
-			
+
 			slideLevelFragment
-			.setFragmentName(Constants.FragmentName.SYSTEMSETF_RAGMENT);
-			fragmentManagers.ChangeFragment(slideLevelFragment);
-			
+					.setFragmentName(Constants.FragmentName.SYSTEMSETF_RAGMENT);
+			slideLevelFragment.setHomeTabChangListner(this);
+
+			if (currentBaseSlideFragment != null) {
+				currentBaseSlideFragment.slideLinstener.replaceFragment(null,
+						-1, Constants.FragmentName.SYSTEMSETF_RAGMENT, null);
+			} else {
+				fragmentManagers.IntentFragment(slideLevelFragment);
+			}
 			break;
 
 		}
 
+	}
+
+	@Override
+	public void setCurrentFragment(BaseSlideFragment baseSlideFragment) {
+
+		this.currentBaseSlideFragment = baseSlideFragment;
 	}
 }

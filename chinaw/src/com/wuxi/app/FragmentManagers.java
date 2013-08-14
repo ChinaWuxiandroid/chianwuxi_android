@@ -15,19 +15,19 @@ public class FragmentManagers {
 	public List<BaseFragment> fragments = new ArrayList<BaseFragment>();
 	public Context context;
 	public FragmentActivity fragmentActivity;
-	public   boolean fistLoadAPP=true;
+	public boolean fistLoadAPP = true;
 
 	public synchronized static FragmentManagers getInstance() {
 		if (instance == null)
 			instance = new FragmentManagers();
 		return instance;
 	}
-	
-	public void popFragment(){
-		
+
+	public void popFragment() {
+
 		FragmentManager manager = fragmentActivity.getSupportFragmentManager();
 		manager.popBackStack();
-		fragments.remove(fragments.size()-1);
+		fragments.remove(fragments.size() - 1);
 	}
 
 	/***
@@ -98,9 +98,9 @@ public class FragmentManagers {
 	public void onTransaction(BaseFragment saveFragment) {
 		FragmentManager manager = fragmentActivity.getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
+
 		ft.replace(FRAME_CONTENT, saveFragment);
-		ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
-		
+
 		ft.addToBackStack(null);
 		ft.commit();
 
@@ -146,7 +146,5 @@ public class FragmentManagers {
 			RemoveFragment(fragments.get(i));
 		}
 	}
-
-
 
 }

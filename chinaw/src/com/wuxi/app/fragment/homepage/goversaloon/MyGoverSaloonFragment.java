@@ -146,10 +146,11 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 
 	protected void initUI() {
 		super.initUI();
-//		SharedPreferences sp=context.getSharedPreferences(Constants.SharepreferenceKey.SHARE_CONFIG,Context.MODE_APPEND);
-//		Editor ed=sp.edit();
-//		ed.putString(Constants.SharepreferenceKey.ACCESSTOKEN, "bd58fcdfe5b54f4c95ed5f2e3a945f7c");
-//		ed.commit();
+		/*SharedPreferences sp=context.getSharedPreferences(Constants.SharepreferenceKey.SHARE_CONFIG,Context.MODE_APPEND);
+		Editor ed=sp.edit();
+		ed.putString(Constants.SharepreferenceKey.ACCESSTOKEN, "");
+		ed.commit();*/
+		
 		
 		
 		
