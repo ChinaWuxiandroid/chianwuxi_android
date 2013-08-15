@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings.TextSize;
 import android.webkit.WebView;
 import android.webkit.WebSettings.TextSize;
 import android.widget.ProgressBar;
@@ -63,6 +64,10 @@ public class GoverMsgWebFragment extends BaseFragment{
 
 		wbView.getSettings().setUseWideViewPort(true); 
 		wbView.getSettings().setLoadWithOverviewMode(true);
+<<<<<<< HEAD
+=======
+		
+>>>>>>> d8b29728ccc1f1f402f061c2da41fe23367acfba
 		if(parentItem.getName().equals("最新信息公开")){
 			wbView.getSettings().setDefaultTextEncodingName("gb2312");
 			wbView.getSettings().setTextSize(TextSize.LARGER);

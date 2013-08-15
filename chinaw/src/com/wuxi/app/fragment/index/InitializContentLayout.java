@@ -35,7 +35,7 @@ public class InitializContentLayout {
 	 */
 	public static void initMenuItemContentLayout(MenuItem menuItem,List<MenuItem> subMenuItems,final Context context) {
 
-		if(menuItem.getName().equals("咨询中心")){
+		if(menuItem.getName().equals("资讯中心")){
 
 			for (final MenuItem menu : subMenuItems) {
 

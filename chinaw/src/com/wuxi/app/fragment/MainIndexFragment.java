@@ -51,6 +51,7 @@ import com.wuxi.app.engine.UpdateInfoService;
 import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
 import com.wuxi.app.fragment.homepage.NewsAnnAcountFragment;
 import com.wuxi.app.fragment.homepage.SlideLevelFragment;
+import com.wuxi.app.listeners.HomeTabChangListner;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.Constants.FragmentName;
@@ -113,7 +114,11 @@ public class MainIndexFragment extends BaseFragment implements
 	private ImageView iv_index_zt;//四个专题
 	private UpdateInfo updateInfo;
 	private ProgressDialog pd;
-	
+	private HomeTabChangListner homeTabChangListner;
+	public void setHomeTabChangListner(HomeTabChangListner homeTabChangListner) {
+		this.homeTabChangListner = homeTabChangListner;
+	}
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 
@@ -153,6 +158,8 @@ public class MainIndexFragment extends BaseFragment implements
 
 	};
 
+	
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -165,6 +172,9 @@ public class MainIndexFragment extends BaseFragment implements
 
 	private void initUI() {
 
+		if(homeTabChangListner!=null){
+			homeTabChangListner.setCurrentFragment(null);
+		}
 		pb = (ProgressBar) view.findViewById(R.id.index_progess);
 		viewpagerLayout = (ViewPager) view.findViewById(R.id.viewpagerLayout);
 		index_title_news_page = (ViewPager) view
@@ -368,6 +378,7 @@ public class MainIndexFragment extends BaseFragment implements
 			
 			Content content=(Content) adapterView.getItemAtPosition(position);
 			SlideLevelFragment slideLevelFragment=new SlideLevelFragment();
+			slideLevelFragment.setHomeTabChangListner(homeTabChangListner);
 			slideLevelFragment.setFragmentName(FragmentName.NEWSANNACOUNTFRAGMENT);
 			Bundle bundle=new Bundle();
 			bundle.putSerializable("content", content);
@@ -431,6 +442,7 @@ public class MainIndexFragment extends BaseFragment implements
 			MenuItem checkMenuItem = (MenuItem) parent
 					.getItemAtPosition(position);
 			SlideLevelFragment saveFragment = new SlideLevelFragment();
+			saveFragment.setHomeTabChangListner(homeTabChangListner);
 			if (checkMenuItem.getName().equals("政民互动")) {
 				saveFragment
 						.setFragmentName(Constants.FragmentName.MAINMINEFRAGMENT);
@@ -665,6 +677,7 @@ public class MainIndexFragment extends BaseFragment implements
 	public void onClick(View v) {
 		Bundle bundle = new Bundle();
 		SlideLevelFragment saveFragment = new SlideLevelFragment();
+		saveFragment.setHomeTabChangListner(homeTabChangListner);
 		switch (v.getId()) {
 		case R.id.index_rb_news:
 			bundle.putInt(MenuItemMainFragment.SHOWITEM_LAYOUT_INDEXKEY, 1);
@@ -753,7 +766,7 @@ public class MainIndexFragment extends BaseFragment implements
 
 		} catch (Exception e) {
 
-			Toast.makeText(context, "监测更新出错", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(context, "监测更新出错", Toast.LENGTH_SHORT).show();
 
 			e.printStackTrace();
 			return false;

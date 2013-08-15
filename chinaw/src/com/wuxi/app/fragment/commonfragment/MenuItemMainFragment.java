@@ -213,7 +213,7 @@ public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 
 	private void bindFragment(BaseFragment fragment) {
 		Bundle bundle=new Bundle();
-		//bundle.putSerializable(ROOTFRAGMENT_KEY, this);
+		
 		fragment.setBaseSlideFragment(this);
 		fragment.setArguments(bundle);//将外层框架传递给子内容框架
 		FragmentTransaction ft = getFragmentManager().beginTransaction();

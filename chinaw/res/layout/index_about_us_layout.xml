@@ -23,17 +23,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="100dip"
             android:gravity="center"
             android:text="中国无锡" />
 
         <TextView
+            android:id="@+id/tv_about"
+            android:padding="10dip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="10dip"
-            android:gravity="center"
-            android:text="无锡泰得利通软件科技有限公司" />
+            android:scrollbars="vertical"
+            android:text="@string/about" 
+            android:fadeScrollbars="false"/>
     </LinearLayout>
 
 </LinearLayout>

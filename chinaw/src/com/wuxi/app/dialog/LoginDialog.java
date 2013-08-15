@@ -13,6 +13,7 @@ import com.wuxi.app.R;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.Constants.FragmentName;
+import com.wuxi.app.util.SystemUtil;
 
 /**
  * 
@@ -46,15 +47,9 @@ public class LoginDialog {
 		}
 	}
 
-	public String getAccessToken() {
-		sp = context
-				.getSharedPreferences(
-						Constants.SharepreferenceKey.SHARE_CONFIG,
-						Context.MODE_PRIVATE);
-
-		String accessToken = sp.getString(
-				Constants.SharepreferenceKey.ACCESSTOKEN, "");
-		return accessToken;
+	private String getAccessToken() {
+		return SystemUtil.getAccessToken(context);
+		
 
 	}
 

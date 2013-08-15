@@ -31,6 +31,7 @@ import com.wuxi.app.engine.MyApplyService;
 import com.wuxi.app.engine.MyconsultService;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.MyApply;
 import com.wuxi.domain.MyApplyWrapper;
 import com.wuxi.domain.Myconsult;
@@ -145,10 +146,11 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 
 	protected void initUI() {
 		super.initUI();
-//		SharedPreferences sp=context.getSharedPreferences(Constants.SharepreferenceKey.SHARE_CONFIG,Context.MODE_APPEND);
-//		Editor ed=sp.edit();
-//		ed.putString(Constants.SharepreferenceKey.ACCESSTOKEN, "bd58fcdfe5b54f4c95ed5f2e3a945f7c");
-//		ed.commit();
+		/*SharedPreferences sp=context.getSharedPreferences(Constants.SharepreferenceKey.SHARE_CONFIG,Context.MODE_APPEND);
+		Editor ed=sp.edit();
+		ed.putString(Constants.SharepreferenceKey.ACCESSTOKEN, "");
+		ed.commit();*/
+		
 		
 		
 		
@@ -199,7 +201,7 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 		switchRadionButtonStyle();
 
 		if(loginDialog.checkLogin()){
-			this.accessToekn=loginDialog.getAccessToken();//获取accessToken
+			this.accessToekn=SystemUtil.getAccessToken(context);//获取accessToken
 			loadMyConsultData(0, PAGE_SIZE);// 加载我的咨询数据
 		}
 		

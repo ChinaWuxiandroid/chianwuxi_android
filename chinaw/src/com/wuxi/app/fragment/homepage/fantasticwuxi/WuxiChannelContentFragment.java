@@ -379,8 +379,7 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 			
 			if (r.isChecked()) {
 
-				/*r.setBackground(getResources().getDrawable(
-						R.drawable.wuxicity_content_channel_item_selector));*/
+				
 				r.setBackgroundResource(R.drawable.wuxicity_content_channel_item_selector);
 				
 				r.setTextColor(Color.WHITE);
@@ -389,7 +388,7 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 						titleChannels.get(i), null);
 
 			} else {
-				//r.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
+				
 				r.setTextColor(Color.BLACK);
 			}
 

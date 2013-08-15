@@ -56,6 +56,7 @@ import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
 import com.wuxi.app.fragment.search.AdvancedSearchFragment;
 import com.wuxi.app.fragment.search.AdvancedSearchResultListFragment;
 import com.wuxi.app.fragment.search.SearchResultDetailFragment;
+import com.wuxi.app.listeners.HomeTabChangListner;
 import com.wuxi.app.listeners.SlideLinstener;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
@@ -89,6 +90,12 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	private PopWindowManager popWindowManager;
 	private List<FragmentWapper> fragments = new ArrayList<FragmentWapper>(); // 记录每次切换到fragment信息以便回退
 	private List<BaseFragment> baseFragments = new ArrayList<BaseFragment>();
+	private HomeTabChangListner homeTabChangListner;
+	
+
+	public void setHomeTabChangListner(HomeTabChangListner homeTabChangListner) {
+		this.homeTabChangListner = homeTabChangListner;
+	}
 
 	public void setFragmentName(Constants.FragmentName fragmentName) {
 		this.fragmentName = fragmentName;
@@ -144,8 +151,8 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 		leftMenuAdapter = new LeftMenuAdapter(getActivity(),
 				R.layout.slide_navigator_item, new int[] {
-			R.id.tv_left_menu_name, R.id.left_iv_icon },
-			leftMenuItems, null, position);
+						R.id.tv_left_menu_name, R.id.left_iv_icon },
+				leftMenuItems, null, position);
 		mlvMenu.setAdapter(leftMenuAdapter);
 	}
 
@@ -162,7 +169,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 			case MenuItem.CUSTOM_MENU:
 
-				if (menuItem.getName().equals("咨询中心")) {
+				if (menuItem.getName().equals("资讯中心")) {
 					InformationCenterFragment informationCenterFragment = new InformationCenterFragment();
 					informationCenterFragment.setMenuItem(menuItem);
 					onReplaceFragment(informationCenterFragment, bundle);
@@ -189,7 +196,6 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				ChannelFragment ch = new ChannelFragment();
 				ch.setMenuItem(menuItem);
 				onReplaceFragment(ch, bundle);
-
 
 				break;
 			case 2:
@@ -251,7 +257,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				onAddFragment(myOnlineAskFragment, bundle);
 
 				break;
-			case HOTREVIEW_CONTENT_FRAGMENT:// 政民互动   热点话题内容页
+			case HOTREVIEW_CONTENT_FRAGMENT:// 政民互动 热点话题内容页
 				HotReviewContentFragment hotReviewContentFragment = new HotReviewContentFragment();
 				onAddFragment(hotReviewContentFragment, bundle);
 				break;
@@ -264,6 +270,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				onAddFragment(forumPostFragment, bundle);
 				break;
 
+<<<<<<< HEAD
 			case GIP_LEGISLATION_CONTENT_FRAGMENT://征求意见平台 立法征求意见详细内容界面
 				LegislationContentFragment legislationContentFragment = new LegislationContentFragment();
 				onAddFragment(legislationContentFragment, bundle);
@@ -271,6 +278,9 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 
 			case GIP_CHANNEL_CONTENT_DETAILWEB_FRAGMENT:// 政民互动  频道内容页
+=======
+			case GIP_CHANNEL_CONTENT_DETAILWEB_FRAGMENT:// 政民互动 频道内容页
+>>>>>>> d8b29728ccc1f1f402f061c2da41fe23367acfba
 				GoverMsgContentDetailWebFragment gIPContentDetailWebFragment = new GoverMsgContentDetailWebFragment();
 				onAddFragment(gIPContentDetailWebFragment, bundle);
 				break;
@@ -294,7 +304,6 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			case GOVERSALOONDETAIL_ZS_FRAGMENT:// 政务大厅 征收办件详情
 				GoverSaloonDetailZSFragment goverSaloonDetailZSFragment = new GoverSaloonDetailZSFragment();
 				onAddFragment(goverSaloonDetailZSFragment, bundle);
-
 
 				break;
 			case GOVERSALOONDETAIL_CF_FRAGMENT:// 政务大厅 处罚办件详情
@@ -329,20 +338,20 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				PublicServiceContentDetailFragment publicServiceContentDetailFragment = new PublicServiceContentDetailFragment();
 				onAddFragment(publicServiceContentDetailFragment, bundle);
 				break;
-			case GOVERMSG_APPLYTABLE_FRAGMENT://政府信息公开  公共那个服务内容页
+			case GOVERMSG_APPLYTABLE_FRAGMENT:// 政府信息公开 公共那个服务内容页
 				GoverMsgApplyTableFragment goverMsgApplyTableFragment = new GoverMsgApplyTableFragment();
 				onAddOtherFragment(goverMsgApplyTableFragment, bundle);
 				break;
-			case GOVERMSG_WEBCONTENT_FARGMENT://政府信息公开  信息公开指南 和信息公开制度  内容页
+			case GOVERMSG_WEBCONTENT_FARGMENT:// 政府信息公开 信息公开指南 和信息公开制度 内容页
 				GoverMsgContentDetailWebFragment goverContentDetailWebFragment = new GoverMsgContentDetailWebFragment();
 				onAddFragment(goverContentDetailWebFragment, bundle);
 				break;
-			case ABOUTUSFRAGMENT://关于我们
-				AboutUsFragment aboutUsFragment=new AboutUsFragment();
+			case ABOUTUSFRAGMENT:// 关于我们
+				AboutUsFragment aboutUsFragment = new AboutUsFragment();
 				onAddFragment(aboutUsFragment, bundle);
 				break;
-			case NEWSANNACOUNTFRAGMENT://首页无锡要闻，公告公示内容页
-				NewsAnnAcountFragment newsAnnAcountFragment=new NewsAnnAcountFragment();
+			case NEWSANNACOUNTFRAGMENT:// 首页无锡要闻，公告公示内容页
+				NewsAnnAcountFragment newsAnnAcountFragment = new NewsAnnAcountFragment();
 				onReplaceFragment(newsAnnAcountFragment, bundle);
 				break;
 			}
@@ -358,13 +367,16 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	 */
 	private void onReplaceFragment(BaseSlideFragment fragment, Bundle bundle) {
 
-
+		if(homeTabChangListner!=null){
+			homeTabChangListner.setCurrentFragment(fragment);//通知 tab 页面当前的fragment
+		}
 		FragmentTransaction ft = manager.beginTransaction();
 
 		ft.replace(FRAME_CONTENT, fragment);
 		if (bundle != null) {
 			fragment.setArguments(bundle);
 		}
+
 		fragment.setFragment(this);
 		ft.addToBackStack(null);
 		fragment.setManagers(managers);// 传递管理器
@@ -381,6 +393,9 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	 * @param bundele
 	 */
 	private void onAddFragment(BaseSlideFragment fragment, Bundle bundele) {
+		if(homeTabChangListner!=null){
+			homeTabChangListner.setCurrentFragment(fragment);//通知 tab 页面当前的fragment
+		}
 		fragment.setFragment(this);
 		fragment.setManagers(managers);
 		fragment.setArguments(bundele);
@@ -392,7 +407,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 	}
 
-	//加载非BaseSlideFragment子类的 内容页
+	// 加载非BaseSlideFragment子类的 内容页
 	private void onAddOtherFragment(BaseFragment fragment, Bundle bundele) {
 		fragment.setManagers(managers);
 		fragment.setArguments(bundele);
@@ -411,9 +426,10 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	public void onBack() {
 
 		if (baseFragments.size() == 0) {// 退出到首页
-
-			managers.ChangeFragment(new MainIndexFragment());
-			//managers.BackPress(this);
+			MainIndexFragment mainIndexFragment=new MainIndexFragment();
+			mainIndexFragment.setHomeTabChangListner(homeTabChangListner);
+			managers.ChangeFragment(mainIndexFragment);
+			// managers.BackPress(this);
 
 		} else {
 			BaseFragment f = baseFragments.get(baseFragments.size() - 1);
@@ -472,7 +488,11 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	public void onItemClick(AdapterView<?> parent, View arg1, int position,
 			long id) {
 
+<<<<<<< HEAD
 		if(!mSlideMenuLayout.getLeftSlideMenuEnabled()){
+=======
+		if (!mSlideMenuLayout.getLeftSlideMenuEnabled()) {
+>>>>>>> d8b29728ccc1f1f402f061c2da41fe23367acfba
 			return;
 		}
 		if (position == this.position)

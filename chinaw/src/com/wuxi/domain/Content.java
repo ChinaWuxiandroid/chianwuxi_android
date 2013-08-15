@@ -307,7 +307,8 @@ public class Content implements Serializable {
 
 	public String getWapUrl() {
 		
-		return "http://www.wuxi.gov.cn"+wapUrl;
+		return wapUrl;
+	//	return "http://www.wuxi.gov.cn"+wapUrl;
 	}
 
 	public void setWapUrl(String wapUrl) {

@@ -3,6 +3,8 @@ package com.wuxi.app.fragment.homepage.more;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.text.method.ScrollingMovementMethod;
+import android.widget.TextView;
 
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.BaseSlideFragment;
@@ -15,10 +17,12 @@ import com.wuxi.app.fragment.BaseSlideFragment;
 public class AboutUsFragment extends BaseSlideFragment {
 
 	
+	private TextView tv_about;
 	@Override
 	public void initUI() {
 		super.initUI();
-
+		tv_about=(TextView) view.findViewById(R.id.tv_about);
+		tv_about.setMovementMethod(ScrollingMovementMethod.getInstance());
 	}
 
 	@Override

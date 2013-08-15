@@ -13,7 +13,7 @@ public class InfoCenterContentDetailFragment extends ContentDetailFragment {
 	@Override
 	protected String getContentTitleText() {
 		
-		return "咨询中心";
+		return "资讯中心";
 	}
 
 	
