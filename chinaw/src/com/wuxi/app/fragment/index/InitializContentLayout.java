@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment;
+import com.wuxi.app.fragment.homepage.SlideLevelFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.CityMapFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgContentListFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgFragmentWebFragment;
@@ -66,6 +67,8 @@ public class InitializContentLayout {
 
 				} else if (menu.getType() == MenuItem.CUSTOM_MENU) {// //普通菜单
 					menu.setContentFragment(InfoNavigatorWithContentFragment.class);
+				}else if(menu.getType()==MenuItem.LINK_MENU){//链接菜单 
+					menu.setContentFragment(SlideLevelFragment.class);
 				}
 			}
 

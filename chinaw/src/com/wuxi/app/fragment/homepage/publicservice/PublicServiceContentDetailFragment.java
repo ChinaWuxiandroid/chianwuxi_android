@@ -13,7 +13,14 @@ public class PublicServiceContentDetailFragment extends ContentDetailFragment {
 	@Override
 	protected String getContentTitleText() {
 		
-		return "公共服务";
+		if(channel!=null){
+			return channel.getChannelName();
+		}else if(menuItem!=null){
+			return menuItem.getName();
+		}else{
+			return "公共服务";
+		}
+		
 	}
 
 	

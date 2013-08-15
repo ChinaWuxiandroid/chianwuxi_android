@@ -55,7 +55,7 @@ public abstract class ContentDetailWebFragment  extends BaseItemContentFragment 
 
 	@Override
 	protected int getContentLayoutId() {
-		// TODO Auto-generated method stub
+		
 		return R.layout.content_detailweb_layout;
 	}
 	

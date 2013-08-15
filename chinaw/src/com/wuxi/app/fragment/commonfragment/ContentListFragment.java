@@ -58,7 +58,8 @@ public abstract class ContentListFragment extends BaseFragment implements
 	private boolean isFirstLoad = true;// 是不是首次加载数据
 	private boolean isLoading = false;
 	private ProgressBar pb_loadmoore;
-	
+	protected MenuItem parentItem;
+	protected Channel channel;
 	private Handler handler = new Handler() {
 		@SuppressLint("HandlerLeak")
 		public void handleMessage(Message msg) {
@@ -215,13 +216,13 @@ public abstract class ContentListFragment extends BaseFragment implements
 		loadMoreButton.setOnClickListener(this);
 	}
 
-	protected MenuItem parentItem;
+	
 
 	public void setParentItem(MenuItem parentItem) {
 		this.parentItem = parentItem;
 	}
 
-	protected Channel channel;
+	
 
 	public void setChannel(Channel channel) {
 		this.channel = channel;

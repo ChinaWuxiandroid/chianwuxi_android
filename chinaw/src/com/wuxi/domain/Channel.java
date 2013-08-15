@@ -1,5 +1,7 @@
 package com.wuxi.domain;
 
+import java.io.Serializable;
+
 import android.support.v4.app.Fragment;
 
 /**
@@ -7,8 +9,12 @@ import android.support.v4.app.Fragment;
  * @author wanglu
  *
  */
-public class Channel {
-  private Boolean isNull;//是否允许为空
+public class Channel implements Serializable {
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7602053445610183214L;
+private Boolean isNull;//是否允许为空
   private String contents;//频道子内容 
   private Channel childrens[];//频道子频道
   private String channelId;//频道Id

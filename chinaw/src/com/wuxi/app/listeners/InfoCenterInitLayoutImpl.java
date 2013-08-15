@@ -2,9 +2,11 @@ package com.wuxi.app.listeners;
 
 import android.support.v4.app.Fragment;
 
+import com.wuxi.app.fragment.homepage.SlideLevelFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InfoNavigatorWithContentFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InforContentListFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.WapFragment;
+import com.wuxi.app.util.CacheUtil;
 import com.wuxi.domain.MenuItem;
 
 /**
@@ -36,6 +38,7 @@ public class InfoCenterInitLayoutImpl implements MenuItemInitLayoutListener {
 			WapFragment leaderWindowFragment = null;
 			InforContentListFragment contentListFragment = null;
 			InfoNavigatorWithContentFragment contentNavigatorWithContentFragment=null;
+			
 			if (fragment instanceof WapFragment) {
 				leaderWindowFragment = (WapFragment) fragment;
 				leaderWindowFragment.setParentItem(menuItem);
@@ -48,6 +51,12 @@ public class InfoCenterInitLayoutImpl implements MenuItemInitLayoutListener {
 				contentNavigatorWithContentFragment=(InfoNavigatorWithContentFragment)fragment;
 				contentNavigatorWithContentFragment.setParentMenuItem(menuItem);
 				initLayoutListner.bindContentLayout(contentNavigatorWithContentFragment);
+			}else if(fragment instanceof SlideLevelFragment){//链接跳转菜单
+				
+				if(menuItem.getName().equals("机构职能")){
+					
+					initLayoutListner.redirectFragment(CacheUtil.getMenuItem(0), 0,6);
+				}
 			}
 
 		} catch (InstantiationException e) {

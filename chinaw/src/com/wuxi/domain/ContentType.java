@@ -8,20 +8,34 @@ package com.wuxi.domain;
  */
 public class ContentType {
 
-	private String typename;
-	private String typeid;
-	public String getTypename() {
-		return typename;
+	private String name;
+	private String id;
+	private String doprojectid;
+	
+	public ContentType(){}
+	public ContentType(String name){
+		this.name=name;
 	}
-	public void setTypename(String typename) {
-		this.typename = typename;
+	public String getName() {
+		return name;
 	}
-	public String getTypeid() {
-		return typeid;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public void setTypeid(String typeid) {
-		this.typeid = typeid;
+	public String getId() {
+		return id;
 	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getDoprojectid() {
+		return doprojectid;
+	}
+	public void setDoprojectid(String doprojectid) {
+		this.doprojectid = doprojectid;
+	}
+	
+	
 	
 
 }

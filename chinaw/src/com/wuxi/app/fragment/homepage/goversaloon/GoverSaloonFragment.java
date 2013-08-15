@@ -150,7 +150,7 @@ public class GoverSaloonFragment extends BaseSlideFragment implements
 	 */
 	private void showLeftMenuItemData() {
 		Bundle bundle=this.getArguments();
-		int showIndex=0;
+		int showIndex=1;
 		if(bundle!=null){
 			showIndex=bundle.getInt(SHOWLAYOUTINDEX);
 		}

@@ -13,7 +13,14 @@ public class WuxiChannelContentDetailFragment extends ContentDetailFragment {
 	@Override
 	protected String getContentTitleText() {
 		
-		return "魅力锡城";
+		if(channel!=null){
+			return channel.getChannelName();
+		}else if(menuItem!=null){
+			return menuItem.getName();
+		}else{
+			return "魅力锡城";
+		}
+		
 	}
 
 	

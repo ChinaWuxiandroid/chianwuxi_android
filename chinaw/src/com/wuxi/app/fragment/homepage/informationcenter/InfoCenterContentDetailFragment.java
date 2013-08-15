@@ -13,7 +13,14 @@ public class InfoCenterContentDetailFragment extends ContentDetailFragment {
 	@Override
 	protected String getContentTitleText() {
 		
-		return "资讯中心";
+		if(channel!=null){
+			return channel.getChannelName();
+		}else if(menuItem!=null){
+			return menuItem.getName();
+		}else{
+			return "资讯中心";
+		}
+		
 	}
 
 	

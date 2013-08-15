@@ -290,13 +290,13 @@ public class Constants {
 		 * 信件查询  内容分类下来
 		 */
 
-		public  static final String CONTENT_TYPE_URL="http://3g.wuxi.gov.cn/api/letter/contenttype.json";
+		public  static final String CONTENT_TYPE_URL="http://3g.wuxi.gov.cn/api/zhengwu/types.json?type=0";
 
 
 		/**
 		 * 信件查询  信件分类下拉
 		 */
-		public static final String LETTER_TYPE_URL="http://3g.wuxi.gov.cn/api/letter/lettertype.json";
+		public static final String LETTER_TYPE_URL="http://3g.wuxi.gov.cn/api/zhengwu/types.json?type=1";
 		
 		
 		/**

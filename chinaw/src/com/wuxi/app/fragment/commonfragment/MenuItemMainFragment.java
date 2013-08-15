@@ -20,6 +20,7 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.fragment.BaseSlideFragment;
+import com.wuxi.app.fragment.homepage.SlideLevelFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
 import com.wuxi.app.util.CacheUtil;
@@ -41,6 +42,8 @@ import com.wuxi.exception.NetException;
  */
 public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 		InitializContentLayoutListner, OnClickListener, Serializable {
+
+
 
 	/**
 	 * 
@@ -227,5 +230,16 @@ public abstract class MenuItemMainFragment extends BaseSlideFragment implements
 	 * items 头部的菜单
 	 */
 	public abstract void initializSubFragmentsLayout(List<MenuItem> items);
+	
+	/**
+	 * 页面跳转切换问题
+	 */
+	@Override
+	public void redirectFragment(MenuItem showMenuItem, int showMenuPositon,
+			int subMenuPostion) {
+		Bundle bundle=new Bundle();
+		bundle.putInt(SHOWITEM_LAYOUT_INDEXKEY, subMenuPostion);
+		slideLinstener.replaceFragment(showMenuItem, showMenuPositon, null, bundle);
+	}
 
 }

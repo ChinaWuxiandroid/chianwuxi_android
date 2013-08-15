@@ -1,11 +1,18 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONException;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputType;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -14,6 +21,7 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,6 +36,7 @@ import com.wuxi.app.adapter.EfficacyComplaintAdapter;
 import com.wuxi.app.engine.EfficaComplainService;
 import com.wuxi.app.engine.LetterQueryService;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.ContentType;
 import com.wuxi.domain.EfficaComplain;
 import com.wuxi.domain.EfficaComplainWrapper;
@@ -70,6 +79,7 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 	private List<ContentType> contentTypes;
 	private List<LetterType> letterTypes;
 	private ProgressBar pb_loadmoore;
+	private Map<String, String> params = new HashMap<String, String>();
 
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -85,7 +95,7 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 				showLetterTypes();
 				break;
 			case LOAD_CONTENTTYPE_ERROR:
-				
+
 			case LOAD_LETTER_ERROR:
 			case LOAD_EFF_FAIL:
 				String tip = msg.obj.toString();
@@ -100,7 +110,6 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 	 * wanglu 泰得利通 显示效能投诉列表数据
 	 */
 	protected void showEffData() {
-		
 
 		List<EfficaComplain> efficaComplains = efficaWrapper
 				.getEfficaComplains();
@@ -125,7 +134,7 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 			}
 
 		}
-		
+
 		if (efficaWrapper.isNext()) {
 			loadMoreButton.setText("点击加载更多");
 			pb_loadmoore.setVisibility(ProgressBar.GONE);
@@ -181,8 +190,7 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 
 			}
 		}).start();
-		
-		
+
 	}
 
 	/**
@@ -190,6 +198,7 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 	 * wanglu 泰得利通 显示信件内容
 	 */
 	private void showContentTypes() {
+		contentTypes.add(0, new ContentType("全部"));
 		sp_contenttype.setAdapter(new LetterTypeAdapter(contentTypes));
 	}
 
@@ -241,7 +250,8 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 	 */
 
 	private void showLetterTypes() {
-		 sp_lettertype.setAdapter(new LetterTypeAdapter(letterTypes));
+		letterTypes.add(0,new LetterType("全部"));
+		sp_lettertype.setAdapter(new LetterTypeAdapter(letterTypes));
 	}
 
 	public void initUI() {
@@ -254,7 +264,8 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 				null);
 		loadMoreButton = (Button) loadMoreView
 				.findViewById(R.id.loadMoreButton);
-		pb_loadmoore=(ProgressBar) loadMoreView.findViewById(R.id.pb_loadmoore);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
 		loadMoreButton.setOnClickListener(this);
 
 		gover_eff_lv = (ListView) view.findViewById(R.id.gover_eff_lv);
@@ -268,23 +279,43 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 				.findViewById(R.id.et_letter_keyword);
 		et_startTime = (EditText) view.findViewById(R.id.et_startTime);
 		et_endtime = (EditText) view.findViewById(R.id.et_endtime);
+		et_startTime.setInputType(InputType.TYPE_NULL);
+		et_endtime.setInputType(InputType.TYPE_NULL);
 		et_letter_no = (EditText) view.findViewById(R.id.et_letter_no);
 		sp_contenttype = (Spinner) view.findViewById(R.id.sp_contenttype);
 		sp_lettertype = (Spinner) view.findViewById(R.id.sp_lettertype);
 
 		nomal_question = (CheckBox) view.findViewById(R.id.nomal_question);
 		iv_letter_query = (ImageView) view.findViewById(R.id.iv_letter_query);
-
+		iv_letter_query.setOnClickListener(this);
 		loadEffData(0, PAGE_SIZE);
 		loadContentTypes();
 		loadLetterTypes();
+
+		et_startTime.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				showDatePickDialog(0);
+			}
+		});
+
+		et_endtime.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				showDatePickDialog(1);
+			}
+		});
 
 	}
 
 	private void loadEffData(final int start, final int end) {
 		if (isFistLoad) {
 			gover_eff_pb.setVisibility(ProgressBar.VISIBLE);
-		}else{
+		} else {
 			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
 		}
 
@@ -297,7 +328,7 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 						context);
 				try {
 					efficaWrapper = efficaComplainService
-							.getPageEfficaComplains(start, end);
+							.getPageEfficaComplains(params, start, end);
 					if (efficaWrapper != null) {
 						msg.what = LOAD_EFF_SUCCESS;
 
@@ -339,19 +370,20 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		//int itemsLastIndex = efficacyComplaintAdapter.getCount() - 1; // 数据集最后一项的索引
-		//int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-		/*if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
-				&& visibleLastIndex == lastIndex) {
-
-			if (efficaWrapper != null && efficaWrapper.isNext()) {// 还有下一条记录
-
-				loadMoreButton.setText("loading.....");
-				loadEffData(visibleLastIndex + 1, visibleLastIndex + 1
-						+ PAGE_SIZE);
-			}
-
-		}*/
+		// int itemsLastIndex = efficacyComplaintAdapter.getCount() - 1; //
+		// 数据集最后一项的索引
+		// int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
+		/*
+		 * if (scrollState == OnScrollListener.SCROLL_STATE_IDLE &&
+		 * visibleLastIndex == lastIndex) {
+		 * 
+		 * if (efficaWrapper != null && efficaWrapper.isNext()) {// 还有下一条记录
+		 * 
+		 * loadMoreButton.setText("loading....."); loadEffData(visibleLastIndex
+		 * + 1, visibleLastIndex + 1 + PAGE_SIZE); }
+		 * 
+		 * }
+		 */
 	}
 
 	@Override
@@ -379,6 +411,20 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 						+ PAGE_SIZE);
 			}
 			break;
+		case R.id.iv_letter_query://信件查询
+			if(checkForm()){
+				bulidParams();
+				if(params.size()!=0){
+					isFistLoad=true;
+					this.loadEffData(0, PAGE_SIZE);
+					ll_mail.setVisibility(LinearLayout.GONE);
+				}else{
+					Toast.makeText(context, "你没有改变查询条件", Toast.LENGTH_SHORT).show();
+				}
+				
+				
+			}
+			break;
 
 		}
 
@@ -391,7 +437,6 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 	@SuppressWarnings("rawtypes")
 	private final class LetterTypeAdapter extends BaseAdapter {
 
-		
 		public List list;
 
 		public LetterTypeAdapter(List list) {
@@ -421,9 +466,9 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 			Object o = list.get(position);
 			String name = "";
 			if (o instanceof ContentType) {
-				name = ((ContentType) o).getTypename();
+				name = ((ContentType) o).getName();
 			} else if (o instanceof LetterType) {
-				name = ((LetterType) o).getTypename();
+				name = ((LetterType) o).getName();
 			}
 
 			ViewHolder viewHolder = null;
@@ -444,6 +489,143 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 			return convertView;
 		}
 
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 检查输入
+	 * 
+	 * @return
+	 */
+	private boolean checkForm() {
+
+		if (et_startTime.getText().toString().equals("")
+				&& !et_endtime.getText().toString().equals("")) {
+			Toast.makeText(context, "请输入开始时间", Toast.LENGTH_SHORT).show();
+			return false;
+		} else if (!et_startTime.getText().toString().equals("")
+				&& et_endtime.getText().toString().equals("")) {
+			Toast.makeText(context, "请输入结束时间", Toast.LENGTH_SHORT).show();
+			return false;
+		} else if (!et_startTime.getText().toString().equals("")
+				&& !et_endtime.getText().toString().equals("")) {
+
+			long startTime = TimeFormateUtil.stringToData(
+					et_startTime.getText().toString(),
+					TimeFormateUtil.DATE_PATTERN).getTime();
+			long endTime = TimeFormateUtil.stringToData(
+					et_endtime.getText().toString(),
+					TimeFormateUtil.DATE_PATTERN).getTime();
+
+			if (startTime > endTime) {
+				Toast.makeText(context, "开始时间不能大于结束时间，请重新输入",
+						Toast.LENGTH_SHORT).show();
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 构建查询参数
+	 * 
+	 * @RequestParam(value = "deptid", required = false, defaultValue =
+	 *                     "47096c9b-4d2c-44b2-a142-4898824630cc") String
+	 *                     deptid,
+	 * @RequestParam(value = "keyword", required = false) String keyword,
+	 * @RequestParam(value = "contenttype", required = false) String
+	 *                     contenttype,
+	 * @RequestParam(value = "lettertype", required = false) String lettertype,
+	 * @RequestParam(value = "normal", required = false, defaultValue = "-1")
+	 *                     int normal,1
+	 * @RequestParam(value = "starttime", required = false, defaultValue = "-1")
+	 *                     long starttime,
+	 * @RequestParam(value = "enttime", required = false, defaultValue = "-1")
+	 *                     long enttime,
+	 * @RequestParam(value = "code", required = false) String code,
+	 * 
+	 *                     et_letter_keyword sp_contenttype sp_lettertype
+	 *                     et_letter_no et_startTime et_endtime nomal_question
+	 */
+	private void bulidParams() {
+		params.clear();
+		if (!et_letter_keyword.getText().toString().equals("")) {
+			params.put("keyword", et_letter_keyword.getText().toString());
+		}
+
+		if (sp_contenttype.getSelectedItemPosition() != 0) {
+
+			ContentType contentType = (ContentType) sp_contenttype
+					.getSelectedItem();
+			params.put("contenttype", contentType.getId());
+		}
+
+		if (sp_lettertype.getSelectedItemPosition() != 0) {
+
+			LetterType letterType = (LetterType) sp_lettertype
+					.getSelectedItem();
+			params.put("contenttype", letterType.getId());
+		}
+
+		if (!et_letter_no.getText().toString().equals("")) {
+			params.put("code", et_letter_no.getText().toString());
+		}
+
+		if (!et_startTime.getText().toString().equals("")) {
+			String longTime = TimeFormateUtil.stringToData(
+					et_startTime.getText().toString(),
+					TimeFormateUtil.DATE_PATTERN).getTime()
+					+ "";
+			params.put("starttime", longTime);
+		}
+
+		if (!et_endtime.getText().toString().equals("")) {
+			String longTime = TimeFormateUtil.stringToData(
+					et_endtime.getText().toString(),
+					TimeFormateUtil.DATE_PATTERN).getTime()
+					+ "";
+			params.put("enttime", longTime);
+		}
+		if (nomal_question.isChecked()) {
+			params.put("normal", "1");
+		}
+
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 时间选择对话框弹出
+	 */
+	public void showDatePickDialog(final int type) {
+		Calendar c = Calendar.getInstance();
+		new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+
+			@Override
+			public void onDateSet(DatePicker view, int year, int monthOfYear,
+					int dayOfMonth) {
+				monthOfYear = monthOfYear + 1;
+				String strMonthOfYear = monthOfYear + "";
+				String strDayOfMonth = dayOfMonth + "";
+				if (monthOfYear < 10) {
+					strMonthOfYear = "0" + strMonthOfYear;
+				}
+
+				if (dayOfMonth < 10) {
+					strDayOfMonth = "0" + strDayOfMonth;
+				}
+				if (type == 0) {
+					et_startTime.setText(year + "-" + strMonthOfYear + "-"
+							+ strDayOfMonth);
+				} else if (type == 1) {
+					et_endtime.setText(year + "-" + strMonthOfYear + "-"
+							+ strDayOfMonth);
+				}
+
+			}
+		}, c.get(Calendar.YEAR), c.get(Calendar.MONTH),
+				c.get(Calendar.DAY_OF_MONTH)).show();
 	}
 
 }
