@@ -182,7 +182,7 @@ public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment
 	}
 	
 	public void showHotReviews(){
-		BaseSlideFragment baseSlideFragment=(BaseSlideFragment)this.getArguments().get("BaseSlideFragment");
+		BaseSlideFragment baseSlideFragment=this.baseSlideFragment;
 		HotReviewListViewAdapter adapter=new HotReviewListViewAdapter(baseSlideFragment);
 		
 		if(hotReviews==null||hotReviews.size()==0){

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
+import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.MyApplyPageService;
 import com.wuxi.app.fragment.commonfragment.PagingLoadListFragment;
 import com.wuxi.app.util.Constants;
@@ -28,6 +29,15 @@ import com.wuxi.exception.ResultException;
 public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 	private MyApplyPageWrapper myApplyPageWrapper;
 	private MyApplyPageAdapter adapter;
+	
+	private LoginDialog loginDialog;
+	
+	@Override
+	protected void initUI() {
+		// TODO Auto-generated method stub
+		loginDialog=new LoginDialog(context,this.baseSlideFragment);
+		super.initUI();
+	}
 	
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
@@ -75,7 +85,13 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 		myApplyPageWrapper=new MyApplyPageWrapper();
 		MyApplyPageService service=new MyApplyPageService(context);
 		try {
-			myApplyPageWrapper=service.getMyApplyPages(Constants.SharepreferenceKey.TEST_ACCESSTOKEN, start, end);
+			if(loginDialog.checkLogin()){
+				myApplyPageWrapper=service.getMyApplyPages(Constants.SharepreferenceKey.TEST_ACCESSTOKEN, start, end);
+			}
+			else{
+				loginDialog.showDialog();
+			}
+			
 		} catch (NetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -170,4 +186,6 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 
 		ft.commit();
 	}
+
+	
 }
