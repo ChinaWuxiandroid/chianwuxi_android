@@ -111,7 +111,6 @@ public class LetterService extends Service{
 			for (int index = 0; index < jData.length(); index++) {
 				
 				JSONObject jb = jData.getJSONObject(index);
-//				System.out.println(jb.toString());
 				LetterWrapper h=new LetterWrapper();
 				LetterWrapper.Letter letters = h.new Letter();
 				letters.setId(jb.getString("id"));

@@ -72,6 +72,11 @@ public class Constants {
 		public static final String REGIST_URL = "http://3g.wuxi.gov.cn/api/register.json";
 
 		/**
+		 * 政民互动 12345来电信息办理平台 部门领导信箱 各部门领导信箱列表
+		 */
+		public static final String PART_LEADER_MAIL_URL = "http://3g.wuxi.gov.cn/api/letter/deps.json";
+		
+		/**
 		 * 公共论坛列表URL
 		 */
 		public static final String FORUM_LIST_URL = "http://3g.wuxi.gov.cn/api/publicbbs/list.json";
@@ -171,6 +176,15 @@ public class Constants {
 		 */
 		public static final String VEDIO_REVIEW_CONTENT_URL = "http://3g.wuxi.gov.cn/api/interview/history.json";
 
+		/**
+		 * 政民互动 征求意见平台 立法征求意见详情
+		 */
+		public static final String LEGISLATION_CONTENT_URL = "http://3g.wuxi.gov.cn/api/politics/{id}.json";
+
+		/**
+		 * 政民互动  网上调查 列表
+		 */
+		public static final String  INTERNET_SURVEY_URL = "http://3g.wuxi.gov.cn/api/survery/list.json";
 
 		/**
 		 * 效能投诉列表 {start}开始占位符 {end}结束占位符
@@ -508,7 +522,7 @@ public class Constants {
 		 */
 		SEARCH_DETAIL_FRAGMENT,
 		/**
-		 * 政务大厅
+		 * 政民互动
 		 */
 		MAINMINEFRAGMENT,
 		/**
@@ -538,6 +552,13 @@ public class Constants {
 		 * 政民互动 频道内容页
 		 */
 		GIP_CHANNEL_CONTENT_DETAILWEB_FRAGMENT,
+		
+		/**
+		 * 征求意见平台 立法征求意见 碎片
+		 */
+		GIP_LEGISLATION_CONTENT_FRAGMENT,
+
+
 
 		MYONLINEASKFRAGMENT,
 		/**

@@ -157,7 +157,10 @@ public class InitializContentLayout {
 				}
 				// wap类型菜单
 				else if (menu.getType() == MenuItem.WAP_MENU) {
+
 					menu.setContentFragment(GoverMsgWebFragment.class);
+
+
 				} 
 				//碎片类型菜单
 				else if (menu.getType() == MenuItem.FRAGMENT_MENU) {

@@ -124,7 +124,7 @@ public class GoverInterPeoplePublicForumFragment extends
 		postButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				BaseSlideFragment baseSlideFragment = GoverInterPeoplePublicForumFragment.this.baseSlideFragment;
+				BaseSlideFragment baseSlideFragment = GoverInterPeoplePublicForumFragment.this.baseSlideFragment;			
 				baseSlideFragment.slideLinstener.replaceFragment(null, position,
 						Constants.FragmentName.GIP_FORUM_POST_FRAGMENT, null);
 			}
@@ -276,12 +276,12 @@ public class GoverInterPeoplePublicForumFragment extends
 		@Override
 		public void onItemClick(AdapterView<?>  adapterView, View arg1, int position,
 				long arg3) {
-//			Forum forum=(Forum)adapterView.getItemAtPosition(position);
-//			Bundle bundle=new Bundle();
-//			bundle.putSerializable("forum", forum);
-//			
-//			baseSlideFragment.slideLinstener.replaceFragment(null, position,
-//					Constants.FragmentName.GIP_FOROUM_FRAGMENT, bundle);
+			Forum forum=(Forum)adapterView.getItemAtPosition(position);
+			Bundle bundle=new Bundle();
+			bundle.putSerializable("forum", forum);
+			
+			baseSlideFragment.slideLinstener.replaceFragment(null, position,
+					Constants.FragmentName.GIP_FOROUM_FRAGMENT, bundle);
 		}
 	}
 

@@ -47,18 +47,11 @@
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="@android:color/white" />
+        android:background="#FFFFFF" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-
-        <ProgressBar
-            android:id="@+id/gip_suggest_peoplewill_listview_pb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone" />
 
         <ListView
             android:id="@+id/gip_suggest_peoplewill_listview"
@@ -67,6 +60,13 @@
             android:divider="@android:color/white"
             android:dividerHeight="1dp" >
         </ListView>
+
+        <ProgressBar
+            android:id="@+id/gip_suggest_peoplewill_listview_pb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
     </FrameLayout>
 
 </LinearLayout>

@@ -55,8 +55,6 @@ public class VedioReviewService extends Service {
 		String url = Constants.Urls.VEDIO_REVIEW_CONTENT_URL + "?start="
 				+ start + "&end=" + end;
 
-		System.out.println(url);
-
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (resultStr != null) {

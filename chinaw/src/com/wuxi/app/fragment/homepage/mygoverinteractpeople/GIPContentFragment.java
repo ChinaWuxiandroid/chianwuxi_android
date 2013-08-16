@@ -50,9 +50,9 @@ public class GIPContentFragment extends GoverMenuItemTitleFragment {
 				else if(menu.getAppUI().endsWith("部门领导信箱")){
 					menu.setContentFragment(GIP12345PartLeaderMailboxFragment.class);
 				}
-				else if(menu.getAppUI().endsWith("区市长信箱")){
-					menu.setContentFragment(GIP12345CMayorMailBoxFragment.class);
-				}
+//				else if(menu.getAppUI().endsWith("区市长信箱")){
+//					menu.setContentFragment(GIP12345CMayorMailBoxFragment.class);
+//				}
 				else if(menu.getAppUI().endsWith("热门新建选登")){
 					menu.setContentFragment(GIP12345HotMail.class);
 				}
@@ -76,9 +76,9 @@ public class GIPContentFragment extends GoverMenuItemTitleFragment {
 				else if(menu.getAppUI().endsWith("走进直播间")){
 					menu.setContentFragment(GoverInterPeopleVideoLiveFragment.class);
 				}
-				else if(menu.getAppUI().endsWith("行风热线")){
-					menu.setContentFragment(GoverInterPeopleVideoLiveFragment.class);
-				}
+//				else if(menu.getAppUI().endsWith("行风热线")){
+//					menu.setContentFragment(GoverInterPeopleVideoLiveFragment.class);
+//				}
 				//公众监督
 				else if(menu.getAppUI().endsWith("无锡市委组织部12380网上举报")){
 					menu.setContentFragment(GoverInterPeoplePublicSuperviseFragment.class);

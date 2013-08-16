@@ -28,15 +28,21 @@ import com.wuxi.domain.MyLetter;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
-public class GIP12345IWantMailLayoutFragment extends BaseFragment implements OnClickListener,OnCheckedChangeListener{
+/**
+ * 政民互动 12345来信办理平台 我要写信 我要写信子界面碎片碎片
+ * 
+ * @author 智佳 杨宸
+ * 
+ */
+public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
+		OnClickListener, OnCheckedChangeListener {
 	protected View view;
 	protected LayoutInflater mInflater;
 	private Context context;
-	
-	private final static int SEND_SUCCESS=1;
-	private final static int SEND_FAILED=0;
-	
-	
+
+	private final static int SEND_SUCCESS = 1;
+	private final static int SEND_FAILED = 0;
+
 	private MyLetter myLetter;
 
 	RadioGroup mailType_radioGroup;
@@ -81,20 +87,19 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements OnC
 			}
 		};
 	};
-	
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.gip_iwantmail_appui_layout, null);
 		mInflater = inflater;
 		context = getActivity();
-		
+
 		initView();
 		return view;
 	}
 
-	public void initView(){
+	public void initView() {
 		myLetter = new MyLetter();
 
 		mailType_radioGroup = (RadioGroup) view
@@ -112,7 +117,7 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements OnC
 				.createFromResource(context, R.array.mailBoxType,
 						R.layout.my_spinner_small_item);
 		mailBoxType_Spinner_adapter
-		.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);
+				.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);
 		mailBoxType.setAdapter(mailBoxType_Spinner_adapter);
 		mailBoxType.setVisibility(View.VISIBLE);
 
@@ -175,23 +180,23 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements OnC
 				e.printStackTrace();
 			}
 			break;
-		}	
+		}
 	}
-	
-	public void submitMyLetter() throws NetException, JSONException, NODataException{
 
-		new Thread(new Runnable(){
+	public void submitMyLetter() throws NetException, JSONException,
+			NODataException {
+
+		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				LetterService service=new LetterService(context);
+				LetterService service = new LetterService(context);
 				try {
-					if(service.submitMyLetter(myLetter)){
-						handler.sendEmptyMessage(SEND_SUCCESS);					
-					}						
-					else {
-						handler.sendEmptyMessage(SEND_FAILED);	
+					if (service.submitMyLetter(myLetter)) {
+						handler.sendEmptyMessage(SEND_SUCCESS);
+					} else {
+						handler.sendEmptyMessage(SEND_FAILED);
 					}
 
 				} catch (NetException e) {
@@ -204,7 +209,8 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements OnC
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}}).start();
+			}
+		}).start();
 	}
 
 	@Override
@@ -237,6 +243,6 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements OnC
 		case R.id.gip_12345_iwantmail_radiobutton_notNeedMsg:
 			myLetter.setMsgStatus(notreplyMsg);
 			break;
-		}		
+		}
 	}
 }

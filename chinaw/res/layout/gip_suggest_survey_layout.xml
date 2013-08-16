@@ -44,15 +44,29 @@
         </RadioGroup>
     </LinearLayout>
 
-    <LinearLayout
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#ffffff" />
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
         <ListView
-            android:id="@+id/goverinterpeople_mine_12345_listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:id="@+id/gip_suggest_survey_listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@android:color/white"
+            android:dividerHeight="1dp" >
         </ListView>
-    </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/gip_suggest_survey_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </FrameLayout>
 
 </LinearLayout>

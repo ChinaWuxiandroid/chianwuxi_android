@@ -176,7 +176,7 @@ OnScrollListener, OnItemClickListener, OnClickListener{
 	 * 
 	 * wanglu 泰得利通 初始化界面
 	 */
-	private void initUI() {
+	protected void initUI() {
 		content_list_lv = (ListView) view.findViewById(R.id.content_list_lv);
 		content_list_lv.setOnItemClickListener(this);
 		content_list_pb = (ProgressBar) view.findViewById(R.id.content_list_pb);

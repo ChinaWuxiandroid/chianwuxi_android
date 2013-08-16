@@ -4,17 +4,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ProgressBar
-        android:id="@+id/gip_live_home_memoir_progressbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
-
-    <ListView
-        android:id="@+id/gip_live_home_memoir_listview"
+    <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
+        android:layout_height="match_parent" >
+
+        <ProgressBar
+            android:id="@+id/gip_live_home_memoir_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/gip_live_home_memoir_listview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+    </FrameLayout>
 
 </LinearLayout>

@@ -30,6 +30,10 @@ import com.wuxi.app.util.GIPRadioButtonStyleChange;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.exception.NetException;
 
+/**
+ * 公众监督
+ * @author 杨宸 智佳 
+ * */
 public class GoverInterPeoplePublicSuperviseFragment extends BaseFragment implements OnClickListener{
 
 	protected View view;
@@ -116,8 +120,16 @@ public class GoverInterPeoplePublicSuperviseFragment extends BaseFragment implem
 //			}
 			break;
 		case R.id.gip_publicsupervise_et_reset:
+			resetEditInfo();
 			break;
 		}
+	}
+	
+	public void resetEditInfo(){
+		sentUserName_et.setText("");
+		tel_et.setText("");
+		email_et.setText("");
+		content_et.setText("");
 	}
 	
 	/**

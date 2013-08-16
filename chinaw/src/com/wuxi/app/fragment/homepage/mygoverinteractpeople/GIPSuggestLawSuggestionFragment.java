@@ -37,6 +37,11 @@ import com.wuxi.exception.NetException;
 
 
 public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment{
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Spinner chooseYear_spinner;
 	
 	private ListView mListView;
@@ -75,25 +80,21 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment{
 	
 	@Override
 	protected int getLayoutId() {
-		// TODO Auto-generated method stub
 		return R.layout.gip_suggest_lawsuggestion_layout;
 	}
 
 	@Override
 	protected int getRadioGroupId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	protected int[] getRadioButtonIds() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	protected int getContentFragmentId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -149,10 +150,8 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment{
 					handler.sendEmptyMessage(DATA_LOAD_ERROR);
 
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (NODataException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -168,6 +167,7 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment{
 		}
 		else{
 			mListView.setAdapter(adapter);
+			mListView.setOnItemClickListener(adapter);
 		}
 	}
 	
@@ -175,19 +175,16 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment{
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return politics.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return politics.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 		
@@ -197,7 +194,6 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment{
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
 			ViewHolder viewHolder = null;
 			if(convertView==null){
 				convertView = mInflater.inflate(
@@ -225,7 +221,8 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment{
 			Bundle bundle=new Bundle();
 			bundle.putSerializable("politics", politics);
 			
-			
+			baseSlideFragment.slideLinstener.replaceFragment(null, position,
+					Constants.FragmentName.GIP_LEGISLATION_CONTENT_FRAGMENT, bundle);
 		}
 		
 	}
