@@ -1,6 +1,7 @@
 package com.wuxi.app.listeners;
 
 import com.wuxi.app.BaseFragment;
+import com.wuxi.domain.MenuItem;
 
 import android.support.v4.app.Fragment;
 
@@ -18,4 +19,14 @@ public interface InitializContentLayoutListner {
 	 */
 	
 	public void bindContentLayout(BaseFragment fragment);
+	
+	
+	/**
+	 * 
+	 *wanglu 泰得利通 
+	 * @param showMenuItem 显示的菜单
+	 * @param showMenuPositon 菜单的位置
+	 * @param subMenuPostion 现在菜单的子菜单位置
+	 */
+	public void redirectFragment(MenuItem showMenuItem,int showMenuPositon,int subMenuPostion);
 }

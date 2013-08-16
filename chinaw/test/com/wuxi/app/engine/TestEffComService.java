@@ -21,7 +21,7 @@ public class TestEffComService extends AndroidTestCase {
 		
 		EfficaComplainService efficaComplainService=new EfficaComplainService(getContext());
 		
-		EfficaComplainWrapper efficaComplainWrapper=efficaComplainService.getPageEfficaComplains(0, 5);
+		EfficaComplainWrapper efficaComplainWrapper=efficaComplainService.getPageEfficaComplains(null,0, 5);
 		
 		
 		List<EfficaComplain> efficaComplains=efficaComplainWrapper.getEfficaComplains();

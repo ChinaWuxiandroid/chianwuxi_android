@@ -2,6 +2,7 @@ package com.wuxi.app.engine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,6 +31,8 @@ public class EfficaComplainService extends Service {
 	 * 
 	 * wanglu 泰得利通 获取能效分页
 	 * 
+	 * @param params
+	 *            查询条件
 	 * @param start
 	 * @param end
 	 * @return
@@ -37,7 +40,8 @@ public class EfficaComplainService extends Service {
 	 * @throws JSONException
 	 * @throws ResultException
 	 */
-	public EfficaComplainWrapper getPageEfficaComplains(int start, int end)
+	public EfficaComplainWrapper getPageEfficaComplains(
+			Map<String, String> params, int start, int end)
 			throws NetException, JSONException, ResultException {
 
 		if (!checkNet()) {
@@ -46,6 +50,27 @@ public class EfficaComplainService extends Service {
 		String url = Constants.Urls.TOUSU_URL.replace("{start}", start + "")
 				.replace("{end}", end + "");
 
+		if (params != null&&params.size()>0) {
+
+			StringBuffer sb = new StringBuffer();
+			for (Map.Entry<String, String> paramSet : params.entrySet()) {
+
+				sb.append(paramSet.getKey()).append("=")
+						.append(paramSet.getValue()).append("&");
+
+			}
+
+			sb.deleteCharAt(sb.length() - 1);// 删除最后一个字符
+			url = url + "&" + sb.toString();
+
+		}
+
+		return getPageEfficaComplainsByURL(url);
+
+	}
+
+	public EfficaComplainWrapper getPageEfficaComplainsByURL(String url)
+			throws JSONException, ResultException {
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (null != resultStr) {
@@ -93,4 +118,7 @@ public class EfficaComplainService extends Service {
 
 		return null;
 	}
+	
+	
+	
 }

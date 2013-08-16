@@ -42,6 +42,13 @@ public class GoverInterPeopleSuggestFragment extends GoverMenuItemTitleFragment{
 		}
 	}
 
+	@Override
+	public void redirectFragment(MenuItem showMenuItem, int showMenuPositon,
+			int subMenuPostion) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }
 

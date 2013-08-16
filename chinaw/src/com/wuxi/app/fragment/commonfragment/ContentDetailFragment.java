@@ -1,6 +1,7 @@
 package com.wuxi.app.fragment.commonfragment;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -10,7 +11,9 @@ import android.widget.TextView;
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.BaseItemContentFragment;
 import com.wuxi.app.util.TimeFormateUtil;
+import com.wuxi.domain.Channel;
 import com.wuxi.domain.Content;
+import com.wuxi.domain.MenuItem;
 
 /**
  * 
@@ -26,6 +29,12 @@ public abstract class ContentDetailFragment extends BaseItemContentFragment {
 	private TextView decontent_tvtime;// 时间
 	private TextView tvbrowcount;// 浏览次数
 	private TextView content_author;// 作者
+	protected Channel channel;
+	protected MenuItem menuItem;
+	public static final String CHANNEL_KEY="channel_key";
+	public static final String MENUITEM_KEY="menuitem_key";
+	public static final String CONTENT_KEY="content";
+	protected Bundle bunel;
 
 	@Override
 	public void initBtn() {
@@ -41,8 +50,9 @@ public abstract class ContentDetailFragment extends BaseItemContentFragment {
 		tvbrowcount = (TextView) view.findViewById(R.id.tvbrowcount);// 浏览次数
 		content_author = (TextView) view.findViewById(R.id.content_author);
 
-		content = (Content) getArguments().get("content");
-
+		
+		content = (Content) bunel.get(CONTENT_KEY);
+	
 		if (content != null) {
 			showContentData();
 		}
@@ -86,7 +96,9 @@ public abstract class ContentDetailFragment extends BaseItemContentFragment {
 
 	@Override
 	protected int getContentLayoutId() {
-
+		bunel=getArguments();
+		channel=(Channel) bunel.get(CHANNEL_KEY);
+		menuItem=(MenuItem) bunel.get(MENUITEM_KEY);
 		return R.layout.content_detial_layout;
 	}
 

@@ -509,6 +509,7 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 
 		bundle.putSerializable(SearchResultFragment.PARAMS_KEY, params);
 		SearchResultFragment searchResultFragment = new SearchResultFragment();
+		searchResultFragment.setBaseSlideFragment(this.baseSlideFragment);
 		searchResultFragment.setArguments(bundle);
 		onTransaction(searchResultFragment);
 

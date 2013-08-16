@@ -59,7 +59,7 @@ public class SearchResultFragment extends BaseFragment implements
 	private int visibleLastIndex;
 	private int visibleItemCount;// 当前显示的总条数
 	private ProgressBar pb_loadmoore;
-	private BaseSlideFragment baseSlideFragment;
+	
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -87,7 +87,8 @@ public class SearchResultFragment extends BaseFragment implements
 		initUI();
 		params = (Map<String, String>) getArguments().getSerializable(
 				PARAMS_KEY);
-		baseSlideFragment=(BaseSlideFragment) getArguments().get("BaseSlideFragment");
+		
+		
 		params.put("start", "0");
 		params.put("end", PAGE_SIZE + "");
 		loadItem(params);

@@ -4,9 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.wuxi.app.fragment.BaseSlideFragment;
+import com.wuxi.app.fragment.commonfragment.ContentDetailFragment;
 import com.wuxi.app.fragment.commonfragment.ContentListFragment;
-import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
 import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.Content;
 
@@ -27,12 +26,14 @@ public class PublicServiceContentListFragment extends ContentListFragment {
 	
 		
 		Bundle bundle=new Bundle();
-		bundle.putSerializable("content", content);
+		bundle.putSerializable(ContentDetailFragment.CONTENT_KEY, content);
+		
 		if(super.parentItem!=null){
-			
+			bundle.putSerializable(ContentDetailFragment.MENUITEM_KEY, parentItem);
 			this.baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.PUBLICSERVICECONTENTDETAILFRAGMENT, bundle);
 			
 		}else if(super.channel!=null){
+			bundle.putSerializable(ContentDetailFragment.CHANNEL_KEY, channel);
 			this.baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.PUBLICSERVICECONTENTDETAILFRAGMENT, bundle);
 		}
 		

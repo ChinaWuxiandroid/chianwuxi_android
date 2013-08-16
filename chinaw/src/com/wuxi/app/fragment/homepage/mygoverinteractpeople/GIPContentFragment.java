@@ -15,7 +15,7 @@ public class GIPContentFragment extends GoverMenuItemTitleFragment {
 
 	@Override
 	public MenuItemInitLayoutListener getMenuItemInitLayoutListener() {
-		// TODO Auto-generated method stub
+		
 		 return new GoverInterPeopleInitLayoutImpl();
 	}
 
@@ -86,5 +86,12 @@ public class GIPContentFragment extends GoverMenuItemTitleFragment {
 			}
 
 		}
+	}
+
+	@Override
+	public void redirectFragment(MenuItem showMenuItem, int showMenuPositon,
+			int subMenuPostion) {
+		
+		
 	}
 }

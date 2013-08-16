@@ -29,7 +29,6 @@ import com.wuxi.app.adapter.MyOnlineConsultAdapter;
 import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.MyApplyService;
 import com.wuxi.app.engine.MyconsultService;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.MyApply;
@@ -149,8 +148,8 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 		/*SharedPreferences sp=context.getSharedPreferences(Constants.SharepreferenceKey.SHARE_CONFIG,Context.MODE_APPEND);
 		Editor ed=sp.edit();
 		ed.putString(Constants.SharepreferenceKey.ACCESSTOKEN, "");
-		ed.commit();*/
-		
+		ed.commit();
+		*/
 		
 		
 		
