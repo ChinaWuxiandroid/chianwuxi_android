@@ -12,9 +12,11 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
+import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.ForumPostService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
-import com.wuxi.app.util.Constants;
+import com.wuxi.app.fragment.BaseSlideFragment;
+import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.exception.NetException;
 
@@ -35,7 +37,7 @@ public class ForumPostFragment extends BaseItemContentFragment {
 	private ImageButton postSubmitImageBtn = null;
 
 	private ForumPostService postService = null;
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -55,7 +57,7 @@ public class ForumPostFragment extends BaseItemContentFragment {
 	protected String getContentTitleText() {
 		return "公众论坛";
 	}
-	
+
 	@Override
 	public void initUI() {
 		super.initUI();
@@ -76,18 +78,27 @@ public class ForumPostFragment extends BaseItemContentFragment {
 
 			@Override
 			public void onClick(View v) {
-				String theme = postThemeEdit.getText().toString();
-				String content = postContentEdit.getText().toString();
-				try {
-					postService = new ForumPostService(context);
-					
-					boolean issubmit = postService.submitPosts(SystemUtil.getAccessToken(context), theme, content);
-					Toast.makeText(context, "提交成功，待审核...", Toast.LENGTH_SHORT)
-					.show();
-				} catch (NetException e) {
-					e.printStackTrace();
-				} catch (JSONException e) {
-					e.printStackTrace();
+				BaseSlideFragment baseSlideFragment = new MainMineFragment();
+				LoginDialog loginDialog = new LoginDialog(context, baseSlideFragment);
+										
+				if (!loginDialog.checkLogin()) {
+					loginDialog.showDialog();
+				} else {
+					String theme = postThemeEdit.getText().toString();
+					String content = postContentEdit.getText().toString();
+					try {
+						postService = new ForumPostService(context);
+
+						boolean issubmit = postService.submitPosts(
+								SystemUtil.getAccessToken(context), theme,
+								content);
+						Toast.makeText(context, "提交成功，待审核...",
+								Toast.LENGTH_SHORT).show();
+					} catch (NetException e) {
+						e.printStackTrace();
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		});

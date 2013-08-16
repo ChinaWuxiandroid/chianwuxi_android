@@ -31,11 +31,16 @@ import com.wuxi.exception.NetException;
 
 /**
  * 热点话题
+ * 
  * @author 杨宸 智佳
  * */
-public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment{
+public class GoverInterPeopleHotReviewFragment extends
+		RadioButtonChangeFragment {
 
-	
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private ListView mListView;
 	private ProgressBar list_pb;
@@ -44,18 +49,16 @@ public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment
 	protected static final String TAG = "GoverInterPeopleHotReviewFragment";
 	private static final int DATA__LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
-	
-	public final int HOTREVIEW_TYPE_NOW=0;    //话题类型  当前话题
-	public final int HOTREVIEW_TYPE_BEFORE=1;//话题类型  以往话题
-	private int reviewType=HOTREVIEW_TYPE_NOW;   //默认为当前话题 
-	private int startIndex=0;         //获取话题的起始坐标
-	private int endIndex=5;			//获取话题的结束坐标
-	
-	private final  int[] radioButtonIds={
-			R.id.goverinterpeople_hottopic_radioButton_now,
-			R.id.goverinterpeople_hottopic_radioButton_before
-	};
 
+	public final int HOTREVIEW_TYPE_NOW = 0; // 话题类型 当前话题
+	public final int HOTREVIEW_TYPE_BEFORE = 1;// 话题类型 以往话题
+	private int reviewType = HOTREVIEW_TYPE_NOW; // 默认为当前话题
+	private int startIndex = 0; // 获取话题的起始坐标
+	private int endIndex = 20; // 获取话题的结束坐标
+
+	private final int[] radioButtonIds = {
+			R.id.goverinterpeople_hottopic_radioButton_now,
+			R.id.goverinterpeople_hottopic_radioButton_before };
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -77,22 +80,22 @@ public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment
 			}
 		};
 	};
-	
-	
+
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-		GIPRadioButtonStyleChange radioButtonStyleChange=new GIPRadioButtonStyleChange();
-		radioButtonStyleChange.refreshRadioButtonStyle(view,radioButtonIds,checkedId);
+		GIPRadioButtonStyleChange radioButtonStyleChange = new GIPRadioButtonStyleChange();
+		radioButtonStyleChange.refreshRadioButtonStyle(view, radioButtonIds,
+				checkedId);
 		switch (checkedId) {
 
 		case R.id.goverinterpeople_hottopic_radioButton_now:
-			reviewType=HOTREVIEW_TYPE_NOW;
+			reviewType = HOTREVIEW_TYPE_NOW;
 			init();
 			break;
 
-		case R.id.goverinterpeople_hottopic_radioButton_before:			
-			reviewType=HOTREVIEW_TYPE_BEFORE;
+		case R.id.goverinterpeople_hottopic_radioButton_before:
+			reviewType = HOTREVIEW_TYPE_BEFORE;
 			init();
 			break;
 		}
@@ -100,58 +103,52 @@ public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment
 
 	@Override
 	protected int getLayoutId() {
-		// TODO Auto-generated method stub
 		return R.layout.goverinterpeople_hotreview_layout;
 	}
 
 	@Override
 	protected int getRadioGroupId() {
-		// TODO Auto-generated method stub
 		return R.id.goverinterpeople_hottopic_radioGroup;
 	}
 
 	@Override
 	protected int[] getRadioButtonIds() {
-		// TODO Auto-generated method stub
 		return radioButtonIds;
 	}
 
 	@Override
 	protected int getContentFragmentId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	protected void init() {	
-		// TODO Auto-generated method stub
-		mListView=(ListView) view.findViewById(R.id.gip_suggest_people_listview);
-		list_pb=(ProgressBar)view.findViewById(R.id.gip_suggest_people_listview_pb);
+	protected void init() {
+		mListView = (ListView) view
+				.findViewById(R.id.gip_suggest_people_listview);
+		list_pb = (ProgressBar) view
+				.findViewById(R.id.gip_suggest_people_listview_pb);
 
 		list_pb.setVisibility(View.VISIBLE);
 		loadData();
 	}
-	
-	public void loadData(){
-		//		if (CacheUtil.get(menuItem.getChannelId()) != null) {// 从缓存获取
-		//
-		//			titleChannels = (List<Channel>) CacheUtil.get(menuItem
-		//					.getChannelId());
-		//			showTitleData();
-		//			return;
-		//		}
+
+	public void loadData() {
 
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 
-				HotReviewService hotReviewService = new HotReviewService(context);
+				HotReviewService hotReviewService = new HotReviewService(
+						context);
 				try {
-					hotReviewWrapper = hotReviewService.getHotReviewWrapper(Constants.Urls.HOTREVIEW_LIST_URL,reviewType,startIndex,endIndex);
+					hotReviewWrapper = hotReviewService.getHotReviewWrapper(
+							Constants.Urls.HOTREVIEW_LIST_URL, reviewType,
+							startIndex, endIndex);
 					if (null != hotReviewWrapper) {
-						//						CacheUtil.put(menuItem.getChannelId(), titleChannels);// 缓存起来
-						hotReviews=hotReviewWrapper.getData();
+						// CacheUtil.put(menuItem.getChannelId(),
+						// titleChannels);// 缓存起来
+						hotReviews = hotReviewWrapper.getData();
 						System.out.println("获取列表成功");
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 
@@ -169,55 +166,55 @@ public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment
 					handler.sendEmptyMessage(DATA_LOAD_ERROR);
 
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (NODataException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		}
 
-				).start();
+		).start();
 	}
-	
-	public void showHotReviews(){
-		BaseSlideFragment baseSlideFragment=this.baseSlideFragment;
-		HotReviewListViewAdapter adapter=new HotReviewListViewAdapter(baseSlideFragment);
+
+	public void showHotReviews() {
+		BaseSlideFragment baseSlideFragment = this.baseSlideFragment;
 		
-		if(hotReviews==null||hotReviews.size()==0){
+		System.out.println("AAAAA:"+baseSlideFragment);
+		
+		HotReviewListViewAdapter adapter = new HotReviewListViewAdapter(
+				baseSlideFragment);
+
+		if (hotReviews == null || hotReviews.size() == 0) {
 			Toast.makeText(context, "对不起，暂无热点话题信息", 2000).show();
-		}
-		else{
+		} else {
 			mListView.setAdapter(adapter);
 			mListView.setOnItemClickListener(adapter);
 		}
 	}
 
-	public class HotReviewListViewAdapter extends BaseAdapter implements OnItemClickListener{
-		BaseSlideFragment baseSlideFragment;
-		public HotReviewListViewAdapter(BaseSlideFragment baseSlideFragment){
-			this.baseSlideFragment=baseSlideFragment;
+	public class HotReviewListViewAdapter extends BaseAdapter implements
+			OnItemClickListener {
+		BaseSlideFragment baseSlideFragment ;
+
+		public HotReviewListViewAdapter(BaseSlideFragment baseSlideFragment) {
+			this.baseSlideFragment = baseSlideFragment;
 		}
-		
+
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return hotReviews.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return hotReviews.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
-		
+
 		class ViewHolder {
 			public TextView title_text;
 			public TextView startTime_text;
@@ -226,9 +223,8 @@ public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
 			ViewHolder viewHolder = null;
-			if(convertView==null){
+			if (convertView == null) {
 				convertView = mInflater.inflate(
 						R.layout.gip_hotreview_listview_item, null);
 
@@ -241,13 +237,14 @@ public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment
 				viewHolder.endTime_text = (TextView) convertView
 						.findViewById(R.id.gip_hottopic_listview_endTime);
 				convertView.setTag(viewHolder);
-			}
-			else {
+			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
 			viewHolder.title_text.setText(hotReviews.get(position).getTitle());
-			viewHolder.startTime_text.setText(hotReviews.get(position).getStartTime());
-			viewHolder.endTime_text.setText(hotReviews.get(position).getEndTime());
+			viewHolder.startTime_text.setText(hotReviews.get(position)
+					.getStartTime());
+			viewHolder.endTime_text.setText(hotReviews.get(position)
+					.getEndTime());
 
 			return convertView;
 		}
@@ -255,12 +252,11 @@ public class GoverInterPeopleHotReviewFragment extends RadioButtonChangeFragment
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 				long arg3) {
-			// TODO Auto-generated method stub
+			
 			baseSlideFragment.slideLinstener.replaceFragment(null, position,
 					Constants.FragmentName.HOTREVIEW_CONTENT_FRAGMENT, null);
 
 		}
 
-	
 	}
 }

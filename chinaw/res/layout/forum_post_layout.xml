@@ -47,7 +47,7 @@
                 android:background="@drawable/worksuggestbox_edit_small_bk"
                 android:gravity="center_vertical"
                 android:paddingLeft="3dp"
-                android:text="123ad中文"
+                android:hint="请输入主题"
                 android:textSize="10sp" />
         </LinearLayout>
 
@@ -79,7 +79,7 @@
                 android:minLines="6"
                 android:paddingLeft="3dp"
                 android:paddingTop="3dp"
-                android:text="123ad中文"
+                android:hint="请输入内容"
                 android:textSize="10sp" />
         </LinearLayout>
 

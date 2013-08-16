@@ -7,13 +7,11 @@ public class HotReviewContentFragment extends BaseItemContentFragment{
 
 	@Override
 	protected int getContentLayoutId() {
-		// TODO Auto-generated method stub
 		return R.layout.hotreview_content_layout;
 	}
 
 	@Override
 	protected String getContentTitleText() {
-		// TODO Auto-generated method stub
 		return "热点话题";
 	}
 }

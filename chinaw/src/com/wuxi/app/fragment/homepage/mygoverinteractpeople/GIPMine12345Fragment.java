@@ -25,13 +25,17 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- * 我的政民互动  主Fragment --12345来信班里平台  fragment
+ * 我的政民互动 主Fragment --12345来信班里平台 fragment
+ * 
  * @author 杨宸 智佳
  * */
 
-public class GIPMine12345Fragment extends RadioButtonChangeFragment{
+public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 
-
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 	private ListView mListView;
 	private LetterWrapper letterWrapper;
 	private List<LetterWrapper.Letter> letters;
@@ -39,14 +43,12 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment{
 	private static final int DATA__LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
 
-	private int startIndex=0;         //获取话题的起始坐标
-	private int endIndex=5;			//获取话题的结束坐标
+	private int startIndex = 0; // 获取话题的起始坐标
+	private int endIndex = 5; // 获取话题的结束坐标
 
-
-	private final  int[] radioButtonIds={
+	private final int[] radioButtonIds = {
 			R.id.gip_mine_12345_radioButton_backmail,
-			R.id.gip_mine_12345_radioButton_mybackmail,
-	};
+			R.id.gip_mine_12345_radioButton_mybackmail, };
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -66,7 +68,6 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment{
 		};
 	};
 
-
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 
@@ -75,10 +76,10 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment{
 		switch (checkedId) {
 
 		case R.id.gip_mine_12345_radioButton_backmail:
-			//			init();
+			// init();
 			break;
 
-		case R.id.gip_mine_12345_radioButton_mybackmail:	
+		case R.id.gip_mine_12345_radioButton_mybackmail:
 			break;
 		}
 	}
@@ -109,18 +110,19 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment{
 
 	@Override
 	protected void init() {
-		mListView=(ListView) view.findViewById(R.id.goverinterpeople_mine_12345_listview);
-		loadData();	
+		mListView = (ListView) view
+				.findViewById(R.id.goverinterpeople_mine_12345_listview);
+		loadData();
 	}
 
-	public void loadData(){
-		//		if (CacheUtil.get(menuItem.getChannelId()) != null) {// 从缓存获取
+	public void loadData() {
+		// if (CacheUtil.get(menuItem.getChannelId()) != null) {// 从缓存获取
 		//
-		//			titleChannels = (List<Channel>) CacheUtil.get(menuItem
-		//					.getChannelId());
-		//			showTitleData();
-		//			return;
-		//		}
+		// titleChannels = (List<Channel>) CacheUtil.get(menuItem
+		// .getChannelId());
+		// showTitleData();
+		// return;
+		// }
 
 		new Thread(new Runnable() {
 
@@ -130,12 +132,14 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment{
 				LetterService letterService = new LetterService(context);
 				try {
 
-					letterWrapper = letterService.getMyLettersList
-							(Constants.Urls.MY_LETTER_URL,Constants.SharepreferenceKey.TEST_ACCESSTOKEN,
-									startIndex,endIndex);
+					letterWrapper = letterService.getMyLettersList(
+							Constants.Urls.MY_LETTER_URL,
+							Constants.SharepreferenceKey.TEST_ACCESSTOKEN,
+							startIndex, endIndex);
 					if (null != letterWrapper) {
-						//						CacheUtil.put(menuItem.getChannelId(), titleChannels);// 缓存起来
-						letters=letterWrapper.getData();
+						// CacheUtil.put(menuItem.getChannelId(),
+						// titleChannels);// 缓存起来
+						letters = letterWrapper.getData();
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 
 					} else {
@@ -159,22 +163,19 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment{
 					e.printStackTrace();
 				}
 			}
-		}
-				).start();
+		}).start();
 	}
 
-
-	public void showLettersList(){
-		LettersListViewAdapter adapter=new LettersListViewAdapter();
-		if(letters==null||letters.size()==0){
+	public void showLettersList() {
+		LettersListViewAdapter adapter = new LettersListViewAdapter();
+		if (letters == null || letters.size() == 0) {
 			Toast.makeText(context, "对不起，暂无信息", 2000).show();
-		}
-		else{
+		} else {
 			mListView.setAdapter(adapter);
 		}
 	}
 
-	public class LettersListViewAdapter extends BaseAdapter{
+	public class LettersListViewAdapter extends BaseAdapter {
 
 		@Override
 		public int getCount() {
@@ -205,7 +206,7 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment{
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
 			ViewHolder viewHolder = null;
-			if(convertView==null){
+			if (convertView == null) {
 				convertView = mInflater.inflate(
 						R.layout.gip_mine_12345_listview_item, null);
 
@@ -219,16 +220,16 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment{
 						.findViewById(R.id.gip_mine_12345_textView_reply);
 
 				convertView.setTag(viewHolder);
-			}
-			else {
+			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			String title_str=(position+1)+"."+"["+letters.get(position).getType()+"]"
-					+letters.get(position).getTitle();
+			String title_str = (position + 1) + "." + "["
+					+ letters.get(position).getType() + "]"
+					+ letters.get(position).getTitle();
 			viewHolder.title_text.setText(title_str);
 			viewHolder.code_text.setText(letters.get(position).getCode());
 
-			//			viewHolder.answerDate_text.setText(letters.get(position).getAnswerdate());
+			// viewHolder.answerDate_text.setText(letters.get(position).getAnswerdate());
 
 			return convertView;
 		}

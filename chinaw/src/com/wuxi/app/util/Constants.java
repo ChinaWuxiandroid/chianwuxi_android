@@ -72,6 +72,11 @@ public class Constants {
 		public static final String REGIST_URL = "http://3g.wuxi.gov.cn/api/register.json";
 
 		/**
+		 * 政民互动 12345来电信息办理平台 部门领导信箱 各部门领导信箱列表
+		 */
+		public static final String PART_LEADER_MAIL_URL = "http://3g.wuxi.gov.cn/api/letter/deps.json";
+		
+		/**
 		 * 公共论坛列表URL
 		 */
 		public static final String FORUM_LIST_URL = "http://3g.wuxi.gov.cn/api/publicbbs/list.json";
@@ -517,7 +522,7 @@ public class Constants {
 		 */
 		SEARCH_DETAIL_FRAGMENT,
 		/**
-		 * 政务大厅
+		 * 政民互动
 		 */
 		MAINMINEFRAGMENT,
 		/**

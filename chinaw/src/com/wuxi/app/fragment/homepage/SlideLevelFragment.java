@@ -234,7 +234,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				onAddFragment(searchResultDetailFragment, bundle);
 				break;
 
-			case MAINMINEFRAGMENT:// 政务名互动
+			case MAINMINEFRAGMENT:// 政民互动
 				MainMineFragment mainMineFragment = new MainMineFragment();
 				mainMineFragment.setParentMenuItem(menuItem);
 				onReplaceFragment(mainMineFragment, bundle);
@@ -270,17 +270,12 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				onAddFragment(forumPostFragment, bundle);
 				break;
 
-<<<<<<< HEAD
 			case GIP_LEGISLATION_CONTENT_FRAGMENT://征求意见平台 立法征求意见详细内容界面
 				LegislationContentFragment legislationContentFragment = new LegislationContentFragment();
 				onAddFragment(legislationContentFragment, bundle);
 				break;
-
-
-			case GIP_CHANNEL_CONTENT_DETAILWEB_FRAGMENT:// 政民互动  频道内容页
-=======
+		
 			case GIP_CHANNEL_CONTENT_DETAILWEB_FRAGMENT:// 政民互动 频道内容页
->>>>>>> d8b29728ccc1f1f402f061c2da41fe23367acfba
 				GoverMsgContentDetailWebFragment gIPContentDetailWebFragment = new GoverMsgContentDetailWebFragment();
 				onAddFragment(gIPContentDetailWebFragment, bundle);
 				break;
@@ -334,7 +329,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				FourTopicActivityFragment fourTopicActivityFragment = new FourTopicActivityFragment();
 				onReplaceFragment(fourTopicActivityFragment, bundle);
 				break;
-			case PUBLICSERVICECONTENTDETAILFRAGMENT:// 公共那个服务内容页
+			case PUBLICSERVICECONTENTDETAILFRAGMENT:// 公共服务内容页
 				PublicServiceContentDetailFragment publicServiceContentDetailFragment = new PublicServiceContentDetailFragment();
 				onAddFragment(publicServiceContentDetailFragment, bundle);
 				break;
@@ -488,11 +483,8 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	public void onItemClick(AdapterView<?> parent, View arg1, int position,
 			long id) {
 
-<<<<<<< HEAD
-		if(!mSlideMenuLayout.getLeftSlideMenuEnabled()){
-=======
+
 		if (!mSlideMenuLayout.getLeftSlideMenuEnabled()) {
->>>>>>> d8b29728ccc1f1f402f061c2da41fe23367acfba
 			return;
 		}
 		if (position == this.position)
