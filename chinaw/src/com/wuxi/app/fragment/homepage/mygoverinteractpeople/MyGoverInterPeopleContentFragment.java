@@ -78,7 +78,10 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment{
 			}
 			//热点话题
 			else if(menuItem.getAppUI().equals("HotTopic")){
-				onTransaction(new GoverInterPeopleHotReviewFragment());
+				GoverInterPeopleHotReviewFragment goverInterPeopleHotReviewFragment = new GoverInterPeopleHotReviewFragment();
+				goverInterPeopleHotReviewFragment.setBaseSlideFragment(this.baseSlideFragment);
+				onTransaction(goverInterPeopleHotReviewFragment);
+				
 			}
 			//公开电话
 			else if(menuItem.getAppUI().equals("PublicTel")){

@@ -104,7 +104,6 @@ public class ForumContentFragment extends BaseItemContentFragment implements
 
 		comment_btn = (Button) view
 				.findViewById(R.id.forum_content_comment_btn);
-		comment_btn.setVisibility(View.GONE);
 		comment_btn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -140,9 +139,9 @@ public class ForumContentFragment extends BaseItemContentFragment implements
 
 			@Override
 			public void onClick(View v) {
-				String id = "77e9a0ef-cba8-4ebd-9d7b-7ccfffd4cdfe";
+				String id = forum.getId();
 				String access_token = Constants.SharepreferenceKey.TEST_ACCESSTOKEN;
-				String type = "/HotReviewContent";
+				String type = forum.getViewpath();
 				String content = submitContent.getText().toString();
 
 				ForumCommentService commentService = new ForumCommentService(

@@ -49,12 +49,10 @@ public class ForumCommentService extends Service {
 				+ "?access_token=" + access_token + "&type=" + type
 				+ "&content=" + content;
 
-		System.out.println("url:" + url);
-
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
-		
-		System.out.println(resultStr);
 
+		System.out.println(">>>>"+resultStr);
+		
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
 			return jsonObject.getBoolean("success");

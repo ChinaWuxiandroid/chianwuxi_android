@@ -99,6 +99,7 @@ public class HotReviewService extends Service{
 
 				hotReview.setEndTime(TimeFormateUtil.formateTime
 						(String.valueOf(jb.getLong("endTime")), TimeFormateUtil.DATE_PATTERN));	
+				hotReview.setReadcount(jb.getString("readcount"));
 				totReviews.add(hotReview);
 			}
 			return totReviews;
