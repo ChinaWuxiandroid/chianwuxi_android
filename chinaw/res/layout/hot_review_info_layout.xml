@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ProgressBar
+        android:id="@+id/hotreview_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/hotreview_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/hotrevire_info_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="15sp"
+            android:layout_marginRight="15sp"
+            android:layout_marginTop="3sp"
+            android:gravity="center"
+            android:text="Title"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#ffffff" />
+
+        <WebView
+            android:id="@+id/hotrevire_info_webview"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="3sp"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginTop="3sp"
+            android:layout_weight="8" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#ffffff" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3sp"
+            android:layout_marginRight="3sp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/hotreview_info_bengintime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发表时间 : "
+                android:textColor="#808080"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/hotreview_info_begintime_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2013-06-03"
+                android:textColor="#808080"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/hotreview_info_endtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
+                android:text="截止时间 : "
+                android:textColor="#808080"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/hotreview_info_endtime_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2013-06-21"
+                android:textColor="#808080"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3sp"
+            android:layout_marginRight="3sp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/hotreview_info_deptname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发布部门 : "
+                android:textColor="#808080"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/hotreview_info_deptname_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="无锡市人力资源和社会保障局"
+                android:textColor="#808080"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/hotreview_info_readcount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
+                android:text="阅读人数 : "
+                android:textColor="#808080"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/hotreview_info_readcount_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="30"
+                android:textColor="#808080"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

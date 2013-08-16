@@ -68,19 +68,25 @@ public class ForumPostFragment extends BaseItemContentFragment {
 	 * 初始化布局控件
 	 */
 	private void initLayout() {
+
 		postThemeEdit = (EditText) view.findViewById(R.id.forum_post_name_edit);
 		postContentEdit = (EditText) view
 				.findViewById(R.id.forum_post_content_edit);
 
 		postSubmitImageBtn = (ImageButton) view
 				.findViewById(R.id.forum_post_imagebtn);
+
 		postSubmitImageBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				BaseSlideFragment baseSlideFragment = new MainMineFragment();
-				LoginDialog loginDialog = new LoginDialog(context, baseSlideFragment);
-										
+				ForumPostFragment forumPostFragment = new ForumPostFragment();
+				forumPostFragment.setBaseSlideFragment(forumPostFragment.baseSlideFragment);
+
+				BaseSlideFragment baseSlideFragment = ForumPostFragment.this.baseSlideFragment;
+				LoginDialog loginDialog = new LoginDialog(getActivity(),
+						baseSlideFragment);
+
 				if (!loginDialog.checkLogin()) {
 					loginDialog.showDialog();
 				} else {

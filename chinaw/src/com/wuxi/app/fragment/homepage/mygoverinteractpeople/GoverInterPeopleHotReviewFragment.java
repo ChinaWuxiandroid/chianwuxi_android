@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.HotReviewWrapper;
+import com.wuxi.domain.HotReviewWrapper.HotReview;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -41,7 +43,7 @@ public class GoverInterPeopleHotReviewFragment extends
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private ListView mListView;
 	private ProgressBar list_pb;
 	private HotReviewWrapper hotReviewWrapper;
@@ -54,7 +56,7 @@ public class GoverInterPeopleHotReviewFragment extends
 	public final int HOTREVIEW_TYPE_BEFORE = 1;// 话题类型 以往话题
 	private int reviewType = HOTREVIEW_TYPE_NOW; // 默认为当前话题
 	private int startIndex = 0; // 获取话题的起始坐标
-	private int endIndex = 20; // 获取话题的结束坐标
+	private int endIndex = 15; // 获取话题的结束坐标
 
 	private final int[] radioButtonIds = {
 			R.id.goverinterpeople_hottopic_radioButton_now,
@@ -177,12 +179,11 @@ public class GoverInterPeopleHotReviewFragment extends
 	}
 
 	public void showHotReviews() {
-		BaseSlideFragment baseSlideFragment = this.baseSlideFragment;
-		
-		System.out.println("AAAAA:"+baseSlideFragment);
-		
+
+		BaseSlideFragment slideFragment = this.baseSlideFragment;
+
 		HotReviewListViewAdapter adapter = new HotReviewListViewAdapter(
-				baseSlideFragment);
+				slideFragment);
 
 		if (hotReviews == null || hotReviews.size() == 0) {
 			Toast.makeText(context, "对不起，暂无热点话题信息", 2000).show();
@@ -194,7 +195,7 @@ public class GoverInterPeopleHotReviewFragment extends
 
 	public class HotReviewListViewAdapter extends BaseAdapter implements
 			OnItemClickListener {
-		BaseSlideFragment baseSlideFragment ;
+		BaseSlideFragment baseSlideFragment;
 
 		public HotReviewListViewAdapter(BaseSlideFragment baseSlideFragment) {
 			this.baseSlideFragment = baseSlideFragment;
@@ -250,11 +251,15 @@ public class GoverInterPeopleHotReviewFragment extends
 		}
 
 		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-				long arg3) {
-			
+		public void onItemClick(AdapterView<?> adapterView, View arg1,
+				int position, long arg3) {
+			HotReview hotReview = (HotReview) adapterView
+					.getItemAtPosition(position);
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("hotReview", hotReview);
+
 			baseSlideFragment.slideLinstener.replaceFragment(null, position,
-					Constants.FragmentName.HOTREVIEW_CONTENT_FRAGMENT, null);
+					Constants.FragmentName.HOTREVIEW_CONTENT_FRAGMENT, bundle);
 
 		}
 
