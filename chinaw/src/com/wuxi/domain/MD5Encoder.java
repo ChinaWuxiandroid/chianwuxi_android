@@ -13,24 +13,24 @@ public class MD5Encoder {
 	/**
 	 * 
 	 *wanglu 泰得利通 
-	 * @param pwd
+	 * @param str
 	 * @return
 	 */
-	public static String encode(String pwd) {
+	public static String encode(String str) {
 
 		try {
 
 			MessageDigest digest = MessageDigest.getInstance("MD5");
-			byte[] enpwd = digest.digest(pwd.getBytes());
+			byte[] enpwd = digest.digest(str.getBytes());
 			StringBuffer sb = new StringBuffer();
 			for (int i = 0; i < enpwd.length; i++) {
 
-				String str = Integer.toHexString(0xff & enpwd[i]);
+				String code = Integer.toHexString(0xff & enpwd[i]);
 
-				if (str.length() == 1) {
-					sb.append("0" + str);
+				if (code.length() == 1) {
+					sb.append("0" + code);
 				} else {
-					sb.append(str);
+					sb.append(code);
 				}
 
 			}

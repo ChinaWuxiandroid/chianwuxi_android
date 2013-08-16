@@ -31,6 +31,7 @@ import com.wuxi.app.fragment.homepage.fantasticwuxi.WuxiChannelContentDetailFrag
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgContentDetailWebFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyTableFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
+import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonContentDetialFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailCFFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailQTFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailQZFragment;
@@ -289,6 +290,10 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				GoverSaloonDetailQTFragment goverSaloonDetailQTFragment = new GoverSaloonDetailQTFragment();
 
 				onAddFragment(goverSaloonDetailQTFragment, bundle);
+				break;
+			case GOVERSALOONCONTENTDETIALFRAGMENT:
+				GoverSaloonContentDetialFragment goverSaloonContentDetialFragment=new GoverSaloonContentDetialFragment();
+				onAddFragment(goverSaloonContentDetialFragment, bundle);
 				break;
 			case GOVERSALOONDETAIL_QZ_FRAGMENT:// 政务大厅 强制办件详情
 				GoverSaloonDetailQZFragment goverSaloonDetailQZFragment = new GoverSaloonDetailQZFragment();

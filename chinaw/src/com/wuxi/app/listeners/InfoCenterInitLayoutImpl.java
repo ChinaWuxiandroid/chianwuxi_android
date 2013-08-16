@@ -55,7 +55,7 @@ public class InfoCenterInitLayoutImpl implements MenuItemInitLayoutListener {
 				
 				if(menuItem.getName().equals("机构职能")){
 					
-					initLayoutListner.redirectFragment(CacheUtil.getMenuItem(0), 0,6);
+					initLayoutListner.redirectFragment(CacheUtil.getHomeMenuItem(0), 0,6);
 				}
 			}
 

@@ -399,6 +399,8 @@ public class Constants {
 		 * 下载文件存放地址
 		 */
 		public static final String DOWNLOAF_FILE_PATH=APP_PATH+"file/";
+		
+		public static final String CACHE_FILE_PATH=DOWNLOAF_FILE_PATH+"cache/";
 
 		/**
 		 * 政府信息公开中 依申请公开 唯一表格  文件名（服务器端未提供字段）
@@ -595,6 +597,10 @@ public class Constants {
 		 * 政务大厅行征收可办件详情
 		 */
 		GOVERSALOONDETAIL_ZS_FRAGMENT,
+		/**
+		 * 政务大厅，组织管理内容页
+		 */
+		GOVERSALOONCONTENTDETIALFRAGMENT,
 
 
 		/**

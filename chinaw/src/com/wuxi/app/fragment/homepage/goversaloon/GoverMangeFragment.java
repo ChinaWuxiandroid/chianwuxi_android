@@ -7,6 +7,7 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
@@ -33,6 +34,8 @@ import com.wuxi.app.R;
 import com.wuxi.app.adapter.GoverManageAdapter;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.engine.ContentService;
+import com.wuxi.app.fragment.commonfragment.ContentDetailFragment;
+import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.Content;
 import com.wuxi.domain.ContentWrapper;
@@ -47,7 +50,7 @@ import com.wuxi.exception.NetException;
  */
 @SuppressLint("HandlerLeak")
 public class GoverMangeFragment extends GoverSaloonContentFragment implements
-		OnPageChangeListener, OnClickListener, OnScrollListener {
+		OnPageChangeListener, OnClickListener, OnScrollListener, OnItemClickListener {
 
 	private ListView gover_mange_lv;
 	private ViewPager gover_viewpagerLayout;
@@ -126,6 +129,7 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 		gover_mange_lv.setOnScrollListener(this);
 		pb_mange = (ProgressBar) view.findViewById(R.id.pb_mange);
 		menuItem = (MenuItem) getArguments().get("menuItem");
+		gover_mange_lv.setOnItemClickListener(this);
 		loadChannle(CHANNEL_TYPE, menuItem.getChannelId());// 加载子Channel
 		loadMoreButton.setOnClickListener(this);
 
@@ -597,8 +601,18 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 
 	@Override
 	public void onPageScrolled(int arg0, float arg1, int arg2) {
-		// TODO Auto-generated method stub
+		
 
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
+	
+		Content content=(Content) adapterView.getItemAtPosition(position);
+		Bundle bundle=new Bundle();
+		bundle.putSerializable(ContentDetailFragment.CHANNEL_KEY, this.checkChannel);
+		bundle.putSerializable(ContentDetailFragment.CONTENT_KEY, content);
+		this.baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.GOVERSALOONCONTENTDETIALFRAGMENT, bundle);
 	}
 
 }

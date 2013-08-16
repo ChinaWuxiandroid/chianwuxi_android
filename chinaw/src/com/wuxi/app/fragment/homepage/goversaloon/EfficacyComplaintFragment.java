@@ -7,12 +7,11 @@ import java.util.Map;
 
 import org.json.JSONException;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.os.Handler;
 import android.os.Message;
 import android.text.InputType;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -81,6 +80,7 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 	private ProgressBar pb_loadmoore;
 	private Map<String, String> params = new HashMap<String, String>();
 
+	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 

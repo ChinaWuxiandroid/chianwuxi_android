@@ -70,8 +70,13 @@ public class MenuService extends Service {
 		}
 
 		String url = Constants.Urls.SUB_MENU_URL.replace("{id}", parentId);
-
-		String reslutStr = httpUtils.executeGetToString(url, 500);
+		String reslutStr = null;
+		boolean hasCachFile = cacheUtil.isHasCacheFile(url);
+		if (hasCachFile) {// 存在缓存，从缓存读取
+			reslutStr = cacheUtil.getCacheStr(url);
+		} else {
+			reslutStr = httpUtils.executeGetToString(url, 500);
+		}
 
 		if (reslutStr != null) {
 
@@ -105,15 +110,18 @@ public class MenuService extends Service {
 					menu.setParentMenuId(jb.getString("parentMenuId"));
 					menu.setLinkMenuItemId(jb.getString("linkMenuItemID"));
 					menu.setContentName(jb.getString("contentName"));
-					menu.setLinkMenuItemName(jb.getString("linkMenuItemName"));				
+					menu.setLinkMenuItemName(jb.getString("linkMenuItemName"));
 					menu.setPfId(jb.getString("pfId"));
 					menu.setPfBuildPath(jb.getString("pfBuildPath"));
 
-					if (!menu.isDeleted()&&!menu.isDisabled()) {// 已经删除标记和弃用的不显示
+					if (!menu.isDeleted() && !menu.isDisabled()) {// 已经删除标记和弃用的不显示
 						menuItems.add(menu);
 					}
 				}
 
+				if (!hasCachFile) {
+					cacheUtil.cacheFile(url, reslutStr);// 缓存文件
+				}
 				return menuItems;
 			}
 
@@ -156,11 +164,18 @@ public class MenuService extends Service {
 
 			}
 		}
+		String reslutStr = null;
+		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url);
+		if (isHasCacheFile) {
+			reslutStr = cacheUtil.getCacheStr(url);// 从缓存读取
+		} else {
+			reslutStr = httpUtils.executeGetToString(url, 500);
+		}
 
-		String reslutStr = httpUtils.executeGetToString(url, 500);
 		List<MenuItem> menuItems;
 		// LogUtil.i(TAG, reslutStr);
 		if (null != reslutStr) {
+
 			menuItems = new ArrayList<MenuItem>();
 			JSONObject jsonObject = new JSONObject(reslutStr);
 			JSONArray jresult = jsonObject.getJSONArray("result");
@@ -196,10 +211,11 @@ public class MenuService extends Service {
 					menu.setPfBuildPath(jb.getString("pfBuildPath"));
 
 					int type = jb.getInt("type");
-					if (type == MenuItem.CHANNEL_MENU&&!menu.isDeleted()) {// 如果是频道菜单，获取子频道，并放入缓存中
+					if (type == MenuItem.CHANNEL_MENU && !menu.isDeleted()) {// 如果是频道菜单，获取子频道，并放入缓存中
 						new Thread(new ChannelTask(menu.getChannelId()))
 								.start();
-					} else if (type == MenuItem.CUSTOM_MENU&&!menu.isDeleted()) {// 如果是普通菜单,将该菜单的子菜单提前获取好，放入缓存
+					} else if (type == MenuItem.CUSTOM_MENU
+							&& !menu.isDeleted()) {// 如果是普通菜单,将该菜单的子菜单提前获取好，放入缓存
 
 						new Thread(new SubMenuItemsTask(menu)).start();
 
@@ -236,6 +252,11 @@ public class MenuService extends Service {
 			}
 
 			Collections.sort(menuItems);// 排序
+
+			if (!isHasCacheFile) {
+				cacheUtil.cacheFile(url, reslutStr);// 缓存文件
+			}
+
 			return menuItems;
 
 		} else {
@@ -266,7 +287,8 @@ public class MenuService extends Service {
 				if (items != null) {
 
 					CacheUtil.put(menuItem.getId(), items);// 将菜单的子菜单放入缓存
-					InitializContentLayout.initMenuItemContentLayout(menuItem, items, context);
+					InitializContentLayout.initMenuItemContentLayout(menuItem,
+							items, context);
 				}
 			} catch (NetException e) {
 				e.printStackTrace();

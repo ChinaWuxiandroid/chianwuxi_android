@@ -1,35 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_searchby_range"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#E0E0E0"
-    android:orientation="vertical"
-    android:id="@+id/ll_searchby_range"
-    android:visibility="gone"
     android:layout_marginLeft="5dip"
-    android:layout_marginRight="5dip" >
+    android:layout_marginRight="5dip"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    android:visibility="gone" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:background="#E0E0E0"
+        android:orientation="vertical" >
 
-        <Spinner
-            android:id="@+id/sp_range"
-            android:layout_width="180dip"
-            android:layout_height="wrap_content" 
-            android:background="@drawable/spiner_bg"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dip" >
 
-        <Button
-            android:id="@+id/btn_searchbyrange"
-            android:layout_width="65dp"
-            android:layout_height="30dp"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="10dip"
-            android:background="@drawable/search_btn_bg"
-            android:text="检索"
-            android:textColor="#207BBE"
-            android:textSize="14sp" />
+            <Spinner
+                android:id="@+id/sp_range"
+                android:layout_width="180dip"
+                android:layout_height="wrap_content"
+                android:background="@drawable/spiner_bg"
+                android:layout_marginLeft="8dip" />
+
+            <Button
+                android:id="@+id/btn_searchbyrange"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="5dip"
+                android:background="@drawable/search_btn_bg"
+                android:text="检索"
+                android:textColor="#207BBE"
+                android:textSize="14sp"
+                 />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

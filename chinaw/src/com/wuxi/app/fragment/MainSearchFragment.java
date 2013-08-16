@@ -136,7 +136,9 @@ public class MainSearchFragment extends BaseSlideFragment implements OnClickList
 				imm.hideSoftInputFromWindow(wordKey_Edt.getWindowToken(), 0);
 
 				normalSearch_pb.setVisibility(ProgressBar.VISIBLE);
-				
+				if(!isFirstLoad){
+					isSwitch=true;
+				}
 				inflateResultListView(queryContent);
 			}
 			else{

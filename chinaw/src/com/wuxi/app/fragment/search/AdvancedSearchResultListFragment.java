@@ -210,7 +210,7 @@ public class AdvancedSearchResultListFragment extends BaseSlideFragment  impleme
 				normalSearch_pb.setVisibility(ProgressBar.GONE);
 			} else {
 				SearchFragmentAdapter.addResults(results);
-				System.out.println("SearchFragmentAdapter.getCount():"+SearchFragmentAdapter.getCount());
+				//System.out.println("SearchFragmentAdapter.getCount():"+SearchFragmentAdapter.getCount());
 			}
 			SearchFragmentAdapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
 			resultListView.setSelection(visibleLastIndex

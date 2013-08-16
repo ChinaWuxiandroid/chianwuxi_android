@@ -3,46 +3,63 @@
     android:id="@+id/ll_searchbything"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="#E0E0E0"
+    android:background="@android:color/transparent"
     android:orientation="vertical"
-    android:visibility="gone"
-    android:layout_marginLeft="5dip"
-    android:layout_marginRight="5dip" >
-
-    <Spinner
-        android:id="@+id/sp_item_type"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/spiner_bg" />
+    android:visibility="gone" >
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:background="#E0E0E0"
+        android:orientation="vertical"
+         >
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/sp_item_type"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="查询内容:" />
+            android:layout_marginLeft="8dip"
+            android:layout_marginRight="8dip"
+            android:layout_marginTop="8dip"
+            android:background="@drawable/spiner_bg" />
 
-        <EditText
-            android:id="@+id/et_searchbying_content"
-            android:layout_width="0dip"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.72"
-            android:background="@android:color/white" 
-            android:hint="请输入关键字..."
-            android:textSize="12sp"/>
+            android:layout_marginTop="8dip"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dip" >
 
-        <Button
-            android:id="@+id/btn_searchbything"
-            android:layout_width="65dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dip"
-            android:background="@drawable/search_btn_bg"
-            android:text="检索"
-            android:textColor="#207BBE" 
-            android:textSize="14sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:text="查询内容:" />
+
+            <EditText
+                android:id="@+id/et_searchbying_content"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.72"
+                android:background="@android:color/white"
+                android:hint="请输入关键字..."
+                android:textSize="12sp"
+                android:layout_marginLeft="5dip" />
+
+            <Button
+                android:id="@+id/btn_searchbything"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dip"
+                android:background="@drawable/search_btn_bg"
+                android:text="检索"
+                android:textColor="#207BBE"
+                android:textSize="14sp"
+                android:layout_marginRight="8dip" />
+            
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

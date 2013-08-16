@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.wuxi.app.net.HttpUtils;
 import com.wuxi.app.net.NetworkUtil;
+import com.wuxi.app.util.CacheUtil;
 
 /**
  * 
@@ -15,9 +16,9 @@ public class Service {
 	protected Context context;
 	protected NetworkUtil networkUtil = NetworkUtil.getInstance();
 	protected HttpUtils httpUtils = HttpUtils.getInstance();
-	protected static final int TIME_OUT=5000;
+	protected static final int TIME_OUT = 5000;
+	protected CacheUtil cacheUtil = CacheUtil.getInstance();
 
-	
 	public Service(Context context) {
 		this.context = context;
 	}

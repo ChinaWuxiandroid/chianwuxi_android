@@ -43,9 +43,16 @@ public class ChannelService extends Service {
 
 		String url = Constants.Urls.CHANNEL_URL.replace("{channelId}",
 				channelId);
+		String resultStr = null;
+		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url);
+		if (isHasCacheFile) {
+			resultStr = cacheUtil.getCacheStr(url);// 缓存读取
+		} else {
+			resultStr = httpUtils.executeGetToString(url, 5000);
+		}
 
-		String resultStr = httpUtils.executeGetToString(url, 5000);
 		if (resultStr != null) {
+
 			List<Channel> channels = null;
 			try {
 				JSONObject jobject = new JSONObject(resultStr);
@@ -70,6 +77,10 @@ public class ChannelService extends Service {
 
 						channels.add(channel);
 
+					}
+
+					if (!isHasCacheFile) {
+						cacheUtil.cacheFile(url, resultStr);// 缓存文件
 					}
 
 				}
