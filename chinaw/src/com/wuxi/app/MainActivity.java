@@ -1,10 +1,12 @@
 package com.wuxi.app;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -13,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
+import com.wuxi.app.engine.InitService;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.MainIndexFragment;
 import com.wuxi.app.fragment.homepage.SlideLevelFragment;
@@ -34,9 +37,12 @@ public class MainActivity extends FragmentActivity implements
 	private RadioGroup radioGroup;
 
 	public FragmentManagers fragmentManagers;
+	private InitService initService;
 
-	private static final long BACK_PRESSED_INTERVAL_MILLIS = 1500;
-	private long mLastBackPressedTimeMillis = 0;
+	// private static final long BACK_PRESSED_INTERVAL_MILLIS = 1500;
+
+	// private static final String TAG = "MainActivity";
+	// private long mLastBackPressedTimeMillis = 0;
 	private BaseSlideFragment currentBaseSlideFragment;
 
 	private RadioButton main_tab_index, main_tab_search, main_tab_login_reg,
@@ -64,6 +70,8 @@ public class MainActivity extends FragmentActivity implements
 		main_tab_mine.setOnClickListener(this);
 		main_tab_more.setOnClickListener(this);
 
+		initService = new InitService(this);
+		initService.init();// 初始化APP操作
 	}
 
 	@Override
@@ -72,10 +80,9 @@ public class MainActivity extends FragmentActivity implements
 		try {
 			super.onConfigurationChanged(newConfig);
 			if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-				// Log.v("Himi",
-				// "onConfigurationChanged_ORIENTATION_LANDSCAPE");
+
 			} else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-				// Log.v("Himi", "onConfigurationChanged_ORIENTATION_PORTRAIT");
+
 			}
 		} catch (Exception ex) {
 		}
@@ -105,7 +112,7 @@ public class MainActivity extends FragmentActivity implements
 		main_tab_index.setTextColor(Color.parseColor("#EB5212"));
 		fragmentManagers = FragmentManagers.getInstance();
 		fragmentManagers.setFragmentActivity(getContext());
-		MainIndexFragment mainIndexFragment=new MainIndexFragment();
+		MainIndexFragment mainIndexFragment = new MainIndexFragment();
 		mainIndexFragment.setHomeTabChangListner(this);
 		ChangeFragment(mainIndexFragment, R.id.main_tab_index);
 
@@ -138,20 +145,54 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	public void onBackPressed() {
+
 		if (fragmentManagers.fragments == null
 				|| fragmentManagers.fragments.size() <= 0) {
-			final long currentTimeMillis = System.currentTimeMillis();
-			if (currentTimeMillis - mLastBackPressedTimeMillis > BACK_PRESSED_INTERVAL_MILLIS)
-				Toast.makeText(getApplicationContext(), "再按一次退出程序！",
-						Toast.LENGTH_SHORT).show();
-			else
-				System.exit(0);
-			mLastBackPressedTimeMillis = currentTimeMillis;
+			
+			showExitDialog();
+
 		} else {
 			fragmentManagers.BackPress(fragmentManagers.fragments
 					.get(fragmentManagers.fragments.size() - 1));
+			currentBaseSlideFragment = null;
 			return;
 		}
+
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 退出程序
+	 */
+	private void showExitDialog() {
+		AlertDialog.Builder builder = new Builder(this);
+		builder.setIcon(R.drawable.logo);
+		builder.setTitle("提示");
+		builder.setMessage("您确定要退出吗?");
+		builder.setCancelable(false);
+
+		builder.setPositiveButton("确定",
+				new android.content.DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+						System.exit(0);
+
+					}
+				});
+
+		builder.setNegativeButton("取消",
+				new android.content.DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+					}
+
+				});
+
+		builder.create().show();
 
 	}
 

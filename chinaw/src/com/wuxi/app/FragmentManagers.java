@@ -136,6 +136,7 @@ public class FragmentManagers {
 		ft.remove(saveFragment);
 		ft.addToBackStack(null);
 		ft.commit();
+		
 
 	}
 
@@ -144,6 +145,7 @@ public class FragmentManagers {
 			return;
 		for (int i = 0; i < fragments.size(); i++) {
 			RemoveFragment(fragments.get(i));
+			fragments.remove(i);
 		}
 	}
 

@@ -92,7 +92,6 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	private List<FragmentWapper> fragments = new ArrayList<FragmentWapper>(); // 记录每次切换到fragment信息以便回退
 	private List<BaseFragment> baseFragments = new ArrayList<BaseFragment>();
 	private HomeTabChangListner homeTabChangListner;
-	
 
 	public void setHomeTabChangListner(HomeTabChangListner homeTabChangListner) {
 		this.homeTabChangListner = homeTabChangListner;
@@ -271,11 +270,11 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				onAddFragment(forumPostFragment, bundle);
 				break;
 
-			case GIP_LEGISLATION_CONTENT_FRAGMENT://征求意见平台 立法征求意见详细内容界面
+			case GIP_LEGISLATION_CONTENT_FRAGMENT:// 征求意见平台 立法征求意见详细内容界面
 				LegislationContentFragment legislationContentFragment = new LegislationContentFragment();
 				onAddFragment(legislationContentFragment, bundle);
 				break;
-		
+
 			case GIP_CHANNEL_CONTENT_DETAILWEB_FRAGMENT:// 政民互动 频道内容页
 				GoverMsgContentDetailWebFragment gIPContentDetailWebFragment = new GoverMsgContentDetailWebFragment();
 				onAddFragment(gIPContentDetailWebFragment, bundle);
@@ -292,7 +291,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				onAddFragment(goverSaloonDetailQTFragment, bundle);
 				break;
 			case GOVERSALOONCONTENTDETIALFRAGMENT:
-				GoverSaloonContentDetialFragment goverSaloonContentDetialFragment=new GoverSaloonContentDetialFragment();
+				GoverSaloonContentDetialFragment goverSaloonContentDetialFragment = new GoverSaloonContentDetialFragment();
 				onAddFragment(goverSaloonContentDetialFragment, bundle);
 				break;
 			case GOVERSALOONDETAIL_QZ_FRAGMENT:// 政务大厅 强制办件详情
@@ -367,8 +366,9 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	 */
 	private void onReplaceFragment(BaseSlideFragment fragment, Bundle bundle) {
 
-		if(homeTabChangListner!=null){
-			homeTabChangListner.setCurrentFragment(fragment);//通知 tab 页面当前的fragment
+		if (homeTabChangListner != null) {
+			homeTabChangListner.setCurrentFragment(fragment);// 通知 tab
+																// 页面当前的fragment
 		}
 		FragmentTransaction ft = manager.beginTransaction();
 
@@ -393,8 +393,9 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	 * @param bundele
 	 */
 	private void onAddFragment(BaseSlideFragment fragment, Bundle bundele) {
-		if(homeTabChangListner!=null){
-			homeTabChangListner.setCurrentFragment(fragment);//通知 tab 页面当前的fragment
+		if (homeTabChangListner != null) {
+			homeTabChangListner.setCurrentFragment(fragment);// 通知 tab
+																// 页面当前的fragment
 		}
 		fragment.setFragment(this);
 		fragment.setManagers(managers);
@@ -426,14 +427,12 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	public void onBack() {
 
 		if (baseFragments.size() == 0) {// 退出到首页
-			MainIndexFragment mainIndexFragment=new MainIndexFragment();
+			MainIndexFragment mainIndexFragment = new MainIndexFragment();
 			mainIndexFragment.setHomeTabChangListner(homeTabChangListner);
 			managers.ChangeFragment(mainIndexFragment);
-			// managers.BackPress(this);
 
 		} else {
 			BaseFragment f = baseFragments.get(baseFragments.size() - 1);
-
 			FragmentTransaction ft = manager.beginTransaction();
 			ft.addToBackStack(null);
 			ft.remove(f);
@@ -487,7 +486,6 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	@Override
 	public void onItemClick(AdapterView<?> parent, View arg1, int position,
 			long id) {
-
 
 		if (!mSlideMenuLayout.getLeftSlideMenuEnabled()) {
 			return;

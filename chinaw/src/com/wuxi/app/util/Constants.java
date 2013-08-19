@@ -1,7 +1,5 @@
 package com.wuxi.app.util;
 
-import java.util.StringTokenizer;
-
 import android.os.Environment;
 
 /**
@@ -467,6 +465,9 @@ public class Constants {
 	 * @author wanglu 泰得利通 Sharepreference 保存常量
 	 */
 	public static final class SharepreferenceKey {
+		
+		
+		public static final String LAST_LOGIN_TIME="last_login_time";//上一次登录时间
 		/**
 		 * shareprefer名称
 		 */
@@ -479,6 +480,9 @@ public class Constants {
 
 		public static final String REFRESHTOKEN = "refreshToken";
 
+		/**
+		 * 登录用户名
+		 */
 		public static final String USERNAME = "userName";
 
 		/**

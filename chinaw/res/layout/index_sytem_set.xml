@@ -8,14 +8,13 @@
     <include
         android:layout_width="fill_parent"
         android:layout_height="0dip"
-        layout="@layout/child_fragmend_header_layout" 
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        layout="@layout/child_fragmend_header_layout" />
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="0dip"
-        android:layout_weight="9"
-         >
+        android:layout_weight="9" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -56,7 +55,7 @@
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="2dip"
-                    android:background="#E2E2E2" /> -->
+                    android:background="#E2E2E2" />
 
                 <RelativeLayout
                     android:id="@+id/sys_clear_cache"
@@ -82,8 +81,9 @@
                         android:textColor="#646464"
                         android:textSize="12sp" />
                 </RelativeLayout>
- 
-            <!--     <View
+
+                <!--
+                <View
                     android:layout_width="fill_parent"
                     android:layout_height="2dip"
                     android:background="#E2E2E2" />
@@ -109,8 +109,8 @@
                         android:layout_alignParentRight="true"
                         android:src="@drawable/systemset_na" />
                 </RelativeLayout>
- -->
-               <!--  <View
+
+                <View
                     android:layout_width="fill_parent"
                     android:layout_height="2dip"
                     android:background="#E2E2E2" />
@@ -136,8 +136,8 @@
                         android:layout_alignParentRight="true"
                         android:src="@drawable/systemset_na" />
                 </RelativeLayout>
- -->
-               <!--  <View
+
+                <View
                     android:layout_width="fill_parent"
                     android:layout_height="2dip"
                     android:background="#E2E2E2" />
@@ -163,7 +163,8 @@
                         android:layout_alignParentRight="true"
                         android:src="@drawable/systemset_na" />
                 </RelativeLayout>
- -->
+                -->
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="2dip"
@@ -248,7 +249,8 @@
                         android:src="@drawable/systemset_na" />
                 </RelativeLayout>
 
-              <!--   <View
+                <!--
+                <View
                     android:layout_width="fill_parent"
                     android:layout_height="2dip"
                     android:background="#E2E2E2" />
@@ -273,9 +275,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:src="@drawable/systemset_na" />
-                </RelativeLayout> -->
-
-               <!--  <View
+                </RelativeLayout>
+                <View
                     android:layout_width="fill_parent"
                     android:layout_height="2dip"
                     android:background="#E2E2E2" />
@@ -300,7 +301,38 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:src="@drawable/systemset_na" />
-                </RelativeLayout> -->
+                </RelativeLayout>
+                -->
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dip"
+                    android:background="#E2E2E2" />
+
+                <RelativeLayout
+                    android:id="@+id/sys_log_out"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="20dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="注销账号"
+                        android:textColor="#646464"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_user"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="未登录"
+                        android:textColor="#646464"
+                        android:textSize="12sp" />
+                </RelativeLayout>
             </LinearLayout>
 
             <View
