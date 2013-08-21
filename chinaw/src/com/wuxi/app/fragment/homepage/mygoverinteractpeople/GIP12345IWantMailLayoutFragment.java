@@ -34,6 +34,7 @@ import com.wuxi.exception.NetException;
  * @author 智佳 杨宸
  * 
  */
+@SuppressLint("ShowToast")
 public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 		OnClickListener, OnCheckedChangeListener {
 	protected View view;
@@ -66,16 +67,12 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 	EditText title_editText;
 	EditText content_editText;
 
-	ImageButton upload;
 	ImageButton send;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
-			String tip = "";
-
 			if (msg.obj != null) {
-				tip = msg.obj.toString();
 			}
 			switch (msg.what) {
 			case SEND_SUCCESS:
@@ -113,6 +110,7 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 
 		mailBoxType = (Spinner) view
 				.findViewById(R.id.gip_12345_iwantmail_spinner_type);
+		@SuppressWarnings("rawtypes")
 		ArrayAdapter mailBoxType_Spinner_adapter = ArrayAdapter
 				.createFromResource(context, R.array.mailBoxType,
 						R.layout.my_spinner_small_item);
@@ -126,8 +124,6 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 		content_editText = (EditText) view
 				.findViewById(R.id.gip_12345_iwantmail_editText_content);
 
-		upload = (ImageButton) view
-				.findViewById(R.id.gip_12345_iwantmail_imageBtn_upload);
 		send = (ImageButton) view
 				.findViewById(R.id.gip_12345_iwantmail_imageBtn_send);
 
@@ -135,8 +131,7 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 		isOpen_radioGroup.setOnCheckedChangeListener(this);
 		isReplyMail_radioGroup.setOnCheckedChangeListener(this);
 		isReplyMsg_radioGroup.setOnCheckedChangeListener(this);
-
-		upload.setOnClickListener(this);
+		
 		send.setOnClickListener(this);
 
 		mailBoxType.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -144,13 +139,11 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View view, int p,
 					long arg3) {
-				// TODO Auto-generated method stub
 				myLetter.setDoprojectid(String.valueOf((p + 1)));
 			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -160,9 +153,6 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 
-		case R.id.gip_12345_iwantmail_imageBtn_upload:
-			Toast.makeText(context, "上传附件（功能暂未实现）", 1000).show();
-			break;
 		case R.id.gip_12345_iwantmail_imageBtn_send:
 			myLetter.setAccess_token(Constants.SharepreferenceKey.TEST_ACCESSTOKEN);
 			myLetter.setTitle(title_editText.getText().toString());
@@ -170,13 +160,10 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 			try {
 				submitMyLetter();
 			} catch (NetException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (NODataException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -190,7 +177,6 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				LetterService service = new LetterService(context);
 				try {
 					if (service.submitMyLetter(myLetter)) {
@@ -200,13 +186,10 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 					}
 
 				} catch (NetException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (NODataException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

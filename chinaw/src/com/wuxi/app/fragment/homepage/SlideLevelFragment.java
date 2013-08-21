@@ -50,8 +50,10 @@ import com.wuxi.app.fragment.homepage.more.SiteMapFragment;
 import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumPostFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegislationContentFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.PepoleIdeaCollectFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceContentDetailFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
 import com.wuxi.app.fragment.search.AdvancedSearchFragment;
@@ -255,16 +257,28 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			case MYONLINEASKFRAGMENT:// 在线咨询
 				MyOnlineAskFragment myOnlineAskFragment = new MyOnlineAskFragment();
 				onAddFragment(myOnlineAskFragment, bundle);
-
 				break;
+
+			case GIP_PEOPLE_IDEA_CONTENT_FRAGMENT:// 政民互动 意见征集平台 民意征集 详情界面
+				PepoleIdeaCollectFragment peopleIdeaCollectFragment = new PepoleIdeaCollectFragment();
+				onAddFragment(peopleIdeaCollectFragment, bundle);
+				break;
+
 			case HOTREVIEW_CONTENT_FRAGMENT:// 政民互动 热点话题内容页
 				HotReviewContentFragment hotReviewContentFragment = new HotReviewContentFragment();
 				onAddFragment(hotReviewContentFragment, bundle);
 				break;
+
+			case GIP_MAYOR_MAIL_CONTENT_FRAGMENT:// 市长信箱 最新信件列表详情界面
+				GIP12345MayorMailContentFragment gip12345MayorMailContentFragment = new GIP12345MayorMailContentFragment();
+				onAddFragment(gip12345MayorMailContentFragment, bundle);
+				break;
+
 			case GIP_FOROUM_FRAGMENT:// 公众论坛帖子详细内容
 				ForumContentFragment forumContentFragment = new ForumContentFragment();
 				onAddFragment(forumContentFragment, bundle);
 				break;
+
 			case GIP_FORUM_POST_FRAGMENT:// 公众论坛发表帖子界面
 				ForumPostFragment forumPostFragment = new ForumPostFragment();
 				onAddFragment(forumPostFragment, bundle);

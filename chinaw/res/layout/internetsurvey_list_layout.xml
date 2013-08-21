@@ -9,6 +9,8 @@
         android:id="@+id/internet_content_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8sp"
+        android:layout_marginBottom="8sp"
         android:layout_marginLeft="3sp"
         android:layout_marginRight="5sp" />
 

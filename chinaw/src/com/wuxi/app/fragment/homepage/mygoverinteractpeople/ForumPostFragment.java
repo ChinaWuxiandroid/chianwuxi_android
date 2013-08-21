@@ -5,6 +5,7 @@ package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
 import org.json.JSONException;
 
+import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -28,6 +29,8 @@ import com.wuxi.exception.NetException;
  */
 public class ForumPostFragment extends BaseItemContentFragment {
 
+	private Context context = null;
+	
 	// 留言主题输入框
 	private EditText postThemeEdit = null;
 	// 留言内容输入框
@@ -37,6 +40,8 @@ public class ForumPostFragment extends BaseItemContentFragment {
 	private ImageButton postSubmitImageBtn = null;
 
 	private ForumPostService postService = null;
+	
+	private LoginDialog loginDialog = null;
 
 	/*
 	 * (non-Javadoc)
@@ -61,6 +66,9 @@ public class ForumPostFragment extends BaseItemContentFragment {
 	@Override
 	public void initUI() {
 		super.initUI();
+		
+		context = getActivity();
+		
 		initLayout();
 	}
 
@@ -69,6 +77,8 @@ public class ForumPostFragment extends BaseItemContentFragment {
 	 */
 	private void initLayout() {
 
+		loginDialog = new LoginDialog(context, baseSlideFragment);
+		
 		postThemeEdit = (EditText) view.findViewById(R.id.forum_post_name_edit);
 		postContentEdit = (EditText) view
 				.findViewById(R.id.forum_post_content_edit);
@@ -80,15 +90,10 @@ public class ForumPostFragment extends BaseItemContentFragment {
 
 			@Override
 			public void onClick(View v) {
-				ForumPostFragment forumPostFragment = new ForumPostFragment();
-				forumPostFragment.setBaseSlideFragment(forumPostFragment.baseSlideFragment);
-
-				BaseSlideFragment baseSlideFragment = ForumPostFragment.this.baseSlideFragment;
-				LoginDialog loginDialog = new LoginDialog(getActivity(),
-						baseSlideFragment);
 
 				if (!loginDialog.checkLogin()) {
-					loginDialog.showDialog();
+//					loginDialog.showDialog();
+					Toast.makeText(context, "您未登录，不能发帖，请先登录，谢谢！", Toast.LENGTH_SHORT).show();
 				} else {
 					String theme = postThemeEdit.getText().toString();
 					String content = postContentEdit.getText().toString();

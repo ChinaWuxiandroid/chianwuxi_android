@@ -12,6 +12,11 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 
 public class GIPMineSuggestionPlatformFragment extends RadioButtonChangeFragment{
 
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private final  int[] radioButtonIds={
 			R.id.gip_mine_suggestion_radioButton_internetsurvy,
 			R.id.gip_mine_suggestion_radioButton_peoplewill,
@@ -37,31 +42,26 @@ public class GIPMineSuggestionPlatformFragment extends RadioButtonChangeFragment
 
 	@Override
 	protected int getLayoutId() {
-		// TODO Auto-generated method stub
 		return R.layout.gip_mine_suggestionplatform_layout;
 	}
 
 	@Override
 	protected int getRadioGroupId() {
-		// TODO Auto-generated method stub
 		return R.id.gip_mine_suggestion_radioGroup;
 	}
 
 	@Override
 	protected int[] getRadioButtonIds() {
-		// TODO Auto-generated method stub
 		return radioButtonIds;
 	}
 
 	@Override
 	protected int getContentFragmentId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	protected void init() {
-		// TODO Auto-generated method stub
 		
 	}
 }

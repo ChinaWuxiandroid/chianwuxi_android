@@ -301,8 +301,8 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 		// 问卷调查类帖子数据显示
 		else if (forum.getViewpath().equals("/SurveryContent")) {
 		
-			content_text.setVisibility(View.GONE);
-			post_scrollview.setVisibility(View.GONE);
+			content_text.setText("该页面还无法显示");
+//			post_scrollview.setVisibility(View.GONE);
 
 			sentpepole_text.setText(questionnairePostWrapper.getAuthor());
 			begintime_text.setText(questionnairePostWrapper.getCreateDate());
@@ -320,31 +320,29 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 			questionnaire_question_layout = (LinearLayout) view.findViewById(R.id.questionnaire_question_layout);
 			
 			questionnaireQuestionWrappers = questionnairePostWrapper.getQuestionnaireQuestionWrappers();
-			for (QuestionnaireQuestionWrapper wrapper:questionnaireQuestionWrappers) {
-				LinearLayout subLayout = null;
-				if (wrapper.getQuestionType().equals("RADIO")) {
-					subLayout = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.forum_post_list_layout, null).findViewById(R.id.forum_post_linearlayout);
-					TextView textView = (TextView) subLayout.getChildAt(0);
-					LinearLayout linearLayout = (LinearLayout) subLayout.getChildAt(1);
-					
-					textView.setText(wrapper.getDescription());
-					
-					RadioGroup radioGroup = new RadioGroup(context);
-					
-					System.out.println("cdcdcdcdcdc:"+wrapper.getOptionCount());
-					
-					questionnaireQuestions= wrapper.getQuestionnaireQuestions();
-					
-					for (int i = 0; i < Integer.valueOf(wrapper.getOptionCount()); i++) {
-						RadioButton radioButton = new RadioButton(context);
-						radioButton.setText("AAAAA");
-						radioButton.setTextSize(10);
-						radioGroup.addView(radioButton);
-					}
-					linearLayout.addView(radioGroup);
-					questionnaire_question_layout.addView(subLayout);
-				}
-			}
+//			for (QuestionnaireQuestionWrapper wrapper:questionnaireQuestionWrappers) {
+//				LinearLayout subLayout = null;
+//				if (wrapper.getQuestionType().equals("RADIO")) {
+//					subLayout = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.forum_post_list_layout, null).findViewById(R.id.forum_post_linearlayout);
+//					TextView textView = (TextView) subLayout.getChildAt(0);
+//					LinearLayout linearLayout = (LinearLayout) subLayout.getChildAt(1);
+//					
+//					textView.setText(wrapper.getDescription());
+//					
+//					RadioGroup radioGroup = new RadioGroup(context);
+//								
+//					questionnaireQuestions= wrapper.getQuestionnaireQuestions();
+//					
+//					for (int i = 0; i < Integer.valueOf(wrapper.getOptionCount()); i++) {
+//						RadioButton radioButton = new RadioButton(context);
+//						radioButton.setText("AAAAA");
+//						radioButton.setTextSize(10);
+//						radioGroup.addView(radioButton);
+//					}
+//					linearLayout.addView(radioGroup);
+//					questionnaire_question_layout.addView(subLayout);
+//				}
+//			}
 			
 		}
 	}

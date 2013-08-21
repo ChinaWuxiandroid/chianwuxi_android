@@ -151,7 +151,7 @@ public class GoverInterPeopleHotReviewFragment extends
 						// CacheUtil.put(menuItem.getChannelId(),
 						// titleChannels);// 缓存起来
 						hotReviews = hotReviewWrapper.getData();
-						System.out.println("获取列表成功");
+
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 
 					} else {

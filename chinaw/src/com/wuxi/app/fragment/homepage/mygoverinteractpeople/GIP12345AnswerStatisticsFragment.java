@@ -118,25 +118,21 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 	}
 	@Override
 	protected int getLayoutId() {
-		// TODO Auto-generated method stub
 		return R.layout.gip_12345_answerstati_layout;
 	}
 
 	@Override
 	protected int getRadioGroupId() {
-		// TODO Auto-generated method stub
 		return R.id.gip_12345_answerstati_radioGroup;
 	}
 
 	@Override
 	protected int[] getRadioButtonIds() {
-		// TODO Auto-generated method stub
 		return radioButtonIds;
 	}
 
 	@Override
 	protected int getContentFragmentId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	@Override
@@ -170,7 +166,6 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				list_pb.setVisibility(View.VISIBLE);
 				loadLettersReplyCountData();
 			}
@@ -222,10 +217,8 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 					handler.sendEmptyMessage(DATA_LOAD_ERROR);
 
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (NODataException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -273,10 +266,8 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 					handler.sendEmptyMessage(DATA_LOAD_ERROR);
 
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (NODataException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

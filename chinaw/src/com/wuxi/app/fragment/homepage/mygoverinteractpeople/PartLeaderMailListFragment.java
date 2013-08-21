@@ -15,6 +15,8 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -143,6 +145,7 @@ public class PartLeaderMailListFragment extends BaseFragment {
 			Toast.makeText(context, "对不起，暂无信息", 2000).show();
 		} else {
 			mListView.setAdapter(adapter);
+			mListView.setOnItemClickListener(adapter);
 		}
 	}
 
@@ -152,7 +155,7 @@ public class PartLeaderMailListFragment extends BaseFragment {
 	 * @author 智佳 罗森
 	 * 
 	 */
-	private class PortLeaderListAdapter extends BaseAdapter {
+	private class PortLeaderListAdapter extends BaseAdapter implements OnItemClickListener{
 
 		@Override
 		public int getCount() {
@@ -193,6 +196,12 @@ public class PartLeaderMailListFragment extends BaseFragment {
 			holder.portNameText.setText(leaderMails.get(position).getDepname());
 
 			return convertView;
+		}
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			Toast.makeText(context, "该功能暂未实现", Toast.LENGTH_SHORT).show();
 		}
 
 	}

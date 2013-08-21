@@ -5,10 +5,13 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -18,21 +21,28 @@ import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.engine.PoliticsService;
+import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.PoliticsWrapper;
+import com.wuxi.domain.PoliticsWrapper.Politics;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
-
 /**
- * 我的政民互动  主Fragment  之 征求意见平台  子fragment  --民意征集
+ * 我的政民互动 主Fragment 之 征求意见平台 子fragment --民意征集
+ * 
  * @author 杨宸 智佳
  * */
 
+@SuppressLint("ShowToast")
+public class GIPSuggestPeopleWill extends RadioButtonChangeFragment {
 
-public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private ListView mListView;
 	private ProgressBar list_pb;
@@ -42,15 +52,14 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 	private static final int DATA__LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
 
-	public final int POLITICS_TYPE=1;    //politics类型，接口里0 为立法征集，1 为民意征集
-	private int startIndex=0;         //获取话题的起始坐标
-	private int endIndex=5;			//获取话题的结束坐标
-	private int passed=0;         //是否过期，可选参数，默认值是0    0: 当前      1:以往
+	public final int POLITICS_TYPE = 1; // politics类型，接口里0 为立法征集，1 为民意征集
+	private int startIndex = 0; // 获取话题的起始坐标
+	private int endIndex = 5; // 获取话题的结束坐标
+	private int passed = 0; // 是否过期，可选参数，默认值是0 0: 当前 1:以往
 
-	private final  int[] radioButtonIds={
+	private final int[] radioButtonIds = {
 			R.id.gip_suggest_peoplewill_radioButton_now,
-			R.id.gip_suggest_peoplewill_radioButton_before
-	};
+			R.id.gip_suggest_peoplewill_radioButton_before };
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -79,55 +88,51 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 		switch (checkedId) {
 
 		case R.id.gip_suggest_peoplewill_radioButton_now:
-			passed=0;
+			passed = 0;
 			init();
 			break;
 
-		case R.id.gip_suggest_peoplewill_radioButton_before:	
-			passed=1;
+		case R.id.gip_suggest_peoplewill_radioButton_before:
+			passed = 1;
 			init();
-//			MainMineFragment suggestionPlatformFragment=new GIPMineSuggestionPlatformFragment();
-//			onTransaction(suggestionPlatformFragment);
 			break;
 		}
 	}
 
 	@Override
 	protected int getLayoutId() {
-		// TODO Auto-generated method stub
 		return R.layout.gip_suggest_peoplewill_layout;
 	}
 
 	@Override
 	protected int getRadioGroupId() {
-		// TODO Auto-generated method stub
 		return R.id.gip_suggest_peoplewill_radioGroup;
 	}
 
 	@Override
 	protected int[] getRadioButtonIds() {
-		// TODO Auto-generated method stub
 		return radioButtonIds;
 	}
 
 	@Override
 	protected int getContentFragmentId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	protected void init() {
 
-		mListView=(ListView) view.findViewById(R.id.gip_suggest_peoplewill_listview);
-		list_pb=(ProgressBar)view.findViewById(R.id.gip_suggest_peoplewill_listview_pb);
+		mListView = (ListView) view
+				.findViewById(R.id.gip_suggest_peoplewill_listview);
+		list_pb = (ProgressBar) view
+				.findViewById(R.id.gip_suggest_peoplewill_listview_pb);
 
 		list_pb.setVisibility(View.VISIBLE);
 		loadData();
 
 	}
 
-	public void loadData(){
+	public void loadData() {
 
 		new Thread(new Runnable() {
 
@@ -136,10 +141,11 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 
 				PoliticsService politicsService = new PoliticsService(context);
 				try {
-					politicsWrapper = politicsService.getPoliticsWrapper(Constants.Urls.POLITICS_LIST_URL,POLITICS_TYPE,startIndex,endIndex,passed);
+					politicsWrapper = politicsService.getPoliticsWrapper(
+							Constants.Urls.POLITICS_LIST_URL, POLITICS_TYPE,
+							startIndex, endIndex, passed);
 					if (null != politicsWrapper) {
-						//						CacheUtil.put(menuItem.getChannelId(), titleChannels);// 缓存起来
-						politics=politicsWrapper.getData();
+						politics = politicsWrapper.getData();
 						System.out.println("获取列表成功");
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 
@@ -157,45 +163,47 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 					handler.sendEmptyMessage(DATA_LOAD_ERROR);
 
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (NODataException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-		}
-				).start();
+		}).start();
 	}
 
+	public void showPoloticsList() {
+		BaseSlideFragment slideFragment = this.baseSlideFragment;
 
-	public void showPoloticsList(){
-		PoliticsListViewAdapter adapter=new PoliticsListViewAdapter();
-		if(politics==null||politics.size()==0){
+		PoliticsListViewAdapter adapter = new PoliticsListViewAdapter(
+				slideFragment);
+		if (politics == null || politics.size() == 0) {
 			Toast.makeText(context, "对不起，暂无热点话题信息", 2000).show();
-		}
-		else{
+		} else {
 			mListView.setAdapter(adapter);
+			mListView.setOnItemClickListener(adapter);
 		}
 	}
 
-	public class PoliticsListViewAdapter extends BaseAdapter{
+	public class PoliticsListViewAdapter extends BaseAdapter implements
+			OnItemClickListener {
+		BaseSlideFragment slideFragment = null;
+
+		public PoliticsListViewAdapter(BaseSlideFragment baseSlideFragment) {
+			this.slideFragment = baseSlideFragment;
+		}
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return politics.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return politics.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 
@@ -208,9 +216,8 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
 			ViewHolder viewHolder = null;
-			if(convertView==null){
+			if (convertView == null) {
 				convertView = mInflater.inflate(
 						R.layout.gip_suggest_peopelwill_listview_item, null);
 
@@ -226,15 +233,28 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment{
 						.findViewById(R.id.gip_suggest_peoplewill_textview_depname);
 
 				convertView.setTag(viewHolder);
-			}
-			else {
+			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
 			viewHolder.title_text.setText(politics.get(position).getTitle());
-			viewHolder.beginTime_text.setText(politics.get(position).getBeginTime());
-			viewHolder.endTime_text.setText(politics.get(position).getEndTime());
-			//			viewHolder.depName_text.setText(politics.get(position).ge);
+			viewHolder.beginTime_text.setText(politics.get(position)
+					.getBeginTime());
+			viewHolder.endTime_text
+					.setText(politics.get(position).getEndTime());
 			return convertView;
+		}
+
+		@Override
+		public void onItemClick(AdapterView<?> adapterView, View arg1,
+				int position, long arg3) {
+			Politics politics = (Politics) adapterView
+					.getItemAtPosition(position);
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("politics", politics);
+
+			slideFragment.slideLinstener.replaceFragment(null, position,
+					Constants.FragmentName.GIP_PEOPLE_IDEA_CONTENT_FRAGMENT,
+					bundle);
 		}
 
 	}

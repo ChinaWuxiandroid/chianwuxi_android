@@ -1,5 +1,6 @@
 package com.wuxi.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class LetterWrapper extends CommonDataWrapper{
@@ -13,7 +14,14 @@ public class LetterWrapper extends CommonDataWrapper{
 		this.data = data;
 	}
 
-	public class Letter{
+	public class Letter implements Serializable{
+		
+		
+		/**
+		 * serialVersionUID
+		 */
+		private static final long serialVersionUID = 1L;
+		
 		private String id;   //信件主键
 		private String type;  //信件类型  包括 咨询  求助 投诉 。。。
 		private String title;  //标题
