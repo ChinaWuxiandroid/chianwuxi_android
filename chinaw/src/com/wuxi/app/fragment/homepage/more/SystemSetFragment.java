@@ -26,6 +26,7 @@ import com.wuxi.app.engine.UpdateInfoService;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.app.util.TextFormateUtil;
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.UpdateInfo;
@@ -43,8 +44,8 @@ public class SystemSetFragment extends BaseSlideFragment implements
 	private static final String TAG = "SystemSetFragment";
 	private RelativeLayout sys_menu_set, sys_clear_cache, sys_score, sys_share,
 			sys_idea, sys_software_update, sys_about_us, sys_site_map,
-			sys_use_help, sys_join_twiiter;
-	private TextView tv_verison, tv_cache;
+			sys_use_help, sys_join_twiiter, sys_log_out;
+	private TextView tv_verison, tv_cache, tv_user;
 	private UpdateInfo updateInfo;
 	private ProgressDialog pd;
 	private boolean isLoading = false;
@@ -86,10 +87,16 @@ public class SystemSetFragment extends BaseSlideFragment implements
 				.findViewById(R.id.sys_software_update);
 		sys_about_us = (RelativeLayout) view.findViewById(R.id.sys_about_us);
 		sys_site_map = (RelativeLayout) view.findViewById(R.id.sys_site_map);
+		sys_log_out = (RelativeLayout) view.findViewById(R.id.sys_log_out);
+		sys_log_out.setOnClickListener(this);
 		// sys_use_help = (RelativeLayout) view.findViewById(R.id.sys_use_help);
 		// sys_join_twiiter = (RelativeLayout) view
 		// .findViewById(R.id.sys_join_twiiter);
 		tv_verison = (TextView) view.findViewById(R.id.tv_verison);
+		tv_user = (TextView) view.findViewById(R.id.tv_user);
+
+	
+		// if(System.get)
 		sys_menu_set.setOnClickListener(this);
 
 		sys_clear_cache.setOnClickListener(this);
@@ -108,6 +115,7 @@ public class SystemSetFragment extends BaseSlideFragment implements
 		 */
 
 		tv_verison.setText(getVersion());
+		initLoginUser();
 
 		pd = new ProgressDialog(context);
 
@@ -146,7 +154,28 @@ public class SystemSetFragment extends BaseSlideFragment implements
 					Constants.FragmentName.SITEMAP_FRAGMENT, null);
 
 			break;
+		case R.id.sys_log_out:// 注销
+			if (SystemUtil.getLoginUser(context).equals("")) {
+				Toast.makeText(context, "您还未登录 ", Toast.LENGTH_SHORT).show();
+				return;
+			}
 
+			SystemUtil.logout(context);
+			Toast.makeText(context, "注销成功", Toast.LENGTH_SHORT).show();
+			initLoginUser();
+			break;
+
+		}
+	}
+
+	
+	
+	private void  initLoginUser(){
+		String loginUser = SystemUtil.getLoginUser(context);
+		if (!loginUser.equals("")) {
+			tv_user.setText(loginUser);
+		} else {
+			tv_user.setText("未登录");
 		}
 	}
 

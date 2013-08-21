@@ -444,11 +444,9 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			MainIndexFragment mainIndexFragment = new MainIndexFragment();
 			mainIndexFragment.setHomeTabChangListner(homeTabChangListner);
 			managers.ChangeFragment(mainIndexFragment);
-			// managers.BackPress(this);
 
 		} else {
 			BaseFragment f = baseFragments.get(baseFragments.size() - 1);
-
 			FragmentTransaction ft = manager.beginTransaction();
 			ft.addToBackStack(null);
 			ft.remove(f);
