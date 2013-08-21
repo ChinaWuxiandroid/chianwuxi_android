@@ -1,0 +1,2537 @@
+android.support.v4.app.BackStackState
+android.support.v4.app.BackStackState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.Fragment$SavedState
+android.support.v4.app.Fragment$SavedState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.FragmentActivity
+android.support.v4.app.FragmentActivity: FragmentActivity()
+android.support.v4.app.FragmentManagerState
+android.support.v4.app.FragmentManagerState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.FragmentState
+android.support.v4.app.FragmentState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.FragmentTabHost
+android.support.v4.app.FragmentTabHost: FragmentTabHost(android.content.Context,android.util.AttributeSet)
+android.support.v4.app.FragmentTabHost$SavedState
+android.support.v4.app.FragmentTabHost$SavedState: android.os.Parcelable$Creator CREATOR
+android.support.v4.content.FileProvider
+android.support.v4.content.ModernAsyncTask$Status: android.support.v4.content.ModernAsyncTask$Status[] values()
+android.support.v4.content.ModernAsyncTask$Status: android.support.v4.content.ModernAsyncTask$Status valueOf(java.lang.String)
+android.support.v4.view.PagerTabStrip
+android.support.v4.view.PagerTabStrip: PagerTabStrip(android.content.Context,android.util.AttributeSet)
+android.support.v4.view.PagerTitleStrip
+android.support.v4.view.PagerTitleStrip: PagerTitleStrip(android.content.Context,android.util.AttributeSet)
+android.support.v4.view.ViewPager
+android.support.v4.view.ViewPager: ViewPager(android.content.Context)
+android.support.v4.view.ViewPager: ViewPager(android.content.Context,android.util.AttributeSet)
+android.support.v4.view.ViewPager$LayoutParams
+android.support.v4.view.ViewPager$LayoutParams: ViewPager$LayoutParams(android.content.Context,android.util.AttributeSet)
+android.support.v4.view.ViewPager$SavedState
+android.support.v4.view.ViewPager$SavedState: android.os.Parcelable$Creator CREATOR
+android.support.v4.widget.DrawerLayout
+android.support.v4.widget.DrawerLayout: DrawerLayout(android.content.Context,android.util.AttributeSet)
+android.support.v4.widget.DrawerLayout: DrawerLayout(android.content.Context,android.util.AttributeSet,int)
+android.support.v4.widget.DrawerLayout$LayoutParams
+android.support.v4.widget.DrawerLayout$LayoutParams: DrawerLayout$LayoutParams(android.content.Context,android.util.AttributeSet)
+android.support.v4.widget.DrawerLayout$SavedState
+android.support.v4.widget.DrawerLayout$SavedState: android.os.Parcelable$Creator CREATOR
+android.support.v4.widget.SlidingPaneLayout
+android.support.v4.widget.SlidingPaneLayout: SlidingPaneLayout(android.content.Context,android.util.AttributeSet)
+android.support.v4.widget.SlidingPaneLayout: SlidingPaneLayout(android.content.Context,android.util.AttributeSet,int)
+android.support.v4.widget.SlidingPaneLayout$LayoutParams
+android.support.v4.widget.SlidingPaneLayout$LayoutParams: SlidingPaneLayout$LayoutParams(android.content.Context,android.util.AttributeSet)
+android.support.v4.widget.SlidingPaneLayout$SavedState
+android.support.v4.widget.SlidingPaneLayout$SavedState: android.os.Parcelable$Creator CREATOR
+com.baidu.location.Jni
+com.baidu.location.Jni: java.lang.String a(byte[],int)
+com.baidu.location.Jni: java.lang.String b(double,double,int,int)
+com.baidu.location.f
+com.baidu.location.f$c$a
+com.baidu.location.i$b
+com.baidu.mapapi.map.MapView
+com.baidu.mapapi.map.MapView: MapView(android.content.Context,android.util.AttributeSet,int)
+com.baidu.mapapi.map.MapView: MapView(android.content.Context,android.util.AttributeSet)
+com.baidu.mapapi.map.MapView: MapView(android.content.Context)
+com.baidu.mapapi.map.MapView$LayoutParams
+com.baidu.mapapi.map.MapView$LayoutParams: MapView$LayoutParams(android.content.Context,android.util.AttributeSet)
+com.baidu.mapapi.search.PlaceCaterActivity
+com.baidu.platform.comapi.map.MapRenderer
+com.baidu.platform.comapi.map.MapRenderer: void nativeInit()
+com.baidu.platform.comapi.map.MapRenderer: void nativeResize(int,int,int,int,int)
+com.baidu.platform.comapi.map.MapRenderer: void nativeRender(int)
+com.baidu.platform.comjni.base.location.JNILocation
+com.baidu.platform.comjni.base.location.JNILocation: int Create()
+com.baidu.platform.comjni.base.location.JNILocation: boolean CoordinateEncryptEx(int,float,float,android.os.Bundle,java.lang.String)
+com.baidu.platform.comjni.base.userdatacollect.JNIUserdataCollect
+com.baidu.platform.comjni.base.userdatacollect.JNIUserdataCollect: int Create()
+com.baidu.platform.comjni.base.userdatacollect.JNIUserdataCollect: int Release(int)
+com.baidu.platform.comjni.base.userdatacollect.JNIUserdataCollect: boolean CreateUDC(int,java.lang.String,android.os.Bundle)
+com.baidu.platform.comjni.base.userdatacollect.JNIUserdataCollect: void AppendRecord(int,java.lang.String,java.lang.String)
+com.baidu.platform.comjni.base.userdatacollect.JNIUserdataCollect: void Save(int)
+com.baidu.platform.comjni.engine.JNIEngine
+com.baidu.platform.comjni.engine.JNIEngine: int initClass(java.lang.Object,int)
+com.baidu.platform.comjni.engine.JNIEngine: boolean InitEngine(android.os.Bundle)
+com.baidu.platform.comjni.engine.JNIEngine: boolean UnInitEngine()
+com.baidu.platform.comjni.engine.JNIEngine: void SetProxyInfo(java.lang.String,int)
+com.baidu.platform.comjni.engine.JNIEngine: boolean StartSocketProc()
+com.baidu.platform.comjni.engine.JNIEngine: boolean GetFlaxLength(android.os.Bundle)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: int Create()
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: int SetCallback(int,com.baidu.platform.comjni.map.basemap.BaseMapCallback)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: int Release(int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: boolean Init(int,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,int,int,int,int,int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: void OnPause(int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: void OnResume(int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: void ResetImageRes(int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: void SetMapStatus(int,android.os.Bundle)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: android.os.Bundle GetMapStatus(int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: void ShowSatelliteMap(int,boolean)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: void ShowTrafficMap(int,boolean)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: void ShowLayers(int,int,boolean)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: void SetLayersClickable(int,int,boolean)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: void UpdateLayers(int,int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: int AddLayer(int,int,int,java.lang.String)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: int RemoveLayer(int,int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: void ClearLayer(int,int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: java.lang.String GetNearlyObjID(int,int,int,int,int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: java.lang.String ScrPtToGeoPoint(int,int,int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: java.lang.String GeoPtToScrPoint(int,int,int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: void SaveScreenToLocal(int,java.lang.String)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: boolean OnRecordAdd(int,int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: boolean OnRecordStart(int,int,boolean,int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: boolean OnRecordSuspend(int,int,boolean,int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: boolean OnRecordRemove(int,int,boolean)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: java.lang.String OnRecordGetAll(int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: java.lang.String OnRecordGetAt(int,int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: boolean OnRecordImport(int,boolean)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: java.lang.String OnHotcityGet(int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: java.lang.String OnSchcityGet(int,java.lang.String)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: void MoveToScrPoint(int,int,int)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: void AddPopupData(int,android.os.Bundle)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: void AddItemData(int,android.os.Bundle)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: boolean RemoveItemData(int,android.os.Bundle)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: void AddLogoData(int,android.os.Bundle)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: int AddGeometryData(int,android.os.Bundle)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: boolean RemoveGeometryData(int,android.os.Bundle)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: int AddTextData(int,android.os.Bundle)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: boolean RemoveTextData(int,android.os.Bundle)
+com.baidu.platform.comjni.map.basemap.JNIBaseMap: int MapProc(int,int,int,int)
+com.baidu.platform.comjni.map.commonmemcache.JNICommonMemCache
+com.baidu.platform.comjni.map.commonmemcache.JNICommonMemCache: int Create()
+com.baidu.platform.comjni.map.commonmemcache.JNICommonMemCache: int Release(int)
+com.baidu.platform.comjni.map.commonmemcache.JNICommonMemCache: void Init(int,android.os.Bundle)
+com.baidu.platform.comjni.map.search.JNISearch
+com.baidu.platform.comjni.map.search.JNISearch: int Create()
+com.baidu.platform.comjni.map.search.JNISearch: int QueryInterface(int)
+com.baidu.platform.comjni.map.search.JNISearch: int Release(int)
+com.baidu.platform.comjni.map.search.JNISearch: java.lang.String GetSearchResult(int,int)
+com.baidu.platform.comjni.map.search.JNISearch: boolean ForceSearchByCityName(int,android.os.Bundle)
+com.baidu.platform.comjni.map.search.JNISearch: boolean AreaMultiSearch(int,android.os.Bundle)
+com.baidu.platform.comjni.map.search.JNISearch: boolean AreaSearch(int,android.os.Bundle)
+com.baidu.platform.comjni.map.search.JNISearch: boolean RoutePlanByBus(int,android.os.Bundle)
+com.baidu.platform.comjni.map.search.JNISearch: boolean RoutePlanByCar(int,android.os.Bundle)
+com.baidu.platform.comjni.map.search.JNISearch: boolean RoutePlanByFoot(int,android.os.Bundle)
+com.baidu.platform.comjni.map.search.JNISearch: boolean POIDetailSearchPlace(int,java.lang.String)
+com.baidu.platform.comjni.map.search.JNISearch: boolean BusLineDetailSearch(int,java.lang.String,java.lang.String)
+com.baidu.platform.comjni.map.search.JNISearch: boolean SuggestionSearch(int,android.os.Bundle)
+com.baidu.platform.comjni.map.search.JNISearch: boolean ReverseGeocodeSearch(int,int,int)
+com.baidu.platform.comjni.map.search.JNISearch: boolean geocode(int,java.lang.String,java.lang.String)
+com.baidu.platform.comjni.map.search.JNISearch: boolean MapBoundSearch(int,android.os.Bundle)
+com.baidu.platform.comjni.map.search.JNISearch: boolean GeoSearch(int,android.os.Bundle)
+com.baidu.platform.comjni.map.search.JNISearch: boolean GeoDetailSearch(int,android.os.Bundle)
+com.baidu.platform.comjni.permissioncheck.PermissionCheck
+com.baidu.platform.comjni.permissioncheck.PermissionCheck: boolean check(java.lang.String,java.lang.String)
+com.baidu.platform.comjni.tools.JNITools
+com.baidu.platform.comjni.tools.JNITools: boolean TransGeoStr2Pt(java.lang.Object)
+com.baidu.platform.comjni.tools.JNITools: void TransNodeStr2Pt(java.lang.Object)
+com.baidu.platform.comjni.tools.JNITools: boolean TransGeoStr2ComplexPt(java.lang.Object)
+com.baidu.platform.comjni.tools.JNITools: void GetDistanceByMC(java.lang.Object)
+com.baidu.platform.comjni.tools.ParcelItem
+com.baidu.platform.comjni.tools.ParcelItem: android.os.Parcelable$Creator a
+com.baidu.vi.VDeviceAPI
+com.baidu.vi.VDeviceAPI: void onNetworkStateChanged()
+com.baidu.vi.VMsg
+com.baidu.vi.VMsg: void OnUserCommand(int,int,int)
+com.google.gson.FieldNamingPolicy: com.google.gson.FieldNamingPolicy[] values()
+com.google.gson.FieldNamingPolicy: com.google.gson.FieldNamingPolicy valueOf(java.lang.String)
+com.google.gson.LongSerializationPolicy: com.google.gson.LongSerializationPolicy[] values()
+com.google.gson.LongSerializationPolicy: com.google.gson.LongSerializationPolicy valueOf(java.lang.String)
+com.google.gson.stream.JsonScope: com.google.gson.stream.JsonScope[] values()
+com.google.gson.stream.JsonScope: com.google.gson.stream.JsonScope valueOf(java.lang.String)
+com.google.gson.stream.JsonToken: com.google.gson.stream.JsonToken[] values()
+com.google.gson.stream.JsonToken: com.google.gson.stream.JsonToken valueOf(java.lang.String)
+com.wuxi.app.MainActivity
+com.wuxi.app.MainActivity: MainActivity()
+com.wuxi.app.MainActivity: void onClick(android.view.View)
+com.wuxi.app.util.Constants$FragmentName: com.wuxi.app.util.Constants$FragmentName[] values()
+com.wuxi.app.util.Constants$FragmentName: com.wuxi.app.util.Constants$FragmentName valueOf(java.lang.String)
+com.wuxi.app.view.DynamicTitleLayout
+com.wuxi.app.view.DynamicTitleLayout: DynamicTitleLayout(android.content.Context,android.util.AttributeSet)
+com.wuxi.app.view.DynamicTitleLayout: DynamicTitleLayout(android.content.Context,android.util.AttributeSet,int)
+com.wuxi.app.view.MyGridView
+com.wuxi.app.view.MyGridView: MyGridView(android.content.Context,android.util.AttributeSet)
+com.wuxi.app.view.MyGridView: MyGridView(android.content.Context)
+com.wuxi.app.view.MyGridView: MyGridView(android.content.Context,android.util.AttributeSet,int)
+com.wuxi.app.view.MyMapView
+com.wuxi.app.view.MyMapView: MyMapView(android.content.Context)
+com.wuxi.app.view.MyMapView: MyMapView(android.content.Context,android.util.AttributeSet)
+com.wuxi.app.view.MyMapView: MyMapView(android.content.Context,android.util.AttributeSet,int)
+com.wuxi.app.view.PagerScrollView
+com.wuxi.app.view.PagerScrollView: PagerScrollView(android.content.Context,android.util.AttributeSet)
+com.wuxi.app.view.SlideMenuLayout
+com.wuxi.app.view.SlideMenuLayout: SlideMenuLayout(android.content.Context)
+com.wuxi.app.view.SlideMenuLayout: SlideMenuLayout(android.content.Context,android.util.AttributeSet)
+com.wuxi.app.view.SlideMenuLayout: SlideMenuLayout(android.content.Context,android.util.AttributeSet,int)
+com.wuxi.app.view.SlipButton
+com.wuxi.app.view.SlipButton: SlipButton(android.content.Context)
+com.wuxi.app.view.SlipButton: SlipButton(android.content.Context,android.util.AttributeSet)
+com.wuxi.app.view.TitleScrollLayout
+com.wuxi.app.view.TitleScrollLayout: TitleScrollLayout(android.content.Context,android.util.AttributeSet)
+com.wuxi.app.view.TitleScrollLayout: TitleScrollLayout(android.content.Context,android.util.AttributeSet,int)
+com.wuxi.domain.AdvancedSearchUtil
+com.wuxi.domain.AdvancedSearchUtil: long serialVersionUID
+com.wuxi.domain.AdvancedSearchUtil: java.lang.String infoType
+com.wuxi.domain.AdvancedSearchUtil: java.lang.String pageSize
+com.wuxi.domain.AdvancedSearchUtil: java.lang.String DateSearchType
+com.wuxi.domain.AdvancedSearchUtil: java.lang.String beginDate
+com.wuxi.domain.AdvancedSearchUtil: java.lang.String endDate
+com.wuxi.domain.AdvancedSearchUtil: java.lang.String contentType
+com.wuxi.domain.AdvancedSearchUtil: java.lang.String keyWord
+com.wuxi.domain.AdvancedSearchUtil: AdvancedSearchUtil()
+com.wuxi.domain.AdvancedSearchUtil: java.lang.String getInfoType()
+com.wuxi.domain.AdvancedSearchUtil: void setInfoType(java.lang.String)
+com.wuxi.domain.AdvancedSearchUtil: java.lang.String getPageSize()
+com.wuxi.domain.AdvancedSearchUtil: void setPageSize(java.lang.String)
+com.wuxi.domain.AdvancedSearchUtil: java.lang.String getBeginDate()
+com.wuxi.domain.AdvancedSearchUtil: void setBeginDate(java.lang.String)
+com.wuxi.domain.AdvancedSearchUtil: java.lang.String getEndDate()
+com.wuxi.domain.AdvancedSearchUtil: void setEndDate(java.lang.String)
+com.wuxi.domain.AdvancedSearchUtil: java.lang.String getContentType()
+com.wuxi.domain.AdvancedSearchUtil: void setContentType(java.lang.String)
+com.wuxi.domain.AdvancedSearchUtil: java.lang.String getKeyWord()
+com.wuxi.domain.AdvancedSearchUtil: void setKeyWord(java.lang.String)
+com.wuxi.domain.AdvancedSearchUtil: java.lang.String getDateSearchType()
+com.wuxi.domain.AdvancedSearchUtil: void setDateSearchType(java.lang.String)
+com.wuxi.domain.AllCount
+com.wuxi.domain.AllCount: java.lang.String name
+com.wuxi.domain.AllCount: int count
+com.wuxi.domain.AllCount: boolean isNull
+com.wuxi.domain.AllCount: AllCount()
+com.wuxi.domain.AllCount: java.lang.String getName()
+com.wuxi.domain.AllCount: void setName(java.lang.String)
+com.wuxi.domain.AllCount: int getCount()
+com.wuxi.domain.AllCount: void setCount(int)
+com.wuxi.domain.AllCount: boolean isNull()
+com.wuxi.domain.AllCount: void setNull(boolean)
+com.wuxi.domain.ApplyDept
+com.wuxi.domain.ApplyDept: long serialVersionUID
+com.wuxi.domain.ApplyDept: java.lang.String doProjectId
+com.wuxi.domain.ApplyDept: java.lang.String depId
+com.wuxi.domain.ApplyDept: java.lang.String depName
+com.wuxi.domain.ApplyDept: boolean isNull
+com.wuxi.domain.ApplyDept: java.lang.String zhinanUrl
+com.wuxi.domain.ApplyDept: ApplyDept()
+com.wuxi.domain.ApplyDept: java.lang.String getDoProjectId()
+com.wuxi.domain.ApplyDept: void setDoProjectId(java.lang.String)
+com.wuxi.domain.ApplyDept: java.lang.String getDepId()
+com.wuxi.domain.ApplyDept: void setDepId(java.lang.String)
+com.wuxi.domain.ApplyDept: java.lang.String getDepName()
+com.wuxi.domain.ApplyDept: void setDepName(java.lang.String)
+com.wuxi.domain.ApplyDept: boolean isNull()
+com.wuxi.domain.ApplyDept: void setNull(boolean)
+com.wuxi.domain.ApplyDept: java.lang.String getZhinanUrl()
+com.wuxi.domain.ApplyDept: void setZhinanUrl(java.lang.String)
+com.wuxi.domain.ApplyGover
+com.wuxi.domain.ApplyGover: boolean isNull
+com.wuxi.domain.ApplyGover: java.lang.String depId
+com.wuxi.domain.ApplyGover: java.lang.String depName
+com.wuxi.domain.ApplyGover: java.lang.String doProjectId
+com.wuxi.domain.ApplyGover: java.lang.String zhinanUrl
+com.wuxi.domain.ApplyGover: java.lang.String applyUrl
+com.wuxi.domain.ApplyGover: ApplyGover()
+com.wuxi.domain.ApplyGover: boolean isNull()
+com.wuxi.domain.ApplyGover: void setisNull(boolean)
+com.wuxi.domain.ApplyGover: java.lang.String getDepId()
+com.wuxi.domain.ApplyGover: void setDepId(java.lang.String)
+com.wuxi.domain.ApplyGover: java.lang.String getDepName()
+com.wuxi.domain.ApplyGover: void setDepName(java.lang.String)
+com.wuxi.domain.ApplyGover: java.lang.String getDoProjectId()
+com.wuxi.domain.ApplyGover: void setDoProjectId(java.lang.String)
+com.wuxi.domain.ApplyGover: java.lang.String getZhinanUrl()
+com.wuxi.domain.ApplyGover: void setZhinanUrl(java.lang.String)
+com.wuxi.domain.ApplyGover: java.lang.String getApplyUrl()
+com.wuxi.domain.ApplyGover: void setApplyUrl(java.lang.String)
+com.wuxi.domain.BBSWrapper
+com.wuxi.domain.BBSWrapper: java.util.List data
+com.wuxi.domain.BBSWrapper: BBSWrapper()
+com.wuxi.domain.BBSWrapper: java.util.List getData()
+com.wuxi.domain.BBSWrapper: void setData(java.util.List)
+com.wuxi.domain.BBSWrapper$BBS
+com.wuxi.domain.BBSWrapper$BBS: java.lang.String politicsMainID
+com.wuxi.domain.BBSWrapper$BBS: java.lang.String title
+com.wuxi.domain.BBSWrapper$BBS: int readCount
+com.wuxi.domain.BBSWrapper$BBS: boolean top
+com.wuxi.domain.BBSWrapper$BBS: java.lang.String sentuser
+com.wuxi.domain.BBSWrapper$BBS: java.lang.String doProjectID
+com.wuxi.domain.BBSWrapper$BBS: int dataNO
+com.wuxi.domain.BBSWrapper$BBS: java.lang.String beginTime
+com.wuxi.domain.BBSWrapper$BBS: java.lang.String viewpath
+com.wuxi.domain.BBSWrapper$BBS: int resultCount
+com.wuxi.domain.BBSWrapper$BBS: com.wuxi.domain.BBSWrapper this$0
+com.wuxi.domain.BBSWrapper$BBS: BBSWrapper$BBS(com.wuxi.domain.BBSWrapper)
+com.wuxi.domain.BBSWrapper$BBS: java.lang.String getPoliticsMainID()
+com.wuxi.domain.BBSWrapper$BBS: void setPoliticsMainID(java.lang.String)
+com.wuxi.domain.BBSWrapper$BBS: java.lang.String getTitle()
+com.wuxi.domain.BBSWrapper$BBS: void setTitle(java.lang.String)
+com.wuxi.domain.BBSWrapper$BBS: int getReadCount()
+com.wuxi.domain.BBSWrapper$BBS: void setReadCount(int)
+com.wuxi.domain.BBSWrapper$BBS: boolean isTop()
+com.wuxi.domain.BBSWrapper$BBS: void setTop(boolean)
+com.wuxi.domain.BBSWrapper$BBS: java.lang.String getSentuser()
+com.wuxi.domain.BBSWrapper$BBS: void setSentuser(java.lang.String)
+com.wuxi.domain.BBSWrapper$BBS: java.lang.String getDoProjectID()
+com.wuxi.domain.BBSWrapper$BBS: void setDoProjectID(java.lang.String)
+com.wuxi.domain.BBSWrapper$BBS: int getDataNO()
+com.wuxi.domain.BBSWrapper$BBS: void setDataNO(int)
+com.wuxi.domain.BBSWrapper$BBS: java.lang.String getBeginTime()
+com.wuxi.domain.BBSWrapper$BBS: void setBeginTime(java.lang.String)
+com.wuxi.domain.BBSWrapper$BBS: java.lang.String getViewpath()
+com.wuxi.domain.BBSWrapper$BBS: void setViewpath(java.lang.String)
+com.wuxi.domain.BBSWrapper$BBS: int getResultCount()
+com.wuxi.domain.BBSWrapper$BBS: void setResultCount(int)
+com.wuxi.domain.Channel
+com.wuxi.domain.Channel: long serialVersionUID
+com.wuxi.domain.Channel: java.lang.Boolean isNull
+com.wuxi.domain.Channel: java.lang.String contents
+com.wuxi.domain.Channel: com.wuxi.domain.Channel[] childrens
+com.wuxi.domain.Channel: java.lang.String channelId
+com.wuxi.domain.Channel: java.lang.String channelName
+com.wuxi.domain.Channel: int childrenChannelsCount
+com.wuxi.domain.Channel: int childrenContentsCount
+com.wuxi.domain.Channel: java.lang.Class contentFragment
+com.wuxi.domain.Channel: Channel()
+com.wuxi.domain.Channel: int getChildrenChannelsCount()
+com.wuxi.domain.Channel: void setChildrenChannelsCount(int)
+com.wuxi.domain.Channel: int getChildrenContentsCount()
+com.wuxi.domain.Channel: void setChildrenContentsCount(int)
+com.wuxi.domain.Channel: java.lang.Class getContentFragment()
+com.wuxi.domain.Channel: void setContentFragment(java.lang.Class)
+com.wuxi.domain.Channel: java.lang.Boolean getIsNull()
+com.wuxi.domain.Channel: void setIsNull(java.lang.Boolean)
+com.wuxi.domain.Channel: java.lang.String getContents()
+com.wuxi.domain.Channel: void setContents(java.lang.String)
+com.wuxi.domain.Channel: com.wuxi.domain.Channel[] getChildrens()
+com.wuxi.domain.Channel: void setChildrens(com.wuxi.domain.Channel[])
+com.wuxi.domain.Channel: java.lang.String getChannelId()
+com.wuxi.domain.Channel: void setChannelId(java.lang.String)
+com.wuxi.domain.Channel: java.lang.String getChannelName()
+com.wuxi.domain.Channel: void setChannelName(java.lang.String)
+com.wuxi.domain.CommonDataWrapper
+com.wuxi.domain.CommonDataWrapper: int start
+com.wuxi.domain.CommonDataWrapper: int end
+com.wuxi.domain.CommonDataWrapper: boolean previous
+com.wuxi.domain.CommonDataWrapper: int totalRowsAmount
+com.wuxi.domain.CommonDataWrapper: boolean next
+com.wuxi.domain.CommonDataWrapper: CommonDataWrapper()
+com.wuxi.domain.CommonDataWrapper: int getStart()
+com.wuxi.domain.CommonDataWrapper: void setStart(int)
+com.wuxi.domain.CommonDataWrapper: int getEnd()
+com.wuxi.domain.CommonDataWrapper: void setEnd(int)
+com.wuxi.domain.CommonDataWrapper: boolean isPrevious()
+com.wuxi.domain.CommonDataWrapper: void setPrevious(boolean)
+com.wuxi.domain.CommonDataWrapper: int getTotalRowsAmount()
+com.wuxi.domain.CommonDataWrapper: void setTotalRowsAmount(int)
+com.wuxi.domain.CommonDataWrapper: boolean isNext()
+com.wuxi.domain.CommonDataWrapper: void setNext(boolean)
+com.wuxi.domain.Content
+com.wuxi.domain.Content: long serialVersionUID
+com.wuxi.domain.Content: java.lang.String organization
+com.wuxi.domain.Content: java.lang.String keyword
+com.wuxi.domain.Content: boolean isNull
+com.wuxi.domain.Content: int status
+com.wuxi.domain.Content: int browseCount
+com.wuxi.domain.Content: java.lang.String title
+com.wuxi.domain.Content: int orderId
+com.wuxi.domain.Content: boolean delete
+com.wuxi.domain.Content: java.lang.String buildTime
+com.wuxi.domain.Content: java.lang.String hangingParentChannelId
+com.wuxi.domain.Content: java.lang.String localUpdateDate
+com.wuxi.domain.Content: java.lang.String contentSource
+com.wuxi.domain.Content: java.lang.String indexId
+com.wuxi.domain.Content: java.lang.String openTime
+com.wuxi.domain.Content: java.lang.String fileNum
+com.wuxi.domain.Content: java.lang.String openTimeLimit
+com.wuxi.domain.Content: java.util.StringTokenizer timeLimit
+com.wuxi.domain.Content: java.lang.String openForm
+com.wuxi.domain.Content: java.lang.String openWay
+com.wuxi.domain.Content: java.lang.String openLimits
+com.wuxi.domain.Content: java.lang.String validDate
+com.wuxi.domain.Content: java.lang.String openProgram
+com.wuxi.domain.Content: java.lang.String fist_topicword
+com.wuxi.domain.Content: java.lang.String second_topicword
+com.wuxi.domain.Content: java.lang.String genre
+com.wuxi.domain.Content: java.lang.String typeWord
+com.wuxi.domain.Content: java.lang.String upFile
+com.wuxi.domain.Content: java.lang.String docSummary
+com.wuxi.domain.Content: java.lang.String contentId
+com.wuxi.domain.Content: java.lang.String longTitle
+com.wuxi.domain.Content: boolean putTop
+com.wuxi.domain.Content: java.lang.String wapUrl
+com.wuxi.domain.Content: boolean pushWap
+com.wuxi.domain.Content: java.lang.String updateTime
+com.wuxi.domain.Content: java.lang.String parentId
+com.wuxi.domain.Content: java.lang.String publishTime
+com.wuxi.domain.Content: Content()
+com.wuxi.domain.Content: java.lang.String getPublishTime()
+com.wuxi.domain.Content: void setPublishTime(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getOrganization()
+com.wuxi.domain.Content: void setOrganization(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getKeyword()
+com.wuxi.domain.Content: void setKeyword(java.lang.String)
+com.wuxi.domain.Content: boolean isNull()
+com.wuxi.domain.Content: void setNull(boolean)
+com.wuxi.domain.Content: int getStatus()
+com.wuxi.domain.Content: void setStatus(int)
+com.wuxi.domain.Content: int getBrowseCount()
+com.wuxi.domain.Content: void setBrowseCount(int)
+com.wuxi.domain.Content: java.lang.String getTitle()
+com.wuxi.domain.Content: void setTitle(java.lang.String)
+com.wuxi.domain.Content: int getOrderId()
+com.wuxi.domain.Content: void setOrderId(int)
+com.wuxi.domain.Content: boolean isDelete()
+com.wuxi.domain.Content: void setDelete(boolean)
+com.wuxi.domain.Content: java.lang.String getBuildTime()
+com.wuxi.domain.Content: void setBuildTime(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getHangingParentChannelId()
+com.wuxi.domain.Content: void setHangingParentChannelId(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getLocalUpdateDate()
+com.wuxi.domain.Content: void setLocalUpdateDate(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getContentSource()
+com.wuxi.domain.Content: void setContentSource(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getIndexId()
+com.wuxi.domain.Content: void setIndexId(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getOpenTime()
+com.wuxi.domain.Content: void setOpenTime(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getFileNum()
+com.wuxi.domain.Content: void setFileNum(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getOpenTimeLimit()
+com.wuxi.domain.Content: void setOpenTimeLimit(java.lang.String)
+com.wuxi.domain.Content: java.util.StringTokenizer getTimeLimit()
+com.wuxi.domain.Content: void setTimeLimit(java.util.StringTokenizer)
+com.wuxi.domain.Content: java.lang.String getOpenForm()
+com.wuxi.domain.Content: void setOpenForm(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getOpenWay()
+com.wuxi.domain.Content: void setOpenWay(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getOpenLimits()
+com.wuxi.domain.Content: void setOpenLimits(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getValidDate()
+com.wuxi.domain.Content: void setValidDate(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getOpenProgram()
+com.wuxi.domain.Content: void setOpenProgram(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getFist_topicword()
+com.wuxi.domain.Content: void setFist_topicword(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getSecond_topicword()
+com.wuxi.domain.Content: void setSecond_topicword(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getGenre()
+com.wuxi.domain.Content: void setGenre(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getTypeWord()
+com.wuxi.domain.Content: void setTypeWord(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getUpFile()
+com.wuxi.domain.Content: void setUpFile(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getDocSummary()
+com.wuxi.domain.Content: void setDocSummary(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getContentId()
+com.wuxi.domain.Content: void setContentId(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getLongTitle()
+com.wuxi.domain.Content: void setLongTitle(java.lang.String)
+com.wuxi.domain.Content: boolean isPutTop()
+com.wuxi.domain.Content: void setPutTop(boolean)
+com.wuxi.domain.Content: java.lang.String getWapUrl()
+com.wuxi.domain.Content: void setWapUrl(java.lang.String)
+com.wuxi.domain.Content: boolean isPushWap()
+com.wuxi.domain.Content: void setPushWap(boolean)
+com.wuxi.domain.Content: java.lang.String getUpdateTime()
+com.wuxi.domain.Content: void setUpdateTime(java.lang.String)
+com.wuxi.domain.Content: java.lang.String getParentId()
+com.wuxi.domain.Content: void setParentId(java.lang.String)
+com.wuxi.domain.ContentType
+com.wuxi.domain.ContentType: java.lang.String name
+com.wuxi.domain.ContentType: java.lang.String id
+com.wuxi.domain.ContentType: java.lang.String doprojectid
+com.wuxi.domain.ContentType: ContentType()
+com.wuxi.domain.ContentType: ContentType(java.lang.String)
+com.wuxi.domain.ContentType: java.lang.String getName()
+com.wuxi.domain.ContentType: void setName(java.lang.String)
+com.wuxi.domain.ContentType: java.lang.String getId()
+com.wuxi.domain.ContentType: void setId(java.lang.String)
+com.wuxi.domain.ContentType: java.lang.String getDoprojectid()
+com.wuxi.domain.ContentType: void setDoprojectid(java.lang.String)
+com.wuxi.domain.ContentWrapper
+com.wuxi.domain.ContentWrapper: java.util.List contents
+com.wuxi.domain.ContentWrapper: int start
+com.wuxi.domain.ContentWrapper: int end
+com.wuxi.domain.ContentWrapper: boolean previous
+com.wuxi.domain.ContentWrapper: int totalRowsAmount
+com.wuxi.domain.ContentWrapper: boolean next
+com.wuxi.domain.ContentWrapper: ContentWrapper()
+com.wuxi.domain.ContentWrapper: int getTotalRowsAmount()
+com.wuxi.domain.ContentWrapper: void setTotalRowsAmount(int)
+com.wuxi.domain.ContentWrapper: java.util.List getContents()
+com.wuxi.domain.ContentWrapper: void setContents(java.util.List)
+com.wuxi.domain.ContentWrapper: int getStart()
+com.wuxi.domain.ContentWrapper: void setStart(int)
+com.wuxi.domain.ContentWrapper: int getEnd()
+com.wuxi.domain.ContentWrapper: void setEnd(int)
+com.wuxi.domain.ContentWrapper: boolean isPrevious()
+com.wuxi.domain.ContentWrapper: void setPrevious(boolean)
+com.wuxi.domain.ContentWrapper: boolean isNext()
+com.wuxi.domain.ContentWrapper: void setNext(boolean)
+com.wuxi.domain.Dept
+com.wuxi.domain.Dept: java.lang.String name
+com.wuxi.domain.Dept: java.lang.String id
+com.wuxi.domain.Dept: boolean isNull
+com.wuxi.domain.Dept: Dept()
+com.wuxi.domain.Dept: Dept(java.lang.String)
+com.wuxi.domain.Dept: java.lang.String getName()
+com.wuxi.domain.Dept: void setName(java.lang.String)
+com.wuxi.domain.Dept: java.lang.String getId()
+com.wuxi.domain.Dept: void setId(java.lang.String)
+com.wuxi.domain.Dept: boolean isNull()
+com.wuxi.domain.Dept: void setNull(boolean)
+com.wuxi.domain.EfficaComplain
+com.wuxi.domain.EfficaComplain: java.lang.String id
+com.wuxi.domain.EfficaComplain: java.lang.String endTime
+com.wuxi.domain.EfficaComplain: java.lang.String title
+com.wuxi.domain.EfficaComplain: java.lang.String doDpetname
+com.wuxi.domain.EfficaComplain: EfficaComplain()
+com.wuxi.domain.EfficaComplain: java.lang.String getId()
+com.wuxi.domain.EfficaComplain: void setId(java.lang.String)
+com.wuxi.domain.EfficaComplain: java.lang.String getEndTime()
+com.wuxi.domain.EfficaComplain: void setEndTime(java.lang.String)
+com.wuxi.domain.EfficaComplain: java.lang.String getTitle()
+com.wuxi.domain.EfficaComplain: void setTitle(java.lang.String)
+com.wuxi.domain.EfficaComplain: java.lang.String getDoDpetname()
+com.wuxi.domain.EfficaComplain: void setDoDpetname(java.lang.String)
+com.wuxi.domain.EfficaComplainWrapper
+com.wuxi.domain.EfficaComplainWrapper: java.util.List efficaComplains
+com.wuxi.domain.EfficaComplainWrapper: int start
+com.wuxi.domain.EfficaComplainWrapper: int end
+com.wuxi.domain.EfficaComplainWrapper: boolean next
+com.wuxi.domain.EfficaComplainWrapper: boolean previous
+com.wuxi.domain.EfficaComplainWrapper: int totalRowsAmount
+com.wuxi.domain.EfficaComplainWrapper: EfficaComplainWrapper()
+com.wuxi.domain.EfficaComplainWrapper: java.util.List getEfficaComplains()
+com.wuxi.domain.EfficaComplainWrapper: void setEfficaComplains(java.util.List)
+com.wuxi.domain.EfficaComplainWrapper: int getStart()
+com.wuxi.domain.EfficaComplainWrapper: void setStart(int)
+com.wuxi.domain.EfficaComplainWrapper: int getEnd()
+com.wuxi.domain.EfficaComplainWrapper: void setEnd(int)
+com.wuxi.domain.EfficaComplainWrapper: boolean isNext()
+com.wuxi.domain.EfficaComplainWrapper: void setNext(boolean)
+com.wuxi.domain.EfficaComplainWrapper: boolean isPrevious()
+com.wuxi.domain.EfficaComplainWrapper: void setPrevious(boolean)
+com.wuxi.domain.EfficaComplainWrapper: int getTotalRowsAmount()
+com.wuxi.domain.EfficaComplainWrapper: void setTotalRowsAmount(int)
+com.wuxi.domain.FifterContentWrapper
+com.wuxi.domain.FifterContentWrapper: java.lang.String id
+com.wuxi.domain.FifterContentWrapper: int start
+com.wuxi.domain.FifterContentWrapper: int end
+com.wuxi.domain.FifterContentWrapper: java.lang.String dept
+com.wuxi.domain.FifterContentWrapper: int year
+com.wuxi.domain.FifterContentWrapper: java.lang.String typeword
+com.wuxi.domain.FifterContentWrapper: java.lang.String zone
+com.wuxi.domain.FifterContentWrapper: FifterContentWrapper(java.lang.String)
+com.wuxi.domain.FifterContentWrapper: FifterContentWrapper(java.lang.String,int,int,int,java.lang.String)
+com.wuxi.domain.FifterContentWrapper: FifterContentWrapper(java.lang.String,int,int,java.lang.String,int)
+com.wuxi.domain.FifterContentWrapper: FifterContentWrapper(java.lang.String,int,int,java.lang.String,int,java.lang.String,java.lang.String)
+com.wuxi.domain.FifterContentWrapper: java.lang.String getId()
+com.wuxi.domain.FifterContentWrapper: void setId(java.lang.String)
+com.wuxi.domain.FifterContentWrapper: int getStart()
+com.wuxi.domain.FifterContentWrapper: void setStart(int)
+com.wuxi.domain.FifterContentWrapper: int getEnd()
+com.wuxi.domain.FifterContentWrapper: void setEnd(int)
+com.wuxi.domain.FifterContentWrapper: java.lang.String getDept()
+com.wuxi.domain.FifterContentWrapper: void setDept(java.lang.String)
+com.wuxi.domain.FifterContentWrapper: int getYear()
+com.wuxi.domain.FifterContentWrapper: void setYear(int)
+com.wuxi.domain.FifterContentWrapper: java.lang.String getTypeword()
+com.wuxi.domain.FifterContentWrapper: void setTypeword(java.lang.String)
+com.wuxi.domain.FifterContentWrapper: java.lang.String getZone()
+com.wuxi.domain.FifterContentWrapper: void setZone(java.lang.String)
+com.wuxi.domain.ForumWrapper
+com.wuxi.domain.ForumWrapper: java.util.List forums
+com.wuxi.domain.ForumWrapper: ForumWrapper()
+com.wuxi.domain.ForumWrapper: java.util.List getForums()
+com.wuxi.domain.ForumWrapper: void setForums(java.util.List)
+com.wuxi.domain.ForumWrapper$Forum
+com.wuxi.domain.ForumWrapper$Forum: long serialVersionUID
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String id
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String title
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String beginTime
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String readCount
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String resultCount
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String sentUser
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String top
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String doProjectID
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String dataNo
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String viewpath
+com.wuxi.domain.ForumWrapper$Forum: com.wuxi.domain.ForumWrapper this$0
+com.wuxi.domain.ForumWrapper$Forum: ForumWrapper$Forum(com.wuxi.domain.ForumWrapper)
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String getTop()
+com.wuxi.domain.ForumWrapper$Forum: void setTop(java.lang.String)
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String getDoProjectID()
+com.wuxi.domain.ForumWrapper$Forum: void setDoProjectID(java.lang.String)
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String getDataNo()
+com.wuxi.domain.ForumWrapper$Forum: void setDataNo(java.lang.String)
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String getViewpath()
+com.wuxi.domain.ForumWrapper$Forum: void setViewpath(java.lang.String)
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String getId()
+com.wuxi.domain.ForumWrapper$Forum: void setId(java.lang.String)
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String getTitle()
+com.wuxi.domain.ForumWrapper$Forum: void setTitle(java.lang.String)
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String getBeginTime()
+com.wuxi.domain.ForumWrapper$Forum: void setBeginTime(java.lang.String)
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String getReadCount()
+com.wuxi.domain.ForumWrapper$Forum: void setReadCount(java.lang.String)
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String getResultCount()
+com.wuxi.domain.ForumWrapper$Forum: void setResultCount(java.lang.String)
+com.wuxi.domain.ForumWrapper$Forum: java.lang.String getSentUser()
+com.wuxi.domain.ForumWrapper$Forum: void setSentUser(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie
+com.wuxi.domain.GoverApplyOnlie: java.lang.String address
+com.wuxi.domain.GoverApplyOnlie: java.lang.String id
+com.wuxi.domain.GoverApplyOnlie: java.lang.String certificate
+com.wuxi.domain.GoverApplyOnlie: java.lang.String qlType
+com.wuxi.domain.GoverApplyOnlie: java.lang.String orgName
+com.wuxi.domain.GoverApplyOnlie: java.lang.String areaName
+com.wuxi.domain.GoverApplyOnlie: java.lang.String eventId
+com.wuxi.domain.GoverApplyOnlie: java.lang.String applyType
+com.wuxi.domain.GoverApplyOnlie: java.lang.String applyName
+com.wuxi.domain.GoverApplyOnlie: java.lang.String deptCode
+com.wuxi.domain.GoverApplyOnlie: java.lang.String linkman
+com.wuxi.domain.GoverApplyOnlie: java.lang.String tel
+com.wuxi.domain.GoverApplyOnlie: java.lang.String mobile
+com.wuxi.domain.GoverApplyOnlie: java.lang.String certificateNo
+com.wuxi.domain.GoverApplyOnlie: java.lang.String applyReason
+com.wuxi.domain.GoverApplyOnlie: java.lang.String orgId
+com.wuxi.domain.GoverApplyOnlie: java.lang.String deptId
+com.wuxi.domain.GoverApplyOnlie: java.lang.String deptName
+com.wuxi.domain.GoverApplyOnlie: java.lang.String areaId
+com.wuxi.domain.GoverApplyOnlie: java.lang.String applyTime
+com.wuxi.domain.GoverApplyOnlie: java.lang.String qlCode
+com.wuxi.domain.GoverApplyOnlie: java.lang.String qlName
+com.wuxi.domain.GoverApplyOnlie: java.lang.String sentUser
+com.wuxi.domain.GoverApplyOnlie: GoverApplyOnlie()
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getAddress()
+com.wuxi.domain.GoverApplyOnlie: void setAddress(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getId()
+com.wuxi.domain.GoverApplyOnlie: void setId(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getCertificate()
+com.wuxi.domain.GoverApplyOnlie: void setCertificate(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getQlType()
+com.wuxi.domain.GoverApplyOnlie: void setQlType(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getOrgName()
+com.wuxi.domain.GoverApplyOnlie: void setOrgName(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getAreaName()
+com.wuxi.domain.GoverApplyOnlie: void setAreaName(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getEventId()
+com.wuxi.domain.GoverApplyOnlie: void setEventId(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getApplyType()
+com.wuxi.domain.GoverApplyOnlie: void setApplyType(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getApplyName()
+com.wuxi.domain.GoverApplyOnlie: void setApplyName(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getDeptCode()
+com.wuxi.domain.GoverApplyOnlie: void setDeptCode(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getLinkman()
+com.wuxi.domain.GoverApplyOnlie: void setLinkman(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getTel()
+com.wuxi.domain.GoverApplyOnlie: void setTel(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getMobile()
+com.wuxi.domain.GoverApplyOnlie: void setMobile(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getCertificateNo()
+com.wuxi.domain.GoverApplyOnlie: void setCertificateNo(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getApplyReason()
+com.wuxi.domain.GoverApplyOnlie: void setApplyReason(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getOrgId()
+com.wuxi.domain.GoverApplyOnlie: void setOrgId(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getDeptId()
+com.wuxi.domain.GoverApplyOnlie: void setDeptId(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getDeptName()
+com.wuxi.domain.GoverApplyOnlie: void setDeptName(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getAreaId()
+com.wuxi.domain.GoverApplyOnlie: void setAreaId(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getApplyTime()
+com.wuxi.domain.GoverApplyOnlie: void setApplyTime(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getQlCode()
+com.wuxi.domain.GoverApplyOnlie: void setQlCode(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getQlName()
+com.wuxi.domain.GoverApplyOnlie: void setQlName(java.lang.String)
+com.wuxi.domain.GoverApplyOnlie: java.lang.String getSentUser()
+com.wuxi.domain.GoverApplyOnlie: void setSentUser(java.lang.String)
+com.wuxi.domain.GoverItemCount
+com.wuxi.domain.GoverItemCount: java.lang.String zone
+com.wuxi.domain.GoverItemCount: java.lang.String oid
+com.wuxi.domain.GoverItemCount: java.lang.String ouid
+com.wuxi.domain.GoverItemCount: java.lang.String ouname
+com.wuxi.domain.GoverItemCount: java.lang.String zonename
+com.wuxi.domain.GoverItemCount: java.lang.String ljjj
+com.wuxi.domain.GoverItemCount: java.lang.String ljbj
+com.wuxi.domain.GoverItemCount: java.lang.String zrsl
+com.wuxi.domain.GoverItemCount: java.lang.String zrbj
+com.wuxi.domain.GoverItemCount: java.lang.String ysl
+com.wuxi.domain.GoverItemCount: java.lang.String ybj
+com.wuxi.domain.GoverItemCount: java.lang.String sysl
+com.wuxi.domain.GoverItemCount: java.lang.String sybj
+com.wuxi.domain.GoverItemCount: java.lang.String bysl
+com.wuxi.domain.GoverItemCount: java.lang.String bybj
+com.wuxi.domain.GoverItemCount: GoverItemCount()
+com.wuxi.domain.GoverItemCount: java.lang.String getZone()
+com.wuxi.domain.GoverItemCount: void setZone(java.lang.String)
+com.wuxi.domain.GoverItemCount: java.lang.String getOid()
+com.wuxi.domain.GoverItemCount: void setOid(java.lang.String)
+com.wuxi.domain.GoverItemCount: java.lang.String getOuid()
+com.wuxi.domain.GoverItemCount: void setOuid(java.lang.String)
+com.wuxi.domain.GoverItemCount: java.lang.String getOuname()
+com.wuxi.domain.GoverItemCount: void setOuname(java.lang.String)
+com.wuxi.domain.GoverItemCount: java.lang.String getZonename()
+com.wuxi.domain.GoverItemCount: void setZonename(java.lang.String)
+com.wuxi.domain.GoverItemCount: java.lang.String getLjjj()
+com.wuxi.domain.GoverItemCount: void setLjjj(java.lang.String)
+com.wuxi.domain.GoverItemCount: java.lang.String getLjbj()
+com.wuxi.domain.GoverItemCount: void setLjbj(java.lang.String)
+com.wuxi.domain.GoverItemCount: java.lang.String getZrsl()
+com.wuxi.domain.GoverItemCount: void setZrsl(java.lang.String)
+com.wuxi.domain.GoverItemCount: java.lang.String getZrbj()
+com.wuxi.domain.GoverItemCount: void setZrbj(java.lang.String)
+com.wuxi.domain.GoverItemCount: java.lang.String getYsl()
+com.wuxi.domain.GoverItemCount: void setYsl(java.lang.String)
+com.wuxi.domain.GoverItemCount: java.lang.String getYbj()
+com.wuxi.domain.GoverItemCount: void setYbj(java.lang.String)
+com.wuxi.domain.GoverItemCount: java.lang.String getSysl()
+com.wuxi.domain.GoverItemCount: void setSysl(java.lang.String)
+com.wuxi.domain.GoverItemCount: java.lang.String getSybj()
+com.wuxi.domain.GoverItemCount: void setSybj(java.lang.String)
+com.wuxi.domain.GoverItemCount: java.lang.String getBysl()
+com.wuxi.domain.GoverItemCount: void setBysl(java.lang.String)
+com.wuxi.domain.GoverItemCount: java.lang.String getBybj()
+com.wuxi.domain.GoverItemCount: void setBybj(java.lang.String)
+com.wuxi.domain.GoverMaterials
+com.wuxi.domain.GoverMaterials: java.lang.String name
+com.wuxi.domain.GoverMaterials: java.lang.String id
+com.wuxi.domain.GoverMaterials: java.lang.String fileid
+com.wuxi.domain.GoverMaterials: java.lang.String itemid
+com.wuxi.domain.GoverMaterials: java.lang.String xh
+com.wuxi.domain.GoverMaterials: java.lang.String itemtype
+com.wuxi.domain.GoverMaterials: GoverMaterials()
+com.wuxi.domain.GoverMaterials: java.lang.String getName()
+com.wuxi.domain.GoverMaterials: void setName(java.lang.String)
+com.wuxi.domain.GoverMaterials: java.lang.String getId()
+com.wuxi.domain.GoverMaterials: void setId(java.lang.String)
+com.wuxi.domain.GoverMaterials: java.lang.String getFileid()
+com.wuxi.domain.GoverMaterials: void setFileid(java.lang.String)
+com.wuxi.domain.GoverMaterials: java.lang.String getItemid()
+com.wuxi.domain.GoverMaterials: void setItemid(java.lang.String)
+com.wuxi.domain.GoverMaterials: java.lang.String getXh()
+com.wuxi.domain.GoverMaterials: void setXh(java.lang.String)
+com.wuxi.domain.GoverMaterials: java.lang.String getItemtype()
+com.wuxi.domain.GoverMaterials: void setItemtype(java.lang.String)
+com.wuxi.domain.GoverSaoonCFCL
+com.wuxi.domain.GoverSaoonCFCL: java.lang.String id
+com.wuxi.domain.GoverSaoonCFCL: java.lang.String result
+com.wuxi.domain.GoverSaoonCFCL: java.lang.String itemid
+com.wuxi.domain.GoverSaoonCFCL: java.lang.String statue
+com.wuxi.domain.GoverSaoonCFCL: GoverSaoonCFCL()
+com.wuxi.domain.GoverSaoonCFCL: java.lang.String getId()
+com.wuxi.domain.GoverSaoonCFCL: void setId(java.lang.String)
+com.wuxi.domain.GoverSaoonCFCL: java.lang.String getResult()
+com.wuxi.domain.GoverSaoonCFCL: void setResult(java.lang.String)
+com.wuxi.domain.GoverSaoonCFCL: java.lang.String getItemid()
+com.wuxi.domain.GoverSaoonCFCL: void setItemid(java.lang.String)
+com.wuxi.domain.GoverSaoonCFCL: java.lang.String getStatue()
+com.wuxi.domain.GoverSaoonCFCL: void setStatue(java.lang.String)
+com.wuxi.domain.GoverSaoonItem
+com.wuxi.domain.GoverSaoonItem: long serialVersionUID
+com.wuxi.domain.GoverSaoonItem: java.lang.String type
+com.wuxi.domain.GoverSaoonItem: int num
+com.wuxi.domain.GoverSaoonItem: int kindtype
+com.wuxi.domain.GoverSaoonItem: int subkindtype
+com.wuxi.domain.GoverSaoonItem: java.lang.String kindname
+com.wuxi.domain.GoverSaoonItem: java.lang.String typename
+com.wuxi.domain.GoverSaoonItem: java.lang.String name
+com.wuxi.domain.GoverSaoonItem: java.lang.String id
+com.wuxi.domain.GoverSaoonItem: java.lang.String deptid
+com.wuxi.domain.GoverSaoonItem: java.lang.String deptname
+com.wuxi.domain.GoverSaoonItem: GoverSaoonItem()
+com.wuxi.domain.GoverSaoonItem: java.lang.String getType()
+com.wuxi.domain.GoverSaoonItem: void setType(java.lang.String)
+com.wuxi.domain.GoverSaoonItem: int getNum()
+com.wuxi.domain.GoverSaoonItem: void setNum(int)
+com.wuxi.domain.GoverSaoonItem: int getKindtype()
+com.wuxi.domain.GoverSaoonItem: void setKindtype(int)
+com.wuxi.domain.GoverSaoonItem: int getSubkindtype()
+com.wuxi.domain.GoverSaoonItem: void setSubkindtype(int)
+com.wuxi.domain.GoverSaoonItem: java.lang.String getKindname()
+com.wuxi.domain.GoverSaoonItem: void setKindname(java.lang.String)
+com.wuxi.domain.GoverSaoonItem: java.lang.String getTypename()
+com.wuxi.domain.GoverSaoonItem: void setTypename(java.lang.String)
+com.wuxi.domain.GoverSaoonItem: java.lang.String getName()
+com.wuxi.domain.GoverSaoonItem: void setName(java.lang.String)
+com.wuxi.domain.GoverSaoonItem: java.lang.String getId()
+com.wuxi.domain.GoverSaoonItem: void setId(java.lang.String)
+com.wuxi.domain.GoverSaoonItem: java.lang.String getDeptid()
+com.wuxi.domain.GoverSaoonItem: void setDeptid(java.lang.String)
+com.wuxi.domain.GoverSaoonItem: java.lang.String getDeptname()
+com.wuxi.domain.GoverSaoonItem: void setDeptname(java.lang.String)
+com.wuxi.domain.GoverSaoonItemCFDetail
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String address
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String cfbz
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String cfyj
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String sszt
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String ssztbm
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String ssztxz
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String wtjg
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String itemcode
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String supertel
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String lcfileid
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String name
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String id
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String deptid
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String deptname
+com.wuxi.domain.GoverSaoonItemCFDetail: java.util.List goverSaoonCFCLs
+com.wuxi.domain.GoverSaoonItemCFDetail: GoverSaoonItemCFDetail()
+com.wuxi.domain.GoverSaoonItemCFDetail: java.util.List getGoverSaoonCFCLs()
+com.wuxi.domain.GoverSaoonItemCFDetail: void setGoverSaoonCFCLs(java.util.List)
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String getAddress()
+com.wuxi.domain.GoverSaoonItemCFDetail: void setAddress(java.lang.String)
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String getCfbz()
+com.wuxi.domain.GoverSaoonItemCFDetail: void setCfbz(java.lang.String)
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String getCfyj()
+com.wuxi.domain.GoverSaoonItemCFDetail: void setCfyj(java.lang.String)
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String getSszt()
+com.wuxi.domain.GoverSaoonItemCFDetail: void setSszt(java.lang.String)
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String getSsztbm()
+com.wuxi.domain.GoverSaoonItemCFDetail: void setSsztbm(java.lang.String)
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String getSsztxz()
+com.wuxi.domain.GoverSaoonItemCFDetail: void setSsztxz(java.lang.String)
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String getWtjg()
+com.wuxi.domain.GoverSaoonItemCFDetail: void setWtjg(java.lang.String)
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String getItemcode()
+com.wuxi.domain.GoverSaoonItemCFDetail: void setItemcode(java.lang.String)
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String getSupertel()
+com.wuxi.domain.GoverSaoonItemCFDetail: void setSupertel(java.lang.String)
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String getLcfileid()
+com.wuxi.domain.GoverSaoonItemCFDetail: void setLcfileid(java.lang.String)
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String getName()
+com.wuxi.domain.GoverSaoonItemCFDetail: void setName(java.lang.String)
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String getId()
+com.wuxi.domain.GoverSaoonItemCFDetail: void setId(java.lang.String)
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String getDeptid()
+com.wuxi.domain.GoverSaoonItemCFDetail: void setDeptid(java.lang.String)
+com.wuxi.domain.GoverSaoonItemCFDetail: java.lang.String getDeptname()
+com.wuxi.domain.GoverSaoonItemCFDetail: void setDeptname(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String bbh
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String bm
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String jc
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String ljdz
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String sfsbssp
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String sszt
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String ssztbm
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String ssztxz
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String wtjg
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String xzqh
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String bldate
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String bslc
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String cbm
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String cnsj
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String cnsjms
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String fdcnsj
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String flfg
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String fwzn
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String isfz
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String issf
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String iswssb
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String jdjg
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String lxdh
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String qtbldd
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String sfbz
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String sfjbj
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String sltj
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String sqsljg
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String xzfwzxbl
+com.wuxi.domain.GoverSaoonItemQTDetail: java.util.List goverMaterials
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String name
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String id
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String deptid
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String deptname
+com.wuxi.domain.GoverSaoonItemQTDetail: GoverSaoonItemQTDetail()
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getBbh()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setBbh(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getBm()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setBm(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getJc()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setJc(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getLjdz()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setLjdz(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getSfsbssp()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setSfsbssp(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getSszt()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setSszt(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getSsztbm()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setSsztbm(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getSsztxz()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setSsztxz(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getWtjg()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setWtjg(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getXzqh()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setXzqh(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getBldate()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setBldate(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getBslc()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setBslc(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getCbm()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setCbm(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getCnsj()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setCnsj(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getCnsjms()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setCnsjms(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getFdcnsj()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setFdcnsj(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getFlfg()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setFlfg(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getFwzn()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setFwzn(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getIsfz()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setIsfz(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getIssf()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setIssf(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getIswssb()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setIswssb(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getJdjg()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setJdjg(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getLxdh()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setLxdh(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getQtbldd()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setQtbldd(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getSfbz()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setSfbz(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getSfjbj()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setSfjbj(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getSltj()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setSltj(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getSqsljg()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setSqsljg(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getXzfwzxbl()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setXzfwzxbl(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.util.List getGoverMaterials()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setGoverMaterials(java.util.List)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getName()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setName(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getId()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setId(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getDeptid()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setDeptid(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQTDetail: java.lang.String getDeptname()
+com.wuxi.domain.GoverSaoonItemQTDetail: void setDeptname(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String bbh
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String bgdd
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String bm
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String jddh
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String ljdz
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String sfsbssp
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String sszt
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String ssztbm
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String ssztxz
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String wtjg
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String xzqh
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String flfg
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String qzcx
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String name
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String id
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String deptid
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String deptname
+com.wuxi.domain.GoverSaoonItemQZDetail: GoverSaoonItemQZDetail()
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getBbh()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setBbh(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getBgdd()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setBgdd(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getBm()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setBm(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getJddh()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setJddh(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getLjdz()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setLjdz(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getSfsbssp()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setSfsbssp(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getSszt()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setSszt(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getSsztbm()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setSsztbm(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getSsztxz()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setSsztxz(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getWtjg()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setWtjg(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getXzqh()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setXzqh(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getFlfg()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setFlfg(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getQzcx()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setQzcx(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getName()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setName(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getId()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setId(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getDeptid()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setDeptid(java.lang.String)
+com.wuxi.domain.GoverSaoonItemQZDetail: java.lang.String getDeptname()
+com.wuxi.domain.GoverSaoonItemQZDetail: void setDeptname(java.lang.String)
+com.wuxi.domain.GoverSaoonItemWrapper
+com.wuxi.domain.GoverSaoonItemWrapper: java.util.List goverSaoonItems
+com.wuxi.domain.GoverSaoonItemWrapper: int start
+com.wuxi.domain.GoverSaoonItemWrapper: int end
+com.wuxi.domain.GoverSaoonItemWrapper: boolean next
+com.wuxi.domain.GoverSaoonItemWrapper: boolean previous
+com.wuxi.domain.GoverSaoonItemWrapper: int totalRowsAmount
+com.wuxi.domain.GoverSaoonItemWrapper: GoverSaoonItemWrapper()
+com.wuxi.domain.GoverSaoonItemWrapper: int getTotalRowsAmount()
+com.wuxi.domain.GoverSaoonItemWrapper: void setTotalRowsAmount(int)
+com.wuxi.domain.GoverSaoonItemWrapper: java.util.List getGoverSaoonItems()
+com.wuxi.domain.GoverSaoonItemWrapper: void setGoverSaoonItems(java.util.List)
+com.wuxi.domain.GoverSaoonItemWrapper: int getStart()
+com.wuxi.domain.GoverSaoonItemWrapper: void setStart(int)
+com.wuxi.domain.GoverSaoonItemWrapper: int getEnd()
+com.wuxi.domain.GoverSaoonItemWrapper: void setEnd(int)
+com.wuxi.domain.GoverSaoonItemWrapper: boolean isNext()
+com.wuxi.domain.GoverSaoonItemWrapper: void setNext(boolean)
+com.wuxi.domain.GoverSaoonItemWrapper: boolean isPrevious()
+com.wuxi.domain.GoverSaoonItemWrapper: void setPrevious(boolean)
+com.wuxi.domain.GoverSaoonItemXKDetail
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String sszt
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String ssztbm
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String ssztxz
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String wtjg
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String bslc
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String flfg
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String fwzn
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String sfbz
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String sltj
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String itemcode
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String supertel
+com.wuxi.domain.GoverSaoonItemXKDetail: java.util.List goverMaterials
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String timelimit
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String slbm
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String jdbm
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String linktel
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String bjtype
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String cert
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String charge
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String zxbl
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String otherAddr
+com.wuxi.domain.GoverSaoonItemXKDetail: boolean iswssb
+com.wuxi.domain.GoverSaoonItemXKDetail: boolean isout
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String outurl
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String name
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String id
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String deptid
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String deptname
+com.wuxi.domain.GoverSaoonItemXKDetail: GoverSaoonItemXKDetail()
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getSszt()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setSszt(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getSsztbm()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setSsztbm(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getSsztxz()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setSsztxz(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getWtjg()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setWtjg(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getBslc()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setBslc(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getFlfg()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setFlfg(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getFwzn()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setFwzn(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getSfbz()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setSfbz(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getSltj()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setSltj(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getItemcode()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setItemcode(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getSupertel()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setSupertel(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.util.List getGoverMaterials()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setGoverMaterials(java.util.List)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getTimelimit()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setTimelimit(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getSlbm()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setSlbm(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getJdbm()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setJdbm(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getLinktel()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setLinktel(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getBjtype()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setBjtype(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getCert()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setCert(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getCharge()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setCharge(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getZxbl()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setZxbl(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getOtherAddr()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setOtherAddr(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: boolean isIswssb()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setIswssb(boolean)
+com.wuxi.domain.GoverSaoonItemXKDetail: boolean isIsout()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setIsout(boolean)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getOuturl()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setOuturl(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getName()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setName(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getId()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setId(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getDeptid()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setDeptid(java.lang.String)
+com.wuxi.domain.GoverSaoonItemXKDetail: java.lang.String getDeptname()
+com.wuxi.domain.GoverSaoonItemXKDetail: void setDeptname(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String bbh
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String bgdd
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String bm
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String jddh
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String ljdz
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String sfsbssp
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String sszt
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String ssztbm
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String ssztxz
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String wtjg
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String xzqh
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String flfg
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String zscx
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String name
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String id
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String deptid
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String deptname
+com.wuxi.domain.GoverSaoonItemZSDetail: GoverSaoonItemZSDetail()
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getBbh()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setBbh(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getBgdd()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setBgdd(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getBm()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setBm(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getJddh()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setJddh(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getLjdz()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setLjdz(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getSfsbssp()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setSfsbssp(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getSszt()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setSszt(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getSsztbm()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setSsztbm(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getSsztxz()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setSsztxz(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getWtjg()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setWtjg(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getXzqh()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setXzqh(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getFlfg()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setFlfg(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getZscx()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setZscx(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getName()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setName(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getId()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setId(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getDeptid()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setDeptid(java.lang.String)
+com.wuxi.domain.GoverSaoonItemZSDetail: java.lang.String getDeptname()
+com.wuxi.domain.GoverSaoonItemZSDetail: void setDeptname(java.lang.String)
+com.wuxi.domain.GoverTableDownLoad
+com.wuxi.domain.GoverTableDownLoad: java.lang.String name
+com.wuxi.domain.GoverTableDownLoad: java.lang.String id
+com.wuxi.domain.GoverTableDownLoad: java.lang.String filename
+com.wuxi.domain.GoverTableDownLoad: java.lang.String itemid
+com.wuxi.domain.GoverTableDownLoad: java.lang.String deptid
+com.wuxi.domain.GoverTableDownLoad: GoverTableDownLoad()
+com.wuxi.domain.GoverTableDownLoad: java.lang.String getName()
+com.wuxi.domain.GoverTableDownLoad: void setName(java.lang.String)
+com.wuxi.domain.GoverTableDownLoad: java.lang.String getId()
+com.wuxi.domain.GoverTableDownLoad: void setId(java.lang.String)
+com.wuxi.domain.GoverTableDownLoad: java.lang.String getFilename()
+com.wuxi.domain.GoverTableDownLoad: void setFilename(java.lang.String)
+com.wuxi.domain.GoverTableDownLoad: java.lang.String getItemid()
+com.wuxi.domain.GoverTableDownLoad: void setItemid(java.lang.String)
+com.wuxi.domain.GoverTableDownLoad: java.lang.String getDeptid()
+com.wuxi.domain.GoverTableDownLoad: void setDeptid(java.lang.String)
+com.wuxi.domain.GoverTableDownLoadWrapper
+com.wuxi.domain.GoverTableDownLoadWrapper: java.util.List goverTableDownLoads
+com.wuxi.domain.GoverTableDownLoadWrapper: int start
+com.wuxi.domain.GoverTableDownLoadWrapper: int end
+com.wuxi.domain.GoverTableDownLoadWrapper: boolean previous
+com.wuxi.domain.GoverTableDownLoadWrapper: int totalRowsAmount
+com.wuxi.domain.GoverTableDownLoadWrapper: boolean next
+com.wuxi.domain.GoverTableDownLoadWrapper: GoverTableDownLoadWrapper()
+com.wuxi.domain.GoverTableDownLoadWrapper: java.util.List getGoverTableDownLoads()
+com.wuxi.domain.GoverTableDownLoadWrapper: void setGoverTableDownLoads(java.util.List)
+com.wuxi.domain.GoverTableDownLoadWrapper: int getStart()
+com.wuxi.domain.GoverTableDownLoadWrapper: void setStart(int)
+com.wuxi.domain.GoverTableDownLoadWrapper: int getEnd()
+com.wuxi.domain.GoverTableDownLoadWrapper: void setEnd(int)
+com.wuxi.domain.GoverTableDownLoadWrapper: boolean isPrevious()
+com.wuxi.domain.GoverTableDownLoadWrapper: void setPrevious(boolean)
+com.wuxi.domain.GoverTableDownLoadWrapper: int getTotalRowsAmount()
+com.wuxi.domain.GoverTableDownLoadWrapper: void setTotalRowsAmount(int)
+com.wuxi.domain.GoverTableDownLoadWrapper: boolean isNext()
+com.wuxi.domain.GoverTableDownLoadWrapper: void setNext(boolean)
+com.wuxi.domain.GoversaoonOnlineASKDetail
+com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String id
+com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String content
+com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String username
+com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String itemid
+com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String answerContent
+com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String itemtype
+com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String sentTime
+com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String answerDate
+com.wuxi.domain.GoversaoonOnlineASKDetail: GoversaoonOnlineASKDetail()
+com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String getId()
+com.wuxi.domain.GoversaoonOnlineASKDetail: void setId(java.lang.String)
+com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String getContent()
+com.wuxi.domain.GoversaoonOnlineASKDetail: void setContent(java.lang.String)
+com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String getUsername()
+com.wuxi.domain.GoversaoonOnlineASKDetail: void setUsername(java.lang.String)
+com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String getItemid()
+com.wuxi.domain.GoversaoonOnlineASKDetail: void setItemid(java.lang.String)
+com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String getAnswerContent()
+com.wuxi.domain.GoversaoonOnlineASKDetail: void setAnswerContent(java.lang.String)
+com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String getItemtype()
+com.wuxi.domain.GoversaoonOnlineASKDetail: void setItemtype(java.lang.String)
+com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String getSentTime()
+com.wuxi.domain.GoversaoonOnlineASKDetail: void setSentTime(java.lang.String)
+com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String getAnswerDate()
+com.wuxi.domain.GoversaoonOnlineASKDetail: void setAnswerDate(java.lang.String)
+com.wuxi.domain.HotPostWrapper
+com.wuxi.domain.HotPostWrapper: java.lang.String id
+com.wuxi.domain.HotPostWrapper: java.lang.String content
+com.wuxi.domain.HotPostWrapper: java.lang.String endTime
+com.wuxi.domain.HotPostWrapper: java.lang.String title
+com.wuxi.domain.HotPostWrapper: java.lang.String depName
+com.wuxi.domain.HotPostWrapper: java.lang.String canReply
+com.wuxi.domain.HotPostWrapper: com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper hotPostReplyWrapper
+com.wuxi.domain.HotPostWrapper: HotPostWrapper()
+com.wuxi.domain.HotPostWrapper: java.lang.String getId()
+com.wuxi.domain.HotPostWrapper: void setId(java.lang.String)
+com.wuxi.domain.HotPostWrapper: java.lang.String getContent()
+com.wuxi.domain.HotPostWrapper: void setContent(java.lang.String)
+com.wuxi.domain.HotPostWrapper: java.lang.String getEndTime()
+com.wuxi.domain.HotPostWrapper: void setEndTime(java.lang.String)
+com.wuxi.domain.HotPostWrapper: java.lang.String getTitle()
+com.wuxi.domain.HotPostWrapper: void setTitle(java.lang.String)
+com.wuxi.domain.HotPostWrapper: java.lang.String getDepName()
+com.wuxi.domain.HotPostWrapper: void setDepName(java.lang.String)
+com.wuxi.domain.HotPostWrapper: java.lang.String getCanReply()
+com.wuxi.domain.HotPostWrapper: void setCanReply(java.lang.String)
+com.wuxi.domain.HotPostWrapper: com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper getHotPostReplyWrapper()
+com.wuxi.domain.HotPostWrapper: void setHotPostReplyWrapper(com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper)
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper: java.util.List hotPostReplies
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper: com.wuxi.domain.HotPostWrapper this$0
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper: HotPostWrapper$HotPostReplyWrapper(com.wuxi.domain.HotPostWrapper)
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper: java.util.List getHotPostReplies()
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper: void setHotPostReplies(java.util.List)
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: java.lang.String id
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: java.lang.String content
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: java.lang.String hotreviewid
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: java.lang.String senduser
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: java.lang.String sendtime
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: java.lang.String answercontent
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper this$1
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: HotPostWrapper$HotPostReplyWrapper$HotPostReply(com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper)
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: java.lang.String getId()
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: void setId(java.lang.String)
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: java.lang.String getContent()
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: void setContent(java.lang.String)
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: java.lang.String getHotreviewid()
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: void setHotreviewid(java.lang.String)
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: java.lang.String getSenduser()
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: void setSenduser(java.lang.String)
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: java.lang.String getSendtime()
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: void setSendtime(java.lang.String)
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: java.lang.String getAnswercontent()
+com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply: void setAnswercontent(java.lang.String)
+com.wuxi.domain.HotReviewInfoWrapper
+com.wuxi.domain.HotReviewInfoWrapper: java.lang.String id
+com.wuxi.domain.HotReviewInfoWrapper: java.lang.String content
+com.wuxi.domain.HotReviewInfoWrapper: java.lang.String endTime
+com.wuxi.domain.HotReviewInfoWrapper: java.lang.String title
+com.wuxi.domain.HotReviewInfoWrapper: java.lang.String depName
+com.wuxi.domain.HotReviewInfoWrapper: java.lang.String canReply
+com.wuxi.domain.HotReviewInfoWrapper: java.lang.String replies
+com.wuxi.domain.HotReviewInfoWrapper: HotReviewInfoWrapper()
+com.wuxi.domain.HotReviewInfoWrapper: java.lang.String getId()
+com.wuxi.domain.HotReviewInfoWrapper: void setId(java.lang.String)
+com.wuxi.domain.HotReviewInfoWrapper: java.lang.String getContent()
+com.wuxi.domain.HotReviewInfoWrapper: void setContent(java.lang.String)
+com.wuxi.domain.HotReviewInfoWrapper: java.lang.String getEndTime()
+com.wuxi.domain.HotReviewInfoWrapper: void setEndTime(java.lang.String)
+com.wuxi.domain.HotReviewInfoWrapper: java.lang.String getTitle()
+com.wuxi.domain.HotReviewInfoWrapper: void setTitle(java.lang.String)
+com.wuxi.domain.HotReviewInfoWrapper: java.lang.String getDepName()
+com.wuxi.domain.HotReviewInfoWrapper: void setDepName(java.lang.String)
+com.wuxi.domain.HotReviewInfoWrapper: java.lang.String getCanReply()
+com.wuxi.domain.HotReviewInfoWrapper: void setCanReply(java.lang.String)
+com.wuxi.domain.HotReviewInfoWrapper: java.lang.String getReplies()
+com.wuxi.domain.HotReviewInfoWrapper: void setReplies(java.lang.String)
+com.wuxi.domain.HotReviewWrapper
+com.wuxi.domain.HotReviewWrapper: java.util.List data
+com.wuxi.domain.HotReviewWrapper: HotReviewWrapper()
+com.wuxi.domain.HotReviewWrapper: java.util.List getData()
+com.wuxi.domain.HotReviewWrapper: void setData(java.util.List)
+com.wuxi.domain.HotReviewWrapper$HotReview
+com.wuxi.domain.HotReviewWrapper$HotReview: long serialVersionUID
+com.wuxi.domain.HotReviewWrapper$HotReview: java.lang.String id
+com.wuxi.domain.HotReviewWrapper$HotReview: java.lang.String title
+com.wuxi.domain.HotReviewWrapper$HotReview: java.lang.String startTime
+com.wuxi.domain.HotReviewWrapper$HotReview: java.lang.String endTime
+com.wuxi.domain.HotReviewWrapper$HotReview: java.lang.String readcount
+com.wuxi.domain.HotReviewWrapper$HotReview: com.wuxi.domain.HotReviewWrapper this$0
+com.wuxi.domain.HotReviewWrapper$HotReview: HotReviewWrapper$HotReview(com.wuxi.domain.HotReviewWrapper)
+com.wuxi.domain.HotReviewWrapper$HotReview: java.lang.String getId()
+com.wuxi.domain.HotReviewWrapper$HotReview: void setId(java.lang.String)
+com.wuxi.domain.HotReviewWrapper$HotReview: java.lang.String getTitle()
+com.wuxi.domain.HotReviewWrapper$HotReview: void setTitle(java.lang.String)
+com.wuxi.domain.HotReviewWrapper$HotReview: java.lang.String getStartTime()
+com.wuxi.domain.HotReviewWrapper$HotReview: void setStartTime(java.lang.String)
+com.wuxi.domain.HotReviewWrapper$HotReview: java.lang.String getEndTime()
+com.wuxi.domain.HotReviewWrapper$HotReview: void setEndTime(java.lang.String)
+com.wuxi.domain.HotReviewWrapper$HotReview: java.lang.String getReadcount()
+com.wuxi.domain.HotReviewWrapper$HotReview: void setReadcount(java.lang.String)
+com.wuxi.domain.HotReviewWrapper$HotReviewContent
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: java.lang.String id
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: java.lang.String content
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: java.lang.String endTime
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: java.lang.String title
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: java.lang.String depName
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: boolean canReply
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: com.wuxi.domain.HotReviewWrapper this$0
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: HotReviewWrapper$HotReviewContent(com.wuxi.domain.HotReviewWrapper)
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: java.lang.String getId()
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: void setId(java.lang.String)
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: java.lang.String getContent()
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: void setContent(java.lang.String)
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: java.lang.String getEndTime()
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: void setEndTime(java.lang.String)
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: java.lang.String getTitle()
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: void setTitle(java.lang.String)
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: java.lang.String getDepName()
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: void setDepName(java.lang.String)
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: boolean isCanReply()
+com.wuxi.domain.HotReviewWrapper$HotReviewContent: void setCanReply(boolean)
+com.wuxi.domain.InternetSurveyWrapper
+com.wuxi.domain.InternetSurveyWrapper: java.util.List internetSurveys
+com.wuxi.domain.InternetSurveyWrapper: InternetSurveyWrapper()
+com.wuxi.domain.InternetSurveyWrapper: java.util.List getInternetSurveys()
+com.wuxi.domain.InternetSurveyWrapper: void setInternetSurveys(java.util.List)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: long serialVersionUID
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String createDate
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String title
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String questions
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String doProjectId
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String depId
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String readCount
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String endDate
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String results
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String isAnonymous
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String orderId
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String isTop
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String summary
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String surveryId
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String author
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String isEnabled
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String updateDate
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String isViewSurveryResult
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String isAuditingInputText
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String isRootDisplay
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String isCenterData
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String isOnlyShowNo
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: com.wuxi.domain.InternetSurveyWrapper this$0
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: InternetSurveyWrapper$InternetSurvey(com.wuxi.domain.InternetSurveyWrapper)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getCreateDate()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setCreateDate(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getTitle()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setTitle(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getQuestions()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setQuestions(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getDoProjectId()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setDoProjectId(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getDepId()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setDepId(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getReadCount()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setReadCount(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getEndDate()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setEndDate(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getResults()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setResults(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getIsAnonymous()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setIsAnonymous(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getOrderId()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setOrderId(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getIsTop()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setIsTop(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getSummary()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setSummary(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getSurveryId()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setSurveryId(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getAuthor()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setAuthor(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getIsEnabled()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setIsEnabled(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getUpdateDate()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setUpdateDate(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getIsViewSurveryResult()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setIsViewSurveryResult(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getIsAuditingInputText()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setIsAuditingInputText(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getIsRootDisplay()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setIsRootDisplay(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getIsCenterData()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setIsCenterData(java.lang.String)
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: java.lang.String getIsOnlyShowNo()
+com.wuxi.domain.InternetSurveyWrapper$InternetSurvey: void setIsOnlyShowNo(java.lang.String)
+com.wuxi.domain.Kindtype
+com.wuxi.domain.Kindtype: java.lang.String id
+com.wuxi.domain.Kindtype: boolean isNull
+com.wuxi.domain.Kindtype: java.lang.String subKindType
+com.wuxi.domain.Kindtype: java.lang.String kindType
+com.wuxi.domain.Kindtype: java.lang.String kindName
+com.wuxi.domain.Kindtype: java.lang.String subKindName
+com.wuxi.domain.Kindtype: Kindtype()
+com.wuxi.domain.Kindtype: java.lang.String getKindType()
+com.wuxi.domain.Kindtype: void setKindType(java.lang.String)
+com.wuxi.domain.Kindtype: java.lang.String getId()
+com.wuxi.domain.Kindtype: void setId(java.lang.String)
+com.wuxi.domain.Kindtype: boolean isNull()
+com.wuxi.domain.Kindtype: void setNull(boolean)
+com.wuxi.domain.Kindtype: java.lang.String getSubKindType()
+com.wuxi.domain.Kindtype: void setSubKindType(java.lang.String)
+com.wuxi.domain.Kindtype: java.lang.String getKindName()
+com.wuxi.domain.Kindtype: void setKindName(java.lang.String)
+com.wuxi.domain.Kindtype: java.lang.String getSubKindName()
+com.wuxi.domain.Kindtype: void setSubKindName(java.lang.String)
+com.wuxi.domain.LeaveMessageWrapper
+com.wuxi.domain.LeaveMessageWrapper: java.util.List leaveMessages
+com.wuxi.domain.LeaveMessageWrapper: LeaveMessageWrapper()
+com.wuxi.domain.LeaveMessageWrapper: java.util.List getLeaveMessages()
+com.wuxi.domain.LeaveMessageWrapper: void setLeaveMessages(java.util.List)
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String id
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: int state
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String content
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String answerId
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String interViewId
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String submitTime
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String sentUser
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String answerContent
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: int answerStatus
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: int isCommend
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: int questionType
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String recommendTime
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String sentIP
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: com.wuxi.domain.LeaveMessageWrapper this$0
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: LeaveMessageWrapper$LeaveMessage(com.wuxi.domain.LeaveMessageWrapper)
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String getId()
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: void setId(java.lang.String)
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: int getState()
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: void setState(int)
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String getContent()
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: void setContent(java.lang.String)
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String getAnswerId()
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: void setAnswerId(java.lang.String)
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String getInterViewId()
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: void setInterViewId(java.lang.String)
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String getSubmitTime()
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: void setSubmitTime(java.lang.String)
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String getSentUser()
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: void setSentUser(java.lang.String)
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String getAnswerContent()
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: void setAnswerContent(java.lang.String)
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: int getAnswerStatus()
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: void setAnswerStatus(int)
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: int getIsCommend()
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: void setIsCommend(int)
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: int getQuestionType()
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: void setQuestionType(int)
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String getRecommendTime()
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: void setRecommendTime(java.lang.String)
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: java.lang.String getSentIP()
+com.wuxi.domain.LeaveMessageWrapper$LeaveMessage: void setSentIP(java.lang.String)
+com.wuxi.domain.LetterType
+com.wuxi.domain.LetterType: java.lang.String name
+com.wuxi.domain.LetterType: java.lang.String id
+com.wuxi.domain.LetterType: java.lang.String doprojectid
+com.wuxi.domain.LetterType: LetterType()
+com.wuxi.domain.LetterType: LetterType(java.lang.String)
+com.wuxi.domain.LetterType: java.lang.String getName()
+com.wuxi.domain.LetterType: void setName(java.lang.String)
+com.wuxi.domain.LetterType: java.lang.String getId()
+com.wuxi.domain.LetterType: void setId(java.lang.String)
+com.wuxi.domain.LetterType: java.lang.String getDoprojectid()
+com.wuxi.domain.LetterType: void setDoprojectid(java.lang.String)
+com.wuxi.domain.LetterWrapper
+com.wuxi.domain.LetterWrapper: java.util.List data
+com.wuxi.domain.LetterWrapper: LetterWrapper()
+com.wuxi.domain.LetterWrapper: java.util.List getData()
+com.wuxi.domain.LetterWrapper: void setData(java.util.List)
+com.wuxi.domain.LetterWrapper$Letter
+com.wuxi.domain.LetterWrapper$Letter: java.lang.String id
+com.wuxi.domain.LetterWrapper$Letter: java.lang.String type
+com.wuxi.domain.LetterWrapper$Letter: java.lang.String title
+com.wuxi.domain.LetterWrapper$Letter: java.lang.String code
+com.wuxi.domain.LetterWrapper$Letter: java.lang.String appraise
+com.wuxi.domain.LetterWrapper$Letter: java.lang.String depname
+com.wuxi.domain.LetterWrapper$Letter: java.lang.String answerdate
+com.wuxi.domain.LetterWrapper$Letter: int readcount
+com.wuxi.domain.LetterWrapper$Letter: com.wuxi.domain.LetterWrapper this$0
+com.wuxi.domain.LetterWrapper$Letter: LetterWrapper$Letter(com.wuxi.domain.LetterWrapper)
+com.wuxi.domain.LetterWrapper$Letter: java.lang.String getId()
+com.wuxi.domain.LetterWrapper$Letter: void setId(java.lang.String)
+com.wuxi.domain.LetterWrapper$Letter: java.lang.String getType()
+com.wuxi.domain.LetterWrapper$Letter: void setType(java.lang.String)
+com.wuxi.domain.LetterWrapper$Letter: java.lang.String getCode()
+com.wuxi.domain.LetterWrapper$Letter: void setCode(java.lang.String)
+com.wuxi.domain.LetterWrapper$Letter: java.lang.String getAppraise()
+com.wuxi.domain.LetterWrapper$Letter: void setAppraise(java.lang.String)
+com.wuxi.domain.LetterWrapper$Letter: java.lang.String getDepname()
+com.wuxi.domain.LetterWrapper$Letter: void setDepname(java.lang.String)
+com.wuxi.domain.LetterWrapper$Letter: java.lang.String getAnswerdate()
+com.wuxi.domain.LetterWrapper$Letter: void setAnswerdate(java.lang.String)
+com.wuxi.domain.LetterWrapper$Letter: int getReadcount()
+com.wuxi.domain.LetterWrapper$Letter: void setReadcount(int)
+com.wuxi.domain.LetterWrapper$Letter: java.lang.String getTitle()
+com.wuxi.domain.LetterWrapper$Letter: void setTitle(java.lang.String)
+com.wuxi.domain.MD5Encoder
+com.wuxi.domain.MD5Encoder: MD5Encoder()
+com.wuxi.domain.MD5Encoder: java.lang.String encode(java.lang.String)
+com.wuxi.domain.MD5Encoder: java.lang.String getLoginPWDMD5(java.lang.String,java.lang.String)
+com.wuxi.domain.MailBoxParameterItem
+com.wuxi.domain.MailBoxParameterItem: long serialVersionUID
+com.wuxi.domain.MailBoxParameterItem: int tpye
+com.wuxi.domain.MailBoxParameterItem: java.lang.String valueType
+com.wuxi.domain.MailBoxParameterItem: java.lang.String keyName
+com.wuxi.domain.MailBoxParameterItem: int requiredForm
+com.wuxi.domain.MailBoxParameterItem: java.lang.String selfId
+com.wuxi.domain.MailBoxParameterItem: java.lang.String alias
+com.wuxi.domain.MailBoxParameterItem: int orderId
+com.wuxi.domain.MailBoxParameterItem: java.lang.String selfObjectId
+com.wuxi.domain.MailBoxParameterItem: java.lang.String inputType
+com.wuxi.domain.MailBoxParameterItem: java.lang.String valueList
+com.wuxi.domain.MailBoxParameterItem: java.lang.String notice
+com.wuxi.domain.MailBoxParameterItem: int searchMark
+com.wuxi.domain.MailBoxParameterItem: int listMark
+com.wuxi.domain.MailBoxParameterItem: java.lang.String jscontent
+com.wuxi.domain.MailBoxParameterItem: MailBoxParameterItem()
+com.wuxi.domain.MailBoxParameterItem: int getTpye()
+com.wuxi.domain.MailBoxParameterItem: void setTpye(int)
+com.wuxi.domain.MailBoxParameterItem: java.lang.String getValueType()
+com.wuxi.domain.MailBoxParameterItem: void setValueType(java.lang.String)
+com.wuxi.domain.MailBoxParameterItem: java.lang.String getKeyName()
+com.wuxi.domain.MailBoxParameterItem: void setKeyName(java.lang.String)
+com.wuxi.domain.MailBoxParameterItem: int getRequiredForm()
+com.wuxi.domain.MailBoxParameterItem: void setRequiredForm(int)
+com.wuxi.domain.MailBoxParameterItem: java.lang.String getSelfId()
+com.wuxi.domain.MailBoxParameterItem: void setSelfId(java.lang.String)
+com.wuxi.domain.MailBoxParameterItem: java.lang.String getAlias()
+com.wuxi.domain.MailBoxParameterItem: void setAlias(java.lang.String)
+com.wuxi.domain.MailBoxParameterItem: int getOrderId()
+com.wuxi.domain.MailBoxParameterItem: void setOrderId(int)
+com.wuxi.domain.MailBoxParameterItem: java.lang.String getSelfObjectId()
+com.wuxi.domain.MailBoxParameterItem: void setSelfObjectId(java.lang.String)
+com.wuxi.domain.MailBoxParameterItem: java.lang.String getInputType()
+com.wuxi.domain.MailBoxParameterItem: void setInputType(java.lang.String)
+com.wuxi.domain.MailBoxParameterItem: java.lang.String getValueList()
+com.wuxi.domain.MailBoxParameterItem: void setValueList(java.lang.String)
+com.wuxi.domain.MailBoxParameterItem: java.lang.String getNotice()
+com.wuxi.domain.MailBoxParameterItem: void setNotice(java.lang.String)
+com.wuxi.domain.MailBoxParameterItem: int getSearchMark()
+com.wuxi.domain.MailBoxParameterItem: void setSearchMark(int)
+com.wuxi.domain.MailBoxParameterItem: int getListMark()
+com.wuxi.domain.MailBoxParameterItem: void setListMark(int)
+com.wuxi.domain.MailBoxParameterItem: java.lang.String getJscontent()
+com.wuxi.domain.MailBoxParameterItem: void setJscontent(java.lang.String)
+com.wuxi.domain.MemoirWrapper
+com.wuxi.domain.MemoirWrapper: java.util.List memoirs
+com.wuxi.domain.MemoirWrapper: MemoirWrapper()
+com.wuxi.domain.MemoirWrapper: java.util.List getMemoirs()
+com.wuxi.domain.MemoirWrapper: void setMemoirs(java.util.List)
+com.wuxi.domain.MemoirWrapper$Memoir
+com.wuxi.domain.MemoirWrapper$Memoir: java.lang.String id
+com.wuxi.domain.MemoirWrapper$Memoir: java.lang.String content
+com.wuxi.domain.MemoirWrapper$Memoir: java.lang.String interViewId
+com.wuxi.domain.MemoirWrapper$Memoir: java.lang.String submitTime
+com.wuxi.domain.MemoirWrapper$Memoir: java.lang.String answerUser
+com.wuxi.domain.MemoirWrapper$Memoir: int answerType
+com.wuxi.domain.MemoirWrapper$Memoir: com.wuxi.domain.MemoirWrapper this$0
+com.wuxi.domain.MemoirWrapper$Memoir: MemoirWrapper$Memoir(com.wuxi.domain.MemoirWrapper)
+com.wuxi.domain.MemoirWrapper$Memoir: java.lang.String getId()
+com.wuxi.domain.MemoirWrapper$Memoir: void setId(java.lang.String)
+com.wuxi.domain.MemoirWrapper$Memoir: java.lang.String getContent()
+com.wuxi.domain.MemoirWrapper$Memoir: void setContent(java.lang.String)
+com.wuxi.domain.MemoirWrapper$Memoir: java.lang.String getInterViewId()
+com.wuxi.domain.MemoirWrapper$Memoir: void setInterViewId(java.lang.String)
+com.wuxi.domain.MemoirWrapper$Memoir: java.lang.String getSubmitTime()
+com.wuxi.domain.MemoirWrapper$Memoir: void setSubmitTime(java.lang.String)
+com.wuxi.domain.MemoirWrapper$Memoir: java.lang.String getAnswerUser()
+com.wuxi.domain.MemoirWrapper$Memoir: void setAnswerUser(java.lang.String)
+com.wuxi.domain.MemoirWrapper$Memoir: int getAnswerType()
+com.wuxi.domain.MemoirWrapper$Memoir: void setAnswerType(int)
+com.wuxi.domain.MenuItem
+com.wuxi.domain.MenuItem: int CUSTOM_MENU
+com.wuxi.domain.MenuItem: int CHANNEL_MENU
+com.wuxi.domain.MenuItem: int CONTENT_MENU
+com.wuxi.domain.MenuItem: int APP_MENU
+com.wuxi.domain.MenuItem: int WAP_MENU
+com.wuxi.domain.MenuItem: int LINK_MENU
+com.wuxi.domain.MenuItem: int FRAGMENT_MENU
+com.wuxi.domain.MenuItem: java.lang.String name
+com.wuxi.domain.MenuItem: java.lang.String id
+com.wuxi.domain.MenuItem: int type
+com.wuxi.domain.MenuItem: boolean disabled
+com.wuxi.domain.MenuItem: java.lang.String des
+com.wuxi.domain.MenuItem: int sort
+com.wuxi.domain.MenuItem: com.wuxi.domain.MenuItem[] childrens
+com.wuxi.domain.MenuItem: java.lang.String createDate
+com.wuxi.domain.MenuItem: java.lang.String channelId
+com.wuxi.domain.MenuItem: java.lang.String channelName
+com.wuxi.domain.MenuItem: boolean favorites
+com.wuxi.domain.MenuItem: java.lang.String contentId
+com.wuxi.domain.MenuItem: boolean deleted
+com.wuxi.domain.MenuItem: java.lang.String appUI
+com.wuxi.domain.MenuItem: java.lang.String wapURI
+com.wuxi.domain.MenuItem: java.lang.String parentMenuId
+com.wuxi.domain.MenuItem: java.lang.String contentName
+com.wuxi.domain.MenuItem: java.lang.String linkMenuItemName
+com.wuxi.domain.MenuItem: java.lang.String linkMenuItemId
+com.wuxi.domain.MenuItem: boolean isHasChildern
+com.wuxi.domain.MenuItem: java.lang.String icon
+com.wuxi.domain.MenuItem: java.lang.String pfId
+com.wuxi.domain.MenuItem: java.lang.String pfBuildPath
+com.wuxi.domain.MenuItem: java.lang.Class contentFragment
+com.wuxi.domain.MenuItem: MenuItem()
+com.wuxi.domain.MenuItem: java.lang.Class getContentFragment()
+com.wuxi.domain.MenuItem: void setContentFragment(java.lang.Class)
+com.wuxi.domain.MenuItem: java.lang.String getIcon()
+com.wuxi.domain.MenuItem: void setIcon(java.lang.String)
+com.wuxi.domain.MenuItem: boolean isHasChildern()
+com.wuxi.domain.MenuItem: void setHasChildern(boolean)
+com.wuxi.domain.MenuItem: java.lang.String getLinkMenuItemId()
+com.wuxi.domain.MenuItem: void setLinkMenuItemId(java.lang.String)
+com.wuxi.domain.MenuItem: java.lang.String getName()
+com.wuxi.domain.MenuItem: void setName(java.lang.String)
+com.wuxi.domain.MenuItem: java.lang.String getId()
+com.wuxi.domain.MenuItem: void setId(java.lang.String)
+com.wuxi.domain.MenuItem: int getType()
+com.wuxi.domain.MenuItem: void setType(int)
+com.wuxi.domain.MenuItem: boolean isDisabled()
+com.wuxi.domain.MenuItem: void setDisabled(boolean)
+com.wuxi.domain.MenuItem: java.lang.String getDes()
+com.wuxi.domain.MenuItem: void setDes(java.lang.String)
+com.wuxi.domain.MenuItem: int getSort()
+com.wuxi.domain.MenuItem: void setSort(int)
+com.wuxi.domain.MenuItem: com.wuxi.domain.MenuItem[] getChildrens()
+com.wuxi.domain.MenuItem: void setChildrens(com.wuxi.domain.MenuItem[])
+com.wuxi.domain.MenuItem: java.lang.String getCreateDate()
+com.wuxi.domain.MenuItem: void setCreateDate(java.lang.String)
+com.wuxi.domain.MenuItem: java.lang.String getChannelId()
+com.wuxi.domain.MenuItem: void setChannelId(java.lang.String)
+com.wuxi.domain.MenuItem: java.lang.String getChannelName()
+com.wuxi.domain.MenuItem: void setChannelName(java.lang.String)
+com.wuxi.domain.MenuItem: boolean isFavorites()
+com.wuxi.domain.MenuItem: void setFavorites(boolean)
+com.wuxi.domain.MenuItem: java.lang.String getContentId()
+com.wuxi.domain.MenuItem: void setContentId(java.lang.String)
+com.wuxi.domain.MenuItem: boolean isDeleted()
+com.wuxi.domain.MenuItem: void setDeleted(boolean)
+com.wuxi.domain.MenuItem: java.lang.String getAppUI()
+com.wuxi.domain.MenuItem: void setAppUI(java.lang.String)
+com.wuxi.domain.MenuItem: java.lang.String getWapURI()
+com.wuxi.domain.MenuItem: void setWapURI(java.lang.String)
+com.wuxi.domain.MenuItem: java.lang.String getParentMenuId()
+com.wuxi.domain.MenuItem: void setParentMenuId(java.lang.String)
+com.wuxi.domain.MenuItem: java.lang.String getContentName()
+com.wuxi.domain.MenuItem: void setContentName(java.lang.String)
+com.wuxi.domain.MenuItem: java.lang.String getLinkMenuItemName()
+com.wuxi.domain.MenuItem: void setLinkMenuItemName(java.lang.String)
+com.wuxi.domain.MenuItem: int compareTo(com.wuxi.domain.MenuItem)
+com.wuxi.domain.MenuItem: java.lang.String getPfId()
+com.wuxi.domain.MenuItem: void setPfId(java.lang.String)
+com.wuxi.domain.MenuItem: java.lang.String getPfBuildPath()
+com.wuxi.domain.MenuItem: void setPfBuildPath(java.lang.String)
+com.wuxi.domain.MenuItem: int compareTo(java.lang.Object)
+com.wuxi.domain.MyApply
+com.wuxi.domain.MyApply: java.lang.String id
+com.wuxi.domain.MyApply: java.lang.String title
+com.wuxi.domain.MyApply: java.lang.String statue
+com.wuxi.domain.MyApply: MyApply()
+com.wuxi.domain.MyApply: java.lang.String getId()
+com.wuxi.domain.MyApply: void setId(java.lang.String)
+com.wuxi.domain.MyApply: java.lang.String getTitle()
+com.wuxi.domain.MyApply: void setTitle(java.lang.String)
+com.wuxi.domain.MyApply: java.lang.String getStatue()
+com.wuxi.domain.MyApply: void setStatue(java.lang.String)
+com.wuxi.domain.MyApplyPageWrapper
+com.wuxi.domain.MyApplyPageWrapper: java.util.List data
+com.wuxi.domain.MyApplyPageWrapper: MyApplyPageWrapper()
+com.wuxi.domain.MyApplyPageWrapper: java.util.List getData()
+com.wuxi.domain.MyApplyPageWrapper: void setData(java.util.List)
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: java.lang.String id
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: java.lang.String content
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: long code
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: java.lang.String title
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: java.lang.String applyDate
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: int readCount
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: java.lang.String answerDep
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: java.lang.String answerDate
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: java.lang.String answerUser
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: java.lang.String answerContent
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: com.wuxi.domain.MyApplyPageWrapper this$0
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: MyApplyPageWrapper$MyApplyPage(com.wuxi.domain.MyApplyPageWrapper)
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: java.lang.String getId()
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: void setId(java.lang.String)
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: java.lang.String getContent()
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: void setContent(java.lang.String)
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: long getCode()
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: void setCode(long)
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: java.lang.String getTitle()
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: void setTitle(java.lang.String)
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: java.lang.String getApplyDate()
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: void setApplyDate(java.lang.String)
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: int getReadCount()
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: void setReadCount(int)
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: java.lang.String getAnswerDep()
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: void setAnswerDep(java.lang.String)
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: java.lang.String getAnswerDate()
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: void setAnswerDate(java.lang.String)
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: java.lang.String getAnswerUser()
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: void setAnswerUser(java.lang.String)
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: java.lang.String getAnswerContent()
+com.wuxi.domain.MyApplyPageWrapper$MyApplyPage: void setAnswerContent(java.lang.String)
+com.wuxi.domain.MyApplyWrapper
+com.wuxi.domain.MyApplyWrapper: java.util.List myApplies
+com.wuxi.domain.MyApplyWrapper: int start
+com.wuxi.domain.MyApplyWrapper: int end
+com.wuxi.domain.MyApplyWrapper: boolean previous
+com.wuxi.domain.MyApplyWrapper: boolean next
+com.wuxi.domain.MyApplyWrapper: int totalRowsAmount
+com.wuxi.domain.MyApplyWrapper: MyApplyWrapper()
+com.wuxi.domain.MyApplyWrapper: java.util.List getMyApplies()
+com.wuxi.domain.MyApplyWrapper: void setMyApplies(java.util.List)
+com.wuxi.domain.MyApplyWrapper: int getStart()
+com.wuxi.domain.MyApplyWrapper: void setStart(int)
+com.wuxi.domain.MyApplyWrapper: int getEnd()
+com.wuxi.domain.MyApplyWrapper: void setEnd(int)
+com.wuxi.domain.MyApplyWrapper: boolean isPrevious()
+com.wuxi.domain.MyApplyWrapper: void setPrevious(boolean)
+com.wuxi.domain.MyApplyWrapper: boolean isNext()
+com.wuxi.domain.MyApplyWrapper: void setNext(boolean)
+com.wuxi.domain.MyApplyWrapper: int getTotalRowsAmount()
+com.wuxi.domain.MyApplyWrapper: void setTotalRowsAmount(int)
+com.wuxi.domain.MyLetter
+com.wuxi.domain.MyLetter: java.lang.String access_token
+com.wuxi.domain.MyLetter: java.lang.String doprojectid
+com.wuxi.domain.MyLetter: java.lang.String typeid
+com.wuxi.domain.MyLetter: java.lang.String title
+com.wuxi.domain.MyLetter: java.lang.String content
+com.wuxi.domain.MyLetter: int openState
+com.wuxi.domain.MyLetter: int sentMailBack
+com.wuxi.domain.MyLetter: int msgStatus
+com.wuxi.domain.MyLetter: MyLetter()
+com.wuxi.domain.MyLetter: java.lang.String getAccess_token()
+com.wuxi.domain.MyLetter: void setAccess_token(java.lang.String)
+com.wuxi.domain.MyLetter: java.lang.String getDoprojectid()
+com.wuxi.domain.MyLetter: void setDoprojectid(java.lang.String)
+com.wuxi.domain.MyLetter: java.lang.String getTypeid()
+com.wuxi.domain.MyLetter: void setTypeid(java.lang.String)
+com.wuxi.domain.MyLetter: java.lang.String getTitle()
+com.wuxi.domain.MyLetter: void setTitle(java.lang.String)
+com.wuxi.domain.MyLetter: java.lang.String getContent()
+com.wuxi.domain.MyLetter: void setContent(java.lang.String)
+com.wuxi.domain.MyLetter: int getOpenState()
+com.wuxi.domain.MyLetter: void setOpenState(int)
+com.wuxi.domain.MyLetter: int getSentMailBack()
+com.wuxi.domain.MyLetter: void setSentMailBack(int)
+com.wuxi.domain.MyLetter: int getMsgStatus()
+com.wuxi.domain.MyLetter: void setMsgStatus(int)
+com.wuxi.domain.Myconsult
+com.wuxi.domain.Myconsult: long serialVersionUID
+com.wuxi.domain.Myconsult: java.lang.String id
+com.wuxi.domain.Myconsult: java.lang.String title
+com.wuxi.domain.Myconsult: java.lang.String statue
+com.wuxi.domain.Myconsult: java.lang.String sendDate
+com.wuxi.domain.Myconsult: Myconsult()
+com.wuxi.domain.Myconsult: java.lang.String getId()
+com.wuxi.domain.Myconsult: void setId(java.lang.String)
+com.wuxi.domain.Myconsult: java.lang.String getTitle()
+com.wuxi.domain.Myconsult: void setTitle(java.lang.String)
+com.wuxi.domain.Myconsult: java.lang.String getStatue()
+com.wuxi.domain.Myconsult: void setStatue(java.lang.String)
+com.wuxi.domain.Myconsult: java.lang.String getSendDate()
+com.wuxi.domain.Myconsult: void setSendDate(java.lang.String)
+com.wuxi.domain.MyconsultWrapper
+com.wuxi.domain.MyconsultWrapper: java.util.List myconsults
+com.wuxi.domain.MyconsultWrapper: int start
+com.wuxi.domain.MyconsultWrapper: int end
+com.wuxi.domain.MyconsultWrapper: boolean next
+com.wuxi.domain.MyconsultWrapper: boolean previous
+com.wuxi.domain.MyconsultWrapper: int totalRowsAmount
+com.wuxi.domain.MyconsultWrapper: MyconsultWrapper()
+com.wuxi.domain.MyconsultWrapper: java.util.List getMyconsults()
+com.wuxi.domain.MyconsultWrapper: void setMyconsults(java.util.List)
+com.wuxi.domain.MyconsultWrapper: int getStart()
+com.wuxi.domain.MyconsultWrapper: void setStart(int)
+com.wuxi.domain.MyconsultWrapper: int getEnd()
+com.wuxi.domain.MyconsultWrapper: void setEnd(int)
+com.wuxi.domain.MyconsultWrapper: boolean isNext()
+com.wuxi.domain.MyconsultWrapper: void setNext(boolean)
+com.wuxi.domain.MyconsultWrapper: boolean isPrevious()
+com.wuxi.domain.MyconsultWrapper: void setPrevious(boolean)
+com.wuxi.domain.MyconsultWrapper: int getTotalRowsAmount()
+com.wuxi.domain.MyconsultWrapper: void setTotalRowsAmount(int)
+com.wuxi.domain.NavigatorItmeAction
+com.wuxi.domain.NavigatorItmeAction: java.lang.String actionName
+com.wuxi.domain.NavigatorItmeAction: android.support.v4.app.Fragment frament
+com.wuxi.domain.NavigatorItmeAction: NavigatorItmeAction(java.lang.String,android.support.v4.app.Fragment)
+com.wuxi.domain.NavigatorItmeAction: java.lang.String getActionName()
+com.wuxi.domain.NavigatorItmeAction: void setActionName(java.lang.String)
+com.wuxi.domain.NavigatorItmeAction: android.support.v4.app.Fragment getFrament()
+com.wuxi.domain.NavigatorItmeAction: void setFrament(android.support.v4.app.Fragment)
+com.wuxi.domain.NoticePostWrapper
+com.wuxi.domain.NoticePostWrapper: java.lang.String id
+com.wuxi.domain.NoticePostWrapper: java.lang.String content
+com.wuxi.domain.NoticePostWrapper: java.lang.String status
+com.wuxi.domain.NoticePostWrapper: java.lang.String title
+com.wuxi.domain.NoticePostWrapper: java.lang.String doAnonymous
+com.wuxi.domain.NoticePostWrapper: java.lang.String readCount
+com.wuxi.domain.NoticePostWrapper: java.lang.String summary
+com.wuxi.domain.NoticePostWrapper: java.lang.String begintime
+com.wuxi.domain.NoticePostWrapper: java.lang.String endtime
+com.wuxi.domain.NoticePostWrapper: java.lang.String doprojectid
+com.wuxi.domain.NoticePostWrapper: java.lang.String sumup
+com.wuxi.domain.NoticePostWrapper: com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper noticePostReplyWrapper
+com.wuxi.domain.NoticePostWrapper: NoticePostWrapper()
+com.wuxi.domain.NoticePostWrapper: java.lang.String getId()
+com.wuxi.domain.NoticePostWrapper: void setId(java.lang.String)
+com.wuxi.domain.NoticePostWrapper: java.lang.String getContent()
+com.wuxi.domain.NoticePostWrapper: void setContent(java.lang.String)
+com.wuxi.domain.NoticePostWrapper: java.lang.String getStatus()
+com.wuxi.domain.NoticePostWrapper: void setStatus(java.lang.String)
+com.wuxi.domain.NoticePostWrapper: java.lang.String getTitle()
+com.wuxi.domain.NoticePostWrapper: void setTitle(java.lang.String)
+com.wuxi.domain.NoticePostWrapper: java.lang.String getDoAnonymous()
+com.wuxi.domain.NoticePostWrapper: void setDoAnonymous(java.lang.String)
+com.wuxi.domain.NoticePostWrapper: java.lang.String getReadCount()
+com.wuxi.domain.NoticePostWrapper: void setReadCount(java.lang.String)
+com.wuxi.domain.NoticePostWrapper: java.lang.String getSummary()
+com.wuxi.domain.NoticePostWrapper: void setSummary(java.lang.String)
+com.wuxi.domain.NoticePostWrapper: java.lang.String getBegintime()
+com.wuxi.domain.NoticePostWrapper: void setBegintime(java.lang.String)
+com.wuxi.domain.NoticePostWrapper: java.lang.String getEndtime()
+com.wuxi.domain.NoticePostWrapper: void setEndtime(java.lang.String)
+com.wuxi.domain.NoticePostWrapper: java.lang.String getDoprojectid()
+com.wuxi.domain.NoticePostWrapper: void setDoprojectid(java.lang.String)
+com.wuxi.domain.NoticePostWrapper: java.lang.String getSumup()
+com.wuxi.domain.NoticePostWrapper: void setSumup(java.lang.String)
+com.wuxi.domain.NoticePostWrapper: com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper getNoticePostReplyWrapper()
+com.wuxi.domain.NoticePostWrapper: void setNoticePostReplyWrapper(com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper: java.util.List noticePostReplies
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper: com.wuxi.domain.NoticePostWrapper this$0
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper: NoticePostWrapper$NoticePostReplyWrapper(com.wuxi.domain.NoticePostWrapper)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper: java.util.List getNoticePostReplies()
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper: void setNoticePostReplies(java.util.List)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String content
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String status
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String userName
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String politicsMainId
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String sentIp
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String sentTime
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String actorInfoId
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper this$1
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply(com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getContent()
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setContent(java.lang.String)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getStatus()
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setStatus(java.lang.String)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getUserName()
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setUserName(java.lang.String)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getPoliticsMainId()
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setPoliticsMainId(java.lang.String)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getSentIp()
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setSentIp(java.lang.String)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getSentTime()
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setSentTime(java.lang.String)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getActorInfoId()
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setActorInfoId(java.lang.String)
+com.wuxi.domain.OpenTel
+com.wuxi.domain.OpenTel: java.lang.String tel
+com.wuxi.domain.OpenTel: java.lang.String depname
+com.wuxi.domain.OpenTel: OpenTel()
+com.wuxi.domain.OpenTel: java.lang.String getTel()
+com.wuxi.domain.OpenTel: void setTel(java.lang.String)
+com.wuxi.domain.OpenTel: java.lang.String getDepname()
+com.wuxi.domain.OpenTel: void setDepname(java.lang.String)
+com.wuxi.domain.OpenTelWrapper
+com.wuxi.domain.OpenTelWrapper: java.util.List data
+com.wuxi.domain.OpenTelWrapper: int end
+com.wuxi.domain.OpenTelWrapper: int start
+com.wuxi.domain.OpenTelWrapper: boolean previous
+com.wuxi.domain.OpenTelWrapper: int totalRowsAmount
+com.wuxi.domain.OpenTelWrapper: boolean next
+com.wuxi.domain.OpenTelWrapper: OpenTelWrapper()
+com.wuxi.domain.OpenTelWrapper: java.util.List getData()
+com.wuxi.domain.OpenTelWrapper: void setData(java.util.List)
+com.wuxi.domain.OpenTelWrapper: int getEnd()
+com.wuxi.domain.OpenTelWrapper: void setEnd(int)
+com.wuxi.domain.OpenTelWrapper: int getStart()
+com.wuxi.domain.OpenTelWrapper: void setStart(int)
+com.wuxi.domain.OpenTelWrapper: boolean isPrevious()
+com.wuxi.domain.OpenTelWrapper: void setPrevious(boolean)
+com.wuxi.domain.OpenTelWrapper: int getTotalRowsAmount()
+com.wuxi.domain.OpenTelWrapper: void setTotalRowsAmount(int)
+com.wuxi.domain.OpenTelWrapper: boolean isNext()
+com.wuxi.domain.OpenTelWrapper: void setNext(boolean)
+com.wuxi.domain.OpinionPostWrapper
+com.wuxi.domain.OpinionPostWrapper: java.lang.String id
+com.wuxi.domain.OpinionPostWrapper: java.lang.String content
+com.wuxi.domain.OpinionPostWrapper: java.lang.String status
+com.wuxi.domain.OpinionPostWrapper: java.lang.String title
+com.wuxi.domain.OpinionPostWrapper: java.lang.String doAnonymous
+com.wuxi.domain.OpinionPostWrapper: java.lang.String readCount
+com.wuxi.domain.OpinionPostWrapper: java.lang.String summary
+com.wuxi.domain.OpinionPostWrapper: java.lang.String begintime
+com.wuxi.domain.OpinionPostWrapper: java.lang.String endtime
+com.wuxi.domain.OpinionPostWrapper: java.lang.String doprojectid
+com.wuxi.domain.OpinionPostWrapper: java.lang.String sumup
+com.wuxi.domain.OpinionPostWrapper: com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper opinionPostReplyWrapper
+com.wuxi.domain.OpinionPostWrapper: OpinionPostWrapper()
+com.wuxi.domain.OpinionPostWrapper: java.lang.String getId()
+com.wuxi.domain.OpinionPostWrapper: void setId(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper: java.lang.String getContent()
+com.wuxi.domain.OpinionPostWrapper: void setContent(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper: java.lang.String getStatus()
+com.wuxi.domain.OpinionPostWrapper: void setStatus(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper: java.lang.String getTitle()
+com.wuxi.domain.OpinionPostWrapper: void setTitle(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper: java.lang.String getDoAnonymous()
+com.wuxi.domain.OpinionPostWrapper: void setDoAnonymous(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper: java.lang.String getReadCount()
+com.wuxi.domain.OpinionPostWrapper: void setReadCount(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper: java.lang.String getSummary()
+com.wuxi.domain.OpinionPostWrapper: void setSummary(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper: java.lang.String getBegintime()
+com.wuxi.domain.OpinionPostWrapper: void setBegintime(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper: java.lang.String getEndtime()
+com.wuxi.domain.OpinionPostWrapper: void setEndtime(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper: java.lang.String getDoprojectid()
+com.wuxi.domain.OpinionPostWrapper: void setDoprojectid(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper: java.lang.String getSumup()
+com.wuxi.domain.OpinionPostWrapper: void setSumup(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper: com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper getOpinionPostReplyWrapper()
+com.wuxi.domain.OpinionPostWrapper: void setOpinionPostReplyWrapper(com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper)
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper: java.util.List opinionPostReplies
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper: com.wuxi.domain.OpinionPostWrapper this$0
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper: OpinionPostWrapper$OpinionPostReplyWrapper(com.wuxi.domain.OpinionPostWrapper)
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper: java.util.List getOpinionPostReplies()
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper: void setOpinionPostReplies(java.util.List)
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: java.lang.String content
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: java.lang.String status
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: java.lang.String userName
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: java.lang.String politicsMainId
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: java.lang.String sentIp
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: java.lang.String sentTime
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: java.lang.String actorInfoId
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper this$1
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply(com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper)
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: java.lang.String getContent()
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: void setContent(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: java.lang.String getStatus()
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: void setStatus(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: java.lang.String getUserName()
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: void setUserName(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: java.lang.String getPoliticsMainId()
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: void setPoliticsMainId(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: java.lang.String getSentIp()
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: void setSentIp(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: java.lang.String getSentTime()
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: void setSentTime(java.lang.String)
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: java.lang.String getActorInfoId()
+com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply: void setActorInfoId(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String politicsMainId
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String content
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String title
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String status
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String sentUser
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String sentIp
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String redTitle
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String modifyTime
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String isTop
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String orderId
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String beginTime
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String endTime
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String readCount
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String doProjectId
+com.wuxi.domain.OrdinaryPostWrapper: com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper raplyWrapper
+com.wuxi.domain.OrdinaryPostWrapper: OrdinaryPostWrapper()
+com.wuxi.domain.OrdinaryPostWrapper: com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper getRaplyWrapper()
+com.wuxi.domain.OrdinaryPostWrapper: void setRaplyWrapper(com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper)
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String getPoliticsMainId()
+com.wuxi.domain.OrdinaryPostWrapper: void setPoliticsMainId(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String getContent()
+com.wuxi.domain.OrdinaryPostWrapper: void setContent(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String getTitle()
+com.wuxi.domain.OrdinaryPostWrapper: void setTitle(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String getStatus()
+com.wuxi.domain.OrdinaryPostWrapper: void setStatus(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String getSentUser()
+com.wuxi.domain.OrdinaryPostWrapper: void setSentUser(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String getSentIp()
+com.wuxi.domain.OrdinaryPostWrapper: void setSentIp(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String getRedTitle()
+com.wuxi.domain.OrdinaryPostWrapper: void setRedTitle(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String getModifyTime()
+com.wuxi.domain.OrdinaryPostWrapper: void setModifyTime(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String getIsTop()
+com.wuxi.domain.OrdinaryPostWrapper: void setIsTop(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String getOrderId()
+com.wuxi.domain.OrdinaryPostWrapper: void setOrderId(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String getBeginTime()
+com.wuxi.domain.OrdinaryPostWrapper: void setBeginTime(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String getEndTime()
+com.wuxi.domain.OrdinaryPostWrapper: void setEndTime(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String getReadCount()
+com.wuxi.domain.OrdinaryPostWrapper: void setReadCount(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper: java.lang.String getDoProjectId()
+com.wuxi.domain.OrdinaryPostWrapper: void setDoProjectId(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper: java.util.List postRaplies
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper: com.wuxi.domain.OrdinaryPostWrapper this$0
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper: OrdinaryPostWrapper$OrdinaryPostRaplyWrapper(com.wuxi.domain.OrdinaryPostWrapper)
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper: java.util.List getPostRaplies()
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper: void setPostRaplies(java.util.List)
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: java.lang.String content
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: java.lang.String status
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: java.lang.String userName
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: java.lang.String politicsMainId
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: java.lang.String sentIp
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: java.lang.String sentTime
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: java.lang.String actorInfoId
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper this$1
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply(com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper)
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: java.lang.String getContent()
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: void setContent(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: java.lang.String getStatus()
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: void setStatus(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: java.lang.String getUserName()
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: void setUserName(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: java.lang.String getPoliticsMainId()
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: void setPoliticsMainId(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: java.lang.String getSentIp()
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: void setSentIp(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: java.lang.String getSentTime()
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: void setSentTime(java.lang.String)
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: java.lang.String getActorInfoId()
+com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: void setActorInfoId(java.lang.String)
+com.wuxi.domain.PartLeaderMailWrapper
+com.wuxi.domain.PartLeaderMailWrapper: java.util.List partLeaderMails
+com.wuxi.domain.PartLeaderMailWrapper: PartLeaderMailWrapper()
+com.wuxi.domain.PartLeaderMailWrapper: java.util.List getPartLeaderMails()
+com.wuxi.domain.PartLeaderMailWrapper: void setPartLeaderMails(java.util.List)
+com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail
+com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: java.lang.String isnull
+com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: java.lang.String depid
+com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: java.lang.String depname
+com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: java.lang.String doProjectID
+com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: com.wuxi.domain.PartLeaderMailWrapper this$0
+com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: PartLeaderMailWrapper$PartLeaderMail(com.wuxi.domain.PartLeaderMailWrapper)
+com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: java.lang.String getIsnull()
+com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: void setIsnull(java.lang.String)
+com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: java.lang.String getDepid()
+com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: void setDepid(java.lang.String)
+com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: java.lang.String getDepname()
+com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: void setDepname(java.lang.String)
+com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: java.lang.String getDoProjectID()
+com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: void setDoProjectID(java.lang.String)
+com.wuxi.domain.PoliticsWrapper
+com.wuxi.domain.PoliticsWrapper: java.util.List data
+com.wuxi.domain.PoliticsWrapper: PoliticsWrapper()
+com.wuxi.domain.PoliticsWrapper: java.util.List getData()
+com.wuxi.domain.PoliticsWrapper: void setData(java.util.List)
+com.wuxi.domain.PoliticsWrapper$Politics
+com.wuxi.domain.PoliticsWrapper$Politics: long serialVersionUID
+com.wuxi.domain.PoliticsWrapper$Politics: java.lang.String id
+com.wuxi.domain.PoliticsWrapper$Politics: java.lang.String title
+com.wuxi.domain.PoliticsWrapper$Politics: java.lang.String doprojectid
+com.wuxi.domain.PoliticsWrapper$Politics: java.lang.String beginTime
+com.wuxi.domain.PoliticsWrapper$Politics: java.lang.String endTime
+com.wuxi.domain.PoliticsWrapper$Politics: com.wuxi.domain.PoliticsWrapper this$0
+com.wuxi.domain.PoliticsWrapper$Politics: PoliticsWrapper$Politics(com.wuxi.domain.PoliticsWrapper)
+com.wuxi.domain.PoliticsWrapper$Politics: java.lang.String getId()
+com.wuxi.domain.PoliticsWrapper$Politics: void setId(java.lang.String)
+com.wuxi.domain.PoliticsWrapper$Politics: java.lang.String getTitle()
+com.wuxi.domain.PoliticsWrapper$Politics: void setTitle(java.lang.String)
+com.wuxi.domain.PoliticsWrapper$Politics: java.lang.String getDoprojectid()
+com.wuxi.domain.PoliticsWrapper$Politics: void setDoprojectid(java.lang.String)
+com.wuxi.domain.PoliticsWrapper$Politics: java.lang.String getBeginTime()
+com.wuxi.domain.PoliticsWrapper$Politics: void setBeginTime(java.lang.String)
+com.wuxi.domain.PoliticsWrapper$Politics: java.lang.String getEndTime()
+com.wuxi.domain.PoliticsWrapper$Politics: void setEndTime(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String createDate
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String title
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String doProjectId
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String depId
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String readCount
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String endDate
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String isAnonymous
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String orderId
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String isTop
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String summary
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String surveryId
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String author
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String isEnabled
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String updateDate
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String isViewSurveryResult
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String isAuditingInputText
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String isRootDisplay
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String isCenterData
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String isOnlyShowNo
+com.wuxi.domain.QuestionnairePostWrapper: java.util.List questionnaireQuestionWrappers
+com.wuxi.domain.QuestionnairePostWrapper: com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper questionnaireAnswerWrapper
+com.wuxi.domain.QuestionnairePostWrapper: QuestionnairePostWrapper()
+com.wuxi.domain.QuestionnairePostWrapper: com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper getQuestionnaireAnswerWrapper()
+com.wuxi.domain.QuestionnairePostWrapper: void setQuestionnaireAnswerWrapper(com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getCreateDate()
+com.wuxi.domain.QuestionnairePostWrapper: void setCreateDate(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getTitle()
+com.wuxi.domain.QuestionnairePostWrapper: void setTitle(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getDoProjectId()
+com.wuxi.domain.QuestionnairePostWrapper: void setDoProjectId(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getDepId()
+com.wuxi.domain.QuestionnairePostWrapper: void setDepId(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getReadCount()
+com.wuxi.domain.QuestionnairePostWrapper: void setReadCount(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getEndDate()
+com.wuxi.domain.QuestionnairePostWrapper: void setEndDate(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getIsAnonymous()
+com.wuxi.domain.QuestionnairePostWrapper: void setIsAnonymous(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getOrderId()
+com.wuxi.domain.QuestionnairePostWrapper: void setOrderId(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getIsTop()
+com.wuxi.domain.QuestionnairePostWrapper: void setIsTop(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getSummary()
+com.wuxi.domain.QuestionnairePostWrapper: void setSummary(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getSurveryId()
+com.wuxi.domain.QuestionnairePostWrapper: void setSurveryId(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getAuthor()
+com.wuxi.domain.QuestionnairePostWrapper: void setAuthor(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getIsEnabled()
+com.wuxi.domain.QuestionnairePostWrapper: void setIsEnabled(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getUpdateDate()
+com.wuxi.domain.QuestionnairePostWrapper: void setUpdateDate(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getIsViewSurveryResult()
+com.wuxi.domain.QuestionnairePostWrapper: void setIsViewSurveryResult(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getIsAuditingInputText()
+com.wuxi.domain.QuestionnairePostWrapper: void setIsAuditingInputText(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getIsRootDisplay()
+com.wuxi.domain.QuestionnairePostWrapper: void setIsRootDisplay(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getIsCenterData()
+com.wuxi.domain.QuestionnairePostWrapper: void setIsCenterData(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.lang.String getIsOnlyShowNo()
+com.wuxi.domain.QuestionnairePostWrapper: void setIsOnlyShowNo(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper: java.util.List getQuestionnaireQuestionWrappers()
+com.wuxi.domain.QuestionnairePostWrapper: void setQuestionnaireQuestionWrappers(java.util.List)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper: java.lang.String isnull
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper: java.util.List answerDataWrappers
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper: com.wuxi.domain.QuestionnairePostWrapper this$0
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper: QuestionnairePostWrapper$QuestionnaireAnswerWrapper(com.wuxi.domain.QuestionnairePostWrapper)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper: java.lang.String getIsnull()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper: void setIsnull(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper: java.util.List getAnswerDataWrappers()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper: void setAnswerDataWrappers(java.util.List)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: java.lang.String userName
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: java.lang.String resultId
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: java.lang.String surveryId
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: java.lang.String submitDate
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: java.lang.String userHostAddress
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: java.util.List questionnaireAnswerDats
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper this$1
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper(com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: java.lang.String getUserName()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: void setUserName(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: java.lang.String getResultId()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: void setResultId(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: java.lang.String getSurveryId()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: void setSurveryId(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: java.lang.String getSubmitDate()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: void setSubmitDate(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: java.lang.String getUserHostAddress()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: void setUserHostAddress(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: java.util.List getQuestionnaireAnswerDats()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper: void setQuestionnaireAnswerDats(java.util.List)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: java.lang.String state
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: java.lang.String userName
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: java.lang.String optionValue
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: java.lang.String resultId
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: java.lang.String orderId
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: java.lang.String optionText
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: java.lang.String submitDate
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: java.lang.String questionsId
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper this$2
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat(com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: java.lang.String getState()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: void setState(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: java.lang.String getUserName()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: void setUserName(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: java.lang.String getOptionValue()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: void setOptionValue(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: java.lang.String getResultId()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: void setResultId(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: java.lang.String getOrderId()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: void setOrderId(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: java.lang.String getOptionText()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: void setOptionText(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: java.lang.String getSubmitDate()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: void setSubmitDate(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: java.lang.String getQuestionsId()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireAnswerWrapper$QuestionnaireAnswerDataWrapper$QuestionnaireAnswerDat: void setQuestionsId(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String description
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String questionId
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String orderId
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String questionType
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String surveryId
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String optionCount
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String hasOther
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String isForce
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String minSelect
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String maxSelect
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String colspan
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.util.List questionnaireQuestions
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: com.wuxi.domain.QuestionnairePostWrapper this$0
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: QuestionnairePostWrapper$QuestionnaireQuestionWrapper(com.wuxi.domain.QuestionnairePostWrapper)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String getDescription()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: void setDescription(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String getQuestionId()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: void setQuestionId(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String getOrderId()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: void setOrderId(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String getQuestionType()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: void setQuestionType(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String getSurveryId()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: void setSurveryId(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String getOptionCount()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: void setOptionCount(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String getHasOther()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: void setHasOther(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String getIsForce()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: void setIsForce(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String getMinSelect()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: void setMinSelect(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String getMaxSelect()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: void setMaxSelect(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.lang.String getColspan()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: void setColspan(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: java.util.List getQuestionnaireQuestions()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper: void setQuestionnaireQuestions(java.util.List)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: java.lang.String serialNumber
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: java.lang.String optionValue
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: java.lang.String questionId
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: java.lang.String optionId
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: java.lang.String clickCount
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: java.lang.String linkUrl
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper this$1
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion(com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: java.lang.String getSerialNumber()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: void setSerialNumber(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: java.lang.String getOptionValue()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: void setOptionValue(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: java.lang.String getQuestionId()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: void setQuestionId(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: java.lang.String getOptionId()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: void setOptionId(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: java.lang.String getClickCount()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: void setClickCount(java.lang.String)
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: java.lang.String getLinkUrl()
+com.wuxi.domain.QuestionnairePostWrapper$QuestionnaireQuestionWrapper$QuestionnaireQuestion: void setLinkUrl(java.lang.String)
+com.wuxi.domain.ReplyMyLetter
+com.wuxi.domain.ReplyMyLetter: java.lang.String id
+com.wuxi.domain.ReplyMyLetter: java.lang.String type
+com.wuxi.domain.ReplyMyLetter: java.lang.String title
+com.wuxi.domain.ReplyMyLetter: java.lang.String content
+com.wuxi.domain.ReplyMyLetter: java.lang.String code
+com.wuxi.domain.ReplyMyLetter: java.lang.String appraise
+com.wuxi.domain.ReplyMyLetter: java.lang.String depname
+com.wuxi.domain.ReplyMyLetter: java.lang.String answerdate
+com.wuxi.domain.ReplyMyLetter: int readcount
+com.wuxi.domain.ReplyMyLetter: ReplyMyLetter()
+com.wuxi.domain.SearchResultWrapper
+com.wuxi.domain.SearchResultWrapper: com.wuxi.domain.SearchResultWrapper$SearchPage page
+com.wuxi.domain.SearchResultWrapper: java.util.List results
+com.wuxi.domain.SearchResultWrapper: SearchResultWrapper()
+com.wuxi.domain.SearchResultWrapper: com.wuxi.domain.SearchResultWrapper$SearchPage getPage()
+com.wuxi.domain.SearchResultWrapper: void setPage(com.wuxi.domain.SearchResultWrapper$SearchPage)
+com.wuxi.domain.SearchResultWrapper: java.util.List getResults()
+com.wuxi.domain.SearchResultWrapper: void setResults(java.util.List)
+com.wuxi.domain.SearchResultWrapper$SearchPage
+com.wuxi.domain.SearchResultWrapper$SearchPage: java.lang.String pagesize
+com.wuxi.domain.SearchResultWrapper$SearchPage: java.lang.String reqstatus
+com.wuxi.domain.SearchResultWrapper$SearchPage: java.lang.String sitename
+com.wuxi.domain.SearchResultWrapper$SearchPage: java.lang.String query
+com.wuxi.domain.SearchResultWrapper$SearchPage: java.lang.String hitcount
+com.wuxi.domain.SearchResultWrapper$SearchPage: java.lang.String searchtime
+com.wuxi.domain.SearchResultWrapper$SearchPage: java.lang.String currentpage
+com.wuxi.domain.SearchResultWrapper$SearchPage: com.wuxi.domain.SearchResultWrapper this$0
+com.wuxi.domain.SearchResultWrapper$SearchPage: SearchResultWrapper$SearchPage(com.wuxi.domain.SearchResultWrapper)
+com.wuxi.domain.SearchResultWrapper$SearchPage: java.lang.String getPagesize()
+com.wuxi.domain.SearchResultWrapper$SearchPage: void setPagesize(java.lang.String)
+com.wuxi.domain.SearchResultWrapper$SearchPage: java.lang.String getReqstatus()
+com.wuxi.domain.SearchResultWrapper$SearchPage: void setReqstatus(java.lang.String)
+com.wuxi.domain.SearchResultWrapper$SearchPage: java.lang.String getSitename()
+com.wuxi.domain.SearchResultWrapper$SearchPage: void setSitename(java.lang.String)
+com.wuxi.domain.SearchResultWrapper$SearchPage: java.lang.String getQuery()
+com.wuxi.domain.SearchResultWrapper$SearchPage: void setQuery(java.lang.String)
+com.wuxi.domain.SearchResultWrapper$SearchPage: java.lang.String getHitcount()
+com.wuxi.domain.SearchResultWrapper$SearchPage: void setHitcount(java.lang.String)
+com.wuxi.domain.SearchResultWrapper$SearchPage: java.lang.String getSearchtime()
+com.wuxi.domain.SearchResultWrapper$SearchPage: void setSearchtime(java.lang.String)
+com.wuxi.domain.SearchResultWrapper$SearchPage: java.lang.String getCurrentpage()
+com.wuxi.domain.SearchResultWrapper$SearchPage: void setCurrentpage(java.lang.String)
+com.wuxi.domain.SearchResultWrapper$SearchResult
+com.wuxi.domain.SearchResultWrapper$SearchResult: long serialVersionUID
+com.wuxi.domain.SearchResultWrapper$SearchResult: java.lang.String docid
+com.wuxi.domain.SearchResultWrapper$SearchResult: java.lang.String title
+com.wuxi.domain.SearchResultWrapper$SearchResult: java.lang.String summarycontent
+com.wuxi.domain.SearchResultWrapper$SearchResult: java.lang.String link
+com.wuxi.domain.SearchResultWrapper$SearchResult: java.lang.String score
+com.wuxi.domain.SearchResultWrapper$SearchResult: java.lang.String modifiedday
+com.wuxi.domain.SearchResultWrapper$SearchResult: java.lang.String size
+com.wuxi.domain.SearchResultWrapper$SearchResult: com.wuxi.domain.SearchResultWrapper this$0
+com.wuxi.domain.SearchResultWrapper$SearchResult: SearchResultWrapper$SearchResult(com.wuxi.domain.SearchResultWrapper)
+com.wuxi.domain.SearchResultWrapper$SearchResult: java.lang.String getDocid()
+com.wuxi.domain.SearchResultWrapper$SearchResult: void setDocid(java.lang.String)
+com.wuxi.domain.SearchResultWrapper$SearchResult: java.lang.String getTitle()
+com.wuxi.domain.SearchResultWrapper$SearchResult: void setTitle(java.lang.String)
+com.wuxi.domain.SearchResultWrapper$SearchResult: java.lang.String getSummarycontent()
+com.wuxi.domain.SearchResultWrapper$SearchResult: void setSummarycontent(java.lang.String)
+com.wuxi.domain.SearchResultWrapper$SearchResult: java.lang.String getLink()
+com.wuxi.domain.SearchResultWrapper$SearchResult: void setLink(java.lang.String)
+com.wuxi.domain.SearchResultWrapper$SearchResult: java.lang.String getScore()
+com.wuxi.domain.SearchResultWrapper$SearchResult: void setScore(java.lang.String)
+com.wuxi.domain.SearchResultWrapper$SearchResult: java.lang.String getModifiedday()
+com.wuxi.domain.SearchResultWrapper$SearchResult: void setModifiedday(java.lang.String)
+com.wuxi.domain.SearchResultWrapper$SearchResult: java.lang.String getSize()
+com.wuxi.domain.SearchResultWrapper$SearchResult: void setSize(java.lang.String)
+com.wuxi.domain.SearchSubmitWrapper
+com.wuxi.domain.SearchSubmitWrapper: java.lang.String query
+com.wuxi.domain.SearchSubmitWrapper: java.lang.String sitename
+com.wuxi.domain.SearchSubmitWrapper: int countperpage
+com.wuxi.domain.SearchSubmitWrapper: int pagenum
+com.wuxi.domain.SearchSubmitWrapper: java.lang.String DateSearchType
+com.wuxi.domain.SearchSubmitWrapper: java.lang.String FromDate
+com.wuxi.domain.SearchSubmitWrapper: java.lang.String ToDate
+com.wuxi.domain.SearchSubmitWrapper: SearchSubmitWrapper()
+com.wuxi.domain.SearchSubmitWrapper: java.lang.String getQuery()
+com.wuxi.domain.SearchSubmitWrapper: void setQuery(java.lang.String)
+com.wuxi.domain.SearchSubmitWrapper: java.lang.String getSitename()
+com.wuxi.domain.SearchSubmitWrapper: void setSitename(java.lang.String)
+com.wuxi.domain.SearchSubmitWrapper: int getCountperpage()
+com.wuxi.domain.SearchSubmitWrapper: void setCountperpage(int)
+com.wuxi.domain.SearchSubmitWrapper: int getPagenum()
+com.wuxi.domain.SearchSubmitWrapper: void setPagenum(int)
+com.wuxi.domain.SearchSubmitWrapper: java.lang.String getDateSearchType()
+com.wuxi.domain.SearchSubmitWrapper: void setDateSearchType(java.lang.String)
+com.wuxi.domain.SearchSubmitWrapper: java.lang.String getFromDate()
+com.wuxi.domain.SearchSubmitWrapper: void setFromDate(java.lang.String)
+com.wuxi.domain.SearchSubmitWrapper: java.lang.String getToDate()
+com.wuxi.domain.SearchSubmitWrapper: void setToDate(java.lang.String)
+com.wuxi.domain.StatisticsLetter
+com.wuxi.domain.StatisticsLetter: boolean isNull
+com.wuxi.domain.StatisticsLetter: java.lang.String depname
+com.wuxi.domain.StatisticsLetter: int acceptedNum
+com.wuxi.domain.StatisticsLetter: int replyNum
+com.wuxi.domain.StatisticsLetter: java.lang.String replyRate
+com.wuxi.domain.StatisticsLetter: java.lang.String replyDay
+com.wuxi.domain.StatisticsLetter: StatisticsLetter()
+com.wuxi.domain.StatisticsLetter: boolean isNull()
+com.wuxi.domain.StatisticsLetter: void setNull(boolean)
+com.wuxi.domain.StatisticsLetter: java.lang.String getDepname()
+com.wuxi.domain.StatisticsLetter: void setDepname(java.lang.String)
+com.wuxi.domain.StatisticsLetter: int getAcceptedNum()
+com.wuxi.domain.StatisticsLetter: void setAcceptedNum(int)
+com.wuxi.domain.StatisticsLetter: int getReplyNum()
+com.wuxi.domain.StatisticsLetter: void setReplyNum(int)
+com.wuxi.domain.StatisticsLetter: java.lang.String getReplyRate()
+com.wuxi.domain.StatisticsLetter: void setReplyRate(java.lang.String)
+com.wuxi.domain.StatisticsLetter: java.lang.String getReplyDay()
+com.wuxi.domain.StatisticsLetter: void setReplyDay(java.lang.String)
+com.wuxi.domain.SubmitLetter
+com.wuxi.domain.SubmitLetter: java.lang.String id
+com.wuxi.domain.SubmitLetter: SubmitLetter()
+com.wuxi.domain.TitleItemAction
+com.wuxi.domain.TitleItemAction: java.lang.String actionName
+com.wuxi.domain.TitleItemAction: com.wuxi.app.BaseFragment baseFragment
+com.wuxi.domain.TitleItemAction: com.wuxi.app.BaseFragment getBaseFragment()
+com.wuxi.domain.TitleItemAction: void setBaseFragment(com.wuxi.app.BaseFragment)
+com.wuxi.domain.TitleItemAction: TitleItemAction(java.lang.String,com.wuxi.app.BaseFragment)
+com.wuxi.domain.TitleItemAction: java.lang.String getActionName()
+com.wuxi.domain.TitleItemAction: void setActionName(java.lang.String)
+com.wuxi.domain.UpdateInfo
+com.wuxi.domain.UpdateInfo: java.lang.String version
+com.wuxi.domain.UpdateInfo: java.lang.String description
+com.wuxi.domain.UpdateInfo: java.lang.String url
+com.wuxi.domain.UpdateInfo: UpdateInfo()
+com.wuxi.domain.UpdateInfo: java.lang.String getVersion()
+com.wuxi.domain.UpdateInfo: void setVersion(java.lang.String)
+com.wuxi.domain.UpdateInfo: java.lang.String getDescription()
+com.wuxi.domain.UpdateInfo: void setDescription(java.lang.String)
+com.wuxi.domain.UpdateInfo: java.lang.String getUrl()
+com.wuxi.domain.UpdateInfo: void setUrl(java.lang.String)
+com.wuxi.domain.User
+com.wuxi.domain.User: java.lang.String userName
+com.wuxi.domain.User: java.lang.String accessToken
+com.wuxi.domain.User: java.lang.String refreshToken
+com.wuxi.domain.User: java.lang.String expireIn
+com.wuxi.domain.User: java.lang.String userId
+com.wuxi.domain.User: java.lang.String trueName
+com.wuxi.domain.User: java.lang.String sex
+com.wuxi.domain.User: java.lang.String birthday
+com.wuxi.domain.User: java.lang.String industry
+com.wuxi.domain.User: java.lang.String marriage
+com.wuxi.domain.User: java.lang.String post
+com.wuxi.domain.User: java.lang.String idcard
+com.wuxi.domain.User: java.lang.String homeAddress
+com.wuxi.domain.User: java.lang.String userHostAddress
+com.wuxi.domain.User: java.lang.String userHostName
+com.wuxi.domain.User: java.lang.String email
+com.wuxi.domain.User: java.lang.String linkTel
+com.wuxi.domain.User: java.lang.String mobile
+com.wuxi.domain.User: java.lang.String smallTel
+com.wuxi.domain.User: java.lang.String regTime
+com.wuxi.domain.User: int loginCount
+com.wuxi.domain.User: java.lang.String lastLogin
+com.wuxi.domain.User: java.lang.String loginIp
+com.wuxi.domain.User: java.lang.String perProjectId
+com.wuxi.domain.User: java.lang.String toeknCreateTime
+com.wuxi.domain.User: boolean mobileRegister
+com.wuxi.domain.User: User()
+com.wuxi.domain.User: java.lang.String getUserName()
+com.wuxi.domain.User: void setUserName(java.lang.String)
+com.wuxi.domain.User: java.lang.String getAccessToken()
+com.wuxi.domain.User: void setAccessToken(java.lang.String)
+com.wuxi.domain.User: java.lang.String getRefreshToken()
+com.wuxi.domain.User: void setRefreshToken(java.lang.String)
+com.wuxi.domain.User: java.lang.String getExpireIn()
+com.wuxi.domain.User: void setExpireIn(java.lang.String)
+com.wuxi.domain.User: java.lang.String getUserId()
+com.wuxi.domain.User: void setUserId(java.lang.String)
+com.wuxi.domain.User: java.lang.String getTrueName()
+com.wuxi.domain.User: void setTrueName(java.lang.String)
+com.wuxi.domain.User: java.lang.String getSex()
+com.wuxi.domain.User: void setSex(java.lang.String)
+com.wuxi.domain.User: java.lang.String getBirthday()
+com.wuxi.domain.User: void setBirthday(java.lang.String)
+com.wuxi.domain.User: java.lang.String getIndustry()
+com.wuxi.domain.User: void setIndustry(java.lang.String)
+com.wuxi.domain.User: java.lang.String getMarriage()
+com.wuxi.domain.User: void setMarriage(java.lang.String)
+com.wuxi.domain.User: java.lang.String getPost()
+com.wuxi.domain.User: void setPost(java.lang.String)
+com.wuxi.domain.User: java.lang.String getIdcard()
+com.wuxi.domain.User: void setIdcard(java.lang.String)
+com.wuxi.domain.User: java.lang.String getHomeAddress()
+com.wuxi.domain.User: void setHomeAddress(java.lang.String)
+com.wuxi.domain.User: java.lang.String getUserHostAddress()
+com.wuxi.domain.User: void setUserHostAddress(java.lang.String)
+com.wuxi.domain.User: java.lang.String getUserHostName()
+com.wuxi.domain.User: void setUserHostName(java.lang.String)
+com.wuxi.domain.User: java.lang.String getEmail()
+com.wuxi.domain.User: void setEmail(java.lang.String)
+com.wuxi.domain.User: java.lang.String getLinkTel()
+com.wuxi.domain.User: void setLinkTel(java.lang.String)
+com.wuxi.domain.User: java.lang.String getMobile()
+com.wuxi.domain.User: void setMobile(java.lang.String)
+com.wuxi.domain.User: java.lang.String getSmallTel()
+com.wuxi.domain.User: void setSmallTel(java.lang.String)
+com.wuxi.domain.User: java.lang.String getRegTime()
+com.wuxi.domain.User: void setRegTime(java.lang.String)
+com.wuxi.domain.User: int getLoginCount()
+com.wuxi.domain.User: void setLoginCount(int)
+com.wuxi.domain.User: java.lang.String getLastLogin()
+com.wuxi.domain.User: void setLastLogin(java.lang.String)
+com.wuxi.domain.User: java.lang.String getLoginIp()
+com.wuxi.domain.User: void setLoginIp(java.lang.String)
+com.wuxi.domain.User: java.lang.String getPerProjectId()
+com.wuxi.domain.User: void setPerProjectId(java.lang.String)
+com.wuxi.domain.User: java.lang.String getToeknCreateTime()
+com.wuxi.domain.User: void setToeknCreateTime(java.lang.String)
+com.wuxi.domain.User: boolean isMobileRegister()
+com.wuxi.domain.User: void setMobileRegister(boolean)
+com.wuxi.domain.VedioReviewWrapper
+com.wuxi.domain.VedioReviewWrapper: java.util.List reviews
+com.wuxi.domain.VedioReviewWrapper: VedioReviewWrapper()
+com.wuxi.domain.VedioReviewWrapper: java.util.List getReviews()
+com.wuxi.domain.VedioReviewWrapper: void setReviews(java.util.List)
+com.wuxi.domain.VedioReviewWrapper$VedioReview
+com.wuxi.domain.VedioReviewWrapper$VedioReview: java.lang.String id
+com.wuxi.domain.VedioReviewWrapper$VedioReview: java.lang.String subject
+com.wuxi.domain.VedioReviewWrapper$VedioReview: java.lang.String guests
+com.wuxi.domain.VedioReviewWrapper$VedioReview: java.lang.String workDate
+com.wuxi.domain.VedioReviewWrapper$VedioReview: java.lang.String subjectContent
+com.wuxi.domain.VedioReviewWrapper$VedioReview: java.lang.String beginTime
+com.wuxi.domain.VedioReviewWrapper$VedioReview: java.lang.String endTime
+com.wuxi.domain.VedioReviewWrapper$VedioReview: com.wuxi.domain.VedioReviewWrapper this$0
+com.wuxi.domain.VedioReviewWrapper$VedioReview: VedioReviewWrapper$VedioReview(com.wuxi.domain.VedioReviewWrapper)
+com.wuxi.domain.VedioReviewWrapper$VedioReview: java.lang.String getId()
+com.wuxi.domain.VedioReviewWrapper$VedioReview: void setId(java.lang.String)
+com.wuxi.domain.VedioReviewWrapper$VedioReview: java.lang.String getSubject()
+com.wuxi.domain.VedioReviewWrapper$VedioReview: void setSubject(java.lang.String)
+com.wuxi.domain.VedioReviewWrapper$VedioReview: java.lang.String getGuests()
+com.wuxi.domain.VedioReviewWrapper$VedioReview: void setGuests(java.lang.String)
+com.wuxi.domain.VedioReviewWrapper$VedioReview: java.lang.String getWorkDate()
+com.wuxi.domain.VedioReviewWrapper$VedioReview: void setWorkDate(java.lang.String)
+com.wuxi.domain.VedioReviewWrapper$VedioReview: java.lang.String getSubjectContent()
+com.wuxi.domain.VedioReviewWrapper$VedioReview: void setSubjectContent(java.lang.String)
+com.wuxi.domain.VedioReviewWrapper$VedioReview: java.lang.String getBeginTime()
+com.wuxi.domain.VedioReviewWrapper$VedioReview: void setBeginTime(java.lang.String)
+com.wuxi.domain.VedioReviewWrapper$VedioReview: java.lang.String getEndTime()
+com.wuxi.domain.VedioReviewWrapper$VedioReview: void setEndTime(java.lang.String)
+com.wuxi.domain.WorkSuggestionBoxWrapper
+com.wuxi.domain.WorkSuggestionBoxWrapper: java.lang.String id
+com.wuxi.domain.WorkSuggestionBoxWrapper: java.util.List parameters
+com.wuxi.domain.WorkSuggestionBoxWrapper: java.lang.String formId
+com.wuxi.domain.WorkSuggestionBoxWrapper: java.lang.String formTitle
+com.wuxi.domain.WorkSuggestionBoxWrapper: java.lang.String formDesc
+com.wuxi.domain.WorkSuggestionBoxWrapper: int sendType
+com.wuxi.domain.WorkSuggestionBoxWrapper: int linkDept
+com.wuxi.domain.WorkSuggestionBoxWrapper: WorkSuggestionBoxWrapper()
+com.wuxi.domain.WorkSuggestionBoxWrapper: java.lang.String getId()
+com.wuxi.domain.WorkSuggestionBoxWrapper: void setId(java.lang.String)
+com.wuxi.domain.WorkSuggestionBoxWrapper: java.util.List getParameters()
+com.wuxi.domain.WorkSuggestionBoxWrapper: void setParameters(java.util.List)
+com.wuxi.domain.WorkSuggestionBoxWrapper: java.lang.String getFormId()
+com.wuxi.domain.WorkSuggestionBoxWrapper: void setFormId(java.lang.String)
+com.wuxi.domain.WorkSuggestionBoxWrapper: java.lang.String getFormTitle()
+com.wuxi.domain.WorkSuggestionBoxWrapper: void setFormTitle(java.lang.String)
+com.wuxi.domain.WorkSuggestionBoxWrapper: java.lang.String getFormDesc()
+com.wuxi.domain.WorkSuggestionBoxWrapper: void setFormDesc(java.lang.String)
+com.wuxi.domain.WorkSuggestionBoxWrapper: int getSendType()
+com.wuxi.domain.WorkSuggestionBoxWrapper: void setSendType(int)
+com.wuxi.domain.WorkSuggestionBoxWrapper: int getLinkDept()
+com.wuxi.domain.WorkSuggestionBoxWrapper: void setLinkDept(int)
