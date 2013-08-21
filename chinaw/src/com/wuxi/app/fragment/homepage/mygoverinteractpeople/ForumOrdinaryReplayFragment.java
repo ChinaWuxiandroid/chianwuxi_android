@@ -62,6 +62,8 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 
 	private ListView listView = null;
 
+	private TextView textView = null;
+
 	private Forum forum;
 
 	private OrdinaryPostWrapper postWrapper = null;
@@ -139,6 +141,8 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 		progressBar = (ProgressBar) view
 				.findViewById(R.id.ordinary_replay_progressbar);
 		progressBar.setVisibility(View.VISIBLE);
+
+		textView = (TextView) view.findViewById(R.id.forum_reply_content_text);
 
 		loadData();
 	}
@@ -229,6 +233,15 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 							Message message = handler.obtainMessage();
 							message.obj = "error";
 							handler.sendEmptyMessage(DATA_LOAD_ERROR);
+						}
+					}
+
+					else if (forum.getViewpath().equals("/SurveryContent")) {
+						if (true) {
+							textView.setVisibility(View.VISIBLE);
+							textView.setText("该页面还无法显示");
+							listView.setVisibility(View.GONE);
+							handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 						}
 					}
 				} catch (NetException e) {

@@ -50,8 +50,10 @@ import com.wuxi.app.fragment.homepage.more.SiteMapFragment;
 import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumPostFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegislationContentFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.PepoleIdeaCollectFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceContentDetailFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
 import com.wuxi.app.fragment.search.AdvancedSearchFragment;
@@ -92,7 +94,6 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	private List<FragmentWapper> fragments = new ArrayList<FragmentWapper>(); // 记录每次切换到fragment信息以便回退
 	private List<BaseFragment> baseFragments = new ArrayList<BaseFragment>();
 	private HomeTabChangListner homeTabChangListner;
-	
 
 	public void setHomeTabChangListner(HomeTabChangListner homeTabChangListner) {
 		this.homeTabChangListner = homeTabChangListner;
@@ -256,26 +257,38 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			case MYONLINEASKFRAGMENT:// 在线咨询
 				MyOnlineAskFragment myOnlineAskFragment = new MyOnlineAskFragment();
 				onAddFragment(myOnlineAskFragment, bundle);
-
 				break;
+
+			case GIP_PEOPLE_IDEA_CONTENT_FRAGMENT:// 政民互动 意见征集平台 民意征集 详情界面
+				PepoleIdeaCollectFragment peopleIdeaCollectFragment = new PepoleIdeaCollectFragment();
+				onAddFragment(peopleIdeaCollectFragment, bundle);
+				break;
+
 			case HOTREVIEW_CONTENT_FRAGMENT:// 政民互动 热点话题内容页
 				HotReviewContentFragment hotReviewContentFragment = new HotReviewContentFragment();
 				onAddFragment(hotReviewContentFragment, bundle);
 				break;
+
+			case GIP_MAYOR_MAIL_CONTENT_FRAGMENT:// 市长信箱 最新信件列表详情界面
+				GIP12345MayorMailContentFragment gip12345MayorMailContentFragment = new GIP12345MayorMailContentFragment();
+				onAddFragment(gip12345MayorMailContentFragment, bundle);
+				break;
+
 			case GIP_FOROUM_FRAGMENT:// 公众论坛帖子详细内容
 				ForumContentFragment forumContentFragment = new ForumContentFragment();
 				onAddFragment(forumContentFragment, bundle);
 				break;
+
 			case GIP_FORUM_POST_FRAGMENT:// 公众论坛发表帖子界面
 				ForumPostFragment forumPostFragment = new ForumPostFragment();
 				onAddFragment(forumPostFragment, bundle);
 				break;
 
-			case GIP_LEGISLATION_CONTENT_FRAGMENT://征求意见平台 立法征求意见详细内容界面
+			case GIP_LEGISLATION_CONTENT_FRAGMENT:// 征求意见平台 立法征求意见详细内容界面
 				LegislationContentFragment legislationContentFragment = new LegislationContentFragment();
 				onAddFragment(legislationContentFragment, bundle);
 				break;
-		
+
 			case GIP_CHANNEL_CONTENT_DETAILWEB_FRAGMENT:// 政民互动 频道内容页
 				GoverMsgContentDetailWebFragment gIPContentDetailWebFragment = new GoverMsgContentDetailWebFragment();
 				onAddFragment(gIPContentDetailWebFragment, bundle);
@@ -292,7 +305,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				onAddFragment(goverSaloonDetailQTFragment, bundle);
 				break;
 			case GOVERSALOONCONTENTDETIALFRAGMENT:
-				GoverSaloonContentDetialFragment goverSaloonContentDetialFragment=new GoverSaloonContentDetialFragment();
+				GoverSaloonContentDetialFragment goverSaloonContentDetialFragment = new GoverSaloonContentDetialFragment();
 				onAddFragment(goverSaloonContentDetialFragment, bundle);
 				break;
 			case GOVERSALOONDETAIL_QZ_FRAGMENT:// 政务大厅 强制办件详情
@@ -367,8 +380,9 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	 */
 	private void onReplaceFragment(BaseSlideFragment fragment, Bundle bundle) {
 
-		if(homeTabChangListner!=null){
-			homeTabChangListner.setCurrentFragment(fragment);//通知 tab 页面当前的fragment
+		if (homeTabChangListner != null) {
+			homeTabChangListner.setCurrentFragment(fragment);// 通知 tab
+																// 页面当前的fragment
 		}
 		FragmentTransaction ft = manager.beginTransaction();
 
@@ -393,8 +407,9 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	 * @param bundele
 	 */
 	private void onAddFragment(BaseSlideFragment fragment, Bundle bundele) {
-		if(homeTabChangListner!=null){
-			homeTabChangListner.setCurrentFragment(fragment);//通知 tab 页面当前的fragment
+		if (homeTabChangListner != null) {
+			homeTabChangListner.setCurrentFragment(fragment);// 通知 tab
+																// 页面当前的fragment
 		}
 		fragment.setFragment(this);
 		fragment.setManagers(managers);
@@ -426,7 +441,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	public void onBack() {
 
 		if (baseFragments.size() == 0) {// 退出到首页
-			MainIndexFragment mainIndexFragment=new MainIndexFragment();
+			MainIndexFragment mainIndexFragment = new MainIndexFragment();
 			mainIndexFragment.setHomeTabChangListner(homeTabChangListner);
 			managers.ChangeFragment(mainIndexFragment);
 			// managers.BackPress(this);
@@ -487,7 +502,6 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	@Override
 	public void onItemClick(AdapterView<?> parent, View arg1, int position,
 			long id) {
-
 
 		if (!mSlideMenuLayout.getLeftSlideMenuEnabled()) {
 			return;

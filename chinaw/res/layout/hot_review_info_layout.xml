@@ -118,7 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5sp"
-                android:text="阅读人数 : "
+                android:text="阅读人数  "
                 android:textColor="#808080"
                 android:textSize="12sp" />
 

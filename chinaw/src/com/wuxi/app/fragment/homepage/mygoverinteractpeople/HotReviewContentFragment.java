@@ -100,7 +100,9 @@ public class HotReviewContentFragment extends BaseItemContentFragment implements
 			break;
 
 		case R.id.forum_content_comment_radiobtn:
-
+			HotReviewReplyFragment hotReviewReplyFragment = new HotReviewReplyFragment();
+			hotReviewReplyFragment.setHotReview(getHotReview());
+			onTransaction(hotReviewReplyFragment);
 			break;
 		}
 	}

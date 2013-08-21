@@ -252,14 +252,6 @@
                 android:textStyle="bold" />
 
             <ImageButton
-                android:id="@+id/gip_12345_iwantmail_imageBtn_upload"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/upload_selector" />
-
-            <ImageButton
                 android:id="@+id/gip_12345_iwantmail_imageBtn_send"
                 android:layout_width="90dp"
                 android:layout_height="match_parent"
@@ -267,45 +259,6 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/sendmail_selector" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="上传附件说明："
-                android:textColor="@color/gip_txt_gray"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:gravity="center_vertical"
-                android:lines="2"
-                android:text="1.您上传文件的扩展名必须是.gif/.jpg/.bmp/.doc/.xls/.pdf/.txt/.zip/.rar中的一种。"
-                android:textColor="@color/gip_txt_gray"
-                android:textSize="10sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:lines="1"
-                android:text="2.每个附件的大小必须小于2M，且附件大小之和不能超过10M。"
-                android:textColor="@color/gip_txt_gray"
-                android:textSize="10sp"
-                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 

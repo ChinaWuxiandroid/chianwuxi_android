@@ -63,25 +63,21 @@ public class GIP12345HotMail extends RadioButtonChangeFragment{
 
 	@Override
 	protected int getLayoutId() {
-		// TODO Auto-generated method stub
 		return R.layout.gip_12345_hotmail_layout;
 	}
 
 	@Override
 	protected int getRadioGroupId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	protected int[] getRadioButtonIds() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	protected int getContentFragmentId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -132,10 +128,8 @@ public class GIP12345HotMail extends RadioButtonChangeFragment{
 					handler.sendEmptyMessage(DATA_LOAD_ERROR);
 
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (NODataException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -158,19 +152,16 @@ public class GIP12345HotMail extends RadioButtonChangeFragment{
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return letters.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return letters.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 
@@ -182,7 +173,6 @@ public class GIP12345HotMail extends RadioButtonChangeFragment{
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
 			ViewHolder viewHolder = null;
 			if(convertView==null){
 				convertView = mInflater.inflate(

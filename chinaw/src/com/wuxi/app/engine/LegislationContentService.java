@@ -86,9 +86,10 @@ public class LegislationContentService extends Service {
 			}
 
 			return noticePostWrapper;
+		}else {
+			// 没有获取到数据异常
+			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);
 		}
-
-		return null;
 	}
 
 	/**
