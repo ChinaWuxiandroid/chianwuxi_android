@@ -3,6 +3,7 @@ package com.wuxi.app.fragment.homepage;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
@@ -63,6 +65,7 @@ import com.wuxi.app.listeners.HomeTabChangListner;
 import com.wuxi.app.listeners.SlideLinstener;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.app.view.SlideMenuLayout;
 import com.wuxi.domain.MenuItem;
@@ -94,6 +97,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	private List<FragmentWapper> fragments = new ArrayList<FragmentWapper>(); // 记录每次切换到fragment信息以便回退
 	private List<BaseFragment> baseFragments = new ArrayList<BaseFragment>();
 	private HomeTabChangListner homeTabChangListner;
+	private Context context;
 
 	public void setHomeTabChangListner(HomeTabChangListner homeTabChangListner) {
 		this.homeTabChangListner = homeTabChangListner;
@@ -111,6 +115,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.slide_level_layout, null);
+		context = getActivity();
 		popWindowManager = PopWindowManager.getInstance();
 		mSlideMenuLayout = (SlideMenuLayout) view
 				.findViewById(R.id.slide_menu_layout);
@@ -131,7 +136,10 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				.findViewById(R.id.right_menu_rb_mydownload);
 		right_menu_rb_myset = (RadioButton) view
 				.findViewById(R.id.right_menu_rb_myset);
-
+		right_menu_rb_collect.setOnClickListener(this);
+		right_menu_rb_mzhd.setOnClickListener(this);
+		right_menu_rb_mydownload.setOnClickListener(this);
+		right_menu_rb_myset.setOnClickListener(this);
 		login_tv_userlogin.setOnClickListener(this);
 		login_tv_user_regisster.setOnClickListener(this);
 		right_menu_rg.setOnCheckedChangeListener(this);
@@ -539,6 +547,37 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			this.fragmentName = Constants.FragmentName.REGIST_FRAGMENT;
 			initFragment(null);
 
+			break;
+		case R.id.right_menu_rb_collect:// 我的收藏
+			this.menuItem = null;
+
+			this.fragmentName = Constants.FragmentName.MENUITEMSET_FRAGMENT;
+			initFragment(null);
+			break;
+		case R.id.right_menu_rb_mzhd:// 我的政民互动
+
+			if ("".equals(SystemUtil.getAccessToken(context))) {
+				Toast.makeText(context, "请先登录", Toast.LENGTH_SHORT).show();
+				this.menuItem = null;
+
+				this.fragmentName = Constants.FragmentName.LOGIN_FRAGMENT;
+				initFragment(null);
+			} else {
+				this.menuItem = null;
+
+				this.fragmentName = Constants.FragmentName.MAINMINEFRAGMENT;
+				initFragment(null);
+			}
+
+			break;
+
+		case R.id.right_menu_rb_mydownload:// 我的下载
+			Toast.makeText(context, "正在施工中....", Toast.LENGTH_SHORT).show();
+			break;
+		case R.id.right_menu_rb_myset:// 我的设置
+			this.menuItem = null;
+			this.fragmentName = Constants.FragmentName.SYSTEMSETF_RAGMENT;
+			initFragment(null);
 			break;
 
 		}

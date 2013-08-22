@@ -4,18 +4,19 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-   <!--  <include
+    <!--
+         <include
         android:id="@+id/search_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        layout="@layout/goversaloon_title_search_layout" /> -->
+        layout="@layout/goversaloon_title_search_layout" />
+    -->
 
     <RadioGroup
         android:id="@+id/gover_btn_rg"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-       
         android:layout_marginLeft="5dip"
         android:layout_marginTop="8dip"
         android:orientation="horizontal" >
@@ -27,9 +28,9 @@
             android:background="@drawable/gover_saloon_btn_selector"
             android:button="@null"
             android:gravity="center"
+            android:padding="5dip"
             android:text="我的在线咨询"
-            android:textSize="14sp" 
-            android:padding="5dip"/>
+            android:textSize="14sp" />
 
         <RadioButton
             android:id="@+id/gover_sallon_my_apply"
@@ -39,9 +40,9 @@
             android:background="@drawable/gover_saloon_btn_selector"
             android:button="@null"
             android:gravity="center"
+            android:padding="5dip"
             android:text="我的申报列表"
-            android:textSize="14sp" 
-              android:padding="5dip"/>
+            android:textSize="14sp" />
     </RadioGroup>
 
     <LinearLayout
@@ -64,18 +65,20 @@
                 android:id="@+id/gover_saloon_lv_myconsult"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:visibility="invisible" 
-                 android:divider="@android:color/white"
-            android:dividerHeight="1dip">
+                android:cacheColorHint="@android:color/transparent"
+                android:divider="@android:color/white"
+                android:dividerHeight="1dip"
+                android:visibility="invisible" >
             </ListView>
 
             <ListView
                 android:id="@+id/gover_saloon_lv_myapply"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
-                 android:divider="@android:color/white"
-            android:dividerHeight="1dip" >
+                android:cacheColorHint="@android:color/transparent"
+                android:divider="@android:color/white"
+                android:dividerHeight="1dip"
+                android:visibility="invisible" >
             </ListView>
         </FrameLayout>
 
@@ -84,10 +87,12 @@
             android:layout_height="5dip" />
     </LinearLayout>
 
-  <!--   <include
+    <!--
+         <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        layout="@layout/goversaloon_foot_search_layout" /> -->
+        layout="@layout/goversaloon_foot_search_layout" />
+    -->
 
 </RelativeLayout>

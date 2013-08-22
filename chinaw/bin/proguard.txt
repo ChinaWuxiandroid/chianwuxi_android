@@ -1,4 +1,4 @@
-# view res/layout/gover_saloon_administrative.xml #generated:22
+# view res/layout/gover_saloon_administrative.xml #generated:23
 # view res/layout/gover_saloon_mange.xml #generated:23
 # view res/layout/index_news_layout.xml #generated:31
 # view res/layout/main_index_fragment_layout.xml #generated:39

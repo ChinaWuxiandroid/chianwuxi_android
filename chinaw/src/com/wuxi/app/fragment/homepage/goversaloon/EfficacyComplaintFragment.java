@@ -260,6 +260,7 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 				.findViewById(R.id.gover_eff_btn_mail_search);
 		gover_eff_btn_writemail = (ImageView) view
 				.findViewById(R.id.gover_eff_btn_writemail);
+		gover_eff_btn_writemail.setOnClickListener(this);
 		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
 				null);
 		loadMoreButton = (Button) loadMoreView
@@ -424,6 +425,9 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 				
 				
 			}
+			break;
+		case R.id.gover_eff_btn_writemail:
+			Toast.makeText(context, "施工中", Toast.LENGTH_SHORT).show();
 			break;
 
 		}
