@@ -24,7 +24,7 @@
             android:cacheColorHint="@android:color/transparent"
             android:divider="@android:color/white"
             android:dividerHeight="1dip" 
-            android:cacheColorHint="@android:color/transparent">
+            >
         </ListView>
 
         <ProgressBar

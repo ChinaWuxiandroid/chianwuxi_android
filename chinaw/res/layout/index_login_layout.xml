@@ -76,7 +76,7 @@
                         android:layout_marginLeft="50dip"
                         android:layout_marginTop="1dip"
                         android:background="@null"
-                        android:hint=" 请输入密码"
+                        android:hint="请输入密码"
                         android:inputType="textPassword" />
                 </RelativeLayout>
 

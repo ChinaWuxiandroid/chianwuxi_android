@@ -122,6 +122,13 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 
 		wuxicity_decontent_wb.getSettings().setJavaScriptEnabled(true);
 
+		
+		wuxicity_decontent_wb.getSettings().setUseWideViewPort(true);
+		wuxicity_decontent_wb.getSettings().setBuiltInZoomControls(true);
+		wuxicity_decontent_wb.getSettings().setLoadWithOverviewMode(true);
+
+		wuxicity_decontent_wb.loadUrl(wapUrl);
+		
 		wuxicity_decontent_wb.setWebChromeClient(new WebChromeClient() {
 			public void onProgressChanged(WebView view, int progress) {
 
@@ -132,11 +139,6 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 
 			}
 		});
-		wuxicity_decontent_wb.getSettings().setUseWideViewPort(true);
-		wuxicity_decontent_wb.getSettings().setBuiltInZoomControls(true);
-		wuxicity_decontent_wb.getSettings().setLoadWithOverviewMode(true);
-
-		wuxicity_decontent_wb.loadUrl(wapUrl);
 
 	}
 

@@ -136,7 +136,8 @@
                     android:layout_height="25dip"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dip"
-                    android:background="#ffffff"
+                   	android:paddingLeft="5dip"
+                    android:background="@drawable/edittext_back"
                     android:hint="   输入起点"
                     android:maxLength="10"
                     android:textSize="12sp" />
@@ -154,7 +155,7 @@
                     android:layout_height="25dip"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dip"
-                    android:background="#ffffff"
+                    android:background="@drawable/edittext_back"
                     android:hint="   输入终点"
                     android:maxLength="10"
                     android:textSize="12sp" />

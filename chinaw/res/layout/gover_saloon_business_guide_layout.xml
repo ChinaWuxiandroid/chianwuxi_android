@@ -4,59 +4,52 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-  <!--   <include
-        android:id="@+id/search_head"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        layout="@layout/goversaloon_title_search_layout" />
- -->
+
+
     <RadioGroup
         android:id="@+id/gover_buness_guide_rg"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-       
         android:layout_marginTop="3dip"
         android:orientation="horizontal" >
 
         <RadioButton
-            
+            android:id="@+id/rb_personal"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/gover_buessguide_btn_selector"
             android:button="@null"
             android:text="个人办事"
-            android:textSize="12sp" 
-            android:id="@+id/rb_personal"
-            android:textColor="#CC0000"/>
+            android:textColor="#CC0000"
+            android:textSize="12sp" />
 
         <RadioButton
+            android:id="@+id/rb_company"
             android:layout_width="0dip"
             android:layout_weight="1"
             android:background="@drawable/gover_buessguide_btn_selector"
             android:button="@null"
             android:text="企业办事"
-             android:textSize="12sp"
-             android:id="@+id/rb_company" />
+            android:textSize="12sp" />
 
         <RadioButton
+            android:id="@+id/rb_style_service"
             android:layout_width="0dip"
             android:layout_weight="1"
             android:background="@drawable/gover_buessguide_btn_selector"
             android:button="@null"
-            android:text="主题服务" 
-             android:textSize="12sp"
-             android:id="@+id/rb_style_service"/>
+            android:text="主题服务"
+            android:textSize="12sp" />
 
         <RadioButton
+            android:id="@+id/rb_green"
             android:layout_width="0dip"
             android:layout_weight="1"
             android:background="@drawable/gover_buessguide_btn_selector"
             android:button="@null"
-            android:text="绿色通道"  
-            android:textSize="12sp"
-            android:id="@+id/rb_green"/>
+            android:text="绿色通道"
+            android:textSize="12sp" />
     </RadioGroup>
 
     <GridView
@@ -66,7 +59,7 @@
         android:layout_below="@+id/gover_buness_guide_rg"
         android:background="@android:color/white"
         android:numColumns="7"
-        android:stretchMode="columnWidth">
+        android:stretchMode="columnWidth" >
     </GridView>
 
     <FrameLayout
@@ -84,20 +77,18 @@
             android:id="@+id/gover_guid_lv_content"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-             android:divider="@android:color/white"
-            android:dividerHeight="1dip"
-<<<<<<< HEAD
-            android:cacheColorHint="@android:color/transparent" >
-=======
-           	android:cacheColorHint="@android:color/transparent" >
->>>>>>> b7b4aab80f50d759363e8aede8c67b29c95db0be
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/white"
+            android:dividerHeight="1dip" >
         </ListView>
     </FrameLayout>
 
-   <!--  <include
+    <!--
+         <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        layout="@layout/goversaloon_foot_search_layout" /> -->
+        layout="@layout/goversaloon_foot_search_layout" />
+    -->
 
 </RelativeLayout>

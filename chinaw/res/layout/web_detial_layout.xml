@@ -16,17 +16,16 @@
         android:layout_height="0dip"
         android:layout_weight="9" >
 
+        <WebView
+            android:id="@+id/wuxicity_decontent_wb"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
         <ProgressBar
             android:id="@+id/pb_content_wb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
-
-        <WebView
-            android:id="@+id/wuxicity_decontent_wb"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-             />
     </FrameLayout>
 
 </LinearLayout>

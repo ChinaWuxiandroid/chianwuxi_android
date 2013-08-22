@@ -63,7 +63,6 @@ public class RegisterFragment extends BaseSlideFragment implements OnClickListen
 	@Override
 	public  void initUI() {
 		super.initUI();
-		slideLinstener.closeSlideMenu();//关掉左右
 		et_username = (EditText) view.findViewById(R.id.et_username);
 		et_truename = (EditText) view.findViewById(R.id.et_truename);
 		et_password = (EditText) view.findViewById(R.id.et_password);

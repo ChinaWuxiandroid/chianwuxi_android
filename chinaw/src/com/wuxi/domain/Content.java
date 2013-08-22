@@ -58,7 +58,11 @@ public class Content implements Serializable {
 	}
 
 	public String getOrganization() {
-		return organization;
+		if(organization!=null&&!organization.equals("null")){
+			return organization;
+		}
+	
+		return "";
 	}
 
 	public void setOrganization(String organization) {
@@ -308,7 +312,7 @@ public class Content implements Serializable {
 	public String getWapUrl() {
 		
 		return wapUrl;
-	//	return "http://www.wuxi.gov.cn"+wapUrl;
+	
 	}
 
 	public void setWapUrl(String wapUrl) {

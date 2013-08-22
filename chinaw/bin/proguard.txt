@@ -16,7 +16,7 @@
 # view res/layout/sitemap_gridview_layout.xml #generated:6
 -keep class com.wuxi.app.view.MyGridView { <init>(...); }
 
-# view res/layout/city_map_layout.xml #generated:203
+# view res/layout/city_map_layout.xml #generated:204
 -keep class com.wuxi.app.view.MyMapView { <init>(...); }
 
 # view res/layout/main_index_fragment_layout.xml #generated:14

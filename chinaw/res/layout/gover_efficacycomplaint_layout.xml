@@ -42,13 +42,9 @@
             android:id="@+id/gover_eff_lv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:cacheColorHint="@android:color/transparent"
             android:divider="@android:color/white"
-            android:dividerHeight="1dip" 
-<<<<<<< HEAD
-            android:cacheColorHint="@android:color/transparent">
-=======
-            android:cacheColorHint="@android:color/transparent" >
->>>>>>> b7b4aab80f50d759363e8aede8c67b29c95db0be
+            android:dividerHeight="1dip" >
         </ListView>
 
         <include
