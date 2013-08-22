@@ -4,15 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <!--
-         <include
-        android:id="@+id/search_head"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        layout="@layout/goversaloon_title_search_layout" />
-    -->
-
+  
     <RadioGroup
         android:id="@+id/gover_btn_rg"
         android:layout_width="fill_parent"
@@ -64,8 +56,13 @@
             <ListView
                 android:id="@+id/gover_saloon_lv_myconsult"
                 android:layout_width="fill_parent"
+<<<<<<< HEAD
                 android:layout_height="wrap_content"
                 android:cacheColorHint="@android:color/transparent"
+=======
+                android:layout_height="wrap_content"
+                android:cacheColorHint="@android:color/transparent"
+>>>>>>> b6d54eda6de3ffda7310d192b27185657158051f
                 android:divider="@android:color/white"
                 android:dividerHeight="1dip"
                 android:visibility="invisible" >
@@ -87,12 +84,5 @@
             android:layout_height="5dip" />
     </LinearLayout>
 
-    <!--
-         <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        layout="@layout/goversaloon_foot_search_layout" />
-    -->
 
 </RelativeLayout>

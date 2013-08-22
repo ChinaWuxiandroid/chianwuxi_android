@@ -62,7 +62,7 @@ public abstract class ContentDetailFragment extends BaseItemContentFragment {
 	@SuppressLint("SetJavaScriptEnabled")
 	private void showContentData() {
 		String wapUrl = content.getWapUrl();
-		String title = content.getTitle();
+		
 		String time = content.getPublishTime();
 		int browCount = content.getBrowseCount();
 

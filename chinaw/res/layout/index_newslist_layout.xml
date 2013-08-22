@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="20dip" >
+        android:padding="19.5dip" >
 
         <TextView
             android:id="@+id/index_num_text"
