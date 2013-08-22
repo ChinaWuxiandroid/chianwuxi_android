@@ -54,6 +54,7 @@ import com.wuxi.app.fragment.homepage.SlideLevelFragment;
 import com.wuxi.app.listeners.HomeTabChangListner;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.Constants.CacheKey;
 import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.Content;
 import com.wuxi.domain.MenuItem;
@@ -675,6 +676,11 @@ public class MainIndexFragment extends BaseFragment implements
 
 	@Override
 	public void onClick(View v) {
+		if (CacheUtil.get(CacheKey.HOME_MENUITEM_KEY) == null) {
+			Toast.makeText(context, "数据异常，请重启，或检查网络", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
 		Bundle bundle = new Bundle();
 		SlideLevelFragment saveFragment = new SlideLevelFragment();
 		saveFragment.setHomeTabChangListner(homeTabChangListner);

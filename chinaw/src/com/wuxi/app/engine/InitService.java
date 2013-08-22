@@ -37,19 +37,15 @@ public class InitService extends Service {
 		clearCache();
 	}
 
-	
-	
-	
 	/**
 	 * 
-	 * wanglu 泰得利通 清除缓存
-	 * 超过3天以上清除缓存文件 
+	 * wanglu 泰得利通 清除缓存 超过3天以上清除缓存文件 每隔3天以上清除一下缓存
 	 */
 	public void clearCache() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.get(Calendar.DATE);
 		long nowLoginTime = calendar.getTimeInMillis();
-
+		Editor ed = sp.edit();
 		long lastLoginTime = sp.getLong(
 				Constants.SharepreferenceKey.LAST_LOGIN_TIME, 0);
 		if (lastLoginTime != 0) {// 上次登录时间不为空
@@ -57,7 +53,9 @@ public class InitService extends Service {
 			long days = (nowLoginTime - lastLoginTime) / (1000 * 60 * 60 * 24);
 			int between_day = Integer.parseInt(String.valueOf(days));
 			if (between_day >= 3) {// 超过三天
-
+				ed.putLong(Constants.SharepreferenceKey.LAST_LOGIN_TIME,
+						nowLoginTime);// 存入登录时间
+				ed.commit();
 				if (Environment.getExternalStorageState().equals(
 						Environment.MEDIA_MOUNTED)) {
 
@@ -73,11 +71,12 @@ public class InitService extends Service {
 
 			}
 
-		}
+		} else {// 首次使用APP
+			ed.putLong(Constants.SharepreferenceKey.LAST_LOGIN_TIME,
+					nowLoginTime);// 存入登录时间
+			ed.commit();
 
-		Editor ed = sp.edit();
-		ed.putLong(Constants.SharepreferenceKey.LAST_LOGIN_TIME, nowLoginTime);// 存入登录时间
-		ed.commit();
+		}
 
 	}
 }

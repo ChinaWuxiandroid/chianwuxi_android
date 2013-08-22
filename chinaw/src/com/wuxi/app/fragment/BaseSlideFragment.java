@@ -49,6 +49,7 @@ public abstract class BaseSlideFragment extends BaseFragment {
 	protected abstract int getLayoutId();
 
 	public void initBtn() {
+		slideLinstener.closeSlideMenu();
 		opearn_btn = (ImageView) view.findViewById(R.id.open_close_left_btn);
 		member_btnm = (ImageView) view.findViewById(R.id.member_btn);
 		Title_text = (TextView) view.findViewById(R.id.Title_Text);

@@ -5,12 +5,10 @@
     android:background="@color/content_background"
     android:orientation="vertical" >
 
-
     <LinearLayout
         android:id="@+id/search_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        
         android:layout_marginLeft="5dip"
         android:layout_marginRight="5dip"
         android:orientation="horizontal" >
@@ -18,27 +16,27 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="表格名称:" 
-            android:textSize="12sp"/>
+            android:text="表格名称:"
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/et_filename_keywords"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.82"
+            android:background="#ffffff"
             android:hint="输入关键字         "
             android:maxLength="20"
-            android:textSize="12sp" 
-            android:background="#ffffff"/>
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/btn_fileSearch"
             android:layout_width="wrap_content"
             android:layout_height="20sp"
-            android:text="检索"
-            android:textSize="12sp"
+            android:layout_marginLeft="3dip"
             android:background="#DCDCDC"
-            android:layout_marginLeft="3dip" />
+            android:text="检索"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <Spinner
@@ -46,9 +44,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/search_ll"
-           android:background="@drawable/spiner_bg"
         android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip" />
+        android:layout_marginRight="10dip"
+        android:background="@drawable/spiner_bg" />
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -60,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/gover_table_down_deptsp"
+            android:cacheColorHint="@android:color/transparent"
             android:divider="@android:color/white"
             android:dividerHeight="1dip" 
             android:cacheColorHint="@android:color/transparent">
@@ -71,7 +70,5 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
     </FrameLayout>
-
-
 
 </RelativeLayout>

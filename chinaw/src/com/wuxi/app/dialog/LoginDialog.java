@@ -7,14 +7,12 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.SharedPreferences;
 
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.app.util.SystemUtil;
-
 /**
  * 
  * @author wanglu 泰得利通 登录对话框
@@ -24,7 +22,7 @@ public class LoginDialog {
 
 	private Context context;
 	private BaseSlideFragment baseSlideFragment;
-	private SharedPreferences sp;
+	
 
 	public LoginDialog(Context context, BaseSlideFragment baseSlideFragment) {
 		this.context = context;

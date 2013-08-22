@@ -602,7 +602,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 
 		switch (v.getId()) {
 		case R.id.gover_mange_iv_next:
-			// gover_viewpagerLayout.setCurrentItem(pageNo+1);
+			
 			gover_viewpagerLayout.setCurrentItem(pageNo + 1, true);
 			break;
 		case R.id.govver_admintrative_ib_search:

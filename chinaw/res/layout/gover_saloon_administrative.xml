@@ -4,18 +4,19 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-   <!--  <include
+    <!--
+         <include
         android:id="@+id/search_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        layout="@layout/goversaloon_title_search_layout" /> -->
+        layout="@layout/goversaloon_title_search_layout" />
+    -->
 
     <FrameLayout
         android:id="@+id/fl_title_item"
         android:layout_width="match_parent"
         android:layout_height="40dip"
-       
         android:layout_marginTop="8dip"
         android:orientation="horizontal" >
 
@@ -49,14 +50,14 @@
         <Spinner
             android:id="@+id/sp_dept_year"
             android:layout_width="55dip"
-            android:layout_height="wrap_content" 
-            android:background="@drawable/spiner_bg"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/spiner_bg" />
 
         <ImageButton
-            android:layout_marginLeft="5dip"
             android:id="@+id/govver_admintrative_ib_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
             android:background="@drawable/search_released" />
     </LinearLayout>
 
@@ -69,6 +70,7 @@
             android:id="@+id/gover_mange_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
             android:divider="@android:color/white"
             android:dividerHeight="1dip"
             android:cacheColorHint="@android:color/transparent" >
@@ -81,10 +83,12 @@
             android:layout_gravity="center" />
     </FrameLayout>
 
-  <!--   <include
+    <!--
+         <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        layout="@layout/goversaloon_foot_search_layout" /> -->
+        layout="@layout/goversaloon_foot_search_layout" />
+    -->
 
 </RelativeLayout>
