@@ -175,9 +175,7 @@ public class GoverInterPeoplePublicForumFragment extends
 	 * 显示论坛列表
 	 */
 	private void showForums() {
-		BaseSlideFragment baseSlideFragment = this.baseSlideFragment;
-		ForumListAdapter forumListAdapter = new ForumListAdapter(
-				baseSlideFragment);
+		ForumListAdapter forumListAdapter = new ForumListAdapter();
 
 		if (forums == null || forums.size() == 0) {
 			Toast.makeText(context, "对不起，暂无论坛信息", 2000).show();
@@ -205,9 +203,9 @@ public class GoverInterPeoplePublicForumFragment extends
 		 * 
 		 * @param baseSlideFragment
 		 */
-		public ForumListAdapter(BaseSlideFragment baseSlideFragment) {
-			this.baseSlideFragment = baseSlideFragment;
-		}
+//		public ForumListAdapter(BaseSlideFragment baseSlideFragment) {
+//			this.baseSlideFragment = baseSlideFragment;
+//		}
 
 		@Override
 		public int getCount() {
@@ -279,6 +277,8 @@ public class GoverInterPeoplePublicForumFragment extends
 			Forum forum=(Forum)adapterView.getItemAtPosition(position);
 			Bundle bundle=new Bundle();
 			bundle.putSerializable("forum", forum);
+			
+			baseSlideFragment = GoverInterPeoplePublicForumFragment.this.baseSlideFragment;
 			
 			baseSlideFragment.slideLinstener.replaceFragment(null, position,
 					Constants.FragmentName.GIP_FOROUM_FRAGMENT, bundle);

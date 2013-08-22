@@ -15,15 +15,17 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
  * */
 
 public class GIP12345IWantMailFragment extends RadioButtonChangeFragment {
+
 	/**
-	 * 
+	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
-	private int contentType=0;   //内容类型，缺省为0-我要写信  1-写信须知   2-办理规则
-	protected static final int HIDEN_CONTENT_ID=R.id.gip_12345_iwantmail_content_framelayout;
+
+	protected static final int HIDEN_CONTENT_ID = R.id.gip_12345_iwantmail_content_framelayout;
+
+	private int contentType = 0; // 内容类型，缺省为0-我要写信 1-写信须知 2-办理规则
 
 	private final int[] radioButtonIds = {
-
 			R.id.gip_12345_iwantmail_radioButton_iwantmail,
 			R.id.gip_12345_iwantmail_radioButton_mustKonwMail,
 			R.id.gip_12345_iwantmail_radioButton_mayorBoxRule };
@@ -33,17 +35,17 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment {
 		super.onCheckedChanged(group, checkedId);
 		switch (checkedId) {
 		case R.id.gip_12345_iwantmail_radioButton_iwantmail:
-			contentType=0;
+			contentType = 0;
 			init();
 			break;
 
 		case R.id.gip_12345_iwantmail_radioButton_mustKonwMail:
-			contentType=1;
+			contentType = 1;
 			changeContent(contentType);
 			break;
 
 		case R.id.gip_12345_iwantmail_radioButton_mayorBoxRule:
-			contentType=2;
+			contentType = 2;
 			changeContent(contentType);
 			break;
 		}
@@ -51,55 +53,53 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment {
 
 	@Override
 	protected int getLayoutId() {
-		// TODO Auto-generated method stub
 		return R.layout.gip_12345_iwantmail_layout;
 	}
 
 	@Override
 	protected int getRadioGroupId() {
-		// TODO Auto-generated method stub
 		return R.id.gip_12345_iwantmail_radioGroup;
 	}
 
 	@Override
 	protected int[] getRadioButtonIds() {
-		// TODO Auto-generated method stub
 		return radioButtonIds;
 	}
 
 	@Override
 	protected int getContentFragmentId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	protected void init() {
-		GIP12345IWantMailLayoutFragment gIP12345IWantMailLayoutFragment=new GIP12345IWantMailLayoutFragment();
+		GIP12345IWantMailLayoutFragment gIP12345IWantMailLayoutFragment = new GIP12345IWantMailLayoutFragment();
 		bindFragment(gIP12345IWantMailLayoutFragment);
 	}
 
-	public void changeContent(int type){
-		GoverInterPeopleWebFragment goverInterPeopleWebFragment=new GoverInterPeopleWebFragment();
-		switch(type){
+	public void changeContent(int type) {
+		GoverInterPeopleWebFragment goverInterPeopleWebFragment = new GoverInterPeopleWebFragment();
+		switch (type) {
 		case 0:
 			init();
 			break;
 		case 1:
-			goverInterPeopleWebFragment.setUrl("http://www.wuxi.gov.cn/zmhd/6148280.shtml");
+			goverInterPeopleWebFragment
+					.setUrl("http://www.wuxi.gov.cn/zmhd/6148280.shtml");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		case 2:
-			goverInterPeopleWebFragment.setUrl("http://www.wuxi.gov.cn/zmhd/6148283.shtml");
+			goverInterPeopleWebFragment
+					.setUrl("http://www.wuxi.gov.cn/zmhd/6148283.shtml");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		}
 	}
 
-	private void bindFragment(Fragment fragment) {		
+	private void bindFragment(Fragment fragment) {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(HIDEN_CONTENT_ID, fragment);
-		ft.commit();	
+		ft.commit();
 	}
 }

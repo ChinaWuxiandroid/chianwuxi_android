@@ -184,7 +184,8 @@
                 <Spinner
                     android:id="@+id/gip_12345_answerstati_spinner_yearalone"
                     android:layout_width="60dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent" 
+                    android:background="@drawable/spiner_bg"/>
             </LinearLayout>
 
             <LinearLayout
@@ -195,12 +196,14 @@
                 <Spinner
                     android:id="@+id/gip_12345_answerstati_spinner_yeara"
                     android:layout_width="60dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:background="@drawable/spiner_bg" />
 
                 <Spinner
                     android:id="@+id/gip_12345_answerstati_spinner_month"
                     android:layout_width="50dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent" 
+                    android:background="@drawable/spiner_bg"/>
 
                 <ImageButton
                     android:id="@+id/gip_12345_answerstati_imagebutton_startstati"
@@ -227,6 +230,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@android:color/white"
+            android:cacheColorHint="@android:color/transparent"
             android:dividerHeight="1dp" >
         </ListView>
     </FrameLayout>

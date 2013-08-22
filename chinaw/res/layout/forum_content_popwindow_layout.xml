@@ -8,29 +8,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10sp"
-            android:layout_marginLeft="20sp"
-            android:layout_marginRight="20sp"
-            android:layout_marginTop="20sp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
+        android:layout_marginTop="20sp"
         android:orientation="horizontal" >
-        
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="请填写您的意见：" 
-            android:textSize="10sp"/>
+            android:text="请填写您的意见："
+            android:textSize="10sp" />
 
         <EditText
             android:id="@+id/forum_popwindow_content_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"       
+            android:layout_gravity="center"
             android:background="@drawable/worksuggestbox_edit_big_bk"
             android:gravity="left|top"
+            android:hint="输入文本..."
             android:inputType="textMultiLine"
             android:minLines="6"
             android:paddingLeft="3dp"
             android:paddingTop="3dp"
-            android:hint="输入文本..."
             android:textSize="10sp" />
     </LinearLayout>
 
@@ -41,9 +41,9 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="30sp"
         android:layout_marginTop="10sp"
-        android:text="提交评论和回复"
         android:background="@drawable/forum_submitbtn_bg"
-        android:textSize="10sp"
-        android:textColor="#0000FF"/>
+        android:text="提交评论和回复"
+        android:textColor="#0000FF"
+        android:textSize="10sp" />
 
 </LinearLayout>

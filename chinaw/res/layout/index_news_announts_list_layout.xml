@@ -8,6 +8,7 @@
         android:id="@+id/index_news_lv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#FCFCFC" />
+        android:background="#FCFCFC"
+        android:cacheColorHint="@android:color/transparent" />
 
 </LinearLayout>

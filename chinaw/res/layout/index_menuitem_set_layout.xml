@@ -25,7 +25,8 @@
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"
-                android:background="@drawable/system_set_shape" >
+                android:background="@drawable/system_set_shape"
+                android:cacheColorHint="@android:color/transparent" >
             </ListView>
             <ProgressBar 
                 android:id="@+id/pb_fava"

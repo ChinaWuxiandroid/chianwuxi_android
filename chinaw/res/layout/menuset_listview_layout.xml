@@ -11,7 +11,8 @@
         android:id="@+id/menuset_lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/system_set_shape" >
+        android:background="@drawable/system_set_shape" 
+        android:cacheColorHint="@android:color/transparent">
     </ListView>
 
 </LinearLayout>

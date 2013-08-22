@@ -8,8 +8,10 @@ import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.engine.LetterService;
+import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
@@ -49,6 +52,10 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 	private final int[] radioButtonIds = {
 			R.id.gip_mine_12345_radioButton_backmail,
 			R.id.gip_mine_12345_radioButton_mybackmail, };
+
+	// 我要写信 按钮
+	private ImageButton writeLetterImageBtn = null;
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -76,7 +83,7 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 		switch (checkedId) {
 
 		case R.id.gip_mine_12345_radioButton_backmail:
-			// init();
+			init();
 			break;
 
 		case R.id.gip_mine_12345_radioButton_mybackmail:
@@ -86,25 +93,21 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 
 	@Override
 	protected int getLayoutId() {
-		// TODO Auto-generated method stub
 		return R.layout.goverinterpeople_mine_12345_layout;
 	}
 
 	@Override
 	protected int getRadioGroupId() {
-		// TODO Auto-generated method stub
 		return R.id.gip_mine_12345_radioGroup;
 	}
 
 	@Override
 	protected int[] getRadioButtonIds() {
-		// TODO Auto-generated method stub
 		return radioButtonIds;
 	}
 
 	@Override
 	protected int getContentFragmentId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -112,17 +115,26 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 	protected void init() {
 		mListView = (ListView) view
 				.findViewById(R.id.goverinterpeople_mine_12345_listview);
+
+		writeLetterImageBtn = (ImageButton) view
+				.findViewById(R.id.gip_mine_12345_imageButton_writemail);
+		writeLetterImageBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// BaseSlideFragment baseSlideFragment =
+				// GIPMine12345Fragment.this.baseSlideFragment;
+				// baseSlideFragment.slideLinstener.replaceFragment(null,
+				// position,
+				// Constants.FragmentName.GIP_12345_WRITE_MAIL_FRAGMENT, null);
+				Toast.makeText(context, "该功能未实现", Toast.LENGTH_SHORT).show();
+			}
+		});
+
 		loadData();
 	}
 
 	public void loadData() {
-		// if (CacheUtil.get(menuItem.getChannelId()) != null) {// 从缓存获取
-		//
-		// titleChannels = (List<Channel>) CacheUtil.get(menuItem
-		// .getChannelId());
-		// showTitleData();
-		// return;
-		// }
 
 		new Thread(new Runnable() {
 
@@ -156,10 +168,8 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 					handler.sendEmptyMessage(DATA_LOAD_ERROR);
 
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (NODataException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -179,19 +189,16 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return letters.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return letters.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 
@@ -204,7 +211,6 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
 			ViewHolder viewHolder = null;
 			if (convertView == null) {
 				convertView = mInflater.inflate(

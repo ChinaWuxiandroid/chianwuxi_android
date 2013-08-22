@@ -67,7 +67,7 @@ public class GoverMsgWebFragment extends BaseFragment{
 
 		if(parentItem.getName().equals("最新信息公开")){
 			wbView.getSettings().setDefaultTextEncodingName("gb2312");
-			wbView.getSettings().setTextSize(TextSize.LARGER);
+			wbView.getSettings().setTextSize(TextSize.NORMAL);
 		}
 		wbView.loadUrl(parentItem.getWapURI());
 	}

@@ -65,7 +65,8 @@
             <Spinner
                 android:id="@+id/gip_12345_iwantmail_spinner_type"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="@drawable/spiner_bg" />
         </LinearLayout>
 
         <LinearLayout

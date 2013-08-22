@@ -27,6 +27,7 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.LetterService;
 import com.wuxi.app.fragment.BaseSlideFragment;
+import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.LetterWrapper;
@@ -41,12 +42,16 @@ import com.wuxi.exception.NetException;
  * @author 智佳 罗森
  * 
  */
-public class GIP12345MayorMailListFragment extends BaseFragment {
+public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment {
+
+	/**
+	 * @字段： serialVersionUID
+	 * @类型： long
+	 * @描述： 序列号 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	protected static final String TAG = "GIP12345MayorMailListFragment";
-
-	private View view = null;
-	private Context context = null;
 
 	private ListView mListView;
 	private ProgressBar list_pb;
@@ -80,16 +85,30 @@ public class GIP12345MayorMailListFragment extends BaseFragment {
 	};
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.mayor_mail_list_fragment_layout, null);
-		context = getActivity();
-
-		initLayout();
-
-		return view;
+	protected int getLayoutId() {
+		return R.layout.mayor_mail_list_fragment_layout;
 	}
 
+	@Override
+	protected int getRadioGroupId() {
+		return 0;
+	}
+
+	@Override
+	protected int[] getRadioButtonIds() {
+		return null;
+	}
+
+	@Override
+	protected int getContentFragmentId() {
+		return 0;
+	}
+
+	@Override
+	protected void init() {
+		initLayout();
+	}
+	
 	/**
 	 * 初始化布局控件
 	 */
@@ -150,11 +169,7 @@ public class GIP12345MayorMailListFragment extends BaseFragment {
 	 * 显示列表
 	 */
 	public void showLettersList() {
-		BaseSlideFragment baseSlideFragment = this.baseSlideFragment;
-
-		LettersListViewAdapter adapter = new LettersListViewAdapter(
-				baseSlideFragment);
-
+		LettersListViewAdapter adapter = new LettersListViewAdapter();
 		if (letters == null || letters.size() == 0) {
 			Toast.makeText(context, "对不起，暂无信息", Toast.LENGTH_SHORT).show();
 		} else {
@@ -172,11 +187,9 @@ public class GIP12345MayorMailListFragment extends BaseFragment {
 	public class LettersListViewAdapter extends BaseAdapter implements
 			OnItemClickListener {
 
-		BaseSlideFragment baseSlideFragment;
-
-		public LettersListViewAdapter(BaseSlideFragment baseSlideFragment) {
-			this.baseSlideFragment = baseSlideFragment;
-		}
+		// public LettersListViewAdapter(BaseSlideFragment baseSlideFragment) {
+		// this.baseSlideFragment = baseSlideFragment;
+		// }
 
 		@Override
 		public int getCount() {
@@ -248,13 +261,17 @@ public class GIP12345MayorMailListFragment extends BaseFragment {
 //			Bundle bundle = new Bundle();
 //			bundle.putSerializable("letter", letter);
 //
-//			baseSlideFragment.slideLinstener.replaceFragment(null, position,
+//			BaseSlideFragment slideFragment = GIP12345MayorMailListFragment.this.baseSlideFragment;
+//			
+//			slideFragment.slideLinstener.replaceFragment(null, position,
 //					Constants.FragmentName.GIP_MAYOR_MAIL_CONTENT_FRAGMENT,
 //					bundle);
-			
-			Toast.makeText(context, "该功能暂未实现", Toast.LENGTH_SHORT).show();
+
+			 Toast.makeText(context, "该功能暂未实现", Toast.LENGTH_SHORT).show();
 		}
 
 	}
+
+	
 
 }

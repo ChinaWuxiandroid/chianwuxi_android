@@ -240,22 +240,32 @@ public class NoticePostWrapper {
 		 */
 		public class NoticePostReply {
 
-			// 回复内容
+			private String id;
 			private String content;
-			// 回复状态
-			private String status;
-			// 回复人
-			private String userName;
-			// 回复帖子ID
-			private String politicsMainId;
-			// 回复IP
-			private String sentIp;
-			// 回复时间
-			private String sentTime;
-			private String actorInfoId;
+			private String username;
+			private String title;
+			private String sendtime;
+			private String answercontent;
+			private String mainid;
+			private String answerman;
 
 			/**
-			 * @return the content
+			 * @return id
+			 */
+			public String getId() {
+				return id;
+			}
+
+			/**
+			 * @param id
+			 *            要设置的 id
+			 */
+			public void setId(String id) {
+				this.id = id;
+			}
+
+			/**
+			 * @return content
 			 */
 			public String getContent() {
 				return content;
@@ -263,100 +273,100 @@ public class NoticePostWrapper {
 
 			/**
 			 * @param content
-			 *            the content to set
+			 *            要设置的 content
 			 */
 			public void setContent(String content) {
 				this.content = content;
 			}
 
 			/**
-			 * @return the status
+			 * @return username
 			 */
-			public String getStatus() {
-				return status;
+			public String getUsername() {
+				return username;
 			}
 
 			/**
-			 * @param status
-			 *            the status to set
+			 * @param username
+			 *            要设置的 username
 			 */
-			public void setStatus(String status) {
-				this.status = status;
+			public void setUsername(String username) {
+				this.username = username;
 			}
 
 			/**
-			 * @return the userName
+			 * @return title
 			 */
-			public String getUserName() {
-				return userName;
+			public String getTitle() {
+				return title;
 			}
 
 			/**
-			 * @param userName
-			 *            the userName to set
+			 * @param title
+			 *            要设置的 title
 			 */
-			public void setUserName(String userName) {
-				this.userName = userName;
+			public void setTitle(String title) {
+				this.title = title;
 			}
 
 			/**
-			 * @return the politicsMainId
+			 * @return sendtime
 			 */
-			public String getPoliticsMainId() {
-				return politicsMainId;
+			public String getSendtime() {
+				return sendtime;
 			}
 
 			/**
-			 * @param politicsMainId
-			 *            the politicsMainId to set
+			 * @param sendtime
+			 *            要设置的 sendtime
 			 */
-			public void setPoliticsMainId(String politicsMainId) {
-				this.politicsMainId = politicsMainId;
+			public void setSendtime(String sendtime) {
+				this.sendtime = sendtime;
 			}
 
 			/**
-			 * @return the sentIp
+			 * @return answercontent
 			 */
-			public String getSentIp() {
-				return sentIp;
+			public String getAnswercontent() {
+				return answercontent;
 			}
 
 			/**
-			 * @param sentIp
-			 *            the sentIp to set
+			 * @param answercontent
+			 *            要设置的 answercontent
 			 */
-			public void setSentIp(String sentIp) {
-				this.sentIp = sentIp;
+			public void setAnswercontent(String answercontent) {
+				this.answercontent = answercontent;
 			}
 
 			/**
-			 * @return the sentTime
+			 * @return mainid
 			 */
-			public String getSentTime() {
-				return sentTime;
+			public String getMainid() {
+				return mainid;
 			}
 
 			/**
-			 * @param sentTime
-			 *            the sentTime to set
+			 * @param mainid
+			 *            要设置的 mainid
 			 */
-			public void setSentTime(String sentTime) {
-				this.sentTime = sentTime;
+			public void setMainid(String mainid) {
+				this.mainid = mainid;
 			}
 
 			/**
-			 * @return the actorInfoId
+			 * @return answerman
 			 */
-			public String getActorInfoId() {
-				return actorInfoId;
+			public String getAnswerman() {
+				return answerman;
 			}
 
 			/**
-			 * @param actorInfoId
-			 *            the actorInfoId to set
+			 * @param answerman
+			 *            要设置的 answerman
 			 */
-			public void setActorInfoId(String actorInfoId) {
-				this.actorInfoId = actorInfoId;
+			public void setAnswerman(String answerman) {
+				this.answerman = answerman;
 			}
 
 		}

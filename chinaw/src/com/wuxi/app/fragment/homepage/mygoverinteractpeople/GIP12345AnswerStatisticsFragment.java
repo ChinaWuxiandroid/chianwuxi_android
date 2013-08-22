@@ -37,6 +37,13 @@ import com.wuxi.exception.NetException;
 
 public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 
+	/**
+	 * @字段： serialVersionUID
+	 * @类型： long
+	 * @描述： TODO 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private TextView complaint_txtView;    //咨询投诉
 	private TextView mayorbox_txtView;    //市长信箱
 	private TextView leaderbox_txtView;     //领导信箱
@@ -306,19 +313,16 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return letters.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return letters.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 

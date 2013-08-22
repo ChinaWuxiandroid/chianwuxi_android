@@ -146,16 +146,16 @@ public class NoticePostService extends Service {
 				NoticePostReplyWrapper noticePostReplyWrapper = noticePostWrapper.new NoticePostReplyWrapper();
 				NoticePostReply noticePostReply = noticePostReplyWrapper.new NoticePostReply();
 
+				noticePostReply.setId(jb.getString("id"));
 				noticePostReply.setContent(jb.getString("content"));
-				noticePostReply.setStatus(jb.getString("status"));
-				noticePostReply.setUserName(jb.getString("userName"));
-				noticePostReply.setPoliticsMainId(jb
-						.getString("politicsMainId"));
-				noticePostReply.setSentIp(jb.getString("sentIp"));
-				noticePostReply.setSentTime(TimeFormateUtil.formateTime(
-						String.valueOf(jb.getLong("sentTime")),
+				noticePostReply.setUsername(jb.getString("username"));
+				noticePostReply.setTitle(jb.getString("title"));
+				noticePostReply.setSendtime(TimeFormateUtil.formateTime(
+						String.valueOf(jb.getLong("sendtime")),
 						TimeFormateUtil.DATE_PATTERN));
-				noticePostReply.setActorInfoId(jb.getString("actorInfoId"));
+				noticePostReply.setAnswercontent(jb.getString("answercontent"));
+				noticePostReply.setMainid(jb.getString("mainid"));
+				noticePostReply.setAnswerman(jb.getString("answerman"));
 
 				noticePostReplies.add(noticePostReply);
 			}

@@ -1,61 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_state"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
-    android:orientation="vertical" 
-    android:visibility="gone"
-    android:id="@+id/ll_state">
+    android:orientation="vertical"
+    android:visibility="gone" >
 
-    
     <LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:background="#E0E0E0"
-    android:orientation="vertical" 
-    android:layout_marginLeft="8dip"
-    android:layout_marginRight="8dip"
-    >
-    
-    <Spinner
-        android:layout_marginTop="8dip"
-        android:id="@+id/sp_xzstate"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/spiner_bg"
         android:layout_marginLeft="8dip"
         android:layout_marginRight="8dip"
-         />
+        android:background="#E0E0E0"
+        android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_marginTop="8dip"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/sp_xzstate"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="办件编号：" 
-            android:layout_marginLeft="8dip"/>
+            android:layout_marginLeft="8dip"
+            android:layout_marginRight="8dip"
+            android:layout_marginTop="8dip"
+            android:background="@drawable/spiner_bg" />
 
-        <EditText
-            android:id="@+id/et_state_itemcode"
-            android:layout_width="0dip"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.72"
-            android:background="@android:color/white" />
+            android:layout_marginTop="8dip"
+            android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/btn_search_bystate"
-            android:layout_width="65dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dip"
-            android:background="@drawable/search_btn_bg"
-            android:text="检索"
-            android:textColor="#207BBE" 
-            android:textSize="14sp"
-            android:layout_marginRight="8dip"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:text="办件编号：" />
+
+            <EditText
+                android:id="@+id/et_state_itemcode"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.72"
+                android:background="@android:color/white" />
+
+            <Button
+                android:id="@+id/btn_search_bystate"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="8dip"
+                android:background="@drawable/search_btn_bg"
+                android:text="检索"
+                android:textColor="#207BBE"
+                android:textSize="14sp" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
 </LinearLayout>

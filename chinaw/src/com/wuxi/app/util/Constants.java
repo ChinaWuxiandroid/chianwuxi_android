@@ -558,6 +558,11 @@ public class Constants {
 		GIP_CHANNEL_CONTENT_DETAILWEB_FRAGMENT,
 
 		/**
+		 * 政民互动 12345来信办理平台 我要写信
+		 */
+		GIP_12345_WRITE_MAIL_FRAGMENT,
+		
+		/**
 		 * 征求意见平台 立法征求意见 碎片
 		 */
 		GIP_LEGISLATION_CONTENT_FRAGMENT,

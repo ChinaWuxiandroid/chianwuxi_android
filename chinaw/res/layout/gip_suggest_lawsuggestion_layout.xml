@@ -22,7 +22,8 @@
             android:id="@+id/gip_suggest_lawsuggest_spinner_chooseYear"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1" 
+            android:background="@drawable/spiner_bg"/>
     </LinearLayout>
 
     <ImageView
@@ -46,7 +47,8 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:divider="@android:color/white"
-            android:dividerHeight="1dp" >
+            android:dividerHeight="1dp" 
+            android:cacheColorHint="@android:color/transparent">
         </ListView>
     </FrameLayout>
 

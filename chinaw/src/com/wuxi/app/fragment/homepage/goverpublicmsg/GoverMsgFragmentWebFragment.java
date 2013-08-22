@@ -59,11 +59,11 @@ public class GoverMsgFragmentWebFragment extends BaseFragment{
 		});
 		wbView.getSettings().setBuiltInZoomControls(true);
 		//		wbView.getSettings().setLoadWithOverviewMode(true);
-		wbView.getSettings().setTextSize(TextSize.LARGER);
+		wbView.getSettings().setTextSize(TextSize.SMALLER);
 		wbView.getSettings().setDefaultTextEncodingName("gb2312");
 		//		wbView.getSettings().setDefaultTextEncodingName("utf-8");
 		wbView.loadUrl(urlHeader+parentItem.getPfBuildPath());
-		System.out.println("show web over");
+
 	}
 
 }

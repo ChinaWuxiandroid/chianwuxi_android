@@ -387,9 +387,9 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 			// 公告类帖子
 			else if (forum.getViewpath().equals("/LegislativeCommentsContent")) {
 				holder.replay_name_text.setText(noticePostReplies.get(position)
-						.getUserName());
+						.getUsername());
 				holder.replay_time_text.setText(noticePostReplies.get(position)
-						.getSentTime());
+						.getSendtime());
 				holder.replay_content_text.setText(noticePostReplies.get(
 						position).getContent());
 			}

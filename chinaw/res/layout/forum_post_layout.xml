@@ -46,8 +46,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/worksuggestbox_edit_small_bk"
                 android:gravity="center_vertical"
-                android:paddingLeft="3dp"
                 android:hint="请输入主题"
+                android:paddingLeft="3dp"
                 android:textSize="10sp" />
         </LinearLayout>
 
@@ -75,11 +75,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/worksuggestbox_edit_big_bk"
                 android:gravity="left|top"
+                android:hint="请输入内容"
                 android:inputType="textMultiLine"
                 android:minLines="6"
                 android:paddingLeft="3dp"
                 android:paddingTop="3dp"
-                android:hint="请输入内容"
                 android:textSize="10sp" />
         </LinearLayout>
 

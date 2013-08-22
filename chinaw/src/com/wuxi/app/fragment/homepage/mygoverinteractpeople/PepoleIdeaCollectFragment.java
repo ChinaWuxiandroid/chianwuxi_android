@@ -28,7 +28,7 @@ import com.wuxi.app.util.GIPRadioButtonStyleChange;
 import com.wuxi.domain.PoliticsWrapper.Politics;
 
 /**
- * 政民互动 征求意见平台 民意征求 详细界面 
+ * 政民互动 征求意见平台 民意征集 详细界面 
  * 
  * @author 智佳 罗森
  *
@@ -48,7 +48,8 @@ public class PepoleIdeaCollectFragment extends BaseItemContentFragment implement
 
 	private Button comment_btn = null;
 
-	private int[] radiobtnids = { R.id.forum_content_info_radiobtn,
+	private int[] radiobtnids = { 
+			R.id.forum_content_info_radiobtn,
 			R.id.forum_content_comment_radiobtn };
 
 	private Politics politics;

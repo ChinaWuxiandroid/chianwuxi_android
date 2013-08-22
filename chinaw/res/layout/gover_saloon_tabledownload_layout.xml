@@ -61,7 +61,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/gover_table_down_deptsp"
             android:divider="@android:color/white"
-            android:dividerHeight="1dip" >
+            android:dividerHeight="1dip" 
+            android:cacheColorHint="@android:color/transparent">
         </ListView>
 
         <ProgressBar

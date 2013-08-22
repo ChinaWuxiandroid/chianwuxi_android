@@ -14,7 +14,8 @@
     <ListView
         android:id="@+id/gip_live_home_message_listview"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@android:color/transparent" >
     </ListView>
 
 </LinearLayout>

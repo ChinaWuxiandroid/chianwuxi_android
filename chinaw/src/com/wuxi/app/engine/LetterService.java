@@ -22,7 +22,6 @@ public class LetterService extends Service{
 
 	public LetterService(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -45,7 +44,6 @@ public class LetterService extends Service{
 	 * */
 	public LetterWrapper getMyLettersList(String url,String access_token,int startIndex,int endIndex) throws NetException, JSONException, NODataException{
 		url=url+"?access_token="+access_token+"&start="+startIndex+"&end="+endIndex;
-//		System.out.println("url:"+url);
 		return getLettersWrapper(url);
 	}
 

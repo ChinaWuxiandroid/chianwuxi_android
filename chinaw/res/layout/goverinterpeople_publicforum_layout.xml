@@ -32,7 +32,8 @@
         <ListView
             android:id="@+id/gip_forum_listview"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:cacheColorHint="@android:color/transparent" >
         </ListView>
     </FrameLayout>
 

@@ -18,14 +18,16 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
-            android:layout_weight="1.5" />
+            android:layout_weight="1.5" 
+            android:background="@drawable/spiner_bg"/>
 
         <Spinner
             android:id="@+id/govermsg_search_spinner_year"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
-            android:layout_weight="1" />
+            android:layout_weight="1" 
+            android:background="@drawable/spiner_bg"/>
 
         <Button
             android:id="@+id/govermsg_search_button_search"

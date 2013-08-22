@@ -43,7 +43,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:divider="@android:color/white"
-            android:dividerHeight="1dip" >
+            android:dividerHeight="1dip" 
+            android:cacheColorHint="@android:color/transparent">
         </ListView>
 
         <include

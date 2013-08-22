@@ -1,5 +1,13 @@
-/**
- * 
+/**   
+ * @公司: 重庆智佳信息科技公司
+ * @文件: PepoleCollectService.java 
+ * @包名： com.wuxi.app.engine 
+ * @描述: 解析民意征集的数据 
+ * @作者： 罗森   
+ * @创建时间： 2013 2013-8-21 下午2:47:33
+ * @修改时间：  
+ * @修改描述：
+ * @版本： V1.0   
  */
 package com.wuxi.app.engine;
 
@@ -21,44 +29,55 @@ import com.wuxi.exception.NetException;
 import android.content.Context;
 
 /**
- * 政民互动 征求意见平台 民意征集 业务类
- * 
- * @author 智佳 罗森
+ * @类名： PepoleCollectService
+ * @描述： 解析民意征集的数据
+ * @作者： 罗森
+ * @创建时间： 2013 2013-8-21 下午2:47:33
+ * @修改时间：
+ * @修改描述：
  * 
  */
 public class PepoleCollectService extends Service {
 
+	/**
+	 * 
+	 * @方法： PepoleCollectService
+	 * @描述：构造方法
+	 * @param context
+	 */
 	public PepoleCollectService(Context context) {
 		super(context);
 	}
 
 	/**
-	 * 解析数据集
-	 * @param politicsMainId
-	 * @return
+	 * 
+	 * @方法： getPepoleIdeaCollectWrapper
+	 * @描述： 解析民意征集数据集
+	 * @param id
+	 * @return PepoleIdeaCollectWrapper
 	 * @throws NetException
 	 * @throws JSONException
 	 * @throws NODataException
 	 */
-	public PepoleIdeaCollectWrapper getPepoleIdeaCollectWrapper(
-			String politicsMainId) throws NetException, JSONException,
-			NODataException {
+	public PepoleIdeaCollectWrapper getPepoleIdeaCollectWrapper(String id)
+			throws NetException, JSONException, NODataException {
 		// 检查网络连接状态
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 
-		String url = Constants.Urls.LEGISLATION_CONTENT_URL.replace("{id}",
-				politicsMainId);
+		// 构建url地址
+		String url = Constants.Urls.LEGISLATION_CONTENT_URL.replace("{id}", id);
+		// 访问服务器
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
-		String resultStr = httpUtils.executeGetToString(url, 5000);
-		
+		// 解析数据
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
 			JSONObject jresult = jsonObject.getJSONObject("result");
-			
+
 			PepoleIdeaCollectWrapper collectWrapper = new PepoleIdeaCollectWrapper();
-			
+
 			collectWrapper.setId(jresult.getString("id"));
 			collectWrapper.setContent(jresult.getString("content"));
 			collectWrapper.setStatus(jresult.getString("status"));
@@ -75,24 +94,25 @@ public class PepoleCollectService extends Service {
 			collectWrapper.setDoprojectid(jresult.getString("doprojectid"));
 			collectWrapper.setSumup(jresult.getString("sumup"));
 
-			JSONObject jData = jresult.getJSONObject("replys");
-			
+			JSONObject jData = jsonObject.getJSONObject("replys");
+
 			if (jData != null) {
-				collectWrapper.setPepoleIdeaReplyWrapper(getPepoleIdeaReplyWrapper(jData));
+				collectWrapper
+						.setPepoleIdeaReplyWrapper(getPepoleIdeaReplyWrapper(jData));
 			}
-			
+
 			return collectWrapper;
-		}else {
+		} else {
 			// 没有获取到数据异常
 			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);
 		}
 	}
 
 	/**
-	 * 解析回复数据集
-	 * 
+	 * @方法： getPepoleIdeaReplyWrapper
+	 * @描述： 解析民意征集回复数据集
 	 * @param jsonObject
-	 * @return
+	 * @return PepoleIdeaReplyWrapper
 	 * @throws JSONException
 	 */
 	private PepoleIdeaReplyWrapper getPepoleIdeaReplyWrapper(
@@ -103,15 +123,15 @@ public class PepoleCollectService extends Service {
 
 			ideaReplyWrapper.setEnd(jsonObject.getInt("end"));
 			ideaReplyWrapper.setStart(jsonObject.getInt("start"));
-			ideaReplyWrapper.setNext(jsonObject.getBoolean("next"));
 			ideaReplyWrapper.setPrevious(jsonObject.getBoolean("previous"));
 			ideaReplyWrapper.setTotalRowsAmount(jsonObject
 					.getInt("totalRowsAmount"));
-			JSONArray jData = jsonObject.getJSONArray("data");
+			ideaReplyWrapper.setNext(jsonObject.getBoolean("next"));
 
-			if (jData != null) {
+			JSONArray array = jsonObject.getJSONArray("data");
+			if (array != null) {
 				ideaReplyWrapper
-						.setPepoleIdeaReplies(getPepoleIdeaReplies(jData));
+						.setPepoleIdeaReplies(getPepoleIdeaReplies(array));
 			}
 
 			return ideaReplyWrapper;
@@ -121,11 +141,13 @@ public class PepoleCollectService extends Service {
 	}
 
 	/**
-	 * 解析单条回复数据
 	 * 
+	 * @方法： getPepoleIdeaReplies
+	 * @描述： 解析民意征集单条回复数据
 	 * @param array
-	 * @return
 	 * @throws JSONException
+	 * @return List<PepoleIdeaReply>
+	 * 
 	 */
 	private List<PepoleIdeaReply> getPepoleIdeaReplies(JSONArray array)
 			throws JSONException {
@@ -133,21 +155,22 @@ public class PepoleCollectService extends Service {
 			List<PepoleIdeaReply> ideaReplies = new ArrayList<PepoleIdeaReply>();
 
 			for (int i = 0; i < array.length(); i++) {
-				JSONObject jb = array.getJSONObject(i);
+				JSONObject jo = array.getJSONObject(i);
 
 				PepoleIdeaCollectWrapper collectWrapper = new PepoleIdeaCollectWrapper();
 				PepoleIdeaReplyWrapper ideaReplyWrapper = collectWrapper.new PepoleIdeaReplyWrapper();
 				PepoleIdeaReply ideaReply = ideaReplyWrapper.new PepoleIdeaReply();
 
-				ideaReply.setContent(jb.getString("content"));
-				ideaReply.setStatus(jb.getString("status"));
-				ideaReply.setUserName(jb.getString("userName"));
-				ideaReply.setPoliticsMainId(jb.getString("politicsMainId"));
-				ideaReply.setSentIp(jb.getString("sentIp"));
-				ideaReply.setSentTime(TimeFormateUtil.formateTime(
-						String.valueOf(jb.getLong("sentTime")),
+				ideaReply.setId(jo.getString("id"));
+				ideaReply.setContent(jo.getString("content"));
+				ideaReply.setUsername(jo.getString("username"));
+				ideaReply.setTitle(jo.getString("title"));
+				ideaReply.setSendtime(TimeFormateUtil.formateTime(
+						String.valueOf(jo.getLong("sendtime")),
 						TimeFormateUtil.DATE_PATTERN));
-				ideaReply.setActorInfoId(jb.getString("actorInfoId"));
+				ideaReply.setAnswercontent(jo.getString("answercontent"));
+				ideaReply.setMainid(jo.getString("mainid"));
+				ideaReply.setAnswerman(jo.getString("answerman"));
 
 				ideaReplies.add(ideaReply);
 			}
@@ -157,4 +180,5 @@ public class PepoleCollectService extends Service {
 
 		return null;
 	}
+
 }

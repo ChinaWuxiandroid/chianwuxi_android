@@ -51,7 +51,8 @@
         <ListView
             android:id="@+id/goverinterpeople_mine_12345_listview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent" 
+            android:cacheColorHint="@android:color/transparent">
         </ListView>
     </LinearLayout>
 

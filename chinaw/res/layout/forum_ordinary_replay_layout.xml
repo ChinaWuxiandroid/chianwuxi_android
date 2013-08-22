@@ -3,14 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    <TextView 
+
+    <TextView
         android:id="@+id/forum_reply_content_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        android:visibility="gone"/>
-        
+        android:visibility="gone" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -26,7 +25,8 @@
         <ListView
             android:id="@+id/ordinary_replay_listview"
             android:layout_width="fill_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent" >
         </ListView>
     </FrameLayout>
 

@@ -50,6 +50,7 @@ import com.wuxi.app.fragment.homepage.more.SiteMapFragment;
 import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumPostFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegislationContentFragment;
@@ -258,8 +259,12 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				MyOnlineAskFragment myOnlineAskFragment = new MyOnlineAskFragment();
 				onAddFragment(myOnlineAskFragment, bundle);
 				break;
-
-			case GIP_PEOPLE_IDEA_CONTENT_FRAGMENT:// 政民互动 意见征集平台 民意征集 详情界面
+				
+			case GIP_12345_WRITE_MAIL_FRAGMENT://政民互动 12345来信办理平台 我要写信 
+				GIP12345IWantMailFragment gip12345iWantMailFragment = new GIP12345IWantMailFragment();
+				onAddFragment(gip12345iWantMailFragment, bundle);
+				
+			case GIP_PEOPLE_IDEA_CONTENT_FRAGMENT:// 政民互动 征求意见平台 民意征集 详情界面
 				PepoleIdeaCollectFragment peopleIdeaCollectFragment = new PepoleIdeaCollectFragment();
 				onAddFragment(peopleIdeaCollectFragment, bundle);
 				break;

@@ -25,7 +25,8 @@
         <ListView
             android:id="@+id/gip_12345_leaderbox_listview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent" 
+            android:cacheColorHint="@android:color/transparent">
         </ListView>
         
     </FrameLayout>
