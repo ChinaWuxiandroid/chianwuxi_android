@@ -119,17 +119,22 @@ public class GoverInterPeoplePublicForumFragment extends
 
 		list_pb = (ProgressBar) view.findViewById(R.id.gip_forum_listview_pb);
 		list_pb.setVisibility(View.VISIBLE);
-		
+
 		postButton = (ImageButton) view.findViewById(R.id.gip_forum_imagebtn);
 		postButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				BaseSlideFragment baseSlideFragment = GoverInterPeoplePublicForumFragment.this.baseSlideFragment;			
-				baseSlideFragment.slideLinstener.replaceFragment(null, position,
+				BaseSlideFragment baseSlideFragment = GoverInterPeoplePublicForumFragment.this.baseSlideFragment;
+
+//				ForumPostFragment postFragment = new ForumPostFragment();
+//				postFragment.setBaseSlideFragment(baseSlideFragment);
+
+				baseSlideFragment.slideLinstener.replaceFragment(null,
+						position,
 						Constants.FragmentName.GIP_FORUM_POST_FRAGMENT, null);
 			}
 		});
-		
+
 		loadData();
 	}
 
@@ -203,9 +208,9 @@ public class GoverInterPeoplePublicForumFragment extends
 		 * 
 		 * @param baseSlideFragment
 		 */
-//		public ForumListAdapter(BaseSlideFragment baseSlideFragment) {
-//			this.baseSlideFragment = baseSlideFragment;
-//		}
+		// public ForumListAdapter(BaseSlideFragment baseSlideFragment) {
+		// this.baseSlideFragment = baseSlideFragment;
+		// }
 
 		@Override
 		public int getCount() {
@@ -272,14 +277,14 @@ public class GoverInterPeoplePublicForumFragment extends
 		}
 
 		@Override
-		public void onItemClick(AdapterView<?>  adapterView, View arg1, int position,
-				long arg3) {
-			Forum forum=(Forum)adapterView.getItemAtPosition(position);
-			Bundle bundle=new Bundle();
+		public void onItemClick(AdapterView<?> adapterView, View arg1,
+				int position, long arg3) {
+			Forum forum = (Forum) adapterView.getItemAtPosition(position);
+			Bundle bundle = new Bundle();
 			bundle.putSerializable("forum", forum);
-			
+
 			baseSlideFragment = GoverInterPeoplePublicForumFragment.this.baseSlideFragment;
-			
+
 			baseSlideFragment.slideLinstener.replaceFragment(null, position,
 					Constants.FragmentName.GIP_FOROUM_FRAGMENT, bundle);
 		}

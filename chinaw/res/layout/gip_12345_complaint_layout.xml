@@ -18,7 +18,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="2dp"
             android:layout_weight="1"
-            android:background="#307ce8"
+            android:background="@drawable/vedio_home_saybtn"
             android:text="信件查询"
             android:textColor="@android:color/white"
             android:textSize="12sp" />
@@ -32,7 +32,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="2dp"
             android:layout_weight="1"
-            android:background="#307ce8"
+            android:background="@drawable/vedio_home_saybtn"
             android:text="信件处理统计"
             android:textColor="@android:color/white"
             android:textSize="12sp" />

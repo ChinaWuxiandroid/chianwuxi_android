@@ -4,6 +4,7 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.hardware.Camera.CameraInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -37,37 +38,38 @@ import com.wuxi.exception.NetException;
 @SuppressLint("ShowToast")
 public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 		OnClickListener, OnCheckedChangeListener {
-	protected View view;
-	protected LayoutInflater mInflater;
-	private Context context;
+
+	protected View view = null;
+	protected LayoutInflater mInflater = null;
+	private Context context = null;
 
 	private final static int SEND_SUCCESS = 1;
 	private final static int SEND_FAILED = 0;
 
-	private MyLetter myLetter;
+	private MyLetter myLetter = null;
 
-	RadioGroup mailType_radioGroup;
-	public final String doprojectid_mayorBox = "6b8e124e-1e5c-4a11-8dd3-c6623c809eff"; // 市长信箱
-	public final String doprojectid_suggestAndComplaint = "bfffa273-086a-47cb-a7a8-7ae8140550db"; // 市长信箱
+	private RadioGroup mailType_radioGroup = null;
+	private static final String DOPROJECTID_MAYORBOX = "6b8e124e-1e5c-4a11-8dd3-c6623c809eff"; // 市长信箱
+	private static final String DOPROJECTID_SUGGEST_AND_COMPLAINT = "bfffa273-086a-47cb-a7a8-7ae8140550db"; // 建议咨询投诉
 
-	RadioGroup isOpen_radioGroup;
+	private RadioGroup isOpen_radioGroup = null;
 	public final int open = 1;
 	public final int notopen = 0;
 
-	RadioGroup isReplyMail_radioGroup;
+	private RadioGroup isReplyMail_radioGroup = null;
 	public final int replyMail = 1;
 	public final int notreplyMail = 0;
 
-	RadioGroup isReplyMsg_radioGroup;
+	private RadioGroup isReplyMsg_radioGroup = null;
 	public final int replyMsg = 1;
 	public final int notreplyMsg = 0;
 
-	Spinner mailBoxType;
+	private Spinner mailBoxType = null;
 
-	EditText title_editText;
-	EditText content_editText;
+	private EditText title_editText = null;
+	private EditText content_editText = null;
 
-	ImageButton send;
+	private ImageButton send = null;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -93,10 +95,15 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 		context = getActivity();
 
 		initView();
+
 		return view;
 	}
 
-	public void initView() {
+	/**
+	 * @方法： initView
+	 * @描述： 初始化布局控件
+	 */
+	private void initView() {
 		myLetter = new MyLetter();
 
 		mailType_radioGroup = (RadioGroup) view
@@ -108,9 +115,12 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 		isReplyMsg_radioGroup = (RadioGroup) view
 				.findViewById(R.id.gip_12345_iwantmail_radiogroup_isNeedMsgRaply);
 
+		view.findViewById(R.id.gip_12345_iwantmail_radiobutton_leaderbox)
+		.setVisibility(View.GONE);
+		
 		mailBoxType = (Spinner) view
 				.findViewById(R.id.gip_12345_iwantmail_spinner_type);
-		@SuppressWarnings("rawtypes")
+
 		ArrayAdapter mailBoxType_Spinner_adapter = ArrayAdapter
 				.createFromResource(context, R.array.mailBoxType,
 						R.layout.my_spinner_small_item);
@@ -131,7 +141,7 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 		isOpen_radioGroup.setOnCheckedChangeListener(this);
 		isReplyMail_radioGroup.setOnCheckedChangeListener(this);
 		isReplyMsg_radioGroup.setOnCheckedChangeListener(this);
-		
+
 		send.setOnClickListener(this);
 
 		mailBoxType.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -154,11 +164,20 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 		switch (v.getId()) {
 
 		case R.id.gip_12345_iwantmail_imageBtn_send:
+
 			myLetter.setAccess_token(Constants.SharepreferenceKey.TEST_ACCESSTOKEN);
 			myLetter.setTitle(title_editText.getText().toString());
 			myLetter.setContent(content_editText.getText().toString());
 			try {
-				submitMyLetter();
+				if (myLetter.getTitle().equals("")) {
+					Toast.makeText(context, "信件标题不能为空", Toast.LENGTH_SHORT)
+							.show();
+				} else if (myLetter.getContent().equals("")) {
+					Toast.makeText(context, "信件内容不能为空", Toast.LENGTH_SHORT)
+							.show();
+				} else {
+					submitMyLetter();
+				}
 			} catch (NetException e) {
 				e.printStackTrace();
 			} catch (JSONException e) {
@@ -170,7 +189,14 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 		}
 	}
 
-	public void submitMyLetter() throws NetException, JSONException,
+	/**
+	 * @方法： submitMyLetter
+	 * @描述： 提交用户写的信件
+	 * @throws NetException
+	 * @throws JSONException
+	 * @throws NODataException
+	 */
+	private void submitMyLetter() throws NetException, JSONException,
 			NODataException {
 
 		new Thread(new Runnable() {
@@ -200,10 +226,10 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		switch (checkedId) {
 		case R.id.gip_12345_iwantmail_radiobutton_mayorbox:
-			myLetter.setDoprojectid(doprojectid_mayorBox);
+			myLetter.setDoprojectid(DOPROJECTID_MAYORBOX);
 			break;
 		case R.id.gip_12345_iwantmail_radiobutton_suggestAndComplaint:
-			myLetter.setDoprojectid(doprojectid_suggestAndComplaint);
+			myLetter.setDoprojectid(DOPROJECTID_SUGGEST_AND_COMPLAINT);
 			break;
 
 		case R.id.gip_12345_iwantmail_radiobutton_open:

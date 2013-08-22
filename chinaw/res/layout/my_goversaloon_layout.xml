@@ -65,10 +65,7 @@
                 android:id="@+id/gover_saloon_lv_myconsult"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-<<<<<<< HEAD
-=======
                 android:cacheColorHint="@android:color/transparent"
->>>>>>> b7b4aab80f50d759363e8aede8c67b29c95db0be
                 android:divider="@android:color/white"
                 android:dividerHeight="1dip"
                 android:visibility="invisible" >

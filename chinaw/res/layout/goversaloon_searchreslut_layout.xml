@@ -10,8 +10,7 @@
         android:layout_height="wrap_content"
         android:cacheColorHint="@android:color/transparent"
         android:divider="@android:color/white"
-        android:dividerHeight="1dip"
-        android:cacheColorHint="@android:color/transparent" >
+        android:dividerHeight="1dip">
     </ListView>
 
     <ProgressBar
