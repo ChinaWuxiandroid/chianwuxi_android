@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-  
     <RadioGroup
         android:id="@+id/gover_btn_rg"
         android:layout_width="fill_parent"
@@ -78,6 +77,5 @@
             android:layout_width="fill_parent"
             android:layout_height="5dip" />
     </LinearLayout>
-
 
 </RelativeLayout>
