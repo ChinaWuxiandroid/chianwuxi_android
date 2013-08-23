@@ -47,7 +47,7 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment {
 	/**
 	 * @字段： serialVersionUID
 	 * @类型： long
-	 * @描述： 序列号 
+	 * @描述： 序列号
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -62,7 +62,7 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment {
 	private static final int DATA_LOAD_ERROR = 1;
 
 	private int startIndex = 0; // 获取话题的起始坐标
-	private int endIndex = 5; // 获取话题的结束坐标
+	private int endIndex = 100; // 获取话题的结束坐标
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -108,7 +108,7 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment {
 	protected void init() {
 		initLayout();
 	}
-	
+
 	/**
 	 * 初始化布局控件
 	 */
@@ -169,7 +169,11 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment {
 	 * 显示列表
 	 */
 	public void showLettersList() {
-		LettersListViewAdapter adapter = new LettersListViewAdapter();
+
+		BaseSlideFragment baseSlideFragment = this.baseSlideFragment;
+
+		LettersListViewAdapter adapter = new LettersListViewAdapter(
+				baseSlideFragment);
 		if (letters == null || letters.size() == 0) {
 			Toast.makeText(context, "对不起，暂无信息", Toast.LENGTH_SHORT).show();
 		} else {
@@ -184,12 +188,19 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment {
 	 * @author 智佳 罗森
 	 * 
 	 */
-	public class LettersListViewAdapter extends BaseAdapter implements
+	private class LettersListViewAdapter extends BaseAdapter implements
 			OnItemClickListener {
 
-		// public LettersListViewAdapter(BaseSlideFragment baseSlideFragment) {
-		// this.baseSlideFragment = baseSlideFragment;
-		// }
+		BaseSlideFragment slideFragment = null;
+
+		/**
+		 * @方法： LettersListViewAdapter
+		 * @描述：
+		 * @param fragment
+		 */
+		public LettersListViewAdapter(BaseSlideFragment fragment) {
+			this.slideFragment = fragment;
+		}
 
 		@Override
 		public int getCount() {
@@ -257,21 +268,16 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment {
 		@Override
 		public void onItemClick(AdapterView<?> adapterView, View arg1,
 				int position, long arg3) {
-//			Letter letter = (Letter) adapterView.getItemAtPosition(position);
-//			Bundle bundle = new Bundle();
-//			bundle.putSerializable("letter", letter);
-//
-//			BaseSlideFragment slideFragment = GIP12345MayorMailListFragment.this.baseSlideFragment;
-//			
-//			slideFragment.slideLinstener.replaceFragment(null, position,
-//					Constants.FragmentName.GIP_MAYOR_MAIL_CONTENT_FRAGMENT,
-//					bundle);
+			Letter letter = (Letter) adapterView.getItemAtPosition(position);
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("letter", letter);
 
-			 Toast.makeText(context, "该功能暂未实现", Toast.LENGTH_SHORT).show();
+			slideFragment.slideLinstener.replaceFragment(null, position,
+					Constants.FragmentName.GIP_MAYOR_MAIL_CONTENT_FRAGMENT,
+					bundle);
+
 		}
 
 	}
-
-	
 
 }

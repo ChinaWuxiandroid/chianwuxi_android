@@ -6,81 +6,84 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="90dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="5sp"
         android:orientation="vertical" >
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="信件处理总计（统计时间2011年06月01日起）："
             android:textSize="12sp" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" >
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:text="咨询投诉："
                 android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/gip_12345_answerstati_textview_complaintcount"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal" >
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:layout_marginTop="5sp">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" >
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="市长信箱："
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/gip_12345_answerstati_textview_mayorbox"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" >
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                android:layout_marginLeft="8sp"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="领导信箱："
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/gip_12345_answerstati_textview_leaderbox"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -191,6 +194,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginTop="3sp"
                 android:layout_weight="1" >
 
                 <Spinner
@@ -203,12 +207,14 @@
                     android:id="@+id/gip_12345_answerstati_spinner_month"
                     android:layout_width="50dp"
                     android:layout_height="match_parent" 
+                    android:layout_marginLeft="3sp"
                     android:background="@drawable/spiner_bg"/>
 
                 <ImageButton
                     android:id="@+id/gip_12345_answerstati_imagebutton_startstati"
                     android:layout_width="80dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="3sp"
                     android:src="@drawable/statistics_selector" />
             </LinearLayout>
         </LinearLayout>

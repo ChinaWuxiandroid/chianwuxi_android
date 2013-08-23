@@ -83,7 +83,6 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	private ListView mlvMenu;// 左侧菜单列表
 
 	private static final String MENUITEM_CACKE_KEY = "man_menu_item";
-	private static final String TAG = "SlideLevelFragment";
 	private TextView login_tv_userlogin;
 	private TextView login_tv_user_regisster;
 	private RadioGroup right_menu_rg;
@@ -95,6 +94,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	private Constants.FragmentName fragmentName;// 显示的fragmentName名称
 	private FragmentManager manager;
 	private PopWindowManager popWindowManager;
+	@SuppressWarnings("unused")
 	private List<FragmentWapper> fragments = new ArrayList<FragmentWapper>(); // 记录每次切换到fragment信息以便回退
 	private List<BaseFragment> baseFragments = new ArrayList<BaseFragment>();
 	private HomeTabChangListner homeTabChangListner;
@@ -219,17 +219,19 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			switch (fragmentName) {
 			case LOGIN_FRAGMENT:// 登录
 				LoginFragment loginFragment = new LoginFragment();
-
 				onReplaceFragment(loginFragment, bundle);
 				break;
+
 			case REGIST_FRAGMENT:// 注册
 				RegisterFragment registerFragment = new RegisterFragment();
 				onAddFragment(registerFragment, bundle);
 				break;
+
 			case MAINSEARCH_FRAGMENT:// 全站搜索
 				MainSearchFragment searchFragment = new MainSearchFragment();
 				onReplaceFragment(searchFragment, bundle);
 				break;
+
 			case ADVANCED_SEARCH_FRAGMENT:// 全站高级搜索
 				AdvancedSearchFragment advancedSearchFragment = new AdvancedSearchFragment();
 				onAddFragment(advancedSearchFragment, bundle);
@@ -250,28 +252,31 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				mainMineFragment.setParentMenuItem(menuItem);
 				onReplaceFragment(mainMineFragment, bundle);
 				break;
+
 			case SYSTEMSETF_RAGMENT:// 系统设置
 				SystemSetFragment systemSetFragment = new SystemSetFragment();
 				onReplaceFragment(systemSetFragment, bundle);
-
 				break;
+
 			case MENUITEMSET_FRAGMENT:// 常用栏设置
 				MenuItemSetFragment menusetFragment = new MenuItemSetFragment();
 				onAddFragment(menusetFragment, bundle);
 				break;
+
 			case SITEMAP_FRAGMENT:// 网站地图
 				SiteMapFragment siteMapFragment = new SiteMapFragment();
 				onAddFragment(siteMapFragment, bundle);
 				break;
+
 			case MYONLINEASKFRAGMENT:// 在线咨询
 				MyOnlineAskFragment myOnlineAskFragment = new MyOnlineAskFragment();
 				onAddFragment(myOnlineAskFragment, bundle);
 				break;
-				
-			case GIP_12345_WRITE_MAIL_FRAGMENT://政民互动 12345来信办理平台 我要写信 
+
+			case GIP_12345_WRITE_MAIL_FRAGMENT:// 政民互动 12345来信办理平台 我要写信
 				GIP12345IWantMailFragment gip12345iWantMailFragment = new GIP12345IWantMailFragment();
 				onAddFragment(gip12345iWantMailFragment, bundle);
-				
+
 			case GIP_PEOPLE_IDEA_CONTENT_FRAGMENT:// 政民互动 征求意见平台 民意征集 详情界面
 				PepoleIdeaCollectFragment peopleIdeaCollectFragment = new PepoleIdeaCollectFragment();
 				onAddFragment(peopleIdeaCollectFragment, bundle);
@@ -282,7 +287,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				onAddFragment(hotReviewContentFragment, bundle);
 				break;
 
-			case GIP_MAYOR_MAIL_CONTENT_FRAGMENT:// 市长信箱 最新信件列表详情界面
+			case GIP_MAYOR_MAIL_CONTENT_FRAGMENT:// 市长信箱 最新信件 列表详情界面
 				GIP12345MayorMailContentFragment gip12345MayorMailContentFragment = new GIP12345MayorMailContentFragment();
 				onAddFragment(gip12345MayorMailContentFragment, bundle);
 				break;
@@ -309,12 +314,10 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 			case GOVERSALOONDETAIL_XK_FRAGMENT:// 政务大厅办件详情
 				GoverSaloonDetailXKFragment goverSaloonDetailFragment = new GoverSaloonDetailXKFragment();
-
 				onAddFragment(goverSaloonDetailFragment, bundle);
 				break;
 			case GOVERSALOONDETAIL_QT_FRAGMENT:// 政务大厅办件详情
 				GoverSaloonDetailQTFragment goverSaloonDetailQTFragment = new GoverSaloonDetailQTFragment();
-
 				onAddFragment(goverSaloonDetailQTFragment, bundle);
 				break;
 			case GOVERSALOONCONTENTDETIALFRAGMENT:
@@ -323,7 +326,6 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				break;
 			case GOVERSALOONDETAIL_QZ_FRAGMENT:// 政务大厅 强制办件详情
 				GoverSaloonDetailQZFragment goverSaloonDetailQZFragment = new GoverSaloonDetailQZFragment();
-
 				onAddFragment(goverSaloonDetailQZFragment, bundle);
 
 				break;
@@ -335,50 +337,59 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			case GOVERSALOONDETAIL_CF_FRAGMENT:// 政务大厅 处罚办件详情
 				GoverSaloonDetailCFFragment goverSaloonDetailCFFragment = new GoverSaloonDetailCFFragment();
 				onAddFragment(goverSaloonDetailCFFragment, bundle);
-
 				break;
 
 			case WUXICHANNELCONTENTDETAILFRAGMENT:// 魅力锡城内容页
 				WuxiChannelContentDetailFragment wuxiChannelContentDetailFragment = new WuxiChannelContentDetailFragment();
-
 				onAddFragment(wuxiChannelContentDetailFragment, bundle);
 				break;
+
 			case HOTTOPICCONTENTFRAGMENT:// 咨询中心热点专题
 				HotTopicContentFragment hotTopicContentFragment = new HotTopicContentFragment();
 				onAddFragment(hotTopicContentFragment, bundle);
-
 				break;
+
 			case INFOCENTER_FRAGMENT:
 				InfoCenterContentDetailFragment infoCenterContentDetailFragment = new InfoCenterContentDetailFragment();
 				onAddFragment(infoCenterContentDetailFragment, bundle);
 				break;
+
 			case LEARACTIVITY_FRAGMENT:// 领导活动集锦
 				LearActivityFragment learActivityFragment = new LearActivityFragment();
 				onReplaceFragment(learActivityFragment, bundle);
 				break;
+
 			case FOURTOPIC_ACTIVITYFRAGMENT:
 				FourTopicActivityFragment fourTopicActivityFragment = new FourTopicActivityFragment();
 				onReplaceFragment(fourTopicActivityFragment, bundle);
 				break;
+
 			case PUBLICSERVICECONTENTDETAILFRAGMENT:// 公共服务内容页
 				PublicServiceContentDetailFragment publicServiceContentDetailFragment = new PublicServiceContentDetailFragment();
 				onAddFragment(publicServiceContentDetailFragment, bundle);
 				break;
+
 			case GOVERMSG_APPLYTABLE_FRAGMENT:// 政府信息公开 公共那个服务内容页
 				GoverMsgApplyTableFragment goverMsgApplyTableFragment = new GoverMsgApplyTableFragment();
 				onAddOtherFragment(goverMsgApplyTableFragment, bundle);
 				break;
+
 			case GOVERMSG_WEBCONTENT_FARGMENT:// 政府信息公开 信息公开指南 和信息公开制度 内容页
 				GoverMsgContentDetailWebFragment goverContentDetailWebFragment = new GoverMsgContentDetailWebFragment();
 				onAddFragment(goverContentDetailWebFragment, bundle);
 				break;
+
 			case ABOUTUSFRAGMENT:// 关于我们
 				AboutUsFragment aboutUsFragment = new AboutUsFragment();
 				onAddFragment(aboutUsFragment, bundle);
 				break;
+
 			case NEWSANNACOUNTFRAGMENT:// 首页无锡要闻，公告公示内容页
 				NewsAnnAcountFragment newsAnnAcountFragment = new NewsAnnAcountFragment();
 				onReplaceFragment(newsAnnAcountFragment, bundle);
+				break;
+				
+			default:
 				break;
 			}
 		}

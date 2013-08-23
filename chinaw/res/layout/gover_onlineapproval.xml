@@ -23,8 +23,7 @@
             android:layout_height="wrap_content"
             android:cacheColorHint="@android:color/transparent"
             android:divider="@android:color/white"
-            android:dividerHeight="1dip" 
-            >
+            android:dividerHeight="1dip" >
         </ListView>
 
         <ProgressBar
@@ -33,7 +32,5 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
     </FrameLayout>
-
-   
 
 </RelativeLayout>

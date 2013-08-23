@@ -116,6 +116,7 @@ public class Constants {
 		 * 获取当前用户 立法征求意见和民意征集 URL
 		 * */
 		public static final String MY_POLITICS_LIST_URL = "http://3g.wuxi.gov.cn/politics/mylist.json";
+		
 		/**
 		 * 获取市长信箱列表 URL
 		 * */
@@ -159,13 +160,20 @@ public class Constants {
 		public static final String MYCONSULT_URL = "http://3g.wuxi.gov.cn/api/zhengwu/myconsult.json?access_token={access_token}&start={start}&end={end}";
 
 		/**
+		 * 政民互动 获取信件详细信息 URL
+		 */
+		public static final String MAIL_INFO_URL = "http://3g.wuxi.gov.cn/api/letter/{id}.json";
+		
+		/**
 		 * 政民互动 公众论坛 发帖
 		 */
 		public static final String FOORUM_POST_URL = "http://3g.wuxi.gov.cn/api/publicbbs/newpost.json";
+		
 		/**
 		 * 政民互动 公众论坛 评论
 		 */
 		public static final String FORUM_COMMENT_URL = "http://3g.wuxi.gov.cn/api/publicbbs/{id}/result_submit.json";
+		
 		/**
 		 * 政民互动 视频直播平台 访谈实录
 		 */
@@ -175,6 +183,7 @@ public class Constants {
 		 * 政民互动 视频直播平台 留言提问
 		 */
 		public static final String LEAVE_MESSAGE_CONTENT_URL = "http://3g.wuxi.gov.cn/api/interview/{interViewId}/questions.json";
+		
 		/**
 		 * 政民互动 视频直播平台 走进直播间 往期回顾
 		 */

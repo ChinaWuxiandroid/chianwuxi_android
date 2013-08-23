@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-
-
     <RadioGroup
         android:id="@+id/gover_buness_guide_rg"
         android:layout_width="fill_parent"
@@ -83,12 +81,5 @@
         </ListView>
     </FrameLayout>
 
-    <!--
-         <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        layout="@layout/goversaloon_foot_search_layout" />
-    -->
 
 </RelativeLayout>

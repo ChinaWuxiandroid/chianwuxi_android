@@ -16,7 +16,7 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- * 恢复统计业务类  包括答复率总数统计 和 各信箱答复率统计
+ * 回复统计业务类  包括答复率总数统计 和 各信箱答复率统计
  * @author 杨宸  智佳
  * */
 public class ReplyStatisticsService extends Service{

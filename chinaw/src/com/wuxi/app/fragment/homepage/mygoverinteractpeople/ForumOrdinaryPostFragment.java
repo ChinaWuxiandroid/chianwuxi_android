@@ -54,7 +54,7 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- * 公众论坛 帖子详细内容 普通帖子界面碎片
+ * 公众论坛 帖子详细内容 帖子界面碎片
  * 
  * @author 智佳 罗森
  * 
@@ -142,7 +142,7 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
 			}
-		};
+		}
 	};
 
 	/**

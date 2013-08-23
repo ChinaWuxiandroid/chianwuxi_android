@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#696969"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="10sp"
+        android:layout_marginRight="5sp"
+        android:text="信件处理统计（统计时间自2011年6月1日起）："
+        android:textColor="@android:color/white" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="7sp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="咨询投诉："
+            android:textColor="@android:color/white" />
+        
+        <TextView 
+            android:id="@+id/advisory_complain_mail_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="54866封"
+            android:textColor="@android:color/white" 
+            />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="7sp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="市长信箱："
+            android:textColor="@android:color/white" />
+        
+        <TextView 
+            android:id="@+id/mayor_box_mail_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="21251封"
+            android:textColor="@android:color/white" 
+            />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="7sp"
+        android:layout_marginBottom="10sp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="领导信箱："
+            android:textColor="@android:color/white" />
+        
+        <TextView 
+            android:id="@+id/leader_box_mail_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9690封"
+            android:textColor="@android:color/white" 
+            />
+    </LinearLayout>
+
+</LinearLayout>
