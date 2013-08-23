@@ -75,9 +75,9 @@
             android:id="@+id/gover_guid_lv_content"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:cacheColorHint="@android:color/transparent"
-            android:divider="@android:color/white"
-            android:dividerHeight="1dip" >
+             android:divider="@android:color/white"
+            android:dividerHeight="1dip"
+            android:cacheColorHint="@android:color/transparent" >
         </ListView>
     </FrameLayout>
 
