@@ -818,10 +818,9 @@ public final class R {
         public static final int ordinary_sentpepole_text=0x7f0b0046;
         public static final int ordinary_title_text=0x7f0b004f;
         public static final int paging_loading_list_fragmeLayout=0x7f0b002d;
-<<<<<<< HEAD
         public static final int pb_applyloadmoore=0x7f0b026a;
         public static final int pb_approval=0x7f0b0136;
-        public static final int pb_content_wb=0x7f0b0028;
+        public static final int pb_content_wb=0x7f0b0029;
         public static final int pb_detail=0x7f0b01a8;
         public static final int pb_fava=0x7f0b022c;
         public static final int pb_hottopic=0x7f0b023f;
@@ -833,22 +832,6 @@ public final class R {
         public static final int pb_publicserivce=0x7f0b02b1;
         public static final int pb_regist=0x7f0b021f;
         public static final int pb_table_download=0x7f0b0151;
-=======
-        public static final int pb_applyloadmoore=0x7f0b025b;
-        public static final int pb_approval=0x7f0b0127;
-        public static final int pb_content_wb=0x7f0b0029;
-        public static final int pb_detail=0x7f0b0199;
-        public static final int pb_fava=0x7f0b021d;
-        public static final int pb_hottopic=0x7f0b0230;
-        public static final int pb_item=0x7f0b01dd;
-        public static final int pb_loadmoore=0x7f0b023b;
-        public static final int pb_login=0x7f0b020d;
-        public static final int pb_mange=0x7f0b0132;
-        public static final int pb_onlineask=0x7f0b011f;
-        public static final int pb_publicserivce=0x7f0b02a2;
-        public static final int pb_regist=0x7f0b0210;
-        public static final int pb_table_download=0x7f0b0142;
->>>>>>> b6d54eda6de3ffda7310d192b27185657158051f
         public static final int popdown=0x7f0b0035;
         public static final int popinfo=0x7f0b0033;
         public static final int popleft=0x7f0b0032;

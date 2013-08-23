@@ -56,13 +56,8 @@
             <ListView
                 android:id="@+id/gover_saloon_lv_myconsult"
                 android:layout_width="fill_parent"
-<<<<<<< HEAD
                 android:layout_height="wrap_content"
                 android:cacheColorHint="@android:color/transparent"
-=======
-                android:layout_height="wrap_content"
-                android:cacheColorHint="@android:color/transparent"
->>>>>>> b6d54eda6de3ffda7310d192b27185657158051f
                 android:divider="@android:color/white"
                 android:dividerHeight="1dip"
                 android:visibility="invisible" >
