@@ -333,19 +333,16 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return depts.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return depts.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 
@@ -380,7 +377,6 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 
 		@Override
 		public void onNothingSelected(AdapterView<?> arg0) {
-			// TODO Auto-generated method stub
 		}
 	}
 }

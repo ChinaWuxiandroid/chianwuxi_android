@@ -5,8 +5,9 @@
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/gip_12345_leader_box_layout"
         android:layout_width="fill_parent"
-        android:layout_height="45dp" >
+        android:layout_height="wrap_content" >
 
         <RadioGroup
             android:id="@+id/gip_12345_leaderbox_radioGroup"
@@ -38,16 +39,16 @@
                 android:layout_weight="1"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="写 信  须 知"
+                android:text="写信须知"
                 android:textColor="@color/gip_second_frame_button_brown"
                 android:textSize="12sp" />
         </RadioGroup>
     </LinearLayout>
 
-    <FrameLayout 
+    <FrameLayout
         android:id="@+id/gip_12345_leaderbox_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        ></FrameLayout>
+        android:layout_height="match_parent" >
+    </FrameLayout>
 
 </LinearLayout>

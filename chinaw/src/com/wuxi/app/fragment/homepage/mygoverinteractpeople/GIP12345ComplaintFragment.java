@@ -165,12 +165,13 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 				int[] xy = new int[2];
 				queryMailBtn.getLocationOnScreen(xy);
 				popWindow.showAtLocation(queryMailBtn, Gravity.BOTTOM
-						| Gravity.RIGHT, 0, queryMailBtn.getHeight() * 2 + 20);
+						| Gravity.RIGHT, 0, queryMailBtn.getHeight() * 2 + 18);
 			}
 		});
 		
 		
 		GIP12345ComplaintListFragment complaintListFragment = new GIP12345ComplaintListFragment();
+		complaintListFragment.setBaseSlideFragment(this.baseSlideFragment);
 		bindFragment(complaintListFragment);
 		
 		loadAllCountData();

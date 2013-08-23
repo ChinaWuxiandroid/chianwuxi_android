@@ -13,7 +13,6 @@ public class GoverMsgContentDetailWebFragment extends ContentDetailWebFragment{
 
 	@Override
 	protected String getContentTitleText() {
-		// TODO Auto-generated method stub
 		return (String) this.getArguments().get("fragmentTitle");
 	}
 

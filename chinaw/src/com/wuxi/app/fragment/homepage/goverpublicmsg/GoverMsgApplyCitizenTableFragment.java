@@ -197,10 +197,8 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements O
 							handler.sendEmptyMessage(SUBMIT_FAILED);
 						}
 					} catch (NetException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -256,7 +254,6 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements O
 		applydate=applyDate_txt.getText().toString();
 
 		if(!inputError&&"".equals(name)){
-			System.out.println();
 			Toast.makeText(context, "姓名不能为空", Toast.LENGTH_SHORT).show();
 			inputError=true;
 		}

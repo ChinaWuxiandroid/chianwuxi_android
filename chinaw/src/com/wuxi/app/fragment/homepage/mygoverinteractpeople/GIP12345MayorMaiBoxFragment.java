@@ -184,7 +184,7 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 				int[] xy = new int[2];
 				queryMailBtn.getLocationOnScreen(xy);
 				popWindow.showAtLocation(queryMailBtn, Gravity.BOTTOM
-						| Gravity.RIGHT, 0, queryMailBtn.getHeight() * 2 + 20);
+						| Gravity.RIGHT, 0, queryMailBtn.getHeight() * 2 + 18);
 			}
 		});
 

@@ -15,6 +15,8 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -24,14 +26,16 @@ import android.widget.Toast;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.LetterService;
+import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.LetterWrapper;
+import com.wuxi.domain.LetterWrapper.Letter;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- * 政民互动 12345来信办理平台 建议咨询投诉界面碎片
+ * 政民互动 12345来信办理平台 建议咨询投诉列表 界面碎片
  * 
  * @author 智佳 罗森
  * 
@@ -52,7 +56,7 @@ public class GIP12345ComplaintListFragment extends BaseFragment {
 	private static final int DATA_LOAD_ERROR = 1;
 
 	private int startIndex = 0; // 获取话题的起始坐标
-	private int endIndex = 5; // 获取话题的结束坐标
+	private int endIndex = 100; // 获取话题的结束坐标
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -145,11 +149,14 @@ public class GIP12345ComplaintListFragment extends BaseFragment {
 	 * 显示列表
 	 */
 	public void showLettersList() {
-		LettersListViewAdapter adapter = new LettersListViewAdapter();
+		BaseSlideFragment baseSlideFragment = this.baseSlideFragment;
+		LettersListViewAdapter adapter = new LettersListViewAdapter(
+				baseSlideFragment);
 		if (letters == null || letters.size() == 0) {
 			Toast.makeText(context, "对不起，暂无信息", 2000).show();
 		} else {
 			mListView.setAdapter(adapter);
+			mListView.setOnItemClickListener(adapter);
 		}
 	}
 
@@ -159,7 +166,19 @@ public class GIP12345ComplaintListFragment extends BaseFragment {
 	 * @author 智佳 罗森
 	 * 
 	 */
-	public class LettersListViewAdapter extends BaseAdapter {
+	public class LettersListViewAdapter extends BaseAdapter implements
+			OnItemClickListener {
+
+		BaseSlideFragment slideFragment = null;
+
+		/**
+		 * @方法： LettersListViewAdapter
+		 * @描述：
+		 * @param fragment
+		 */
+		public LettersListViewAdapter(BaseSlideFragment fragment) {
+			this.slideFragment = fragment;
+		}
 
 		@Override
 		public int getCount() {
@@ -226,6 +245,18 @@ public class GIP12345ComplaintListFragment extends BaseFragment {
 					.getAppraise());
 
 			return convertView;
+		}
+
+		@Override
+		public void onItemClick(AdapterView<?> adapterView, View arg1,
+				int position, long arg3) {
+			Letter letter = (Letter) adapterView.getItemAtPosition(position);
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("letter", letter);
+
+			slideFragment.slideLinstener.replaceFragment(null, position,
+					Constants.FragmentName.GIP_MAYOR_MAIL_CONTENT_FRAGMENT,
+					bundle);
 		}
 
 	}

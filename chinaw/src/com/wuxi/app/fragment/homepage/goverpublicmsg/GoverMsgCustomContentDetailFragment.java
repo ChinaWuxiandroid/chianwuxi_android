@@ -169,7 +169,6 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		switch(v.getId()){
 		case R.id.govermsg_detail_btn_packup:
 			FragmentManager manager = getActivity().getSupportFragmentManager();

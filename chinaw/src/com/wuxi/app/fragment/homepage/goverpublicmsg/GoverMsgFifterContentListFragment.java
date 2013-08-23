@@ -13,7 +13,6 @@ public class GoverMsgFifterContentListFragment extends FifterContentListFragment
 
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
-		// TODO Auto-generated method stub
 		Content content = (Content) adapterView.getItemAtPosition(position);
 		BaseSlideFragment baseSlideFragment = this.baseSlideFragment;
 		if (super.parentItem != null) {

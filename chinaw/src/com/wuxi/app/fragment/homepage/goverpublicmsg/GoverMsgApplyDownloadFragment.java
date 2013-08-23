@@ -158,7 +158,6 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment{
 					handler.sendEmptyMessage(LOAD_FAILED);
 
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -176,7 +175,6 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment{
 				try {
 					depts = applyDeptService.getDepts(Constants.Urls.APPLYDEPT_URL);
 					if (null != depts) {
-						//						CacheUtil.put(menuItem.getChannelId(), titleChannels);// 缓存起来
 						handler.sendEmptyMessage(LOAD_DEPT_SUCCESS);
 					} else {
 						Message message = handler.obtainMessage();
@@ -191,7 +189,6 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment{
 					handler.sendEmptyMessage(LOAD_FAILED);
 
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -307,19 +304,16 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment{
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return depts.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return depts.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 
