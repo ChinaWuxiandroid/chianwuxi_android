@@ -148,14 +148,14 @@ public class MainActivity extends FragmentActivity implements
 
 		if (fragmentManagers.fragments == null
 				|| fragmentManagers.fragments.size() <= 0) {
-			
+
 			showExitDialog();
 
 		} else {
-			fragmentManagers.BackPress(fragmentManagers.fragments
-					.get(fragmentManagers.fragments.size() - 1));
-			currentBaseSlideFragment = null;
-			return;
+			if (currentBaseSlideFragment != null) {
+				currentBaseSlideFragment.slideLinstener.onBack();
+			}
+
 		}
 
 	}

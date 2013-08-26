@@ -6,6 +6,7 @@ import java.util.Map;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -29,7 +30,8 @@ import com.wuxi.exception.ResultException;
  * @author wanglu 泰得利通 注册
  * 
  */
-public class RegisterFragment extends BaseSlideFragment implements OnClickListener {
+public class RegisterFragment extends BaseSlideFragment implements
+		OnClickListener {
 
 	protected static final int REGIST_SUCCESS = 1;// 登录成功
 
@@ -41,7 +43,7 @@ public class RegisterFragment extends BaseSlideFragment implements OnClickListen
 			et_findpass_answer, et_email, et_tel, et_phone;
 
 	private Button regist_btn_submit, regist_btn_cancle;
-	private ProgressBar pb_regist;
+	private ProgressDialog pd;
 
 	private User regUser;
 	@SuppressLint("HandlerLeak")
@@ -56,12 +58,12 @@ public class RegisterFragment extends BaseSlideFragment implements OnClickListen
 						.show();
 				break;
 			}
-			pb_regist.setVisibility(ProgressBar.GONE);
+			pd.dismiss();
 		};
 	};
 
 	@Override
-	public  void initUI() {
+	public void initUI() {
 		super.initUI();
 		et_username = (EditText) view.findViewById(R.id.et_username);
 		et_truename = (EditText) view.findViewById(R.id.et_truename);
@@ -75,12 +77,14 @@ public class RegisterFragment extends BaseSlideFragment implements OnClickListen
 		et_email = (EditText) view.findViewById(R.id.et_email);
 		et_tel = (EditText) view.findViewById(R.id.et_tel);
 		et_phone = (EditText) view.findViewById(R.id.et_phonenumber);
-		pb_regist=(ProgressBar) view.findViewById(R.id.pb_regist);
+
 		regist_btn_submit = (Button) view.findViewById(R.id.regist_btn_submit);
 		regist_btn_cancle = (Button) view.findViewById(R.id.regist_btn_cancle);
 
 		regist_btn_submit.setOnClickListener(this);
 		regist_btn_cancle.setOnClickListener(this);
+		pd = new ProgressDialog(context);
+		pd.setMessage("正在注册......");
 	}
 
 	protected void handlerRegist() {
@@ -90,7 +94,7 @@ public class RegisterFragment extends BaseSlideFragment implements OnClickListen
 
 	@Override
 	public void onClick(View v) {
-		
+
 		switch (v.getId()) {
 		case R.id.regist_btn_submit:// 提交
 			if (validate()) {
@@ -126,8 +130,7 @@ public class RegisterFragment extends BaseSlideFragment implements OnClickListen
 
 	private void doRegist() {
 
-		pb_regist.setVisibility(ProgressBar.VISIBLE);
-
+		pd.show();
 		new Thread(new Runnable() {
 
 			@Override
@@ -259,9 +262,5 @@ public class RegisterFragment extends BaseSlideFragment implements OnClickListen
 	protected String getTitleText() {
 		return "登录/注册";
 	}
-
-	
-
-
 
 }

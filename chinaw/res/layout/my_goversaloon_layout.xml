@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dip"
-        android:layout_marginTop="8dip"
+        android:layout_marginTop="5dip"
         android:orientation="horizontal" >
 
         <RadioButton
@@ -18,8 +18,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/gover_saloon_btn_selector"
             android:button="@null"
-            android:gravity="center"
-            android:padding="5dip"
+            android:padding="8dip"
             android:text="我的在线咨询"
             android:textSize="14sp" />
 
@@ -27,11 +26,10 @@
             android:id="@+id/gover_sallon_my_apply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dip"
+            android:layout_marginLeft="20dip"
             android:background="@drawable/gover_saloon_btn_selector"
             android:button="@null"
-            android:gravity="center"
-            android:padding="5dip"
+            android:padding="8dip"
             android:text="我的申报列表"
             android:textSize="14sp" />
     </RadioGroup>

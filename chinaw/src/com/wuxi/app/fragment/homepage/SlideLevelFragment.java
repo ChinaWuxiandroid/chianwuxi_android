@@ -287,7 +287,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				HotReviewContentFragment hotReviewContentFragment = new HotReviewContentFragment();
 				onAddFragment(hotReviewContentFragment, bundle);
 				break;
-				
+
 			case GIP_MAYOR_MAIL_CONTENT_FRAGMENT:// 市长信箱 最新信件 列表详情界面
 				GIP12345MayorMailContentFragment gip12345MayorMailContentFragment = new GIP12345MayorMailContentFragment();
 				onAddFragment(gip12345MayorMailContentFragment, bundle);
@@ -389,7 +389,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				NewsAnnAcountFragment newsAnnAcountFragment = new NewsAnnAcountFragment();
 				onReplaceFragment(newsAnnAcountFragment, bundle);
 				break;
-				
+
 			default:
 				break;
 			}
@@ -550,6 +550,9 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 	@Override
 	public void onClick(View v) {
 
+		if (!mSlideMenuLayout.getRightSlideMenuEnabled()) {
+			return;
+		}
 		switch (v.getId()) {
 		case R.id.login_tv_userlogin:// 登录处理
 
@@ -559,7 +562,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			initFragment(null);
 			break;
 		case R.id.login_tv_user_regisster:// 注册
-			// managers.BackPress(this);
+
 			this.menuItem = null;
 			this.fragmentName = Constants.FragmentName.REGIST_FRAGMENT;
 			initFragment(null);

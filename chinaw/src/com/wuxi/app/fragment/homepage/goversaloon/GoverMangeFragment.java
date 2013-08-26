@@ -1,32 +1,29 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,13 +47,12 @@ import com.wuxi.exception.NetException;
  */
 @SuppressLint("HandlerLeak")
 public class GoverMangeFragment extends GoverSaloonContentFragment implements
-		OnPageChangeListener, OnClickListener, OnScrollListener, OnItemClickListener {
+		OnClickListener, OnScrollListener, OnCheckedChangeListener,
+		OnItemClickListener {
 
 	private ListView gover_mange_lv;
-	private ViewPager gover_viewpagerLayout;
+
 	private ImageView gover_mange_iv_next;
-	private List<View> titleGridViews;
-	private static final int PAGE_ITEM = 4;
 
 	protected static final int LOAD_CHANNEL_SUCCESS = 1;
 	protected static final int LOAD_CHANNEL_FAIL = 0;
@@ -70,10 +66,9 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 	private int visibleLastIndex;
 	private int visibleItemCount;// 当前显示的总条数
 
-	private int checkPositons[];// 选中的坐标
-	private int pageNo = 0;
 	private GoverManageAdapter manageAdapter;
 	private MenuItem menuItem;
+	private List<Channel> subChannels;
 	private List<Channel> channels;
 
 	private static final int CHANNEL_TYPE = 1;
@@ -86,6 +81,8 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 	private Channel checkChannel;
 	private LinearLayout ll_subchannel;
 	private ProgressBar pb_loadmoore;
+	private RadioGroup mange_rg_channel;
+	private boolean isFirstChange = true;
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 
@@ -113,18 +110,21 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 		super.initUI();
 
 		gover_mange_lv = (ListView) view.findViewById(R.id.gover_mange_lv);
-		gover_viewpagerLayout = (ViewPager) view
-				.findViewById(R.id.gover_viewpagerLayout);
+		mange_rg_channel = (RadioGroup) view
+				.findViewById(R.id.mange_rg_channel);
+		mange_rg_channel.setOnCheckedChangeListener(this);
+	
 		gover_mange_iv_next = (ImageView) view
 				.findViewById(R.id.gover_mange_iv_next);
 		ll_subchannel = (LinearLayout) view.findViewById(R.id.ll_subchannel);
-		gover_viewpagerLayout.setOnPageChangeListener(this);
+		
 		gover_mange_iv_next.setOnClickListener(this);
 		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
 				null);
 		loadMoreButton = (Button) loadMoreView
 				.findViewById(R.id.loadMoreButton);
-		pb_loadmoore=(ProgressBar) loadMoreView.findViewById(R.id.pb_loadmoore);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
 		gover_mange_lv.addFooterView(loadMoreView);
 		gover_mange_lv.setOnScrollListener(this);
 		pb_mange = (ProgressBar) view.findViewById(R.id.pb_mange);
@@ -137,13 +137,12 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 
 	/**
 	 * 
-	 *wanglu 泰得利通
-	 *显示子Channel
+	 * wanglu 泰得利通 显示子Channel
 	 */
 	protected void showSubChannel() {
 
-		int index=0;
-		for (final Channel channel : channels) {
+		int index = 0;
+		for (final Channel channel : subChannels) {
 
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -153,23 +152,23 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 			textView.setTextColor(Color.BLUE);
 			textView.setText(channel.getChannelName());
 			ll_subchannel.addView(textView, params);
-			
+
 			textView.setOnClickListener(new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
-					
-					if(channel.getChildrenContentsCount()>0){
+
+					if (channel.getChildrenContentsCount() > 0) {
 						isSwitch = true;
 						checkChannel = channel;
 						loadContentsData(channel.getChannelId(), 0, PAGESIZE);
 					}
 				}
 			});
-			
-			if(index==0&&channel.getChildrenContentsCount()>0){//默认显示第一个的内容
-				this.checkChannel=channel;
-				loadContentsData(channel.getChannelId(),0, PAGESIZE);
+
+			if (index == 0 && channel.getChildrenContentsCount() > 0) {// 默认显示第一个的内容
+				this.checkChannel = channel;
+				loadContentsData(channel.getChannelId(), 0, PAGESIZE);
 			}
 			index++;
 
@@ -188,18 +187,27 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 
 				ChannelService channelService = new ChannelService(context);
 				try {
-					channels = channelService.getSubChannels(channelId);
-					if (channels != null) {
-						if (type == CHANNEL_TYPE) {
+
+					if (type == CHANNEL_TYPE) {
+						channels = channelService.getSubChannels(channelId);
+						if (channels != null) {
 							msg.what = LOAD_CHANNEL_SUCCESS;
-						} else if (type == SUB_CHANNEL_TYPE) {
-							msg.what = LOAD_SUBCHANNEL_SUCCESS;// 加载子Channel成功
+						} else {
+							msg.what = LOAD_CHANNEL_FAIL;
+							msg.obj = "加载失败";
 						}
 
-					} else {
-						msg.what = LOAD_CHANNEL_FAIL;
-						msg.obj = "加载失败";
+					} else if (type == SUB_CHANNEL_TYPE) {
+						subChannels = channelService.getSubChannels(channelId);
+						if (channels != null) {
+							msg.what = LOAD_SUBCHANNEL_SUCCESS;// 加载子Channel成功
+						} else {
+							msg.what = LOAD_CHANNEL_FAIL;
+							msg.obj = "加载失败";
+						}
+
 					}
+
 					handler.sendMessage(msg);
 				} catch (NetException e) {
 					e.printStackTrace();
@@ -215,64 +223,43 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 
 	private void showChannelData() {
 
-		int i = 0;
-		List<Channel> onScreenItems = null;
-		titleGridViews = new ArrayList<View>();
-		int currentScreen = 0;// 当前屏
+		int index = 0;
+		for (Channel channle : channels) {
 
-		int totalScreenNum = channels.size() / PAGE_ITEM;// 屏数
-		checkPositons = new int[totalScreenNum + 1];
-		for (int j = 0; j < checkPositons.length; j++) {// 初始化头部安选中的下标
-			checkPositons[j] = -1;
-		}
+			RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(
+					RadioGroup.LayoutParams.WRAP_CONTENT,
+					RadioGroup.LayoutParams.WRAP_CONTENT);
+			params.leftMargin = 5;
+			RadioButton radioButton = new RadioButton(context);
+			if (index == 0) {
 
-		checkPositons[0] = 0;// 默认选中第一屏第一个Chanel
+				radioButton.setTextColor(Color.WHITE);
 
-		for (Channel item : channels) {
+				radioButton
+						.setBackgroundResource(R.drawable.wuxi_content_channelselect_);
 
-			if (i % PAGE_ITEM == 0) {
+				if (channle.getChildrenContentsCount() > 0) {
+					loadContentsData(channle.getChannelId(), 0, PAGESIZE);
+					this.checkChannel = channle;
+					ll_subchannel.setVisibility(LinearLayout.GONE);// 隐藏子Channel
+																	// View
+				} else if (channle.getChildrenChannelsCount() > 0) {
 
-				if (onScreenItems != null) {
-
-					titleGridViews.add(bulidGridView(onScreenItems,
-							currentScreen));
-					currentScreen++;
-
+					ll_subchannel.setVisibility(LinearLayout.VISIBLE);// 隐藏子Channel
+																		// View
+					loadChannle(SUB_CHANNEL_TYPE, channle.getChannelId());
 				}
 
-				onScreenItems = new ArrayList<Channel>();
 			}
 
-			// 最后一屏操作
-			if (currentScreen > totalScreenNum + 1) {
+			radioButton.setText(channle.getChannelName());
+			radioButton.setTextSize(14);
+			radioButton.setPadding(5, 5, 5, 5);
+			radioButton.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-				onScreenItems = new ArrayList<Channel>();
-			}
+			mange_rg_channel.addView(radioButton, params);
+			index++;
 
-			onScreenItems.add(item);
-
-			// add last category screen //最后一屏
-			if (i == channels.size() - 1) {
-
-				titleGridViews.add(bulidGridView(onScreenItems, currentScreen));
-
-			}
-
-			i++;
-		}
-
-		gover_viewpagerLayout.setAdapter(new ChannelItemViewPageAdapter(
-				titleGridViews));// 设置ViewPage适配器
-
-		Channel initChannel = channels.get(0);
-		if (initChannel.getChildrenContentsCount() > 0) {
-			loadContentsData(initChannel.getChannelId(), 0, PAGESIZE);
-			this.checkChannel = initChannel;
-			ll_subchannel.setVisibility(LinearLayout.GONE);// 隐藏子Channel View
-		} else if (initChannel.getChildrenChannelsCount() > 0) {
-
-			ll_subchannel.setVisibility(LinearLayout.VISIBLE);// 隐藏子Channel View
-			loadChannle(SUB_CHANNEL_TYPE, initChannel.getChannelId());
 		}
 
 	}
@@ -290,7 +277,7 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 
 		if (isFistLoad || isSwitch) {
 			pb_mange.setVisibility(ProgressBar.VISIBLE);
-		}else{
+		} else {
 			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
 		}
 
@@ -335,7 +322,6 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 
 	protected void showContentData() {
 
-		
 		List<Content> contents = contentWrapper.getContents();
 		if (contents != null && contents.size() > 0) {
 			if (isFistLoad) {
@@ -361,179 +347,15 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 
 			}
 		}
-		
+
 		if (contentWrapper.isNext()) {
 			loadMoreButton.setText("点击加载更多");
 			pb_loadmoore.setVisibility(ProgressBar.GONE);
 
 		} else {
-			
+
 			gover_mange_lv.removeFooterView(loadMoreView);
 		}
-
-
-	}
-
-	private GridView bulidGridView(List<Channel> items, int screenIndex) {
-		GridView gridView = (GridView) mInflater.inflate(
-				R.layout.gover_mange_title_gridview_layout, null);
-		gridView.setColumnWidth(PAGE_ITEM);
-
-		gridView.setAdapter(new ChannelGridViewAdaptger(items, screenIndex));
-		gridView.setOnItemClickListener(GridviewOnclick);
-		return gridView;
-	}
-
-	static class ViewHolder {
-		TextView tv_title;
-	}
-
-	private class ChannelGridViewAdaptger extends BaseAdapter {
-
-		public List<Channel> channels;
-		public int screenIndex;
-
-		public ChannelGridViewAdaptger(List<Channel> channels, int screenIndex) {
-			this.channels = channels;
-			this.screenIndex = screenIndex;
-		}
-
-		@Override
-		public int getCount() {
-			return channels.size();
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return channels.get(position);
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			Channel channel = channels.get(position);
-			ViewHolder viewHolder = null;
-			if (convertView == null) {
-				convertView = mInflater.inflate(
-						R.layout.gover_mange_title_gridview_item_layout, null);
-
-				viewHolder = new ViewHolder();
-
-				viewHolder.tv_title = (TextView) convertView
-						.findViewById(R.id.gover_manger_tv);
-
-				if (screenIndex == 0 && position == 0) {
-
-					viewHolder.tv_title
-							.setBackgroundResource(R.drawable.goversaloon_menuitem_bg);
-					viewHolder.tv_title.setTextColor(Color.WHITE);
-
-				}
-
-				convertView.setTag(viewHolder);
-			} else {
-				viewHolder = (ViewHolder) convertView.getTag();
-			}
-
-			viewHolder.tv_title.setText(channel.getChannelName());
-			return convertView;
-		}
-
-	}
-
-	private class ChannelItemViewPageAdapter extends PagerAdapter {
-
-		private List<View> mListViews;
-
-		public ChannelItemViewPageAdapter(List<View> mGridViews) {
-
-			this.mListViews = mGridViews;
-		}
-
-		@Override
-		public int getCount() {
-			return mListViews.size();
-		}
-
-		@Override
-		public Object instantiateItem(View collection, int position) {
-
-			((ViewPager) collection).addView(mListViews.get(position), 0);
-
-			return mListViews.get(position);
-		}
-
-		@Override
-		public void destroyItem(View collection, int position, Object view) {
-			((ViewPager) collection).removeView(mListViews.get(position));
-		}
-
-		@Override
-		public boolean isViewFromObject(View view, Object object) {
-			return view == (object);
-		}
-
-	}
-
-	/**
-	 * 菜单点击
-	 */
-	private OnItemClickListener GridviewOnclick = new OnItemClickListener() {
-
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
-
-			Channel channel = (Channel) parent.getItemAtPosition(position);
-			/**
-			 * 切换选中与未选择的样式
-			 */
-			if (checkPositons[pageNo] != position) {
-				View checkView = parent.getChildAt(position);
-
-				TextView tv_Check = (TextView) checkView
-						.findViewById(R.id.gover_manger_tv);
-				tv_Check.setBackgroundResource(R.drawable.goversaloon_menuitem_bg);
-
-				tv_Check.setTextColor(Color.WHITE);
-
-				View oldCheckView = parent.getChildAt(checkPositons[pageNo]);
-				if (null != oldCheckView) {
-
-					TextView tv_oldCheck = (TextView) oldCheckView
-							.findViewById(R.id.gover_manger_tv);
-					tv_oldCheck.setBackgroundColor(getResources().getColor(
-							R.color.content_background));
-
-					tv_oldCheck.setTextColor(Color.BLACK);
-
-				}
-
-				checkPositons[pageNo] = position;
-			}
-
-			isSwitch = true;
-			checkChannel = channel;
-			if (channel.getChildrenContentsCount() > 0) {
-				loadContentsData(channel.getChannelId(), 0, PAGESIZE);
-				ll_subchannel.setVisibility(LinearLayout.GONE);// 隐藏子显示子ChannelView
-
-			}else if(channel.getChildrenChannelsCount()>0){
-				ll_subchannel.removeAllViews();//移除前面有点view重新加载
-				ll_subchannel.setVisibility(LinearLayout.VISIBLE);// 隐藏子显示子ChannelView
-				loadChannle(SUB_CHANNEL_TYPE, channel.getChannelId());
-			}	
-
-		}
-	};
-
-	@Override
-	public void onPageSelected(int position) {
-		pageNo = position;
 
 	}
 
@@ -541,10 +363,7 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 	public void onClick(View v) {
 
 		switch (v.getId()) {
-		case R.id.gover_mange_iv_next:
-			// gover_viewpagerLayout.setCurrentItem(pageNo+1);
-			gover_viewpagerLayout.setCurrentItem(pageNo + 1, true);
-			break;
+
 		case R.id.loadMoreButton:
 			if (contentWrapper != null && contentWrapper.isNext()) {// 还有下一条记录
 
@@ -577,42 +396,61 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		/*int itemsLastIndex = manageAdapter.getCount() - 1; // 数据集最后一项的索引
-		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
-				&& visibleLastIndex == lastIndex) {
 
-			if (contentWrapper != null && contentWrapper.isNext()) {// 还有下一条记录
+	}
 
-				loadMoreButton.setText("loading.....");
-				isSwitch = false;
-				loadContentsData(checkChannel.getChannelId(),
-						visibleLastIndex + 1, visibleLastIndex + 1 + PAGESIZE);
+	@Override
+	public void onItemClick(AdapterView<?> adapterView, View arg1,
+			int position, long arg3) {
 
+		Content content = (Content) adapterView.getItemAtPosition(position);
+		Bundle bundle = new Bundle();
+		bundle.putSerializable(ContentDetailFragment.CHANNEL_KEY,
+				this.checkChannel);
+		bundle.putSerializable(ContentDetailFragment.CONTENT_KEY, content);
+		this.baseSlideFragment.slideLinstener.replaceFragment(null, -1,
+				FragmentName.GOVERSALOONCONTENTDETIALFRAGMENT, bundle);
+	}
+
+	@Override
+	public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+		for (int i = 0; i < group.getChildCount(); i++) {
+
+			RadioButton r = (RadioButton) group.getChildAt(i);
+
+			if (isFirstChange && i == 0) {
+				r.setBackgroundColor(Color.TRANSPARENT);
+				r.setTextColor(Color.BLACK);
 			}
 
-		}*/
-	}
+			if (r.isChecked()) {
 
-	@Override
-	public void onPageScrollStateChanged(int arg0) {
+				r.setBackgroundResource(R.drawable.wuxicity_content_channel_item_selector);
 
-	}
+				r.setTextColor(Color.WHITE);
 
-	@Override
-	public void onPageScrolled(int arg0, float arg1, int arg2) {
-		
+				isSwitch = true;
+				checkChannel = channels.get(i);
+				if (checkChannel.getChildrenContentsCount() > 0) {
+					loadContentsData(checkChannel.getChannelId(), 0, PAGESIZE);
+					ll_subchannel.setVisibility(LinearLayout.GONE);// 隐藏子显示子ChannelView
 
-	}
+				} else if (checkChannel.getChildrenChannelsCount() > 0) {
+					ll_subchannel.removeAllViews();// 移除前面有点view重新加载
+					ll_subchannel.setVisibility(LinearLayout.VISIBLE);// 隐藏子显示子ChannelView
+					loadChannle(SUB_CHANNEL_TYPE, checkChannel.getChannelId());
+				}
 
-	@Override
-	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
-	
-		Content content=(Content) adapterView.getItemAtPosition(position);
-		Bundle bundle=new Bundle();
-		bundle.putSerializable(ContentDetailFragment.CHANNEL_KEY, this.checkChannel);
-		bundle.putSerializable(ContentDetailFragment.CONTENT_KEY, content);
-		this.baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.GOVERSALOONCONTENTDETIALFRAGMENT, bundle);
+			} else {
+
+				r.setTextColor(Color.BLACK);
+			}
+
+		}
+
+		isFirstChange = false;
+
 	}
 
 }

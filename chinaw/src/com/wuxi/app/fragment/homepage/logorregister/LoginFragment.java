@@ -3,6 +3,7 @@ package com.wuxi.app.fragment.homepage.logorregister;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -38,9 +39,9 @@ public class LoginFragment extends BaseSlideFragment implements OnClickListener 
 	private Button login_btn_regist;
 	private EditText login_et_username;// 用户名
 	private EditText login_et_pwd;// 密码
-	private ProgressBar pb_login;// 登录等待
 	private User user;
 	private SharedPreferences sp;
+	private ProgressDialog pd;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -48,13 +49,12 @@ public class LoginFragment extends BaseSlideFragment implements OnClickListener 
 			switch (msg.what) {
 			case LOGIN_SUCCESS:
 
-				pb_login.setVisibility(ProgressBar.GONE);// 隐藏进度条
 				loginHandler();// 登录成功处理
 				break;
 			case LOGIN_FAIL:
 				String tip = msg.obj.toString();
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
-				pb_login.setVisibility(ProgressBar.GONE);// 隐藏进度条
+				pd.dismiss();
 				break;
 			}
 
@@ -63,20 +63,22 @@ public class LoginFragment extends BaseSlideFragment implements OnClickListener 
 
 	@Override
 	public void initUI() {
-		slideLinstener.closeSlideMenu();// 关掉左右
+
 		super.initUI();
 		login_btn_login = (Button) view.findViewById(R.id.login_btn_login);
 		login_btn_regist = (Button) view.findViewById(R.id.login_btn_regist);
 		login_et_pwd = (EditText) view.findViewById(R.id.login_et_pwd);// 密码
 		login_et_username = (EditText) view
 				.findViewById(R.id.login_et_username);// 用户名
-		pb_login = (ProgressBar) view.findViewById(R.id.pb_login);
 
 		login_btn_login.setOnClickListener(this);
 		login_btn_regist.setOnClickListener(this);
+		pd = new ProgressDialog(context);
+		pd.setMessage("正在登录...");
 	}
 
 	private void loginHandler() {
+		pd.dismiss();
 		CacheUtil.put(Constants.CacheKey.LOGIN_USER, user);// 将登录的用户存入缓存中
 
 		sp = context
@@ -120,7 +122,8 @@ public class LoginFragment extends BaseSlideFragment implements OnClickListener 
 	 * wanglu 泰得利通 登录
 	 */
 	private void doLogin() {
-		pb_login.setVisibility(ProgressBar.VISIBLE);
+		// pb_login.setVisibility(ProgressBar.VISIBLE);
+		pd.show();
 		new Thread(new Runnable() {
 
 			@Override

@@ -2,12 +2,12 @@
     android:id="@+id/index_gv_menuitem"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:columnWidth="30dip"
+    android:columnWidth="45dip"
     android:gravity="center"
     android:horizontalSpacing="5dip"
     android:numColumns="4"
     android:padding="5dip"
     android:stretchMode="columnWidth"
-    android:verticalSpacing="5dip" >
+   >
 
 </GridView>

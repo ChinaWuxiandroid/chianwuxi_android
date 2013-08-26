@@ -16,7 +16,7 @@
         android:id="@+id/gover_content_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dip" >
+        android:layout_marginTop="35dip" >
     </FrameLayout>
 
     <LinearLayout

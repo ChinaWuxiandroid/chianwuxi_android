@@ -307,24 +307,7 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		// int itemsLastIndex = goverTableDownLoadAdapter.getCount() - 1; //
-		// 数据集最后一项的索引
-		// int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-		/*
-		 * if (scrollState == OnScrollListener.SCROLL_STATE_IDLE &&
-		 * visibleLastIndex == lastIndex) {
-		 * 
-		 * if (goverTableDownLoadWrapper != null &&
-		 * goverTableDownLoadWrapper.isNext()) {// 还有下一条记录
-		 * 
-		 * loadMoreButton.setText("loading....."); isSwitchDept = false;
-		 * loadItem(currentDeptId, currentFileName, visibleLastIndex + 1,
-		 * visibleLastIndex + 1 + PAGE_SIZE);
-		 * 
-		 * }
-		 * 
-		 * }
-		 */
+		
 	}
 
 	@Override

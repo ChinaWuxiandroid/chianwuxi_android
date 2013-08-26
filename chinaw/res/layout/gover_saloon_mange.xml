@@ -4,33 +4,39 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <!--
-         <include
-        android:id="@+id/search_head"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        layout="@layout/goversaloon_title_search_layout" />
-    -->
-
     <FrameLayout
         android:id="@+id/fl_title_item"
         android:layout_width="match_parent"
-        android:layout_height="30dip"
+        android:layout_height="35dip"
         android:layout_marginTop="5dip"
         android:orientation="horizontal" >
 
-        <android.support.v4.view.ViewPager
+        <!--
+             <android.support.v4.view.ViewPager
             android:id="@+id/gover_viewpagerLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        -->
+
+        <HorizontalScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="50dip" >
+
+            <RadioGroup
+                android:id="@+id/mange_rg_channel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+            </RadioGroup>
+        </HorizontalScrollView>
 
         <ImageView
             android:id="@+id/gover_mange_iv_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="5dip"
+            android:layout_marginRight="3dip"
             android:background="@drawable/gover_manger_next" />
     </FrameLayout>
 
@@ -38,15 +44,15 @@
         android:id="@+id/hs_subchannel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/fl_title_item" >
+        android:layout_below="@+id/fl_title_item"
+        android:layout_marginTop="5dip" >
 
         <LinearLayout
             android:id="@+id/ll_subchannel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="gone" 
-            >
+            android:visibility="gone" >
         </LinearLayout>
     </HorizontalScrollView>
 
@@ -59,9 +65,9 @@
             android:id="@+id/gover_mange_lv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:cacheColorHint="@android:color/transparent"
             android:divider="@android:color/white"
-            android:dividerHeight="1dip" 
-            android:cacheColorHint="@android:color/transparent">
+            android:dividerHeight="1dip" >
         </ListView>
 
         <ProgressBar
@@ -70,15 +76,5 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
     </FrameLayout>
-
-    <!--
-         <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        layout="@layout/goversaloon_foot_search_layout" />
-    -->
-
-   
 
 </RelativeLayout>

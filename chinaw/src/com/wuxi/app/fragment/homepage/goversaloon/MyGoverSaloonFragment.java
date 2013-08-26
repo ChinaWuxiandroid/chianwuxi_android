@@ -5,9 +5,6 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -29,7 +26,6 @@ import com.wuxi.app.adapter.MyOnlineConsultAdapter;
 import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.MyApplyService;
 import com.wuxi.app.engine.MyconsultService;
-import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.MyApply;
 import com.wuxi.domain.MyApplyWrapper;
