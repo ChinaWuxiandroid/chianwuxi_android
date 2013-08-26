@@ -258,7 +258,7 @@ public class MainActivity extends FragmentActivity implements
 				slideLevelFragment
 						.setFragmentName(Constants.FragmentName.MAINMINEFRAGMENT);
 				slideLevelFragment.setHomeTabChangListner(this);
-				fragmentManagers.ChangeFragment(slideLevelFragment);
+//				fragmentManagers.ChangeFragment(slideLevelFragment);
 
 				if (currentBaseSlideFragment != null) {
 					currentBaseSlideFragment.slideLinstener.replaceFragment(
