@@ -164,27 +164,31 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 
 	@Override
 	protected void init() {
-		dealMailBtn = (Button) view
+		queryMailBtn = (Button) view
 				.findViewById(R.id.gip_12345_mayorbox_button_queryMail);
-		dealMailBtn.setOnClickListener(new OnClickListener() {
+		queryMailBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "暂未实现该功能", Toast.LENGTH_SHORT).show();
+				popWindow = getPopQueryMail(context);
+				int[] xy = new int[2];
+				queryMailBtn.getLocationOnScreen(xy);
+				popWindow.showAtLocation(queryMailBtn, Gravity.TOP
+						| Gravity.RIGHT, 0, queryMailBtn.getHeight() * 6 + 8);
 			}
 		});
 
-		queryMailBtn = (Button) view
+		dealMailBtn = (Button) view
 				.findViewById(R.id.gip_12345_mayorbox_button_statisticMail);
-		queryMailBtn.setOnClickListener(new OnClickListener() {
+		dealMailBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				popWindow = makePopWindow(context);
 				int[] xy = new int[2];
-				queryMailBtn.getLocationOnScreen(xy);
-				popWindow.showAtLocation(queryMailBtn, Gravity.BOTTOM
-						| Gravity.RIGHT, 0, queryMailBtn.getHeight() * 2 + 18);
+				dealMailBtn.getLocationOnScreen(xy);
+				popWindow.showAtLocation(dealMailBtn, Gravity.BOTTOM
+						| Gravity.RIGHT, 0, dealMailBtn.getHeight() * 2 + 10);
 			}
 		});
 
@@ -208,7 +212,7 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 	}
 
 	/**
-	 * 创建弹出窗体
+	 * 创建信件处理统计弹出窗体
 	 * 
 	 * @param con
 	 * @return
@@ -244,6 +248,38 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 		popupWindow.setOutsideTouchable(true); // 设置非PopupWindow区域可触摸
 
 		return popupWindow;
+	}
+	
+	/**
+	 * @方法： getPopQueryMail
+	 * @描述： 创建信件查询弹出窗体
+	 * @param cont
+	 * @return PopupWindow
+	 */
+	private PopupWindow getPopQueryMail(Context cont){
+		PopupWindow popupWindow = null;
+		
+		popview = LayoutInflater.from(cont).inflate(
+				R.layout.gip_query_mail_pop_layout, null);
+		popWindowManager = PopWindowManager.getInstance();
+
+		popWindowManager.addPopWindow(popupWindow);
+
+		popupWindow = new PopupWindow(cont);
+
+		popupWindow.setContentView(popview);
+
+		popupWindow.setWidth(637);
+		popupWindow.setHeight(LayoutParams.WRAP_CONTENT);
+		popupWindow.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.naviga_leftitem_back));
+
+		popupWindow.setFocusable(true); // 设置PopupWindow可获得焦点
+		popupWindow.setTouchable(true); // 设置PopupWindow可触摸
+		popupWindow.setOutsideTouchable(true); // 设置非PopupWindow区域可触摸
+
+		return popupWindow;
+		
 	}
 
 	/*

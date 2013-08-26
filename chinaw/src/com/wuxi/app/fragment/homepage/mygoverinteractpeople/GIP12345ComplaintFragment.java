@@ -165,7 +165,7 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 				int[] xy = new int[2];
 				queryMailBtn.getLocationOnScreen(xy);
 				popWindow.showAtLocation(queryMailBtn, Gravity.BOTTOM
-						| Gravity.RIGHT, 0, queryMailBtn.getHeight() * 2 + 18);
+						| Gravity.RIGHT, 0, queryMailBtn.getHeight() * 2 + 10);
 			}
 		});
 		
