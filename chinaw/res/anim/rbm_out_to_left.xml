@@ -20,13 +20,13 @@
     -->
 
     <translate
-        android:duration="100"
+        android:duration="400"
         android:fromXDelta="0%"
-        android:toXDelta="-20%" />
+        android:toXDelta="-100%" />
 
-    <alpha
-        android:duration="100"
+   <!--  <alpha
+        android:duration="400"
         android:fromAlpha="1.0"
-        android:toAlpha="0.0" />
+        android:toAlpha="0.0" /> -->
 
 </set>

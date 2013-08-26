@@ -1,6 +1,5 @@
 package com.wuxi.app.fragment.homepage.goversaloon;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,30 +8,27 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
@@ -59,15 +55,14 @@ import com.wuxi.exception.NetException;
  */
 @SuppressLint("HandlerLeak")
 public class AdministrativeItemFragment extends GoverSaloonContentFragment
-		implements OnPageChangeListener, OnClickListener, OnScrollListener,
-		OnItemSelectedListener, OnItemClickListener {
+		implements OnClickListener, OnScrollListener, OnItemSelectedListener,
+		OnItemClickListener, OnCheckedChangeListener {
 
 	private ListView gover_mange_lv;
-	private ViewPager gover_viewpagerLayout;
-	private ImageView gover_mange_iv_next;
-	private List<View> titleGridViews;
-	private static final int PAGE_ITEM = 4;
 
+	private ImageView gover_mange_iv_next;
+
+	private RadioGroup administrative_rg_channel;
 	protected static final int TITLE_ITEM_LOADSUCCESS = 0;
 	protected static final int TITLE_ITEM_LOADFAIL = 1;
 	protected static final int GOVERITEM_LOAD_SUCCESS = 2;
@@ -75,8 +70,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	private static final int PAGE_SIZE = 10;
 	protected static final int LOAD_DEPT_SUCCESS = 4;
 	protected static final int LOAD_DEPT_FAIL = 5;
-	private int checkPositons[];// 选中的坐标
-	private int pageNo = 0;
+
 	private Spinner sp_dept;
 	private MenuItem menuItem;
 	private List<MenuItem> menuItems;
@@ -96,6 +90,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	private Spinner sp_dept_year;
 	private ImageButton govver_admintrative_ib_search;
 	private ProgressBar pb_loadmoore;
+	private boolean isFirstChange = true;
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
@@ -123,8 +118,9 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	public void initUI() {
 		super.initUI();
 		gover_mange_lv = (ListView) view.findViewById(R.id.gover_mange_lv);
-		gover_viewpagerLayout = (ViewPager) view
-				.findViewById(R.id.gover_viewpagerLayout);
+		administrative_rg_channel = (RadioGroup) view
+				.findViewById(R.id.administrative_rg_channel);
+		administrative_rg_channel.setOnCheckedChangeListener(this);
 		pb_mange = (ProgressBar) view.findViewById(R.id.pb_mange);
 		gover_mange_iv_next = (ImageView) view
 				.findViewById(R.id.gover_mange_iv_next);
@@ -133,23 +129,30 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 		govver_admintrative_ib_search = (ImageButton) view
 				.findViewById(R.id.govver_admintrative_ib_search);
 		sp_dept.setOnItemSelectedListener(this);
-		gover_viewpagerLayout.setOnPageChangeListener(this);
+
 		gover_mange_iv_next.setOnClickListener(this);
 		govver_admintrative_ib_search.setOnClickListener(this);
 
-		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
-				null);
-		loadMoreButton = (Button) loadMoreView
-				.findViewById(R.id.loadMoreButton);
-		pb_loadmoore=(ProgressBar) loadMoreView.findViewById(R.id.pb_loadmoore);
-		gover_mange_lv.addFooterView(loadMoreView);
+		gover_mange_lv.addFooterView(getFootView());
 		gover_mange_lv.setOnScrollListener(this);
-		loadMoreButton.setOnClickListener(this);
+
 		menuItem = (MenuItem) getArguments().get("menuItem");
 		gover_mange_lv.setOnItemClickListener(this);
 		loadTitleItems(menuItem.getId());// 加载滑动菜单
 		loadDept();// 加载部门
 		initYear();
+
+	}
+
+	private View getFootView() {
+		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+				null);
+		loadMoreButton = (Button) loadMoreView
+				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
+		loadMoreButton.setOnClickListener(this);
+		return loadMoreView;
 
 	}
 
@@ -167,14 +170,9 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	 * 
 	 * wanglu 泰得利通 获取部门信息
 	 */
-	
+
 	private void loadDept() {
 
-		/*
-		 * if (CacheUtil.get(Constants.CacheKey.DEPT_KEY) != null) { depts =
-		 * (List<Dept>) CacheUtil.get(Constants.CacheKey.DEPT_KEY); showDept();
-		 * return; }
-		 */
 		new Thread(new Runnable() {
 
 			@Override
@@ -271,60 +269,37 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 
 	private void showTitleData() {
 
-		int i = 0;
-		List<MenuItem> onScreenItems = null;
-		titleGridViews = new ArrayList<View>();
-		int currentScreen = 0;// 当前屏
+		int index = 0;
+		for (MenuItem menuItem : menuItems) {
 
-		int totalScreenNum = menuItems.size() / PAGE_ITEM;// 屏数
-		checkPositons = new int[totalScreenNum + 1];
-		for (int j = 0; j < checkPositons.length; j++) {// 初始化头部安选中的下标
-			checkPositons[j] = -1;
+			RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(
+					RadioGroup.LayoutParams.WRAP_CONTENT,
+					RadioGroup.LayoutParams.WRAP_CONTENT);
+			params.leftMargin = 5;
+			RadioButton radioButton = new RadioButton(context);
+			if (index == 0) {
+
+				radioButton.setTextColor(Color.WHITE);
+
+				radioButton
+						.setBackgroundResource(R.drawable.wuxi_content_channelselect_);
+
+				this.qltype = getType(menuItem);
+				Map<String, String> parmsMap = buildParams(null, qltype,
+						deptid, year, 0, PAGE_SIZE);
+				loadItem(parmsMap);
+
+			}
+
+			radioButton.setText(menuItem.getName());
+			radioButton.setTextSize(14);
+			radioButton.setPadding(5, 5, 5, 5);
+			radioButton.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+			administrative_rg_channel.addView(radioButton, params);
+			index++;
+
 		}
-
-		checkPositons[0] = 0;// 默认选中第一屏第一个Chanel
-
-		for (MenuItem item : menuItems) {
-
-			if (i % PAGE_ITEM == 0) {
-
-				if (onScreenItems != null) {
-
-					titleGridViews.add(bulidGridView(onScreenItems,
-							currentScreen));
-					currentScreen++;
-
-				}
-
-				onScreenItems = new ArrayList<MenuItem>();
-			}
-
-			// 最后一屏操作
-			if (currentScreen > totalScreenNum + 1) {
-
-				onScreenItems = new ArrayList<MenuItem>();
-			}
-
-			onScreenItems.add(item);
-
-			// add last category screen //最后一屏
-			if (i == menuItems.size() - 1) {
-
-				titleGridViews.add(bulidGridView(onScreenItems, currentScreen));
-
-			}
-
-			i++;
-		}
-
-		gover_viewpagerLayout.setAdapter(new MenuItemViewPageAdapter(
-				titleGridViews));// 设置ViewPage适配器
-
-		// 显示第一个数据
-		this.qltype = getType(menuItems.get(0));
-		Map<String, String> parmsMap = buildParams(null, qltype, deptid, year,
-				0, PAGE_SIZE);
-		loadItem(parmsMap);
 
 	}
 
@@ -336,7 +311,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 		if (isFirstLoadGoverItem || isSwitch) {// 首次加载时或切换部门时显示进度条
 
 			pb_mange.setVisibility(ProgressBar.VISIBLE);
-		}else{
+		} else {
 			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
 		}
 
@@ -386,7 +361,6 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	 */
 	protected void showItemList() {
 
-		
 		List<GoverSaoonItem> goverSaoonItems = goverSaoonItemWrapper
 				.getGoverSaoonItems();
 		if (goverSaoonItems != null && goverSaoonItems.size() > 0) {
@@ -416,194 +390,32 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 			}
 
 		}
-		
+
 		if (goverSaoonItemWrapper.isNext()) {
-			pb_loadmoore.setVisibility(ProgressBar.GONE);
-			loadMoreButton.setText("点击加载更多");
+
+			if (gover_mange_lv.getFooterViewsCount() != 0) {
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+				loadMoreButton.setText("点击加载更多");
+			} else {
+
+				gover_mange_lv.addFooterView(getFootView());
+			}
 
 		} else {
-			
+
 			gover_mange_lv.removeFooterView(loadMoreView);
 		}
 
-
 	}
 
-	private GridView bulidGridView(List<MenuItem> items, int screenIndex) {
-		GridView gridView = (GridView) mInflater.inflate(
-				R.layout.gover_mange_title_gridview_layout, null);
-		gridView.setColumnWidth(PAGE_ITEM);
-
-		gridView.setAdapter(new MenuItemGridViewAdaptger(items, screenIndex));
-		gridView.setOnItemClickListener(GridviewOnclick);
-		return gridView;
-	}
-
-	static class ViewHolder {
-		TextView tv_title;
-	}
-
-	private class MenuItemGridViewAdaptger extends BaseAdapter {
-
-		public List<MenuItem> menuItems;
-		public int screenIndex;
-
-		public MenuItemGridViewAdaptger(List<MenuItem> menuItems,
-				int screenIndex) {
-			this.menuItems = menuItems;
-			this.screenIndex = screenIndex;
-		}
-
-		@Override
-		public int getCount() {
-			return menuItems.size();
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return menuItems.get(position);
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			MenuItem menuItem = menuItems.get(position);
-			ViewHolder viewHolder = null;
-			if (convertView == null) {
-				convertView = mInflater.inflate(
-						R.layout.gover_mange_title_gridview_item_layout, null);
-
-				viewHolder = new ViewHolder();
-
-				viewHolder.tv_title = (TextView) convertView
-						.findViewById(R.id.gover_manger_tv);
-
-				if (screenIndex == 0 && position == 0) {
-
-					viewHolder.tv_title
-							.setBackgroundResource(R.drawable.goversaloon_menuitem_bg);
-					viewHolder.tv_title.setTextColor(Color.WHITE);
-
-				}
-
-				convertView.setTag(viewHolder);
-			} else {
-				viewHolder = (ViewHolder) convertView.getTag();
-			}
-
-			viewHolder.tv_title.setText(menuItem.getName());
-			return convertView;
-		}
-
-	}
-
-	private class MenuItemViewPageAdapter extends PagerAdapter {
-
-		private List<View> mListViews;
-
-		public MenuItemViewPageAdapter(List<View> mGridViews) {
-
-			this.mListViews = mGridViews;
-		}
-
-		@Override
-		public int getCount() {
-			return mListViews.size();
-		}
-
-		@Override
-		public Object instantiateItem(View collection, int position) {
-
-			((ViewPager) collection).addView(mListViews.get(position), 0);
-
-			return mListViews.get(position);
-		}
-
-		@Override
-		public void destroyItem(View collection, int position, Object view) {
-			((ViewPager) collection).removeView(mListViews.get(position));
-		}
-
-		@Override
-		public boolean isViewFromObject(View view, Object object) {
-			return view == (object);
-		}
-
-	}
-
-	/**
-	 * 菜单点击
-	 */
-	private OnItemClickListener GridviewOnclick = new OnItemClickListener() {
-
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
-
-			MenuItem menuItem = (MenuItem) parent.getItemAtPosition(position);
-			/**
-			 * 切换选中与未选择的样式
-			 */
-			if (checkPositons[pageNo] != position) {
-				View checkView = parent.getChildAt(position);
-
-				TextView tv_Check = (TextView) checkView
-						.findViewById(R.id.gover_manger_tv);
-				tv_Check.setBackgroundResource(R.drawable.goversaloon_menuitem_bg);
-
-				tv_Check.setTextColor(Color.WHITE);
-
-				View oldCheckView = parent.getChildAt(checkPositons[pageNo]);
-				if (null != oldCheckView) {
-
-					TextView tv_oldCheck = (TextView) oldCheckView
-							.findViewById(R.id.gover_manger_tv);
-					tv_oldCheck.setBackgroundColor(getResources().getColor(
-							R.color.content_background));
-
-					tv_oldCheck.setTextColor(Color.BLACK);
-
-				}
-
-				checkPositons[pageNo] = position;
-			}
-
-			isSwitch = true;
-			qltype = getType(menuItem);// 记录当前选中的type
-			Map<String, String> params = buildParams(null, qltype, deptid,
-					year, 0, PAGE_SIZE);
-			loadItem(params);
-
-		}
-	};
-
-	@Override
-	public void onPageScrollStateChanged(int arg0) {
-
-	}
-
-	@Override
-	public void onPageScrolled(int arg0, float arg1, int arg2) {
-
-	}
-
-	@Override
-	public void onPageSelected(int position) {
-		pageNo = position;
-
-	}
-
+	
+	
 	@Override
 	public void onClick(View v) {
 
 		switch (v.getId()) {
 		case R.id.gover_mange_iv_next:
-			
-			gover_viewpagerLayout.setCurrentItem(pageNo + 1, true);
+
 			break;
 		case R.id.govver_admintrative_ib_search:
 			isSwitch = true;
@@ -707,25 +519,6 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-	//	int itemsLastIndex = goverOnlineApproveAdapter.getCount() - 1; // 数据集最后一项的索引
-		//int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-		/*if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
-				&& visibleLastIndex == lastIndex) {
-
-			if (goverSaoonItemWrapper != null && goverSaoonItemWrapper.isNext()) {// 还有下一条记录
-
-				loadMoreButton.setText("loading.....");
-				isSwitch = false;
-
-				Map<String, String> parms = buildParams(null, qltype, deptid,
-						year, visibleLastIndex + 1, visibleLastIndex + 1
-								+ PAGE_SIZE);
-
-				loadItem(parms);
-
-			}
-
-		}*/
 	}
 
 	/**
@@ -762,31 +555,64 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
-	
+	public void onItemClick(AdapterView<?> adapterView, View arg1,
+			int position, long arg3) {
+
 		GoverSaoonItem goverSaoonItem = (GoverSaoonItem) adapterView
 				.getItemAtPosition(position);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("goverSaoonItem", goverSaoonItem);
 		if (goverSaoonItem.getType().equals("XK")) {
-			
 
 			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
 					FragmentName.GOVERSALOONDETAIL_XK_FRAGMENT, bundle);
-		}else if(goverSaoonItem.getType().equals("QT")){
+		} else if (goverSaoonItem.getType().equals("QT")) {
 			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
 					FragmentName.GOVERSALOONDETAIL_QT_FRAGMENT, bundle);
-		}else if(goverSaoonItem.getType().equals("ZS")){
+		} else if (goverSaoonItem.getType().equals("ZS")) {
 			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
 					FragmentName.GOVERSALOONDETAIL_ZS_FRAGMENT, bundle);
-		}else if(goverSaoonItem.getType().equals("QZ")){
+		} else if (goverSaoonItem.getType().equals("QZ")) {
 			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
 					FragmentName.GOVERSALOONDETAIL_QZ_FRAGMENT, bundle);
-		}else if(goverSaoonItem.getType().equals("CF")){
+		} else if (goverSaoonItem.getType().equals("CF")) {
 			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
 					FragmentName.GOVERSALOONDETAIL_CF_FRAGMENT, bundle);
 		}
-		
-		
+
+	}
+
+	@Override
+	public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+		for (int i = 0; i < group.getChildCount(); i++) {
+
+			RadioButton r = (RadioButton) group.getChildAt(i);
+
+			if (isFirstChange && i == 0) {
+				r.setBackgroundColor(Color.TRANSPARENT);
+				r.setTextColor(Color.BLACK);
+			}
+
+			if (r.isChecked()) {
+
+				r.setBackgroundResource(R.drawable.wuxicity_content_channel_item_selector);
+
+				r.setTextColor(Color.WHITE);
+
+				isSwitch = true;
+				qltype = getType(menuItems.get(i));// 记录当前选中的type
+				Map<String, String> params = buildParams(null, qltype, deptid,
+						year, 0, PAGE_SIZE);
+				loadItem(params);
+			} else {
+
+				r.setTextColor(Color.BLACK);
+			}
+
+		}
+
+		isFirstChange = false;
+
 	}
 }

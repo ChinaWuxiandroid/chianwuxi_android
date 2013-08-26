@@ -94,7 +94,7 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 		if (isFirstLoadGoverItem || isSwitchDept) {// 首次加载时或切换部门时显示进度条
 
 			pb_approval.setVisibility(ProgressBar.VISIBLE);
-		}else{
+		} else {
 			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
 		}
 
@@ -144,8 +144,6 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 	 */
 	protected void showItemList() {
 
-	
-
 		List<GoverSaoonItem> goverSaoonItems = goverSaoonItemWrapper
 				.getGoverSaoonItems();
 		if (goverSaoonItems != null && goverSaoonItems.size() > 0) {
@@ -175,13 +173,17 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 			}
 
 		}
-		
+
 		if (goverSaoonItemWrapper.isNext()) {
-			loadMoreButton.setText("点击加载更多 ");
-			pb_loadmoore.setVisibility(ProgressBar.GONE);
+			if (gover_online_approval_lv.getFooterViewsCount() != 0) {
+				loadMoreButton.setText("点击加载更多 ");
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+			} else {
+				gover_online_approval_lv.addFooterView(getFootView());
+			}
 
 		} else {
-			
+
 			gover_online_approval_lv.removeFooterView(loadMoreView);
 		}
 
@@ -209,11 +211,23 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 				null);
 		loadMoreButton = (Button) loadMoreView
 				.findViewById(R.id.loadMoreButton);
-		pb_loadmoore=(ProgressBar) loadMoreView.findViewById(R.id.pb_loadmoore);
-		gover_online_approval_lv.addFooterView(loadMoreView);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
+		gover_online_approval_lv.addFooterView(getFootView());
 		gover_online_approval_lv.setOnScrollListener(this);
-		loadMoreButton.setOnClickListener(this);
+
 		loadDept();// 加载部门
+	}
+
+	private View getFootView() {
+		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+				null);
+		loadMoreButton = (Button) loadMoreView
+				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
+		loadMoreButton.setOnClickListener(this);
+		return loadMoreView;
 	}
 
 	/**
@@ -223,11 +237,6 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 
 	private void loadDept() {
 
-		/*
-		 * if (CacheUtil.get(Constants.CacheKey.DEPT_KEY) != null) { depts =
-		 * (List<Dept>) CacheUtil.get(Constants.CacheKey.DEPT_KEY); showDept();
-		 * return; }
-		 */
 		new Thread(new Runnable() {
 
 			@Override
@@ -292,22 +301,6 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-		/*int itemsLastIndex = goverOnlineApproveAdapter.getCount() - 1; // 数据集最后一项的索引
-		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
-				&& visibleLastIndex == lastIndex) {
-
-			if (goverSaoonItemWrapper != null && goverSaoonItemWrapper.isNext()) {// 还有下一条记录
-
-				loadMoreButton.setText("loading.....");
-				isSwitchDept = false;
-				loadItem(currentDeptId, visibleLastIndex + 1, visibleLastIndex
-						+ 1 + PAGE_SIZE);
-
-			}
-
-		}*/
-
 	}
 
 	@Override
@@ -336,20 +329,19 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("goverSaoonItem", goverSaoonItem);
 		if (goverSaoonItem.getType().equals("XK")) {
-			
 
 			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
 					FragmentName.GOVERSALOONDETAIL_XK_FRAGMENT, bundle);
-		}else if(goverSaoonItem.getType().equals("QT")){
+		} else if (goverSaoonItem.getType().equals("QT")) {
 			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
 					FragmentName.GOVERSALOONDETAIL_QT_FRAGMENT, bundle);
-		}else if(goverSaoonItem.getType().equals("ZS")){
+		} else if (goverSaoonItem.getType().equals("ZS")) {
 			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
 					FragmentName.GOVERSALOONDETAIL_ZS_FRAGMENT, bundle);
-		}else if(goverSaoonItem.getType().equals("QZ")){
+		} else if (goverSaoonItem.getType().equals("QZ")) {
 			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
 					FragmentName.GOVERSALOONDETAIL_QZ_FRAGMENT, bundle);
-		}else if(goverSaoonItem.getType().equals("CF")){
+		} else if (goverSaoonItem.getType().equals("CF")) {
 			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
 					FragmentName.GOVERSALOONDETAIL_CF_FRAGMENT, bundle);
 		}
@@ -357,8 +349,8 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 
 	@Override
 	public void onClick(View v) {
-		switch(v.getId()){
-		
+		switch (v.getId()) {
+
 		case R.id.loadMoreButton:
 			if (goverSaoonItemWrapper != null && goverSaoonItemWrapper.isNext()) {// 还有下一条记录
 
@@ -370,9 +362,9 @@ public class OnlineApprovalFragment extends GoverSaloonContentFragment
 			}
 
 			break;
-		
+
 		}
-		
+
 	}
 
 }

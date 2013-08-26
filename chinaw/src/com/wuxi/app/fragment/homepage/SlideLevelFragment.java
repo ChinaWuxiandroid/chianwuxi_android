@@ -440,6 +440,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		fragment.setManagers(managers);
 		fragment.setArguments(bundele);
 		FragmentTransaction ft = manager.beginTransaction();
+		ft.setCustomAnimations(R.anim.rbm_in_from_left, R.anim.rbm_out_to_left);
 		ft.addToBackStack(null);
 		ft.add(FRAME_CONTENT, fragment);
 		baseFragments.add(fragment);
@@ -473,6 +474,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		} else {
 			BaseFragment f = baseFragments.get(baseFragments.size() - 1);
 			FragmentTransaction ft = manager.beginTransaction();
+			ft.setCustomAnimations(R.anim.move_in, R.anim.move_out);
 			ft.addToBackStack(null);
 			ft.remove(f);
 			ft.commit();

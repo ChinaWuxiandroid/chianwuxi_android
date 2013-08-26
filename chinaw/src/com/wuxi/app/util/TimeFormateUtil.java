@@ -1,6 +1,5 @@
 package com.wuxi.app.util;
 
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.text.format.DateFormat;
 
 /**
  * 

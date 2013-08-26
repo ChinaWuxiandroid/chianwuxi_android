@@ -11,10 +11,18 @@
         android:layout_marginTop="8dip"
         android:orientation="horizontal" >
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/gover_viewpagerLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <HorizontalScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="50dip" >
+
+            <RadioGroup
+                android:id="@+id/administrative_rg_channel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+            </RadioGroup>
+        </HorizontalScrollView>
 
         <ImageView
             android:id="@+id/gover_mange_iv_next"
@@ -28,27 +36,31 @@
     <LinearLayout
         android:id="@+id/ll_filter"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dip"
         android:layout_below="@+id/fl_title_item"
         android:orientation="horizontal" >
 
         <Spinner
             android:id="@+id/sp_dept"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.45"
             android:background="@drawable/spiner_bg" />
 
         <Spinner
             android:id="@+id/sp_dept_year"
-            android:layout_width="55dip"
-            android:layout_height="wrap_content"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="5dip"
+            android:layout_weight="0.35"
             android:background="@drawable/spiner_bg" />
 
         <ImageButton
             android:id="@+id/govver_admintrative_ib_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
             android:layout_marginLeft="5dip"
+            android:layout_weight="0.2"
             android:background="@drawable/search_released" />
     </LinearLayout>
 

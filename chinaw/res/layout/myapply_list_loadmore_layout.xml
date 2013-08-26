@@ -26,7 +26,8 @@
             android:layout_marginLeft="2dip"
             android:background="@color/content_background"
             android:text="点击加载更多"
-            android:textSize="12sp" />
+            android:textSize="12sp" 
+            android:textColor="#000000"/>
     </LinearLayout>
 
     <View

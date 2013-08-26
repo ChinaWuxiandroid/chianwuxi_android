@@ -27,7 +27,6 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.GoverOnlineApproveAdapter;
 import com.wuxi.app.engine.GoverSaoonItemService;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.GoverSaoonItem;
 import com.wuxi.domain.GoverSaoonItemWrapper;

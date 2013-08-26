@@ -5,6 +5,9 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -26,6 +29,7 @@ import com.wuxi.app.adapter.MyOnlineConsultAdapter;
 import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.MyApplyService;
 import com.wuxi.app.engine.MyconsultService;
+import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.MyApply;
 import com.wuxi.domain.MyApplyWrapper;
@@ -44,21 +48,18 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 
 	private RadioGroup gover_btn_rg;
 	private RadioButton gover_sallon_myconsult;
-	private RadioButton gover_sallon_my_apply;
+
 	private ListView gover_saloon_lv_myapply;// 我的申请
 	private ListView gover_saloon_lv_myconsult;// 我的在线咨询
-	//public static final String ACCESS_TOKEN = "bd58fcdfe5b54f4c95ed5f2e3a945f7c";
 
 	private static final int PAGE_SIZE = 10;
-	private static final int MYCONSULT_CHECKED = 0;// 标识哪个按钮选中
-	private static final int MYCONAPPLY_CHECKED = 1;
+
 	protected static final int MYCONSULT_LOADSUCCESS = 0;// 咨询列表加载成功
 	protected static final int MYCONSULT_LOADFAIL = 1;// 咨询列表加载失败
 	protected static final int MYAPP_LOADSUCCESS = 2;// 申报列表加载成功
 	protected static final int MYAPP_LOADFAIL = 3;// 申报列表加载失败
 	private MyconsultWrapper myconsultWrapper;// 我的咨询包装类
 	private MyApplyWrapper myApplyWrapper;
-	private int type = MYCONSULT_CHECKED;
 
 	private MyOnlineConsultAdapter myOnlineConsultAdapter;
 
@@ -129,8 +130,12 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 		}
 
 		if (myApplyWrapper.isNext()) {
-			pb_applyloadmoore.setVisibility(ProgressBar.GONE);
-			myapplyloadMoreButton.setText("点击加载更多");
+			if (gover_saloon_lv_myapply.getFooterViewsCount() != 0) {
+				pb_applyloadmoore.setVisibility(ProgressBar.GONE);
+				myapplyloadMoreButton.setText("点击加载更多");
+			} else {
+				gover_saloon_lv_myapply.addFooterView(getMyApplyFootView());
+			}
 
 		} else {
 
@@ -141,23 +146,20 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 
 	protected void initUI() {
 		super.initUI();
-		/*SharedPreferences sp=context.getSharedPreferences(Constants.SharepreferenceKey.SHARE_CONFIG,Context.MODE_APPEND);
-		Editor ed=sp.edit();
-		ed.putString(Constants.SharepreferenceKey.ACCESSTOKEN, "");
+
+		/*SharedPreferences sp = context.getSharedPreferences(
+				Constants.SharepreferenceKey.SHARE_CONFIG, Context.MODE_APPEND);
+		Editor ed = sp.edit();
+		ed.putString(Constants.SharepreferenceKey.ACCESSTOKEN, "bd58fcdfe5b54f4c95ed5f2e3a945f7c");
 		ed.commit();
-		*/
-		
-		
-		
-		loginDialog = new LoginDialog(context, baseSlideFragment);//实例化登录对话框
+*/
+		loginDialog = new LoginDialog(context, baseSlideFragment);// 实例化登录对话框
 		gover_pb_myonlineapply = (ProgressBar) view
 				.findViewById(R.id.gover_pb_myonlineapply);
 		gover_btn_rg = (RadioGroup) view.findViewById(R.id.gover_btn_rg);
 		gover_btn_rg.setOnCheckedChangeListener(this);
 		gover_sallon_myconsult = (RadioButton) view
 				.findViewById(R.id.gover_sallon_my_ask);
-		gover_sallon_my_apply = (RadioButton) view
-				.findViewById(R.id.gover_sallon_my_apply);
 
 		gover_saloon_lv_myconsult = (ListView) view
 				.findViewById(R.id.gover_saloon_lv_myconsult);
@@ -169,46 +171,56 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 
 		gover_sallon_myconsult.setChecked(true);
 
+		gover_saloon_lv_myconsult.addFooterView(getMyConsultFootView());// 为listView添加底部视图
+		gover_saloon_lv_myapply.addFooterView(getMyApplyFootView());
+		gover_saloon_lv_myconsult
+				.setOnScrollListener(new MyConsultOnScrollListener());// 增加滑动监听
+		gover_saloon_lv_myapply
+				.setOnScrollListener(new MyAppplyScrollListener());
+
+		gover_sallon_myconsult.setChecked(true);
+
+		switchRadionButtonStyle();
+
+		if (loginDialog.checkLogin()) {
+			this.accessToekn = SystemUtil.getAccessToken(context);// 获取accessToken
+			loadMyConsultData(0, PAGE_SIZE);// 加载我的咨询数据
+		}
+
+	}
+
+	private View getMyConsultFootView() {
 		myconsultloadMoreView = View.inflate(context,
 				R.layout.list_loadmore_layout, null);
 		pb_consultloadmoore = (ProgressBar) myconsultloadMoreView
 				.findViewById(R.id.pb_loadmoore);
 
-		myapplyloadMoreView = View.inflate(context,
-				R.layout.myapply_list_loadmore_layout, null);
 		myconsultloadMoreButton = (Button) myconsultloadMoreView
 				.findViewById(R.id.loadMoreButton);
 		myconsultloadMoreButton.setOnClickListener(this);
+		return myconsultloadMoreView;
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 申报列表底部视图
+	 * 
+	 * @return
+	 */
+	private View getMyApplyFootView() {
+		myapplyloadMoreView = View.inflate(context,
+				R.layout.myapply_list_loadmore_layout, null);
 		myapplyloadMoreButton = (Button) myapplyloadMoreView
 				.findViewById(R.id.loadapply_MoreButton);
 		myapplyloadMoreButton.setOnClickListener(this);
 		pb_applyloadmoore = (ProgressBar) myapplyloadMoreView
 				.findViewById(R.id.pb_applyloadmoore);
-		gover_saloon_lv_myconsult.addFooterView(myconsultloadMoreView);// 为listView添加底部视图
-		gover_saloon_lv_myapply.addFooterView(myapplyloadMoreView);
-		gover_saloon_lv_myconsult
-				.setOnScrollListener(new MyConsultOnScrollListener());// 增加滑动监听
-		gover_saloon_lv_myapply
-				.setOnScrollListener(new MyAppplyScrollListener());
-		
-		gover_sallon_myconsult.setChecked(true);
-
-		switchRadionButtonStyle();
-
-		if(loginDialog.checkLogin()){
-			this.accessToekn=SystemUtil.getAccessToken(context);//获取accessToken
-			loadMyConsultData(0, PAGE_SIZE);// 加载我的咨询数据
-		}
-		
-		
+		return myapplyloadMoreView;
 
 	}
 
-	
-
 	private void loadMyConsultData(final int start, final int end) {
 
-		
 		if (isFristLoadMyConsultData) {// 如果是首次加载显示进度条
 			gover_pb_myonlineapply.setVisibility(ProgressBar.VISIBLE);// 显示加载进度条
 		} else {
@@ -268,7 +280,7 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 				isFristLoadMyConsultData = false;
 				gover_saloon_lv_myconsult.setAdapter(myOnlineConsultAdapter);
 				gover_pb_myonlineapply.setVisibility(ProgressBar.GONE);
-				// isLoading = false;
+
 			} else {
 
 				for (Myconsult myconsult : myconsults) {
@@ -279,14 +291,18 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 				gover_saloon_lv_myconsult
 						.setSelection(myconsultvisibleLastIndex
 								- myconsultvisibleItemCount + 1); // 设置选中项
-				// isLoading = false;
+
 			}
 
 		}
 
 		if (myconsultWrapper.isNext()) {
-			myconsultloadMoreButton.setText("点击加载更多");
-			pb_consultloadmoore.setVisibility(ProgressBar.GONE);
+			if (gover_saloon_lv_myconsult.getFooterViewsCount() != 0) {
+				myconsultloadMoreButton.setText("点击加载更多");
+				pb_consultloadmoore.setVisibility(ProgressBar.GONE);
+			} else {
+				gover_saloon_lv_myconsult.addFooterView(getMyConsultFootView());
+			}
 
 		} else {
 
@@ -332,13 +348,12 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 
 		switch (checkedId) {
 		case R.id.gover_sallon_my_ask:// 我的咨询列表
-			if(loginDialog.checkLogin()){
+			if (loginDialog.checkLogin()) {
 				gover_saloon_lv_myconsult.setVisibility(ListView.VISIBLE);
 				gover_saloon_lv_myapply.setVisibility(ListView.INVISIBLE);
-			}else{
+			} else {
 				loginDialog.showDialog();
 			}
-			
 
 			break;
 		case R.id.gover_sallon_my_apply:// 我的申报列表
@@ -347,12 +362,12 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 			gover_saloon_lv_myapply.setVisibility(ListView.VISIBLE);
 			if (isFistLoadMyApplyData) {
 
-				if(loginDialog.checkLogin()){
+				if (loginDialog.checkLogin()) {
 					loadMyAppLodata(0, PAGE_SIZE);
-				}else{
+				} else {
 					loginDialog.showDialog();
 				}
-				
+
 			}
 
 			break;
@@ -369,8 +384,6 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 	 * @param pageSize
 	 */
 	private void loadMyAppLodata(final int start, final int end) {
-
-		
 
 		if (isFistLoadMyApplyData) {// 如果是首次加载显示进度条
 			gover_pb_myonlineapply.setVisibility(ProgressBar.VISIBLE);// 显示加载进度条

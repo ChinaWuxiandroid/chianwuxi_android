@@ -28,7 +28,7 @@ import com.wuxi.app.util.SystemUtil;
 /**
  * 主要架构
  * 
- * @author 方庆银
+ * @author wanglu
  * 
  */
 public class MainActivity extends FragmentActivity implements

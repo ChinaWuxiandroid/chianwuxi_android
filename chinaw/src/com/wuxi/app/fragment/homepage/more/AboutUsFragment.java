@@ -1,8 +1,5 @@
 package com.wuxi.app.fragment.homepage.more;
 
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 

@@ -13,6 +13,11 @@ import android.support.v4.app.Fragment;
 public class MenuItem implements Comparable<MenuItem>, Serializable {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -963854395463548938L;
+
+	/**
 	 * 普通菜单 一般它的下级也可以认为是menuitem
 	 */
 	public static final int CUSTOM_MENU = 0;

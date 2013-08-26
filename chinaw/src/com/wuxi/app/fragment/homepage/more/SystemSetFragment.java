@@ -25,10 +25,8 @@ import com.wuxi.app.engine.DownLoadTask;
 import com.wuxi.app.engine.UpdateInfoService;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.Constants;
-import com.wuxi.app.util.LogUtil;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.app.util.TextFormateUtil;
-import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.UpdateInfo;
 
 /**

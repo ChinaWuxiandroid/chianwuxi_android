@@ -136,8 +136,12 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 		}
 
 		if (efficaWrapper.isNext()) {
-			loadMoreButton.setText("点击加载更多");
-			pb_loadmoore.setVisibility(ProgressBar.GONE);
+			if (gover_eff_lv.getFooterViewsCount() != 0) {
+				loadMoreButton.setText("点击加载更多");
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+			} else {
+				gover_eff_lv.addFooterView(getFootView());
+			}
 
 		} else {
 
@@ -250,8 +254,19 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 	 */
 
 	private void showLetterTypes() {
-		letterTypes.add(0,new LetterType("全部"));
+		letterTypes.add(0, new LetterType("全部"));
 		sp_lettertype.setAdapter(new LetterTypeAdapter(letterTypes));
+	}
+
+	private View getFootView() {
+		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+				null);
+		loadMoreButton = (Button) loadMoreView
+				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
+		loadMoreButton.setOnClickListener(this);
+		return loadMoreView;
 	}
 
 	public void initUI() {
@@ -261,16 +276,9 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 		gover_eff_btn_writemail = (ImageView) view
 				.findViewById(R.id.gover_eff_btn_writemail);
 		gover_eff_btn_writemail.setOnClickListener(this);
-		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
-				null);
-		loadMoreButton = (Button) loadMoreView
-				.findViewById(R.id.loadMoreButton);
-		pb_loadmoore = (ProgressBar) loadMoreView
-				.findViewById(R.id.pb_loadmoore);
-		loadMoreButton.setOnClickListener(this);
 
 		gover_eff_lv = (ListView) view.findViewById(R.id.gover_eff_lv);
-		gover_eff_lv.addFooterView(loadMoreView);
+		gover_eff_lv.addFooterView(getFootView());
 		gover_eff_lv.setOnScrollListener(this);
 		gover_eff_pb = (ProgressBar) view.findViewById(R.id.gover_eff_pb);
 		ll_mail = (LinearLayout) view.findViewById(R.id.ll_mail);
@@ -371,20 +379,7 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		// int itemsLastIndex = efficacyComplaintAdapter.getCount() - 1; //
-		// 数据集最后一项的索引
-		// int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-		/*
-		 * if (scrollState == OnScrollListener.SCROLL_STATE_IDLE &&
-		 * visibleLastIndex == lastIndex) {
-		 * 
-		 * if (efficaWrapper != null && efficaWrapper.isNext()) {// 还有下一条记录
-		 * 
-		 * loadMoreButton.setText("loading....."); loadEffData(visibleLastIndex
-		 * + 1, visibleLastIndex + 1 + PAGE_SIZE); }
-		 * 
-		 * }
-		 */
+
 	}
 
 	@Override
@@ -412,18 +407,18 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 						+ PAGE_SIZE);
 			}
 			break;
-		case R.id.iv_letter_query://信件查询
-			if(checkForm()){
+		case R.id.iv_letter_query:// 信件查询
+			if (checkForm()) {
 				bulidParams();
-				if(params.size()!=0){
-					isFistLoad=true;
+				if (params.size() != 0) {
+					isFistLoad = true;
 					this.loadEffData(0, PAGE_SIZE);
 					ll_mail.setVisibility(LinearLayout.GONE);
-				}else{
-					Toast.makeText(context, "你没有改变查询条件", Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(context, "你没有改变查询条件", Toast.LENGTH_SHORT)
+							.show();
 				}
-				
-				
+
 			}
 			break;
 		case R.id.gover_eff_btn_writemail:

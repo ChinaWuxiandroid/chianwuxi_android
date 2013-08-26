@@ -119,18 +119,12 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 				.findViewById(R.id.et_filename_keywords);
 		btn_fileSearch = (Button) view.findViewById(R.id.btn_fileSearch);
 
-		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
-				null);
-		loadMoreButton = (Button) loadMoreView
-				.findViewById(R.id.loadMoreButton);
-		pb_loadmoore = (ProgressBar) loadMoreView
-				.findViewById(R.id.pb_loadmoore);
-		gover_tabledowload_lv.addFooterView(loadMoreView);
+		gover_tabledowload_lv.addFooterView(getFootView());
 		gover_tabledowload_lv.setOnScrollListener(this);
 		gover_tabledowload_lv.setOnItemClickListener(this);
 		gover_table_down_deptsp.setOnItemSelectedListener(this);
 		btn_fileSearch.setOnClickListener(this);
-		loadMoreButton.setOnClickListener(this);
+
 		loadDept();
 
 		pd = new ProgressDialog(context);
@@ -138,6 +132,17 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 		pd.setMessage("正在下载表格....");
 		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 
+	}
+
+	private View getFootView() {
+		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+				null);
+		loadMoreButton = (Button) loadMoreView
+				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
+		loadMoreButton.setOnClickListener(this);
+		return loadMoreView;
 	}
 
 	private void loadDept() {
@@ -282,11 +287,15 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 		}
 
 		if (goverTableDownLoadWrapper.isNext()) {
-			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
-			loadMoreButton.setText("点击加载更多");
+			if (gover_tabledowload_lv.getFooterViewsCount() != 0) {
+				pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
+				loadMoreButton.setText("点击加载更多");
+			} else {
+				gover_tabledowload_lv.addFooterView(getFootView());
+			}
 
 		} else {
-			
+
 			gover_tabledowload_lv.removeFooterView(loadMoreView);
 		}
 
@@ -307,7 +316,7 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		
+
 	}
 
 	@Override
@@ -356,7 +365,8 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 					pd.show();
 
 				} else {
-					Toast.makeText(context, "SDK不存在", 1).show();
+					Toast.makeText(context, "SDK不存在", Toast.LENGTH_SHORT)
+							.show();
 
 				}
 

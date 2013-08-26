@@ -119,22 +119,35 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 		ll_subchannel = (LinearLayout) view.findViewById(R.id.ll_subchannel);
 		
 		gover_mange_iv_next.setOnClickListener(this);
-		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
-				null);
-		loadMoreButton = (Button) loadMoreView
-				.findViewById(R.id.loadMoreButton);
-		pb_loadmoore = (ProgressBar) loadMoreView
-				.findViewById(R.id.pb_loadmoore);
-		gover_mange_lv.addFooterView(loadMoreView);
+		
+		
+		gover_mange_lv.addFooterView(getFootView());
 		gover_mange_lv.setOnScrollListener(this);
 		pb_mange = (ProgressBar) view.findViewById(R.id.pb_mange);
 		menuItem = (MenuItem) getArguments().get("menuItem");
 		gover_mange_lv.setOnItemClickListener(this);
 		loadChannle(CHANNEL_TYPE, menuItem.getChannelId());// 加载子Channel
-		loadMoreButton.setOnClickListener(this);
+		
 
 	}
 
+	
+	/**
+	 * 
+	 *wanglu 泰得利通 
+	 *listView加载视图
+	 * @return
+	 */
+	private View getFootView(){
+		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+				null);
+		loadMoreButton = (Button) loadMoreView
+				.findViewById(R.id.loadMoreButton);
+		loadMoreButton.setOnClickListener(this);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
+		return loadMoreView;
+	}
 	/**
 	 * 
 	 * wanglu 泰得利通 显示子Channel
@@ -349,8 +362,13 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 		}
 
 		if (contentWrapper.isNext()) {
-			loadMoreButton.setText("点击加载更多");
-			pb_loadmoore.setVisibility(ProgressBar.GONE);
+			if(gover_mange_lv.getFooterViewsCount()!=0){
+				loadMoreButton.setText("点击加载更多");
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+			}else{
+				gover_mange_lv.addFooterView(getFootView());
+			}
+			
 
 		} else {
 
