@@ -1,6 +1,7 @@
 package com.wuxi.app.view;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -29,8 +30,8 @@ public class SlideMenuLayout extends ViewGroup {
 	private float mDownMotionX;
 	private float mDownMotionY;
 	private int mMoveTimesCounter = 0;
-	private float mUnTouchableOffsetStart = -1;
-	private float mUnTouchableOffsetEnd = -1;
+	private float mUnTouchableOffsetStart =0;
+	private float mUnTouchableOffsetEnd = 200;
 	private int mTouchState = TOUCH_STATE_NORMAL;
 
 	private Scroller mScroller;
@@ -51,7 +52,7 @@ public class SlideMenuLayout extends ViewGroup {
 
 	private void init() {
 		mScroller = new Scroller(getContext());
-		mGestureDetector = new GestureDetector(getContext(),new GestureAdapter());
+		//mGestureDetector = new GestureDetector(getContext(),new GestureAdapter());
 	}
 
 	@Override
@@ -193,9 +194,9 @@ public class SlideMenuLayout extends ViewGroup {
 		super.computeScroll();
 	}
 
-	@Override
+	/*@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
-		/*
+		
 		final int action = ev.getAction();
 		if (action == MotionEvent.ACTION_MOVE && mTouchState == TOUCH_STATE_SCROLLING)
 			return true;
@@ -235,13 +236,13 @@ public class SlideMenuLayout extends ViewGroup {
 			}
 			break;
 		}
-		*/
+		
 		return super.onInterceptTouchEvent(ev);
-	}
-
+	}*/
+/*
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
-		/*switch (ev.getAction()) {
+		switch (ev.getAction()) {
 		case MotionEvent.ACTION_MOVE:
 			mMoveTimesCounter++;
 			if (mMoveTimesCounter > CLICK_CORRECTION_COEFFICIENT&& TOUCH_STATE_FORECAST == mTouchState)
@@ -255,18 +256,24 @@ public class SlideMenuLayout extends ViewGroup {
 				return true;
 			}
 			final int pos = getScrollX();
-			if (-pos > getLeftMenuWidthF() / 2)
+			if (-pos > getLeftMenuWidthF() / 2){
 				openLeftSlideMenu();
-			else if (pos > getRightMenuWidthF() / 2)
+			}
+				
+			else if (pos > getRightMenuWidthF() / 2){
 				openRightSlideMenu();
-			else
+			}
+				
+			else{
 				reset();
+			}
+				
 			break;
-		}*/
+		}
 		return mGestureDetector.onTouchEvent(ev);
-	}
+	}*/
 
-	class GestureAdapter extends SimpleOnGestureListener {
+	/*class GestureAdapter extends SimpleOnGestureListener {
 
 		@Override
 		public boolean onDown(MotionEvent e) {
@@ -284,5 +291,5 @@ public class SlideMenuLayout extends ViewGroup {
 				smoothHorizontalScrollTo(dis);
 			return false;
 		}
-	}
+	}*/
 }
