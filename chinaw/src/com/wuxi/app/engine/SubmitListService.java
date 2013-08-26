@@ -19,7 +19,6 @@ public class SubmitListService extends Service{
 
 	public SubmitListService(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
 
 	public boolean submitByUrl(String url) throws JSONException, NetException{
@@ -27,10 +26,10 @@ public class SubmitListService extends Service{
 			throw new NetException(Constants.ExceptionMessage.NO_NET); // 检查网络
 		}
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
-		System.out.println("url:"+url);
+
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
-			System.out.println("success:"+jsonObject.getBoolean("success"));
+
 			return  jsonObject.getBoolean("success");
 		} else {
 			return false;

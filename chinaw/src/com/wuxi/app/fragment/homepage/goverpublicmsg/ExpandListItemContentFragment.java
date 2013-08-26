@@ -159,19 +159,16 @@ public class ExpandListItemContentFragment extends BaseFragment{
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return MenuItems.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return MenuItems.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 
@@ -201,8 +198,6 @@ public class ExpandListItemContentFragment extends BaseFragment{
 					
 					@Override
 					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						System.out.println("textview click");
 					}
 				});	
 			}

@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.WebView;
+import android.webkit.WebSettings.TextSize;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -27,7 +29,7 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- * 政民互动 12345来信办理平台 市长信箱 最新信件列表 列表项点击相应页面
+ * 政民互动 12345来信办理平台 所有 最新信件列表 列表项点击响应页面
  * 
  * @author 智佳 罗森
  * 
@@ -43,7 +45,8 @@ public class GIP12345MayorMailContentFragment extends BaseItemContentFragment {
 	private TextView depnameText = null;
 	private TextView endtimeText = null;
 	private TextView dodepnameText = null;
-	private TextView resultText = null;
+	
+	private WebView resultText = null;
 
 	private Button commentBtn = null;
 
@@ -124,7 +127,13 @@ public class GIP12345MayorMailContentFragment extends BaseItemContentFragment {
 		endtimeText = (TextView) view.findViewById(R.id.mail_content_endtime);
 		dodepnameText = (TextView) view
 				.findViewById(R.id.mail_content_dodepname);
-		resultText = (TextView) view.findViewById(R.id.mail_content_result);
+		
+		resultText = (WebView) view.findViewById(R.id.mail_content_result);
+		resultText.getSettings().setJavaScriptEnabled(true);
+		resultText.getSettings().setDefaultTextEncodingName("utf-8");
+		resultText.getSettings().setBuiltInZoomControls(true);
+		resultText.getSettings().setTextSize(TextSize.SMALLER);
+		
 
 		commentBtn = (Button) view.findViewById(R.id.mail_content_comment_btn);
 		commentBtn.setVisibility(View.GONE);
@@ -151,7 +160,8 @@ public class GIP12345MayorMailContentFragment extends BaseItemContentFragment {
 		depnameText.setText(wrapper.getDepname());
 		endtimeText.setText(wrapper.getEndtime());
 		dodepnameText.setText(wrapper.getDodepname());
-		resultText.setText(wrapper.getResult());
+		
+		resultText.loadData(wrapper.getResult(),"text/html; charset=UTF-8",null);
 	}
 
 	/**

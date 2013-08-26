@@ -71,7 +71,6 @@ InitializContentLayoutListner{
 	
 	@Override
 	public void bindContentLayout(BaseFragment fragment) {
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -99,7 +98,6 @@ InitializContentLayoutListner{
 	@Override
 	public void redirectFragment(MenuItem showMenuItem, int showMenuPositon,
 			int subMenuPostion) {
-		// TODO Auto-generated method stub
 		
 	}
 

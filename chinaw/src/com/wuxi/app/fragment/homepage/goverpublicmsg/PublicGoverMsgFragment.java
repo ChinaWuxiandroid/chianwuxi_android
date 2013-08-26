@@ -25,7 +25,6 @@ public class PublicGoverMsgFragment extends MenuItemMainFragment{
 
 	@Override
 	public void initializSubFragmentsLayout(List<MenuItem> items) {
-		// TODO Auto-generated method stub
 		InitializContentLayout.initMenuItemContentLayout(menuItem, items, context);
 	}
 

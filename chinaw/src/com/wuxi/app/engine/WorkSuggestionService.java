@@ -103,8 +103,7 @@ public class WorkSuggestionService extends Service{
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
 //			JSONObject jresult = jsonObject.getJSONObject("result");		
-//			System.out.println("jresult:"+jresult);
-			System.out.println("提交结果："+jsonObject.getBoolean("success"));
+
 			return  jsonObject.getBoolean("success");
 		} else {
 			return false;

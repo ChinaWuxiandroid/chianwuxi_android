@@ -40,7 +40,6 @@ import com.wuxi.exception.NetException;
 public class NavigatorContentExpandListFragment extends BaseFragment implements OnItemClickListener{
 	@Override
 	public void onHiddenChanged(boolean hidden) {
-		// TODO Auto-generated method stub
 
 		super.onHiddenChanged(hidden);
 		processBar.setVisibility(View.INVISIBLE);

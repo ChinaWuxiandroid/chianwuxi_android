@@ -104,10 +104,8 @@ public class GoverMsgInterMailStatisticsFragment extends BaseFragment{
 					handler.sendEmptyMessage(DATA_LOAD_ERROR);
 
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (NODataException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -148,7 +146,6 @@ public class GoverMsgInterMailStatisticsFragment extends BaseFragment{
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
 			ViewHolder viewHolder = null;
 			if(convertView==null){
 				convertView = mInflater.inflate(

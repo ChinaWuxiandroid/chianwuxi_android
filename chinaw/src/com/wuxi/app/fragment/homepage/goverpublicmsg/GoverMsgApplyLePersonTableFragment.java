@@ -195,10 +195,8 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements 
 							handler.sendEmptyMessage(SUBMIT_FAILED);
 						}
 					} catch (NetException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}

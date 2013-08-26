@@ -34,7 +34,6 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 	
 	@Override
 	protected void initUI() {
-		// TODO Auto-generated method stub
 		loginDialog=new LoginDialog(context,this.baseSlideFragment);
 		super.initUI();
 	}
@@ -50,7 +49,6 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 
 	@Override
 	protected List<Object> getContents() {
-		// TODO Auto-generated method stub
 		List<Object> objects=new ArrayList<Object>();
 		if(myApplyPageWrapper.getData()!=null){
 			for(MyApplyPage apply:myApplyPageWrapper.getData()){
@@ -62,20 +60,17 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 
 	@Override
 	protected BaseAdapter getAdapter() {
-		// TODO Auto-generated method stub
 		adapter= new MyApplyPageAdapter(myApplyPageWrapper.getData(),context);
 		return adapter;
 	}
 
 	@Override
 	protected void addItem(Object object) {
-		// TODO Auto-generated method stub
 		adapter.addItem((MyApplyPage) object);
 	}
 
 	@Override
 	protected void switchContents() {
-		// TODO Auto-generated method stub
 		adapter.setContents(myApplyPageWrapper.getData());
 	}
 
@@ -93,13 +88,10 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 			}
 			
 		} catch (NetException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ResultException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return myApplyPageWrapper;
@@ -121,19 +113,16 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return contents.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return contents.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 

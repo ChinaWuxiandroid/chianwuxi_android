@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import android.content.Context;
 
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.LetterWrapper;
 import com.wuxi.domain.MyLetter;
 import com.wuxi.exception.NODataException;

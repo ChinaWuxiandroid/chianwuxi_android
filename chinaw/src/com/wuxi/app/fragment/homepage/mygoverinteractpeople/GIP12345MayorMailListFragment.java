@@ -8,7 +8,6 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,7 +22,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.LetterService;
 import com.wuxi.app.fragment.BaseSlideFragment;

@@ -75,7 +75,6 @@ public class GoverMyApplyPageContentFragment extends BaseFragment{
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				onRemove();
 			}
 		});

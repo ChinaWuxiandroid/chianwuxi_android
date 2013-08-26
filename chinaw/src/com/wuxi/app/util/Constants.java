@@ -123,6 +123,11 @@ public class Constants {
 		public static final String MAYOR_MAILBOX_URL = "http://3g.wuxi.gov.cn/api/letter/mayorletter.json";
 
 		/**
+		 * 获取部门领导信件列表URL
+		 */
+		public static final String PART_LEADER_MAIL_LIST_URL = "http://3g.wuxi.gov.cn/api/letter/depletter.json";
+		
+		/**
 		 * 获取建议咨询信件列表 URL
 		 * */
 		public static final String SUGGESTLETTER_URL = "http://3g.wuxi.gov.cn/api/letter/suggestletter.json";
@@ -580,7 +585,7 @@ public class Constants {
 		 * 征求意见平台 民意征集 详细内容碎片
 		 */
 		GIP_PEOPLE_IDEA_CONTENT_FRAGMENT,
-
+		
 		MYONLINEASKFRAGMENT,
 		/**
 		 * 公共论坛帖子详细界面

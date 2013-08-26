@@ -217,13 +217,10 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 				try {
 					submitMail(access_token);
 				} catch (NetException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (NODataException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -255,13 +252,10 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 							handler.sendEmptyMessage(DATA_SUBMIT_FAILED);
 						}
 					} catch (NetException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (NODataException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}

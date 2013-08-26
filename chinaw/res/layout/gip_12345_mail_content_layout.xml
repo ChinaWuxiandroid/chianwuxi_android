@@ -301,16 +301,14 @@
                         android:layout_height="match_parent"
                         android:background="#A9A9A9" />
 
-                    <TextView
+                    <WebView
                         android:id="@+id/mail_content_result"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5sp"
                         android:layout_marginLeft="5sp"
                         android:layout_marginRight="5sp"
-                        android:layout_marginTop="5sp"
-                        android:text="本人现在在一家企业工作，社保也在本企业，已交了5年左右，现在想辞职，如何转成自由职业者交社保，辞职是不是要退工，社保关系如何办？麻烦详细说明一下，谢谢"
-                        android:textSize="12sp" />
+                        android:layout_marginTop="5sp" />
                 </LinearLayout>
 
                 <ImageView

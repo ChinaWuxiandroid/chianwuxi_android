@@ -53,6 +53,7 @@ import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumPostFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegislationContentFragment;
@@ -286,7 +287,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				HotReviewContentFragment hotReviewContentFragment = new HotReviewContentFragment();
 				onAddFragment(hotReviewContentFragment, bundle);
 				break;
-
+				
 			case GIP_MAYOR_MAIL_CONTENT_FRAGMENT:// 市长信箱 最新信件 列表详情界面
 				GIP12345MayorMailContentFragment gip12345MayorMailContentFragment = new GIP12345MayorMailContentFragment();
 				onAddFragment(gip12345MayorMailContentFragment, bundle);
