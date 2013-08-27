@@ -5,6 +5,7 @@
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/btn_layout"
         android:layout_width="fill_parent"
         android:layout_height="30dp"
         android:orientation="horizontal" >
@@ -37,6 +38,12 @@
             android:textColor="@android:color/white"
             android:textSize="12sp" />
     </LinearLayout>
+    
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/gip_query_mail_pop_layout" />
+    
 
     <LinearLayout
         android:id="@+id/mayorbox_radiobtn_linearlayout"
@@ -96,7 +103,8 @@
     <FrameLayout
         android:id="@+id/mayor_box_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content" >
     </FrameLayout>
 
+    
 </LinearLayout>

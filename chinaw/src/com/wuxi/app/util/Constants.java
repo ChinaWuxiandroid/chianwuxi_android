@@ -70,9 +70,19 @@ public class Constants {
 		public static final String REGIST_URL = "http://3g.wuxi.gov.cn/api/register.json";
 
 		/**
-		 * 政民互动 12345来电信息办理平台 部门领导信箱 各部门领导信箱列表
+		 * 政民互动 12345来信办理平台 部门领导信箱 各部门领导信箱列表
 		 */
 		public static final String PART_LEADER_MAIL_URL = "http://3g.wuxi.gov.cn/api/letter/deps.json";
+
+		/**
+		 * 政民互动 12345来信办理平台 信件查询 内容分类 URL
+		 */
+		public static final String QUERY_MAIL_CONTENT_TYPE_URL = "http://3g.wuxi.gov.cn/api/letter/contenttype.json";
+
+		/**
+		 * 政民互动 12345来信办理平台 信件查询 信件分类 URL
+		 */
+		public static final String QUERY_MAIL_TYPE_URL = "http://3g.wuxi.gov.cn/api/letter/lettertype.json";
 
 		/**
 		 * 公共论坛列表URL
@@ -116,7 +126,7 @@ public class Constants {
 		 * 获取当前用户 立法征求意见和民意征集 URL
 		 * */
 		public static final String MY_POLITICS_LIST_URL = "http://3g.wuxi.gov.cn/politics/mylist.json";
-		
+
 		/**
 		 * 获取市长信箱列表 URL
 		 * */
@@ -126,7 +136,7 @@ public class Constants {
 		 * 获取部门领导信件列表URL
 		 */
 		public static final String PART_LEADER_MAIL_LIST_URL = "http://3g.wuxi.gov.cn/api/letter/depletter.json";
-		
+
 		/**
 		 * 获取建议咨询信件列表 URL
 		 * */
@@ -168,17 +178,17 @@ public class Constants {
 		 * 政民互动 获取信件详细信息 URL
 		 */
 		public static final String MAIL_INFO_URL = "http://3g.wuxi.gov.cn/api/letter/{id}.json";
-		
+
 		/**
 		 * 政民互动 公众论坛 发帖
 		 */
 		public static final String FOORUM_POST_URL = "http://3g.wuxi.gov.cn/api/publicbbs/newpost.json";
-		
+
 		/**
 		 * 政民互动 公众论坛 评论
 		 */
 		public static final String FORUM_COMMENT_URL = "http://3g.wuxi.gov.cn/api/publicbbs/{id}/result_submit.json";
-		
+
 		/**
 		 * 政民互动 视频直播平台 访谈实录
 		 */
@@ -188,7 +198,7 @@ public class Constants {
 		 * 政民互动 视频直播平台 留言提问
 		 */
 		public static final String LEAVE_MESSAGE_CONTENT_URL = "http://3g.wuxi.gov.cn/api/interview/{interViewId}/questions.json";
-		
+
 		/**
 		 * 政民互动 视频直播平台 走进直播间 往期回顾
 		 */
@@ -472,9 +482,8 @@ public class Constants {
 	 * @author wanglu 泰得利通 Sharepreference 保存常量
 	 */
 	public static final class SharepreferenceKey {
-		
-		
-		public static final String LAST_LOGIN_TIME="last_login_time";//上一次登录时间
+
+		public static final String LAST_LOGIN_TIME = "last_login_time";// 上一次登录时间
 		/**
 		 * shareprefer名称
 		 */
@@ -560,7 +569,7 @@ public class Constants {
 		 * 市长信箱 最新信件列表 详情碎片
 		 */
 		GIP_MAYOR_MAIL_CONTENT_FRAGMENT,
-		
+
 		/**
 		 * 政民互动 往期回顾 详情界面
 		 */
@@ -575,17 +584,17 @@ public class Constants {
 		 * 政民互动 12345来信办理平台 我要写信
 		 */
 		GIP_12345_WRITE_MAIL_FRAGMENT,
-		
+
 		/**
 		 * 征求意见平台 立法征求意见 碎片
 		 */
 		GIP_LEGISLATION_CONTENT_FRAGMENT,
-		
+
 		/**
 		 * 征求意见平台 民意征集 详细内容碎片
 		 */
 		GIP_PEOPLE_IDEA_CONTENT_FRAGMENT,
-		
+
 		MYONLINEASKFRAGMENT,
 		/**
 		 * 公共论坛帖子详细界面
