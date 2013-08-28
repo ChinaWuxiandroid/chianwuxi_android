@@ -166,12 +166,15 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 				.findViewById(R.id.ll_searchby_range);
 		ll_itemcount = (LinearLayout) view.findViewById(R.id.ll_itemcount);
 		ll_state = (LinearLayout) view.findViewById(R.id.ll_state);
+		
 		sp_item_type = (Spinner) view.findViewById(R.id.sp_item_type);// 办事事项搜索下拉框
 
 		sp_item_type.setAdapter(new ArrayAdapter<String>(context,
 				R.layout.my_simple_spinner_item_layout, itemType));
+		
 		sp_dept = (Spinner) view.findViewById(R.id.sp_dept);
 		loadDeptData();
+	
 		sp_dept_range = (Spinner) view.findViewById(R.id.sp_dept_range);
 		sp_dept_range.setAdapter(new ArrayAdapter<String>(context,
 				R.layout.my_simple_spinner_item_layout, rangType));

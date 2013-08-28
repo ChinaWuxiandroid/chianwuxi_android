@@ -32,12 +32,13 @@ public class PartLeaderMailService extends Service {
 
 	/**
 	 * 解析整个数据集
+	 * 
 	 * @return
 	 * @throws NetException
 	 * @throws JSONException
 	 */
 	public PartLeaderMailWrapper getPartLeaderMailWrapper()
-			throws NetException, JSONException,NODataException {
+			throws NetException, JSONException, NODataException {
 		// 检查网络连接状态
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
@@ -59,9 +60,9 @@ public class PartLeaderMailService extends Service {
 			}
 
 			return leaderMailWrapper;
+		} else {
+			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);// 没有获取到数据异常
 		}
-
-		return null;
 	}
 
 	/**

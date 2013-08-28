@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/query_mail_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:background="@android:color/transparent"
+     android:visibility="gone">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,14 +44,14 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="信箱分类："
+            android:text="内容分类："
             android:textSize="12sp"
             android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/query_mail_box_sort_spinner"
-            android:layout_width="70sp"
-            android:layout_height="25sp"
+            android:layout_width="108sp"
+            android:layout_height="32sp"
             android:background="@drawable/spiner_bg" />
     </LinearLayout>
 
@@ -70,8 +73,8 @@
 
         <Spinner
             android:id="@+id/query_mail_email_sort_spinner"
-            android:layout_width="70sp"
-            android:layout_height="25sp"
+            android:layout_width="108sp"
+            android:layout_height="32sp"
             android:background="@drawable/spiner_bg" />
     </LinearLayout>
 
@@ -157,8 +160,8 @@
 
         <Spinner
             android:id="@+id/query_mail_accept_department_spinner"
-            android:layout_width="70sp"
-            android:layout_height="25sp"
+            android:layout_width="205sp"
+            android:layout_height="32sp"
             android:background="@drawable/spiner_bg" />
     </LinearLayout>
     
@@ -180,8 +183,8 @@
 
         <Spinner
             android:id="@+id/query_mail_reply_department_spinner"
-            android:layout_width="70sp"
-            android:layout_height="25sp"
+            android:layout_width="205sp"
+            android:layout_height="32sp"
             android:background="@drawable/spiner_bg" />
     </LinearLayout>
     
@@ -195,11 +198,11 @@
         android:textSize="12sp"/>
     
     <Button
-        android:id="@+id/forum_submit_btn"
+        android:id="@+id/query_mail_btn"
         android:layout_width="wrap_content"
         android:layout_height="25sp"
         android:layout_gravity="right"
-        android:layout_marginBottom="30sp"
+        android:layout_marginBottom="15sp"
         android:layout_marginTop="5sp"
         android:layout_marginRight="5sp"
         android:background="@drawable/forum_submitbtn_bg"

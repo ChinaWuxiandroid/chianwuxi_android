@@ -250,7 +250,6 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements 
 		use=use_et.getText().toString();
 
 		if(!inputError&&"".equals(organname)){
-			System.out.println();
 			Toast.makeText(context, "机构名称不能为空", Toast.LENGTH_SHORT).show();
 			inputError=true;
 		}

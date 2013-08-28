@@ -219,7 +219,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 
 	}
 
-	public void showDept(){
+	private void showDept(){
 		ApplyDept deptDefault=new ApplyDept();
 		deptDefault.setDepId("0");
 		deptDefault.setDepName(DEFAULT_DEPT_FIFTER);

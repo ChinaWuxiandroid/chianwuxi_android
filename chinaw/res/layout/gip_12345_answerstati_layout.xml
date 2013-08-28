@@ -186,7 +186,7 @@
 
                 <Spinner
                     android:id="@+id/gip_12345_answerstati_spinner_yearalone"
-                    android:layout_width="60dp"
+                    android:layout_width="80dp"
                     android:layout_height="match_parent" 
                     android:background="@drawable/spiner_bg"/>
             </LinearLayout>
@@ -199,13 +199,13 @@
 
                 <Spinner
                     android:id="@+id/gip_12345_answerstati_spinner_yeara"
-                    android:layout_width="60dp"
+                    android:layout_width="80dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/spiner_bg" />
 
                 <Spinner
                     android:id="@+id/gip_12345_answerstati_spinner_month"
-                    android:layout_width="50dp"
+                    android:layout_width="60dp"
                     android:layout_height="match_parent" 
                     android:layout_marginLeft="3sp"
                     android:background="@drawable/spiner_bg"/>
