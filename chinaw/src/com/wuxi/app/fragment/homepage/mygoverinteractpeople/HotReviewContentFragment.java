@@ -22,10 +22,13 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
+import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.ForumCommentService;
+import com.wuxi.app.engine.HotReviewCommentService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.ForumWrapper.Forum;
 import com.wuxi.domain.HotReviewWrapper.HotReview;
 import com.wuxi.exception.NetException;
@@ -147,7 +150,7 @@ public class HotReviewContentFragment extends BaseItemContentFragment implements
 	 * @return
 	 */
 	@SuppressWarnings("deprecation")
-	private PopupWindow makePopWindow(Context con) {
+	private PopupWindow makePopWindow(final Context con) {
 		PopupWindow popupWindow = null;
 
 		popview = LayoutInflater.from(con).inflate(
@@ -158,13 +161,33 @@ public class HotReviewContentFragment extends BaseItemContentFragment implements
 
 		final EditText submitContent = (EditText) popview
 				.findViewById(R.id.forum_popwindow_content_edit);
+
 		submitBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+				HotReviewCommentService service = new HotReviewCommentService(
+						con);
+				
+				LoginDialog loginDialog = new LoginDialog(con, baseSlideFragment);
+				try {
+					if (loginDialog.checkLogin()) {
+						service.submitComment(hotReview.getId(), submitContent
+								.getText().toString(), SystemUtil
+								.getAccessToken(con));
+						Toast.makeText(con, "提交成功，正在审核...", Toast.LENGTH_SHORT).show();
+					}else {
+						Toast.makeText(con, "提交失败，您未登录，请登录后再参与讨论，谢谢！", Toast.LENGTH_SHORT).show();
+					}
+					
+				} catch (NetException e) {
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 
-				Toast.makeText(context, "暂未开通该功能...", Toast.LENGTH_SHORT)
-						.show();
+//				Toast.makeText(context, "暂未开通该功能...", Toast.LENGTH_SHORT)
+//						.show();
 			}
 		});
 

@@ -77,7 +77,7 @@ public class ForumPostFragment extends BaseItemContentFragment {
 	 */
 	private void initLayout() {
 
-		loginDialog = new LoginDialog(context, this.baseSlideFragment);
+		loginDialog = new LoginDialog(context, baseSlideFragment);
 		
 		postThemeEdit = (EditText) view.findViewById(R.id.forum_post_name_edit);
 		postContentEdit = (EditText) view

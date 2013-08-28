@@ -85,6 +85,11 @@ public class Constants {
 		public static final String QUERY_MAIL_TYPE_URL = "http://3g.wuxi.gov.cn/api/letter/lettertype.json";
 
 		/**
+		 * 政民互动 12345来信办理平台 信件评价URL
+		 */
+		public static final String MAIL_COMMENT_SUBMIT_URL = "http://3g.wuxi.gov.cn/api/letter/appraise.json";
+		
+		/**
 		 * 公共论坛列表URL
 		 */
 		public static final String FORUM_LIST_URL = "http://3g.wuxi.gov.cn/api/publicbbs/list.json";
@@ -112,6 +117,11 @@ public class Constants {
 		 */
 		public static final String HOTREVIEWCONTENT_LIST_URL = "http://3g.wuxi.gov.cn/api/hotreview/{id}.json";
 
+		/**
+		 * 热点话题 话题评论 URL
+		 */
+		public static final String HOT_REVIEW_COMMENT_URL = "http://3g.wuxi.gov.cn/api/hotreview/{id}/reply.json";
+		
 		/**
 		 * 热点话题 回复 列表 URL
 		 */

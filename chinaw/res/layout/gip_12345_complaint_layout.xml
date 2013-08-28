@@ -37,8 +37,14 @@
             android:textColor="@android:color/white"
             android:textSize="12sp" />
     </LinearLayout>
+    
+     <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/gip_query_mail_pop_layout" />
 
     <LinearLayout
+        android:id="@+id/gip_12345_complaint_layout"
         android:layout_width="fill_parent"
         android:layout_height="45dp" >
 

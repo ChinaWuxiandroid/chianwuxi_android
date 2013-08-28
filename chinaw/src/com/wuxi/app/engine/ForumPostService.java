@@ -42,14 +42,11 @@ public class ForumPostService extends Service {
 			throws NetException, JSONException {
 		// 检查网络连接
 		if (!checkNet()) {
-			System.out.println("net error");
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 
 		String url = Constants.Urls.FOORUM_POST_URL + "?title=" + theme
 				+ "&content=" + content + "&access_token=" + access_token;
-
-		System.out.println("url:" + url);
 
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 

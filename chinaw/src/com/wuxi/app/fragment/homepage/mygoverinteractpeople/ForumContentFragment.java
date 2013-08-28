@@ -124,7 +124,6 @@ public class ForumContentFragment extends BaseItemContentFragment implements
 	 * @param con
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	private PopupWindow makePopWindow(Context con) {
 		PopupWindow popupWindow = null;
 
@@ -176,7 +175,7 @@ public class ForumContentFragment extends BaseItemContentFragment implements
 		popupWindow.setContentView(popview);
 		popupWindow.setBackgroundDrawable(getResources().getDrawable(
 				R.drawable.naviga_leftitem_back));
-		popupWindow.setWidth(LayoutParams.FILL_PARENT);
+		popupWindow.setWidth(LayoutParams.MATCH_PARENT);
 		popupWindow.setHeight(LayoutParams.WRAP_CONTENT);
 
 		popupWindow.setFocusable(true); // 设置PopupWindow可获得焦点

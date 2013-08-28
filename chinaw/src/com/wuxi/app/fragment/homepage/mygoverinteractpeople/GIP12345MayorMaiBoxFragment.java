@@ -127,6 +127,7 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 
 	private LinearLayout linearLayout = null;
 	private LinearLayout radioLayout = null;
+	
 	private View popview = null;
 
 	private List<AllCount> allCounts = null;
@@ -196,7 +197,7 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 				Toast.makeText(context, "信件类型加载失败", Toast.LENGTH_SHORT).show();
 				break;
 			}
-		};
+		}
 	};
 
 	@Override

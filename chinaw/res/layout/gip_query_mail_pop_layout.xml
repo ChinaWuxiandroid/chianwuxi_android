@@ -200,7 +200,7 @@
     <Button
         android:id="@+id/query_mail_btn"
         android:layout_width="wrap_content"
-        android:layout_height="25sp"
+        android:layout_height="30sp"
         android:layout_gravity="right"
         android:layout_marginBottom="15sp"
         android:layout_marginTop="5sp"

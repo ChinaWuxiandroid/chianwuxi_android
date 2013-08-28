@@ -6,21 +6,30 @@ package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.webkit.WebView;
 import android.webkit.WebSettings.TextSize;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.platform.comapi.map.w;
+import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.GIPMailInfoService;
+import com.wuxi.app.engine.MailCommentService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.GIPMailInfoWrapper;
@@ -34,8 +43,10 @@ import com.wuxi.exception.NetException;
  * @author 智佳 罗森
  * 
  */
+@SuppressWarnings("deprecation")
+@SuppressLint("SetJavaScriptEnabled")
 public class GIP12345MayorMailContentFragment extends BaseItemContentFragment {
-	
+
 	private static final String TAG = "GIP12345MayorMailContentFragment";
 
 	private TextView queryNoText = null;
@@ -45,14 +56,26 @@ public class GIP12345MayorMailContentFragment extends BaseItemContentFragment {
 	private TextView depnameText = null;
 	private TextView endtimeText = null;
 	private TextView dodepnameText = null;
-	
+
 	private WebView resultText = null;
 
 	private Button commentBtn = null;
 
+	private RadioGroup radioGroup = null;
+	private RadioButton satisfiedRadioBtn = null;
+	private RadioButton lesserSatisfiedRadioBtn = null;
+	private RadioButton improveRadioBtn = null;
+
 	private ProgressBar progressBar = null;
 
 	private LinearLayout layout = null;
+
+	private View popview = null;
+
+	// 声明弹出窗体变量
+	private PopupWindow popWindow = null;
+
+	private PopWindowManager popWindowManager = null;
 
 	// 数据加载成功标志
 	private static final int DATA__LOAD_SUCESS = 0;
@@ -127,13 +150,12 @@ public class GIP12345MayorMailContentFragment extends BaseItemContentFragment {
 		endtimeText = (TextView) view.findViewById(R.id.mail_content_endtime);
 		dodepnameText = (TextView) view
 				.findViewById(R.id.mail_content_dodepname);
-		
+
 		resultText = (WebView) view.findViewById(R.id.mail_content_result);
 		resultText.getSettings().setJavaScriptEnabled(true);
 		resultText.getSettings().setDefaultTextEncodingName("utf-8");
 		resultText.getSettings().setBuiltInZoomControls(true);
 		resultText.getSettings().setTextSize(TextSize.SMALLER);
-		
 
 		commentBtn = (Button) view.findViewById(R.id.mail_content_comment_btn);
 		commentBtn.setVisibility(View.GONE);
@@ -141,27 +163,95 @@ public class GIP12345MayorMailContentFragment extends BaseItemContentFragment {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "该功能暂未实现", Toast.LENGTH_SHORT).show();
+				popWindow = makePopupWindow(context);
+				int[] xy = new int[2];
+				commentBtn.getLocationOnScreen(xy);
+				popWindow.showAtLocation(commentBtn, Gravity.BOTTOM
+						| Gravity.RIGHT, 0, commentBtn.getHeight() * 2 + 49);
 			}
 		});
-		
+
 		loadData();
 	}
-	
+
+	/**
+	 * @方法： makePopupWindow
+	 * @描述： 创建信件评价弹出窗口
+	 * @param cont
+	 * @return PopupWindow
+	 */
+	private PopupWindow makePopupWindow(Context cont) {
+		PopupWindow popupWindow = null;
+
+		popview = LayoutInflater.from(cont).inflate(
+				R.layout.gip_12345_mail_estimate_pop_layout, null);
+
+		radioGroup = (RadioGroup) popview
+				.findViewById(R.id.mail_estimate_radiogroup);
+		radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				int radioBtnId = group.getCheckedRadioButtonId();
+				RadioButton radioBtn = (RadioButton) popview
+						.findViewById(radioBtnId);
+				int rank = 0;
+				if (radioBtn.getText().equals("满意")) {
+					rank = 3;
+					submitData(rank);
+				} else if (radioBtn.getText().equals("比较满意")) {
+					rank = 2;
+					submitData(rank);
+				} else if (radioBtn.getText().equals("有待改进")) {
+					rank = 1;
+					submitData(rank);
+				}
+			}
+		});
+
+		// satisfiedRadioBtn = (RadioButton)
+		// popview.findViewById(R.id.mail_satisfied_radiobtn);
+		// lesserSatisfiedRadioBtn = (RadioButton)
+		// popview.findViewById(R.id.mail_lesser_satisfied_radiobtn);
+		// improveRadioBtn = (RadioButton)
+		// popview.findViewById(R.id.mail_improve_radiobtn);
+
+		popWindowManager = PopWindowManager.getInstance();
+
+		popWindowManager.addPopWindow(popupWindow);
+
+		popupWindow = new PopupWindow(cont);
+
+		popupWindow.setContentView(popview);
+
+		popupWindow.setWidth(LayoutParams.MATCH_PARENT);
+		popupWindow.setHeight(LayoutParams.WRAP_CONTENT);
+
+		popupWindow.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.naviga_leftitem_back));
+
+		popupWindow.setFocusable(true); // 设置PopupWindow可获得焦点
+		popupWindow.setTouchable(true); // 设置PopupWindow可触摸
+		popupWindow.setOutsideTouchable(true); // 设置非PopupWindow区域可触摸
+
+		return popupWindow;
+	}
+
 	/**
 	 * @方法： showData
-	 * @描述： 在界面显示数据
+	 * @描述： 显示数据
 	 */
-	private void showData(){
+	private void showData() {
 		queryNoText.setText(wrapper.getCode());
-		titleText.setText("["+wrapper.getType()+"]"+wrapper.getTitle());
+		titleText.setText("[" + wrapper.getType() + "]" + wrapper.getTitle());
 		contentText.setText(wrapper.getContent());
 		begintimeText.setText(wrapper.getBegintime());
 		depnameText.setText(wrapper.getDepname());
 		endtimeText.setText(wrapper.getEndtime());
 		dodepnameText.setText(wrapper.getDodepname());
-		
-		resultText.loadData(wrapper.getResult(),"text/html; charset=UTF-8",null);
+
+		resultText.loadData(wrapper.getResult(), "text/html; charset=UTF-8",
+				null);
 	}
 
 	/**
@@ -174,7 +264,7 @@ public class GIP12345MayorMailContentFragment extends BaseItemContentFragment {
 			@Override
 			public void run() {
 				GIPMailInfoService service = new GIPMailInfoService(context);
-				letter = (Letter) getArguments().get("letter");		
+				letter = (Letter) getArguments().get("letter");
 				try {
 					wrapper = service.getGipMailInfoWrapper(letter.getId());
 					if (wrapper != null) {
@@ -197,6 +287,24 @@ public class GIP12345MayorMailContentFragment extends BaseItemContentFragment {
 				}
 			}
 		}).start();
+	}
+
+	private void submitData(final int rank) {
+
+		MailCommentService commentService = new MailCommentService(context);
+		letter = (Letter) getArguments().get("letter");
+		try {
+			boolean issubmit = commentService.submitMailComment(letter.getId(),
+					rank);
+
+			Toast.makeText(context, "提交成功，正在审核...", Toast.LENGTH_SHORT).show();
+
+		} catch (NetException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

@@ -126,8 +126,8 @@ public class GoverInterPeoplePublicForumFragment extends
 			public void onClick(View v) {
 				BaseSlideFragment baseSlideFragment = GoverInterPeoplePublicForumFragment.this.baseSlideFragment;
 
-//				ForumPostFragment postFragment = new ForumPostFragment();
-//				postFragment.setBaseSlideFragment(baseSlideFragment);
+				ForumPostFragment postFragment = new ForumPostFragment();
+				postFragment.setBaseSlideFragment(baseSlideFragment);
 
 				baseSlideFragment.slideLinstener.replaceFragment(null,
 						position,
