@@ -55,25 +55,39 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 	protected static final int COTENT_LOAD_FAIL = 3;// 单条内容获取失败
 
 	private Channel channel;// 选中的channel
+
 	private static final int CONTENT_LIST_ID = R.id.wucity_content;
 
 	private View view;
+
 	private LinearLayout wuxicity_decontent_ll;// 内容
+
 	private ChannelContentListFragment contentListFragment;
 
 	// private ListView wucity_content_lv; // 内容列表
 	private FrameLayout wucity_content;
+
 	private HorizontalScrollView wucity_channel_hs;// 头部Channel
+
 	private List<Channel> titleChannels;
+
 	private Context context;
+
 	private RadioGroup wuxicity_rg_title_chanel;
+
 	private ProgressBar pb_content_wb;// webView加载进度条
+
 	private Content content;
+
 	private WebView wuxicity_decontent_wb;// 加载数据的webView
-	//private TextView wuxicity_decontent_title;// 标题
+
+	// private TextView wuxicity_decontent_title;// 标题
 	private TextView wuxi_decontent_tvtime;// 时间
+
 	private TextView wuxi_decontent_tvbrowcount;// 浏览次数
+
 	private boolean isFirstChange = true;// 是否是首次加载
+
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
@@ -114,21 +128,20 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 		String time = content.getPublishTime();
 		int browCount = content.getBrowseCount();
 
-	//	wuxicity_decontent_title.setText(title);
+		// wuxicity_decontent_title.setText(title);
 		wuxi_decontent_tvtime.setText("时间:"
-				+ TimeFormateUtil.formateTime(time,
-						TimeFormateUtil.DATE_PATTERN));// 时间
+				+ TimeFormateUtil.formateTime(
+					time, TimeFormateUtil.DATE_PATTERN));// 时间
 		wuxi_decontent_tvbrowcount.setText("浏览次数:".toString() + browCount);// 浏览次数
 
 		wuxicity_decontent_wb.getSettings().setJavaScriptEnabled(true);
 
-		
 		wuxicity_decontent_wb.getSettings().setUseWideViewPort(true);
 		wuxicity_decontent_wb.getSettings().setBuiltInZoomControls(true);
 		wuxicity_decontent_wb.getSettings().setLoadWithOverviewMode(true);
 
 		wuxicity_decontent_wb.loadUrl(wapUrl);
-		
+
 		wuxicity_decontent_wb.setWebChromeClient(new WebChromeClient() {
 			public void onProgressChanged(WebView view, int progress) {
 
@@ -140,6 +153,20 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 			}
 		});
 
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+
+				ContentService contentService = new ContentService(context);
+				try {
+					contentService.flushContentBrowsCount(content.getContentId());// 刷新内容阅读次数
+				} catch (NetException e) {
+
+					e.printStackTrace();
+				}
+			}
+		}).start();
 	}
 
 	/**
@@ -147,26 +174,21 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 	 * wanglu 泰得利通 初始化view
 	 */
 	private void initUI() {
-		wuxicity_decontent_ll = (LinearLayout) view
-				.findViewById(R.id.wuxicity_decontent_ll);
-		
+		wuxicity_decontent_ll = (LinearLayout) view.findViewById(R.id.wuxicity_decontent_ll);
+
 		wucity_content = (FrameLayout) view.findViewById(R.id.wucity_content);
-		wucity_channel_hs = (HorizontalScrollView) view
-				.findViewById(R.id.wucity_channel_hs);
-		wuxicity_rg_title_chanel = (RadioGroup) view
-				.findViewById(R.id.wuxicity_rg_title_chanel);
+		wucity_channel_hs = (HorizontalScrollView) view.findViewById(R.id.wucity_channel_hs);
+		wuxicity_rg_title_chanel = (RadioGroup) view.findViewById(R.id.wuxicity_rg_title_chanel);
 
 		wuxicity_rg_title_chanel.setOnCheckedChangeListener(this);
 		pb_content_wb = (ProgressBar) view.findViewById(R.id.pb_content_wb);
 
-		wuxicity_decontent_wb = (WebView) view
-				.findViewById(R.id.wuxicity_decontent_wb);// 加载数据的webView
-	/*	wuxicity_decontent_title = (TextView) view
-				.findViewById(R.id.wuxicity_decontent_title);// 标题
-*/		wuxi_decontent_tvtime = (TextView) view
-				.findViewById(R.id.wuxi_decontent_tvtime);// 时间
-		wuxi_decontent_tvbrowcount = (TextView) view
-				.findViewById(R.id.wuxi_decontent_tvbrowcount);// 浏览次数
+		wuxicity_decontent_wb = (WebView) view.findViewById(R.id.wuxicity_decontent_wb);// 加载数据的webView
+		/*
+		 * wuxicity_decontent_title = (TextView) view
+		 * .findViewById(R.id.wuxicity_decontent_title);// 标题
+		 */wuxi_decontent_tvtime = (TextView) view.findViewById(R.id.wuxi_decontent_tvtime);// 时间
+		wuxi_decontent_tvbrowcount = (TextView) view.findViewById(R.id.wuxi_decontent_tvbrowcount);// 浏览次数
 
 		if (channel.getChildrenChannelsCount() > 0
 				&& channel.getChildrenContentsCount() >= 0) {// 既有子频道也有内容的情况
@@ -218,7 +240,7 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 		contentListFragment = new ChannelContentListFragment();
 		contentListFragment.setChannel(channel);
 		contentListFragment.setArguments(this.getArguments());
-		contentListFragment.setBaseSlideFragment(this.baseSlideFragment);//传递最外层框架
+		contentListFragment.setBaseSlideFragment(this.baseSlideFragment);// 传递最外层框架
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 
@@ -242,8 +264,7 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 				Message msg = handler.obtainMessage();
 				ContentService contentService = new ContentService(context);
 				try {
-					List<Content> contents = contentService
-							.getContentsById(channel.getChannelId());
+					List<Content> contents = contentService.getContentsById(channel.getChannelId());
 					if (contents != null) {
 						content = contents.get(0);
 						msg.what = COTENT_LOAD_SUCCESS;
@@ -284,8 +305,7 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 	private void loadTitleChannel() {
 
 		if (CacheUtil.get(channel.getChannelId()) != null) {
-			titleChannels = (List<Channel>) CacheUtil.get(channel
-					.getChannelId());
+			titleChannels = (List<Channel>) CacheUtil.get(channel.getChannelId());
 			showChannelData();
 			return;
 		}
@@ -298,8 +318,7 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 				Message msg = handler.obtainMessage();
 				ChannelService channelService = new ChannelService(context);
 				try {
-					titleChannels = channelService.getSubChannels(channel
-							.getChannelId());
+					titleChannels = channelService.getSubChannels(channel.getChannelId());
 
 					if (titleChannels != null) {
 						msg.what = CHANNEL_LOAD_SUCESS;
@@ -334,13 +353,14 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 		for (Channel channle : titleChannels) {
 
 			RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(
-					RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+				RadioGroup.LayoutParams.WRAP_CONTENT,
+				RadioGroup.LayoutParams.WRAP_CONTENT);
 			params.leftMargin = 5;
 			RadioButton radioButton = new RadioButton(context);
 			if (index == 0) {
-			
+
 				radioButton.setTextColor(Color.WHITE);
-				
+
 				radioButton.setBackgroundResource(R.drawable.wuxi_content_channelselect_);
 				LoadContentsData(channle);
 
@@ -369,34 +389,32 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-		
 		for (int i = 0; i < group.getChildCount(); i++) {
 
 			RadioButton r = (RadioButton) group.getChildAt(i);
 
-			if(isFirstChange&&i==0){
+			if (isFirstChange && i == 0) {
 				r.setBackgroundColor(Color.TRANSPARENT);
-				r.setTextColor(Color.BLACK);	
+				r.setTextColor(Color.BLACK);
 			}
-			
+
 			if (r.isChecked()) {
 
-				
 				r.setBackgroundResource(R.drawable.wuxicity_content_channel_item_selector);
-				
+
 				r.setTextColor(Color.WHITE);
-				
+
 				contentListFragment.changeChannelOrMenItem(
-						titleChannels.get(i), null);
+					titleChannels.get(i), null);
 
 			} else {
-				
+
 				r.setTextColor(Color.BLACK);
 			}
 
 		}
-		
-		isFirstChange=false;
+
+		isFirstChange = false;
 	}
 
 }

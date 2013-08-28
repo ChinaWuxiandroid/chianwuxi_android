@@ -18,11 +18,11 @@ public class SlideMenuLayout extends ViewGroup {
 	protected static final float SCROLL_COEFFICIENT = 1.0F;
 	protected static final int CLICK_CORRECTION_COEFFICIENT = 1;
 
-	private float mLeftMenuWidth = 0.45F;
+	private float mLeftMenuWidth = 0.4F;
 	private int mLeftMenuWidthPixels = 0;
 	private View mLeftSlideMenu;
 	private boolean mLeftSlideMenuEnabled = false;
-	private float mRightMenuWidth = 0.55F;
+	private float mRightMenuWidth = 0.6F;
 	private int mRightMenuWidthPixels = 0;
 	private View mRightSlideMenu;
 	private boolean mRightSlideMenuEnabled = false;

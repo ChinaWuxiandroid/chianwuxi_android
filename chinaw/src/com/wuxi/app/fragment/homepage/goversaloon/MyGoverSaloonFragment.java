@@ -5,9 +5,6 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -29,7 +26,6 @@ import com.wuxi.app.adapter.MyOnlineConsultAdapter;
 import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.MyApplyService;
 import com.wuxi.app.engine.MyconsultService;
-import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.MyApply;
 import com.wuxi.domain.MyApplyWrapper;
@@ -147,12 +143,12 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 	protected void initUI() {
 		super.initUI();
 
-		/*SharedPreferences sp = context.getSharedPreferences(
+	/*	SharedPreferences sp = context.getSharedPreferences(
 				Constants.SharepreferenceKey.SHARE_CONFIG, Context.MODE_APPEND);
 		Editor ed = sp.edit();
-		ed.putString(Constants.SharepreferenceKey.ACCESSTOKEN, "bd58fcdfe5b54f4c95ed5f2e3a945f7c");
-		ed.commit();
-*/
+		ed.putString(Constants.SharepreferenceKey.ACCESSTOKEN, "");
+		ed.commit();*/
+
 		loginDialog = new LoginDialog(context, baseSlideFragment);// 实例化登录对话框
 		gover_pb_myonlineapply = (ProgressBar) view
 				.findViewById(R.id.gover_pb_myonlineapply);

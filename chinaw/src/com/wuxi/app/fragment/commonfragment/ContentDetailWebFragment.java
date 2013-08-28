@@ -5,23 +5,27 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.BaseItemContentFragment;
 
-public abstract class ContentDetailWebFragment  extends BaseItemContentFragment {
+public abstract class ContentDetailWebFragment extends BaseItemContentFragment {
 	private ProgressBar searchDetail_pb;// webView加载进度条
-	private String  url;
+
+	private String url;
+
 	private WebView searchDetail_wb;// 加载数据的webView
 
-	
-	
+	private RelativeLayout rl_down;
+
 	@Override
 	public void initBtn() {
 
 		super.initBtn();
-		super.download_btn.setVisibility(ImageView.INVISIBLE);// 隐藏下载图标
 
+		rl_down = (RelativeLayout) view.findViewById(R.id.rl_down);
+		rl_down.setVisibility(RelativeLayout.GONE);//隐藏下载
 		searchDetail_pb = (ProgressBar) view.findViewById(R.id.content_detailwb_pb);
 
 		searchDetail_wb = (WebView) view.findViewById(R.id.content_detailwb_wb);// 加载数据的webView
@@ -55,9 +59,9 @@ public abstract class ContentDetailWebFragment  extends BaseItemContentFragment 
 
 	@Override
 	protected int getContentLayoutId() {
-		
+
 		return R.layout.content_detailweb_layout;
 	}
-	
+
 	protected abstract String getUrl();
 }

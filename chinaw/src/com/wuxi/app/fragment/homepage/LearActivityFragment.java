@@ -5,6 +5,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.BaseItemContentFragment;
@@ -19,13 +20,14 @@ public class LearActivityFragment extends BaseItemContentFragment {
 	private ProgressBar pb_content_wb;// webView加载进度条
 
 	private WebView wuxicity_decontent_wb;// 加载数据的webView
-
+	private RelativeLayout rl_down;
 	@Override
 	public void initBtn() {
 
 		super.initBtn();
-		super.download_btn.setVisibility(ImageView.INVISIBLE);// 隐藏下载图标
-
+		
+		rl_down = (RelativeLayout) view.findViewById(R.id.rl_down);
+		rl_down.setVisibility(RelativeLayout.GONE);
 		pb_content_wb = (ProgressBar) view.findViewById(R.id.pb_content_wb);
 
 		wuxicity_decontent_wb = (WebView) view

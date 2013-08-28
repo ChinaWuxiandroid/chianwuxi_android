@@ -2,20 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_shape_bg"
+    android:background="#F1F5F6"
     android:orientation="vertical" >
 
-    <include
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        layout="@layout/child_fragment_itemcontent_header_layout" />
+    <include layout="@layout/child_fragment_itemcontent_header_layout" />
 
     <LinearLayout
         android:id="@+id/decontent_ll"
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="9"
+        android:layout_weight="10"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -61,6 +57,7 @@
         android:id="@+id/content_author"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="right" />
+        android:gravity="right"
+        android:orientation="vertical" />
 
 </LinearLayout>

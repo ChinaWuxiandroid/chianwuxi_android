@@ -43,7 +43,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="首页常用栏设置"
                         android:textColor="#646464"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="清除缓存"
                         android:textColor="#646464"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tv_cache"
@@ -79,7 +79,7 @@
                         android:layout_alignParentRight="true"
                         android:text="1.0M"
                         android:textColor="#646464"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
                 <!--
@@ -183,7 +183,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="软件升级"
                         android:textColor="#646464"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tv_verison"
@@ -192,7 +192,7 @@
                         android:layout_alignParentRight="true"
                         android:text="1.0.0"
                         android:textColor="#646464"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
                 <View
@@ -213,7 +213,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="关于我们"
                         android:textColor="#646464"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -240,7 +240,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="网站地图"
                         android:textColor="#646464"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -322,7 +322,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="注销账号"
                         android:textColor="#646464"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tv_user"
@@ -331,7 +331,7 @@
                         android:layout_alignParentRight="true"
                         android:text="未登录"
                         android:textColor="#646464"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
                 </RelativeLayout>
             </LinearLayout>
 

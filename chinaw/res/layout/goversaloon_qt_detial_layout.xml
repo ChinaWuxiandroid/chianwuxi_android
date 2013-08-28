@@ -5,11 +5,7 @@
     android:background="@android:color/white"
     android:orientation="vertical" >
 
-    <include
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        layout="@layout/child_fragment_itemcontent_header_layout" />
+    <include layout="@layout/child_fragment_itemcontent_header_layout" />
 
     <FrameLayout
         android:layout_width="fill_parent"
@@ -23,12 +19,6 @@
             <FrameLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" >
-
-                <ProgressBar
-                    android:id="@+id/pb_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -501,6 +491,12 @@
             </FrameLayout>
         </ScrollView>
 
+        <ProgressBar
+            android:id="@+id/pb_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
         <include layout="@layout/goversaoon_zxbl_layout" />
 
         <include layout="@layout/goversaoon_zxzx_layout" />
@@ -521,7 +517,8 @@
             android:text="在线办理"
             android:textColor="#ffffff"
             android:textSize="12sp"
-            android:visibility="gone"></Button>
+            android:visibility="gone" >
+        </Button>
 
         <Button
             android:id="@+id/btn_zxzx"
@@ -534,6 +531,5 @@
             android:textColor="#ffffff"
             android:textSize="12sp" />
     </LinearLayout>
-
 
 </LinearLayout>

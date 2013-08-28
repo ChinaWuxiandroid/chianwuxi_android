@@ -54,7 +54,7 @@ public class GoverSaoonWorkFlowImageService extends Service {
 					path = path.substring(0, lastIndex + 1)
 							+ URLEncoder.encode(path.substring(lastIndex + 1),
 									"utf-8");
-					return Constants.Urls.ROOT_URL + path;
+					return Constants.Urls.BASIC_URL + path;
 				} catch (UnsupportedEncodingException e) {
 
 					e.printStackTrace();
