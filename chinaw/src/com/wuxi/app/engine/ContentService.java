@@ -65,6 +65,21 @@ public class ContentService extends Service {
 	}
 
 	/**
+	 * 
+	 * @param id
+	 *            刷新阅读次数
+	 * @throws NetException
+	 */
+	public void  flushContentBrowsCount(String id) throws NetException {
+		if (!checkNet()) {
+			throw new NetException(Constants.ExceptionMessage.NO_NET);
+		}
+		String url = Constants.Urls.CONTENT_BROWSECOUNT_URL.replace("{id}", id);
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+
+	}
+
+	/**
 	 * '
 	 * 
 	 * wanglu 泰得利通 根据URL地址获取内容，列推荐新闻，推荐公告API调用
@@ -121,7 +136,8 @@ public class ContentService extends Service {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 		String url = Constants.Urls.CHANNEL_CONTENT_P_URL.replace("{id}", id)
-				.replace("{start}", start + "").replace("{end}", end + "");
+				.replace("{start}", start + "")
+				.replace("{end}", end + "");
 		String resultStr = httpUtils.executeGetToString(url, 5000);
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
@@ -148,15 +164,16 @@ public class ContentService extends Service {
 	 * 
 	 * 杨宸 智佳 根据开始位置结束位置
 	 * 
-	 * @param url  包含id start end 等后面 部门 地区 关键词 年份 可选项
-	 *            
+	 * @param url
+	 *            包含id start end 等后面 部门 地区 关键词 年份 可选项
+	 * 
 	 * @return ContentWrapper content包装对象
 	 * @throws NetException
 	 * @throws JSONException
 	 * @throws NODataException
 	 */
-	public ContentWrapper getPageContentsByUrl(String url)
-			throws NetException, JSONException, NODataException {
+	public ContentWrapper getPageContentsByUrl(String url) throws NetException,
+			JSONException, NODataException {
 
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
@@ -183,7 +200,6 @@ public class ContentService extends Service {
 		}
 	}
 
-	
 	/**
 	 * ID wanglu 泰得利通
 	 * 
@@ -209,8 +225,7 @@ public class ContentService extends Service {
 					content.setBrowseCount(jb.getInt("browseCount"));
 					content.setOrderId(jb.getInt("orderId"));
 					content.setBuildTime(jb.getString("buildTime"));
-					content.setHangingParentChannelId(jb
-							.getString("hangingParentChannelId"));
+					content.setHangingParentChannelId(jb.getString("hangingParentChannelId"));
 					content.setLocalUpdateDate(jb.getString("localUpdateDate"));
 					content.setContentSource(jb.getString("contentSource"));
 					content.setUpFile(jb.getString("upFile"));

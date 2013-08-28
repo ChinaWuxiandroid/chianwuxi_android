@@ -12,7 +12,8 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:adjustViewBounds="true"
-        android:src="@drawable/slide_open_close_btn" />
+        android:src="@drawable/slide_open_close_btn"
+        android:layout_marginLeft="5dip" />
 
     <ImageView
         android:id="@+id/back_btn"
@@ -20,7 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/open_close_left_btn"
-        android:src="@drawable/slide_back_btn" />
+        android:src="@drawable/slide_back_btn"
+        android:layout_marginLeft="10dip" />
 
     <TextView
         android:id="@+id/Title_Text"
@@ -38,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/slide_member_btn" />
+        android:src="@drawable/slide_member_btn" 
+        android:layout_marginRight="5dip"/>
 
 </RelativeLayout>

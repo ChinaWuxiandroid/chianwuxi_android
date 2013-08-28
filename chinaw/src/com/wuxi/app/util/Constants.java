@@ -19,235 +19,288 @@ public class Constants {
 	public static final class Urls {
 
 		/**
-		 * 跟地址
+		 * 域名地址
 		 */
-		public static final String ROOT_URL = "http://3g.wuxi.gov.cn/api";
+		public static final String DOMAIN_URL = "http://3g.wuxi.gov.cn";
+
+		/**
+		 * 根地址
+		 */
+		public static final String BASIC_URL = DOMAIN_URL + "/api";
+
 		/**
 		 * 菜单获取URL
 		 * 
 		 * recursions false Int 返回层次,不输入则为2,为0则返回所有
 		 */
-		public static final String MENU_URL = "http://3g.wuxi.gov.cn/api/menu/tree.json";
+		public static final String MENU_URL = BASIC_URL + "/menu/tree.json";
 
 		/**
 		 * 获取子菜单接口 {id}要获取子菜单的Id
 		 */
-		public static final String SUB_MENU_URL = "http://3g.wuxi.gov.cn/api/menu/{id}/menus.json";
+		public static final String SUB_MENU_URL = BASIC_URL
+				+ "/menu/{id}/menus.json";
 
 		/**
 		 * 获取子频道URL {channelId}频道ID占位符
 		 */
-		public static final String CHANNEL_URL = "http://3g.wuxi.gov.cn/api/channel/{channelId}/channels.json";
+		public static final String CHANNEL_URL = BASIC_URL
+				+ "/channel/{channelId}/channels.json";
 
 		/**
 		 * 获取频道内容信息 {id}频道Id占位符
 		 */
 
-		public static final String CHANNEL_CONTENT_URL = "http://3g.wuxi.gov.cn/api/channel/{id}/contents.json";
+		public static final String CHANNEL_CONTENT_URL = BASIC_URL
+				+ "/channel/{id}/contents.json";
+
+		/**
+		 * 类容页阅读次数URL {id}类容Id
+		 */
+
+		public static final String CONTENT_BROWSECOUNT_URL = BASIC_URL
+				+ "/content/{id}/flush.json";
 
 		/**
 		 * 获取频道内容分页接口 {id}频道占位符 {start}开始位置占位符 {end}结束位置占位符
 		 */
-		public static final String CHANNEL_CONTENT_P_URL = "http://3g.wuxi.gov.cn/api/channel/{id}/contents_p.json?start={start}&end={end}";
+		public static final String CHANNEL_CONTENT_P_URL = BASIC_URL
+				+ "/channel/{id}/contents_p.json?start={start}&end={end}";
 
 		/**
 		 * 推荐公告URL
 		 */
 
-		public static final String ANNOUNCENTS_URL = "http://3g.wuxi.gov.cn/api/main/announcements.json";
+		public static final String ANNOUNCENTS_URL = BASIC_URL
+				+ "/main/announcements.json";
 
 		/**
 		 * 无锡推荐信息URL
 		 */
-		public static final String IMPORT_NEWS_URL = "http://3g.wuxi.gov.cn/api/main/wuiximportantnews.json";
+		public static final String IMPORT_NEWS_URL = BASIC_URL
+				+ "/main/wuiximportantnews.json";
 
 		/**
 		 * 用户登录URL {username}用户名占位符 {pwd}密码占位符
 		 */
 
-		public static final String LOGIN_URL = "http://3g.wuxi.gov.cn/api/login.json?username={username}&password={pwd}";
+		public static final String LOGIN_URL = BASIC_URL
+				+ "/login.json?username={username}&password={pwd}";
 
-		public static final String REGIST_URL = "http://3g.wuxi.gov.cn/api/register.json";
+		public static final String REGIST_URL = BASIC_URL + "/register.json";
 
 		/**
 		 * 政民互动 12345来信办理平台 部门领导信箱 各部门领导信箱列表
 		 */
-		public static final String PART_LEADER_MAIL_URL = "http://3g.wuxi.gov.cn/api/letter/deps.json";
+		public static final String PART_LEADER_MAIL_URL = BASIC_URL
+				+ "/letter/deps.json";
 
 		/**
 		 * 政民互动 12345来信办理平台 信件查询 内容分类 URL
 		 */
-		public static final String QUERY_MAIL_CONTENT_TYPE_URL = "http://3g.wuxi.gov.cn/api/letter/contenttype.json";
+		public static final String QUERY_MAIL_CONTENT_TYPE_URL = BASIC_URL
+				+ "/letter/contenttype.json";
 
 		/**
 		 * 政民互动 12345来信办理平台 信件查询 信件分类 URL
 		 */
-		public static final String QUERY_MAIL_TYPE_URL = "http://3g.wuxi.gov.cn/api/letter/lettertype.json";
+		public static final String QUERY_MAIL_TYPE_URL = BASIC_URL
+				+ "/letter/lettertype.json";
 
 		/**
 		 * 公共论坛列表URL
 		 */
-		public static final String FORUM_LIST_URL = "http://3g.wuxi.gov.cn/api/publicbbs/list.json";
+		public static final String FORUM_LIST_URL = BASIC_URL
+				+ "/publicbbs/list.json";
 
 		/**
 		 * 政民互动 公众论坛 获取帖子详情
 		 */
-		public static final String FORUM_CONTENT_URL = "http://3g.wuxi.gov.cn/api/publicbbs/{id}/details.json";
+		public static final String FORUM_CONTENT_URL = BASIC_URL
+				+ "/publicbbs/{id}/details.json";
 
 		/**
 		 * 公开电话 URL
 		 * 
 		 */
-		public static final String OPENTEL_URL = "http://3g.wuxi.gov.cn/api/opentel/list.json";
+		public static final String OPENTEL_URL = BASIC_URL
+				+ "/opentel/list.json";
 
 		/**
 		 * 热点话题列表 URL
 		 * 
 		 */
-		public static final String HOTREVIEW_LIST_URL = "http://3g.wuxi.gov.cn/api/hotreview/list.json";
+		public static final String HOTREVIEW_LIST_URL = BASIC_URL
+				+ "/hotreview/list.json";
 
 		/**
 		 * 热点话题内容 URL
 		 * 
 		 */
-		public static final String HOTREVIEWCONTENT_LIST_URL = "http://3g.wuxi.gov.cn/api/hotreview/{id}.json";
+		public static final String HOTREVIEWCONTENT_LIST_URL = BASIC_URL
+				+ "/hotreview/{id}.json";
 
 		/**
 		 * 热点话题 回复 列表 URL
 		 */
-		public static final String HOTREVIEW_REPLY_LIST_URL = "http://3g.wuxi.gov.cn/api/hotreview/{id}/replylist.json";
+		public static final String HOTREVIEW_REPLY_LIST_URL = BASIC_URL
+				+ "/hotreview/{id}/replylist.json";
 
 		/**
 		 * 分页获取立法征求意见和民意征集 URL
 		 * */
-		public static final String POLITICS_LIST_URL = "http://3g.wuxi.gov.cn/api/politics/list.json";
+		public static final String POLITICS_LIST_URL = BASIC_URL
+				+ "/politics/list.json";
 
 		/**
 		 * 获取当前用户 立法征求意见和民意征集 URL
 		 * */
-		public static final String MY_POLITICS_LIST_URL = "http://3g.wuxi.gov.cn/politics/mylist.json";
+		public static final String MY_POLITICS_LIST_URL = BASIC_URL
+				+ "/politics/mylist.json";
 
 		/**
 		 * 获取市长信箱列表 URL
 		 * */
-		public static final String MAYOR_MAILBOX_URL = "http://3g.wuxi.gov.cn/api/letter/mayorletter.json";
+		public static final String MAYOR_MAILBOX_URL = BASIC_URL
+				+ "/letter/mayorletter.json";
 
 		/**
 		 * 获取部门领导信件列表URL
 		 */
-		public static final String PART_LEADER_MAIL_LIST_URL = "http://3g.wuxi.gov.cn/api/letter/depletter.json";
+		public static final String PART_LEADER_MAIL_LIST_URL = BASIC_URL
+				+ "/letter/depletter.json";
 
 		/**
 		 * 获取建议咨询信件列表 URL
 		 * */
-		public static final String SUGGESTLETTER_URL = "http://3g.wuxi.gov.cn/api/letter/suggestletter.json";
+		public static final String SUGGESTLETTER_URL = BASIC_URL
+				+ "/letter/suggestletter.json";
 
 		/**
 		 * 获取热门信件列表 URL
 		 * */
-		public static final String HOTMAIL_URL = "http://3g.wuxi.gov.cn/api/letter/hotletter.json";
+		public static final String HOTMAIL_URL = BASIC_URL
+				+ "/letter/hotletter.json";
 
 		/**
 		 * 获取我的信件列表 URL
 		 * */
-		public static final String MY_LETTER_URL = "http://3g.wuxi.gov.cn/api/letter/myletters.json";
+		public static final String MY_LETTER_URL = BASIC_URL
+				+ "/letter/myletters.json";
 
 		/**
 		 * 获取答复率总数统计 URL
 		 * */
-		public static final String LETTERS_ALLCOUNT_URL = "http://3g.wuxi.gov.cn/api/letter/allcount.json";
+		public static final String LETTERS_ALLCOUNT_URL = BASIC_URL
+				+ "/letter/allcount.json";
 
 		/**
 		 * 获取信箱各部门答复率总数统计 URL
 		 * */
-		public static final String LETTERS_STATISTICS_URL = "http://3g.wuxi.gov.cn/api/letter/statistics.json";
+		public static final String LETTERS_STATISTICS_URL = BASIC_URL
+				+ "/letter/statistics.json";
 
 		/**
 		 * 获取我的申报列表 URL {access_token} access_token 占位符 {start} 开始位置暂占位符
 		 * {end}结束位置占位符
 		 */
-		public static final String MY_APPLY_URL = "http://3g.wuxi.gov.cn/api/zhengwu/myapply.json?access_token={access_token}&start={start}&end={end}";
+		public static final String MY_APPLY_URL = BASIC_URL
+				+ "/zhengwu/myapply.json?access_token={access_token}&start={start}&end={end}";
 
 		/**
 		 * 获取我的在线咨询列表 {access_token} access_token 占位符 {start} 开始位置暂占位符
 		 * {end}结束位置占位符
 		 */
-		public static final String MYCONSULT_URL = "http://3g.wuxi.gov.cn/api/zhengwu/myconsult.json?access_token={access_token}&start={start}&end={end}";
+		public static final String MYCONSULT_URL = BASIC_URL
+				+ "/zhengwu/myconsult.json?access_token={access_token}&start={start}&end={end}";
 
 		/**
 		 * 政民互动 获取信件详细信息 URL
 		 */
-		public static final String MAIL_INFO_URL = "http://3g.wuxi.gov.cn/api/letter/{id}.json";
+		public static final String MAIL_INFO_URL = BASIC_URL
+				+ "/letter/{id}.json";
 
 		/**
 		 * 政民互动 公众论坛 发帖
 		 */
-		public static final String FOORUM_POST_URL = "http://3g.wuxi.gov.cn/api/publicbbs/newpost.json";
+		public static final String FOORUM_POST_URL = BASIC_URL
+				+ "/publicbbs/newpost.json";
 
 		/**
 		 * 政民互动 公众论坛 评论
 		 */
-		public static final String FORUM_COMMENT_URL = "http://3g.wuxi.gov.cn/api/publicbbs/{id}/result_submit.json";
+		public static final String FORUM_COMMENT_URL = BASIC_URL
+				+ "/publicbbs/{id}/result_submit.json";
 
 		/**
 		 * 政民互动 视频直播平台 访谈实录
 		 */
-		public static final String MEMOIR_CONTENT_URL = "http://3g.wuxi.gov.cn/api/interview/{interViewId}/textrecords.json";
+		public static final String MEMOIR_CONTENT_URL = BASIC_URL
+				+ "/interview/{interViewId}/textrecords.json";
 
 		/**
 		 * 政民互动 视频直播平台 留言提问
 		 */
-		public static final String LEAVE_MESSAGE_CONTENT_URL = "http://3g.wuxi.gov.cn/api/interview/{interViewId}/questions.json";
+		public static final String LEAVE_MESSAGE_CONTENT_URL = BASIC_URL
+				+ "/interview/{interViewId}/questions.json";
 
 		/**
 		 * 政民互动 视频直播平台 走进直播间 往期回顾
 		 */
-		public static final String VEDIO_REVIEW_CONTENT_URL = "http://3g.wuxi.gov.cn/api/interview/history.json";
+		public static final String VEDIO_REVIEW_CONTENT_URL = BASIC_URL
+				+ "/interview/history.json";
 
 		/**
 		 * 政民互动 征求意见平台 立法征求意见详情
 		 */
-		public static final String LEGISLATION_CONTENT_URL = "http://3g.wuxi.gov.cn/api/politics/{id}.json";
+		public static final String LEGISLATION_CONTENT_URL = BASIC_URL
+				+ "/politics/{id}.json";
 
 		/**
 		 * 政民互动 网上调查 列表
 		 */
-		public static final String INTERNET_SURVEY_URL = "http://3g.wuxi.gov.cn/api/survery/list.json";
+		public static final String INTERNET_SURVEY_URL = BASIC_URL
+				+ "/survery/list.json";
 
 		/**
 		 * 效能投诉列表 {start}开始占位符 {end}结束占位符
 		 */
-		public static final String TOUSU_URL = "http://3g.wuxi.gov.cn/api/zhengwu/tousu.json?start={start}&end={end}";
+		public static final String TOUSU_URL = BASIC_URL
+				+ "/zhengwu/tousu.json?start={start}&end={end}";
 
 		/**
 		 * 政务大厅 部门获取url
 		 */
-		public static final String DEPT_URL = "http://3g.wuxi.gov.cn/api/zhengwu/depts.json";
+		public static final String DEPT_URL = BASIC_URL + "/zhengwu/depts.json";
 
 		/**
 		 * 我要写信 {access_token} access_token {doprojectid} 提交信箱的项目编号占位符 {typeid}
 		 * 咨询类型 占位符 {title}标题 {content}内容占位符 {openstate}是否公开
 		 * {sentmailback}是否邮件回复 {msgstatus}是否短信回复
 		 * */
-		public static final String IWANTMAIL_URL = "http://3g.wuxi.gov.cn/api/letter/submit.json?"
+		public static final String IWANTMAIL_URL = BASIC_URL
+				+ "/letter/submit.json?"
 				+ "access_token={access_token}&doprojectid={doprojectid}&typeid={typeid}&title={title}"
 				+ "&content={content}&openstate={openstate}&sentmailback={sentmailback}&msgstatus={msgstatus}";
 
 		/**
 		 * 政务大厅，办件分类获取 type 01：个人身份 02：个人办事 03：企业行业 04：企业办事 05：港澳台侨、外国人 06：主题服务
 		 */
-		public static final String KIND_TYPE_URL = "http://3g.wuxi.gov.cn/api/zhengwu/kindtype.json?type={type}";
+		public static final String KIND_TYPE_URL = BASIC_URL
+				+ "/zhengwu/kindtype.json?type={type}";
 
 		/**
 		 * 政务大厅，根据部们获取部门ID获取办件信息
 		 */
-		public static final String GETITEM_BYDEPT_URL = "http://3g.wuxi.gov.cn/api/zhengwu/itemlistdept.json?deptid={deptid}&start={start}&end={end}";
+		public static final String GETITEM_BYDEPT_URL = BASIC_URL
+				+ "/zhengwu/itemlistdept.json?deptid={deptid}&start={start}&end={end}";
 
 		/**
 		 * 
 		 * 政务大厅根据，kindType类型获办件列表
 		 */
-		public static final String GETITEM_BYKINDTYPE_URL = "http://3g.wuxi.gov.cn/api/zhengwu/itemlist.json?type={type}&kindtype={kindtype}&start={start}&end={end}";
+		public static final String GETITEM_BYKINDTYPE_URL = BASIC_URL
+				+ "/zhengwu/itemlist.json?type={type}&kindtype={kindtype}&start={start}&end={end}";
 
 		/**
 		 * 政务大厅多条件查询接口
@@ -256,134 +309,163 @@ public class Constants {
 		 * false String 部门id year true Int 年份 start true Int 分页开始 end true Int
 		 * 分页结束
 		 */
-		public static final String GETITEM_QUERY_URL = "http://3g.wuxi.gov.cn/api/zhengwu/itemlist/query.json";
+		public static final String GETITEM_QUERY_URL = BASIC_URL
+				+ "/zhengwu/itemlist/query.json";
 
 		/**
 		 * 政务大厅获取表格下载列表 {deptid} 部门ID {start}开始记录 {end} 结束记录
 		 */
-		public static final String GETTABLE_DOWNLOADS_URL = "http://3g.wuxi.gov.cn/api/zhengwu/downloadfiles.json?deptid={deptid}&start={start}&end={end}";
+		public static final String GETTABLE_DOWNLOADS_URL = BASIC_URL
+				+ "/zhengwu/downloadfiles.json?deptid={deptid}&start={start}&end={end}";
 
 		/**
 		 * 政务大厅获取好办件 行政许可详情信息
 		 * 
 		 * {id} id
 		 */
-		public static final String GETGOVER_ITEMDETIAL_XK_URL = "http://3g.wuxi.gov.cn/api/zhengwu/item/XK.json?id={id}";
+		public static final String GETGOVER_ITEMDETIAL_XK_URL = BASIC_URL
+				+ "/zhengwu/item/XK.json?id={id}";
 
 		/**
 		 * 政务大厅获取好办件 其他详情信息
 		 */
-		public static final String GETGOVER_ITEMDETIAL_QT_URL = "http://3g.wuxi.gov.cn/api/zhengwu/item/QT.json?id={id}";
+		public static final String GETGOVER_ITEMDETIAL_QT_URL = BASIC_URL
+				+ "/zhengwu/item/QT.json?id={id}";
 
 		/**
 		 * 政务大厅获取好办件 处罚详情信息
 		 */
-		public static final String GETGOVER_ITEMDETIAL_CF_URL = "http://3g.wuxi.gov.cn/api/zhengwu/item/CF.json?id={id}";
+		public static final String GETGOVER_ITEMDETIAL_CF_URL = BASIC_URL
+				+ "/zhengwu/item/CF.json?id={id}";
 
 		/**
 		 * 政务大厅获取好办件 征收详情信息
 		 */
-		public static final String GETGOVER_ITEMDETIAL_ZS_URL = "http://3g.wuxi.gov.cn/api/zhengwu/item/ZS.json?id={id}";
+		public static final String GETGOVER_ITEMDETIAL_ZS_URL = BASIC_URL
+				+ "/zhengwu/item/ZS.json?id={id}";
+
 		/**
 		 * 政务大厅获取好办件 强制详情信息
 		 */
-		public static final String GETGOVER_ITEMDETIAL_QZ_URL = "http://3g.wuxi.gov.cn/api/zhengwu/item/QZ.json?id={id}";
+		public static final String GETGOVER_ITEMDETIAL_QZ_URL = BASIC_URL
+				+ "/zhengwu/item/QZ.json?id={id}";
 
 		/**
 		 * 政务大厅办件统计
 		 */
-		public static final String GETGOVEDR_ITEM_COUNT_URL = "http://3g.wuxi.gov.cn/api/zhengwu/allcount.json";
+		public static final String GETGOVEDR_ITEM_COUNT_URL = BASIC_URL
+				+ "/zhengwu/allcount.json";
 
 		/**
 		 * 政务大厅，办件在线咨询详情
 		 */
-		public static final String GETGOVER_ONLINEASK_DETAIL_URL = "http://3g.wuxi.gov.cn/api/zhengwu/consult/{id}.json?access_token={access_token}";
+		public static final String GETGOVER_ONLINEASK_DETAIL_URL = BASIC_URL
+				+ "/zhengwu/consult/{id}.json?access_token={access_token}";
+
 		/**
 		 * 政务大厅流程图片获取
 		 */
-		public static final String GETLIUC_IMG_URL = "http://3g.wuxi.gov.cn/api/zhengwu/lcimg/{id}.json";
+		public static final String GETLIUC_IMG_URL = BASIC_URL
+				+ "/zhengwu/lcimg/{id}.json";
 
 		/**
 		 * 政务大厅 在线咨询提交URL
 		 */
-		public static final String GOVER_ONLEINASK_COMMIT_URL = "http://3g.wuxi.gov.cn/api/zhengwu/consult.json?id={id}&type={type}&content={content}&access_token={access_token}";
+		public static final String GOVER_ONLEINASK_COMMIT_URL = BASIC_URL
+				+ "/zhengwu/consult.json?id={id}&type={type}&content={content}&access_token={access_token}";
 
 		/**
 		 * 政务大厅表 在线办理表单提交
 		 */
 
-		public static final String GOVER_APPLY_ONLINE_URL = "http://3g.wuxi.gov.cn/api/zhengwu/applyonline.json";
+		public static final String GOVER_APPLY_ONLINE_URL = BASIC_URL
+				+ "/zhengwu/applyonline.json";
 
 		/**
 		 * 政务大厅下 附近现在地址
 		 */
-		public static final String GOVER_FILE_DOWN_URL = "http://3g.wuxi.gov.cn/api/zhengwu/file/{id}.json";
+		public static final String GOVER_FILE_DOWN_URL = BASIC_URL
+				+ "/zhengwu/file/{id}.json";
 
 		/**
 		 * 信件查询 内容分类下来
 		 */
 
-		public static final String CONTENT_TYPE_URL = "http://3g.wuxi.gov.cn/api/zhengwu/types.json?type=0";
+		public static final String CONTENT_TYPE_URL = BASIC_URL
+				+ "/zhengwu/types.json?type=0";
 
 		/**
 		 * 信件查询 信件分类下拉
 		 */
-		public static final String LETTER_TYPE_URL = "http://3g.wuxi.gov.cn/api/zhengwu/types.json?type=1";
+		public static final String LETTER_TYPE_URL = BASIC_URL
+				+ "/zhengwu/types.json?type=1";
 
 		/**
 		 * 获取收藏列表
 		 */
-		public static final String GET_FAVORITES_URL = "http://3g.wuxi.gov.cn/api/menu/favorites.json";
+		public static final String GET_FAVORITES_URL = BASIC_URL
+				+ "/menu/favorites.json";
 
 		/**
 		 * 政府信息公开 获取公开意见箱的APPUI布局数据
 		 * */
-		public static final String GOVERMSG_WORKSUGGESTIONBOX_LAYOUT_URL = "http://3g.wuxi.gov.cn/api/selfforms/workopinion.json";
+		public static final String GOVERMSG_WORKSUGGESTIONBOX_LAYOUT_URL = BASIC_URL
+				+ "/selfforms/workopinion.json";
 
 		/**
 		 * 政府信息公开 提交自定义表单信息的URL
 		 * */
-		public static final String SUBMIT_SELFFORM_URL = "http://3g.wuxi.gov.cn/api/selfforms/submit.json";
+		public static final String SUBMIT_SELFFORM_URL = BASIC_URL
+				+ "/selfforms/submit.json";
 
 		/**
 		 * 政府信息公开 市区县依申请公开
 		 * */
-		public static final String APPLYGOVER_URL = "http://3g.wuxi.gov.cn/api/applyopen/quxians.json";
+		public static final String APPLYGOVER_URL = BASIC_URL
+				+ "/applyopen/quxians.json";
 
 		/**
 		 * 政府信息公开 各部门依申请公开
 		 * */
-		public static final String APPLYDEPT_URL = "http://3g.wuxi.gov.cn/api/applyopen/deps.json";
+		public static final String APPLYDEPT_URL = BASIC_URL
+				+ "/applyopen/deps.json";
+
 		/**
 		 * 政府信息公开 依申请公开网上办件统计
 		 * */
-		public static final String INTERNET_LETTERS_STATISTICS_URL = "http://3g.wuxi.gov.cn/api/applyopen/applycount.json";
+		public static final String INTERNET_LETTERS_STATISTICS_URL = BASIC_URL
+				+ "/applyopen/applycount.json";
 
 		/**
 		 * 政府信息公开 获取我的依申请公开列表 URL {access_token} access_token 占位符 {start}
 		 * 开始位置暂占位符 {end}结束位置占位符
 		 */
-		public static final String MY_APPLYPAGE_URL = "http://3g.wuxi.gov.cn/api/applyopen/myapplypage.json?access_token={access_token}&start={start}&end={end}";
+		public static final String MY_APPLYPAGE_URL = BASIC_URL
+				+ "/applyopen/myapplypage.json?access_token={access_token}&start={start}&end={end}";
 
 		/**
 		 * 政府信息公开 获取 依申请公开的表格 下载地址 的URl
 		 * */
-		public static final String GOVERMSG_TABLE_DOWNLOAD_URL = "http://3g.wuxi.gov.cn/api/applyopen/doc.json";
+		public static final String GOVERMSG_TABLE_DOWNLOAD_URL = BASIC_URL
+				+ "/applyopen/doc.json";
 
 		/**
 		 * 政府信息公开 个人依申请公开提交
 		 * */
-		public static final String CITIZEN_APPLY_SUBMIT_URL = "http://3g.wuxi.gov.cn/api/applyopen/personalapply.json";
+		public static final String CITIZEN_APPLY_SUBMIT_URL = BASIC_URL
+				+ "/applyopen/personalapply.json";
 
 		/**
 		 * 政府信息公开 法人/组织依申请公开提交
 		 * */
-		public static final String LEGALPERSONAPPLY_SUBMIT_URL = "http://3g.wuxi.gov.cn/api/applyopen/orgapply.json";
+		public static final String LEGALPERSONAPPLY_SUBMIT_URL = BASIC_URL
+				+ "/applyopen/orgapply.json";
 
 		/**
 		 * 全文检索 URL
 		 * */
-		public static final String SEARCH_URL = "http://3g.wuxi.gov.cn/contentsearch/getJson?jsonpCallback=?&query={query}&sitename={sitename}&countperpage={countperpage}&pagenum={pagenum}";
+		public static final String SEARCH_URL = DOMAIN_URL
+				+ "/contentsearch/getJson?jsonpCallback=?&query={query}&sitename={sitename}&countperpage={countperpage}&pagenum={pagenum}";
 
 		/**
 		 * 全文检索 sitename
@@ -401,8 +483,9 @@ public class Constants {
 		/**
 		 * 项目外部文件存储路径
 		 */
-		public static final String APP_PATH = Environment
-				.getExternalStorageDirectory().getPath() + "/chinawi/";
+		public static final String APP_PATH = Environment.getExternalStorageDirectory()
+				.getPath()
+				+ "/chinawi/";
 
 		/**
 		 * 项目菜单图标存储路径
@@ -484,6 +567,7 @@ public class Constants {
 	public static final class SharepreferenceKey {
 
 		public static final String LAST_LOGIN_TIME = "last_login_time";// 上一次登录时间
+
 		/**
 		 * shareprefer名称
 		 */
