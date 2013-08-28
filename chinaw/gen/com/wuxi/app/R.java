@@ -11,10 +11,11 @@ public final class R {
     public static final class anim {
         public static final int move_in=0x7f040000;
         public static final int move_out=0x7f040001;
-        public static final int rbm_in_from_left=0x7f040002;
-        public static final int rbm_out_to_left=0x7f040003;
-        public static final int rotate=0x7f040004;
-        public static final int scale=0x7f040005;
+        public static final int rbm_in_from_right=0x7f040002;
+        public static final int rbm_in_out_right=0x7f040003;
+        public static final int rbm_out_to_left=0x7f040004;
+        public static final int rotate=0x7f040005;
+        public static final int scale=0x7f040006;
     }
     public static final class array {
         public static final int contentType=0x7f050002;

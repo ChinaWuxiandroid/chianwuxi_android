@@ -8249,6 +8249,44 @@ com.wuxi.domain.ForumWrapper$Forum: java.lang.String getResultCount()
 com.wuxi.domain.ForumWrapper$Forum: void setResultCount(java.lang.String)
 com.wuxi.domain.ForumWrapper$Forum: java.lang.String getSentUser()
 com.wuxi.domain.ForumWrapper$Forum: void setSentUser(java.lang.String)
+com.wuxi.domain.GIPMailInfoWrapper
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String id
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String type
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String content
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String result
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String code
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String title
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String depname
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String appraise
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String begintime
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String endtime
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String doprojectid
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String dodepname
+com.wuxi.domain.GIPMailInfoWrapper: GIPMailInfoWrapper()
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String getId()
+com.wuxi.domain.GIPMailInfoWrapper: void setId(java.lang.String)
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String getType()
+com.wuxi.domain.GIPMailInfoWrapper: void setType(java.lang.String)
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String getContent()
+com.wuxi.domain.GIPMailInfoWrapper: void setContent(java.lang.String)
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String getResult()
+com.wuxi.domain.GIPMailInfoWrapper: void setResult(java.lang.String)
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String getCode()
+com.wuxi.domain.GIPMailInfoWrapper: void setCode(java.lang.String)
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String getTitle()
+com.wuxi.domain.GIPMailInfoWrapper: void setTitle(java.lang.String)
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String getDepname()
+com.wuxi.domain.GIPMailInfoWrapper: void setDepname(java.lang.String)
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String getAppraise()
+com.wuxi.domain.GIPMailInfoWrapper: void setAppraise(java.lang.String)
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String getBegintime()
+com.wuxi.domain.GIPMailInfoWrapper: void setBegintime(java.lang.String)
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String getEndtime()
+com.wuxi.domain.GIPMailInfoWrapper: void setEndtime(java.lang.String)
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String getDoprojectid()
+com.wuxi.domain.GIPMailInfoWrapper: void setDoprojectid(java.lang.String)
+com.wuxi.domain.GIPMailInfoWrapper: java.lang.String getDodepname()
+com.wuxi.domain.GIPMailInfoWrapper: void setDodepname(java.lang.String)
 com.wuxi.domain.GoverApplyOnlie
 com.wuxi.domain.GoverApplyOnlie: java.lang.String address
 com.wuxi.domain.GoverApplyOnlie: java.lang.String id
@@ -9264,6 +9302,7 @@ com.wuxi.domain.MemoirWrapper$Memoir: void setAnswerUser(java.lang.String)
 com.wuxi.domain.MemoirWrapper$Memoir: int getAnswerType()
 com.wuxi.domain.MemoirWrapper$Memoir: void setAnswerType(int)
 com.wuxi.domain.MenuItem
+com.wuxi.domain.MenuItem: long serialVersionUID
 com.wuxi.domain.MenuItem: int CUSTOM_MENU
 com.wuxi.domain.MenuItem: int CHANNEL_MENU
 com.wuxi.domain.MenuItem: int CONTENT_MENU
@@ -9529,29 +9568,32 @@ com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper: NoticePostWrapper$Noti
 com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper: java.util.List getNoticePostReplies()
 com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper: void setNoticePostReplies(java.util.List)
 com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String id
 com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String content
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String status
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String userName
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String politicsMainId
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String sentIp
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String sentTime
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String actorInfoId
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String username
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String title
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String sendtime
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String answercontent
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String mainid
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String answerman
 com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper this$1
 com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply(com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getId()
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setId(java.lang.String)
 com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getContent()
 com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setContent(java.lang.String)
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getStatus()
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setStatus(java.lang.String)
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getUserName()
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setUserName(java.lang.String)
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getPoliticsMainId()
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setPoliticsMainId(java.lang.String)
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getSentIp()
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setSentIp(java.lang.String)
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getSentTime()
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setSentTime(java.lang.String)
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getActorInfoId()
-com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setActorInfoId(java.lang.String)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getUsername()
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setUsername(java.lang.String)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getTitle()
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setTitle(java.lang.String)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getSendtime()
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setSendtime(java.lang.String)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getAnswercontent()
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setAnswercontent(java.lang.String)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getMainid()
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setMainid(java.lang.String)
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getAnswerman()
+com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setAnswerman(java.lang.String)
 com.wuxi.domain.OpenTel
 com.wuxi.domain.OpenTel: java.lang.String tel
 com.wuxi.domain.OpenTel: java.lang.String depname
@@ -9731,6 +9773,7 @@ com.wuxi.domain.PartLeaderMailWrapper: PartLeaderMailWrapper()
 com.wuxi.domain.PartLeaderMailWrapper: java.util.List getPartLeaderMails()
 com.wuxi.domain.PartLeaderMailWrapper: void setPartLeaderMails(java.util.List)
 com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail
+com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: long serialVersionUID
 com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: java.lang.String isnull
 com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: java.lang.String depid
 com.wuxi.domain.PartLeaderMailWrapper$PartLeaderMail: java.lang.String depname
@@ -9790,29 +9833,32 @@ com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper: PepoleIdeaColle
 com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper: java.util.List getPepoleIdeaReplies()
 com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper: void setPepoleIdeaReplies(java.util.List)
 com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String id
 com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String content
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String status
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String userName
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String politicsMainId
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String sentIp
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String sentTime
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String actorInfoId
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String username
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String title
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String sendtime
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String answercontent
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String mainid
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String answerman
 com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper this$1
 com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply(com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper)
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String getId()
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: void setId(java.lang.String)
 com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String getContent()
 com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: void setContent(java.lang.String)
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String getStatus()
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: void setStatus(java.lang.String)
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String getUserName()
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: void setUserName(java.lang.String)
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String getPoliticsMainId()
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: void setPoliticsMainId(java.lang.String)
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String getSentIp()
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: void setSentIp(java.lang.String)
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String getSentTime()
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: void setSentTime(java.lang.String)
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String getActorInfoId()
-com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: void setActorInfoId(java.lang.String)
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String getUsername()
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: void setUsername(java.lang.String)
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String getTitle()
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: void setTitle(java.lang.String)
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String getSendtime()
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: void setSendtime(java.lang.String)
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String getAnswercontent()
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: void setAnswercontent(java.lang.String)
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String getMainid()
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: void setMainid(java.lang.String)
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String getAnswerman()
+com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: void setAnswerman(java.lang.String)
 com.wuxi.domain.PoliticsWrapper
 com.wuxi.domain.PoliticsWrapper: java.util.List data
 com.wuxi.domain.PoliticsWrapper: PoliticsWrapper()

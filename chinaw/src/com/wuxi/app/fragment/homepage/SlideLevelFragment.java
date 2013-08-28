@@ -16,9 +16,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.PopWindowManager;
@@ -30,8 +30,8 @@ import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.WuxiChannelContentDetailFragment;
-import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgContentDetailWebFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyTableFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgContentDetailWebFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonContentDetialFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailCFFragment;
@@ -53,7 +53,6 @@ import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumPostFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailFragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegislationContentFragment;
@@ -67,8 +66,8 @@ import com.wuxi.app.listeners.HomeTabChangListner;
 import com.wuxi.app.listeners.SlideLinstener;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
-import com.wuxi.app.util.SystemUtil;
 import com.wuxi.app.util.Constants.FragmentName;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.app.view.SlideMenuLayout;
 import com.wuxi.domain.MenuItem;
 
@@ -440,7 +439,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		fragment.setManagers(managers);
 		fragment.setArguments(bundele);
 		FragmentTransaction ft = manager.beginTransaction();
-		ft.setCustomAnimations(R.anim.rbm_in_from_left, R.anim.rbm_out_to_left);
+		ft.setCustomAnimations(R.anim.rbm_in_from_right, R.anim.rbm_out_to_left);
 		ft.addToBackStack(null);
 		ft.add(FRAME_CONTENT, fragment);
 		baseFragments.add(fragment);
@@ -474,7 +473,8 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		} else {
 			BaseFragment f = baseFragments.get(baseFragments.size() - 1);
 			FragmentTransaction ft = manager.beginTransaction();
-			ft.setCustomAnimations(R.anim.move_in, R.anim.move_out);
+			
+			ft.setCustomAnimations(R.anim.rbm_in_from_right, R.anim.rbm_in_out_right);
 			ft.addToBackStack(null);
 			ft.remove(f);
 			ft.commit();

@@ -159,7 +159,9 @@ com.wuxi.app.FragmentManagers:
     public android.content.Context context
     28:31:public void popFragment()
     46:49:public void IntentFragment(com.wuxi.app.BaseFragment,boolean)
+    70:72:public void BackPress(com.wuxi.app.BaseFragment)
     79:79:public com.wuxi.app.BaseFragment getCurrentFragment()
+    83:84:public void clear(com.wuxi.app.BaseFragment)
     87:90:public void clearAllFragment()
     123:131:public void AddAndRemove(com.wuxi.app.BaseFragment,com.wuxi.app.BaseFragment,java.lang.String)
 com.wuxi.app.MainActivity:
@@ -270,7 +272,7 @@ com.wuxi.app.fragment.commonfragment.ContentListFragment:
     protected static final int CONTENT_LOAD_SUCCESS
     protected static final int CONTENT_LOAD_FAIL
     private static final int PAGE_SIZE
-    193:198:public void loadMore(android.view.View)
+    197:202:public void loadMore(android.view.View)
 com.wuxi.app.fragment.commonfragment.FifterContentListFragment:
     protected static final int CONTENT_LOAD_SUCCESS
     protected static final int CONTENT_LOAD_FAIL
@@ -320,8 +322,7 @@ com.wuxi.app.fragment.homepage.NewsAnnAcountFragment:
 com.wuxi.app.fragment.homepage.SlideLevelFragment:
     protected static final int FRAME_CONTENT
     private static final java.lang.String MENUITEM_CACKE_KEY
-    private static final java.lang.String TAG
-    491:492:public void setUnTouchableOffset(float,float)
+    510:511:public void setUnTouchableOffset(float,float)
 com.wuxi.app.fragment.homepage.SlideLevelFragment$FragmentWapper
 com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment:
     private static final long serialVersionUID
@@ -344,7 +345,7 @@ com.wuxi.app.fragment.homepage.fantasticwuxi.WuxiChannelContentFragment:
     protected static final int COTENT_LOAD_SUCCESS
     protected static final int COTENT_LOAD_FAIL
     private static final int CONTENT_LIST_ID
-    360:360:public com.wuxi.domain.Channel getChannel()
+    362:362:public com.wuxi.domain.Channel getChannel()
 com.wuxi.app.fragment.homepage.goverpublicmsg.ExpandListItemContentFragment
 com.wuxi.app.fragment.homepage.goverpublicmsg.ExpandListItemContentFragment$1
 com.wuxi.app.fragment.homepage.goverpublicmsg.ExpandListItemContentFragment$2
@@ -412,7 +413,6 @@ com.wuxi.app.fragment.homepage.goverpublicmsg.WorkSuggestionBoxFragment:
     private static final int DATA_SUBMIT_FAILED
     protected static final int CHANNELCONTENT_ID
 com.wuxi.app.fragment.homepage.goversaloon.AdministrativeItemFragment:
-    private static final int PAGE_ITEM
     protected static final int TITLE_ITEM_LOADSUCCESS
     protected static final int TITLE_ITEM_LOADFAIL
     protected static final int GOVERITEM_LOAD_SUCCESS
@@ -435,7 +435,6 @@ com.wuxi.app.fragment.homepage.goversaloon.EfficacyComplaintFragment:
     protected static final int LOAD_LETTER_SUCCESS
     protected static final int LOAD_LETTER_ERROR
 com.wuxi.app.fragment.homepage.goversaloon.GoverMangeFragment:
-    private static final int PAGE_ITEM
     protected static final int LOAD_CHANNEL_SUCCESS
     protected static final int LOAD_CHANNEL_FAIL
     protected static final int CONTENT_LOAD_SUCCESS
@@ -503,8 +502,6 @@ com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonFragment:
     public static final java.lang.String SHOWLAYOUTINDEX
 com.wuxi.app.fragment.homepage.goversaloon.MyGoverSaloonFragment:
     private static final int PAGE_SIZE
-    private static final int MYCONSULT_CHECKED
-    private static final int MYCONAPPLY_CHECKED
     protected static final int MYCONSULT_LOADSUCCESS
     protected static final int MYCONSULT_LOADFAIL
     protected static final int MYAPP_LOADSUCCESS
@@ -563,6 +560,7 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment
     private static final int DATA__LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment:
+    private static final long serialVersionUID
     protected static final java.lang.String TAG
     private static final int ALLCOUNT_LOAD_SUCESS
     private static final int LETTERSTATISTICS_LOAD_SUCESS
@@ -574,7 +572,10 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345CMayorMailBoxFragme
     private static final long serialVersionUID
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment:
     private static final long serialVersionUID
+    private static final java.lang.String TAG
     private static final int HIDEN_CONTENT_ID
+    private static final int ALLCOUNT_LOAD_SUCESS
+    private static final int DATA_LOAD_ERROR
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintListFragment:
     protected static final java.lang.String TAG
     private static final int DATA__LOAD_SUCESS
@@ -589,10 +590,20 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailFragment:
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment:
     private static final int SEND_SUCCESS
     private static final int SEND_FAILED
+    private static final java.lang.String DOPROJECTID_MAYORBOX
+    private static final java.lang.String DOPROJECTID_SUGGEST_AND_COMPLAINT
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment:
     private static final long serialVersionUID
+    private static final java.lang.String TAG
     private static final int HIDEN_CONTENT_ID
+    private static final int ALLCOUNT_LOAD_SUCESS
+    private static final int DATA_LOAD_ERROR
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailContentFragment:
+    private static final java.lang.String TAG
+    private static final int DATA__LOAD_SUCESS
+    private static final int DATA_LOAD_ERROR
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailListFragment:
+    private static final long serialVersionUID
     protected static final java.lang.String TAG
     private static final int DATA__LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
@@ -686,7 +697,19 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.LiveHomeMemoirFragment:
     private static final int DATA_LOAD_ERROR
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.MyGoverInterPeopleContentFragment:
     private static final int CONTENT_MAIN_ID
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.PartLeaderBoxListFragment:
+    protected static final java.lang.String TAG
+    private static final int HIDEN_CONTENT_ID
+    private static final int DATA__LOAD_SUCESS
+    private static final int DATA_LOAD_ERROR
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.PartLeaderMailFragment:
+    private static final long serialVersionUID
+    private static final java.lang.String TAG
+    private static final int HIDEN_CONTENT_ID
+    private static final int ALLCOUNT_LOAD_SUCESS
+    private static final int DATA_LOAD_ERROR
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.PartLeaderMailListFragment:
+    private static final long serialVersionUID
     protected static final java.lang.String TAG
     private static final int DATA__LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
@@ -749,7 +772,7 @@ com.wuxi.app.util.Constants:
     11:11:public Constants()
 com.wuxi.app.util.Constants$APPFiles:
     public static final java.lang.String GOVERMSG_APPLYOPEN_TABLENAME
-    375:375:public Constants$APPFiles()
+    389:389:public Constants$APPFiles()
 com.wuxi.app.util.Constants$CacheKey
 com.wuxi.app.util.Constants$ExceptionMessage
 com.wuxi.app.util.Constants$SharepreferenceKey
@@ -781,7 +804,7 @@ com.wuxi.app.util.TimeFormateUtil:
     public static final java.lang.String DATE_PATTERN
     public static final java.lang.String DATE_TIME_PATTERN
     public static final int START_YEAR
-    18:18:public TimeFormateUtil()
+    16:16:public TimeFormateUtil()
 com.wuxi.app.view.DynamicTitleLayout:
     private static final int PERSCREEN_ITEM_COUNT
     private int mCurScreen
@@ -813,11 +836,12 @@ com.wuxi.app.view.SlideMenuLayout:
     protected static final int CLICK_CORRECTION_COEFFICIENT
     private float mDownMotionX
     private float mDownMotionY
-    110:112:public void setUnTouchableOffset(float,float)
-    115:117:public void setLeftMenuWidth(float)
-    120:122:public void setLeftMenuWidthPixels(int)
-    133:135:public void setRightMenuWidth(float)
-    138:140:public void setRightMenuWidthPixels(int)
+    private android.view.GestureDetector mGestureDetector
+    111:113:public void setUnTouchableOffset(float,float)
+    116:118:public void setLeftMenuWidth(float)
+    121:123:public void setLeftMenuWidthPixels(int)
+    134:136:public void setRightMenuWidth(float)
+    139:141:public void setRightMenuWidthPixels(int)
 com.wuxi.app.view.TitleScrollLayout:
     private static final int PERSCREEN_ITEM_COUNT
     private static final int TOUCH_STATE_REST
