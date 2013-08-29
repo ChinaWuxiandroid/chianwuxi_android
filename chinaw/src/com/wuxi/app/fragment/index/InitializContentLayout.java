@@ -1,4 +1,5 @@
 package com.wuxi.app.fragment.index;
+
 import java.util.List;
 
 import android.content.Context;
@@ -29,14 +30,18 @@ import com.wuxi.exception.NetException;
 public class InitializContentLayout {
 	/**
 	 * 
-	 *wanglu 泰得利通 
-	 * @param menuItem 首页导航模块菜单
-	 * @param subMenuItems 导航菜单子菜单
+	 * wanglu 泰得利通
+	 * 
+	 * @param menuItem
+	 *            首页导航模块菜单
+	 * @param subMenuItems
+	 *            导航菜单子菜单
 	 * @param context
 	 */
-	public static void initMenuItemContentLayout(MenuItem menuItem,List<MenuItem> subMenuItems,final Context context) {
+	public static void initMenuItemContentLayout(MenuItem menuItem,
+			List<MenuItem> subMenuItems, final Context context) {
 
-		if(menuItem.getName().equals("资讯中心")){
+		if (menuItem.getName().equals("资讯中心")) {
 
 			for (final MenuItem menu : subMenuItems) {
 
@@ -67,13 +72,12 @@ public class InitializContentLayout {
 
 				} else if (menu.getType() == MenuItem.CUSTOM_MENU) {// //普通菜单
 					menu.setContentFragment(InfoNavigatorWithContentFragment.class);
-				}else if(menu.getType()==MenuItem.LINK_MENU){//链接菜单 
+				} else if (menu.getType() == MenuItem.LINK_MENU) {// 链接菜单
 					menu.setContentFragment(SlideLevelFragment.class);
 				}
 			}
 
-
-		}else if(menuItem.getName().equals("公共服务")){
+		} else if (menuItem.getName().equals("公共服务")) {
 
 			for (final MenuItem menu : subMenuItems) {
 
@@ -110,8 +114,7 @@ public class InitializContentLayout {
 
 			}
 
-
-		}else if(menuItem.getName().equals("政府信息公开")){
+		} else if (menuItem.getName().equals("政府信息公开")) {
 
 			for (final MenuItem menu : subMenuItems) {
 
@@ -132,12 +135,10 @@ public class InitializContentLayout {
 
 								if (channels != null) {
 									menu.setContentFragment(GoverMsgNaviWithContentFragment.class);
-								} 
-								else {
-									if(menu.getName().equals("信息公开动态")){
+								} else {
+									if (menu.getName().equals("信息公开动态")) {
 										menu.setContentFragment(GoverMsgSearchContentListFragment.class);// 内容列表界面
-									}
-									else{
+									} else {
 										menu.setContentFragment(GoverMsgContentListFragment.class);// 内容列表界面
 									}
 								}
@@ -147,11 +148,11 @@ public class InitializContentLayout {
 						}
 					}).start();
 
-				} 
-				//定制菜单
-				else if(menu.getType() == MenuItem.APP_MENU){
-					//目前就工作意见箱一个定制菜单
-					if(menu.getName().endsWith("工作意见箱")){
+				}
+				// 定制菜单
+				else if (menu.getType() == MenuItem.APP_MENU) {
+					// 目前就工作意见箱一个定制菜单
+					if (menu.getName().endsWith("工作意见箱")) {
 						menu.setContentFragment(WorkSuggestionBoxFragment.class);
 					}
 				}
@@ -160,21 +161,14 @@ public class InitializContentLayout {
 
 					menu.setContentFragment(GoverMsgWebFragment.class);
 
-
-				} 
-				//碎片类型菜单
+				}
+				// 碎片类型菜单
 				else if (menu.getType() == MenuItem.FRAGMENT_MENU) {
 					menu.setContentFragment(GoverMsgFragmentWebFragment.class);
-				} 
+				}
 			}
 
-
-
 		}
-
-
-
-
 
 	}
 
