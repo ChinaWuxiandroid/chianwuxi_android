@@ -305,8 +305,12 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 //			post_scrollview.setVisibility(View.GONE);
 
 			sentpepole_text.setText(questionnairePostWrapper.getAuthor());
-			begintime_text.setText(questionnairePostWrapper.getCreateDate());
-			endtime_text.setText(questionnairePostWrapper.getEndDate());
+			begintime_text.setVisibility(View.GONE);
+			endtime_text.setVisibility(View.GONE);
+			
+			post_bengintime.setVisibility(View.GONE);
+			post_endtime.setVisibility(View.GONE);
+			
 			readnum_text.setText(questionnairePostWrapper.getReadCount());
 			replynum_text.setText(String.valueOf(questionnaireAnswerWrapper
 					.getTotalRowsAmount()));

@@ -24,10 +24,12 @@ import android.widget.Toast;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
+import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.ForumCommentService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.ForumWrapper.Forum;
 import com.wuxi.exception.NetException;
 
@@ -139,23 +141,39 @@ public class ForumContentFragment extends BaseItemContentFragment implements
 			@Override
 			public void onClick(View v) {
 				String id = forum.getId();
-				String access_token = Constants.SharepreferenceKey.TEST_ACCESSTOKEN;
+				String access_token = SystemUtil.getAccessToken(context);
 				String type = forum.getViewpath();
 				String content = submitContent.getText().toString();
 
 				ForumCommentService commentService = new ForumCommentService(
 						context);
 
-				try {
-					boolean isSubnit = commentService.submitComment(id,
-							access_token, type, content);
+				LoginDialog loginDialog = new LoginDialog(context,
+						baseSlideFragment);
 
-					if (isSubnit) {
-						Toast.makeText(context, "提交成功！", Toast.LENGTH_SHORT)
-								.show();
+				try {
+					if (!forum.getViewpath().equals("/SurveryContent")) {
+						if (loginDialog.checkLogin()) {
+							if (!content.equals("")) {
+								boolean isSubnit = commentService
+										.submitComment(id, access_token, type,
+												content);
+
+								Toast.makeText(context, "提交成功，正待审核...",
+										Toast.LENGTH_SHORT).show();
+							} else {
+								Toast.makeText(context, "提交失败，您没有输入任何信息",
+										Toast.LENGTH_SHORT).show();
+							}
+
+						} else {
+							// loginDialog.showDialog();
+							Toast.makeText(context, "提交失败，您未登录，请登录后再发表评论，谢谢！",
+									Toast.LENGTH_SHORT).show();
+						}
 					} else {
-						Toast.makeText(context, "提交失败！", Toast.LENGTH_SHORT)
-								.show();
+						Toast.makeText(context, "调查问卷类帖子功能暂未实现",
+								Toast.LENGTH_SHORT).show();
 					}
 
 				} catch (NetException e) {
@@ -199,15 +217,22 @@ public class ForumContentFragment extends BaseItemContentFragment implements
 			break;
 
 		case R.id.forum_content_comment_radiobtn:
-			ForumOrdinaryReplayFragment forumOrdinaryReplayFragment = new ForumOrdinaryReplayFragment();
-			forumOrdinaryReplayFragment.setForum(getForum());
-			onTransaction(forumOrdinaryReplayFragment);
+			if (!forum.getViewpath().equals("/SurveryContent")) {
+				ForumOrdinaryReplayFragment forumOrdinaryReplayFragment = new ForumOrdinaryReplayFragment();
+				forumOrdinaryReplayFragment.setForum(getForum());
+				onTransaction(forumOrdinaryReplayFragment);
+			} else {
+				Toast.makeText(context, "调查问卷类帖子暂未实现该功能", Toast.LENGTH_SHORT)
+						.show();
+			}
+
 			break;
 		}
 	}
 
 	/**
 	 * 获取帖子数据
+	 * 
 	 * @return
 	 */
 	private Forum getForum() {
