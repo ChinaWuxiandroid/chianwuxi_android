@@ -222,6 +222,7 @@ public class ChannelActivity extends BaseSlideActivity implements
 	public void redirectFragment(MenuItem showMenuItem, int showMenuPositon,
 			int subMenuPostion) {
 
+		
 	}
 
 }

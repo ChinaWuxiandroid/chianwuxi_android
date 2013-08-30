@@ -49,8 +49,6 @@ import com.wuxi.domain.StackElement;
 public class MainTabActivity extends ActivityGroup implements
 		OnCheckedChangeListener, OnClickListener {
 
-	
-
 	private static final int REMOVE_VIEW = 0;
 
 	private RadioGroup radioGroup;
@@ -67,18 +65,19 @@ public class MainTabActivity extends ActivityGroup implements
 			main_tab_mine, main_tab_more;
 
 	@SuppressLint("HandlerLeak")
-	private Handler handler=new Handler(){
-		
+	private Handler handler = new Handler() {
+
 		public void handleMessage(android.os.Message msg) {
-			switch(msg.what){
+			switch (msg.what) {
 			case REMOVE_VIEW:
 				removeView();
 				break;
-			
+
 			}
-			
+
 		};
 	};
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -122,7 +121,7 @@ public class MainTabActivity extends ActivityGroup implements
 		View view = getLocalActivityManager().startActivity(
 			str, intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
 				.getDecorView();
-		
+
 		llMain.addView(view, new LinearLayout.LayoutParams(
 			LinearLayout.LayoutParams.MATCH_PARENT,
 			LinearLayout.LayoutParams.MATCH_PARENT));
@@ -131,15 +130,13 @@ public class MainTabActivity extends ActivityGroup implements
 		StackElement component = new StackElement(str, view);
 		stack.add(component);
 
-		
-	
-		if(llMain.getChildCount()>1){
+		if (llMain.getChildCount() > 1) {
 			handler.sendEmptyMessageDelayed(REMOVE_VIEW, 2000);
 		}
-		
+
 	}
-	
-	private void removeView(){
+
+	private void removeView() {
 		for (int index = 0; index < llMain.getChildCount() - 1; index++) {// 移除下面的view保留最上面的view
 			llMain.removeViewAt(index);
 		}
@@ -285,10 +282,7 @@ public class MainTabActivity extends ActivityGroup implements
 		case R.id.main_tab_index:// 首页
 
 			clearAll();
-			/*
-			 * if(IndexActivity.instance!=null){
-			 * IndexActivity.instance.clearAll(); }
-			 */
+
 			intent = new Intent(MainTabActivity.this, MainIndexActivity.class);
 
 			break;
@@ -312,7 +306,8 @@ public class MainTabActivity extends ActivityGroup implements
 				intent = new Intent(MainTabActivity.this, LoginActivity.class);
 
 			} else {
-				intent = new Intent(MainTabActivity.this, MainMineActivity.class);
+				intent = new Intent(MainTabActivity.this,
+					MainMineActivity.class);
 			}
 
 			break;

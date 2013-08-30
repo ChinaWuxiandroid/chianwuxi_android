@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,8 +17,10 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseSlideActivity;
+import com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity;
 import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
@@ -188,8 +191,6 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 
 	}
 
-	
-	
 	@Override
 	public void onClick(View v) {
 		super.onClick(v);
@@ -228,9 +229,16 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 	public void redirectFragment(MenuItem showMenuItem, int showMenuPositon,
 			int subMenuPostion) {
 		Bundle bundle = new Bundle();
-		bundle.putInt(SHOWITEM_LAYOUT_INDEXKEY, subMenuPostion);
-		// slideLinstener.replaceFragment(showMenuItem, showMenuPositon, null,
-		// bundle);
+		if (showMenuItem.getName().equals("政府信息公开")) {
+			Intent intent = new Intent(MenuItemMainActivity.this,
+				PublicGoverMsgActivity.class);
+			intent.putExtra(SHOWITEM_LAYOUT_INDEXKEY, subMenuPostion);
+			intent.putExtra(
+				BaseSlideActivity.SELECT_MENU_POSITION_KEY, showMenuPositon);
+			MainTabActivity.instance.addView(intent);
+
+		}
+
 	}
 
 }

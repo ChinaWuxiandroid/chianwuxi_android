@@ -56,8 +56,6 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 
 	private List<MenuItem> menuItems;
 
-	
-
 	private ContentNavigatorAdapter adapter;
 
 	public static final String SHOWLAYOUTINDEX = "showLayout_index";
@@ -144,7 +142,7 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 	private void showLeftMenuItemData() {
 		Bundle bundle = getIntent().getExtras();
 		int showIndex = 1;
-		if (bundle != null&&bundle.containsKey(SHOWLAYOUTINDEX)) {
+		if (bundle != null && bundle.containsKey(SHOWLAYOUTINDEX)) {
 			showIndex = bundle.getInt(SHOWLAYOUTINDEX);
 		}
 		adapter = new ContentNavigatorAdapter(getLayoutInflater(), null,
@@ -185,8 +183,7 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 						channels = channelService.getSubChannels(menuItem.getChannelId());
 						if (channels != null) {
 							handler.sendEmptyMessage(LEFT_CHANNEL_DATA__LOAD_SUCCESS);
-							CacheUtil.put(
-								menuItem.getChannelId(), channels);// 放入缓存
+							CacheUtil.put(menuItem.getChannelId(), channels);// 放入缓存
 						}
 
 					} catch (NetException e) {
@@ -220,15 +217,19 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 			showContentFragment(showChannelContentFragment(channels.get(0)));// 显示第一个Channel数据
 		}
 	}
-	
-	private  class GoverOnItemClickListenr implements OnItemClickListener{
 
-		/* (non-Javadoc)
-		 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+	private class GoverOnItemClickListenr implements OnItemClickListener {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * android.widget.AdapterView.OnItemClickListener#onItemClick(android
+		 * .widget.AdapterView, android.view.View, int, long)
 		 */
 		@Override
-		public void onItemClick(AdapterView<?> adapterView, View view, int position,
-				long arg3) {
+		public void onItemClick(AdapterView<?> adapterView, View view,
+				int position, long arg3) {
 			Object object = adapterView.getItemAtPosition(position);
 
 			if (object instanceof Channel) {// 如果是频道
@@ -240,11 +241,10 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 				adapter.notifyDataSetInvalidated();
 				showContentFragment(showMenItemContentFragment((MenuItem) object));
 			}
-			
-		}
-		
-	}
 
+		}
+
+	}
 
 	/**
 	 * 
@@ -278,10 +278,9 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 		if (fragment != null) {
 			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 			ft.replace(DETAIL_ID, fragment);// 替换视图
-
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-
-			ft.commit();
+			ft.addToBackStack(null);
+			ft.commitAllowingStateLoss();
 		}
 	}
 

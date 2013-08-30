@@ -160,7 +160,7 @@ public class PublicServiceChannelContentFragment extends BaseFragment implements
 
 		ft.replace(CHANNELCONTENT_ID, publicServiceChannelContentDetailFragment);
 
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 
 }

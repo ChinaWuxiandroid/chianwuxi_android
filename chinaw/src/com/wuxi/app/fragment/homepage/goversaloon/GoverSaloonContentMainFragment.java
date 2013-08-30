@@ -365,7 +365,7 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 		fragment.setManagers(managers);// 传递managers
 		ft.replace(CONTENT_MAIN_ID, fragment);
 
-		ft.commit();
+		ft.commitAllowingStateLoss();
 
 	}
 

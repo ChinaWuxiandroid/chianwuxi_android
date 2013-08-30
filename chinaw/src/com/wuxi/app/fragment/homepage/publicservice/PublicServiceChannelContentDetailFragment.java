@@ -35,25 +35,42 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 		implements OnItemClickListener {
 
 	private Context context;
+
 	private View view;
+
 	private TextView public_detial_tv_title;
+
 	private HorizontalScrollView publicservice_level1, publicservice_level2,
 			publicservice_level3;
+
 	private View dev_v_1, dev_v_2, dev_v_3;
+
 	private static final int CONTENT_LIST_ID = R.id.publicservice_contentlist;
+
 	protected static final int LOAD_CHANNEL_SUCCESS = 1;
+
 	protected static final int LOAD_CHANNEL_FAIL = 0;
+
 	private Channel channel;
+
 	private int level;
+
 	private PublicServiceContentListFragment publicServiceContentListFragment;
+
 	private List<Channel> channels;
+
 	// private GridView dishtype;
 	private ContentChannelAdapter contentChannelAdapter;
+
 	private RadioGroup publicserivce_rb_1, publicserivce_rb_2,
 			publicserivce_rb_3;
+
 	private boolean isFirst1Change = true;
+
 	private boolean isFirst2Change = true;
+
 	private boolean isFirst3Change = true;
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -85,33 +102,26 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 	}
 
 	private void initUI() {
-		public_detial_tv_title = (TextView) view
-				.findViewById(R.id.public_detial_tv_title);
+		public_detial_tv_title = (TextView) view.findViewById(R.id.public_detial_tv_title);
 
-		publicservice_level1 = (HorizontalScrollView) view
-				.findViewById(R.id.publicservice_level1);
-		publicservice_level2 = (HorizontalScrollView) view
-				.findViewById(R.id.publicservice_level2);
-		publicservice_level3 = (HorizontalScrollView) view
-				.findViewById(R.id.publicservice_level3);
+		publicservice_level1 = (HorizontalScrollView) view.findViewById(R.id.publicservice_level1);
+		publicservice_level2 = (HorizontalScrollView) view.findViewById(R.id.publicservice_level2);
+		publicservice_level3 = (HorizontalScrollView) view.findViewById(R.id.publicservice_level3);
 		dev_v_1 = (View) view.findViewById(R.id.dev_v_1);// 分割线
 		dev_v_2 = (View) view.findViewById(R.id.dev_v_2);
 		dev_v_3 = (View) view.findViewById(R.id.dev_v_3);
-		publicserivce_rb_1=(RadioGroup) view.findViewById(R.id.publicserivce_rb_1);
-		publicserivce_rb_2 = (RadioGroup) view
-				.findViewById(R.id.publicserivce_rb_2);
+		publicserivce_rb_1 = (RadioGroup) view.findViewById(R.id.publicserivce_rb_1);
+		publicserivce_rb_2 = (RadioGroup) view.findViewById(R.id.publicserivce_rb_2);
 
-		publicserivce_rb_2
-				.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+		publicserivce_rb_2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
-					@Override
-					public void onCheckedChanged(RadioGroup group, int checkedId) {
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-					}
-				});
+			}
+		});
 
-		publicserivce_rb_3 = (RadioGroup) view
-				.findViewById(R.id.publicserivce_rb_3);
+		publicserivce_rb_3 = (RadioGroup) view.findViewById(R.id.publicserivce_rb_3);
 
 		// dishtype = (GridView) view.findViewById(R.id.dishtype);
 
@@ -154,8 +164,7 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 				Message msg = handler.obtainMessage();
 				ChannelService channelService = new ChannelService(context);
 				try {
-					channels = channelService.getSubChannels(channel
-							.getChannelId());
+					channels = channelService.getSubChannels(channel.getChannelId());
 					if (channels != null) {
 						PublicServiceChannelContentDetailFragment.this.level = level;
 						msg.what = LOAD_CHANNEL_SUCCESS;
@@ -188,26 +197,22 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 		switch (level) {
 
 		case 1:
-			
-			
+
 			Level1ChannelChangeLister level1ChannelChangeLister = new Level1ChannelChangeLister(
-					channels);
-			publicserivce_rb_1
-					.setOnCheckedChangeListener(level1ChannelChangeLister);
+				channels);
+			publicserivce_rb_1.setOnCheckedChangeListener(level1ChannelChangeLister);
 			buildSubChannelsView(1);
 			break;
 		case 2:
 			Level2ChannelChangeLister level2ChannelChangeLister = new Level2ChannelChangeLister(
-					channels);
-			publicserivce_rb_2
-					.setOnCheckedChangeListener(level2ChannelChangeLister);
+				channels);
+			publicserivce_rb_2.setOnCheckedChangeListener(level2ChannelChangeLister);
 			buildSubChannelsView(2);
 			break;
 		case 3:
 			Level3ChannelChangeLister level3ChannelChangeLister = new Level3ChannelChangeLister(
-					channels);
-			publicserivce_rb_3
-					.setOnCheckedChangeListener(level3ChannelChangeLister);
+				channels);
+			publicserivce_rb_3.setOnCheckedChangeListener(level3ChannelChangeLister);
 			buildSubChannelsView(3);
 			break;
 		}
@@ -224,8 +229,8 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 		for (Channel channle : channels) {
 
 			RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(
-					RadioGroup.LayoutParams.WRAP_CONTENT,
-					RadioGroup.LayoutParams.WRAP_CONTENT);
+				RadioGroup.LayoutParams.WRAP_CONTENT,
+				RadioGroup.LayoutParams.WRAP_CONTENT);
 			params.leftMargin = 5;
 
 			RadioButton radioButton = new RadioButton(context);
@@ -233,14 +238,12 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 
 				radioButton.setTextColor(Color.WHITE);
 
-				radioButton
-						.setBackgroundResource(R.drawable.public_service_channel_2bg);
+				radioButton.setBackgroundResource(R.drawable.public_service_channel_2bg);
 				showChannelView(channle, level);
 
 			} else {
 
-				radioButton
-						.setBackgroundResource(R.drawable.public_service_channel_3bg);
+				radioButton.setBackgroundResource(R.drawable.public_service_channel_3bg);
 
 			}
 			radioButton.setGravity(Gravity.CENTER);
@@ -280,7 +283,7 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 
 		ft.replace(CONTENT_LIST_ID, publicServiceContentListFragment);
 
-		ft.commit();
+		ft.commitAllowingStateLoss();
 
 	}
 
