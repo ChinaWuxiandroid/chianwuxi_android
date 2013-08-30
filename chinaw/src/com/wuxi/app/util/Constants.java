@@ -21,7 +21,7 @@ public class Constants {
 		/**
 		 * 域名地址
 		 */
-		public static final String DOMAIN_URL = "http://3g.wuxi.gov.cn";
+		public static final String DOMAIN_URL = "http://m.wuxi.gov.cn";
 
 		/**
 		 * 根地址
@@ -110,8 +110,9 @@ public class Constants {
 		/**
 		 * 政民互动 12345来信办理平台 信件评价URL
 		 */
-		public static final String MAIL_COMMENT_SUBMIT_URL = "http://3g.wuxi.gov.cn/api/letter/appraise.json";
-		
+		public static final String MAIL_COMMENT_SUBMIT_URL = BASIC_URL
+				+ "/letter/appraise.json";
+
 		/**
 		 * 公共论坛列表URL
 		 */
@@ -148,8 +149,9 @@ public class Constants {
 		/**
 		 * 热点话题 话题评论 URL
 		 */
-		public static final String HOT_REVIEW_COMMENT_URL = "http://3g.wuxi.gov.cn/api/hotreview/{id}/reply.json";
-		
+		public static final String HOT_REVIEW_COMMENT_URL = BASIC_URL
+				+ "/hotreview/{id}/reply.json";
+
 		/**
 		 * 热点话题 回复 列表 URL
 		 */
@@ -493,9 +495,8 @@ public class Constants {
 		/**
 		 * 项目外部文件存储路径
 		 */
-		public static final String APP_PATH = Environment.getExternalStorageDirectory()
-				.getPath()
-				+ "/chinawi/";
+		public static final String APP_PATH = Environment
+				.getExternalStorageDirectory().getPath() + "/chinawi/";
 
 		/**
 		 * 项目菜单图标存储路径
