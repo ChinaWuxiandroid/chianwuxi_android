@@ -3,7 +3,7 @@ package com.wuxi.app.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -12,9 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wuxi.app.FragmentManagers;
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.goversaloon.MyOnlineAskActivity;
 import com.wuxi.app.fragment.BaseSlideFragment;
-import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.Myconsult;
 
@@ -27,16 +28,18 @@ public class MyOnlineConsultAdapter extends BaseAdapter implements
 		OnClickListener {
 
 	private List<Myconsult> myconsults;
+
 	private Context context;
 
 	private Myconsult selectMyconsult;
+
 	public BaseSlideFragment baseSlideFragment;
 
 	public MyOnlineConsultAdapter(List<Myconsult> myconsults, Context context,
 			FragmentManagers managers, BaseSlideFragment baseSlideFragment) {
 		this.myconsults = myconsults;
 		this.context = context;
-		
+
 		this.baseSlideFragment = baseSlideFragment;
 	}
 
@@ -57,7 +60,9 @@ public class MyOnlineConsultAdapter extends BaseAdapter implements
 
 	static class ViewHolder {
 		TextView tv_title;
+
 		ImageView iv_view;
+
 		ImageView iv_goask;
 	}
 
@@ -67,17 +72,14 @@ public class MyOnlineConsultAdapter extends BaseAdapter implements
 		Myconsult myconsult = myconsults.get(position);
 		ViewHolder viewHolder = null;
 		if (convertView == null) {
-			convertView = View.inflate(context,
-					R.layout.gover_myonlineask_item, null);
+			convertView = View.inflate(
+				context, R.layout.gover_myonlineask_item, null);
 
 			viewHolder = new ViewHolder();
 
-			viewHolder.tv_title = (TextView) convertView
-					.findViewById(R.id.gover_onlineask_title);
-			viewHolder.iv_view = (ImageView) convertView
-					.findViewById(R.id.gover_onlineask_view);
-			viewHolder.iv_goask = (ImageView) convertView
-					.findViewById(R.id.gover_onlineask_goask);
+			viewHolder.tv_title = (TextView) convertView.findViewById(R.id.gover_onlineask_title);
+			viewHolder.iv_view = (ImageView) convertView.findViewById(R.id.gover_onlineask_view);
+			viewHolder.iv_goask = (ImageView) convertView.findViewById(R.id.gover_onlineask_goask);
 
 			convertView.setTag(viewHolder);
 		} else {
@@ -85,8 +87,8 @@ public class MyOnlineConsultAdapter extends BaseAdapter implements
 		}
 		String text = myconsult.getTitle();
 
-		String time = TimeFormateUtil.formateTime(myconsult.getSendDate(),
-				TimeFormateUtil.DATE_PATTERN);
+		String time = TimeFormateUtil.formateTime(
+			myconsult.getSendDate(), TimeFormateUtil.DATE_PATTERN);
 		viewHolder.tv_title.setText(text + " (" + time + " )");
 		viewHolder.iv_view.setOnClickListener(this);
 		viewHolder.iv_goask.setOnClickListener(this);
@@ -97,21 +99,20 @@ public class MyOnlineConsultAdapter extends BaseAdapter implements
 
 	@Override
 	public void onClick(View v) {
-		Bundle bundle = new Bundle();
+
+		Intent intent = new Intent(context, MyOnlineAskActivity.class);
 		switch (v.getId()) {
-		case R.id.gover_onlineask_view://咨询详情
-			bundle.putInt("showType", 0);
+		case R.id.gover_onlineask_view:// 咨询详情
+
+			intent.putExtra("showType", 0);
 			break;
-		case R.id.gover_onlineask_goask://继续咨询
-			bundle.putInt("showType", 1);
+		case R.id.gover_onlineask_goask:// 继续咨询
+			intent.putExtra("showType", 1);
 			break;
 		}
 
-		
-		bundle.putSerializable("selectMyconsult", selectMyconsult);
-
-		baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-				Constants.FragmentName.MYONLINEASKFRAGMENT, bundle);
+		intent.putExtra("selectMyconsult", selectMyconsult);
+		MainTabActivity.instance.addView(intent);
 
 	}
 

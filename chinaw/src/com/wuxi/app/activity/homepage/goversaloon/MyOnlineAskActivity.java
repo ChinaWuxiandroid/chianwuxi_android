@@ -259,6 +259,7 @@ public class MyOnlineAskActivity extends BaseSlideActivity implements
 
 	@Override
 	public void onClick(View v) {
+		super.onClick(v);
 		switch (v.getId()) {
 		case R.id.online_ask_submit:
 			if (et_content.getText().toString().equals("")) {

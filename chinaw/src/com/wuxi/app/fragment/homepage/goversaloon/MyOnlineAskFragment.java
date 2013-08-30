@@ -82,7 +82,7 @@ public class MyOnlineAskFragment extends BaseSlideFragment implements
 		accessToken=SystemUtil.getAccessToken(context);
 		myconsult = (Myconsult) b.get("selectMyconsult");
 		int showIndex = b.getInt("showType");
-		super.slideLinstener.closeSlideMenu();
+		
 		super.initUI();
 		gover_btn_rg = (RadioGroup) view.findViewById(R.id.gover_btn_rg);
 		gover_myonlineask_detail = (LinearLayout) view
