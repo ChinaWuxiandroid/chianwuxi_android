@@ -24,15 +24,11 @@ import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
 import com.wuxi.app.dialog.LoginDialog;
-import com.wuxi.app.engine.ForumCommentService;
 import com.wuxi.app.engine.HotReviewCommentService;
-import com.wuxi.app.fragment.BaseItemContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewInfoFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewReplyFragment;
-import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
 import com.wuxi.app.util.SystemUtil;
-import com.wuxi.domain.ForumWrapper.Forum;
 import com.wuxi.domain.HotReviewWrapper.HotReview;
 import com.wuxi.exception.NetException;
 

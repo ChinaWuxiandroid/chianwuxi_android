@@ -418,7 +418,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		fragment.setFragment(this);
 		ft.addToBackStack(null);
 		fragment.setManagers(managers);// 传递管理器
-		ft.commit();
+		ft.commitAllowingStateLoss();
 
 		baseFragments.clear();// 清楚所有add视图
 	}
@@ -443,7 +443,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		ft.addToBackStack(null);
 		ft.add(FRAME_CONTENT, fragment);
 		baseFragments.add(fragment);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 
 	}
 
@@ -454,7 +454,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.add(FRAME_CONTENT, fragment);
 		baseFragments.add(fragment);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 
 	}
 
@@ -477,7 +477,7 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 			ft.setCustomAnimations(R.anim.rbm_in_from_right, R.anim.rbm_in_out_right);
 			ft.addToBackStack(null);
 			ft.remove(f);
-			ft.commit();
+			ft.commitAllowingStateLoss();
 			baseFragments.remove(baseFragments.size() - 1);
 
 		}
