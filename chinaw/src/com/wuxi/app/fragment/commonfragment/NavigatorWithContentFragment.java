@@ -252,10 +252,11 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 		if (fragment != null) {
 			fragment.setArguments(this.getArguments());
 			fragment.setBaseSlideFragment(this.baseSlideFragment);
-			FragmentTransaction ft = getFragmentManager().beginTransaction();
+			FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
 			ft.replace(DETAIL_ID, fragment);// 替换视图
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-			ft.commit();
+			ft.addToBackStack(null);
+			ft.commitAllowingStateLoss();
 		}
 
 	}

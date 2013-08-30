@@ -89,6 +89,7 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 
 	@Override
 	protected void findMainContentViews(View view) {
+		super.findMainContentViews(view);
 		initLayout(view);
 
 		// ForumOrdinaryPostFragment forumOrdinaryFragment = new
