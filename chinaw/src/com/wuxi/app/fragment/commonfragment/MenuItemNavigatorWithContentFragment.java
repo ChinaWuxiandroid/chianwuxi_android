@@ -50,16 +50,23 @@ import com.wuxi.exception.NetException;
 public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 		implements OnItemClickListener {
 	private static final int DETAIL_ID = R.id.details;// 点击左侧导航时右侧要显示内容区域的ID
+
 	protected static final int LEFT_CHANNEL_DATA__LOAD_SUCCESS = 1;// 左侧频道(菜单)加载
+
 	protected static final int LEFT_MENUITEM_DATA__LOAD_SUCCESS = 2;// 左侧频道(菜单)加载
+
 	protected static final int LEFT_DATA__LOAD_ERROR = 0;// 左侧频道(菜单)加载失败
 
 	protected View view;
+
 	protected ListView mListView;// 左侧ListView
+
 	protected LayoutInflater mInflater;
+
 	private Context context;
 
 	private List<Channel> channels;
+
 	private List<MenuItem> menuItems;
 
 	private MenuItem parentMenuItem; // 父菜单
@@ -79,7 +86,7 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 			case LEFT_CHANNEL_DATA__LOAD_SUCCESS:
 				showLeftChannelData();
 				break;
-			case LEFT_MENUITEM_DATA__LOAD_SUCCESS:				
+			case LEFT_MENUITEM_DATA__LOAD_SUCCESS:
 				showLeftMenuItemData();
 				break;
 
@@ -112,6 +119,13 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 
 	}
 
+	@Override
+	public void onResume() {
+
+		super.onResume();
+
+	}
+
 	@SuppressWarnings("unchecked")
 	private void loadMenuItemData() {
 
@@ -129,8 +143,7 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 				MenuService menuService = new MenuService(context);
 				Message msg = handler.obtainMessage();
 				try {
-					menuItems = menuService.getSubMenuItems(parentMenuItem
-							.getId());
+					menuItems = menuService.getSubMenuItems(parentMenuItem.getId());
 					if (menuItems != null) {
 						CacheUtil.put(parentMenuItem.getId(), menuItems);// 放入缓存
 						msg.what = LEFT_MENUITEM_DATA__LOAD_SUCCESS;
@@ -188,8 +201,7 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 	private void loadChannelData() {
 
 		if (null != CacheUtil.get(parentMenuItem.getChannelId())) {// 从缓存中查找
-			channels = (List<Channel>) CacheUtil.get(parentMenuItem
-					.getChannelId());
+			channels = (List<Channel>) CacheUtil.get(parentMenuItem.getChannelId());
 			showLeftChannelData();
 			return;
 
@@ -203,12 +215,11 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 					ChannelService channelService = new ChannelService(context);
 
 					try {
-						channels = channelService.getSubChannels(parentMenuItem
-								.getChannelId());
+						channels = channelService.getSubChannels(parentMenuItem.getChannelId());
 						if (channels != null) {
 							handler.sendEmptyMessage(LEFT_CHANNEL_DATA__LOAD_SUCCESS);
-							CacheUtil.put(parentMenuItem.getChannelId(),
-									channels);// 放入缓存
+							CacheUtil.put(
+								parentMenuItem.getChannelId(), channels);// 放入缓存
 						}
 
 					} catch (NetException e) {
@@ -280,10 +291,12 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 	 */
 	private void showContentFragment(Fragment fragment) {
 		if (fragment != null) {
-			FragmentTransaction ft = getFragmentManager().beginTransaction();
+			FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
 			ft.replace(DETAIL_ID, fragment);// 替换视图
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-			ft.commit();
+			ft.addToBackStack(null);
+			ft.commitAllowingStateLoss();
+			
 		}
 
 	}

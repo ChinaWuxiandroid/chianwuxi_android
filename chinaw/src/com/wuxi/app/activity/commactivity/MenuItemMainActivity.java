@@ -212,7 +212,8 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(MANCOTENT_ID, fragment);// 替换内容界面
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-		ft.commit();
+		ft.addToBackStack(null);
+		ft.commitAllowingStateLoss();
 	}
 
 	/**
