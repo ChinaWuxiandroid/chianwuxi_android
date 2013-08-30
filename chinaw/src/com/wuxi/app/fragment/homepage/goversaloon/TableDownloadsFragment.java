@@ -53,31 +53,55 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 		OnItemClickListener, android.view.View.OnClickListener {
 
 	protected static final int LOAD_DEPT_SUCCESS = 0;
+
 	protected static final int LOAD_DEPT_FAIL = 1;
+
 	protected static final int GOVERITEM_LOAD_SUCCESS = 2;
+
 	protected static final int GOVERITEM_LOAD_FIAL = 3;
+
 	private static final int FILE_DOWN_SUCCESS = 4;
+
 	private static final int FILE_DOWN_ERROR = 5;
+
 	private static final int PAGE_SIZE = 10;
+
 	private Spinner gover_table_down_deptsp;
+
 	private List<Dept> depts;
+
 	private ProgressBar pb_table_download;
+
 	private ListView gover_tabledowload_lv;
+
 	private View loadMoreView;// 加载更多视图
+
 	private Button loadMoreButton;
+
 	private int visibleLastIndex;
+
 	private int visibleItemCount;// 当前显示的总条数
+
 	private GoverTableDownLoadWrapper goverTableDownLoadWrapper;
+
 	private GoverTableDownLoadAdapter goverTableDownLoadAdapter;
+
 	private String currentDeptId;
+
 	private boolean isSwitchDept = false;
+
 	private boolean isFisrtLoadItems = true;// 是否是首次加载
+
 	private String currentFileName;
+
 	private EditText et_filename_keywords;
+
 	private Button btn_fileSearch;
+
 	private ProgressBar pb_loadmoore;
 
 	private ProgressDialog pd;
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -109,14 +133,10 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 
 		super.initUI();
 
-		gover_table_down_deptsp = (Spinner) view
-				.findViewById(R.id.gover_table_down_deptsp);
-		pb_table_download = (ProgressBar) view
-				.findViewById(R.id.pb_table_download);
-		gover_tabledowload_lv = (ListView) view
-				.findViewById(R.id.gover_tabledowload_lv);
-		et_filename_keywords = (EditText) view
-				.findViewById(R.id.et_filename_keywords);
+		gover_table_down_deptsp = (Spinner) view.findViewById(R.id.gover_table_down_deptsp);
+		pb_table_download = (ProgressBar) view.findViewById(R.id.pb_table_download);
+		gover_tabledowload_lv = (ListView) view.findViewById(R.id.gover_tabledowload_lv);
+		et_filename_keywords = (EditText) view.findViewById(R.id.et_filename_keywords);
 		btn_fileSearch = (Button) view.findViewById(R.id.btn_fileSearch);
 
 		gover_tabledowload_lv.addFooterView(getFootView());
@@ -135,12 +155,10 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 	}
 
 	private View getFootView() {
-		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
-				null);
-		loadMoreButton = (Button) loadMoreView
-				.findViewById(R.id.loadMoreButton);
-		pb_loadmoore = (ProgressBar) loadMoreView
-				.findViewById(R.id.pb_loadmoore);
+		loadMoreView = View.inflate(
+			context, R.layout.list_loadmore_layout, null);
+		loadMoreButton = (Button) loadMoreView.findViewById(R.id.loadMoreButton);
+		pb_loadmoore = (ProgressBar) loadMoreView.findViewById(R.id.pb_loadmoore);
 		loadMoreButton.setOnClickListener(this);
 		return loadMoreView;
 	}
@@ -187,7 +205,7 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 	private void showDept() {
 
 		gover_table_down_deptsp.setAdapter(new DeptSpinnerAdapter(depts,
-				context));
+			context));
 
 		this.currentDeptId = depts.get(0).getId();
 		loadItem(currentDeptId, null, 0, PAGE_SIZE);
@@ -213,10 +231,10 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 			public void run() {
 				Message msg = handler.obtainMessage();
 				GoverTableDownLoadService goverTableDownLoadService = new GoverTableDownLoadService(
-						context);
+					context);
 				try {
-					goverTableDownLoadWrapper = goverTableDownLoadService
-							.getTableDownLoadsPage(deptId, fileName, start, end);
+					goverTableDownLoadWrapper = goverTableDownLoadService.getTableDownLoadsPage(
+						deptId, fileName, start, end);
 					if (goverTableDownLoadWrapper != null) {
 						msg.what = GOVERITEM_LOAD_SUCCESS;
 					} else {
@@ -256,12 +274,11 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 	 */
 	protected void showTableDownLoadItemList() {
 
-		List<GoverTableDownLoad> goDownLoads = goverTableDownLoadWrapper
-				.getGoverTableDownLoads();
+		List<GoverTableDownLoad> goDownLoads = goverTableDownLoadWrapper.getGoverTableDownLoads();
 		if (goDownLoads != null && goDownLoads.size() > 0) {
 			if (isFisrtLoadItems) {// 首次加载
 				goverTableDownLoadAdapter = new GoverTableDownLoadAdapter(
-						goDownLoads, context);
+					goDownLoads, context);
 				isFisrtLoadItems = false;
 				gover_tabledowload_lv.setAdapter(goverTableDownLoadAdapter);
 				pb_table_download.setVisibility(ProgressBar.GONE);
@@ -269,8 +286,7 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 			} else {
 
 				if (isSwitchDept) {// 切换部门
-					goverTableDownLoadAdapter
-							.setGoverTableDownLoads(goDownLoads);
+					goverTableDownLoadAdapter.setGoverTableDownLoads(goDownLoads);
 					pb_table_download.setVisibility(ProgressBar.GONE);
 				} else {
 					for (GoverTableDownLoad goverTableDownLoad : goDownLoads) {
@@ -354,12 +370,12 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 			public void onClick(DialogInterface dialog, int which) {
 
 				if (Environment.getExternalStorageState().equals(
-						Environment.MEDIA_MOUNTED)) {
+					Environment.MEDIA_MOUNTED)) {
 
 					DownLoadThreadTask dowTask = new DownLoadThreadTask(
-							tableDownLoad.getId(),
-							Constants.APPFiles.DOWNLOAF_FILE_PATH
-									+ tableDownLoad.getFilename());
+						tableDownLoad.getId(),
+						Constants.APPFiles.DOWNLOAF_FILE_PATH
+								+ tableDownLoad.getFilename());
 
 					new Thread(dowTask).start();
 					pd.show();
@@ -387,6 +403,7 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 	private class DownLoadThreadTask implements Runnable {
 
 		private String fileId;
+
 		private String filePath;
 
 		public DownLoadThreadTask(String fileId, String filePath) {
@@ -401,9 +418,9 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 			try {
 
 				GoverSaoonFileService goverSaoonFileService = new GoverSaoonFileService(
-						context);
-				File file = goverSaoonFileService.dowloadTable(fileId,
-						filePath, pd);
+					context);
+				File file = goverSaoonFileService.dowloadTable(
+					fileId, filePath, pd);
 				if (file != null) {
 					handler.sendEmptyMessage(FILE_DOWN_SUCCESS);
 				}
@@ -425,8 +442,7 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 	public void onItemClick(AdapterView<?> adapterView, View arg1,
 			int position, long arg3) {
 
-		GoverTableDownLoad tableDownLoad = (GoverTableDownLoad) adapterView
-				.getItemAtPosition(position);
+		GoverTableDownLoad tableDownLoad = (GoverTableDownLoad) adapterView.getItemAtPosition(position);
 		showDownloadComfirmDialog(tableDownLoad);
 
 	}
@@ -450,8 +466,9 @@ public class TableDownloadsFragment extends GoverSaloonContentFragment
 
 				loadMoreButton.setText("loading.....");
 				isSwitchDept = false;
-				loadItem(currentDeptId, currentFileName, visibleLastIndex + 1,
-						visibleLastIndex + 1 + PAGE_SIZE);
+				loadItem(
+					currentDeptId, currentFileName, visibleLastIndex + 1,
+					visibleLastIndex + 1 + PAGE_SIZE);
 
 			}
 			break;

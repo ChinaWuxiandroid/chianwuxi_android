@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -27,12 +28,13 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.commactivity.ContentDetailActivity;
+import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonContentDetialActivity;
 import com.wuxi.app.adapter.GoverManageAdapter;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.engine.ContentService;
-import com.wuxi.app.fragment.commonfragment.ContentDetailFragment;
-import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.Content;
 import com.wuxi.domain.ContentWrapper;
@@ -55,34 +57,55 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 	private ImageView gover_mange_iv_next;
 
 	protected static final int LOAD_CHANNEL_SUCCESS = 1;
+
 	protected static final int LOAD_CHANNEL_FAIL = 0;
+
 	protected static final int CONTENT_LOAD_SUCCESS = 2;
+
 	protected static final int CONTENT_LOAD_FAIL = 3;
+
 	protected static final int LOAD_SUBCHANNEL_SUCCESS = 4;
+
 	private static final int PAGESIZE = 10;
 
 	private View loadMoreView;// 加载更多视图
+
 	private Button loadMoreButton;
+
 	private int visibleLastIndex;
+
 	private int visibleItemCount;// 当前显示的总条数
 
 	private GoverManageAdapter manageAdapter;
+
 	private MenuItem menuItem;
+
 	private List<Channel> subChannels;
+
 	private List<Channel> channels;
 
 	private static final int CHANNEL_TYPE = 1;
+
 	private static final int SUB_CHANNEL_TYPE = 2;// 子Channel
 
 	private ProgressBar pb_mange;
+
 	private ContentWrapper contentWrapper;
+
 	private boolean isFistLoad = true;// 是否是首次加载
+
 	private boolean isSwitch = false;
+
 	private Channel checkChannel;
+
 	private LinearLayout ll_subchannel;
+
 	private ProgressBar pb_loadmoore;
+
 	private RadioGroup mange_rg_channel;
+
 	private boolean isFirstChange = true;
+
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 
@@ -110,44 +133,38 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 		super.initUI();
 
 		gover_mange_lv = (ListView) view.findViewById(R.id.gover_mange_lv);
-		mange_rg_channel = (RadioGroup) view
-				.findViewById(R.id.mange_rg_channel);
+		mange_rg_channel = (RadioGroup) view.findViewById(R.id.mange_rg_channel);
 		mange_rg_channel.setOnCheckedChangeListener(this);
-	
-		gover_mange_iv_next = (ImageView) view
-				.findViewById(R.id.gover_mange_iv_next);
+
+		gover_mange_iv_next = (ImageView) view.findViewById(R.id.gover_mange_iv_next);
 		ll_subchannel = (LinearLayout) view.findViewById(R.id.ll_subchannel);
-		
+
 		gover_mange_iv_next.setOnClickListener(this);
-		
-		
+
 		gover_mange_lv.addFooterView(getFootView());
 		gover_mange_lv.setOnScrollListener(this);
 		pb_mange = (ProgressBar) view.findViewById(R.id.pb_mange);
 		menuItem = (MenuItem) getArguments().get("menuItem");
 		gover_mange_lv.setOnItemClickListener(this);
 		loadChannle(CHANNEL_TYPE, menuItem.getChannelId());// 加载子Channel
-		
 
 	}
 
-	
 	/**
 	 * 
-	 *wanglu 泰得利通 
-	 *listView加载视图
+	 * wanglu 泰得利通 listView加载视图
+	 * 
 	 * @return
 	 */
-	private View getFootView(){
-		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
-				null);
-		loadMoreButton = (Button) loadMoreView
-				.findViewById(R.id.loadMoreButton);
+	private View getFootView() {
+		loadMoreView = View.inflate(
+			context, R.layout.list_loadmore_layout, null);
+		loadMoreButton = (Button) loadMoreView.findViewById(R.id.loadMoreButton);
 		loadMoreButton.setOnClickListener(this);
-		pb_loadmoore = (ProgressBar) loadMoreView
-				.findViewById(R.id.pb_loadmoore);
+		pb_loadmoore = (ProgressBar) loadMoreView.findViewById(R.id.pb_loadmoore);
 		return loadMoreView;
 	}
+
 	/**
 	 * 
 	 * wanglu 泰得利通 显示子Channel
@@ -158,8 +175,8 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 		for (final Channel channel : subChannels) {
 
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.WRAP_CONTENT,
-					LinearLayout.LayoutParams.WRAP_CONTENT);
+				LinearLayout.LayoutParams.WRAP_CONTENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT);
 			params.leftMargin = 10;
 			TextView textView = new TextView(context);
 			textView.setTextColor(Color.BLUE);
@@ -240,16 +257,15 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 		for (Channel channle : channels) {
 
 			RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(
-					RadioGroup.LayoutParams.WRAP_CONTENT,
-					RadioGroup.LayoutParams.WRAP_CONTENT);
+				RadioGroup.LayoutParams.WRAP_CONTENT,
+				RadioGroup.LayoutParams.WRAP_CONTENT);
 			params.leftMargin = 5;
 			RadioButton radioButton = new RadioButton(context);
 			if (index == 0) {
 
 				radioButton.setTextColor(Color.WHITE);
 
-				radioButton
-						.setBackgroundResource(R.drawable.wuxi_content_channelselect_);
+				radioButton.setBackgroundResource(R.drawable.wuxi_content_channelselect_);
 
 				if (channle.getChildrenContentsCount() > 0) {
 					loadContentsData(channle.getChannelId(), 0, PAGESIZE);
@@ -303,7 +319,7 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 				ContentService contentService = new ContentService(context);
 				try {
 					contentWrapper = contentService.getPageContentsById(
-							channelId, start, end);
+						channelId, start, end);
 					if (contentWrapper != null) {
 						msg.what = CONTENT_LOAD_SUCCESS;
 
@@ -362,13 +378,12 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 		}
 
 		if (contentWrapper.isNext()) {
-			if(gover_mange_lv.getFooterViewsCount()!=0){
+			if (gover_mange_lv.getFooterViewsCount() != 0) {
 				loadMoreButton.setText("点击加载更多");
 				pb_loadmoore.setVisibility(ProgressBar.GONE);
-			}else{
+			} else {
 				gover_mange_lv.addFooterView(getFootView());
 			}
-			
 
 		} else {
 
@@ -387,8 +402,9 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 
 				loadMoreButton.setText("loading.....");
 				isSwitch = false;
-				loadContentsData(checkChannel.getChannelId(),
-						visibleLastIndex + 1, visibleLastIndex + 1 + PAGESIZE);
+				loadContentsData(
+					checkChannel.getChannelId(), visibleLastIndex + 1,
+					visibleLastIndex + 1 + PAGESIZE);
 
 			}
 
@@ -423,11 +439,12 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 
 		Content content = (Content) adapterView.getItemAtPosition(position);
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(ContentDetailFragment.CHANNEL_KEY,
-				this.checkChannel);
-		bundle.putSerializable(ContentDetailFragment.CONTENT_KEY, content);
-		this.baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-				FragmentName.GOVERSALOONCONTENTDETIALFRAGMENT, bundle);
+		Intent intent = new Intent(getActivity(),
+			GoverSaloonContentDetialActivity.class);
+		intent.putExtra(ContentDetailActivity.CHANNEL_KEY, this.checkChannel);
+		intent.putExtra(ContentDetailActivity.CONTENT_KEY, content);
+
+		MainTabActivity.instance.addView(intent);
 	}
 
 	@Override

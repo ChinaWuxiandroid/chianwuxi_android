@@ -5,8 +5,10 @@ package com.wuxi.app.activity;
 
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -19,7 +21,18 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity;
+import com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity;
+import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonActivity;
+import com.wuxi.app.activity.homepage.informationcenter.InformationCenterActivity;
+import com.wuxi.app.activity.homepage.logorregister.LoginActivity;
+import com.wuxi.app.activity.homepage.logorregister.RegisterActivity;
+import com.wuxi.app.activity.homepage.more.MenuItemSetActivity;
+import com.wuxi.app.activity.homepage.more.SystemSetActivity;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity;
+import com.wuxi.app.activity.homepage.publicservice.PublicServiceActivity;
 import com.wuxi.app.adapter.LeftMenuAdapter;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.SystemUtil;
@@ -38,7 +51,7 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 
 	public static final String SELECT_MENU_POSITION_KEY = "SELECT_MENU_KEY";// 选中的左侧菜单序号
 
-	protected View mainView;//之间的视图
+	protected View mainView;// 之间的视图
 
 	private SlideMenuLayout mSlideMenuLayout;
 
@@ -83,33 +96,31 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.slide_level_layout);
 
-		findViews();
-		initLeftMenu();// 初始化左侧菜单数据
-
 		Bundle bundle = getIntent().getExtras();
 		if (bundle != null) {
 			leftSelectPostion = bundle.getInt(SELECT_MENU_POSITION_KEY);
+
+		}
+		findViews();
+		initLeftMenu();// 初始化左侧菜单数据
+		if (leftSelectPostion != -1) {
+			this.menuItem = leftMenuItems.get(leftSelectPostion);
 		}
 
-		if(leftSelectPostion!=-1){
-			this.menuItem=leftMenuItems.get(leftSelectPostion);
-		}
-		
-		
 		mainView = View.inflate(this, getLayoutId(), null);
 		flmain.addView(mainView);// 将中间视图添加到布局中
 		findMainTitleViews();// 寻找并初始化中间视图的头部数据
-		findMainContentViews(mainView);//寻找并初始化中间视图的头部数据子activity实现
+		findMainContentViews(mainView);// 寻找并初始化中间视图的头部数据子activity实现
 
 	}
-	
-	
+
 	/**
 	 * 
-	 *@author 泰得利通 wanglu 
-	 * @param view 中间视图的View
+	 * @author 泰得利通 wanglu
+	 * @param view
+	 *            中间视图的View
 	 */
-	protected  abstract void  findMainContentViews(View view);
+	protected abstract void findMainContentViews(View view);
 
 	/**
 	 * @author 泰得利通 wanglu 初始化中间视图的控件
@@ -156,6 +167,8 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 	 * @author 泰得利通 wanglu 回退处理
 	 */
 	protected void onBack() {
+
+		MainTabActivity.instance.pop();// 回退
 
 	}
 
@@ -273,6 +286,7 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 		if (position == this.leftSelectPostion)
 			return;
 		MenuItem checkMenuItem = (MenuItem) adapterView.getItemAtPosition(position);
+		closeSlideMenu();
 		switchActivity(checkMenuItem, position);
 
 	}
@@ -285,21 +299,41 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 	 */
 	protected void switchActivity(MenuItem menuItem, int position) {
 
+		Intent intent = null;
+
 		if (menuItem.getType() != MenuItem.CHANNEL_MENU) {
 			if (menuItem.getName().equals("资讯中心")) {
 
+				intent = new Intent(BaseSlideActivity.this,
+					InformationCenterActivity.class);
+
 			} else if (menuItem.getName().equals("政府信息公开")) {
+				intent = new Intent(BaseSlideActivity.this,
+					PublicGoverMsgActivity.class);
 
 			} else if (menuItem.getName().equals("公共服务")) {
 
+				intent = new Intent(BaseSlideActivity.this,
+					PublicServiceActivity.class);
+
 			} else if (menuItem.getName().equals("政务大厅")) {
 
+				intent = new Intent(BaseSlideActivity.this,
+					GoverSaloonActivity.class);
 			} else if (menuItem.getName().equals("政民互动")) {
-
+				intent = new Intent(BaseSlideActivity.this,
+					MainMineActivity.class);
 			}
 
 		} else if (menuItem.getType() == MenuItem.CHANNEL_MENU) {// 频道类型菜单
+			intent = new Intent(BaseSlideActivity.this, ChannelActivity.class);
+		}
 
+		if (intent != null) {
+			intent.putExtra(
+				BaseSlideActivity.SELECT_MENU_POSITION_KEY, position);
+
+			MainTabActivity.instance.addView(intent);
 		}
 
 	}
@@ -307,23 +341,26 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 	@Override
 	public void onClick(View v) {
 
-		if (!mSlideMenuLayout.getRightSlideMenuEnabled()) {
-			return;
-		}
+		Intent intent = null;
 		switch (v.getId()) {
 		case R.id.login_tv_userlogin:// 登录处理
+			intent = new Intent(BaseSlideActivity.this, LoginActivity.class);
 
 			break;
 		case R.id.login_tv_user_regisster:// 注册
+			intent = new Intent(BaseSlideActivity.this, RegisterActivity.class);
 
 			break;
 		case R.id.right_menu_rb_collect:// 我的收藏
+			intent = new Intent(BaseSlideActivity.this,
+				MenuItemSetActivity.class);
 
 			break;
 		case R.id.right_menu_rb_mzhd:// 我的政民互动
 
 			if ("".equals(SystemUtil.getAccessToken(this))) {
 				Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
+				intent = new Intent(BaseSlideActivity.this, LoginActivity.class);
 
 			} else {
 
@@ -335,11 +372,25 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 			Toast.makeText(this, "正在施工中....", Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.right_menu_rb_myset:// 我的设置
-
+			intent = new Intent(BaseSlideActivity.this, SystemSetActivity.class);
 			break;
 
 		}
 
+		if (intent != null) {
+			MainTabActivity.instance.addView(intent);
+		}
+
 	}
 
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+			if (event.getAction() == KeyEvent.ACTION_UP) {
+				onBack();
+			}
+			return true;
+		}
+		return super.dispatchKeyEvent(event);
+	}
 }

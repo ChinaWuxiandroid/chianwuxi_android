@@ -7,6 +7,7 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,7 +25,13 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailCFActivity;
+import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailQTActivity;
+import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailQZActivity;
+import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailXKActivity;
+import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailZSActivtiy;
 import com.wuxi.app.adapter.GoverOnlineApproveAdapter;
 import com.wuxi.app.engine.GoverSaoonItemService;
 import com.wuxi.app.util.Constants.FragmentName;
@@ -266,25 +273,27 @@ public class SearchResultFragment extends BaseFragment implements
 		
 		GoverSaoonItem goverSaoonItem = (GoverSaoonItem) adapterView
 				.getItemAtPosition(position);
-		Bundle bundle = new Bundle();
-		bundle.putSerializable("goverSaoonItem", goverSaoonItem);
+		
+		Intent intent=null;
 		if (goverSaoonItem.getType().equals("XK")) {
+			intent=new Intent(getActivity(),GoverSaloonDetailXKActivity.class);
+		} else if (goverSaoonItem.getType().equals("QT")) {
 			
-
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-					FragmentName.GOVERSALOONDETAIL_XK_FRAGMENT, bundle);
-		}else if(goverSaoonItem.getType().equals("QT")){
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-					FragmentName.GOVERSALOONDETAIL_QT_FRAGMENT, bundle);
-		}else if(goverSaoonItem.getType().equals("ZS")){
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-					FragmentName.GOVERSALOONDETAIL_ZS_FRAGMENT, bundle);
-		}else if(goverSaoonItem.getType().equals("QZ")){
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-					FragmentName.GOVERSALOONDETAIL_QZ_FRAGMENT, bundle);
-		}else if(goverSaoonItem.getType().equals("CF")){
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-					FragmentName.GOVERSALOONDETAIL_CF_FRAGMENT, bundle);
+			intent=new Intent(getActivity(),GoverSaloonDetailQTActivity.class);
+		} else if (goverSaoonItem.getType().equals("ZS")) {
+			
+			intent=new Intent(getActivity(),GoverSaloonDetailZSActivtiy.class);
+		} else if (goverSaoonItem.getType().equals("QZ")) {
+			
+			intent=new Intent(getActivity(),GoverSaloonDetailQZActivity.class);
+		} else if (goverSaoonItem.getType().equals("CF")) {
+			intent=new Intent(getActivity(),GoverSaloonDetailCFActivity.class);
+		}
+		
+		
+		if(intent!=null){
+			intent.putExtra("goverSaoonItem", goverSaoonItem);
+			MainTabActivity.instance.addView(intent);
 		}
 		
 	}

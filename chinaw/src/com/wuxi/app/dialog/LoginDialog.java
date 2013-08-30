@@ -7,12 +7,15 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.logorregister.LoginActivity;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.Constants;
-import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.app.util.SystemUtil;
+
 /**
  * 
  * @author wanglu 泰得利通 登录对话框
@@ -21,8 +24,8 @@ import com.wuxi.app.util.SystemUtil;
 public class LoginDialog {
 
 	private Context context;
+
 	private BaseSlideFragment baseSlideFragment;
-	
 
 	public LoginDialog(Context context, BaseSlideFragment baseSlideFragment) {
 		this.context = context;
@@ -47,7 +50,6 @@ public class LoginDialog {
 
 	private String getAccessToken() {
 		return SystemUtil.getAccessToken(context);
-		
 
 	}
 
@@ -71,8 +73,8 @@ public class LoginDialog {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 
-				baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-						FragmentName.LOGIN_FRAGMENT, null);//转向登录界面
+				Intent intent = new Intent(context, LoginActivity.class);
+				MainTabActivity.instance.addView(intent);
 
 			}
 		});

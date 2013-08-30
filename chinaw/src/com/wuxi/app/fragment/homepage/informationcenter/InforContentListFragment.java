@@ -1,13 +1,15 @@
 package com.wuxi.app.fragment.homepage.informationcenter;
 
 import android.annotation.SuppressLint;
-import android.os.Bundle;
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.wuxi.app.fragment.commonfragment.ContentDetailFragment;
+import com.wuxi.app.MainTabActivity;
+import com.wuxi.app.activity.commactivity.ContentDetailActivity;
+import com.wuxi.app.activity.homepage.informationcenter.HotTopicContentActivity;
+import com.wuxi.app.activity.homepage.informationcenter.InfoCenterContentDetailActivity;
 import com.wuxi.app.fragment.commonfragment.ContentListFragment;
-import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.Content;
 
 /**
@@ -23,29 +25,37 @@ public class InforContentListFragment extends ContentListFragment {
 			int position, long arg3) {
 
 		Content content = (Content) adapterView.getItemAtPosition(position);
-		Bundle bundle = new Bundle();
-		bundle.putSerializable(ContentDetailFragment.CONTENT_KEY, content);
+		
+		Intent intent = null;
+		
 		if (super.parentItem != null) {
 
-			bundle.putSerializable(ContentDetailFragment.MENUITEM_KEY,
-					parentItem);
 			if (parentItem.getName().equals("热点专题")) {
 
-				this.baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-						FragmentName.HOTTOPICCONTENTFRAGMENT, bundle);// 跳转
+				intent = new Intent(getActivity(),
+					HotTopicContentActivity.class);
+				intent.putExtra(ContentDetailActivity.MENUITEM_KEY, parentItem);
+				intent.putExtra(ContentDetailActivity.CONTENT_KEY, content);
+				MainTabActivity.instance.addView(intent);
 
 			} else {
 
-				this.baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-						FragmentName.INFOCENTER_FRAGMENT, bundle);// 跳转
+				intent = new Intent(getActivity(),
+					InfoCenterContentDetailActivity.class);
+				intent.putExtra(ContentDetailActivity.CONTENT_KEY, content);
+				intent.putExtra(ContentDetailActivity.MENUITEM_KEY, parentItem);
+				MainTabActivity.instance.addView(intent);
 
 			}
 
 		} else if (super.channel != null) {
 
-			bundle.putSerializable(ContentDetailFragment.CHANNEL_KEY, channel);
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-					FragmentName.INFOCENTER_FRAGMENT, bundle);// 跳转
+			intent = new Intent(getActivity(),
+				InfoCenterContentDetailActivity.class);
+			intent.putExtra(ContentDetailActivity.CONTENT_KEY, content);
+			intent.putExtra(ContentDetailActivity.CHANNEL_KEY, channel);
+			MainTabActivity.instance.addView(intent);
+
 		}
 
 	}

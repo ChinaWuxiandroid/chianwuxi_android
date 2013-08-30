@@ -7,6 +7,7 @@ import java.util.Map;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -31,7 +32,13 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailCFActivity;
+import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailQTActivity;
+import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailQZActivity;
+import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailXKActivity;
+import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailZSActivtiy;
 import com.wuxi.app.adapter.DeptSpinnerAdapter;
 import com.wuxi.app.adapter.GoverOnlineApproveAdapter;
 import com.wuxi.app.engine.DeptService;
@@ -560,24 +567,27 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 
 		GoverSaoonItem goverSaoonItem = (GoverSaoonItem) adapterView
 				.getItemAtPosition(position);
-		Bundle bundle = new Bundle();
-		bundle.putSerializable("goverSaoonItem", goverSaoonItem);
+		
+		Intent intent=null;
 		if (goverSaoonItem.getType().equals("XK")) {
-
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-					FragmentName.GOVERSALOONDETAIL_XK_FRAGMENT, bundle);
+			intent=new Intent(getActivity(),GoverSaloonDetailXKActivity.class);
 		} else if (goverSaoonItem.getType().equals("QT")) {
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-					FragmentName.GOVERSALOONDETAIL_QT_FRAGMENT, bundle);
+			
+			intent=new Intent(getActivity(),GoverSaloonDetailQTActivity.class);
 		} else if (goverSaoonItem.getType().equals("ZS")) {
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-					FragmentName.GOVERSALOONDETAIL_ZS_FRAGMENT, bundle);
+			
+			intent=new Intent(getActivity(),GoverSaloonDetailZSActivtiy.class);
 		} else if (goverSaoonItem.getType().equals("QZ")) {
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-					FragmentName.GOVERSALOONDETAIL_QZ_FRAGMENT, bundle);
+			
+			intent=new Intent(getActivity(),GoverSaloonDetailQZActivity.class);
 		} else if (goverSaoonItem.getType().equals("CF")) {
-			baseSlideFragment.slideLinstener.replaceFragment(null, -1,
-					FragmentName.GOVERSALOONDETAIL_CF_FRAGMENT, bundle);
+			intent=new Intent(getActivity(),GoverSaloonDetailCFActivity.class);
+		}
+		
+		
+		if(intent!=null){
+			intent.putExtra("goverSaoonItem", goverSaoonItem);
+			MainTabActivity.instance.addView(intent);
 		}
 
 	}

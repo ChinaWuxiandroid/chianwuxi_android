@@ -5,6 +5,7 @@ import java.util.Calendar;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -20,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseSlideActivity;
 import com.wuxi.app.util.Constants;
@@ -133,7 +135,8 @@ public class AdvancedSearchActivity extends BaseSlideActivity implements
 
 	@Override
 	public void onClick(View v) {
-		BaseSlideActivity baseSlideActivity;
+		super.onClick(v);
+		
 
 		switch (v.getId()) {
 		case R.id.search_imageButton_to_normal_search:
@@ -147,13 +150,13 @@ public class AdvancedSearchActivity extends BaseSlideActivity implements
 					.getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(searchNow_Btn.getWindowToken(), 0);
 
-			baseSlideActivity = (BaseSlideActivity) this;
-			Bundle bundle = new Bundle();
-			bundle.putSerializable("searchUtil", searchUtil);
 			
-//			baseSlideActivity.slideLinstener.replaceFragment(null, -1,
-//					Constants.FragmentName.ADVANCED_SEARCH_LIST_FRAGMENT,
-//					bundle);
+			Intent intent=new Intent(AdvancedSearchActivity.this,AdvancedSearchResultListActivity.class);
+			intent.putExtra("searchUtil", searchUtil);
+		
+			MainTabActivity.instance.addView(intent);
+			
+			
 
 			break;
 		// 获取开始日期

@@ -50,8 +50,6 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 	 * 
 	 */
 
-	protected MenuItem menuItem;
-
 	protected List<MenuItem> titleMenuItems;// 头部子菜单
 
 	protected TitleScrollLayout mtitleScrollLayout;
@@ -87,10 +85,6 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 			}
 		};
 	};
-
-	public void setMenuItem(MenuItem menuItem) {
-		this.menuItem = menuItem;
-	}
 
 	@Override
 	protected void findMainContentViews(View view) {
@@ -194,9 +188,11 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 
 	}
 
+	
+	
 	@Override
 	public void onClick(View v) {
-
+		super.onClick(v);
 		switch (v.getId()) {
 		case R.id.btn_next_screen:// 下一屏
 			mtitleScrollLayout.goNextScreen();
