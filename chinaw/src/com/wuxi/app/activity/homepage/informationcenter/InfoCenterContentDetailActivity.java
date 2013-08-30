@@ -5,7 +5,7 @@ import com.wuxi.app.activity.commactivity.ContentDetailActivity;
 /**
  * 
  * @author wanglu 泰得利通
- * 魅力锡城内容详细页
+ * 资讯中心内容详细页
  *
  */
 public class InfoCenterContentDetailActivity extends ContentDetailActivity {

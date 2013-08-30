@@ -1,36 +1,38 @@
 package com.wuxi.app.fragment.homepage.fantasticwuxi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.wuxi.app.MainTabActivity;
+import com.wuxi.app.activity.homepage.fantasticwuxi.WuxiChannelContentDetailActivity;
 import com.wuxi.app.fragment.commonfragment.ContentDetailFragment;
 import com.wuxi.app.fragment.commonfragment.ContentListFragment;
 import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.Content;
 
-
 /**
  * 
- * @author wanglu 泰得利通
- *	内容列表界面
+ * @author wanglu 泰得利通 内容列表界面
  */
 public class ChannelContentListFragment extends ContentListFragment {
 
-	
 	@Override
-	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
-		Content content=(Content) adapterView.getItemAtPosition(position);
-		Bundle bundle=new Bundle();
-		bundle.putSerializable(ContentDetailFragment.CONTENT_KEY, content);
-		if(this.channel!=null){
-			bundle.putSerializable(ContentDetailFragment.CHANNEL_KEY, channel);
+	public void onItemClick(AdapterView<?> adapterView, View arg1,
+			int position, long arg3) {
+		Content content = (Content) adapterView.getItemAtPosition(position);
+
+		Intent intent = new Intent(getActivity(),
+			WuxiChannelContentDetailActivity.class);
+		intent.putExtra(WuxiChannelContentDetailActivity.CONTENT_KEY, content);
+
+		if (this.channel != null) {
+			intent.putExtra(ContentDetailFragment.CHANNEL_KEY, channel);
 		}
-		
-		
-		this.baseSlideFragment.slideLinstener.replaceFragment(null, -1, FragmentName.WUXICHANNELCONTENTDETAILFRAGMENT, bundle);
-		
+
+		MainTabActivity.instance.addView(intent);
+
 	}
 
-	
 }

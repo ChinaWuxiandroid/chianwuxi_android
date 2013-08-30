@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseSlideActivity;
 import com.wuxi.app.engine.DownLoadTask;
@@ -37,15 +38,23 @@ public class SystemSetActivity extends BaseSlideActivity implements
 		OnClickListener {
 
 	protected static final int UPDATE_APK = 0;
+
 	protected static final int NO_UPDATE_APK = 1;
+
 	private static final int DOWLOAD_ERROR = 2;
+
 	private static final String TAG = "SystemSetFragment";
+
 	private RelativeLayout sys_menu_set, sys_clear_cache, sys_score, sys_share,
 			sys_idea, sys_software_update, sys_about_us, sys_site_map,
 			sys_use_help, sys_join_twiiter, sys_log_out;
+
 	private TextView tv_verison, tv_cache, tv_user;
+
 	private UpdateInfo updateInfo;
+
 	private ProgressDialog pd;
+
 	private boolean isLoading = false;
 
 	@SuppressLint("HandlerLeak")
@@ -58,34 +67,32 @@ public class SystemSetActivity extends BaseSlideActivity implements
 				isLoading = false;
 				break;
 			case NO_UPDATE_APK:
-				Toast.makeText(SystemSetActivity.this, "没有要升级的版本", Toast.LENGTH_SHORT).show();
+				Toast.makeText(
+					SystemSetActivity.this, "没有要升级的版本", Toast.LENGTH_SHORT)
+						.show();
 				isLoading = false;
 				break;
 			case DOWLOAD_ERROR:
-				Toast.makeText(SystemSetActivity.this, "下载出错", Toast.LENGTH_SHORT).show();
+				Toast.makeText(
+					SystemSetActivity.this, "下载出错", Toast.LENGTH_SHORT).show();
 				break;
 			}
 
 		};
 	};
-	
-	
 
 	@Override
 	protected void findMainContentViews(View view) {
-	
-		
+
 		sys_menu_set = (RelativeLayout) view.findViewById(R.id.sys_menu_set);
 		tv_cache = (TextView) view.findViewById(R.id.tv_cache);
 		tv_cache.setText(getCacheSize());// 获取缓存文件大小
-		sys_clear_cache = (RelativeLayout) view
-				.findViewById(R.id.sys_clear_cache);
+		sys_clear_cache = (RelativeLayout) view.findViewById(R.id.sys_clear_cache);
 
 		// sys_score = (RelativeLayout) view.findViewById(R.id.sys_score);
 		// sys_share = (RelativeLayout) view.findViewById(R.id.sys_share);
 		// sys_idea = (RelativeLayout) view.findViewById(R.id.sys_idea);
-		sys_software_update = (RelativeLayout) view
-				.findViewById(R.id.sys_software_update);
+		sys_software_update = (RelativeLayout) view.findViewById(R.id.sys_software_update);
 		sys_about_us = (RelativeLayout) view.findViewById(R.id.sys_about_us);
 		sys_site_map = (RelativeLayout) view.findViewById(R.id.sys_site_map);
 		sys_log_out = (RelativeLayout) view.findViewById(R.id.sys_log_out);
@@ -96,7 +103,6 @@ public class SystemSetActivity extends BaseSlideActivity implements
 		tv_verison = (TextView) view.findViewById(R.id.tv_verison);
 		tv_user = (TextView) view.findViewById(R.id.tv_user);
 
-	
 		// if(System.get)
 		sys_menu_set.setOnClickListener(this);
 
@@ -124,8 +130,6 @@ public class SystemSetActivity extends BaseSlideActivity implements
 		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 	}
 
-	
-
 	@Override
 	protected int getLayoutId() {
 		return R.layout.index_sytem_set;
@@ -134,27 +138,38 @@ public class SystemSetActivity extends BaseSlideActivity implements
 	@Override
 	public void onClick(View v) {
 
+		Intent intent = null;
 		switch (v.getId()) {
 		case R.id.sys_menu_set:// 常用栏设置
 
-			/*super.slideLinstener.replaceFragment(null, -1,
-					Constants.FragmentName.MENUITEMSET_FRAGMENT, null);*/
+			/*
+			 * super.slideLinstener.replaceFragment(null, -1,
+			 * Constants.FragmentName.MENUITEMSET_FRAGMENT, null);
+			 */
+			intent = new Intent(SystemSetActivity.this,
+				MenuItemSetActivity.class);
 			break;
 
 		case R.id.sys_software_update:// 软件升级
 			checkUpdate();
 			break;
 		case R.id.sys_about_us:// 关于我们
-			/*slideLinstener.replaceFragment(null, -1,
-					Constants.FragmentName.ABOUTUSFRAGMENT, null);*/
+			/*
+			 * slideLinstener.replaceFragment(null, -1,
+			 * Constants.FragmentName.ABOUTUSFRAGMENT, null);
+			 */
+			intent = new Intent(SystemSetActivity.this, AboutUsActivity.class);
 			break;
 		case R.id.sys_clear_cache:// 清楚缓存
 			clearCache();
 			break;
 		case R.id.sys_site_map:// 网站地图
-			/*slideLinstener.replaceFragment(null, -1,
-					Constants.FragmentName.SITEMAP_FRAGMENT, null);*/
+			/*
+			 * slideLinstener.replaceFragment(null, -1,
+			 * Constants.FragmentName.SITEMAP_FRAGMENT, null);
+			 */
 
+			intent = new Intent(SystemSetActivity.this, SiteMapActivity.class);
 			break;
 		case R.id.sys_log_out:// 注销
 			if (SystemUtil.getLoginUser(this).equals("")) {
@@ -168,11 +183,13 @@ public class SystemSetActivity extends BaseSlideActivity implements
 			break;
 
 		}
+
+		if (intent != null) {
+			MainTabActivity.instance.addView(intent);
+		}
 	}
 
-	
-	
-	private void  initLoginUser(){
+	private void initLoginUser() {
 		String loginUser = SystemUtil.getLoginUser(this);
 		if (!loginUser.equals("")) {
 			tv_user.setText(loginUser);
@@ -188,7 +205,7 @@ public class SystemSetActivity extends BaseSlideActivity implements
 	private void clearCache() {
 
 		if (Environment.getExternalStorageState().equals(
-				Environment.MEDIA_MOUNTED)) {
+			Environment.MEDIA_MOUNTED)) {
 
 			AlertDialog.Builder builder = new Builder(this);
 			builder.setIcon(R.drawable.logo);
@@ -196,40 +213,41 @@ public class SystemSetActivity extends BaseSlideActivity implements
 			builder.setMessage("确认要清除缓存吗？");
 			builder.setCancelable(false);
 
-			builder.setPositiveButton("确定",
-					new android.content.DialogInterface.OnClickListener() {
+			builder.setPositiveButton(
+				"确定", new android.content.DialogInterface.OnClickListener() {
 
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
 
-							File file = new File(
-									Constants.APPFiles.CACHE_FILE_PATH);
-							File cacheFiles[] = file.listFiles();
-							for (File cacheFile : cacheFiles) {
-								cacheFile.delete();
-							}
-
-							Toast.makeText(SystemSetActivity.this, "清除完成", Toast.LENGTH_SHORT)
-									.show();
-							tv_cache.setText(getCacheSize());// 获取缓存文件大小
-
-						}
-					});
-
-			builder.setNegativeButton("取消",
-					new android.content.DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-
+						File file = new File(Constants.APPFiles.CACHE_FILE_PATH);
+						File cacheFiles[] = file.listFiles();
+						for (File cacheFile : cacheFiles) {
+							cacheFile.delete();
 						}
 
-					});
+						Toast.makeText(
+							SystemSetActivity.this, "清除完成", Toast.LENGTH_SHORT)
+								.show();
+						tv_cache.setText(getCacheSize());// 获取缓存文件大小
+
+					}
+				});
+
+			builder.setNegativeButton(
+				"取消", new android.content.DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+					}
+
+				});
 
 			builder.create().show();
 
 		} else {
-			Toast.makeText(SystemSetActivity.this, "SDK不存在", Toast.LENGTH_SHORT).show();
+			Toast.makeText(SystemSetActivity.this, "SDK不存在", Toast.LENGTH_SHORT)
+					.show();
 		}
 
 	}
@@ -242,7 +260,7 @@ public class SystemSetActivity extends BaseSlideActivity implements
 	 */
 	private String getCacheSize() {
 		if (Environment.getExternalStorageState().equals(
-				Environment.MEDIA_MOUNTED)) {
+			Environment.MEDIA_MOUNTED)) {
 			File file = new File(Constants.APPFiles.CACHE_FILE_PATH);
 			File cacheFiles[] = file.listFiles();
 
@@ -293,8 +311,8 @@ public class SystemSetActivity extends BaseSlideActivity implements
 	private void install(File file) {
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_VIEW);
-		intent.setDataAndType(Uri.fromFile(file),
-				"application/vnd.android.package-archive");
+		intent.setDataAndType(
+			Uri.fromFile(file), "application/vnd.android.package-archive");
 		this.finish();
 		startActivity(intent);
 
@@ -364,45 +382,46 @@ public class SystemSetActivity extends BaseSlideActivity implements
 				+ updateInfo.getDescription());
 		builder.setCancelable(false);
 
-		builder.setPositiveButton("确定",
-				new android.content.DialogInterface.OnClickListener() {
+		builder.setPositiveButton(
+			"确定", new android.content.DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
 
-						if (Environment.getExternalStorageState().equals(
-								Environment.MEDIA_MOUNTED)) {
+					if (Environment.getExternalStorageState().equals(
+						Environment.MEDIA_MOUNTED)) {
 
-							File file = new File(
-									Constants.APPFiles.DOWNLOAF_FILE_PATH);
-							if (!file.exists()) {
-								file.mkdirs();
-							}
-							DownLoadThreadTask dowTask = new DownLoadThreadTask(
-									updateInfo.getUrl(),
-									Constants.APPFiles.DOWNLOAF_FILE_PATH
-											+ "chinawuxi.apk");
-
-							new Thread(dowTask).start();
-							pd.show();
-
-						} else {
-							Toast.makeText(SystemSetActivity.this, "SDK不存在", 1).show();
-
+						File file = new File(
+							Constants.APPFiles.DOWNLOAF_FILE_PATH);
+						if (!file.exists()) {
+							file.mkdirs();
 						}
+						DownLoadThreadTask dowTask = new DownLoadThreadTask(
+							updateInfo.getUrl(),
+							Constants.APPFiles.DOWNLOAF_FILE_PATH
+									+ "chinawuxi.apk");
+
+						new Thread(dowTask).start();
+						pd.show();
+
+					} else {
+						Toast.makeText(SystemSetActivity.this, "SDK不存在", 1)
+								.show();
 
 					}
-				});
 
-		builder.setNegativeButton("取消",
-				new android.content.DialogInterface.OnClickListener() {
+				}
+			});
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
+		builder.setNegativeButton(
+			"取消", new android.content.DialogInterface.OnClickListener() {
 
-					}
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
 
-				});
+				}
+
+			});
 
 		builder.create().show();
 
@@ -411,6 +430,7 @@ public class SystemSetActivity extends BaseSlideActivity implements
 	private class DownLoadThreadTask implements Runnable {
 
 		private String path;
+
 		private String filePath;
 
 		public DownLoadThreadTask(String path, String filePath) {

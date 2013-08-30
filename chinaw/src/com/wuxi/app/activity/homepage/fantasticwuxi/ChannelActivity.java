@@ -30,7 +30,7 @@ import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NetException;
 
 /**
- * @author wanglu 泰得利通 魅力锡城Activity  频道最外层activity
+ * @author wanglu 泰得利通 魅力锡城Activity 频道最外层activity
  * @version $1.0, 2013-8-29 2013-8-29 GMT+08:00
  * 
  */
@@ -171,13 +171,14 @@ public class ChannelActivity extends BaseSlideActivity implements
 
 	@Override
 	public void onClick(View v) {
+
+		super.onClick(v);
 		switch (v.getId()) {
 		case R.id.btn_next_screen:// 下一屏
 			mtitleScrollLayout.goNextScreen();
 			break;
 
 		}
-
 	}
 
 	private void bindFragment(BaseFragment fragment) {

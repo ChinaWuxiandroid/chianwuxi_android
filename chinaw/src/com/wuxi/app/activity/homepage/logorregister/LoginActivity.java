@@ -5,6 +5,7 @@ import org.json.JSONException;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Handler;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseSlideActivity;
 import com.wuxi.app.engine.UserService;
@@ -32,13 +34,21 @@ import com.wuxi.exception.NetException;
 public class LoginActivity extends BaseSlideActivity implements OnClickListener {
 
 	private static final int LOGIN_SUCCESS = 0;// 登录成功
+
 	protected static final int LOGIN_FAIL = 1;// 登录失败
+
 	private Button login_btn_login;
+
 	private Button login_btn_regist;
+
 	private EditText login_et_username;// 用户名
+
 	private EditText login_et_pwd;// 密码
+
 	private User user;
+
 	private SharedPreferences sp;
+
 	private ProgressDialog pd;
 
 	@SuppressLint("HandlerLeak")
@@ -51,7 +61,8 @@ public class LoginActivity extends BaseSlideActivity implements OnClickListener 
 				break;
 			case LOGIN_FAIL:
 				String tip = msg.obj.toString();
-				Toast.makeText(LoginActivity.this, tip, Toast.LENGTH_SHORT).show();
+				Toast.makeText(LoginActivity.this, tip, Toast.LENGTH_SHORT)
+						.show();
 				pd.dismiss();
 				break;
 			}
@@ -59,44 +70,36 @@ public class LoginActivity extends BaseSlideActivity implements OnClickListener 
 		};
 	};
 
-	
-	
-	
 	@Override
 	protected void findMainContentViews(View view) {
-		
+
 		login_btn_login = (Button) view.findViewById(R.id.login_btn_login);
 		login_btn_regist = (Button) view.findViewById(R.id.login_btn_regist);
 		login_et_pwd = (EditText) view.findViewById(R.id.login_et_pwd);// 密码
-		login_et_username = (EditText) view
-				.findViewById(R.id.login_et_username);// 用户名
+		login_et_username = (EditText) view.findViewById(R.id.login_et_username);// 用户名
 
 		login_btn_login.setOnClickListener(this);
 		login_btn_regist.setOnClickListener(this);
 		pd = new ProgressDialog(this);
 		pd.setMessage("正在登录...");
-		
-	}
 
-	
+	}
 
 	private void loginHandler() {
 		pd.dismiss();
 		CacheUtil.put(Constants.CacheKey.LOGIN_USER, user);// 将登录的用户存入缓存中
 
-		sp = this
-				.getSharedPreferences(
-						Constants.SharepreferenceKey.SHARE_CONFIG,
-						Context.MODE_PRIVATE);
+		sp = this.getSharedPreferences(
+			Constants.SharepreferenceKey.SHARE_CONFIG, Context.MODE_PRIVATE);
 
 		Editor editor = sp.edit();
 
-		editor.putString(Constants.SharepreferenceKey.ACCESSTOKEN,
-				user.getAccessToken());
-		editor.putString(Constants.SharepreferenceKey.REFRESHTOKEN,
-				user.getRefreshToken());
-		editor.putString(Constants.SharepreferenceKey.USERNAME,
-				user.getUserName());
+		editor.putString(
+			Constants.SharepreferenceKey.ACCESSTOKEN, user.getAccessToken());
+		editor.putString(
+			Constants.SharepreferenceKey.REFRESHTOKEN, user.getRefreshToken());
+		editor.putString(
+			Constants.SharepreferenceKey.USERNAME, user.getUserName());
 		editor.commit();// tijiao
 
 		Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
@@ -106,15 +109,17 @@ public class LoginActivity extends BaseSlideActivity implements OnClickListener 
 	@Override
 	public void onClick(View v) {
 
+		super.onClick(v);
 		switch (v.getId()) {
 		case R.id.login_btn_login:
 			if (validate()) {
 				doLogin();
 			}
 			break;
-		case R.id.login_btn_regist://注册处理
-		/*	slideLinstener.replaceFragment(null, -1,
-					FragmentName.REGIST_FRAGMENT, null);*/
+		case R.id.login_btn_regist:// 注册处理
+			Intent intent = new Intent(LoginActivity.this,
+				RegisterActivity.class);
+			MainTabActivity.instance.addView(intent);
 
 			break;
 		}
@@ -137,9 +142,10 @@ public class LoginActivity extends BaseSlideActivity implements OnClickListener 
 
 					String userName = login_et_username.getText().toString();
 					String password = login_et_pwd.getText().toString();
-					UserService userService = new UserService(LoginActivity.this);
-					user = userService.login(userName,
-							MD5Encoder.getLoginPWDMD5(password, "utf-8"));
+					UserService userService = new UserService(
+						LoginActivity.this);
+					user = userService.login(
+						userName, MD5Encoder.getLoginPWDMD5(password, "utf-8"));
 
 					if (user != null) {
 						msg.what = LOGIN_SUCCESS;

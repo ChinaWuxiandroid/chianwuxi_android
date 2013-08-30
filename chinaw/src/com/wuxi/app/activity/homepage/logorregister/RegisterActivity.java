@@ -98,7 +98,7 @@ public class RegisterActivity extends BaseSlideActivity implements
 
 	@Override
 	public void onClick(View v) {
-
+		super.onClick(v);
 		switch (v.getId()) {
 		case R.id.regist_btn_submit:// 提交
 			if (validate()) {

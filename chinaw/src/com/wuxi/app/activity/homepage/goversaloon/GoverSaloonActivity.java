@@ -56,7 +56,7 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 
 	private List<MenuItem> menuItems;
 
-	private MenuItem parentMenuItem; // 父菜单
+	
 
 	private ContentNavigatorAdapter adapter;
 
@@ -90,8 +90,8 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 	@SuppressWarnings("unchecked")
 	private void loadMenuItemData() {
 
-		if (null != CacheUtil.get(parentMenuItem.getId())) {
-			menuItems = (List<MenuItem>) CacheUtil.get(parentMenuItem.getId());
+		if (null != CacheUtil.get(menuItem.getId())) {
+			menuItems = (List<MenuItem>) CacheUtil.get(menuItem.getId());
 			showLeftMenuItemData();
 			return;
 		}
@@ -105,9 +105,9 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 					GoverSaloonActivity.this);
 				Message msg = handler.obtainMessage();
 				try {
-					menuItems = menuService.getSubMenuItems(parentMenuItem.getId());
+					menuItems = menuService.getSubMenuItems(menuItem.getId());
 					if (menuItems != null) {
-						CacheUtil.put(parentMenuItem.getId(), menuItems);// 放入缓存
+						CacheUtil.put(menuItem.getId(), menuItems);// 放入缓存
 						msg.what = LEFT_MENUITEM_DATA__LOAD_SUCCESS;
 						handler.sendMessage(msg);
 
@@ -144,14 +144,14 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 	private void showLeftMenuItemData() {
 		Bundle bundle = getIntent().getExtras();
 		int showIndex = 1;
-		if (bundle != null) {
+		if (bundle != null&&bundle.containsKey(SHOWLAYOUTINDEX)) {
 			showIndex = bundle.getInt(SHOWLAYOUTINDEX);
 		}
 		adapter = new ContentNavigatorAdapter(getLayoutInflater(), null,
 			menuItems);
 		adapter.setSelectedPosition(showIndex);
 		mListView.setAdapter(adapter);// 设置适配器
-		mListView.setOnItemClickListener(this);
+		mListView.setOnItemClickListener(new GoverOnItemClickListenr());
 
 		if (menuItems.size() > 0) {
 
@@ -166,8 +166,8 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 	@SuppressWarnings("unchecked")
 	private void loadChannelData() {
 
-		if (null != CacheUtil.get(parentMenuItem.getChannelId())) {// 从缓存中查找
-			channels = (List<Channel>) CacheUtil.get(parentMenuItem.getChannelId());
+		if (null != CacheUtil.get(menuItem.getChannelId())) {// 从缓存中查找
+			channels = (List<Channel>) CacheUtil.get(menuItem.getChannelId());
 			showLeftChannelData();
 			return;
 
@@ -182,11 +182,11 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 						GoverSaloonActivity.this);
 
 					try {
-						channels = channelService.getSubChannels(parentMenuItem.getChannelId());
+						channels = channelService.getSubChannels(menuItem.getChannelId());
 						if (channels != null) {
 							handler.sendEmptyMessage(LEFT_CHANNEL_DATA__LOAD_SUCCESS);
 							CacheUtil.put(
-								parentMenuItem.getChannelId(), channels);// 放入缓存
+								menuItem.getChannelId(), channels);// 放入缓存
 						}
 
 					} catch (NetException e) {
@@ -214,28 +214,37 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 			null);
 		adapter.setSelectedPosition(0);
 		mListView.setAdapter(adapter);// 设置适配器
-		mListView.setOnItemClickListener(this);
+		mListView.setOnItemClickListener(new GoverOnItemClickListenr());
 
 		if (channels.size() > 0) {
 			showContentFragment(showChannelContentFragment(channels.get(0)));// 显示第一个Channel数据
 		}
 	}
+	
+	private  class GoverOnItemClickListenr implements OnItemClickListener{
 
-	@Override
-	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+		/* (non-Javadoc)
+		 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+		 */
+		@Override
+		public void onItemClick(AdapterView<?> adapterView, View view, int position,
+				long arg3) {
+			Object object = adapterView.getItemAtPosition(position);
 
-		Object object = parent.getItemAtPosition(position);
-
-		if (object instanceof Channel) {// 如果是频道
-			adapter.setSelectedPosition(position); // 刷新左侧导航listView背景
-			adapter.notifyDataSetInvalidated();
-			showContentFragment(showChannelContentFragment((Channel) object));
-		} else if (object instanceof MenuItem) {
-			adapter.setSelectedPosition(position); // 刷新左侧导航listView背景
-			adapter.notifyDataSetInvalidated();
-			showContentFragment(showMenItemContentFragment((MenuItem) object));
+			if (object instanceof Channel) {// 如果是频道
+				adapter.setSelectedPosition(position); // 刷新左侧导航listView背景
+				adapter.notifyDataSetInvalidated();
+				showContentFragment(showChannelContentFragment((Channel) object));
+			} else if (object instanceof MenuItem) {
+				adapter.setSelectedPosition(position); // 刷新左侧导航listView背景
+				adapter.notifyDataSetInvalidated();
+				showContentFragment(showMenItemContentFragment((MenuItem) object));
+			}
+			
 		}
+		
 	}
+
 
 	/**
 	 * 
@@ -277,7 +286,7 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 	}
 
 	public void setParentMenuItem(MenuItem parentMenuItem) {
-		this.parentMenuItem = parentMenuItem;
+		this.menuItem = parentMenuItem;
 	}
 
 	@Override
@@ -287,16 +296,16 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 
 	@Override
 	protected String getTitleText() {
-		return parentMenuItem.getName();
+		return menuItem.getName();
 	}
 
 	@Override
 	protected void findMainContentViews(View view) {
 
 		mListView = (ListView) view.findViewById(R.id.lv_left_navigator);
-		if (parentMenuItem.getType() == MenuItem.CHANNEL_MENU) {
+		if (menuItem.getType() == MenuItem.CHANNEL_MENU) {
 			loadChannelData();
-		} else if (parentMenuItem.getType() == MenuItem.CUSTOM_MENU) {// 普通菜单
+		} else if (menuItem.getType() == MenuItem.CUSTOM_MENU) {// 普通菜单
 			loadMenuItemData();// 加载子菜单
 
 		}

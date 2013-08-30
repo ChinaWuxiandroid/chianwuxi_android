@@ -48,43 +48,70 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 		OnCheckedChangeListener, OnClickListener {
 
 	private MenuItem menuItem;
+
 	private View view;
+
 	private RadioGroup goversaloon_title_search;
+
 	private RadioButton search_bything;
+
 	private RadioButton search_bydeparent;
+
 	private RadioButton search_byrange;
+
 	private Context context;
 
 	private static final int CONTENT_MAIN_ID = R.id.gover_content_main;
+
 	private static final int SEARCH_BYTHING = 0, SEARCH_BYDEPARENT = 1,
 			SEARCH_BYRANGE = 2, SEARCH_BYSTATE = 3, COUNTPOP_WINDOW = 4;
+
 	protected static final int LOAD_DEPT_SUCCESS = 1;
+
 	protected static final int LOAD_DEPT_FAIL = 0;
+
 	protected static final int GOVER_ITEMCOUNT_LOAD_SUCCESS = 2;
+
 	protected static final int GOVER_ITEMCOUNT_LOAD_ERROR = 3;
 
 	private Spinner goversaloon_sp_szxk;
+
 	private Button goversaloon_btn_statesearch;
+
 	private Button goversaloon_btn_count;
+
 	private Spinner sp_item_type;
+
 	private Spinner sp_dept;// 部门
+
 	private Spinner sp_dept_range;// 范围
+
 	private Spinner sp_range;// 范围
+
 	private String[] itemType = new String[] { "事项名称", "事项编码" };
+
 	private String[] rangType = new String[] { "全部事项", "当前栏目", "网上审批" };
+
 	private String[] xzType = new String[] { "行政许可", "行政处罚", "行政征收", "行政强制",
 			"其它" };
+
 	private String[] xzState = new String[] { "行政许可状态查询", "行政处罚状态查询",
 			"行政征收状态查询", "行政强制状态查询", "其它状态查询" };
+
 	private Spinner sp_xzstate;
 
 	private LinearLayout ll_searchbything, ll_searchby_dept, ll_searchby_range,
 			ll_itemcount, ll_state;
+
 	private Button btn_searchbything, btn_search_bydept, btn_searchbyrange,
 			btn_search_bystate;
+
 	private EditText et_searchbying_content, et_state_itemcode;
+
 	private List<Dept> depts;
+
 	private GoverItemCount goverItemCount;
+
 	private TextView tv_item_count, tv_quick_info, tv_item_count_detail;
 
 	@SuppressLint("HandlerLeak")
@@ -127,74 +154,64 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 
 	/**
 	 * 
-	 *wanglu 泰得利通
-	 *显示办件统计
+	 * wanglu 泰得利通 显示办件统计
 	 */
 	private void showGoverItemCount() {
 
-		
-		
-		tv_item_count.setText("累计接件:"+goverItemCount.getLjjj()+"\n累计办件:"+goverItemCount.getLjbj());
-		tv_quick_info.setText("昨日受理:"+goverItemCount.getZrsl()+"\n昨日办结:"+goverItemCount.getZrbj());
-		tv_item_count_detail.setText("已受理:"+goverItemCount.getYsl()+" 已办结:"+goverItemCount.getYbj()+"\n"
-				+"上月受理:"+goverItemCount.getSysl()+" 上月办结:"+goverItemCount.getSybj()+"\n"+
-				"本月受理:"+goverItemCount.getBysl()+" 本月办结"+goverItemCount.getBybj());
+		tv_item_count.setText("累计接件:" + goverItemCount.getLjjj() + "\n累计办件:"
+				+ goverItemCount.getLjbj());
+		tv_quick_info.setText("昨日受理:" + goverItemCount.getZrsl() + "\n昨日办结:"
+				+ goverItemCount.getZrbj());
+		tv_item_count_detail.setText("已受理:" + goverItemCount.getYsl() + " 已办结:"
+				+ goverItemCount.getYbj() + "\n" + "上月受理:"
+				+ goverItemCount.getSysl() + " 上月办结:"
+				+ goverItemCount.getSybj() + "\n" + "本月受理:"
+				+ goverItemCount.getBysl() + " 本月办结" + goverItemCount.getBybj());
 	}
 
 	private void initUI() {
 
-		goversaloon_title_search = (RadioGroup) view
-				.findViewById(R.id.goversaloon_title_search);
+		goversaloon_title_search = (RadioGroup) view.findViewById(R.id.goversaloon_title_search);
 		search_bything = (RadioButton) view.findViewById(R.id.search_bything);
-		search_bydeparent = (RadioButton) view
-				.findViewById(R.id.search_bydeparent);
+		search_bydeparent = (RadioButton) view.findViewById(R.id.search_bydeparent);
 		search_byrange = (RadioButton) view.findViewById(R.id.search_byrange);
-		goversaloon_sp_szxk = (Spinner) view
-				.findViewById(R.id.goversaloon_sp_szxk);
+		goversaloon_sp_szxk = (Spinner) view.findViewById(R.id.goversaloon_sp_szxk);
 		goversaloon_sp_szxk.setAdapter(new ArrayAdapter<String>(context,
-				R.layout.my_simple_spinner_item_layout, xzType));
+			R.layout.my_simple_spinner_item_layout, xzType));
 
-		goversaloon_btn_statesearch = (Button) view
-				.findViewById(R.id.goversaloon_btn_statesearch);
-		goversaloon_btn_count = (Button) view
-				.findViewById(R.id.goversaloon_btn_count);
-		ll_searchbything = (LinearLayout) view
-				.findViewById(R.id.ll_searchbything);
-		ll_searchby_dept = (LinearLayout) view
-				.findViewById(R.id.ll_searchby_dept);
-		ll_searchby_range = (LinearLayout) view
-				.findViewById(R.id.ll_searchby_range);
+		goversaloon_btn_statesearch = (Button) view.findViewById(R.id.goversaloon_btn_statesearch);
+		goversaloon_btn_count = (Button) view.findViewById(R.id.goversaloon_btn_count);
+		ll_searchbything = (LinearLayout) view.findViewById(R.id.ll_searchbything);
+		ll_searchby_dept = (LinearLayout) view.findViewById(R.id.ll_searchby_dept);
+		ll_searchby_range = (LinearLayout) view.findViewById(R.id.ll_searchby_range);
 		ll_itemcount = (LinearLayout) view.findViewById(R.id.ll_itemcount);
 		ll_state = (LinearLayout) view.findViewById(R.id.ll_state);
-		
+
 		sp_item_type = (Spinner) view.findViewById(R.id.sp_item_type);// 办事事项搜索下拉框
 
 		sp_item_type.setAdapter(new ArrayAdapter<String>(context,
-				R.layout.my_simple_spinner_item_layout, itemType));
-		
+			R.layout.my_simple_spinner_item_layout, itemType));
+
 		sp_dept = (Spinner) view.findViewById(R.id.sp_dept);
 		loadDeptData();
-	
+
 		sp_dept_range = (Spinner) view.findViewById(R.id.sp_dept_range);
 		sp_dept_range.setAdapter(new ArrayAdapter<String>(context,
-				R.layout.my_simple_spinner_item_layout, rangType));
+			R.layout.my_simple_spinner_item_layout, rangType));
 
 		sp_range = (Spinner) view.findViewById(R.id.sp_range);
 		sp_range.setAdapter(new ArrayAdapter<String>(context,
-				R.layout.my_simple_spinner_item_layout, rangType));
+			R.layout.my_simple_spinner_item_layout, rangType));
 
 		sp_xzstate = (Spinner) view.findViewById(R.id.sp_xzstate);
 		sp_xzstate.setAdapter(new ArrayAdapter<String>(context,
-				R.layout.my_simple_spinner_item_layout, xzState));// 行政状态
+			R.layout.my_simple_spinner_item_layout, xzState));// 行政状态
 		btn_searchbything = (Button) view.findViewById(R.id.btn_searchbything);
-		et_searchbying_content = (EditText) view
-				.findViewById(R.id.et_searchbying_content);
-		et_state_itemcode = (EditText) view
-				.findViewById(R.id.et_state_itemcode);
+		et_searchbying_content = (EditText) view.findViewById(R.id.et_searchbying_content);
+		et_state_itemcode = (EditText) view.findViewById(R.id.et_state_itemcode);
 		btn_search_bydept = (Button) view.findViewById(R.id.btn_search_bydept);
 		btn_searchbyrange = (Button) view.findViewById(R.id.btn_searchbyrange);
-		btn_search_bystate = (Button) view
-				.findViewById(R.id.btn_search_bystate);
+		btn_search_bystate = (Button) view.findViewById(R.id.btn_search_bystate);
 		goversaloon_title_search.setOnCheckedChangeListener(this);
 		goversaloon_btn_statesearch.setOnClickListener(this);
 		search_bything.setOnClickListener(this);
@@ -205,40 +222,42 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 		btn_search_bydept.setOnClickListener(this);
 		btn_searchbyrange.setOnClickListener(this);
 		btn_search_bystate.setOnClickListener(this);
-		
-		
-		tv_item_count=(TextView) view.findViewById(R.id.tv_item_count);
-		tv_quick_info=(TextView) view.findViewById(R.id.tv_quick_info);
-		tv_item_count_detail=(TextView) view.findViewById(R.id.tv_item_count_detail);
+
+		tv_item_count = (TextView) view.findViewById(R.id.tv_item_count);
+		tv_quick_info = (TextView) view.findViewById(R.id.tv_quick_info);
+		tv_item_count_detail = (TextView) view.findViewById(R.id.tv_item_count_detail);
 
 		if (menuItem.getType() == MenuItem.CUSTOM_MENU) {
 
 			if (menuItem.getName().equals("我的政务大厅")) {
-				onTransaction(new MyGoverSaloonFragment());
+				onTransaction(new MyGoverSaloonFragment(), null);
 			} else if (menuItem.getName().equals("效能投诉")) {
-				onTransaction(new EfficacyComplaintFragment());
+				onTransaction(new EfficacyComplaintFragment(), null);
 			} else if (menuItem.getName().equals("行政事项")) {
-				this.getArguments().putSerializable("menuItem", menuItem);
-				onTransaction(new AdministrativeItemFragment());
+				Bundle bundle = new Bundle();
+
+				bundle.putSerializable("menuItem", menuItem);
+				onTransaction(new AdministrativeItemFragment(), bundle);
 			} else if (menuItem.getName().equals("办事指南")) {
-				onTransaction(new BusinessGuideFragment());
+				onTransaction(new BusinessGuideFragment(), null);
 			}
 
 		} else if (menuItem.getType() == MenuItem.CHANNEL_MENU) {
 			GoverMangeFragment goverMangeFragment = new GoverMangeFragment();
 
-			this.getArguments().putSerializable("menuItem", menuItem);
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("menuItem", menuItem);
 
-			onTransaction(goverMangeFragment);
+			onTransaction(goverMangeFragment, bundle);
 		} else if (menuItem.getType() == MenuItem.APP_MENU) {
 			if (menuItem.getAppUI().equals("OnlineApproval")) {
-				onTransaction(new OnlineApprovalFragment());
+				onTransaction(new OnlineApprovalFragment(), null);
 			} else if (menuItem.getAppUI().equals("TableDownloads")) {
-				onTransaction(new TableDownloadsFragment());
+				onTransaction(new TableDownloadsFragment(), null);
 			}
 		}
 
-		loadGoverItemCount();//加载办件统计信息
+		loadGoverItemCount();// 加载办件统计信息
 	}
 
 	/**
@@ -294,7 +313,7 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 				Message msg = handler.obtainMessage();
 
 				GoverItemCountService goverItemCountService = new GoverItemCountService(
-						context);
+					context);
 				try {
 					goverItemCount = goverItemCountService.getGoverItemCount();
 					if (goverItemCount != null) {
@@ -336,9 +355,11 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 		this.menuItem = menuItem;
 	}
 
-	private void onTransaction(BaseFragment fragment) {
-		fragment.setBaseSlideFragment(this.baseSlideFragment);
-		fragment.setArguments(this.getArguments());// 传递主框架对象
+	private void onTransaction(BaseFragment fragment, Bundle bundel) {
+
+		if (bundel != null) {
+			fragment.setArguments(bundel);
+		}
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		fragment.setManagers(managers);// 传递managers
@@ -464,7 +485,7 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 	 * @param type
 	 */
 	private void searchHandler(int type) {
-		Bundle bundle = this.getArguments();
+		Bundle bundle = new Bundle();
 		HashMap<String, String> params = new HashMap<String, String>();
 		switch (type) {
 		case SEARCH_BYTHING:
@@ -512,9 +533,8 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 
 		bundle.putSerializable(SearchResultFragment.PARAMS_KEY, params);
 		SearchResultFragment searchResultFragment = new SearchResultFragment();
-		searchResultFragment.setBaseSlideFragment(this.baseSlideFragment);
-		searchResultFragment.setArguments(bundle);
-		onTransaction(searchResultFragment);
+
+		onTransaction(searchResultFragment, bundle);
 
 	}
 

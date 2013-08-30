@@ -68,7 +68,8 @@ public class SearchResultDetailActivity extends BaseItemContentActivity {
 	 */
 	@Override
 	protected void findMainContentViews(View view) {
-		super.download_btn.setVisibility(ImageView.INVISIBLE);// 隐藏下载图标
+		super.findMainContentViews(view);
+		download_btn.setVisibility(ImageView.INVISIBLE);// 隐藏下载图标
 
 		searchDetail_pb = (ProgressBar) view
 				.findViewById(R.id.search_detail_pb);

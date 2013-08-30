@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,6 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseSlideActivity;
 import com.wuxi.app.adapter.SearchFragmentAdapter;
@@ -106,7 +108,7 @@ public class AdvancedSearchResultListActivity extends BaseSlideActivity
 				.findViewById(R.id.pb_loadmoore);
 		resultListView.addFooterView(loadMoreView);// 为listView添加底部视图
 		resultListView.setOnScrollListener(this);// 增加滑动监听
-		resultListView.setOnItemClickListener(this);
+		resultListView.setOnItemClickListener(new AdvanceListOnItemClickListener());
 		loadMoreButton.setOnClickListener(this);
 
 		searchResultSummary_layout = (LinearLayout) view
@@ -246,18 +248,27 @@ public class AdvancedSearchResultListActivity extends BaseSlideActivity
 	protected String getTitleText() {
 		return "全站搜索";
 	}
+	
+	private class AdvanceListOnItemClickListener implements OnItemClickListener{
 
-	@Override
-	public void onItemClick(AdapterView<?> adapterView, View arg1,
-			int position, long arg3) {
-		SearchResult result = (SearchResult) adapterView
-				.getItemAtPosition(position);
-		// BaseSlideFragment baseSlideFragment=(BaseSlideFragment)this;
-		Bundle bundle = new Bundle();
-		bundle.putSerializable("result", result);
-		// baseSlideFragment.slideLinstener.replaceFragment(null, position,
-		// Constants.FragmentName.SEARCH_DETAIL_FRAGMENT, bundle);
+		/* (non-Javadoc)
+		 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+		 */
+		@Override
+		public void onItemClick(AdapterView<?> adapterView, View arg1, int position,
+				long arg3) {
+			SearchResult result = (SearchResult) adapterView
+					.getItemAtPosition(position);
+		
+		
+			Intent intent=new Intent(AdvancedSearchResultListActivity.this,SearchResultDetailActivity.class);
+			intent.putExtra("result", result);
+			MainTabActivity.instance.addView(intent);
+			
+		}
+		
 	}
+
 
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,

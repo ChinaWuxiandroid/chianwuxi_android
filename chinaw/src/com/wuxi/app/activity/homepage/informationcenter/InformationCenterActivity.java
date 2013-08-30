@@ -80,4 +80,6 @@ public class InformationCenterActivity extends MenuItemMainActivity {
 		return menuItem.getName();
 	}
 
+	
+	
 }
