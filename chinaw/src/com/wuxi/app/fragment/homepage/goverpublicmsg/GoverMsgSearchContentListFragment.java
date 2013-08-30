@@ -326,7 +326,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 		fragment.setBaseSlideFragment(this.baseSlideFragment);
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(CHANNELLIST_CONTENT_ID, fragment);
-		ft.commit();	
+		ft.commitAllowingStateLoss();	
 	}
 
 	public class DeptAdapter extends BaseAdapter implements OnItemSelectedListener{

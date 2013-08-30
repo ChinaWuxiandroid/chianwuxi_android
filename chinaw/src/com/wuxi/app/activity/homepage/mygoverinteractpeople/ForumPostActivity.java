@@ -64,6 +64,7 @@ public class ForumPostActivity extends BaseItemContentActivity {
 	
 	@Override
 	protected void findMainContentViews(View view) {
+		super.findMainContentViews(view);
 		initLayout(view);
 	}
 
@@ -72,7 +73,7 @@ public class ForumPostActivity extends BaseItemContentActivity {
 	 */
 	private void initLayout(View view) {
 
-//		loginDialog = new LoginDialog(context, baseSlideFragment);
+		loginDialog = new LoginDialog(this, null);
 
 		postThemeEdit = (EditText) view.findViewById(R.id.forum_post_name_edit);
 		postContentEdit = (EditText) view
@@ -86,36 +87,36 @@ public class ForumPostActivity extends BaseItemContentActivity {
 			@Override
 			public void onClick(View v) {
 
-//				if (!loginDialog.checkLogin()) {
-//					// loginDialog.showDialog();
-//					Toast.makeText(context, "您未登录，不能发帖，请先登录，谢谢！",
+				if (!loginDialog.checkLogin()) {
+					 loginDialog.showDialog();
+//					Toast.makeText(ForumPostActivity.this, "您未登录，不能发帖，请先登录，谢谢！",
 //							Toast.LENGTH_SHORT).show();
-//				} else {
-//					String theme = postThemeEdit.getText().toString();
-//					String content = postContentEdit.getText().toString();
-//					try {
-//						postService = new ForumPostService(context);
-//
-//						if (theme.equals("")) {
-//							Toast.makeText(context, "提交失败，留言主题不能为空！",
-//									Toast.LENGTH_SHORT).show();
-//						} else if (content.equals("")) {
-//							Toast.makeText(context, "提交失败，留言内容不能为空！",
-//									Toast.LENGTH_SHORT).show();
-//						} else {
-//							boolean issubmit = postService.submitPosts(
-//									SystemUtil.getAccessToken(context), theme,
-//									content);
-//							Toast.makeText(context, "提交成功，待审核...",
-//									Toast.LENGTH_SHORT).show();
-//						}
-//
-//					} catch (NetException e) {
-//						e.printStackTrace();
-//					} catch (JSONException e) {
-//						e.printStackTrace();
-//					}
-//				}
+				} else {
+					String theme = postThemeEdit.getText().toString();
+					String content = postContentEdit.getText().toString();
+					try {
+						postService = new ForumPostService(ForumPostActivity.this);
+
+						if (theme.equals("")) {
+							Toast.makeText(ForumPostActivity.this, "提交失败，留言主题不能为空！",
+									Toast.LENGTH_SHORT).show();
+						} else if (content.equals("")) {
+							Toast.makeText(ForumPostActivity.this, "提交失败，留言内容不能为空！",
+									Toast.LENGTH_SHORT).show();
+						} else {
+							boolean issubmit = postService.submitPosts(
+									SystemUtil.getAccessToken(ForumPostActivity.this), theme,
+									content);
+							Toast.makeText(ForumPostActivity.this, "提交成功，待审核...",
+									Toast.LENGTH_SHORT).show();
+						}
+
+					} catch (NetException e) {
+						e.printStackTrace();
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		});
 	}

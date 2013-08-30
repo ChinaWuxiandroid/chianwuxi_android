@@ -147,7 +147,7 @@ public class GoverMsgSubChannelsSearchFragment extends BaseFragment{
 			FragmentTransaction ft = manager.beginTransaction();
 			goverMsgCustomContentListFragment.setBaseSlideFragment(this.baseSlideFragment);
 			ft.replace(CONTENT_LIST_ID, goverMsgCustomContentListFragment);
-			ft.commit();
+			ft.commitAllowingStateLoss();
 		}
 		else{
 			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment= new GoverMsgSearchContentListFragment();
@@ -157,7 +157,7 @@ public class GoverMsgSubChannelsSearchFragment extends BaseFragment{
 			FragmentTransaction ft = manager.beginTransaction();
 			goverMsgSearchContentListFragment.setBaseSlideFragment(this.baseSlideFragment);
 			ft.replace(CONTENT_LIST_ID, goverMsgSearchContentListFragment);
-			ft.commit();
+			ft.commitAllowingStateLoss();
 		}
 	}
 

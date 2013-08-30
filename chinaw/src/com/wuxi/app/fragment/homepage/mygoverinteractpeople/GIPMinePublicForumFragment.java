@@ -14,6 +14,12 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 
 public class GIPMinePublicForumFragment extends RadioButtonChangeFragment{
 
+	/**
+	 * @字段： serialVersionUID
+	 * @类型： long
+	 * @描述： 序列化序号 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final  int[] radioButtonIds={
 			R.id.gip_mine_publicforum_radioButton_myTheme,
 			R.id.gip_mine_publicforum_radioButton_themeTJoin,
@@ -43,31 +49,26 @@ public class GIPMinePublicForumFragment extends RadioButtonChangeFragment{
 
 	@Override
 	protected int getLayoutId() {
-		// TODO Auto-generated method stub
 		return R.layout.gip_mine_publicforum_layout;
 	}
 
 	@Override
 	protected int getRadioGroupId() {
-		// TODO Auto-generated method stub
 		return R.id.gip_mine_publicforum_radioGroup;
 	}
 
 	@Override
 	protected int[] getRadioButtonIds() {
-		// TODO Auto-generated method stub
 		return radioButtonIds;
 	}
 
 	@Override
 	protected int getContentFragmentId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	protected void init() {
-		// TODO Auto-generated method stub
 		
 	}
 }

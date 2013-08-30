@@ -27,6 +27,8 @@ import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.ForumCommentService;
 import com.wuxi.app.engine.HotReviewCommentService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewInfoFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewReplyFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
 import com.wuxi.app.util.SystemUtil;
@@ -83,9 +85,9 @@ public class HotReviewContentActivity extends BaseItemContentActivity implements
 	protected void findMainContentViews(View view) {
 		initLayout(view);
 
-//		HotReviewInfoFragment hotReviewInfoFragment = new HotReviewInfoFragment();
-//		hotReviewInfoFragment.setHotReview(getHotReview());
-//		onTransaction(hotReviewInfoFragment);
+		HotReviewInfoFragment hotReviewInfoFragment = new HotReviewInfoFragment();
+		hotReviewInfoFragment.setHotReview(getHotReview());
+		onTransaction(hotReviewInfoFragment);
 	}
 	
 	@Override
@@ -93,21 +95,19 @@ public class HotReviewContentActivity extends BaseItemContentActivity implements
 		GIPRadioButtonStyleChange radioButtonStyleChange = new GIPRadioButtonStyleChange(
 				R.drawable.gip_button_selected_bk, 0, Color.WHITE,
 				R.color.gip_second_frame_button_brown);
-		
-		View view = new View(this);
-		
-		radioButtonStyleChange.refreshRadioButtonStyle(view, radiobtnids,
+
+		radioButtonStyleChange.refreshRadioButtonStyle(mainView, radiobtnids,
 				checkedId);
 
 		switch (checkedId) {
 		case R.id.forum_content_info_radiobtn:
-			findMainContentViews(view);
+			findMainContentViews(mainView);
 			break;
 
 		case R.id.forum_content_comment_radiobtn:
-//			HotReviewReplyFragment hotReviewReplyFragment = new HotReviewReplyFragment();
-//			hotReviewReplyFragment.setHotReview(getHotReview());
-//			onTransaction(hotReviewReplyFragment);
+			HotReviewReplyFragment hotReviewReplyFragment = new HotReviewReplyFragment();
+			hotReviewReplyFragment.setHotReview(getHotReview());
+			onTransaction(hotReviewReplyFragment);
 			break;
 		}
 	}
@@ -171,24 +171,25 @@ public class HotReviewContentActivity extends BaseItemContentActivity implements
 				HotReviewCommentService service = new HotReviewCommentService(
 						con);
 				
-//				LoginDialog loginDialog = new LoginDialog(con, baseSlideFragment);
-//				try {
-//					if (loginDialog.checkLogin()) {
-//						service.submitComment(hotReview.getId(), submitContent
-//								.getText().toString(), SystemUtil
-//								.getAccessToken(con));
-//						Toast.makeText(con, "提交成功，正在审核...", Toast.LENGTH_SHORT).show();
-//					}else {
+				LoginDialog loginDialog = new LoginDialog(con, null);
+				try {
+					if (loginDialog.checkLogin()) {
+						service.submitComment(hotReview.getId(), submitContent
+								.getText().toString(), SystemUtil
+								.getAccessToken(con));
+						Toast.makeText(con, "提交成功，正在审核...", Toast.LENGTH_SHORT).show();
+					}else {
+						loginDialog.showDialog();
 //						Toast.makeText(con, "提交失败，您未登录，请登录后再参与讨论，谢谢！", Toast.LENGTH_SHORT).show();
-//					}
-//					
-//				} catch (NetException e) {
-//					e.printStackTrace();
-//				} catch (JSONException e) {
-//					e.printStackTrace();
-//				}
+					}
+					
+				} catch (NetException e) {
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 
-//				Toast.makeText(context, "暂未开通该功能...", Toast.LENGTH_SHORT)
+//				Toast.makeText(HotReviewContentActivity.this, "暂未开通该功能...", Toast.LENGTH_SHORT)
 //						.show();
 			}
 		});
@@ -221,7 +222,7 @@ public class HotReviewContentActivity extends BaseItemContentActivity implements
 		FragmentManager manager = this.getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(R.id.forum_content_fragment, fragment);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 
 	/**

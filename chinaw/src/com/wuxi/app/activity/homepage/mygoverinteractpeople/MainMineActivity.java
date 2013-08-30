@@ -199,7 +199,7 @@ public class MainMineActivity extends BaseSlideActivity implements
 
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
-			ft.commit();
+			ft.commitAllowingStateLoss();
 		}
 
 	}

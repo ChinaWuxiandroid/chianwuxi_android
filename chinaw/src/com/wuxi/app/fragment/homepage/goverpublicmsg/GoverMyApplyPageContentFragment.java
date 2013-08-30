@@ -85,6 +85,6 @@ public class GoverMyApplyPageContentFragment extends BaseFragment{
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.remove(this);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 }

@@ -346,6 +346,6 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 		fragment.setBaseSlideFragment(this.baseSlideFragment);
 		ft.replace(CHANNELCONTENT_ID, fragment);
 
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 }

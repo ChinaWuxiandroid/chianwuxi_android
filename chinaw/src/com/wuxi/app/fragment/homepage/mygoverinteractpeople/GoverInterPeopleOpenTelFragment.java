@@ -9,7 +9,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.graphics.SumPathEffect;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -77,25 +76,21 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment
 
 	@Override
 	protected int getLayoutId() {
-		// TODO Auto-generated method stub
 		return R.layout.goverinterpeople_opentel_layout;
 	}
 
 	@Override
 	protected int getRadioGroupId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	protected int[] getRadioButtonIds() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	protected int getContentFragmentId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -109,13 +104,6 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment
 	}
 
 	public void loadData() {
-		// if (CacheUtil.get(menuItem.getChannelId()) != null) {// 从缓存获取
-		//
-		// titleChannels = (List<Channel>) CacheUtil.get(menuItem
-		// .getChannelId());
-		// showTitleData();
-		// return;
-		// }
 
 		new Thread(new Runnable() {
 
@@ -146,10 +134,8 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment
 					handler.sendEmptyMessage(DATA_LOAD_ERROR);
 
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (NODataException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -172,19 +158,16 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return tels.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return tels.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 
@@ -195,7 +178,6 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
 			ViewHolder viewHolder = null;
 			if (convertView == null) {
 				convertView = mInflater.inflate(
@@ -253,7 +235,6 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
 				dialog.dismiss();
 			}
 		});

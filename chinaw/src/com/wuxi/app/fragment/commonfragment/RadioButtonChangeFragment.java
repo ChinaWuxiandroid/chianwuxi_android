@@ -74,7 +74,7 @@ implements OnCheckedChangeListener{
 			FragmentManager manager = getActivity().getSupportFragmentManager();
 			FragmentTransaction ft = manager.beginTransaction();
 			ft.replace(getContentFragmentId(), fragment);
-			ft.commit();
+			ft.commitAllowingStateLoss();
 		}	
 	}
 

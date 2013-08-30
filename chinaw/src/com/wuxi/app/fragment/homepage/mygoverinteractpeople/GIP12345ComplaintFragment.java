@@ -63,7 +63,7 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private static final String TAG = "GIP12345ComplaintFragment";
 
 	private final int[] radioButtonIds = {
@@ -73,24 +73,24 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 			R.id.gip_12345_complaint_radioButton_organizationDuty };
 
 	private static final int HIDEN_CONTENT_ID = R.id.complaint_fragment;
-	
+
 	private static final int ALLCOUNT_LOAD_SUCESS = 0; // 答复率总数统计
 	private static final int DATA_LOAD_ERROR = 1;
-	
+
 	// 部门数据加载成功标志
-		private static final int LOAD_DEPT_SUCCESS = 2;
-		// 部门数据加载失败标志
-		private static final int LOAD_DEPT_FAILED = 3;
+	private static final int LOAD_DEPT_SUCCESS = 2;
+	// 部门数据加载失败标志
+	private static final int LOAD_DEPT_FAILED = 3;
 
-		// 内容类型数据加载成功标志
-		private static final int LOAD_CONTENT_TYPE_SUCCESS = 4;
-		// 内容类型数据加载失败标志
-		private static final int LOAD_CONTENT_TYPE_FAILED = 5;
+	// 内容类型数据加载成功标志
+	private static final int LOAD_CONTENT_TYPE_SUCCESS = 4;
+	// 内容类型数据加载失败标志
+	private static final int LOAD_CONTENT_TYPE_FAILED = 5;
 
-		// 信件类型数据加载成功标志
-		private static final int LOAD_MAIL_TYPE_SUCCESS = 6;
-		// 信件类型数据加载失败标志
-		private static final int LOAD_MAIL_TYPE_FAILED = 7;
+	// 信件类型数据加载成功标志
+	private static final int LOAD_MAIL_TYPE_SUCCESS = 6;
+	// 信件类型数据加载失败标志
+	private static final int LOAD_MAIL_TYPE_FAILED = 7;
 
 	private Button dealMailBtn = null;
 	private Button queryMailBtn = null;
@@ -102,53 +102,53 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 	private View popview = null;
 
 	private List<AllCount> allCounts;
-	
+
 	// 关键字输入框
-		private EditText keyWordEdit = null;
-		// 信件编号输入框
-		private EditText mailNoEdit = null;
-		// 答复时间的开始时间输入框
-		private EditText timeBeginEdit = null;
-		// 答复时间的结束时间输入框
-		private EditText timeEndEdit = null;
+	private EditText keyWordEdit = null;
+	// 信件编号输入框
+	private EditText mailNoEdit = null;
+	// 答复时间的开始时间输入框
+	private EditText timeBeginEdit = null;
+	// 答复时间的结束时间输入框
+	private EditText timeEndEdit = null;
 
-		// 常见问题复选框
-		private CheckBox questionCheckbox = null;
+	// 常见问题复选框
+	private CheckBox questionCheckbox = null;
 
-		// 信件查询按钮
-		private Button queryMailsBtn = null;
+	// 信件查询按钮
+	private Button queryMailsBtn = null;
 
-		// 信箱分类下拉列表
-		private Spinner boxSortSpinner = null;
-		// 信件分类下拉列表
-		private Spinner emailSortSpinner = null;
-		// 受理部门下拉列表
-		private Spinner acceptDepartmentSpinner = null;
-		// 答复部门下拉列表
-		private Spinner replyDepartmentSpinner = null;
+	// 信箱分类下拉列表
+	private Spinner boxSortSpinner = null;
+	// 信件分类下拉列表
+	private Spinner emailSortSpinner = null;
+	// 受理部门下拉列表
+	private Spinner acceptDepartmentSpinner = null;
+	// 答复部门下拉列表
+	private Spinner replyDepartmentSpinner = null;
 
-		private LinearLayout linearLayout = null;
-		private LinearLayout radioLayout = null;
-		
-		private PartLeaderMailWrapper leaderMailWrapper = null;
-		private List<PartLeaderMail> depts = null;
+	private LinearLayout linearLayout = null;
+	private LinearLayout radioLayout = null;
 
-		private QueryMailContentTypeWrapper contentTypeWrapper = null;
-		private List<QueryMailContentType> contentTypes = null;
+	private PartLeaderMailWrapper leaderMailWrapper = null;
+	private List<PartLeaderMail> depts = null;
 
-		private MailTypeWrapper mailTypeWrapper = null;
-		private List<MailType> mailTypes = null;
-		
-		private static String DEFAULT_DEPT_FIFTER = "无限制";
-		private String deptStrFifter = DEFAULT_DEPT_FIFTER;
+	private QueryMailContentTypeWrapper contentTypeWrapper = null;
+	private List<QueryMailContentType> contentTypes = null;
+
+	private MailTypeWrapper mailTypeWrapper = null;
+	private List<MailType> mailTypes = null;
+
+	private static String DEFAULT_DEPT_FIFTER = "无限制";
+	private String deptStrFifter = DEFAULT_DEPT_FIFTER;
 
 	// 声明弹出窗体变量
 	private PopupWindow popWindow = null;
 
-	private PopWindowManager popWindowManager = null; 
+	private PopWindowManager popWindowManager = null;
 
 	private int contentType = 0; // 内容类型，缺省为0-信件列表 1-写信须知 2-办理规则 3-机构职责
-	
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -292,8 +292,7 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 		loadContentTypeData();
 		loadMailTypeData();
 		loadDeptData();
-		
-		
+
 		queryMailBtn = (Button) view
 				.findViewById(R.id.gip_12345_complaint_button_queryMail);
 		queryMailBtn.setOnClickListener(new OnClickListener() {
@@ -323,15 +322,14 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 						| Gravity.RIGHT, 0, queryMailBtn.getHeight() * 2 + 10);
 			}
 		});
-		
-		
+
 		GIP12345ComplaintListFragment complaintListFragment = new GIP12345ComplaintListFragment();
 		complaintListFragment.setBaseSlideFragment(this.baseSlideFragment);
 		bindFragment(complaintListFragment);
-		
+
 		loadAllCountData();
 	}
-	
+
 	/**
 	 * @方法： showDept
 	 * @描述： 显示部门数据
@@ -354,7 +352,7 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 		// .setOnItemSelectedListener(partment_Spinner_adapter);
 
 	}
-	
+
 	/**
 	 * @方法： showContentType
 	 * @描述： 显示内容类型数据
@@ -391,7 +389,7 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 
 		emailSortSpinner.setAdapter(adapter);
 	}
-	
+
 	/**
 	 * @方法： loadMailTypeData
 	 * @描述： 加载信件类型数据
@@ -473,7 +471,7 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 			}
 		}).start();
 	}
-	
+
 	/**
 	 * @方法： loadDeptData
 	 * @描述： 加载受理部门和答复部门数据
@@ -587,7 +585,6 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 		}
 	}
 
-
 	/**
 	 * 切换界面
 	 * 
@@ -626,7 +623,7 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(HIDEN_CONTENT_ID, fragment);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 
 	/**
@@ -649,7 +646,7 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 		leaderNum = (TextView) popview.findViewById(R.id.leader_box_mail_text);
 
 		showAllCounts();
-		
+
 		popWindowManager = PopWindowManager.getInstance();
 
 		popWindowManager.addPopWindow(popupWindow);
@@ -721,5 +718,4 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 		}).start();
 	}
 
-	
 }

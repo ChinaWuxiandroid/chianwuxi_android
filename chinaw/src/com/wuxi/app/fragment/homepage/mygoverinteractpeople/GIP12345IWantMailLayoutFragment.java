@@ -116,8 +116,8 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 				.findViewById(R.id.gip_12345_iwantmail_radiogroup_isNeedMsgRaply);
 
 		view.findViewById(R.id.gip_12345_iwantmail_radiobutton_leaderbox)
-		.setVisibility(View.GONE);
-		
+				.setVisibility(View.GONE);
+
 		mailBoxType = (Spinner) view
 				.findViewById(R.id.gip_12345_iwantmail_spinner_type);
 

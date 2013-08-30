@@ -173,7 +173,7 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 
 		ft.replace(FRAMELAYOUT_ID, fragment);
 
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 
 	

@@ -9,6 +9,7 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,7 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345MayorMailContentActivity;
 import com.wuxi.app.engine.LetterService;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.Constants;
@@ -251,12 +254,10 @@ public class GIP12345ComplaintListFragment extends BaseFragment {
 		public void onItemClick(AdapterView<?> adapterView, View arg1,
 				int position, long arg3) {
 			Letter letter = (Letter) adapterView.getItemAtPosition(position);
-			Bundle bundle = new Bundle();
-			bundle.putSerializable("letter", letter);
 
-			slideFragment.slideLinstener.replaceFragment(null, position,
-					Constants.FragmentName.GIP_MAYOR_MAIL_CONTENT_FRAGMENT,
-					bundle);
+			Intent intent = new Intent(getActivity(), GIP12345MayorMailContentActivity.class);
+			intent.putExtra("letter", letter);
+			MainTabActivity.instance.addView(intent);
 		}
 
 	}

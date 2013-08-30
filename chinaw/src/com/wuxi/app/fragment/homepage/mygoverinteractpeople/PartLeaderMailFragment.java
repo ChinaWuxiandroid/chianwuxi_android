@@ -381,7 +381,7 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(HIDEN_CONTENT_ID, fragment);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 
 	/**

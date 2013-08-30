@@ -28,13 +28,17 @@ import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
 import com.wuxi.app.engine.ForumCommentService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
 import com.wuxi.domain.PoliticsWrapper.Politics;
 import com.wuxi.exception.NetException;
 
 /**
- * @author Administrator
+ * 立法征求意见 内容界面
+ * 
+ * @author 罗森
  * 
  */
 public class LegislationContentActivity extends BaseItemContentActivity
@@ -89,13 +93,15 @@ public class LegislationContentActivity extends BaseItemContentActivity
 
 	@Override
 	protected void findMainContentViews(View view) {
+		super.findMainContentViews(view);
+
 		initLayout(view);
 
-//		LegidlstionInfoFragment legidlstionInfoFragment = new LegidlstionInfoFragment();
-//		legidlstionInfoFragment.setPolitics(getPolitics());
-//		onTransaction(legidlstionInfoFragment);
+		LegidlstionInfoFragment legidlstionInfoFragment = new LegidlstionInfoFragment();
+		legidlstionInfoFragment.setPolitics(getPolitics());
+		onTransaction(legidlstionInfoFragment);
 	}
-	
+
 	/**
 	 * 初始化布局控件
 	 */
@@ -165,11 +171,11 @@ public class LegislationContentActivity extends BaseItemContentActivity
 							access_token, type, content);
 
 					if (isSubnit) {
-						Toast.makeText(LegislationContentActivity.this, "提交成功！", Toast.LENGTH_SHORT)
-								.show();
+						Toast.makeText(LegislationContentActivity.this,
+								"提交成功！", Toast.LENGTH_SHORT).show();
 					} else {
-						Toast.makeText(LegislationContentActivity.this, "提交失败！", Toast.LENGTH_SHORT)
-								.show();
+						Toast.makeText(LegislationContentActivity.this,
+								"提交失败！", Toast.LENGTH_SHORT).show();
 					}
 
 				} catch (NetException e) {
@@ -204,21 +210,19 @@ public class LegislationContentActivity extends BaseItemContentActivity
 		GIPRadioButtonStyleChange radioButtonStyleChange = new GIPRadioButtonStyleChange(
 				R.drawable.gip_button_selected_bk, 0, Color.WHITE,
 				R.color.gip_second_frame_button_brown);
-		
-		View view = new View(this);
-		
-		radioButtonStyleChange.refreshRadioButtonStyle(view, radiobtnids,
+
+		radioButtonStyleChange.refreshRadioButtonStyle(mainView, radiobtnids,
 				checkedId);
 
 		switch (checkedId) {
 		case R.id.forum_content_info_radiobtn:
-			findMainContentViews(view);
+			findMainContentViews(mainView);
 			break;
 
 		case R.id.forum_content_comment_radiobtn:
-//			LegidlstionReplyFragment legidlstionReplyFragment = new LegidlstionReplyFragment();
-//			legidlstionReplyFragment.setPolitics(getPolitics());
-//			 onTransaction(legidlstionReplyFragment);
+			LegidlstionReplyFragment legidlstionReplyFragment = new LegidlstionReplyFragment();
+			legidlstionReplyFragment.setPolitics(getPolitics());
+			onTransaction(legidlstionReplyFragment);
 			break;
 		}
 	}
@@ -242,7 +246,7 @@ public class LegislationContentActivity extends BaseItemContentActivity
 		FragmentManager manager = this.getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(R.id.forum_content_fragment, fragment);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 
 }
