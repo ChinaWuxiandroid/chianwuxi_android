@@ -101,13 +101,11 @@ public class AdvancedSearchFragment extends BaseSlideFragment implements OnClick
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View view,
 					int arg2, long arg3) {
-				// TODO Auto-generated method stub
 				infoType=((TextView)view).getText().toString();
 			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -121,13 +119,11 @@ public class AdvancedSearchFragment extends BaseSlideFragment implements OnClick
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View view,
 					int arg2, long arg3) {
-				// TODO Auto-generated method stub
 				pageSize=((TextView)view).getText().toString();
 			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -141,7 +137,6 @@ public class AdvancedSearchFragment extends BaseSlideFragment implements OnClick
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View view,
 					int arg2, long arg3) {
-				// TODO Auto-generated method stub
 				String buffTypeStr=((TextView)view).getText().toString();
 				if(buffTypeStr.equals("正文")){
 					contentType="content";
@@ -156,7 +151,6 @@ public class AdvancedSearchFragment extends BaseSlideFragment implements OnClick
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
 
 			}
 		});

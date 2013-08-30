@@ -14,6 +14,14 @@ import com.wuxi.app.util.GIPRadioButtonStyleChange;
  * */
 
 public class GoverInterPeople12345Fragment extends RadioButtonChangeFragment {
+	
+	/**
+	 * @字段： serialVersionUID
+	 * @类型： long
+	 * @描述： 序列化序号 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private final  int[] radioButtonIds={
 			R.id.goverinterpeople_12345_radioButton_mayorMailBox,
 			R.id.goverinterpeople_12345_radioButton_complaint,
@@ -68,35 +76,30 @@ public class GoverInterPeople12345Fragment extends RadioButtonChangeFragment {
 
 	@Override
 	protected int getLayoutId() {
-		// TODO Auto-generated method stub
 		return R.layout.goverinterpeople_12345_layout;
 	}
 
 
 	@Override
 	protected int getRadioGroupId() {
-		// TODO Auto-generated method stub
 		return R.id.goverinterpeople_12345_radioGroup;
 	}
 
 
 	@Override
 	protected int[] getRadioButtonIds() {
-		// TODO Auto-generated method stub
 		return radioButtonIds;
 	}
 
 
 	@Override
 	protected int getContentFragmentId() {
-		// TODO Auto-generated method stub
 		return R.id.goverinterpeople_12345_content_fragment;
 	}
 
 
 	@Override
 	protected void init() {
-		// TODO Auto-generated method stub
 		MainMineFragment mayorBoxFragment=new GIP12345MayorMaiBoxFragment();
 		onTransaction(mayorBoxFragment);
 	}

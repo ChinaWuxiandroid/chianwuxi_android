@@ -25,11 +25,20 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- *12345来信办理平台  主Fragment --热门信件选登 fragment
+ * 12345来信办理平台 主Fragment --热门信件选登 fragment
+ * 
  * @author 杨宸 智佳
  * */
 
-public class GIP12345HotMail extends RadioButtonChangeFragment{
+public class GIP12345HotMail extends RadioButtonChangeFragment {
+
+	/**
+	 * @字段： serialVersionUID
+	 * @类型： long
+	 * @描述： 序列化
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private ListView mListView;
 	private ProgressBar list_pb;
 	private LetterWrapper letterWrapper;
@@ -38,8 +47,8 @@ public class GIP12345HotMail extends RadioButtonChangeFragment{
 	private static final int DATA__LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
 
-	private int startIndex=0;         //获取话题的起始坐标
-	private int endIndex=5;			//获取话题的结束坐标
+	private int startIndex = 0; // 获取话题的起始坐标
+	private int endIndex = 5; // 获取话题的结束坐标
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -83,21 +92,16 @@ public class GIP12345HotMail extends RadioButtonChangeFragment{
 
 	@Override
 	protected void init() {
-		mListView=(ListView) view.findViewById(R.id.gip_12345_hotmail_listView);
-		list_pb=(ProgressBar)view.findViewById(R.id.gip_12345_hotmail_listView_pb);
+		mListView = (ListView) view
+				.findViewById(R.id.gip_12345_hotmail_listView);
+		list_pb = (ProgressBar) view
+				.findViewById(R.id.gip_12345_hotmail_listView_pb);
 
 		list_pb.setVisibility(View.VISIBLE);
-		loadData();	
+		loadData();
 	}
 
-	public void loadData(){
-		//		if (CacheUtil.get(menuItem.getChannelId()) != null) {// 从缓存获取
-		//
-		//			titleChannels = (List<Channel>) CacheUtil.get(menuItem
-		//					.getChannelId());
-		//			showTitleData();
-		//			return;
-		//		}
+	public void loadData() {
 
 		new Thread(new Runnable() {
 
@@ -106,11 +110,12 @@ public class GIP12345HotMail extends RadioButtonChangeFragment{
 
 				LetterService letterService = new LetterService(context);
 				try {
-					letterWrapper = letterService.getLetterLitstWrapper
-							(Constants.Urls.HOTMAIL_URL,startIndex,endIndex);
+					letterWrapper = letterService.getLetterLitstWrapper(
+							Constants.Urls.HOTMAIL_URL, startIndex, endIndex);
 					if (null != letterWrapper) {
-						//						CacheUtil.put(menuItem.getChannelId(), titleChannels);// 缓存起来
-						letters=letterWrapper.getData();
+						// CacheUtil.put(menuItem.getChannelId(),
+						// titleChannels);// 缓存起来
+						letters = letterWrapper.getData();
 
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 
@@ -133,22 +138,19 @@ public class GIP12345HotMail extends RadioButtonChangeFragment{
 					e.printStackTrace();
 				}
 			}
-		}
-				).start();
+		}).start();
 	}
 
-
-	public void showLettersList(){
-		LettersListViewAdapter adapter=new LettersListViewAdapter();
-		if(letters==null||letters.size()==0){
+	public void showLettersList() {
+		LettersListViewAdapter adapter = new LettersListViewAdapter();
+		if (letters == null || letters.size() == 0) {
 			Toast.makeText(context, "对不起，暂无信息", 2000).show();
-		}
-		else{
+		} else {
 			mListView.setAdapter(adapter);
 		}
 	}
 
-	public class LettersListViewAdapter extends BaseAdapter{
+	public class LettersListViewAdapter extends BaseAdapter {
 
 		@Override
 		public int getCount() {
@@ -166,7 +168,7 @@ public class GIP12345HotMail extends RadioButtonChangeFragment{
 		}
 
 		class ViewHolder {
-			public TextView title_text;		
+			public TextView title_text;
 			public TextView depname_text;
 			public TextView answerDate_text;
 		}
@@ -174,7 +176,7 @@ public class GIP12345HotMail extends RadioButtonChangeFragment{
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder viewHolder = null;
-			if(convertView==null){
+			if (convertView == null) {
 				convertView = mInflater.inflate(
 						R.layout.gip_12345_hotmail_listview_item, null);
 
@@ -187,16 +189,14 @@ public class GIP12345HotMail extends RadioButtonChangeFragment{
 				viewHolder.answerDate_text = (TextView) convertView
 						.findViewById(R.id.gip_12345_hotmail_answerDate);
 
-
 				convertView.setTag(viewHolder);
-			}
-			else {
+			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
 			viewHolder.title_text.setText(letters.get(position).getTitle());
 			viewHolder.depname_text.setText(letters.get(position).getDepname());
-			viewHolder.answerDate_text.setText(letters.get(position).getAnswerdate());
-
+			viewHolder.answerDate_text.setText(letters.get(position)
+					.getAnswerdate());
 
 			return convertView;
 		}

@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,7 +21,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumContentActivity;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumPostActivity;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity;
 import com.wuxi.app.engine.ForumService;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
@@ -124,14 +129,10 @@ public class GoverInterPeoplePublicForumFragment extends
 		postButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				BaseSlideFragment baseSlideFragment = GoverInterPeoplePublicForumFragment.this.baseSlideFragment;
-
-				ForumPostFragment postFragment = new ForumPostFragment();
-				postFragment.setBaseSlideFragment(baseSlideFragment);
-
-				baseSlideFragment.slideLinstener.replaceFragment(null,
-						position,
-						Constants.FragmentName.GIP_FORUM_POST_FRAGMENT, null);
+				
+					Intent intent = new Intent(getActivity(), ForumPostActivity.class);
+					
+					MainTabActivity.instance.addView(intent);
 			}
 		});
 
@@ -201,17 +202,6 @@ public class GoverInterPeoplePublicForumFragment extends
 	public class ForumListAdapter extends BaseAdapter implements
 			OnItemClickListener {
 
-		BaseSlideFragment baseSlideFragment;
-
-		/**
-		 * 构造方法
-		 * 
-		 * @param baseSlideFragment
-		 */
-		// public ForumListAdapter(BaseSlideFragment baseSlideFragment) {
-		// this.baseSlideFragment = baseSlideFragment;
-		// }
-
 		@Override
 		public int getCount() {
 			return forums.size();
@@ -280,13 +270,11 @@ public class GoverInterPeoplePublicForumFragment extends
 		public void onItemClick(AdapterView<?> adapterView, View arg1,
 				int position, long arg3) {
 			Forum forum = (Forum) adapterView.getItemAtPosition(position);
-			Bundle bundle = new Bundle();
-			bundle.putSerializable("forum", forum);
-
-			baseSlideFragment = GoverInterPeoplePublicForumFragment.this.baseSlideFragment;
-
-			baseSlideFragment.slideLinstener.replaceFragment(null, position,
-					Constants.FragmentName.GIP_FOROUM_FRAGMENT, bundle);
+			
+			Intent intent = new Intent(getActivity(), ForumContentActivity.class);
+			intent.putExtra("forum", forum);
+			
+			MainTabActivity.instance.addView(intent);
 		}
 	}
 

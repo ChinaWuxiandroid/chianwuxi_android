@@ -16,6 +16,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -30,7 +31,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345MayorMailContentActivity;
 import com.wuxi.app.engine.PartLeaderMailListService;
 import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
@@ -279,12 +282,11 @@ public class PartLeaderMailListFragment extends RadioButtonChangeFragment {
 		public void onItemClick(AdapterView<?> adapterView, View arg1,
 				int position, long arg3) {
 			Letter letter = (Letter) adapterView.getItemAtPosition(position);
-			Bundle bundle = new Bundle();
-			bundle.putSerializable("letter", letter);
 
-			slideFragment.slideLinstener.replaceFragment(null, position,
-					Constants.FragmentName.GIP_MAYOR_MAIL_CONTENT_FRAGMENT,
-					bundle);
+			Intent intent = new Intent(getActivity(),
+					GIP12345MayorMailContentActivity.class);
+			intent.putExtra("letter", letter);
+			MainTabActivity.instance.addView(intent);
 
 		}
 

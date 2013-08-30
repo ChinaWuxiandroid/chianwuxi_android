@@ -14,6 +14,12 @@ import com.wuxi.app.util.GIPRadioButtonStyleChange;
 
 public class GoverInterPeopleMineFragment extends RadioButtonChangeFragment{
 
+	/**
+	 * @字段： serialVersionUID
+	 * @类型： long
+	 * @描述： 序列化序号 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final  int[] radioButtonIds={
 			R.id.goverinterpeople_mine_radioButton_12345,
 			R.id.goverinterpeople_mine_radioButton_suggestionPlatform,
@@ -79,7 +85,6 @@ public class GoverInterPeopleMineFragment extends RadioButtonChangeFragment{
 
 	@Override
 	protected void init() {
-		// TODO Auto-generated method stub
 		MainMineFragment mine12345Fragment=new GIPMine12345Fragment();
 		onTransaction(mine12345Fragment);
 	}

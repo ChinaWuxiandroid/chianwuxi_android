@@ -239,7 +239,7 @@ public class LegislationContentFragment extends BaseItemContentFragment
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(R.id.forum_content_fragment, fragment);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 
 }

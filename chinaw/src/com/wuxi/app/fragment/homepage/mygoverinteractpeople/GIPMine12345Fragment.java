@@ -122,11 +122,11 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 
 			@Override
 			public void onClick(View v) {
-				// BaseSlideFragment baseSlideFragment =
-				// GIPMine12345Fragment.this.baseSlideFragment;
-				// baseSlideFragment.slideLinstener.replaceFragment(null,
-				// position,
-				// Constants.FragmentName.GIP_12345_WRITE_MAIL_FRAGMENT, null);
+//				 BaseSlideFragment baseSlideFragment =
+//				 GIPMine12345Fragment.this.baseSlideFragment;
+//				 baseSlideFragment.slideLinstener.replaceFragment(null,
+//				 position,
+//				 Constants.FragmentName.GIP_12345_WRITE_MAIL_FRAGMENT, null);
 				Toast.makeText(context, "该功能未实现", Toast.LENGTH_SHORT).show();
 			}
 		});

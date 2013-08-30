@@ -9,7 +9,7 @@ import com.wuxi.domain.MenuItem;
 public class GIPContentFragment extends GoverMenuItemTitleFragment {
 
 	/**
-	 * 
+	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
 

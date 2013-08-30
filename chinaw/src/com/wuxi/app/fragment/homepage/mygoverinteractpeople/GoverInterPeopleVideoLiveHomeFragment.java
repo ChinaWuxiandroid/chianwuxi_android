@@ -85,7 +85,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(HOME_CONTENT_ID, fragment);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 
 	/**

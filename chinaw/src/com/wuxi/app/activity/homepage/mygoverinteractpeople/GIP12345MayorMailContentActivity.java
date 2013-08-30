@@ -48,7 +48,7 @@ import com.wuxi.exception.NetException;
 @SuppressLint("SetJavaScriptEnabled")
 public class GIP12345MayorMailContentActivity extends BaseItemContentActivity {
 
-	private static final String TAG = "GIP12345MayorMailContentFragment";
+	private static final String TAG = "GIP12345MayorMailContentActivity";
 
 	private TextView queryNoText = null;
 	private TextView titleText = null;
@@ -133,6 +133,8 @@ public class GIP12345MayorMailContentActivity extends BaseItemContentActivity {
 	
 	@Override
 	protected void findMainContentViews(View view) {
+		super.findMainContentViews(view);
+		
 		progressBar = (ProgressBar) view
 				.findViewById(R.id.mail_content_progress);
 		progressBar.setVisibility(View.VISIBLE);
@@ -288,6 +290,7 @@ public class GIP12345MayorMailContentActivity extends BaseItemContentActivity {
 		}).start();
 	}
 
+	
 	private void submitData(final int rank) {
 
 		MailCommentService commentService = new MailCommentService(this);

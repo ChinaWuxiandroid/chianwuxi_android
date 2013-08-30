@@ -5,7 +5,8 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
-import android.os.Bundle;
+import android.content.Intent;
+
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -19,9 +20,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity;
 import com.wuxi.app.engine.PoliticsService;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
@@ -172,10 +174,8 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment {
 	}
 
 	public void showPoloticsList() {
-		BaseSlideFragment slideFragment = this.baseSlideFragment;
 
-		PoliticsListViewAdapter adapter = new PoliticsListViewAdapter(
-				slideFragment);
+		PoliticsListViewAdapter adapter = new PoliticsListViewAdapter();
 		if (politics == null || politics.size() == 0) {
 			Toast.makeText(context, "对不起，暂无热点话题信息", 2000).show();
 		} else {
@@ -186,11 +186,6 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment {
 
 	public class PoliticsListViewAdapter extends BaseAdapter implements
 			OnItemClickListener {
-		BaseSlideFragment slideFragment = null;
-
-		public PoliticsListViewAdapter(BaseSlideFragment baseSlideFragment) {
-			this.slideFragment = baseSlideFragment;
-		}
 
 		@Override
 		public int getCount() {
@@ -249,12 +244,11 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment {
 				int position, long arg3) {
 			Politics politics = (Politics) adapterView
 					.getItemAtPosition(position);
-			Bundle bundle = new Bundle();
-			bundle.putSerializable("politics", politics);
-
-			slideFragment.slideLinstener.replaceFragment(null, position,
-					Constants.FragmentName.GIP_PEOPLE_IDEA_CONTENT_FRAGMENT,
-					bundle);
+			
+			Intent intent = new Intent(getActivity(), PepoleIdeaCollectActivity.class);
+			intent.putExtra("politics", politics);
+			
+			MainTabActivity.instance.addView(intent);
 		}
 
 	}

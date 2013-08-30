@@ -111,7 +111,7 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment{
 		fragment.setManagers(managers);// 传递managers
 		ft.replace(CONTENT_MAIN_ID, fragment);
 
-		ft.commit();
+		ft.commitAllowingStateLoss();
 
 	}
 }

@@ -28,6 +28,8 @@ import com.wuxi.app.activity.BaseItemContentActivity;
 import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.ForumCommentService;
 import com.wuxi.app.fragment.BaseItemContentFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryPostFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
 import com.wuxi.app.util.SystemUtil;
@@ -92,10 +94,9 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 		super.findMainContentViews(view);
 		initLayout(view);
 
-		// ForumOrdinaryPostFragment forumOrdinaryFragment = new
-		// ForumOrdinaryPostFragment();
-		// forumOrdinaryFragment.setForum(getForum());
-		// onTransaction(forumOrdinaryFragment);
+		ForumOrdinaryPostFragment forumOrdinaryFragment = new ForumOrdinaryPostFragment();
+		forumOrdinaryFragment.setForum(getForum());
+		onTransaction(forumOrdinaryFragment);
 	}
 
 	/**
@@ -151,42 +152,42 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 				ForumCommentService commentService = new ForumCommentService(
 						ForumContentActivity.this);
 
-//				LoginDialog loginDialog = new LoginDialog(
-//						ForumContentActivity.this, baseSlideFragment);
-//
-//				try {
-//					if (!forum.getViewpath().equals("/SurveryContent")) {
-//						if (loginDialog.checkLogin()) {
-//							if (!content.equals("")) {
-//								boolean isSubnit = commentService
-//										.submitComment(id, access_token, type,
-//												content);
-//
-//								Toast.makeText(ForumContentActivity.this,
-//										"提交成功，正待审核...", Toast.LENGTH_SHORT)
-//										.show();
-//							} else {
-//								Toast.makeText(ForumContentActivity.this,
-//										"提交失败，您没有输入任何信息", Toast.LENGTH_SHORT)
-//										.show();
-//							}
-//
-//						} else {
-//							// loginDialog.showDialog();
+				LoginDialog loginDialog = new LoginDialog(
+						ForumContentActivity.this, null);
+
+				try {
+					if (!forum.getViewpath().equals("/SurveryContent")) {
+						if (loginDialog.checkLogin()) {
+							if (!content.equals("")) {
+								boolean isSubnit = commentService
+										.submitComment(id, access_token, type,
+												content);
+
+								Toast.makeText(ForumContentActivity.this,
+										"提交成功，正待审核...", Toast.LENGTH_SHORT)
+										.show();
+							} else {
+								Toast.makeText(ForumContentActivity.this,
+										"提交失败，您没有输入任何信息", Toast.LENGTH_SHORT)
+										.show();
+							}
+
+						} else {
+							 loginDialog.showDialog();
 //							Toast.makeText(ForumContentActivity.this,
 //									"提交失败，您未登录，请登录后再发表评论，谢谢！",
 //									Toast.LENGTH_SHORT).show();
-//						}
-//					} else {
-//						Toast.makeText(ForumContentActivity.this,
-//								"调查问卷类帖子功能暂未实现", Toast.LENGTH_SHORT).show();
-//					}
-//
-//				} catch (NetException e) {
-//					e.printStackTrace();
-//				} catch (JSONException e) {
-//					e.printStackTrace();
-//				}
+						}
+					} else {
+						Toast.makeText(ForumContentActivity.this,
+								"调查问卷类帖子功能暂未实现", Toast.LENGTH_SHORT).show();
+					}
+
+				} catch (NetException e) {
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 
@@ -211,24 +212,24 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
+		
 		GIPRadioButtonStyleChange radioButtonStyleChange = new GIPRadioButtonStyleChange(
 				R.drawable.gip_button_selected_bk, 0, Color.WHITE,
 				R.color.gip_second_frame_button_brown);
-		View view = new View(this);
-		radioButtonStyleChange.refreshRadioButtonStyle(view, radiobtnids,
+		
+		radioButtonStyleChange.refreshRadioButtonStyle(mainView, radiobtnids,
 				checkedId);
 
 		switch (checkedId) {
 		case R.id.forum_content_info_radiobtn:
-			findMainContentViews(view);
+			findMainContentViews(mainView);
 			break;
 
 		case R.id.forum_content_comment_radiobtn:
 			if (!forum.getViewpath().equals("/SurveryContent")) {
-				// ForumOrdinaryReplayFragment forumOrdinaryReplayFragment = new
-				// ForumOrdinaryReplayFragment();
-				// forumOrdinaryReplayFragment.setForum(getForum());
-				// onTransaction(forumOrdinaryReplayFragment);
+				ForumOrdinaryReplayFragment forumOrdinaryReplayFragment = new ForumOrdinaryReplayFragment();
+				forumOrdinaryReplayFragment.setForum(getForum());
+				onTransaction(forumOrdinaryReplayFragment);
 			} else {
 				Toast.makeText(this, "调查问卷类帖子暂未实现该功能", Toast.LENGTH_SHORT)
 						.show();
@@ -257,7 +258,7 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 		FragmentManager manager = this.getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(R.id.forum_content_fragment, fragment);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 
 }

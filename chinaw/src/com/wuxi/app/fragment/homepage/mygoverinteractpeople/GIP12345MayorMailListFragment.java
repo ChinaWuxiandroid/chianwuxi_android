@@ -8,7 +8,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
-import android.os.Bundle;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -22,9 +22,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345MayorMailContentActivity;
 import com.wuxi.app.engine.LetterService;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
@@ -168,10 +169,7 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment {
 	 */
 	public void showLettersList() {
 
-		BaseSlideFragment baseSlideFragment = this.baseSlideFragment;
-
-		LettersListViewAdapter adapter = new LettersListViewAdapter(
-				baseSlideFragment);
+		LettersListViewAdapter adapter = new LettersListViewAdapter();
 		if (letters == null || letters.size() == 0) {
 			Toast.makeText(context, "对不起，暂无信息", Toast.LENGTH_SHORT).show();
 		} else {
@@ -188,17 +186,6 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment {
 	 */
 	private class LettersListViewAdapter extends BaseAdapter implements
 			OnItemClickListener {
-
-		BaseSlideFragment slideFragment = null;
-
-		/**
-		 * @方法： LettersListViewAdapter
-		 * @描述：
-		 * @param fragment
-		 */
-		public LettersListViewAdapter(BaseSlideFragment fragment) {
-			this.slideFragment = fragment;
-		}
 
 		@Override
 		public int getCount() {
@@ -267,12 +254,11 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment {
 		public void onItemClick(AdapterView<?> adapterView, View arg1,
 				int position, long arg3) {
 			Letter letter = (Letter) adapterView.getItemAtPosition(position);
-			Bundle bundle = new Bundle();
-			bundle.putSerializable("letter", letter);
-
-			slideFragment.slideLinstener.replaceFragment(null, position,
-					Constants.FragmentName.GIP_MAYOR_MAIL_CONTENT_FRAGMENT,
-					bundle);
+		
+			Intent intent = new Intent(getActivity(), GIP12345MayorMailContentActivity.class);
+			intent.putExtra("letter", letter);
+			
+			MainTabActivity.instance.addView(intent);
 
 		}
 

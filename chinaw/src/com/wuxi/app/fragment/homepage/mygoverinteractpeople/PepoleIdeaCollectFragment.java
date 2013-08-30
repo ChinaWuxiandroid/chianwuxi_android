@@ -187,7 +187,7 @@ public class PepoleIdeaCollectFragment extends BaseItemContentFragment implement
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(R.id.forum_content_fragment, fragment);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 
 	/**

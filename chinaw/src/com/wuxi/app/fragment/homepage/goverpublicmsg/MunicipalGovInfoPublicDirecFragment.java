@@ -64,7 +64,7 @@ InitializContentLayoutListner{
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(R.id.goverpublic_titlebelow_content_layout, fragment);
 		ft.addToBackStack(null);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 	
 

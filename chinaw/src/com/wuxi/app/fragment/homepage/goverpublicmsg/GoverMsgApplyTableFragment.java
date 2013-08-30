@@ -91,7 +91,7 @@ public class GoverMsgApplyTableFragment extends BaseFragment implements OnChecke
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(TALBE_CONTENT_ID, fragment);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 
 	/*
@@ -101,7 +101,7 @@ public class GoverMsgApplyTableFragment extends BaseFragment implements OnChecke
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.remove(GoverMsgApplyTableFragment.this);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 
 	@Override

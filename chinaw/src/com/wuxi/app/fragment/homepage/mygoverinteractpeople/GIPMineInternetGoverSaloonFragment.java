@@ -13,6 +13,12 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 
 public class GIPMineInternetGoverSaloonFragment extends RadioButtonChangeFragment{
 
+	/**
+	 * @字段： serialVersionUID
+	 * @类型： long
+	 * @描述： 序列化序号 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final  int[] radioButtonIds={
 			R.id.gip_mine_saloon_radioButton_onlineinquire,
 			R.id.gip_mine_saloon_radioButton_declarationlist
@@ -37,31 +43,26 @@ public class GIPMineInternetGoverSaloonFragment extends RadioButtonChangeFragmen
 
 	@Override
 	protected int getLayoutId() {
-		// TODO Auto-generated method stub
 		return R.layout.goverinterpeople_mine_internetgoversaloon_layout;
 	}
 
 	@Override
 	protected int getRadioGroupId() {
-		// TODO Auto-generated method stub
 		return R.id.gip_mine_saloon_radioGroup;
 	}
 
 	@Override
 	protected int[] getRadioButtonIds() {
-		// TODO Auto-generated method stub
 		return radioButtonIds;
 	}
 
 	@Override
 	protected int getContentFragmentId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	protected void init() {
-		// TODO Auto-generated method stub
 		
 	}
 }

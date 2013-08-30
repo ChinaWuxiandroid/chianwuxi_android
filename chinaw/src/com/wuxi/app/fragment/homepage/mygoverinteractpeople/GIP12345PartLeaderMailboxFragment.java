@@ -100,7 +100,7 @@ public class GIP12345PartLeaderMailboxFragment extends RadioButtonChangeFragment
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(HIDEN_CONTENT_ID, fragment);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 
 }

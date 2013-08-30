@@ -1,7 +1,6 @@
 package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
 import java.util.List;
-import java.util.ListResourceBundle;
 
 import org.json.JSONException;
 
@@ -34,22 +33,16 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
-import com.wuxi.app.adapter.DeptSpinnerAdapter;
 import com.wuxi.app.adapter.MailTypeAdapter;
 import com.wuxi.app.adapter.QueryMailContentTypeAdapter;
-import com.wuxi.app.engine.ApplyDeptService;
 import com.wuxi.app.engine.MailTypeService;
 import com.wuxi.app.engine.PartLeaderMailService;
 import com.wuxi.app.engine.QueryMailContentTypeService;
 import com.wuxi.app.engine.ReplyStatisticsService;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
-import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgSearchContentListFragment.DeptAdapter;
-import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgSearchContentListFragment.DeptAdapter.ViewHolder;
-import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.AllCount;
-import com.wuxi.domain.ApplyDept;
 import com.wuxi.domain.MailTypeWrapper;
 import com.wuxi.domain.MailTypeWrapper.MailType;
 import com.wuxi.domain.PartLeaderMailWrapper;
@@ -127,7 +120,7 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 
 	private LinearLayout linearLayout = null;
 	private LinearLayout radioLayout = null;
-	
+
 	private View popview = null;
 
 	private List<AllCount> allCounts = null;
@@ -366,7 +359,7 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(HIDEN_CONTENT_ID, fragment);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 
 	/**

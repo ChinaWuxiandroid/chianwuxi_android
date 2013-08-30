@@ -253,7 +253,7 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 		fragment.setBaseSlideFragment(this.baseSlideFragment);
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(RIGHT_CONTENT_ID, fragment);
-		ft.commit();	
+		ft.commitAllowingStateLoss();	
 	}
 
 	private class GridViewAdaptger extends BaseAdapter {

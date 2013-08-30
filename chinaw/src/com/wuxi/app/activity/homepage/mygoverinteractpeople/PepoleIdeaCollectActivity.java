@@ -25,6 +25,8 @@ import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
 import com.wuxi.app.fragment.BaseItemContentFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
 import com.wuxi.domain.PoliticsWrapper.Politics;
 
@@ -67,11 +69,13 @@ public class PepoleIdeaCollectActivity extends BaseItemContentActivity implement
 
 	@Override
 	protected void findMainContentViews(View view) {
+		super.findMainContentViews(view);
+		
 		initLayout(view);
 
-//		LegidlstionInfoFragment legidlstionInfoFragment = new LegidlstionInfoFragment();
-//		legidlstionInfoFragment.setPolitics(getPolitics());
-//		onTransaction(legidlstionInfoFragment);
+		LegidlstionInfoFragment legidlstionInfoFragment = new LegidlstionInfoFragment();
+		legidlstionInfoFragment.setPolitics(getPolitics());
+		onTransaction(legidlstionInfoFragment);
 	}
 	
 	@Override
@@ -79,21 +83,19 @@ public class PepoleIdeaCollectActivity extends BaseItemContentActivity implement
 		GIPRadioButtonStyleChange radioButtonStyleChange = new GIPRadioButtonStyleChange(
 				R.drawable.gip_button_selected_bk, 0, Color.WHITE,
 				R.color.gip_second_frame_button_brown);
-		
-		View view = new View(this);
-		
-		radioButtonStyleChange.refreshRadioButtonStyle(view, radiobtnids,
+
+		radioButtonStyleChange.refreshRadioButtonStyle(mainView, radiobtnids,
 				checkedId);
 
 		switch (checkedId) {
 		case R.id.forum_content_info_radiobtn:
-			findMainContentViews(view);
+			findMainContentViews(mainView);
 			break;
 
 		case R.id.forum_content_comment_radiobtn:
-//			LegidlstionReplyFragment legidlstionReplyFragment = new LegidlstionReplyFragment();
-//			legidlstionReplyFragment.setPolitics(getPolitics());
-//			onTransaction(legidlstionReplyFragment);
+			LegidlstionReplyFragment legidlstionReplyFragment = new LegidlstionReplyFragment();
+			legidlstionReplyFragment.setPolitics(getPolitics());
+			onTransaction(legidlstionReplyFragment);
 			break;
 		}
 	}
@@ -187,7 +189,7 @@ public class PepoleIdeaCollectActivity extends BaseItemContentActivity implement
 		FragmentManager manager = this.getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(R.id.forum_content_fragment, fragment);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 
 	/**

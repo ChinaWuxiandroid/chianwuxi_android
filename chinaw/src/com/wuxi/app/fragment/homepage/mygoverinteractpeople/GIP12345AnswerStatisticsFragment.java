@@ -188,13 +188,6 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 	 * 先加载所有统计信息，下面的信息，按 统计按钮后加载
 	 * */
 	public void loadAllCountData(){
-		//		if (CacheUtil.get(menuItem.getChannelId()) != null) {// 从缓存获取
-		//
-		//			titleChannels = (List<Channel>) CacheUtil.get(menuItem
-		//					.getChannelId());
-		//			showTitleData();
-		//			return;
-		//		}
 
 		new Thread(new Runnable() {
 
@@ -237,13 +230,6 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 	 * 统计按钮按后加载 各信箱部门回复统计
 	 * */
 	public void loadLettersReplyCountData(){
-		//		if (CacheUtil.get(menuItem.getChannelId()) != null) {// 从缓存获取
-		//
-		//			titleChannels = (List<Channel>) CacheUtil.get(menuItem
-		//					.getChannelId());
-		//			showTitleData();
-		//			return;
-		//		}
 
 		new Thread(new Runnable() {
 
@@ -336,7 +322,6 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
 			ViewHolder viewHolder = null;
 			if(convertView==null){
 				convertView = mInflater.inflate(

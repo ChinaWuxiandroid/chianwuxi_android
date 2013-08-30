@@ -5,7 +5,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
-import android.os.Bundle;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -19,9 +19,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.HotReviewContentActivity;
 import com.wuxi.app.engine.HotReviewService;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
@@ -180,10 +181,7 @@ public class GoverInterPeopleHotReviewFragment extends
 
 	public void showHotReviews() {
 
-		BaseSlideFragment slideFragment = this.baseSlideFragment;
-
-		HotReviewListViewAdapter adapter = new HotReviewListViewAdapter(
-				slideFragment);
+		HotReviewListViewAdapter adapter = new HotReviewListViewAdapter();
 
 		if (hotReviews == null || hotReviews.size() == 0) {
 			Toast.makeText(context, "对不起，暂无热点话题信息", 2000).show();
@@ -195,11 +193,6 @@ public class GoverInterPeopleHotReviewFragment extends
 
 	public class HotReviewListViewAdapter extends BaseAdapter implements
 			OnItemClickListener {
-		BaseSlideFragment baseSlideFragment;
-
-		public HotReviewListViewAdapter(BaseSlideFragment baseSlideFragment) {
-			this.baseSlideFragment = baseSlideFragment;
-		}
 
 		@Override
 		public int getCount() {
@@ -255,12 +248,13 @@ public class GoverInterPeopleHotReviewFragment extends
 				int position, long arg3) {
 			HotReview hotReview = (HotReview) adapterView
 					.getItemAtPosition(position);
-			Bundle bundle = new Bundle();
-			bundle.putSerializable("hotReview", hotReview);
+			;
 
-			baseSlideFragment.slideLinstener.replaceFragment(null, position,
-					Constants.FragmentName.HOTREVIEW_CONTENT_FRAGMENT, bundle);
-
+			Intent intent = new Intent(getActivity(),
+					HotReviewContentActivity.class);
+			intent.putExtra("hotReview", hotReview);
+			
+			MainTabActivity.instance.addView(intent);
 		}
 
 	}

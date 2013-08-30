@@ -30,8 +30,6 @@ import com.wuxi.exception.NetException;
  * 我的政民互动  主Fragment  之 征求意见平台  子fragment  --网上调查
  * @author 杨宸 智佳
  * */
-
-
 public class GIPSuggestSurveyFragment extends RadioButtonChangeFragment{
 
 	/**

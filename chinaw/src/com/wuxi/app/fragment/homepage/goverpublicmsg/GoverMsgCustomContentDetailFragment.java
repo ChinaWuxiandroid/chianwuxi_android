@@ -23,11 +23,8 @@ import android.widget.Toast;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.PublicSericeChannelAdapter;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.listeners.GoverMsgInitInfoOpenListener;
-import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.Channel;
-import com.wuxi.domain.Content;
 import com.wuxi.domain.MenuItem;
 
 public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
@@ -142,7 +139,7 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 			FragmentManager manager = getActivity().getSupportFragmentManager();
 			FragmentTransaction ft = manager.beginTransaction();
 			ft.replace(CONTENT_LIST_ID, goverMsgCustomContentListFragment);
-			ft.commit();
+			ft.commitAllowingStateLoss();
 		} else {
 			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment = new GoverMsgSearchContentListFragment();
 			goverMsgSearchContentListFragment.setBaseSlideFragment(this.baseSlideFragment);
@@ -157,7 +154,7 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 			FragmentTransaction ft = manager.beginTransaction();
 			
 			ft.replace(CONTENT_LIST_ID, goverMsgSearchContentListFragment);
-			ft.commit();
+			ft.commitAllowingStateLoss();
 		}
 	}
 
@@ -174,7 +171,7 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 			FragmentManager manager = getActivity().getSupportFragmentManager();
 			FragmentTransaction ft = manager.beginTransaction();
 			ft.remove(GoverMsgCustomContentDetailFragment.this);
-			ft.commit();
+			ft.commitAllowingStateLoss();
 			break;
 		}
 	}
