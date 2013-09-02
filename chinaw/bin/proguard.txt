@@ -1,5 +1,5 @@
 # view res/layout/index_news_layout.xml #generated:31
-# view res/layout/main_index_fragment_layout.xml #generated:39
+# view res/layout/main_index_fragment_layout.xml #generated:40
 -keep class android.support.v4.view.ViewPager { <init>(...); }
 
 # view AndroidManifest.xml #generated:50
@@ -137,7 +137,7 @@
 # view res/layout/city_map_layout.xml #generated:204
 -keep class com.wuxi.app.view.MyMapView { <init>(...); }
 
-# view res/layout/main_index_fragment_layout.xml #generated:14
+# view res/layout/main_index_fragment_layout.xml #generated:15
 -keep class com.wuxi.app.view.PagerScrollView { <init>(...); }
 
 # view res/layout/login_slide_layout.xml #generated:1

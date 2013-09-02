@@ -5,7 +5,6 @@ package com.wuxi.app.activity.homepage.mygoverinteractpeople;
 
 import org.json.JSONException;
 
-import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -16,9 +15,6 @@ import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
 import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.ForumPostService;
-import com.wuxi.app.fragment.BaseItemContentFragment;
-import com.wuxi.app.fragment.BaseSlideFragment;
-import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.exception.NetException;
 

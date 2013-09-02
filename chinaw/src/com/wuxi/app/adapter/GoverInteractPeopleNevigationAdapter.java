@@ -8,20 +8,19 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.wuxi.app.FragmentManagers;
 import com.wuxi.app.R;
 import com.wuxi.domain.MenuItem;
 
 public class GoverInteractPeopleNevigationAdapter extends BaseAdapter{
 	private LayoutInflater mInflater;
 	private List<MenuItem> listMenus;
-	FragmentManagers managers;
+	
 	private int selectedPosition = 0;// 选中的位置  
 	
-	public GoverInteractPeopleNevigationAdapter(LayoutInflater mInflater,List<MenuItem> listMenus, FragmentManagers managers){
+	public GoverInteractPeopleNevigationAdapter(LayoutInflater mInflater,List<MenuItem> listMenus){
 		this.mInflater=mInflater;
 		this.listMenus=listMenus;
-		this.managers=managers;
+		
 	}
 
 	@Override

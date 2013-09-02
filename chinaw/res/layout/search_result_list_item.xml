@@ -13,7 +13,8 @@
         android:focusable="false"
         android:gravity="center_vertical"
         android:text="无锡景（无锡民歌） （关联度：99%）"
-        android:textSize="15sp" />
+        android:textSize="15sp" 
+        />
 
     <WebView
         android:id="@+id/search_result_listitem_webview"

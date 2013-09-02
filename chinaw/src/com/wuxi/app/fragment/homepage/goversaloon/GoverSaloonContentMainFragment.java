@@ -362,7 +362,7 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 		}
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
-		fragment.setManagers(managers);// 传递managers
+		
 		ft.replace(CONTENT_MAIN_ID, fragment);
 
 		ft.commitAllowingStateLoss();

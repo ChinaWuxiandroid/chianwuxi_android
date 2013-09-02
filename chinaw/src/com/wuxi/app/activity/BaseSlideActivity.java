@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -341,6 +342,9 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 	@Override
 	public void onClick(View v) {
 
+		if(!isRightMenuEnabled()){
+			return ;
+		}
 		Intent intent = null;
 		switch (v.getId()) {
 		case R.id.login_tv_userlogin:// 登录处理

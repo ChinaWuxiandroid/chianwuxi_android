@@ -20,13 +20,13 @@ import android.widget.Toast;
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseSlideActivity;
+import com.wuxi.app.activity.commactivity.MenuItemMainActivity;
 import com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity;
 import com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity;
 import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonActivity;
 import com.wuxi.app.activity.homepage.informationcenter.InformationCenterActivity;
 import com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity;
 import com.wuxi.app.activity.homepage.publicservice.PublicServiceActivity;
-import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Channel;
@@ -303,7 +303,7 @@ public class SiteMapActivity extends BaseSlideActivity {
 					InformationCenterActivity.class);
 				selectMenuItemIndex = 2;
 				intent.putExtra(
-					MenuItemMainFragment.SHOWITEM_LAYOUT_INDEXKEY, position);
+					MenuItemMainActivity.SHOWITEM_LAYOUT_INDEXKEY, position);
 			} else if (menuItem.getName().equals("政府信息公开")) {
 				intent = new Intent(SiteMapActivity.this,
 					PublicGoverMsgActivity.class);
@@ -313,7 +313,7 @@ public class SiteMapActivity extends BaseSlideActivity {
 				intent = new Intent(SiteMapActivity.this,
 					PublicServiceActivity.class);
 				intent.putExtra(
-					MenuItemMainFragment.SHOWITEM_LAYOUT_INDEXKEY, position);
+					MenuItemMainActivity.SHOWITEM_LAYOUT_INDEXKEY, position);
 				selectMenuItemIndex = 4;
 			} else if (menuItem.getName().equals("政务大厅")) {
 

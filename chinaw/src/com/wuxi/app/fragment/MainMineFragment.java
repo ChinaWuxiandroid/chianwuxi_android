@@ -35,26 +35,33 @@ import com.wuxi.exception.NetException;
  * */
 
 public class MainMineFragment extends BaseSlideFragment implements
-OnItemClickListener, Serializable {
+		OnItemClickListener, Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	private String id = "402881de3f758726013f75873a3200a6";
+
 	private static final int DETAIL_ID = R.id.gover_interact_people_maincontent_fragment;// 点击左侧导航时右侧要显示内容区域的ID
+
 	protected static final int LEFT_CHANNEL_DATA__LOAD_SUCCESS = 1;// 左侧频道(菜单)加载
+
 	protected static final int LEFT_MENUITEM_DATA__LOAD_SUCCESS = 2;// 左侧频道(菜单)加载
+
 	protected static final int LEFT_DATA__LOAD_ERROR = 0;// 左侧频道(菜单)加载失败
 
 	protected ListView mListView;// 左侧ListView
+
 	private List<MenuItem> listMenus;// 头部菜单选项
 
-	//	private List<Channel> channels;
+	// private List<Channel> channels;
 	private LoginDialog loginDialog;
 
 	private MenuItem parentMenuItem; // 父菜单
-	private int defaultCheckPosition=0;
+
+	private int defaultCheckPosition = 0;
 
 	private GoverInteractPeopleNevigationAdapter adapter;
 
@@ -68,9 +75,9 @@ OnItemClickListener, Serializable {
 			}
 
 			switch (msg.what) {
-			//			case LEFT_CHANNEL_DATA__LOAD_SUCCESS:
-			//				showLeftChannelData();
-			//				break;
+			// case LEFT_CHANNEL_DATA__LOAD_SUCCESS:
+			// showLeftChannelData();
+			// break;
 			case LEFT_MENUITEM_DATA__LOAD_SUCCESS:
 				showLeftMenuItemData();
 				break;
@@ -83,32 +90,30 @@ OnItemClickListener, Serializable {
 		};
 	};
 
-	public void getArgumentsFromOtherFragment(){
-		Bundle bundle=this.getArguments();
-		if( bundle!=null&&this.getArguments().get("checkPosition")!=null){
-			defaultCheckPosition= (Integer) this.getArguments().get("checkPosition");
+	public void getArgumentsFromOtherFragment() {
+		Bundle bundle = this.getArguments();
+		if (bundle != null && this.getArguments().get("checkPosition") != null) {
+			defaultCheckPosition = (Integer) this.getArguments().get(
+				"checkPosition");
 		}
 	}
-	
+
 	@Override
 	public void initUI() {
 		super.initUI();
-		loginDialog=new LoginDialog(context, this);
+		loginDialog = new LoginDialog(context, this);
 		mListView = (ListView) view.findViewById(R.id.gover_interact_people_mainmenu_listview);
-		
-		if("".equals(SystemUtil.getAccessToken(context))){
-			defaultCheckPosition=1;
+
+		if ("".equals(SystemUtil.getAccessToken(context))) {
+			defaultCheckPosition = 1;
 		}
 		getArgumentsFromOtherFragment();
-		
-		
-		
-		if(parentMenuItem==null){
+
+		if (parentMenuItem == null) {
 			loadMenuItemData(id);
-		}
-		else{
+		} else {
 			if (parentMenuItem.getType() == MenuItem.CHANNEL_MENU) {
-				//				loadChannelData();
+				// loadChannelData();
 			} else if (parentMenuItem.getType() == MenuItem.CUSTOM_MENU) {// 普通菜单
 				loadMenuItemData(parentMenuItem.getId());// 加载子菜单
 
@@ -161,13 +166,13 @@ OnItemClickListener, Serializable {
 			}
 		}
 
-				).start();
+		).start();
 
 	}
 
 	private void showLeftMenuItemData() {
 
-		adapter = new GoverInteractPeopleNevigationAdapter(mInflater, listMenus, managers);
+		adapter = new GoverInteractPeopleNevigationAdapter(mInflater, listMenus);
 		adapter.setSelectedPosition(defaultCheckPosition);
 		mListView.setDividerHeight(0);
 		mListView.setAdapter(adapter);// 设置适配器
@@ -189,7 +194,7 @@ OnItemClickListener, Serializable {
 		if (fragment != null) {
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
 			ft.replace(DETAIL_ID, fragment);// 替换视图
-			fragment.setManagers(managers);// 传递mangers
+
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
 			ft.commit();
@@ -208,7 +213,7 @@ OnItemClickListener, Serializable {
 
 	@Override
 	protected String getTitleText() {
-		if(parentMenuItem==null)
+		if (parentMenuItem == null)
 			return "政民互动";
 		else
 			return parentMenuItem.getName();
@@ -216,12 +221,11 @@ OnItemClickListener, Serializable {
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		if(position==0){
-			if(!loginDialog.checkLogin()){
+		if (position == 0) {
+			if (!loginDialog.checkLogin()) {
 				loginDialog.showDialog();
 			}
-		}
-		else{
+		} else {
 			Object object = parent.getItemAtPosition(position);
 
 			adapter.setSelectedPosition(position); // 刷新左侧导航listView背景

@@ -272,7 +272,7 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 			if (isFristLoadMyConsultData) {
 
 				myOnlineConsultAdapter = new MyOnlineConsultAdapter(myconsults,
-						context, managers, baseSlideFragment);
+						context);
 				isFristLoadMyConsultData = false;
 				gover_saloon_lv_myconsult.setAdapter(myOnlineConsultAdapter);
 				gover_pb_myonlineapply.setVisibility(ProgressBar.GONE);

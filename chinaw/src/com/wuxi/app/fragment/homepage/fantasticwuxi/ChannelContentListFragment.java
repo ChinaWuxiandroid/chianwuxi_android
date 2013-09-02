@@ -1,15 +1,13 @@
 package com.wuxi.app.fragment.homepage.fantasticwuxi;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
 import com.wuxi.app.MainTabActivity;
+import com.wuxi.app.activity.commactivity.ContentDetailActivity;
 import com.wuxi.app.activity.homepage.fantasticwuxi.WuxiChannelContentDetailActivity;
-import com.wuxi.app.fragment.commonfragment.ContentDetailFragment;
 import com.wuxi.app.fragment.commonfragment.ContentListFragment;
-import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.Content;
 
 /**
@@ -28,7 +26,7 @@ public class ChannelContentListFragment extends ContentListFragment {
 		intent.putExtra(WuxiChannelContentDetailActivity.CONTENT_KEY, content);
 
 		if (this.channel != null) {
-			intent.putExtra(ContentDetailFragment.CHANNEL_KEY, channel);
+			intent.putExtra(ContentDetailActivity.CHANNEL_KEY, channel);
 		}
 
 		MainTabActivity.instance.addView(intent);

@@ -13,7 +13,7 @@
         android:layout_centerVertical="true"
         android:adjustViewBounds="true"
         android:src="@drawable/slide_open_close_btn"
-        android:layout_marginLeft="5dip" />
+        android:layout_marginLeft="8dip" />
 
     <ImageView
         android:id="@+id/back_btn"
@@ -22,7 +22,7 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/open_close_left_btn"
         android:src="@drawable/slide_back_btn"
-        android:layout_marginLeft="10dip" />
+        android:layout_marginLeft="15dip" />
 
     <TextView
         android:id="@+id/Title_Text"

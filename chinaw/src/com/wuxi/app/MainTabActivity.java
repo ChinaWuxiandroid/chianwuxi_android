@@ -63,7 +63,7 @@ public class MainTabActivity extends ActivityGroup implements
 
 	private RadioButton main_tab_index, main_tab_search, main_tab_login_reg,
 			main_tab_mine, main_tab_more;
-
+	public boolean fistLoadAPP = true;
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 
@@ -131,7 +131,7 @@ public class MainTabActivity extends ActivityGroup implements
 		stack.add(component);
 
 		if (llMain.getChildCount() > 1) {
-			handler.sendEmptyMessageDelayed(REMOVE_VIEW, 2000);
+			handler.sendEmptyMessageDelayed(REMOVE_VIEW, 1000);
 		}
 
 	}

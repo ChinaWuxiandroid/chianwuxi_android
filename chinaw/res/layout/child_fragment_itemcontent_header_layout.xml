@@ -14,9 +14,22 @@
         android:padding="5dip" >
 
         <ImageView
+            android:id="@+id/open_close_left_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dip"
+            android:adjustViewBounds="true"
+            android:src="@drawable/slide_open_close_btn" />
+
+        <ImageView
             android:id="@+id/back_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@+id/open_close_left_btn"
             android:src="@drawable/slide_back_btn" />
 
         <TextView
@@ -45,26 +58,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            
-            android:orientation="vertical" >
-
-            <ImageView
-                android:id="@+id/open_close_left_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/slide_open_close_btn_1" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/open_close_left_btn"
-                android:text="列表" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="35dip"
+            android:layout_marginLeft="45dip"
             android:orientation="vertical" >
 
             <ImageView
@@ -78,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/content_setting"
                 android:gravity="center_horizontal"
-                android:text="设置" />
+                android:text="显示" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -100,14 +94,13 @@
                 android:gravity="center_horizontal"
                 android:text="分享" />
         </RelativeLayout>
-        
-	
+
         <RelativeLayout
             android:id="@+id/rl_down"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-             android:layout_marginLeft="13dip" >
+            android:layout_marginLeft="13dip"
+            android:orientation="vertical" >
 
             <ImageView
                 android:id="@+id/content_download"

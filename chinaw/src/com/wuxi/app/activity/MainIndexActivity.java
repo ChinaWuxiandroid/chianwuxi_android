@@ -39,7 +39,6 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
-import com.wuxi.app.FragmentManagers;
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.commactivity.MenuItemMainActivity;
@@ -59,8 +58,6 @@ import com.wuxi.app.engine.DownLoadTask;
 import com.wuxi.app.engine.ImportNewsService;
 import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.engine.UpdateInfoService;
-import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
-import com.wuxi.app.fragment.homepage.NewsAnnAcountFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.Constants.CacheKey;
@@ -232,9 +229,9 @@ public class MainIndexActivity extends Activity implements
 		pd.setMessage("正在下载");
 		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 
-		if (FragmentManagers.getInstance().fistLoadAPP) {
+		if (MainTabActivity.instance.fistLoadAPP) {
 			checkUpdate();// 监测软件是否有更新
-			FragmentManagers.getInstance().fistLoadAPP = false;
+			MainTabActivity.instance.fistLoadAPP = false;
 		}
 
 	}
@@ -406,8 +403,8 @@ public class MainIndexActivity extends Activity implements
 				NewsAnnAcountActivitiy.class);
 			Bundle bundle = new Bundle();
 			intent.putExtra("content", content);
-			intent.putExtra(NewsAnnAcountFragment.SHOWTYPE_KEY, type);// 显示
-			// IndexActivity.instance.addView(intent);
+			intent.putExtra(NewsAnnAcountActivitiy.SHOWTYPE_KEY, type);// 显示
+			
 			MainTabActivity.instance.addView(intent);
 
 		}
@@ -738,13 +735,13 @@ public class MainIndexActivity extends Activity implements
 			intent = new Intent(MainIndexActivity.this,
 				InformationCenterActivity.class);
 			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 2);
-			intent.putExtra(MenuItemMainFragment.SHOWITEM_LAYOUT_INDEXKEY, 1);
+			intent.putExtra(MenuItemMainActivity.SHOWITEM_LAYOUT_INDEXKEY, 1);
 			break;
 		case R.id.index_rb_announcements:// 推荐公告
 			intent = new Intent(MainIndexActivity.this,
 				InformationCenterActivity.class);
 			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 2);
-			intent.putExtra(MenuItemMainFragment.SHOWITEM_LAYOUT_INDEXKEY, 2);
+			intent.putExtra(MenuItemMainActivity.SHOWITEM_LAYOUT_INDEXKEY, 2);
 			break;
 		case R.id.iv_index_ldhd:
 
@@ -941,7 +938,7 @@ public class MainIndexActivity extends Activity implements
 	public boolean dispatchKeyEvent(KeyEvent event) {
 		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
 			if (event.getAction() == KeyEvent.ACTION_UP) {
-				// IndexActivity.instance.pop();
+				
 				MainTabActivity.instance.pop();
 			}
 			return true;

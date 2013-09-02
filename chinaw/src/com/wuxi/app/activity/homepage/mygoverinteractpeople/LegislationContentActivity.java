@@ -19,15 +19,14 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
 import com.wuxi.app.engine.ForumCommentService;
-import com.wuxi.app.fragment.BaseItemContentFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment;
 import com.wuxi.app.util.Constants;

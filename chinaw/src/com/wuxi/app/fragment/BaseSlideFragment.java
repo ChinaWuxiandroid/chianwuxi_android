@@ -11,12 +11,11 @@ import android.widget.TextView;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.listeners.SlideLinstener;
 
 public abstract class BaseSlideFragment extends BaseFragment {
 
 	protected View view ;
-	public SlideLinstener slideLinstener;
+	
 	protected ImageView opearn_btn, member_btnm, back_btn;
 	public TextView Title_text;
 	protected LayoutInflater mInflater;
@@ -49,7 +48,7 @@ public abstract class BaseSlideFragment extends BaseFragment {
 	protected abstract int getLayoutId();
 
 	public void initBtn() {
-		slideLinstener.closeSlideMenu();
+		
 		opearn_btn = (ImageView) view.findViewById(R.id.open_close_left_btn);
 		member_btnm = (ImageView) view.findViewById(R.id.member_btn);
 		Title_text = (TextView) view.findViewById(R.id.Title_Text);
@@ -73,13 +72,13 @@ public abstract class BaseSlideFragment extends BaseFragment {
 	private OnClickListener LeftClick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			OpenOrCloseMenu(v);
+			
 		}
 	};
 	private OnClickListener MemberClick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			MemberMenu(v);
+			
 		}
 	};
 
@@ -87,22 +86,9 @@ public abstract class BaseSlideFragment extends BaseFragment {
 
 		@Override
 		public void onClick(View v) {
-			onBack();
+			
 		}
 	};
 
-	public void onBack(){
-		slideLinstener.onBack();
-	}
-	public void OpenOrCloseMenu(View souce) {
-		slideLinstener.OpearnLeft();
-	}
-
-	public void MemberMenu(View souce) {
-		slideLinstener.OpearnRight();
-	}
-
-	public void setFragment(SlideLinstener slideLinstener) {
-		this.slideLinstener = slideLinstener;
-	}
+	
 }

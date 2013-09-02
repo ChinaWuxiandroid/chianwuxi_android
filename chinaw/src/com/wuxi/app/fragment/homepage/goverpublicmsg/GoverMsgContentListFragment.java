@@ -1,16 +1,12 @@
 package com.wuxi.app.fragment.homepage.goverpublicmsg;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.activity.homepage.goverpublicmsg.GoverMsgContentDetailWebActivity;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.ContentListFragment;
-import com.wuxi.app.fragment.commonfragment.MenuItemMainFragment;
-import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.Content;
 
 /**

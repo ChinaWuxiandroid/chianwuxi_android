@@ -173,7 +173,7 @@ public class MainMineActivity extends BaseSlideActivity implements
 	private void showLeftMenuItemData() {
 
 		adapter = new GoverInteractPeopleNevigationAdapter(getLayoutInflater(),
-			listMenus, null);
+			listMenus);
 		adapter.setSelectedPosition(defaultCheckPosition);
 		mListView.setDividerHeight(0);
 		mListView.setAdapter(adapter);// 设置适配器
