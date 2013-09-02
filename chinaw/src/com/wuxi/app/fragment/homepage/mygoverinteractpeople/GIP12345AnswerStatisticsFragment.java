@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -183,6 +184,14 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 
 		loadAllCountData();	
 	}
+	
+//	public class MyAryAdapter extends ArrayAdapter {
+//
+//		public MyAryAdapter(Context context, int textViewResourceId) {
+//			super(context, textViewResourceId);
+//		}
+//		
+//	}
 
 	/**
 	 * 先加载所有统计信息，下面的信息，按 统计按钮后加载
