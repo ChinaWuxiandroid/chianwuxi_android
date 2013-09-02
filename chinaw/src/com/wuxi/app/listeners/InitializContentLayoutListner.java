@@ -3,8 +3,6 @@ package com.wuxi.app.listeners;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.domain.MenuItem;
 
-import android.support.v4.app.Fragment;
-
 /**
  * 内容界面绑定监听器
  * 

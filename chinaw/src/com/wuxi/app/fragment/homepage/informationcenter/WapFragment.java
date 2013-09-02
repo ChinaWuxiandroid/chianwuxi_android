@@ -1,7 +1,6 @@
 package com.wuxi.app.fragment.homepage.informationcenter;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,7 @@ public class WapFragment extends BaseFragment {
 
 	private View view;
 	private MenuItem parentItem;
-	private Context context;
+	
 
 	private WebView mWb_leader;
 	private ProgressBar wb_pb;
@@ -37,7 +36,7 @@ public class WapFragment extends BaseFragment {
 			Bundle savedInstanceState) {
 
 		view = inflater.inflate(R.layout.leader_window_layout, null);
-		context = getActivity();
+		
 		initUI();
 		return view;
 	}

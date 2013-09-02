@@ -6,7 +6,6 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -35,7 +34,6 @@ import com.wuxi.app.engine.DeptService;
 import com.wuxi.app.engine.GoverSaoonItemService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
-import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.Dept;
 import com.wuxi.domain.GoverSaoonItem;
 import com.wuxi.domain.GoverSaoonItemWrapper;

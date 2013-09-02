@@ -34,7 +34,6 @@ import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailXKActivity;
 import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailZSActivtiy;
 import com.wuxi.app.adapter.GoverOnlineApproveAdapter;
 import com.wuxi.app.engine.GoverSaoonItemService;
-import com.wuxi.app.util.Constants.FragmentName;
 import com.wuxi.domain.GoverSaoonItem;
 import com.wuxi.domain.GoverSaoonItemWrapper;
 import com.wuxi.exception.NODataException;
