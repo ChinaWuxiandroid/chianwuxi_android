@@ -28,7 +28,8 @@
                 android:layout_width="180dip"
                 android:layout_height="wrap_content"
                 android:background="@drawable/spiner_bg"
-                android:layout_marginLeft="8dip" />
+                android:layout_marginLeft="8dip" 
+               />
 
             <Button
                 android:id="@+id/btn_searchbyrange"
