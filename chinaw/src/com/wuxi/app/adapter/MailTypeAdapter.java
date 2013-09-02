@@ -17,6 +17,7 @@ import com.wuxi.app.R;
 import com.wuxi.domain.MailTypeWrapper.MailType;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -149,7 +150,10 @@ public class MailTypeAdapter extends BaseAdapter implements
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
+		
+		viewHolder.tv_dept.setTextColor(Color.BLACK);
 		viewHolder.tv_dept.setText(mailTypes.get(position).getTypename());
+		
 		return convertView;
 	}
 

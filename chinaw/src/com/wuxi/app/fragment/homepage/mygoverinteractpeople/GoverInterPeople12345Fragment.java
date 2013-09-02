@@ -3,8 +3,8 @@ package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
 import android.widget.RadioGroup;
 
+import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
 
@@ -43,30 +43,30 @@ public class GoverInterPeople12345Fragment extends RadioButtonChangeFragment {
 			break;
 
 		case R.id.goverinterpeople_12345_radioButton_complaint:	
-			MainMineFragment complaintFragment=new GIP12345ComplaintFragment();
+			BaseFragment complaintFragment=new GIP12345ComplaintFragment();
 			onTransaction(complaintFragment);
 			break;
 
 		case R.id.goverinterpeople_12345_radioButton_partmentLeaderMailBox:
-			MainMineFragment partLeaderMailboxFragment=new GIP12345PartLeaderMailboxFragment();
+			BaseFragment partLeaderMailboxFragment=new GIP12345PartLeaderMailboxFragment();
 			onTransaction(partLeaderMailboxFragment);
 			break;
 
 		case R.id.goverinterpeople_12345_radioButton_countryMayorMailBox:
-			MainMineFragment cMayorMailBoxFragment=new GIP12345CMayorMailBoxFragment();
+			BaseFragment cMayorMailBoxFragment=new GIP12345CMayorMailBoxFragment();
 			onTransaction(cMayorMailBoxFragment);
 			break;
 
 		case R.id.goverinterpeople_12345_radioButton_hotMail:
-			MainMineFragment hotMailFragment=new GIP12345HotMail();
+			BaseFragment hotMailFragment=new GIP12345HotMail();
 			onTransaction(hotMailFragment);
 			break;
 		case R.id.goverinterpeople_12345_radioButton_answerStatistics:
-			MainMineFragment answerStatisticsFragment=new GIP12345AnswerStatisticsFragment();
+			BaseFragment answerStatisticsFragment=new GIP12345AnswerStatisticsFragment();
 			onTransaction(answerStatisticsFragment);
 			break;		
 		case R.id.goverinterpeople_12345_radioButton_iwantmail:
-			MainMineFragment iWantMailFragment=new GIP12345IWantMailFragment();
+			BaseFragment iWantMailFragment=new GIP12345IWantMailFragment();
 			onTransaction(iWantMailFragment);
 			break;
 		}
@@ -100,7 +100,7 @@ public class GoverInterPeople12345Fragment extends RadioButtonChangeFragment {
 
 	@Override
 	protected void init() {
-		MainMineFragment mayorBoxFragment=new GIP12345MayorMaiBoxFragment();
+		BaseFragment mayorBoxFragment=new GIP12345MayorMaiBoxFragment();
 		onTransaction(mayorBoxFragment);
 	}
 

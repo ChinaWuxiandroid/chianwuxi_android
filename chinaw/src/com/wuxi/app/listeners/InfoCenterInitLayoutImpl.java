@@ -2,7 +2,7 @@ package com.wuxi.app.listeners;
 
 import android.support.v4.app.Fragment;
 
-import com.wuxi.app.fragment.homepage.SlideLevelFragment;
+import com.wuxi.app.BaseFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InfoNavigatorWithContentFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.InforContentListFragment;
 import com.wuxi.app.fragment.homepage.informationcenter.WapFragment;
@@ -51,7 +51,7 @@ public class InfoCenterInitLayoutImpl implements MenuItemInitLayoutListener {
 				contentNavigatorWithContentFragment=(InfoNavigatorWithContentFragment)fragment;
 				contentNavigatorWithContentFragment.setParentMenuItem(menuItem);
 				initLayoutListner.bindContentLayout(contentNavigatorWithContentFragment);
-			}else if(fragment instanceof SlideLevelFragment){//链接跳转菜单
+			}else if(fragment instanceof BaseFragment){//链接跳转菜单
 				
 				if(menuItem.getName().equals("机构职能")){
 					

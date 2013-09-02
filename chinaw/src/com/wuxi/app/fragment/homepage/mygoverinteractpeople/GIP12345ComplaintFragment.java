@@ -6,6 +6,7 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
@@ -324,7 +325,7 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 		});
 
 		GIP12345ComplaintListFragment complaintListFragment = new GIP12345ComplaintListFragment();
-		complaintListFragment.setBaseSlideFragment(this.baseSlideFragment);
+		
 		bindFragment(complaintListFragment);
 
 		loadAllCountData();
@@ -569,7 +570,10 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
+			
+			viewHolder.tv_dept.setTextColor(Color.BLACK);
 			viewHolder.tv_dept.setText(dept.getDepname());
+			
 			return convertView;
 		}
 

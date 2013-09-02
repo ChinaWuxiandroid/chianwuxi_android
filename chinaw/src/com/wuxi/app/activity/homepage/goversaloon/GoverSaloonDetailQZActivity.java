@@ -100,7 +100,7 @@ public class GoverSaloonDetailQZActivity extends BaseItemContentActivity
 		super.findMainContentViews(view);
 		
 		
-		loginDialog=new LoginDialog(this, null);
+		loginDialog=new LoginDialog(this);
 		tv_ssmc_name = (TextView) view.findViewById(R.id.tv_ssmc_name);
 		tl_tb_detail = (TableLayout) view.findViewById(R.id.tl_tb_detail);
 		pb_detail = (ProgressBar) view.findViewById(R.id.pb_detail);

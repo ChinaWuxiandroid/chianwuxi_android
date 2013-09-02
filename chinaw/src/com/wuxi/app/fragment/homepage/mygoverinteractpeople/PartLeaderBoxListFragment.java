@@ -9,7 +9,6 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.hardware.Camera.CameraInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,15 +23,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.engine.PartLeaderMailService;
-import com.wuxi.app.fragment.BaseSlideFragment;
-import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.PartLeaderMailWrapper;
 import com.wuxi.domain.PartLeaderMailWrapper.PartLeaderMail;
@@ -217,7 +213,7 @@ public class PartLeaderBoxListFragment extends BaseFragment {
 				int position, long arg3) {
 			
 			PartLeaderMailFragment listFragment = new PartLeaderMailFragment();
-			listFragment.setBaseSlideFragment(PartLeaderBoxListFragment.this.baseSlideFragment);
+		
 			listFragment.setLeaderMail(leaderMails.get(position));
 			bindFragment(listFragment);
 		}

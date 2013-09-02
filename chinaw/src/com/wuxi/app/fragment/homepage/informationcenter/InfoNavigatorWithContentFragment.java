@@ -31,7 +31,7 @@ public class InfoNavigatorWithContentFragment extends
 	protected Fragment showChannelContentFragment(Channel channel) {
 		InforContentListFragment inforContentListFragment=new InforContentListFragment();
 		inforContentListFragment.setArguments(this.getArguments());//传递外层框架
-		inforContentListFragment.setBaseSlideFragment(this.baseSlideFragment);
+		
 		inforContentListFragment.setChannel(channel);
 		return inforContentListFragment;
 	}

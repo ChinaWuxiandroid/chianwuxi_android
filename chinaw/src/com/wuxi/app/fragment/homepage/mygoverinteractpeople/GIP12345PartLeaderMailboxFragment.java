@@ -70,7 +70,7 @@ public class GIP12345PartLeaderMailboxFragment extends RadioButtonChangeFragment
 	@Override
 	protected void init() {
 		PartLeaderBoxListFragment leaderMailListFragment = new PartLeaderBoxListFragment();
-		leaderMailListFragment.setBaseSlideFragment(this.baseSlideFragment);
+		
 		bindFragment(leaderMailListFragment);
 	}
 	

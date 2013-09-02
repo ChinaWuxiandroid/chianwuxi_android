@@ -17,27 +17,24 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345MayorMailContentActivity;
 import com.wuxi.app.engine.PartLeaderMailListService;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
-import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.LetterWrapper;
 import com.wuxi.domain.LetterWrapper.Letter;
@@ -183,10 +180,10 @@ public class PartLeaderMailListFragment extends RadioButtonChangeFragment {
 	 */
 	public void showLettersList() {
 
-		BaseSlideFragment baseSlideFragment = this.baseSlideFragment;
+		
 
 		LettersListViewAdapter adapter = new LettersListViewAdapter(
-				baseSlideFragment);
+				);
 		if (letters == null || letters.size() == 0) {
 			Toast.makeText(context, "该部门暂无信件", Toast.LENGTH_SHORT).show();
 		} else {
@@ -204,15 +201,15 @@ public class PartLeaderMailListFragment extends RadioButtonChangeFragment {
 	private class LettersListViewAdapter extends BaseAdapter implements
 			OnItemClickListener {
 
-		BaseSlideFragment slideFragment = null;
+	
 
 		/**
 		 * @方法： LettersListViewAdapter
 		 * @描述：
 		 * @param fragment
 		 */
-		public LettersListViewAdapter(BaseSlideFragment fragment) {
-			this.slideFragment = fragment;
+		public LettersListViewAdapter() {
+			
 		}
 
 		@Override

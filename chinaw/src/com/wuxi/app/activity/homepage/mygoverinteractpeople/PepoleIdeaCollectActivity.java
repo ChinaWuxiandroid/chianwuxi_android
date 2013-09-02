@@ -127,7 +127,7 @@ public class PepoleIdeaCollectActivity extends BaseItemContentActivity implement
 				comment_btn.getLocationOnScreen(xy);
 				popWindow.showAtLocation(comment_btn, Gravity.BOTTOM
 						| Gravity.CENTER_HORIZONTAL, 0,
-						comment_btn.getHeight() * 2 + 20);
+						comment_btn.getHeight() * 2 + 50);
 			}
 		});
 	}
@@ -154,7 +154,7 @@ public class PepoleIdeaCollectActivity extends BaseItemContentActivity implement
 
 			@Override
 			public void onClick(View v) {
-
+				
 				Toast.makeText(PepoleIdeaCollectActivity.this, "暂未开通该功能...", Toast.LENGTH_SHORT)
 						.show();
 			}

@@ -52,7 +52,8 @@
             android:id="@+id/query_mail_box_sort_spinner"
             android:layout_width="108sp"
             android:layout_height="32sp"
-            android:background="@drawable/spiner_bg" />
+            android:background="@drawable/spiner_bg" 
+            />
     </LinearLayout>
 
     <LinearLayout

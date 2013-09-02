@@ -105,7 +105,7 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements OnClickLi
 	}
 
 	public void initLayout(){
-		loginDialog=new LoginDialog(context, this.baseSlideFragment);
+		loginDialog=new LoginDialog(context);
 		if(!loginDialog.checkLogin()){
 			loginDialog.showDialog();
 		}

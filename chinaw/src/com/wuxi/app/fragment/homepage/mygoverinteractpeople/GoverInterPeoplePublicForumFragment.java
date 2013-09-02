@@ -6,7 +6,6 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -25,9 +24,7 @@ import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumContentActivity;
 import com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumPostActivity;
-import com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity;
 import com.wuxi.app.engine.ForumService;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;

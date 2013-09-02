@@ -35,7 +35,7 @@ import com.wuxi.domain.ForumWrapper.Forum;
 import com.wuxi.exception.NetException;
 
 /**
- * 公众论坛帖子详细内容碎片
+ * 公众论坛帖子详细内容界面
  * 
  * @author 智佳 罗森
  * 
@@ -116,7 +116,7 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 				comment_btn.getLocationOnScreen(xy);
 				popWindow.showAtLocation(comment_btn, Gravity.BOTTOM
 						| Gravity.CENTER_HORIZONTAL, 0,
-						comment_btn.getHeight() * 2 + 20);
+						comment_btn.getHeight()*2+50);
 			}
 		});
 	}
@@ -127,8 +127,7 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 	 * @param con
 	 * @return
 	 */
-	private PopupWindow makePopWindow(Context con) {
-		PopupWindow popupWindow = null;
+	private PopupWindow makePopWindow(final Context con) {
 
 		popview = LayoutInflater.from(con).inflate(
 				R.layout.forum_content_popwindow_layout, null);
@@ -137,6 +136,20 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 
 		final EditText submitContent = (EditText) popview
 				.findViewById(R.id.forum_popwindow_content_edit);
+		
+		popWindowManager = PopWindowManager.getInstance();
+
+		final PopupWindow popupWindow = new PopupWindow(popview, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, true); 
+		
+		popWindowManager.addPopWindow(popupWindow);
+
+		popupWindow.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.naviga_leftitem_back));
+
+		popupWindow.setFocusable(true); // 设置PopupWindow可获得焦点
+		popupWindow.setTouchable(true); // 设置PopupWindow可触摸
+		popupWindow.setOutsideTouchable(true); // 设置非PopupWindow区域可触摸
+		
 		submitBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -151,15 +164,14 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 						ForumContentActivity.this);
 
 				LoginDialog loginDialog = new LoginDialog(
-						ForumContentActivity.this, null);
+						ForumContentActivity.this);
 
 				try {
 					if (!forum.getViewpath().equals("/SurveryContent")) {
 						if (loginDialog.checkLogin()) {
 							if (!content.equals("")) {
-								boolean isSubnit = commentService
-										.submitComment(id, access_token, type,
-												content);
+								commentService.submitComment(id, access_token,
+										type, content);
 
 								Toast.makeText(ForumContentActivity.this,
 										"提交成功，正待审核...", Toast.LENGTH_SHORT)
@@ -171,10 +183,8 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 							}
 
 						} else {
-							 loginDialog.showDialog();
-//							Toast.makeText(ForumContentActivity.this,
-//									"提交失败，您未登录，请登录后再发表评论，谢谢！",
-//									Toast.LENGTH_SHORT).show();
+							loginDialog.showDialog();
+							popupWindow.dismiss();
 						}
 					} else {
 						Toast.makeText(ForumContentActivity.this,
@@ -189,32 +199,17 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 			}
 		});
 
-		popWindowManager = PopWindowManager.getInstance();
-
-		popWindowManager.addPopWindow(popupWindow);
-
-		popupWindow = new PopupWindow(con);
-
-		popupWindow.setContentView(popview);
-		popupWindow.setBackgroundDrawable(getResources().getDrawable(
-				R.drawable.naviga_leftitem_back));
-		popupWindow.setWidth(LayoutParams.MATCH_PARENT);
-		popupWindow.setHeight(LayoutParams.WRAP_CONTENT);
-
-		popupWindow.setFocusable(true); // 设置PopupWindow可获得焦点
-		popupWindow.setTouchable(true); // 设置PopupWindow可触摸
-		popupWindow.setOutsideTouchable(true); // 设置非PopupWindow区域可触摸
 
 		return popupWindow;
 	}
 
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
-		
+
 		GIPRadioButtonStyleChange radioButtonStyleChange = new GIPRadioButtonStyleChange(
 				R.drawable.gip_button_selected_bk, 0, Color.WHITE,
 				R.color.gip_second_frame_button_brown);
-		
+
 		radioButtonStyleChange.refreshRadioButtonStyle(mainView, radiobtnids,
 				checkedId);
 

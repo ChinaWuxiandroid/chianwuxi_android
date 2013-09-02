@@ -20,7 +20,7 @@ public class PublicServiceWithContentFragment extends
 		if (channel.getChildrenChannelsCount() > 0) {
 			PublicServiceChannelContentFragment ch = new PublicServiceChannelContentFragment();
 			ch.setArguments(this.getArguments());
-			ch.setBaseSlideFragment(this.baseSlideFragment);
+			
 			ch.setChannel(channel);
 			return ch;
 		} else if (channel.getChildrenContentsCount() > 0) {
@@ -28,7 +28,7 @@ public class PublicServiceWithContentFragment extends
 
 			publicServiceContentListFragment.setChannel(channel);
 			publicServiceContentListFragment.setArguments(getArguments());
-			publicServiceContentListFragment.setBaseSlideFragment(this.baseSlideFragment);
+			
 			return publicServiceContentListFragment;
 
 		}

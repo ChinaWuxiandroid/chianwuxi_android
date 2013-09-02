@@ -134,7 +134,7 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 		}
 		if (fifterType == 0) {
 			GoverMsgCustomContentListFragment goverMsgCustomContentListFragment = new GoverMsgCustomContentListFragment();
-			goverMsgCustomContentListFragment.setBaseSlideFragment(this.baseSlideFragment);
+			
 			goverMsgCustomContentListFragment.setParentItem(parentMenuItem);
 			FragmentManager manager = getActivity().getSupportFragmentManager();
 			FragmentTransaction ft = manager.beginTransaction();
@@ -142,7 +142,7 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 			ft.commitAllowingStateLoss();
 		} else {
 			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment = new GoverMsgSearchContentListFragment();
-			goverMsgSearchContentListFragment.setBaseSlideFragment(this.baseSlideFragment);
+		
 			goverMsgSearchContentListFragment.setFifterType(fifterType);
 			if (parentMenuItem != null) {
 				goverMsgSearchContentListFragment

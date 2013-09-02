@@ -99,7 +99,7 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements 
 
 	public void initView(){
 		
-		loginDialog = new LoginDialog(context, baseSlideFragment);//实例化登录对话框
+		loginDialog = new LoginDialog(context);//实例化登录对话框
 		
 		if(!loginDialog.checkLogin()){
 			loginDialog.showDialog();

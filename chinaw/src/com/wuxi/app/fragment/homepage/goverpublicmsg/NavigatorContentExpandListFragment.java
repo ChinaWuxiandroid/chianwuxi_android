@@ -225,7 +225,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 	public void showChannelData(){
 		//没有子频道列表
 		GoverMsgCustomContentDetailFragment goverMsgCustomContentDetailFragment=new GoverMsgCustomContentDetailFragment();
-		goverMsgCustomContentDetailFragment.setBaseSlideFragment(baseSlideFragment);
+		
 		goverMsgCustomContentDetailFragment.setParentMenuItem(parentItem);
 		goverMsgCustomContentDetailFragment.setFifterType(GoverMsgSearchContentListFragment.DEPT_TYPE);
 		bindFragment(goverMsgCustomContentDetailFragment);
@@ -343,7 +343,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 	public void bindFragment(BaseFragment fragment){
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
-		fragment.setBaseSlideFragment(this.baseSlideFragment);
+		
 		ft.replace(CHANNELCONTENT_ID, fragment);
 
 		ft.commitAllowingStateLoss();

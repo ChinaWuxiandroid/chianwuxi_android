@@ -250,7 +250,7 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 
 	private void bindFragment(BaseFragment fragment) {		
 		FragmentManager manager = getActivity().getSupportFragmentManager();
-		fragment.setBaseSlideFragment(this.baseSlideFragment);
+		
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(RIGHT_CONTENT_ID, fragment);
 		ft.commitAllowingStateLoss();	
@@ -401,7 +401,7 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 
 	public void loadChannelContentList(Channel channel){
 		GIPChannelContentListFragment gIPContentListFragment = new GIPChannelContentListFragment();	
-		gIPContentListFragment.setBaseSlideFragment(this.baseSlideFragment);
+		
 		gIPContentListFragment.setChannel(channel);
 		bindContentLayout(gIPContentListFragment);
 	}

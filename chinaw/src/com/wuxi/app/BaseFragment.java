@@ -2,8 +2,6 @@ package com.wuxi.app;
 
 import android.support.v4.app.Fragment;
 
-import com.wuxi.app.fragment.BaseSlideFragment;
-
 /**
  * 该fragment是主界面之上的所有子fragment的父类 实现了fragment的管理类的传递 让子页面直接可以调用管理类进行跳转和切换
  * 
@@ -12,13 +10,7 @@ import com.wuxi.app.fragment.BaseSlideFragment;
  */
 public class BaseFragment extends Fragment {
 
-	public BaseSlideFragment baseSlideFragment;
-
-	public int position = -1;
-
-	public void setBaseSlideFragment(BaseSlideFragment fragmnet) {
-		this.baseSlideFragment = fragmnet;
-	}
+	protected int position;
 
 	public void setPosition(int position) {
 		this.position = position;

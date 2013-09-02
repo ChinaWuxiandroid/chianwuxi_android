@@ -17,6 +17,7 @@ import com.wuxi.app.R;
 import com.wuxi.domain.QueryMailContentTypeWrapper.QueryMailContentType;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -29,14 +30,14 @@ import android.widget.BaseAdapter;
  * @描述： 信件查询内容类型下拉框适配器
  * @作者： 罗森
  * @创建时间： 2013 2013-8-27 下午4:34:42
- * @修改时间： 
- * @修改描述： 
- *
+ * @修改时间：
+ * @修改描述：
  */
-public class QueryMailContentTypeAdapter extends BaseAdapter implements OnItemSelectedListener{
-	
+public class QueryMailContentTypeAdapter extends BaseAdapter implements
+		OnItemSelectedListener {
+
 	private List<QueryMailContentType> contentTypes = null;
-	
+
 	private Context context = null;
 
 	/**
@@ -44,15 +45,21 @@ public class QueryMailContentTypeAdapter extends BaseAdapter implements OnItemSe
 	 * @描述： 构造方法
 	 * @param cont
 	 */
-	public QueryMailContentTypeAdapter(Context cont,List<QueryMailContentType> mailContentTypes){
+	public QueryMailContentTypeAdapter(Context cont,
+			List<QueryMailContentType> mailContentTypes) {
 		this.context = cont;
 		this.contentTypes = mailContentTypes;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @方法： getCount
-	 * @描述： 
-	 * @return 
+	 * 
+	 * @描述：
+	 * 
+	 * @return
+	 * 
 	 * @see android.widget.Adapter#getCount()
 	 */
 	@Override
@@ -60,11 +67,17 @@ public class QueryMailContentTypeAdapter extends BaseAdapter implements OnItemSe
 		return contentTypes.size();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @方法： getItem
-	 * @描述： 
+	 * 
+	 * @描述：
+	 * 
 	 * @param position
-	 * @return 
+	 * 
+	 * @return
+	 * 
 	 * @see android.widget.Adapter#getItem(int)
 	 */
 	@Override
@@ -72,39 +85,54 @@ public class QueryMailContentTypeAdapter extends BaseAdapter implements OnItemSe
 		return contentTypes.get(position);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @方法： getItemId
-	 * @描述： 
+	 * 
+	 * @描述：
+	 * 
 	 * @param position
-	 * @return 
+	 * 
+	 * @return
+	 * 
 	 * @see android.widget.Adapter#getItemId(int)
 	 */
 	@Override
 	public long getItemId(int position) {
 		return position;
 	}
-	
+
 	/**
 	 * @类名： ViewHolder
 	 * @描述： 下拉列表布局
 	 * @作者： 罗森
 	 * @创建时间： 2013 2013-8-27 下午4:43:55
-	 * @修改时间： 
-	 * @修改描述： 
-	 *
+	 * @修改时间：
+	 * @修改描述：
+	 * 
 	 */
 	public class ViewHolder {
 		TextView tv_dept;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @方法： getView
-	 * @描述： 
+	 * 
+	 * @描述：
+	 * 
 	 * @param position
+	 * 
 	 * @param convertView
+	 * 
 	 * @param parent
-	 * @return 
-	 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+	 * 
+	 * @return
+	 * 
+	 * @see android.widget.Adapter#getView(int, android.view.View,
+	 * android.view.ViewGroup)
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -121,19 +149,22 @@ public class QueryMailContentTypeAdapter extends BaseAdapter implements OnItemSe
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
+
+		viewHolder.tv_dept.setTextColor(Color.BLACK);
 		viewHolder.tv_dept.setText(contentTypes.get(position).getTypename());
+
 		return convertView;
 	}
 
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 			long arg3) {
-		
+
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
-		
+
 	}
 
 }

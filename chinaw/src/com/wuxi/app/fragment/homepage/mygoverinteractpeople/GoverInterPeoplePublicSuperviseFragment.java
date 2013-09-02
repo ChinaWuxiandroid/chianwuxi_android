@@ -9,24 +9,18 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.adapter.SimpleListViewFragmentAdapter;
 import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.SubmitListService;
-import com.wuxi.app.fragment.MainMineFragment;
-import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
-import com.wuxi.app.util.GIPRadioButtonStyleChange;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.exception.NetException;
 
@@ -87,7 +81,7 @@ public class GoverInterPeoplePublicSuperviseFragment extends BaseFragment
 	}
 
 	public void initView() {
-		loginDialog = new LoginDialog(context, baseSlideFragment);// 实例化登录对话框
+		loginDialog = new LoginDialog(context);// 实例化登录对话框
 
 		if (!loginDialog.checkLogin()) {
 			loginDialog.showDialog();

@@ -153,7 +153,7 @@ public class PublicServiceChannelContentFragment extends BaseFragment implements
 		
 		PublicServiceChannelContentDetailFragment publicServiceChannelContentDetailFragment=new PublicServiceChannelContentDetailFragment();
 		publicServiceChannelContentDetailFragment.setArguments(this.getArguments());
-		publicServiceChannelContentDetailFragment.setBaseSlideFragment(this.baseSlideFragment);
+	
 		publicServiceChannelContentDetailFragment.setChannel(channel);
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();

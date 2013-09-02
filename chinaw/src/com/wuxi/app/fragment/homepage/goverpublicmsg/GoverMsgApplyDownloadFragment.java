@@ -34,7 +34,6 @@ import com.wuxi.app.R;
 import com.wuxi.app.engine.ApplyDeptService;
 import com.wuxi.app.engine.ApplyGoverService;
 import com.wuxi.app.engine.GoverSaoonFileService;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.ApplyDept;
 import com.wuxi.domain.ApplyGover;
@@ -195,28 +194,28 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 	}
 
 	public void showGoverList() {
-		BaseSlideFragment baseSlideFragment = this.baseSlideFragment;
+	
 		if (govers != null)
 			content_listView
-					.setAdapter(new ApplyGoverAdapter(baseSlideFragment));
+					.setAdapter(new ApplyGoverAdapter());
 	}
 
 	public void showDeptList() {
 
-		BaseSlideFragment baseSlideFragment = this.baseSlideFragment;
+		
 		if (depts != null)
 			content_listView
-					.setAdapter(new ApplyDeptAdapter(baseSlideFragment));
+					.setAdapter(new ApplyDeptAdapter());
 	}
 
 	public class ApplyGoverAdapter extends BaseAdapter implements
 			OnClickListener {
 
-		BaseSlideFragment baseSlideFragment;
+		
 		private ApplyGover gover;
 
-		public ApplyGoverAdapter(BaseSlideFragment baseSlideFragment) {
-			this.baseSlideFragment = baseSlideFragment;
+		public ApplyGoverAdapter() {
+			
 		}
 
 		@Override
@@ -295,11 +294,11 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 	public class ApplyDeptAdapter extends BaseAdapter implements
 			OnClickListener {
 
-		BaseSlideFragment baseSlideFragment;
+		
 		ApplyDept applyDept = null;
 
-		public ApplyDeptAdapter(BaseSlideFragment baseSlideFragment) {
-			this.baseSlideFragment = baseSlideFragment;
+		public ApplyDeptAdapter() {
+			
 		}
 
 		@Override
@@ -363,14 +362,9 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 				break;
 			case R.id.govermsg_deptapply_item_apply:
 				// 检测登录状态
-				Bundle bundle = new Bundle();
+				
 				if (applyDept != null) {
-					// bundle.putSerializable("applyDept", applyDept);
-
-					// baseSlideFragment.slideLinstener.replaceFragment(null,
-					// position,
-					// Constants.FragmentName.GOVERMSG_APPLYTABLE_FRAGMENT,
-					// bundle);
+					
 
 					Intent intent = new Intent(getActivity(),
 							GoverMsgApplyTableFragment.class);

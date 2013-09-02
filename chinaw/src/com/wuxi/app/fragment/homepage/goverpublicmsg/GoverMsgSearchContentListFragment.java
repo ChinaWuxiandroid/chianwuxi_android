@@ -307,7 +307,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 
 	private void loadContentList(){
 		GoverMsgContentListFragment goverMsgContentListFragment=new GoverMsgContentListFragment();
-		goverMsgContentListFragment.setBaseSlideFragment(this.baseSlideFragment);
+	
 		if(parentMenuItem!=null){
 			goverMsgContentListFragment.setParentItem(parentMenuItem);
 		}
@@ -320,7 +320,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 
 	private void bindFragment(BaseFragment fragment) {		
 		FragmentManager manager = getActivity().getSupportFragmentManager();
-		fragment.setBaseSlideFragment(this.baseSlideFragment);
+		
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(CHANNELLIST_CONTENT_ID, fragment);
 		ft.commitAllowingStateLoss();	

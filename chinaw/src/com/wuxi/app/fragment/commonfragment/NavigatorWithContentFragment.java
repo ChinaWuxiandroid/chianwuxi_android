@@ -43,23 +43,33 @@ import com.wuxi.exception.NetException;
 public class NavigatorWithContentFragment extends BaseFragment implements
 		OnItemClickListener {
 	private static final int DETAIL_ID = R.id.details;// 点击左侧导航时右侧要显示内容区域的ID
+
 	protected static final int LEFT_CHANNEL_DATA__LOAD_SUCCESS = 1;// 左侧频道(菜单)加载
+
 	protected static final int LEFT_MENUITEM_DATA__LOAD_SUCCESS = 2;// 左侧频道(菜单)加载
+
 	protected static final int LEFT_DATA__LOAD_ERROR = 0;// 左侧频道(菜单)加载失败
 
 	public static final int DATA_TPYE_MENUITEM = 0; // 加载的数据类型为MenuItem
+
 	public static final int DATA_TYPE_CHANNEL = 1; // 加载的数据类型为Channel,后续消息类型未加。。。
 
 	protected View view;
+
 	protected ListView mListView;// 左侧ListView
+
 	protected LayoutInflater mInflater;
+
 	private Context context;
 
 	private Channel parentChannel;// 父频道
+
 	private List<Channel> channels;
 
 	private MenuItem parentMenuItem; // 父菜单
+
 	private List<MenuItem> menuItems;
+
 	private ContentNavigatorAdapter adapter;
 
 	private int dataType = 1; // 消息类型，默认为Channel ,因为@wanglu 最先定义用作加载Channel消息类型
@@ -115,8 +125,7 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 	private void loadChannelData() {
 
 		if (null != CacheUtil.get(parentChannel.getChannelId())) {// 从缓存中查找
-			channels = (List<Channel>) CacheUtil.get(parentChannel
-					.getChannelId());
+			channels = (List<Channel>) CacheUtil.get(parentChannel.getChannelId());
 			showLeftChannelData();
 			return;
 
@@ -130,12 +139,11 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 					ChannelService channelService = new ChannelService(context);
 
 					try {
-						channels = channelService.getSubChannels(parentChannel
-								.getChannelId());
+						channels = channelService.getSubChannels(parentChannel.getChannelId());
 						if (channels != null) {
 							handler.sendEmptyMessage(LEFT_CHANNEL_DATA__LOAD_SUCCESS);
-							CacheUtil.put(parentChannel.getChannelId(),
-									channels);// 放入缓存
+							CacheUtil.put(
+								parentChannel.getChannelId(), channels);// 放入缓存
 						}
 
 					} catch (NetException e) {
@@ -171,8 +179,7 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 					MenuService menuService = new MenuService(context);
 
 					try {
-						menuItems = menuService.getSubMenuItems(parentMenuItem
-								.getId());
+						menuItems = menuService.getSubMenuItems(parentMenuItem.getId());
 						if (menuItems != null) {
 							handler.sendEmptyMessage(LEFT_MENUITEM_DATA__LOAD_SUCCESS);
 							CacheUtil.put(parentMenuItem.getId(), menuItems);// 放入缓存
@@ -212,7 +219,7 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 
 	private void showLeftMenuItemData() {
 		mListView.setAdapter(new ContentNavigatorAdapter(mInflater, null,
-				menuItems));// 设置适配器
+			menuItems));// 设置适配器
 		mListView.setOnItemClickListener(this);
 	}
 
@@ -242,7 +249,6 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 
 	}
 
-
 	/**
 	 * 显示替换主要内容区域
 	 * 
@@ -251,8 +257,9 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 	protected void showContentFragment(BaseFragment fragment) {
 		if (fragment != null) {
 			fragment.setArguments(this.getArguments());
-			fragment.setBaseSlideFragment(this.baseSlideFragment);
-			FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+
+			FragmentTransaction ft = getActivity().getSupportFragmentManager()
+					.beginTransaction();
 			ft.replace(DETAIL_ID, fragment);// 替换视图
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 			ft.addToBackStack(null);

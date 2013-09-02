@@ -40,7 +40,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 	/**
 	 * @字段： serialVersionUID
 	 * @类型： long
-	 * @描述： TODO 
+	 * @描述： 序列化序号 
 	 */
 	private static final long serialVersionUID = 1L;
 	
@@ -199,7 +199,6 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 					allCounts= replyStatisticsService.getAllCount
 							(Constants.Urls.LETTERS_ALLCOUNT_URL);
 					if (null != allCounts) {
-						//						CacheUtil.put(menuItem.getChannelId(), titleChannels);// 缓存起来
 
 						handler.sendEmptyMessage(ALLCOUNT_LOAD_SUCESS);
 
@@ -241,7 +240,6 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 					letters= replyStatisticsService.getLettersStatistics
 							(Constants.Urls.LETTERS_STATISTICS_URL,letter_type,year,month);
 					if (null != letters) {
-						//						CacheUtil.put(menuItem.getChannelId(), titleChannels);// 缓存起来
 
 						handler.sendEmptyMessage(LETTERSTATISTICS_LOAD_SUCESS);
 
@@ -288,7 +286,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 		LettersListViewAdapter adapter=new LettersListViewAdapter();
 
 		if(letters==null||letters.size()==0){
-			Toast.makeText(context, "对不起，暂无信息", 2000).show();
+			Toast.makeText(context, "对不起，暂无信息", Toast.LENGTH_SHORT).show();
 		}
 		else{
 			mListView.setAdapter(adapter);

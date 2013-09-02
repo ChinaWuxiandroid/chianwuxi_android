@@ -149,7 +149,7 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 		ed.putString(Constants.SharepreferenceKey.ACCESSTOKEN, "");
 		ed.commit();*/
 
-		loginDialog = new LoginDialog(context, baseSlideFragment);// 实例化登录对话框
+		loginDialog = new LoginDialog(context);// 实例化登录对话框
 		gover_pb_myonlineapply = (ProgressBar) view
 				.findViewById(R.id.gover_pb_myonlineapply);
 		gover_btn_rg = (RadioGroup) view.findViewById(R.id.gover_btn_rg);

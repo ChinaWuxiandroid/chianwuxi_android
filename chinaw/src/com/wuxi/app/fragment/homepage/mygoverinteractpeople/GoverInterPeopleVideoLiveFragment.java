@@ -2,8 +2,8 @@ package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
 import android.widget.RadioGroup;
 
+import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 
 /**
@@ -51,7 +51,7 @@ public class GoverInterPeopleVideoLiveFragment  extends RadioButtonChangeFragmen
 
 	@Override
 	protected void init() {
-		MainMineFragment gipVedioLiveHomeFragment = new GoverInterPeopleVideoLiveHomeFragment();
+		BaseFragment gipVedioLiveHomeFragment = new GoverInterPeopleVideoLiveHomeFragment();
 		onTransaction(gipVedioLiveHomeFragment);
 	}
 

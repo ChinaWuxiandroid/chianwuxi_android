@@ -17,6 +17,7 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
@@ -360,12 +361,12 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 				int[] xy = new int[2];
 				queryMailBtn.getLocationOnScreen(xy);
 				popWindow.showAtLocation(queryMailBtn, Gravity.BOTTOM
-						| Gravity.RIGHT, 0, queryMailBtn.getHeight() * 2 + 10);
+						| Gravity.RIGHT, 0, queryMailBtn.getHeight() * 2 + 31);
 			}
 		});
 
 		PartLeaderMailListFragment leaderMailListFragment = new PartLeaderMailListFragment();
-		leaderMailListFragment.setBaseSlideFragment(this.baseSlideFragment);
+	
 		leaderMailListFragment.setLeaderMail(getLeaderMail());
 		bindFragment(leaderMailListFragment);
 
@@ -730,7 +731,10 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
+			
+			viewHolder.tv_dept.setTextColor(Color.BLACK);
 			viewHolder.tv_dept.setText(dept.getDepname());
+			
 			return convertView;
 		}
 

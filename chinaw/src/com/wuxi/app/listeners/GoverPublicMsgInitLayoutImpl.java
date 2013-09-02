@@ -1,10 +1,7 @@
 package com.wuxi.app.listeners;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 
-import com.wuxi.app.dialog.LoginDialog;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgContentListFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgFragmentWebFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgNaviWithContentFragment;

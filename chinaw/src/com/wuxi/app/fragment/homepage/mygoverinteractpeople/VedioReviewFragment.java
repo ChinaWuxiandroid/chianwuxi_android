@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.engine.VedioReviewService;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.VedioReviewWrapper;
@@ -186,15 +185,13 @@ public class VedioReviewFragment extends RadioButtonChangeFragment {
 	 */
 	public class ReviewListAdapter extends BaseAdapter implements OnItemClickListener{
 		
-		BaseSlideFragment baseSlideFragment;
+	
 		
 		public ReviewListAdapter(){
 			
 		}
 		
-		public ReviewListAdapter(BaseSlideFragment bsf){
-			this.baseSlideFragment = bsf;
-		}
+		
 
 		@Override
 		public int getCount() {

@@ -29,7 +29,6 @@ import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345MayorMailContentActivity;
 import com.wuxi.app.engine.LetterService;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.LetterWrapper;
@@ -152,9 +151,9 @@ public class GIP12345ComplaintListFragment extends BaseFragment {
 	 * 显示列表
 	 */
 	public void showLettersList() {
-		BaseSlideFragment baseSlideFragment = this.baseSlideFragment;
+		
 		LettersListViewAdapter adapter = new LettersListViewAdapter(
-				baseSlideFragment);
+				);
 		if (letters == null || letters.size() == 0) {
 			Toast.makeText(context, "对不起，暂无信息", 2000).show();
 		} else {
@@ -172,15 +171,15 @@ public class GIP12345ComplaintListFragment extends BaseFragment {
 	public class LettersListViewAdapter extends BaseAdapter implements
 			OnItemClickListener {
 
-		BaseSlideFragment slideFragment = null;
+		
 
 		/**
 		 * @方法： LettersListViewAdapter
 		 * @描述：
 		 * @param fragment
 		 */
-		public LettersListViewAdapter(BaseSlideFragment fragment) {
-			this.slideFragment = fragment;
+		public LettersListViewAdapter() {
+			
 		}
 
 		@Override

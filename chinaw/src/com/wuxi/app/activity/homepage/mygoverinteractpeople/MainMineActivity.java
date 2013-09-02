@@ -100,7 +100,7 @@ public class MainMineActivity extends BaseSlideActivity implements
 
 	@Override
 	protected void findMainContentViews(View view) {
-		loginDialog = new LoginDialog(this, null);
+		loginDialog = new LoginDialog(this);
 		mListView = (ListView) view.findViewById(R.id.gover_interact_people_mainmenu_listview);
 
 		if ("".equals(SystemUtil.getAccessToken(this))) {

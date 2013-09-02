@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.engine.LetterService;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;

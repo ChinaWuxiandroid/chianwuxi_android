@@ -57,7 +57,7 @@ public class ForumPostActivity extends BaseItemContentActivity {
 	protected String getContentTitleText() {
 		return "公众论坛";
 	}
-	
+
 	@Override
 	protected void findMainContentViews(View view) {
 		super.findMainContentViews(view);
@@ -69,7 +69,7 @@ public class ForumPostActivity extends BaseItemContentActivity {
 	 */
 	private void initLayout(View view) {
 
-		loginDialog = new LoginDialog(this, null);
+		loginDialog = new LoginDialog(this);
 
 		postThemeEdit = (EditText) view.findViewById(R.id.forum_post_name_edit);
 		postContentEdit = (EditText) view
@@ -84,27 +84,28 @@ public class ForumPostActivity extends BaseItemContentActivity {
 			public void onClick(View v) {
 
 				if (!loginDialog.checkLogin()) {
-					 loginDialog.showDialog();
-//					Toast.makeText(ForumPostActivity.this, "您未登录，不能发帖，请先登录，谢谢！",
-//							Toast.LENGTH_SHORT).show();
+					loginDialog.showDialog();
 				} else {
 					String theme = postThemeEdit.getText().toString();
 					String content = postContentEdit.getText().toString();
 					try {
-						postService = new ForumPostService(ForumPostActivity.this);
+						postService = new ForumPostService(
+								ForumPostActivity.this);
 
 						if (theme.equals("")) {
-							Toast.makeText(ForumPostActivity.this, "提交失败，留言主题不能为空！",
-									Toast.LENGTH_SHORT).show();
+							Toast.makeText(ForumPostActivity.this,
+									"提交失败，留言主题不能为空！", Toast.LENGTH_SHORT)
+									.show();
 						} else if (content.equals("")) {
-							Toast.makeText(ForumPostActivity.this, "提交失败，留言内容不能为空！",
-									Toast.LENGTH_SHORT).show();
+							Toast.makeText(ForumPostActivity.this,
+									"提交失败，留言内容不能为空！", Toast.LENGTH_SHORT)
+									.show();
 						} else {
-							boolean issubmit = postService.submitPosts(
-									SystemUtil.getAccessToken(ForumPostActivity.this), theme,
-									content);
-							Toast.makeText(ForumPostActivity.this, "提交成功，待审核...",
-									Toast.LENGTH_SHORT).show();
+							postService.submitPosts(SystemUtil
+									.getAccessToken(ForumPostActivity.this),
+									theme, content);
+							Toast.makeText(ForumPostActivity.this,
+									"提交成功，待审核...", Toast.LENGTH_SHORT).show();
 						}
 
 					} catch (NetException e) {

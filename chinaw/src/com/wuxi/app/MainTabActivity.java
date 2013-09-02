@@ -33,7 +33,6 @@ import com.wuxi.app.activity.homepage.more.SystemSetActivity;
 import com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity;
 import com.wuxi.app.activity.search.MainSearchActivity;
 import com.wuxi.app.engine.InitService;
-import com.wuxi.app.fragment.homepage.SlideLevelFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants.CacheKey;
 import com.wuxi.app.util.SystemUtil;
@@ -276,7 +275,7 @@ public class MainTabActivity extends ActivityGroup implements
 			return;
 		}
 		Intent intent = null;
-		SlideLevelFragment slideLevelFragment = new SlideLevelFragment();
+		
 		switch (v.getId()) {
 
 		case R.id.main_tab_index:// 首页

@@ -34,7 +34,7 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 	
 	@Override
 	protected void initUI() {
-		loginDialog=new LoginDialog(context,this.baseSlideFragment);
+		loginDialog=new LoginDialog(context);
 		super.initUI();
 	}
 	

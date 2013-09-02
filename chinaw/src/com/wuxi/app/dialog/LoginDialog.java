@@ -12,7 +12,6 @@ import android.content.Intent;
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.homepage.logorregister.LoginActivity;
-import com.wuxi.app.fragment.BaseSlideFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.SystemUtil;
 
@@ -25,11 +24,11 @@ public class LoginDialog {
 
 	private Context context;
 
-	private BaseSlideFragment baseSlideFragment;
+	
 
-	public LoginDialog(Context context, BaseSlideFragment baseSlideFragment) {
+	public LoginDialog(Context context) {
 		this.context = context;
-		this.baseSlideFragment = baseSlideFragment;
+		
 
 	}
 

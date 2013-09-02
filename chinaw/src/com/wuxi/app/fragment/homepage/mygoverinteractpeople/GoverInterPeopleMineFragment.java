@@ -2,8 +2,8 @@ package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
 import android.widget.RadioGroup;
 
+import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.fragment.MainMineFragment;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
 
@@ -40,24 +40,24 @@ public class GoverInterPeopleMineFragment extends RadioButtonChangeFragment{
 			break;
 
 		case R.id.goverinterpeople_mine_radioButton_suggestionPlatform:	
-			MainMineFragment suggestionPlatformFragment=new GIPMineSuggestionPlatformFragment();
+			BaseFragment suggestionPlatformFragment=new GIPMineSuggestionPlatformFragment();
 			onTransaction(suggestionPlatformFragment);
 			break;
 
 		case R.id.goverinterpeople_mine_radioButton_internetGoverSaloon:
-			MainMineFragment internetGoverSaloonFragment=new GIPMineInternetGoverSaloonFragment();
+			BaseFragment internetGoverSaloonFragment=new GIPMineInternetGoverSaloonFragment();
 			onTransaction(internetGoverSaloonFragment);
 			break;
 
 		case R.id.goverinterpeople_mine_radioButton_infoPublicPlatform:
-			MainMineFragment infoPublicPlatformFragment=new GIPMineInfoPublicPlatformFragment();
+			BaseFragment infoPublicPlatformFragment=new GIPMineInfoPublicPlatformFragment();
 			onTransaction(infoPublicPlatformFragment);
 
 			break;
 
 		case R.id.goverinterpeople_mine_radioButton_publicForum:
 
-			MainMineFragment publicForumFragment=new GIPMinePublicForumFragment();
+			BaseFragment publicForumFragment=new GIPMinePublicForumFragment();
 			onTransaction(publicForumFragment);
 			break;
 		}
@@ -85,7 +85,7 @@ public class GoverInterPeopleMineFragment extends RadioButtonChangeFragment{
 
 	@Override
 	protected void init() {
-		MainMineFragment mine12345Fragment=new GIPMine12345Fragment();
+		BaseFragment mine12345Fragment=new GIPMine12345Fragment();
 		onTransaction(mine12345Fragment);
 	}
 }

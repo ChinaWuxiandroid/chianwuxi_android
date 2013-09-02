@@ -6,6 +6,7 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
@@ -338,13 +339,12 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 				int[] xy = new int[2];
 				dealMailBtn.getLocationOnScreen(xy);
 				popWindow.showAtLocation(dealMailBtn, Gravity.BOTTOM
-						| Gravity.RIGHT, 0, dealMailBtn.getHeight() * 2 + 10);
+						| Gravity.RIGHT, 0, dealMailBtn.getHeight() * 2 + 31);
 			}
 		});
 
 		GIP12345MayorMailListFragment gip12345MayorMailListFragment = new GIP12345MayorMailListFragment();
-		gip12345MayorMailListFragment
-				.setBaseSlideFragment(this.baseSlideFragment);
+		
 		bindFragment(gip12345MayorMailListFragment);
 
 		loadAllCountData();
@@ -692,7 +692,10 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
+			
+			viewHolder.tv_dept.setTextColor(Color.BLACK);
 			viewHolder.tv_dept.setText(dept.getDepname());
+			
 			return convertView;
 		}
 
