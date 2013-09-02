@@ -41,11 +41,6 @@ import com.wuxi.exception.NetException;
 @SuppressLint("ShowToast")
 public class GIPSuggestPeopleWill extends RadioButtonChangeFragment {
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
-
 	private ListView mListView;
 	private ProgressBar list_pb;
 	private PoliticsWrapper politicsWrapper;
@@ -56,7 +51,7 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment {
 
 	public final int POLITICS_TYPE = 1; // politics类型，接口里0 为立法征集，1 为民意征集
 	private int startIndex = 0; // 获取话题的起始坐标
-	private int endIndex = 5; // 获取话题的结束坐标
+	private int endIndex = 52; // 获取话题的结束坐标
 	private int passed = 0; // 是否过期，可选参数，默认值是0 0: 当前 1:以往
 
 	private final int[] radioButtonIds = {
@@ -142,10 +137,12 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment {
 			public void run() {
 
 				PoliticsService politicsService = new PoliticsService(context);
+				
+				String url = Constants.Urls.POLITICS_LIST_URL + "?type="
+						+ POLITICS_TYPE + "&start=" + startIndex + "&end="
+						+ endIndex + "&passed=" + passed;
 				try {
-					politicsWrapper = politicsService.getPoliticsWrapper(
-							Constants.Urls.POLITICS_LIST_URL, POLITICS_TYPE,
-							startIndex, endIndex, passed);
+					politicsWrapper = politicsService.getPoliticsWrapper(url);
 					if (null != politicsWrapper) {
 						politics = politicsWrapper.getData();
 						System.out.println("获取列表成功");

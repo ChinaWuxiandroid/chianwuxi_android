@@ -16,11 +16,6 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 
 public class GIP12345IWantMailFragment extends RadioButtonChangeFragment {
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
-
 	protected static final int HIDEN_CONTENT_ID = R.id.gip_12345_iwantmail_content_framelayout;
 
 	private int contentType = 0; // 内容类型，缺省为0-我要写信 1-写信须知 2-办理规则

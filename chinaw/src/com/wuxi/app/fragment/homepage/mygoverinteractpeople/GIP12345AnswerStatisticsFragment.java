@@ -6,8 +6,11 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -32,53 +35,50 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- *12345来信办理平台  主Fragment --答复率统计  fragment
+ * 12345来信办理平台 主Fragment --答复率统计 fragment
+ * 
  * @author 杨宸 智佳
  * */
 
-public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
+public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment {
 
-	/**
-	 * @字段： serialVersionUID
-	 * @类型： long
-	 * @描述： 序列化序号 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	private TextView complaint_txtView;    //咨询投诉
-	private TextView mayorbox_txtView;    //市长信箱
-	private TextView leaderbox_txtView;     //领导信箱
+	private TextView complaint_txtView; // 咨询投诉
+	private TextView mayorbox_txtView; // 市长信箱
+	private TextView leaderbox_txtView; // 领导信箱
 
 	private Spinner yearAlone_Spinnner;
 	private Spinner year_Spinnner;
 	private Spinner month_Spinnner;
 
-	private ImageButton startStatic_imgBtn;   //统计
+	private ImageButton startStatic_imgBtn; // 统计
 
 	private ProgressBar list_pb;
 
 	private ListView mListView;
 	protected static final String TAG = "GIP12345AnswerStatisticsFragment";
-	private static final int ALLCOUNT_LOAD_SUCESS = 0;   //答复率总数统计
-	private static final int LETTERSTATISTICS_LOAD_SUCESS = 1;   //各部门答复率统计
+	private static final int ALLCOUNT_LOAD_SUCESS = 0; // 答复率总数统计
+	private static final int LETTERSTATISTICS_LOAD_SUCESS = 1; // 各部门答复率统计
 	private static final int DATA_LOAD_ERROR = 2;
-	public static final int REPLY_LETTER_TYPE_MAYORBOX=1;   //市长信箱
-	public static final int REPLY_LETTER_TYPE_COMPLAINT=2;   //咨询投诉
-	public static final int REPLY_LETTER_TYPE_LEADERBOX=3;   //领导信箱
+	public static final int REPLY_LETTER_TYPE_MAYORBOX = 1; // 市长信箱
+	public static final int REPLY_LETTER_TYPE_COMPLAINT = 2; // 咨询投诉
+	public static final int REPLY_LETTER_TYPE_LEADERBOX = 3; // 领导信箱
 
-	List<AllCount> allCounts;
-	List<StatisticsLetter> letters;
+	private List<AllCount> allCounts;
+	private List<StatisticsLetter> letters;
 
-	private int letter_type=REPLY_LETTER_TYPE_MAYORBOX;   //默认为市长信箱
+	private int letter_type = REPLY_LETTER_TYPE_MAYORBOX; // 默认为市长信箱
 
-	private int year=2012;         //年份
-	private int month=1;			//月份
+	private int year = 2012; // 年份
+	private int month = 1; // 月份
 
-	private final  int[] radioButtonIds={
+	private final int[] radioButtonIds = {
 			R.id.gip_12345_answerstati_radioButton_mayorBox,
 			R.id.gip_12345_answerstati_radioButton_complaint,
-			R.id.gip_12345_answerstati_radioButton_leaderBox	
-	};	
+			R.id.gip_12345_answerstati_radioButton_leaderBox };
+
+	private String[] yearAlone = { "2013", "2012", "2011", "2010" };
+	private String[] spinnerMonth = { "1", "2", "3", "4", "5", "6", "7", "8",
+			"9", "10", "11", "12" };
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -110,20 +110,20 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 		switch (checkedId) {
 
 		case R.id.gip_12345_answerstati_radioButton_mayorBox:
-			letter_type=REPLY_LETTER_TYPE_MAYORBOX;
+			letter_type = REPLY_LETTER_TYPE_MAYORBOX;
 			break;
 
-		case R.id.gip_12345_answerstati_radioButton_complaint:	
-			letter_type=REPLY_LETTER_TYPE_COMPLAINT;
+		case R.id.gip_12345_answerstati_radioButton_complaint:
+			letter_type = REPLY_LETTER_TYPE_COMPLAINT;
 			break;
 
-		case R.id.gip_12345_answerstati_radioButton_leaderBox:	
-			letter_type=REPLY_LETTER_TYPE_LEADERBOX;
+		case R.id.gip_12345_answerstati_radioButton_leaderBox:
+			letter_type = REPLY_LETTER_TYPE_LEADERBOX;
 			break;
-
 
 		}
 	}
+
 	@Override
 	protected int getLayoutId() {
 		return R.layout.gip_12345_answerstati_layout;
@@ -143,33 +143,49 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 	protected int getContentFragmentId() {
 		return 0;
 	}
+
 	@Override
 	protected void init() {
-		complaint_txtView=(TextView)view.findViewById(R.id.gip_12345_answerstati_textview_complaintcount);
-		mayorbox_txtView=(TextView)view.findViewById(R.id.gip_12345_answerstati_textview_mayorbox);
-		leaderbox_txtView=(TextView)view.findViewById(R.id.gip_12345_answerstati_textview_leaderbox);
+		complaint_txtView = (TextView) view
+				.findViewById(R.id.gip_12345_answerstati_textview_complaintcount);
+		mayorbox_txtView = (TextView) view
+				.findViewById(R.id.gip_12345_answerstati_textview_mayorbox);
+		leaderbox_txtView = (TextView) view
+				.findViewById(R.id.gip_12345_answerstati_textview_leaderbox);
 
-		yearAlone_Spinnner=(Spinner)view.findViewById(R.id.gip_12345_answerstati_spinner_yearalone);
-		ArrayAdapter yearAlone_Spinner_adapter = ArrayAdapter.createFromResource(context, R.array.spinnerYear,R.layout.my_spinner_small_item);  
-		yearAlone_Spinner_adapter.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);  
-		yearAlone_Spinnner.setAdapter(yearAlone_Spinner_adapter);  
-		yearAlone_Spinnner.setVisibility(View.VISIBLE); 
+		yearAlone_Spinnner = (Spinner) view
+				.findViewById(R.id.gip_12345_answerstati_spinner_yearalone);
 
-		year_Spinnner=(Spinner)view.findViewById(R.id.gip_12345_answerstati_spinner_yeara);
+		MyAryAdapter yearAlone_Spinner_adapter = new MyAryAdapter(context,
+				android.R.layout.simple_spinner_item, yearAlone);
 
-		ArrayAdapter year_Spinner_adapter = ArrayAdapter.createFromResource(context, R.array.spinnerYear, R.layout.my_spinner_small_item);  
-		year_Spinner_adapter.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);  
-		year_Spinnner.setAdapter(year_Spinner_adapter);  
-		year_Spinnner.setVisibility(View.VISIBLE); 
+		yearAlone_Spinner_adapter
+				.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);
+		yearAlone_Spinnner.setAdapter(yearAlone_Spinner_adapter);
+		yearAlone_Spinnner.setVisibility(View.VISIBLE);
 
+		year_Spinnner = (Spinner) view
+				.findViewById(R.id.gip_12345_answerstati_spinner_yeara);
 
-		month_Spinnner=(Spinner)view.findViewById(R.id.gip_12345_answerstati_spinner_month);
-		ArrayAdapter month_Spinner_adapter = ArrayAdapter.createFromResource(context, R.array.spinnerMonth, R.layout.my_spinner_small_item);  
-		month_Spinner_adapter.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);  
-		month_Spinnner.setAdapter(month_Spinner_adapter);  
-		month_Spinnner.setVisibility(View.VISIBLE); 
+		MyAryAdapter year_Spinner_adapter = new MyAryAdapter(context,
+				android.R.layout.simple_spinner_item, yearAlone);
+		year_Spinner_adapter
+				.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);
+		year_Spinnner.setAdapter(year_Spinner_adapter);
+		year_Spinnner.setVisibility(View.VISIBLE);
 
-		startStatic_imgBtn=(ImageButton)view.findViewById(R.id.gip_12345_answerstati_imagebutton_startstati);
+		month_Spinnner = (Spinner) view
+				.findViewById(R.id.gip_12345_answerstati_spinner_month);
+
+		MyAryAdapter month_Spinner_adapter = new MyAryAdapter(context,
+				android.R.layout.simple_spinner_item, spinnerMonth);
+		month_Spinner_adapter
+				.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);
+		month_Spinnner.setAdapter(month_Spinner_adapter);
+		month_Spinnner.setVisibility(View.VISIBLE);
+
+		startStatic_imgBtn = (ImageButton) view
+				.findViewById(R.id.gip_12345_answerstati_imagebutton_startstati);
 		startStatic_imgBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -179,34 +195,88 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 			}
 		});
 
-		mListView=(ListView) view.findViewById(R.id.gip_12345_answerstati_listview);
-		list_pb=(ProgressBar)view.findViewById(R.id.gip_12345_answerstati_listview_pb);
+		mListView = (ListView) view
+				.findViewById(R.id.gip_12345_answerstati_listview);
+		list_pb = (ProgressBar) view
+				.findViewById(R.id.gip_12345_answerstati_listview_pb);
 
-		loadAllCountData();	
+		loadAllCountData();
 	}
-	
-//	public class MyAryAdapter extends ArrayAdapter {
-//
-//		public MyAryAdapter(Context context, int textViewResourceId) {
-//			super(context, textViewResourceId);
-//		}
-//		
-//	}
+
+	/**
+	 * @类名： MyAryAdapter
+	 * @描述： 年、月下拉框适配器类
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-9-2 下午2:52:14
+	 * @修改时间：
+	 * @修改描述：
+	 * 
+	 */
+	public class MyAryAdapter extends ArrayAdapter<String> {
+
+		Context context;
+		String[] items = new String[] {};
+
+		public MyAryAdapter(final Context context,
+				final int textViewResourceId, final String[] objects) {
+			super(context, textViewResourceId, objects);
+
+			this.items = objects;
+			this.context = context;
+		}
+
+		@Override
+		public View getDropDownView(int position, View convertView,
+				ViewGroup parent) {
+			if (convertView == null) {
+				LayoutInflater inflater = LayoutInflater.from(context);
+				convertView = inflater.inflate(
+						android.R.layout.simple_spinner_item, parent, false);
+			}
+
+			TextView tv = (TextView) convertView
+					.findViewById(android.R.id.text1);
+			tv.setText(items[position]);
+			tv.setGravity(Gravity.LEFT);
+			tv.setTextColor(Color.BLACK);
+
+			return convertView;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				LayoutInflater inflater = LayoutInflater.from(context);
+				convertView = inflater.inflate(
+						android.R.layout.simple_spinner_item, parent, false);
+			}
+
+			TextView tv = (TextView) convertView
+					.findViewById(android.R.id.text1);
+			tv.setText(items[position]);
+			tv.setGravity(Gravity.LEFT);
+			tv.setTextColor(Color.BLACK);
+
+			return convertView;
+		}
+
+	}
 
 	/**
 	 * 先加载所有统计信息，下面的信息，按 统计按钮后加载
 	 * */
-	public void loadAllCountData(){
+	public void loadAllCountData() {
 
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 
-				ReplyStatisticsService replyStatisticsService = new ReplyStatisticsService(context);
+				ReplyStatisticsService replyStatisticsService = new ReplyStatisticsService(
+						context);
 				try {
-					allCounts= replyStatisticsService.getAllCount
-							(Constants.Urls.LETTERS_ALLCOUNT_URL);
+					allCounts = replyStatisticsService
+							.getAllCount(Constants.Urls.LETTERS_ALLCOUNT_URL);
 					if (null != allCounts) {
 
 						handler.sendEmptyMessage(ALLCOUNT_LOAD_SUCESS);
@@ -230,24 +300,25 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 					e.printStackTrace();
 				}
 			}
-		}
-				).start();
+		}).start();
 	}
 
 	/**
 	 * 统计按钮按后加载 各信箱部门回复统计
 	 * */
-	public void loadLettersReplyCountData(){
+	public void loadLettersReplyCountData() {
 
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 
-				ReplyStatisticsService replyStatisticsService = new ReplyStatisticsService(context);
+				ReplyStatisticsService replyStatisticsService = new ReplyStatisticsService(
+						context);
 				try {
-					letters= replyStatisticsService.getLettersStatistics
-							(Constants.Urls.LETTERS_STATISTICS_URL,letter_type,year,month);
+					letters = replyStatisticsService.getLettersStatistics(
+							Constants.Urls.LETTERS_STATISTICS_URL, letter_type,
+							year, month);
 					if (null != letters) {
 
 						handler.sendEmptyMessage(LETTERSTATISTICS_LOAD_SUCESS);
@@ -271,38 +342,38 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 					e.printStackTrace();
 				}
 			}
-		}
-				).start();
+		}).start();
 	}
-
 
 	/*
 	 * 显示所有回复统计信息
-	 * */
-	public void showAllCounts(){
+	 */
+	public void showAllCounts() {
 
-		for(AllCount count:allCounts){
-			if(count.getName().equals("领导信箱"))
-				complaint_txtView.setText(String.valueOf(count.getCount())+"封");
-			else if(count.getName().equals("咨询投诉"))
-				mayorbox_txtView.setText(String.valueOf(count.getCount())+"封");
-			else if(count.getName().equals("市长信箱"))
-				leaderbox_txtView.setText(String.valueOf(count.getCount())+"封");
+		for (AllCount count : allCounts) {
+			if (count.getName().equals("领导信箱"))
+				complaint_txtView.setText(String.valueOf(count.getCount())
+						+ "封");
+			else if (count.getName().equals("咨询投诉"))
+				mayorbox_txtView
+						.setText(String.valueOf(count.getCount()) + "封");
+			else if (count.getName().equals("市长信箱"))
+				leaderbox_txtView.setText(String.valueOf(count.getCount())
+						+ "封");
 		}
 	}
 
-	public void showReplyLettersList(){
-		LettersListViewAdapter adapter=new LettersListViewAdapter();
+	public void showReplyLettersList() {
+		LettersListViewAdapter adapter = new LettersListViewAdapter();
 
-		if(letters==null||letters.size()==0){
+		if (letters == null || letters.size() == 0) {
 			Toast.makeText(context, "对不起，暂无信息", Toast.LENGTH_SHORT).show();
-		}
-		else{
+		} else {
 			mListView.setAdapter(adapter);
 		}
 	}
 
-	public class LettersListViewAdapter extends BaseAdapter{
+	public class LettersListViewAdapter extends BaseAdapter {
 
 		@Override
 		public int getCount() {
@@ -330,7 +401,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder viewHolder = null;
-			if(convertView==null){
+			if (convertView == null) {
 				convertView = mInflater.inflate(
 						R.layout.gip_12345_answerstati_listview_item, null);
 
@@ -348,16 +419,19 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment{
 						.findViewById(R.id.gip_12345_answerstati_replyDay);
 
 				convertView.setTag(viewHolder);
-			}
-			else {
+			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
 
 			viewHolder.depName_text.setText(letters.get(position).getDepname());
-			viewHolder.acceptedNum_text.setText(String.valueOf(letters.get(position).getAcceptedNum()));
-			viewHolder.replyNum_text.setText(String.valueOf(letters.get(position).getReplyNum()));
-			viewHolder.replyRate_text.setText(String.valueOf(letters.get(position).getReplyRate()));
-			viewHolder.replyDay_text.setText(letters.get(position).getReplyDay());
+			viewHolder.acceptedNum_text.setText(String.valueOf(letters.get(
+					position).getAcceptedNum()));
+			viewHolder.replyNum_text.setText(String.valueOf(letters.get(
+					position).getReplyNum()));
+			viewHolder.replyRate_text.setText(String.valueOf(letters.get(
+					position).getReplyRate()));
+			viewHolder.replyDay_text.setText(letters.get(position)
+					.getReplyDay());
 
 			return convertView;
 		}

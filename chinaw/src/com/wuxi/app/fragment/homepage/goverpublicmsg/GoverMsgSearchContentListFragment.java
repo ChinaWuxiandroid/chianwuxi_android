@@ -7,11 +7,13 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,22 +40,25 @@ import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NetException;
 
 /**
- * 政府信息公开   里  带有部门/区县   时间  的 内容列表搜索Fragment
- * @author 杨宸  智佳
+ * 政府信息公开 里 带有部门/区县 时间 的 内容列表搜索Fragment
+ * 
+ * @author 杨宸 智佳
  * */
 
-public class GoverMsgSearchContentListFragment extends BaseFragment implements OnClickListener{
+public class GoverMsgSearchContentListFragment extends BaseFragment implements
+		OnClickListener {
+
 	protected View view;
 	protected LayoutInflater mInflater;
 	private Context context;
-	protected static final int CHANNELLIST_CONTENT_ID=R.id.govermsg_search_content_framelayout;
+	protected static final int CHANNELLIST_CONTENT_ID = R.id.govermsg_search_content_framelayout;
 
-	private static final int LOAD_DEPT_SUCCESS=1;
-	private static final int LOAD_DEPT_FAILED=2;
-	private static final int LOAD_YEAR_SUCCESS=3;
-	private static final int LOAD_YEAR_FAILED=4;
-	private static final int LOAD_CONTENTLIST_SUCCESS=5;
-	private static final int LOAD_CONTENTLIST_FAILED=6;
+	private static final int LOAD_DEPT_SUCCESS = 1;
+	private static final int LOAD_DEPT_FAILED = 2;
+	private static final int LOAD_YEAR_SUCCESS = 3;
+	private static final int LOAD_YEAR_FAILED = 4;
+	private static final int LOAD_CONTENTLIST_SUCCESS = 5;
+	private static final int LOAD_CONTENTLIST_FAILED = 6;
 
 	private MenuItem parentMenuItem;
 	private Channel channel;
@@ -64,24 +69,25 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 	private Spinner year_sp;
 	private Button search_imbtn;
 
-	private static String DEFAULT_DEPT_FIFTER="按部门筛选";
-	private static String DEFAULT_ZONE_FIFTER="按县区筛选";
-	private String deptStrFifter=DEFAULT_DEPT_FIFTER;
-	private String zoneStrFifter=DEFAULT_ZONE_FIFTER;
-	//年份默认今年
-	private int DEFAULT_YEAR_FIFTER=2013;
-	private int yearFifter=DEFAULT_YEAR_FIFTER;   //2013
+	private static String DEFAULT_DEPT_FIFTER = "按部门筛选";
+	private static String DEFAULT_ZONE_FIFTER = "按县区筛选";
+	private String deptStrFifter = DEFAULT_DEPT_FIFTER;
+	private String zoneStrFifter = DEFAULT_ZONE_FIFTER;
+	// 年份默认今年
+	private int DEFAULT_YEAR_FIFTER = 2013;
+	private int yearFifter = DEFAULT_YEAR_FIFTER; // 2013
 
-	private static final String[] zoneArr={DEFAULT_ZONE_FIFTER,"江阴","宜兴","惠山","滨湖","崇安","南长 ","北塘","无锡新区"};
-	
-	public static final int DEPT_TYPE=1;
-	public static final int ZONE_TYPE=2;
-	private int filterType=DEPT_TYPE;  //检索过滤 类型  1-部门时间型(缺省类型)   2-区县时间型  
+	private static final String[] zoneArr = { DEFAULT_ZONE_FIFTER, "江阴", "宜兴",
+			"惠山", "滨湖", "崇安", "南长 ", "北塘", "无锡新区" };
 
-	public void setFifterType(int type){
-		this.filterType=type;
+	public static final int DEPT_TYPE = 1;
+	public static final int ZONE_TYPE = 2;
+	private int filterType = DEPT_TYPE; // 检索过滤 类型 1-部门时间型(缺省类型) 2-区县时间型
+
+	public void setFifterType(int type) {
+		this.filterType = type;
 	}
-	
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -92,7 +98,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 			case LOAD_DEPT_FAILED:
 				Toast.makeText(context, "部门信息加载失败", Toast.LENGTH_SHORT).show();
 				break;
-			case	LOAD_YEAR_SUCCESS:
+			case LOAD_YEAR_SUCCESS:
 				Toast.makeText(context, "下载成功", Toast.LENGTH_SHORT).show();
 				break;
 			case LOAD_YEAR_FAILED:
@@ -110,42 +116,45 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 		}
 	};
 
-	public void setParentMenuItem(MenuItem parentMenuItem){
-		this.parentMenuItem=parentMenuItem;
+	public void setParentMenuItem(MenuItem parentMenuItem) {
+		this.parentMenuItem = parentMenuItem;
 	}
 
-	public void setChannel(Channel channel){
-		this.channel=channel;
+	public void setChannel(Channel channel) {
+		this.channel = channel;
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.govermsg_search_contentlist_layout, null);
+		view = inflater.inflate(R.layout.govermsg_search_contentlist_layout,
+				null);
 		mInflater = inflater;
 		context = getActivity();
-
 
 		initView();
 		return view;
 	}
 
-	public void initView(){
-		partment_sp=(Spinner)view.findViewById(R.id.govermsg_search_spinner_partment);
-		year_sp=(Spinner)view.findViewById(R.id.govermsg_search_spinner_year);
-		search_imbtn=(Button)view.findViewById(R.id.govermsg_search_button_search);
+	public void initView() {
+		partment_sp = (Spinner) view
+				.findViewById(R.id.govermsg_search_spinner_partment);
+		year_sp = (Spinner) view
+				.findViewById(R.id.govermsg_search_spinner_year);
+		search_imbtn = (Button) view
+				.findViewById(R.id.govermsg_search_button_search);
 		search_imbtn.setOnClickListener(this);
-	
+
 		loadContentList();
 
 		initFilter(filterType);
 	}
 
-	public void initFilter(int Type){
+	public void initFilter(int Type) {
 		Calendar c = Calendar.getInstance();
-		DEFAULT_YEAR_FIFTER=c.get(Calendar.YEAR);   //2013
-		yearFifter=DEFAULT_YEAR_FIFTER;
-		switch(Type){
+		DEFAULT_YEAR_FIFTER = c.get(Calendar.YEAR); // 2013
+		yearFifter = DEFAULT_YEAR_FIFTER;
+		switch (Type) {
 		case DEPT_TYPE:
 			loadDeptData();
 			initYearSpinner();
@@ -156,42 +165,45 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 			break;
 		}
 	}
-	
+
 	/**
 	 * 初始化区县过滤信息 （已屏蔽）
 	 * */
-	public void initCountrySpinner(){
+	public void initCountrySpinner() {
 
-//		ArrayAdapter<String> country_Spinner_adapter = new ArrayAdapter<String>(context,
-//				R.layout.my_simple_spinner_item_layout, zoneArr);
-//		country_Spinner_adapter.setDropDownViewResource(R.layout.my_spinner_medium_dropdown_item);
-//		partment_sp.setAdapter(country_Spinner_adapter);
-//		partment_sp.setOnItemSelectedListener(new OnItemSelectedListener() {
-//
-//			@Override
-//			public void onItemSelected(AdapterView<?> arg0, View view,
-//					int arg2, long arg3) {
-//				zoneStrFifter=((TextView)view).getText().toString();
-//			}
-//
-//			@Override
-//			public void onNothingSelected(AdapterView<?> arg0) {
-//			}
-//		});
-//		partment_sp.setVisibility(View.VISIBLE);
+		// ArrayAdapter<String> country_Spinner_adapter = new
+		// ArrayAdapter<String>(context,
+		// R.layout.my_simple_spinner_item_layout, zoneArr);
+		// country_Spinner_adapter.setDropDownViewResource(R.layout.my_spinner_medium_dropdown_item);
+		// partment_sp.setAdapter(country_Spinner_adapter);
+		// partment_sp.setOnItemSelectedListener(new OnItemSelectedListener() {
+		//
+		// @Override
+		// public void onItemSelected(AdapterView<?> arg0, View view,
+		// int arg2, long arg3) {
+		// zoneStrFifter=((TextView)view).getText().toString();
+		// }
+		//
+		// @Override
+		// public void onNothingSelected(AdapterView<?> arg0) {
+		// }
+		// });
+		// partment_sp.setVisibility(View.VISIBLE);
 		partment_sp.setVisibility(View.GONE);
 	}
 
-	public void loadDeptData(){
+	public void loadDeptData() {
 
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 				Message msg = handler.obtainMessage();
-				ApplyDeptService applyDeptService = new ApplyDeptService(context);
+				ApplyDeptService applyDeptService = new ApplyDeptService(
+						context);
 				try {
-					depts = applyDeptService.getDepts(Constants.Urls.APPLYDEPT_URL);
+					depts = applyDeptService
+							.getDepts(Constants.Urls.APPLYDEPT_URL);
 					if (depts != null) {
 						msg.what = LOAD_DEPT_SUCCESS;
 						CacheUtil.put(Constants.CacheKey.DEPT_KEY, depts);// 放入缓存
@@ -216,42 +228,49 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 
 	}
 
-	private void showDept(){
-		ApplyDept deptDefault=new ApplyDept();
+	private void showDept() {
+		ApplyDept deptDefault = new ApplyDept();
 		deptDefault.setDepId("0");
 		deptDefault.setDepName(DEFAULT_DEPT_FIFTER);
 		depts.add(0, deptDefault);
 
 		DeptAdapter partment_Spinner_adapter = new DeptAdapter();
-		if(partment_sp.getVisibility()==View.VISIBLE){
+		if (partment_sp.getVisibility() == View.VISIBLE) {
 			partment_sp.setAdapter(partment_Spinner_adapter);
 			partment_sp.setOnItemSelectedListener(partment_Spinner_adapter);
 			partment_sp.setVisibility(View.VISIBLE);
 		}
-	
+
 	}
 
-	public void initYearSpinner(){
+	public void initYearSpinner() {
 		List<String> years = TimeFormateUtil
 				.getYears(TimeFormateUtil.START_YEAR);
 
+		String[] yearStr = new String[years.size()];
+		
+		for (int i = 0; i < years.size(); i++) {
+			yearStr[i] = years.get(i);
+			
+		}
+		
 		years.add(0, "按年份");
 
-		ArrayAdapter year_Spinner_adapter = new ArrayAdapter<String>(context,
-				R.layout.my_simple_spinner_item_layout, years);
-		year_Spinner_adapter.setDropDownViewResource(R.layout.my_spinner_medium_dropdown_item);
+		MyAryAdapter year_Spinner_adapter = new MyAryAdapter(context, android.R.layout.simple_spinner_item, yearStr);
+		year_Spinner_adapter
+				.setDropDownViewResource(R.layout.my_spinner_medium_dropdown_item);
 		year_sp.setAdapter(year_Spinner_adapter);
 		year_sp.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View view,
 					int position, long arg3) {
-				String buffYearStr=((TextView)view).getText().toString();
-				if(position!=0){
-					yearFifter=Integer.valueOf(((TextView)view).getText().toString());
-				}
-				else{
-					yearFifter=DEFAULT_YEAR_FIFTER;    //表示按年份来
+				String buffYearStr = ((TextView) view).getText().toString();
+				if (position != 0) {
+					yearFifter = Integer.valueOf(((TextView) view).getText()
+							.toString());
+				} else {
+					yearFifter = DEFAULT_YEAR_FIFTER; // 表示按年份来
 				}
 			}
 
@@ -264,39 +283,89 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 
 	@Override
 	public void onClick(View v) {
-		switch(v.getId()){
+		switch (v.getId()) {
 		case R.id.govermsg_search_button_search:
 			search();
 			break;
 		}
 	}
+	
+	public class MyAryAdapter extends ArrayAdapter<String> {
 
-	//开始检索
-	public void search(){
-		GoverMsgFifterContentListFragment goverMsgFifterContentListFragment=new GoverMsgFifterContentListFragment();
-		String id=null;
+		Context context;
+		String[] items = new String[] {};
+
+		public MyAryAdapter(final Context context,
+				final int textViewResourceId, final String[] objects) {
+			super(context, textViewResourceId, objects);
+
+			this.items = objects;
+			this.context = context;
+		}
+
+		@Override
+		public View getDropDownView(int position, View convertView,
+				ViewGroup parent) {
+			if (convertView == null) {
+				LayoutInflater inflater = LayoutInflater.from(context);
+				convertView = inflater.inflate(
+						android.R.layout.simple_spinner_item, parent, false);
+			}
+
+			TextView tv = (TextView) convertView
+					.findViewById(android.R.id.text1);
+			tv.setText(items[position]);
+			tv.setGravity(Gravity.LEFT);
+			tv.setTextColor(Color.BLACK);
+			
+			return convertView;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				LayoutInflater inflater = LayoutInflater.from(context);
+				convertView = inflater.inflate(
+						android.R.layout.simple_spinner_item, parent, false);
+			}
+
+			TextView tv = (TextView) convertView
+					.findViewById(android.R.id.text1);
+			tv.setText(items[position]);
+			tv.setGravity(Gravity.LEFT);
+			tv.setTextColor(Color.BLACK);
+
+			return convertView;
+		}
+
+	}
+
+	// 开始检索
+	public void search() {
+		GoverMsgFifterContentListFragment goverMsgFifterContentListFragment = new GoverMsgFifterContentListFragment();
+		String id = null;
 		if (channel != null) {
 			id = channel.getChannelId();
 		} else if (parentMenuItem != null) {
 			id = parentMenuItem.getChannelId();
 		}
-		FifterContentWrapper fifter=new FifterContentWrapper(id);
-		switch(filterType){
-		//按部门 时间  检索
+		FifterContentWrapper fifter = new FifterContentWrapper(id);
+		switch (filterType) {
+		// 按部门 时间 检索
 		case DEPT_TYPE:
-			if(DEFAULT_DEPT_FIFTER.equals(deptStrFifter))
-				deptStrFifter=null;
-			if(yearFifter==DEFAULT_YEAR_FIFTER)
-				yearFifter=-1;
+			if (DEFAULT_DEPT_FIFTER.equals(deptStrFifter))
+				deptStrFifter = null;
+			if (yearFifter == DEFAULT_YEAR_FIFTER)
+				yearFifter = -1;
 			fifter.setDept(deptStrFifter);
 			fifter.setYear(yearFifter);
 			break;
-			//按区县 时间  检索
+		// 按区县 时间 检索
 		case ZONE_TYPE:
-			if(DEFAULT_ZONE_FIFTER.equals(zoneStrFifter))
-				zoneStrFifter=null;
-			if(yearFifter==DEFAULT_YEAR_FIFTER)
-				yearFifter=-1;
+			if (DEFAULT_ZONE_FIFTER.equals(zoneStrFifter))
+				zoneStrFifter = null;
+			if (yearFifter == DEFAULT_YEAR_FIFTER)
+				yearFifter = -1;
 			fifter.setZone(zoneStrFifter);
 			fifter.setYear(yearFifter);
 			break;
@@ -305,28 +374,28 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 		bindFragment(goverMsgFifterContentListFragment);
 	}
 
-	private void loadContentList(){
-		GoverMsgContentListFragment goverMsgContentListFragment=new GoverMsgContentListFragment();
-	
-		if(parentMenuItem!=null){
+	private void loadContentList() {
+		GoverMsgContentListFragment goverMsgContentListFragment = new GoverMsgContentListFragment();
+
+		if (parentMenuItem != null) {
 			goverMsgContentListFragment.setParentItem(parentMenuItem);
-		}
-		else if(channel!=null){
+		} else if (channel != null) {
 			goverMsgContentListFragment.setChannel(channel);
 		}
 
 		bindFragment(goverMsgContentListFragment);
 	}
 
-	private void bindFragment(BaseFragment fragment) {		
+	private void bindFragment(BaseFragment fragment) {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
-		
+
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(CHANNELLIST_CONTENT_ID, fragment);
-		ft.commitAllowingStateLoss();	
+		ft.commitAllowingStateLoss();
 	}
 
-	public class DeptAdapter extends BaseAdapter implements OnItemSelectedListener{
+	public class DeptAdapter extends BaseAdapter implements
+			OnItemSelectedListener {
 
 		@Override
 		public int getCount() {
@@ -343,7 +412,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 			return position;
 		}
 
-		public class ViewHolder{
+		public class ViewHolder {
 			TextView tv_dept;
 		}
 
@@ -362,14 +431,17 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements O
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
+			
+			viewHolder.tv_dept.setTextColor(Color.BLACK);
 			viewHolder.tv_dept.setText(dept.getDepName());
+			
 			return convertView;
 		}
 
 		@Override
-		public void onItemSelected(AdapterView<?> arg0, View arg1, int position,
-				long arg3) {
-			deptStrFifter= depts.get(position).getDepName();
+		public void onItemSelected(AdapterView<?> arg0, View arg1,
+				int position, long arg3) {
+			deptStrFifter = depts.get(position).getDepName();
 		}
 
 		@Override

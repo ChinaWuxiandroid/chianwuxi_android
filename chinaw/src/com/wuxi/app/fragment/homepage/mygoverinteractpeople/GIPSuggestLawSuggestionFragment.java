@@ -5,14 +5,18 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -40,10 +44,6 @@ import com.wuxi.exception.NetException;
  * */
 
 public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment {
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
 
 	private Spinner chooseYear_spinner;
 
@@ -57,8 +57,10 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment {
 
 	public final int POLITICS_TYPE = 0; // politics类型，接口里0 为立法征集，1 为民意征集
 	private int startIndex = 0; // 获取话题的起始坐标
-	private int endIndex = 10; // 获取话题的结束坐标
-	private int passed = 1; // 是否过期，可选参数，默认值是0 0: 当前 1:以往
+	private int endIndex = 20; // 获取话题的结束坐标
+	private int year = 2013; // 可选参数，用于立法征求的年份查询，默认为当前年份
+
+	private String[] yearAlone = { "2013", "2012", "2011", "2010" };
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -103,13 +105,38 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment {
 
 	@Override
 	protected void init() {
+		// 初始化年份下拉框控件变量
 		chooseYear_spinner = (Spinner) view
 				.findViewById(R.id.gip_suggest_lawsuggest_spinner_chooseYear);
-		ArrayAdapter spinner_adapter = ArrayAdapter.createFromResource(context,
-				R.array.spinnerYear, android.R.layout.simple_spinner_item);
+
+		// 年份下拉框适配器实例
+		MyAryAdapter spinner_adapter = new MyAryAdapter(context,
+				android.R.layout.simple_spinner_item, yearAlone);
 		spinner_adapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		// 设置年份下拉框适配器
 		chooseYear_spinner.setAdapter(spinner_adapter);
+		// 设置年份下拉框选项事件监听
+		chooseYear_spinner
+				.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+					@Override
+					public void onItemSelected(AdapterView<?> adapterView,
+							View view, int position, long arg3) {
+						// 构建征集主题URL
+						String url = Constants.Urls.POLITICS_LIST_URL
+								+ "?type=" + POLITICS_TYPE + "&start="
+								+ startIndex + "&end=" + endIndex + "&year="
+								+ yearAlone[position];
+						// 加载数据
+						loadData(url);
+					}
+
+					@Override
+					public void onNothingSelected(AdapterView<?> arg0) {
+
+					}
+				});
 		chooseYear_spinner.setVisibility(View.VISIBLE);
 
 		mListView = (ListView) view
@@ -118,11 +145,22 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment {
 				.findViewById(R.id.gip_suggest_lawsuggest_listView_poloticsList_pb);
 
 		list_pb.setVisibility(View.VISIBLE);
-		loadData();
+
+		// 构建立法征求意见数据查询URL
+		String url = Constants.Urls.POLITICS_LIST_URL + "?type="
+				+ POLITICS_TYPE + "&start=" + startIndex + "&end=" + endIndex
+				+ "&year=" + year;
+
+		loadData(url);
 
 	}
 
-	public void loadData() {
+	/**
+	 * @方法： loadData
+	 * @描述： 加载立法征求意见数据
+	 * @param url
+	 */
+	public void loadData(final String url) {
 
 		new Thread(new Runnable() {
 
@@ -131,12 +169,9 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment {
 
 				PoliticsService politicsService = new PoliticsService(context);
 				try {
-					politicsWrapper = politicsService.getPoliticsWrapper(
-							Constants.Urls.POLITICS_LIST_URL, POLITICS_TYPE,
-							startIndex, endIndex, passed);
+
+					politicsWrapper = politicsService.getPoliticsWrapper(url);
 					if (null != politicsWrapper) {
-						// CacheUtil.put(menuItem.getChannelId(),
-						// titleChannels);// 缓存起来
 						politics = politicsWrapper.getData();
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 
@@ -162,16 +197,89 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment {
 		}).start();
 	}
 
+	/**
+	 * @方法： showPoloticsList
+	 * @描述： 显示立法征求意见列表
+	 */
 	public void showPoloticsList() {
 		PoliticsListViewAdapter adapter = new PoliticsListViewAdapter();
 		if (politics == null || politics.size() == 0) {
-			Toast.makeText(context, "对不起，暂无热点话题信息", 2000).show();
+			Toast.makeText(context, "对不起，暂无立法征求意见信息", Toast.LENGTH_SHORT)
+					.show();
 		} else {
 			mListView.setAdapter(adapter);
 			mListView.setOnItemClickListener(adapter);
 		}
 	}
 
+	/**
+	 * @类名： MyAryAdapter
+	 * @描述： 按年份筛选征集主题下拉框适配器类
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-9-2 下午4:48:31
+	 * @修改时间：
+	 * @修改描述：
+	 * 
+	 */
+	public class MyAryAdapter extends ArrayAdapter<String> {
+
+		Context context;
+		String[] items = new String[] {};
+
+		public MyAryAdapter(final Context context,
+				final int textViewResourceId, final String[] objects) {
+			super(context, textViewResourceId, objects);
+
+			this.items = objects;
+			this.context = context;
+		}
+
+		@Override
+		public View getDropDownView(int position, View convertView,
+				ViewGroup parent) {
+			if (convertView == null) {
+				LayoutInflater inflater = LayoutInflater.from(context);
+				convertView = inflater.inflate(
+						android.R.layout.simple_spinner_item, parent, false);
+			}
+
+			TextView tv = (TextView) convertView
+					.findViewById(android.R.id.text1);
+			tv.setText(items[position]);
+			tv.setGravity(Gravity.LEFT);
+			tv.setTextColor(Color.BLACK);
+
+			return convertView;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				LayoutInflater inflater = LayoutInflater.from(context);
+				convertView = inflater.inflate(
+						android.R.layout.simple_spinner_item, parent, false);
+			}
+
+			TextView tv = (TextView) convertView
+					.findViewById(android.R.id.text1);
+			tv.setText(items[position]);
+			tv.setGravity(Gravity.LEFT);
+			tv.setTextColor(Color.BLACK);
+
+			return convertView;
+		}
+
+	}
+
+	/**
+	 * @类名： PoliticsListViewAdapter
+	 * @描述： 立法征求意见列表适配器
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-9-2 下午4:44:23
+	 * @修改时间：
+	 * @修改描述：
+	 * 
+	 */
 	public class PoliticsListViewAdapter extends BaseAdapter implements
 			OnItemClickListener {
 
@@ -227,6 +335,5 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment {
 
 			MainTabActivity.instance.addView(intent);
 		}
-
 	}
 }

@@ -61,11 +61,6 @@ import com.wuxi.exception.NetException;
 
 public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
-
 	private static final String TAG = "GIP12345MayorMaiBoxFragment";
 
 	private static final int HIDEN_CONTENT_ID = R.id.mayor_box_fragment;
@@ -344,7 +339,7 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 		});
 
 		GIP12345MayorMailListFragment gip12345MayorMailListFragment = new GIP12345MayorMailListFragment();
-		
+
 		bindFragment(gip12345MayorMailListFragment);
 
 		loadAllCountData();
@@ -415,12 +410,12 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 		DeptAdapter partment_Spinner_adapter = new DeptAdapter();
 
 		acceptDepartmentSpinner.setAdapter(partment_Spinner_adapter);
-		// acceptDepartmentSpinner
-		// .setOnItemSelectedListener(partment_Spinner_adapter);
+		acceptDepartmentSpinner
+				.setOnItemSelectedListener(partment_Spinner_adapter);
 
 		replyDepartmentSpinner.setAdapter(partment_Spinner_adapter);
-		// replyDepartmentSpinner
-		// .setOnItemSelectedListener(partment_Spinner_adapter);
+		replyDepartmentSpinner
+				.setOnItemSelectedListener(partment_Spinner_adapter);
 
 	}
 
@@ -461,7 +456,7 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 		emailSortSpinner.setAdapter(adapter);
 	}
 
-	/*
+	/**
 	 * 显示所有回复统计信息
 	 */
 	public void showAllCounts() {
@@ -692,10 +687,10 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			
+
 			viewHolder.tv_dept.setTextColor(Color.BLACK);
 			viewHolder.tv_dept.setText(dept.getDepname());
-			
+
 			return convertView;
 		}
 

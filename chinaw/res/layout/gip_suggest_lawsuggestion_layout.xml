@@ -10,20 +10,20 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="5sp"
+        android:gravity="center_horizontal"
         android:orientation="horizontal" >
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="2"
             android:gravity="center"
-            android:text="按年份筛选征集 主题：" />
+            android:text="按年份筛选征集主题：" />
 
         <Spinner
             android:id="@+id/gip_suggest_lawsuggest_spinner_chooseYear"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" 
+            android:layout_width="100sp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3sp"
             android:background="@drawable/spiner_bg"/>
     </LinearLayout>
 

@@ -120,7 +120,6 @@ public class LegislationContentActivity extends BaseItemContentActivity
 		comment_btn = (Button) view
 				.findViewById(R.id.forum_content_comment_btn);
 		comment_btn.setText("填写意见");
-		comment_btn.setVisibility(View.GONE);
 		comment_btn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -130,7 +129,7 @@ public class LegislationContentActivity extends BaseItemContentActivity
 				comment_btn.getLocationOnScreen(xy);
 				popWindow.showAtLocation(comment_btn, Gravity.BOTTOM
 						| Gravity.CENTER_HORIZONTAL, 0,
-						comment_btn.getHeight() * 2 + 20);
+						comment_btn.getHeight() * 2 + 50);
 			}
 		});
 	}
@@ -157,31 +156,33 @@ public class LegislationContentActivity extends BaseItemContentActivity
 
 			@Override
 			public void onClick(View v) {
-				String id = "77e9a0ef-cba8-4ebd-9d7b-7ccfffd4cdfe";
-				String access_token = Constants.SharepreferenceKey.TEST_ACCESSTOKEN;
-				String type = "/HotReviewContent";
-				String content = submitContent.getText().toString();
-
-				ForumCommentService commentService = new ForumCommentService(
-						LegislationContentActivity.this);
-
-				try {
-					boolean isSubnit = commentService.submitComment(id,
-							access_token, type, content);
-
-					if (isSubnit) {
-						Toast.makeText(LegislationContentActivity.this,
-								"提交成功！", Toast.LENGTH_SHORT).show();
-					} else {
-						Toast.makeText(LegislationContentActivity.this,
-								"提交失败！", Toast.LENGTH_SHORT).show();
-					}
-
-				} catch (NetException e) {
-					e.printStackTrace();
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+//				String id = "77e9a0ef-cba8-4ebd-9d7b-7ccfffd4cdfe";
+//				String access_token = Constants.SharepreferenceKey.TEST_ACCESSTOKEN;
+//				String type = "/HotReviewContent";
+//				String content = submitContent.getText().toString();
+//
+//				ForumCommentService commentService = new ForumCommentService(
+//						LegislationContentActivity.this);
+//
+//				try {
+//					boolean isSubnit = commentService.submitComment(id,
+//							access_token, type, content);
+//
+//					if (isSubnit) {
+//						Toast.makeText(LegislationContentActivity.this,
+//								"提交成功！", Toast.LENGTH_SHORT).show();
+//					} else {
+//						Toast.makeText(LegislationContentActivity.this,
+//								"提交失败！", Toast.LENGTH_SHORT).show();
+//					}
+//
+//				} catch (NetException e) {
+//					e.printStackTrace();
+//				} catch (JSONException e) {
+//					e.printStackTrace();
+//				}
+				
+				Toast.makeText(LegislationContentActivity.this, "暂未实现该功能", Toast.LENGTH_SHORT).show();
 			}
 		});
 

@@ -1,12 +1,15 @@
 package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
+import java.util.List;
+
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.hardware.Camera.CameraInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,9 +17,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -26,6 +31,8 @@ import com.wuxi.app.R;
 import com.wuxi.app.engine.LetterService;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.MyLetter;
+import com.wuxi.domain.PartLeaderMailWrapper;
+import com.wuxi.domain.PartLeaderMailWrapper.PartLeaderMail;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -47,6 +54,12 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 	private final static int SEND_FAILED = 0;
 
 	private MyLetter myLetter = null;
+	
+	private PartLeaderMailWrapper leaderMailWrapper = null;
+	private List<PartLeaderMail> depts = null;
+	
+	private static String DEFAULT_DEPT_FIFTER = "无限制";
+	private String deptStrFifter = DEFAULT_DEPT_FIFTER;
 
 	private RadioGroup mailType_radioGroup = null;
 	private static final String DOPROJECTID_MAYORBOX = "6b8e124e-1e5c-4a11-8dd3-c6623c809eff"; // 市长信箱
@@ -70,6 +83,9 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 	private EditText content_editText = null;
 
 	private ImageButton send = null;
+	
+	//信箱分类数组
+	private String[] mailBoxTypes = {"咨询","求助","建议","投诉","举报","表扬","其他"};
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -121,11 +137,12 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 		mailBoxType = (Spinner) view
 				.findViewById(R.id.gip_12345_iwantmail_spinner_type);
 
-		ArrayAdapter mailBoxType_Spinner_adapter = ArrayAdapter
-				.createFromResource(context, R.array.mailBoxType,
-						R.layout.my_spinner_small_item);
+		//信箱分类适配器实例
+		MyAryAdapter mailBoxType_Spinner_adapter = new MyAryAdapter(context, android.R.layout.simple_spinner_item, mailBoxTypes);
+
 		mailBoxType_Spinner_adapter
 				.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);
+		//设置信箱分类下拉框适配器
 		mailBoxType.setAdapter(mailBoxType_Spinner_adapter);
 		mailBoxType.setVisibility(View.VISIBLE);
 
@@ -154,7 +171,7 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-
+				
 			}
 		});
 	}
@@ -253,5 +270,139 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment implements
 			myLetter.setMsgStatus(notreplyMsg);
 			break;
 		}
+	}
+
+	/**
+	 * @类名： DeptAdapter
+	 * @描述： 部门下拉框适配器类
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-9-2 下午3:15:48
+	 * @修改时间： 
+	 * @修改描述： 
+	 *
+	 */
+	public class DeptAdapter extends BaseAdapter implements
+			OnItemSelectedListener {
+
+		@Override
+		public int getCount() {
+			return depts.size();
+		}
+
+		@Override
+		public Object getItem(int position) {
+			return depts.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		/**
+		 * @类名： ViewHolder
+		 * @描述： 下拉列表布局
+		 * @作者： 罗森
+		 * @创建时间： 2013 2013-8-27 上午9:28:24
+		 * @修改时间：
+		 * @修改描述：
+		 * 
+		 */
+		public class ViewHolder {
+			TextView tv_dept;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			PartLeaderMail dept = depts.get(position);
+			ViewHolder viewHolder = null;
+
+			if (convertView == null) {
+				// 加载下拉列表布局文件
+				convertView = View.inflate(context,
+						R.layout.comstuom_spinner_item_layout, null);
+				viewHolder = new ViewHolder();
+				TextView tv = (TextView) convertView.findViewById(R.id.sp_tv);
+				viewHolder.tv_dept = tv;
+				convertView.setTag(viewHolder);
+			} else {
+				viewHolder = (ViewHolder) convertView.getTag();
+			}
+
+			viewHolder.tv_dept.setTextColor(Color.BLACK);
+			viewHolder.tv_dept.setText(dept.getDepname());
+
+			return convertView;
+		}
+
+		@Override
+		public void onItemSelected(AdapterView<?> arg0, View arg1,
+				int position, long arg3) {
+			// 设置下拉列表内容
+			deptStrFifter = depts.get(position).getDepname();
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {
+		}
+	}
+	
+	/**
+	 * @类名： MyAryAdapter
+	 * @描述： 信箱分类下拉框适配器类
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-9-2 下午3:29:55
+	 * @修改时间： 
+	 * @修改描述： 
+	 *
+	 */
+	public class MyAryAdapter extends ArrayAdapter<String> {
+
+		Context context;
+		String[] items = new String[] {};
+
+		public MyAryAdapter(final Context context,
+				final int textViewResourceId, final String[] objects) {
+			super(context, textViewResourceId, objects);
+
+			this.items = objects;
+			this.context = context;
+		}
+
+		@Override
+		public View getDropDownView(int position, View convertView,
+				ViewGroup parent) {
+			if (convertView == null) {
+				LayoutInflater inflater = LayoutInflater.from(context);
+				convertView = inflater.inflate(
+						android.R.layout.simple_spinner_item, parent, false);
+			}
+
+			TextView tv = (TextView) convertView
+					.findViewById(android.R.id.text1);
+			tv.setText(items[position]);
+			tv.setGravity(Gravity.LEFT);
+			tv.setTextColor(Color.BLACK);
+			
+			return convertView;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				LayoutInflater inflater = LayoutInflater.from(context);
+				convertView = inflater.inflate(
+						android.R.layout.simple_spinner_item, parent, false);
+			}
+
+			TextView tv = (TextView) convertView
+					.findViewById(android.R.id.text1);
+			tv.setText(items[position]);
+			tv.setGravity(Gravity.LEFT);
+			tv.setTextColor(Color.BLACK);
+
+			return convertView;
+		}
+
 	}
 }
