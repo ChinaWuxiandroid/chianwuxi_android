@@ -31,8 +31,6 @@ import com.wuxi.app.fragment.MainSearchFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.WuxiChannelContentDetailFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyTableFragment;
-import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgContentDetailWebFragment;
-import com.wuxi.app.fragment.homepage.goverpublicmsg.PublicGoverMsgFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonContentDetialFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailCFFragment;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonDetailQTFragment;
@@ -50,18 +48,9 @@ import com.wuxi.app.fragment.homepage.more.AboutUsFragment;
 import com.wuxi.app.fragment.homepage.more.MenuItemSetFragment;
 import com.wuxi.app.fragment.homepage.more.SiteMapFragment;
 import com.wuxi.app.fragment.homepage.more.SystemSetFragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumContentFragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumPostFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailFragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailContentFragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewContentFragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegislationContentFragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.PepoleIdeaCollectFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceContentDetailFragment;
 import com.wuxi.app.fragment.homepage.publicservice.PublicServiceFragment;
-import com.wuxi.app.fragment.search.AdvancedSearchFragment;
-import com.wuxi.app.fragment.search.AdvancedSearchResultListFragment;
-import com.wuxi.app.fragment.search.SearchResultDetailFragment;
 import com.wuxi.app.listeners.HomeTabChangListner;
 import com.wuxi.app.listeners.SlideLinstener;
 import com.wuxi.app.util.CacheUtil;
@@ -185,11 +174,11 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 					informationCenterFragment.setMenuItem(menuItem);
 					onReplaceFragment(informationCenterFragment, bundle);
 
-				} else if (menuItem.getName().equals("政府信息公开")) {
-
-					PublicGoverMsgFragment publicGoverMsgFragment = new PublicGoverMsgFragment();
-					publicGoverMsgFragment.setMenuItem(menuItem);
-					onReplaceFragment(publicGoverMsgFragment, bundle);
+//				} else if (menuItem.getName().equals("政府信息公开")) {
+//
+//					PublicGoverMsgFragment publicGoverMsgFragment = new PublicGoverMsgFragment();
+//					publicGoverMsgFragment.setMenuItem(menuItem);
+//					onReplaceFragment(publicGoverMsgFragment, bundle);
 
 				} else if (menuItem.getName().equals("公共服务")) {
 					PublicServiceFragment publicServiceFragment = new PublicServiceFragment();
@@ -232,20 +221,20 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				onReplaceFragment(searchFragment, bundle);
 				break;
 
-			case ADVANCED_SEARCH_FRAGMENT:// 全站高级搜索
-				AdvancedSearchFragment advancedSearchFragment = new AdvancedSearchFragment();
-				onAddFragment(advancedSearchFragment, bundle);
-				break;
+//			case ADVANCED_SEARCH_FRAGMENT:// 全站高级搜索
+//				AdvancedSearchFragment advancedSearchFragment = new AdvancedSearchFragment();
+//				onAddFragment(advancedSearchFragment, bundle);
+//				break;
 
-			case ADVANCED_SEARCH_LIST_FRAGMENT:// 高级搜索列表
-				AdvancedSearchResultListFragment advancedSearchResultListFragment = new AdvancedSearchResultListFragment();
-				onAddFragment(advancedSearchResultListFragment, bundle);
-				break;
+//			case ADVANCED_SEARCH_LIST_FRAGMENT:// 高级搜索列表
+//				AdvancedSearchResultListFragment advancedSearchResultListFragment = new AdvancedSearchResultListFragment();
+//				onAddFragment(advancedSearchResultListFragment, bundle);
+//				break;
 
-			case SEARCH_DETAIL_FRAGMENT:// 搜索内容页
-				SearchResultDetailFragment searchResultDetailFragment = new SearchResultDetailFragment();
-				onAddFragment(searchResultDetailFragment, bundle);
-				break;
+//			case SEARCH_DETAIL_FRAGMENT:// 搜索内容页
+//				SearchResultDetailFragment searchResultDetailFragment = new SearchResultDetailFragment();
+//				onAddFragment(searchResultDetailFragment, bundle);
+//				break;
 
 			case MAINMINEFRAGMENT:// 政民互动
 				MainMineFragment mainMineFragment = new MainMineFragment();
@@ -277,40 +266,11 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				GIP12345IWantMailFragment gip12345iWantMailFragment = new GIP12345IWantMailFragment();
 				onAddFragment(gip12345iWantMailFragment, bundle);
 
-			case GIP_PEOPLE_IDEA_CONTENT_FRAGMENT:// 政民互动 征求意见平台 民意征集 详情界面
-				PepoleIdeaCollectFragment peopleIdeaCollectFragment = new PepoleIdeaCollectFragment();
-				onAddFragment(peopleIdeaCollectFragment, bundle);
-				break;
 
-			case HOTREVIEW_CONTENT_FRAGMENT:// 政民互动 热点话题内容页
-				HotReviewContentFragment hotReviewContentFragment = new HotReviewContentFragment();
-				onAddFragment(hotReviewContentFragment, bundle);
-				break;
-
-			case GIP_MAYOR_MAIL_CONTENT_FRAGMENT:// 市长信箱 最新信件 列表详情界面
-				GIP12345MayorMailContentFragment gip12345MayorMailContentFragment = new GIP12345MayorMailContentFragment();
-				onAddFragment(gip12345MayorMailContentFragment, bundle);
-				break;
-
-			case GIP_FOROUM_FRAGMENT:// 公众论坛帖子详细内容
-				ForumContentFragment forumContentFragment = new ForumContentFragment();
-				onAddFragment(forumContentFragment, bundle);
-				break;
-
-			case GIP_FORUM_POST_FRAGMENT:// 公众论坛发表帖子界面
-				ForumPostFragment forumPostFragment = new ForumPostFragment();
-				onAddFragment(forumPostFragment, bundle);
-				break;
-
-			case GIP_LEGISLATION_CONTENT_FRAGMENT:// 征求意见平台 立法征求意见详细内容界面
-				LegislationContentFragment legislationContentFragment = new LegislationContentFragment();
-				onAddFragment(legislationContentFragment, bundle);
-				break;
-
-			case GIP_CHANNEL_CONTENT_DETAILWEB_FRAGMENT:// 政民互动 频道内容页
-				GoverMsgContentDetailWebFragment gIPContentDetailWebFragment = new GoverMsgContentDetailWebFragment();
-				onAddFragment(gIPContentDetailWebFragment, bundle);
-				break;
+//			case GIP_CHANNEL_CONTENT_DETAILWEB_FRAGMENT:// 政民互动 频道内容页
+//				GoverMsgContentDetailWebFragment gIPContentDetailWebFragment = new GoverMsgContentDetailWebFragment();
+//				onAddFragment(gIPContentDetailWebFragment, bundle);
+//				break;
 
 			case GOVERSALOONDETAIL_XK_FRAGMENT:// 政务大厅办件详情
 				GoverSaloonDetailXKFragment goverSaloonDetailFragment = new GoverSaloonDetailXKFragment();
@@ -374,10 +334,10 @@ OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 				onAddOtherFragment(goverMsgApplyTableFragment, bundle);
 				break;
 
-			case GOVERMSG_WEBCONTENT_FARGMENT:// 政府信息公开 信息公开指南 和信息公开制度 内容页
-				GoverMsgContentDetailWebFragment goverContentDetailWebFragment = new GoverMsgContentDetailWebFragment();
-				onAddFragment(goverContentDetailWebFragment, bundle);
-				break;
+//			case GOVERMSG_WEBCONTENT_FARGMENT:// 政府信息公开 信息公开指南 和信息公开制度 内容页
+//				GoverMsgContentDetailWebFragment goverContentDetailWebFragment = new GoverMsgContentDetailWebFragment();
+//				onAddFragment(goverContentDetailWebFragment, bundle);
+//				break;
 
 			case ABOUTUSFRAGMENT:// 关于我们
 				AboutUsFragment aboutUsFragment = new AboutUsFragment();
