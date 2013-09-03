@@ -6,10 +6,11 @@ import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.graphics.Color;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -24,7 +25,6 @@ import android.widget.TextView;
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseSlideActivity;
-import com.wuxi.app.util.Constants;
 import com.wuxi.domain.AdvancedSearchUtil;
 
 /**
@@ -67,71 +67,132 @@ public class AdvancedSearchActivity extends BaseSlideActivity implements
 
 	private String keyWord;
 
+	private String[] infoTypes = { "全部", "要闻", "公文", "办事", "公告" };
+	private String[] resultsPerPages = { "10", "20", "30" };
+	private String[] contentTypes = { "全部", "正文", "标题" };
+
 	private void setSpinnerAdapter() {
 
-		ArrayAdapter infoType_Spinner_adapter = ArrayAdapter.createFromResource(
-			this, R.array.infoType, android.R.layout.simple_spinner_item);
-		infoType_Spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		MyAryAdapter infoType_Spinner_adapter = new MyAryAdapter(this,
+				android.R.layout.simple_spinner_item, infoTypes);
+		infoType_Spinner_adapter
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		infoType_spinner.setAdapter(infoType_Spinner_adapter);
 		infoType_spinner.setVisibility(View.VISIBLE);
-		infoType_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+		infoType_spinner
+				.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View view,
-					int arg2, long arg3) {
-				infoType = ((TextView) view).getText().toString();
-			}
+					@Override
+					public void onItemSelected(AdapterView<?> arg0, View view,
+							int arg2, long arg3) {
+						infoType = ((TextView) view).getText().toString();
+					}
 
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
+					@Override
+					public void onNothingSelected(AdapterView<?> arg0) {
 
-			}
-		});
+					}
+				});
 
-		ArrayAdapter resultsPerPage_adapter = ArrayAdapter.createFromResource(
-			this, R.array.resultsPerPage, android.R.layout.simple_spinner_item);
-		resultsPerPage_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		MyAryAdapter resultsPerPage_adapter = new MyAryAdapter(this,
+				android.R.layout.simple_spinner_item, resultsPerPages);
+		resultsPerPage_adapter
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		resultsPerPage_spinner.setAdapter(resultsPerPage_adapter);
 		resultsPerPage_spinner.setVisibility(View.VISIBLE);
-		resultsPerPage_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+		resultsPerPage_spinner
+				.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View view,
-					int arg2, long arg3) {
-				pageSize = ((TextView) view).getText().toString();
-			}
+					@Override
+					public void onItemSelected(AdapterView<?> arg0, View view,
+							int arg2, long arg3) {
+						pageSize = ((TextView) view).getText().toString();
+					}
 
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
+					@Override
+					public void onNothingSelected(AdapterView<?> arg0) {
 
-			}
-		});
+					}
+				});
 
-		ArrayAdapter contentType_Spinner_adapter = ArrayAdapter.createFromResource(
-			this, R.array.contentType, android.R.layout.simple_spinner_item);
-		contentType_Spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		MyAryAdapter contentType_Spinner_adapter = new MyAryAdapter(this,
+				android.R.layout.simple_spinner_item, contentTypes);
+		contentType_Spinner_adapter
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		contentType_spinner.setAdapter(contentType_Spinner_adapter);
 		contentType_spinner.setVisibility(View.VISIBLE);
-		contentType_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+		contentType_spinner
+				.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View view,
-					int arg2, long arg3) {
-				String buffTypeStr = ((TextView) view).getText().toString();
-				if (buffTypeStr.equals("正文")) {
-					contentType = "content";
-				} else if (buffTypeStr.equals("标题")) {
-					contentType = "title";
-				} else {
-					contentType = buffTypeStr;
-				}
+					@Override
+					public void onItemSelected(AdapterView<?> arg0, View view,
+							int arg2, long arg3) {
+						String buffTypeStr = ((TextView) view).getText()
+								.toString();
+						if (buffTypeStr.equals("正文")) {
+							contentType = "content";
+						} else if (buffTypeStr.equals("标题")) {
+							contentType = "title";
+						} else {
+							contentType = buffTypeStr;
+						}
+					}
+
+					@Override
+					public void onNothingSelected(AdapterView<?> arg0) {
+
+					}
+				});
+	}
+
+	public class MyAryAdapter extends ArrayAdapter<String> {
+
+		Context context;
+		String[] items = new String[] {};
+
+		public MyAryAdapter(final Context context,
+				final int textViewResourceId, final String[] objects) {
+			super(context, textViewResourceId, objects);
+
+			this.items = objects;
+			this.context = context;
+		}
+
+		@Override
+		public View getDropDownView(int position, View convertView,
+				ViewGroup parent) {
+			if (convertView == null) {
+				LayoutInflater inflater = LayoutInflater.from(context);
+				convertView = inflater.inflate(
+						android.R.layout.simple_spinner_item, parent, false);
 			}
 
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
+			TextView tv = (TextView) convertView
+					.findViewById(android.R.id.text1);
+			tv.setText(items[position]);
+			tv.setGravity(Gravity.LEFT);
+			tv.setTextColor(Color.BLACK);
 
+			return convertView;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				LayoutInflater inflater = LayoutInflater.from(context);
+				convertView = inflater.inflate(
+						android.R.layout.simple_spinner_item, parent, false);
 			}
-		});
+
+			TextView tv = (TextView) convertView
+					.findViewById(android.R.id.text1);
+			tv.setText(items[position]);
+			tv.setGravity(Gravity.LEFT);
+			tv.setTextColor(Color.BLACK);
+
+			return convertView;
+		}
+
 	}
 
 	@Override
@@ -146,11 +207,12 @@ public class AdvancedSearchActivity extends BaseSlideActivity implements
 		case R.id.search_imageButton_search_now:
 			getSearchUtil();
 			// 关闭软键盘
-			InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+			InputMethodManager imm = (InputMethodManager) this
+					.getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(searchNow_Btn.getWindowToken(), 0);
 
 			Intent intent = new Intent(AdvancedSearchActivity.this,
-				AdvancedSearchResultListActivity.class);
+					AdvancedSearchResultListActivity.class);
 			intent.putExtra("searchUtil", searchUtil);
 
 			MainTabActivity.instance.addView(intent);
@@ -188,7 +250,7 @@ public class AdvancedSearchActivity extends BaseSlideActivity implements
 	}
 
 	protected void onRomove() {
-		
+
 		MainTabActivity.instance.pop();
 	}
 
@@ -215,16 +277,24 @@ public class AdvancedSearchActivity extends BaseSlideActivity implements
 
 	@Override
 	protected void findMainContentViews(View view) {
-		toNormalSearch_Btn = (ImageButton) view.findViewById(R.id.search_imageButton_to_normal_search);
-		keyWord_editText = (EditText) view.findViewById(R.id.search_advanced_edittext_keyword);
-		beginDate_TextView = (TextView) view.findViewById(R.id.search_advanced_edittext_startDate);
-		endDate_TextView = (TextView) view.findViewById(R.id.search_advanced_edittext_endDate);
+		toNormalSearch_Btn = (ImageButton) view
+				.findViewById(R.id.search_imageButton_to_normal_search);
+		keyWord_editText = (EditText) view
+				.findViewById(R.id.search_advanced_edittext_keyword);
+		beginDate_TextView = (TextView) view
+				.findViewById(R.id.search_advanced_edittext_startDate);
+		endDate_TextView = (TextView) view
+				.findViewById(R.id.search_advanced_edittext_endDate);
 
-		searchNow_Btn = (ImageButton) view.findViewById(R.id.search_imageButton_search_now);
+		searchNow_Btn = (ImageButton) view
+				.findViewById(R.id.search_imageButton_search_now);
 
-		infoType_spinner = (Spinner) view.findViewById(R.id.search_spinner_infoType);
-		resultsPerPage_spinner = (Spinner) view.findViewById(R.id.search_spinner_resultsperpage);
-		contentType_spinner = (Spinner) view.findViewById(R.id.search_spinner_contentType);
+		infoType_spinner = (Spinner) view
+				.findViewById(R.id.search_spinner_infoType);
+		resultsPerPage_spinner = (Spinner) view
+				.findViewById(R.id.search_spinner_resultsperpage);
+		contentType_spinner = (Spinner) view
+				.findViewById(R.id.search_spinner_contentType);
 
 		toNormalSearch_Btn.setOnClickListener(this);
 		searchNow_Btn.setOnClickListener(this);

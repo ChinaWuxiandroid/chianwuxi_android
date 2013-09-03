@@ -28,17 +28,17 @@ public class PoliticsService extends Service{
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * 分页获取立法征求或者民意征集的列表
-	 * @throws NODataException 
-	 * @throws JSONException 
-	 * @throws NetException 
-	 * */
-	public PoliticsWrapper getPoliticsWrapper(String url,int type,int startIndex,int endIndex,int passed)
-			throws NetException, JSONException, NODataException{
-		url=url+"?type="+type+"&start="+startIndex+"&end="+endIndex+"&passed="+passed;
-		return getPoliticsWrapper(url);
-	}
+//	/**
+//	 * 分页获取立法征求或者民意征集的列表
+//	 * @throws NODataException 
+//	 * @throws JSONException 
+//	 * @throws NetException 
+//	 * */
+//	public PoliticsWrapper getPoliticsWrapper(String url,int type,int startIndex,int endIndex,int passed,int )
+//			throws NetException, JSONException, NODataException{
+//		url=url+"?type="+type+"&start="+startIndex+"&end="+endIndex+"&passed="+passed;
+//		return getPoliticsWrapper(url);
+//	}
 
 	/**
 	 * 获取当前用户参与的立法征求或民意征集
@@ -69,7 +69,6 @@ public class PoliticsService extends Service{
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
-
 
 		String resultStr = httpUtils.executeGetToString(url, 5000);
 

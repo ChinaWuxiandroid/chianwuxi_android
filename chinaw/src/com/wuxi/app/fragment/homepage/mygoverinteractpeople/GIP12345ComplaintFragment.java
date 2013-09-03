@@ -60,11 +60,6 @@ import com.wuxi.exception.NetException;
 
 public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
-
 	private static final String TAG = "GIP12345ComplaintFragment";
 
 	private final int[] radioButtonIds = {

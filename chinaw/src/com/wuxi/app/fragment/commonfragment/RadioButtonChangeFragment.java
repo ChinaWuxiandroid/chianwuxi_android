@@ -24,10 +24,6 @@ import com.wuxi.domain.MenuItem;
 
 public abstract class RadioButtonChangeFragment extends BaseFragment implements
 		OnCheckedChangeListener {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	public View view = null;
 
