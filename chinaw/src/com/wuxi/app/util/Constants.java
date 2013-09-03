@@ -495,8 +495,9 @@ public class Constants {
 		/**
 		 * 项目外部文件存储路径
 		 */
-		public static final String APP_PATH = Environment
-				.getExternalStorageDirectory().getPath() + "/chinawi/";
+		public static final String APP_PATH = Environment.getExternalStorageDirectory()
+				.getPath()
+				+ "/chinawi/";
 
 		/**
 		 * 项目菜单图标存储路径
@@ -515,6 +516,30 @@ public class Constants {
 		 * 政府信息公开中 依申请公开 唯一表格 文件名（服务器端未提供字段）
 		 */
 		public static final String GOVERMSG_APPLYOPEN_TABLENAME = "无锡市人民政府办公室信息公开申请表.doc";
+
+	}
+
+	/**
+	 * 
+	 * @author wanglu 泰得利通
+	 * @version $1.0, 2013-9-2 2013-9-2 GMT+08:00 菜单选中的key值
+	 */
+	public static final class CheckPositionKey {
+
+		/**
+		 * 一级菜单只首页的6个大大模块的菜单 一级子菜单选中的key值 如：魅力锡城，头部一排菜单，政务大厅，左侧菜单都属于一级子菜单
+		 */
+		public static final String LEVEL_ONE_KEY = "LEVEL_ONE_KEY";
+
+		/**
+		 * 二级子菜单选中的key值 如：魅力锡城左侧的竖排菜单为二级子菜单
+		 */
+		public static final String LEVEL_TWO_KEY = "LEVEL_TWO_KEY";
+
+		/**
+		 * 三级子菜单选中的key值
+		 */
+		public static final String LEVEL_THREE_KEY = "LEVEL_THREE_KEY";
 
 	}
 
@@ -601,179 +626,6 @@ public class Constants {
 		 * */
 		public static final String TEST_ACCESSTOKEN = "bd58fcdfe5b54f4c95ed5f2e3a945f7c";
 
-	}
-
-	/**
-	 * 
-	 * @author wanglu 泰得利通 fragment名字
-	 * 
-	 */
-	public enum FragmentName {
-		/**
-		 * 登录fragment
-		 */
-		LOGIN_FRAGMENT,
-
-		/**
-		 * 注册 fragments
-		 */
-		REGIST_FRAGMENT,
-
-		/**
-		 * 全站搜索
-		 */
-		MAINSEARCH_FRAGMENT,
-
-		/**
-		 * 全站高级搜索
-		 */
-		ADVANCED_SEARCH_FRAGMENT,
-
-		/**
-		 * 全站高级搜索列表
-		 */
-		ADVANCED_SEARCH_LIST_FRAGMENT,
-
-		/**
-		 * 搜索内容页
-		 */
-		SEARCH_DETAIL_FRAGMENT,
-		/**
-		 * 政民互动
-		 */
-		MAINMINEFRAGMENT,
-		/**
-		 * 系统设置
-		 */
-		SYSTEMSETF_RAGMENT,
-		/**
-		 * 首页常用栏设置
-		 */
-		MENUITEMSET_FRAGMENT,
-
-		/**
-		 * 网站地图
-		 */
-
-		SITEMAP_FRAGMENT,
-		/**
-		 * 在线咨询
-		 */
-
-		/**
-		 * 市长信箱 最新信件列表 详情碎片
-		 */
-		GIP_MAYOR_MAIL_CONTENT_FRAGMENT,
-
-		/**
-		 * 政民互动 往期回顾 详情界面
-		 */
-		GIP_REVIEW_CONTENT_FRAGMENT,
-
-		/**
-		 * 政民互动 频道内容页
-		 */
-		GIP_CHANNEL_CONTENT_DETAILWEB_FRAGMENT,
-
-		/**
-		 * 政民互动 12345来信办理平台 我要写信
-		 */
-		GIP_12345_WRITE_MAIL_FRAGMENT,
-
-		/**
-		 * 征求意见平台 立法征求意见 碎片
-		 */
-		GIP_LEGISLATION_CONTENT_FRAGMENT,
-
-		/**
-		 * 征求意见平台 民意征集 详细内容碎片
-		 */
-		GIP_PEOPLE_IDEA_CONTENT_FRAGMENT,
-
-		MYONLINEASKFRAGMENT,
-		/**
-		 * 公共论坛帖子详细界面
-		 */
-		GIP_FOROUM_FRAGMENT,
-		/**
-		 * 公众论坛发表帖子碎片
-		 */
-		GIP_FORUM_POST_FRAGMENT,
-
-		/**
-		 * 热点话题内容
-		 * */
-		HOTREVIEW_CONTENT_FRAGMENT,
-
-		/**
-		 * 政务大厅行政许可办件详情
-		 */
-		GOVERSALOONDETAIL_XK_FRAGMENT,
-		/**
-		 * 政务大厅行其它可办件详情
-		 */
-		GOVERSALOONDETAIL_QT_FRAGMENT,
-		/**
-		 * 政务大厅行处罚可办件详情
-		 */
-		GOVERSALOONDETAIL_CF_FRAGMENT,
-		/**
-		 * 政务大厅行强制可办件详情
-		 */
-		GOVERSALOONDETAIL_QZ_FRAGMENT,
-		/**
-		 * 政务大厅行征收可办件详情
-		 */
-		GOVERSALOONDETAIL_ZS_FRAGMENT,
-		/**
-		 * 政务大厅，组织管理内容页
-		 */
-		GOVERSALOONCONTENTDETIALFRAGMENT,
-
-		/**
-		 * 魅力锡城内容页
-		 */
-		WUXICHANNELCONTENTDETAILFRAGMENT,
-		/**
-		 * 资讯中心->热点专题内容页
-		 */
-		HOTTOPICCONTENTFRAGMENT,
-		/**
-		 * 咨询中心内容页
-		 */
-		INFOCENTER_FRAGMENT,
-		/**
-		 * 领导活动集锦
-		 */
-		LEARACTIVITY_FRAGMENT,
-		/**
-		 * 四个无锡专题
-		 */
-		FOURTOPIC_ACTIVITYFRAGMENT,
-
-		/**
-		 * 公共服务内容页
-		 */
-		PUBLICSERVICECONTENTDETAILFRAGMENT,
-
-		/**
-		 * 政府信息公开 各部门依申请公开内容页
-		 * */
-		GOVERMSG_APPLYTABLE_FRAGMENT,
-		/**
-		 * 政府信息公开 信息公开指南内容页 信息公开制度公开内容页
-		 * */
-		GOVERMSG_WEBCONTENT_FARGMENT,
-		/**
-		 * 关于我们
-		 */
-		ABOUTUSFRAGMENT,
-		/**
-		 * 首页无锡要闻 公告公示内容页
-		 */
-		NEWSANNACOUNTFRAGMENT
-
-		;
 	}
 
 }

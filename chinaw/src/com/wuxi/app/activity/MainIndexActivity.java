@@ -41,16 +41,10 @@ import android.widget.Toast;
 
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
-import com.wuxi.app.activity.commactivity.MenuItemMainActivity;
 import com.wuxi.app.activity.homepage.FourTopicActivity;
 import com.wuxi.app.activity.homepage.LearActivity;
 import com.wuxi.app.activity.homepage.NewsAnnAcountActivitiy;
-import com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity;
-import com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity;
-import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonActivity;
 import com.wuxi.app.activity.homepage.informationcenter.InformationCenterActivity;
-import com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity;
-import com.wuxi.app.activity.homepage.publicservice.PublicServiceActivity;
 import com.wuxi.app.adapter.IndexGridAdapter;
 import com.wuxi.app.adapter.IndexNewsListAdapter;
 import com.wuxi.app.engine.AnnouncementsService;
@@ -61,6 +55,7 @@ import com.wuxi.app.engine.UpdateInfoService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.Constants.CacheKey;
+import com.wuxi.app.util.MenuItemChanelUtil;
 import com.wuxi.domain.Content;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.domain.UpdateInfo;
@@ -404,7 +399,7 @@ public class MainIndexActivity extends Activity implements
 			Bundle bundle = new Bundle();
 			intent.putExtra("content", content);
 			intent.putExtra(NewsAnnAcountActivitiy.SHOWTYPE_KEY, type);// 显示
-			
+
 			MainTabActivity.instance.addView(intent);
 
 		}
@@ -462,42 +457,14 @@ public class MainIndexActivity extends Activity implements
 				long id) {
 
 			MenuItem checkMenuItem = (MenuItem) parent.getItemAtPosition(position);
-			Intent intent = null;
 
-			if (checkMenuItem.getType() != MenuItem.CHANNEL_MENU) {
-				if (checkMenuItem.getName().equals("资讯中心")) {
+			Class<?> acClass = MenuItemChanelUtil.getActivityClassByName(checkMenuItem);
 
-					intent = new Intent(MainIndexActivity.this,
-						InformationCenterActivity.class);
-
-				} else if (checkMenuItem.getName().equals("政府信息公开")) {
-					
-					intent = new Intent(MainIndexActivity.this,
-						PublicGoverMsgActivity.class);
-
-				} else if (checkMenuItem.getName().equals("公共服务")) {
-
-					intent = new Intent(MainIndexActivity.this,
-						PublicServiceActivity.class);
-
-				} else if (checkMenuItem.getName().equals("政务大厅")) {
-
-					intent = new Intent(MainIndexActivity.this,
-						GoverSaloonActivity.class);
-				} else if (checkMenuItem.getName().equals("政民互动")) {
-					intent = new Intent(MainIndexActivity.this,
-						MainMineActivity.class);
-				}
-
-			} else if (checkMenuItem.getType() == MenuItem.CHANNEL_MENU) {// 频道类型菜单
-				intent = new Intent(MainIndexActivity.this,
-					ChannelActivity.class);
-			}
-
-			if (intent != null) {
+			if (acClass != null) {
+				Intent intent = new Intent(MainIndexActivity.this, acClass);
 				intent.putExtra(
 					BaseSlideActivity.SELECT_MENU_POSITION_KEY, position);
-				// IndexActivity.instance.addView(intent);
+
 				MainTabActivity.instance.addView(intent);
 			}
 
@@ -735,13 +702,13 @@ public class MainIndexActivity extends Activity implements
 			intent = new Intent(MainIndexActivity.this,
 				InformationCenterActivity.class);
 			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 2);
-			intent.putExtra(MenuItemMainActivity.SHOWITEM_LAYOUT_INDEXKEY, 1);
+			intent.putExtra(Constants.CheckPositionKey.LEVEL_ONE_KEY, 1);
 			break;
 		case R.id.index_rb_announcements:// 推荐公告
 			intent = new Intent(MainIndexActivity.this,
 				InformationCenterActivity.class);
 			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 2);
-			intent.putExtra(MenuItemMainActivity.SHOWITEM_LAYOUT_INDEXKEY, 2);
+			intent.putExtra(Constants.CheckPositionKey.LEVEL_ONE_KEY, 2);
 			break;
 		case R.id.iv_index_ldhd:
 
@@ -938,7 +905,7 @@ public class MainIndexActivity extends Activity implements
 	public boolean dispatchKeyEvent(KeyEvent event) {
 		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
 			if (event.getAction() == KeyEvent.ACTION_UP) {
-				
+
 				MainTabActivity.instance.pop();
 			}
 			return true;

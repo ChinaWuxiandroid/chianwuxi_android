@@ -24,6 +24,7 @@ import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.MyGoverInterPeopleContentFragment;
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
@@ -93,8 +94,8 @@ public class MainMineActivity extends BaseSlideActivity implements
 	public void getArgumentsFromOtherFragment() {
 		Bundle bundle = this.getIntent().getExtras();
 
-		if (bundle != null && bundle.get("checkPosition") != null) {
-			defaultCheckPosition = (Integer) bundle.get("checkPosition");
+		if (bundle != null && bundle.get(Constants.CheckPositionKey.LEVEL_ONE_KEY) != null) {
+			defaultCheckPosition = (Integer) bundle.get(Constants.CheckPositionKey.LEVEL_ONE_KEY);
 		}
 	}
 

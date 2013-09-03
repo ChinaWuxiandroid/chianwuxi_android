@@ -2,9 +2,12 @@ package com.wuxi.app.fragment.homepage.fantasticwuxi;
 
 import android.content.Intent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 
 import com.wuxi.app.MainTabActivity;
+import com.wuxi.app.R;
 import com.wuxi.app.activity.commactivity.ContentDetailActivity;
 import com.wuxi.app.activity.homepage.fantasticwuxi.WuxiChannelContentDetailActivity;
 import com.wuxi.app.fragment.commonfragment.ContentListFragment;
@@ -29,7 +32,9 @@ public class ChannelContentListFragment extends ContentListFragment {
 			intent.putExtra(ContentDetailActivity.CHANNEL_KEY, channel);
 		}
 
-		MainTabActivity.instance.addView(intent);
+		Animation animation = AnimationUtils.loadAnimation(
+			getActivity(), R.anim.rbm_in_from_right);
+		MainTabActivity.instance.addView(intent, animation);
 
 	}
 

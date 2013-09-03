@@ -25,6 +25,7 @@ import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.Constants;
 import com.wuxi.app.view.TitleScrollLayout;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
@@ -66,7 +67,7 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 	protected static final int TITLE_LOAD_FAIL = 1;// 加载失败
 
 	// public static final String ROOTFRAGMENT_KEY="BaseSlideFragment";
-	public static final String SHOWITEM_LAYOUT_INDEXKEY = "showitem_layout_index";
+	//public static final String SHOWITEM_LAYOUT_INDEXKEY = "showitem_layout_index";
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -95,7 +96,7 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 		Bundle bundle = this.getIntent().getExtras();
 		int showIndex = 0;
 		if (bundle != null) {
-			showIndex = bundle.getInt(SHOWITEM_LAYOUT_INDEXKEY);//
+			showIndex = bundle.getInt(Constants.CheckPositionKey.LEVEL_ONE_KEY);//头部选中的菜单序号
 		}
 		mtitleScrollLayout = (TitleScrollLayout) view.findViewById(R.id.title_scroll_action);// 头部控件
 		mtitleScrollLayout.setInitializContentLayoutListner(this);// 设置绑定内容界面监听器
@@ -232,7 +233,7 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 		if (showMenuItem.getName().equals("政府信息公开")) {
 			Intent intent = new Intent(MenuItemMainActivity.this,
 				PublicGoverMsgActivity.class);
-			intent.putExtra(SHOWITEM_LAYOUT_INDEXKEY, subMenuPostion);
+			intent.putExtra(Constants.CheckPositionKey.LEVEL_ONE_KEY, subMenuPostion);
 			intent.putExtra(
 				BaseSlideActivity.SELECT_MENU_POSITION_KEY, showMenuPositon);
 			MainTabActivity.instance.addView(intent);

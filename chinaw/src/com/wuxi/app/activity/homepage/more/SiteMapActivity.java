@@ -20,15 +20,9 @@ import android.widget.Toast;
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseSlideActivity;
-import com.wuxi.app.activity.commactivity.MenuItemMainActivity;
-import com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity;
-import com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity;
-import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonActivity;
-import com.wuxi.app.activity.homepage.informationcenter.InformationCenterActivity;
-import com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity;
-import com.wuxi.app.activity.homepage.publicservice.PublicServiceActivity;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.MenuItemChanelUtil;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 
@@ -118,7 +112,8 @@ public class SiteMapActivity extends BaseSlideActivity {
 
 			}
 
-			gv.setOnItemClickListener(new SiteMapClickLister(item));// 绑定事件
+			gv.setOnItemClickListener(new SiteMapClickLister(item,
+				groupPosition));// 绑定事件
 
 			if (subMenuItems != null && subChannels == null) {
 				gv.setAdapter(new SiteMapAdapter(subMenuItems));
@@ -277,8 +272,11 @@ public class SiteMapActivity extends BaseSlideActivity {
 
 		private MenuItem menuItem;
 
-		public SiteMapClickLister(MenuItem menuItem) {
+		private int parentPosition;
+
+		public SiteMapClickLister(MenuItem menuItem, int parentPosition) {
 			this.menuItem = menuItem;
+			this.parentPosition = parentPosition;
 
 		}
 
@@ -286,59 +284,26 @@ public class SiteMapActivity extends BaseSlideActivity {
 		public void onItemClick(AdapterView<?> adapterView, View view,
 				int position, long arg3) {
 
-			switchActivity(menuItem, position);
+			switchActivity(menuItem, position, parentPosition);
 
 		}
 
 	}
 
-	protected void switchActivity(MenuItem menuItem, int position) {
+	protected void switchActivity(MenuItem menuItem, int position,
+			int parentPosition) {
 
 		Intent intent = null;
-		int selectMenuItemIndex = 0;
-		if (menuItem.getType() != MenuItem.CHANNEL_MENU) {
-			if (menuItem.getName().equals("资讯中心")) {
 
-				intent = new Intent(SiteMapActivity.this,
-					InformationCenterActivity.class);
-				selectMenuItemIndex = 2;
-				intent.putExtra(
-					MenuItemMainActivity.SHOWITEM_LAYOUT_INDEXKEY, position);
-			} else if (menuItem.getName().equals("政府信息公开")) {
-				intent = new Intent(SiteMapActivity.this,
-					PublicGoverMsgActivity.class);
-				selectMenuItemIndex = 0;
-			} else if (menuItem.getName().equals("公共服务")) {
+		Class<?> acClass = MenuItemChanelUtil.getActivityClassByName(menuItem);
 
-				intent = new Intent(SiteMapActivity.this,
-					PublicServiceActivity.class);
-				intent.putExtra(
-					MenuItemMainActivity.SHOWITEM_LAYOUT_INDEXKEY, position);
-				selectMenuItemIndex = 4;
-			} else if (menuItem.getName().equals("政务大厅")) {
-
-				intent = new Intent(SiteMapActivity.this,
-					GoverSaloonActivity.class);
-				intent.putExtra(GoverSaloonActivity.SHOWLAYOUTINDEX, position);
-				selectMenuItemIndex = 3;
-			} else if (menuItem.getName().equals("政民互动")) {
-				intent = new Intent(SiteMapActivity.this,
-					MainMineActivity.class);
-				selectMenuItemIndex = 5;
-			}
-
-		} else if (menuItem.getType() == MenuItem.CHANNEL_MENU) {// 频道类型菜单
-			intent = new Intent(SiteMapActivity.this, ChannelActivity.class);
+		if (acClass != null) {
+			intent = new Intent(SiteMapActivity.this, acClass);
+			intent.putExtra(Constants.CheckPositionKey.LEVEL_ONE_KEY, position);// 设置选中的一级菜单的序号
 			intent.putExtra(
-				ChannelActivity.SHOWCHANNEL_LAYOUT_INDEXKEY, position);
-			selectMenuItemIndex = 1;
-
-		}
-
-		if (intent != null) {
-			intent.putExtra(
-				BaseSlideActivity.SELECT_MENU_POSITION_KEY, selectMenuItemIndex);
+				BaseSlideActivity.SELECT_MENU_POSITION_KEY, parentPosition);// 设置左侧选中的选菜单序号
 			MainTabActivity.instance.addView(intent);
+
 		}
 
 	}
