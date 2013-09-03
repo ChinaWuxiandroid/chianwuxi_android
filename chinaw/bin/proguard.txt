@@ -128,6 +128,9 @@
 # view AndroidManifest.xml #generated:114
 -keep class com.wuxi.app.activity.search.SearchResultDetailActivity { <init>(...); }
 
+# view res/layout/wuxi_city_content_layout.xml #generated:37
+-keep class com.wuxi.app.view.ContentListView { <init>(...); }
+
 # view res/layout/gip_content_layout.xml #generated:18
 -keep class com.wuxi.app.view.DynamicTitleLayout { <init>(...); }
 
@@ -156,6 +159,6 @@
 # view res/layout/menuset_item_layout.xml #generated:26
 -keep class com.wuxi.app.view.SlipButton { <init>(...); }
 
-# view res/layout/title_scroll_action_layout.xml #generated:7
+# view res/layout/title_scroll_action_layout.xml #generated:8
 -keep class com.wuxi.app.view.TitleScrollLayout { <init>(...); }
 

@@ -40,7 +40,7 @@ import com.wuxi.exception.NetException;
 @SuppressLint("HandlerLeak")
 public abstract class ContentListFragment extends BaseFragment implements
 		OnScrollListener, OnItemClickListener, OnClickListener {
-
+	
 	protected static final int CONTENT_LOAD_SUCCESS = 0;
 	protected static final int CONTENT_LOAD_FAIL = 1;
 	private static final int PAGE_SIZE = 10;
@@ -118,12 +118,8 @@ public abstract class ContentListFragment extends BaseFragment implements
 		}
 
 		if (contentWrapper.isNext()) {
-			if (content_list_lv.getFooterViewsCount() != 0) {
-				pb_loadmoore.setVisibility(ProgressBar.GONE);
-				loadMoreButton.setText("点击加载更多");
-			} else {
-				content_list_lv.addFooterView(getFootView());
-			}
+			pb_loadmoore.setVisibility(ProgressBar.GONE);
+			loadMoreButton.setText("点击加载更多");
 
 		} else {
 			content_list_lv.removeFooterView(loadMoreView);
@@ -209,26 +205,24 @@ public abstract class ContentListFragment extends BaseFragment implements
 		content_list_lv = (ListView) view.findViewById(R.id.content_list_lv);
 		content_list_lv.setOnItemClickListener(this);
 		content_list_pb = (ProgressBar) view.findViewById(R.id.content_list_pb);
-
-		content_list_lv.addFooterView(getFootView());// 为listView添加底部视图
-		content_list_lv.setOnScrollListener(this);// 增加滑动监听
-
-	}
-
-	private View getFootView() {
 		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
 				null);
 		loadMoreButton = (Button) loadMoreView
 				.findViewById(R.id.loadMoreButton);
 		pb_loadmoore = (ProgressBar) loadMoreView
 				.findViewById(R.id.pb_loadmoore);
+		content_list_lv.addFooterView(loadMoreView);// 为listView添加底部视图
+		content_list_lv.setOnScrollListener(this);// 增加滑动监听
 		loadMoreButton.setOnClickListener(this);
-		return loadMoreView;
 	}
+
+	
 
 	public void setParentItem(MenuItem parentItem) {
 		this.parentItem = parentItem;
 	}
+
+	
 
 	public void setChannel(Channel channel) {
 		this.channel = channel;
@@ -243,7 +237,10 @@ public abstract class ContentListFragment extends BaseFragment implements
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-
+		int itemsLastIndex = adapter.getCount() - 1; // 数据集最后一项的索引
+		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
+		
+		
 	}
 
 	@Override

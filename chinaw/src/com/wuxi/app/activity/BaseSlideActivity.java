@@ -304,7 +304,6 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 				BaseSlideActivity.SELECT_MENU_POSITION_KEY, position);
 
 			MainTabActivity.instance.addView(intent);
-
 		}
 
 	}

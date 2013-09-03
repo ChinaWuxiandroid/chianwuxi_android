@@ -59,7 +59,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dip"
-            android:orientation="vertical" >
+            android:orientation="vertical" 
+            android:id="@+id/rl_setting">
 
             <ImageView
                 android:id="@+id/content_setting"
@@ -79,7 +80,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="13dip"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:id="@+id/rl_search_share" >
 
             <ImageView
                 android:id="@+id/content_share"

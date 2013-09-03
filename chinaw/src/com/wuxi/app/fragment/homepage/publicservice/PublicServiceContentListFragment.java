@@ -2,9 +2,12 @@ package com.wuxi.app.fragment.homepage.publicservice;
 
 import android.content.Intent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 
 import com.wuxi.app.MainTabActivity;
+import com.wuxi.app.R;
 import com.wuxi.app.activity.commactivity.ContentDetailActivity;
 import com.wuxi.app.activity.homepage.publicservice.PublicServiceContentDetailActivity;
 import com.wuxi.app.fragment.commonfragment.ContentListFragment;
@@ -31,11 +34,18 @@ public class PublicServiceContentListFragment extends ContentListFragment {
 
 			intent.putExtra(ContentDetailActivity.MENUITEM_KEY, parentItem);
 
-			MainTabActivity.instance.addView(intent);
+			
+			
+			Animation animation = AnimationUtils.loadAnimation(
+				getActivity(), R.anim.rbm_in_from_right);
+			MainTabActivity.instance.addView(intent, animation);
 
 		} else if (super.channel != null) {
 			intent.putExtra(ContentDetailActivity.CHANNEL_KEY, channel);
-			MainTabActivity.instance.addView(intent);
+			
+			Animation animation = AnimationUtils.loadAnimation(
+				getActivity(), R.anim.rbm_in_from_right);
+			MainTabActivity.instance.addView(intent, animation);
 
 		}
 

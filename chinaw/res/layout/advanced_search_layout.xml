@@ -5,16 +5,11 @@
     android:background="#ffffff"
     android:orientation="vertical" >
 
-    <include
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        layout="@layout/child_fragmend_header_layout" />
+    <include layout="@layout/child_fragmend_header_layout" />
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="9"
+        android:layout_height="fill_parent"
         android:orientation="vertical" >
 
         <LinearLayout

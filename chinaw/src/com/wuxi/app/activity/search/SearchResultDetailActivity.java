@@ -6,6 +6,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
@@ -69,7 +70,7 @@ public class SearchResultDetailActivity extends BaseItemContentActivity {
 	@Override
 	protected void findMainContentViews(View view) {
 		super.findMainContentViews(view);
-		download_btn.setVisibility(ImageView.INVISIBLE);// 隐藏下载图标
+		rl_down.setVisibility(RelativeLayout.GONE);
 
 		searchDetail_pb = (ProgressBar) view
 				.findViewById(R.id.search_detail_pb);

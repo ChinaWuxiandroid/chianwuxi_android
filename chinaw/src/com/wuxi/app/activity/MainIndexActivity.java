@@ -430,10 +430,9 @@ public class MainIndexActivity extends Activity implements
 	 * 
 	 * @param listView
 	 */
-	public void setViewHeight(ListView listView) {
+	public int getListViewHeight(ListView listView) {
 		IndexNewsListAdapter listAdapter = (IndexNewsListAdapter) listView.getAdapter();
-		if (listAdapter == null)
-			return;
+		
 		int totalHeight = 0;
 		for (int i = 0; i < listAdapter.getCount(); i++) {
 			View listItem = listAdapter.getView(i, null, listView);
@@ -444,7 +443,8 @@ public class MainIndexActivity extends Activity implements
 		params.height = totalHeight
 				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
 
-		listView.setLayoutParams(params);
+		return params.height;
+		
 	}
 
 	/**
@@ -589,6 +589,8 @@ public class MainIndexActivity extends Activity implements
 	private void showNews() {
 		ListView listView = (ListView) mListViews.get(0);
 		showNewsOrAnncountData(listView, news);
+		
+		index_title_news_page.getLayoutParams().height=getListViewHeight(listView);
 	}
 
 	/**

@@ -49,7 +49,7 @@ public abstract class ContentDetailActivity extends BaseItemContentActivity {
 
 	protected Bundle bunel;
 
-	private RelativeLayout rl_down;
+	protected RelativeLayout rl_down;
 
 	@Override
 	protected void findMainContentViews(View view) {

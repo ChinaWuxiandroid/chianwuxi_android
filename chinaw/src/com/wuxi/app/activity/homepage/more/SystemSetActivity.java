@@ -137,15 +137,11 @@ public class SystemSetActivity extends BaseSlideActivity implements
 
 	@Override
 	public void onClick(View v) {
-
+		super.onClick(v);
 		Intent intent = null;
 		switch (v.getId()) {
 		case R.id.sys_menu_set:// 常用栏设置
 
-			/*
-			 * super.slideLinstener.replaceFragment(null, -1,
-			 * Constants.FragmentName.MENUITEMSET_FRAGMENT, null);
-			 */
 			intent = new Intent(SystemSetActivity.this,
 				MenuItemSetActivity.class);
 			break;
@@ -154,20 +150,13 @@ public class SystemSetActivity extends BaseSlideActivity implements
 			checkUpdate();
 			break;
 		case R.id.sys_about_us:// 关于我们
-			/*
-			 * slideLinstener.replaceFragment(null, -1,
-			 * Constants.FragmentName.ABOUTUSFRAGMENT, null);
-			 */
+
 			intent = new Intent(SystemSetActivity.this, AboutUsActivity.class);
 			break;
 		case R.id.sys_clear_cache:// 清楚缓存
 			clearCache();
 			break;
 		case R.id.sys_site_map:// 网站地图
-			/*
-			 * slideLinstener.replaceFragment(null, -1,
-			 * Constants.FragmentName.SITEMAP_FRAGMENT, null);
-			 */
 
 			intent = new Intent(SystemSetActivity.this, SiteMapActivity.class);
 			break;
@@ -445,7 +434,7 @@ public class SystemSetActivity extends BaseSlideActivity implements
 			try {
 				File file = DownLoadTask.dowLoadNewSoft(path, filePath, pd);
 				pd.dismiss();
-				install(file);// ��װ�°汾���
+				install(file);
 			} catch (Exception e) {
 
 				e.printStackTrace();

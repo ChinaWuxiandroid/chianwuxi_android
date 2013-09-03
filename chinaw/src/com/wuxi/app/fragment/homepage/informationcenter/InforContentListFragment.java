@@ -3,9 +3,12 @@ package com.wuxi.app.fragment.homepage.informationcenter;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 
 import com.wuxi.app.MainTabActivity;
+import com.wuxi.app.R;
 import com.wuxi.app.activity.commactivity.ContentDetailActivity;
 import com.wuxi.app.activity.homepage.informationcenter.HotTopicContentActivity;
 import com.wuxi.app.activity.homepage.informationcenter.InfoCenterContentDetailActivity;
@@ -36,7 +39,11 @@ public class InforContentListFragment extends ContentListFragment {
 					HotTopicContentActivity.class);
 				intent.putExtra(ContentDetailActivity.MENUITEM_KEY, parentItem);
 				intent.putExtra(ContentDetailActivity.CONTENT_KEY, content);
-				MainTabActivity.instance.addView(intent);
+				
+				
+				Animation animation = AnimationUtils.loadAnimation(
+					getActivity(), R.anim.rbm_in_from_right);
+				MainTabActivity.instance.addView(intent, animation);
 
 			} else {
 
@@ -44,8 +51,10 @@ public class InforContentListFragment extends ContentListFragment {
 					InfoCenterContentDetailActivity.class);
 				intent.putExtra(ContentDetailActivity.CONTENT_KEY, content);
 				intent.putExtra(ContentDetailActivity.MENUITEM_KEY, parentItem);
-				MainTabActivity.instance.addView(intent);
-
+				
+				Animation animation = AnimationUtils.loadAnimation(
+					getActivity(), R.anim.rbm_in_from_right);
+				MainTabActivity.instance.addView(intent, animation);
 			}
 
 		} else if (super.channel != null) {
@@ -54,8 +63,10 @@ public class InforContentListFragment extends ContentListFragment {
 				InfoCenterContentDetailActivity.class);
 			intent.putExtra(ContentDetailActivity.CONTENT_KEY, content);
 			intent.putExtra(ContentDetailActivity.CHANNEL_KEY, channel);
-			MainTabActivity.instance.addView(intent);
-
+		
+			Animation animation = AnimationUtils.loadAnimation(
+				getActivity(), R.anim.rbm_in_from_right);
+			MainTabActivity.instance.addView(intent, animation);
 		}
 
 	}

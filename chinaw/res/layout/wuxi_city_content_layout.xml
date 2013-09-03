@@ -5,29 +5,44 @@
     android:background="@drawable/navgator_back"
     android:orientation="vertical" >
 
-    <HorizontalScrollView
-        android:id="@+id/wucity_channel_hs"
+    <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="50dip"
-        android:visibility="gone"
-        android:layout_marginTop="10dip"
-        android:layout_marginBottom="10dip" >
+        android:layout_height="wrap_content" >
 
-        <RadioGroup
-            android:id="@+id/wuxicity_rg_title_chanel"
+        <HorizontalScrollView
+            android:id="@+id/wucity_channel_hs"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="10dip"
+            android:visibility="gone" >
+
+            <RadioGroup
+                android:id="@+id/wuxicity_rg_title_chanel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+            </RadioGroup>
+        </HorizontalScrollView>
+
+        <ProgressBar
+            android:id="@+id/pb_content_ld"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
-            android:orientation="horizontal" >
-        </RadioGroup>
-    </HorizontalScrollView>
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </FrameLayout>
 
-    <FrameLayout
+    <com.wuxi.app.view.ContentListView
         android:id="@+id/wucity_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@android:color/white"
+        android:dividerHeight="1dip"
         android:visibility="gone" >
-    </FrameLayout>
+    </com.wuxi.app.view.ContentListView>
 
     <include layout="@layout/wuxi_city_detailcontent_layout" />
 

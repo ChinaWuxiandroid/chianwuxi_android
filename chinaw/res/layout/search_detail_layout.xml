@@ -5,16 +5,11 @@
     android:background="@drawable/login_shape_bg"
     android:orientation="vertical" >
 
-    <include
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        layout="@layout/child_fragment_itemcontent_header_layout" />
+    <include layout="@layout/child_fragment_itemcontent_header_layout" />
 
     <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="9" >
+        android:layout_height="fill_parent" >
 
         <ProgressBar
             android:id="@+id/search_detail_pb"
