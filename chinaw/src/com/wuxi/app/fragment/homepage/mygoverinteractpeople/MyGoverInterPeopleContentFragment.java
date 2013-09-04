@@ -106,7 +106,7 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment {
 	}
 
 	private void onTransaction(BaseFragment fragment) {
-		fragment.setArguments(this.getArguments());// 传递主框架对象
+		fragment.setArguments(this.getArguments());// 
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 

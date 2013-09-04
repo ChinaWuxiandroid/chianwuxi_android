@@ -97,6 +97,7 @@ public class MainMineActivity extends BaseSlideActivity implements
 		if (bundle != null && bundle.get(Constants.CheckPositionKey.LEVEL_ONE_KEY) != null) {
 			defaultCheckPosition = (Integer) bundle.get(Constants.CheckPositionKey.LEVEL_ONE_KEY);
 		}
+		
 	}
 
 	@Override
@@ -195,6 +196,8 @@ public class MainMineActivity extends BaseSlideActivity implements
 
 	private void showContentFragment(BaseFragment fragment) {
 		if (fragment != null) {
+			Bundle bundle=getIntent().getExtras();
+			fragment.setArguments(bundle);//传递intent
 			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 			ft.replace(DETAIL_ID, fragment);// 替换视图
 
