@@ -267,8 +267,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 					int position, long arg3) {
 				String buffYearStr = ((TextView) view).getText().toString();
 				if (position != 0) {
-					yearFifter = Integer.valueOf(((TextView) view).getText()
-							.toString());
+					yearFifter = Integer.valueOf(buffYearStr);
 				} else {
 					yearFifter = DEFAULT_YEAR_FIFTER; // 表示按年份来
 				}

@@ -31,11 +31,6 @@ import com.wuxi.exception.NetException;
  * @author 杨宸 智佳
  * */
 public class GIPSuggestSurveyFragment extends RadioButtonChangeFragment{
-
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
 	
 	protected static final String TAG = "GIPSuggestSurveyFragment";
 	

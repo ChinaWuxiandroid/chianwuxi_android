@@ -44,7 +44,7 @@ import com.wuxi.exception.NetException;
 
 /**
  * @类名： PartLeaderMailListFragment
- * @描述： 显示部门领带信箱最新信件列表
+ * @描述： 显示部门领导信箱最新信件列表
  * @作者： 罗森
  * @创建时间： 2013 2013-8-23 下午2:14:30
  * @修改时间：
@@ -52,13 +52,6 @@ import com.wuxi.exception.NetException;
  * 
  */
 public class PartLeaderMailListFragment extends RadioButtonChangeFragment {
-
-	/**
-	 * @字段： serialVersionUID
-	 * @类型： long
-	 * @描述： 序列号
-	 */
-	private static final long serialVersionUID = 1L;
 
 	protected static final String TAG = "PartLeaderMailListFragment";
 

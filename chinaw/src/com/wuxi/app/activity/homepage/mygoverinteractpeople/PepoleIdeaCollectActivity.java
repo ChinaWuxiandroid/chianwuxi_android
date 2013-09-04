@@ -63,7 +63,7 @@ public class PepoleIdeaCollectActivity extends BaseItemContentActivity implement
 
 	@Override
 	protected String getContentTitleText() {
-		return "立法征求意见";
+		return "民意征集";
 	}
 
 	@Override
