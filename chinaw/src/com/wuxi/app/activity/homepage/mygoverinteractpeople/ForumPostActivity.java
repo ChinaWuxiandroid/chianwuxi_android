@@ -105,7 +105,7 @@ public class ForumPostActivity extends BaseItemContentActivity {
 									.getAccessToken(ForumPostActivity.this),
 									theme, content);
 							Toast.makeText(ForumPostActivity.this,
-									"提交成功，待审核...", Toast.LENGTH_SHORT).show();
+									"提交成功，正在审核...", Toast.LENGTH_SHORT).show();
 						}
 
 					} catch (NetException e) {
