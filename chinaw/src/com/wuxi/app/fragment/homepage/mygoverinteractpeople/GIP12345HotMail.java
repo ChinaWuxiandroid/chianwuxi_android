@@ -32,13 +32,6 @@ import com.wuxi.exception.NetException;
 
 public class GIP12345HotMail extends RadioButtonChangeFragment {
 
-	/**
-	 * @字段： serialVersionUID
-	 * @类型： long
-	 * @描述： 序列化
-	 */
-	private static final long serialVersionUID = 1L;
-
 	private ListView mListView;
 	private ProgressBar list_pb;
 	private LetterWrapper letterWrapper;
@@ -48,7 +41,7 @@ public class GIP12345HotMail extends RadioButtonChangeFragment {
 	private static final int DATA_LOAD_ERROR = 1;
 
 	private int startIndex = 0; // 获取话题的起始坐标
-	private int endIndex = 5; // 获取话题的结束坐标
+	private int endIndex = 100; // 获取话题的结束坐标
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -113,8 +106,6 @@ public class GIP12345HotMail extends RadioButtonChangeFragment {
 					letterWrapper = letterService.getLetterLitstWrapper(
 							Constants.Urls.HOTMAIL_URL, startIndex, endIndex);
 					if (null != letterWrapper) {
-						// CacheUtil.put(menuItem.getChannelId(),
-						// titleChannels);// 缓存起来
 						letters = letterWrapper.getData();
 
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
@@ -144,7 +135,7 @@ public class GIP12345HotMail extends RadioButtonChangeFragment {
 	public void showLettersList() {
 		LettersListViewAdapter adapter = new LettersListViewAdapter();
 		if (letters == null || letters.size() == 0) {
-			Toast.makeText(context, "对不起，暂无信息", 2000).show();
+			Toast.makeText(context, "对不起，暂无热门信件信息", Toast.LENGTH_SHORT).show();
 		} else {
 			mListView.setAdapter(adapter);
 		}
@@ -193,7 +184,8 @@ public class GIP12345HotMail extends RadioButtonChangeFragment {
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			viewHolder.title_text.setText(letters.get(position).getTitle());
+			
+			viewHolder.title_text.setText("信件标题："+letters.get(position).getTitle());
 			viewHolder.depname_text.setText(letters.get(position).getDepname());
 			viewHolder.answerDate_text.setText(letters.get(position)
 					.getAnswerdate());

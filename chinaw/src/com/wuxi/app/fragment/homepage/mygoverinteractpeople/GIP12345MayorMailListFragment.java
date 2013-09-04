@@ -43,13 +43,6 @@ import com.wuxi.exception.NetException;
  */
 public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment {
 
-	/**
-	 * @字段： serialVersionUID
-	 * @类型： long
-	 * @描述： 序列号
-	 */
-	private static final long serialVersionUID = 1L;
-
 	protected static final String TAG = "GIP12345MayorMailListFragment";
 
 	private ListView mListView;
@@ -57,7 +50,9 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment {
 	private LetterWrapper letterWrapper;
 	private List<LetterWrapper.Letter> letters;
 
+	// 数据加载成功标识
 	private static final int DATA__LOAD_SUCESS = 0;
+	// 数据加载失败标识
 	private static final int DATA_LOAD_ERROR = 1;
 
 	private int startIndex = 0; // 获取话题的起始坐标
@@ -136,8 +131,6 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment {
 							Constants.Urls.MAYOR_MAILBOX_URL, startIndex,
 							endIndex);
 					if (null != letterWrapper) {
-						// CacheUtil.put(menuItem.getChannelId(),
-						// titleChannels);// 缓存起来
 						letters = letterWrapper.getData();
 
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
@@ -240,8 +233,9 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment {
 			viewHolder.title_text.setText(letters.get(position).getTitle());
 			viewHolder.code_text.setText(letters.get(position).getCode());
 			viewHolder.type_text.setText(letters.get(position).getType());
-			viewHolder.answerDate_text.setText(letters.get(position)
-					.getAnswerdate());
+
+			viewHolder.answerDate_text.setText(String.valueOf(letters.get(
+					position).getAnswerdate()));
 			viewHolder.readCount_text.setText(String.valueOf(letters.get(
 					position).getReadcount()));
 			viewHolder.appraise_text.setText(letters.get(position)
@@ -254,10 +248,11 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment {
 		public void onItemClick(AdapterView<?> adapterView, View arg1,
 				int position, long arg3) {
 			Letter letter = (Letter) adapterView.getItemAtPosition(position);
-		
-			Intent intent = new Intent(getActivity(), GIP12345MayorMailContentActivity.class);
+
+			Intent intent = new Intent(getActivity(),
+					GIP12345MayorMailContentActivity.class);
 			intent.putExtra("letter", letter);
-			
+
 			MainTabActivity.instance.addView(intent);
 
 		}

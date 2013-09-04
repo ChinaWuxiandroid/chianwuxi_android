@@ -24,7 +24,6 @@ public class HotReviewService extends Service{
 
 	public HotReviewService(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

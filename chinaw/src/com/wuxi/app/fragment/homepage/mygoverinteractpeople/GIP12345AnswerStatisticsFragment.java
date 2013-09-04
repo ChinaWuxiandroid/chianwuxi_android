@@ -8,12 +8,15 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
@@ -55,6 +58,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 	private ProgressBar list_pb;
 
 	private ListView mListView;
+	
 	protected static final String TAG = "GIP12345AnswerStatisticsFragment";
 	private static final int ALLCOUNT_LOAD_SUCESS = 0; // 答复率总数统计
 	private static final int LETTERSTATISTICS_LOAD_SUCESS = 1; // 各部门答复率统计
@@ -83,11 +87,6 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
-			String tip = "";
-
-			if (msg.obj != null) {
-				tip = msg.obj.toString();
-			}
 			switch (msg.what) {
 			case ALLCOUNT_LOAD_SUCESS:
 				showAllCounts();
@@ -97,7 +96,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 				showReplyLettersList();
 				break;
 			case DATA_LOAD_ERROR:
-				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
+				list_pb.setVisibility(View.GONE);
 				break;
 			}
 		};
@@ -172,6 +171,19 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 		year_Spinner_adapter
 				.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);
 		year_Spinnner.setAdapter(year_Spinner_adapter);
+		year_Spinnner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> adapterView, View view,
+					int position, long arg3) {
+				year = Integer.valueOf(yearAlone[position]);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+
+			}
+		});
 		year_Spinnner.setVisibility(View.VISIBLE);
 
 		month_Spinnner = (Spinner) view
@@ -182,6 +194,19 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 		month_Spinner_adapter
 				.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);
 		month_Spinnner.setAdapter(month_Spinner_adapter);
+		month_Spinnner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> adapterView, View view,
+					int position, long arg3) {
+				month = Integer.valueOf(spinnerMonth[position]);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+
+			}
+		});
 		month_Spinnner.setVisibility(View.VISIBLE);
 
 		startStatic_imgBtn = (ImageButton) view
@@ -191,7 +216,8 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 			@Override
 			public void onClick(View v) {
 				list_pb.setVisibility(View.VISIBLE);
-				loadLettersReplyCountData();
+
+				loadLettersReplyCountData(letter_type, year, month);
 			}
 		});
 
@@ -263,7 +289,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 	}
 
 	/**
-	 * 先加载所有统计信息，下面的信息，按 统计按钮后加载
+	 * 加载所有统计信息
 	 * */
 	public void loadAllCountData() {
 
@@ -306,7 +332,8 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 	/**
 	 * 统计按钮按后加载 各信箱部门回复统计
 	 * */
-	public void loadLettersReplyCountData() {
+	public void loadLettersReplyCountData(final int letter_type,
+			final int year, final int month) {
 
 		new Thread(new Runnable() {
 
@@ -317,16 +344,21 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 						context);
 				try {
 					letters = replyStatisticsService.getLettersStatistics(
-							Constants.Urls.LETTERS_STATISTICS_URL, letter_type,
-							year, month);
+							letter_type, year, month);
+
 					if (null != letters) {
-
 						handler.sendEmptyMessage(LETTERSTATISTICS_LOAD_SUCESS);
-
 					} else {
 						Message message = handler.obtainMessage();
 						message.obj = "error";
 						handler.sendEmptyMessage(DATA_LOAD_ERROR);
+
+						Looper.prepare();
+						Toast.makeText(context,
+								"没有" + year + "年" + month + "月的答复率统计数据",
+								Toast.LENGTH_SHORT).show();
+						Looper.loop();
+
 					}
 
 				} catch (NetException e) {
@@ -363,6 +395,10 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 		}
 	}
 
+	/**
+	 * @方法： showReplyLettersList
+	 * @描述： 显示回复统计及列表
+	 */
 	public void showReplyLettersList() {
 		LettersListViewAdapter adapter = new LettersListViewAdapter();
 
@@ -373,11 +409,25 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 		}
 	}
 
+	/**
+	 * @类名： LettersListViewAdapter
+	 * @描述： 列表适配器类
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-9-3 上午9:01:37
+	 * @修改时间：
+	 * @修改描述：
+	 * 
+	 */
 	public class LettersListViewAdapter extends BaseAdapter {
 
 		@Override
 		public int getCount() {
-			return letters.size();
+			if (letters != null && letters.size() > 0) {
+				return letters.size();
+			} else {
+				return 0;
+			}
+
 		}
 
 		@Override

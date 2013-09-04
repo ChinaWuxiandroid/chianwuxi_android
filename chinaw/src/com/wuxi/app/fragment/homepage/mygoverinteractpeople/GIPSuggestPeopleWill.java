@@ -174,7 +174,7 @@ public class GIPSuggestPeopleWill extends RadioButtonChangeFragment {
 
 		PoliticsListViewAdapter adapter = new PoliticsListViewAdapter();
 		if (politics == null || politics.size() == 0) {
-			Toast.makeText(context, "对不起，暂无热点话题信息", 2000).show();
+			Toast.makeText(context, "对不起，暂无民意征集信息", Toast.LENGTH_SHORT).show();
 		} else {
 			mListView.setAdapter(adapter);
 			mListView.setOnItemClickListener(adapter);

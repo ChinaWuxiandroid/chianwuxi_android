@@ -23,7 +23,6 @@ public class ReplyStatisticsService extends Service{
 
 	public ReplyStatisticsService(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -37,8 +36,7 @@ public class ReplyStatisticsService extends Service{
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
-		String reslutStr = httpUtils.executeGetToString(url, 500);
-
+		String reslutStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (reslutStr != null) {
 			JSONObject jsonObject = new JSONObject(reslutStr);
@@ -68,15 +66,15 @@ public class ReplyStatisticsService extends Service{
 	 * @throws JSONException 
 	 * @throws NetException 
 	 * */
-	public List<StatisticsLetter> getLettersStatistics(String url,int type,int year,int month) 
+	public List<StatisticsLetter> getLettersStatistics(int letter_type,int year,int month) 
 			throws JSONException, NetException, NODataException {
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 
-		url=url+"?type="+type+"&year="+year+"&month="+month;
-		String reslutStr = httpUtils.executeGetToString(url, 500);
-
+		String url=Constants.Urls.LETTERS_STATISTICS_URL+"?type="+letter_type+"&year="+year+"&month="+month;	
+		
+		String reslutStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (reslutStr != null) {
 			JSONObject jsonObject = new JSONObject(reslutStr);
@@ -96,9 +94,6 @@ public class ReplyStatisticsService extends Service{
 					letters.add(letter);	
 				}
 				return letters;
-
-			} else {
-				throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);// 没有获取到数据异常
 			}
 		}
 		return null;
