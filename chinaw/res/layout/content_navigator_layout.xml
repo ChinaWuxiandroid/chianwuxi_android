@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/navgator_back"
@@ -7,19 +7,19 @@
 
     <ListView
         android:id="@+id/lv_left_navigator"
-        android:layout_width="0px"
+        android:layout_width="75dip"
         android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
         android:layout_marginLeft="5dip"
-        android:layout_weight="1"
         android:background="@drawable/naviga_leftitem_back"
-        android:listSelector="@android:color/transparent" 
-        android:cacheColorHint="@android:color/transparent">
+        android:cacheColorHint="@android:color/transparent"
+        android:listSelector="@android:color/transparent" >
     </ListView>
 
     <FrameLayout
         android:id="@+id/details"
-        android:layout_width="0px"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3" />
+        android:layout_toRightOf="@+id/lv_left_navigator" />
 
-</LinearLayout>
+</RelativeLayout>

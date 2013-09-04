@@ -8,6 +8,7 @@
     <color name="gip_txt_green">#fc3b00</color>
     <color name="gip_txt_gray">#555555</color>
     <color name="list_gray">#808080</color>
+    <color name="tab_selectbg">#000000</color>
     
     <!-- 市政府信息公开目录里 分类词查询  背景颜色 -->
     <color name="query_back_gray">#dddddd</color>

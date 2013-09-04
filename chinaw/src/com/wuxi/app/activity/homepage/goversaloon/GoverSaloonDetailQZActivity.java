@@ -45,27 +45,49 @@ public class GoverSaloonDetailQZActivity extends BaseItemContentActivity
 		implements OnClickListener, OnCheckedChangeListener {
 
 	protected static final int LOAD_ITEM_DETIAL_SUCCESS = 0;
+
 	protected static final int LOAD_ITEM_DETIAL_FAIL = 1;
+
 	protected static final int LC_LOADSCUCESS = 2;
+
 	protected static final int LC_LOADERROR = 3;
+
 	protected static final int COMMIT_SUCCESS = 4;
+
 	protected static final int COMMIT_ERROR = 5;
+
 	private TextView tv_ssmc_name;
+
 	private TableLayout tl_tb_detail;
+
 	private ProgressBar pb_detail;
+
 	private TextView tv_ssbm, tv_bgdz, tv_jddh;
+
 	private GoverSaoonItem goverSaoonItem;
+
 	private GoverSaoonItemQZDetail goverSaoonItemDetail;
+
 	private RadioGroup rg_detail;
+
 	private TextView tv_content;
+
 	private ImageView iv_lc;
+
 	private Bitmap bitmap;
+
 	private Button btn_zxzx;
+
 	private LinearLayout ll_zxnr;// 在线办理
+
 	private TextView tv_item_name;
+
 	private EditText et_content;
-	private Button btn_ask_submit,btn_ask_reset;
+
+	private Button btn_ask_submit, btn_ask_reset;
+
 	private LoginDialog loginDialog;
+
 	private Handler handler = new Handler() {
 
 		public void handleMessage(android.os.Message msg) {
@@ -78,29 +100,30 @@ public class GoverSaloonDetailQZActivity extends BaseItemContentActivity
 				break;
 			case COMMIT_SUCCESS:
 				pb_detail.setVisibility(ProgressBar.GONE);
-				Toast.makeText(GoverSaloonDetailQZActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
+				Toast.makeText(
+					GoverSaloonDetailQZActivity.this, "提交成功",
+					Toast.LENGTH_SHORT).show();
 				break;
 			case COMMIT_ERROR:
 
 			case LC_LOADERROR:
 			case LOAD_ITEM_DETIAL_FAIL:
 				String tip = msg.obj.toString();
-				Toast.makeText(GoverSaloonDetailQZActivity.this, tip, Toast.LENGTH_SHORT).show();
+				Toast.makeText(
+					GoverSaloonDetailQZActivity.this, tip, Toast.LENGTH_SHORT)
+						.show();
 				break;
 			}
 
 		}
 	};
 
-	
-	
 	@Override
 	protected void findMainContentViews(View view) {
-		
+
 		super.findMainContentViews(view);
-		
-		
-		loginDialog=new LoginDialog(this);
+
+		loginDialog = new LoginDialog(this);
 		tv_ssmc_name = (TextView) view.findViewById(R.id.tv_ssmc_name);
 		tl_tb_detail = (TableLayout) view.findViewById(R.id.tl_tb_detail);
 		pb_detail = (ProgressBar) view.findViewById(R.id.pb_detail);
@@ -112,27 +135,24 @@ public class GoverSaloonDetailQZActivity extends BaseItemContentActivity
 		rg_detail.setOnCheckedChangeListener(this);
 		tv_content = (TextView) view.findViewById(R.id.tv_content);
 		iv_lc = (ImageView) view.findViewById(R.id.iv_lc);
-		rg_detail.check(R.id.rb_sszt);
-		goverSaoonItem = (GoverSaoonItem) getIntent().getExtras().get("goverSaoonItem");
 
-		loadItemDetail();
+		goverSaoonItem = (GoverSaoonItem) getIntent().getExtras().get(
+			"goverSaoonItem");
 
 		tv_ssmc_name.setOnClickListener(this);
-		
+
 		btn_zxzx = (Button) view.findViewById(R.id.btn_zxzx);
 		btn_zxzx.setOnClickListener(this);
 		ll_zxnr = (LinearLayout) view.findViewById(R.id.ll_zxnr);
-		
-		tv_item_name=(TextView) view.findViewById(R.id.tv_item_name);
-		et_content=(EditText) view.findViewById(R.id.et_content);
-		btn_ask_submit=(Button) view.findViewById(R.id.btn_ask_submit);
-		btn_ask_reset=(Button) view.findViewById(R.id.btn_ask_reset);
+
+		tv_item_name = (TextView) view.findViewById(R.id.tv_item_name);
+		et_content = (EditText) view.findViewById(R.id.et_content);
+		btn_ask_submit = (Button) view.findViewById(R.id.btn_ask_submit);
+		btn_ask_reset = (Button) view.findViewById(R.id.btn_ask_reset);
 		btn_ask_submit.setOnClickListener(this);
 		btn_ask_reset.setOnClickListener(this);
-		
+		loadItemDetail();
 	}
-
-	
 
 	protected void showItemDetail() {
 		pb_detail.setVisibility(ProgressBar.INVISIBLE);
@@ -141,6 +161,9 @@ public class GoverSaloonDetailQZActivity extends BaseItemContentActivity
 		tv_bgdz.setText(goverSaoonItemDetail.getBgdd());
 		tv_jddh.setText(goverSaoonItemDetail.getJddh());// 监督电话
 		tv_item_name.setText(goverSaoonItemDetail.getName());
+
+		rg_detail.check(R.id.rb_sszt);
+
 	}
 
 	/**
@@ -160,9 +183,7 @@ public class GoverSaloonDetailQZActivity extends BaseItemContentActivity
 				GoverSaoonItemService goverSaoonItemService = new GoverSaoonItemService(
 					GoverSaloonDetailQZActivity.this);
 				try {
-					goverSaoonItemDetail = goverSaoonItemService
-							.getGoverSaoonItemQZDetailByid(goverSaoonItem
-									.getId());
+					goverSaoonItemDetail = goverSaoonItemService.getGoverSaoonItemQZDetailByid(goverSaoonItem.getId());
 
 					if (goverSaoonItemDetail != null) {
 						msg.what = LOAD_ITEM_DETIAL_SUCCESS;
@@ -208,44 +229,43 @@ public class GoverSaloonDetailQZActivity extends BaseItemContentActivity
 			if (tl_tb_detail.getVisibility() == TableLayout.VISIBLE) {
 				tl_tb_detail.setVisibility(TableLayout.GONE);
 				tv_ssmc_name.setCompoundDrawablesWithIntrinsicBounds(
-						null,
-						null,
-						getResources().getDrawable(
-								R.drawable.gover_item_detail_expa_down), null);
+					null,
+					null,
+					getResources().getDrawable(
+						R.drawable.gover_item_detail_expa_down), null);
 				// drawableRight
 			} else if (tl_tb_detail.getVisibility() == TableLayout.GONE) {
 				tl_tb_detail.setVisibility(TableLayout.VISIBLE);
 
 				tv_ssmc_name.setCompoundDrawablesWithIntrinsicBounds(
-						null,
-						null,
-						getResources().getDrawable(
-								R.drawable.gover_item_detail_expa_up), null);
+					null,
+					null,
+					getResources().getDrawable(
+						R.drawable.gover_item_detail_expa_up), null);
 			}
 
 			break;
 		case R.id.btn_zxzx:// 在线咨询
 			if (ll_zxnr.getVisibility() == LinearLayout.GONE) {
-				if(loginDialog.checkLogin()){
+				if (loginDialog.checkLogin()) {
 					ll_zxnr.setVisibility(LinearLayout.VISIBLE);
-				}else{
+				} else {
 					loginDialog.showDialog();
 				}
-				
 
 			} else if (ll_zxnr.getVisibility() == LinearLayout.VISIBLE) {
 				ll_zxnr.setVisibility(LinearLayout.GONE);
-			} break;
-		case R.id.btn_ask_submit://在线咨询提交
-			if(et_content.getText().toString().equals("")){
+			}
+			break;
+		case R.id.btn_ask_submit:// 在线咨询提交
+			if (et_content.getText().toString().equals("")) {
 				Toast.makeText(this, "请输入您要提交的内容", Toast.LENGTH_SHORT).show();
-				return ;
+				return;
 			}
 			commitAsk();
 			break;
 		case R.id.btn_ask_reset:// 在线提交重置
 			et_content.setText("");
-
 
 		}
 
@@ -315,8 +335,7 @@ public class GoverSaloonDetailQZActivity extends BaseItemContentActivity
 				GoverSaoonWorkFlowImageService goverSaoonWorkFlowImageService = new GoverSaoonWorkFlowImageService(
 					GoverSaloonDetailQZActivity.this);
 				try {
-					bitmap = goverSaoonWorkFlowImageService
-							.getBitMap(goverSaoonItemDetail.getQzcx());
+					bitmap = goverSaoonWorkFlowImageService.getBitMap(goverSaoonItemDetail.getQzcx());
 					if (bitmap != null) {
 						msg.what = LC_LOADSCUCESS;
 
@@ -337,8 +356,7 @@ public class GoverSaloonDetailQZActivity extends BaseItemContentActivity
 		}).start();
 
 	}
-	
-	
+
 	private void commitAsk() {
 		if (goverSaoonItemDetail == null) {
 			Toast.makeText(this, "没有咨询信息，提交失败", Toast.LENGTH_SHORT).show();
@@ -356,12 +374,11 @@ public class GoverSaloonDetailQZActivity extends BaseItemContentActivity
 				GoversaoonOnlineASKDetailService goversaoonOnlineASKDetailService = new GoversaoonOnlineASKDetailService(
 					GoverSaloonDetailQZActivity.this);
 				try {
-					GoversaoonOnlineASKDetail goversaoonOnlineDetail = goversaoonOnlineASKDetailService
-							.commitGoversaoonOnlineASKDetail(
-									goverSaoonItemDetail.getId(),
-									"XK",
-									et_content.getText().toString(),
-									SystemUtil.getAccessToken(GoverSaloonDetailQZActivity.this));
+					GoversaoonOnlineASKDetail goversaoonOnlineDetail = goversaoonOnlineASKDetailService.commitGoversaoonOnlineASKDetail(
+						goverSaoonItemDetail.getId(),
+						"XK",
+						et_content.getText().toString(),
+						SystemUtil.getAccessToken(GoverSaloonDetailQZActivity.this));
 					if (goversaoonOnlineDetail != null) {
 						msg.what = COMMIT_SUCCESS;
 					} else {

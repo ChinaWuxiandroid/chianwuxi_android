@@ -135,13 +135,13 @@ public class TitleScrollLayout extends ViewGroup {
 		final int width = MeasureSpec.getSize(widthMeasureSpec);
 		final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
 		if (widthMode != MeasureSpec.EXACTLY) {
-			throw new IllegalStateException(
-					"ScrollLayout only canmCurScreen run at EXACTLY mode!");
+			/*throw new IllegalStateException(
+					"ScrollLayout only canmCurScreen run at EXACTLY mode!");*/
 		}
 		final int heightMode = MeasureSpec.getMode(heightMeasureSpec);
 		if (heightMode != MeasureSpec.EXACTLY) {
-			throw new IllegalStateException(
-					"ScrollLayout only can run at EXACTLY mode!");
+			/*throw new IllegalStateException(
+					"ScrollLayout only can run at EXACTLY mode!");*/
 		}
 
 		// The children are given the same width and height as the scrollLayout

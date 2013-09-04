@@ -39,7 +39,8 @@ public final class R {
         public static final int list_gray=0x7f060006;
         /**  市政府信息公开目录里 分类词查询  背景颜色 
          */
-        public static final int query_back_gray=0x7f060007;
+        public static final int query_back_gray=0x7f060008;
+        public static final int tab_selectbg=0x7f060007;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -239,28 +240,34 @@ public final class R {
         public static final int system_set_shape=0x7f0200b8;
         public static final int systemset_na=0x7f0200b9;
         public static final int tab_bg=0x7f0200ba;
-        public static final int title=0x7f0200bb;
-        public static final int title_item_bg=0x7f0200bc;
-        public static final int title_item_select_bg=0x7f0200bd;
-        public static final int title_na_bg=0x7f0200be;
-        public static final int title_scroll_next=0x7f0200bf;
-        public static final int upload_p=0x7f0200c0;
-        public static final int upload_r=0x7f0200c1;
-        public static final int upload_selector=0x7f0200c2;
-        public static final int useless=0x7f0200c3;
-        public static final int vedio_home_saybtn=0x7f0200c4;
-        public static final int video_bg=0x7f0200c5;
-        public static final int worksuggestbox_back=0x7f0200c6;
-        public static final int worksuggestbox_big_back=0x7f0200c7;
-        public static final int worksuggestbox_edit_big_bk=0x7f0200c8;
-        public static final int worksuggestbox_edit_small_bk=0x7f0200c9;
-        public static final int wuxi_content_channelselect_=0x7f0200ca;
-        public static final int wuxicity_content_bg=0x7f0200cb;
-        public static final int wuxicity_content_channel_item_selector=0x7f0200cc;
+        public static final int tab_bg_selector=0x7f0200bb;
+        public static final int tab_selected_bg=0x7f0200bc;
+        public static final int title=0x7f0200bd;
+        public static final int title_item_bg=0x7f0200be;
+        public static final int title_item_select_bg=0x7f0200bf;
+        public static final int title_na_bg=0x7f0200c0;
+        public static final int title_scroll_next=0x7f0200c1;
+        public static final int upload_p=0x7f0200c2;
+        public static final int upload_r=0x7f0200c3;
+        public static final int upload_selector=0x7f0200c4;
+        public static final int useless=0x7f0200c5;
+        public static final int vedio_home_saybtn=0x7f0200c6;
+        public static final int video_bg=0x7f0200c7;
+        public static final int worksuggestbox_back=0x7f0200c8;
+        public static final int worksuggestbox_big_back=0x7f0200c9;
+        public static final int worksuggestbox_edit_big_bk=0x7f0200ca;
+        public static final int worksuggestbox_edit_small_bk=0x7f0200cb;
+        public static final int wuxi_content_channelselect_=0x7f0200cc;
+        public static final int wuxicity_content_bg=0x7f0200cd;
+        public static final int wuxicity_content_channel_item_selector=0x7f0200ce;
     }
     public static final class id {
         public static final int Title_Text=0x7f0b000b;
+<<<<<<< HEAD
         public static final int action_settings=0x7f0b031a;
+=======
+        public static final int action_settings=0x7f0b031b;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int administrative_rg_channel=0x7f0b014f;
         public static final int advisory_complain_mail_text=0x7f0b00dc;
         public static final int apply_btn_reset=0x7f0b0217;
@@ -273,13 +280,21 @@ public final class R {
         public static final int bdroom_home_live_theme_text=0x7f0b0111;
         public static final int bdroom_home_live_time_content=0x7f0b0119;
         public static final int bdroom_home_live_time_text=0x7f0b0112;
+<<<<<<< HEAD
         public static final int bmapView=0x7f0b001d;
+=======
+        public static final int bmapView=0x7f0b001f;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int btn=0x7f0b0263;
         public static final int btn_ask_reset=0x7f0b021b;
         public static final int btn_ask_submit=0x7f0b021a;
         public static final int btn_bl=0x7f0b01cd;
         public static final int btn_fileSearch=0x7f0b0164;
+<<<<<<< HEAD
         public static final int btn_layout=0x7f0b00a6;
+=======
+        public static final int btn_layout=0x7f0b00a7;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int btn_next_screen=0x7f0b02fb;
         public static final int btn_rl=0x7f0b012e;
         public static final int btn_search_bydept=0x7f0b01f5;
@@ -288,7 +303,11 @@ public final class R {
         public static final int btn_searchbything=0x7f0b0200;
         public static final int btn_zxzx=0x7f0b01ce;
         public static final int channel_content=0x7f0b02c5;
+<<<<<<< HEAD
         public static final int channelitem_tv_name=0x7f0b0023;
+=======
+        public static final int channelitem_tv_name=0x7f0b0025;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int citizen_address_edit=0x7f0b029a;
         public static final int citizen_apply_time_txt=0x7f0b029f;
         public static final int citizen_email_edit=0x7f0b029e;
@@ -308,6 +327,7 @@ public final class R {
         public static final int citizen_postcode_edit=0x7f0b029b;
         public static final int citizen_solve_bydept=0x7f0b0295;
         public static final int citizen_workadd_edit=0x7f0b0297;
+<<<<<<< HEAD
         public static final int city_map_et_end=0x7f0b001a;
         public static final int city_map_et_key=0x7f0b0016;
         public static final int city_map_et_start=0x7f0b0019;
@@ -329,6 +349,29 @@ public final class R {
         public static final int decontent_tvtime=0x7f0b0027;
         public static final int decontent_wb=0x7f0b0029;
         public static final int details=0x7f0b0032;
+=======
+        public static final int city_map_et_end=0x7f0b001c;
+        public static final int city_map_et_key=0x7f0b0018;
+        public static final int city_map_et_start=0x7f0b001b;
+        public static final int city_map_rg_tab=0x7f0b0013;
+        public static final int city_map_tv_bus_rote=0x7f0b001d;
+        public static final int city_map_tv_showmap=0x7f0b0019;
+        public static final int complaint_fragment=0x7f0b0081;
+        public static final int content_author=0x7f0b002d;
+        public static final int content_detailwb_pb=0x7f0b0027;
+        public static final int content_detailwb_wb=0x7f0b0026;
+        public static final int content_download=0x7f0b0012;
+        public static final int content_list_lv=0x7f0b0032;
+        public static final int content_list_pb=0x7f0b0031;
+        public static final int content_list_tv_time=0x7f0b002f;
+        public static final int content_list_tv_title=0x7f0b002e;
+        public static final int content_setting=0x7f0b000e;
+        public static final int content_share=0x7f0b0010;
+        public static final int decontent_ll=0x7f0b0028;
+        public static final int decontent_tvtime=0x7f0b0029;
+        public static final int decontent_wb=0x7f0b002b;
+        public static final int details=0x7f0b0034;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int dev_v_1=0x7f0b02cd;
         public static final int dev_v_2=0x7f0b02d0;
         public static final int dev_v_3=0x7f0b02d3;
@@ -357,6 +400,7 @@ public final class R {
         public static final int et_username=0x7f0b0234;
         public static final int et_zjhm=0x7f0b0214;
         public static final int et_zjmc=0x7f0b0213;
+<<<<<<< HEAD
         public static final int expand_channel_listview=0x7f0b003d;
         public static final int expand_channel_listview_item_title=0x7f0b003a;
         public static final int expand_channel_progress=0x7f0b003c;
@@ -428,12 +472,85 @@ public final class R {
         public static final int gip_12345_iwantmail_radioGroup=0x7f0b008d;
         public static final int gip_12345_iwantmail_radiobutton_leaderbox=0x7f0b00c9;
         public static final int gip_12345_iwantmail_radiobutton_mayorbox=0x7f0b00c7;
+=======
+        public static final int expand_channel_listview=0x7f0b003f;
+        public static final int expand_channel_listview_item_title=0x7f0b003c;
+        public static final int expand_channel_progress=0x7f0b003e;
+        public static final int fl_title_item=0x7f0b014e;
+        public static final int foot=0x7f0b0271;
+        public static final int forum_content_comment_btn=0x7f0b0044;
+        public static final int forum_content_comment_radiobtn=0x7f0b0042;
+        public static final int forum_content_fragment=0x7f0b0043;
+        public static final int forum_content_info_radiobtn=0x7f0b0041;
+        public static final int forum_content_radiogroup=0x7f0b0040;
+        public static final int forum_popwindow_content_edit=0x7f0b0045;
+        public static final int forum_post_content_edit=0x7f0b005d;
+        public static final int forum_post_imagebtn=0x7f0b005e;
+        public static final int forum_post_linearlayout=0x7f0b005f;
+        public static final int forum_post_name_edit=0x7f0b005c;
+        public static final int forum_reply_content_text=0x7f0b0059;
+        public static final int forum_submit_btn=0x7f0b0046;
+        public static final int gip_12345_answerstati_acceptedNum=0x7f0b0075;
+        public static final int gip_12345_answerstati_depname=0x7f0b0074;
+        public static final int gip_12345_answerstati_imagebutton_startstati=0x7f0b0071;
+        public static final int gip_12345_answerstati_listview=0x7f0b0073;
+        public static final int gip_12345_answerstati_listview_pb=0x7f0b0072;
+        public static final int gip_12345_answerstati_radioButton_complaint=0x7f0b006a;
+        public static final int gip_12345_answerstati_radioButton_leaderBox=0x7f0b006b;
+        public static final int gip_12345_answerstati_radioButton_mayorBox=0x7f0b0069;
+        public static final int gip_12345_answerstati_radioGroup=0x7f0b0068;
+        public static final int gip_12345_answerstati_radiobutton_month=0x7f0b006d;
+        public static final int gip_12345_answerstati_radiobutton_year=0x7f0b006c;
+        public static final int gip_12345_answerstati_replyDay=0x7f0b0078;
+        public static final int gip_12345_answerstati_replyNum=0x7f0b0076;
+        public static final int gip_12345_answerstati_replyRate=0x7f0b0077;
+        public static final int gip_12345_answerstati_spinner_month=0x7f0b0070;
+        public static final int gip_12345_answerstati_spinner_yeara=0x7f0b006f;
+        public static final int gip_12345_answerstati_spinner_yearalone=0x7f0b006e;
+        public static final int gip_12345_answerstati_textview_complaintcount=0x7f0b0065;
+        public static final int gip_12345_answerstati_textview_leaderbox=0x7f0b0067;
+        public static final int gip_12345_answerstati_textview_mayorbox=0x7f0b0066;
+        public static final int gip_12345_complaint_answerDate=0x7f0b0086;
+        public static final int gip_12345_complaint_appraise=0x7f0b0088;
+        public static final int gip_12345_complaint_button_queryMail=0x7f0b0079;
+        public static final int gip_12345_complaint_button_statisticMail=0x7f0b007a;
+        public static final int gip_12345_complaint_code=0x7f0b0083;
+        public static final int gip_12345_complaint_depname=0x7f0b0085;
+        public static final int gip_12345_complaint_layout=0x7f0b007b;
+        public static final int gip_12345_complaint_listView=0x7f0b0023;
+        public static final int gip_12345_complaint_listView_pb=0x7f0b0022;
+        public static final int gip_12345_complaint_radioButton_latestMailList=0x7f0b007d;
+        public static final int gip_12345_complaint_radioButton_mayorBoxRule=0x7f0b007f;
+        public static final int gip_12345_complaint_radioButton_mustKonwMail=0x7f0b007e;
+        public static final int gip_12345_complaint_radioButton_organizationDuty=0x7f0b0080;
+        public static final int gip_12345_complaint_radioGroup=0x7f0b007c;
+        public static final int gip_12345_complaint_readcount=0x7f0b0087;
+        public static final int gip_12345_complaint_tilte=0x7f0b0082;
+        public static final int gip_12345_complaint_type=0x7f0b0084;
+        public static final int gip_12345_hotmail_answerDate=0x7f0b008d;
+        public static final int gip_12345_hotmail_depname=0x7f0b008c;
+        public static final int gip_12345_hotmail_listView=0x7f0b008a;
+        public static final int gip_12345_hotmail_listView_pb=0x7f0b0089;
+        public static final int gip_12345_hotmail_tilte=0x7f0b008b;
+        public static final int gip_12345_iwantmail_content_framelayout=0x7f0b0092;
+        public static final int gip_12345_iwantmail_editText_content=0x7f0b00cd;
+        public static final int gip_12345_iwantmail_editText_title=0x7f0b00cc;
+        public static final int gip_12345_iwantmail_imageBtn_send=0x7f0b00d7;
+        public static final int gip_12345_iwantmail_layout_iwantmail=0x7f0b00c6;
+        public static final int gip_12345_iwantmail_radioButton_iwantmail=0x7f0b008f;
+        public static final int gip_12345_iwantmail_radioButton_mayorBoxRule=0x7f0b0091;
+        public static final int gip_12345_iwantmail_radioButton_mustKonwMail=0x7f0b0090;
+        public static final int gip_12345_iwantmail_radioGroup=0x7f0b008e;
+        public static final int gip_12345_iwantmail_radiobutton_leaderbox=0x7f0b00ca;
+        public static final int gip_12345_iwantmail_radiobutton_mayorbox=0x7f0b00c8;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int gip_12345_iwantmail_radiobutton_needMail=0x7f0b00d3;
         public static final int gip_12345_iwantmail_radiobutton_needMsg=0x7f0b00d6;
         public static final int gip_12345_iwantmail_radiobutton_notNeedMail=0x7f0b00d2;
         public static final int gip_12345_iwantmail_radiobutton_notNeedMsg=0x7f0b00d5;
         public static final int gip_12345_iwantmail_radiobutton_notOpen=0x7f0b00d0;
         public static final int gip_12345_iwantmail_radiobutton_open=0x7f0b00cf;
+<<<<<<< HEAD
         public static final int gip_12345_iwantmail_radiobutton_suggestAndComplaint=0x7f0b00c8;
         public static final int gip_12345_iwantmail_radiogroup_isNeedMailRaply=0x7f0b00d1;
         public static final int gip_12345_iwantmail_radiogroup_isNeedMsgRaply=0x7f0b00d4;
@@ -479,15 +596,68 @@ public final class R {
         public static final int gip_hottopic_listview_discuss=0x7f0b00c4;
         public static final int gip_hottopic_listview_endTime=0x7f0b00c3;
         public static final int gip_hottopic_listview_title=0x7f0b00c1;
+=======
+        public static final int gip_12345_iwantmail_radiobutton_suggestAndComplaint=0x7f0b00c9;
+        public static final int gip_12345_iwantmail_radiogroup_isNeedMailRaply=0x7f0b00d1;
+        public static final int gip_12345_iwantmail_radiogroup_isNeedMsgRaply=0x7f0b00d4;
+        public static final int gip_12345_iwantmail_radiogroup_isopen=0x7f0b00ce;
+        public static final int gip_12345_iwantmail_radiogroup_mailType=0x7f0b00c7;
+        public static final int gip_12345_iwantmail_spinner_type=0x7f0b00cb;
+        public static final int gip_12345_leader_box_layout=0x7f0b0093;
+        public static final int gip_12345_leaderbox_fragment=0x7f0b0097;
+        public static final int gip_12345_leaderbox_listview=0x7f0b02c3;
+        public static final int gip_12345_leaderbox_progress=0x7f0b02c2;
+        public static final int gip_12345_leaderbox_radioButton_lederBoxList=0x7f0b0095;
+        public static final int gip_12345_leaderbox_radioButton_mustKonwMail=0x7f0b0096;
+        public static final int gip_12345_leaderbox_radioGroup=0x7f0b0094;
+        public static final int gip_12345_mayorbox_answerDate=0x7f0b00b3;
+        public static final int gip_12345_mayorbox_appraise=0x7f0b00b5;
+        public static final int gip_12345_mayorbox_button_queryMail=0x7f0b00a8;
+        public static final int gip_12345_mayorbox_button_statisticMail=0x7f0b00a9;
+        public static final int gip_12345_mayorbox_code=0x7f0b00b1;
+        public static final int gip_12345_mayorbox_listView=0x7f0b0273;
+        public static final int gip_12345_mayorbox_listView_pb=0x7f0b0272;
+        public static final int gip_12345_mayorbox_radioButton_mailList=0x7f0b00ac;
+        public static final int gip_12345_mayorbox_radioButton_mayorBoxRule=0x7f0b00ae;
+        public static final int gip_12345_mayorbox_radioButton_mustKonwMail=0x7f0b00ad;
+        public static final int gip_12345_mayorbox_radioGroup=0x7f0b00ab;
+        public static final int gip_12345_mayorbox_readcount=0x7f0b00b4;
+        public static final int gip_12345_mayorbox_tilte=0x7f0b00b0;
+        public static final int gip_12345_mayorbox_type=0x7f0b00b2;
+        public static final int gip_forum_begintime=0x7f0b00ba;
+        public static final int gip_forum_begintime_text=0x7f0b00bb;
+        public static final int gip_forum_fragment=0x7f0b018a;
+        public static final int gip_forum_imagebtn=0x7f0b0189;
+        public static final int gip_forum_list_title=0x7f0b00b9;
+        public static final int gip_forum_listview=0x7f0b018c;
+        public static final int gip_forum_listview_pb=0x7f0b018b;
+        public static final int gip_forum_readCount=0x7f0b00bc;
+        public static final int gip_forum_readCount_text=0x7f0b00bd;
+        public static final int gip_forum_resultCount=0x7f0b00be;
+        public static final int gip_forum_resultCount_text=0x7f0b00bf;
+        public static final int gip_forum_sentUser=0x7f0b00c0;
+        public static final int gip_forum_sentUser_text=0x7f0b00c1;
+        public static final int gip_hottopic_listview_beginTime=0x7f0b00c3;
+        public static final int gip_hottopic_listview_discuss=0x7f0b00c5;
+        public static final int gip_hottopic_listview_endTime=0x7f0b00c4;
+        public static final int gip_hottopic_listview_title=0x7f0b00c2;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int gip_live_home_memoir_listview=0x7f0b00d9;
         public static final int gip_live_home_memoir_progressbar=0x7f0b00d8;
         public static final int gip_live_home_message_listview=0x7f0b00db;
         public static final int gip_live_home_message_progressbar=0x7f0b00da;
         public static final int gip_menu_tv_title=0x7f0b00df;
+<<<<<<< HEAD
         public static final int gip_menuitem_content_fragmentlayout=0x7f0b00b7;
         public static final int gip_menuitem_gridview_title=0x7f0b00e0;
         public static final int gip_menuitem_progressbar=0x7f0b00b5;
         public static final int gip_menuitem_title_layout=0x7f0b00b6;
+=======
+        public static final int gip_menuitem_content_fragmentlayout=0x7f0b00b8;
+        public static final int gip_menuitem_gridview_title=0x7f0b00e0;
+        public static final int gip_menuitem_progressbar=0x7f0b00b6;
+        public static final int gip_menuitem_title_layout=0x7f0b00b7;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int gip_mine_12345_imageButton_writemail=0x7f0b017c;
         public static final int gip_mine_12345_radioButton_backmail=0x7f0b017a;
         public static final int gip_mine_12345_radioButton_mybackmail=0x7f0b017b;
@@ -636,7 +806,11 @@ public final class R {
         public static final int govermsg_applytable_radioButton_citizen=0x7f0b019d;
         public static final int govermsg_applytable_radioButton_legalperson=0x7f0b019e;
         public static final int govermsg_applytable_radioGroup=0x7f0b019c;
+<<<<<<< HEAD
         public static final int govermsg_custom_content=0x7f0b003b;
+=======
+        public static final int govermsg_custom_content=0x7f0b003d;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int govermsg_deptapply_item_apply=0x7f0b01a5;
         public static final int govermsg_deptapply_item_download=0x7f0b01a3;
         public static final int govermsg_deptapply_item_guide=0x7f0b01a4;
@@ -663,15 +837,25 @@ public final class R {
         public static final int govermsg_subchannels_imgview_search=0x7f0b01b9;
         public static final int govermsg_subchannels_imgview_tv_title=0x7f0b01ba;
         public static final int govermsg_subchannels_tv_title=0x7f0b01b7;
+<<<<<<< HEAD
         public static final int goverpublic_imagebutton_externltitle_check=0x7f0b0060;
         public static final int goverpublic_imagebutton_externltitle_search=0x7f0b0061;
         public static final int goverpublic_titlebelow_content_layout=0x7f0b0062;
+=======
+        public static final int goverpublic_imagebutton_externltitle_check=0x7f0b0062;
+        public static final int goverpublic_imagebutton_externltitle_search=0x7f0b0063;
+        public static final int goverpublic_titlebelow_content_layout=0x7f0b0064;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int goversaloon_btn_count=0x7f0b01d4;
         public static final int goversaloon_btn_statesearch=0x7f0b01d3;
         public static final int goversaloon_sp_szxk=0x7f0b01d2;
         public static final int goversaloon_title_search=0x7f0b0203;
         public static final int govver_admintrative_ib_search=0x7f0b0154;
+<<<<<<< HEAD
         public static final int gv_title=0x7f0b0039;
+=======
+        public static final int gv_title=0x7f0b003b;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int home_live_scroll=0x7f0b0115;
         public static final int hot_review_reply_content_text=0x7f0b022a;
         public static final int hot_review_reply_listview=0x7f0b0229;
@@ -691,7 +875,11 @@ public final class R {
         public static final int hotrevire_info_title_text=0x7f0b021e;
         public static final int hotrevire_info_webview=0x7f0b021f;
         public static final int hottopic_wv=0x7f0b0252;
+<<<<<<< HEAD
         public static final int hs_channel=0x7f0b01c5;
+=======
+        public static final int hs_channel=0x7f0b01c4;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int hs_subchannel=0x7f0b0160;
         public static final int index_gridview_image=0x7f0b022e;
         public static final int index_gridview_texttitle=0x7f0b022f;
@@ -709,7 +897,11 @@ public final class R {
         public static final int internet_endtime_text=0x7f0b0256;
         public static final int iv_index_ldhd=0x7f0b026d;
         public static final int iv_index_zt=0x7f0b026e;
+<<<<<<< HEAD
         public static final int iv_lc=0x7f0b01cc;
+=======
+        public static final int iv_lc=0x7f0b01cb;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int iv_letter_query=0x7f0b01f2;
         public static final int iv_zslc=0x7f0b020b;
         public static final int layout_bottom=0x7f0b026a;
@@ -745,10 +937,17 @@ public final class R {
         public static final int ll_filter=0x7f0b0151;
         public static final int ll_itemcount=0x7f0b01d5;
         public static final int ll_mail=0x7f0b01ea;
+<<<<<<< HEAD
         public static final int ll_main=0x7f0b005f;
         public static final int ll_search1=0x7f0b0015;
         public static final int ll_search2=0x7f0b0018;
         public static final int ll_search3=0x7f0b001c;
+=======
+        public static final int ll_main=0x7f0b0061;
+        public static final int ll_search1=0x7f0b0017;
+        public static final int ll_search2=0x7f0b001a;
+        public static final int ll_search3=0x7f0b001e;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int ll_searchby_dept=0x7f0b01f3;
         public static final int ll_searchby_range=0x7f0b01f6;
         public static final int ll_searchbything=0x7f0b01fd;
@@ -767,6 +966,7 @@ public final class R {
         public static final int login_tv_user_regisster=0x7f0b02f4;
         public static final int login_tv_userlogin=0x7f0b02f3;
         public static final int lv_fava=0x7f0b023f;
+<<<<<<< HEAD
         public static final int lv_left_navigator=0x7f0b0031;
         public static final int lv_menu=0x7f0b02ee;
         public static final int mail_content_begintime=0x7f0b009c;
@@ -784,6 +984,25 @@ public final class R {
         public static final int mail_improve_radiobtn=0x7f0b00a5;
         public static final int mail_lesser_satisfied_radiobtn=0x7f0b00a4;
         public static final int mail_satisfied_radiobtn=0x7f0b00a3;
+=======
+        public static final int lv_left_navigator=0x7f0b0033;
+        public static final int lv_menu=0x7f0b02ee;
+        public static final int mail_content_begintime=0x7f0b009d;
+        public static final int mail_content_comment_btn=0x7f0b00a2;
+        public static final int mail_content_content=0x7f0b009c;
+        public static final int mail_content_depname=0x7f0b009e;
+        public static final int mail_content_dodepname=0x7f0b00a0;
+        public static final int mail_content_endtime=0x7f0b009f;
+        public static final int mail_content_layout=0x7f0b0099;
+        public static final int mail_content_progress=0x7f0b0098;
+        public static final int mail_content_queryno=0x7f0b009a;
+        public static final int mail_content_result=0x7f0b00a1;
+        public static final int mail_content_title=0x7f0b009b;
+        public static final int mail_estimate_radiogroup=0x7f0b00a3;
+        public static final int mail_improve_radiobtn=0x7f0b00a6;
+        public static final int mail_lesser_satisfied_radiobtn=0x7f0b00a5;
+        public static final int mail_satisfied_radiobtn=0x7f0b00a4;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int main_content=0x7f0b0269;
         public static final int main_tab_index=0x7f0b0264;
         public static final int main_tab_login_reg=0x7f0b0266;
@@ -792,9 +1011,15 @@ public final class R {
         public static final int main_tab_radiogroup=0x7f0b0242;
         public static final int main_tab_search=0x7f0b0265;
         public static final int mange_rg_channel=0x7f0b015f;
+<<<<<<< HEAD
         public static final int mayor_box_fragment=0x7f0b00ae;
         public static final int mayor_box_mail_text=0x7f0b00dd;
         public static final int mayorbox_radiobtn_linearlayout=0x7f0b00a9;
+=======
+        public static final int mayor_box_fragment=0x7f0b00af;
+        public static final int mayor_box_mail_text=0x7f0b00dd;
+        public static final int mayorbox_radiobtn_linearlayout=0x7f0b00aa;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int member_btn=0x7f0b000c;
         public static final int memoir_content_text=0x7f0b0301;
         public static final int memoir_pepole_text=0x7f0b0300;
@@ -815,11 +1040,16 @@ public final class R {
         public static final int myapplypage_item_applydate=0x7f0b028c;
         public static final int myapplypage_item_code=0x7f0b028a;
         public static final int myapplypage_item_title=0x7f0b0289;
+<<<<<<< HEAD
         public static final int next=0x7f0b001f;
+=======
+        public static final int next=0x7f0b0021;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int nomal_question=0x7f0b01f1;
         public static final int online_ask_reset=0x7f0b0142;
         public static final int online_ask_submit=0x7f0b0141;
         public static final int open_close_left_btn=0x7f0b0009;
+<<<<<<< HEAD
         public static final int ordinary_begintime_text=0x7f0b0049;
         public static final int ordinary_content_text=0x7f0b0053;
         public static final int ordinary_endtime_text=0x7f0b004b;
@@ -836,6 +1066,25 @@ public final class R {
         public static final int pb_approval=0x7f0b014b;
         public static final int pb_content_wb=0x7f0b002a;
         public static final int pb_detail=0x7f0b01be;
+=======
+        public static final int ordinary_begintime_text=0x7f0b004b;
+        public static final int ordinary_content_text=0x7f0b0055;
+        public static final int ordinary_endtime_text=0x7f0b004d;
+        public static final int ordinary_linearlayout=0x7f0b0048;
+        public static final int ordinary_progressbar=0x7f0b0047;
+        public static final int ordinary_readnum_text=0x7f0b004f;
+        public static final int ordinary_replay_listview=0x7f0b005b;
+        public static final int ordinary_replay_progressbar=0x7f0b005a;
+        public static final int ordinary_replynum_text=0x7f0b0051;
+        public static final int ordinary_sentpepole_text=0x7f0b0049;
+        public static final int ordinary_title_text=0x7f0b0052;
+        public static final int paging_loading_list_fragmeLayout=0x7f0b0030;
+        public static final int pb_applyloadmoore=0x7f0b027f;
+        public static final int pb_approval=0x7f0b014b;
+        public static final int pb_content_ld=0x7f0b0316;
+        public static final int pb_content_wb=0x7f0b002c;
+        public static final int pb_detail=0x7f0b01cc;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int pb_fava=0x7f0b0240;
         public static final int pb_hottopic=0x7f0b0253;
         public static final int pb_item=0x7f0b0202;
@@ -844,6 +1093,7 @@ public final class R {
         public static final int pb_onlineask=0x7f0b0143;
         public static final int pb_publicserivce=0x7f0b02c6;
         public static final int pb_table_download=0x7f0b0167;
+<<<<<<< HEAD
         public static final int popdown=0x7f0b0036;
         public static final int popinfo=0x7f0b0034;
         public static final int popleft=0x7f0b0033;
@@ -857,6 +1107,21 @@ public final class R {
         public static final int post_summary_text=0x7f0b0051;
         public static final int post_webview=0x7f0b0054;
         public static final int pre=0x7f0b001e;
+=======
+        public static final int popdown=0x7f0b0038;
+        public static final int popinfo=0x7f0b0036;
+        public static final int popleft=0x7f0b0035;
+        public static final int popright=0x7f0b0039;
+        public static final int port_name_text=0x7f0b0257;
+        public static final int post_bengintime=0x7f0b004a;
+        public static final int post_endtime=0x7f0b004c;
+        public static final int post_readnum=0x7f0b004e;
+        public static final int post_replynum=0x7f0b0050;
+        public static final int post_scrollview=0x7f0b0054;
+        public static final int post_summary_text=0x7f0b0053;
+        public static final int post_webview=0x7f0b0056;
+        public static final int pre=0x7f0b0020;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int public_detial_tv_title=0x7f0b02c9;
         public static final int publicsercie_tv_channelname=0x7f0b02c4;
         public static final int publicserivce_rb_1=0x7f0b02cc;
@@ -878,6 +1143,7 @@ public final class R {
         public static final int query_mail_reply_department_spinner=0x7f0b00fb;
         public static final int query_mail_reply_time_begin_edit=0x7f0b00f8;
         public static final int query_mail_reply_time_end_edit=0x7f0b00f9;
+<<<<<<< HEAD
         public static final int questionnaire__scrollview=0x7f0b0055;
         public static final int questionnaire_question_layout=0x7f0b0056;
         public static final int questionnaire_question_text=0x7f0b005e;
@@ -889,11 +1155,25 @@ public final class R {
         public static final int rb_detail=0x7f0b01c6;
         public static final int rb_flfg=0x7f0b01e5;
         public static final int rb_fwcl=0x7f0b01cb;
+=======
+        public static final int questionnaire__scrollview=0x7f0b0057;
+        public static final int questionnaire_question_layout=0x7f0b0058;
+        public static final int questionnaire_question_text=0x7f0b0060;
+        public static final int rb_bus=0x7f0b0015;
+        public static final int rb_car=0x7f0b0016;
+        public static final int rb_cfbz=0x7f0b01c8;
+        public static final int rb_cfyj=0x7f0b01c7;
+        public static final int rb_company=0x7f0b0159;
+        public static final int rb_detail=0x7f0b01c5;
+        public static final int rb_flfg=0x7f0b01e5;
+        public static final int rb_fwcl=0x7f0b01ca;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int rb_fwzn=0x7f0b01e7;
         public static final int rb_green=0x7f0b015b;
         public static final int rb_gslc=0x7f0b01e8;
         public static final int rb_personal=0x7f0b0158;
         public static final int rb_qzlc=0x7f0b01e9;
+<<<<<<< HEAD
         public static final int rb_search=0x7f0b0012;
         public static final int rb_sfbz=0x7f0b01e4;
         public static final int rb_sltj=0x7f0b01e6;
@@ -901,6 +1181,15 @@ public final class R {
         public static final int rb_sszt=0x7f0b01c7;
         public static final int rb_style_service=0x7f0b015a;
         public static final int rb_zslc=0x7f0b01ca;
+=======
+        public static final int rb_search=0x7f0b0014;
+        public static final int rb_sfbz=0x7f0b01e4;
+        public static final int rb_sltj=0x7f0b01e6;
+        public static final int rb_sqcl=0x7f0b01e3;
+        public static final int rb_sszt=0x7f0b01c6;
+        public static final int rb_style_service=0x7f0b015a;
+        public static final int rb_zslc=0x7f0b01c9;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int regist_btn_cancle=0x7f0b023e;
         public static final int regist_btn_submit=0x7f0b023d;
         public static final int replay_content_text=0x7f0b02c1;
@@ -926,7 +1215,13 @@ public final class R {
         public static final int right_menu_rb_myset=0x7f0b02f9;
         public static final int right_menu_rb_mzhd=0x7f0b02f7;
         public static final int right_menu_rg=0x7f0b02f5;
+<<<<<<< HEAD
         public static final int rl_down=0x7f0b000f;
+=======
+        public static final int rl_down=0x7f0b0011;
+        public static final int rl_search_share=0x7f0b000f;
+        public static final int rl_setting=0x7f0b000d;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int search_Title_Text=0x7f0b02d6;
         public static final int search_advanced_edittext_endDate=0x7f0b0005;
         public static final int search_advanced_edittext_keyword=0x7f0b0007;
@@ -985,7 +1280,11 @@ public final class R {
         public static final int sp_lettertype=0x7f0b01ed;
         public static final int sp_range=0x7f0b01f7;
         public static final int sp_sqtype=0x7f0b020d;
+<<<<<<< HEAD
         public static final int sp_tv=0x7f0b0022;
+=======
+        public static final int sp_tv=0x7f0b0024;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int sp_xzstate=0x7f0b01fa;
         public static final int sys_about_us=0x7f0b024e;
         public static final int sys_clear_cache=0x7f0b024a;
@@ -993,6 +1292,7 @@ public final class R {
         public static final int sys_menu_set=0x7f0b0249;
         public static final int sys_site_map=0x7f0b024f;
         public static final int sys_software_update=0x7f0b024c;
+<<<<<<< HEAD
         public static final int tb_title=0x7f0b01bf;
         public static final int textcache=0x7f0b0035;
         public static final int title_scroll=0x7f0b0277;
@@ -1002,6 +1302,17 @@ public final class R {
         public static final int tv_actionname=0x7f0b0038;
         public static final int tv_answerContent=0x7f0b013d;
         public static final int tv_bgdz=0x7f0b01c3;
+=======
+        public static final int tb_title=0x7f0b01be;
+        public static final int textcache=0x7f0b0037;
+        public static final int title_scroll=0x7f0b0277;
+        public static final int title_scroll_action=0x7f0b02fa;
+        public static final int tl_tb_detail=0x7f0b01c0;
+        public static final int tv_about=0x7f0b022d;
+        public static final int tv_actionname=0x7f0b003a;
+        public static final int tv_answerContent=0x7f0b013d;
+        public static final int tv_bgdz=0x7f0b01c2;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int tv_cache=0x7f0b024b;
         public static final int tv_cjwt=0x7f0b0207;
         public static final int tv_clss=0x7f0b01d9;
@@ -1011,7 +1322,11 @@ public final class R {
         public static final int tv_item_count_detail=0x7f0b01d8;
         public static final int tv_item_name=0x7f0b0219;
         public static final int tv_itemid=0x7f0b013b;
+<<<<<<< HEAD
         public static final int tv_jddh=0x7f0b01c4;
+=======
+        public static final int tv_jddh=0x7f0b01c3;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int tv_jdjg=0x7f0b01db;
         public static final int tv_left_menu_name=0x7f0b02f1;
         public static final int tv_lldh=0x7f0b01dc;
@@ -1023,12 +1338,21 @@ public final class R {
         public static final int tv_sfsf=0x7f0b01e0;
         public static final int tv_sfzabl=0x7f0b0208;
         public static final int tv_sljg=0x7f0b01da;
+<<<<<<< HEAD
         public static final int tv_ssbm=0x7f0b01c2;
         public static final int tv_ssmc_name=0x7f0b01c0;
         public static final int tv_user=0x7f0b0251;
         public static final int tv_verison=0x7f0b024d;
         public static final int tv_xzfwzxbl=0x7f0b01df;
         public static final int tvbrowcount=0x7f0b0028;
+=======
+        public static final int tv_ssbm=0x7f0b01c1;
+        public static final int tv_ssmc_name=0x7f0b01bf;
+        public static final int tv_user=0x7f0b0251;
+        public static final int tv_verison=0x7f0b024d;
+        public static final int tv_xzfwzxbl=0x7f0b01df;
+        public static final int tvbrowcount=0x7f0b002a;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int v_level1=0x7f0b02ca;
         public static final int vedio_bdroom_home_live_more_text=0x7f0b0114;
         public static final int vedio_dbroom_home_live_click_text=0x7f0b0117;
@@ -1048,10 +1372,17 @@ public final class R {
         public static final int worksuggestionbox_mutiltxtbox_layout=0x7f0b0312;
         public static final int worksuggestionbox_singletxtbox_layout=0x7f0b0313;
         public static final int wucity_channel_hs=0x7f0b0314;
+<<<<<<< HEAD
         public static final int wucity_content=0x7f0b0316;
         public static final int wuxi_decontent_tvbrowcount=0x7f0b0319;
         public static final int wuxi_decontent_tvtime=0x7f0b0318;
         public static final int wuxicity_decontent_ll=0x7f0b0317;
+=======
+        public static final int wucity_content=0x7f0b0317;
+        public static final int wuxi_decontent_tvbrowcount=0x7f0b031a;
+        public static final int wuxi_decontent_tvtime=0x7f0b0319;
+        public static final int wuxicity_decontent_ll=0x7f0b0318;
+>>>>>>> aaa2b5074fcd4a878953b27ff3e2fb327e9eaf1f
         public static final int wuxicity_decontent_wb=0x7f0b030d;
         public static final int wuxicity_rg_title_chanel=0x7f0b0315;
     }

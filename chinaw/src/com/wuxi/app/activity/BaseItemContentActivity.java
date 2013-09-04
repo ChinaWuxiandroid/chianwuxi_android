@@ -3,6 +3,7 @@ package com.wuxi.app.activity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
@@ -16,7 +17,7 @@ import com.wuxi.app.R;
 public abstract class BaseItemContentActivity extends BaseSlideActivity {
 
 	protected ImageView setting_btn, share_btn, download_btn;
-
+	protected RelativeLayout rl_down,rl_setting,rl_search_share;
 	@Override
 	protected int getLayoutId() {
 
@@ -25,7 +26,10 @@ public abstract class BaseItemContentActivity extends BaseSlideActivity {
 
 	@Override
 	protected void findMainContentViews(View view) {
-
+		rl_down=(RelativeLayout) view.findViewById(R.id.rl_down);
+		rl_setting=(RelativeLayout) view.findViewById(R.id.rl_setting);
+		rl_search_share=(RelativeLayout) view.findViewById(R.id.rl_search_share);
+		
 		setting_btn = (ImageView) view.findViewById(R.id.content_setting);
 		share_btn = (ImageView) view.findViewById(R.id.content_share);
 		download_btn = (ImageView) view.findViewById(R.id.content_download);

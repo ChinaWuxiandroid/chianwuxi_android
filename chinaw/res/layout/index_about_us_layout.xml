@@ -5,17 +5,12 @@
     android:background="#D6DAE2"
     android:orientation="vertical" >
 
-    <include
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        layout="@layout/child_fragmend_header_layout" />
+    <include layout="@layout/child_fragmend_header_layout" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dip"
+        android:layout_height="fill_parent"
         android:layout_margin="10dip"
-        android:layout_weight="9"
         android:background="@drawable/system_set_shape"
         android:orientation="vertical" >
 
@@ -24,17 +19,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="中国无锡" />
+            android:text="中国无锡" 
+            android:paddingTop="10dip"
+            android:textSize="16sp"/>
 
         <TextView
             android:id="@+id/tv_about"
-            android:padding="10dip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:fadeScrollbars="false"
+            android:padding="10dip"
             android:scrollbars="vertical"
-            android:text="@string/about" 
-            android:fadeScrollbars="false"/>
+            android:text="@string/about"
+            android:textSize="14sp" />
     </LinearLayout>
 
 </LinearLayout>

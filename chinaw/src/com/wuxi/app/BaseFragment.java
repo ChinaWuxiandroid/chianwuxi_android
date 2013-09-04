@@ -10,12 +10,6 @@ import android.support.v4.app.Fragment;
  */
 public class BaseFragment extends Fragment {
 
-	protected int position;
-
-	public void setPosition(int position) {
-		this.position = position;
-	}
-
 	// 大部分Fragment需要实现初始化它的子布局
 	public void initializSubFragmentsLayout() {
 

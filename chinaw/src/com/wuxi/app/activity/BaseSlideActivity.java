@@ -23,18 +23,13 @@ import android.widget.Toast;
 
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
-import com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity;
-import com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity;
-import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonActivity;
-import com.wuxi.app.activity.homepage.informationcenter.InformationCenterActivity;
 import com.wuxi.app.activity.homepage.logorregister.LoginActivity;
 import com.wuxi.app.activity.homepage.logorregister.RegisterActivity;
 import com.wuxi.app.activity.homepage.more.MenuItemSetActivity;
 import com.wuxi.app.activity.homepage.more.SystemSetActivity;
-import com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity;
-import com.wuxi.app.activity.homepage.publicservice.PublicServiceActivity;
 import com.wuxi.app.adapter.LeftMenuAdapter;
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.MenuItemChanelUtil;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.app.view.SlideMenuLayout;
 import com.wuxi.domain.MenuItem;
@@ -301,35 +296,10 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 
 		Intent intent = null;
 
-		if (menuItem.getType() != MenuItem.CHANNEL_MENU) {
-			if (menuItem.getName().equals("资讯中心")) {
+		Class<?> acClass = MenuItemChanelUtil.getActivityClassByName(menuItem);
+		if (acClass != null) {
+			intent = new Intent(BaseSlideActivity.this, acClass);
 
-				intent = new Intent(BaseSlideActivity.this,
-					InformationCenterActivity.class);
-
-			} else if (menuItem.getName().equals("政府信息公开")) {
-				intent = new Intent(BaseSlideActivity.this,
-					PublicGoverMsgActivity.class);
-
-			} else if (menuItem.getName().equals("公共服务")) {
-
-				intent = new Intent(BaseSlideActivity.this,
-					PublicServiceActivity.class);
-
-			} else if (menuItem.getName().equals("政务大厅")) {
-
-				intent = new Intent(BaseSlideActivity.this,
-					GoverSaloonActivity.class);
-			} else if (menuItem.getName().equals("政民互动")) {
-				intent = new Intent(BaseSlideActivity.this,
-					MainMineActivity.class);
-			}
-
-		} else if (menuItem.getType() == MenuItem.CHANNEL_MENU) {// 频道类型菜单
-			intent = new Intent(BaseSlideActivity.this, ChannelActivity.class);
-		}
-
-		if (intent != null) {
 			intent.putExtra(
 				BaseSlideActivity.SELECT_MENU_POSITION_KEY, position);
 
@@ -341,8 +311,8 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 	@Override
 	public void onClick(View v) {
 
-		if(!isRightMenuEnabled()){
-			return ;
+		if (!isRightMenuEnabled()) {
+			return;
 		}
 		Intent intent = null;
 		switch (v.getId()) {
@@ -381,6 +351,7 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 		}
 
 		if (intent != null) {
+			closeSlideMenu();
 			MainTabActivity.instance.addView(intent);
 		}
 

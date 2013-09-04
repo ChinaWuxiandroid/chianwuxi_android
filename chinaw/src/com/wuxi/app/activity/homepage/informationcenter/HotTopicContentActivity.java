@@ -6,6 +6,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
@@ -20,28 +21,28 @@ import com.wuxi.domain.Content;
 public class HotTopicContentActivity extends BaseItemContentActivity {
 
 	private WebView hottopic_wv;
+
 	private ProgressBar pb_hottopic;
+
 	private Content content;
 
-	
-	
 	@Override
 	protected void findMainContentViews(View view) {
-		
+
 		super.findMainContentViews(view);
-		
-		setting_btn.setVisibility(ImageView.INVISIBLE);
-		share_btn.setVisibility(ImageView.INVISIBLE);
-		download_btn.setVisibility(ImageView.INVISIBLE);
-		opearn_btn.setVisibility(ImageView.INVISIBLE);
-		member_btnm.setVisibility(ImageView.INVISIBLE);
+		rl_down.setVisibility(RelativeLayout.GONE);
+		rl_setting.setVisibility(RelativeLayout.GONE);
+		rl_search_share.setVisibility(RelativeLayout.GONE);
+
+		opearn_btn.setVisibility(ImageView.GONE);
+		member_btnm.setVisibility(ImageView.GONE);
 		hottopic_wv = (WebView) view.findViewById(R.id.hottopic_wv);
 		pb_hottopic = (ProgressBar) view.findViewById(R.id.pb_hottopic);
 
 		content = (Content) getIntent().getExtras().get("content");
 		showContent();
 	}
-	
+
 	@SuppressLint("SetJavaScriptEnabled")
 	private void showContent() {
 		hottopic_wv.getSettings().setJavaScriptEnabled(true);

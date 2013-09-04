@@ -24,6 +24,7 @@ import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.fragment.homepage.goversaloon.GoverSaloonContentMainFragment;
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
@@ -58,7 +59,7 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 
 	private ContentNavigatorAdapter adapter;
 
-	public static final String SHOWLAYOUTINDEX = "showLayout_index";
+
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -142,8 +143,8 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 	private void showLeftMenuItemData() {
 		Bundle bundle = getIntent().getExtras();
 		int showIndex = 1;
-		if (bundle != null && bundle.containsKey(SHOWLAYOUTINDEX)) {
-			showIndex = bundle.getInt(SHOWLAYOUTINDEX);
+		if (bundle != null && bundle.containsKey(Constants.CheckPositionKey.LEVEL_ONE_KEY)) {
+			showIndex = bundle.getInt(Constants.CheckPositionKey.LEVEL_ONE_KEY);
 		}
 		adapter = new ContentNavigatorAdapter(getLayoutInflater(), null,
 			menuItems);

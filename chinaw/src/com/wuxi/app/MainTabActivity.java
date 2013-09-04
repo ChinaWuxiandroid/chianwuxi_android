@@ -20,6 +20,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -62,7 +63,9 @@ public class MainTabActivity extends ActivityGroup implements
 
 	private RadioButton main_tab_index, main_tab_search, main_tab_login_reg,
 			main_tab_mine, main_tab_more;
+
 	public boolean fistLoadAPP = true;
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 
@@ -109,6 +112,28 @@ public class MainTabActivity extends ActivityGroup implements
 
 	}
 
+	public void addView(Intent intent, Animation animation) {
+
+		String str = UUID.randomUUID().toString();
+
+		View view = getLocalActivityManager().startActivity(
+			str, intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+				.getDecorView();
+		view.startAnimation(animation);
+		llMain.addView(view, new LinearLayout.LayoutParams(
+			LinearLayout.LayoutParams.MATCH_PARENT,
+			LinearLayout.LayoutParams.MATCH_PARENT));
+		llMain.requestFocus();
+
+		StackElement component = new StackElement(str, view);
+		stack.add(component);
+
+		if (llMain.getChildCount() > 1) {
+			handler.sendEmptyMessageDelayed(
+				REMOVE_VIEW, animation.getDuration() + 1000L);// 移除view
+		}
+	}
+
 	/**
 	 * 
 	 * @param intent
@@ -130,7 +155,7 @@ public class MainTabActivity extends ActivityGroup implements
 		stack.add(component);
 
 		if (llMain.getChildCount() > 1) {
-			handler.sendEmptyMessageDelayed(REMOVE_VIEW, 1000);
+			handler.sendEmptyMessageDelayed(REMOVE_VIEW, 1000);// 移除view
 		}
 
 	}
@@ -275,7 +300,7 @@ public class MainTabActivity extends ActivityGroup implements
 			return;
 		}
 		Intent intent = null;
-		
+
 		switch (v.getId()) {
 
 		case R.id.main_tab_index:// 首页

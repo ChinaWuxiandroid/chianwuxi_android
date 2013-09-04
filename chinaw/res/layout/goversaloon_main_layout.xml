@@ -3,16 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-     <include
+
+    <include layout="@layout/child_fragmend_header_layout" />
+
+    <include
         android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        layout="@layout/child_fragmend_header_layout" />
-     <include 
-           android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="9"
-         layout="@layout/content_navigator_layout"
-         />
+        android:layout_height="fill_parent"
+        layout="@layout/content_navigator_layout" />
 
 </LinearLayout>
