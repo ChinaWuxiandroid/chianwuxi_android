@@ -3,6 +3,7 @@ package com.wuxi.app.activity.homepage.goversaloon;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Handler;
@@ -21,8 +22,10 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
+import com.wuxi.app.activity.commactivity.ImageViewScaleActivity;
 import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.GoverSaoonItemService;
 import com.wuxi.app.engine.GoverSaoonWorkFlowImageService;
@@ -78,28 +81,27 @@ public class GoverSaloonDetailZSActivtiy extends BaseItemContentActivity
 				break;
 			case COMMIT_SUCCESS:
 				pb_detail.setVisibility(ProgressBar.GONE);
-				Toast.makeText(GoverSaloonDetailZSActivtiy.this, "提交成功", Toast.LENGTH_SHORT).show();
+				Toast.makeText(GoverSaloonDetailZSActivtiy.this, "提交成功",
+						Toast.LENGTH_SHORT).show();
 				break;
 			case COMMIT_ERROR:
 			case LC_LOADERROR:
 			case LOAD_ITEM_DETIAL_FAIL:
 				String tip = msg.obj.toString();
-				Toast.makeText(GoverSaloonDetailZSActivtiy.this, tip, Toast.LENGTH_SHORT).show();
+				Toast.makeText(GoverSaloonDetailZSActivtiy.this, tip,
+						Toast.LENGTH_SHORT).show();
 				break;
 			}
 
 		}
 	};
 
-	
-	
 	@Override
 	protected void findMainContentViews(View view) {
-		
+
 		super.findMainContentViews(view);
-		
-		
-		loginDialog=new LoginDialog(this);
+
+		loginDialog = new LoginDialog(this);
 		tv_ssmc_name = (TextView) view.findViewById(R.id.tv_ssmc_name);
 		tl_tb_detail = (TableLayout) view.findViewById(R.id.tl_tb_detail);
 		pb_detail = (ProgressBar) view.findViewById(R.id.pb_detail);
@@ -112,7 +114,8 @@ public class GoverSaloonDetailZSActivtiy extends BaseItemContentActivity
 		tv_content = (TextView) view.findViewById(R.id.tv_content);
 		iv_zslc = (ImageView) view.findViewById(R.id.iv_zslc);
 
-		goverSaoonItem = (GoverSaoonItem) getIntent().getExtras().get("goverSaoonItem");
+		goverSaoonItem = (GoverSaoonItem) getIntent().getExtras().get(
+				"goverSaoonItem");
 
 		loadItemDetail();
 
@@ -121,7 +124,7 @@ public class GoverSaloonDetailZSActivtiy extends BaseItemContentActivity
 		btn_zxzx = (Button) view.findViewById(R.id.btn_zxzx);
 		btn_zxzx.setOnClickListener(this);
 		ll_zxnr = (LinearLayout) view.findViewById(R.id.ll_zxnr);
-
+		iv_zslc.setOnClickListener(this);
 		tv_item_name = (TextView) view.findViewById(R.id.tv_item_name);
 		et_content = (EditText) view.findViewById(R.id.et_content);
 		btn_ask_submit = (Button) view.findViewById(R.id.btn_ask_submit);
@@ -154,8 +157,8 @@ public class GoverSaloonDetailZSActivtiy extends BaseItemContentActivity
 			public void run() {
 
 				Message msg = handler.obtainMessage();
-				GoverSaoonItemService goverSaoonItemService = new GoverSaoonItemService(GoverSaloonDetailZSActivtiy.this
-						);
+				GoverSaoonItemService goverSaoonItemService = new GoverSaoonItemService(
+						GoverSaloonDetailZSActivtiy.this);
 				try {
 					goverSaoonItemDetail = goverSaoonItemService
 							.getGoverSaoonItemZSDetailByid(goverSaoonItem
@@ -223,12 +226,11 @@ public class GoverSaloonDetailZSActivtiy extends BaseItemContentActivity
 			break;
 		case R.id.btn_zxzx:// 在线咨询
 			if (ll_zxnr.getVisibility() == LinearLayout.GONE) {
-				if(loginDialog.checkLogin()){
+				if (loginDialog.checkLogin()) {
 					ll_zxnr.setVisibility(LinearLayout.VISIBLE);
-				}else{
+				} else {
 					loginDialog.showDialog();
 				}
-				
 
 			} else if (ll_zxnr.getVisibility() == LinearLayout.VISIBLE) {
 				ll_zxnr.setVisibility(LinearLayout.GONE);
@@ -236,14 +238,23 @@ public class GoverSaloonDetailZSActivtiy extends BaseItemContentActivity
 			break;
 		case R.id.btn_ask_submit:// 在线咨询提交
 			if (et_content.getText().toString().equals("")) {
-				Toast.makeText(this, "请输入您要提交的内容", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(this, "请输入您要提交的内容", Toast.LENGTH_SHORT).show();
 				return;
 			}
 			commitAsk();
 			break;
 		case R.id.btn_ask_reset:// 在线提交重置
 			et_content.setText("");
+			break;
+		case R.id.iv_zslc:
+			if (this.bitmap != null) {
+				Intent intent = new Intent(this, ImageViewScaleActivity.class);
+				intent.putExtra(ImageViewScaleActivity.BITMAP_KEY, bitmap);
+
+				MainTabActivity.instance.addView(intent);
+
+			}
+			break;
 
 		}
 
@@ -306,7 +317,7 @@ public class GoverSaloonDetailZSActivtiy extends BaseItemContentActivity
 			public void run() {
 				Message msg = handler.obtainMessage();
 				GoverSaoonWorkFlowImageService goverSaoonWorkFlowImageService = new GoverSaoonWorkFlowImageService(
-					GoverSaloonDetailZSActivtiy.this);
+						GoverSaloonDetailZSActivtiy.this);
 				try {
 					bitmap = goverSaoonWorkFlowImageService
 							.getBitMap(goverSaoonItemDetail.getZscx());
@@ -333,7 +344,7 @@ public class GoverSaloonDetailZSActivtiy extends BaseItemContentActivity
 
 	private void showLcImage() {
 		iv_zslc.setImageBitmap(bitmap);
-		
+
 	}
 
 	private void commitAsk() {
@@ -351,13 +362,14 @@ public class GoverSaloonDetailZSActivtiy extends BaseItemContentActivity
 
 				Message msg = handler.obtainMessage();
 				GoversaoonOnlineASKDetailService goversaoonOnlineASKDetailService = new GoversaoonOnlineASKDetailService(
-					GoverSaloonDetailZSActivtiy.this);
+						GoverSaloonDetailZSActivtiy.this);
 				try {
-					GoversaoonOnlineASKDetail goversaoonOnlineDetail = goversaoonOnlineASKDetailService
-							.commitGoversaoonOnlineASKDetail(
-									goverSaoonItemDetail.getId(), "XK",
-									et_content.getText().toString(),
-									SystemUtil.getAccessToken(GoverSaloonDetailZSActivtiy.this));
+					GoversaoonOnlineASKDetail goversaoonOnlineDetail = goversaoonOnlineASKDetailService.commitGoversaoonOnlineASKDetail(
+							goverSaoonItemDetail.getId(),
+							"XK",
+							et_content.getText().toString(),
+							SystemUtil
+									.getAccessToken(GoverSaloonDetailZSActivtiy.this));
 					if (goversaoonOnlineDetail != null) {
 						msg.what = COMMIT_SUCCESS;
 					} else {
