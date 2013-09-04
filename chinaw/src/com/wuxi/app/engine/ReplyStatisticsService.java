@@ -74,6 +74,8 @@ public class ReplyStatisticsService extends Service{
 
 		String url=Constants.Urls.LETTERS_STATISTICS_URL+"?type="+letter_type+"&year="+year+"&month="+month;	
 		
+		System.out.println("--->"+url);
+		
 		String reslutStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (reslutStr != null) {
