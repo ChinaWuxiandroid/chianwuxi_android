@@ -32,6 +32,7 @@ import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
@@ -170,6 +171,10 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 	//显示普通菜单类型标题条
 	public void showMenuItemTitle(){
 		checkPoint=0;  //默认选中第一个
+		Bundle  bundle =getArguments();
+		if(bundle!=null){
+			checkPoint=bundle.getInt(Constants.CheckPositionKey.LEVEL_TWO_KEY);
+		}
 		Titles_gridView=(GridView) view.findViewById(R.id.gip_menuitem_gridview_title);
 		int titleSize=titleMenuItems.size();
 		if(titleSize<2)
@@ -221,6 +226,10 @@ InitializContentLayoutListner, OnClickListener, Serializable{
 	//显示频道菜单类型标题条
 	public void showChannelTitle(){
 		checkPoint=0;  //默认选中第一个
+		Bundle  bundle =getArguments();
+		if(bundle!=null){
+			checkPoint=bundle.getInt(Constants.CheckPositionKey.LEVEL_TWO_KEY);
+		}
 		Titles_gridView=(GridView) view.findViewById(R.id.gip_menuitem_gridview_title);
 		int titleSize=titleChannels.size();
 		if(titleSize<2)

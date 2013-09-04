@@ -29,10 +29,10 @@ public abstract class RadioButtonChangeFragment extends BaseFragment implements
 
 	protected LayoutInflater mInflater;
 
-	private RadioGroup radioGroup;
+	protected RadioGroup radioGroup;
 	protected Context context;
 	private int[] radioButtonIds;
-	private MenuItem parentMenuItem; // 父菜单
+	protected MenuItem parentMenuItem; // 父菜单
 
 	public void setParentMenuItem(MenuItem parentMenuItem) {
 		this.parentMenuItem = parentMenuItem;

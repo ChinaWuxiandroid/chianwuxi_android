@@ -163,8 +163,8 @@ public class MainIndexActivity extends Activity implements
 				showUpdatDialog();
 				break;
 			case DOWLOAD_ERROR:
-				Toast.makeText(
-					MainIndexActivity.this, "下载出错", Toast.LENGTH_LONG).show();
+				Toast.makeText(MainIndexActivity.this, "下载出错",
+						Toast.LENGTH_LONG).show();
 				break;
 			case ANNOUNCE_LOAD_FAIL:
 			case NEWS_LOAD_FAIL:
@@ -199,7 +199,8 @@ public class MainIndexActivity extends Activity implements
 		for (int i = 0; i < 2; i++) {
 			mListViews.add(bulidListView(i));
 		}
-		index_title_news_page.setAdapter(new MainDataViewPageAdapter(mListViews));// 设置适配器
+		index_title_news_page
+				.setAdapter(new MainDataViewPageAdapter(mListViews));// 设置适配器
 		index_title_news_page.setOnPageChangeListener(this);
 		main_tab_radiogroup = (RadioGroup) findViewById(R.id.main_tab_radiogroup);
 		main_tab_radiogroup.setOnCheckedChangeListener(this);
@@ -248,45 +249,46 @@ public class MainIndexActivity extends Activity implements
 
 		new Thread(new Runnable() {// 加载首页MenuItem数据
 
-				@Override
-				public void run() {
+					@Override
+					public void run() {
 
-					MenuService menuSevice = new MenuService(
-						MainIndexActivity.this);
-					try {
-						menuItems = menuSevice.getHomeMenuItems(Constants.Urls.MENU_URL
-								+ "?recursions=0");
-						if (menuItems != null) {
-							handler.sendEmptyMessage(MENUITEM_LOAD_SUCESS);// 发送消息
-							CacheUtil.put(MENUITEM_CACKE_KEY, menuItems);// 将菜单数据放入缓存
-						} else {
+						MenuService menuSevice = new MenuService(
+								MainIndexActivity.this);
+						try {
+							menuItems = menuSevice
+									.getHomeMenuItems(Constants.Urls.MENU_URL
+											+ "?recursions=0");
+							if (menuItems != null) {
+								handler.sendEmptyMessage(MENUITEM_LOAD_SUCESS);// 发送消息
+								CacheUtil.put(MENUITEM_CACKE_KEY, menuItems);// 将菜单数据放入缓存
+							} else {
+								Message msg = handler.obtainMessage();
+								msg.what = MENUITEM_LOAD_ERROR;
+								msg.obj = "加载错误";
+								handler.sendMessage(msg);// 加载错误
+							}
+						} catch (NetException e) {
+							e.printStackTrace();
 							Message msg = handler.obtainMessage();
+							msg.obj = e.getMessage();
 							msg.what = MENUITEM_LOAD_ERROR;
-							msg.obj = "加载错误";
+							handler.sendMessage(msg);// 加载错误
+						} catch (JSONException e) {
+							e.printStackTrace();
+							Message msg = handler.obtainMessage();
+							msg.obj = "网络格式出错";
+							msg.what = MENUITEM_LOAD_ERROR;
+							handler.sendMessage(msg);// 加载错误
+						} catch (NODataException e) {
+							e.printStackTrace();
+							Message msg = handler.obtainMessage();
+							msg.obj = "获取数据异常";
+							msg.what = MENUITEM_LOAD_ERROR;
 							handler.sendMessage(msg);// 加载错误
 						}
-					} catch (NetException e) {
-						e.printStackTrace();
-						Message msg = handler.obtainMessage();
-						msg.obj = e.getMessage();
-						msg.what = MENUITEM_LOAD_ERROR;
-						handler.sendMessage(msg);// 加载错误
-					} catch (JSONException e) {
-						e.printStackTrace();
-						Message msg = handler.obtainMessage();
-						msg.obj = "网络格式出错";
-						msg.what = MENUITEM_LOAD_ERROR;
-						handler.sendMessage(msg);// 加载错误
-					} catch (NODataException e) {
-						e.printStackTrace();
-						Message msg = handler.obtainMessage();
-						msg.obj = "获取数据异常";
-						msg.what = MENUITEM_LOAD_ERROR;
-						handler.sendMessage(msg);// 加载错误
-					}
 
+					}
 				}
-			}
 
 		).start();
 
@@ -350,10 +352,10 @@ public class MainIndexActivity extends Activity implements
 	 */
 	private GridView bulidGridView(List<MenuItem> items) {
 		GridView gridView = (GridView) getLayoutInflater().inflate(
-			R.layout.index_gridview_layout, null);
+				R.layout.index_gridview_layout, null);
 
 		gridAdapter = new IndexGridAdapter(this,
-			R.layout.index_gridview_item_layout, Grid_viewid, items, null);
+				R.layout.index_gridview_item_layout, Grid_viewid, items, null);
 		gridView.setAdapter(gridAdapter);
 		gridView.setOnItemClickListener(GridviewOnclick);
 		return gridView;
@@ -367,8 +369,9 @@ public class MainIndexActivity extends Activity implements
 	private ListView bulidListView(int type) {
 
 		View layoutView = getLayoutInflater().inflate(
-			R.layout.index_news_announts_list_layout, null);
-		ListView listView = (ListView) layoutView.findViewById(R.id.index_news_lv);
+				R.layout.index_news_announts_list_layout, null);
+		ListView listView = (ListView) layoutView
+				.findViewById(R.id.index_news_lv);
 		listView.setOnItemClickListener(new NewsOrAnncountClick(type));
 		return listView;
 
@@ -395,8 +398,8 @@ public class MainIndexActivity extends Activity implements
 			Content content = (Content) adapterView.getItemAtPosition(position);
 
 			Intent intent = new Intent(MainIndexActivity.this,
-				NewsAnnAcountActivitiy.class);
-			Bundle bundle = new Bundle();
+					NewsAnnAcountActivitiy.class);
+
 			intent.putExtra("content", content);
 			intent.putExtra(NewsAnnAcountActivitiy.SHOWTYPE_KEY, type);// 显示
 
@@ -418,8 +421,8 @@ public class MainIndexActivity extends Activity implements
 			list.remove(2);
 		}
 		listAdapter = new IndexNewsListAdapter(this,
-			R.layout.index_newslist_layout, newslist_viewid, list,
-			newslist_dataName);
+				R.layout.index_newslist_layout, newslist_viewid, list,
+				newslist_dataName);
 		listView.setAdapter(listAdapter);
 
 	}
@@ -431,8 +434,9 @@ public class MainIndexActivity extends Activity implements
 	 * @param listView
 	 */
 	public int getListViewHeight(ListView listView) {
-		IndexNewsListAdapter listAdapter = (IndexNewsListAdapter) listView.getAdapter();
-		
+		IndexNewsListAdapter listAdapter = (IndexNewsListAdapter) listView
+				.getAdapter();
+
 		int totalHeight = 0;
 		for (int i = 0; i < listAdapter.getCount(); i++) {
 			View listItem = listAdapter.getView(i, null, listView);
@@ -444,7 +448,7 @@ public class MainIndexActivity extends Activity implements
 				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
 
 		return params.height;
-		
+
 	}
 
 	/**
@@ -456,14 +460,16 @@ public class MainIndexActivity extends Activity implements
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 
-			MenuItem checkMenuItem = (MenuItem) parent.getItemAtPosition(position);
+			MenuItem checkMenuItem = (MenuItem) parent
+					.getItemAtPosition(position);
 
-			Class<?> acClass = MenuItemChanelUtil.getActivityClassByName(checkMenuItem);
+			Class<?> acClass = MenuItemChanelUtil
+					.getActivityClassByName(checkMenuItem);
 
 			if (acClass != null) {
 				Intent intent = new Intent(MainIndexActivity.this, acClass);
-				intent.putExtra(
-					BaseSlideActivity.SELECT_MENU_POSITION_KEY, position);
+				intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY,
+						position);
 
 				MainTabActivity.instance.addView(intent);
 			}
@@ -544,7 +550,7 @@ public class MainIndexActivity extends Activity implements
 			public void run() {
 
 				ImportNewsService importNewsService = new ImportNewsService(
-					MainIndexActivity.this);
+						MainIndexActivity.this);
 				try {
 					news = importNewsService.getImportNews();
 					if (news != null) {
@@ -589,8 +595,8 @@ public class MainIndexActivity extends Activity implements
 	private void showNews() {
 		ListView listView = (ListView) mListViews.get(0);
 		showNewsOrAnncountData(listView, news);
-		
-		index_title_news_page.getLayoutParams().height=getListViewHeight(listView);
+
+		index_title_news_page.getLayoutParams().height = getListViewHeight(listView);
 	}
 
 	/**
@@ -614,7 +620,7 @@ public class MainIndexActivity extends Activity implements
 			public void run() {
 
 				AnnouncementsService announcementsService = new AnnouncementsService(
-					MainIndexActivity.this);
+						MainIndexActivity.this);
 				try {
 					announcements = announcementsService.getAnnouncements();
 					if (announcements != null) {
@@ -683,7 +689,8 @@ public class MainIndexActivity extends Activity implements
 		case 1:
 
 			index_rb_news.setBackgroundResource(R.drawable.index_news);
-			index_rb_announcements.setBackgroundResource(R.drawable.index_news_pre);
+			index_rb_announcements
+					.setBackgroundResource(R.drawable.index_news_pre);
 			loadAnnouncements();
 			break;
 		}
@@ -702,13 +709,13 @@ public class MainIndexActivity extends Activity implements
 		case R.id.index_rb_news:// 无锡要闻
 
 			intent = new Intent(MainIndexActivity.this,
-				InformationCenterActivity.class);
+					InformationCenterActivity.class);
 			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 2);
 			intent.putExtra(Constants.CheckPositionKey.LEVEL_ONE_KEY, 1);
 			break;
 		case R.id.index_rb_announcements:// 推荐公告
 			intent = new Intent(MainIndexActivity.this,
-				InformationCenterActivity.class);
+					InformationCenterActivity.class);
 			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 2);
 			intent.putExtra(Constants.CheckPositionKey.LEVEL_ONE_KEY, 2);
 			break;
@@ -758,8 +765,8 @@ public class MainIndexActivity extends Activity implements
 	private void install(File file) {
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_VIEW);
-		intent.setDataAndType(
-			Uri.fromFile(file), "application/vnd.android.package-archive");
+		intent.setDataAndType(Uri.fromFile(file),
+				"application/vnd.android.package-archive");
 		this.finish();
 		startActivity(intent);
 
@@ -826,47 +833,46 @@ public class MainIndexActivity extends Activity implements
 				+ updateInfo.getDescription());
 		builder.setCancelable(false);
 
-		builder.setPositiveButton(
-			"确定", new android.content.DialogInterface.OnClickListener() {
+		builder.setPositiveButton("确定",
+				new android.content.DialogInterface.OnClickListener() {
 
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
 
-					if (Environment.getExternalStorageState().equals(
-						Environment.MEDIA_MOUNTED)) {
+						if (Environment.getExternalStorageState().equals(
+								Environment.MEDIA_MOUNTED)) {
 
-						File file = new File(
-							Constants.APPFiles.DOWNLOAF_FILE_PATH);
-						if (!file.exists()) {
-							file.mkdirs();
+							File file = new File(
+									Constants.APPFiles.DOWNLOAF_FILE_PATH);
+							if (!file.exists()) {
+								file.mkdirs();
+							}
+							DownLoadThreadTask dowTask = new DownLoadThreadTask(
+									updateInfo.getUrl(),
+									Constants.APPFiles.DOWNLOAF_FILE_PATH
+											+ "chinawuxi.apk");
+
+							new Thread(dowTask).start();
+							pd.show();
+
+						} else {
+							Toast.makeText(MainIndexActivity.this, "SDK不存在",
+									Toast.LENGTH_SHORT).show();
+
 						}
-						DownLoadThreadTask dowTask = new DownLoadThreadTask(
-							updateInfo.getUrl(),
-							Constants.APPFiles.DOWNLOAF_FILE_PATH
-									+ "chinawuxi.apk");
 
-						new Thread(dowTask).start();
-						pd.show();
+					}
+				});
 
-					} else {
-						Toast.makeText(
-							MainIndexActivity.this, "SDK不存在",
-							Toast.LENGTH_SHORT).show();
+		builder.setNegativeButton("取消",
+				new android.content.DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
 
 					}
 
-				}
-			});
-
-		builder.setNegativeButton(
-			"取消", new android.content.DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-
-				}
-
-			});
+				});
 
 		builder.create().show();
 

@@ -540,6 +540,11 @@ public class Constants {
 		 * 三级子菜单选中的key值
 		 */
 		public static final String LEVEL_THREE_KEY = "LEVEL_THREE_KEY";
+		
+		/**
+		 * 政民互动我要写信功能
+		 */
+		public static final String WIRTE_MAIL_KEY = "WIRTE_MAIL_KEY";
 
 	}
 
