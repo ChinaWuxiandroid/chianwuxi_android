@@ -22,7 +22,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,17 +51,25 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 	private TextView mayorbox_txtView; // 市长信箱
 	private TextView leaderbox_txtView; // 领导信箱
 
+	// 年份查询下拉框
 	private Spinner yearAlone_Spinnner;
+
+	// 月份查询下拉框
 	private Spinner year_Spinnner;
 	private Spinner month_Spinnner;
 
 	private ImageButton startStatic_imgBtn; // 统计
 
+	private RadioGroup radioGroup = null;
+	private RadioButton yearRadioBtn = null;
+	private RadioButton monthRadioBtn = null;
+
 	private ProgressBar list_pb;
 
 	private ListView mListView;
-	
+
 	protected static final String TAG = "GIP12345AnswerStatisticsFragment";
+
 	private static final int ALLCOUNT_LOAD_SUCESS = 0; // 答复率总数统计
 	private static final int LETTERSTATISTICS_LOAD_SUCESS = 1; // 各部门答复率统计
 	private static final int DATA_LOAD_ERROR = 2;
@@ -80,9 +90,9 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 			R.id.gip_12345_answerstati_radioButton_complaint,
 			R.id.gip_12345_answerstati_radioButton_leaderBox };
 
-	private String[] yearAlone = { "2013", "2012", "2011", "2010" };
-	private String[] spinnerMonth = { "1", "2", "3", "4", "5", "6", "7", "8",
-			"9", "10", "11", "12" };
+	private String[] yearAlone = { "请选择年", "2013", "2012", "2011", "2010" };
+	private String[] spinnerMonth = { "请选择月", "1", "2", "3", "4", "5", "6",
+			"7", "8", "9", "10", "11", "12" };
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -152,6 +162,20 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 		leaderbox_txtView = (TextView) view
 				.findViewById(R.id.gip_12345_answerstati_textview_leaderbox);
 
+		radioGroup = (RadioGroup) view
+				.findViewById(R.id.gip_12345_answerstati_radiogroup);
+		radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+			}
+		});
+
+		// 年份单选按钮
+		yearRadioBtn = (RadioButton) view
+				.findViewById(R.id.gip_12345_answerstati_radiobutton_year);
+		// 年份下拉框
 		yearAlone_Spinnner = (Spinner) view
 				.findViewById(R.id.gip_12345_answerstati_spinner_yearalone);
 
@@ -161,8 +185,13 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 		yearAlone_Spinner_adapter
 				.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);
 		yearAlone_Spinnner.setAdapter(yearAlone_Spinner_adapter);
+
 		yearAlone_Spinnner.setVisibility(View.VISIBLE);
 
+		// 月份单选按钮
+		monthRadioBtn = (RadioButton) view
+				.findViewById(R.id.gip_12345_answerstati_radiobutton_month);
+		// 月份下拉框
 		year_Spinnner = (Spinner) view
 				.findViewById(R.id.gip_12345_answerstati_spinner_yeara);
 
@@ -171,19 +200,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 		year_Spinner_adapter
 				.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);
 		year_Spinnner.setAdapter(year_Spinner_adapter);
-		year_Spinnner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-			@Override
-			public void onItemSelected(AdapterView<?> adapterView, View view,
-					int position, long arg3) {
-				year = Integer.valueOf(yearAlone[position]);
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-
-			}
-		});
 		year_Spinnner.setVisibility(View.VISIBLE);
 
 		month_Spinnner = (Spinner) view
@@ -194,21 +211,10 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 		month_Spinner_adapter
 				.setDropDownViewResource(R.layout.my_spinner_small_dropdown_item);
 		month_Spinnner.setAdapter(month_Spinner_adapter);
-		month_Spinnner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-			@Override
-			public void onItemSelected(AdapterView<?> adapterView, View view,
-					int position, long arg3) {
-				month = Integer.valueOf(spinnerMonth[position]);
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-
-			}
-		});
 		month_Spinnner.setVisibility(View.VISIBLE);
 
+		// 统计按钮
 		startStatic_imgBtn = (ImageButton) view
 				.findViewById(R.id.gip_12345_answerstati_imagebutton_startstati);
 		startStatic_imgBtn.setOnClickListener(new OnClickListener() {
@@ -217,7 +223,92 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 			public void onClick(View v) {
 				list_pb.setVisibility(View.VISIBLE);
 
-				loadLettersReplyCountData(letter_type, year, month);
+				// 选中年份单选按钮
+				if (yearRadioBtn.isChecked()) {
+
+					yearAlone_Spinnner
+							.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+								@Override
+								public void onItemSelected(
+										AdapterView<?> adapterView, View view,
+										int position, long arg3) {
+									if (yearAlone[position].equals("请选择年")) {
+										year = 2012;
+										month = -1;
+									} else {
+										year = Integer
+												.valueOf(yearAlone[position]);
+										month = -1;
+									}
+
+								}
+
+								@Override
+								public void onNothingSelected(
+										AdapterView<?> arg0) {
+
+								}
+							});
+					loadLettersReplyCountData(letter_type, year, month);
+				}
+				// 选中月份单选按钮
+				else if (monthRadioBtn.isChecked()) {
+
+					year_Spinnner
+							.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+								@Override
+								public void onItemSelected(
+										AdapterView<?> adapterView, View view,
+										int position, long arg3) {
+									if (yearAlone[position].equals("请选择年")) {
+										year = 2012;
+									} else {
+										year = Integer
+												.valueOf(yearAlone[position]);
+									}
+								}
+
+								@Override
+								public void onNothingSelected(
+										AdapterView<?> arg0) {
+
+								}
+							});
+
+					month_Spinnner
+							.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+								@Override
+								public void onItemSelected(
+										AdapterView<?> adapterView, View view,
+										int position, long arg3) {
+									if (spinnerMonth[position].equals("")) {
+										month = 1;
+									} else {
+										month = Integer
+												.valueOf(spinnerMonth[position]);
+									}
+
+								}
+
+								@Override
+								public void onNothingSelected(
+										AdapterView<?> arg0) {
+
+								}
+							});
+
+					loadLettersReplyCountData(letter_type, year, month);
+				}
+				// 没有选择统计方式
+				else {
+					Toast.makeText(context, "请选择一种统计方式！", Toast.LENGTH_LONG)
+							.show();
+					list_pb.setVisibility(View.GONE);
+				}
+
 			}
 		});
 
@@ -282,6 +373,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 			tv.setText(items[position]);
 			tv.setGravity(Gravity.LEFT);
 			tv.setTextColor(Color.BLACK);
+			tv.setTextSize(8);
 
 			return convertView;
 		}
@@ -354,9 +446,14 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 						handler.sendEmptyMessage(DATA_LOAD_ERROR);
 
 						Looper.prepare();
-						Toast.makeText(context,
-								"没有" + year + "年" + month + "月的答复率统计数据",
-								Toast.LENGTH_SHORT).show();
+						if (month == -1) {
+							Toast.makeText(context, "没有" + year + "年的答复率统计数据",
+									Toast.LENGTH_SHORT).show();
+						} else {
+							Toast.makeText(context,
+									"没有" + year + "年" + month + "月的答复率统计数据",
+									Toast.LENGTH_SHORT).show();
+						}
 						Looper.loop();
 
 					}
