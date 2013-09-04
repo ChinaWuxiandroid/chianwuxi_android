@@ -3,6 +3,7 @@ package com.wuxi.app.activity.homepage.goversaloon;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Handler;
@@ -21,8 +22,10 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
+import com.wuxi.app.activity.commactivity.ImageViewScaleActivity;
 import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.GoverSaoonItemService;
 import com.wuxi.app.engine.GoverSaoonWorkFlowImageService;
@@ -135,7 +138,7 @@ public class GoverSaloonDetailQZActivity extends BaseItemContentActivity
 		rg_detail.setOnCheckedChangeListener(this);
 		tv_content = (TextView) view.findViewById(R.id.tv_content);
 		iv_lc = (ImageView) view.findViewById(R.id.iv_lc);
-
+		iv_lc.setOnClickListener(this);
 		goverSaoonItem = (GoverSaoonItem) getIntent().getExtras().get(
 			"goverSaoonItem");
 
@@ -266,6 +269,16 @@ public class GoverSaloonDetailQZActivity extends BaseItemContentActivity
 			break;
 		case R.id.btn_ask_reset:// 在线提交重置
 			et_content.setText("");
+			break;
+		case R.id.iv_lc:
+			if (this.bitmap != null) {
+				Intent intent = new Intent(this, ImageViewScaleActivity.class);
+				intent.putExtra(ImageViewScaleActivity.BITMAP_KEY, bitmap);
+				
+				MainTabActivity.instance.addView(intent);
+
+			}
+			break;
 
 		}
 

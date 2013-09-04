@@ -5,6 +5,9 @@
 # view AndroidManifest.xml #generated:50
 -keep class android.test.InstrumentationTestRunner { <init>(...); }
 
+# view res/layout/image_scal_layout.xml #generated:10
+-keep class com.polites.android.GestureImageView { <init>(...); }
+
 # view AndroidManifest.xml #generated:59
 -keep class com.wuxi.app.MainTabActivity { <init>(...); }
 
@@ -13,6 +16,9 @@
 
 # view AndroidManifest.xml #generated:73
 -keep class com.wuxi.app.activity.MainIndexActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:129
+-keep class com.wuxi.app.activity.commactivity.ImageViewScaleActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:94
 -keep class com.wuxi.app.activity.homepage.FourTopicActivity { <init>(...); }

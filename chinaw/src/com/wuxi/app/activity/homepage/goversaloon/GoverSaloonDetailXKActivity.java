@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Handler;
@@ -28,8 +29,10 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
+import com.wuxi.app.activity.commactivity.ImageViewScaleActivity;
 import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.GoverApplyOnlieService;
 import com.wuxi.app.engine.GoverSaoonItemService;
@@ -175,7 +178,7 @@ public class GoverSaloonDetailXKActivity extends BaseItemContentActivity
 		rg_detial = (RadioGroup) view.findViewById(R.id.rg_detial);
 		tv_content = (TextView) view.findViewById(R.id.tv_content);
 		iv_lc = (ImageView) view.findViewById(R.id.iv_lc);
-
+		iv_lc.setOnClickListener(this);
 		rg_detial.setOnCheckedChangeListener(this);
 		goverSaoonItem = (GoverSaoonItem) getIntent().getExtras().get(
 			"goverSaoonItem");
@@ -367,6 +370,15 @@ public class GoverSaloonDetailXKActivity extends BaseItemContentActivity
 			break;
 		case R.id.apply_btn_reset:
 			applyonleReSet();
+			break;
+		case R.id.iv_lc:
+			if (this.bitmap != null) {
+				Intent intent = new Intent(this, ImageViewScaleActivity.class);
+				intent.putExtra(ImageViewScaleActivity.BITMAP_KEY, bitmap);
+				
+				MainTabActivity.instance.addView(intent);
+
+			}
 			break;
 		}
 

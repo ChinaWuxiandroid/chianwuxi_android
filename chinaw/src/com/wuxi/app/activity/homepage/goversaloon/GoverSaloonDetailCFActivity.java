@@ -3,6 +3,7 @@ package com.wuxi.app.activity.homepage.goversaloon;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Handler;
@@ -21,8 +22,10 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
+import com.wuxi.app.activity.commactivity.ImageViewScaleActivity;
 import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.GoverSaoonItemService;
 import com.wuxi.app.engine.GoverSaoonWorkFlowImageService;
@@ -101,9 +104,8 @@ public class GoverSaloonDetailCFActivity extends BaseItemContentActivity
 				break;
 			case COMMIT_SUCCESS:
 				pb_detail.setVisibility(ProgressBar.GONE);
-				Toast.makeText(
-					GoverSaloonDetailCFActivity.this, "提交成功",
-					Toast.LENGTH_SHORT).show();
+				Toast.makeText(GoverSaloonDetailCFActivity.this, "提交成功",
+						Toast.LENGTH_SHORT).show();
 				break;
 			case COMMIT_ERROR:
 
@@ -111,9 +113,8 @@ public class GoverSaloonDetailCFActivity extends BaseItemContentActivity
 
 			case LOAD_ITEM_DETIAL_FAIL:
 				String tip = msg.obj.toString();
-				Toast.makeText(
-					GoverSaloonDetailCFActivity.this, tip, Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(GoverSaloonDetailCFActivity.this, tip,
+						Toast.LENGTH_SHORT).show();
 				break;
 			}
 
@@ -138,9 +139,10 @@ public class GoverSaloonDetailCFActivity extends BaseItemContentActivity
 		tv_content = (TextView) view.findViewById(R.id.tv_content);
 		rb_detail.setOnCheckedChangeListener(this);
 		goverSaoonItem = (GoverSaoonItem) getIntent().getExtras().get(
-			"goverSaoonItem");
+				"goverSaoonItem");
 		btn_zxzx = (Button) view.findViewById(R.id.btn_zxzx);
 		btn_zxzx.setOnClickListener(this);
+		iv_lc.setOnClickListener(this);
 		ll_zxnr = (LinearLayout) view.findViewById(R.id.ll_zxnr);
 		loadItemDetail();
 
@@ -181,9 +183,11 @@ public class GoverSaloonDetailCFActivity extends BaseItemContentActivity
 
 				Message msg = handler.obtainMessage();
 				GoverSaoonItemService goverSaoonItemService = new GoverSaoonItemService(
-					GoverSaloonDetailCFActivity.this);
+						GoverSaloonDetailCFActivity.this);
 				try {
-					goverSaoonItemDetail = goverSaoonItemService.getGoverSaoonItemCFDetailByid(goverSaoonItem.getId());
+					goverSaoonItemDetail = goverSaoonItemService
+							.getGoverSaoonItemCFDetailByid(goverSaoonItem
+									.getId());
 
 					if (goverSaoonItemDetail != null) {
 						msg.what = LOAD_ITEM_DETIAL_SUCCESS;
@@ -229,19 +233,19 @@ public class GoverSaloonDetailCFActivity extends BaseItemContentActivity
 			if (tl_tb_detail.getVisibility() == TableLayout.VISIBLE) {
 				tl_tb_detail.setVisibility(TableLayout.GONE);
 				tv_ssmc_name.setCompoundDrawablesWithIntrinsicBounds(
-					null,
-					null,
-					getResources().getDrawable(
-						R.drawable.gover_item_detail_expa_down), null);
+						null,
+						null,
+						getResources().getDrawable(
+								R.drawable.gover_item_detail_expa_down), null);
 				// drawableRight
 			} else if (tl_tb_detail.getVisibility() == TableLayout.GONE) {
 				tl_tb_detail.setVisibility(TableLayout.VISIBLE);
 
 				tv_ssmc_name.setCompoundDrawablesWithIntrinsicBounds(
-					null,
-					null,
-					getResources().getDrawable(
-						R.drawable.gover_item_detail_expa_up), null);
+						null,
+						null,
+						getResources().getDrawable(
+								R.drawable.gover_item_detail_expa_up), null);
 			}
 
 			break;
@@ -261,9 +265,8 @@ public class GoverSaloonDetailCFActivity extends BaseItemContentActivity
 		case R.id.btn_ask_submit:// 在线咨询提交
 
 			if (et_content.getText().toString().equals("")) {
-				Toast.makeText(
-					GoverSaloonDetailCFActivity.this, "请输入您要提交的内容",
-					Toast.LENGTH_SHORT).show();
+				Toast.makeText(GoverSaloonDetailCFActivity.this, "请输入您要提交的内容",
+						Toast.LENGTH_SHORT).show();
 				return;
 			}
 			commitAsk();
@@ -271,6 +274,15 @@ public class GoverSaloonDetailCFActivity extends BaseItemContentActivity
 			break;
 		case R.id.btn_ask_reset:// 在线提交重置
 			et_content.setText("");
+		case R.id.iv_lc:// 流程
+			if (this.bitmap != null) {
+				Intent intent = new Intent(this, ImageViewScaleActivity.class);
+				intent.putExtra(ImageViewScaleActivity.BITMAP_KEY, bitmap);
+				
+				MainTabActivity.instance.addView(intent);
+
+			}
+			break;
 
 		}
 
@@ -324,10 +336,12 @@ public class GoverSaloonDetailCFActivity extends BaseItemContentActivity
 
 				StringBuffer sb = new StringBuffer();
 
-				for (GoverSaoonCFCL goverSaoonCFCL : goverSaoonItemDetail.getGoverSaoonCFCLs()) {
+				for (GoverSaoonCFCL goverSaoonCFCL : goverSaoonItemDetail
+						.getGoverSaoonCFCLs()) {
 					sb.append(
-						goverSaoonCFCL.getStatue() + " :"
-								+ goverSaoonCFCL.getResult()).append("\r\n");
+							goverSaoonCFCL.getStatue() + " :"
+									+ goverSaoonCFCL.getResult())
+							.append("\r\n");
 				}
 
 				tv_content.setText(sb.toString());
@@ -360,9 +374,10 @@ public class GoverSaloonDetailCFActivity extends BaseItemContentActivity
 			public void run() {
 				Message msg = handler.obtainMessage();
 				GoverSaoonWorkFlowImageService goverSaoonWorkFlowImageService = new GoverSaoonWorkFlowImageService(
-					GoverSaloonDetailCFActivity.this);
+						GoverSaloonDetailCFActivity.this);
 				try {
-					bitmap = goverSaoonWorkFlowImageService.getBitMap(goverSaoonItemDetail.getLcfileid());
+					bitmap = goverSaoonWorkFlowImageService
+							.getBitMap(goverSaoonItemDetail.getLcfileid());
 					if (bitmap != null) {
 						msg.what = LC_LOADSCUCESS;
 
@@ -386,9 +401,8 @@ public class GoverSaloonDetailCFActivity extends BaseItemContentActivity
 
 	private void commitAsk() {
 		if (goverSaoonItemDetail == null) {
-			Toast.makeText(
-				GoverSaloonDetailCFActivity.this, "没有咨询信息，提交失败",
-				Toast.LENGTH_SHORT).show();
+			Toast.makeText(GoverSaloonDetailCFActivity.this, "没有咨询信息，提交失败",
+					Toast.LENGTH_SHORT).show();
 			return;
 		}
 
@@ -401,13 +415,14 @@ public class GoverSaloonDetailCFActivity extends BaseItemContentActivity
 
 				Message msg = handler.obtainMessage();
 				GoversaoonOnlineASKDetailService goversaoonOnlineASKDetailService = new GoversaoonOnlineASKDetailService(
-					GoverSaloonDetailCFActivity.this);
+						GoverSaloonDetailCFActivity.this);
 				try {
 					GoversaoonOnlineASKDetail goversaoonOnlineDetail = goversaoonOnlineASKDetailService.commitGoversaoonOnlineASKDetail(
-						goverSaoonItemDetail.getId(),
-						"XK",
-						et_content.getText().toString(),
-						SystemUtil.getAccessToken(GoverSaloonDetailCFActivity.this));
+							goverSaoonItemDetail.getId(),
+							"XK",
+							et_content.getText().toString(),
+							SystemUtil
+									.getAccessToken(GoverSaloonDetailCFActivity.this));
 					if (goversaoonOnlineDetail != null) {
 						msg.what = COMMIT_SUCCESS;
 					} else {

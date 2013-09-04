@@ -8,9 +8,6 @@ import java.util.UUID;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityGroup;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -56,7 +53,7 @@ public class MainTabActivity extends ActivityGroup implements
 	public Stack<StackElement> stack;
 
 	public static MainTabActivity instance;
-
+	private LinearLayout main_tab;
 	private InitService initService;
 
 	private FrameLayout llMain;
@@ -65,7 +62,7 @@ public class MainTabActivity extends ActivityGroup implements
 			main_tab_mine, main_tab_more;
 
 	public boolean fistLoadAPP = true;
-
+	private long lastExitTime = 0;
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 
@@ -80,6 +77,19 @@ public class MainTabActivity extends ActivityGroup implements
 		};
 	};
 
+	/**
+	 * 
+	 * wanglu 泰得利通 隐藏tab
+	 */
+	public void hideOrShowTab() {
+		if (main_tab.getVisibility() == LinearLayout.GONE) {
+			main_tab.setVisibility(LinearLayout.VISIBLE);
+		} else {
+			main_tab.setVisibility(LinearLayout.GONE);
+		}
+
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -89,6 +99,7 @@ public class MainTabActivity extends ActivityGroup implements
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		setContentView(R.layout.main_tab_layout);
+		main_tab = (LinearLayout) findViewById(R.id.main_tab);
 		llMain = (FrameLayout) findViewById(R.id.main_content);
 		radioGroup = (RadioGroup) findViewById(R.id.main_tab_radiogroup);
 		radioGroup.setOnCheckedChangeListener(this);
@@ -116,21 +127,20 @@ public class MainTabActivity extends ActivityGroup implements
 
 		String str = UUID.randomUUID().toString();
 
-		View view = getLocalActivityManager().startActivity(
-			str, intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
-				.getDecorView();
+		View view = getLocalActivityManager().startActivity(str,
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)).getDecorView();
 		view.startAnimation(animation);
 		llMain.addView(view, new LinearLayout.LayoutParams(
-			LinearLayout.LayoutParams.MATCH_PARENT,
-			LinearLayout.LayoutParams.MATCH_PARENT));
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.MATCH_PARENT));
 		llMain.requestFocus();
 
 		StackElement component = new StackElement(str, view);
 		stack.add(component);
 
 		if (llMain.getChildCount() > 1) {
-			handler.sendEmptyMessageDelayed(
-				REMOVE_VIEW, animation.getDuration() + 1000L);// 移除view
+			handler.sendEmptyMessageDelayed(REMOVE_VIEW,
+					animation.getDuration() + 1000L);// 移除view
 		}
 	}
 
@@ -142,13 +152,12 @@ public class MainTabActivity extends ActivityGroup implements
 	public void addView(Intent intent) {
 		String str = UUID.randomUUID().toString();
 
-		View view = getLocalActivityManager().startActivity(
-			str, intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
-				.getDecorView();
+		View view = getLocalActivityManager().startActivity(str,
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)).getDecorView();
 
 		llMain.addView(view, new LinearLayout.LayoutParams(
-			LinearLayout.LayoutParams.MATCH_PARENT,
-			LinearLayout.LayoutParams.MATCH_PARENT));
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.MATCH_PARENT));
 		llMain.requestFocus();
 
 		StackElement component = new StackElement(str, view);
@@ -180,41 +189,23 @@ public class MainTabActivity extends ActivityGroup implements
 			llMain.requestFocus();
 		} else if (size == 1) {
 			element = stack.peek();
-			showExitDialog();
+
+			exit();
 		}
 
 		return stack.size();
 	}
 
-	private void showExitDialog() {
-		AlertDialog.Builder builder = new Builder(this);
-		builder.setIcon(R.drawable.logo);
-		builder.setTitle("提示");
-		builder.setMessage("您确定要退出吗?");
-		builder.setCancelable(false);
+	private void exit() {
 
-		builder.setPositiveButton(
-			"确定", new android.content.DialogInterface.OnClickListener() {
+		if ((System.currentTimeMillis() - lastExitTime) > 2000) {
+			Toast.makeText(getApplicationContext(), "再按一次退出中国无锡",
+					Toast.LENGTH_SHORT).show();
+			lastExitTime = System.currentTimeMillis();
+		} else {
+			System.exit(0);
 
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-
-					System.exit(0);
-
-				}
-			});
-
-		builder.setNegativeButton(
-			"取消", new android.content.DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-
-				}
-
-			});
-
-		builder.create().show();
+		}
 
 	}
 
@@ -236,8 +227,8 @@ public class MainTabActivity extends ActivityGroup implements
 		if (size > 0) {
 			for (int i = 0; i < size; i++) {
 				StackElement element = stack.pop();
-				getLocalActivityManager().destroyActivity(
-					element.getTag(), true);
+				getLocalActivityManager().destroyActivity(element.getTag(),
+						true);
 			}
 		}
 	}
@@ -281,7 +272,7 @@ public class MainTabActivity extends ActivityGroup implements
 		main_tab_index.setTextColor(Color.parseColor("#EB5212"));
 
 		Intent intent = new Intent(MainTabActivity.this,
-			MainIndexActivity.class);
+				MainIndexActivity.class);
 
 		instance.addView(intent);
 
@@ -331,7 +322,7 @@ public class MainTabActivity extends ActivityGroup implements
 
 			} else {
 				intent = new Intent(MainTabActivity.this,
-					MainMineActivity.class);
+						MainMineActivity.class);
 			}
 
 			break;
