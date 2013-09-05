@@ -28,7 +28,7 @@ public class PublicGoverMsgActivity extends MenuItemMainActivity{
 
 	@Override
 	protected int getTitlePerScreenItemCount() {
-		return 4;
+		return 3;
 	}
 
 	@Override

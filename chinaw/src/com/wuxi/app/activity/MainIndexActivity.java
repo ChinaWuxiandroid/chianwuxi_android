@@ -425,6 +425,9 @@ public class MainIndexActivity extends Activity implements
 				newslist_dataName);
 		listView.setAdapter(listAdapter);
 
+		setListViewHeight(listView);
+		
+
 	}
 
 	/**
@@ -433,7 +436,7 @@ public class MainIndexActivity extends Activity implements
 	 * 
 	 * @param listView
 	 */
-	public int getListViewHeight(ListView listView) {
+	public void setListViewHeight(ListView listView) {
 		IndexNewsListAdapter listAdapter = (IndexNewsListAdapter) listView
 				.getAdapter();
 
@@ -445,9 +448,8 @@ public class MainIndexActivity extends Activity implements
 		}
 		ViewGroup.LayoutParams params = listView.getLayoutParams();
 		params.height = totalHeight
-				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-
-		return params.height;
+				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1))-50;
+		listView.setLayoutParams(params);
 
 	}
 
@@ -596,7 +598,6 @@ public class MainIndexActivity extends Activity implements
 		ListView listView = (ListView) mListViews.get(0);
 		showNewsOrAnncountData(listView, news);
 
-		index_title_news_page.getLayoutParams().height = getListViewHeight(listView);
 	}
 
 	/**

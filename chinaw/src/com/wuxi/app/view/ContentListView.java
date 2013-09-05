@@ -44,6 +44,7 @@ import com.wuxi.exception.NetException;
  * @version $1.0, 2013-9-3 2013-9-3 GMT+08:00 内容列表自定义 view
  * 
  */
+@SuppressLint("HandlerLeak")
 public class ContentListView extends ListView implements OnScrollListener,
 		OnClickListener, android.widget.AdapterView.OnItemClickListener {
 
@@ -295,8 +296,8 @@ public class ContentListView extends ListView implements OnScrollListener,
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		int itemsLastIndex = adapter.getCount() - 1; // 数据集最后一项的索引
-		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
+		//int itemsLastIndex = adapter.getCount() - 1; // 数据集最后一项的索引
+		//int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
 
 	}
 

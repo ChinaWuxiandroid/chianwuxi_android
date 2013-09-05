@@ -22,7 +22,6 @@ import com.wuxi.app.activity.BaseSlideActivity;
 import com.wuxi.app.engine.UserService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
-import com.wuxi.domain.MD5Encoder;
 import com.wuxi.domain.User;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -76,7 +75,8 @@ public class LoginActivity extends BaseSlideActivity implements OnClickListener 
 		login_btn_login = (Button) view.findViewById(R.id.login_btn_login);
 		login_btn_regist = (Button) view.findViewById(R.id.login_btn_regist);
 		login_et_pwd = (EditText) view.findViewById(R.id.login_et_pwd);// 密码
-		login_et_username = (EditText) view.findViewById(R.id.login_et_username);// 用户名
+		login_et_username = (EditText) view
+				.findViewById(R.id.login_et_username);// 用户名
 
 		login_btn_login.setOnClickListener(this);
 		login_btn_regist.setOnClickListener(this);
@@ -89,17 +89,19 @@ public class LoginActivity extends BaseSlideActivity implements OnClickListener 
 		pd.dismiss();
 		CacheUtil.put(Constants.CacheKey.LOGIN_USER, user);// 将登录的用户存入缓存中
 
-		sp = this.getSharedPreferences(
-			Constants.SharepreferenceKey.SHARE_CONFIG, Context.MODE_PRIVATE);
+		sp = this
+				.getSharedPreferences(
+						Constants.SharepreferenceKey.SHARE_CONFIG,
+						Context.MODE_PRIVATE);
 
 		Editor editor = sp.edit();
 
-		editor.putString(
-			Constants.SharepreferenceKey.ACCESSTOKEN, user.getAccessToken());
-		editor.putString(
-			Constants.SharepreferenceKey.REFRESHTOKEN, user.getRefreshToken());
-		editor.putString(
-			Constants.SharepreferenceKey.USERNAME, user.getUserName());
+		editor.putString(Constants.SharepreferenceKey.ACCESSTOKEN,
+				user.getAccessToken());
+		editor.putString(Constants.SharepreferenceKey.REFRESHTOKEN,
+				user.getRefreshToken());
+		editor.putString(Constants.SharepreferenceKey.USERNAME,
+				user.getUserName());
 		editor.commit();// tijiao
 
 		Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
@@ -118,7 +120,7 @@ public class LoginActivity extends BaseSlideActivity implements OnClickListener 
 			break;
 		case R.id.login_btn_regist:// 注册处理
 			Intent intent = new Intent(LoginActivity.this,
-				RegisterActivity.class);
+					RegisterActivity.class);
 			MainTabActivity.instance.addView(intent);
 
 			break;
@@ -143,9 +145,8 @@ public class LoginActivity extends BaseSlideActivity implements OnClickListener 
 					String userName = login_et_username.getText().toString();
 					String password = login_et_pwd.getText().toString();
 					UserService userService = new UserService(
-						LoginActivity.this);
-					user = userService.login(
-						userName, MD5Encoder.getLoginPWDMD5(password, "utf-8"));
+							LoginActivity.this);
+					user = userService.login(userName, password);
 
 					if (user != null) {
 						msg.what = LOGIN_SUCCESS;

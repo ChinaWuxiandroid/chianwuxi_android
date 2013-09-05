@@ -1,13 +1,15 @@
 <GridView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/index_gv_menuitem"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#F4F4F4"
     android:columnWidth="50dip"
     android:gravity="center"
-    android:horizontalSpacing="5dip"
+    android:horizontalSpacing="3dip"
     android:numColumns="3"
-    android:padding="5dip"
     android:stretchMode="columnWidth"
-    android:verticalSpacing="5dip" >
+    android:verticalSpacing="3dip"
+    android:listSelector="@android:color/transparent"
+    >
 
 </GridView>
