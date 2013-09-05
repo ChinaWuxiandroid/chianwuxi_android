@@ -229,7 +229,7 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 	@Override
 	public void redirectFragment(MenuItem showMenuItem, int showMenuPositon,
 			int subMenuPostion) {
-		Bundle bundle = new Bundle();
+		
 		if (showMenuItem.getName().equals("政府信息公开")) {
 			Intent intent = new Intent(MenuItemMainActivity.this,
 				PublicGoverMsgActivity.class);

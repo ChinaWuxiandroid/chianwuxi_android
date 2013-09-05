@@ -1,4 +1,4 @@
-package com.wuxi.domain;
+package com.wuxi.app.util;
 
 import java.security.MessageDigest;
 

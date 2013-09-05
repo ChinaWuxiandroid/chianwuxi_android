@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
+import com.wuxi.app.popwin.SharePopWindow;
 
 /**
  * 
@@ -18,6 +19,7 @@ public abstract class BaseItemContentActivity extends BaseSlideActivity {
 
 	protected ImageView setting_btn, share_btn, download_btn;
 	protected RelativeLayout rl_down,rl_setting,rl_search_share;
+	private SharePopWindow sharePopWindow;
 	@Override
 	protected int getLayoutId() {
 
@@ -34,8 +36,9 @@ public abstract class BaseItemContentActivity extends BaseSlideActivity {
 		share_btn = (ImageView) view.findViewById(R.id.content_share);
 		download_btn = (ImageView) view.findViewById(R.id.content_download);
 
+		rl_search_share.setOnClickListener(ShareClick);
 		setting_btn.setOnClickListener(SettingClick);
-		share_btn.setOnClickListener(ShareClick);
+		
 		download_btn.setOnClickListener(DownloadClick);
 
 	}
@@ -64,11 +67,35 @@ public abstract class BaseItemContentActivity extends BaseSlideActivity {
 
 		@Override
 		public void onClick(View v) {
-			Toast.makeText(
-				BaseItemContentActivity.this, "分享，该功能暂未实现", Toast.LENGTH_SHORT)
-					.show();
+			
+			if(sharePopWindow!=null){
+				sharePopWindow.dissmissPopWindow();
+				sharePopWindow=null;
+			}else{
+				sharePopWindow=new SharePopWindow(BaseItemContentActivity.this);
+				int location[]=new int [2];
+				v.getLocationInWindow(location);
+				sharePopWindow.showPopWindow(v, location[0], location[1]-30);
+				
+			}
+			
+		
 		}
 	};
+	
+	
+	
+
+	@Override
+	protected void onBack() {
+	
+		super.onBack();
+		
+		if(sharePopWindow!=null){
+			sharePopWindow.dissmissPopWindow();
+			sharePopWindow=null;
+		}
+	}
 
 	private OnClickListener DownloadClick = new OnClickListener() {
 

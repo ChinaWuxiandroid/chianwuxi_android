@@ -12,7 +12,6 @@ import java.util.Map;
 
 import android.os.Environment;
 
-import com.wuxi.domain.MD5Encoder;
 import com.wuxi.domain.MenuItem;
 
 /**

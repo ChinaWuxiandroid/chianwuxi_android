@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseSlideActivity;
 import com.wuxi.app.engine.UserService;
-import com.wuxi.domain.MD5Encoder;
+import com.wuxi.app.util.MD5Encoder;
 import com.wuxi.domain.User;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -194,8 +194,7 @@ public class RegisterActivity extends BaseSlideActivity implements
 
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("username", et_username.getText().toString());
-		String enPassword = MD5Encoder.getLoginPWDMD5(et_password.getText()
-				.toString(), "utf-8");
+		String enPassword = et_password.getText().toString();
 		params.put("password", enPassword);
 		params.put("realname", et_truename.getText().toString());
 
