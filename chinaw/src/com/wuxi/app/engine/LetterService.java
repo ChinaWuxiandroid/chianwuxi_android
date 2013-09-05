@@ -87,13 +87,13 @@ public class LetterService extends Service {
 			JSONObject jresult = jsonObject.getJSONObject("result");
 
 			LetterWrapper letterWrapper = new LetterWrapper();
-			
+
 			letterWrapper.setEnd(jresult.getInt("end"));
 			letterWrapper.setStart(jresult.getInt("start"));
 			letterWrapper.setNext(jresult.getBoolean("next"));
 			letterWrapper.setPrevious(jresult.getBoolean("previous"));
 			letterWrapper.setTotalRowsAmount(jresult.getInt("totalRowsAmount"));
-			
+
 			JSONArray jData = jresult.getJSONArray("data");
 			if (jData != null) {
 				letterWrapper.setData(parseData(jData));// 解析数组
@@ -133,9 +133,9 @@ public class LetterService extends Service {
 				letters.setCode(jb.getString("code"));
 				letters.setAppraise(jb.getString("appraise"));
 				letters.setDepname(jb.getString("depname"));
-//				letters.setAnswerdate(TimeFormateUtil.formateTime(
-//						String.valueOf(jb.getLong("answerdate")),
-//						TimeFormateUtil.DATE_PATTERN));
+				// letters.setAnswerdate(TimeFormateUtil.formateTime(
+				// String.valueOf(jb.getLong("answerdate")),
+				// TimeFormateUtil.DATE_PATTERN));
 				letters.setReadcount(jb.getInt("readcount"));
 
 				letterList.add(letters);
@@ -146,7 +146,7 @@ public class LetterService extends Service {
 	}
 
 	/**
-	 * 我要写信
+	 * 提交我要写信
 	 * 
 	 * @throws NetException
 	 * @throws JSONException
@@ -156,21 +156,20 @@ public class LetterService extends Service {
 			JSONException, NODataException {
 
 		if (!checkNet()) {
-			System.out.println("net error");
 			throw new NetException(Constants.ExceptionMessage.NO_NET); // 检查网络
 		}
 
-		String url = Constants.Urls.IWANTMAIL_URL
-				.replace("{access_token}", myLetter.getAccess_token())
-				.replace("{doprojectid}", myLetter.getDoprojectid())
-				.replace("{typeid}", myLetter.getTypeid())
-				.replace("{title}", myLetter.getTitle())
-				.replace("{content}", myLetter.getContent())
-				.replace("{openstate}", String.valueOf(myLetter.getOpenState()))
-				.replace("{sentmailback}",
-						String.valueOf(myLetter.getSentMailBack()))
-				.replace("{msgstatus}", String.valueOf(myLetter.getMsgStatus()));
+		String url = Constants.Urls.IWANTMAIL_URL + "?access_token="
+				+ myLetter.getAccess_token() + "&doprojectid="
+				+ myLetter.getDoprojectid() + "&typeid=" + myLetter.getTypeid()
+				+ "&title=" + myLetter.getTitle() + "&content="
+				+ myLetter.getContent() + "&openstate="
+				+ myLetter.getOpenState() + "&sentmailback="
+				+ myLetter.getSentMailBack() + "&msgstatus="
+				+ myLetter.getMsgStatus();
 
+		System.out.println("--->"+url);
+		
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (resultStr != null) {

@@ -157,19 +157,19 @@
                 android:orientation="horizontal" >
 
                 <RadioButton
-                    android:id="@+id/gip_12345_iwantmail_radiobutton_open"
+                    android:id="@+id/gip_12345_iwantmail_radiobutton_notopen"
                     android:layout_width="wrap_content"
                     android:layout_height="23sp"
-                    android:text="公开"
+                    android:text="不公开"
                     android:textColor="@color/gip_txt_gray"
                     android:textSize="12sp" />
 
                 <RadioButton
-                    android:id="@+id/gip_12345_iwantmail_radiobutton_notOpen"
+                    android:id="@+id/gip_12345_iwantmail_radiobutton_open"
                     android:layout_width="wrap_content"
                     android:layout_height="23sp"
-                    android:layout_marginLeft="18sp"
-                    android:text="不公开"
+                    android:layout_marginLeft="6sp"
+                    android:text="公开"
                     android:textColor="@color/gip_txt_gray"
                     android:textSize="12sp" />
             </RadioGroup>

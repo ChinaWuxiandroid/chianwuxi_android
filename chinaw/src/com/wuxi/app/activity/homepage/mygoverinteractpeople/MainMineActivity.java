@@ -40,7 +40,7 @@ public class MainMineActivity extends BaseSlideActivity implements
 		OnItemClickListener, Serializable {
 
 	/**
-	 * 
+	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
 

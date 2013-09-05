@@ -442,8 +442,8 @@ public final class R {
         public static final int gip_12345_iwantmail_radiobutton_needMsg=0x7f0b00d7;
         public static final int gip_12345_iwantmail_radiobutton_notNeedMail=0x7f0b00d3;
         public static final int gip_12345_iwantmail_radiobutton_notNeedMsg=0x7f0b00d6;
-        public static final int gip_12345_iwantmail_radiobutton_notOpen=0x7f0b00d1;
-        public static final int gip_12345_iwantmail_radiobutton_open=0x7f0b00d0;
+        public static final int gip_12345_iwantmail_radiobutton_notopen=0x7f0b00d0;
+        public static final int gip_12345_iwantmail_radiobutton_open=0x7f0b00d1;
         public static final int gip_12345_iwantmail_radiobutton_suggestAndComplaint=0x7f0b00c9;
         public static final int gip_12345_iwantmail_radiogroup_isNeedMailRaply=0x7f0b00d2;
         public static final int gip_12345_iwantmail_radiogroup_isNeedMsgRaply=0x7f0b00d5;

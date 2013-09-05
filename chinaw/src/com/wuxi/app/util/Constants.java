@@ -286,14 +286,9 @@ public class Constants {
 		public static final String DEPT_URL = BASIC_URL + "/zhengwu/depts.json";
 
 		/**
-		 * 我要写信 {access_token} access_token {doprojectid} 提交信箱的项目编号占位符 {typeid}
-		 * 咨询类型 占位符 {title}标题 {content}内容占位符 {openstate}是否公开
-		 * {sentmailback}是否邮件回复 {msgstatus}是否短信回复
+		 * 我要写信URL
 		 * */
-		public static final String IWANTMAIL_URL = BASIC_URL
-				+ "/letter/submit.json?"
-				+ "access_token={access_token}&doprojectid={doprojectid}&typeid={typeid}&title={title}"
-				+ "&content={content}&openstate={openstate}&sentmailback={sentmailback}&msgstatus={msgstatus}";
+		public static final String IWANTMAIL_URL = BASIC_URL + "/letter/submit.json";
 
 		/**
 		 * 政务大厅，办件分类获取 type 01：个人身份 02：个人办事 03：企业行业 04：企业办事 05：港澳台侨、外国人 06：主题服务
@@ -495,9 +490,8 @@ public class Constants {
 		/**
 		 * 项目外部文件存储路径
 		 */
-		public static final String APP_PATH = Environment.getExternalStorageDirectory()
-				.getPath()
-				+ "/chinawi/";
+		public static final String APP_PATH = Environment
+				.getExternalStorageDirectory().getPath() + "/chinawi/";
 
 		/**
 		 * 项目菜单图标存储路径
