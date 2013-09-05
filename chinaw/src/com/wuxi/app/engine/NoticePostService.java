@@ -34,6 +34,7 @@ public class NoticePostService extends Service {
 
 	/**
 	 * 解析公告型帖子数据集
+	 * 
 	 * @param politicsMainId
 	 * @param type
 	 * @param start
@@ -74,12 +75,19 @@ public class NoticePostService extends Service {
 			noticePostWrapper.setDoAnonymous(jresult.getString("doAnonymous"));
 			noticePostWrapper.setReadCount(jresult.getString("readCount"));
 			noticePostWrapper.setSummary(jresult.getString("summary"));
-			noticePostWrapper.setBegintime(TimeFormateUtil.formateTime(
-					String.valueOf(jresult.getLong("begintime")),
-					TimeFormateUtil.DATE_PATTERN));
-			noticePostWrapper.setEndtime(TimeFormateUtil.formateTime(
-					String.valueOf(jresult.getLong("endtime")),
-					TimeFormateUtil.DATE_PATTERN));
+
+			if (!jresult.isNull("begintime")) {
+				noticePostWrapper.setBegintime(TimeFormateUtil.formateTime(
+						String.valueOf(jresult.getLong("begintime")),
+						TimeFormateUtil.DATE_PATTERN));
+			}
+
+			if (!jresult.isNull("endtime")) {
+				noticePostWrapper.setEndtime(TimeFormateUtil.formateTime(
+						String.valueOf(jresult.getLong("endtime")),
+						TimeFormateUtil.DATE_PATTERN));
+			}
+
 			noticePostWrapper.setDoprojectid(jresult.getString("doprojectid"));
 			noticePostWrapper.setSumup(jresult.getString("sumup"));
 
@@ -150,9 +158,13 @@ public class NoticePostService extends Service {
 				noticePostReply.setContent(jb.getString("content"));
 				noticePostReply.setUsername(jb.getString("username"));
 				noticePostReply.setTitle(jb.getString("title"));
-				noticePostReply.setSendtime(TimeFormateUtil.formateTime(
-						String.valueOf(jb.getLong("sendtime")),
-						TimeFormateUtil.DATE_PATTERN));
+
+				if (!jb.isNull("sendtime")) {
+					noticePostReply.setSendtime(TimeFormateUtil.formateTime(
+							String.valueOf(jb.getLong("sendtime")),
+							TimeFormateUtil.DATE_PATTERN));
+				}
+
 				noticePostReply.setAnswercontent(jb.getString("answercontent"));
 				noticePostReply.setMainid(jb.getString("mainid"));
 				noticePostReply.setAnswerman(jb.getString("answerman"));

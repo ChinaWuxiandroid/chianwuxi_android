@@ -28,6 +28,7 @@ public class HotReviewInfoService extends Service {
 
 	/**
 	 * 解析数据
+	 * 
 	 * @param id
 	 * @return
 	 * @throws NetException
@@ -53,16 +54,20 @@ public class HotReviewInfoService extends Service {
 
 			wrapper.setId(jresult.getString("id"));
 			wrapper.setContent(jresult.getString("content"));
-			wrapper.setEndTime(TimeFormateUtil.formateTime(
-					String.valueOf(jresult.getLong("endTime")),
-					TimeFormateUtil.DATE_PATTERN));
+
+			if (!jresult.isNull("endTime")) {
+				wrapper.setEndTime(TimeFormateUtil.formateTime(
+						String.valueOf(jresult.getLong("endTime")),
+						TimeFormateUtil.DATE_PATTERN));
+			}
+
 			wrapper.setTitle(jresult.getString("title"));
 			wrapper.setDepName(jresult.getString("depName"));
 			wrapper.setCanReply(jresult.getString("canReply"));
 			wrapper.setReplies(jresult.getString("replies"));
 
 			return wrapper;
-		}else {
+		} else {
 			// 没有获取到数据异常
 			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);
 		}

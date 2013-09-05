@@ -34,6 +34,7 @@ public class OpinionPostService extends Service {
 
 	/**
 	 * 解析征求意见类数据
+	 * 
 	 * @param politicsMainId
 	 * @param type
 	 * @param start
@@ -74,12 +75,19 @@ public class OpinionPostService extends Service {
 			opinionPostWrapper.setDoAnonymous(jresult.getString("doAnonymous"));
 			opinionPostWrapper.setReadCount(jresult.getString("readCount"));
 			opinionPostWrapper.setSummary(jresult.getString("summary"));
-			opinionPostWrapper.setBegintime(TimeFormateUtil.formateTime(
-					String.valueOf(jresult.getLong("begintime")),
-					TimeFormateUtil.DATE_PATTERN));
-			opinionPostWrapper.setEndtime(TimeFormateUtil.formateTime(
-					String.valueOf(jresult.getLong("endtime")),
-					TimeFormateUtil.DATE_PATTERN));
+
+			if (!jresult.isNull("begintime")) {
+				opinionPostWrapper.setBegintime(TimeFormateUtil.formateTime(
+						String.valueOf(jresult.getLong("begintime")),
+						TimeFormateUtil.DATE_PATTERN));
+			}
+
+			if (!jresult.isNull("endtime")) {
+				opinionPostWrapper.setEndtime(TimeFormateUtil.formateTime(
+						String.valueOf(jresult.getLong("endtime")),
+						TimeFormateUtil.DATE_PATTERN));
+			}
+
 			opinionPostWrapper.setDoprojectid(jresult.getString("doprojectid"));
 			opinionPostWrapper.setSumup(jresult.getString("sumup"));
 
@@ -152,9 +160,13 @@ public class OpinionPostService extends Service {
 				opinionPostReply.setPoliticsMainId(jb
 						.getString("politicsMainId"));
 				opinionPostReply.setSentIp(jb.getString("sentIp"));
-				opinionPostReply.setSentTime(TimeFormateUtil.formateTime(
-						String.valueOf(jb.getLong("sentTime")),
-						TimeFormateUtil.DATE_PATTERN));
+
+				if (!jb.isNull("sentTime")) {
+					opinionPostReply.setSentTime(TimeFormateUtil.formateTime(
+							String.valueOf(jb.getLong("sentTime")),
+							TimeFormateUtil.DATE_PATTERN));
+				}
+
 				opinionPostReply.setActorInfoId(jb.getString("actorInfoId"));
 
 				opinionPostReplies.add(opinionPostReply);

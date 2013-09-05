@@ -17,6 +17,7 @@ import com.wuxi.domain.MenuItem;
  * @author 杨宸 智佳
  * */
 public class MyGoverInterPeopleContentFragment extends BaseFragment {
+	
 	private MenuItem menuItem;
 
 	private View view;
@@ -39,7 +40,7 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment {
 		// 普通菜单类型
 		case MenuItem.CUSTOM_MENU:
 			GIPContentFragment gIPMenuItemContentFragment = new GIPContentFragment();
-			
+
 			gIPMenuItemContentFragment.setParentItem(menuItem);
 			onTransaction(gIPMenuItemContentFragment);
 			break;
@@ -47,7 +48,7 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment {
 		// 频道菜单类型
 		case MenuItem.CHANNEL_MENU:
 			GIPContentFragment gIPChannelContentFragment = new GIPContentFragment();
-			
+
 			gIPChannelContentFragment.setParentItem(menuItem);
 			onTransaction(gIPChannelContentFragment);
 			break;
@@ -74,13 +75,13 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment {
 			// 公众论坛
 			else if (menuItem.getAppUI().equals("PublicBBS")) {
 				GoverInterPeoplePublicForumFragment goverInterPeoplePublicForumFragment = new GoverInterPeoplePublicForumFragment();
-				
+
 				onTransaction(goverInterPeoplePublicForumFragment);
 			}
 			// 热点话题
 			else if (menuItem.getAppUI().equals("HotTopic")) {
 				GoverInterPeopleHotReviewFragment goverInterPeopleHotReviewFragment = new GoverInterPeopleHotReviewFragment();
-				
+
 				onTransaction(goverInterPeopleHotReviewFragment);
 
 			}
@@ -106,7 +107,7 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment {
 	}
 
 	private void onTransaction(BaseFragment fragment) {
-		fragment.setArguments(this.getArguments());// 
+		fragment.setArguments(this.getArguments());
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 

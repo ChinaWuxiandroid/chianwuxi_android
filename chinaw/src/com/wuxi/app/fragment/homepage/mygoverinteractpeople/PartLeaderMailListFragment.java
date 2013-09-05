@@ -36,8 +36,9 @@ import com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345MayorMailCon
 import com.wuxi.app.engine.PartLeaderMailListService;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.LogUtil;
-import com.wuxi.domain.LetterWrapper;
+import com.wuxi.domain.PartLeaderLetterWrapper;
 import com.wuxi.domain.LetterWrapper.Letter;
+import com.wuxi.domain.PartLeaderLetterWrapper.PartLeaderLetter;
 import com.wuxi.domain.PartLeaderMailWrapper.PartLeaderMail;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -57,8 +58,8 @@ public class PartLeaderMailListFragment extends RadioButtonChangeFragment {
 
 	private ListView mListView;
 	private ProgressBar list_pb;
-	private LetterWrapper letterWrapper;
-	private List<LetterWrapper.Letter> letters;
+	private PartLeaderLetterWrapper leaderLetterWrapper;
+	private List<PartLeaderLetter> leaderLetters;
 
 	private PartLeaderMail leaderMail;
 
@@ -66,7 +67,7 @@ public class PartLeaderMailListFragment extends RadioButtonChangeFragment {
 	private static final int DATA_LOAD_ERROR = 1;
 
 	private int startIndex = 0; // 获取话题的起始坐标
-	private int endIndex = 100; // 获取话题的结束坐标
+	private int endIndex = 20; // 获取话题的结束坐标
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -138,11 +139,11 @@ public class PartLeaderMailListFragment extends RadioButtonChangeFragment {
 				PartLeaderMailListService partLeaderMailListService = new PartLeaderMailListService(
 						context);
 				try {
-					letterWrapper = partLeaderMailListService
-							.getLettersWrapper(startIndex, endIndex,
+					leaderLetterWrapper = partLeaderMailListService
+							.getLeaderLetterWrapper(startIndex, endIndex,
 									getLeaderMail().getDoProjectID());
-					if (null != letterWrapper) {
-						letters = letterWrapper.getData();
+					if (null != leaderLetterWrapper) {
+						leaderLetters = leaderLetterWrapper.getLeaderLetters();
 
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 
@@ -177,7 +178,7 @@ public class PartLeaderMailListFragment extends RadioButtonChangeFragment {
 
 		LettersListViewAdapter adapter = new LettersListViewAdapter(
 				);
-		if (letters == null || letters.size() == 0) {
+		if (leaderLetters == null || leaderLetters.size() == 0) {
 			Toast.makeText(context, "该部门暂无信件", Toast.LENGTH_SHORT).show();
 		} else {
 			mListView.setAdapter(adapter);
@@ -207,12 +208,12 @@ public class PartLeaderMailListFragment extends RadioButtonChangeFragment {
 
 		@Override
 		public int getCount() {
-			return letters.size();
+			return leaderLetters.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			return letters.get(position);
+			return leaderLetters.get(position);
 		}
 
 		@Override
@@ -255,14 +256,15 @@ public class PartLeaderMailListFragment extends RadioButtonChangeFragment {
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			viewHolder.title_text.setText(letters.get(position).getTitle());
-			viewHolder.code_text.setText(letters.get(position).getCode());
-			viewHolder.type_text.setText(letters.get(position).getType());
-			viewHolder.answerDate_text.setText(letters.get(position)
+			
+			viewHolder.title_text.setText(leaderLetters.get(position).getTitle());
+			viewHolder.code_text.setText(leaderLetters.get(position).getCode());
+			viewHolder.type_text.setText(leaderLetters.get(position).getType());
+			viewHolder.answerDate_text.setText(leaderLetters.get(position)
 					.getAnswerdate());
-			viewHolder.readCount_text.setText(String.valueOf(letters.get(
+			viewHolder.readCount_text.setText(String.valueOf(leaderLetters.get(
 					position).getReadcount()));
-			viewHolder.appraise_text.setText(letters.get(position)
+			viewHolder.appraise_text.setText(leaderLetters.get(position)
 					.getAppraise());
 
 			return convertView;

@@ -38,6 +38,7 @@ public class MemoirService extends Service {
 
 	/**
 	 * 解析访谈实录结果集
+	 * 
 	 * @param interViewId
 	 * @param start
 	 * @param end
@@ -57,7 +58,7 @@ public class MemoirService extends Service {
 				interViewId) + "?start=" + start + "&end=" + end;
 
 		System.out.println(url);
-		
+
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (resultStr != null) {
@@ -109,9 +110,13 @@ public class MemoirService extends Service {
 				memoir.setId(jb.getString("id"));
 				memoir.setContent(jb.getString("content"));
 				memoir.setInterViewId(jb.getString("interViewId"));
-				memoir.setSubmitTime(TimeFormateUtil.formateTime(
-						String.valueOf(jb.getLong("submitTime")),
-						TimeFormateUtil.DATE_TIME_PATTERN));
+
+				if (!jb.isNull("submitTime")) {
+					memoir.setSubmitTime(TimeFormateUtil.formateTime(
+							String.valueOf(jb.getLong("submitTime")),
+							TimeFormateUtil.DATE_TIME_PATTERN));
+				}
+
 				memoir.setAnswerUser(jb.getString("answerUser"));
 				memoir.setAnswerType(jb.getInt("answerType"));
 

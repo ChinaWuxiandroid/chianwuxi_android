@@ -32,7 +32,7 @@ public class PartLeaderMailWrapper {
 	}
 
 	/**
-	 * 各部门领导信箱单挑数据实体类
+	 * 各部门领导信箱单条数据实体类
 	 * 
 	 * @author 智佳 罗森
 	 * 

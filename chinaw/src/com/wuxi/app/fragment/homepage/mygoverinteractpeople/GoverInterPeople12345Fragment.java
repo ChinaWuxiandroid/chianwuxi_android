@@ -16,8 +16,6 @@ import com.wuxi.app.util.GIPRadioButtonStyleChange;
 
 public class GoverInterPeople12345Fragment extends RadioButtonChangeFragment {
 
-
-
 	private static final String TAG = "GoverInterPeople12345Fragment";
 
 	private final int[] radioButtonIds = {
@@ -94,10 +92,10 @@ public class GoverInterPeople12345Fragment extends RadioButtonChangeFragment {
 
 	@Override
 	protected void init() {
-		
-			BaseFragment mayorBoxFragment = new GIP12345MayorMaiBoxFragment();
-			onTransaction(mayorBoxFragment);
-		
+
+		BaseFragment mayorBoxFragment = new GIP12345MayorMaiBoxFragment();
+		onTransaction(mayorBoxFragment);
+
 	}
 
 }

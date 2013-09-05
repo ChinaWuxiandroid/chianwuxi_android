@@ -71,18 +71,27 @@ public class QuestionnairePostService extends Service {
 
 			QuestionnairePostWrapper questionnairePostWrapper = new QuestionnairePostWrapper();
 
-			questionnairePostWrapper.setCreateDate(TimeFormateUtil.formateTime(
-					String.valueOf(jresult.getLong("createDate")),
-					TimeFormateUtil.DATE_PATTERN));
+			if (!jresult.isNull("createDate")) {
+				questionnairePostWrapper.setCreateDate(TimeFormateUtil
+						.formateTime(
+								String.valueOf(jresult.getLong("createDate")),
+								TimeFormateUtil.DATE_PATTERN));
+			}
+
 			questionnairePostWrapper.setTitle(jresult.getString("title"));
 			questionnairePostWrapper.setDoProjectId(jresult
 					.getString("doProjectId"));
 			questionnairePostWrapper.setDepId(jresult.getString("depId"));
 			questionnairePostWrapper.setReadCount(jresult
 					.getString("readCount"));
-			questionnairePostWrapper.setEndDate(TimeFormateUtil.formateTime(
-					String.valueOf(jresult.getLong("endDate")),
-					TimeFormateUtil.DATE_PATTERN));
+
+			if (!jresult.isNull("endDate")) {
+				questionnairePostWrapper.setEndDate(TimeFormateUtil
+						.formateTime(
+								String.valueOf(jresult.getLong("endDate")),
+								TimeFormateUtil.DATE_PATTERN));
+			}
+
 			questionnairePostWrapper.setIsAnonymous(jresult
 					.getString("isAnonymous"));
 			questionnairePostWrapper.setOrderId(jresult.getString("orderId"));
@@ -93,9 +102,14 @@ public class QuestionnairePostService extends Service {
 			questionnairePostWrapper.setAuthor(jresult.getString("author"));
 			questionnairePostWrapper.setIsEnabled(jresult
 					.getString("isEnabled"));
-			questionnairePostWrapper.setUpdateDate(TimeFormateUtil.formateTime(
-					String.valueOf(jresult.getLong("updateDate")),
-					TimeFormateUtil.DATE_PATTERN));
+
+			if (!jresult.isNull("updateDate")) {
+				questionnairePostWrapper.setUpdateDate(TimeFormateUtil
+						.formateTime(
+								String.valueOf(jresult.getLong("updateDate")),
+								TimeFormateUtil.DATE_PATTERN));
+			}
+
 			questionnairePostWrapper.setIsViewSurveryResult(jresult
 					.getString("isViewSurveryResult"));
 			questionnairePostWrapper.setIsAuditingInputText(jresult
@@ -206,8 +220,7 @@ public class QuestionnairePostService extends Service {
 						.getString("serialNumber"));
 				questionnaireQuestion.setOptionValue(jb
 						.getString("optionValue"));
-				questionnaireQuestion.setQuestionId(jb
-						.getString("questionId"));
+				questionnaireQuestion.setQuestionId(jb.getString("questionId"));
 				questionnaireQuestion.setOptionId(jb.getString("optionId"));
 				questionnaireQuestion.setClickCount(jb.getString("clickCount"));
 				questionnaireQuestion.setLinkUrl(jb.getString("linkUrl"));
@@ -280,9 +293,14 @@ public class QuestionnairePostService extends Service {
 						.getString("resultId"));
 				questionnaireAnswerDataWrapper.setSurveryId(jb
 						.getString("surveryId"));
-				questionnaireAnswerDataWrapper.setSubmitDate(TimeFormateUtil
-						.formateTime(String.valueOf(jb.getLong("submitDate")),
-								TimeFormateUtil.DATE_PATTERN));
+
+				if (!jb.isNull("submitDate")) {
+					questionnaireAnswerDataWrapper
+							.setSubmitDate(TimeFormateUtil.formateTime(
+									String.valueOf(jb.getLong("submitDate")),
+									TimeFormateUtil.DATE_PATTERN));
+				}
+
 				questionnaireAnswerDataWrapper.setUserHostAddress(jb
 						.getString("userHostAddress"));
 
@@ -331,9 +349,14 @@ public class QuestionnairePostService extends Service {
 				questionnaireAnswerDat.setOrderId(jb.getString("orderId"));
 				questionnaireAnswerDat
 						.setOptionText(jb.getString("optionText"));
-				questionnaireAnswerDat.setSubmitDate(TimeFormateUtil
-						.formateTime(String.valueOf(jb.getLong("submitDate")),
-								TimeFormateUtil.DATE_PATTERN));
+
+				if (!jb.isNull("submitDate")) {
+					questionnaireAnswerDat.setSubmitDate(TimeFormateUtil
+							.formateTime(
+									String.valueOf(jb.getLong("submitDate")),
+									TimeFormateUtil.DATE_PATTERN));
+				}
+
 				questionnaireAnswerDat.setQuestionsId(jb
 						.getString("questionsId"));
 

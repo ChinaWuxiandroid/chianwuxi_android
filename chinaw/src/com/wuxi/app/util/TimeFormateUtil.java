@@ -15,6 +15,8 @@ import android.annotation.SuppressLint;
  */
 public class TimeFormateUtil {
 
+	
+	
 	public static final String DATE_PATTERN = "yyyy-MM-dd";
 	public static final String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 	public static final int START_YEAR = 2000;
@@ -30,12 +32,15 @@ public class TimeFormateUtil {
 
 	@SuppressLint("SimpleDateFormat")
 	public static String formateTime(String time, String pattern) {
-		if (time != null) {
+		if (time != null) {		
 			Date date = new Date(Long.parseLong(time));
+			System.out.println("-->"+time);
+			
 			SimpleDateFormat formater = new SimpleDateFormat(pattern);
 			return formater.format(date);
-		} else
-			return null;
+		} else{
+			return "";
+		}
 	}
 
 	/**

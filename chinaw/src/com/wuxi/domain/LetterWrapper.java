@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class LetterWrapper extends CommonDataWrapper{
+	
 	private List<Letter> data;
 
 	public List<Letter> getData() {

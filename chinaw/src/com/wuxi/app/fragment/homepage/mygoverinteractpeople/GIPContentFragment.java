@@ -53,7 +53,7 @@ public class GIPContentFragment extends GoverMenuItemTitleFragment {
 //				else if(menu.getAppUI().endsWith("区市长信箱")){
 //					menu.setContentFragment(GIP12345CMayorMailBoxFragment.class);
 //				}
-				else if(menu.getAppUI().endsWith("热门新建选登")){
+				else if(menu.getAppUI().endsWith("热门信件选登")){
 					menu.setContentFragment(GIP12345HotMail.class);
 				}
 				else if(menu.getAppUI().endsWith("答复率统计")){
@@ -91,7 +91,5 @@ public class GIPContentFragment extends GoverMenuItemTitleFragment {
 	@Override
 	public void redirectFragment(MenuItem showMenuItem, int showMenuPositon,
 			int subMenuPostion) {
-		
-		
 	}
 }

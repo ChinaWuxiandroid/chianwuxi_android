@@ -17,54 +17,48 @@ import com.wuxi.exception.NetException;
 
 /**
  * 立法征求或者民意征集 业务类
+ * 
  * @author 杨宸 智佳
  * */
 
-
-public class PoliticsService extends Service{
+public class PoliticsService extends Service {
 
 	public PoliticsService(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
-
-//	/**
-//	 * 分页获取立法征求或者民意征集的列表
-//	 * @throws NODataException 
-//	 * @throws JSONException 
-//	 * @throws NetException 
-//	 * */
-//	public PoliticsWrapper getPoliticsWrapper(String url,int type,int startIndex,int endIndex,int passed,int )
-//			throws NetException, JSONException, NODataException{
-//		url=url+"?type="+type+"&start="+startIndex+"&end="+endIndex+"&passed="+passed;
-//		return getPoliticsWrapper(url);
-//	}
 
 	/**
 	 * 获取当前用户参与的立法征求或民意征集
 	 * */
-	public PoliticsWrapper getMyPoliticsWrapper(String url,String accessToken,
-			int type,int startIndex,int endIndex) 
-					throws NetException, JSONException, NODataException{
-		url=url+"?access_token="+accessToken+"&type="+type+"&start="+startIndex+"&end="+endIndex;
+	public PoliticsWrapper getMyPoliticsWrapper(String url, String accessToken,
+			int type, int startIndex, int endIndex) throws NetException,
+			JSONException, NODataException {
+		url = url + "?access_token=" + accessToken + "&type=" + type
+				+ "&start=" + startIndex + "&end=" + endIndex;
 		return getPoliticsWrapper(url);
 	}
 
 	/**
 	 * 
-	 * 杨宸 智佳 
-	 * @param start 开始索引
-	 * @param end    结束索引
-	 * @param previous		是否可以上一页
-	 * @param totalRowsAmount; 	数据列表中元素个数
-	 * @param next;			是否可以下一页
+	 * 杨宸 智佳
+	 * 
+	 * @param start
+	 *            开始索引
+	 * @param end
+	 *            结束索引
+	 * @param previous
+	 *            是否可以上一页
+	 * @param totalRowsAmount
+	 *            ; 数据列表中元素个数
+	 * @param next
+	 *            ; 是否可以下一页
 	 * @return PoliticsWrapper Politics包装对象
 	 * @throws NetException
 	 * @throws JSONException
 	 * @throws NODataException
 	 */
-	public PoliticsWrapper getPoliticsWrapper(String url)
-			throws NetException, JSONException, NODataException {
+	public PoliticsWrapper getPoliticsWrapper(String url) throws NetException,
+			JSONException, NODataException {
 
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
@@ -81,7 +75,8 @@ public class PoliticsService extends Service{
 			politicsWrapper.setStart(jresult.getInt("start"));
 			politicsWrapper.setNext(jresult.getBoolean("next"));
 			politicsWrapper.setPrevious(jresult.getBoolean("previous"));
-			politicsWrapper.setTotalRowsAmount(jresult.getInt("totalRowsAmount"));
+			politicsWrapper.setTotalRowsAmount(jresult
+					.getInt("totalRowsAmount"));
 			JSONArray jData = jresult.getJSONArray("data");
 			if (jData != null) {
 				politicsWrapper.setData(parseData(jData));// 解析数组
@@ -94,16 +89,17 @@ public class PoliticsService extends Service{
 		}
 	}
 
-
 	/**
-	 *
+	 * 
 	 * 杨宸 智佳
+	 * 
 	 * @param jData
-	 * @return   从 索引start 到  end-1   的  List<HotReview>
+	 * @return 从 索引start 到 end-1 的 List<HotReview>
 	 * @throws JSONException
 	 */
 
-	private List<PoliticsWrapper.Politics> parseData(JSONArray jData) throws JSONException {
+	private List<PoliticsWrapper.Politics> parseData(JSONArray jData)
+			throws JSONException {
 
 		if (jData != null) {
 			List<PoliticsWrapper.Politics> politicsList = new ArrayList<PoliticsWrapper.Politics>();
@@ -111,16 +107,24 @@ public class PoliticsService extends Service{
 			for (int index = 0; index < jData.length(); index++) {
 
 				JSONObject jb = jData.getJSONObject(index);
-				PoliticsWrapper h=new PoliticsWrapper();
+				PoliticsWrapper h = new PoliticsWrapper();
 				PoliticsWrapper.Politics politics = h.new Politics();
 				politics.setId(jb.getString("id"));
-				politics.setTitle(jb.getString("title"));	
+				politics.setTitle(jb.getString("title"));
 				politics.setDoprojectid(jb.getString("doprojectid"));
-				politics.setBeginTime(TimeFormateUtil.formateTime
-						(String.valueOf(jb.getLong("begintime")), TimeFormateUtil.DATE_PATTERN));		
 
-				politics.setEndTime(TimeFormateUtil.formateTime
-						(String.valueOf(jb.getLong("endtime")), TimeFormateUtil.DATE_PATTERN));		
+				if (!jb.isNull("begintime")) {
+					politics.setBeginTime(TimeFormateUtil.formateTime(
+							String.valueOf(jb.getLong("begintime")),
+							TimeFormateUtil.DATE_PATTERN));
+				}
+
+				if (!jb.isNull("endtime")) {
+					politics.setEndTime(TimeFormateUtil.formateTime(
+							String.valueOf(jb.getLong("endtime")),
+							TimeFormateUtil.DATE_PATTERN));
+				}
+
 				politicsList.add(politics);
 			}
 			return politicsList;
@@ -128,5 +132,4 @@ public class PoliticsService extends Service{
 		return null;
 	}
 
-	
 }

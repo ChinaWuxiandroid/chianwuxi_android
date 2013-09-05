@@ -15,29 +15,29 @@ import com.wuxi.domain.WorkSuggestionBoxWrapper;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
-
 /**
  * 工作意见箱 布局 业务类
+ * 
  * @author 杨宸 智佳
  * */
 
-public class WorkSuggestionService extends Service{
+public class WorkSuggestionService extends Service {
 
 	public WorkSuggestionService(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	/**
 	 * 
-	 * 杨宸 智佳 
+	 * 杨宸 智佳
+	 * 
 	 * @throws NetException
 	 * @throws JSONException
 	 * @throws NODataException
 	 */
-	
-	public WorkSuggestionBoxWrapper getBoxWrapper(String url) throws NODataException, NetException, JSONException{
+
+	public WorkSuggestionBoxWrapper getBoxWrapper(String url)
+			throws NODataException, NetException, JSONException {
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
@@ -58,8 +58,8 @@ public class WorkSuggestionService extends Service{
 			if (!o.toString().equals("[]") && !o.equals("null")) {
 				JSONArray jData = (JSONArray) o;
 				try {
-					boxWrapper.setParameters(JAsonPaserUtil
-							.getListByJassory(MailBoxParameterItem.class, jData));
+					boxWrapper.setParameters(JAsonPaserUtil.getListByJassory(
+							MailBoxParameterItem.class, jData));
 				} catch (IllegalArgumentException e) {
 					e.printStackTrace();
 				} catch (InstantiationException e) {
@@ -79,37 +79,38 @@ public class WorkSuggestionService extends Service{
 			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);// 没有获取到数据异常
 		}
 	}
-	
+
 	/**
-	 * @author 杨宸 智佳
-	 * 提交工作意见箱  的   自定义列表信息
-	 * @throws NetException 
-	 * @throws JSONException 
-	 * @throws NODataException 
+	 * @author 杨宸 智佳 提交工作意见箱 的 自定义列表信息
+	 * @throws NetException
+	 * @throws JSONException
+	 * @throws NODataException
 	 * */
-	public boolean submitMailBox(String access_token,WorkSuggestionBoxWrapper boxWrapper) throws NetException, JSONException, NODataException{
+	public boolean submitMailBox(String access_token,
+			WorkSuggestionBoxWrapper boxWrapper) throws NetException,
+			JSONException, NODataException {
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET); // 检查网络
 		}
 
-		String url = Constants.Urls.SUBMIT_SELFFORM_URL+"?access_token="+access_token;	
-		for(MailBoxParameterItem item:boxWrapper.getParameters()){
-			url=url+"&"+item.getKeyName()+"="+item.getValueList();
+		String url = Constants.Urls.SUBMIT_SELFFORM_URL + "?access_token="
+				+ access_token;
+		for (MailBoxParameterItem item : boxWrapper.getParameters()) {
+			url = url + "&" + item.getKeyName() + "=" + item.getValueList();
 		}
-		url=url+"&selfFormId="+boxWrapper.getId();
-		
+		url = url + "&selfFormId=" + boxWrapper.getId();
+
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
-//			JSONObject jresult = jsonObject.getJSONObject("result");		
+			// JSONObject jresult = jsonObject.getJSONObject("result");
 
-			return  jsonObject.getBoolean("success");
+			return jsonObject.getBoolean("success");
 		} else {
 			return false;
 		}
-		
+
 	}
-	
-	
+
 }

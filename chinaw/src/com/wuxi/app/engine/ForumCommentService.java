@@ -51,8 +51,6 @@ public class ForumCommentService extends Service {
 
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
-		System.out.println(">>>>"+resultStr);
-		
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
 			return jsonObject.getBoolean("success");

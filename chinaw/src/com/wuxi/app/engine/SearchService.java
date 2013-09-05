@@ -18,46 +18,49 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- *全局搜索  业务类
- *@author 杨宸 智佳 
+ * 全局搜索 业务类
+ * 
+ * @author 杨宸 智佳
  * */
 
-public class SearchService extends Service{
+public class SearchService extends Service {
 
 	public SearchService(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * 普通搜索
+	 * 
 	 * @param query
 	 * @param sitename
 	 * @param countperpage
 	 * @param pagenum
-	 * @throws NetException 
-	 * @throws JSONException 
-	 * @throws NODataException 
+	 * @throws NetException
+	 * @throws JSONException
+	 * @throws NODataException
 	 * 
 	 * */
-	public SearchResultWrapper getNormalSearchResult(String query,String sitename,int countperpage,int pagenum)
-			throws NetException, JSONException, NODataException{
+	public SearchResultWrapper getNormalSearchResult(String query,
+			String sitename, int countperpage, int pagenum)
+			throws NetException, JSONException, NODataException {
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 		String url = Constants.Urls.SEARCH_URL.replace("{query}", query)
-				.replace("{sitename}", sitename).replace("{countperpage}", countperpage + "")
+				.replace("{sitename}", sitename)
+				.replace("{countperpage}", countperpage + "")
 				.replace("{pagenum}", pagenum + "");
-		
+
 		String resultStr = httpUtils.executeGetToStringGBK(url, 5000);
-		
+
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
 			SearchResultWrapper searchResultWrapper = new SearchResultWrapper();
-			
-			//初始化 page 类
+
+			// 初始化 page 类
 			JSONObject jpage = jsonObject.getJSONObject("page");
-			SearchPage page=searchResultWrapper.new SearchPage();
+			SearchPage page = searchResultWrapper.new SearchPage();
 			page.setPagesize(jpage.getString("pagesize"));
 			page.setReqstatus(jpage.getString("reqstatus"));
 			page.setSitename(jpage.getString("sitename"));
@@ -66,8 +69,8 @@ public class SearchService extends Service{
 			page.setSearchtime(jpage.getString("searchtime"));
 			page.setCurrentpage(jpage.getString("currentpage"));
 			searchResultWrapper.setPage(page);
-			
-			//初始化 List<SearchResult>
+
+			// 初始化 List<SearchResult>
 			JSONArray jresults = jsonObject.getJSONArray("results");
 			if (jresults != null) {
 				searchResultWrapper.setResults(parseData(jresults));// 解析数组
@@ -79,46 +82,51 @@ public class SearchService extends Service{
 			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);// 没有获取到数据异常
 		}
 	}
-	
+
 	/**
 	 * 高级搜索
-	 * @param searchUtil 高级搜索参数实体类
+	 * 
+	 * @param searchUtil
+	 *            高级搜索参数实体类
 	 * @param sitename
 	 * @param countperpage
 	 * @param pagenum
-	 * @throws NetException 
-	 * @throws JSONException 
-	 * @throws NODataException 
+	 * @throws NetException
+	 * @throws JSONException
+	 * @throws NODataException
 	 * 
 	 * */
-	public SearchResultWrapper getAdvancedSearchResult(AdvancedSearchUtil searchUtil,String sitename,int pagenum)
-			throws NetException, JSONException, NODataException{
+	public SearchResultWrapper getAdvancedSearchResult(
+			AdvancedSearchUtil searchUtil, String sitename, int pagenum)
+			throws NetException, JSONException, NODataException {
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
-		String url = Constants.Urls.SEARCH_URL.replace("{query}", searchUtil.getKeyWord())
-				.replace("{sitename}", sitename).replace("{countperpage}", searchUtil.getPageSize() + "")
+		String url = Constants.Urls.SEARCH_URL
+				.replace("{query}", searchUtil.getKeyWord())
+				.replace("{sitename}", sitename)
+				.replace("{countperpage}", searchUtil.getPageSize() + "")
 				.replace("{pagenum}", pagenum + "");
-		
-		if(!searchUtil.getInfoType().equals("全部"))
-			url=url+"&field.key_kinds="+searchUtil.getInfoType();
-		url=url+"&DateSearchType="+searchUtil.getDateSearchType()+
-				"&FromDate="+searchUtil.getBeginDate()+
-				"&ToDate="+searchUtil.getEndDate();
-		
-		if(!searchUtil.getContentType().equals("全部"))
-			url=url+"&searchType="+searchUtil.getContentType();
-		
-		System.out.println("url:"+url);
+
+		if (!searchUtil.getInfoType().equals("全部"))
+			url = url + "&field.key_kinds=" + searchUtil.getInfoType();
+			url = url + "&DateSearchType=" + searchUtil.getDateSearchType()
+				+ "&FromDate=" + searchUtil.getBeginDate() + "&ToDate="
+				+ searchUtil.getEndDate();
+
+		if (!searchUtil.getContentType().equals("全部"))
+			url = url + "&searchType=" + searchUtil.getContentType();
+
+		System.out.println("url:" + url);
 		String resultStr = httpUtils.executeGetToStringGBK(url, 5000);
-		
+
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
 			SearchResultWrapper searchResultWrapper = new SearchResultWrapper();
-			
-			//初始化 page 类
+
+			// 初始化 page 类
 			JSONObject jpage = jsonObject.getJSONObject("page");
-			SearchPage page=searchResultWrapper.new SearchPage();
+			SearchPage page = searchResultWrapper.new SearchPage();
 			page.setPagesize(jpage.getString("pagesize"));
 			page.setReqstatus(jpage.getString("reqstatus"));
 			page.setSitename(jpage.getString("sitename"));
@@ -127,8 +135,8 @@ public class SearchService extends Service{
 			page.setSearchtime(jpage.getString("searchtime"));
 			page.setCurrentpage(jpage.getString("currentpage"));
 			searchResultWrapper.setPage(page);
-			
-			//初始化 List<SearchResult>
+
+			// 初始化 List<SearchResult>
 			JSONArray jresults = jsonObject.getJSONArray("results");
 			if (jresults != null) {
 				searchResultWrapper.setResults(parseData(jresults));// 解析数组
@@ -140,7 +148,7 @@ public class SearchService extends Service{
 			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);// 没有获取到数据异常
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param jData
@@ -151,7 +159,7 @@ public class SearchService extends Service{
 	private List<SearchResult> parseData(JSONArray jData) throws JSONException {
 		if (jData != null) {
 			List<SearchResult> results = new ArrayList<SearchResult>();
-			SearchResultWrapper wrapper=new SearchResultWrapper();
+			SearchResultWrapper wrapper = new SearchResultWrapper();
 			for (int index = 0; index < jData.length(); index++) {
 				JSONObject jb = jData.getJSONObject(index);
 				SearchResult result = wrapper.new SearchResult();

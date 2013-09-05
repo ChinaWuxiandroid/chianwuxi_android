@@ -225,12 +225,12 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 			break;
 		case 1:
 			goverInterPeopleWebFragment
-					.setUrl("http://www.wuxi.gov.cn/zmhd/6148280.shtml");
+					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148280.shtml");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		case 2:
 			goverInterPeopleWebFragment
-					.setUrl("http://www.wuxi.gov.cn/zmhd/6148283.shtml");
+					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148283.shtml");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		}

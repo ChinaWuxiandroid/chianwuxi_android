@@ -15,11 +15,6 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 
 public class GIP12345PartLeaderMailboxFragment extends RadioButtonChangeFragment{
 	
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
-	
 	private int contentType = 0;
 	
 	private static final int HIDEN_CONTENT_ID = R.id.gip_12345_leaderbox_fragment;
@@ -86,7 +81,7 @@ public class GIP12345PartLeaderMailboxFragment extends RadioButtonChangeFragment
 			break;
 		case 1:
 			goverInterPeopleWebFragment
-					.setUrl("http://www.wuxi.gov.cn/zmhd/6148278.shtml");
+					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148278.shtml");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		}

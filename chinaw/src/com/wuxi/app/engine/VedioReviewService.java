@@ -37,6 +37,7 @@ public class VedioReviewService extends Service {
 
 	/**
 	 * 解析数据集
+	 * 
 	 * @param start
 	 * @param end
 	 * @return
@@ -106,12 +107,18 @@ public class VedioReviewService extends Service {
 				review.setGuests(jb.getString("guests"));
 				review.setWorkDate(jb.getString("workDate"));
 				review.setSubjectContent(jb.getString("subjectContent"));
-				review.setBeginTime(TimeFormateUtil.formateTime(
-						String.valueOf(jb.getLong("beginTime")),
-						TimeFormateUtil.DATE_TIME_PATTERN));
-				review.setEndTime(TimeFormateUtil.formateTime(
-						String.valueOf(jb.getLong("endTime")),
-						TimeFormateUtil.DATE_TIME_PATTERN));
+
+				if (!jb.isNull("beginTime")) {
+					review.setBeginTime(TimeFormateUtil.formateTime(
+							String.valueOf(jb.getLong("beginTime")),
+							TimeFormateUtil.DATE_TIME_PATTERN));
+				}
+
+				if (!jb.isNull("endTime")) {
+					review.setEndTime(TimeFormateUtil.formateTime(
+							String.valueOf(jb.getLong("endTime")),
+							TimeFormateUtil.DATE_TIME_PATTERN));
+				}
 
 				reviews.add(review);
 			}

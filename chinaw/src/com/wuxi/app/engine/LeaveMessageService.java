@@ -37,6 +37,7 @@ public class LeaveMessageService extends Service {
 
 	/**
 	 * 解析数据集
+	 * 
 	 * @param interViewId
 	 * @param start
 	 * @param end
@@ -114,17 +115,25 @@ public class LeaveMessageService extends Service {
 				leaveMessage.setContent(jb.getString("content"));
 				leaveMessage.setAnswerId(jb.getString("answerId"));
 				leaveMessage.setInterViewId(jb.getString("interViewId"));
-				leaveMessage.setSubmitTime(TimeFormateUtil.formateTime(
-						String.valueOf(jb.getLong("submitTime")),
-						TimeFormateUtil.DATE_TIME_PATTERN));
+
+				if (!jb.isNull("submitTime")) {
+					leaveMessage.setSubmitTime(TimeFormateUtil.formateTime(
+							String.valueOf(jb.getLong("submitTime")),
+							TimeFormateUtil.DATE_TIME_PATTERN));
+				}
+
 				leaveMessage.setSentUser(jb.getString("sentUser"));
 				leaveMessage.setAnswerContent(jb.getString("answerContent"));
 				leaveMessage.setAnswerStatus(jb.getInt("answerStatus"));
 				leaveMessage.setIsCommend(jb.getInt("isCommend"));
 				leaveMessage.setQuestionType(jb.getInt("questionType"));
-				leaveMessage.setRecommendTime(TimeFormateUtil.formateTime(
-						String.valueOf(jb.getLong("recommendTime")),
-						TimeFormateUtil.DATE_TIME_PATTERN));
+
+				if (!jb.isNull("recommendTime")) {
+					leaveMessage.setRecommendTime(TimeFormateUtil.formateTime(
+							String.valueOf(jb.getLong("recommendTime")),
+							TimeFormateUtil.DATE_TIME_PATTERN));
+				}
+
 				leaveMessage.setSentIP(jb.getString("sentIP"));
 
 				leaveMessages.add(leaveMessage);

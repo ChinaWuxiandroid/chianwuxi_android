@@ -70,22 +70,26 @@ public class HotPostService extends Service {
 
 			hotPostWrapper.setId(jresult.getString("id"));
 			hotPostWrapper.setContent(jresult.getString("content"));
-			hotPostWrapper.setEndTime(TimeFormateUtil.formateTime(
-					String.valueOf(jresult.getLong("endTime")),
-					TimeFormateUtil.DATE_TIME_PATTERN));
+
+			if (!jresult.isNull("endTime")) {
+				hotPostWrapper.setEndTime(TimeFormateUtil.formateTime(
+						String.valueOf(jresult.getLong("endTime")),
+						TimeFormateUtil.DATE_TIME_PATTERN));
+			}
+
 			hotPostWrapper.setTitle(jresult.getString("title"));
 			hotPostWrapper.setDepName(jresult.getString("depName"));
 			hotPostWrapper.setCanReply(jresult.getString("canReply"));
 
 			JSONObject jData = jresult.getJSONObject("replies");
-			
+
 			if (jData != null) {
 				hotPostWrapper
 						.setHotPostReplyWrapper(getHotPostReplyWrapper(jData));
 			}
 
 			return hotPostWrapper;
-		}else {
+		} else {
 			// 没有获取到数据异常
 			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);
 		}
