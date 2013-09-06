@@ -17,36 +17,42 @@ import com.wuxi.exception.NetException;
 
 /**
  * 公众论坛列表业务类
+ * 
  * @author 杨宸 智佳
  * */
 
-public class BBSService extends Service{
+public class BBSService extends Service {
 
 	public BBSService(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * 
-	 * 杨宸 智佳 
-	 * @param start 开始索引
-	 * @param end    结束索引
-	 * @param previous		是否可以上一页
-	 * @param totalRowsAmount; 	数据列表中元素个数
-	 * @param next;			是否可以下一页
+	 * 杨宸 智佳
+	 * 
+	 * @param start
+	 *            开始索引
+	 * @param end
+	 *            结束索引
+	 * @param previous
+	 *            是否可以上一页
+	 * @param totalRowsAmount
+	 *            ; 数据列表中元素个数
+	 * @param next
+	 *            ; 是否可以下一页
 	 * @return HotReviewWrapper OpenTel包装对象
 	 * @throws NetException
 	 * @throws JSONException
 	 * @throws NODataException
 	 */
-	public BBSWrapper getBBSWrapper(String url,int startIndex,int endIndex)
+	public BBSWrapper getBBSWrapper(String url, int startIndex, int endIndex)
 			throws NetException, JSONException, NODataException {
 
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
-		url=url+"?start="+startIndex+"&end="+endIndex;
+		url = url + "?start=" + startIndex + "&end=" + endIndex;
 
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
@@ -72,16 +78,17 @@ public class BBSService extends Service{
 		}
 	}
 
-
 	/**
-	 *
+	 * 
 	 * 杨宸 智佳
+	 * 
 	 * @param jData
-	 * @return   从 索引start 到  end-1   的  List<HotReview>
+	 * @return 从 索引start 到 end-1 的 List<HotReview>
 	 * @throws JSONException
 	 */
 
-	private List<BBSWrapper.BBS> parseData(JSONArray jData) throws JSONException {
+	private List<BBSWrapper.BBS> parseData(JSONArray jData)
+			throws JSONException {
 
 		if (jData != null) {
 			List<BBSWrapper.BBS> bbsList = new ArrayList<BBSWrapper.BBS>();
@@ -89,7 +96,7 @@ public class BBSService extends Service{
 			for (int index = 0; index < jData.length(); index++) {
 
 				JSONObject jb = jData.getJSONObject(index);
-				BBSWrapper h=new BBSWrapper();
+				BBSWrapper h = new BBSWrapper();
 				BBSWrapper.BBS bbs = h.new BBS();
 				bbs.setPoliticsMainID(jb.getString("politicsMainID"));
 				bbs.setTitle(jb.getString("title"));
@@ -99,8 +106,13 @@ public class BBSService extends Service{
 				bbs.setDoProjectID(jb.getString("doProjectID"));
 				bbs.setDataNO(jb.getInt("title"));
 				bbs.setTitle(jb.getString("dataNo"));
-				bbs.setBeginTime(TimeFormateUtil.formateTime
-						(String.valueOf(jb.getLong("beginTime")), TimeFormateUtil.DATE_PATTERN));
+				
+				if (!jb.isNull("beginTime")) {
+					bbs.setBeginTime(TimeFormateUtil.formateTime(
+							String.valueOf(jb.getLong("beginTime")),
+							TimeFormateUtil.DATE_PATTERN));
+				}
+
 				bbs.setViewpath(jb.getString("viewpath"));
 				bbs.setResultCount(jb.getInt("resultCount"));
 				bbsList.add(bbs);

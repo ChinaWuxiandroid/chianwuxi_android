@@ -55,12 +55,13 @@ public class HotReviewCommentService extends Service {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 
-		String url = Constants.Urls.HOT_REVIEW_COMMENT_URL.replace("{id}", id)+"?content="+content+"&access_token="+access_token;
-		
+		String url = Constants.Urls.HOT_REVIEW_COMMENT_URL.replace("{id}", id)
+				+ "?content=" + content + "&access_token=" + access_token;
+
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
-		
+
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
-		} 
+		}
 	}
 }

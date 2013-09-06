@@ -102,9 +102,13 @@ public class ForumService extends Service {
 				forum.setSentUser(jb.getString("sentUser"));
 				forum.setDoProjectID(jb.getString("doProjectID"));
 				forum.setDataNo(jb.getString("dataNo"));
-				forum.setBeginTime(TimeFormateUtil.formateTime(
-						String.valueOf(jb.getLong("begintime")),
-						TimeFormateUtil.DATE_PATTERN));
+
+				if (!jb.isNull("begintime")) {
+					forum.setBeginTime(TimeFormateUtil.formateTime(
+							String.valueOf(jb.getLong("begintime")),
+							TimeFormateUtil.DATE_PATTERN));
+				}
+
 				forum.setViewpath(jb.getString("viewpath"));
 				forum.setResultCount(jb.getString("resultCount"));
 

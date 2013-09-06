@@ -20,7 +20,6 @@ public class MyApplyPageService extends Service{
 
 	public MyApplyPageService(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

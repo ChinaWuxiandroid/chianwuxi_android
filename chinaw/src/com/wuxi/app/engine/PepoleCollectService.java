@@ -85,12 +85,19 @@ public class PepoleCollectService extends Service {
 			collectWrapper.setDoAnonymous(jresult.getString("doAnonymous"));
 			collectWrapper.setReadCount(jresult.getString("readCount"));
 			collectWrapper.setSummary(jresult.getString("summary"));
-			collectWrapper.setBegintime(TimeFormateUtil.formateTime(
-					String.valueOf(jresult.getLong("begintime")),
-					TimeFormateUtil.DATE_PATTERN));
-			collectWrapper.setEndtime(TimeFormateUtil.formateTime(
-					String.valueOf(jresult.getLong("endtime")),
-					TimeFormateUtil.DATE_PATTERN));
+
+			if (!jresult.isNull("begintime")) {
+				collectWrapper.setBegintime(TimeFormateUtil.formateTime(
+						String.valueOf(jresult.getLong("begintime")),
+						TimeFormateUtil.DATE_PATTERN));
+			}
+
+			if (!jresult.isNull("endtime")) {
+				collectWrapper.setEndtime(TimeFormateUtil.formateTime(
+						String.valueOf(jresult.getLong("endtime")),
+						TimeFormateUtil.DATE_PATTERN));
+			}
+
 			collectWrapper.setDoprojectid(jresult.getString("doprojectid"));
 			collectWrapper.setSumup(jresult.getString("sumup"));
 
@@ -165,9 +172,13 @@ public class PepoleCollectService extends Service {
 				ideaReply.setContent(jo.getString("content"));
 				ideaReply.setUsername(jo.getString("username"));
 				ideaReply.setTitle(jo.getString("title"));
-				ideaReply.setSendtime(TimeFormateUtil.formateTime(
-						String.valueOf(jo.getLong("sendtime")),
-						TimeFormateUtil.DATE_PATTERN));
+
+				if (!jo.isNull("sendtime")) {
+					ideaReply.setSendtime(TimeFormateUtil.formateTime(
+							String.valueOf(jo.getLong("sendtime")),
+							TimeFormateUtil.DATE_PATTERN));
+				}
+
 				ideaReply.setAnswercontent(jo.getString("answercontent"));
 				ideaReply.setMainid(jo.getString("mainid"));
 				ideaReply.setAnswerman(jo.getString("answerman"));

@@ -76,12 +76,19 @@ public class GIPMailInfoService extends Service {
 			wrapper.setTitle(jresult.getString("title"));
 			wrapper.setDepname(jresult.getString("depname"));
 			wrapper.setAppraise(jresult.getString("appraise"));
-			wrapper.setBegintime(TimeFormateUtil.formateTime(
-					String.valueOf(jresult.getLong("begintime")),
-					TimeFormateUtil.DATE_PATTERN));
-			wrapper.setEndtime(TimeFormateUtil.formateTime(
-					String.valueOf(jresult.getLong("endtime")),
-					TimeFormateUtil.DATE_PATTERN));
+
+			if (!jresult.isNull("begintime")) {
+				wrapper.setBegintime(TimeFormateUtil.formateTime(
+						String.valueOf(jresult.getLong("begintime")),
+						TimeFormateUtil.DATE_PATTERN));
+			}
+
+			if (!jresult.isNull("endtime")) {
+				wrapper.setEndtime(TimeFormateUtil.formateTime(
+						String.valueOf(jresult.getLong("endtime")),
+						TimeFormateUtil.DATE_PATTERN));
+			}
+
 			wrapper.setDoprojectid(jresult.getString("doprojectid"));
 			wrapper.setDodepname(jresult.getString("dodepname"));
 

@@ -81,7 +81,6 @@ public class LetterService extends Service {
 		}
 
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
-
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
 			JSONObject jresult = jsonObject.getJSONObject("result");
@@ -133,9 +132,14 @@ public class LetterService extends Service {
 				letters.setCode(jb.getString("code"));
 				letters.setAppraise(jb.getString("appraise"));
 				letters.setDepname(jb.getString("depname"));
-				// letters.setAnswerdate(TimeFormateUtil.formateTime(
-				// String.valueOf(jb.getLong("answerdate")),
-				// TimeFormateUtil.DATE_PATTERN));
+
+				if (!jb.isNull("answerdate")) {
+
+					letters.setAnswerdate(TimeFormateUtil.formateTime(
+							String.valueOf(jb.getLong("answerdate")),
+							TimeFormateUtil.DATE_PATTERN));
+				}
+
 				letters.setReadcount(jb.getInt("readcount"));
 
 				letterList.add(letters);
@@ -168,8 +172,6 @@ public class LetterService extends Service {
 				+ myLetter.getSentMailBack() + "&msgstatus="
 				+ myLetter.getMsgStatus();
 
-		System.out.println("--->"+url);
-		
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (resultStr != null) {

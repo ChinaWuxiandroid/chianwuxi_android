@@ -58,7 +58,7 @@ public class GIP12345ComplaintListFragment extends BaseFragment {
 	private static final int DATA_LOAD_ERROR = 1;
 
 	private int startIndex = 0; // 获取话题的起始坐标
-	private int endIndex = 100; // 获取话题的结束坐标
+	private int endIndex = 20; // 获取话题的结束坐标
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -119,8 +119,6 @@ public class GIP12345ComplaintListFragment extends BaseFragment {
 							Constants.Urls.SUGGESTLETTER_URL, startIndex,
 							endIndex);
 					if (null != letterWrapper) {
-						// CacheUtil.put(menuItem.getChannelId(),
-						// titleChannels);// 缓存起来
 						letters = letterWrapper.getData();
 
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
@@ -155,7 +153,7 @@ public class GIP12345ComplaintListFragment extends BaseFragment {
 		LettersListViewAdapter adapter = new LettersListViewAdapter(
 				);
 		if (letters == null || letters.size() == 0) {
-			Toast.makeText(context, "对不起，暂无信息", 2000).show();
+			Toast.makeText(context, "对不起，暂无建议咨询投诉信息", Toast.LENGTH_SHORT).show();
 		} else {
 			mListView.setAdapter(adapter);
 			mListView.setOnItemClickListener(adapter);
@@ -170,8 +168,6 @@ public class GIP12345ComplaintListFragment extends BaseFragment {
 	 */
 	public class LettersListViewAdapter extends BaseAdapter implements
 			OnItemClickListener {
-
-		
 
 		/**
 		 * @方法： LettersListViewAdapter
@@ -239,8 +235,10 @@ public class GIP12345ComplaintListFragment extends BaseFragment {
 			viewHolder.code_text.setText(letters.get(position).getCode());
 			viewHolder.type_text.setText(letters.get(position).getType());
 			viewHolder.depname_text.setText(letters.get(position).getDepname());
+			
 			viewHolder.answerDate_text.setText(letters.get(position)
 					.getAnswerdate());
+			
 			viewHolder.readCount_text.setText(String.valueOf(letters.get(
 					position).getReadcount()));
 			viewHolder.appraise_text.setText(letters.get(position)

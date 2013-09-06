@@ -70,17 +70,12 @@ import com.wuxi.exception.NetException;
  * @类名： PortLeaderMailListFragment
  * @描述： 政民互动 12345来信办理平台 部门领导信箱 某部门最新信件列表界面
  * @作者： 罗森
- * @创建时间： 2013 2013-8-23 上午11:12:56
+ * @创建时间： 2013-8-23 上午11:12:56
  * @修改时间：
  * @修改描述：
  * 
  */
 public class PartLeaderMailFragment extends RadioButtonChangeFragment {
-
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
 
 	private static final String TAG = "PartLeaderMailListFragment";
 
@@ -250,7 +245,7 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 			break;
 		case 1:
 			goverInterPeopleWebFragment
-					.setUrl("http://www.wuxi.gov.cn/zmhd/6148278.shtml");
+					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148278.shtml");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		case 2:
@@ -366,7 +361,7 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 		});
 
 		PartLeaderMailListFragment leaderMailListFragment = new PartLeaderMailListFragment();
-	
+
 		leaderMailListFragment.setLeaderMail(getLeaderMail());
 		bindFragment(leaderMailListFragment);
 
@@ -438,12 +433,12 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 		DeptAdapter partment_Spinner_adapter = new DeptAdapter();
 
 		acceptDepartmentSpinner.setAdapter(partment_Spinner_adapter);
-		// acceptDepartmentSpinner
-		// .setOnItemSelectedListener(partment_Spinner_adapter);
+		acceptDepartmentSpinner
+				.setOnItemSelectedListener(partment_Spinner_adapter);
 
 		replyDepartmentSpinner.setAdapter(partment_Spinner_adapter);
-		// replyDepartmentSpinner
-		// .setOnItemSelectedListener(partment_Spinner_adapter);
+		replyDepartmentSpinner
+				.setOnItemSelectedListener(partment_Spinner_adapter);
 
 	}
 
@@ -484,7 +479,7 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 		emailSortSpinner.setAdapter(adapter);
 	}
 
-	/*
+	/**
 	 * 显示所有回复统计信息
 	 */
 	public void showAllCounts() {
@@ -500,7 +495,7 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 	}
 
 	/**
-	 * 先加载所有统计信息，下面的信息，按 统计按钮后加载
+	 * 加载所有统计信息
 	 * */
 	private void loadAllCountData() {
 		new Thread(new Runnable() {
@@ -731,10 +726,10 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			
+
 			viewHolder.tv_dept.setTextColor(Color.BLACK);
 			viewHolder.tv_dept.setText(dept.getDepname());
-			
+
 			return convertView;
 		}
 

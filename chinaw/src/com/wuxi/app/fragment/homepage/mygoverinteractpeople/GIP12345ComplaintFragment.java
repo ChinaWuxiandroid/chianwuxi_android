@@ -597,17 +597,17 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 			break;
 		case 1:
 			goverInterPeopleWebFragment
-					.setUrl("http://www.wuxi.gov.cn/zmhd/6148281.shtml");
+					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148281.shtml");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		case 2:
 			goverInterPeopleWebFragment
-					.setUrl("http://www.wuxi.gov.cn/zmhd/6148282.shtml");
+					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148282.shtml");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		case 3:
 			goverInterPeopleWebFragment
-					.setUrl("http://www.wuxi.gov.cn/zxzx/jgzn/index.shtml");
+					.setUrl("http://www.wuxi.gov.cn/wap/zxzx/jgzn/index.shtml");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		}

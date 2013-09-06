@@ -34,7 +34,6 @@ public class PublicSericeChannelAdapter extends BaseAdapter {
 
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
 		return channles.get(position);
 	}
 

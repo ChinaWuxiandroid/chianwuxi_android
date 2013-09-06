@@ -62,9 +62,13 @@ public class OrdinaryPostService extends Service {
 			OrdinaryPostWrapper postWrapper = new OrdinaryPostWrapper();
 
 			postWrapper.setContent(jresult.getString("content"));
-			postWrapper.setEndTime(TimeFormateUtil.formateTime(
-					String.valueOf(jresult.getLong("endTime")),
-					TimeFormateUtil.DATE_TIME_PATTERN));
+
+			if (!jresult.isNull("endTime")) {
+				postWrapper.setEndTime(TimeFormateUtil.formateTime(
+						String.valueOf(jresult.getLong("endTime")),
+						TimeFormateUtil.DATE_TIME_PATTERN));
+			}
+
 			postWrapper.setStatus(jresult.getString("status"));
 			postWrapper.setTitle(jresult.getString("title"));
 			postWrapper.setDoProjectId(jresult.getString("doProjectId"));
@@ -73,9 +77,13 @@ public class OrdinaryPostService extends Service {
 			postWrapper.setSentIp(jresult.getString("sentIp"));
 			postWrapper.setSentUser(jresult.getString("sentUser"));
 			postWrapper.setOrderId(jresult.getString("orderId"));
-			postWrapper.setBeginTime(TimeFormateUtil.formateTime(
-					String.valueOf(jresult.getLong("beginTime")),
-					TimeFormateUtil.DATE_TIME_PATTERN));
+
+			if (!jresult.isNull("beginTime")) {
+				postWrapper.setBeginTime(TimeFormateUtil.formateTime(
+						String.valueOf(jresult.getLong("beginTime")),
+						TimeFormateUtil.DATE_TIME_PATTERN));
+			}
+
 			postWrapper.setIsTop(jresult.getString("isTop"));
 			postWrapper.setModifyTime(jresult.getString("modifyTime"));
 			postWrapper.setRedTitle(jresult.getString("redTitle"));
@@ -151,9 +159,13 @@ public class OrdinaryPostService extends Service {
 				postRaply.setUserName(jb.getString("userName"));
 				postRaply.setPoliticsMainId(jb.getString("politicsMainId"));
 				postRaply.setSentIp(jb.getString("sentIp"));
-				postRaply.setSentTime(TimeFormateUtil.formateTime(
-						String.valueOf(jb.getLong("sentTime")),
-						TimeFormateUtil.DATE_TIME_PATTERN));
+
+				if (!jb.isNull("sentTime")) {
+					postRaply.setSentTime(TimeFormateUtil.formateTime(
+							String.valueOf(jb.getLong("sentTime")),
+							TimeFormateUtil.DATE_TIME_PATTERN));
+				}
+
 				postRaply.setActorInfoId(jb.getString("actorInfoId"));
 
 				postRaplies.add(postRaply);

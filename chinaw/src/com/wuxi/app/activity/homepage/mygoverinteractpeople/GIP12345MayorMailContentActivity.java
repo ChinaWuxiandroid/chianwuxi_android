@@ -62,9 +62,6 @@ public class GIP12345MayorMailContentActivity extends BaseItemContentActivity {
 	private Button commentBtn = null;
 
 	private RadioGroup radioGroup = null;
-	private RadioButton satisfiedRadioBtn = null;
-	private RadioButton lesserSatisfiedRadioBtn = null;
-	private RadioButton improveRadioBtn = null;
 
 	private ProgressBar progressBar = null;
 
@@ -209,13 +206,6 @@ public class GIP12345MayorMailContentActivity extends BaseItemContentActivity {
 			}
 		});
 
-		// satisfiedRadioBtn = (RadioButton)
-		// popview.findViewById(R.id.mail_satisfied_radiobtn);
-		// lesserSatisfiedRadioBtn = (RadioButton)
-		// popview.findViewById(R.id.mail_lesser_satisfied_radiobtn);
-		// improveRadioBtn = (RadioButton)
-		// popview.findViewById(R.id.mail_improve_radiobtn);
-
 		popWindowManager = PopWindowManager.getInstance();
 
 		popWindowManager.addPopWindow(popupWindow);
@@ -295,7 +285,7 @@ public class GIP12345MayorMailContentActivity extends BaseItemContentActivity {
 		MailCommentService commentService = new MailCommentService(this);
 		letter = (Letter) getIntent().getExtras().get("letter");
 		try {
-			boolean issubmit = commentService.submitMailComment(letter.getId(),
+			commentService.submitMailComment(letter.getId(),
 					rank);
 
 			Toast.makeText(this, "提交成功，正在审核...", Toast.LENGTH_SHORT).show();

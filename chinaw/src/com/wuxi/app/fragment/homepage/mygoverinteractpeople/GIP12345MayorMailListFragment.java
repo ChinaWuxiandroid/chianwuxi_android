@@ -236,6 +236,7 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment {
 
 			viewHolder.answerDate_text.setText(String.valueOf(letters.get(
 					position).getAnswerdate()));
+			
 			viewHolder.readCount_text.setText(String.valueOf(letters.get(
 					position).getReadcount()));
 			viewHolder.appraise_text.setText(letters.get(position)

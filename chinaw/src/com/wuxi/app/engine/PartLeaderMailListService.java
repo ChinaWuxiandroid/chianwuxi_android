@@ -20,8 +20,8 @@ import org.json.JSONObject;
 
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
-import com.wuxi.domain.LetterWrapper;
-import com.wuxi.domain.LetterWrapper.Letter;
+import com.wuxi.domain.PartLeaderLetterWrapper;
+import com.wuxi.domain.PartLeaderLetterWrapper.PartLeaderLetter;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -58,8 +58,8 @@ public class PartLeaderMailListService extends Service {
 	 * @throws JSONException
 	 * @throws NODataException
 	 */
-	public LetterWrapper getLettersWrapper(int start, int end, String doid)
-			throws NetException, JSONException, NODataException {
+	public PartLeaderLetterWrapper getLeaderLetterWrapper(int start, int end,
+			String doid) throws NetException, JSONException, NODataException {
 		// 检查网络链接状态
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
@@ -76,20 +76,22 @@ public class PartLeaderMailListService extends Service {
 			JSONObject jsonObject = new JSONObject(resultStr);
 			JSONObject jresult = jsonObject.getJSONObject("result");
 
-			LetterWrapper letterWrapper = new LetterWrapper();
+			PartLeaderLetterWrapper leaderLetterWrapper = new PartLeaderLetterWrapper();
 
-			letterWrapper.setEnd(jresult.getInt("end"));
-			letterWrapper.setStart(jresult.getInt("start"));
-			letterWrapper.setNext(jresult.getBoolean("next"));
-			letterWrapper.setPrevious(jresult.getBoolean("previous"));
-			letterWrapper.setTotalRowsAmount(jresult.getInt("totalRowsAmount"));
+			leaderLetterWrapper.setEnd(jresult.getInt("end"));
+			leaderLetterWrapper.setStart(jresult.getInt("start"));
+			leaderLetterWrapper.setNext(jresult.getBoolean("next"));
+			leaderLetterWrapper.setPrevious(jresult.getBoolean("previous"));
+			leaderLetterWrapper.setTotalRowsAmount(jresult
+					.getInt("totalRowsAmount"));
+
 			JSONArray jData = jresult.getJSONArray("data");
 
 			if (jData != null) {
-				letterWrapper.setData(parseData(jData));// 解析数组
+				leaderLetterWrapper.setLeaderLetters(parseData(jData));// 解析数组
 			}
 
-			return letterWrapper;
+			return leaderLetterWrapper;
 
 		} else {
 			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);// 没有获取到数据异常
@@ -103,30 +105,37 @@ public class PartLeaderMailListService extends Service {
 	 * @return List<Letter>
 	 * @throws JSONException
 	 */
-	private List<Letter> parseData(JSONArray jData) throws JSONException {
+	private List<PartLeaderLetter> parseData(JSONArray jData)
+			throws JSONException {
 
 		if (jData != null) {
-			List<Letter> letterList = new ArrayList<Letter>();
+			List<PartLeaderLetter> letterList = new ArrayList<PartLeaderLetter>();
 
 			for (int index = 0; index < jData.length(); index++) {
 				JSONObject jb = jData.getJSONObject(index);
-				
-				LetterWrapper h = new LetterWrapper();
-				
-				Letter letters = h.new Letter();
-				letters.setId(jb.getString("id"));
-				letters.setType(jb.getString("type"));
-				letters.setTitle(jb.getString("title"));
-				letters.setCode(jb.getString("code"));
-				letters.setAppraise(jb.getString("appraise"));
-				letters.setDepname(jb.getString("depname"));
-//				letters.setAnswerdate(TimeFormateUtil.formateTime(
-//						String.valueOf(jb.getLong("answerdate")),
-//						TimeFormateUtil.DATE_PATTERN));
-				letters.setReadcount(jb.getInt("readcount"));
-				
-				letterList.add(letters);
+
+				PartLeaderLetterWrapper leaderLetterWrapper = new PartLeaderLetterWrapper();
+
+				PartLeaderLetter leaderLetter = leaderLetterWrapper.new PartLeaderLetter();
+
+				leaderLetter.setId(jb.getString("id"));
+				leaderLetter.setType(jb.getString("type"));
+				leaderLetter.setTitle(jb.getString("title"));
+				leaderLetter.setCode(jb.getString("code"));
+				leaderLetter.setAppraise(jb.getString("appraise"));
+				leaderLetter.setDepname(jb.getString("depname"));
+
+				if (!jb.isNull("answerdate")) {
+					leaderLetter.setAnswerdate(TimeFormateUtil.formateTime(
+							String.valueOf(jb.getLong("answerdate")),
+							TimeFormateUtil.DATE_PATTERN));
+				}
+
+				leaderLetter.setReadcount(jb.getString("readcount"));
+
+				letterList.add(leaderLetter);
 			}
+
 			return letterList;
 		}
 		return null;
