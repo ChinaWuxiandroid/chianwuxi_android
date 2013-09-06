@@ -60,28 +60,7 @@ public class ContentListAdapter extends BaseAdapter {
 		TextView title_time;// 时间
 	}
 
-	/*
-	 * @Override public View getView(int position, View convertView, ViewGroup
-	 * parent) {
-	 * 
-	 * Content content = contents.get(position); ViewHolder viewHolder = null;
-	 * if (convertView == null) { convertView = View.inflate(context,
-	 * R.layout.content_list_item_layout, null); viewHolder = new ViewHolder();
-	 * 
-	 * viewHolder.title_text = (TextView) convertView
-	 * .findViewById(R.id.content_list_tv_title); viewHolder.title_time =
-	 * (TextView) convertView .findViewById(R.id.content_list_tv_time);
-	 * convertView.setTag(viewHolder); } else { viewHolder = (ViewHolder)
-	 * convertView.getTag(); }
-	 * 
-	 * String title = ""; title = content.getTitle();
-	 * 
-	 * viewHolder.title_text.setText("." + title);
-	 * viewHolder.title_time.setText("(" +
-	 * TimeFormateUtil.formateTime(content.getPublishTime(),
-	 * TimeFormateUtil.DATE_PATTERN) + ")"); return convertView; }
-	 */
-
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
