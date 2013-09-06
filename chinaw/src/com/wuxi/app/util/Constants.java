@@ -275,6 +275,14 @@ public class Constants {
 				+ "/survery/list.json";
 
 		/**
+		 * 政务大厅视频播放
+		 */
+
+		public static final String PLAY_VIDEO_URL = BASIC_URL
+				+ "/interview/{id}/video.json";
+
+		
+		/**
 		 * 效能投诉列表 {start}开始占位符 {end}结束占位符
 		 */
 		public static final String TOUSU_URL = BASIC_URL
@@ -288,7 +296,8 @@ public class Constants {
 		/**
 		 * 我要写信URL
 		 * */
-		public static final String IWANTMAIL_URL = BASIC_URL + "/letter/submit.json";
+		public static final String IWANTMAIL_URL = BASIC_URL
+				+ "/letter/submit.json";
 
 		/**
 		 * 政务大厅，办件分类获取 type 01：个人身份 02：个人办事 03：企业行业 04：企业办事 05：港澳台侨、外国人 06：主题服务
@@ -534,7 +543,7 @@ public class Constants {
 		 * 三级子菜单选中的key值
 		 */
 		public static final String LEVEL_THREE_KEY = "LEVEL_THREE_KEY";
-		
+
 		/**
 		 * 政民互动我要写信功能
 		 */

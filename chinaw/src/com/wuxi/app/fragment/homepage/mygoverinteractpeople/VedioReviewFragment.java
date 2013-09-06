@@ -8,6 +8,8 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -22,10 +24,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
+import com.wuxi.app.engine.InterViewService;
 import com.wuxi.app.engine.VedioReviewService;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.VedioReviewWrapper;
+import com.wuxi.domain.VedioReviewWrapper.VedioReview;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -36,7 +40,8 @@ import com.wuxi.exception.NetException;
  * 
  */
 @SuppressLint("HandlerLeak")
-public class VedioReviewFragment extends RadioButtonChangeFragment {
+public class VedioReviewFragment extends RadioButtonChangeFragment implements
+		OnItemClickListener {
 
 	/**
 	 * serialVersionUID
@@ -50,7 +55,7 @@ public class VedioReviewFragment extends RadioButtonChangeFragment {
 	private VedioReviewWrapper reviewWrapper = null;
 
 	private List<VedioReviewWrapper.VedioReview> reviews = null;
-
+	private String viewoURL;
 	// 数据加载成功标志
 	private static final int DATA__LOAD_SUCESS = 0;
 	// 数据加载失败标志
@@ -62,6 +67,10 @@ public class VedioReviewFragment extends RadioButtonChangeFragment {
 	private int endIndex = 10;
 
 	protected static final String TAG = "VedioReviewFragment";
+
+	protected static final int LOAD_VIEDO_URL_SUCCESS = 2;
+
+	protected static final int LOAD_VIEDO_URL_FAIL = 3;
 
 	@Override
 	protected int getLayoutId() {
@@ -82,7 +91,7 @@ public class VedioReviewFragment extends RadioButtonChangeFragment {
 	protected int getContentFragmentId() {
 		return 0;
 	}
-	
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -97,6 +106,10 @@ public class VedioReviewFragment extends RadioButtonChangeFragment {
 				reviewProBar.setVisibility(View.GONE);
 				showReviewList();
 				break;
+			case LOAD_VIEDO_URL_SUCCESS:
+				playVideo();
+				break;
+			case LOAD_VIEDO_URL_FAIL:
 
 			case DATA_LOAD_ERROR:
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
@@ -113,10 +126,10 @@ public class VedioReviewFragment extends RadioButtonChangeFragment {
 		reviewProBar = (ProgressBar) view
 				.findViewById(R.id.gip_vedio_review_progressbar);
 		reviewProBar.setVisibility(View.VISIBLE);
-		
+
 		loadData();
 	}
-	
+
 	/**
 	 * 加载数据
 	 */
@@ -129,7 +142,8 @@ public class VedioReviewFragment extends RadioButtonChangeFragment {
 						context);
 
 				try {
-					reviewWrapper = reviewService.getVedioReviewWrapper(startIndex,endIndex);
+					reviewWrapper = reviewService.getVedioReviewWrapper(
+							startIndex, endIndex);
 					if (reviewWrapper != null) {
 						reviews = reviewWrapper.getReviews();
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
@@ -158,40 +172,33 @@ public class VedioReviewFragment extends RadioButtonChangeFragment {
 	 * 显示列表数据
 	 */
 	@SuppressLint("ShowToast")
-	private void showReviewList(){
-//		BaseSlideFragment baseSlideFragment = (BaseSlideFragment)this.getArguments().get("BaseSlideFragment");
-//		
-//		System.out.println("+++=="+getArguments().get("BaseSlideFragment"));
-		
+	private void showReviewList() {
+		// BaseSlideFragment baseSlideFragment =
+		// (BaseSlideFragment)this.getArguments().get("BaseSlideFragment");
+		//
+		// System.out.println("+++=="+getArguments().get("BaseSlideFragment"));
+
 		ReviewListAdapter reviewListAdapter = new ReviewListAdapter();
-		
-		for (int i = 0; i < reviews.size(); i++) {
-			System.out.println(reviews.get(i).getSubject());
-		}
-		
+
 		if (reviews == null || reviews.size() == 0) {
 			Toast.makeText(context, "对不起，暂无访谈实录信息", 2000).show();
 		} else {
 			reviewListView.setAdapter(reviewListAdapter);
-			reviewListView.setOnItemClickListener(reviewListAdapter);
+			reviewListView.setOnItemClickListener(this);
 		}
 	}
-	
+
 	/**
 	 * 内部类，往期回顾列表适配器
 	 * 
 	 * @author 智佳 罗森
 	 * 
 	 */
-	public class ReviewListAdapter extends BaseAdapter implements OnItemClickListener{
-		
-	
-		
-		public ReviewListAdapter(){
-			
+	public class ReviewListAdapter extends BaseAdapter {
+
+		public ReviewListAdapter() {
+
 		}
-		
-		
 
 		@Override
 		public int getCount() {
@@ -251,12 +258,64 @@ public class VedioReviewFragment extends RadioButtonChangeFragment {
 			return convertView;
 		}
 
-		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-				long arg3) {
-//			baseSlideFragment.slideLinstener.replaceFragment(null, position,
-//					Constants.FragmentName.GIP_REVIEW_CONTENT_FRAGMENT, null);
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通
+	 */
+	private void playVideo() {
+		Intent it = new Intent();  
+        it.setAction(Intent.ACTION_VIEW);
+        it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+       // String tmpPath ="http://192.168.1.167:8081/20130903.3gp";
+        Uri uri = Uri.parse(viewoURL);  
+        it.setType("video/mp4");
+        it.setDataAndType(uri , "video/mp4");  
+        startActivity(it); 
+		
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> daAdapterView, View arg1,
+			int position, long arg3) {
+		final VedioReview view = (VedioReview) daAdapterView
+				.getItemAtPosition(position);
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				InterViewService interViewService = new InterViewService(
+						context);
+				Message msg = handler.obtainMessage();
+				try {
+					viewoURL = interViewService.getViewURL(view.getId());
+					if (viewoURL != null) {
+						msg.what = LOAD_VIEDO_URL_SUCCESS;
+					} else {
+						msg.what = LOAD_VIEDO_URL_FAIL;
+						msg.obj = "获取视频地址失败";
+					}
+					handler.sendMessage(msg);
+				} catch (NetException e) {
+					msg.what = LOAD_VIEDO_URL_FAIL;
+					msg.obj = e.getMessage();
+					handler.sendMessage(msg);
+
+					e.printStackTrace();
+
+				} catch (JSONException e) {
+					msg.what = LOAD_VIEDO_URL_FAIL;
+					msg.obj = "数据格式不正确";
+					handler.sendMessage(msg);
+					e.printStackTrace();
+				}
+
+			}
 		}
+
+		).start();
 
 	}
 }

@@ -9,6 +9,7 @@ import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -91,7 +92,8 @@ public class ContentListAdapter extends BaseAdapter {
 		viewHolder.title_text.setText(showText,BufferType.EDITABLE);
 		
 		Spannable spannable=(Spannable) viewHolder.title_text.getText();
-		spannable.setSpan(new AbsoluteSizeSpan(16), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		//spannable.setSpan(new AbsoluteSizeSpan(16), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		spannable.setSpan(new RelativeSizeSpan(1.1f), 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		spannable.setSpan(new ForegroundColorSpan(Color.parseColor("#808080")), title.length(),showText.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
 		viewHolder.title_text.setText(spannable);
 		return convertView;
