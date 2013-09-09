@@ -90,7 +90,7 @@ public abstract class ContentDetailActivity extends BaseItemContentActivity {
 		tvbrowcount.setText("浏览次数:" + browCount);// 浏览次数
 
 		decontent_wb.getSettings().setJavaScriptEnabled(true);
-
+		
 		decontent_wb.setWebChromeClient(new WebChromeClient() {
 			public void onProgressChanged(WebView view, int progress) {
 
