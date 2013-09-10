@@ -54,7 +54,7 @@ public class GIPContentFragment extends GoverMenuItemTitleFragment {
 //					menu.setContentFragment(GIP12345CMayorMailBoxFragment.class);
 //				}
 				else if(menu.getAppUI().endsWith("热门信件选登")){
-					menu.setContentFragment(GIP12345HotMail.class);
+					menu.setContentFragment(GIP12345HotMailFragment.class);
 				}
 				else if(menu.getAppUI().endsWith("答复率统计")){
 					menu.setContentFragment(GIP12345AnswerStatisticsFragment.class);
@@ -70,7 +70,7 @@ public class GIPContentFragment extends GoverMenuItemTitleFragment {
 					menu.setContentFragment(GIPSuggestSurveyFragment.class);
 				}
 				else if(menu.getAppUI().endsWith("Public_opinion_collection")){
-					menu.setContentFragment(GIPSuggestPeopleWill.class);
+					menu.setContentFragment(GIPSuggestPeopleWillFragment.class);
 				}
 				//视频直播平台
 				else if(menu.getAppUI().endsWith("走进直播间")){

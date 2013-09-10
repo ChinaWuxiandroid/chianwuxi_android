@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -30,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.R;
+import com.wuxi.app.adapter.AnswerStatisticsListAdapter;
 import com.wuxi.app.engine.ReplyStatisticsService;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
@@ -67,6 +67,8 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 	private ProgressBar list_pb;
 
 	private ListView mListView;
+	
+	private AnswerStatisticsListAdapter adapter;
 
 	protected static final String TAG = "GIP12345AnswerStatisticsFragment";
 
@@ -78,6 +80,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 	public static final int REPLY_LETTER_TYPE_LEADERBOX = 3; // 领导信箱
 
 	private List<AllCount> allCounts;
+	
 	private List<StatisticsLetter> letters;
 
 	private int letter_type = REPLY_LETTER_TYPE_MAYORBOX; // 默认为市长信箱
@@ -474,7 +477,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 		}).start();
 	}
 
-	/*
+	/**
 	 * 显示所有回复统计信息
 	 */
 	public void showAllCounts() {
@@ -497,7 +500,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 	 * @描述： 显示回复统计及列表
 	 */
 	public void showReplyLettersList() {
-		LettersListViewAdapter adapter = new LettersListViewAdapter();
+		 adapter = new AnswerStatisticsListAdapter(letters,context);
 
 		if (letters == null || letters.size() == 0) {
 			Toast.makeText(context, "对不起，暂无信息", Toast.LENGTH_SHORT).show();
@@ -505,84 +508,4 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 			mListView.setAdapter(adapter);
 		}
 	}
-
-	/**
-	 * @类名： LettersListViewAdapter
-	 * @描述： 列表适配器类
-	 * @作者： 罗森
-	 * @创建时间： 2013 2013-9-3 上午9:01:37
-	 * @修改时间：
-	 * @修改描述：
-	 * 
-	 */
-	public class LettersListViewAdapter extends BaseAdapter {
-
-		@Override
-		public int getCount() {
-			if (letters != null && letters.size() > 0) {
-				return letters.size();
-			} else {
-				return 0;
-			}
-
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return letters.get(position);
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		class ViewHolder {
-			public TextView depName_text;
-			public TextView acceptedNum_text;
-			public TextView replyNum_text;
-			public TextView replyRate_text;
-			public TextView replyDay_text;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHolder viewHolder = null;
-			if (convertView == null) {
-				convertView = mInflater.inflate(
-						R.layout.gip_12345_answerstati_listview_item, null);
-
-				viewHolder = new ViewHolder();
-
-				viewHolder.depName_text = (TextView) convertView
-						.findViewById(R.id.gip_12345_answerstati_depname);
-				viewHolder.acceptedNum_text = (TextView) convertView
-						.findViewById(R.id.gip_12345_answerstati_acceptedNum);
-				viewHolder.replyNum_text = (TextView) convertView
-						.findViewById(R.id.gip_12345_answerstati_replyNum);
-				viewHolder.replyRate_text = (TextView) convertView
-						.findViewById(R.id.gip_12345_answerstati_replyRate);
-				viewHolder.replyDay_text = (TextView) convertView
-						.findViewById(R.id.gip_12345_answerstati_replyDay);
-
-				convertView.setTag(viewHolder);
-			} else {
-				viewHolder = (ViewHolder) convertView.getTag();
-			}
-
-			viewHolder.depName_text.setText(letters.get(position).getDepname());
-			viewHolder.acceptedNum_text.setText(String.valueOf(letters.get(
-					position).getAcceptedNum()));
-			viewHolder.replyNum_text.setText(String.valueOf(letters.get(
-					position).getReplyNum()));
-			viewHolder.replyRate_text.setText(String.valueOf(letters.get(
-					position).getReplyRate()));
-			viewHolder.replyDay_text.setText(letters.get(position)
-					.getReplyDay());
-
-			return convertView;
-		}
-
-	}
-
 }

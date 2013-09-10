@@ -149,8 +149,6 @@ public class GoverInterPeopleHotReviewFragment extends
 							Constants.Urls.HOTREVIEW_LIST_URL, reviewType,
 							startIndex, endIndex);
 					if (null != hotReviewWrapper) {
-						// CacheUtil.put(menuItem.getChannelId(),
-						// titleChannels);// 缓存起来
 						hotReviews = hotReviewWrapper.getData();
 
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);

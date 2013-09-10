@@ -20,8 +20,8 @@ import org.json.JSONObject;
 
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
-import com.wuxi.domain.PartLeaderLetterWrapper;
-import com.wuxi.domain.PartLeaderLetterWrapper.PartLeaderLetter;
+import com.wuxi.domain.LetterWrapper;
+import com.wuxi.domain.LetterWrapper.Letter;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -58,7 +58,7 @@ public class PartLeaderMailListService extends Service {
 	 * @throws JSONException
 	 * @throws NODataException
 	 */
-	public PartLeaderLetterWrapper getLeaderLetterWrapper(int start, int end,
+	public LetterWrapper getLeaderLetterWrapper(int start, int end,
 			String doid) throws NetException, JSONException, NODataException {
 		// 检查网络链接状态
 		if (!checkNet()) {
@@ -76,22 +76,22 @@ public class PartLeaderMailListService extends Service {
 			JSONObject jsonObject = new JSONObject(resultStr);
 			JSONObject jresult = jsonObject.getJSONObject("result");
 
-			PartLeaderLetterWrapper leaderLetterWrapper = new PartLeaderLetterWrapper();
+			LetterWrapper letterWrapper = new LetterWrapper();
 
-			leaderLetterWrapper.setEnd(jresult.getInt("end"));
-			leaderLetterWrapper.setStart(jresult.getInt("start"));
-			leaderLetterWrapper.setNext(jresult.getBoolean("next"));
-			leaderLetterWrapper.setPrevious(jresult.getBoolean("previous"));
-			leaderLetterWrapper.setTotalRowsAmount(jresult
+			letterWrapper.setEnd(jresult.getInt("end"));
+			letterWrapper.setStart(jresult.getInt("start"));
+			letterWrapper.setNext(jresult.getBoolean("next"));
+			letterWrapper.setPrevious(jresult.getBoolean("previous"));
+			letterWrapper.setTotalRowsAmount(jresult
 					.getInt("totalRowsAmount"));
 
 			JSONArray jData = jresult.getJSONArray("data");
 
 			if (jData != null) {
-				leaderLetterWrapper.setLeaderLetters(parseData(jData));// 解析数组
+				letterWrapper.setData(parseData(jData));// 解析数组
 			}
 
-			return leaderLetterWrapper;
+			return letterWrapper;
 
 		} else {
 			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);// 没有获取到数据异常
@@ -105,35 +105,35 @@ public class PartLeaderMailListService extends Service {
 	 * @return List<Letter>
 	 * @throws JSONException
 	 */
-	private List<PartLeaderLetter> parseData(JSONArray jData)
+	private List<Letter> parseData(JSONArray jData)
 			throws JSONException {
 
 		if (jData != null) {
-			List<PartLeaderLetter> letterList = new ArrayList<PartLeaderLetter>();
+			List<Letter> letterList = new ArrayList<Letter>();
 
 			for (int index = 0; index < jData.length(); index++) {
 				JSONObject jb = jData.getJSONObject(index);
 
-				PartLeaderLetterWrapper leaderLetterWrapper = new PartLeaderLetterWrapper();
+				LetterWrapper letterWrapper = new LetterWrapper();
 
-				PartLeaderLetter leaderLetter = leaderLetterWrapper.new PartLeaderLetter();
+				Letter letter = letterWrapper.new Letter();
 
-				leaderLetter.setId(jb.getString("id"));
-				leaderLetter.setType(jb.getString("type"));
-				leaderLetter.setTitle(jb.getString("title"));
-				leaderLetter.setCode(jb.getString("code"));
-				leaderLetter.setAppraise(jb.getString("appraise"));
-				leaderLetter.setDepname(jb.getString("depname"));
+				letter.setId(jb.getString("id"));
+				letter.setType(jb.getString("type"));
+				letter.setTitle(jb.getString("title"));
+				letter.setCode(jb.getString("code"));
+				letter.setAppraise(jb.getString("appraise"));
+				letter.setDepname(jb.getString("depname"));
 
 				if (!jb.isNull("answerdate")) {
-					leaderLetter.setAnswerdate(TimeFormateUtil.formateTime(
+					letter.setAnswerdate(TimeFormateUtil.formateTime(
 							String.valueOf(jb.getLong("answerdate")),
 							TimeFormateUtil.DATE_PATTERN));
 				}
 
-				leaderLetter.setReadcount(jb.getString("readcount"));
+				letter.setReadcount(jb.getInt("readcount"));
 
-				letterList.add(leaderLetter);
+				letterList.add(letter);
 			}
 
 			return letterList;

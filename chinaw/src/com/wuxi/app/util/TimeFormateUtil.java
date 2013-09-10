@@ -34,8 +34,6 @@ public class TimeFormateUtil {
 	public static String formateTime(String time, String pattern) {
 		if (time != null) {		
 			Date date = new Date(Long.parseLong(time));
-			System.out.println("-->"+time);
-			
 			SimpleDateFormat formater = new SimpleDateFormat(pattern);
 			return formater.format(date);
 		} else{
