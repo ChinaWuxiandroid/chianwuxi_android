@@ -54,7 +54,7 @@ public class GoverInterPeople12345Fragment extends RadioButtonChangeFragment {
 			break;
 
 		case R.id.goverinterpeople_12345_radioButton_hotMail:
-			BaseFragment hotMailFragment = new GIP12345HotMail();
+			BaseFragment hotMailFragment = new GIP12345HotMailFragment();
 			onTransaction(hotMailFragment);
 			break;
 		case R.id.goverinterpeople_12345_radioButton_answerStatistics:

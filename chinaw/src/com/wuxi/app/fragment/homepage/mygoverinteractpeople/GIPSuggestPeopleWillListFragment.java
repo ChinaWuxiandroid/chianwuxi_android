@@ -1,5 +1,13 @@
-/**
- * 
+/**   
+ * @公司: 重庆智佳信息科技有限公司
+ * @文件: GIPSuggestPeopleWillListFragment.java 
+ * @包名： com.wuxi.app.fragment.homepage.mygoverinteractpeople 
+ * @描述: 民意征集列表Fragment
+ * @作者： 罗森   
+ * @创建时间： 2013 2013-9-9 下午2:03:41
+ * @修改时间：  
+ * @修改描述：
+ * @版本： V1.0   
  */
 package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
@@ -8,59 +16,71 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView.OnItemClickListener;
 
+import com.wuxi.app.BaseFragment;
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
-import com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345AllMailContentActivity;
-import com.wuxi.app.adapter.MayorLettersListAdapter;
-import com.wuxi.app.engine.LetterService;
-import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity;
+import com.wuxi.app.adapter.SuggestPeopleListAdapter;
+import com.wuxi.app.engine.PoliticsService;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
-import com.wuxi.domain.LetterWrapper;
-import com.wuxi.domain.LetterWrapper.Letter;
+import com.wuxi.domain.PoliticsWrapper;
+import com.wuxi.domain.PoliticsWrapper.Politics;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- * 
- * 市长信箱 最新信件列表 碎片界面
- * 
- * @author 智佳 罗森
+ * @类名： GIPSuggestPeopleWillListFragment
+ * @描述： 民意征集列表Fragment
+ * @作者： 罗森
+ * @创建时间： 2013 2013-9-9 下午2:03:41
+ * @修改时间：
+ * @修改描述：
  * 
  */
-public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment
-		implements OnScrollListener, OnClickListener, OnItemClickListener {
+public class GIPSuggestPeopleWillListFragment extends BaseFragment implements
+		OnItemClickListener, OnClickListener, OnScrollListener {
 
-	protected static final String TAG = "GIP12345MayorMailListFragment";
+	private final static String TAG = "GIPSuggestPeopleWillListFragment";
+
+	private Context context;
+
+	private View view;
 
 	private ListView mListView;
 	private ProgressBar list_pb;
-	private LetterWrapper letterWrapper;
-	private List<Letter> letters;
+	private PoliticsWrapper politicsWrapper;
+	private List<Politics> politics;
 
-	private MayorLettersListAdapter adapter;
+	private SuggestPeopleListAdapter adapter;
+
+	private static final int DATA__LOAD_SUCESS = 0;
+	private static final int DATA_LOAD_ERROR = 1;
+
+	private final int POLITICS_TYPE = 1; // politics类型，接口里0 为立法征集，1 为民意征集
+
+	private int type;
 
 	private int visibleLastIndex;
 	private int visibleItemCount;// 当前显示的总条数
-	// 数据加载成功标识
-	private static final int DATA__LOAD_SUCESS = 0;
-	// 数据加载失败标识
-	private static final int DATA_LOAD_ERROR = 1;
-
 	private final static int PAGE_NUM = 10;
 
 	private boolean isFirstLoad = true;// 是不是首次加载数据
@@ -70,6 +90,14 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment
 	private View loadMoreView;// 加载更多视图
 	private Button loadMoreButton;
 	private ProgressBar pb_loadmoore;
+
+	/**
+	 * @param type
+	 *            要设置的 type
+	 */
+	public void setType(int type) {
+		this.type = type;
+	}
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -81,54 +109,42 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment
 			}
 			switch (msg.what) {
 			case DATA__LOAD_SUCESS:
-				showLettersList();
+				showPoloticsList();
 				break;
 			case DATA_LOAD_ERROR:
-				list_pb.setVisibility(View.VISIBLE);
+				list_pb.setVisibility(View.INVISIBLE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
 			}
-		};
+		}
 	};
 
 	@Override
-	protected int getLayoutId() {
-		return R.layout.mayor_mail_list_fragment_layout;
-	}
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		view = inflater.inflate(R.layout.gip_suggest_peoplewill_list_layout,
+				null);
+		context = getActivity();
 
-	@Override
-	protected int getRadioGroupId() {
-		return 0;
-	}
-
-	@Override
-	protected int[] getRadioButtonIds() {
-		return null;
-	}
-
-	@Override
-	protected int getContentFragmentId() {
-		return 0;
-	}
-
-	@Override
-	protected void init() {
 		initLayout();
 
 		loadFirstData(0, PAGE_NUM);
+
+		return view;
 	}
 
 	/**
-	 * 初始化布局控件
+	 * @方法： initLayout
+	 * @描述： 初始化布局控件
 	 */
 	private void initLayout() {
 		mListView = (ListView) view
-				.findViewById(R.id.gip_12345_mayorbox_listView);
+				.findViewById(R.id.gip_suggest_peoplewill_listview);
 		mListView.setOnItemClickListener(this);
 		
 		list_pb = (ProgressBar) view
-				.findViewById(R.id.gip_12345_mayorbox_listView_pb);
-
+				.findViewById(R.id.gip_suggest_peoplewill_listview_pb);
+		
 		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
 				null);
 		loadMoreButton = (Button) loadMoreView
@@ -139,23 +155,25 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment
 		mListView.addFooterView(loadMoreView);// 为listView添加底部视图
 		mListView.setOnScrollListener(this);// 增加滑动监听
 		loadMoreButton.setOnClickListener(this);
-
 	}
 
 	/**
 	 * @方法： loadFirstData
-	 * @描述： 首次加载数据
+	 * @描述： 第一次加载数据
 	 * @param start
 	 * @param end
 	 */
 	private void loadFirstData(int start, int end) {
 		loadData(start, end);
 	}
-
+	
 	/**
-	 * 加载数据
+	 * @方法： loadData
+	 * @描述： 加载数据
+	 * @param startIndex
+	 * @param endIndex
 	 */
-	public void loadData(final int startIndex, final int endIndex) {
+	private void loadData(final int startIndex,final int endIndex) {
 		if (isFirstLoad || isSwitch) {
 			list_pb.setVisibility(View.VISIBLE);
 		} else {
@@ -168,24 +186,25 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment
 			public void run() {
 				isLoading = true;// 正在加载数据
 				Message message = handler.obtainMessage();
-				LetterService letterService = new LetterService(context);
+				PoliticsService politicsService = new PoliticsService(context);
+
+				String url = Constants.Urls.POLITICS_LIST_URL + "?type="
+						+ POLITICS_TYPE + "&start=" + startIndex + "&end="
+						+ endIndex + "&passed=" + type;
+				
 				try {
-					letterWrapper = letterService.getLetterLitstWrapper(
-							Constants.Urls.MAYOR_MAILBOX_URL, startIndex,
-							endIndex);
-					if (null != letterWrapper) {
+					politicsWrapper = politicsService.getPoliticsWrapper(url);
+					if (null != politicsWrapper) {
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 					} else {
 						message.obj = "error";
 						handler.sendEmptyMessage(DATA_LOAD_ERROR);
 					}
-
 				} catch (NetException e) {
 					LogUtil.i(TAG, "出错");
 					e.printStackTrace();
 					message.obj = e.getMessage();
 					handler.sendEmptyMessage(DATA_LOAD_ERROR);
-
 				} catch (JSONException e) {
 					e.printStackTrace();
 				} catch (NODataException e) {
@@ -195,6 +214,46 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment
 		}).start();
 	}
 
+	/**
+	 * @方法： showPoloticsList
+	 * @描述： 显示数据
+	 */
+	private void showPoloticsList() {
+		politics = politicsWrapper.getData();
+		
+		if (politics == null || politics.size() == 0) {
+			Toast.makeText(context, "对不起，暂无民意征集信息", Toast.LENGTH_SHORT).show();
+		} else {
+			if (isFirstLoad) {
+				adapter = new SuggestPeopleListAdapter(context, politics);
+				isFirstLoad = false;
+				mListView.setAdapter(adapter);
+				list_pb.setVisibility(View.GONE);
+				isLoading = false;
+			}else {
+				if (isSwitch) {
+					adapter.setPolitics(politics);
+					list_pb.setVisibility(View.GONE);
+				} else {
+					for (Politics pol : politics) {
+						adapter.addItem(pol);
+					}
+				}
+
+				adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
+				mListView.setSelection(visibleLastIndex - visibleItemCount + 1); // 设置选中项
+				isLoading = false;
+			}
+		}
+		
+		if (politicsWrapper.isNext()) {
+			pb_loadmoore.setVisibility(ProgressBar.GONE);
+			loadMoreButton.setText("点击加载更多");
+		} else {
+			mListView.removeFooterView(loadMoreView);
+		}
+	}
+	
 	/**
 	 * @方法： loadMoreData
 	 * @描述： 加载更多数据
@@ -206,57 +265,6 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment
 		} else {
 			loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_NUM);
 		}
-	}
-
-	/**
-	 * 显示列表
-	 */
-	public void showLettersList() {
-		letters = letterWrapper.getData();
-		if (letters != null || letters.size() > 0) {
-			if (isFirstLoad) {
-				adapter = new MayorLettersListAdapter(letters, context);
-				isFirstLoad = false;
-				mListView.setAdapter(adapter);
-				list_pb.setVisibility(View.GONE);
-				isLoading = false;
-			} else {
-				if (isSwitch) {
-					adapter.setLetters(letters);
-					list_pb.setVisibility(View.GONE);
-				}else{
-					for (Letter letter : letters) {
-						adapter.addItem(letter);
-					}
-				}
-				
-				adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
-				mListView.setSelection(visibleLastIndex - visibleItemCount + 1); // 设置选中项
-				isLoading = false;
-			}
-		} else {
-			Toast.makeText(context, "对不起，暂无市长信箱信息", Toast.LENGTH_SHORT).show();
-		}
-
-		if (letterWrapper.isNext()) {
-			pb_loadmoore.setVisibility(ProgressBar.GONE);
-			loadMoreButton.setText("点击加载更多");
-		} else {
-			mListView.removeFooterView(loadMoreView);
-		}
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> adapterView, View arg1,
-			int position, long arg3) {
-		Letter letter = (Letter) adapterView.getItemAtPosition(position);
-
-		Intent intent = new Intent(getActivity(),
-				GIP12345AllMailContentActivity.class);
-		intent.putExtra("letter", letter);
-
-		MainTabActivity.instance.addView(intent);
-
 	}
 
 	@Override
@@ -274,10 +282,9 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment
 
 	@Override
 	public void onClick(View v) {
-
 		switch (v.getId()) {
 		case R.id.loadMoreButton:
-			if (letterWrapper != null && letterWrapper.isNext()) {// 还有下一条记录
+			if (politicsWrapper != null && politicsWrapper.isNext()) {// 还有下一条记录
 
 				isSwitch = false;
 				loadMoreButton.setText("loading.....");
@@ -285,6 +292,18 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment
 			}
 			break;
 		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> adapterView, View arg1,
+			int position, long arg3) {
+		Politics politics = (Politics) adapterView.getItemAtPosition(position);
+
+		Intent intent = new Intent(getActivity(),
+				PepoleIdeaCollectActivity.class);
+		intent.putExtra("politics", politics);
+
+		MainTabActivity.instance.addView(intent);
 	}
 
 }

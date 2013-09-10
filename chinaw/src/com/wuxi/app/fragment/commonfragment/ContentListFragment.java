@@ -189,7 +189,7 @@ public abstract class ContentListFragment extends BaseFragment implements
 		}).start();
 	}
 
-	public void loadMore(View view) {
+	private void loadMore(View view) {
 		if (isLoading) {
 			return;
 		} else {

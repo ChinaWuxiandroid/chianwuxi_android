@@ -1,160 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/gip_12345_complaint_tilte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
+        android:layout_marginTop="8sp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="测试"
+        android:textSize="14sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
+        android:layout_marginTop="5sp"
+        android:orientation="horizontal" >
 
         <TextView
-            android:id="@+id/gip_12345_complaint_tilte"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:lines="1" />
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="信件编号："
+            android:textColor="@color/gip_txt_gray"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/gip_12345_complaint_code"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="wx20130602031"
+            android:textColor="@color/gip_txt_gray"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:text="信件分类："
+            android:textColor="@color/gip_txt_gray"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/gip_12345_complaint_type"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="咨询"
+            android:textColor="@color/gip_txt_gray"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
+        android:layout_marginTop="5sp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="答复部门："
+            android:textColor="@color/gip_txt_gray"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/gip_12345_complaint_depname"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="市建设局"
+            android:textColor="@color/gip_txt_gray"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
+        android:layout_marginTop="5sp"
+        android:orientation="horizontal" >
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal" >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="信件编号："
+                android:text="答复时间："
                 android:textColor="@color/gip_txt_gray"
                 android:textSize="10sp" />
 
             <TextView
-                android:id="@+id/gip_12345_complaint_code"
+                android:id="@+id/gip_12345_complaint_answerDate"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="wx20130602031"
+                android:text="2013-06-04"
                 android:textColor="@color/gip_txt_gray"
                 android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
-                android:text="信件分类："
+                android:text="预览量："
                 android:textColor="@color/gip_txt_gray"
                 android:textSize="10sp" />
 
             <TextView
-                android:id="@+id/gip_12345_complaint_type"
+                android:id="@+id/gip_12345_complaint_readcount"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="咨询"
+                android:text="123"
                 android:textColor="@color/gip_txt_gray"
                 android:textSize="10sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal" >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="答复部门："
+                android:layout_marginLeft="10dp"
+                android:text="满意度评价："
                 android:textColor="@color/gip_txt_gray"
                 android:textSize="10sp" />
 
             <TextView
-                android:id="@+id/gip_12345_complaint_depname"
+                android:id="@+id/gip_12345_complaint_appraise"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="市建设局"
+                android:text="满意"
                 android:textColor="@color/gip_txt_gray"
                 android:textSize="10sp" />
         </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="答复时间："
-                    android:textColor="@color/gip_txt_gray"
-                    android:textSize="10sp" />
-
-                <TextView
-                    android:id="@+id/gip_12345_complaint_answerDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="2013-06-04"
-                    android:textColor="@color/gip_txt_gray"
-                    android:textSize="10sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:text="预览量："
-                    android:textColor="@color/gip_txt_gray"
-                    android:textSize="10sp" />
-
-                <TextView
-                    android:id="@+id/gip_12345_complaint_readcount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="123"
-                    android:textColor="@color/gip_txt_gray"
-                    android:textSize="10sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:text="满意度评价："
-                    android:textColor="@color/gip_txt_gray"
-                    android:textSize="10sp" />
-
-                <TextView
-                    android:id="@+id/gip_12345_complaint_appraise"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="满意"
-                    android:textColor="@color/gip_txt_gray"
-                    android:textSize="10sp" />
-            </LinearLayout>
-        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>

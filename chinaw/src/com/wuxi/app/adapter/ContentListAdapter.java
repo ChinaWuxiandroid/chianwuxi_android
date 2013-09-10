@@ -9,7 +9,6 @@ import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -61,7 +60,28 @@ public class ContentListAdapter extends BaseAdapter {
 		TextView title_time;// 时间
 	}
 
-	
+	/*
+	 * @Override public View getView(int position, View convertView, ViewGroup
+	 * parent) {
+	 * 
+	 * Content content = contents.get(position); ViewHolder viewHolder = null;
+	 * if (convertView == null) { convertView = View.inflate(context,
+	 * R.layout.content_list_item_layout, null); viewHolder = new ViewHolder();
+	 * 
+	 * viewHolder.title_text = (TextView) convertView
+	 * .findViewById(R.id.content_list_tv_title); viewHolder.title_time =
+	 * (TextView) convertView .findViewById(R.id.content_list_tv_time);
+	 * convertView.setTag(viewHolder); } else { viewHolder = (ViewHolder)
+	 * convertView.getTag(); }
+	 * 
+	 * String title = ""; title = content.getTitle();
+	 * 
+	 * viewHolder.title_text.setText("." + title);
+	 * viewHolder.title_time.setText("(" +
+	 * TimeFormateUtil.formateTime(content.getPublishTime(),
+	 * TimeFormateUtil.DATE_PATTERN) + ")"); return convertView; }
+	 */
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -86,15 +106,15 @@ public class ContentListAdapter extends BaseAdapter {
 				+ TimeFormateUtil.formateTime(content.getPublishTime(),
 						TimeFormateUtil.DATE_PATTERN) + ")";
 
-		
-		
-		String showText=title+"   "+time;
-		viewHolder.title_text.setText(showText,BufferType.EDITABLE);
-		
-		Spannable spannable=(Spannable) viewHolder.title_text.getText();
-		
-		spannable.setSpan(new RelativeSizeSpan(1.1f), 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		spannable.setSpan(new ForegroundColorSpan(Color.parseColor("#808080")), title.length(),showText.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+		String showText = title + "   " + time;
+		viewHolder.title_text.setText(showText, BufferType.EDITABLE);
+
+		Spannable spannable = (Spannable) viewHolder.title_text.getText();
+		spannable.setSpan(new AbsoluteSizeSpan(28), 0, title.length(),
+				Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		spannable.setSpan(new ForegroundColorSpan(Color.parseColor("#808080")),
+				title.length(), showText.length(),
+				Spannable.SPAN_INCLUSIVE_INCLUSIVE);
 		viewHolder.title_text.setText(spannable);
 		return convertView;
 	}

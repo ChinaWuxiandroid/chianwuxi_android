@@ -37,7 +37,7 @@ import com.wuxi.app.R;
 import com.wuxi.app.adapter.MailTypeAdapter;
 import com.wuxi.app.adapter.QueryMailContentTypeAdapter;
 import com.wuxi.app.engine.MailTypeService;
-import com.wuxi.app.engine.PartLeaderMailService;
+import com.wuxi.app.engine.QueryLetterDepService;
 import com.wuxi.app.engine.QueryMailContentTypeService;
 import com.wuxi.app.engine.ReplyStatisticsService;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
@@ -554,7 +554,7 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 	}
 
 	/**
-	 * 先加载所有统计信息，下面的信息，按 统计按钮后加载
+	 * 先加载所有统计信息
 	 * */
 	private void loadAllCountData() {
 		new Thread(new Runnable() {
@@ -601,10 +601,9 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 			@Override
 			public void run() {
 				Message msg = handler.obtainMessage();
-				PartLeaderMailService mailService = new PartLeaderMailService(
-						context);
+				QueryLetterDepService depService = new QueryLetterDepService(context);
 				try {
-					leaderMailWrapper = mailService.getPartLeaderMailWrapper();
+					leaderMailWrapper = depService.getPartLeaderMailWrapper();
 
 					if (leaderMailWrapper != null) {
 						depts = leaderMailWrapper.getPartLeaderMails();

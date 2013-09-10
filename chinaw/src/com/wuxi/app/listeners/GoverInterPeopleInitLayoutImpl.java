@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345CMayorMailBoxFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345HotMail;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345HotMailFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345PartLeaderMailboxFragment;
@@ -15,7 +15,7 @@ import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineInternetGover
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMinePublicForumFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineSuggestionPlatformFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWill;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveFragment;
@@ -55,7 +55,7 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 			GIP12345ComplaintFragment gIP12345ComplaintFragment=null;
 			GIP12345PartLeaderMailboxFragment gIP12345PartLeaderMailboxFragment=null;
 			GIP12345CMayorMailBoxFragment gIP12345CMayorMailBoxFragment=null;
-			GIP12345HotMail gIP12345HotMail=null;
+			GIP12345HotMailFragment gIP12345HotMail=null;
 			GIP12345AnswerStatisticsFragment gIP12345AnswerStatisticsFragment=null;
 			GIP12345IWantMailFragment gIP12345IWantMailFragment=null;
 
@@ -64,7 +64,7 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 			 */
 			GIPSuggestLawSuggestionFragment gIPSuggestLawSuggestionFragment=null;
 			GIPSuggestSurveyFragment gIPSuggestSurveyFragment=null;
-			GIPSuggestPeopleWill gIPSuggestPeopleWill=null;
+			GIPSuggestPeopleWillFragment gIPSuggestPeopleWill=null;
 			/**
 			 * 视频直播平台
 			 */
@@ -137,9 +137,8 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 				gIP12345CMayorMailBoxFragment.setParentMenuItem(menuItem);
 				initLayoutListner.bindContentLayout(gIP12345CMayorMailBoxFragment);
 			}
-			else if(fragment instanceof GIP12345HotMail){
-				gIP12345HotMail=(GIP12345HotMail)fragment;
-				gIP12345HotMail.setParentMenuItem(menuItem);
+			else if(fragment instanceof GIP12345HotMailFragment){
+				gIP12345HotMail=(GIP12345HotMailFragment)fragment;
 				initLayoutListner.bindContentLayout(gIP12345HotMail);
 			}
 			else if(fragment instanceof GIP12345IWantMailFragment){
@@ -166,8 +165,8 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 				gIPSuggestSurveyFragment.setParentMenuItem(menuItem);
 				initLayoutListner.bindContentLayout(gIPSuggestSurveyFragment);
 			}
-			else if(fragment instanceof GIPSuggestPeopleWill){
-				gIPSuggestPeopleWill=(GIPSuggestPeopleWill)fragment;
+			else if(fragment instanceof GIPSuggestPeopleWillFragment){
+				gIPSuggestPeopleWill=(GIPSuggestPeopleWillFragment)fragment;
 				gIPSuggestPeopleWill.setParentMenuItem(menuItem);
 				initLayoutListner.bindContentLayout(gIPSuggestPeopleWill);
 			}

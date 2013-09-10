@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" 
-    android:background="@android:color/transparent"
+    android:background="#A9A9A9"
      android:visibility="gone">
 
     <LinearLayout
@@ -74,7 +74,7 @@
 
         <Spinner
             android:id="@+id/query_mail_email_sort_spinner"
-            android:layout_width="108sp"
+            android:layout_width="70sp"
             android:layout_height="32sp"
             android:background="@drawable/spiner_bg" />
     </LinearLayout>
@@ -161,7 +161,7 @@
 
         <Spinner
             android:id="@+id/query_mail_accept_department_spinner"
-            android:layout_width="205sp"
+            android:layout_width="175sp"
             android:layout_height="32sp"
             android:background="@drawable/spiner_bg" />
     </LinearLayout>
@@ -184,7 +184,7 @@
 
         <Spinner
             android:id="@+id/query_mail_reply_department_spinner"
-            android:layout_width="205sp"
+            android:layout_width="175sp"
             android:layout_height="32sp"
             android:background="@drawable/spiner_bg" />
     </LinearLayout>

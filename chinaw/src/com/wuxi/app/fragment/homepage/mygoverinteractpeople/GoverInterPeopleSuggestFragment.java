@@ -34,7 +34,7 @@ public class GoverInterPeopleSuggestFragment extends GoverMenuItemTitleFragment 
 				} else if (menu.getName().endsWith("网上调查")) {
 					menu.setContentFragment(GIPSuggestSurveyFragment.class);
 				} else if (menu.getName().endsWith("民意征集")) {
-					menu.setContentFragment(GIPSuggestPeopleWill.class);
+					menu.setContentFragment(GIPSuggestPeopleWillFragment.class);
 				}
 			}
 		}

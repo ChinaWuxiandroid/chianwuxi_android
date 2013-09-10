@@ -42,7 +42,7 @@ public class PartLeaderMailWrapper {
 		/**
 		 * @字段： serialVersionUID
 		 * @类型： long
-		 * @描述： TODO 
+		 * @描述： 序列化序号 
 		 */
 		private static final long serialVersionUID = 1L;
 		

@@ -1,95 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/gip_suggest_peoplewill_listitem_tile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
+        android:layout_marginTop="8sp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="测试"
+        android:textColor="@color/gip_second_frame_button_brown"
+        android:textSize="14sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
+        android:layout_marginTop="3sp"
+        android:orientation="horizontal" >
 
         <TextView
-            android:id="@+id/gip_suggest_peoplewill_listitem_tile"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:ellipsize="end"
-            android:lines="2"
-            android:textColor="@color/gip_second_frame_button_brown" />
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="发布时间："
+            android:textColor="@color/gip_txt_gray"
+            android:textSize="10sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal" >
+        <TextView
+            android:id="@+id/gip_suggest_peoplewill_textview_begintime"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="2013-06-04"
+            android:textColor="@color/gip_txt_gray"
+            android:textSize="10sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="发布时间："
-                android:textColor="@color/gip_txt_gray"
-                android:textSize="10sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:text="截止时间："
+            android:textColor="@color/gip_txt_gray"
+            android:textSize="10sp" />
 
-            <TextView
-                android:id="@+id/gip_suggest_peoplewill_textview_begintime"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="2013-06-04"
-                android:textColor="@color/gip_txt_gray"
-                android:textSize="10sp" />
+        <TextView
+            android:id="@+id/gip_suggest_peoplewill_textview_endtime"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="2013-06-30"
+            android:textColor="@color/gip_txt_gray"
+            android:textSize="10sp" />
+    </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:text="截止时间："
-                android:textColor="@color/gip_txt_gray"
-                android:textSize="10sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
+        android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/gip_suggest_peoplewill_textview_endtime"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="2013-06-30"
-                android:textColor="@color/gip_txt_gray"
-                android:textSize="10sp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/gip_suggest_peoplewill_dep"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="发布部门："
+            android:textColor="@color/gip_txt_gray"
+            android:textSize="10sp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" >
+        <TextView
+            android:id="@+id/gip_suggest_peoplewill_textview_depname"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="无锡市总工会"
+            android:textColor="@color/gip_txt_gray"
+            android:textSize="10sp" />
 
-            <TextView
-                android:id="@+id/gip_suggest_peoplewill_dep"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="发布部门："
-                android:textColor="@color/gip_txt_gray"
-                android:textSize="10sp" />
-
-            <TextView
-                android:id="@+id/gip_suggest_peoplewill_textview_depname"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@+id/gip_suggest_peoplewill_dep"
-                android:text="无锡市总工会"
-                android:textColor="@color/gip_txt_gray"
-                android:textSize="10sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:text="参与讨论"
-                android:textColor="@color/gip_txt_green"
-                android:textSize="12sp" />
-        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20sp"
+            android:text="参与讨论"
+            android:textColor="@color/gip_txt_green"
+            android:textSize="12sp" />
     </LinearLayout>
 
 </LinearLayout>

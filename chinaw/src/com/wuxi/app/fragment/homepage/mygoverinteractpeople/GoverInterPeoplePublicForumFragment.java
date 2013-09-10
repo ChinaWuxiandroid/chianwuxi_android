@@ -43,11 +43,6 @@ import com.wuxi.exception.NetException;
 public class GoverInterPeoplePublicForumFragment extends
 		RadioButtonChangeFragment {
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
-
 	protected static final String TAG = "GoverInterPeoplePublicForumFragment";
 
 	// 贴子列表

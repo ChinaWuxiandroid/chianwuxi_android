@@ -10,10 +10,13 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
-        android:layout_marginTop="5sp"
+        android:layout_marginTop="8sp"
+        android:layout_marginBottom="3sp"
+        android:ellipsize="end"
+        android:lines="1"
         android:text="无锡市总工会机关作风建设问卷调查"
         android:textColor="@color/gip_second_frame_button_brown"
-        android:textSize="12sp" />
+        android:textSize="14sp" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -27,7 +30,7 @@
             android:layout_marginLeft="5sp"
             android:layout_marginTop="5sp"
             android:textColor="@color/gip_second_frame_button_brown" 
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:text="发帖时间："/>
         
         <TextView 
@@ -37,7 +40,7 @@
             android:layout_marginRight="5sp"
             android:layout_marginTop="5sp"
             android:textColor="@color/gip_second_frame_button_brown" 
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:text="2013-04-09"
             />
     </LinearLayout>
@@ -45,6 +48,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="3sp"
         android:orientation="horizontal" >
 
         <TextView
@@ -54,7 +58,7 @@
             android:layout_marginLeft="5sp"
             android:layout_marginTop="5sp"
             android:textColor="@color/gip_second_frame_button_brown" 
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:text="点击："/>
         
         <TextView 
@@ -64,7 +68,7 @@
             android:layout_marginRight="5sp"
             android:layout_marginTop="5sp"
             android:textColor="@color/gip_second_frame_button_brown" 
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:text="12345"
             />
         
@@ -75,7 +79,7 @@
             android:layout_marginLeft="5sp"
             android:layout_marginTop="5sp"
             android:textColor="@color/gip_second_frame_button_brown" 
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:text="回应："/>
         
         <TextView 
@@ -85,7 +89,7 @@
             android:layout_marginRight="5sp"
             android:layout_marginTop="5sp"
             android:textColor="@color/gip_second_frame_button_brown" 
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:text="321"
             />
         
@@ -96,7 +100,7 @@
             android:layout_marginLeft="5sp"
             android:layout_marginTop="5sp"
             android:textColor="@color/gip_second_frame_button_brown" 
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:text="发帖人："/>
         
         <TextView 
@@ -106,7 +110,7 @@
             android:layout_marginRight="5sp"
             android:layout_marginTop="5sp"
             android:textColor="@color/gip_second_frame_button_brown" 
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:text="张克平"
             />
         

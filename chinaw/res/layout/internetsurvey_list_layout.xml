@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="3sp"
     android:orientation="vertical" >
 
     <TextView
@@ -11,14 +10,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8sp"
         android:layout_marginBottom="8sp"
-        android:layout_marginLeft="3sp"
-        android:layout_marginRight="5sp" />
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp" 
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="测试"
+        android:textSize="14sp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="3sp"
+        android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
+        android:layout_marginBottom="3sp"
         android:orientation="horizontal" >
 
         <TextView
@@ -26,14 +30,14 @@
             android:layout_height="wrap_content"
             android:text="发布时间："
             android:textColor="#808080"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/internet_begintime_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#808080"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -41,14 +45,14 @@
             android:layout_marginLeft="5sp"
             android:text="截止时间："
             android:textColor="#808080"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/internet_endtime_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#808080"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
     </LinearLayout>
 
 </LinearLayout>
