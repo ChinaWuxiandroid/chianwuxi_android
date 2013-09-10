@@ -30,7 +30,7 @@ import com.wuxi.exception.NetException;
  * @author 杨宸 智佳
  * */
 
-public class GIP12345HotMail extends RadioButtonChangeFragment {
+public class GIP12345HotMailFragment extends RadioButtonChangeFragment {
 
 	private ListView mListView;
 	private ProgressBar list_pb;

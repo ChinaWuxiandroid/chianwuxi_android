@@ -39,7 +39,7 @@ import com.wuxi.exception.NetException;
  * */
 
 @SuppressLint("ShowToast")
-public class GIPSuggestPeopleWill extends RadioButtonChangeFragment {
+public class GIPSuggestPeopleWillFragment extends RadioButtonChangeFragment {
 
 	private ListView mListView;
 	private ProgressBar list_pb;

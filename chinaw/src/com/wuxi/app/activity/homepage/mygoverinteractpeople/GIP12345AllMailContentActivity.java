@@ -45,7 +45,7 @@ import com.wuxi.exception.NetException;
  */
 @SuppressWarnings("deprecation")
 @SuppressLint("SetJavaScriptEnabled")
-public class GIP12345MayorMailContentActivity extends BaseItemContentActivity {
+public class GIP12345AllMailContentActivity extends BaseItemContentActivity {
 
 	private static final String TAG = "GIP12345MayorMailContentActivity";
 
@@ -101,7 +101,7 @@ public class GIP12345MayorMailContentActivity extends BaseItemContentActivity {
 				break;
 
 			case DATA_LOAD_ERROR:
-				Toast.makeText(GIP12345MayorMailContentActivity.this, tip, Toast.LENGTH_SHORT).show();
+				Toast.makeText(GIP12345AllMailContentActivity.this, tip, Toast.LENGTH_SHORT).show();
 				break;
 			}
 		}
@@ -160,7 +160,7 @@ public class GIP12345MayorMailContentActivity extends BaseItemContentActivity {
 
 			@Override
 			public void onClick(View v) {
-				popWindow = makePopupWindow(GIP12345MayorMailContentActivity.this);
+				popWindow = makePopupWindow(GIP12345AllMailContentActivity.this);
 				int[] xy = new int[2];
 				commentBtn.getLocationOnScreen(xy);
 				popWindow.showAtLocation(commentBtn, Gravity.BOTTOM
@@ -253,7 +253,7 @@ public class GIP12345MayorMailContentActivity extends BaseItemContentActivity {
 
 			@Override
 			public void run() {
-				GIPMailInfoService service = new GIPMailInfoService(GIP12345MayorMailContentActivity.this);
+				GIPMailInfoService service = new GIPMailInfoService(GIP12345AllMailContentActivity.this);
 				letter = (Letter) getIntent().getExtras().get("letter");
 				try {
 					wrapper = service.getGipMailInfoWrapper(letter.getId());

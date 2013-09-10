@@ -99,7 +99,7 @@
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumPostActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:121
--keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345MayorMailContentActivity { <init>(...); }
+-keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345AllMailContentActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:122
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPContentDetailWebActivity { <init>(...); }
