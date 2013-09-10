@@ -118,7 +118,7 @@
 
         <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumContentActivity" />
         <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumPostActivity" />
-        <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345MayorMailContentActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345AllMailContentActivity" />
         <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPContentDetailWebActivity" />
         <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.HotReviewContentActivity" />
         <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity" />
