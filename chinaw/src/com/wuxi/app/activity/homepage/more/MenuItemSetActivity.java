@@ -104,12 +104,9 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 		public View getView(int position, View convertView, ViewGroup parent) {
 
 			String name = "";
-			Object o = items.get(position);
-			if (o instanceof MenuItem) {
-				name = ((MenuItem) o).getName();
-			} else if (o instanceof Channel) {
-				name = ((Channel) o).getChannelName();
-			}
+			MenuItem menuItem  = (MenuItem) items.get(position);
+			
+			name=menuItem.getName();
 
 			ViewHolder viewHolder = null;
 			if (convertView == null) {
@@ -131,7 +128,12 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 			}
 
 			viewHolder.title_text.setText(name);
-			viewHolder.slipButton.setChecked(true);
+			if(menuItem.getParentMenuId()==null){
+				viewHolder.slipButton.setChecked(true);
+			}else{
+				viewHolder.slipButton.setChecked(false);
+			}
+			
 			viewHolder.slipButton.SetOnChangedListener("", this);
 			return convertView;
 

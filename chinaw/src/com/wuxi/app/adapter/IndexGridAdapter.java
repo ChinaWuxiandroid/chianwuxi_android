@@ -76,7 +76,7 @@ public class IndexGridAdapter extends BasicAdapter {
 			}
 
 		} else {
-			viewHolder.image.setImageResource(image[position]);// 图片暂时做死了，
+			viewHolder.image.setImageResource(image[0]);// 图片暂时做死了，
 		}
 
 		viewHolder.title_text.setText(menuItem.getName());
