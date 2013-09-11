@@ -298,7 +298,7 @@ public class Constants {
 				+ "/letter/submit.json";
 
 		/**
-		 * 政务大厅视频播放
+		 * 政民互动视频播放
 		 */
 		public static final String PLAY_VIDEO_URL = BASIC_URL
 				+ "/interview/{id}/video.json";

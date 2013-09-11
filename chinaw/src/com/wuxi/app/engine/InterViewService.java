@@ -43,16 +43,13 @@ public class InterViewService extends Service {
 
 			JSONObject jsonObject = new JSONObject(resultStr);
 
-			if (jsonObject.has("result")) {
-				JSONObject jb=jsonObject.getJSONObject("result");
-				if(jb.has("errorCode")){
-					return null;
-				}else{
-					return jb.toString();
-				}
+			if(jsonObject.getBoolean("success")){
 				
-				
+				return jsonObject.getString("result");
+			}else{
+				return null;
 			}
+			
 
 		}
 		return null;

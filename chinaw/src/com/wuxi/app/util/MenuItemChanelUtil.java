@@ -3,6 +3,19 @@
  */
 package com.wuxi.app.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+
 import com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity;
 import com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity;
 import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonActivity;
@@ -18,11 +31,13 @@ import com.wuxi.domain.MenuItem;
  */
 public class MenuItemChanelUtil {
 
+	private static final String TAG = "MenuItemChanelUtil";
+
 	/**
 	 * 
-	 *@author 泰得利通 wanglu 
+	 * @author 泰得利通 wanglu
 	 * @param menuItem
-	 * 根据菜单名称获取Activity
+	 *            根据菜单名称获取Activity
 	 * @return
 	 */
 	public static Class<?> getActivityClassByName(MenuItem menuItem) {
@@ -54,4 +69,6 @@ public class MenuItemChanelUtil {
 
 		return null;
 	}
+
+	
 }

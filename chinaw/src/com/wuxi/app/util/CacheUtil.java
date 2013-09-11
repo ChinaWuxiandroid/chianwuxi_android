@@ -7,8 +7,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import android.os.Environment;
 
@@ -23,6 +25,7 @@ import com.wuxi.domain.MenuItem;
 public class CacheUtil {
 
 	private static Map<String, Object> mapCache = new HashMap<String, Object>();
+	
 	
 	private static CacheUtil instance;// 缓存
 
@@ -46,6 +49,8 @@ public class CacheUtil {
 	public static Object get(String key) {
 		return mapCache.get(key);
 	}
+	
+	
 
 	/**
 	 * 

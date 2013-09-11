@@ -52,6 +52,8 @@ public class MenuItemChannelIndexUtil {
 		indexMap.put(parentId, subIndex);
 
 	}
+	
+	
 
 	/**
 	 * 
@@ -75,7 +77,27 @@ public class MenuItemChannelIndexUtil {
 		indexMap.put(parentId, subIndex);
 
 	}
+	
+	public boolean containsKey(String parentId){
+		return indexMap.containsKey(parentId);
+	}
 
+	/**
+	 * 
+	 *wanglu 泰得利通 
+	 * @param parentId
+	 * @param subkey
+	 * @return
+	 */
+	public boolean containsKey(String parentId,String subkey){
+		if(indexMap.containsKey(parentId)){
+			
+			return indexMap.get(parentId).containsKey(subkey);
+		}else{
+			return false;
+		}
+		
+	}
 	/**
 	 * 
 	 * 获取菜单或频道所在子菜单子频道的索引位置
