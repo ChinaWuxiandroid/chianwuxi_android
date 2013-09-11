@@ -95,8 +95,6 @@ public class PartLeaderBoxListFragment extends BaseFragment {
 	 */
 	private void initLayout() {
 
-		
-		
 		mListView = (ListView) view
 				.findViewById(R.id.gip_12345_leaderbox_listview);
 		list_pb = (ProgressBar) view
@@ -150,7 +148,7 @@ public class PartLeaderBoxListFragment extends BaseFragment {
 	public void showLettersList() {
 		PortLeaderListAdapter adapter = new PortLeaderListAdapter();
 		if (leaderMails == null || leaderMails.size() == 0) {
-			Toast.makeText(context, "对不起，暂无信息", 2000).show();
+			Toast.makeText(context, "对不起，暂无信息", Toast.LENGTH_SHORT).show();
 		} else {
 			
 			mListView.setAdapter(adapter);
