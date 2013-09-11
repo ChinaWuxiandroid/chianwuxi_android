@@ -29,5 +29,7 @@
             android:cacheColorHint="@android:color/transparent" >
         </ListView>
     </FrameLayout>
+    
+    <GridView ></GridView>
 
 </LinearLayout>

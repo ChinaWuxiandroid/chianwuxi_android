@@ -16,14 +16,13 @@
         android:lines="1"
         android:text="测试"
         android:textColor="@color/gip_second_frame_button_brown"
-        android:textSize="14sp" />
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
-        android:layout_marginTop="3sp"
         android:orientation="horizontal" >
 
         <TextView
@@ -31,7 +30,7 @@
             android:layout_height="match_parent"
             android:text="发布时间："
             android:textColor="@color/gip_txt_gray"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/gip_suggest_peoplewill_textview_begintime"
@@ -39,7 +38,7 @@
             android:layout_height="match_parent"
             android:text="2013-06-04"
             android:textColor="@color/gip_txt_gray"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -47,7 +46,7 @@
             android:layout_marginLeft="15dp"
             android:text="截止时间："
             android:textColor="@color/gip_txt_gray"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/gip_suggest_peoplewill_textview_endtime"
@@ -55,7 +54,7 @@
             android:layout_height="match_parent"
             android:text="2013-06-30"
             android:textColor="@color/gip_txt_gray"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -64,6 +63,7 @@
         android:layout_marginTop="5sp"
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
+        android:layout_marginBottom="5sp"
         android:orientation="horizontal" >
 
         <TextView
@@ -72,7 +72,7 @@
             android:layout_height="match_parent"
             android:text="发布部门："
             android:textColor="@color/gip_txt_gray"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/gip_suggest_peoplewill_textview_depname"
@@ -80,7 +80,7 @@
             android:layout_height="match_parent"
             android:text="无锡市总工会"
             android:textColor="@color/gip_txt_gray"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -88,7 +88,7 @@
             android:layout_marginLeft="20sp"
             android:text="参与讨论"
             android:textColor="@color/gip_txt_green"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
     </LinearLayout>
 
 </LinearLayout>
