@@ -2,7 +2,6 @@ package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
 import java.util.List;
 
-import com.wuxi.app.BaseFragment;
 import com.wuxi.app.listeners.GoverInterPeopleInitLayoutImpl;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
 import com.wuxi.domain.MenuItem;
@@ -15,7 +14,7 @@ import com.wuxi.domain.MenuItem;
 public class GoverInterPeopleSuggestFragment extends GoverMenuItemTitleFragment {
 
 	/**
-	 * 
+	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
 

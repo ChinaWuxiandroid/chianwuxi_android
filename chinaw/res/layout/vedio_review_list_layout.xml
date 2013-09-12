@@ -9,7 +9,7 @@
         android:layout_width="91dp"
         android:layout_height="69dp"
         android:layout_marginLeft="5sp"
-        android:layout_marginTop="5sp"
+        android:layout_marginTop="15sp"
         android:src="@drawable/video_bg" />
 
     <LinearLayout
@@ -28,20 +28,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="访问主题：" 
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
 
             <TextView
                 android:id="@+id/review_title_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3sp"
                 android:layout_marginRight="5sp"
                 android:text="无锡地税局长丁源专访---“百姓身边的地税”" 
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3sp"
             android:orientation="horizontal" >
 
             <TextView
@@ -49,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:text="时间："
                 android:textColor="#808080"
-                android:textSize="11sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/review_time_text"
@@ -58,12 +60,14 @@
                 android:layout_marginRight="5sp"
                 android:text="2013年3月28日 上午10:00--11:00"
                 android:textColor="#808080"
-                android:textSize="11sp" />
+                android:textSize="12sp" />
         </LinearLayout>
         
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3sp"
+            android:layout_marginBottom="5sp"
             android:orientation="horizontal" >
 
             <TextView
@@ -71,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:text="嘉宾："
                 android:textColor="#808080"
-                android:textSize="11sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/review_guest_text"
@@ -80,7 +84,7 @@
                 android:layout_marginRight="5sp"
                 android:text="无锡市地税局党组书记、局长 丁源"
                 android:textColor="#808080"
-                android:textSize="11sp" />
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 

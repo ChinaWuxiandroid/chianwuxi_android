@@ -13,7 +13,7 @@ import android.support.v4.app.Fragment;
 public class MenuItem implements Comparable<MenuItem>, Serializable {
 
 	/**
-	 * 
+	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = -963854395463548938L;
 

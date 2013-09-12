@@ -53,6 +53,7 @@ public class HotReviewService extends Service {
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
+		
 		url = url + "?type=" + type + "&start=" + startIndex + "&end="
 				+ endIndex;
 

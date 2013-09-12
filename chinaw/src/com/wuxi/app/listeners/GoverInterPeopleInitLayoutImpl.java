@@ -45,7 +45,7 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 			GIPMine12345Fragment gIPMine12345Fragment=null;
 			GIPMineSuggestionPlatformFragment gIPMineSuggestionPlatformFragment=null;
 			GIPMineInternetGoverSaloonFragment gIPMineInternetGoverSaloonFragment=null;
-			GIPMineInfoPublicPlatformFragment gIPMineInfoPublicPlatformFragment=null;
+//			GIPMineInfoPublicPlatformFragment gIPMineInfoPublicPlatformFragment=null;
 			GIPMinePublicForumFragment gIPMinePublicForumFragment=null;
 
 			/**
@@ -65,17 +65,17 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 			GIPSuggestLawSuggestionFragment gIPSuggestLawSuggestionFragment=null;
 			GIPSuggestSurveyFragment gIPSuggestSurveyFragment=null;
 			GIPSuggestPeopleWillFragment gIPSuggestPeopleWill=null;
-			/**
-			 * 视频直播平台
-			 */
-			/**
-			 * 视频直播平台之走进直播间
-			 */
-			GoverInterPeopleVideoLiveFragment goverInterPeopleVideoLiveFragment = null;		
+			
+//			/**
+//			 * 视频直播平台之走进直播间
+//			 */
+//			GoverInterPeopleVideoLiveFragment goverInterPeopleVideoLiveFragment = null;		
+			
 			/**
 			 * 走进直播间之栏目首页
 			 */
 			GoverInterPeopleVideoLiveHomeFragment goverInterPeopleVideoLiveHomeFragment = null;
+			
 			/**
 			 * 公众监督
 			 */
@@ -171,14 +171,14 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 				initLayoutListner.bindContentLayout(gIPSuggestPeopleWill);
 			}
 
-			/**
-			 * 走进直播间
-			 */
-			else if (fragment instanceof GoverInterPeopleVideoLiveFragment) {
-				goverInterPeopleVideoLiveFragment = (GoverInterPeopleVideoLiveFragment) fragment;
-				goverInterPeopleVideoLiveFragment.setParentMenuItem(menuItem);
-				initLayoutListner.bindContentLayout(goverInterPeopleVideoLiveFragment);
-			}
+//			/**
+//			 * 走进直播间
+//			 */
+//			else if (fragment instanceof GoverInterPeopleVideoLiveFragment) {
+//				goverInterPeopleVideoLiveFragment = (GoverInterPeopleVideoLiveFragment) fragment;
+//				goverInterPeopleVideoLiveFragment.setParentMenuItem(menuItem);
+//				initLayoutListner.bindContentLayout(goverInterPeopleVideoLiveFragment);
+//			}
 
 			/**
 			 * 走进直播间之栏目主页

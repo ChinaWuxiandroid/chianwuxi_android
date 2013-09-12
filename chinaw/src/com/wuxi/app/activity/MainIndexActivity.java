@@ -651,7 +651,6 @@ public class MainIndexActivity extends Activity implements
 					msg.obj = e.getMessage();
 					handler.sendMessage(msg);
 				}
-
 			}
 		}
 
@@ -682,13 +681,11 @@ public class MainIndexActivity extends Activity implements
 	public void onPageSelected(int position) {
 		switch (position) {
 		case 0:
-
 			index_rb_news.setBackgroundResource(R.drawable.index_news_pre);
 			index_rb_announcements.setBackgroundResource(R.drawable.index_news);
 			loadNews();
 			break;
 		case 1:
-
 			index_rb_news.setBackgroundResource(R.drawable.index_news);
 			index_rb_announcements
 					.setBackgroundResource(R.drawable.index_news_pre);

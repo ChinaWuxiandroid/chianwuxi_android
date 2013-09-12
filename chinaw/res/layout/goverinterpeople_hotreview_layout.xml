@@ -53,24 +53,9 @@
         android:background="@android:color/white" />
 
     <FrameLayout
+        android:id="@+id/gip_suggest_people_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <ProgressBar
-            android:id="@+id/gip_suggest_people_listview_pb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone" />
-
-        <ListView
-            android:id="@+id/gip_suggest_people_listview"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:divider="@android:color/white"
-            android:dividerHeight="1dp" 
-            android:cacheColorHint="@android:color/transparent">
-        </ListView>
+        android:layout_height="wrap_content" >
     </FrameLayout>
 
 </LinearLayout>
