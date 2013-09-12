@@ -72,7 +72,6 @@ public class GIPSuggestLawSuggestionFragment extends RadioButtonChangeFragment {
 			}
 			switch (msg.what) {
 			case DATA__LOAD_SUCESS:
-				System.out.println("success");
 				list_pb.setVisibility(View.INVISIBLE);
 				showPoloticsList();
 				break;

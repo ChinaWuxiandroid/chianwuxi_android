@@ -138,6 +138,7 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 					titleMenuItems = menuSevice.getSubMenuItems(parentItem
 							.getId());
 					if (titleMenuItems != null) {
+						
 						handler.sendEmptyMessage(MENUITEM_TITLEDATA__LOAD_SUCESS);
 						CacheUtil.put(parentItem.getId(), titleMenuItems);// 放入缓存
 					} else {
@@ -213,6 +214,7 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 					titleChannels = channelService.getSubChannels(parentItem
 							.getChannelId());
 					if (titleChannels != null) {
+						
 						handler.sendEmptyMessage(CHANNEL_TITLEDATA__LOAD_SUCESS);
 						CacheUtil.put(parentItem.getChannelId(), titleChannels);// 放入缓存
 					}

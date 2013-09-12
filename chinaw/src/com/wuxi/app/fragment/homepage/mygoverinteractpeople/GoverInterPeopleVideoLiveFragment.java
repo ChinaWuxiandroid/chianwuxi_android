@@ -4,6 +4,9 @@ import java.util.List;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,87 +25,77 @@ import com.wuxi.domain.MenuItem;
  * @author 智佳 罗森
  * 
  */
-public class GoverInterPeopleVideoLiveFragment extends BaseFragment {
+public class GoverInterPeopleVideoLiveFragment extends RadioButtonChangeFragment {
 	
-	private Context context;
-	private View view;
-	
+	// 存放该界面的RadioBtnID的数组
+	private final int[] radioBtnIds = { 
+			R.id.gip_video_bdroom_radioBtn_home,
+			R.id.gip_video_bdroom_radioBtn_review,
+			R.id.gip_video_bdroom_radioBtn_guest,
+			R.id.gip_video_bdroom_radioBtn_relative_info,
+			R.id.gip_video_bdroom_radioBtn_program,
+			R.id.gip_video_bdroom_radioBtn_schedule };
+
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.video_live_menu_layout, null);
-		return view;
+	protected int getLayoutId() {
+		return R.layout.gip_video_broadcastroom_layout;
 	}
 
-//	// 存放该界面的RadioBtnID的数组
-//	private final int[] radioBtnIds = { 
-//			R.id.gip_video_bdroom_radioBtn_home,
-//			R.id.gip_video_bdroom_radioBtn_review,
-//			R.id.gip_video_bdroom_radioBtn_guest,
-//			R.id.gip_video_bdroom_radioBtn_relative_info,
-//			R.id.gip_video_bdroom_radioBtn_program,
-//			R.id.gip_video_bdroom_radioBtn_schedule };
-//
-//	@Override
-//	protected int getLayoutId() {
-//		return R.layout.gip_video_broadcastroom_layout;
-//	}
-//
-//	@Override
-//	protected int getRadioGroupId() {
-//		return R.id.gip_vedio_bdroom_radioGroup;
-//	}
-//
-//	@Override
-//	protected int[] getRadioButtonIds() {
-//		return radioBtnIds;
-//	}
-//
-//	@Override
-//	protected int getContentFragmentId() {
-//		return R.id.gip_video_bdroom_frame;
-//	}
-//
-//	@Override
-//	protected void init() {
-//		BaseFragment gipVedioLiveHomeFragment = new GoverInterPeopleVideoLiveHomeFragment();
-//		onTransaction(gipVedioLiveHomeFragment);
-//	}
-//
-//	@Override
-//	public void onCheckedChanged(RadioGroup group, int checkedId) {
-//
-//		super.onCheckedChanged(group, checkedId);
-//
-//		switch (checkedId) {
-//		case R.id.gip_video_bdroom_radioBtn_home:
-//			init();
-//			break;
-//
-//		case R.id.gip_video_bdroom_radioBtn_review:
-//			VedioReviewFragment reviewFragment = new VedioReviewFragment();
-//			onTransaction(reviewFragment);
-//			break;
-//
-//		case R.id.gip_video_bdroom_radioBtn_guest:
-//
-//			break;
-//
-//		case R.id.gip_video_bdroom_radioBtn_relative_info:
-//
-//			break;
-//
-//		case R.id.gip_video_bdroom_radioBtn_program:
-//
-//			break;
-//
-//		case R.id.gip_video_bdroom_radioBtn_schedule:
-//
-//			break;
-//
-//		default:
-//			break;
-//		}
-//	}
+	@Override
+	protected int getRadioGroupId() {
+		return R.id.gip_vedio_bdroom_radioGroup;
+	}
 
+	@Override
+	protected int[] getRadioButtonIds() {
+		return radioBtnIds;
+	}
+
+	@Override
+	protected int getContentFragmentId() {
+		return R.id.gip_video_bdroom_frame;
+	}
+
+	@Override
+	protected void init() {
+		GoverInterPeopleVideoLiveHomeFragment gipVedioLiveHomeFragment = new GoverInterPeopleVideoLiveHomeFragment();
+		onTransaction(gipVedioLiveHomeFragment);
+	}
+
+	@Override
+	public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+		super.onCheckedChanged(group, checkedId);
+
+		switch (checkedId) {
+		case R.id.gip_video_bdroom_radioBtn_home:
+			init();
+			break;
+
+		case R.id.gip_video_bdroom_radioBtn_review:
+			VedioReviewFragment reviewFragment = new VedioReviewFragment();
+			onTransaction(reviewFragment);
+			break;
+
+		case R.id.gip_video_bdroom_radioBtn_guest:
+
+			break;
+
+		case R.id.gip_video_bdroom_radioBtn_relative_info:
+
+			break;
+
+		case R.id.gip_video_bdroom_radioBtn_program:
+
+			break;
+
+		case R.id.gip_video_bdroom_radioBtn_schedule:
+
+			break;
+
+		default:
+			break;
+		}
+	}
+	
 }

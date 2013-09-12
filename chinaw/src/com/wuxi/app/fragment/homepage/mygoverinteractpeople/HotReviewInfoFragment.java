@@ -35,6 +35,7 @@ import com.wuxi.exception.NetException;
  * @author 智佳 罗森
  * 
  */
+@SuppressWarnings("deprecation")
 public class HotReviewInfoFragment extends BaseFragment {
 
 	private static final String TAG = "HotReviewInfoFragment";
@@ -99,6 +100,7 @@ public class HotReviewInfoFragment extends BaseFragment {
 	/**
 	 * 初始化布局控件
 	 */
+	@SuppressLint("SetJavaScriptEnabled")
 	private void initLayout() {
 		layout = (LinearLayout) view.findViewById(R.id.hotreview_layout);
 		layout.setVisibility(View.GONE);

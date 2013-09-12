@@ -205,6 +205,7 @@ public class HotReviewReplyFragment extends BaseFragment implements
 
 		if (hotReviewReplies == null || hotReviewReplies.size() == 0) {
 			Toast.makeText(context, "对不起，暂无该话题回复信息", Toast.LENGTH_SHORT).show();
+			list_pb.setVisibility(View.GONE);
 		} else {
 			if (isFirstLoad) {
 				adapter = new HotReviewReplyListAdapter(context,

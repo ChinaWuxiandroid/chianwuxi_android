@@ -56,7 +56,7 @@ public class PublicForumListAdapter extends BaseAdapter {
 	 * @param forum
 	 */
 	public void addItem(Forum forum) {
-		this.addItem(forum);
+		this.forums.add(forum);
 	}
 
 	public void setForums(List<Forum> forums) {

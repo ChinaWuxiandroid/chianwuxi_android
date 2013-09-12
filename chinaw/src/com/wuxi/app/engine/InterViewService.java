@@ -44,31 +44,24 @@ public class InterViewService extends Service {
 
 			JSONObject jsonObject = new JSONObject(resultStr);
 
-<<<<<<< HEAD
 			if (jsonObject.has("result")) {
-				JSONObject jb=jsonObject.getJSONObject("result");
-				if(jb.has("errorCode")){
+				JSONObject jb = jsonObject.getJSONObject("result");
+				if (jb.has("errorCode")) {
 					return null;
-				}else{
+				} else {
 					return jb.toString();
 				}
 			}
-			if(jsonObject.getBoolean("success")){
-				
-=======
 			if (jsonObject.getBoolean("success")) {
 
->>>>>>> 036753d5dc3b4eaef12484f854c389a1583dfd68
-				return jsonObject.getString("result");
-			} else {
-				return null;
-<<<<<<< HEAD
-			}
-=======
+				if (jsonObject.getBoolean("success")) {
+					return jsonObject.getString("result");
+				} else {
+					return null;
+				}
 
 			}
 
->>>>>>> 036753d5dc3b4eaef12484f854c389a1583dfd68
 		}
 		return null;
 	}
