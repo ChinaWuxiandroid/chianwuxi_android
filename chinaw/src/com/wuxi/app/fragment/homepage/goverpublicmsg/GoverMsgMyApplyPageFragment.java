@@ -19,39 +19,42 @@ import com.wuxi.app.R;
 import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.MyApplyPageService;
 import com.wuxi.app.fragment.commonfragment.PagingLoadListFragment;
-import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.CommonDataWrapper;
 import com.wuxi.domain.MyApplyPageWrapper;
 import com.wuxi.domain.MyApplyPageWrapper.MyApplyPage;
 import com.wuxi.exception.NetException;
 import com.wuxi.exception.ResultException;
 
-public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
+public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment {
+
 	private MyApplyPageWrapper myApplyPageWrapper;
 	private MyApplyPageAdapter adapter;
-	
+
 	private LoginDialog loginDialog;
-	
+
 	@Override
 	protected void initUI() {
-		loginDialog=new LoginDialog(context);
+		loginDialog = new LoginDialog(context);
 		super.initUI();
 	}
-	
+
 	@Override
-	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
-		MyApplyPage myPage=(MyApplyPage) adapterView.getItemAtPosition(position);
-		
-		GoverMyApplyPageContentFragment goverMyApplyPageContentFragment=new GoverMyApplyPageContentFragment();
+	public void onItemClick(AdapterView<?> adapterView, View arg1,
+			int position, long arg3) {
+		MyApplyPage myPage = (MyApplyPage) adapterView
+				.getItemAtPosition(position);
+
+		GoverMyApplyPageContentFragment goverMyApplyPageContentFragment = new GoverMyApplyPageContentFragment();
 		goverMyApplyPageContentFragment.setPage(myPage);
 		bindFragment(goverMyApplyPageContentFragment);
 	}
 
 	@Override
 	protected List<Object> getContents() {
-		List<Object> objects=new ArrayList<Object>();
-		if(myApplyPageWrapper.getData()!=null){
-			for(MyApplyPage apply:myApplyPageWrapper.getData()){
+		List<Object> objects = new ArrayList<Object>();
+		if (myApplyPageWrapper.getData() != null) {
+			for (MyApplyPage apply : myApplyPageWrapper.getData()) {
 				objects.add(apply);
 			}
 		}
@@ -60,7 +63,7 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 
 	@Override
 	protected BaseAdapter getAdapter() {
-		adapter= new MyApplyPageAdapter(myApplyPageWrapper.getData(),context);
+		adapter = new MyApplyPageAdapter(myApplyPageWrapper.getData(), context);
 		return adapter;
 	}
 
@@ -76,17 +79,17 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 
 	@Override
 	protected CommonDataWrapper getWarpper(int start, int end) {
-		
-		myApplyPageWrapper=new MyApplyPageWrapper();
-		MyApplyPageService service=new MyApplyPageService(context);
+
+		myApplyPageWrapper = new MyApplyPageWrapper();
+		MyApplyPageService service = new MyApplyPageService(context);
 		try {
-			if(loginDialog.checkLogin()){
-				myApplyPageWrapper=service.getMyApplyPages(Constants.SharepreferenceKey.TEST_ACCESSTOKEN, start, end);
-			}
-			else{
+			if (loginDialog.checkLogin()) {
+				myApplyPageWrapper = service.getMyApplyPages(
+						SystemUtil.getAccessToken(context), start, end);
+			} else {
 				loginDialog.showDialog();
 			}
-			
+
 		} catch (NetException e) {
 			e.printStackTrace();
 		} catch (JSONException e) {
@@ -97,10 +100,11 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 		return myApplyPageWrapper;
 	}
 
-	public class MyApplyPageAdapter extends BaseAdapter{
-		
+	public class MyApplyPageAdapter extends BaseAdapter {
+
 		private List<MyApplyPage> contents;
 		private Context context;
+
 		public void setContents(List<MyApplyPage> contents) {
 			this.contents = contents;
 		}
@@ -132,7 +136,7 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 			TextView dept_text;
 			TextView time_text;
 		}
-		
+
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			MyApplyPage content = contents.get(position);
@@ -161,13 +165,13 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 			viewHolder.time_text.setText(content.getApplyDate());
 			return convertView;
 		}
-		
+
 		public void addItem(MyApplyPage content) {
 			this.contents.add(content);
 		}
 	}
-	
-	public void bindFragment(BaseFragment fragment){
+
+	public void bindFragment(BaseFragment fragment) {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 
@@ -176,5 +180,4 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment{
 		ft.commitAllowingStateLoss();
 	}
 
-	
 }
