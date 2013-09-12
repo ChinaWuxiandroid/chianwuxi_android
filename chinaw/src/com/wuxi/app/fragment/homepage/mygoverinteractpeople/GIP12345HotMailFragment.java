@@ -164,7 +164,6 @@ public class GIP12345HotMailFragment extends BaseFragment implements
 						message.obj = "error";
 						handler.sendEmptyMessage(DATA_LOAD_ERROR);
 					}
-
 				} catch (NetException e) {
 					LogUtil.i(TAG, "出错");
 					e.printStackTrace();
@@ -224,7 +223,7 @@ public class GIP12345HotMailFragment extends BaseFragment implements
 	 * @描述： 加载更多数据
 	 * @param view
 	 */
-	public void loadMoreData(View view) {
+	private void loadMoreData(View view) {
 		if (isLoading) {
 			return;
 		} else {
@@ -253,7 +252,7 @@ public class GIP12345HotMailFragment extends BaseFragment implements
 
 				isSwitch = false;
 				loadMoreButton.setText("loading.....");
-				loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_NUM);
+				loadMoreData(v);
 			}
 			break;
 		}
