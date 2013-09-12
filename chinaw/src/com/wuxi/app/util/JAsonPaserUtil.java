@@ -65,7 +65,7 @@ public class JAsonPaserUtil {
 					method = t.getDeclaredMethod(methodName, boolean.class);
 					method.invoke(o, jb.getBoolean(fileName));
 				} else if (tyeName.equals("java.lang.String")
-						&& jb.has(fileName)) {
+						&& jb.has(fileName)&&!jb.getString(fileName).equals("null")) {
 					method = t.getDeclaredMethod(methodName,
 							java.lang.String.class);
 					method.invoke(o, jb.getString(fileName));

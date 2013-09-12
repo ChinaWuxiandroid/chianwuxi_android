@@ -19,6 +19,7 @@ import android.os.Environment;
 import com.wuxi.app.fragment.index.InitializContentLayout;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.MenuItemChannelIndexUtil;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
@@ -115,6 +116,7 @@ public class MenuService extends Service {
 					menu.setPfBuildPath(jb.getString("pfBuildPath"));
 
 					if (!menu.isDeleted() && !menu.isDisabled()) {// 已经删除标记和弃用的不显示
+						CacheUtil.put(menu.getId(), menu);//将该项菜单放入缓存
 						menuItems.add(menu);
 					}
 				}
@@ -122,6 +124,10 @@ public class MenuService extends Service {
 				if (!hasCachFile) {
 					cacheUtil.cacheFile(url, reslutStr);// 缓存文件
 				}
+
+				CacheUtil.put(parentId, menuItems);// 将菜单放入缓存
+				MenuItemChannelIndexUtil.getInstance().addMenuItemIndex(
+						parentId, menuItems);// 建立菜单的索引位置
 				return menuItems;
 			}
 
@@ -195,7 +201,7 @@ public class MenuService extends Service {
 							|| (!jb.getString("childrens").equals("[]"))) {
 						menu.setHasChildern(true);// 有子菜单存在
 					}
-					menu.setCreateDate(jb.getString("createDate"));
+					// menu.setCreateDate(jb.getString("createDate"));
 					menu.setChannelId(jb.getString("channelId"));
 					menu.setChannelName(jb.getString("channelName"));
 					menu.setFavorites(jb.getBoolean("favorites"));
@@ -212,15 +218,16 @@ public class MenuService extends Service {
 
 					int type = jb.getInt("type");
 					if (type == MenuItem.CHANNEL_MENU && !menu.isDeleted()) {// 如果是频道菜单，获取子频道，并放入缓存中
-						new Thread(new ChannelTask(menu.getChannelId()))
-								.start();
+
+						new ChannelTask(menu.getChannelId()).getsubChannel();
 					} else if (type == MenuItem.CUSTOM_MENU
 							&& !menu.isDeleted()) {// 如果是普通菜单,将该菜单的子菜单提前获取好，放入缓存
 
-						new Thread(new SubMenuItemsTask(menu)).start();
+						new SubMenuItemsTask(menu).getSubMenuItem();
 
 					}
 
+					
 					// 图标处理
 					String iconUrl = jb.getString("icon");
 					if (!iconUrl.equals("null") && !iconUrl.equals("")
@@ -244,6 +251,7 @@ public class MenuService extends Service {
 
 					// LogUtil.i(TAG, jb.toString());
 					if (!menu.isDeleted()) {// 已经删除标记的不显示
+						CacheUtil.put(menu.getId(), menu);//将该项菜单放入缓存
 						menuItems.add(menu);
 					}
 
@@ -254,9 +262,13 @@ public class MenuService extends Service {
 			Collections.sort(menuItems);// 排序
 
 			if (!isHasCacheFile) {
-				cacheUtil.cacheFile(url, reslutStr);// 缓存文件
+				cacheUtil.cacheFile(url, reslutStr);// 缓存菜单
 			}
 
+			CacheUtil.put(Constants.CacheKey.HOME_MENUITEM_KEY, menuItems);// 将导航主菜单放入缓存
+
+			MenuItemChannelIndexUtil.getInstance().addMenuItemIndex(
+					Constants.CacheKey.HOME_MENUITEM_KEY, menuItems);// 建立六个模块菜单合集子菜单索引
 			return menuItems;
 
 		} else {
@@ -278,6 +290,27 @@ public class MenuService extends Service {
 			this.menuItem = menuItem;
 		}
 
+		/**
+		 * 
+		 * wanglu 泰得利通 加载二级子菜单
+		 * 
+		 * @throws NetException
+		 * @throws NODataException
+		 * @throws JSONException
+		 */
+		public void getSubMenuItem() throws NetException, NODataException,
+				JSONException {
+
+			List<MenuItem> menuItems = getSubMenuItems(menuItem.getId());
+
+			if (menuItems != null) {
+
+				InitializContentLayout.initMenuItemContentLayout(menuItem,
+						menuItems, context);// 二级菜单界面初始化绑定
+
+			}
+		}
+
 		@Override
 		public void run() {
 
@@ -286,7 +319,6 @@ public class MenuService extends Service {
 
 				if (items != null) {
 
-					CacheUtil.put(menuItem.getId(), items);// 将菜单的子菜单放入缓存
 					InitializContentLayout.initMenuItemContentLayout(menuItem,
 							items, context);
 				}
@@ -359,6 +391,20 @@ public class MenuService extends Service {
 
 		public ChannelTask(String channelId) {
 			this.channelId = channelId;
+
+		}
+
+		/**
+		 * 
+		 * wanglu 泰得利通 加载二级及三级菜单
+		 * 
+		 * @throws NetException
+		 */
+		public void getsubChannel() throws NetException {
+
+			ChannelService channelService = new ChannelService(context);
+
+			channelService.getSubChannels(channelId);
 
 		}
 

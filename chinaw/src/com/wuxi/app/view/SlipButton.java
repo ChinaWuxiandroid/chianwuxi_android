@@ -23,7 +23,7 @@ import com.wuxi.app.listeners.OnChangedListener;
  *
  */
 public class SlipButton extends View implements OnTouchListener {
-	private String strName;
+	private Object object;
 	private boolean enabled = true;
 	public boolean flag = false;
 	public boolean NowChoose = false;
@@ -146,7 +146,7 @@ public class SlipButton extends View implements OnTouchListener {
 			else
 				NowChoose = false;
 			if (isChgLsnOn && (LastChoose != NowChoose))
-				ChgLsn.OnChanged(strName, NowChoose);
+				ChgLsn.OnChanged(object, NowChoose);
 			break;
 		default:
 
@@ -155,8 +155,8 @@ public class SlipButton extends View implements OnTouchListener {
 		return true;
 	}
 
-	public void SetOnChangedListener(String name, OnChangedListener l) {
-		strName = name;
+	public void SetOnChangedListener(Object object, OnChangedListener l) {
+		this.object = object;
 		isChgLsnOn = true;
 		ChgLsn = l;
 	}

@@ -9,7 +9,9 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
+import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.MenuItemChannelIndexUtil;
 import com.wuxi.domain.Channel;
 import com.wuxi.exception.NetException;
 
@@ -75,6 +77,7 @@ public class ChannelService extends Service {
 						channel.setChildrenContentsCount(jb
 								.getInt("childrenContentsCount"));
 
+						CacheUtil.put(channel.getChannelId(), channel);// 将该屏道菜单单放入缓存
 						channels.add(channel);
 
 					}
@@ -89,6 +92,10 @@ public class ChannelService extends Service {
 				e.printStackTrace();
 
 			}
+
+			CacheUtil.put(channelId, channels);// 将频道菜单的子菜单放入缓存
+			MenuItemChannelIndexUtil.getInstance().addChannelIndex(channelId,
+					channels);// 建立字频道索引
 
 			return channels;
 		}

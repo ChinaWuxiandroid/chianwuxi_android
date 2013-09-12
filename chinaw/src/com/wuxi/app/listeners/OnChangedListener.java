@@ -7,5 +7,5 @@ package com.wuxi.app.listeners;
  *
  */
 public interface OnChangedListener {
-	abstract void OnChanged(String strName, boolean CheckState);
+	abstract void OnChanged(Object object, boolean checkState);
 }
