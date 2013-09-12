@@ -168,7 +168,7 @@ public class PublicServiceChannelContentDetailFragment extends BaseFragment
 					if (channels != null) {
 						PublicServiceChannelContentDetailFragment.this.level = level;
 						msg.what = LOAD_CHANNEL_SUCCESS;
-						CacheUtil.put(channel.getChannelId(), channels);
+						
 					} else {
 						msg.what = LOAD_CHANNEL_FAIL;
 						msg.obj = "加载数据失败";

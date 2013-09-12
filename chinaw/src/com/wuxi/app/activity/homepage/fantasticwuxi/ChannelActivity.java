@@ -131,7 +131,7 @@ public class ChannelActivity extends BaseSlideActivity implements
 				try {
 					titleChannels = channelService.getSubChannels(menuItem.getChannelId());
 					if (null != titleChannels) {
-						CacheUtil.put(menuItem.getChannelId(), titleChannels);// 缓存起来
+						
 						handler.sendEmptyMessage(TITLE__LOAD_SUCESS);
 
 					} else {

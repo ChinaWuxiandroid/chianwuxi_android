@@ -112,7 +112,7 @@ public class PublicServiceChannelContentFragment extends BaseFragment implements
 
 					if (subChannels != null) {
 						msg.what = CHANNEL_LOAD_SUCESS;
-						CacheUtil.put(channel.getChannelId(), subChannels);// 放入缓存
+						
 					} else {
 						msg.what = CHANNEL_LOAD_FAIL;
 					}

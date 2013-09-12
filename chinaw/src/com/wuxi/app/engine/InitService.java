@@ -34,8 +34,24 @@ public class InitService extends Service {
 	 */
 	public void init() {
 
-		clearCache();
+		clearCache();//緩存處理
+		registCount();
 	}
+	
+	/**
+	 * 
+	 *wanglu 泰得利通
+	 *记录软件使用次数
+	 */
+	public void registCount(){
+		int userCount=sp.getInt(Constants.SharepreferenceKey.USEAPP_COUNT, 0);
+		Editor ed = sp.edit();
+		ed.putInt(Constants.SharepreferenceKey.USEAPP_COUNT,userCount+1 );
+		ed.commit();
+		
+	}
+	
+	
 
 	/**
 	 * 

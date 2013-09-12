@@ -176,19 +176,19 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 
 			viewHolder.title_text.setText(name);
 
-			String saveKey = FAVORITES_KEY_PRE + menuItem.getId();
-
-			if (sp.getBoolean(saveKey, false)) {// 如果存在
+			if (favoriteItemDao.findFavoriteItem(menuItem.getId())) {// 数据库存在
 				viewHolder.slipButton.setChecked(true);
-				favoriteItemDao.addFavoriteItem(menuItem);// 保存收藏列表
+
 			} else {
-				if (menuItem.getParentMenuId() == null && !sp.contains(saveKey)) {// 一级菜单开始时默认选中
+
+				if (menuItem.getParentMenuId() == null
+						&& sp.getInt(Constants.SharepreferenceKey.USEAPP_COUNT,
+								1) == 1) {// 首次使用，并且是跟菜单
+					menuItem.setLevel(1);
+					favoriteItemDao.addFavoriteItem(menuItem);// 保存数据库
 					viewHolder.slipButton.setChecked(true);
-					favoriteItemDao.addFavoriteItem(menuItem);// 保存收藏列表
-				} else {
-					viewHolder.slipButton.setChecked(false);
-					favoriteItemDao.delFavoriteItem(menuItem.getId());
 				}
+				viewHolder.slipButton.setChecked(false);
 			}
 
 			viewHolder.slipButton.SetOnChangedListener(menuItem, this);
@@ -239,7 +239,7 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 			 * checkMenuItem.getId(), checkState); ed.commit(); }
 			 */
 
-			Toast.makeText(MenuItemSetActivity.this, "改功能在施工中",
+			Toast.makeText(MenuItemSetActivity.this, " 该功能在施工中",
 					Toast.LENGTH_SHORT).show();
 
 		}

@@ -67,7 +67,8 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 	protected static final int TITLE_LOAD_FAIL = 1;// 加载失败
 
 	// public static final String ROOTFRAGMENT_KEY="BaseSlideFragment";
-	//public static final String SHOWITEM_LAYOUT_INDEXKEY = "showitem_layout_index";
+	// public static final String SHOWITEM_LAYOUT_INDEXKEY =
+	// "showitem_layout_index";
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -78,9 +79,8 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 				String tip = "";
 				if (msg.obj != null) {
 					tip = msg.obj.toString();
-					Toast.makeText(
-						MenuItemMainActivity.this, tip, Toast.LENGTH_SHORT)
-							.show();
+					Toast.makeText(MenuItemMainActivity.this, tip,
+							Toast.LENGTH_SHORT).show();
 				}
 				break;
 			case TITLE_LOAD_SUCCESS:
@@ -96,11 +96,13 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 		Bundle bundle = this.getIntent().getExtras();
 		int showIndex = 0;
 		if (bundle != null) {
-			showIndex = bundle.getInt(Constants.CheckPositionKey.LEVEL_ONE_KEY);//头部选中的菜单序号
+			showIndex = bundle.getInt(Constants.CheckPositionKey.LEVEL_ONE_KEY);// 头部选中的菜单序号
 		}
-		mtitleScrollLayout = (TitleScrollLayout) view.findViewById(R.id.title_scroll_action);// 头部控件
+		mtitleScrollLayout = (TitleScrollLayout) view
+				.findViewById(R.id.title_scroll_action);// 头部控件
 		mtitleScrollLayout.setInitializContentLayoutListner(this);// 设置绑定内容界面监听器
-		mtitleScrollLayout.setMenuItemInitLayoutListener(getMenuItemInitLayoutListener());// 设置界面监听处理类
+		mtitleScrollLayout
+				.setMenuItemInitLayoutListener(getMenuItemInitLayoutListener());// 设置界面监听处理类
 		int perScreenItemCount = getTitlePerScreenItemCount();
 		mtitleScrollLayout.setPerscreenCount(perScreenItemCount);// 美屏显示的菜单数量
 		int screenIndex = showIndex / perScreenItemCount;// 第几屏
@@ -149,12 +151,13 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 			public void run() {
 
 				MenuService menuSevice = new MenuService(
-					MenuItemMainActivity.this);
+						MenuItemMainActivity.this);
 				try {
-					titleMenuItems = menuSevice.getSubMenuItems(menuItem.getId());
+					titleMenuItems = menuSevice.getSubMenuItems(menuItem
+							.getId());
 					if (titleMenuItems != null) {
 						handler.sendEmptyMessage(TITLE_LOAD_SUCCESS);
-						CacheUtil.put(menuItem.getId(), titleMenuItems);// 放入缓存
+
 					}
 
 				} catch (NetException e) {
@@ -187,8 +190,8 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 	private void showTitleData() {
 		initializSubFragmentsLayout(titleMenuItems);// 绑定子界面
 
-		mtitleScrollLayout.initMenuItemScreen(
-			this, getLayoutInflater(), titleMenuItems);// 初始化头部空间
+		mtitleScrollLayout.initMenuItemScreen(this, getLayoutInflater(),
+				titleMenuItems);// 初始化头部空间
 
 	}
 
@@ -229,13 +232,14 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 	@Override
 	public void redirectFragment(MenuItem showMenuItem, int showMenuPositon,
 			int subMenuPostion) {
-		
+
 		if (showMenuItem.getName().equals("政府信息公开")) {
 			Intent intent = new Intent(MenuItemMainActivity.this,
-				PublicGoverMsgActivity.class);
-			intent.putExtra(Constants.CheckPositionKey.LEVEL_ONE_KEY, subMenuPostion);
-			intent.putExtra(
-				BaseSlideActivity.SELECT_MENU_POSITION_KEY, showMenuPositon);
+					PublicGoverMsgActivity.class);
+			intent.putExtra(Constants.CheckPositionKey.LEVEL_ONE_KEY,
+					subMenuPostion);
+			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY,
+					showMenuPositon);
 			MainTabActivity.instance.addView(intent);
 
 		}

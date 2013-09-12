@@ -145,7 +145,7 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 				try {
 					menuItems = menuService.getSubMenuItems(parentMenuItem.getId());
 					if (menuItems != null) {
-						CacheUtil.put(parentMenuItem.getId(), menuItems);// 放入缓存
+						
 						msg.what = LEFT_MENUITEM_DATA__LOAD_SUCCESS;
 						handler.sendMessage(msg);
 
@@ -218,8 +218,7 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 						channels = channelService.getSubChannels(parentMenuItem.getChannelId());
 						if (channels != null) {
 							handler.sendEmptyMessage(LEFT_CHANNEL_DATA__LOAD_SUCCESS);
-							CacheUtil.put(
-								parentMenuItem.getChannelId(), channels);// 放入缓存
+							
 						}
 
 					} catch (NetException e) {

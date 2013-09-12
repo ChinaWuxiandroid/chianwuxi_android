@@ -63,9 +63,9 @@ public class FavoriteItemDao {
 		if (db.isOpen()) {
 			db.execSQL(
 					"insert into " + DataBaseHelper.TABLE_FAVORITE
-							+ " (id,name,parentMenuId) values(?,?,?)",
+							+ " (id,name,parentMenuId,level) values(?,?,?,?)",
 					new Object[] { menItem.getId(), menItem.getName(),
-							menItem.getParentMenuId() });
+							menItem.getParentMenuId(),menItem.getLevel() });
 			db.close();
 		}
 	}
@@ -125,7 +125,8 @@ public class FavoriteItemDao {
 				menuItem.setId(cursor.getString(0));
 				menuItem.setName(cursor.getString(1));
 				menuItem.setParentMenuId(cursor.getString(2));
-
+				menuItem.setLevel(cursor.getInt(3));//菜单的层次 
+				menuItem.setLocalFavorites(true);
 				menuItems.add(menuItem);
 			}
 

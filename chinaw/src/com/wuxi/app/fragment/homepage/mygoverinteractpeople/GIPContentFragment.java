@@ -77,13 +77,14 @@ public class GIPContentFragment extends GoverMenuItemTitleFragment {
 				else if (menu.getAppUI().endsWith("无锡市委组织部12380网上举报")) {
 					menu.setContentFragment(GoverInterPeoplePublicSuperviseFragment.class);
 				}
-			} else if (menu.getType() == MenuItem.CUSTOM_MENU) {
-				if (menu.getName().equals("走进直播间")) {
+
+			}else if(menu.getType() == MenuItem.CUSTOM_MENU){//普通菜单
+				if(menu.getName().equals("走进直播间")){
 					menu.setContentFragment(GoverInterPeopleVideoLiveFragment.class);
 				}
 
-			}
-
+			} 
+			
 		}
 	}
 

@@ -73,7 +73,27 @@ public class MenuItem implements Comparable<MenuItem>, Serializable {
 	private boolean isHasChildern;// 是否子菜单
 	private String icon;// 图标
 	private String pfId;  
-	private String pfBuildPath;  
+	private String pfBuildPath; 
+	private boolean isLocalFavorites=false;//是不是本地收藏菜单
+	private int level;//菜单的层次
+	
+	public boolean isLocalFavorites() {
+		return isLocalFavorites;
+	}
+
+	public void setLocalFavorites(boolean isLocalFavorites) {
+		this.isLocalFavorites = isLocalFavorites;
+	}
+
+	
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 	public static final String MENUITEM_KEY="menuitem_key";
 
 	private Class<? extends Fragment> contentFragment;

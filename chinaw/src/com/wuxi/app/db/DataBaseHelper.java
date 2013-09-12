@@ -22,7 +22,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_FAVORITE+" (id varchar(32) , name varchar(32),parentMenuId varchar(32))");   //创建收藏表
+		db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_FAVORITE+" (id varchar(32) , name varchar(32),parentMenuId varchar(32),level varchar(2))");   //创建收藏表
    }
 
 	

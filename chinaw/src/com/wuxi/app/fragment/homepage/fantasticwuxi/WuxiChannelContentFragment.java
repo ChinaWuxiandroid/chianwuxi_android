@@ -310,7 +310,7 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 
 					if (titleChannels != null) {
 						msg.what = CHANNEL_LOAD_SUCESS;
-						CacheUtil.put(channel.getChannelId(), titleChannels);// 放入缓存
+						
 					} else {
 						msg.what = CHANNEL_LOAD_FAIL;
 					}
