@@ -112,6 +112,7 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 				gIPMinePublicForumFragment.setParentMenuItem(menuItem);
 				initLayoutListner.bindContentLayout(gIPMinePublicForumFragment);
 			}
+			
 			/**
 			 * 12345来信办理平台
 			 */
