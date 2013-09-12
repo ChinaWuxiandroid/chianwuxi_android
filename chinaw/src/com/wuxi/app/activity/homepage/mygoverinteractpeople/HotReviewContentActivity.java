@@ -54,7 +54,8 @@ public class HotReviewContentActivity extends BaseItemContentActivity implements
 
 	private Button comment_btn = null;
 
-	private int[] radiobtnids = { R.id.forum_content_info_radiobtn,
+	private int[] radiobtnids = { 
+			R.id.forum_content_info_radiobtn,
 			R.id.forum_content_comment_radiobtn };
 
 	private HotReview hotReview;

@@ -62,8 +62,6 @@ public class LeaveMessageService extends Service {
 				+ "&end="
 				+ end;
 
-		System.out.println("留言提问url:" + url);
-
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (resultStr != null) {

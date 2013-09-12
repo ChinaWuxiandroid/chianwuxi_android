@@ -57,8 +57,6 @@ public class MemoirService extends Service {
 		String url = Constants.Urls.MEMOIR_CONTENT_URL.replace("{interViewId}",
 				interViewId) + "?start=" + start + "&end=" + end;
 
-		System.out.println(url);
-
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (resultStr != null) {

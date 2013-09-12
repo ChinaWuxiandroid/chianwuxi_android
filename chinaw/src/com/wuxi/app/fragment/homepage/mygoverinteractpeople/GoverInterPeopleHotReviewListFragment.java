@@ -2,7 +2,7 @@
  * @公司: 重庆智佳信息科技有限公司
  * @文件: GoverInterPeopleHotReviewListFragment.java 
  * @包名： com.wuxi.app.fragment.homepage.mygoverinteractpeople 
- * @描述: TODO(用一句话描述该文件做什么) 
+ * @描述: 热点话题列表
  * @作者： 罗森   
  * @创建时间： 2013 2013-9-11 下午3:54:29
  * @修改时间：  
@@ -49,7 +49,7 @@ import com.wuxi.exception.NetException;
 
 /**
  * @类名： GoverInterPeopleHotReviewListFragment
- * @描述： TODO
+ * @描述： 热点话题列表类
  * @作者： 罗森
  * @创建时间： 2013 2013-9-11 下午3:54:29
  * @修改时间：
@@ -128,6 +128,10 @@ public class GoverInterPeopleHotReviewListFragment extends BaseFragment
 		return view;
 	}
 
+	/**
+	 * @方法： initLayout
+	 * @描述： 初始化布局控件
+	 */
 	private void initLayout() {
 		mListView = (ListView) view
 				.findViewById(R.id.gip_suggest_people_listview);
@@ -158,6 +162,12 @@ public class GoverInterPeopleHotReviewListFragment extends BaseFragment
 		loadData(start, end);
 	}
 
+	/**
+	 * @方法： loadData
+	 * @描述： 加载数据
+	 * @param startIndex
+	 * @param endIndex
+	 */
 	private void loadData(final int startIndex, final int endIndex) {
 		if (isFirstLoad || isSwitch) {
 			list_pb.setVisibility(View.VISIBLE);
@@ -197,6 +207,10 @@ public class GoverInterPeopleHotReviewListFragment extends BaseFragment
 		}).start();
 	}
 
+	/**
+	 * @方法： showHotReviews
+	 * @描述： 显示列表
+	 */
 	private void showHotReviews() {
 		hotReviews = hotReviewWrapper.getData();
 
@@ -277,7 +291,6 @@ public class GoverInterPeopleHotReviewListFragment extends BaseFragment
 		switch (v.getId()) {
 		case R.id.loadMoreButton:
 			if (hotReviewWrapper != null && hotReviewWrapper.isNext()) {// 还有下一条记录
-
 				isSwitch = false;
 				loadMoreButton.setText("loading.....");
 				loadMoreData(v);

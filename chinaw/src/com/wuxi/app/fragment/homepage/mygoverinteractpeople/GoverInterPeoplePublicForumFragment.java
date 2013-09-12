@@ -290,7 +290,6 @@ public class GoverInterPeoplePublicForumFragment extends BaseFragment implements
 		switch (v.getId()) {
 		case R.id.loadMoreButton:
 			if (forumWrapper != null && forumWrapper.isNext()) {// 还有下一条记录
-
 				isSwitch = false;
 				loadMoreButton.setText("loading.....");
 				loadMoreData(v);

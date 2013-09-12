@@ -1,8 +1,8 @@
 package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
+
 import android.widget.RadioGroup;
 
-import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 
@@ -12,27 +12,33 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
  * @author 智佳 罗森
  *
  */
-public class GoverInterPeopleVideoLiveFragment  extends RadioButtonChangeFragment{
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
 
-	//存放该界面的RadioBtnID的数组
-	private final  int[] radioBtnIds={
+
+
+
+public class GoverInterPeopleVideoLiveFragment extends RadioButtonChangeFragment {
+	
+	// 存放该界面的RadioBtnID的数组
+	private final int[] radioBtnIds = { 
+
 			R.id.gip_video_bdroom_radioBtn_home,
 			R.id.gip_video_bdroom_radioBtn_review,
 			R.id.gip_video_bdroom_radioBtn_guest,
 			R.id.gip_video_bdroom_radioBtn_relative_info,
 			R.id.gip_video_bdroom_radioBtn_program,
+
 			R.id.gip_video_bdroom_radioBtn_schedule
 	};
+
 
 	@Override
 	protected int getLayoutId() {
 		return R.layout.gip_video_broadcastroom_layout;
 	}
+
+
+
 
 	@Override
 	protected int getRadioGroupId() {
@@ -51,11 +57,12 @@ public class GoverInterPeopleVideoLiveFragment  extends RadioButtonChangeFragmen
 
 	@Override
 	protected void init() {
-		BaseFragment gipVedioLiveHomeFragment = new GoverInterPeopleVideoLiveHomeFragment();
+		GoverInterPeopleVideoLiveHomeFragment gipVedioLiveHomeFragment = new GoverInterPeopleVideoLiveHomeFragment();
 		onTransaction(gipVedioLiveHomeFragment);
 	}
 
 	@Override
+
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 
 		super.onCheckedChanged(group, checkedId);
@@ -76,6 +83,7 @@ public class GoverInterPeopleVideoLiveFragment  extends RadioButtonChangeFragmen
 
 		case R.id.gip_video_bdroom_radioBtn_relative_info:
 
+
 			break;
 
 		case R.id.gip_video_bdroom_radioBtn_program:
@@ -91,4 +99,7 @@ public class GoverInterPeopleVideoLiveFragment  extends RadioButtonChangeFragmen
 		}
 	}
 
+
+	
+	
 }
