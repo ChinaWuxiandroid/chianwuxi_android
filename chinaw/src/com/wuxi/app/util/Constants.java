@@ -638,7 +638,7 @@ public class Constants {
 		/**
 		 * 测试用户 用户名：youngii 密码：123123 的ACCESSTOKEN
 		 * */
-		public static final String TEST_ACCESSTOKEN = "bd58fcdfe5b54f4c95ed5f2e3a945f7c";
+//		public static final String TEST_ACCESSTOKEN = "bd58fcdfe5b54f4c95ed5f2e3a945f7c";
 
 	}
 

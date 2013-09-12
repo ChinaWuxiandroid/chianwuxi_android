@@ -1,6 +1,5 @@
 package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
-
 import android.widget.RadioGroup;
 
 import com.wuxi.app.R;
@@ -10,35 +9,26 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
  * 我的政民互动之视频直播平台之走进直播间
  * 
  * @author 智佳 罗森
- *
+ * 
  */
 
+public class GoverInterPeopleVideoLiveFragment extends
+		RadioButtonChangeFragment {
 
-
-
-
-public class GoverInterPeopleVideoLiveFragment extends RadioButtonChangeFragment {
-	
 	// 存放该界面的RadioBtnID的数组
-	private final int[] radioBtnIds = { 
+	private final int[] radioBtnIds = {
 
-			R.id.gip_video_bdroom_radioBtn_home,
-			R.id.gip_video_bdroom_radioBtn_review,
+	R.id.gip_video_bdroom_radioBtn_home, R.id.gip_video_bdroom_radioBtn_review,
 			R.id.gip_video_bdroom_radioBtn_guest,
 			R.id.gip_video_bdroom_radioBtn_relative_info,
 			R.id.gip_video_bdroom_radioBtn_program,
 
-			R.id.gip_video_bdroom_radioBtn_schedule
-	};
-
+			R.id.gip_video_bdroom_radioBtn_schedule };
 
 	@Override
 	protected int getLayoutId() {
 		return R.layout.gip_video_broadcastroom_layout;
 	}
-
-
-
 
 	@Override
 	protected int getRadioGroupId() {
@@ -62,7 +52,6 @@ public class GoverInterPeopleVideoLiveFragment extends RadioButtonChangeFragment
 	}
 
 	@Override
-
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 
 		super.onCheckedChanged(group, checkedId);
@@ -83,7 +72,6 @@ public class GoverInterPeopleVideoLiveFragment extends RadioButtonChangeFragment
 
 		case R.id.gip_video_bdroom_radioBtn_relative_info:
 
-
 			break;
 
 		case R.id.gip_video_bdroom_radioBtn_program:
@@ -99,7 +87,4 @@ public class GoverInterPeopleVideoLiveFragment extends RadioButtonChangeFragment
 		}
 	}
 
-
-	
-	
 }

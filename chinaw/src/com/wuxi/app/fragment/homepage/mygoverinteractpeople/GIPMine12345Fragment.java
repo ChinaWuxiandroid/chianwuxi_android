@@ -22,6 +22,7 @@ import com.wuxi.app.engine.LetterService;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.LetterWrapper;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -34,10 +35,6 @@ import com.wuxi.exception.NetException;
 
 public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
 	private ListView mListView;
 	private LetterWrapper letterWrapper;
 	private List<LetterWrapper.Letter> letters;
@@ -121,11 +118,11 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 
 			@Override
 			public void onClick(View v) {
-//				 BaseSlideFragment baseSlideFragment =
-//				 GIPMine12345Fragment.this.baseSlideFragment;
-//				 baseSlideFragment.slideLinstener.replaceFragment(null,
-//				 position,
-//				 Constants.FragmentName.GIP_12345_WRITE_MAIL_FRAGMENT, null);
+				// BaseSlideFragment baseSlideFragment =
+				// GIPMine12345Fragment.this.baseSlideFragment;
+				// baseSlideFragment.slideLinstener.replaceFragment(null,
+				// position,
+				// Constants.FragmentName.GIP_12345_WRITE_MAIL_FRAGMENT, null);
 				Toast.makeText(context, "该功能未实现", Toast.LENGTH_SHORT).show();
 			}
 		});
@@ -145,8 +142,8 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 
 					letterWrapper = letterService.getMyLettersList(
 							Constants.Urls.MY_LETTER_URL,
-							Constants.SharepreferenceKey.TEST_ACCESSTOKEN,
-							startIndex, endIndex);
+							SystemUtil.getAccessToken(context), startIndex,
+							endIndex);
 					if (null != letterWrapper) {
 						// CacheUtil.put(menuItem.getChannelId(),
 						// titleChannels);// 缓存起来
@@ -178,7 +175,7 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 	public void showLettersList() {
 		LettersListViewAdapter adapter = new LettersListViewAdapter();
 		if (letters == null || letters.size() == 0) {
-			Toast.makeText(context, "对不起，暂无信息", 2000).show();
+			Toast.makeText(context, "对不起，暂无信息", Toast.LENGTH_SHORT).show();
 		} else {
 			mListView.setAdapter(adapter);
 		}
