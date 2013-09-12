@@ -116,7 +116,7 @@ public class MenuService extends Service {
 					menu.setPfBuildPath(jb.getString("pfBuildPath"));
 
 					if (!menu.isDeleted() && !menu.isDisabled()) {// 已经删除标记和弃用的不显示
-						CacheUtil.put(menu.getId(), menu);//将该项菜单放入缓存
+						CacheUtil.put(MenuItem.MENUITEM_KEY+menu.getId(), menu);//将该项菜单放入缓存
 						menuItems.add(menu);
 					}
 				}
@@ -251,7 +251,7 @@ public class MenuService extends Service {
 
 					// LogUtil.i(TAG, jb.toString());
 					if (!menu.isDeleted()) {// 已经删除标记的不显示
-						CacheUtil.put(menu.getId(), menu);//将该项菜单放入缓存
+						CacheUtil.put(MenuItem.MENUITEM_KEY+menu.getId(), menu);//将该项菜单放入缓存
 						menuItems.add(menu);
 					}
 

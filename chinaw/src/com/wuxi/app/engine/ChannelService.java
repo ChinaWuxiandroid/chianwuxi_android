@@ -77,7 +77,7 @@ public class ChannelService extends Service {
 						channel.setChildrenContentsCount(jb
 								.getInt("childrenContentsCount"));
 
-						CacheUtil.put(channel.getChannelId(), channel);// 将该屏道菜单单放入缓存
+						CacheUtil.put(Channel.CHANNEL_KEY+channel.getChannelId(), channel);// 将该屏道菜单单放入缓存
 						channels.add(channel);
 
 					}
