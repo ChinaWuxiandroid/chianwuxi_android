@@ -15,17 +15,21 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.view.View.OnClickListener;
+import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AbsListView.OnScrollListener;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
+import com.wuxi.app.adapter.LiveHomeMemoirListAdapter;
 import com.wuxi.app.engine.MemoirService;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.MemoirWrapper;
+import com.wuxi.domain.MemoirWrapper.Memoir;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -37,7 +41,8 @@ import com.wuxi.exception.NetException;
  * 
  */
 @SuppressLint({ "ShowToast", "HandlerLeak" })
-public class LiveHomeMemoirFragment extends BaseFragment {
+public class LiveHomeMemoirFragment extends BaseFragment implements
+		OnClickListener, OnScrollListener {
 
 	protected static final String TAG = "LiveHomeMemoirFragment";
 
@@ -45,13 +50,15 @@ public class LiveHomeMemoirFragment extends BaseFragment {
 
 	private Context context = null;
 
-	private ProgressBar memoirBar = null;
+	private ProgressBar list_pb = null;
 
-	private ListView memoirListView = null;
+	private ListView mListView = null;
 
 	private MemoirWrapper memoirWrapper = null;
 
-	private List<MemoirWrapper.Memoir> memoirs = null;
+	private List<Memoir> memoirs = null;
+
+	private LiveHomeMemoirListAdapter adapter;
 
 	// 数据加载成功标志
 	private static final int DATA__LOAD_SUCESS = 0;
@@ -60,8 +67,17 @@ public class LiveHomeMemoirFragment extends BaseFragment {
 
 	// 获取实录的起始坐标
 	private int startIndex = 0;
-	// 获取实录的结束坐标
-	private int endIndex = 10;
+	private int visibleLastIndex;
+	private int visibleItemCount;// 当前显示的总条数
+	private final static int PAGE_NUM = 10;
+
+	private boolean isFirstLoad = true;// 是不是首次加载数据
+	private boolean isSwitch = false;// 切换
+	private boolean isLoading = false;
+
+	private View loadMoreView;// 加载更多视图
+	private Button loadMoreButton;
+	private ProgressBar pb_loadmoore;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -74,11 +90,12 @@ public class LiveHomeMemoirFragment extends BaseFragment {
 
 			switch (msg.what) {
 			case DATA__LOAD_SUCESS:
-				memoirBar.setVisibility(View.GONE);
+
 				showMemoirList();
 				break;
 
 			case DATA_LOAD_ERROR:
+				list_pb.setVisibility(View.GONE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
 			}
@@ -94,6 +111,9 @@ public class LiveHomeMemoirFragment extends BaseFragment {
 
 		initLayout();
 
+		// 第一次加载数据
+		loadFirstData(startIndex, PAGE_NUM);
+
 		return view;
 	}
 
@@ -101,45 +121,66 @@ public class LiveHomeMemoirFragment extends BaseFragment {
 	 * 加载布局文件
 	 */
 	private void initLayout() {
-		memoirListView = (ListView) view
+		mListView = (ListView) view
 				.findViewById(R.id.gip_live_home_memoir_listview);
-		
-		memoirBar = (ProgressBar) view
+
+		list_pb = (ProgressBar) view
 				.findViewById(R.id.gip_live_home_memoir_progressbar);
-		memoirBar.setVisibility(View.VISIBLE);
-		
-		loadData();
+
+		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+				null);
+		loadMoreButton = (Button) loadMoreView
+				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
+
+		mListView.addFooterView(loadMoreView);// 为listView添加底部视图
+		mListView.setOnScrollListener(this);// 增加滑动监听
+		loadMoreButton.setOnClickListener(this);
+	}
+
+	/**
+	 * @方法： loadFirstData
+	 * @描述： 第一次加载数据
+	 * @param start
+	 * @param end
+	 */
+	private void loadFirstData(int start, int end) {
+		loadData(start, end);
 	}
 
 	/**
 	 * 加载数据
 	 */
-	private void loadData() {
+	private void loadData(final int startIndex, final int endIndex) {
+		if (isFirstLoad || isSwitch) {
+			list_pb.setVisibility(View.VISIBLE);
+		} else {
+			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
+		}
+
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
+				isLoading = true;// 正在加载数据
+				Message message = handler.obtainMessage();
 				MemoirService memoirService = new MemoirService(context);
-
 				try {
 					memoirWrapper = memoirService.getMemoirWrapper(
 							"32480e19-76b8-45d9-b7d1-a6c54933f9f7", startIndex,
 							endIndex);
 					if (memoirWrapper != null) {
-						memoirs = memoirWrapper.getMemoirs();
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 					} else {
-						Message message = handler.obtainMessage();
 						message.obj = "error";
 						handler.sendEmptyMessage(DATA_LOAD_ERROR);
 					}
 				} catch (NetException e) {
 					LogUtil.i(TAG, "出错");
 					e.printStackTrace();
-					Message message = handler.obtainMessage();
 					message.obj = e.getMessage();
 					handler.sendEmptyMessage(DATA_LOAD_ERROR);
-
 				} catch (JSONException e) {
 					e.printStackTrace();
 				} catch (NODataException e) {
@@ -153,90 +194,78 @@ public class LiveHomeMemoirFragment extends BaseFragment {
 	 * 显示实录列表
 	 */
 	private void showMemoirList() {
+		memoirs = memoirWrapper.getMemoirs();
 
-		MemoirListAdapter memoirListAdapter = new MemoirListAdapter();
-
-		for (int i = 0; i < memoirs.size(); i++) {
-			System.out.println(memoirs.get(i).getAnswerUser());
-		}
-		
 		if (memoirs == null || memoirs.size() == 0) {
 			Toast.makeText(context, "对不起，暂无访谈实录信息", 2000).show();
 		} else {
-			memoirListView.setAdapter(memoirListAdapter);
+			if (isFirstLoad) {
+				adapter = new LiveHomeMemoirListAdapter(context, memoirs);
+				isFirstLoad = false;
+				mListView.setAdapter(adapter);
+				list_pb.setVisibility(View.GONE);
+				isLoading = false;
+			} else {
+				if (isSwitch) {
+					adapter.setMemoirs(memoirs);
+					list_pb.setVisibility(View.GONE);
+				} else {
+					for (Memoir memoir : memoirs) {
+						adapter.addItem(memoir);
+					}
+				}
+
+				adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
+				mListView.setSelection(visibleLastIndex - visibleItemCount + 1); // 设置选中项
+				isLoading = false;
+			}
+		}
+
+		if (memoirWrapper.isNext()) {
+			pb_loadmoore.setVisibility(ProgressBar.GONE);
+			loadMoreButton.setText("点击加载更多");
+		} else {
+			mListView.removeFooterView(loadMoreView);
 		}
 	}
 
 	/**
-	 * 
-	 * 内部类，访谈实录列表适配器
-	 * 
-	 * @author 智佳 罗森
-	 * @createtime 2013年8月9日 20:33
-	 * 
+	 * @方法： loadMoreData
+	 * @描述： 加载更多数据
+	 * @param view
 	 */
-	public class MemoirListAdapter extends BaseAdapter {
-
-		@Override
-		public int getCount() {
-			return memoirs.size();
+	private void loadMoreData(View view) {
+		if (isLoading) {
+			return;
+		} else {
+			loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_NUM);
 		}
+	}
 
-		@Override
-		public Object getItem(int position) {
-			return memoirs.get(position);
-		}
+	@Override
+	public void onScroll(AbsListView view, int firstVisibleItem,
+			int visibleItemCount, int totalItemCount) {
+		this.visibleItemCount = visibleItemCount;
+		visibleLastIndex = firstVisibleItem + visibleItemCount - 1;// 最后一条索引号
+	}
 
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
+	@Override
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+		int itemsLastIndex = adapter.getCount() - 1; // 数据集最后一项的索引
+		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
+	}
 
-		/**
-		 * 内部类，定义了列表的项的布局控件
-		 * 
-		 * @author 智佳 罗森
-		 * @createtime 2013年8月9日 20:36
-		 * 
-		 */
-		class ViewHolder {
-			public TextView pepole_text;
-			public TextView content_text;
-			public TextView time_text;
-		}
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.loadMoreButton:
+			if (memoirWrapper != null && memoirWrapper.isNext()) {// 还有下一条记录
 
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHolder holder = null;
-
-			if (convertView == null) {
-				convertView = LayoutInflater.from(context).inflate(
-						R.layout.vedio_memoir_list_layout, null);
-
-				holder = new ViewHolder();
-
-				holder.pepole_text = (TextView) convertView
-						.findViewById(R.id.memoir_pepole_text);
-				holder.content_text = (TextView) convertView
-						.findViewById(R.id.memoir_content_text);
-				holder.time_text = (TextView) convertView
-						.findViewById(R.id.memoir_time_text);
-
-				convertView.setTag(holder);
-			} else {
-				holder = (ViewHolder) convertView.getTag();
+				isSwitch = false;
+				loadMoreButton.setText("loading.....");
+				loadMoreData(v);
 			}
-
-			if ((memoirs.get(position).getAnswerType()) == 0) {
-				holder.pepole_text.setText("[主持人：]");
-			} else if ((memoirs.get(position).getAnswerType()) == 1) {
-				holder.pepole_text.setText("[嘉宾：]");
-			}
-			holder.content_text.setText(memoirs.get(position).getContent());
-			holder.time_text.setText("["
-					+ memoirs.get(position).getSubmitTime() + "]");
-
-			return convertView;
+			break;
 		}
 	}
 

@@ -57,31 +57,29 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment {
 			if (menuItem.getAppUI().equals("MyPoliticalInteraction")) {
 				onTransaction(new GoverInterPeopleMineFragment());
 			}
-			// 1345来信办理平台*
+			// 12345来信办理平台*
 			else if (menuItem.getAppUI().equals("Letter12345")) {
 				onTransaction(new GoverInterPeople12345Fragment());
 			}
 			// 征求意见平台*
 			else if (menuItem.getAppUI().equals("QuestionnairePlatform")) {
-				// onTransaction(new GoverInterPeopleSuggestFragment());
 				GoverInterPeopleSuggestFragment goverInterPeopleSuggestFragment = new GoverInterPeopleSuggestFragment();
 				goverInterPeopleSuggestFragment.setParentItem(menuItem);
 				onTransaction(goverInterPeopleSuggestFragment);
 			}
-			// 视频直播平台
-			else if (menuItem.getAppUI().equals("VideoBroadcastPlatform")) {
-				onTransaction(new GoverInterPeopleVideoLiveFragment());
-			}
+//			// 视频直播平台
+//			else if (menuItem.getAppUI().equals("VideoBroadcastPlatform")) {
+//				GoverInterPeopleVideoLiveFragment goverInterPeopleVideoLiveFragment = new GoverInterPeopleVideoLiveFragment();
+//				onTransaction(goverInterPeopleVideoLiveFragment);
+//			}
 			// 公众论坛
 			else if (menuItem.getAppUI().equals("PublicBBS")) {
 				GoverInterPeoplePublicForumFragment goverInterPeoplePublicForumFragment = new GoverInterPeoplePublicForumFragment();
-
 				onTransaction(goverInterPeoplePublicForumFragment);
 			}
 			// 热点话题
 			else if (menuItem.getAppUI().equals("HotTopic")) {
 				GoverInterPeopleHotReviewFragment goverInterPeopleHotReviewFragment = new GoverInterPeopleHotReviewFragment();
-
 				onTransaction(goverInterPeopleHotReviewFragment);
 
 			}

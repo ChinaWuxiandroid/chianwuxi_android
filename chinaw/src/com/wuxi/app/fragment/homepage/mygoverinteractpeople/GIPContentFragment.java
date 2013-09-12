@@ -72,10 +72,12 @@ public class GIPContentFragment extends GoverMenuItemTitleFragment {
 				else if(menu.getAppUI().endsWith("Public_opinion_collection")){
 					menu.setContentFragment(GIPSuggestPeopleWillFragment.class);
 				}
-				//视频直播平台
-				else if(menu.getAppUI().endsWith("走进直播间")){
-					menu.setContentFragment(GoverInterPeopleVideoLiveFragment.class);
-				}
+//				//视频直播平台
+//				else if(menu.getAppUI().endsWith("ItemHomePage")){
+//					menu.setContentFragment(GoverInterPeopleVideoLiveHomeFragment.class);
+//				}
+				
+				
 //				else if(menu.getAppUI().endsWith("行风热线")){
 //					menu.setContentFragment(GoverInterPeopleVideoLiveFragment.class);
 //				}

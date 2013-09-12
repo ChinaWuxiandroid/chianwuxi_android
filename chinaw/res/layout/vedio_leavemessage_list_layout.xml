@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
+        android:layout_marginTop="5sp"
         android:text="[网友：]"
         android:textColor="#FF4500" />
 
@@ -17,7 +18,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5sp"
-        android:layout_marginRight="5sp" />
+        android:layout_marginRight="5sp"
+        android:layout_marginTop="3sp"
+        android:text="测试" />
 
     <TextView
         android:id="@+id/leave_ask_time_text"
@@ -25,13 +28,15 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
+        android:layout_marginTop="3sp"
+        android:layout_marginBottom="5sp"
+        android:layout_gravity="right"
+        android:text="测试"
         android:textColor="#808080" />
 
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:layout_marginBottom="3sp"
-        android:layout_marginTop="3sp"
         android:background="#ffffff" />
 
     <TextView
@@ -39,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
+        android:layout_marginTop="5sp"
         android:text="[回复：]"
         android:textColor="#0000FF" />
 
@@ -46,15 +52,21 @@
         android:id="@+id/leave_answer_content_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="3sp"
         android:layout_marginLeft="5sp"
-        android:layout_marginRight="5sp" />
+        android:layout_marginRight="5sp" 
+        android:text="测试"/>
 
     <TextView
         android:id="@+id/leave_answer_time_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="3sp"
+        android:layout_marginBottom="5sp"
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
-        android:textColor="#808080" />
+        android:layout_gravity="right"
+        android:textColor="#808080"
+        android:text="测试" />
 
 </LinearLayout>

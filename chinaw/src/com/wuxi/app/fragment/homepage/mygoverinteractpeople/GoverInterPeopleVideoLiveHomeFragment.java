@@ -25,11 +25,6 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 public class GoverInterPeopleVideoLiveHomeFragment extends
 		RadioButtonChangeFragment {
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
-
 	protected static final int HOME_CONTENT_ID = R.id.gip_vedio_live_home_fragment;
 
 	// 我来说说按钮

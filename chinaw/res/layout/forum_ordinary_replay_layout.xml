@@ -30,6 +30,4 @@
         </ListView>
     </FrameLayout>
     
-    <GridView ></GridView>
-
 </LinearLayout>
