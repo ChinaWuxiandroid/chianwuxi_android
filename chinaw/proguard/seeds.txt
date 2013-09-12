@@ -7812,11 +7812,124 @@ com.google.gson.stream.JsonScope: com.google.gson.stream.JsonScope[] values()
 com.google.gson.stream.JsonScope: com.google.gson.stream.JsonScope valueOf(java.lang.String)
 com.google.gson.stream.JsonToken: com.google.gson.stream.JsonToken[] values()
 com.google.gson.stream.JsonToken: com.google.gson.stream.JsonToken valueOf(java.lang.String)
-com.wuxi.app.MainActivity
-com.wuxi.app.MainActivity: MainActivity()
-com.wuxi.app.MainActivity: void onClick(android.view.View)
-com.wuxi.app.util.Constants$FragmentName: com.wuxi.app.util.Constants$FragmentName[] values()
-com.wuxi.app.util.Constants$FragmentName: com.wuxi.app.util.Constants$FragmentName valueOf(java.lang.String)
+com.polites.android.GestureImageView
+com.polites.android.GestureImageView: GestureImageView(android.content.Context,android.util.AttributeSet,int)
+com.polites.android.GestureImageView: GestureImageView(android.content.Context,android.util.AttributeSet)
+com.polites.android.GestureImageView: GestureImageView(android.content.Context)
+com.wuxi.app.MainTabActivity
+com.wuxi.app.MainTabActivity: MainTabActivity()
+com.wuxi.app.MainTabActivity: void onClick(android.view.View)
+com.wuxi.app.activity.BaseItemContentActivity
+com.wuxi.app.activity.BaseItemContentActivity: BaseItemContentActivity()
+com.wuxi.app.activity.BaseSlideActivity
+com.wuxi.app.activity.BaseSlideActivity: BaseSlideActivity()
+com.wuxi.app.activity.BaseSlideActivity: void onClick(android.view.View)
+com.wuxi.app.activity.MainIndexActivity
+com.wuxi.app.activity.MainIndexActivity: MainIndexActivity()
+com.wuxi.app.activity.MainIndexActivity: void onClick(android.view.View)
+com.wuxi.app.activity.commactivity.ContentDetailActivity
+com.wuxi.app.activity.commactivity.ContentDetailActivity: ContentDetailActivity()
+com.wuxi.app.activity.commactivity.ContentDetailWebActivity
+com.wuxi.app.activity.commactivity.ContentDetailWebActivity: ContentDetailWebActivity()
+com.wuxi.app.activity.commactivity.ImageViewScaleActivity
+com.wuxi.app.activity.commactivity.ImageViewScaleActivity: ImageViewScaleActivity()
+com.wuxi.app.activity.commactivity.MenuItemMainActivity
+com.wuxi.app.activity.commactivity.MenuItemMainActivity: MenuItemMainActivity()
+com.wuxi.app.activity.commactivity.MenuItemMainActivity: void onClick(android.view.View)
+com.wuxi.app.activity.homepage.FourTopicActivity
+com.wuxi.app.activity.homepage.FourTopicActivity: FourTopicActivity()
+com.wuxi.app.activity.homepage.LearActivity
+com.wuxi.app.activity.homepage.LearActivity: LearActivity()
+com.wuxi.app.activity.homepage.NewsAnnAcountActivitiy
+com.wuxi.app.activity.homepage.NewsAnnAcountActivitiy: NewsAnnAcountActivitiy()
+com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity
+com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity: ChannelActivity()
+com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity: void onClick(android.view.View)
+com.wuxi.app.activity.homepage.fantasticwuxi.WuxiChannelContentDetailActivity
+com.wuxi.app.activity.homepage.fantasticwuxi.WuxiChannelContentDetailActivity: WuxiChannelContentDetailActivity()
+com.wuxi.app.activity.homepage.goverpublicmsg.GoverMsgContentDetailWebActivity
+com.wuxi.app.activity.homepage.goverpublicmsg.GoverMsgContentDetailWebActivity: GoverMsgContentDetailWebActivity()
+com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity
+com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity: PublicGoverMsgActivity()
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonActivity
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonActivity: GoverSaloonActivity()
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonContentDetialActivity
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonContentDetialActivity: GoverSaloonContentDetialActivity()
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailCFActivity
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailCFActivity: GoverSaloonDetailCFActivity()
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailCFActivity: void onClick(android.view.View)
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailQTActivity
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailQTActivity: GoverSaloonDetailQTActivity()
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailQTActivity: void onClick(android.view.View)
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailQZActivity
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailQZActivity: GoverSaloonDetailQZActivity()
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailQZActivity: void onClick(android.view.View)
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailXKActivity
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailXKActivity: GoverSaloonDetailXKActivity()
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailXKActivity: void onClick(android.view.View)
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailZSActivtiy
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailZSActivtiy: GoverSaloonDetailZSActivtiy()
+com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailZSActivtiy: void onClick(android.view.View)
+com.wuxi.app.activity.homepage.goversaloon.MyOnlineAskActivity
+com.wuxi.app.activity.homepage.goversaloon.MyOnlineAskActivity: MyOnlineAskActivity()
+com.wuxi.app.activity.homepage.goversaloon.MyOnlineAskActivity: void onClick(android.view.View)
+com.wuxi.app.activity.homepage.informationcenter.HotTopicContentActivity
+com.wuxi.app.activity.homepage.informationcenter.HotTopicContentActivity: HotTopicContentActivity()
+com.wuxi.app.activity.homepage.informationcenter.InfoCenterContentDetailActivity
+com.wuxi.app.activity.homepage.informationcenter.InfoCenterContentDetailActivity: InfoCenterContentDetailActivity()
+com.wuxi.app.activity.homepage.informationcenter.InformationCenterActivity
+com.wuxi.app.activity.homepage.informationcenter.InformationCenterActivity: InformationCenterActivity()
+com.wuxi.app.activity.homepage.logorregister.LoginActivity
+com.wuxi.app.activity.homepage.logorregister.LoginActivity: LoginActivity()
+com.wuxi.app.activity.homepage.logorregister.LoginActivity: void onClick(android.view.View)
+com.wuxi.app.activity.homepage.logorregister.RegisterActivity
+com.wuxi.app.activity.homepage.logorregister.RegisterActivity: RegisterActivity()
+com.wuxi.app.activity.homepage.logorregister.RegisterActivity: void onClick(android.view.View)
+com.wuxi.app.activity.homepage.more.AboutUsActivity
+com.wuxi.app.activity.homepage.more.AboutUsActivity: AboutUsActivity()
+com.wuxi.app.activity.homepage.more.MenuItemSetActivity
+com.wuxi.app.activity.homepage.more.MenuItemSetActivity: MenuItemSetActivity()
+com.wuxi.app.activity.homepage.more.SiteMapActivity
+com.wuxi.app.activity.homepage.more.SiteMapActivity: SiteMapActivity()
+com.wuxi.app.activity.homepage.more.SystemSetActivity
+com.wuxi.app.activity.homepage.more.SystemSetActivity: SystemSetActivity()
+com.wuxi.app.activity.homepage.more.SystemSetActivity: void onClick(android.view.View)
+com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumContentActivity
+com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumContentActivity: ForumContentActivity()
+com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumPostActivity
+com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumPostActivity: ForumPostActivity()
+com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345AllMailContentActivity
+com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345AllMailContentActivity: GIP12345AllMailContentActivity()
+com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPContentDetailWebActivity
+com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPContentDetailWebActivity: GIPContentDetailWebActivity()
+com.wuxi.app.activity.homepage.mygoverinteractpeople.HotReviewContentActivity
+com.wuxi.app.activity.homepage.mygoverinteractpeople.HotReviewContentActivity: HotReviewContentActivity()
+com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity
+com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity: LegislationContentActivity()
+com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity
+com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity: MainMineActivity()
+com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity
+com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity: PepoleIdeaCollectActivity()
+com.wuxi.app.activity.homepage.publicservice.PublicServiceActivity
+com.wuxi.app.activity.homepage.publicservice.PublicServiceActivity: PublicServiceActivity()
+com.wuxi.app.activity.homepage.publicservice.PublicServiceContentDetailActivity
+com.wuxi.app.activity.homepage.publicservice.PublicServiceContentDetailActivity: PublicServiceContentDetailActivity()
+com.wuxi.app.activity.search.AdvancedSearchActivity
+com.wuxi.app.activity.search.AdvancedSearchActivity: AdvancedSearchActivity()
+com.wuxi.app.activity.search.AdvancedSearchActivity: void onClick(android.view.View)
+com.wuxi.app.activity.search.AdvancedSearchResultListActivity
+com.wuxi.app.activity.search.AdvancedSearchResultListActivity: AdvancedSearchResultListActivity()
+com.wuxi.app.activity.search.AdvancedSearchResultListActivity: void onClick(android.view.View)
+com.wuxi.app.activity.search.MainSearchActivity
+com.wuxi.app.activity.search.MainSearchActivity: MainSearchActivity()
+com.wuxi.app.activity.search.MainSearchActivity: void findView(android.view.View)
+com.wuxi.app.activity.search.MainSearchActivity: void onClick(android.view.View)
+com.wuxi.app.activity.search.SearchResultDetailActivity
+com.wuxi.app.activity.search.SearchResultDetailActivity: SearchResultDetailActivity()
+com.wuxi.app.view.ContentListView
+com.wuxi.app.view.ContentListView: ContentListView(android.content.Context,android.util.AttributeSet)
+com.wuxi.app.view.ContentListView: ContentListView(android.content.Context)
+com.wuxi.app.view.ContentListView: ContentListView(android.content.Context,android.util.AttributeSet,int)
 com.wuxi.app.view.DynamicTitleLayout
 com.wuxi.app.view.DynamicTitleLayout: DynamicTitleLayout(android.content.Context,android.util.AttributeSet)
 com.wuxi.app.view.DynamicTitleLayout: DynamicTitleLayout(android.content.Context,android.util.AttributeSet,int)
@@ -7960,6 +8073,7 @@ com.wuxi.domain.Channel: java.lang.String channelId
 com.wuxi.domain.Channel: java.lang.String channelName
 com.wuxi.domain.Channel: int childrenChannelsCount
 com.wuxi.domain.Channel: int childrenContentsCount
+com.wuxi.domain.Channel: java.lang.String CHANNEL_KEY
 com.wuxi.domain.Channel: java.lang.Class contentFragment
 com.wuxi.domain.Channel: Channel()
 com.wuxi.domain.Channel: int getChildrenChannelsCount()
@@ -9226,10 +9340,6 @@ com.wuxi.domain.LetterWrapper$Letter: int getReadcount()
 com.wuxi.domain.LetterWrapper$Letter: void setReadcount(int)
 com.wuxi.domain.LetterWrapper$Letter: java.lang.String getTitle()
 com.wuxi.domain.LetterWrapper$Letter: void setTitle(java.lang.String)
-com.wuxi.domain.MD5Encoder
-com.wuxi.domain.MD5Encoder: MD5Encoder()
-com.wuxi.domain.MD5Encoder: java.lang.String encode(java.lang.String)
-com.wuxi.domain.MD5Encoder: java.lang.String getLoginPWDMD5(java.lang.String,java.lang.String)
 com.wuxi.domain.MailBoxParameterItem
 com.wuxi.domain.MailBoxParameterItem: long serialVersionUID
 com.wuxi.domain.MailBoxParameterItem: int tpye
@@ -9275,6 +9385,23 @@ com.wuxi.domain.MailBoxParameterItem: int getListMark()
 com.wuxi.domain.MailBoxParameterItem: void setListMark(int)
 com.wuxi.domain.MailBoxParameterItem: java.lang.String getJscontent()
 com.wuxi.domain.MailBoxParameterItem: void setJscontent(java.lang.String)
+com.wuxi.domain.MailTypeWrapper
+com.wuxi.domain.MailTypeWrapper: java.util.List mailTypes
+com.wuxi.domain.MailTypeWrapper: MailTypeWrapper()
+com.wuxi.domain.MailTypeWrapper: java.util.List getMailTypes()
+com.wuxi.domain.MailTypeWrapper: void setMailTypes(java.util.List)
+com.wuxi.domain.MailTypeWrapper$MailType
+com.wuxi.domain.MailTypeWrapper$MailType: java.lang.String isnull
+com.wuxi.domain.MailTypeWrapper$MailType: java.lang.String typename
+com.wuxi.domain.MailTypeWrapper$MailType: java.lang.String typeid
+com.wuxi.domain.MailTypeWrapper$MailType: com.wuxi.domain.MailTypeWrapper this$0
+com.wuxi.domain.MailTypeWrapper$MailType: MailTypeWrapper$MailType(com.wuxi.domain.MailTypeWrapper)
+com.wuxi.domain.MailTypeWrapper$MailType: java.lang.String getIsnull()
+com.wuxi.domain.MailTypeWrapper$MailType: void setIsnull(java.lang.String)
+com.wuxi.domain.MailTypeWrapper$MailType: java.lang.String getTypename()
+com.wuxi.domain.MailTypeWrapper$MailType: void setTypename(java.lang.String)
+com.wuxi.domain.MailTypeWrapper$MailType: java.lang.String getTypeid()
+com.wuxi.domain.MailTypeWrapper$MailType: void setTypeid(java.lang.String)
 com.wuxi.domain.MemoirWrapper
 com.wuxi.domain.MemoirWrapper: java.util.List memoirs
 com.wuxi.domain.MemoirWrapper: MemoirWrapper()
@@ -9333,8 +9460,15 @@ com.wuxi.domain.MenuItem: boolean isHasChildern
 com.wuxi.domain.MenuItem: java.lang.String icon
 com.wuxi.domain.MenuItem: java.lang.String pfId
 com.wuxi.domain.MenuItem: java.lang.String pfBuildPath
+com.wuxi.domain.MenuItem: boolean isLocalFavorites
+com.wuxi.domain.MenuItem: int level
+com.wuxi.domain.MenuItem: java.lang.String MENUITEM_KEY
 com.wuxi.domain.MenuItem: java.lang.Class contentFragment
 com.wuxi.domain.MenuItem: MenuItem()
+com.wuxi.domain.MenuItem: boolean isLocalFavorites()
+com.wuxi.domain.MenuItem: void setLocalFavorites(boolean)
+com.wuxi.domain.MenuItem: int getLevel()
+com.wuxi.domain.MenuItem: void setLevel(int)
 com.wuxi.domain.MenuItem: java.lang.Class getContentFragment()
 com.wuxi.domain.MenuItem: void setContentFragment(java.lang.Class)
 com.wuxi.domain.MenuItem: java.lang.String getIcon()
@@ -9767,6 +9901,38 @@ com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: 
 com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: void setSentTime(java.lang.String)
 com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: java.lang.String getActorInfoId()
 com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply: void setActorInfoId(java.lang.String)
+com.wuxi.domain.PartLeaderLetterWrapper
+com.wuxi.domain.PartLeaderLetterWrapper: java.util.List leaderLetters
+com.wuxi.domain.PartLeaderLetterWrapper: PartLeaderLetterWrapper()
+com.wuxi.domain.PartLeaderLetterWrapper: java.util.List getLeaderLetters()
+com.wuxi.domain.PartLeaderLetterWrapper: void setLeaderLetters(java.util.List)
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: java.lang.String id
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: java.lang.String type
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: java.lang.String code
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: java.lang.String title
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: java.lang.String depname
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: java.lang.String appraise
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: java.lang.String answerdate
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: java.lang.String readcount
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: com.wuxi.domain.PartLeaderLetterWrapper this$0
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: PartLeaderLetterWrapper$PartLeaderLetter(com.wuxi.domain.PartLeaderLetterWrapper)
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: java.lang.String getId()
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: void setId(java.lang.String)
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: java.lang.String getType()
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: void setType(java.lang.String)
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: java.lang.String getCode()
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: void setCode(java.lang.String)
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: java.lang.String getTitle()
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: void setTitle(java.lang.String)
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: java.lang.String getDepname()
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: void setDepname(java.lang.String)
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: java.lang.String getAppraise()
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: void setAppraise(java.lang.String)
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: java.lang.String getAnswerdate()
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: void setAnswerdate(java.lang.String)
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: java.lang.String getReadcount()
+com.wuxi.domain.PartLeaderLetterWrapper$PartLeaderLetter: void setReadcount(java.lang.String)
 com.wuxi.domain.PartLeaderMailWrapper
 com.wuxi.domain.PartLeaderMailWrapper: java.util.List partLeaderMails
 com.wuxi.domain.PartLeaderMailWrapper: PartLeaderMailWrapper()
@@ -9883,6 +10049,23 @@ com.wuxi.domain.PoliticsWrapper$Politics: java.lang.String getBeginTime()
 com.wuxi.domain.PoliticsWrapper$Politics: void setBeginTime(java.lang.String)
 com.wuxi.domain.PoliticsWrapper$Politics: java.lang.String getEndTime()
 com.wuxi.domain.PoliticsWrapper$Politics: void setEndTime(java.lang.String)
+com.wuxi.domain.QueryMailContentTypeWrapper
+com.wuxi.domain.QueryMailContentTypeWrapper: java.util.List contentTypes
+com.wuxi.domain.QueryMailContentTypeWrapper: QueryMailContentTypeWrapper()
+com.wuxi.domain.QueryMailContentTypeWrapper: java.util.List getContentTypes()
+com.wuxi.domain.QueryMailContentTypeWrapper: void setContentTypes(java.util.List)
+com.wuxi.domain.QueryMailContentTypeWrapper$QueryMailContentType
+com.wuxi.domain.QueryMailContentTypeWrapper$QueryMailContentType: java.lang.String isnull
+com.wuxi.domain.QueryMailContentTypeWrapper$QueryMailContentType: java.lang.String typename
+com.wuxi.domain.QueryMailContentTypeWrapper$QueryMailContentType: java.lang.String typeid
+com.wuxi.domain.QueryMailContentTypeWrapper$QueryMailContentType: com.wuxi.domain.QueryMailContentTypeWrapper this$0
+com.wuxi.domain.QueryMailContentTypeWrapper$QueryMailContentType: QueryMailContentTypeWrapper$QueryMailContentType(com.wuxi.domain.QueryMailContentTypeWrapper)
+com.wuxi.domain.QueryMailContentTypeWrapper$QueryMailContentType: java.lang.String getIsnull()
+com.wuxi.domain.QueryMailContentTypeWrapper$QueryMailContentType: void setIsnull(java.lang.String)
+com.wuxi.domain.QueryMailContentTypeWrapper$QueryMailContentType: java.lang.String getTypename()
+com.wuxi.domain.QueryMailContentTypeWrapper$QueryMailContentType: void setTypename(java.lang.String)
+com.wuxi.domain.QueryMailContentTypeWrapper$QueryMailContentType: java.lang.String getTypeid()
+com.wuxi.domain.QueryMailContentTypeWrapper$QueryMailContentType: void setTypeid(java.lang.String)
 com.wuxi.domain.QuestionnairePostWrapper
 com.wuxi.domain.QuestionnairePostWrapper: java.lang.String createDate
 com.wuxi.domain.QuestionnairePostWrapper: java.lang.String title
@@ -10156,6 +10339,14 @@ com.wuxi.domain.SearchSubmitWrapper: java.lang.String getFromDate()
 com.wuxi.domain.SearchSubmitWrapper: void setFromDate(java.lang.String)
 com.wuxi.domain.SearchSubmitWrapper: java.lang.String getToDate()
 com.wuxi.domain.SearchSubmitWrapper: void setToDate(java.lang.String)
+com.wuxi.domain.StackElement
+com.wuxi.domain.StackElement: java.lang.String tag
+com.wuxi.domain.StackElement: android.view.View view
+com.wuxi.domain.StackElement: StackElement(java.lang.String,android.view.View)
+com.wuxi.domain.StackElement: void setTag(java.lang.String)
+com.wuxi.domain.StackElement: void setView(android.view.View)
+com.wuxi.domain.StackElement: java.lang.String getTag()
+com.wuxi.domain.StackElement: android.view.View getView()
 com.wuxi.domain.StatisticsLetter
 com.wuxi.domain.StatisticsLetter: boolean isNull
 com.wuxi.domain.StatisticsLetter: java.lang.String depname
