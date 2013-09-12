@@ -74,6 +74,7 @@ public class MenuItem implements Comparable<MenuItem>, Serializable {
 	private String icon;// 图标
 	private String pfId;  
 	private String pfBuildPath;  
+	public static final String MENUITEM_KEY="menuitem_key";
 
 	private Class<? extends Fragment> contentFragment;
 

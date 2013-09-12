@@ -39,11 +39,12 @@ public class InterViewService extends Service {
 		String url = Constants.Urls.PLAY_VIDEO_URL.replace("{id}", id);
 
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
-		
+
 		if (resultStr != null) {
 
 			JSONObject jsonObject = new JSONObject(resultStr);
 
+<<<<<<< HEAD
 			if (jsonObject.has("result")) {
 				JSONObject jb=jsonObject.getJSONObject("result");
 				if(jb.has("errorCode")){
@@ -54,10 +55,20 @@ public class InterViewService extends Service {
 			}
 			if(jsonObject.getBoolean("success")){
 				
+=======
+			if (jsonObject.getBoolean("success")) {
+
+>>>>>>> 036753d5dc3b4eaef12484f854c389a1583dfd68
 				return jsonObject.getString("result");
-			}else{
+			} else {
 				return null;
+<<<<<<< HEAD
 			}
+=======
+
+			}
+
+>>>>>>> 036753d5dc3b4eaef12484f854c389a1583dfd68
 		}
 		return null;
 	}
