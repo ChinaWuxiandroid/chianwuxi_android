@@ -260,7 +260,7 @@ public class MainIndexActivity extends Activity implements
 											+ "?recursions=0");
 							if (menuItems != null) {
 								handler.sendEmptyMessage(MENUITEM_LOAD_SUCESS);// 发送消息
-								CacheUtil.put(MENUITEM_CACKE_KEY, menuItems);// 将菜单数据放入缓存
+								
 							} else {
 								Message msg = handler.obtainMessage();
 								msg.what = MENUITEM_LOAD_ERROR;

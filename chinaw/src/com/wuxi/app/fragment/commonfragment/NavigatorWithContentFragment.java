@@ -125,7 +125,8 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 	private void loadChannelData() {
 
 		if (null != CacheUtil.get(parentChannel.getChannelId())) {// 从缓存中查找
-			channels = (List<Channel>) CacheUtil.get(parentChannel.getChannelId());
+			channels = (List<Channel>) CacheUtil.get(parentChannel
+					.getChannelId());
 			showLeftChannelData();
 			return;
 
@@ -139,11 +140,11 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 					ChannelService channelService = new ChannelService(context);
 
 					try {
-						channels = channelService.getSubChannels(parentChannel.getChannelId());
+						channels = channelService.getSubChannels(parentChannel
+								.getChannelId());
 						if (channels != null) {
 							handler.sendEmptyMessage(LEFT_CHANNEL_DATA__LOAD_SUCCESS);
-							CacheUtil.put(
-								parentChannel.getChannelId(), channels);// 放入缓存
+
 						}
 
 					} catch (NetException e) {
@@ -179,10 +180,11 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 					MenuService menuService = new MenuService(context);
 
 					try {
-						menuItems = menuService.getSubMenuItems(parentMenuItem.getId());
+						menuItems = menuService.getSubMenuItems(parentMenuItem
+								.getId());
 						if (menuItems != null) {
 							handler.sendEmptyMessage(LEFT_MENUITEM_DATA__LOAD_SUCCESS);
-							CacheUtil.put(parentMenuItem.getId(), menuItems);// 放入缓存
+						
 						}
 
 					} catch (NetException e) {
@@ -219,7 +221,7 @@ public class NavigatorWithContentFragment extends BaseFragment implements
 
 	private void showLeftMenuItemData() {
 		mListView.setAdapter(new ContentNavigatorAdapter(mInflater, null,
-			menuItems));// 设置适配器
+				menuItems));// 设置适配器
 		mListView.setOnItemClickListener(this);
 	}
 

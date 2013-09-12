@@ -139,7 +139,7 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 							.getId());
 					if (titleMenuItems != null) {
 						handler.sendEmptyMessage(MENUITEM_TITLEDATA__LOAD_SUCESS);
-						CacheUtil.put(parentItem.getId(), titleMenuItems);// 放入缓存
+						
 					} else {
 						Message msg = handler.obtainMessage();
 						msg.obj = "暂无信息";
@@ -214,7 +214,7 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 							.getChannelId());
 					if (titleChannels != null) {
 						handler.sendEmptyMessage(CHANNEL_TITLEDATA__LOAD_SUCESS);
-						CacheUtil.put(parentItem.getChannelId(), titleChannels);// 放入缓存
+						
 					}
 				} catch (NetException e) {
 					e.printStackTrace();

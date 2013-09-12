@@ -615,6 +615,8 @@ public class Constants {
 	public static final class SharepreferenceKey {
 
 		public static final String LAST_LOGIN_TIME = "last_login_time";// 上一次登录时间
+		
+		public static final String USEAPP_COUNT="use_app_count";//使用app次数
 
 		/**
 		 * shareprefer名称

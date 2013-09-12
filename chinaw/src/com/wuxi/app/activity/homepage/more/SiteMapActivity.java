@@ -37,7 +37,8 @@ public class SiteMapActivity extends BaseSlideActivity {
 	@Override
 	protected void findMainContentViews(View view) {
 
-		site_map_elv = (ExpandableListView) view.findViewById(R.id.site_map_elv);
+		site_map_elv = (ExpandableListView) view
+				.findViewById(R.id.site_map_elv);
 		site_map_elv.setDivider(null);
 		site_map_elv.setGroupIndicator(null);
 
@@ -50,7 +51,8 @@ public class SiteMapActivity extends BaseSlideActivity {
 			Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		List<MenuItem> menuItems = (List<MenuItem>) CacheUtil.get(Constants.CacheKey.HOME_MENUITEM_KEY);
+		List<MenuItem> menuItems = (List<MenuItem>) CacheUtil
+				.get(Constants.CacheKey.HOME_MENUITEM_KEY);
 		site_map_elv.setAdapter(new SiteMapExpandableAdapter(menuItems));
 
 		// 将所有项设置成默认展开
@@ -80,10 +82,12 @@ public class SiteMapActivity extends BaseSlideActivity {
 			MenuItem item = items.get(groupPosition);
 
 			if (item.getType() == MenuItem.CUSTOM_MENU) { // 普通菜单
-				List<MenuItem> subMenuItems = (List<MenuItem>) CacheUtil.get(item.getId());
+				List<MenuItem> subMenuItems = (List<MenuItem>) CacheUtil
+						.get(item.getId());
 				return subMenuItems;
 			} else if (item.getType() == MenuItem.CHANNEL_MENU) {
-				List<Channel> subChannels = (List<Channel>) CacheUtil.get(item.getChannelId());
+				List<Channel> subChannels = (List<Channel>) CacheUtil.get(item
+						.getChannelId());
 				return subChannels;
 			}
 
@@ -98,9 +102,10 @@ public class SiteMapActivity extends BaseSlideActivity {
 		@Override
 		public View getChildView(int groupPosition, int childPosition,
 				boolean isLastChild, View convertView, ViewGroup parent) {
-			View subView = View.inflate(
-				SiteMapActivity.this, R.layout.sitemap_gridview_layout, null);
-			GridView gv = (GridView) subView.findViewById(R.id.sitemap_gv_menuitem);
+			View subView = View.inflate(SiteMapActivity.this,
+					R.layout.sitemap_gridview_layout, null);
+			GridView gv = (GridView) subView
+					.findViewById(R.id.sitemap_gv_menuitem);
 			List<MenuItem> subMenuItems = null;
 			List<Channel> subChannels = null;
 			MenuItem item = items.get(groupPosition);
@@ -108,12 +113,13 @@ public class SiteMapActivity extends BaseSlideActivity {
 				subMenuItems = (List<MenuItem>) CacheUtil.get(item.getId());
 
 			} else if (item.getType() == MenuItem.CHANNEL_MENU) {
-				subChannels = (List<Channel>) CacheUtil.get(item.getChannelId());
+				subChannels = (List<Channel>) CacheUtil
+						.get(item.getChannelId());
 
 			}
 
 			gv.setOnItemClickListener(new SiteMapClickLister(item,
-				groupPosition));// 绑定事件
+					groupPosition));// 绑定事件
 
 			if (subMenuItems != null && subChannels == null) {
 				gv.setAdapter(new SiteMapAdapter(subMenuItems));
@@ -130,13 +136,15 @@ public class SiteMapActivity extends BaseSlideActivity {
 			MenuItem item = items.get(groupPosition);
 
 			if (item.getType() == MenuItem.CUSTOM_MENU) { // 普通菜单
-				List<MenuItem> subMenuItems = (List<MenuItem>) CacheUtil.get(item.getId());
+				List<MenuItem> subMenuItems = (List<MenuItem>) CacheUtil
+						.get(item.getId());
 				if (subMenuItems == null) {
 					return 0;
 				}
 				return subMenuItems.size() > 0 ? 1 : 0;
 			} else if (item.getType() == MenuItem.CHANNEL_MENU) {
-				List<Channel> subChannels = (List<Channel>) CacheUtil.get(item.getChannelId());
+				List<Channel> subChannels = (List<Channel>) CacheUtil.get(item
+						.getChannelId());
 				if (subChannels == null) {
 					return 0;
 				}
@@ -173,13 +181,13 @@ public class SiteMapActivity extends BaseSlideActivity {
 			MenuItem menuItem = items.get(groupPosition);
 			TextView tv = new TextView(SiteMapActivity.this);
 			AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(
-				200, ViewGroup.LayoutParams.WRAP_CONTENT);
+					200, ViewGroup.LayoutParams.WRAP_CONTENT);
 
 			tv.setBackgroundColor(Color.parseColor("#2890DF"));
 			tv.setGravity(Gravity.CENTER);
 			tv.setText(menuItem.getName());
 			tv.setTextColor(Color.WHITE);
-			tv.setTextSize(14);
+			tv.setTextSize(16);
 			tv.setGravity(Gravity.CENTER);
 			tv.setLayoutParams(layoutParams);
 
@@ -239,11 +247,11 @@ public class SiteMapActivity extends BaseSlideActivity {
 			}
 			ViewHolder viewHolder = null;
 			if (convertView == null) {
-				convertView = View.inflate(
-					SiteMapActivity.this,
-					R.layout.left_navigator_list_item_layout, null);
-				TextView tv = (TextView) convertView.findViewById(R.id.tv_navigator_name);
-				tv.setTextSize(12);
+				convertView = View.inflate(SiteMapActivity.this,
+						R.layout.site_map_item, null);
+				TextView tv = (TextView) convertView
+						.findViewById(R.id.site_map_tv);
+
 				viewHolder = new ViewHolder();
 
 				viewHolder.title_text = tv;
@@ -300,8 +308,8 @@ public class SiteMapActivity extends BaseSlideActivity {
 		if (acClass != null) {
 			intent = new Intent(SiteMapActivity.this, acClass);
 			intent.putExtra(Constants.CheckPositionKey.LEVEL_ONE_KEY, position);// 设置选中的一级菜单的序号
-			intent.putExtra(
-				BaseSlideActivity.SELECT_MENU_POSITION_KEY, parentPosition);// 设置左侧选中的选菜单序号
+			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY,
+					parentPosition);// 设置左侧选中的选菜单序号
 			MainTabActivity.instance.addView(intent);
 
 		}

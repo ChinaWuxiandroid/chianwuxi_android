@@ -106,7 +106,7 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 				try {
 					menuItems = menuService.getSubMenuItems(menuItem.getId());
 					if (menuItems != null) {
-						CacheUtil.put(menuItem.getId(), menuItems);// 放入缓存
+						
 						msg.what = LEFT_MENUITEM_DATA__LOAD_SUCCESS;
 						handler.sendMessage(msg);
 
@@ -184,7 +184,7 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 						channels = channelService.getSubChannels(menuItem.getChannelId());
 						if (channels != null) {
 							handler.sendEmptyMessage(LEFT_CHANNEL_DATA__LOAD_SUCCESS);
-							CacheUtil.put(menuItem.getChannelId(), channels);// 放入缓存
+						
 						}
 
 					} catch (NetException e) {

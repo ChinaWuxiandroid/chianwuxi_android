@@ -142,7 +142,7 @@ public class MainMineActivity extends BaseSlideActivity implements
 				try {
 					listMenus = menuService.getSubMenuItems(id);
 					if (listMenus != null) {
-						CacheUtil.put(id, listMenus);// 放入缓存
+						
 						msg.what = LEFT_MENUITEM_DATA__LOAD_SUCCESS;
 						handler.sendMessage(msg);
 

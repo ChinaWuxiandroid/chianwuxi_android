@@ -116,7 +116,7 @@ public class ExpandListItemContentFragment extends BaseFragment{
 							.getId());
 					if (MenuItems != null) {
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
-						CacheUtil.put(parentItem.getId(), MenuItems);// 放入缓存
+					
 					}
 					else{
 						Message msg = handler.obtainMessage();

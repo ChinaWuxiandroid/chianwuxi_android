@@ -3,7 +3,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <com.wuxi.app.view.MyGridView
+   <com.wuxi.app.view.MyGridView
         android:id="@+id/sitemap_gv_menuitem"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -12,7 +12,7 @@
         android:horizontalSpacing="2dip"
         android:numColumns="5"
         android:stretchMode="spacingWidth"
-        android:verticalSpacing="2dip" >
+        android:verticalSpacing="5dip" >
     </com.wuxi.app.view.MyGridView>
 
 </LinearLayout>

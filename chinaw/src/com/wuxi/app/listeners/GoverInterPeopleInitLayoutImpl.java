@@ -66,10 +66,10 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 			GIPSuggestSurveyFragment gIPSuggestSurveyFragment=null;
 			GIPSuggestPeopleWillFragment gIPSuggestPeopleWill=null;
 			
-//			/**
-//			 * 视频直播平台之走进直播间
-//			 */
-//			GoverInterPeopleVideoLiveFragment goverInterPeopleVideoLiveFragment = null;		
+			/**
+			 * 视频直播平台之走进直播间
+			 */
+			GoverInterPeopleVideoLiveFragment goverInterPeopleVideoLiveFragment = null;		
 			
 			/**
 			 * 走进直播间之栏目首页
@@ -171,14 +171,14 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 				initLayoutListner.bindContentLayout(gIPSuggestPeopleWill);
 			}
 
-//			/**
-//			 * 走进直播间
-//			 */
-//			else if (fragment instanceof GoverInterPeopleVideoLiveFragment) {
-//				goverInterPeopleVideoLiveFragment = (GoverInterPeopleVideoLiveFragment) fragment;
-//				goverInterPeopleVideoLiveFragment.setParentMenuItem(menuItem);
-//				initLayoutListner.bindContentLayout(goverInterPeopleVideoLiveFragment);
-//			}
+			/**
+			 * 走进直播间
+			 */
+			else if (fragment instanceof GoverInterPeopleVideoLiveFragment) {
+				goverInterPeopleVideoLiveFragment = (GoverInterPeopleVideoLiveFragment) fragment;
+				goverInterPeopleVideoLiveFragment.setParentMenuItem(menuItem);
+				initLayoutListner.bindContentLayout(goverInterPeopleVideoLiveFragment);
+			}
 
 			/**
 			 * 走进直播间之栏目主页

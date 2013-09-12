@@ -144,7 +144,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 							.getId());
 					if (menuItems != null) {
 						handler.sendEmptyMessage(MENUITEM_DATA_LOAD_SUCESS);
-						CacheUtil.put(parentItem.getId(), menuItems);// 放入缓存
+					
 					}
 					else{
 						Message msg = handler.obtainMessage();
@@ -201,7 +201,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 						channels = channelSevice.getSubChannels(parentItem.getChannelId());
 						if (channels != null) {
 							handler.sendEmptyMessage(CHANNEL_DATA_LOAD_SUCESS);
-							CacheUtil.put(parentItem.getChannelId(), channels);// 放入缓存
+							
 						}
 						else{
 							Message msg = handler.obtainMessage();
