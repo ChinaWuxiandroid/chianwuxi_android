@@ -89,7 +89,6 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment {
 			} else {
 				loginDialog.showDialog();
 			}
-
 		} catch (NetException e) {
 			e.printStackTrace();
 		} catch (JSONException e) {
