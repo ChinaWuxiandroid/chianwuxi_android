@@ -16,10 +16,12 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.Environment;
 
+import com.wuxi.app.db.FavoriteItemDao;
 import com.wuxi.app.fragment.index.InitializContentLayout;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.MenuItemChannelIndexUtil;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
@@ -50,7 +52,29 @@ public class MenuService extends Service {
 	 */
 	public List<MenuItem> getHomeMenuItems(String url) throws NetException,
 			JSONException, NODataException {
-		return getMenuItems(url);
+		return getMainMenuItems(url);
+	}
+
+	public List<MenuItem> getBeateHomeMenuItems(String url)
+			throws NetException, JSONException, NODataException {
+
+		FavoriteItemDao favoriteItemDao = new FavoriteItemDao(context);
+
+		List<MenuItem> mainMenuItems = getMainMenuItems(url);// 启动六大主模块菜单获取
+		List<MenuItem> faItems = favoriteItemDao.getFavoriteItems();
+		for (MenuItem menuItem : mainMenuItems) {
+			if(menuItem.isFavorites()&&favoriteItemDao.findFavoriteItem(menuItem.getId())){
+				faItems.add(menuItem);
+			}else{
+				faItems.add(menuItem);
+			}
+			
+
+		}
+		
+		CacheUtil.put(Constants.CacheKey.HOME_MENUITEM_KEY, faItems);
+
+		return faItems;
 	}
 
 	/**
@@ -116,7 +140,8 @@ public class MenuService extends Service {
 					menu.setPfBuildPath(jb.getString("pfBuildPath"));
 
 					if (!menu.isDeleted() && !menu.isDisabled()) {// 已经删除标记和弃用的不显示
-						CacheUtil.put(MenuItem.MENUITEM_KEY+menu.getId(), menu);//将该项菜单放入缓存
+						CacheUtil.put(MenuItem.MENUITEM_KEY + menu.getId(),
+								menu);// 将该项菜单放入缓存
 						menuItems.add(menu);
 					}
 				}
@@ -141,17 +166,19 @@ public class MenuService extends Service {
 	}
 
 	/**
-	 * 获取菜单数据
+	 * 获取主菜单，顶级菜单
 	 * 
 	 * @param context
 	 * @param url
+	 * @param isCheckFavorite
+	 *            是否检查是不是首次菜单
 	 * @return
 	 * @throws NetException
 	 * @throws JSONException
 	 * @throws NODataException
 	 */
 
-	private List<MenuItem> getMenuItems(String url) throws NetException,
+	private List<MenuItem> getMainMenuItems(String url) throws NetException,
 			JSONException, NODataException {
 
 		if (!checkNet()) {
@@ -188,6 +215,7 @@ public class MenuService extends Service {
 
 			if (jresult != null && jresult.length() > 0) {
 
+				FavoriteItemDao favoriteItemDao = new FavoriteItemDao(context);
 				for (int i = 0; i < jresult.length(); i++) {
 					JSONObject jb = jresult.getJSONObject(i);
 					MenuItem menu = new MenuItem();
@@ -227,7 +255,13 @@ public class MenuService extends Service {
 
 					}
 
-					
+					if (SystemUtil.getUserAppCount(context) == 1
+							&& menu.isFavorites()) {// 如果是首次启动将首次的菜单放入数据库
+						menu.setLevel(1);
+
+						favoriteItemDao.addFavoriteItem(menu);// 保存到数据库
+					}
+
 					// 图标处理
 					String iconUrl = jb.getString("icon");
 					if (!iconUrl.equals("null") && !iconUrl.equals("")
@@ -251,8 +285,11 @@ public class MenuService extends Service {
 
 					// LogUtil.i(TAG, jb.toString());
 					if (!menu.isDeleted()) {// 已经删除标记的不显示
-						CacheUtil.put(MenuItem.MENUITEM_KEY+menu.getId(), menu);//将该项菜单放入缓存
+						CacheUtil.put(MenuItem.MENUITEM_KEY + menu.getId(),
+								menu);// 将该项菜单放入缓存
+
 						menuItems.add(menu);
+
 					}
 
 				}
@@ -265,10 +302,10 @@ public class MenuService extends Service {
 				cacheUtil.cacheFile(url, reslutStr);// 缓存菜单
 			}
 
-			CacheUtil.put(Constants.CacheKey.HOME_MENUITEM_KEY, menuItems);// 将导航主菜单放入缓存
+			CacheUtil.put(Constants.CacheKey.MAIN_MENUITEM_KEY, menuItems);// 将导航主菜单放入缓存
 
 			MenuItemChannelIndexUtil.getInstance().addMenuItemIndex(
-					Constants.CacheKey.HOME_MENUITEM_KEY, menuItems);// 建立六个模块菜单合集子菜单索引
+					Constants.CacheKey.MAIN_MENUITEM_KEY, menuItems);// 建立六个模块菜单合集子菜单索引
 			return menuItems;
 
 		} else {

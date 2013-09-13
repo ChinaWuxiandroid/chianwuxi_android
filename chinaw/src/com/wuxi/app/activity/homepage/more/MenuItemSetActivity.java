@@ -6,9 +6,6 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -230,10 +227,10 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 			
 			*/
 
-			/*
-			 * Toast.makeText(MenuItemSetActivity.this, " 该功能在施工中",
-			 * Toast.LENGTH_SHORT).show();
-			 */
+			
+			  Toast.makeText(MenuItemSetActivity.this, " 该功能在施工中",
+			  Toast.LENGTH_SHORT).show();
+			 
 		}
 	}
 
@@ -358,7 +355,7 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 		} else {
 
 			if (MenuItemChannelIndexUtil.getInstance().containsKey(
-					Constants.CacheKey.HOME_MENUITEM_KEY, parentId)) {
+					Constants.CacheKey.MAIN_MENUITEM_KEY, parentId)) {
 
 				return MENUITEM_LEVEL_TWO;
 			} else {

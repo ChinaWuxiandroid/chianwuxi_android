@@ -47,12 +47,12 @@ public class SiteMapActivity extends BaseSlideActivity {
 
 	@SuppressWarnings("unchecked")
 	private void initData() {
-		if (CacheUtil.get(Constants.CacheKey.HOME_MENUITEM_KEY) == null) {
+		if (CacheUtil.get(Constants.CacheKey.MAIN_MENUITEM_KEY) == null) {
 			Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		List<MenuItem> menuItems = (List<MenuItem>) CacheUtil
-				.get(Constants.CacheKey.HOME_MENUITEM_KEY);
+				.get(Constants.CacheKey.MAIN_MENUITEM_KEY);
 		site_map_elv.setAdapter(new SiteMapExpandableAdapter(menuItems));
 
 		// 将所有项设置成默认展开

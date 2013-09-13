@@ -62,7 +62,7 @@ public class CacheUtil {
 	public static MenuItem getHomeMenuItem(int postion) {
 		@SuppressWarnings("unchecked")
 		List<MenuItem> menItems = (List<MenuItem>) mapCache
-				.get(Constants.CacheKey.HOME_MENUITEM_KEY);
+				.get(Constants.CacheKey.MAIN_MENUITEM_KEY);
 		return menItems.get(postion);
 	}
 
