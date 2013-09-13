@@ -145,8 +145,7 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 							SystemUtil.getAccessToken(context), startIndex,
 							endIndex);
 					if (null != letterWrapper) {
-						// CacheUtil.put(menuItem.getChannelId(),
-						// titleChannels);// 缓存起来
+						
 						letters = letterWrapper.getData();
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 

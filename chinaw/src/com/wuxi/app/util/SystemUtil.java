@@ -94,4 +94,22 @@ public class SystemUtil {
 
 	}
 
+	/**
+	 * 
+	 * wanglu 泰得利通 获取用户使用APP次数
+	 * 
+	 * @param context
+	 * @return
+	 */
+	public static int getUserAppCount(Context context) {
+
+		SharedPreferences sp = context
+				.getSharedPreferences(
+						Constants.SharepreferenceKey.SHARE_CONFIG,
+						Context.MODE_PRIVATE);
+
+		return sp.getInt(Constants.SharepreferenceKey.USEAPP_COUNT, 1);
+
+	}
+
 }

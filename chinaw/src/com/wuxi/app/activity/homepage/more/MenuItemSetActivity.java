@@ -47,11 +47,11 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 	private List<MenuItem> favaItems;
 	private ListView lv_fava;
 	private ProgressBar pb_fava;
-	private static final String FAVORITES_KEY_PRE = "favorites_";// key前缀
+
 	protected static final int SET_SUCCESS = 2;
 	protected static final int SET_FAIL = 3;
 	private FavoriteItemDao favoriteItemDao;
-	private SharedPreferences sp;
+
 	private ProgressDialog pd;
 	private MenuItem checkMenuItem;
 
@@ -93,13 +93,10 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 		lv_fava = (ListView) view.findViewById(R.id.lv_fava);
 		pb_fava = (ProgressBar) view.findViewById(R.id.pb_fava);
 		loadFavaItems();
-		sp = this
-				.getSharedPreferences(
-						Constants.SharepreferenceKey.SHARE_CONFIG,
-						Context.MODE_PRIVATE);
+
 		favoriteItemDao = new FavoriteItemDao(this);
 		pd = new ProgressDialog(this);
-		pd.setMessage("设置...");
+		pd.setMessage("正在设置...");
 	}
 
 	/**
@@ -108,9 +105,7 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 	protected void saveFaveItem() {
 
 		favoriteItemDao.addFavoriteItem(checkMenuItem);// 保存收藏列表到数据库
-		Editor ed = sp.edit();
-		ed.putBoolean(FAVORITES_KEY_PRE + checkMenuItem.getId(), true);
-		ed.commit();
+		checkMenuItem.setLocalFavorites(true);
 		Toast.makeText(this, "收藏" + checkMenuItem.getName() + "成功!",
 				Toast.LENGTH_SHORT).show();
 
@@ -125,21 +120,18 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 	private class MenuSetAdapter extends BaseAdapter implements
 			OnChangedListener {
 
-		@SuppressWarnings("rawtypes")
-		private List items;
+		public MenuSetAdapter() {
 
-		public MenuSetAdapter(@SuppressWarnings("rawtypes") List items) {
-			this.items = items;
 		}
 
 		@Override
 		public int getCount() {
-			return items.size();
+			return favaItems.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			return items.get(position);
+			return favaItems.get(position);
 		}
 
 		@Override
@@ -151,7 +143,7 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 		public View getView(int position, View convertView, ViewGroup parent) {
 
 			String name = "";
-			MenuItem menuItem = (MenuItem) items.get(position);
+			MenuItem menuItem = (MenuItem) favaItems.get(position);
 
 			name = menuItem.getName();
 
@@ -176,18 +168,9 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 
 			viewHolder.title_text.setText(name);
 
-			if (favoriteItemDao.findFavoriteItem(menuItem.getId())) {// 数据库存在
+			if (menuItem.isLocalFavorites()) {
 				viewHolder.slipButton.setChecked(true);
-
 			} else {
-
-				if (menuItem.getParentMenuId() == null
-						&& sp.getInt(Constants.SharepreferenceKey.USEAPP_COUNT,
-								1) == 1) {// 首次使用，并且是跟菜单
-					menuItem.setLevel(1);
-					favoriteItemDao.addFavoriteItem(menuItem);// 保存数据库
-					viewHolder.slipButton.setChecked(true);
-				}
 				viewHolder.slipButton.setChecked(false);
 			}
 
@@ -200,50 +183,58 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 		public void OnChanged(Object o, boolean checkState) {
 
 			checkMenuItem = (MenuItem) o;
+/*
+			if (checkState) {// 保存手册列表
+
+				int level = getMenuItemLevel(checkMenuItem);// 获取菜单的级别
+
+				switch (level) {
+				case MENUITEM_LEVEL_ONE:// 一级菜单
+					checkMenuItem.setLevel(1);
+					saveFaveItem();// 保存收藏项
+					break;
+				case MENUITEM_LEVEL_TWO:// 二级菜单
+					checkMenuItem.setLevel(2);
+					if (CacheUtil.get(checkMenuItem.getId()) == null
+							&& checkMenuItem.getType() == MenuItem.CUSTOM_MENU) {// 看缓存中有没有三级子菜单,没有就加载三级子菜单
+
+						laodMenuItems(checkMenuItem.getId());// 加载二级菜单的子菜单
+
+					} else {
+
+						saveFaveItem();
+					}
+
+				case MENUITEM_LEVEL_THREE:// 三级菜单
+					checkMenuItem.setLevel(3);
+					MenuItem paretMenuItem = (MenuItem) CacheUtil
+							.get(MenuItem.MENUITEM_KEY
+									+ checkMenuItem.getParentMenuId());// 拿到父菜单，二级菜单
+
+					if (CacheUtil.get(paretMenuItem.getId()) == null
+							&& paretMenuItem.getType() == MenuItem.CUSTOM_MENU) {// 看缓存中有没有三级子菜单,没有就加载三级子菜单
+						laodMenuItems(paretMenuItem.getId());
+					} else {
+						saveFaveItem();// 保存收藏项
+					}
+
+					break;
+
+				}
+
+			} else {
+				checkMenuItem.setLocalFavorites(false);
+
+				favoriteItemDao.delFavoriteItem(checkMenuItem.getId());
+			}
+			
+			*/
 
 			/*
-			 * if (checkState) {// 保存手册列表
-			 * 
-			 * int level = getMenuItemLevel(checkMenuItem);// 获取菜单的级别
-			 * 
-			 * if (level == MENUITEM_LEVEL_ONE) {// 一级菜单
-			 * 
-			 * saveFaveItem();// 保存收藏项
-			 * 
-			 * } else if (level == MENUITEM_LEVEL_TWO) {// 如果是二级菜单,并且是普通菜单 //
-			 * ，看缓存中有没有三级菜单，如果没有去加载三级菜单，并建立三级菜单索引
-			 * 
-			 * if (CacheUtil.get(checkMenuItem.getId()) == null &&
-			 * checkMenuItem.getType() == MenuItem.CUSTOM_MENU) {//
-			 * 看缓存中有没有三级子菜单,没有就加载三级子菜单
-			 * 
-			 * laodMenuItems(checkMenuItem.getId());
-			 * 
-			 * } else { saveFaveItem();// 保存收藏项 }
-			 * 
-			 * } else if (level == MENUITEM_LEVEL_THREE) {// 三级菜单
-			 * 
-			 * MenuItem paretMenuItem = (MenuItem) CacheUtil
-			 * .get(checkMenuItem.getParentMenuId());// 拿到父菜单，二级菜单
-			 * 
-			 * if (CacheUtil.get(checkMenuItem.getId()) == null &&
-			 * paretMenuItem.getType() == MenuItem.CUSTOM_MENU) {//
-			 * 看缓存中有没有三级子菜单,没有就加载三级子菜单
-			 * 
-			 * laodMenuItems(checkMenuItem.getId());
-			 * 
-			 * } else { saveFaveItem();// 保存收藏项 } }
-			 * 
-			 * } else { favoriteItemDao.delFavoriteItem(checkMenuItem.getId());
-			 * Editor ed = sp.edit(); ed.putBoolean(FAVORITES_KEY_PRE +
-			 * checkMenuItem.getId(), checkState); ed.commit(); }
+			 * Toast.makeText(MenuItemSetActivity.this, " 该功能在施工中",
+			 * Toast.LENGTH_SHORT).show();
 			 */
-
-			Toast.makeText(MenuItemSetActivity.this, " 该功能在施工中",
-					Toast.LENGTH_SHORT).show();
-
 		}
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -347,7 +338,7 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 
 	private void showFavaItems() {
 		pb_fava.setVisibility(ProgressBar.GONE);
-		lv_fava.setAdapter(new MenuSetAdapter(favaItems));
+		lv_fava.setAdapter(new MenuSetAdapter());
 
 	}
 
@@ -372,7 +363,7 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 				return MENUITEM_LEVEL_TWO;
 			} else {
 
-				return MENUITEM_LEVEL_TWO;
+				return MENUITEM_LEVEL_THREE;
 			}
 
 		}

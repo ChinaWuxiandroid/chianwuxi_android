@@ -37,11 +37,13 @@ public class FavoriteItemDao {
 					+ DataBaseHelper.TABLE_FAVORITE + " where id=?",
 					new String[] { id });
 			if (curosor.moveToNext()) {
+				curosor.close();
+				db.close();
 				return true;
 			}
+
 			curosor.close();
 			db.close();
-
 		}
 
 		return false;
@@ -65,7 +67,7 @@ public class FavoriteItemDao {
 					"insert into " + DataBaseHelper.TABLE_FAVORITE
 							+ " (id,name,parentMenuId,level) values(?,?,?,?)",
 					new Object[] { menItem.getId(), menItem.getName(),
-							menItem.getParentMenuId(),menItem.getLevel() });
+							menItem.getParentMenuId(), menItem.getLevel() });
 			db.close();
 		}
 	}
@@ -120,12 +122,12 @@ public class FavoriteItemDao {
 			Cursor cursor = db.rawQuery("select * from "
 					+ DataBaseHelper.TABLE_FAVORITE, null);
 			while (cursor.moveToNext()) {
-			
+
 				MenuItem menuItem = new MenuItem();
 				menuItem.setId(cursor.getString(0));
 				menuItem.setName(cursor.getString(1));
 				menuItem.setParentMenuId(cursor.getString(2));
-				menuItem.setLevel(cursor.getInt(3));//菜单的层次 
+				menuItem.setLevel(cursor.getInt(3));// 菜单的层次
 				menuItem.setLocalFavorites(true);
 				menuItems.add(menuItem);
 			}
