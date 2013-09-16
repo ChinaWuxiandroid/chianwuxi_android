@@ -56,7 +56,8 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 
 	private Forum forum;
 
-	private int[] radiobtnids = { R.id.forum_content_info_radiobtn,
+	private int[] radiobtnids = { 
+			R.id.forum_content_info_radiobtn,
 			R.id.forum_content_comment_radiobtn };
 
 	/**

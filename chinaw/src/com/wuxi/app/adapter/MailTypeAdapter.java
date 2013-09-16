@@ -152,6 +152,7 @@ public class MailTypeAdapter extends BaseAdapter implements
 		}
 		
 		viewHolder.tv_dept.setTextColor(Color.BLACK);
+		viewHolder.tv_dept.setTextSize(12);
 		viewHolder.tv_dept.setText(mailTypes.get(position).getTypename());
 		
 		return convertView;

@@ -1,10 +1,13 @@
 package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
@@ -19,10 +22,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -30,7 +33,6 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
@@ -83,6 +85,21 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 	// 信件类型数据加载失败标志
 	private static final int LOAD_MAIL_TYPE_FAILED = 7;
 
+	// 日期选择对话框显示标志
+	private static final int SHOW_BEGIN_DATE_PICK = 8;
+	private static final int SHOW_END_DATE_PICK = 9;
+
+	private static final int BEGIN_TIME_DIALOG_ID = 0;
+	private static final int END_TIME_DIALOG_ID = 1;
+
+	private int byear;
+	private int bmonth;
+	private int bday;
+	
+	private int eyear;
+	private int emonth;
+	private int eday;
+
 	private Button dealMailBtn = null;
 	private Button queryMailBtn = null;
 
@@ -98,6 +115,9 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 	private EditText timeBeginEdit = null;
 	// 答复时间的结束时间输入框
 	private EditText timeEndEdit = null;
+
+	private Button beginTimeBtn = null;
+	private Button endTimeBtn = null;
 
 	// 常见问题复选框
 	private CheckBox questionCheckbox = null;
@@ -136,9 +156,17 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 	private PopWindowManager popWindowManager = null;
 
 	private static String DEFAULT_DEPT_FIFTER = "无限制";
-	private String deptStrFifter = DEFAULT_DEPT_FIFTER;
 
 	private int contentType = 0; // 内容类型，缺省为0-信件列表 1-写信须知 2-办理规则
+	
+	//信件查询字段
+	private String keyword = null;
+	private String contenttype = null;
+	private String lettertype = null;
+	private long starttime = 0;
+	private long endtime = 0;
+	private String code = null;
+	private int common = 1; //常见问题：-1->选中；1->未选中
 
 	private final int[] radioButtonIds = {
 			R.id.gip_12345_mayorbox_radioButton_mailList,
@@ -184,6 +212,14 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 
 			case LOAD_MAIL_TYPE_FAILED:
 				Toast.makeText(context, "信件类型加载失败", Toast.LENGTH_SHORT).show();
+				break;
+				
+			case SHOW_BEGIN_DATE_PICK:
+				showDialog(BEGIN_TIME_DIALOG_ID);
+				break;
+				
+			case SHOW_END_DATE_PICK:
+				showDialog(END_TIME_DIALOG_ID);
 				break;
 			}
 		}
@@ -258,10 +294,22 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 
 	@Override
 	protected void init() {
-		linearLayout = (LinearLayout) view.findViewById(R.id.query_mail_layout);
-		radioLayout = (LinearLayout) view
-				.findViewById(R.id.mayorbox_radiobtn_linearlayout);
+		initLayout();
 
+		setBeginDate();
+		setEndDate();
+
+		GIP12345MayorMailListFragment gip12345MayorMailListFragment = new GIP12345MayorMailListFragment();
+		bindFragment(gip12345MayorMailListFragment);
+
+		loadAllCountData();
+	}
+
+	/**
+	 * @方法： initLayout
+	 * @描述： 初始化布局控件
+	 */
+	private void initLayout() {
 		// 关键字输入框
 		keyWordEdit = (EditText) view
 				.findViewById(R.id.query_mail_key_word_edit);
@@ -273,6 +321,34 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 		// 答复时间的结束时间输入框
 		timeEndEdit = (EditText) view
 				.findViewById(R.id.query_mail_reply_time_end_edit);
+
+		beginTimeBtn = (Button) view
+				.findViewById(R.id.query_mail_reply_begin_time_btn);
+		beginTimeBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Message msg = new Message();
+				if (beginTimeBtn.equals((Button) v)) {
+					msg.what = GIP12345MayorMaiBoxFragment.SHOW_BEGIN_DATE_PICK;
+				}
+				handler.sendMessage(msg);
+			}
+		});
+
+		endTimeBtn = (Button) view
+				.findViewById(R.id.query_mail_reply_end_time_btn);
+		endTimeBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Message msg = new Message();
+				if (endTimeBtn.equals((Button) v)) {
+					msg.what = GIP12345MayorMaiBoxFragment.SHOW_END_DATE_PICK;
+				}
+				handler.sendMessage(msg);
+			}
+		});
 
 		// 常见问题复选框
 		questionCheckbox = (CheckBox) view
@@ -338,13 +414,122 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 			}
 		});
 
-		GIP12345MayorMailListFragment gip12345MayorMailListFragment = new GIP12345MayorMailListFragment();
-
-		bindFragment(gip12345MayorMailListFragment);
-
-		loadAllCountData();
+		linearLayout = (LinearLayout) view.findViewById(R.id.query_mail_layout);
+		radioLayout = (LinearLayout) view
+				.findViewById(R.id.mayorbox_radiobtn_linearlayout);
 	}
 
+	/**
+	 * @方法： setDateTime
+	 * @描述： 设置开始日期
+	 */
+	private void setBeginDate() {
+		final Calendar calendar = Calendar.getInstance();
+
+		byear = calendar.get(Calendar.YEAR);
+		bmonth = calendar.get(Calendar.MONTH);
+		bday = calendar.get(Calendar.DAY_OF_MONTH);
+
+		updateBeginDateDisplay();
+	}
+
+	/**
+	 * @方法： updateBeginDateDisplay
+	 * @描述： 更新开始日期显示
+	 */
+	private void updateBeginDateDisplay() {
+		StringBuffer sb = new StringBuffer().append(byear).append("-")
+				.append((bmonth + 1) < 10 ? "0" + (bmonth + 1) : (bmonth + 1))
+				.append("-").append((bday < 10) ? "0" + bday : bday);
+		timeBeginEdit.setText(sb);
+	}
+
+	/**
+	 * @方法： setEndDate
+	 * @描述： 设置结束日期
+	 */
+	private void setEndDate() {
+		final Calendar calendar = Calendar.getInstance();
+
+		eyear = calendar.get(Calendar.YEAR);
+		emonth = calendar.get(Calendar.MONTH);
+		eday = calendar.get(Calendar.DAY_OF_MONTH);
+
+		updateEndDateDisplay();
+	}
+
+	/**
+	 * @方法： updateEndDateDisplay
+	 * @描述： 更新结束日期显示
+	 */
+	private void updateEndDateDisplay() {
+		StringBuffer sb = new StringBuffer().append(eyear).append("-")
+				.append((emonth + 1) < 10 ? "0" + (emonth + 1) : (emonth + 1))
+				.append("-").append((eday < 10) ? "0" + eday : eday);
+		timeEndEdit.setText(sb);
+	}
+
+	/**
+	 * 开始日期对话框监听器
+	 */
+	private DatePickerDialog.OnDateSetListener beginDateListener = new DatePickerDialog.OnDateSetListener() {
+
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear,
+				int dayOfMonth) {
+			GIP12345MayorMaiBoxFragment.this.byear = year;
+			GIP12345MayorMaiBoxFragment.this.bmonth = monthOfYear;
+			GIP12345MayorMaiBoxFragment.this.bday = dayOfMonth;
+			updateBeginDateDisplay();
+		}
+	};
+
+	/**
+	 * 结束日期对话框监听器
+	 */
+	private DatePickerDialog.OnDateSetListener endDateListener = new DatePickerDialog.OnDateSetListener() {
+
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear,
+				int dayOfMonth) {
+			GIP12345MayorMaiBoxFragment.this.eyear = year;
+			GIP12345MayorMaiBoxFragment.this.emonth = monthOfYear;
+			GIP12345MayorMaiBoxFragment.this.eday = dayOfMonth;
+			updateBeginDateDisplay();
+		}
+	};
+	
+	/**
+	 * @方法： onCreateDialog
+	 * @描述： 创建时间选择对话框
+	 * @param id
+	 * @return
+	 */
+	private Dialog onCreateDialog(int id){
+		switch (id) {
+		case BEGIN_TIME_DIALOG_ID:
+			DatePickerDialog beginDialog = new DatePickerDialog(context, beginDateListener, byear, bmonth, bday);
+			beginDialog.setIcon(R.drawable.logo);
+			beginDialog.show();
+			return beginDialog ;
+		case END_TIME_DIALOG_ID:
+			DatePickerDialog endDialog = new DatePickerDialog(context, endDateListener, eyear, emonth, eday);
+			endDialog.setIcon(R.drawable.logo);
+			endDialog.show();
+			return endDialog ;
+		}
+		return null;
+	}
+	
+	/**
+	 * @方法： showDialog
+	 * @描述： 显示日期选择对话框
+	 * @param id
+	 */
+	private void showDialog(int id){
+		onCreateDialog(id);
+	}
+	
 	/**
 	 * 绑定碎片
 	 * 
@@ -410,12 +595,8 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 		DeptAdapter partment_Spinner_adapter = new DeptAdapter();
 
 		acceptDepartmentSpinner.setAdapter(partment_Spinner_adapter);
-		acceptDepartmentSpinner
-				.setOnItemSelectedListener(partment_Spinner_adapter);
 
 		replyDepartmentSpinner.setAdapter(partment_Spinner_adapter);
-		replyDepartmentSpinner
-				.setOnItemSelectedListener(partment_Spinner_adapter);
 
 	}
 
@@ -601,7 +782,8 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 			@Override
 			public void run() {
 				Message msg = handler.obtainMessage();
-				QueryLetterDepService depService = new QueryLetterDepService(context);
+				QueryLetterDepService depService = new QueryLetterDepService(
+						context);
 				try {
 					leaderMailWrapper = depService.getPartLeaderMailWrapper();
 
@@ -639,8 +821,7 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 	 * @修改描述：
 	 * 
 	 */
-	public class DeptAdapter extends BaseAdapter implements
-			OnItemSelectedListener {
+	public class DeptAdapter extends BaseAdapter{
 
 		@Override
 		public int getCount() {
@@ -688,21 +869,12 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 			}
 
 			viewHolder.tv_dept.setTextColor(Color.BLACK);
+			viewHolder.tv_dept.setTextSize(12);
 			viewHolder.tv_dept.setText(dept.getDepname());
 
 			return convertView;
 		}
 
-		@Override
-		public void onItemSelected(AdapterView<?> arg0, View arg1,
-				int position, long arg3) {
-			// 设置下拉列表内容
-			deptStrFifter = depts.get(position).getDepname();
-		}
-
-		@Override
-		public void onNothingSelected(AdapterView<?> arg0) {
-		}
 	}
 
 }

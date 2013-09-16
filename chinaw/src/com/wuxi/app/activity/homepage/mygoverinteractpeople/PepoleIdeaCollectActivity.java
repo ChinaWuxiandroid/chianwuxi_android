@@ -3,6 +3,8 @@
  */
 package com.wuxi.app.activity.homepage.mygoverinteractpeople;
 
+import org.json.JSONException;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.app.FragmentManager;
@@ -24,18 +26,23 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
+import com.wuxi.app.dialog.LoginDialog;
+import com.wuxi.app.engine.LegislationCommentService;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.PoliticsWrapper.Politics;
+import com.wuxi.exception.NetException;
 
 /**
- * 政民互动 征求意见平台 民意征集 详细界面 
+ * 政民互动 征求意见平台 民意征集 详细界面
  * 
  * @author 智佳 罗森
- *
+ * 
  */
-public class PepoleIdeaCollectActivity extends BaseItemContentActivity implements OnCheckedChangeListener{
+public class PepoleIdeaCollectActivity extends BaseItemContentActivity
+		implements OnCheckedChangeListener {
 
 	private RadioGroup radioGroup = null;
 	private RadioButton content_info_radiobtn = null;
@@ -50,7 +57,7 @@ public class PepoleIdeaCollectActivity extends BaseItemContentActivity implement
 
 	private Button comment_btn = null;
 
-	private int[] radiobtnids = { 
+	private int[] radiobtnids = {
 			R.id.forum_content_info_radiobtn,
 			R.id.forum_content_comment_radiobtn };
 
@@ -69,14 +76,14 @@ public class PepoleIdeaCollectActivity extends BaseItemContentActivity implement
 	@Override
 	protected void findMainContentViews(View view) {
 		super.findMainContentViews(view);
-		
+
 		initLayout(view);
 
 		LegidlstionInfoFragment legidlstionInfoFragment = new LegidlstionInfoFragment();
 		legidlstionInfoFragment.setPolitics(getPolitics());
 		onTransaction(legidlstionInfoFragment);
 	}
-	
+
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		GIPRadioButtonStyleChange radioButtonStyleChange = new GIPRadioButtonStyleChange(
@@ -138,9 +145,7 @@ public class PepoleIdeaCollectActivity extends BaseItemContentActivity implement
 	 * @param con
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	private PopupWindow makePopWindow(Context con) {
-		PopupWindow popupWindow = null;
 
 		popview = LayoutInflater.from(con).inflate(
 				R.layout.forum_content_popwindow_layout, null);
@@ -150,31 +155,63 @@ public class PepoleIdeaCollectActivity extends BaseItemContentActivity implement
 
 		final EditText submitContent = (EditText) popview
 				.findViewById(R.id.forum_popwindow_content_edit);
-		submitBtn.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				
-				Toast.makeText(PepoleIdeaCollectActivity.this, "暂未开通该功能...", Toast.LENGTH_SHORT)
-						.show();
-			}
-		});
 
 		popWindowManager = PopWindowManager.getInstance();
 
-		popWindowManager.addPopWindow(popupWindow);
+		final PopupWindow popupWindow = new PopupWindow(popview,
+				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, true);
 
-		popupWindow = new PopupWindow(con);
+		popWindowManager.addPopWindow(popupWindow);
 
 		popupWindow.setContentView(popview);
 		popupWindow.setBackgroundDrawable(getResources().getDrawable(
 				R.drawable.naviga_leftitem_back));
-		popupWindow.setWidth(LayoutParams.FILL_PARENT);
-		popupWindow.setHeight(LayoutParams.WRAP_CONTENT);
 
 		popupWindow.setFocusable(true); // 设置PopupWindow可获得焦点
 		popupWindow.setTouchable(true); // 设置PopupWindow可触摸
 		popupWindow.setOutsideTouchable(true); // 设置非PopupWindow区域可触摸
+
+		submitBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				String mainid = politics.getId();
+				String access_token = SystemUtil
+						.getAccessToken(PepoleIdeaCollectActivity.this);
+				String content = submitContent.getText().toString();
+
+				LegislationCommentService service = new LegislationCommentService(
+						PepoleIdeaCollectActivity.this);
+
+				LoginDialog loginDialog = new LoginDialog(
+						PepoleIdeaCollectActivity.this);
+
+				try {
+
+					if (!loginDialog.checkLogin()) {
+						loginDialog.showDialog();
+						popupWindow.dismiss();
+					} else {
+						if (content.equals("")) {
+							Toast.makeText(PepoleIdeaCollectActivity.this,
+									"提交失败，您未输入任何信息", Toast.LENGTH_SHORT).show();
+						} else {
+							service.submitData(access_token, mainid, content);
+
+							Toast.makeText(PepoleIdeaCollectActivity.this,
+									"提交成功，正在审核...", Toast.LENGTH_SHORT).show();
+						}
+					}
+
+				} catch (NetException e) {
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
+			}
+		});
 
 		return popupWindow;
 	}

@@ -123,10 +123,11 @@
         <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.HotReviewContentActivity" />
         <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity" />
         <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity" />
-         <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity" />
 
-         <!--  公共activity -->
-         <activity android:name="com.wuxi.app.activity.commactivity.ImageViewScaleActivity" />
+        <!-- 公共activity -->
+        <activity android:name="com.wuxi.app.activity.commactivity.ImageViewScaleActivity" />
+
         <uses-library android:name="android.test.runner" />
     </application>
 

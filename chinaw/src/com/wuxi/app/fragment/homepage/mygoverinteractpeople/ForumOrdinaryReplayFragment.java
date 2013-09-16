@@ -15,14 +15,18 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.view.View.OnClickListener;
+import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AbsListView.OnScrollListener;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
+import com.wuxi.app.adapter.OrdinaryReplayListAdapter;
 import com.wuxi.app.engine.HotPostService;
 import com.wuxi.app.engine.NoticePostService;
 import com.wuxi.app.engine.OpinionPostService;
@@ -50,17 +54,17 @@ import com.wuxi.exception.NetException;
  * @author 智佳 罗森
  * 
  */
-@SuppressLint({ "HandlerLeak", "ShowToast" })
-public class ForumOrdinaryReplayFragment extends BaseFragment {
+public class ForumOrdinaryReplayFragment extends BaseFragment implements
+		OnClickListener, OnScrollListener {
 
 	private static final String TAG = "ForumOrdinaryReplayFragment";
 
 	private View view = null;
 	private Context context = null;
 
-	private ProgressBar progressBar = null;
+	private ProgressBar list_pb = null;
 
-	private ListView listView = null;
+	private ListView mListView = null;
 
 	private TextView textView = null;
 
@@ -82,6 +86,8 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 	private OpinionPostReplyWrapper opinionPostReplyWrapper = null;
 	private List<OpinionPostReply> opinionPostReplies = null;
 
+	private OrdinaryReplayListAdapter adapter;
+
 	// 数据加载成功标志
 	private static final int DATA__LOAD_SUCESS = 0;
 	// 数据加载失败标志
@@ -89,9 +95,19 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 
 	// 获取帖子的起始坐标
 	private int startIndex = 0;
-	// 获取帖子的结束坐标
-	private int endIndex = 60;
+	private int visibleLastIndex;
+	private int visibleItemCount;// 当前显示的总条数
+	private final static int PAGE_NUM = 10;
 
+	private boolean isFirstLoad = true;// 是不是首次加载数据
+	private boolean isSwitch = false;// 切换
+	private boolean isLoading = false;
+
+	private View loadMoreView;// 加载更多视图
+	private Button loadMoreButton;
+	private ProgressBar pb_loadmoore;
+
+	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			String tip = "";
@@ -102,11 +118,11 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 
 			switch (msg.what) {
 			case DATA__LOAD_SUCESS:
-				progressBar.setVisibility(View.GONE);
 				showReplayList();
 				break;
 
 			case DATA_LOAD_ERROR:
+				list_pb.setVisibility(View.VISIBLE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
 			}
@@ -129,6 +145,9 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 
 		initLayout();
 
+		// 第一次加载数据
+		loadFirstData(startIndex, PAGE_NUM);
+
 		return view;
 	}
 
@@ -136,21 +155,45 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 	 * 初始化布局控件
 	 */
 	private void initLayout() {
-		listView = (ListView) view.findViewById(R.id.ordinary_replay_listview);
+		mListView = (ListView) view.findViewById(R.id.ordinary_replay_listview);
 
-		progressBar = (ProgressBar) view
+		list_pb = (ProgressBar) view
 				.findViewById(R.id.ordinary_replay_progressbar);
-		progressBar.setVisibility(View.VISIBLE);
 
 		textView = (TextView) view.findViewById(R.id.forum_reply_content_text);
 
-		loadData();
+		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+				null);
+		loadMoreButton = (Button) loadMoreView
+				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
+
+		mListView.addFooterView(loadMoreView);// 为listView添加底部视图
+		mListView.setOnScrollListener(this);// 增加滑动监听
+		loadMoreButton.setOnClickListener(this);
+	}
+
+	/**
+	 * @方法： loadFirstData
+	 * @描述： 第一次加载数据
+	 * @param start
+	 * @param end
+	 */
+	private void loadFirstData(int start, int end) {
+		loadData(start, end);
 	}
 
 	/**
 	 * 加载数据
 	 */
-	private void loadData() {
+	private void loadData(final int startIndex, final int endIndex) {
+		if (isFirstLoad || isSwitch) {
+			list_pb.setVisibility(View.VISIBLE);
+		} else {
+			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
+		}
+
 		new Thread(new Runnable() {
 
 			@Override
@@ -159,6 +202,8 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 				try {
 					// 普通帖子回复内容加载
 					if (forum.getViewpath().equals("/Get_UserBBSAnswerAll")) {
+						isLoading = true;// 正在加载数据
+						Message message = handler.obtainMessage();
 						OrdinaryPostService postService = new OrdinaryPostService(
 								context);
 						postWrapper = postService.getOrdinaryPostWrapper(
@@ -167,29 +212,27 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 
 						if (postWrapper != null) {
 							postRaplyWrapper = postWrapper.getRaplyWrapper();
-							postRaplies = postRaplyWrapper.getPostRaplies();
+
 							handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 						} else {
-							Message message = handler.obtainMessage();
 							message.obj = "error";
 							handler.sendEmptyMessage(DATA_LOAD_ERROR);
 						}
 					}
 					// 热点话题帖子回复内容加载
 					else if (forum.getViewpath().equals("/HotReviewContent")) {
+						isLoading = true;// 正在加载数据
+						Message message = handler.obtainMessage();
 						HotPostService hotPostService = new HotPostService(
 								context);
 						hotPostWrapper = hotPostService.getHotPostWrapper(
-								forum.getId(), forum.getViewpath(), startIndex,
-								6);
+								forum.getId(), forum.getViewpath(), startIndex,endIndex);
 						if (hotPostWrapper != null) {
 							hotPostReplyWrapper = hotPostWrapper
 									.getHotPostReplyWrapper();
-							hotPostReplies = hotPostReplyWrapper
-									.getHotPostReplies();
+
 							handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 						} else {
-							Message message = handler.obtainMessage();
 							message.obj = "error";
 							handler.sendEmptyMessage(DATA_LOAD_ERROR);
 						}
@@ -197,6 +240,8 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 					// 公告类帖子回复内容加载
 					else if (forum.getViewpath().equals(
 							"/LegislativeCommentsContent")) {
+						isLoading = true;// 正在加载数据
+						Message message = handler.obtainMessage();
 						NoticePostService noticePostService = new NoticePostService(
 								context);
 						noticePostWrapper = noticePostService
@@ -206,17 +251,16 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 						if (noticePostWrapper != null) {
 							noticePostReplyWrapper = noticePostWrapper
 									.getNoticePostReplyWrapper();
-							noticePostReplies = noticePostReplyWrapper
-									.getNoticePostReplies();
+
 							handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 						} else {
-							Message message = handler.obtainMessage();
 							message.obj = "error";
 							handler.sendEmptyMessage(DATA_LOAD_ERROR);
 						}
 					}
 					// 征求意见类帖子回复内容加载
 					else if (forum.getViewpath().equals("/JoinPoliticsContent")) {
+						isLoading = true;// 正在加载数据
 						OpinionPostService opinionPostService = new OpinionPostService(
 								context);
 						opinionPostWrapper = opinionPostService
@@ -226,8 +270,7 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 						if (opinionPostWrapper != null) {
 							opinionPostReplyWrapper = opinionPostWrapper
 									.getOpinionPostReplyWrapper();
-							opinionPostReplies = opinionPostReplyWrapper
-									.getOpinionPostReplies();
+
 							handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 						} else {
 							Message message = handler.obtainMessage();
@@ -240,7 +283,7 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 						if (true) {
 							textView.setVisibility(View.VISIBLE);
 							textView.setText("该页面还无法显示");
-							listView.setVisibility(View.GONE);
+							mListView.setVisibility(View.GONE);
 							handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 						}
 					}
@@ -250,7 +293,6 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 					Message message = handler.obtainMessage();
 					message.obj = e.getMessage();
 					handler.sendEmptyMessage(DATA_LOAD_ERROR);
-
 				} catch (JSONException e) {
 					e.printStackTrace();
 				} catch (NODataException e) {
@@ -264,147 +306,229 @@ public class ForumOrdinaryReplayFragment extends BaseFragment {
 	 * 显示回复数据列表
 	 */
 	private void showReplayList() {
-
-		OrdinaryReplayListAdapter ordinaryReplayListAdapter = new OrdinaryReplayListAdapter();
-
+		// 普通帖子
 		if (forum.getViewpath().equals("/Get_UserBBSAnswerAll")) {
+			postRaplies = postRaplyWrapper.getPostRaplies();
+
 			if (postRaplies == null || postRaplies.size() == 0) {
-				Toast.makeText(context, "对不起，暂无该论坛的回复信息", 2000).show();
+				Toast.makeText(context, "对不起，暂无该论坛的回复信息", Toast.LENGTH_SHORT)
+						.show();
+				list_pb.setVisibility(View.GONE);
 			} else {
-				listView.setAdapter(ordinaryReplayListAdapter);
+				if (isFirstLoad) {
+					adapter = new OrdinaryReplayListAdapter(context,
+							postRaplies, hotPostReplies, noticePostReplies,
+							opinionPostReplies, forum);
+					isFirstLoad = false;
+					mListView.setAdapter(adapter);
+					list_pb.setVisibility(View.GONE);
+					isLoading = false;
+				} else {
+					if (isSwitch) {
+						adapter.setPostRaplies(postRaplies);
+						list_pb.setVisibility(View.GONE);
+					} else {
+						for (OrdinaryPostRaply ordinaryPostRaply : postRaplies) {
+							adapter.addOrdinaryPostRaply(ordinaryPostRaply);
+						}
+					}
+
+					adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
+					mListView.setSelection(visibleLastIndex - visibleItemCount
+							+ 1); // 设置选中项
+					isLoading = false;
+				}
+
 			}
-		} else if (forum.getViewpath().equals("/HotReviewContent")) {
+
+			if (postRaplyWrapper.isNext()) {
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+				loadMoreButton.setText("点击加载更多");
+			} else {
+				mListView.removeFooterView(loadMoreView);
+			}
+
+		}
+		// 热点话题类帖子
+		else if (forum.getViewpath().equals("/HotReviewContent")) {
+			hotPostReplies = hotPostReplyWrapper.getHotPostReplies();
+
 			if (hotPostReplies == null || hotPostReplies.size() == 0) {
-				Toast.makeText(context, "对不起，暂无该论坛的回复信息", 2000).show();
+				Toast.makeText(context, "对不起，暂无该论坛的回复信息", Toast.LENGTH_SHORT)
+						.show();
+				list_pb.setVisibility(View.GONE);
 			} else {
-				listView.setAdapter(ordinaryReplayListAdapter);
+				if (isFirstLoad) {
+					adapter = new OrdinaryReplayListAdapter(context,
+							postRaplies, hotPostReplies, noticePostReplies,
+							opinionPostReplies, forum);
+					isFirstLoad = false;
+					mListView.setAdapter(adapter);
+					list_pb.setVisibility(View.GONE);
+					isLoading = false;
+				} else {
+					if (isSwitch) {
+						adapter.setHotPostReplies(hotPostReplies);
+						list_pb.setVisibility(View.GONE);
+					} else {
+						for (HotPostReply hotPostReply : hotPostReplies) {
+							adapter.addHotPostReply(hotPostReply);
+						}
+					}
+
+					adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
+					mListView.setSelection(visibleLastIndex - visibleItemCount
+							+ 1); // 设置选中项
+					isLoading = false;
+				}
 			}
-		} else if (forum.getViewpath().equals("/LegislativeCommentsContent")) {
-			if (hotPostReplies == null || hotPostReplies.size() == 0) {
-				Toast.makeText(context, "对不起，暂无该论坛的回复信息", 2000).show();
+
+			if (hotPostReplyWrapper.isNext()) {
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+				loadMoreButton.setText("点击加载更多");
 			} else {
-				listView.setAdapter(ordinaryReplayListAdapter);
+				mListView.removeFooterView(loadMoreView);
 			}
-		} else if (forum.getViewpath().equals("/JoinPoliticsContent")) {
+		}
+		// 公告类帖子
+		else if (forum.getViewpath().equals("/LegislativeCommentsContent")) {
+			noticePostReplies = noticePostReplyWrapper.getNoticePostReplies();
+
+			if (noticePostReplies == null || noticePostReplies.size() == 0) {
+				Toast.makeText(context, "对不起，暂无该论坛的回复信息", Toast.LENGTH_SHORT)
+						.show();
+				list_pb.setVisibility(View.GONE);
+			} else {
+				if (isFirstLoad) {
+					adapter = new OrdinaryReplayListAdapter(context,
+							postRaplies, hotPostReplies, noticePostReplies,
+							opinionPostReplies, forum);
+					isFirstLoad = false;
+					mListView.setAdapter(adapter);
+					list_pb.setVisibility(View.GONE);
+					isLoading = false;
+				} else {
+					if (isSwitch) {
+						adapter.setNoticePostReplies(noticePostReplies);
+						list_pb.setVisibility(View.GONE);
+					} else {
+						for (NoticePostReply noticePostReply : noticePostReplies) {
+							adapter.addNoticePostReply(noticePostReply);
+						}
+					}
+
+					adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
+					mListView.setSelection(visibleLastIndex - visibleItemCount
+							+ 1); // 设置选中项
+					isLoading = false;
+				}
+
+			}
+
+			if (noticePostReplyWrapper.isNext()) {
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+				loadMoreButton.setText("点击加载更多");
+			} else {
+				mListView.removeFooterView(loadMoreView);
+			}
+		}
+		// 征求意见类帖子
+		else if (forum.getViewpath().equals("/JoinPoliticsContent")) {
+			opinionPostReplies = opinionPostReplyWrapper
+					.getOpinionPostReplies();
+
 			if (opinionPostReplies == null || opinionPostReplies.size() == 0) {
-				Toast.makeText(context, "对不起，暂无该论坛的回复信息", 2000).show();
+				Toast.makeText(context, "对不起，暂无该论坛的回复信息", Toast.LENGTH_SHORT)
+						.show();
+				list_pb.setVisibility(View.GONE);
 			} else {
-				listView.setAdapter(ordinaryReplayListAdapter);
+				if (isFirstLoad) {
+					adapter = new OrdinaryReplayListAdapter(context,
+							postRaplies, hotPostReplies, noticePostReplies,
+							opinionPostReplies, forum);
+					isFirstLoad = false;
+					mListView.setAdapter(adapter);
+					list_pb.setVisibility(View.GONE);
+					isLoading = false;
+				} else {
+					if (isSwitch) {
+						adapter.setOpinionPostReplies(opinionPostReplies);
+						list_pb.setVisibility(View.GONE);
+					} else {
+						for (OpinionPostReply opinionPostReply : opinionPostReplies) {
+							adapter.addOpinionPostReply(opinionPostReply);
+						}
+					}
+
+					adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
+					mListView.setSelection(visibleLastIndex - visibleItemCount
+							+ 1); // 设置选中项
+					isLoading = false;
+				}
+			}
+
+			if (opinionPostReplyWrapper.isNext()) {
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+				loadMoreButton.setText("点击加载更多");
+			} else {
+				mListView.removeFooterView(loadMoreView);
 			}
 		}
 
 	}
 
 	/**
-	 * 内部类，普通帖子回复列表适配器
-	 * 
-	 * @author 智佳 罗森
-	 * 
+	 * @方法： loadMoreData
+	 * @描述： 加载更多数据
+	 * @param view
 	 */
-	public class OrdinaryReplayListAdapter extends BaseAdapter {
-
-		@Override
-		public int getCount() {
-			if (forum.getViewpath().equals("/Get_UserBBSAnswerAll")) {
-				return postRaplies.size();
-			} else if (forum.getViewpath().equals("/HotReviewContent")) {
-				return hotPostReplies.size();
-			} else if (forum.getViewpath()
-					.equals("/LegislativeCommentsContent")) {
-				return noticePostReplies.size();
-			} else if (forum.getViewpath().equals("/JoinPoliticsContent")) {
-				return opinionPostReplies.size();
-			}
-
-			return 0;
+	private void loadMoreData(View view) {
+		if (isLoading) {
+			return;
+		} else {
+			loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_NUM);
 		}
+	}
 
-		@Override
-		public Object getItem(int position) {
-			if (forum.getViewpath().equals("/Get_UserBBSAnswerAll")) {
-				return postRaplies.get(position);
-			} else if (forum.getViewpath().equals("/HotReviewContent")) {
-				return hotPostReplies.get(position);
-			} else if (forum.getViewpath()
-					.equals("/LegislativeCommentsContent")) {
-				return noticePostReplies.get(position);
-			} else if (forum.getViewpath().equals("/JoinPoliticsContent")) {
-				return opinionPostReplies.get(position);
+	@Override
+	public void onScroll(AbsListView view, int firstVisibleItem,
+			int visibleItemCount, int totalItemCount) {
+		this.visibleItemCount = visibleItemCount;
+		visibleLastIndex = firstVisibleItem + visibleItemCount - 1;// 最后一条索引号
+	}
+
+	@Override
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+		int itemsLastIndex = adapter.getCount() - 1; // 数据集最后一项的索引
+		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.loadMoreButton:
+			if (postRaplyWrapper != null && postRaplyWrapper.isNext()) {// 还有下一条记录
+				isSwitch = false;
+				loadMoreButton.setText("loading.....");
+				loadMoreData(v);
+			} else if (hotPostReplyWrapper != null
+					&& hotPostReplyWrapper.isNext()) {
+				isSwitch = false;
+				loadMoreButton.setText("loading.....");
+				loadMoreData(v);
+			} else if (noticePostReplyWrapper != null
+					&& noticePostReplyWrapper.isNext()) {
+				isSwitch = false;
+				loadMoreButton.setText("loading.....");
+				loadMoreData(v);
+			} else if (opinionPostReplyWrapper != null
+					&& opinionPostReplyWrapper.isNext()) {
+				isSwitch = false;
+				loadMoreButton.setText("loading.....");
+				loadMoreData(v);
 			}
-			return null;
+			break;
 		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		class ViewHolder {
-			public TextView replay_name_text;
-			public TextView replay_time_text;
-			public TextView replay_content_text;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHolder holder = null;
-			if (convertView == null) {
-				holder = new ViewHolder();
-
-				convertView = LayoutInflater.from(context).inflate(
-						R.layout.ordinary_replay_list_layout, null);
-
-				holder.replay_name_text = (TextView) convertView
-						.findViewById(R.id.replay_name_text);
-				holder.replay_time_text = (TextView) convertView
-						.findViewById(R.id.replay_time_text);
-				holder.replay_content_text = (TextView) convertView
-						.findViewById(R.id.replay_content_text);
-
-				convertView.setTag(holder);
-			} else {
-				holder = (ViewHolder) convertView.getTag();
-			}
-
-			// 普通帖子
-			if (forum.getViewpath().equals("/Get_UserBBSAnswerAll")) {
-				holder.replay_name_text.setText(postRaplies.get(position)
-						.getUserName());
-				holder.replay_time_text.setText(postRaplies.get(position)
-						.getSentTime());
-				holder.replay_content_text.setText(postRaplies.get(position)
-						.getContent());
-			}
-			// 热点话题类帖子
-			else if (forum.getViewpath().equals("/HotReviewContent")) {
-				holder.replay_name_text.setText(hotPostReplies.get(position)
-						.getSenduser());
-				holder.replay_time_text.setText(hotPostReplies.get(position)
-						.getSendtime());
-				holder.replay_content_text.setText(hotPostReplies.get(position)
-						.getContent());
-			}
-			// 公告类帖子
-			else if (forum.getViewpath().equals("/LegislativeCommentsContent")) {
-				holder.replay_name_text.setText(noticePostReplies.get(position)
-						.getUsername());
-				holder.replay_time_text.setText(noticePostReplies.get(position)
-						.getSendtime());
-				holder.replay_content_text.setText(noticePostReplies.get(
-						position).getContent());
-			}
-			// 征求意见类帖子
-			else if (forum.getViewpath().equals("/JoinPoliticsContent")) {
-				holder.replay_name_text.setText(opinionPostReplies
-						.get(position).getUserName());
-				holder.replay_time_text.setText(opinionPostReplies
-						.get(position).getSentTime());
-				holder.replay_content_text.setText(opinionPostReplies.get(
-						position).getContent());
-			}
-			return convertView;
-		}
-
 	}
 
 }
