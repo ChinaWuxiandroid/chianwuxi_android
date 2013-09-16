@@ -51,6 +51,7 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 
 	private ProgressDialog pd;
 	private MenuItem checkMenuItem;
+	private List<MenuItem> homeMenuItems;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -84,6 +85,7 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 
 	};
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void findMainContentViews(View view) {
 
@@ -94,6 +96,8 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 		favoriteItemDao = new FavoriteItemDao(this);
 		pd = new ProgressDialog(this);
 		pd.setMessage("正在设置...");
+		
+		homeMenuItems=(List<MenuItem>) CacheUtil.get(Constants.CacheKey.HOME_MENUITEM_KEY);
 	}
 
 	/**
@@ -103,6 +107,7 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 
 		favoriteItemDao.addFavoriteItem(checkMenuItem);// 保存收藏列表到数据库
 		checkMenuItem.setLocalFavorites(true);
+		homeMenuItems.add(checkMenuItem);
 		Toast.makeText(this, "收藏" + checkMenuItem.getName() + "成功!",
 				Toast.LENGTH_SHORT).show();
 
@@ -180,7 +185,7 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 		public void OnChanged(Object o, boolean checkState) {
 
 			checkMenuItem = (MenuItem) o;
-/*
+
 			if (checkState) {// 保存手册列表
 
 				int level = getMenuItemLevel(checkMenuItem);// 获取菜单的级别
@@ -223,13 +228,14 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 				checkMenuItem.setLocalFavorites(false);
 
 				favoriteItemDao.delFavoriteItem(checkMenuItem.getId());
+				homeMenuItems.remove(checkMenuItem);
 			}
 			
-			*/
+		
 
 			
-			  Toast.makeText(MenuItemSetActivity.this, " 该功能在施工中",
-			  Toast.LENGTH_SHORT).show();
+			/*  Toast.makeText(MenuItemSetActivity.this, " 该功能在施工中",
+			  Toast.LENGTH_SHORT).show();*/
 			 
 		}
 	}

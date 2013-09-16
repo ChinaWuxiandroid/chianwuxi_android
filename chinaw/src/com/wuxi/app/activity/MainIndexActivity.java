@@ -54,6 +54,7 @@ import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.engine.UpdateInfoService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.LogUtil;
 import com.wuxi.app.util.Constants.CacheKey;
 import com.wuxi.app.util.MenuItemChanelUtil;
 import com.wuxi.domain.Content;
@@ -117,6 +118,8 @@ public class MainIndexActivity extends Activity implements
 	protected static final int NO_UPDATE_APK = 8;
 
 	public static final int DOWLOAD_ERROR = 9;
+
+	private static final String TAG = "MainIndexActivity";
 
 	private List<View> mGridViews;
 
@@ -188,7 +191,70 @@ public class MainIndexActivity extends Activity implements
 		setContentView(R.layout.main_index_fragment_layout);
 
 		initUI();
+		
+		LogUtil.i(TAG, "onCreate");
 	}
+	
+	
+	
+
+	@Override
+	public void finish() {
+		
+		super.finish();
+		LogUtil.i(TAG, "finish");
+	}
+
+
+
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		LogUtil.i(TAG, "onDestroy");
+	}
+
+
+
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		LogUtil.i(TAG, "onPause");
+	}
+
+
+
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		LogUtil.i(TAG, "onResume");
+	}
+
+
+
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		
+		LogUtil.i(TAG, "onStart");
+	}
+
+
+
+
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+	}
+
+
+
 
 	private void initUI() {
 
@@ -232,6 +298,9 @@ public class MainIndexActivity extends Activity implements
 		}
 
 	}
+	
+	
+	
 
 	/**
 	 * 
@@ -524,6 +593,34 @@ public class MainIndexActivity extends Activity implements
 	 * 菜单点击
 	 */
 	private OnItemClickListener GridviewOnclick = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+
+			MenuItem checkMenuItem = (MenuItem) parent
+					.getItemAtPosition(position);
+
+			Class<?> acClass = MenuItemChanelUtil
+					.getActivityClassByName(checkMenuItem);
+
+			if (acClass != null) {
+				Intent intent = new Intent(MainIndexActivity.this, acClass);
+				intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY,
+						position);
+
+				MainTabActivity.instance.addView(intent);
+			}
+
+		}
+	};
+	
+	
+	
+	/**
+	 * 菜单点击
+	 */
+	private OnItemClickListener GridviewOnclick2 = new OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
