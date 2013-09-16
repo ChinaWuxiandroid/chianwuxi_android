@@ -54,7 +54,7 @@ public class LegislationContentService extends Service {
 		String url = Constants.Urls.LEGISLATION_CONTENT_URL.replace("{id}",
 				politicsMainId);
 
-		String resultStr = httpUtils.executeGetToString(url, 5000);
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);

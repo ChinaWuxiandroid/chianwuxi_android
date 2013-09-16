@@ -26,11 +26,12 @@ import com.wuxi.app.BaseFragment;
 import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
-import com.wuxi.app.engine.ForumCommentService;
+import com.wuxi.app.dialog.LoginDialog;
+import com.wuxi.app.engine.LegislationCommentService;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment;
-import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
+import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.PoliticsWrapper.Politics;
 import com.wuxi.exception.NetException;
 
@@ -57,7 +58,8 @@ public class LegislationContentActivity extends BaseItemContentActivity
 
 	private Button comment_btn = null;
 
-	private int[] radiobtnids = { R.id.forum_content_info_radiobtn,
+	private int[] radiobtnids = { 
+			R.id.forum_content_info_radiobtn,
 			R.id.forum_content_comment_radiobtn };
 
 	private Politics politics = null;
@@ -140,9 +142,7 @@ public class LegislationContentActivity extends BaseItemContentActivity
 	 * @param con
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	private PopupWindow makePopWindow(Context con) {
-		PopupWindow popupWindow = null;
 
 		popview = LayoutInflater.from(con).inflate(
 				R.layout.forum_content_popwindow_layout, null);
@@ -152,55 +152,62 @@ public class LegislationContentActivity extends BaseItemContentActivity
 
 		final EditText submitContent = (EditText) popview
 				.findViewById(R.id.forum_popwindow_content_edit);
-		submitBtn.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-//				String id = "77e9a0ef-cba8-4ebd-9d7b-7ccfffd4cdfe";
-//				String access_token = Constants.SharepreferenceKey.TEST_ACCESSTOKEN;
-//				String type = "/HotReviewContent";
-//				String content = submitContent.getText().toString();
-//
-//				ForumCommentService commentService = new ForumCommentService(
-//						LegislationContentActivity.this);
-//
-//				try {
-//					boolean isSubnit = commentService.submitComment(id,
-//							access_token, type, content);
-//
-//					if (isSubnit) {
-//						Toast.makeText(LegislationContentActivity.this,
-//								"提交成功！", Toast.LENGTH_SHORT).show();
-//					} else {
-//						Toast.makeText(LegislationContentActivity.this,
-//								"提交失败！", Toast.LENGTH_SHORT).show();
-//					}
-//
-//				} catch (NetException e) {
-//					e.printStackTrace();
-//				} catch (JSONException e) {
-//					e.printStackTrace();
-//				}
-				
-				Toast.makeText(LegislationContentActivity.this, "暂未实现该功能", Toast.LENGTH_SHORT).show();
-			}
-		});
 
 		popWindowManager = PopWindowManager.getInstance();
 
-		popWindowManager.addPopWindow(popupWindow);
+		final PopupWindow popupWindow = new PopupWindow(popview,
+				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, true);
 
-		popupWindow = new PopupWindow(con);
+		popWindowManager.addPopWindow(popupWindow);
 
 		popupWindow.setContentView(popview);
 		popupWindow.setBackgroundDrawable(getResources().getDrawable(
 				R.drawable.naviga_leftitem_back));
-		popupWindow.setWidth(LayoutParams.FILL_PARENT);
-		popupWindow.setHeight(LayoutParams.WRAP_CONTENT);
 
 		popupWindow.setFocusable(true); // 设置PopupWindow可获得焦点
 		popupWindow.setTouchable(true); // 设置PopupWindow可触摸
 		popupWindow.setOutsideTouchable(true); // 设置非PopupWindow区域可触摸
+
+		submitBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				String mainid = politics.getId();
+				String access_token = SystemUtil
+						.getAccessToken(LegislationContentActivity.this);
+				String content = submitContent.getText().toString();
+
+				LegislationCommentService service = new LegislationCommentService(
+						LegislationContentActivity.this);
+
+				LoginDialog loginDialog = new LoginDialog(
+						LegislationContentActivity.this);
+
+				try {
+
+					if (!loginDialog.checkLogin()) {
+						loginDialog.showDialog();
+						popupWindow.dismiss();
+					} else {
+						if (content.equals("")) {
+							Toast.makeText(LegislationContentActivity.this,
+									"提交失败，您未输入任何信息", Toast.LENGTH_SHORT).show();
+						} else {
+							service.submitData(access_token, mainid, content);
+
+							Toast.makeText(LegislationContentActivity.this,
+									"提交成功，正在审核...", Toast.LENGTH_SHORT).show();
+
+						}
+					}
+
+				} catch (NetException e) {
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 
 		return popupWindow;
 	}

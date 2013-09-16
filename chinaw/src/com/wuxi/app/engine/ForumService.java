@@ -50,7 +50,7 @@ public class ForumService extends Service {
 		// 构建数据加载url
 		url = url + "?start=" + startIndex + "&end=" + endIndex;
 		// 提交请求并返回结果
-		String resultStr = httpUtils.executeGetToString(url, 5000);
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
 			JSONObject jresult = jsonObject.getJSONObject("result");

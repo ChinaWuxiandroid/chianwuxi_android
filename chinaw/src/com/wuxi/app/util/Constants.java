@@ -269,11 +269,21 @@ public class Constants {
 				+ "/interview/history.json";
 
 		/**
-		 * 政民互动 征求意见平台 立法征求意见详情
+		 * 政民互动 征求意见平台 立法征求意见详情  和 民意征集
 		 */
 		public static final String LEGISLATION_CONTENT_URL = BASIC_URL
 				+ "/politics/{id}.json";
 
+		/**
+		 * 政民互动 征求意见平台 民意征集 回复列表 和 立法征求意见
+		 */
+		public static final String LEGISLATION_REPLY_URL = BASIC_URL+"/politics/replylist.json";
+		
+		/**
+		 * 政民互动 征求意见平台 立法征求意见 民意征集 提交评论 URL
+		 */
+		public static final String LEGISLATION_SUBMIT_DATA_URL = BASIC_URL+"/politics/reply.json";
+		
 		/**
 		 * 政民互动 网上调查 列表
 		 */

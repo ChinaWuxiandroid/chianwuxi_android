@@ -100,7 +100,7 @@ public class GoverInterPeoplePublicForumFragment extends BaseFragment implements
 				break;
 
 			case DATA_LOAD_ERROR:
-				list_pb.setVisibility(View.GONE);
+				list_pb.setVisibility(View.VISIBLE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
 			}
