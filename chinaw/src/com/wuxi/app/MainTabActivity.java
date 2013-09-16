@@ -286,7 +286,7 @@ public class MainTabActivity extends ActivityGroup implements
 	@Override
 	public void onClick(View v) {
 
-		if (CacheUtil.get(CacheKey.HOME_MENUITEM_KEY) == null) {
+		if (CacheUtil.get(CacheKey.MAIN_MENUITEM_KEY) == null) {
 			Toast.makeText(this, "数据异常，请重启，或检查网络", Toast.LENGTH_SHORT).show();
 			return;
 		}

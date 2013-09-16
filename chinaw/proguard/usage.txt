@@ -322,11 +322,10 @@ com.wuxi.app.activity.homepage.more.MenuItemSetActivity:
     private static final int MENUITEM_LEVEL_ONE
     private static final int MENUITEM_LEVEL_TWO
     private static final int MENUITEM_LEVEL_THREE
-    private static final java.lang.String FAVORITES_KEY_PRE
     protected static final int SET_SUCCESS
     protected static final int SET_FAIL
-    305:346:public void laodMenuItems(java.lang.String)
-    363:375:private int getMenuItemLevel(com.wuxi.domain.MenuItem)
+    293:334:public void laodMenuItems(java.lang.String)
+    351:363:private int getMenuItemLevel(com.wuxi.domain.MenuItem)
 com.wuxi.app.activity.homepage.more.MenuItemSetActivity$3
 com.wuxi.app.activity.homepage.more.SystemSetActivity:
     protected static final int UPDATE_APK
@@ -399,9 +398,9 @@ com.wuxi.app.db.DataBaseHelper:
     private static final int VERSION
     public static final java.lang.String TABLE_FAVORITE
 com.wuxi.app.db.FavoriteItemDao:
-    80:87:public void delFavoriteItem(java.lang.String)
-    96:106:public void updateFavoriteItem(com.wuxi.domain.MenuItem)
-    116:138:public java.util.List getFavoriteItems()
+    82:89:public void delFavoriteItem(java.lang.String)
+    98:108:public void updateFavoriteItem(com.wuxi.domain.MenuItem)
+    118:140:public java.util.List getFavoriteItems()
 com.wuxi.app.engine.BBSService
 com.wuxi.app.engine.DownLoadTask:
     16:16:public DownLoadTask()
@@ -675,7 +674,6 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345PartLeaderMailboxFr
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPContentFragment:
     private static final long serialVersionUID
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment:
-    private static final long serialVersionUID
     protected static final java.lang.String TAG
     private static final int DATA__LOAD_SUCESS
     private static final int DATA_LOAD_ERROR

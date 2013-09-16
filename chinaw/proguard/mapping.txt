@@ -8132,10 +8132,9 @@ com.wuxi.app.activity.homepage.more.MenuItemSetActivity -> com.wuxi.app.activity
     android.widget.ListView lv_fava -> b
     android.widget.ProgressBar pb_fava -> c
     com.wuxi.app.db.FavoriteItemDao favoriteItemDao -> d
-    android.content.SharedPreferences sp -> e
-    android.app.ProgressDialog pd -> f
-    com.wuxi.domain.MenuItem checkMenuItem -> m
-    android.os.Handler handler -> n
+    android.app.ProgressDialog pd -> e
+    com.wuxi.domain.MenuItem checkMenuItem -> f
+    android.os.Handler handler -> m
     void findMainContentViews(android.view.View) -> a
     void saveFaveItem() -> c
     void showFavaItems() -> d
@@ -8143,12 +8142,10 @@ com.wuxi.app.activity.homepage.more.MenuItemSetActivity -> com.wuxi.app.activity
     java.lang.String getTitleText() -> b
     void access$0(com.wuxi.app.activity.homepage.more.MenuItemSetActivity) -> a
     android.app.ProgressDialog access$1(com.wuxi.app.activity.homepage.more.MenuItemSetActivity) -> b
-    com.wuxi.app.db.FavoriteItemDao access$2(com.wuxi.app.activity.homepage.more.MenuItemSetActivity) -> c
-    android.content.SharedPreferences access$3(com.wuxi.app.activity.homepage.more.MenuItemSetActivity) -> d
-    void access$4(com.wuxi.app.activity.homepage.more.MenuItemSetActivity,com.wuxi.domain.MenuItem) -> a
-    android.os.Handler access$5(com.wuxi.app.activity.homepage.more.MenuItemSetActivity) -> e
-    void access$6(com.wuxi.app.activity.homepage.more.MenuItemSetActivity,java.util.List) -> a
-    java.util.List access$7(com.wuxi.app.activity.homepage.more.MenuItemSetActivity) -> f
+    java.util.List access$2(com.wuxi.app.activity.homepage.more.MenuItemSetActivity) -> c
+    void access$3(com.wuxi.app.activity.homepage.more.MenuItemSetActivity,com.wuxi.domain.MenuItem) -> a
+    android.os.Handler access$4(com.wuxi.app.activity.homepage.more.MenuItemSetActivity) -> d
+    void access$5(com.wuxi.app.activity.homepage.more.MenuItemSetActivity,java.util.List) -> a
 com.wuxi.app.activity.homepage.more.MenuItemSetActivity$1 -> com.wuxi.app.activity.homepage.more.a:
     com.wuxi.app.activity.homepage.more.MenuItemSetActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -8156,7 +8153,6 @@ com.wuxi.app.activity.homepage.more.MenuItemSetActivity$2 -> com.wuxi.app.activi
     com.wuxi.app.activity.homepage.more.MenuItemSetActivity this$0 -> a
     void run() -> run
 com.wuxi.app.activity.homepage.more.MenuItemSetActivity$MenuSetAdapter -> com.wuxi.app.activity.homepage.more.c:
-    java.util.List items -> b
     com.wuxi.app.activity.homepage.more.MenuItemSetActivity this$0 -> a
     int getCount() -> getCount
     java.lang.Object getItem(int) -> getItem

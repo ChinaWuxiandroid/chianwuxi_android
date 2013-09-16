@@ -597,9 +597,15 @@ public class Constants {
 	public static final class CacheKey {
 
 		/**
-		 * 首页导航菜单缓存key名称
+		 * 首页六大主模块导航菜单缓存key名称
 		 */
-		public static final String HOME_MENUITEM_KEY = "man_menu_item";
+		public static final String MAIN_MENUITEM_KEY = "man_menu_item";
+		
+		
+		/**
+		 * 收藏菜单+首页六大模块 缓存key
+		 */
+		public static final String HOME_MENUITEM_KEY = "home_menu_item";
 
 		/**
 		 * 收藏列表菜单

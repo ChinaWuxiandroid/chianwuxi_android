@@ -1,6 +1,5 @@
 package com.wuxi.app.engine;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import android.content.Context;
 
 import com.wuxi.app.db.FavoriteItemDao;
 import com.wuxi.app.util.Constants;
-import com.wuxi.app.util.JAsonPaserUtil;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NetException;
@@ -28,7 +26,6 @@ public class FavoritesService extends Service {
 		super(context);
 
 	}
-
 
 	/**
 	 * 
@@ -53,7 +50,7 @@ public class FavoritesService extends Service {
 			Object o = jsonObject.get("result");
 			if (!o.toString().equals("[]") && !o.toString().equals("null")) {
 				JSONArray jsArray = (JSONArray) o;
-				FavoriteItemDao favoriteItemDao = new FavoriteItemDao(context);
+				FavoriteItemDao favoriteItemDao=new FavoriteItemDao(context);
 				List<MenuItem> menuItems = new ArrayList<MenuItem>();
 				for (int index = 0; index < jsArray.length(); index++) {
 					JSONObject jb = jsArray.getJSONObject(index);
@@ -66,28 +63,20 @@ public class FavoritesService extends Service {
 					if (!parentMenuId.equals("null")) {
 						menuItem.setParentMenuId(jb.getString("parentMenuId"));
 					}
+					
+					if(favoriteItemDao.findFavoriteItem(id)){
+						menuItem.setLocalFavorites(true);
+					}else{
+						menuItem.setLocalFavorites(false);
+					}
+					
 
 					menuItem.setChannelId(jb.getString("channelId"));
 					menuItem.setChannelName(jb.getString("channelName"));
 
-					if (favoriteItemDao.findFavoriteItem(id)) {// 如果在数据库存在收藏项目
-						menuItem.setLocalFavorites(true);
-
-					} else {
-						if (SystemUtil.getUserAppCount(context) == 1
-								&& menuItem.getParentMenuId() == null) {// 首次使用APP并且菜单为顶级菜单
-							menuItem.setLevel(1);
-							menuItem.setLocalFavorites(true);
-							favoriteItemDao.addFavoriteItem(menuItem);// 保存到数据库
-						} else {
-							menuItem.setLocalFavorites(false);
-						}
-
-					}
-
 					menuItems.add(menuItem);
 				}
-				
+
 				return menuItems;
 
 			}

@@ -94,7 +94,7 @@ public class MainIndexActivity extends Activity implements
 
 	private static final int MENUITEM_LOAD_SUCESS = 1;// 菜单加载成功标识
 
-	private static final String MENUITEM_CACKE_KEY = Constants.CacheKey.HOME_MENUITEM_KEY;
+	private static final String MENUITEM_CACKE_KEY = Constants.CacheKey.MAIN_MENUITEM_KEY;
 
 	private static final String ANNOUNCE_CACHE_KEY = "announce";
 
@@ -217,6 +217,7 @@ public class MainIndexActivity extends Activity implements
 		iv_index_ldhd.setOnClickListener(this);
 		iv_index_zt.setOnClickListener(this);
 		LoadGrid();
+		//LoadGrid2();
 		loadNews();// 加载新闻数据
 		loadAnnouncements();
 
@@ -293,6 +294,72 @@ public class MainIndexActivity extends Activity implements
 		).start();
 
 	}
+	
+	
+	
+	
+	/**
+	 * 
+	 * wanglu 泰得利通 加载菜单数据
+	 */
+	@SuppressWarnings("unchecked")
+	private void LoadGrid2() {
+
+		if (CacheUtil.get(MENUITEM_CACKE_KEY) != null) {// 从缓存加载
+
+			menuItems = (List<MenuItem>) CacheUtil.get(Constants.CacheKey.HOME_MENUITEM_KEY);
+			pb.setVisibility(ProgressBar.GONE);
+			showGridData();
+			return;
+		}
+
+		new Thread(new Runnable() {// 加载首页MenuItem数据
+
+					@Override
+					public void run() {
+
+						MenuService menuSevice = new MenuService(
+								MainIndexActivity.this);
+						try {
+							menuItems = menuSevice
+									.getBeateHomeMenuItems(Constants.Urls.MENU_URL
+											+ "?recursions=0");
+							if (menuItems != null) {
+								handler.sendEmptyMessage(MENUITEM_LOAD_SUCESS);// 发送消息
+								
+							} else {
+								Message msg = handler.obtainMessage();
+								msg.what = MENUITEM_LOAD_ERROR;
+								msg.obj = "加载错误";
+								handler.sendMessage(msg);// 加载错误
+							}
+						} catch (NetException e) {
+							e.printStackTrace();
+							Message msg = handler.obtainMessage();
+							msg.obj = e.getMessage();
+							msg.what = MENUITEM_LOAD_ERROR;
+							handler.sendMessage(msg);// 加载错误
+						} catch (JSONException e) {
+							e.printStackTrace();
+							Message msg = handler.obtainMessage();
+							msg.obj = "网络格式出错";
+							msg.what = MENUITEM_LOAD_ERROR;
+							handler.sendMessage(msg);// 加载错误
+						} catch (NODataException e) {
+							e.printStackTrace();
+							Message msg = handler.obtainMessage();
+							msg.obj = "获取数据异常";
+							msg.what = MENUITEM_LOAD_ERROR;
+							handler.sendMessage(msg);// 加载错误
+						}
+
+					}
+				}
+
+		).start();
+
+	}
+
 
 	/**
 	 * 显示菜单数据
@@ -697,7 +764,7 @@ public class MainIndexActivity extends Activity implements
 
 	@Override
 	public void onClick(View v) {
-		if (CacheUtil.get(CacheKey.HOME_MENUITEM_KEY) == null) {
+		if (CacheUtil.get(CacheKey.MAIN_MENUITEM_KEY) == null) {
 			Toast.makeText(this, "数据异常，请重启，或检查网络", Toast.LENGTH_SHORT).show();
 			return;
 		}
