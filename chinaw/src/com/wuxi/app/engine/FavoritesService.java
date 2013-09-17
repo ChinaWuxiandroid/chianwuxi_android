@@ -64,7 +64,7 @@ public class FavoritesService extends Service {
 						menuItem.setParentMenuId(jb.getString("parentMenuId"));
 					}
 					
-					if(favoriteItemDao.findFavoriteItem(id)){
+					if(favoriteItemDao.findFavoriteItem(id)){//查找本地数据库
 						menuItem.setLocalFavorites(true);
 					}else{
 						menuItem.setLocalFavorites(false);
@@ -73,8 +73,10 @@ public class FavoritesService extends Service {
 
 					menuItem.setChannelId(jb.getString("channelId"));
 					menuItem.setChannelName(jb.getString("channelName"));
-
-					menuItems.add(menuItem);
+					if(menuItem.getParentMenuId()!=null){
+						menuItems.add(menuItem);
+					}
+					
 				}
 
 				return menuItems;

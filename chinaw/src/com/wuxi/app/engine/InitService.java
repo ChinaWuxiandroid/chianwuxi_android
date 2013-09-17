@@ -3,6 +3,8 @@ package com.wuxi.app.engine;
 import java.io.File;
 import java.util.Calendar;
 
+import com.wuxi.app.db.AppUseCountDao;
+import com.wuxi.app.db.DataBaseHelper;
 import com.wuxi.app.util.Constants;
 
 import android.content.Context;
@@ -43,11 +45,15 @@ public class InitService extends Service {
 	 *wanglu 泰得利通
 	 *记录软件使用次数
 	 */
+	@SuppressWarnings("unused")
 	public void registCount(){
-		int userCount=sp.getInt(Constants.SharepreferenceKey.USEAPP_COUNT, 0);
-		Editor ed = sp.edit();
-		ed.putInt(Constants.SharepreferenceKey.USEAPP_COUNT,userCount+1 );
-		ed.commit();
+		
+		if(DataBaseHelper.VERSION>1){
+			AppUseCountDao useCountDao=new AppUseCountDao(context);
+			useCountDao.updateUseCount();//更新使用次数
+			
+		}
+	
 		
 	}
 	

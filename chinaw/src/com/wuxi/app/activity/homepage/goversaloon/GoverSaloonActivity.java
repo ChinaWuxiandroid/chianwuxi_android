@@ -143,8 +143,8 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 	private void showLeftMenuItemData() {
 		Bundle bundle = getIntent().getExtras();
 		int showIndex = 1;
-		if (bundle != null && bundle.containsKey(Constants.CheckPositionKey.LEVEL_ONE_KEY)) {
-			showIndex = bundle.getInt(Constants.CheckPositionKey.LEVEL_ONE_KEY);
+		if (bundle != null && bundle.containsKey(Constants.CheckPositionKey.LEVEL_TWO__KEY)) {
+			showIndex = bundle.getInt(Constants.CheckPositionKey.LEVEL_TWO__KEY);
 		}
 		adapter = new ContentNavigatorAdapter(getLayoutInflater(), null,
 			menuItems);

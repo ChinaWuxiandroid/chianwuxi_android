@@ -94,8 +94,8 @@ public class MainMineActivity extends BaseSlideActivity implements
 	public void getArgumentsFromOtherFragment() {
 		Bundle bundle = this.getIntent().getExtras();
 
-		if (bundle != null && bundle.get(Constants.CheckPositionKey.LEVEL_ONE_KEY) != null) {
-			defaultCheckPosition = (Integer) bundle.get(Constants.CheckPositionKey.LEVEL_ONE_KEY);
+		if (bundle != null && bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY) != null) {
+			defaultCheckPosition = (Integer) bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY);
 		}
 		
 	}

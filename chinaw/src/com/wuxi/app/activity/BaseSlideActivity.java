@@ -29,6 +29,7 @@ import com.wuxi.app.activity.homepage.more.MenuItemSetActivity;
 import com.wuxi.app.activity.homepage.more.SystemSetActivity;
 import com.wuxi.app.adapter.LeftMenuAdapter;
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.MenuItemChanelUtil;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.app.view.SlideMenuLayout;
@@ -54,7 +55,7 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 
 	protected MenuItem menuItem;// 当前的最外层菜单
 
-	private static final String MENUITEM_CACKE_KEY = "man_menu_item";
+	private static final String MENUITEM_CACKE_KEY = Constants.CacheKey.MAIN_MENUITEM_KEY;
 
 	private TextView login_tv_userlogin;
 

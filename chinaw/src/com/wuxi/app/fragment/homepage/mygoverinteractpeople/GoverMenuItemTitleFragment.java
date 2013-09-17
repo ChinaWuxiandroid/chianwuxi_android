@@ -177,7 +177,7 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 		Bundle bundle = getArguments();
 		if (bundle != null) {
 			checkPoint = bundle
-					.getInt(Constants.CheckPositionKey.LEVEL_TWO_KEY);
+					.getInt(Constants.CheckPositionKey.LEVEL_THREE_KEY);
 		}
 		Titles_gridView = (GridView) view
 				.findViewById(R.id.gip_menuitem_gridview_title);
@@ -235,7 +235,7 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 		Bundle bundle = getArguments();
 		if (bundle != null) {
 			checkPoint = bundle
-					.getInt(Constants.CheckPositionKey.LEVEL_TWO_KEY);
+					.getInt(Constants.CheckPositionKey.LEVEL_THREE_KEY);
 		}
 		Titles_gridView = (GridView) view
 				.findViewById(R.id.gip_menuitem_gridview_title);

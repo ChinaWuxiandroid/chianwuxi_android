@@ -53,6 +53,11 @@ public class MenuItem implements Comparable<MenuItem>, Serializable {
 	 */
 	public static final int FRAGMENT_MENU = 6;
 
+	
+	public static final int LEVEL_ONE=1;//一级菜单即顶级菜单
+	public static final int LEVEL_TWO=2;//二级菜单
+	public static final int LEVEL_THREE=3;//三级菜单
+	
 	private String name;// 菜单名称
 	private String id;// ID 唯一标识
 	private int type;// 菜单类型
@@ -77,8 +82,29 @@ public class MenuItem implements Comparable<MenuItem>, Serializable {
 	private String pfId;  
 	private String pfBuildPath; 
 	private boolean isLocalFavorites=false;//是不是本地收藏菜单
-	private int level;//菜单的层次
 	
+	private int level=LEVEL_ONE;//菜单的层次
+	private int level_two_p=0;//二级菜单的位置
+	private int level_three_p=0;//三级菜单的位置
+	
+	public int getLevel_three_p() {
+		return level_three_p;
+	}
+
+	public void setLevel_three_p(int level_three_p) {
+		this.level_three_p = level_three_p;
+	}
+
+	public int getLevel_two_p() {
+		return level_two_p;
+	}
+
+	public void setLevel_two_p(int level_two_p) {
+		this.level_two_p = level_two_p;
+	}
+
+	
+
 	public boolean isLocalFavorites() {
 		return isLocalFavorites;
 	}

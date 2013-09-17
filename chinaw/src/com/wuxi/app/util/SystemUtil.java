@@ -1,5 +1,8 @@
 package com.wuxi.app.util;
 
+import com.wuxi.app.db.AppUseCountDao;
+import com.wuxi.app.db.DataBaseHelper;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -101,14 +104,15 @@ public class SystemUtil {
 	 * @param context
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	public static int getUserAppCount(Context context) {
-
-		SharedPreferences sp = context
-				.getSharedPreferences(
-						Constants.SharepreferenceKey.SHARE_CONFIG,
-						Context.MODE_PRIVATE);
-
-		return sp.getInt(Constants.SharepreferenceKey.USEAPP_COUNT, 1);
+		if(DataBaseHelper.VERSION>1){
+			AppUseCountDao appUseCountDao = new AppUseCountDao(context);
+			return appUseCountDao.getUseAppCount();
+		}else{
+			return  0;
+		}
+		
 
 	}
 

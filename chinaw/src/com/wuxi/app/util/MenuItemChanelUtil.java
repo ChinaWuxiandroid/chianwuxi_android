@@ -70,5 +70,16 @@ public class MenuItemChanelUtil {
 		return null;
 	}
 
-	
+	/**
+	 * 
+	 * wanglu 泰得利通 获取六大主菜单的索引位置
+	 * 
+	 * @param menuItem
+	 * @return
+	 */
+	public static int getMainMenuItemIndex(MenuItem menuItem) {
+		return MenuItemChannelIndexUtil.getInstance().getMenueChannelIndex(
+				Constants.CacheKey.MAIN_MENUITEM_KEY, menuItem.getId());
+	}
+
 }
