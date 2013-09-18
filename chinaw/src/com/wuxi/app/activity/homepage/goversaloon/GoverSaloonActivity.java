@@ -277,6 +277,7 @@ public class GoverSaloonActivity extends BaseSlideActivity implements
 	 */
 	private void showContentFragment(BaseFragment fragment) {
 		if (fragment != null) {
+			fragment.setArguments(this.getIntent().getExtras());//传递intent数据
 			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 			ft.replace(DETAIL_ID, fragment);// 替换视图
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

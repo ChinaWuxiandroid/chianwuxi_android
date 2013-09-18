@@ -105,7 +105,6 @@ public class VedioReviewFragment extends BaseFragment implements
 				playVideo();
 				break;
 			case LOAD_VIEDO_URL_FAIL:
-				break;
 
 			case DATA_LOAD_ERROR:
 				list_pb.setVisibility(View.GONE);
@@ -243,7 +242,7 @@ public class VedioReviewFragment extends BaseFragment implements
 			mListView.removeFooterView(loadMoreView);
 		}
 	}
-	
+
 	/**
 	 * @方法： loadMoreData
 	 * @描述： 加载更多数据

@@ -150,6 +150,12 @@ public class FavoriteItemDao {
 
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 
+		List<MenuItem> homeItems = new ArrayList<MenuItem>();
+
+		for (MenuItem mainMItem : mainMenuItems) {
+			homeItems.add(mainMItem);
+		}
+
 		if (db.isOpen()) {
 
 			Cursor cursor = db.rawQuery("select * from "
@@ -162,10 +168,10 @@ public class FavoriteItemDao {
 				menuItem.setParentMenuId(cursor.getString(2));
 				menuItem.setLevel(cursor.getInt(3));// 菜单的层次
 				menuItem.setLevel_two_p(cursor.getInt(4));
-				menuItem.setLevel_three_p(5);
+				menuItem.setLevel_three_p(cursor.getInt(5));
 				menuItem.setLocalFavorites(true);
 
-				mainMenuItems.add(menuItem);
+				homeItems.add(menuItem);
 			}
 
 			cursor.close();
@@ -173,7 +179,7 @@ public class FavoriteItemDao {
 			db.close();
 		}
 
-		return mainMenuItems;
+		return homeItems;
 
 	}
 
