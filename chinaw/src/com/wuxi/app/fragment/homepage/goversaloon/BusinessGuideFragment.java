@@ -132,6 +132,9 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 						.containsKey(Constants.CheckPositionKey.LEVEL_THREE_KEY)) {
 			showIndex = bundle
 					.getInt(Constants.CheckPositionKey.LEVEL_THREE_KEY);
+			
+			bundle.putInt(Constants.CheckPositionKey.LEVEL_THREE_KEY, 0);//回复现场
+			getActivity().getIntent().putExtras(bundle);//回复现场
 		}
 		int typeIndex = 0;
 		switch (showIndex) {

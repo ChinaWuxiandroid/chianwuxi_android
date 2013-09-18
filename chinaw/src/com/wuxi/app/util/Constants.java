@@ -553,12 +553,9 @@ public class Constants {
 		/**
 		 * 二级子菜单选中的key值 如：魅力锡城左侧的竖排菜单为二级子菜单
 		 */
-		public static final String LEVEL_THREE_KEY = "LEVEL_Three_KEY";
+		public static final String LEVEL_THREE_KEY = "LEVEL_THREE_KEY";
 
-		/**
-		 * 三级子菜单选中的key值
-		 */
-		//public static final String LEVEL_THREE_KEY = "LEVEL_THREE_KEY";
+	
 
 		/**
 		 * 政民互动我要写信功能
