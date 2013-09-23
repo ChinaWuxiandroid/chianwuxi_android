@@ -13,9 +13,6 @@ import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -39,6 +36,7 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
+import com.wuxi.app.AppManager;
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.homepage.FourTopicActivity;
@@ -51,13 +49,10 @@ import com.wuxi.app.engine.AnnouncementsService;
 import com.wuxi.app.engine.DownLoadTask;
 import com.wuxi.app.engine.ImportNewsService;
 import com.wuxi.app.engine.MenuService;
-import com.wuxi.app.engine.UpdateInfoService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
-import com.wuxi.app.util.LogUtil;
 import com.wuxi.app.util.Constants.CacheKey;
 import com.wuxi.app.util.MenuItemChanelUtil;
-import com.wuxi.app.util.MenuItemChannelIndexUtil;
 import com.wuxi.domain.Content;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.domain.UpdateInfo;
@@ -119,8 +114,6 @@ public class MainIndexActivity extends Activity implements
 	protected static final int NO_UPDATE_APK = 8;
 
 	public static final int DOWLOAD_ERROR = 9;
-
-	private static final String TAG = "MainIndexActivity";
 
 	private List<View> mGridViews;
 
@@ -193,47 +186,6 @@ public class MainIndexActivity extends Activity implements
 
 		initUI();
 
-		LogUtil.i(TAG, "onCreate");
-	}
-
-	@Override
-	public void finish() {
-
-		super.finish();
-		LogUtil.i(TAG, "finish");
-	}
-
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-		LogUtil.i(TAG, "onDestroy");
-	}
-
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		LogUtil.i(TAG, "onPause");
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		LogUtil.i(TAG, "onResume");
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-
-		LogUtil.i(TAG, "onStart");
-	}
-
-	@Override
-	protected void onStop() {
-		// TODO Auto-generated method stub
-		super.onStop();
 	}
 
 	private void initUI() {
@@ -276,68 +228,6 @@ public class MainIndexActivity extends Activity implements
 			checkUpdate();// 监测软件是否有更新
 			MainTabActivity.instance.fistLoadAPP = false;
 		}
-
-	}
-
-	/**
-	 * 
-	 * wanglu 泰得利通 加载菜单数据
-	 */
-	@SuppressWarnings("unchecked")
-	private void LoadGrid() {
-
-		if (CacheUtil.get(MENUITEM_CACKE_KEY) != null) {// 从缓存加载
-
-			menuItems = (List<MenuItem>) CacheUtil.get(MENUITEM_CACKE_KEY);
-			pb.setVisibility(ProgressBar.GONE);
-			showGridData();
-			return;
-		}
-
-		new Thread(new Runnable() {// 加载首页MenuItem数据
-
-					@Override
-					public void run() {
-
-						MenuService menuSevice = new MenuService(
-								MainIndexActivity.this);
-						try {
-							menuItems = menuSevice
-									.getHomeMenuItems(Constants.Urls.MENU_URL
-											+ "?recursions=0");
-							if (menuItems != null) {
-								handler.sendEmptyMessage(MENUITEM_LOAD_SUCESS);// 发送消息
-
-							} else {
-								Message msg = handler.obtainMessage();
-								msg.what = MENUITEM_LOAD_ERROR;
-								msg.obj = "加载错误";
-								handler.sendMessage(msg);// 加载错误
-							}
-						} catch (NetException e) {
-							e.printStackTrace();
-							Message msg = handler.obtainMessage();
-							msg.obj = e.getMessage();
-							msg.what = MENUITEM_LOAD_ERROR;
-							handler.sendMessage(msg);// 加载错误
-						} catch (JSONException e) {
-							e.printStackTrace();
-							Message msg = handler.obtainMessage();
-							msg.obj = "网络格式出错";
-							msg.what = MENUITEM_LOAD_ERROR;
-							handler.sendMessage(msg);// 加载错误
-						} catch (NODataException e) {
-							e.printStackTrace();
-							Message msg = handler.obtainMessage();
-							msg.obj = "获取数据异常";
-							msg.what = MENUITEM_LOAD_ERROR;
-							handler.sendMessage(msg);// 加载错误
-						}
-
-					}
-				}
-
-		).start();
 
 	}
 
@@ -565,32 +455,7 @@ public class MainIndexActivity extends Activity implements
 
 	}
 
-	/**
-	 * 菜单点击
-	 */
-	private OnItemClickListener GridviewOnclick = new OnItemClickListener() {
-
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
-
-			MenuItem checkMenuItem = (MenuItem) parent
-					.getItemAtPosition(position);
-
-			Class<?> acClass = MenuItemChanelUtil
-					.getActivityClassByName(checkMenuItem);
-
-			if (acClass != null) {
-				Intent intent = new Intent(MainIndexActivity.this, acClass);
-				intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY,
-						position);
-
-				MainTabActivity.instance.addView(intent);
-			}
-
-		}
-	};
-
+	
 	/**
 	 * 菜单点击
 	 */
@@ -915,27 +780,8 @@ public class MainIndexActivity extends Activity implements
 		}
 
 		if (intent != null) {
-			// IndexActivity.instance.addView(intent);
+			
 			MainTabActivity.instance.addView(intent);
-		}
-
-	}
-
-	/**
-	 * 
-	 * wanglu 泰得利通 获取软件版本
-	 * 
-	 * @return
-	 */
-	private String getVersion() {
-		PackageManager pm = this.getPackageManager();
-		try {
-			PackageInfo paInfo = pm.getPackageInfo(this.getPackageName(), 0);
-			return paInfo.versionName;
-		} catch (NameNotFoundException e) {
-
-			e.printStackTrace();
-			return "未知版本";
 		}
 
 	}
@@ -957,36 +803,6 @@ public class MainIndexActivity extends Activity implements
 	}
 
 	/**
-	 * 
-	 * wanglu 泰得利通 是否要更新
-	 * 
-	 * @return
-	 */
-	public boolean isUpdate() {
-
-		String oldVerson = getVersion();
-		UpdateInfoService updateInfoService = new UpdateInfoService(this);
-		try {
-			updateInfo = updateInfoService.getUpdateInfo(R.string.updateurl);
-			if (!updateInfo.getVersion().equals(oldVerson)) {
-
-				return true;
-			} else {
-
-				return false;
-			}
-
-		} catch (Exception e) {
-
-			// Toast.makeText(context, "监测更新出错", Toast.LENGTH_SHORT).show();
-
-			e.printStackTrace();
-			return false;
-		}
-
-	}
-
-	/**
 	 * 监测更新 wanglu 泰得利通
 	 */
 	private void checkUpdate() {
@@ -995,8 +811,9 @@ public class MainIndexActivity extends Activity implements
 
 			@Override
 			public void run() {
-
-				boolean update = isUpdate();
+				updateInfo=new UpdateInfo();
+				boolean update = AppManager.getInstance(MainIndexActivity.this)
+						.isUpdate(updateInfo);// 检查更新
 				if (update) {
 					handler.sendEmptyMessage(UPDATE_APK);
 				} else {

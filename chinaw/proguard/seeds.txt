@@ -9437,6 +9437,9 @@ com.wuxi.domain.MenuItem: int APP_MENU
 com.wuxi.domain.MenuItem: int WAP_MENU
 com.wuxi.domain.MenuItem: int LINK_MENU
 com.wuxi.domain.MenuItem: int FRAGMENT_MENU
+com.wuxi.domain.MenuItem: int LEVEL_ONE
+com.wuxi.domain.MenuItem: int LEVEL_TWO
+com.wuxi.domain.MenuItem: int LEVEL_THREE
 com.wuxi.domain.MenuItem: java.lang.String name
 com.wuxi.domain.MenuItem: java.lang.String id
 com.wuxi.domain.MenuItem: int type
@@ -9462,9 +9465,15 @@ com.wuxi.domain.MenuItem: java.lang.String pfId
 com.wuxi.domain.MenuItem: java.lang.String pfBuildPath
 com.wuxi.domain.MenuItem: boolean isLocalFavorites
 com.wuxi.domain.MenuItem: int level
+com.wuxi.domain.MenuItem: int level_two_p
+com.wuxi.domain.MenuItem: int level_three_p
 com.wuxi.domain.MenuItem: java.lang.String MENUITEM_KEY
 com.wuxi.domain.MenuItem: java.lang.Class contentFragment
 com.wuxi.domain.MenuItem: MenuItem()
+com.wuxi.domain.MenuItem: int getLevel_three_p()
+com.wuxi.domain.MenuItem: void setLevel_three_p(int)
+com.wuxi.domain.MenuItem: int getLevel_two_p()
+com.wuxi.domain.MenuItem: void setLevel_two_p(int)
 com.wuxi.domain.MenuItem: boolean isLocalFavorites()
 com.wuxi.domain.MenuItem: void setLocalFavorites(boolean)
 com.wuxi.domain.MenuItem: int getLevel()
@@ -9518,6 +9527,8 @@ com.wuxi.domain.MenuItem: java.lang.String getPfId()
 com.wuxi.domain.MenuItem: void setPfId(java.lang.String)
 com.wuxi.domain.MenuItem: java.lang.String getPfBuildPath()
 com.wuxi.domain.MenuItem: void setPfBuildPath(java.lang.String)
+com.wuxi.domain.MenuItem: int hashCode()
+com.wuxi.domain.MenuItem: boolean equals(java.lang.Object)
 com.wuxi.domain.MenuItem: int compareTo(java.lang.Object)
 com.wuxi.domain.MyApply
 com.wuxi.domain.MyApply: java.lang.String id

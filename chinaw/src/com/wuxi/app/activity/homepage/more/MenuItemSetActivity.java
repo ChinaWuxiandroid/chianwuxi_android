@@ -11,6 +11,8 @@ import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,6 +28,7 @@ import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.MenuItemChannelIndexUtil;
 import com.wuxi.app.view.SlipButton;
+import com.wuxi.app.view.SwitchButton;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -147,6 +150,7 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 
 		public TextView title_text;
 		public SlipButton slipButton;
+		public SwitchButton switchButton;
 	}
 
 	private class MenuSetAdapter extends BaseAdapter implements
@@ -181,17 +185,19 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 
 			ViewHolder viewHolder = null;
 			if (convertView == null) {
+				
 				convertView = View.inflate(MenuItemSetActivity.this,
 						R.layout.menuset_item_layout, null);
-
 				viewHolder = new ViewHolder();
 
 				viewHolder.title_text = (TextView) convertView
 						.findViewById(R.id.menuset_tv_name);
-				SlipButton slipButton = (SlipButton) convertView
-						.findViewById(R.id.slipButton);
+				
+				SwitchButton switchButton = (SwitchButton) convertView
+						.findViewById(R.id.checkbox);
 
-				viewHolder.slipButton = slipButton;
+				
+				viewHolder.switchButton = switchButton;
 
 				convertView.setTag(viewHolder);
 			} else {
@@ -199,14 +205,11 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 			}
 
 			viewHolder.title_text.setText(name);
-
-			if (menuItem.isLocalFavorites()) {
-				viewHolder.slipButton.setChecked(true);
-			} else {
-				viewHolder.slipButton.setChecked(false);
-			}
-
-			viewHolder.slipButton.SetOnChangedListener(menuItem, this);
+			viewHolder.switchButton.setChecked(menuItem.isLocalFavorites());
+			
+			viewHolder.switchButton
+					.setOnCheckedChangeListener(new SwitchOnChangeButton(
+							menuItem));
 			return convertView;
 
 		}
@@ -258,12 +261,72 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 				homeMenuItems.remove(checkMenuItem);
 			}
 
-			/*
-			 * Toast.makeText(MenuItemSetActivity.this, " 该功能在施工中",
-			 * Toast.LENGTH_SHORT).show();
-			 */
-
 		}
+	}
+
+	private final class SwitchOnChangeButton implements OnCheckedChangeListener {
+
+		private MenuItem menuItem;
+		public SwitchOnChangeButton(MenuItem menuItem) {
+
+			this.menuItem=menuItem;
+			
+		}
+
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView,
+				boolean isChecked) {
+			
+
+			
+			checkMenuItem =menuItem;
+
+			if (isChecked) {// 保存手册列表
+
+				currentMenuLevel = getMenuItemLevel(checkMenuItem);// 获取菜单的级别
+
+				switch (currentMenuLevel) {
+				case MenuItem.LEVEL_ONE:// 一级菜单
+					checkMenuItem.setLevel(MenuItem.LEVEL_ONE);
+					saveFaveItem();// 保存收藏项
+					break;
+				case MenuItem.LEVEL_TWO:// 二级菜单
+					checkMenuItem.setLevel(MenuItem.LEVEL_TWO);
+					saveFaveItem();
+					break;
+				case MenuItem.LEVEL_THREE:// 三级菜单
+					checkMenuItem.setLevel(MenuItem.LEVEL_THREE);
+					MenuItem paretMenuItem = (MenuItem) CacheUtil
+							.get(MenuItem.MENUITEM_KEY
+									+ checkMenuItem.getParentMenuId());// 拿到父菜单，二级菜单
+
+					if (CacheUtil.get(paretMenuItem.getId()) == null) {// 看缓存中有没有三级子菜单,没有就加载三级子菜单
+
+						if (paretMenuItem.getType() == MenuItem.CUSTOM_MENU) {
+							loadMenuItems(paretMenuItem.getId());
+						} else if (paretMenuItem.getType() == MenuItem.CHANNEL_MENU) {// 频道
+							Toast.makeText(MenuItemSetActivity.this,
+									"该数据有误,不可以收藏", Toast.LENGTH_SHORT).show();
+						}
+
+					} else {
+						saveFaveItem();// 保存收藏项
+					}
+
+					break;
+
+				}
+
+			} else {
+				checkMenuItem.setLocalFavorites(false);
+				favoriteItemDao.delFavoriteItem(checkMenuItem.getId());
+				homeMenuItems.remove(checkMenuItem);
+			}
+
+			
+		
+		}
+
 	}
 
 	@SuppressWarnings("unchecked")
