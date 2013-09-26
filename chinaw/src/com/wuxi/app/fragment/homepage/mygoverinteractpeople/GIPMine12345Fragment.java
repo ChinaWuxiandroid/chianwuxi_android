@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -17,7 +18,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.BaseSlideActivity;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity;
 import com.wuxi.app.engine.LetterService;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
@@ -118,12 +122,12 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 
 			@Override
 			public void onClick(View v) {
-				// BaseSlideFragment baseSlideFragment =
-				// GIPMine12345Fragment.this.baseSlideFragment;
-				// baseSlideFragment.slideLinstener.replaceFragment(null,
-				// position,
-				// Constants.FragmentName.GIP_12345_WRITE_MAIL_FRAGMENT, null);
-				Toast.makeText(context, "该功能未实现", Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(getActivity(), MainMineActivity.class);
+				intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 5);
+				intent.putExtra(Constants.CheckPositionKey.LEVEL_ONE_KEY, 1);// 这个意思让你选中左侧第二个菜单也就是12345办理平台
+				intent.putExtra(Constants.CheckPositionKey.LEVEL_TWO_KEY, 6);// 这个意思让你选中我要写信
+
+				MainTabActivity.instance.addView(intent);
 			}
 		});
 

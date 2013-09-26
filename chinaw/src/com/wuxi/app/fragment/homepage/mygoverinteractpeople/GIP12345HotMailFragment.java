@@ -156,8 +156,10 @@ public class GIP12345HotMailFragment extends BaseFragment implements
 				Message message = handler.obtainMessage();
 				LetterService letterService = new LetterService(context);
 				try {
-					letterWrapper = letterService.getLetterLitstWrapper(
-							Constants.Urls.HOTMAIL_URL, startIndex, endIndex);
+					
+					String url = Constants.Urls.HOTMAIL_URL+"?start="+startIndex+"&end="+endIndex;
+					
+					letterWrapper = letterService.getLetterLitstWrapper(url);
 					if (null != letterWrapper) {
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 					} else {

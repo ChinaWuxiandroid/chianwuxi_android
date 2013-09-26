@@ -26,7 +26,16 @@ import com.wuxi.domain.StatisticsLetter;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
+/**
+ * @类名： GoverMsgInterMailStatisticsFragment
+ * @描述： 政府信息公开 依申请公开 网上办件统计 界面
+ * @作者： 罗森
+ * @创建时间： 2013 2013-9-22 上午11:16:57
+ * @修改时间： 
+ * @修改描述：
+ */
 public class GoverMsgInterMailStatisticsFragment extends BaseFragment{
+	
 	protected View view;
 	protected LayoutInflater mInflater;
 	private Context context;

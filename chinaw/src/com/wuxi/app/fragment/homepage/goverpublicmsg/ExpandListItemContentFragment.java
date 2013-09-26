@@ -34,6 +34,7 @@ import com.wuxi.exception.NetException;
  * */
 
 public class ExpandListItemContentFragment extends BaseFragment{
+	
 	private View view;
 	private LayoutInflater mInflater;
 	private MenuItem parentItem;

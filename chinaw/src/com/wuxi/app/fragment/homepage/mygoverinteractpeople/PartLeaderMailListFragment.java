@@ -214,6 +214,7 @@ public class PartLeaderMailListFragment extends RadioButtonChangeFragment
 		letters = letterWrapper.getData();
 		if (letters == null || letters.size() == 0) {
 			Toast.makeText(context, "该部门暂无信件", Toast.LENGTH_SHORT).show();
+			list_pb.setVisibility(View.GONE);
 		} else {
 			if (isFirstLoad) {
 				adapter = new LeaderLetterListAdapter(letters, context);

@@ -19,6 +19,7 @@ import com.wuxi.domain.MenuItem;
  * 显示碎片菜单类型的Fragment
  * */
 public class GoverMsgFragmentWebFragment extends BaseFragment{
+	
 	private View view;
 	private MenuItem parentItem;
 	private Context context;

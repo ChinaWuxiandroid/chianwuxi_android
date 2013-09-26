@@ -545,7 +545,7 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment {
 			}
 
 			viewHolder.tv_dept.setTextColor(Color.BLACK);
-			viewHolder.tv_dept.setTextSize(8);
+			viewHolder.tv_dept.setTextSize(10);
 			viewHolder.tv_dept.setText(dept.getDepname());
 
 			return convertView;

@@ -15,21 +15,28 @@ public class GoverMsgFifterContentListFragment extends
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View arg1,
 			int position, long arg3) {
+		
+
 		Content content = (Content) adapterView.getItemAtPosition(position);
+		
+		System.out.println(parentItem);
+		
+		if (parentItem != null) {
 
-		if (super.parentItem != null) {
-
-			Intent intent = new Intent(getActivity(),
+			Intent intent = new Intent(context,
 					GoverMsgContentDetailWebActivity.class);
 			intent.putExtra("url", content.getWapUrl());
 			intent.putExtra("fragmentTitle", parentItem.getName());
+			System.out.println("测试1");
 			MainTabActivity.instance.addView(intent);
-		} else if (super.channel != null) {
 
-			Intent intent = new Intent(getActivity(),
+		} else if (channel != null) {
+
+			Intent intent = new Intent(context,
 					GoverMsgContentDetailWebActivity.class);
 			intent.putExtra("url", content.getWapUrl());
 			intent.putExtra("fragmentTitle", channel.getChannelName());
+			
 			MainTabActivity.instance.addView(intent);
 		}
 	}

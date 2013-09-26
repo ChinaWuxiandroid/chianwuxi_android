@@ -29,6 +29,7 @@ import com.wuxi.domain.MenuItem;
 
 public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 		OnItemClickListener,OnClickListener{
+	
 	private Context context;
 	private View view;
 

@@ -40,10 +40,6 @@ import com.wuxi.exception.NetException;
 
 public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment
 		implements OnItemClickListener {
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
 
 	private ListView mListView;
 	private ProgressBar list_pb;
@@ -206,7 +202,12 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment
 		dial(tels.get(position).getTel());
 	}
 
-	public void dial(final String phoneNumber) {
+	/**
+	 * @方法： dial
+	 * @描述： 创建一个对话框
+	 * @param phoneNumber
+	 */
+	private void dial(final String phoneNumber) {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setTitle("提示");
 

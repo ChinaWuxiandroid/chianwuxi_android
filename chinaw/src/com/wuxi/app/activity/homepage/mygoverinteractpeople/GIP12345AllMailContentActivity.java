@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
+import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.GIPMailInfoService;
 import com.wuxi.app.engine.MailCommentService;
 import com.wuxi.app.util.LogUtil;
@@ -101,7 +102,8 @@ public class GIP12345AllMailContentActivity extends BaseItemContentActivity {
 				break;
 
 			case DATA_LOAD_ERROR:
-				Toast.makeText(GIP12345AllMailContentActivity.this, tip, Toast.LENGTH_SHORT).show();
+				Toast.makeText(GIP12345AllMailContentActivity.this, tip,
+						Toast.LENGTH_SHORT).show();
 				break;
 			}
 		}
@@ -126,11 +128,11 @@ public class GIP12345AllMailContentActivity extends BaseItemContentActivity {
 	protected String getContentTitleText() {
 		return "12345来信办理平台";
 	}
-	
+
 	@Override
 	protected void findMainContentViews(View view) {
 		super.findMainContentViews(view);
-		
+
 		progressBar = (ProgressBar) view
 				.findViewById(R.id.mail_content_progress);
 		progressBar.setVisibility(View.VISIBLE);
@@ -178,44 +180,21 @@ public class GIP12345AllMailContentActivity extends BaseItemContentActivity {
 	 * @return PopupWindow
 	 */
 	private PopupWindow makePopupWindow(Context cont) {
-		PopupWindow popupWindow = null;
 
 		popview = LayoutInflater.from(cont).inflate(
 				R.layout.gip_12345_mail_estimate_pop_layout, null);
 
 		radioGroup = (RadioGroup) popview
 				.findViewById(R.id.mail_estimate_radiogroup);
-		radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(RadioGroup group, int checkedId) {
-				int radioBtnId = group.getCheckedRadioButtonId();
-				RadioButton radioBtn = (RadioButton) popview
-						.findViewById(radioBtnId);
-				int rank = 0;
-				if (radioBtn.getText().equals("满意")) {
-					rank = 3;
-					submitData(rank);
-				} else if (radioBtn.getText().equals("比较满意")) {
-					rank = 2;
-					submitData(rank);
-				} else if (radioBtn.getText().equals("有待改进")) {
-					rank = 1;
-					submitData(rank);
-				}
-			}
-		});
 
 		popWindowManager = PopWindowManager.getInstance();
 
+		final PopupWindow popupWindow = new PopupWindow(popview,
+				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, true);
+
 		popWindowManager.addPopWindow(popupWindow);
 
-		popupWindow = new PopupWindow(cont);
-
 		popupWindow.setContentView(popview);
-
-		popupWindow.setWidth(LayoutParams.MATCH_PARENT);
-		popupWindow.setHeight(LayoutParams.WRAP_CONTENT);
 
 		popupWindow.setBackgroundDrawable(getResources().getDrawable(
 				R.drawable.naviga_leftitem_back));
@@ -223,6 +202,37 @@ public class GIP12345AllMailContentActivity extends BaseItemContentActivity {
 		popupWindow.setFocusable(true); // 设置PopupWindow可获得焦点
 		popupWindow.setTouchable(true); // 设置PopupWindow可触摸
 		popupWindow.setOutsideTouchable(true); // 设置非PopupWindow区域可触摸
+
+		//评价单选按钮组的事件监听处理
+		radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+				LoginDialog dialog = new LoginDialog(
+						GIP12345AllMailContentActivity.this);
+				if (dialog.checkLogin()) {
+					int radioBtnId = group.getCheckedRadioButtonId();
+					RadioButton radioBtn = (RadioButton) popview
+							.findViewById(radioBtnId);
+					int rank = 0;
+					if (radioBtn.getText().equals("满意")) {
+						rank = 3;
+						submitData(rank);
+					} else if (radioBtn.getText().equals("比较满意")) {
+						rank = 2;
+						submitData(rank);
+					} else if (radioBtn.getText().equals("有待改进")) {
+						rank = 1;
+						submitData(rank);
+					}
+				} else {
+					dialog.showDialog();
+					popupWindow.dismiss();
+				}
+
+			}
+		});
 
 		return popupWindow;
 	}
@@ -253,7 +263,8 @@ public class GIP12345AllMailContentActivity extends BaseItemContentActivity {
 
 			@Override
 			public void run() {
-				GIPMailInfoService service = new GIPMailInfoService(GIP12345AllMailContentActivity.this);
+				GIPMailInfoService service = new GIPMailInfoService(
+						GIP12345AllMailContentActivity.this);
 				letter = (Letter) getIntent().getExtras().get("letter");
 				try {
 					wrapper = service.getGipMailInfoWrapper(letter.getId());
@@ -279,14 +290,16 @@ public class GIP12345AllMailContentActivity extends BaseItemContentActivity {
 		}).start();
 	}
 
-	
+	/**
+	 * @方法： submitData
+	 * @描述： 提交评论数据
+	 * @param rank
+	 */
 	private void submitData(final int rank) {
-
 		MailCommentService commentService = new MailCommentService(this);
 		letter = (Letter) getIntent().getExtras().get("letter");
 		try {
-			commentService.submitMailComment(letter.getId(),
-					rank);
+			commentService.submitMailComment(letter.getId(), rank);
 
 			Toast.makeText(this, "提交成功，正在审核...", Toast.LENGTH_SHORT).show();
 

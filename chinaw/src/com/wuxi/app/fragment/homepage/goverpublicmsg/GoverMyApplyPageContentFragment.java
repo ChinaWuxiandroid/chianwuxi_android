@@ -22,6 +22,7 @@ import com.wuxi.domain.MyApplyPageWrapper.MyApplyPage;
  * */
 
 public class GoverMyApplyPageContentFragment extends BaseFragment{
+	
 	protected View view;
 	protected LayoutInflater mInflater;
 	private Context context;

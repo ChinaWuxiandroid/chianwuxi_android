@@ -316,6 +316,7 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 				queryMailBtn.getLocationOnScreen(xy);
 				popWindow.showAtLocation(queryMailBtn, Gravity.BOTTOM
 						| Gravity.RIGHT, 0, queryMailBtn.getHeight() * 2 + 10);
+				dealMailBtn.setVisibility(View.GONE);
 			}
 		});
 
@@ -597,17 +598,17 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 			break;
 		case 1:
 			goverInterPeopleWebFragment
-					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148281.shtml");
+					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148281.shtml?backurl=false");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		case 2:
 			goverInterPeopleWebFragment
-					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148282.shtml");
+					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148282.shtml?backurl=false");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		case 3:
 			goverInterPeopleWebFragment
-					.setUrl("http://www.wuxi.gov.cn/wap/zxzx/jgzn/index.shtml");
+					.setUrl("http://www.wuxi.gov.cn/wap/zxzx/jgzn/index.shtml?backurl=false");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		}

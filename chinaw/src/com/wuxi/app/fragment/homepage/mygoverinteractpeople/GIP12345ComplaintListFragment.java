@@ -161,9 +161,8 @@ public class GIP12345ComplaintListFragment extends BaseFragment implements
 				Message message = handler.obtainMessage();
 				LetterService letterService = new LetterService(context);
 				try {
-					letterWrapper = letterService.getLetterLitstWrapper(
-							Constants.Urls.SUGGESTLETTER_URL, startIndex,
-							endIndex);
+					String url = Constants.Urls.SUGGESTLETTER_URL+"?start="+startIndex+"&end="+endIndex;
+					letterWrapper = letterService.getLetterLitstWrapper(url);
 					if (null != letterWrapper) {
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 

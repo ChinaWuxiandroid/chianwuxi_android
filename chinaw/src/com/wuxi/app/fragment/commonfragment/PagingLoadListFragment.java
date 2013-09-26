@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +23,14 @@ import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
+import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.CommonDataWrapper;
 import com.wuxi.domain.MenuItem;
 
 public abstract class PagingLoadListFragment extends BaseFragment implements
-OnScrollListener, OnItemClickListener, OnClickListener{
+		OnScrollListener, OnItemClickListener, OnClickListener {
+
 	protected Context context;
 	protected static final int FRAMELAYOUT_ID = R.id.paging_loading_list_fragmeLayout;
 	protected static final int LIST_LOAD_SUCCESS = 0;
@@ -35,7 +38,7 @@ OnScrollListener, OnItemClickListener, OnClickListener{
 	private static final int PAGE_SIZE = 10;
 	protected View view;
 	protected ListView content_list_lv;
-	
+
 	private ProgressBar content_list_pb;
 	private View loadMoreView;// 加载更多视图
 	private Button loadMoreButton;
@@ -46,7 +49,6 @@ OnScrollListener, OnItemClickListener, OnClickListener{
 	private boolean isLoading = false;
 	private ProgressBar pb_loadmoore;
 
-
 	private CommonDataWrapper wrapper;// 内容
 	private BaseAdapter adapter;
 	protected List<Object> objects;
@@ -56,7 +58,7 @@ OnScrollListener, OnItemClickListener, OnClickListener{
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case LIST_LOAD_SUCCESS:
-				content_list_pb.setVisibility(ProgressBar.GONE);
+				// content_list_pb.setVisibility(ProgressBar.GONE);
 				showContentData();
 				break;
 			case LIST_LOAD_FAIL:
@@ -94,14 +96,13 @@ OnScrollListener, OnItemClickListener, OnClickListener{
 	 * */
 	protected abstract void addItem(Object object);
 
-
 	/**
 	 * 切换操作
 	 * */
 	protected abstract void switchContents();
 
 	/**
-	 *得到包装类
+	 * 得到包装类
 	 * */
 	protected abstract CommonDataWrapper getWarpper(int start, int end);
 
@@ -126,36 +127,34 @@ OnScrollListener, OnItemClickListener, OnClickListener{
 			public void run() {
 				isLoading = true;// 正在加载数据
 				Message msg = handler.obtainMessage();
-			
-				try {
-					System.out.println("getWarpper");
-					wrapper=getWarpper(start, end);
-					
-					/*ContentService contentService = new ContentService(context);
-					try {
 
-						String channelId = "";
-						if (channel != null) {
-							channelId = channel.getChannelId();
-						} else if (parentItem != null) {
-							channelId = parentItem.getChannelId();
-						}
-						contentWrapper = contentService.getPageContentsById(channelId, start, end);
-					*/
+				try {
+
+					System.out.println("测试1");
+					wrapper = getWarpper(start, end);
+
+					/*
+					 * ContentService contentService = new
+					 * ContentService(context); try {
+					 * 
+					 * String channelId = ""; if (channel != null) { channelId =
+					 * channel.getChannelId(); } else if (parentItem != null) {
+					 * channelId = parentItem.getChannelId(); } contentWrapper =
+					 * contentService.getPageContentsById(channelId, start,
+					 * end);
+					 */
+					// Looper.loop();
 					if (wrapper != null) {
 						msg.what = LIST_LOAD_SUCCESS;
-						System.out.println("LIST_LOAD_SUCCESS");
 					} else {
-						System.out.println("内容获取错误,稍后重试");
 						msg.what = LIST_LOAD_FAIL;
 						msg.obj = "内容获取错误,稍后重试";
 					}
 					handler.sendMessage(msg);
-
 				} catch (Exception e) {
-					System.out.println("加载失败");
 					e.printStackTrace();
 					msg.what = LIST_LOAD_FAIL;
+					System.out.println("测试2");
 					msg.obj = "加载失败";
 					handler.sendMessage(msg);
 				}
@@ -180,7 +179,7 @@ OnScrollListener, OnItemClickListener, OnClickListener{
 		content_list_lv = (ListView) view.findViewById(R.id.content_list_lv);
 		content_list_lv.setOnItemClickListener(this);
 		content_list_pb = (ProgressBar) view.findViewById(R.id.content_list_pb);
-		
+
 		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
 				null);
 		loadMoreButton = (Button) loadMoreView
@@ -203,27 +202,32 @@ OnScrollListener, OnItemClickListener, OnClickListener{
 	public void setChannel(Channel channel) {
 		this.channel = channel;
 	}
-	
+
 	protected void showContentData() {
 
-		objects = getContents();
-		System.out.println("getContents over");
-		if (objects != null ) {
-			if(objects.size() <= 0){
+		LoginDialog dialog = new LoginDialog(context);
+
+		if (!dialog.checkLogin()) {
+			dialog.showDialog();
+			content_list_pb.setVisibility(View.GONE);
+		} else {
+			objects = getContents();
+
+			if (objects != null && objects.size() <= 0) {
 				content_list_pb.setVisibility(ProgressBar.GONE);
-				Toast.makeText(context, "没有信息或加载信息失败", Toast.LENGTH_SHORT).show();
-			}
-			else{
+				Toast.makeText(context, "没有信息或加载信息失败", Toast.LENGTH_SHORT)
+						.show();
+			} else {
 				if (isFirstLoad) {
 
 					isFirstLoad = false;
-					adapter=getAdapter();
+					adapter = getAdapter();
 					content_list_lv.setAdapter(adapter);
 					/*
 					 * adapter = new ContentListAdapter(contents, context);
 					 * content_list_lv.setAdapter(adapter);
-					 * */
-					
+					 */
+
 					content_list_pb.setVisibility(ProgressBar.GONE);
 					isLoading = false;
 				} else {
@@ -232,15 +236,15 @@ OnScrollListener, OnItemClickListener, OnClickListener{
 						switchContents();
 						/*
 						 * adapter.setContents(contents);
-						 * */
-						
+						 */
+
 						content_list_pb.setVisibility(ProgressBar.GONE);
 					} else {
 						for (Object object : objects) {
 							addItem(object);
 							/*
 							 * adapter.addItem(content);
-							 * */
+							 */
 						}
 					}
 
@@ -250,14 +254,14 @@ OnScrollListener, OnItemClickListener, OnClickListener{
 					isLoading = false;
 				}
 			}
-			
-		}
 
-		if (wrapper.isNext()) {
-			pb_loadmoore.setVisibility(ProgressBar.GONE);
-			loadMoreButton.setText("点击加载更多");
-		} else {
-			content_list_lv.removeFooterView(loadMoreView);
+			if (wrapper.isNext()) {
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+				loadMoreButton.setText("点击加载更多");
+			} else {
+				content_list_lv.removeFooterView(loadMoreView);
+			}
+
 		}
 
 	}
@@ -273,15 +277,14 @@ OnScrollListener, OnItemClickListener, OnClickListener{
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		int itemsLastIndex = adapter.getCount() - 1; // 数据集最后一项的索引
 		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-		/*if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
-				&& visibleLastIndex == lastIndex) {
-			if (contentWrapper != null && contentWrapper.isNext()) {// 还有下一条记录
-
-				isSwitch = false;
-				loadMoreButton.setText("loading.....");
-				loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_SIZE);
-			}
-		}*/
+		/*
+		 * if (scrollState == OnScrollListener.SCROLL_STATE_IDLE &&
+		 * visibleLastIndex == lastIndex) { if (contentWrapper != null &&
+		 * contentWrapper.isNext()) {// 还有下一条记录
+		 * 
+		 * isSwitch = false; loadMoreButton.setText("loading.....");
+		 * loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_SIZE); } }
+		 */
 
 	}
 

@@ -3,6 +3,7 @@ package com.wuxi.app.listeners;
 import android.support.v4.app.Fragment;
 
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgContentListFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgFifterContentListFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgFragmentWebFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgNaviWithContentFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgSearchContentListFragment;
@@ -38,6 +39,8 @@ public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener 
 			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment=null;
 			WorkSuggestionBoxFragment workSuggestionBoxFragment = null;
 			GoverMsgFragmentWebFragment goverMsgFragmentWebFragment=null;
+			
+			GoverMsgFifterContentListFragment goverMsgFifterContentListFragment = null;
 
 			if (fragment instanceof GoverMsgNaviWithContentFragment) {
 				contentNavigatorWithContentFragment = (GoverMsgNaviWithContentFragment) fragment;
@@ -50,6 +53,7 @@ public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener 
 
 				contentListFragment.setParentItem(menuItem);
 				initLayoutListner.bindContentLayout(contentListFragment);
+				
 			} else if (fragment instanceof GoverMsgWebFragment) {
 				leaderWindowFragment = (GoverMsgWebFragment) fragment;
 				leaderWindowFragment.setParentItem(menuItem);
@@ -71,6 +75,12 @@ public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener 
 				goverMsgFragmentWebFragment = (GoverMsgFragmentWebFragment) fragment;
 				goverMsgFragmentWebFragment.setParentMenuItem(menuItem);
 				initLayoutListner.bindContentLayout(goverMsgFragmentWebFragment);
+			}
+			
+			else if (fragment instanceof GoverMsgFifterContentListFragment) {
+				goverMsgFifterContentListFragment = (GoverMsgFifterContentListFragment) fragment;
+				goverMsgFifterContentListFragment.setParentItem(menuItem);
+				initLayoutListner.bindContentLayout(goverMsgFifterContentListFragment);
 			}
 
 		} catch (InstantiationException e) {

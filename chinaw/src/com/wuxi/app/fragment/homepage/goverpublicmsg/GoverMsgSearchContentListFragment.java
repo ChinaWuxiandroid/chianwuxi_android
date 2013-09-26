@@ -63,7 +63,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 	private MenuItem parentMenuItem;
 	private Channel channel;
 
-	List<ApplyDept> depts;
+	private List<ApplyDept> depts;
 
 	private Spinner partment_sp;
 	private Spinner year_sp;
@@ -340,7 +340,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 	}
 
 	// 开始检索
-	public void search() {
+	private void search() {
 		GoverMsgFifterContentListFragment goverMsgFifterContentListFragment = new GoverMsgFifterContentListFragment();
 		String id = null;
 		if (channel != null) {

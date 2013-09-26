@@ -93,7 +93,7 @@ public class GoverInterPeople12345Fragment extends RadioButtonChangeFragment {
 	@Override
 	protected void init() {
 
-		BaseFragment mayorBoxFragment = new GIP12345MayorMaiBoxFragment();
+		GIP12345MayorMaiBoxFragment mayorBoxFragment = new GIP12345MayorMaiBoxFragment();
 		onTransaction(mayorBoxFragment);
 
 	}

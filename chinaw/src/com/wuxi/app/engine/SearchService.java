@@ -52,6 +52,8 @@ public class SearchService extends Service {
 				.replace("{countperpage}", countperpage + "")
 				.replace("{pagenum}", pagenum + "");
 
+		System.out.println("搜索测试："+url);
+		
 		String resultStr = httpUtils.executeGetToStringGBK(url, 5000);
 
 		if (resultStr != null) {
@@ -118,6 +120,7 @@ public class SearchService extends Service {
 			url = url + "&searchType=" + searchUtil.getContentType();
 
 		System.out.println("url:" + url);
+		
 		String resultStr = httpUtils.executeGetToStringGBK(url, 5000);
 
 		if (resultStr != null) {

@@ -16,13 +16,11 @@ public class GoverInterPeopleVideoLiveFragment extends
 		RadioButtonChangeFragment {
 
 	// 存放该界面的RadioBtnID的数组
-	private final int[] radioBtnIds = {
-
-	R.id.gip_video_bdroom_radioBtn_home, R.id.gip_video_bdroom_radioBtn_review,
+	private final int[] radioBtnIds = { R.id.gip_video_bdroom_radioBtn_home,
+			R.id.gip_video_bdroom_radioBtn_review,
 			R.id.gip_video_bdroom_radioBtn_guest,
 			R.id.gip_video_bdroom_radioBtn_relative_info,
 			R.id.gip_video_bdroom_radioBtn_program,
-
 			R.id.gip_video_bdroom_radioBtn_schedule };
 
 	@Override
@@ -57,29 +55,34 @@ public class GoverInterPeopleVideoLiveFragment extends
 		super.onCheckedChanged(group, checkedId);
 
 		switch (checkedId) {
+		//节目预告
 		case R.id.gip_video_bdroom_radioBtn_home:
 			init();
 			break;
-
+		//往期回顾
 		case R.id.gip_video_bdroom_radioBtn_review:
 			VedioReviewFragment reviewFragment = new VedioReviewFragment();
 			onTransaction(reviewFragment);
 			break;
-
+		//嘉宾风采
 		case R.id.gip_video_bdroom_radioBtn_guest:
-
+			VideoGuestPresenceFragment videoGuestPresenceFragment = new VideoGuestPresenceFragment();
+			onTransaction(videoGuestPresenceFragment);
 			break;
-
+		//相关资料
 		case R.id.gip_video_bdroom_radioBtn_relative_info:
-
+			VideoRelatedDataFragment videoRelatedDataFragment = new VideoRelatedDataFragment();
+			onTransaction(videoRelatedDataFragment);
 			break;
-
+		//节目介绍
 		case R.id.gip_video_bdroom_radioBtn_program:
-
+			VideoProgramIntroducedFragment programIntroducedFragment = new VideoProgramIntroducedFragment();
+			onTransaction(programIntroducedFragment);
 			break;
-
+		//日常安排
 		case R.id.gip_video_bdroom_radioBtn_schedule:
-
+			VideoDailyRoutineFragment videoDailyRoutineFragment = new VideoDailyRoutineFragment();
+			onTransaction(videoDailyRoutineFragment);
 			break;
 
 		default:

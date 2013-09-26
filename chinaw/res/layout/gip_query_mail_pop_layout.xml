@@ -51,7 +51,7 @@
 
         <Spinner
             android:id="@+id/query_mail_box_sort_spinner"
-            android:layout_width="108sp"
+            android:layout_width="130sp"
             android:layout_height="32sp"
             android:background="@drawable/spiner_bg" 
             />
@@ -127,6 +127,7 @@
             android:layout_weight="0.38"
             android:layout_marginLeft="3sp"
             android:background="@drawable/worksuggestbox_edit_small_bk"
+            android:enabled="false"
             android:paddingLeft="3dp" 
             android:textSize="12sp"/>
         
@@ -162,6 +163,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.38"
             android:paddingLeft="3dp"
+            android:enabled="false"
             android:background="@drawable/worksuggestbox_edit_small_bk" 
             android:textSize="12sp"/>
         
@@ -195,7 +197,7 @@
 
         <Spinner
             android:id="@+id/query_mail_accept_department_spinner"
-            android:layout_width="175sp"
+            android:layout_width="197sp"
             android:layout_height="32sp"
             android:background="@drawable/spiner_bg" />
     </LinearLayout>
@@ -218,7 +220,7 @@
 
         <Spinner
             android:id="@+id/query_mail_reply_department_spinner"
-            android:layout_width="175sp"
+            android:layout_width="197sp"
             android:layout_height="32sp"
             android:background="@drawable/spiner_bg" />
     </LinearLayout>

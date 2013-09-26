@@ -26,7 +26,7 @@ public class SearchResultDetailActivity extends BaseItemContentActivity {
 
 	@SuppressLint("SetJavaScriptEnabled")
 	private void showResultData() {
-		String wapUrl = resultContent.getLink();
+		String wapUrl = resultContent.getLink()+"?backurl=false";
 		searchDetail_wb.getSettings().setJavaScriptEnabled(true);
 		searchDetail_wb.setWebChromeClient(new WebChromeClient() {
 			public void onProgressChanged(WebView view, int progress) {

@@ -15,7 +15,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
@@ -36,12 +35,13 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- * 带有过滤功能 的返回指定频道的内容列表抽象类父类
+ * 带有过滤功能 的返回指定频道的内容列表类
  * @author 杨宸  智佳
  * 
  */
 public abstract class FifterContentListFragment  extends BaseFragment implements
 OnScrollListener, OnItemClickListener, OnClickListener {
+	
 	protected static final int CONTENT_LOAD_SUCCESS = 0;
 	protected static final int CONTENT_LOAD_FAIL = 1;
 	private static final int PAGE_SIZE = 10;
@@ -51,7 +51,7 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 	private ContentWrapper contentWrapper;// 内容
 	private View loadMoreView;// 加载更多视图
 	private Button loadMoreButton;
-	private Context context;
+	protected Context context;
 	private int visibleLastIndex;
 	private int visibleItemCount;// 当前显示的总条数
 	private ContentListAdapter adapter;
@@ -68,6 +68,12 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 		this.fifter=fifter;
 	}
 
+	/**
+	 * @方法： getURL
+	 * @描述： 构建URL
+	 * @param fifter
+	 * @return
+	 */
 	private String getURL(FifterContentWrapper fifter){
 		String url = Constants.Urls.CHANNEL_CONTENT_P_URL.replace("{id}", fifter.getId())
 				.replace("{start}", String.valueOf(fifter.getStart()))
@@ -89,9 +95,11 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 		if(zone!=null&&!"".equals(zone)){
 			url=url+"&zone="+zone;
 		}
+		
 		return url;
 	}
 
+	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		@SuppressLint("HandlerLeak")
 		public void handleMessage(Message msg) {
@@ -119,7 +127,11 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 		return view;
 	}
 
-	protected void showContentData() {
+	/**
+	 * @方法： showContentData
+	 * @描述： 显示列表数据
+	 */
+	private void showContentData() {
 
 		if (contentWrapper.isNext()) {
 			loadMoreButton.setText("more");
@@ -155,6 +167,9 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 						- visibleItemCount + 1); // 设置选中项
 				isLoading = false;
 			}
+		}else {
+			content_list_pb.setVisibility(ProgressBar.GONE);
+			Toast.makeText(context, "根据您的条件，检索的数据为空，请重新选择条件。", Toast.LENGTH_SHORT).show();
 		}
 		
 		if (contentWrapper.isNext()) {
@@ -178,7 +193,13 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 
 	}
 
-	public void loadData(final int start, final int end) {
+	/**
+	 * @方法： loadData
+	 * @描述： 加载数据
+	 * @param start
+	 * @param end
+	 */
+	private void loadData(final int start, final int end) {
 		if (isFirstLoad || isSwitch) {
 			content_list_pb.setVisibility(ProgressBar.VISIBLE);
 		} else {
@@ -223,7 +244,12 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 		}).start();
 	}
 
-	public void loadMore(View view) {
+	/**
+	 * @方法： loadMore
+	 * @描述： 加载更多数据
+	 * @param view
+	 */
+	private void loadMore(View view) {
 		if (isLoading) {
 			return;
 		} else {
@@ -238,9 +264,11 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 	private void initUI() {
 		content_list_lv = (ListView) view.findViewById(R.id.content_list_lv);
 		content_list_lv.setOnItemClickListener(this);
+		
 		content_list_pb = (ProgressBar) view.findViewById(R.id.content_list_pb);
 		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
 				null);
+		
 		loadMoreButton = (Button) loadMoreView
 				.findViewById(R.id.loadMoreButton);
 		pb_loadmoore = (ProgressBar) loadMoreView
@@ -274,15 +302,6 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		int itemsLastIndex = adapter.getCount() - 1; // 数据集最后一项的索引
 		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-//		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
-//				&& visibleLastIndex == lastIndex) {
-//			if (contentWrapper != null && contentWrapper.isNext()) {// 还有下一条记录
-//
-//				isSwitch = false;
-//				loadMoreButton.setText("loading.....");
-//				loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_SIZE);
-//			}
-//		}
 	}
 
 	public void changeChannelOrMenItem(Channel channel, MenuItem menuItem) {
@@ -301,16 +320,10 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 
 				isSwitch = false;
 				loadMoreButton.setText("loading.....");
-				loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_SIZE);
+				loadMore(v);
 			}
 			break;
 		}
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

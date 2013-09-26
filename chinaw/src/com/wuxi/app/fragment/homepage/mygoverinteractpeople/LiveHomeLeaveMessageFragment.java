@@ -195,6 +195,7 @@ public class LiveHomeLeaveMessageFragment extends BaseFragment implements
 
 		if (leaveMessages == null || leaveMessages.size() == 0) {
 			Toast.makeText(context, "对不起，暂无留言提问信息", 2000).show();
+			list_pb.setVisibility(View.GONE);
 		} else {
 			if (isFirstLoad) {
 				adapter = new LiveHomeLeaveMessageListAdapter(context,
