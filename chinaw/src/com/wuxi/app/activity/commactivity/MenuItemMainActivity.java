@@ -96,7 +96,7 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 		Bundle bundle = this.getIntent().getExtras();
 		int showIndex = 0;
 		if (bundle != null) {
-			showIndex = bundle.getInt(Constants.CheckPositionKey.LEVEL_ONE_KEY);// 头部选中的菜单序号
+			showIndex = bundle.getInt(Constants.CheckPositionKey.LEVEL_TWO__KEY);// 头部选中的菜单序号
 		}
 		mtitleScrollLayout = (TitleScrollLayout) view
 				.findViewById(R.id.title_scroll_action);// 头部控件
@@ -213,7 +213,7 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 	}
 
 	private void bindFragment(BaseFragment fragment) {
-
+		fragment.setArguments(getIntent().getExtras());//传递intent数据
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(MANCOTENT_ID, fragment);// 替换内容界面
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -236,7 +236,7 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 		if (showMenuItem.getName().equals("政府信息公开")) {
 			Intent intent = new Intent(MenuItemMainActivity.this,
 					PublicGoverMsgActivity.class);
-			intent.putExtra(Constants.CheckPositionKey.LEVEL_ONE_KEY,
+			intent.putExtra(Constants.CheckPositionKey.LEVEL_TWO__KEY,
 					subMenuPostion);
 			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY,
 					showMenuPositon);

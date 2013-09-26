@@ -13,9 +13,6 @@ import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -39,6 +36,7 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
+import com.wuxi.app.AppManager;
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.homepage.FourTopicActivity;
@@ -51,7 +49,6 @@ import com.wuxi.app.engine.AnnouncementsService;
 import com.wuxi.app.engine.DownLoadTask;
 import com.wuxi.app.engine.ImportNewsService;
 import com.wuxi.app.engine.MenuService;
-import com.wuxi.app.engine.UpdateInfoService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.Constants.CacheKey;
@@ -188,6 +185,7 @@ public class MainIndexActivity extends Activity implements
 		setContentView(R.layout.main_index_fragment_layout);
 
 		initUI();
+
 	}
 
 	private void initUI() {
@@ -216,8 +214,8 @@ public class MainIndexActivity extends Activity implements
 		iv_index_zt = (ImageView) findViewById(R.id.iv_index_zt);
 		iv_index_ldhd.setOnClickListener(this);
 		iv_index_zt.setOnClickListener(this);
-		LoadGrid();
-		//LoadGrid2();
+		// LoadGrid();
+		LoadGrid2();
 		loadNews();// 加载新闻数据
 		loadAnnouncements();
 
@@ -238,76 +236,12 @@ public class MainIndexActivity extends Activity implements
 	 * wanglu 泰得利通 加载菜单数据
 	 */
 	@SuppressWarnings("unchecked")
-	private void LoadGrid() {
-
-		if (CacheUtil.get(MENUITEM_CACKE_KEY) != null) {// 从缓存加载
-
-			menuItems = (List<MenuItem>) CacheUtil.get(MENUITEM_CACKE_KEY);
-			pb.setVisibility(ProgressBar.GONE);
-			showGridData();
-			return;
-		}
-
-		new Thread(new Runnable() {// 加载首页MenuItem数据
-
-					@Override
-					public void run() {
-
-						MenuService menuSevice = new MenuService(
-								MainIndexActivity.this);
-						try {
-							menuItems = menuSevice
-									.getHomeMenuItems(Constants.Urls.MENU_URL
-											+ "?recursions=0");
-							if (menuItems != null) {
-								handler.sendEmptyMessage(MENUITEM_LOAD_SUCESS);// 发送消息
-								
-							} else {
-								Message msg = handler.obtainMessage();
-								msg.what = MENUITEM_LOAD_ERROR;
-								msg.obj = "加载错误";
-								handler.sendMessage(msg);// 加载错误
-							}
-						} catch (NetException e) {
-							e.printStackTrace();
-							Message msg = handler.obtainMessage();
-							msg.obj = e.getMessage();
-							msg.what = MENUITEM_LOAD_ERROR;
-							handler.sendMessage(msg);// 加载错误
-						} catch (JSONException e) {
-							e.printStackTrace();
-							Message msg = handler.obtainMessage();
-							msg.obj = "网络格式出错";
-							msg.what = MENUITEM_LOAD_ERROR;
-							handler.sendMessage(msg);// 加载错误
-						} catch (NODataException e) {
-							e.printStackTrace();
-							Message msg = handler.obtainMessage();
-							msg.obj = "获取数据异常";
-							msg.what = MENUITEM_LOAD_ERROR;
-							handler.sendMessage(msg);// 加载错误
-						}
-
-					}
-				}
-
-		).start();
-
-	}
-	
-	
-	
-	
-	/**
-	 * 
-	 * wanglu 泰得利通 加载菜单数据
-	 */
-	@SuppressWarnings("unchecked")
 	private void LoadGrid2() {
 
 		if (CacheUtil.get(MENUITEM_CACKE_KEY) != null) {// 从缓存加载
 
-			menuItems = (List<MenuItem>) CacheUtil.get(Constants.CacheKey.HOME_MENUITEM_KEY);
+			menuItems = (List<MenuItem>) CacheUtil
+					.get(Constants.CacheKey.HOME_MENUITEM_KEY);
 			pb.setVisibility(ProgressBar.GONE);
 			showGridData();
 			return;
@@ -326,7 +260,7 @@ public class MainIndexActivity extends Activity implements
 											+ "?recursions=0");
 							if (menuItems != null) {
 								handler.sendEmptyMessage(MENUITEM_LOAD_SUCESS);// 发送消息
-								
+
 							} else {
 								Message msg = handler.obtainMessage();
 								msg.what = MENUITEM_LOAD_ERROR;
@@ -359,7 +293,6 @@ public class MainIndexActivity extends Activity implements
 		).start();
 
 	}
-
 
 	/**
 	 * 显示菜单数据
@@ -424,7 +357,9 @@ public class MainIndexActivity extends Activity implements
 		gridAdapter = new IndexGridAdapter(this,
 				R.layout.index_gridview_item_layout, Grid_viewid, items, null);
 		gridView.setAdapter(gridAdapter);
-		gridView.setOnItemClickListener(GridviewOnclick);
+		// gridView.setOnItemClickListener(GridviewOnclick);
+		gridView.setOnItemClickListener(GridviewOnclick2);
+
 		return gridView;
 	}
 
@@ -493,7 +428,6 @@ public class MainIndexActivity extends Activity implements
 		listView.setAdapter(listAdapter);
 
 		setListViewHeight(listView);
-		
 
 	}
 
@@ -515,15 +449,17 @@ public class MainIndexActivity extends Activity implements
 		}
 		ViewGroup.LayoutParams params = listView.getLayoutParams();
 		params.height = totalHeight
-				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1))-50;
+				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1))
+				- 50;
 		listView.setLayoutParams(params);
 
 	}
 
+	
 	/**
 	 * 菜单点击
 	 */
-	private OnItemClickListener GridviewOnclick = new OnItemClickListener() {
+	private OnItemClickListener GridviewOnclick2 = new OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -532,19 +468,67 @@ public class MainIndexActivity extends Activity implements
 			MenuItem checkMenuItem = (MenuItem) parent
 					.getItemAtPosition(position);
 
-			Class<?> acClass = MenuItemChanelUtil
-					.getActivityClassByName(checkMenuItem);
+			MenuItem mainMenuItem = null;// 主菜单
+			Bundle bundle = null;
+			if (checkMenuItem.isLocalFavorites()) {// 是收藏菜单
+				int menuLevel = checkMenuItem.getLevel();
+				if (menuLevel == MenuItem.LEVEL_TWO) {// 二级菜单
+					int leve_twop = checkMenuItem.getLevel_two_p();// 二级菜单的索引位置
+					bundle = new Bundle();
+					bundle.putInt(Constants.CheckPositionKey.LEVEL_TWO__KEY,
+							leve_twop);// 索引位置
+					mainMenuItem = (MenuItem) CacheUtil
+							.get(MenuItem.MENUITEM_KEY
+									+ checkMenuItem.getParentMenuId());// 获取一级菜单
 
-			if (acClass != null) {
-				Intent intent = new Intent(MainIndexActivity.this, acClass);
-				intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY,
-						position);
+				} else if (menuLevel == MenuItem.LEVEL_THREE) {// 三级菜单
 
-				MainTabActivity.instance.addView(intent);
+					int leve_twop = checkMenuItem.getLevel_two_p();// 二级菜单的索引位置
+					int leve_threep = checkMenuItem.getLevel_three_p();// 三级菜单索引位置
+					bundle = new Bundle();
+					bundle.putInt(Constants.CheckPositionKey.LEVEL_TWO__KEY,
+							leve_twop);// 索引位置
+					bundle.putInt(Constants.CheckPositionKey.LEVEL_THREE_KEY,
+							leve_threep);
+					MenuItem parentMenuItem = (MenuItem) CacheUtil
+							.get(MenuItem.MENUITEM_KEY
+									+ checkMenuItem.getParentMenuId());// 获取二级菜单
+
+					mainMenuItem = (MenuItem) CacheUtil
+							.get(MenuItem.MENUITEM_KEY
+									+ parentMenuItem.getParentMenuId());// 获取主菜单级菜单
+
+				}
+
+			} else {
+				mainMenuItem = checkMenuItem;
+			}
+
+			if (mainMenuItem != null) {
+				Class<?> acClass = MenuItemChanelUtil
+						.getActivityClassByName(mainMenuItem);
+
+				if (acClass != null) {
+					startOtherActivity(acClass,
+							MenuItemChanelUtil
+									.getMainMenuItemIndex(mainMenuItem), bundle);
+				}
 			}
 
 		}
 	};
+
+	private void startOtherActivity(Class<?> activityClass,
+			int selectMainMenuPostion, Bundle bundle) {
+
+		Intent intent = new Intent(MainIndexActivity.this, activityClass);
+		intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY,
+				selectMainMenuPostion);
+		if (bundle != null) {
+			intent.putExtras(bundle);
+		}
+		MainTabActivity.instance.addView(intent);
+	}
 
 	/**
 	 * 
@@ -776,13 +760,13 @@ public class MainIndexActivity extends Activity implements
 			intent = new Intent(MainIndexActivity.this,
 					InformationCenterActivity.class);
 			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 2);
-			intent.putExtra(Constants.CheckPositionKey.LEVEL_ONE_KEY, 1);
+			intent.putExtra(Constants.CheckPositionKey.LEVEL_TWO__KEY, 1);
 			break;
 		case R.id.index_rb_announcements:// 推荐公告
 			intent = new Intent(MainIndexActivity.this,
 					InformationCenterActivity.class);
 			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 2);
-			intent.putExtra(Constants.CheckPositionKey.LEVEL_ONE_KEY, 2);
+			intent.putExtra(Constants.CheckPositionKey.LEVEL_TWO__KEY, 2);
 			break;
 		case R.id.iv_index_ldhd:
 
@@ -796,27 +780,8 @@ public class MainIndexActivity extends Activity implements
 		}
 
 		if (intent != null) {
-			// IndexActivity.instance.addView(intent);
+			
 			MainTabActivity.instance.addView(intent);
-		}
-
-	}
-
-	/**
-	 * 
-	 * wanglu 泰得利通 获取软件版本
-	 * 
-	 * @return
-	 */
-	private String getVersion() {
-		PackageManager pm = this.getPackageManager();
-		try {
-			PackageInfo paInfo = pm.getPackageInfo(this.getPackageName(), 0);
-			return paInfo.versionName;
-		} catch (NameNotFoundException e) {
-
-			e.printStackTrace();
-			return "未知版本";
 		}
 
 	}
@@ -838,36 +803,6 @@ public class MainIndexActivity extends Activity implements
 	}
 
 	/**
-	 * 
-	 * wanglu 泰得利通 是否要更新
-	 * 
-	 * @return
-	 */
-	public boolean isUpdate() {
-
-		String oldVerson = getVersion();
-		UpdateInfoService updateInfoService = new UpdateInfoService(this);
-		try {
-			updateInfo = updateInfoService.getUpdateInfo(R.string.updateurl);
-			if (!updateInfo.getVersion().equals(oldVerson)) {
-
-				return true;
-			} else {
-
-				return false;
-			}
-
-		} catch (Exception e) {
-
-			// Toast.makeText(context, "监测更新出错", Toast.LENGTH_SHORT).show();
-
-			e.printStackTrace();
-			return false;
-		}
-
-	}
-
-	/**
 	 * 监测更新 wanglu 泰得利通
 	 */
 	private void checkUpdate() {
@@ -876,8 +811,9 @@ public class MainIndexActivity extends Activity implements
 
 			@Override
 			public void run() {
-
-				boolean update = isUpdate();
+				updateInfo=new UpdateInfo();
+				boolean update = AppManager.getInstance(MainIndexActivity.this)
+						.isUpdate(updateInfo);// 检查更新
 				if (update) {
 					handler.sendEmptyMessage(UPDATE_APK);
 				} else {

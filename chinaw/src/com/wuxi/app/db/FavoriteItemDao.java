@@ -64,10 +64,13 @@ public class FavoriteItemDao {
 
 		if (db.isOpen()) {
 			db.execSQL(
-					"insert into " + DataBaseHelper.TABLE_FAVORITE
-							+ " (id,name,parentMenuId,level) values(?,?,?,?)",
+					"insert into "
+							+ DataBaseHelper.TABLE_FAVORITE
+							+ " (id,name,parentMenuId,level,level_two_p,level_three_p ) values(?,?,?,?,?,?)",
 					new Object[] { menItem.getId(), menItem.getName(),
-							menItem.getParentMenuId(), menItem.getLevel() });
+							menItem.getParentMenuId(), menItem.getLevel(),
+							menItem.getLevel_two_p(),
+							menItem.getLevel_three_p() });
 			db.close();
 		}
 	}
@@ -128,6 +131,8 @@ public class FavoriteItemDao {
 				menuItem.setName(cursor.getString(1));
 				menuItem.setParentMenuId(cursor.getString(2));
 				menuItem.setLevel(cursor.getInt(3));// 菜单的层次
+				menuItem.setLevel_two_p(cursor.getInt(4));
+				menuItem.setLevel_three_p((cursor.getInt(5)));
 				menuItem.setLocalFavorites(true);
 				menuItems.add(menuItem);
 			}
@@ -138,6 +143,43 @@ public class FavoriteItemDao {
 		}
 
 		return menuItems;
+
+	}
+
+	public List<MenuItem> getFavoriteItems(List<MenuItem> mainMenuItems) {
+
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+		List<MenuItem> homeItems = new ArrayList<MenuItem>();
+
+		for (MenuItem mainMItem : mainMenuItems) {
+			homeItems.add(mainMItem);
+		}
+
+		if (db.isOpen()) {
+
+			Cursor cursor = db.rawQuery("select * from "
+					+ DataBaseHelper.TABLE_FAVORITE, null);
+			while (cursor.moveToNext()) {
+
+				MenuItem menuItem = new MenuItem();
+				menuItem.setId(cursor.getString(0));
+				menuItem.setName(cursor.getString(1));
+				menuItem.setParentMenuId(cursor.getString(2));
+				menuItem.setLevel(cursor.getInt(3));// 菜单的层次
+				menuItem.setLevel_two_p(cursor.getInt(4));
+				menuItem.setLevel_three_p(cursor.getInt(5));
+				menuItem.setLocalFavorites(true);
+
+				homeItems.add(menuItem);
+			}
+
+			cursor.close();
+
+			db.close();
+		}
+
+		return homeItems;
 
 	}
 

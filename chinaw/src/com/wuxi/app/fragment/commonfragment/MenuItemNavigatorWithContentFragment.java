@@ -25,6 +25,7 @@ import com.wuxi.app.adapter.ContentNavigatorAdapter;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
@@ -143,9 +144,10 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 				MenuService menuService = new MenuService(context);
 				Message msg = handler.obtainMessage();
 				try {
-					menuItems = menuService.getSubMenuItems(parentMenuItem.getId());
+					menuItems = menuService.getSubMenuItems(parentMenuItem
+							.getId());
 					if (menuItems != null) {
-						
+
 						msg.what = LEFT_MENUITEM_DATA__LOAD_SUCCESS;
 						handler.sendMessage(msg);
 
@@ -181,14 +183,28 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 	 */
 	private void showLeftMenuItemData() {
 
+		int showIndex = 0;
+
+		Bundle bundle = getArguments();
+		if (bundle != null
+				&& bundle
+						.containsKey(Constants.CheckPositionKey.LEVEL_THREE_KEY)) {
+
+			showIndex = bundle
+					.getInt(Constants.CheckPositionKey.LEVEL_THREE_KEY);
+			
+			bundle.putInt(Constants.CheckPositionKey.LEVEL_THREE_KEY, 0);//回复现场
+			getActivity().getIntent().putExtras(bundle);//回复现场
+		}
 		adapter = new ContentNavigatorAdapter(mInflater, null, menuItems);
-		adapter.setSelectedPosition(0);
+		adapter.setSelectedPosition(showIndex);
 		mListView.setAdapter(adapter);// 设置适配器
 		mListView.setOnItemClickListener(this);
 
 		if (menuItems.size() > 0) {
 
-			showContentFragment(showMenItemContentFragment(menuItems.get(0)));// 默认显示第一个ConentFragment
+			showContentFragment(showMenItemContentFragment(menuItems
+					.get(showIndex)));// 默认显示第一个ConentFragment
 
 		}
 	}
@@ -201,7 +217,8 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 	private void loadChannelData() {
 
 		if (null != CacheUtil.get(parentMenuItem.getChannelId())) {// 从缓存中查找
-			channels = (List<Channel>) CacheUtil.get(parentMenuItem.getChannelId());
+			channels = (List<Channel>) CacheUtil.get(parentMenuItem
+					.getChannelId());
 			showLeftChannelData();
 			return;
 
@@ -215,10 +232,11 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 					ChannelService channelService = new ChannelService(context);
 
 					try {
-						channels = channelService.getSubChannels(parentMenuItem.getChannelId());
+						channels = channelService.getSubChannels(parentMenuItem
+								.getChannelId());
 						if (channels != null) {
 							handler.sendEmptyMessage(LEFT_CHANNEL_DATA__LOAD_SUCCESS);
-							
+
 						}
 
 					} catch (NetException e) {
@@ -242,13 +260,24 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 	 * 
 	 */
 	private void showLeftChannelData() {
+		
+		int showIndex = 0;
+
+		Bundle bundle = getArguments();
+		if (bundle != null
+				&& bundle
+						.containsKey(Constants.CheckPositionKey.LEVEL_THREE_KEY)) {
+
+			showIndex = bundle
+					.getInt(Constants.CheckPositionKey.LEVEL_THREE_KEY);
+		}
 		adapter = new ContentNavigatorAdapter(mInflater, channels, null);
-		adapter.setSelectedPosition(0);
+		adapter.setSelectedPosition(showIndex);
 		mListView.setAdapter(adapter);// 设置适配器
 		mListView.setOnItemClickListener(this);
 
 		if (channels.size() > 0) {
-			showContentFragment(showChannelContentFragment(channels.get(0)));// 显示第一个Channel数据
+			showContentFragment(showChannelContentFragment(channels.get(showIndex)));// 显示第一个Channel数据
 		}
 
 	}
@@ -290,12 +319,13 @@ public abstract class MenuItemNavigatorWithContentFragment extends BaseFragment
 	 */
 	private void showContentFragment(Fragment fragment) {
 		if (fragment != null) {
-			FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+			FragmentTransaction ft = getActivity().getSupportFragmentManager()
+					.beginTransaction();
 			ft.replace(DETAIL_ID, fragment);// 替换视图
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 			ft.addToBackStack(null);
 			ft.commitAllowingStateLoss();
-			
+
 		}
 
 	}

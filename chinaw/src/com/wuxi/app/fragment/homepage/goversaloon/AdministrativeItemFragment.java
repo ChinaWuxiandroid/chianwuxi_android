@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -96,6 +97,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	private ImageButton govver_admintrative_ib_search;
 	private ProgressBar pb_loadmoore;
 	private boolean isFirstChange = true;
+	private int showIndex=0;//要显示的序号
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
@@ -275,6 +277,14 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	private void showTitleData() {
 
 		int index = 0;
+		
+		
+		Bundle bundle=getArguments();
+		if(bundle!=null&&bundle.containsKey(Constants.CheckPositionKey.LEVEL_THREE_KEY)){
+			showIndex=bundle.getInt(Constants.CheckPositionKey.LEVEL_THREE_KEY);
+			bundle.putInt(Constants.CheckPositionKey.LEVEL_THREE_KEY, 0);//回复现场
+			getActivity().getIntent().putExtras(bundle);//回复现场
+		}
 		for (MenuItem menuItem : menuItems) {
 
 			RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(
@@ -282,7 +292,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 					RadioGroup.LayoutParams.WRAP_CONTENT);
 			params.leftMargin = 5;
 			RadioButton radioButton = new RadioButton(context);
-			if (index == 0) {
+			if (index == showIndex) {
 
 				radioButton.setTextColor(Color.WHITE);
 
@@ -597,7 +607,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 
 			RadioButton r = (RadioButton) group.getChildAt(i);
 
-			if (isFirstChange && i == 0) {
+			if (isFirstChange && i == showIndex) {
 				r.setBackgroundColor(Color.TRANSPARENT);
 				r.setTextColor(Color.BLACK);
 			}

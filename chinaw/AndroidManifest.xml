@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wuxi.app"
+<<<<<<< HEAD
     android:versionCode="3"
+=======
+    android:versionCode="4"
+>>>>>>> b774d463e707cd297f1d67594b26bfc9eddf5fcc
     android:versionName="1.0.5" >
 
     <uses-sdk
@@ -123,10 +127,11 @@
         <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.HotReviewContentActivity" />
         <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity" />
         <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity" />
-         <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity" />
 
-         <!--  公共activity -->
-         <activity android:name="com.wuxi.app.activity.commactivity.ImageViewScaleActivity" />
+        <!-- 公共activity -->
+        <activity android:name="com.wuxi.app.activity.commactivity.ImageViewScaleActivity" />
+
         <uses-library android:name="android.test.runner" />
     </application>
 

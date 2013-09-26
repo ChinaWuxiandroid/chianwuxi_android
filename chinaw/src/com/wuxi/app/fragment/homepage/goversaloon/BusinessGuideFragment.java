@@ -7,6 +7,7 @@ import org.json.JSONException;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -36,6 +37,7 @@ import com.wuxi.app.adapter.KindTypeAdapter;
 import com.wuxi.app.engine.GoverSaoonItemService;
 import com.wuxi.app.engine.KindTypeService;
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.Constants;
 import com.wuxi.domain.GoverSaoonItem;
 import com.wuxi.domain.GoverSaoonItemWrapper;
 import com.wuxi.domain.Kindtype;
@@ -77,6 +79,7 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 	private int visibleItemCount;// 当前显示的总条数
 	private Kindtype currentKindtype;
 	private ProgressBar pb_loadmoore;
+	private int showIndex = 0;
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
@@ -108,7 +111,8 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 		gover_guide_pb = (ProgressBar) view.findViewById(R.id.gover_guide_pb);
 		gover_guid_lv_content = (ListView) view
 				.findViewById(R.id.gover_guid_lv_content);
-		gover_buness_guide_rg.check(R.id.rb_personal);
+
+		
 
 		gover_guid_lv_content.setOnItemClickListener(this);
 
@@ -116,8 +120,45 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 		gover_guid_lv_content.setOnScrollListener(this);
 
 		gover_buness_guide_rg.setOnCheckedChangeListener(this);
-		loadKindTypeData(types[1]);
 
+		showMainType();
+
+	}
+
+	private void showMainType() {
+		Bundle bundle = getArguments();
+		if (bundle != null
+				&& bundle
+						.containsKey(Constants.CheckPositionKey.LEVEL_THREE_KEY)) {
+			showIndex = bundle
+					.getInt(Constants.CheckPositionKey.LEVEL_THREE_KEY);
+			
+			bundle.putInt(Constants.CheckPositionKey.LEVEL_THREE_KEY, 0);//回复现场
+			getActivity().getIntent().putExtras(bundle);//回复现场
+		}
+		int typeIndex = 0;
+		switch (showIndex) {
+		case 0:
+			gover_buness_guide_rg.check(R.id.rb_personal);
+			typeIndex = 1;
+
+			break;
+		case 1:
+			gover_buness_guide_rg.check(R.id.rb_company);
+			typeIndex = 3;
+
+			break;
+		case 2:
+			gover_buness_guide_rg.check(R.id.rb_style_service);
+			typeIndex = 5;
+			break;
+		case 3:
+			gover_buness_guide_rg.check(R.id.rb_green);
+			break;
+
+		}
+
+		loadKindTypeData(types[typeIndex]);
 	}
 
 	private View getFootView() {
@@ -346,25 +387,6 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		// int itemsLastIndex = goverOnlineApproveAdapter.getCount() - 1; //
-		// 数据集最后一项的索引
-		// int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-		/*
-		 * if (scrollState == OnScrollListener.SCROLL_STATE_IDLE &&
-		 * visibleLastIndex == lastIndex) {
-		 * 
-		 * if (goverSaoonItemWrapper != null && goverSaoonItemWrapper.isNext())
-		 * {// 还有下一条记录
-		 * 
-		 * loadMoreButton.setText("loading....."); isSwitchDept = false;
-		 * loadItem(currentKindtype.getKindType(),
-		 * currentKindtype.getSubKindType(), visibleLastIndex + 1,
-		 * visibleLastIndex + 1 + PAGE_SIZE);
-		 * 
-		 * }
-		 * 
-		 * }
-		 */
 
 	}
 
@@ -383,32 +405,36 @@ public class BusinessGuideFragment extends GoverSaloonContentFragment implements
 			kindTypeAdapter.notifyDataSetChanged();
 
 		} else if (o instanceof GoverSaoonItem) {
-			
+
 			GoverSaoonItem goverSaoonItem = (GoverSaoonItem) parent
 					.getItemAtPosition(position);
-			
-			Intent intent=null;
+
+			Intent intent = null;
 			if (goverSaoonItem.getType().equals("XK")) {
-				intent=new Intent(getActivity(),GoverSaloonDetailXKActivity.class);
+				intent = new Intent(getActivity(),
+						GoverSaloonDetailXKActivity.class);
 			} else if (goverSaoonItem.getType().equals("QT")) {
-				
-				intent=new Intent(getActivity(),GoverSaloonDetailQTActivity.class);
+
+				intent = new Intent(getActivity(),
+						GoverSaloonDetailQTActivity.class);
 			} else if (goverSaoonItem.getType().equals("ZS")) {
-				
-				intent=new Intent(getActivity(),GoverSaloonDetailZSActivtiy.class);
+
+				intent = new Intent(getActivity(),
+						GoverSaloonDetailZSActivtiy.class);
 			} else if (goverSaoonItem.getType().equals("QZ")) {
-				
-				intent=new Intent(getActivity(),GoverSaloonDetailQZActivity.class);
+
+				intent = new Intent(getActivity(),
+						GoverSaloonDetailQZActivity.class);
 			} else if (goverSaoonItem.getType().equals("CF")) {
-				intent=new Intent(getActivity(),GoverSaloonDetailCFActivity.class);
+				intent = new Intent(getActivity(),
+						GoverSaloonDetailCFActivity.class);
 			}
-			
-			
-			if(intent!=null){
+
+			if (intent != null) {
 				intent.putExtra("goverSaoonItem", goverSaoonItem);
 				MainTabActivity.instance.addView(intent);
 			}
-			
+
 		}
 
 	}

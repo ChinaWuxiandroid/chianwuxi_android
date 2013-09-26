@@ -21,7 +21,7 @@ public class Constants {
 		/**
 		 * 域名地址
 		 */
-		public static final String DOMAIN_URL = "http://m.wuxi.gov.cn";
+		public static final String DOMAIN_URL = "http://3g.wuxi.gov.cn";
 
 		/**
 		 * 根地址
@@ -550,20 +550,19 @@ public class Constants {
 	 */
 	public static final class CheckPositionKey {
 
+		
+		
 		/**
 		 * 一级菜单只首页的6个大大模块的菜单 一级子菜单选中的key值 如：魅力锡城，头部一排菜单，政务大厅，左侧菜单都属于一级子菜单
 		 */
-		public static final String LEVEL_ONE_KEY = "LEVEL_ONE_KEY";
+		public static final String LEVEL_TWO__KEY = "LEVEL_TWO_KEY";
 
 		/**
 		 * 二级子菜单选中的key值 如：魅力锡城左侧的竖排菜单为二级子菜单
 		 */
-		public static final String LEVEL_TWO_KEY = "LEVEL_TWO_KEY";
-
-		/**
-		 * 三级子菜单选中的key值
-		 */
 		public static final String LEVEL_THREE_KEY = "LEVEL_THREE_KEY";
+
+	
 
 		/**
 		 * 政民互动我要写信功能

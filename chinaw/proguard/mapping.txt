@@ -7345,7 +7345,13 @@ com.polites.android.ZoomAnimation -> com.polites.android.p:
 com.polites.android.ZoomAnimationListener -> com.polites.android.q:
     void onZoom(float,float,float) -> a
     void onComplete() -> a
-com.wuxi.app.BaseFragment -> com.wuxi.app.a:
+com.wuxi.app.AppManager -> com.wuxi.app.a:
+    com.wuxi.app.AppManager instance -> a
+    android.content.Context context -> b
+    com.wuxi.app.AppManager getInstance(android.content.Context) -> a
+    java.lang.String getVersion() -> a
+    boolean isUpdate(com.wuxi.domain.UpdateInfo) -> a
+com.wuxi.app.BaseFragment -> com.wuxi.app.b:
 com.wuxi.app.MainTabActivity -> com.wuxi.app.MainTabActivity:
     android.widget.RadioGroup radioGroup -> d
     java.util.Stack stack -> a
@@ -7373,10 +7379,10 @@ com.wuxi.app.MainTabActivity -> com.wuxi.app.MainTabActivity:
     void onClick(android.view.View) -> onClick
     boolean dispatchKeyEvent(android.view.KeyEvent) -> dispatchKeyEvent
     void access$0(com.wuxi.app.MainTabActivity) -> a
-com.wuxi.app.MainTabActivity$1 -> com.wuxi.app.b:
+com.wuxi.app.MainTabActivity$1 -> com.wuxi.app.c:
     com.wuxi.app.MainTabActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.PopWindowManager -> com.wuxi.app.c:
+com.wuxi.app.PopWindowManager -> com.wuxi.app.d:
     com.wuxi.app.PopWindowManager instance -> a
     java.util.List popWindows -> b
     com.wuxi.app.PopWindowManager getInstance() -> a
@@ -7472,38 +7478,38 @@ com.wuxi.app.activity.MainIndexActivity -> com.wuxi.app.activity.MainIndexActivi
     com.wuxi.domain.UpdateInfo updateInfo -> s
     android.app.ProgressDialog pd -> t
     android.os.Handler handler -> u
-    android.widget.AdapterView$OnItemClickListener GridviewOnclick -> v
+    android.widget.AdapterView$OnItemClickListener GridviewOnclick2 -> v
     void onCreate(android.os.Bundle) -> onCreate
-    void showGridData() -> b
+    void showGridData() -> a
     android.widget.GridView bulidGridView(java.util.List) -> a
     void showNewsOrAnncountData(android.widget.ListView,java.util.List) -> a
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
-    void loadNews() -> c
-    void showNews() -> d
-    void loadAnnouncements() -> e
-    void showAnnouncements() -> f
+    void loadNews() -> b
+    void showNews() -> c
+    void loadAnnouncements() -> d
+    void showAnnouncements() -> e
     void onPageScrollStateChanged(int) -> onPageScrollStateChanged
     void onPageScrolled(int,float,int) -> onPageScrolled
     void onPageSelected(int) -> onPageSelected
     void onClick(android.view.View) -> onClick
-    java.lang.String getVersion() -> g
-    boolean isUpdate() -> a
     boolean dispatchKeyEvent(android.view.KeyEvent) -> dispatchKeyEvent
     android.widget.ProgressBar access$0(com.wuxi.app.activity.MainIndexActivity) -> a
     void access$1(com.wuxi.app.activity.MainIndexActivity) -> b
     void access$2(com.wuxi.app.activity.MainIndexActivity) -> c
     void access$3(com.wuxi.app.activity.MainIndexActivity) -> d
     void access$4(com.wuxi.app.activity.MainIndexActivity) -> e
-    android.app.ProgressDialog access$5(com.wuxi.app.activity.MainIndexActivity) -> f
-    void access$6(com.wuxi.app.activity.MainIndexActivity,java.io.File) -> a
-    android.os.Handler access$7(com.wuxi.app.activity.MainIndexActivity) -> g
-    void access$8(com.wuxi.app.activity.MainIndexActivity,java.util.List) -> a
-    java.util.List access$9(com.wuxi.app.activity.MainIndexActivity) -> h
-    void access$10(com.wuxi.app.activity.MainIndexActivity,java.util.List) -> b
-    java.util.List access$11(com.wuxi.app.activity.MainIndexActivity) -> i
-    void access$12(com.wuxi.app.activity.MainIndexActivity,java.util.List) -> c
-    java.util.List access$13(com.wuxi.app.activity.MainIndexActivity) -> j
-    com.wuxi.domain.UpdateInfo access$14(com.wuxi.app.activity.MainIndexActivity) -> k
+    void access$5(com.wuxi.app.activity.MainIndexActivity,java.lang.Class,int,android.os.Bundle) -> a
+    android.app.ProgressDialog access$6(com.wuxi.app.activity.MainIndexActivity) -> f
+    void access$7(com.wuxi.app.activity.MainIndexActivity,java.io.File) -> a
+    android.os.Handler access$8(com.wuxi.app.activity.MainIndexActivity) -> g
+    void access$9(com.wuxi.app.activity.MainIndexActivity,java.util.List) -> a
+    java.util.List access$10(com.wuxi.app.activity.MainIndexActivity) -> h
+    void access$11(com.wuxi.app.activity.MainIndexActivity,java.util.List) -> b
+    java.util.List access$12(com.wuxi.app.activity.MainIndexActivity) -> i
+    void access$13(com.wuxi.app.activity.MainIndexActivity,java.util.List) -> c
+    java.util.List access$14(com.wuxi.app.activity.MainIndexActivity) -> j
+    void access$15(com.wuxi.app.activity.MainIndexActivity,com.wuxi.domain.UpdateInfo) -> a
+    com.wuxi.domain.UpdateInfo access$16(com.wuxi.app.activity.MainIndexActivity) -> k
 com.wuxi.app.activity.MainIndexActivity$1 -> com.wuxi.app.activity.g:
     com.wuxi.app.activity.MainIndexActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -8134,9 +8140,12 @@ com.wuxi.app.activity.homepage.more.MenuItemSetActivity -> com.wuxi.app.activity
     com.wuxi.app.db.FavoriteItemDao favoriteItemDao -> d
     android.app.ProgressDialog pd -> e
     com.wuxi.domain.MenuItem checkMenuItem -> f
-    android.os.Handler handler -> m
+    java.util.List homeMenuItems -> m
+    int currentMenuLevel -> n
+    android.os.Handler handler -> o
     void findMainContentViews(android.view.View) -> a
     void saveFaveItem() -> c
+    void loadMenuItems(java.lang.String) -> a
     void showFavaItems() -> d
     int getLayoutId() -> a
     java.lang.String getTitleText() -> b
@@ -8144,22 +8153,32 @@ com.wuxi.app.activity.homepage.more.MenuItemSetActivity -> com.wuxi.app.activity
     android.app.ProgressDialog access$1(com.wuxi.app.activity.homepage.more.MenuItemSetActivity) -> b
     java.util.List access$2(com.wuxi.app.activity.homepage.more.MenuItemSetActivity) -> c
     void access$3(com.wuxi.app.activity.homepage.more.MenuItemSetActivity,com.wuxi.domain.MenuItem) -> a
-    android.os.Handler access$4(com.wuxi.app.activity.homepage.more.MenuItemSetActivity) -> d
-    void access$5(com.wuxi.app.activity.homepage.more.MenuItemSetActivity,java.util.List) -> a
+    com.wuxi.domain.MenuItem access$4(com.wuxi.app.activity.homepage.more.MenuItemSetActivity) -> d
+    int access$5$b25e95d(com.wuxi.domain.MenuItem) -> a
+    void access$6(com.wuxi.app.activity.homepage.more.MenuItemSetActivity,int) -> a
+    int access$7(com.wuxi.app.activity.homepage.more.MenuItemSetActivity) -> e
+    com.wuxi.app.db.FavoriteItemDao access$8(com.wuxi.app.activity.homepage.more.MenuItemSetActivity) -> f
+    java.util.List access$9(com.wuxi.app.activity.homepage.more.MenuItemSetActivity) -> g
+    android.os.Handler access$10(com.wuxi.app.activity.homepage.more.MenuItemSetActivity) -> h
+    void access$11(com.wuxi.app.activity.homepage.more.MenuItemSetActivity,java.util.List) -> a
 com.wuxi.app.activity.homepage.more.MenuItemSetActivity$1 -> com.wuxi.app.activity.homepage.more.a:
     com.wuxi.app.activity.homepage.more.MenuItemSetActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 com.wuxi.app.activity.homepage.more.MenuItemSetActivity$2 -> com.wuxi.app.activity.homepage.more.b:
     com.wuxi.app.activity.homepage.more.MenuItemSetActivity this$0 -> a
     void run() -> run
-com.wuxi.app.activity.homepage.more.MenuItemSetActivity$MenuSetAdapter -> com.wuxi.app.activity.homepage.more.c:
+com.wuxi.app.activity.homepage.more.MenuItemSetActivity$3 -> com.wuxi.app.activity.homepage.more.c:
+    com.wuxi.app.activity.homepage.more.MenuItemSetActivity this$0 -> a
+    java.lang.String val$parentId -> b
+    void run() -> run
+com.wuxi.app.activity.homepage.more.MenuItemSetActivity$MenuSetAdapter -> com.wuxi.app.activity.homepage.more.d:
     com.wuxi.app.activity.homepage.more.MenuItemSetActivity this$0 -> a
     int getCount() -> getCount
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-    void OnChanged$4cfd3ce3(java.lang.Object) -> a
-com.wuxi.app.activity.homepage.more.MenuItemSetActivity$ViewHolder -> com.wuxi.app.activity.homepage.more.d:
+    void OnChanged(java.lang.Object,boolean) -> a
+com.wuxi.app.activity.homepage.more.MenuItemSetActivity$ViewHolder -> com.wuxi.app.activity.homepage.more.e:
     android.widget.TextView title_text -> a
     com.wuxi.app.view.SlipButton slipButton -> b
 com.wuxi.app.activity.homepage.more.SiteMapActivity -> com.wuxi.app.activity.homepage.more.SiteMapActivity:
@@ -8168,22 +8187,22 @@ com.wuxi.app.activity.homepage.more.SiteMapActivity -> com.wuxi.app.activity.hom
     int getLayoutId() -> a
     java.lang.String getTitleText() -> b
     void switchActivity(com.wuxi.domain.MenuItem,int,int) -> a
-com.wuxi.app.activity.homepage.more.SiteMapActivity$SiteMapAdapter -> com.wuxi.app.activity.homepage.more.e:
+com.wuxi.app.activity.homepage.more.SiteMapActivity$SiteMapAdapter -> com.wuxi.app.activity.homepage.more.f:
     java.util.List items -> b
     com.wuxi.app.activity.homepage.more.SiteMapActivity this$0 -> a
     int getCount() -> getCount
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.wuxi.app.activity.homepage.more.SiteMapActivity$SiteMapAdapter$ViewHolder -> com.wuxi.app.activity.homepage.more.f:
+com.wuxi.app.activity.homepage.more.SiteMapActivity$SiteMapAdapter$ViewHolder -> com.wuxi.app.activity.homepage.more.g:
     android.widget.TextView title_text -> a
     com.wuxi.app.activity.homepage.more.SiteMapActivity$SiteMapAdapter this$1 -> b
-com.wuxi.app.activity.homepage.more.SiteMapActivity$SiteMapClickLister -> com.wuxi.app.activity.homepage.more.g:
+com.wuxi.app.activity.homepage.more.SiteMapActivity$SiteMapClickLister -> com.wuxi.app.activity.homepage.more.h:
     com.wuxi.domain.MenuItem menuItem -> b
     int parentPosition -> c
     com.wuxi.app.activity.homepage.more.SiteMapActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.wuxi.app.activity.homepage.more.SiteMapActivity$SiteMapExpandableAdapter -> com.wuxi.app.activity.homepage.more.h:
+com.wuxi.app.activity.homepage.more.SiteMapActivity$SiteMapExpandableAdapter -> com.wuxi.app.activity.homepage.more.i:
     java.util.List items -> a
     com.wuxi.app.activity.homepage.more.SiteMapActivity this$0 -> b
     java.lang.Object getChild(int,int) -> getChild
@@ -8197,12 +8216,12 @@ com.wuxi.app.activity.homepage.more.SiteMapActivity$SiteMapExpandableAdapter -> 
     boolean hasStableIds() -> hasStableIds
     boolean isChildSelectable(int,int) -> isChildSelectable
 com.wuxi.app.activity.homepage.more.SystemSetActivity -> com.wuxi.app.activity.homepage.more.SystemSetActivity:
-    android.widget.RelativeLayout sys_menu_set -> a
-    android.widget.RelativeLayout sys_clear_cache -> b
-    android.widget.RelativeLayout sys_software_update -> c
-    android.widget.RelativeLayout sys_about_us -> d
-    android.widget.RelativeLayout sys_site_map -> e
-    android.widget.RelativeLayout sys_log_out -> f
+    android.widget.TableRow sys_menu_set -> a
+    android.widget.TableRow sys_clear_cache -> b
+    android.widget.TableRow sys_software_update -> c
+    android.widget.TableRow sys_about_us -> d
+    android.widget.TableRow sys_site_map -> e
+    android.widget.TableRow sys_log_out -> f
     android.widget.TextView tv_verison -> m
     android.widget.TextView tv_cache -> n
     android.widget.TextView tv_user -> o
@@ -8213,38 +8232,37 @@ com.wuxi.app.activity.homepage.more.SystemSetActivity -> com.wuxi.app.activity.h
     void findMainContentViews(android.view.View) -> a
     int getLayoutId() -> a
     void onClick(android.view.View) -> onClick
-    void initLoginUser() -> h
-    java.lang.String getCacheSize() -> i
+    void initLoginUser() -> d
+    java.lang.String getCacheSize() -> h
     java.lang.String getTitleText() -> b
-    java.lang.String getVersion() -> j
-    boolean isUpdate() -> c
     void access$0(com.wuxi.app.activity.homepage.more.SystemSetActivity) -> a
     void access$1$69c596f(com.wuxi.app.activity.homepage.more.SystemSetActivity) -> b
     android.app.ProgressDialog access$2(com.wuxi.app.activity.homepage.more.SystemSetActivity) -> c
     void access$3(com.wuxi.app.activity.homepage.more.SystemSetActivity,java.io.File) -> a
     android.os.Handler access$4(com.wuxi.app.activity.homepage.more.SystemSetActivity) -> d
     android.widget.TextView access$5(com.wuxi.app.activity.homepage.more.SystemSetActivity) -> e
-    java.lang.String access$6$9bfce5d() -> d
-    com.wuxi.domain.UpdateInfo access$7(com.wuxi.app.activity.homepage.more.SystemSetActivity) -> f
-com.wuxi.app.activity.homepage.more.SystemSetActivity$1 -> com.wuxi.app.activity.homepage.more.i:
+    java.lang.String access$6$9bfce5d() -> c
+    void access$7(com.wuxi.app.activity.homepage.more.SystemSetActivity,com.wuxi.domain.UpdateInfo) -> a
+    com.wuxi.domain.UpdateInfo access$8(com.wuxi.app.activity.homepage.more.SystemSetActivity) -> f
+com.wuxi.app.activity.homepage.more.SystemSetActivity$1 -> com.wuxi.app.activity.homepage.more.j:
     com.wuxi.app.activity.homepage.more.SystemSetActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.activity.homepage.more.SystemSetActivity$2 -> com.wuxi.app.activity.homepage.more.j:
+com.wuxi.app.activity.homepage.more.SystemSetActivity$2 -> com.wuxi.app.activity.homepage.more.k:
     com.wuxi.app.activity.homepage.more.SystemSetActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.wuxi.app.activity.homepage.more.SystemSetActivity$3 -> com.wuxi.app.activity.homepage.more.k:
+com.wuxi.app.activity.homepage.more.SystemSetActivity$3 -> com.wuxi.app.activity.homepage.more.l:
     com.wuxi.app.activity.homepage.more.SystemSetActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.wuxi.app.activity.homepage.more.SystemSetActivity$4 -> com.wuxi.app.activity.homepage.more.l:
+com.wuxi.app.activity.homepage.more.SystemSetActivity$4 -> com.wuxi.app.activity.homepage.more.m:
     com.wuxi.app.activity.homepage.more.SystemSetActivity this$0 -> a
     void run() -> run
-com.wuxi.app.activity.homepage.more.SystemSetActivity$5 -> com.wuxi.app.activity.homepage.more.m:
+com.wuxi.app.activity.homepage.more.SystemSetActivity$5 -> com.wuxi.app.activity.homepage.more.n:
     com.wuxi.app.activity.homepage.more.SystemSetActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.wuxi.app.activity.homepage.more.SystemSetActivity$6 -> com.wuxi.app.activity.homepage.more.n:
+com.wuxi.app.activity.homepage.more.SystemSetActivity$6 -> com.wuxi.app.activity.homepage.more.o:
     com.wuxi.app.activity.homepage.more.SystemSetActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.wuxi.app.activity.homepage.more.SystemSetActivity$DownLoadThreadTask -> com.wuxi.app.activity.homepage.more.o:
+com.wuxi.app.activity.homepage.more.SystemSetActivity$DownLoadThreadTask -> com.wuxi.app.activity.homepage.more.p:
     java.lang.String path -> b
     java.lang.String filePath -> c
     com.wuxi.app.activity.homepage.more.SystemSetActivity this$0 -> a
@@ -8394,11 +8412,14 @@ com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity 
     void access$1(com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity,android.widget.PopupWindow) -> a
     android.widget.Button access$2(com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity) -> a
     android.widget.PopupWindow access$3(com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity) -> b
+    com.wuxi.domain.PoliticsWrapper$Politics access$4(com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity) -> c
 com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity$1 -> com.wuxi.app.activity.homepage.mygoverinteractpeople.j:
     com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity$2 -> com.wuxi.app.activity.homepage.mygoverinteractpeople.k:
     com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity this$0 -> a
+    android.widget.EditText val$submitContent -> b
+    android.widget.PopupWindow val$popupWindow -> c
     void onClick(android.view.View) -> onClick
 com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity -> com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity:
     java.lang.String id -> b
@@ -8453,11 +8474,14 @@ com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity -
     void access$1(com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity,android.widget.PopupWindow) -> a
     android.widget.Button access$2(com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity) -> a
     android.widget.PopupWindow access$3(com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity) -> b
+    com.wuxi.domain.PoliticsWrapper$Politics access$4(com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity) -> c
 com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity$1 -> com.wuxi.app.activity.homepage.mygoverinteractpeople.o:
     com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity$2 -> com.wuxi.app.activity.homepage.mygoverinteractpeople.p:
     com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity this$0 -> a
+    android.widget.EditText val$submitContent -> b
+    android.widget.PopupWindow val$popupWindow -> c
     void onClick(android.view.View) -> onClick
 com.wuxi.app.activity.homepage.publicservice.PublicServiceActivity -> com.wuxi.app.activity.homepage.publicservice.PublicServiceActivity:
     void initializSubFragmentsLayout(java.util.List) -> a
@@ -8878,7 +8902,21 @@ com.wuxi.app.adapter.LeftMenuAdapter -> com.wuxi.app.a.an:
 com.wuxi.app.adapter.LeftMenuAdapter$ViewHolder -> com.wuxi.app.a.ao:
     android.widget.TextView title_text -> a
     android.widget.ImageView iv_icon -> b
-com.wuxi.app.adapter.LiveHomeLeaveMessageListAdapter -> com.wuxi.app.a.ap:
+com.wuxi.app.adapter.LegidlstionReplyListAdapter -> com.wuxi.app.a.ap:
+    android.content.Context context -> a
+    java.util.List noticePostReplies -> b
+    void setNoticePostReplies(java.util.List) -> a
+    void addItem(com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply) -> a
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+com.wuxi.app.adapter.LegidlstionReplyListAdapter$ViewHolder -> com.wuxi.app.a.aq:
+    android.widget.TextView replay_name_text -> a
+    android.widget.TextView replay_time_text -> b
+    android.widget.TextView replay_content_text -> c
+    com.wuxi.app.adapter.LegidlstionReplyListAdapter this$0 -> d
+com.wuxi.app.adapter.LiveHomeLeaveMessageListAdapter -> com.wuxi.app.a.ar:
     android.content.Context context -> a
     java.util.List leaveMessages -> b
     void addItem(com.wuxi.domain.LeaveMessageWrapper$LeaveMessage) -> a
@@ -8887,13 +8925,13 @@ com.wuxi.app.adapter.LiveHomeLeaveMessageListAdapter -> com.wuxi.app.a.ap:
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.wuxi.app.adapter.LiveHomeLeaveMessageListAdapter$ViewHolder -> com.wuxi.app.a.aq:
+com.wuxi.app.adapter.LiveHomeLeaveMessageListAdapter$ViewHolder -> com.wuxi.app.a.as:
     android.widget.TextView leave_content_text -> a
     android.widget.TextView leave_ask_time_text -> b
     android.widget.TextView leave_answer_content_text -> c
     android.widget.TextView leave_answer_time_text -> d
     com.wuxi.app.adapter.LiveHomeLeaveMessageListAdapter this$0 -> e
-com.wuxi.app.adapter.LiveHomeMemoirListAdapter -> com.wuxi.app.a.ar:
+com.wuxi.app.adapter.LiveHomeMemoirListAdapter -> com.wuxi.app.a.at:
     android.content.Context context -> a
     java.util.List memoirs -> b
     void addItem(com.wuxi.domain.MemoirWrapper$Memoir) -> a
@@ -8902,12 +8940,12 @@ com.wuxi.app.adapter.LiveHomeMemoirListAdapter -> com.wuxi.app.a.ar:
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.wuxi.app.adapter.LiveHomeMemoirListAdapter$ViewHolder -> com.wuxi.app.a.as:
+com.wuxi.app.adapter.LiveHomeMemoirListAdapter$ViewHolder -> com.wuxi.app.a.au:
     android.widget.TextView pepole_text -> a
     android.widget.TextView content_text -> b
     android.widget.TextView time_text -> c
     com.wuxi.app.adapter.LiveHomeMemoirListAdapter this$0 -> d
-com.wuxi.app.adapter.MailTypeAdapter -> com.wuxi.app.a.at:
+com.wuxi.app.adapter.MailTypeAdapter -> com.wuxi.app.a.av:
     java.util.List mailTypes -> a
     android.content.Context context -> b
     int getCount() -> getCount
@@ -8916,10 +8954,10 @@ com.wuxi.app.adapter.MailTypeAdapter -> com.wuxi.app.a.at:
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-com.wuxi.app.adapter.MailTypeAdapter$ViewHolder -> com.wuxi.app.a.au:
+com.wuxi.app.adapter.MailTypeAdapter$ViewHolder -> com.wuxi.app.a.aw:
     android.widget.TextView tv_dept -> a
     com.wuxi.app.adapter.MailTypeAdapter this$0 -> b
-com.wuxi.app.adapter.MayorLettersListAdapter -> com.wuxi.app.a.av:
+com.wuxi.app.adapter.MayorLettersListAdapter -> com.wuxi.app.a.ax:
     android.content.Context context -> a
     java.util.List letters -> b
     void setLetters(java.util.List) -> a
@@ -8928,7 +8966,7 @@ com.wuxi.app.adapter.MayorLettersListAdapter -> com.wuxi.app.a.av:
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.wuxi.app.adapter.MayorLettersListAdapter$ViewHolder -> com.wuxi.app.a.aw:
+com.wuxi.app.adapter.MayorLettersListAdapter$ViewHolder -> com.wuxi.app.a.ay:
     android.widget.TextView title_text -> a
     android.widget.TextView code_text -> b
     android.widget.TextView type_text -> c
@@ -8936,7 +8974,7 @@ com.wuxi.app.adapter.MayorLettersListAdapter$ViewHolder -> com.wuxi.app.a.aw:
     android.widget.TextView readCount_text -> e
     android.widget.TextView appraise_text -> f
     com.wuxi.app.adapter.MayorLettersListAdapter this$0 -> g
-com.wuxi.app.adapter.MyOnlineApplyAdapter -> com.wuxi.app.a.ax:
+com.wuxi.app.adapter.MyOnlineApplyAdapter -> com.wuxi.app.a.az:
     java.util.List myApplies -> a
     android.content.Context context -> b
     int getCount() -> getCount
@@ -8944,10 +8982,10 @@ com.wuxi.app.adapter.MyOnlineApplyAdapter -> com.wuxi.app.a.ax:
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     void addItem(com.wuxi.domain.MyApply) -> a
-com.wuxi.app.adapter.MyOnlineApplyAdapter$ViewHolder -> com.wuxi.app.a.ay:
+com.wuxi.app.adapter.MyOnlineApplyAdapter$ViewHolder -> com.wuxi.app.a.ba:
     android.widget.TextView tv_title -> a
     android.widget.TextView tv_state -> b
-com.wuxi.app.adapter.MyOnlineConsultAdapter -> com.wuxi.app.a.az:
+com.wuxi.app.adapter.MyOnlineConsultAdapter -> com.wuxi.app.a.bb:
     java.util.List myconsults -> a
     android.content.Context context -> b
     com.wuxi.domain.Myconsult selectMyconsult -> c
@@ -8957,11 +8995,35 @@ com.wuxi.app.adapter.MyOnlineConsultAdapter -> com.wuxi.app.a.az:
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     void onClick(android.view.View) -> onClick
     void addItem(com.wuxi.domain.Myconsult) -> a
-com.wuxi.app.adapter.MyOnlineConsultAdapter$ViewHolder -> com.wuxi.app.a.ba:
+com.wuxi.app.adapter.MyOnlineConsultAdapter$ViewHolder -> com.wuxi.app.a.bc:
     android.widget.TextView tv_title -> a
     android.widget.ImageView iv_view -> b
     android.widget.ImageView iv_goask -> c
-com.wuxi.app.adapter.PublicForumListAdapter -> com.wuxi.app.a.bb:
+com.wuxi.app.adapter.OrdinaryReplayListAdapter -> com.wuxi.app.a.bd:
+    android.content.Context context -> a
+    java.util.List postRaplies -> b
+    java.util.List hotPostReplies -> c
+    java.util.List noticePostReplies -> d
+    java.util.List opinionPostReplies -> e
+    com.wuxi.domain.ForumWrapper$Forum forum -> f
+    void addOrdinaryPostRaply(com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper$OrdinaryPostRaply) -> a
+    void addHotPostReply(com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper$HotPostReply) -> a
+    void addNoticePostReply(com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply) -> a
+    void addOpinionPostReply(com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper$OpinionPostReply) -> a
+    void setPostRaplies(java.util.List) -> a
+    void setHotPostReplies(java.util.List) -> b
+    void setNoticePostReplies(java.util.List) -> c
+    void setOpinionPostReplies(java.util.List) -> d
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+com.wuxi.app.adapter.OrdinaryReplayListAdapter$ViewHolder -> com.wuxi.app.a.be:
+    android.widget.TextView replay_name_text -> a
+    android.widget.TextView replay_time_text -> b
+    android.widget.TextView replay_content_text -> c
+    com.wuxi.app.adapter.OrdinaryReplayListAdapter this$0 -> d
+com.wuxi.app.adapter.PublicForumListAdapter -> com.wuxi.app.a.bf:
     android.content.Context context -> a
     java.util.List forums -> b
     void addItem(com.wuxi.domain.ForumWrapper$Forum) -> a
@@ -8970,23 +9032,23 @@ com.wuxi.app.adapter.PublicForumListAdapter -> com.wuxi.app.a.bb:
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.wuxi.app.adapter.PublicForumListAdapter$ViewHolder -> com.wuxi.app.a.bc:
+com.wuxi.app.adapter.PublicForumListAdapter$ViewHolder -> com.wuxi.app.a.bg:
     android.widget.TextView title_text -> a
     android.widget.TextView beginTime_text -> b
     android.widget.TextView readCount_text -> c
     android.widget.TextView resultCount_text -> d
     android.widget.TextView sentUser_text -> e
     com.wuxi.app.adapter.PublicForumListAdapter this$0 -> f
-com.wuxi.app.adapter.PublicSericeChannelAdapter -> com.wuxi.app.a.bd:
+com.wuxi.app.adapter.PublicSericeChannelAdapter -> com.wuxi.app.a.bh:
     java.util.List channles -> a
     android.content.Context context -> b
     int getCount() -> getCount
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.wuxi.app.adapter.PublicSericeChannelAdapter$ViewHolder -> com.wuxi.app.a.be:
+com.wuxi.app.adapter.PublicSericeChannelAdapter$ViewHolder -> com.wuxi.app.a.bi:
     android.widget.TextView tv_channeName -> a
-com.wuxi.app.adapter.QueryMailContentTypeAdapter -> com.wuxi.app.a.bf:
+com.wuxi.app.adapter.QueryMailContentTypeAdapter -> com.wuxi.app.a.bj:
     java.util.List contentTypes -> a
     android.content.Context context -> b
     int getCount() -> getCount
@@ -8995,10 +9057,10 @@ com.wuxi.app.adapter.QueryMailContentTypeAdapter -> com.wuxi.app.a.bf:
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-com.wuxi.app.adapter.QueryMailContentTypeAdapter$ViewHolder -> com.wuxi.app.a.bg:
+com.wuxi.app.adapter.QueryMailContentTypeAdapter$ViewHolder -> com.wuxi.app.a.bk:
     android.widget.TextView tv_dept -> a
     com.wuxi.app.adapter.QueryMailContentTypeAdapter this$0 -> b
-com.wuxi.app.adapter.SearchFragmentAdapter -> com.wuxi.app.a.bh:
+com.wuxi.app.adapter.SearchFragmentAdapter -> com.wuxi.app.a.bl:
     android.content.Context context -> a
     java.util.List resultList -> b
     android.view.LayoutInflater inflater -> c
@@ -9009,12 +9071,12 @@ com.wuxi.app.adapter.SearchFragmentAdapter -> com.wuxi.app.a.bh:
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     java.lang.String standardHtmlStr(java.lang.String) -> a
-com.wuxi.app.adapter.SearchFragmentAdapter$ViewHolder -> com.wuxi.app.a.bi:
+com.wuxi.app.adapter.SearchFragmentAdapter$ViewHolder -> com.wuxi.app.a.bm:
     android.widget.TextView title_text -> a
     android.webkit.WebView webview -> b
     android.widget.TextView link_text -> c
     com.wuxi.app.adapter.SearchFragmentAdapter this$0 -> d
-com.wuxi.app.adapter.SuggestPeopleListAdapter -> com.wuxi.app.a.bj:
+com.wuxi.app.adapter.SuggestPeopleListAdapter -> com.wuxi.app.a.bn:
     android.content.Context context -> a
     java.util.List politics -> b
     void addItem(com.wuxi.domain.PoliticsWrapper$Politics) -> a
@@ -9023,13 +9085,13 @@ com.wuxi.app.adapter.SuggestPeopleListAdapter -> com.wuxi.app.a.bj:
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.wuxi.app.adapter.SuggestPeopleListAdapter$ViewHolder -> com.wuxi.app.a.bk:
+com.wuxi.app.adapter.SuggestPeopleListAdapter$ViewHolder -> com.wuxi.app.a.bo:
     android.widget.TextView title_text -> a
     android.widget.TextView beginTime_text -> b
     android.widget.TextView endTime_text -> c
     android.widget.TextView depName_text -> d
     com.wuxi.app.adapter.SuggestPeopleListAdapter this$0 -> e
-com.wuxi.app.adapter.TitleChannelAdapter -> com.wuxi.app.a.bl:
+com.wuxi.app.adapter.TitleChannelAdapter -> com.wuxi.app.a.bp:
     java.util.List items -> b
     int screenIndex -> c
     int showIndex -> d
@@ -9038,10 +9100,10 @@ com.wuxi.app.adapter.TitleChannelAdapter -> com.wuxi.app.a.bl:
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.wuxi.app.adapter.TitleChannelAdapter$ViewHolder -> com.wuxi.app.a.bm:
+com.wuxi.app.adapter.TitleChannelAdapter$ViewHolder -> com.wuxi.app.a.bq:
     android.widget.TextView title_text -> a
     com.wuxi.app.adapter.TitleChannelAdapter this$0 -> b
-com.wuxi.app.adapter.VedioReviewListAdapter -> com.wuxi.app.a.bn:
+com.wuxi.app.adapter.VedioReviewListAdapter -> com.wuxi.app.a.br:
     android.content.Context context -> a
     java.util.List reviews -> b
     void addItem(com.wuxi.domain.VedioReviewWrapper$VedioReview) -> a
@@ -9050,18 +9112,23 @@ com.wuxi.app.adapter.VedioReviewListAdapter -> com.wuxi.app.a.bn:
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.wuxi.app.adapter.VedioReviewListAdapter$Holder -> com.wuxi.app.a.bo:
+com.wuxi.app.adapter.VedioReviewListAdapter$Holder -> com.wuxi.app.a.bs:
     android.widget.TextView review_title_text -> a
     android.widget.TextView review_time_text -> b
     android.widget.TextView review_guest_text -> c
     com.wuxi.app.adapter.VedioReviewListAdapter this$0 -> d
-com.wuxi.app.db.DataBaseHelper -> com.wuxi.app.b.a:
+com.wuxi.app.db.AppUseCountDao -> com.wuxi.app.b.a:
+    com.wuxi.app.db.DataBaseHelper dbHelper -> a
+    void updateUseCount() -> a
+com.wuxi.app.db.DataBaseHelper -> com.wuxi.app.b.b:
     void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
     void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
-com.wuxi.app.db.FavoriteItemDao -> com.wuxi.app.b.b:
+com.wuxi.app.db.FavoriteItemDao -> com.wuxi.app.b.c:
     com.wuxi.app.db.DataBaseHelper dbHelper -> a
     boolean findFavoriteItem(java.lang.String) -> a
     void addFavoriteItem(com.wuxi.domain.MenuItem) -> a
+    void delFavoriteItem(java.lang.String) -> b
+    java.util.List getFavoriteItems(java.util.List) -> a
 com.wuxi.app.dialog.LoginDialog -> com.wuxi.app.c.a:
     android.content.Context context -> a
     boolean checkLogin() -> a
@@ -9158,114 +9225,119 @@ com.wuxi.app.engine.KindTypeService -> com.wuxi.app.d.ad:
 com.wuxi.app.engine.LeaveMessageService -> com.wuxi.app.d.ae:
     com.wuxi.domain.LeaveMessageWrapper getLeaveMessageWrapper(java.lang.String,int,int) -> a
     java.util.List getLeaveMessages(org.json.JSONArray) -> a
-com.wuxi.app.engine.LegislationContentService -> com.wuxi.app.d.af:
+com.wuxi.app.engine.LegislationCommentService -> com.wuxi.app.d.af:
+    boolean submitData(java.lang.String,java.lang.String,java.lang.String) -> a
+com.wuxi.app.engine.LegislationContentService -> com.wuxi.app.d.ag:
     com.wuxi.domain.NoticePostWrapper getNoticePostWrapper(java.lang.String) -> a
     java.util.List getNoticePostReplies(org.json.JSONArray) -> a
-com.wuxi.app.engine.LetterQueryService -> com.wuxi.app.d.ag:
+com.wuxi.app.engine.LegislationReplyService -> com.wuxi.app.d.ah:
+    com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper getNoticePostReplyWrapper(java.lang.String,int,int) -> a
+    java.util.List getNoticePostReplies(org.json.JSONArray) -> a
+com.wuxi.app.engine.LetterQueryService -> com.wuxi.app.d.ai:
     java.util.List getContentTypes() -> a
     java.util.List getLetterTypes() -> b
-com.wuxi.app.engine.LetterService -> com.wuxi.app.d.ah:
+com.wuxi.app.engine.LetterService -> com.wuxi.app.d.aj:
     com.wuxi.domain.LetterWrapper getLetterLitstWrapper(java.lang.String,int,int) -> a
     com.wuxi.domain.LetterWrapper getMyLettersList(java.lang.String,java.lang.String,int,int) -> a
     com.wuxi.domain.LetterWrapper getLettersWrapper(java.lang.String) -> a
     java.util.List parseData(org.json.JSONArray) -> a
     boolean submitMyLetter(com.wuxi.domain.MyLetter) -> a
-com.wuxi.app.engine.MailCommentService -> com.wuxi.app.d.ai:
+com.wuxi.app.engine.MailCommentService -> com.wuxi.app.d.ak:
     boolean submitMailComment(java.lang.String,int) -> a
-com.wuxi.app.engine.MailTypeService -> com.wuxi.app.d.aj:
+com.wuxi.app.engine.MailTypeService -> com.wuxi.app.d.al:
     com.wuxi.domain.MailTypeWrapper getMailTypeWrapper() -> a
     java.util.List getMailTypes(org.json.JSONArray) -> a
-com.wuxi.app.engine.MemoirService -> com.wuxi.app.d.ak:
+com.wuxi.app.engine.MemoirService -> com.wuxi.app.d.am:
     com.wuxi.domain.MemoirWrapper getMemoirWrapper(java.lang.String,int,int) -> a
     java.util.List parseData$f3749c8(org.json.JSONArray) -> a
-com.wuxi.app.engine.MenuService -> com.wuxi.app.d.al:
-    java.util.List getHomeMenuItems(java.lang.String) -> a
+com.wuxi.app.engine.MenuService -> com.wuxi.app.d.an:
+    java.util.List getBeateHomeMenuItems(java.lang.String) -> a
     java.util.List getSubMenuItems(java.lang.String) -> b
-com.wuxi.app.engine.MenuService$ChannelTask -> com.wuxi.app.d.am:
+com.wuxi.app.engine.MenuService$ChannelTask -> com.wuxi.app.d.ao:
     java.lang.String channelId -> b
     com.wuxi.app.engine.MenuService this$0 -> a
     void getsubChannel() -> a
     void run() -> run
-com.wuxi.app.engine.MenuService$IconTask -> com.wuxi.app.d.an:
+com.wuxi.app.engine.MenuService$IconTask -> com.wuxi.app.d.ap:
     java.lang.String iconUrl -> b
     com.wuxi.domain.MenuItem menuItem -> c
     java.io.File fileIcon -> d
     com.wuxi.app.engine.MenuService this$0 -> a
     void run() -> run
-com.wuxi.app.engine.MenuService$SubMenuItemsTask -> com.wuxi.app.d.ao:
+com.wuxi.app.engine.MenuService$SubMenuItemsTask -> com.wuxi.app.d.aq:
     com.wuxi.domain.MenuItem menuItem -> b
     com.wuxi.app.engine.MenuService this$0 -> a
     void getSubMenuItem() -> a
     void run() -> run
-com.wuxi.app.engine.MyApplyPageService -> com.wuxi.app.d.ap:
+com.wuxi.app.engine.MyApplyPageService -> com.wuxi.app.d.ar:
     com.wuxi.domain.MyApplyPageWrapper getMyApplyPages(java.lang.String,int,int) -> a
     java.util.List parseData(org.json.JSONArray) -> a
-com.wuxi.app.engine.MyApplyService -> com.wuxi.app.d.aq:
+com.wuxi.app.engine.MyApplyService -> com.wuxi.app.d.as:
     com.wuxi.domain.MyApplyWrapper getPageMyApplyes(java.lang.String,int,int) -> a
-com.wuxi.app.engine.MyconsultService -> com.wuxi.app.d.ar:
+com.wuxi.app.engine.MyconsultService -> com.wuxi.app.d.at:
     com.wuxi.domain.MyconsultWrapper getPageMyconsults(java.lang.String,int,int) -> a
-com.wuxi.app.engine.NoticePostService -> com.wuxi.app.d.as:
+com.wuxi.app.engine.NoticePostService -> com.wuxi.app.d.au:
     com.wuxi.domain.NoticePostWrapper getNoticePostWrapper(java.lang.String,java.lang.String,int,int) -> a
     java.util.List getNoticePostReplies(org.json.JSONArray) -> a
-com.wuxi.app.engine.OpenTelService -> com.wuxi.app.d.at:
+com.wuxi.app.engine.OpenTelService -> com.wuxi.app.d.av:
     com.wuxi.domain.OpenTelWrapper getOpenTelWrapper(java.lang.String) -> a
     java.util.List parseData$f3749c8(org.json.JSONArray) -> a
-com.wuxi.app.engine.OpinionPostService -> com.wuxi.app.d.au:
+com.wuxi.app.engine.OpinionPostService -> com.wuxi.app.d.aw:
     com.wuxi.domain.OpinionPostWrapper getOpinionPostWrapper(java.lang.String,java.lang.String,int,int) -> a
     java.util.List getOpinionPostReplies(org.json.JSONArray) -> a
-com.wuxi.app.engine.OrdinaryPostService -> com.wuxi.app.d.av:
+com.wuxi.app.engine.OrdinaryPostService -> com.wuxi.app.d.ax:
     com.wuxi.domain.OrdinaryPostWrapper getOrdinaryPostWrapper(java.lang.String,java.lang.String,int,int) -> a
     java.util.List getOrdinaryPostRaplies(org.json.JSONArray) -> a
-com.wuxi.app.engine.PartLeaderMailListService -> com.wuxi.app.d.aw:
+com.wuxi.app.engine.PartLeaderMailListService -> com.wuxi.app.d.ay:
     com.wuxi.domain.LetterWrapper getLeaderLetterWrapper(int,int,java.lang.String) -> a
     java.util.List parseData(org.json.JSONArray) -> a
-com.wuxi.app.engine.PartLeaderMailService -> com.wuxi.app.d.ax:
+com.wuxi.app.engine.PartLeaderMailService -> com.wuxi.app.d.az:
     com.wuxi.domain.PartLeaderMailWrapper getPartLeaderMailWrapper() -> a
     java.util.List getLeaderMails(org.json.JSONArray) -> a
-com.wuxi.app.engine.PoliticsService -> com.wuxi.app.d.ay:
+com.wuxi.app.engine.PoliticsService -> com.wuxi.app.d.ba:
     com.wuxi.domain.PoliticsWrapper getPoliticsWrapper(java.lang.String) -> a
     java.util.List parseData(org.json.JSONArray) -> a
-com.wuxi.app.engine.QueryLetterDepService -> com.wuxi.app.d.az:
+com.wuxi.app.engine.QueryLetterDepService -> com.wuxi.app.d.bb:
     com.wuxi.domain.PartLeaderMailWrapper getPartLeaderMailWrapper() -> a
     java.util.List getLeaderMails(org.json.JSONArray) -> a
-com.wuxi.app.engine.QueryMailContentTypeService -> com.wuxi.app.d.ba:
+com.wuxi.app.engine.QueryMailContentTypeService -> com.wuxi.app.d.bc:
     com.wuxi.domain.QueryMailContentTypeWrapper getQueryMailContentType() -> a
     java.util.List getContentTypes(org.json.JSONArray) -> a
-com.wuxi.app.engine.QuestionnairePostService -> com.wuxi.app.d.bb:
+com.wuxi.app.engine.QuestionnairePostService -> com.wuxi.app.d.bd:
     com.wuxi.domain.QuestionnairePostWrapper getQuestionnairePostWrapper(java.lang.String,java.lang.String,int,int) -> a
     java.util.List getQuestionnaireQuestionWrappers(org.json.JSONArray) -> a
     java.util.List getQuestionnaireQuestions(org.json.JSONArray) -> b
     java.util.List getQuestionnaireAnswerDataWrappers(org.json.JSONArray) -> c
     java.util.List getQuestionnaireAnswerDats(org.json.JSONArray) -> d
-com.wuxi.app.engine.ReplyStatisticsService -> com.wuxi.app.d.bc:
+com.wuxi.app.engine.ReplyStatisticsService -> com.wuxi.app.d.be:
     java.util.List getAllCount(java.lang.String) -> a
     java.util.List getLettersStatistics(int,int,int) -> a
     java.util.List getAllLettersStatistics(java.lang.String) -> b
-com.wuxi.app.engine.SearchService -> com.wuxi.app.d.bd:
+com.wuxi.app.engine.SearchService -> com.wuxi.app.d.bf:
     com.wuxi.domain.SearchResultWrapper getNormalSearchResult(java.lang.String,java.lang.String,int,int) -> a
     com.wuxi.domain.SearchResultWrapper getAdvancedSearchResult(com.wuxi.domain.AdvancedSearchUtil,java.lang.String,int) -> a
     java.util.List parseData(org.json.JSONArray) -> a
-com.wuxi.app.engine.Service -> com.wuxi.app.d.be:
+com.wuxi.app.engine.Service -> com.wuxi.app.d.bg:
     android.content.Context context -> a
     com.wuxi.app.net.NetworkUtil networkUtil -> b
     com.wuxi.app.net.HttpUtils httpUtils -> c
     com.wuxi.app.util.CacheUtil cacheUtil -> d
     boolean checkNet() -> c
-com.wuxi.app.engine.SubmitListService -> com.wuxi.app.d.bf:
+com.wuxi.app.engine.SubmitListService -> com.wuxi.app.d.bh:
     boolean submitByUrl(java.lang.String) -> a
-com.wuxi.app.engine.UpdateInfoService -> com.wuxi.app.d.bg:
+com.wuxi.app.engine.UpdateInfoService -> com.wuxi.app.d.bi:
     android.content.Context context -> a
     com.wuxi.domain.UpdateInfo getUpdateInfo$5d33f9a7() -> a
-com.wuxi.app.engine.UpdateParser -> com.wuxi.app.d.bh:
+com.wuxi.app.engine.UpdateParser -> com.wuxi.app.d.bj:
     com.wuxi.domain.UpdateInfo paserUpdateInfo(java.io.InputStream) -> a
-com.wuxi.app.engine.UserService -> com.wuxi.app.d.bi:
+com.wuxi.app.engine.UserService -> com.wuxi.app.d.bk:
     com.wuxi.domain.User login(java.lang.String,java.lang.String) -> a
     com.wuxi.domain.User resgistUser(java.util.Map) -> a
     com.wuxi.domain.User paserUser(org.json.JSONObject) -> a
-com.wuxi.app.engine.VedioReviewService -> com.wuxi.app.d.bj:
+com.wuxi.app.engine.VedioReviewService -> com.wuxi.app.d.bl:
     com.wuxi.domain.VedioReviewWrapper getVedioReviewWrapper(int,int) -> a
     java.util.List getVedioReviews(org.json.JSONArray) -> a
-com.wuxi.app.engine.WorkSuggestionService -> com.wuxi.app.d.bk:
+com.wuxi.app.engine.WorkSuggestionService -> com.wuxi.app.d.bm:
     com.wuxi.domain.WorkSuggestionBoxWrapper getBoxWrapper(java.lang.String) -> a
     boolean submitMailBox(java.lang.String,com.wuxi.domain.WorkSuggestionBoxWrapper) -> a
 com.wuxi.app.fragment.commonfragment.ContentListFragment -> com.wuxi.app.e.a.a:
@@ -10136,7 +10208,8 @@ com.wuxi.app.fragment.homepage.goversaloon.AdministrativeItemFragment -> com.wux
     android.widget.ImageButton govver_admintrative_ib_search -> x
     android.widget.ProgressBar pb_loadmoore -> y
     boolean isFirstChange -> z
-    android.os.Handler handler -> A
+    int showIndex -> A
+    android.os.Handler handler -> B
     void initUI() -> a
     android.view.View getFootView() -> d
     void loadItem(java.util.Map) -> a
@@ -10193,7 +10266,8 @@ com.wuxi.app.fragment.homepage.goversaloon.BusinessGuideFragment -> com.wuxi.app
     int visibleItemCount -> s
     com.wuxi.domain.Kindtype currentKindtype -> t
     android.widget.ProgressBar pb_loadmoore -> u
-    android.os.Handler handler -> v
+    int showIndex -> v
+    android.os.Handler handler -> w
     void initUI() -> a
     android.view.View getFootView() -> d
     void loadItem(java.lang.String,java.lang.String,int,int) -> a
@@ -10737,8 +10811,8 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryPostFragment$2
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment -> com.wuxi.app.e.b.e.d:
     android.view.View view -> a
     android.content.Context context -> b
-    android.widget.ProgressBar progressBar -> c
-    android.widget.ListView listView -> d
+    android.widget.ProgressBar list_pb -> c
+    android.widget.ListView mListView -> d
     android.widget.TextView textView -> e
     com.wuxi.domain.ForumWrapper$Forum forum -> f
     com.wuxi.domain.OrdinaryPostWrapper postWrapper -> g
@@ -10753,62 +10827,53 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment
     com.wuxi.domain.OpinionPostWrapper opinionPostWrapper -> p
     com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper opinionPostReplyWrapper -> q
     java.util.List opinionPostReplies -> r
-    int startIndex -> s
-    int endIndex -> t
-    android.os.Handler handler -> u
+    com.wuxi.app.adapter.OrdinaryReplayListAdapter adapter -> s
+    int startIndex -> t
+    int visibleLastIndex -> u
+    int visibleItemCount -> v
+    boolean isFirstLoad -> w
+    boolean isSwitch -> x
+    boolean isLoading -> y
+    android.view.View loadMoreView -> z
+    android.widget.Button loadMoreButton -> A
+    android.widget.ProgressBar pb_loadmoore -> B
+    android.os.Handler handler -> C
     void setForum(com.wuxi.domain.ForumWrapper$Forum) -> a
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    android.widget.ProgressBar access$0(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> a
-    void access$1(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> b
+    void loadData(int,int) -> a
+    void loadMoreData$3c7ec8c3() -> a
+    void onScroll(android.widget.AbsListView,int,int,int) -> onScroll
+    void onScrollStateChanged(android.widget.AbsListView,int) -> onScrollStateChanged
+    void onClick(android.view.View) -> onClick
+    void access$0(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> a
+    android.widget.ProgressBar access$1(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> b
     android.content.Context access$2(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> c
     com.wuxi.domain.ForumWrapper$Forum access$3(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> d
-    java.util.List access$4(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> e
-    java.util.List access$5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> f
-    java.util.List access$6(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> g
-    java.util.List access$7(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> h
-    int access$8(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> i
-    int access$9(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> j
-    void access$10(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,com.wuxi.domain.OrdinaryPostWrapper) -> a
-    com.wuxi.domain.OrdinaryPostWrapper access$11(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> k
-    void access$12(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper) -> a
-    com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper access$13(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> l
-    void access$14(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,java.util.List) -> a
-    android.os.Handler access$15(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> m
-    void access$16(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,com.wuxi.domain.HotPostWrapper) -> a
-    com.wuxi.domain.HotPostWrapper access$17(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> n
-    void access$18(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper) -> a
-    com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper access$19(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> o
-    void access$20(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,java.util.List) -> b
-    void access$21(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,com.wuxi.domain.NoticePostWrapper) -> a
-    com.wuxi.domain.NoticePostWrapper access$22(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> p
-    void access$23(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper) -> a
-    com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper access$24(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> q
-    void access$25(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,java.util.List) -> c
-    void access$26(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,com.wuxi.domain.OpinionPostWrapper) -> a
-    com.wuxi.domain.OpinionPostWrapper access$27(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> r
-    void access$28(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper) -> a
-    com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper access$29(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> s
-    void access$30(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,java.util.List) -> d
-    android.widget.TextView access$31(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> t
-    android.widget.ListView access$32(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> u
+    void access$4$5b3c8b4d(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> e
+    android.os.Handler access$5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> f
+    void access$6(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,com.wuxi.domain.OrdinaryPostWrapper) -> a
+    com.wuxi.domain.OrdinaryPostWrapper access$7(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> g
+    void access$8(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,com.wuxi.domain.OrdinaryPostWrapper$OrdinaryPostRaplyWrapper) -> a
+    void access$9(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,com.wuxi.domain.HotPostWrapper) -> a
+    com.wuxi.domain.HotPostWrapper access$10(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> h
+    void access$11(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,com.wuxi.domain.HotPostWrapper$HotPostReplyWrapper) -> a
+    void access$12(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,com.wuxi.domain.NoticePostWrapper) -> a
+    com.wuxi.domain.NoticePostWrapper access$13(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> i
+    void access$14(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper) -> a
+    void access$15(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,com.wuxi.domain.OpinionPostWrapper) -> a
+    com.wuxi.domain.OpinionPostWrapper access$16(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> j
+    void access$17(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment,com.wuxi.domain.OpinionPostWrapper$OpinionPostReplyWrapper) -> a
+    android.widget.TextView access$18(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> k
+    android.widget.ListView access$19(com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment) -> l
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment$1 -> com.wuxi.app.e.b.e.e:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment$2 -> com.wuxi.app.e.b.e.f:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment this$0 -> a
+    int val$startIndex -> b
+    int val$endIndex -> c
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment$OrdinaryReplayListAdapter -> com.wuxi.app.e.b.e.g:
-    com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment this$0 -> a
-    int getCount() -> getCount
-    java.lang.Object getItem(int) -> getItem
-    long getItemId(int) -> getItemId
-    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment$OrdinaryReplayListAdapter$ViewHolder -> com.wuxi.app.e.b.e.h:
-    android.widget.TextView replay_name_text -> a
-    android.widget.TextView replay_time_text -> b
-    android.widget.TextView replay_content_text -> c
-    com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment$OrdinaryReplayListAdapter this$1 -> d
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment -> com.wuxi.app.e.b.e.i:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment -> com.wuxi.app.e.b.e.g:
     android.widget.TextView complaint_txtView -> f
     android.widget.TextView mayorbox_txtView -> g
     android.widget.TextView leaderbox_txtView -> h
@@ -10859,50 +10924,50 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFra
     android.os.Handler access$16(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment) -> n
     void access$17(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment,java.util.List) -> b
     java.util.List access$18(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment) -> o
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$1 -> com.wuxi.app.e.b.e.j:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$1 -> com.wuxi.app.e.b.e.h:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$2 -> com.wuxi.app.e.b.e.k:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$2 -> com.wuxi.app.e.b.e.i:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment this$0 -> a
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$3 -> com.wuxi.app.e.b.e.l:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$3 -> com.wuxi.app.e.b.e.j:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment this$0 -> a
     void onClick(android.view.View) -> onClick
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment access$0(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$3) -> a
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$3$1 -> com.wuxi.app.e.b.e.m:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$3$1 -> com.wuxi.app.e.b.e.k:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$3 this$1 -> a
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$3$2 -> com.wuxi.app.e.b.e.n:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$3$2 -> com.wuxi.app.e.b.e.l:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$3 this$1 -> a
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$3$3 -> com.wuxi.app.e.b.e.o:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$3$3 -> com.wuxi.app.e.b.e.m:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$3 this$1 -> a
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$4 -> com.wuxi.app.e.b.e.p:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$4 -> com.wuxi.app.e.b.e.n:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment this$0 -> a
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$5 -> com.wuxi.app.e.b.e.q:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$5 -> com.wuxi.app.e.b.e.o:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment this$0 -> a
     int val$letter_type -> b
     int val$year -> c
     int val$month -> d
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$MyAryAdapter -> com.wuxi.app.e.b.e.r:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment$MyAryAdapter -> com.wuxi.app.e.b.e.p:
     android.content.Context context -> a
     java.lang.String[] items -> b
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment this$0 -> c
     android.view.View getDropDownView(int,android.view.View,android.view.ViewGroup) -> getDropDownView
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345CMayorMailBoxFragment -> com.wuxi.app.e.b.e.s:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345CMayorMailBoxFragment -> com.wuxi.app.e.b.e.q:
     int getLayoutId() -> a
     int getRadioGroupId() -> b
     int[] getRadioButtonIds() -> c
     int getContentFragmentId() -> d
     void init() -> e
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment -> com.wuxi.app.e.b.e.t:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment -> com.wuxi.app.e.b.e.r:
     int[] radioButtonIds -> f
     android.widget.Button dealMailBtn -> g
     android.widget.Button queryMailBtn -> h
@@ -10967,31 +11032,31 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment -
     void access$21(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment,java.util.List) -> c
     void access$22(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment,java.util.List) -> d
     java.util.List access$23(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment) -> n
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$1 -> com.wuxi.app.e.b.e.u:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$1 -> com.wuxi.app.e.b.e.s:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$2 -> com.wuxi.app.e.b.e.v:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$2 -> com.wuxi.app.e.b.e.t:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$3 -> com.wuxi.app.e.b.e.w:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$3 -> com.wuxi.app.e.b.e.u:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$4 -> com.wuxi.app.e.b.e.x:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$4 -> com.wuxi.app.e.b.e.v:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$5 -> com.wuxi.app.e.b.e.y:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$5 -> com.wuxi.app.e.b.e.w:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment this$0 -> a
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$6 -> com.wuxi.app.e.b.e.z:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$6 -> com.wuxi.app.e.b.e.x:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment this$0 -> a
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$7 -> com.wuxi.app.e.b.e.aa:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$7 -> com.wuxi.app.e.b.e.y:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment this$0 -> a
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$8 -> com.wuxi.app.e.b.e.ab:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$8 -> com.wuxi.app.e.b.e.z:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment this$0 -> a
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$DeptAdapter -> com.wuxi.app.e.b.e.ac:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$DeptAdapter -> com.wuxi.app.e.b.e.aa:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment this$0 -> a
     int getCount() -> getCount
     java.lang.Object getItem(int) -> getItem
@@ -10999,10 +11064,10 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$D
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$DeptAdapter$ViewHolder -> com.wuxi.app.e.b.e.ad:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$DeptAdapter$ViewHolder -> com.wuxi.app.e.b.e.ab:
     android.widget.TextView tv_dept -> a
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment$DeptAdapter this$1 -> b
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintListFragment -> com.wuxi.app.e.b.e.ae:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintListFragment -> com.wuxi.app.e.b.e.ac:
     android.view.View view -> a
     android.content.Context context -> b
     android.widget.ListView mListView -> c
@@ -11032,15 +11097,15 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintListFragme
     android.os.Handler access$3(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintListFragment) -> d
     void access$4(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintListFragment,com.wuxi.domain.LetterWrapper) -> a
     com.wuxi.domain.LetterWrapper access$5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintListFragment) -> e
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintListFragment$1 -> com.wuxi.app.e.b.e.af:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintListFragment$1 -> com.wuxi.app.e.b.e.ad:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintListFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintListFragment$2 -> com.wuxi.app.e.b.e.ag:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintListFragment$2 -> com.wuxi.app.e.b.e.ae:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintListFragment this$0 -> a
     int val$startIndex -> b
     int val$endIndex -> c
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345HotMailFragment -> com.wuxi.app.e.b.e.ah:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345HotMailFragment -> com.wuxi.app.e.b.e.af:
     android.view.View view -> a
     android.content.Context context -> b
     android.widget.ListView mListView -> c
@@ -11069,15 +11134,15 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345HotMailFragment -> 
     android.os.Handler access$4(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345HotMailFragment) -> e
     void access$5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345HotMailFragment,com.wuxi.domain.LetterWrapper) -> a
     com.wuxi.domain.LetterWrapper access$6(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345HotMailFragment) -> f
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345HotMailFragment$1 -> com.wuxi.app.e.b.e.ai:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345HotMailFragment$1 -> com.wuxi.app.e.b.e.ag:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345HotMailFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345HotMailFragment$2 -> com.wuxi.app.e.b.e.aj:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345HotMailFragment$2 -> com.wuxi.app.e.b.e.ah:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345HotMailFragment this$0 -> a
     int val$startIndex -> b
     int val$endIndex -> c
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailFragment -> com.wuxi.app.e.b.e.ak:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailFragment -> com.wuxi.app.e.b.e.ai:
     int contentType -> f
     int[] radioButtonIds -> g
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
@@ -11088,7 +11153,7 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailFragment -
     void init() -> e
     void changeContent(int) -> a
     void bindFragment(android.support.v4.app.Fragment) -> a
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment -> com.wuxi.app.e.b.e.al:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment -> com.wuxi.app.e.b.e.aj:
     android.view.View view -> a
     android.view.LayoutInflater mInflater -> b
     android.content.Context context -> c
@@ -11143,44 +11208,44 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFrag
     void access$23(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment,com.wuxi.domain.MailTypeWrapper) -> a
     com.wuxi.domain.MailTypeWrapper access$24(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment) -> u
     void access$25(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment,java.util.List) -> b
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$1 -> com.wuxi.app.e.b.e.am:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$1 -> com.wuxi.app.e.b.e.ak:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$10 -> com.wuxi.app.e.b.e.an:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$10 -> com.wuxi.app.e.b.e.al:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment this$0 -> a
     com.wuxi.domain.MyLetter val$letter -> b
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$2 -> com.wuxi.app.e.b.e.ao:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$2 -> com.wuxi.app.e.b.e.am:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment this$0 -> a
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment access$0(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$2) -> a
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$2$1 -> com.wuxi.app.e.b.e.ap:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$2$1 -> com.wuxi.app.e.b.e.an:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$2 this$1 -> a
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$3 -> com.wuxi.app.e.b.e.aq:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$3 -> com.wuxi.app.e.b.e.ao:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment this$0 -> a
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$4 -> com.wuxi.app.e.b.e.ar:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$4 -> com.wuxi.app.e.b.e.ap:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment this$0 -> a
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$5 -> com.wuxi.app.e.b.e.as:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$5 -> com.wuxi.app.e.b.e.aq:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment this$0 -> a
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$6 -> com.wuxi.app.e.b.e.at:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$6 -> com.wuxi.app.e.b.e.ar:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment this$0 -> a
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$7 -> com.wuxi.app.e.b.e.au:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$7 -> com.wuxi.app.e.b.e.as:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$8 -> com.wuxi.app.e.b.e.av:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$8 -> com.wuxi.app.e.b.e.at:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment this$0 -> a
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$9 -> com.wuxi.app.e.b.e.aw:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$9 -> com.wuxi.app.e.b.e.au:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment this$0 -> a
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$DeptAdapter -> com.wuxi.app.e.b.e.ax:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$DeptAdapter -> com.wuxi.app.e.b.e.av:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment this$0 -> a
     int getCount() -> getCount
     java.lang.Object getItem(int) -> getItem
@@ -11188,42 +11253,58 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFrag
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$DeptAdapter$ViewHolder -> com.wuxi.app.e.b.e.ay:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$DeptAdapter$ViewHolder -> com.wuxi.app.e.b.e.aw:
     android.widget.TextView tv_dept -> a
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment$DeptAdapter this$1 -> b
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment -> com.wuxi.app.e.b.e.az:
-    android.widget.Button dealMailBtn -> f
-    android.widget.Button queryMailBtn -> g
-    android.widget.TextView advisoryNum -> h
-    android.widget.TextView mayorNum -> i
-    android.widget.TextView leaderNum -> j
-    android.widget.EditText keyWordEdit -> k
-    android.widget.EditText mailNoEdit -> l
-    android.widget.EditText timeBeginEdit -> m
-    android.widget.EditText timeEndEdit -> n
-    android.widget.CheckBox questionCheckbox -> o
-    android.widget.Button queryMailsBtn -> p
-    android.widget.Spinner boxSortSpinner -> q
-    android.widget.Spinner emailSortSpinner -> r
-    android.widget.Spinner acceptDepartmentSpinner -> s
-    android.widget.Spinner replyDepartmentSpinner -> t
-    android.widget.LinearLayout linearLayout -> u
-    android.widget.LinearLayout radioLayout -> v
-    android.view.View popview -> w
-    java.util.List allCounts -> x
-    com.wuxi.domain.PartLeaderMailWrapper leaderMailWrapper -> y
-    java.util.List depts -> z
-    com.wuxi.domain.QueryMailContentTypeWrapper contentTypeWrapper -> A
-    java.util.List contentTypes -> B
-    com.wuxi.domain.MailTypeWrapper mailTypeWrapper -> C
-    java.util.List mailTypes -> D
-    android.widget.PopupWindow popWindow -> E
-    com.wuxi.app.PopWindowManager popWindowManager -> F
-    java.lang.String DEFAULT_DEPT_FIFTER -> G
-    java.lang.String deptStrFifter -> H
-    int contentType -> I
-    int[] radioButtonIds -> J
-    android.os.Handler handler -> K
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment -> com.wuxi.app.e.b.e.ax:
+    int byear -> f
+    int bmonth -> g
+    int bday -> h
+    int eyear -> i
+    int emonth -> j
+    int eday -> k
+    android.widget.Button dealMailBtn -> l
+    android.widget.Button queryMailBtn -> m
+    android.widget.TextView advisoryNum -> n
+    android.widget.TextView mayorNum -> o
+    android.widget.TextView leaderNum -> p
+    android.widget.EditText keyWordEdit -> q
+    android.widget.EditText mailNoEdit -> r
+    android.widget.EditText timeBeginEdit -> s
+    android.widget.EditText timeEndEdit -> t
+    android.widget.Button beginTimeBtn -> u
+    android.widget.Button endTimeBtn -> v
+    android.widget.CheckBox questionCheckbox -> w
+    android.widget.Button queryMailsBtn -> x
+    android.widget.Spinner boxSortSpinner -> y
+    android.widget.Spinner emailSortSpinner -> z
+    android.widget.Spinner acceptDepartmentSpinner -> A
+    android.widget.Spinner replyDepartmentSpinner -> B
+    android.widget.LinearLayout linearLayout -> C
+    android.widget.LinearLayout radioLayout -> D
+    android.view.View popview -> E
+    java.util.List allCounts -> F
+    com.wuxi.domain.PartLeaderMailWrapper leaderMailWrapper -> G
+    java.util.List depts -> H
+    com.wuxi.domain.QueryMailContentTypeWrapper contentTypeWrapper -> I
+    java.util.List contentTypes -> J
+    com.wuxi.domain.MailTypeWrapper mailTypeWrapper -> K
+    java.util.List mailTypes -> L
+    android.widget.PopupWindow popWindow -> M
+    com.wuxi.app.PopWindowManager popWindowManager -> N
+    java.lang.String DEFAULT_DEPT_FIFTER -> O
+    int contentType -> P
+    java.lang.String keyword -> Q
+    java.lang.String contenttype -> R
+    java.lang.String lettertype -> S
+    long starttime -> T
+    long endtime -> U
+    java.lang.String code -> V
+    int common -> W
+    int[] radioButtonIds -> X
+    android.os.Handler handler -> Y
+    android.app.DatePickerDialog$OnDateSetListener beginDateListener -> Z
+    android.app.DatePickerDialog$OnDateSetListener endDateListener -> aa
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
     void changeContent(int) -> a
     int getLayoutId() -> a
@@ -11231,67 +11312,87 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment
     int[] getRadioButtonIds() -> c
     int getContentFragmentId() -> d
     void init() -> e
+    void updateBeginDateDisplay() -> f
     void bindFragment(android.support.v4.app.Fragment) -> a
     void access$0(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> a
     android.content.Context access$1(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> b
     void access$2(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> c
     void access$3(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> d
-    java.util.List access$4(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> e
-    void access$5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,java.lang.String) -> a
-    android.widget.LinearLayout access$6(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> f
-    android.widget.LinearLayout access$7(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> g
-    android.widget.PopupWindow access$8(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,android.content.Context) -> a
-    void access$9(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,android.widget.PopupWindow) -> a
-    android.widget.Button access$10(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> h
-    android.widget.PopupWindow access$11(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> i
-    android.os.Handler access$12(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> j
-    void access$13(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,com.wuxi.domain.MailTypeWrapper) -> a
-    com.wuxi.domain.MailTypeWrapper access$14(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> k
-    void access$15(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,java.util.List) -> a
-    void access$16(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,com.wuxi.domain.QueryMailContentTypeWrapper) -> a
-    com.wuxi.domain.QueryMailContentTypeWrapper access$17(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> l
-    void access$18(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,java.util.List) -> b
-    void access$19(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,java.util.List) -> c
-    java.util.List access$20(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> m
-    void access$21(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,com.wuxi.domain.PartLeaderMailWrapper) -> a
-    com.wuxi.domain.PartLeaderMailWrapper access$22(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> n
-    void access$23(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,java.util.List) -> d
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$1 -> com.wuxi.app.e.b.e.ba:
+    void access$4(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,int) -> a
+    void access$5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,int) -> b
+    void access$6(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,int) -> c
+    void access$7(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,int) -> d
+    void access$8(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> e
+    void access$9(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,int) -> e
+    void access$10(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,int) -> f
+    void access$11(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,int) -> g
+    java.util.List access$12(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> f
+    android.widget.Button access$13(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> g
+    android.os.Handler access$14(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> h
+    android.widget.Button access$15(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> i
+    android.widget.LinearLayout access$16(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> j
+    android.widget.LinearLayout access$17(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> k
+    android.widget.PopupWindow access$18(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,android.content.Context) -> a
+    void access$19(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,android.widget.PopupWindow) -> a
+    android.widget.Button access$20(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> l
+    android.widget.PopupWindow access$21(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> m
+    void access$22(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,com.wuxi.domain.MailTypeWrapper) -> a
+    com.wuxi.domain.MailTypeWrapper access$23(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> n
+    void access$24(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,java.util.List) -> a
+    void access$25(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,com.wuxi.domain.QueryMailContentTypeWrapper) -> a
+    com.wuxi.domain.QueryMailContentTypeWrapper access$26(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> o
+    void access$27(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,java.util.List) -> b
+    void access$28(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,java.util.List) -> c
+    java.util.List access$29(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> p
+    void access$30(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,com.wuxi.domain.PartLeaderMailWrapper) -> a
+    com.wuxi.domain.PartLeaderMailWrapper access$31(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment) -> q
+    void access$32(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment,java.util.List) -> d
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$1 -> com.wuxi.app.e.b.e.ay:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$2 -> com.wuxi.app.e.b.e.bb:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$10 -> com.wuxi.app.e.b.e.az:
+    com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment this$0 -> a
+    void run() -> run
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$11 -> com.wuxi.app.e.b.e.ba:
+    com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment this$0 -> a
+    void run() -> run
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$12 -> com.wuxi.app.e.b.e.bb:
+    com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment this$0 -> a
+    void run() -> run
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$2 -> com.wuxi.app.e.b.e.bc:
+    com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment this$0 -> a
+    void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$3 -> com.wuxi.app.e.b.e.bd:
+    com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment this$0 -> a
+    void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$4 -> com.wuxi.app.e.b.e.be:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$3 -> com.wuxi.app.e.b.e.bc:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$5 -> com.wuxi.app.e.b.e.bf:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$4 -> com.wuxi.app.e.b.e.bd:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$6 -> com.wuxi.app.e.b.e.bg:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$5 -> com.wuxi.app.e.b.e.be:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$7 -> com.wuxi.app.e.b.e.bh:
+    com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$8 -> com.wuxi.app.e.b.e.bi:
+    com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$9 -> com.wuxi.app.e.b.e.bj:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment this$0 -> a
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$6 -> com.wuxi.app.e.b.e.bf:
-    com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment this$0 -> a
-    void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$7 -> com.wuxi.app.e.b.e.bg:
-    com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment this$0 -> a
-    void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$8 -> com.wuxi.app.e.b.e.bh:
-    com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment this$0 -> a
-    void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$DeptAdapter -> com.wuxi.app.e.b.e.bi:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$DeptAdapter -> com.wuxi.app.e.b.e.bk:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment this$0 -> a
     int getCount() -> getCount
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-    void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
-    void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$DeptAdapter$ViewHolder -> com.wuxi.app.e.b.e.bj:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$DeptAdapter$ViewHolder -> com.wuxi.app.e.b.e.bl:
     android.widget.TextView tv_dept -> a
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment$DeptAdapter this$1 -> b
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailListFragment -> com.wuxi.app.e.b.e.bk:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailListFragment -> com.wuxi.app.e.b.e.bm:
     android.widget.ListView mListView -> f
     android.widget.ProgressBar list_pb -> g
     com.wuxi.domain.LetterWrapper letterWrapper -> h
@@ -11323,15 +11424,15 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailListFragme
     android.os.Handler access$3(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailListFragment) -> d
     void access$4(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailListFragment,com.wuxi.domain.LetterWrapper) -> a
     com.wuxi.domain.LetterWrapper access$5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailListFragment) -> e
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailListFragment$1 -> com.wuxi.app.e.b.e.bl:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailListFragment$1 -> com.wuxi.app.e.b.e.bn:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailListFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailListFragment$2 -> com.wuxi.app.e.b.e.bm:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailListFragment$2 -> com.wuxi.app.e.b.e.bo:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailListFragment this$0 -> a
     int val$startIndex -> b
     int val$endIndex -> c
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345PartLeaderMailboxFragment -> com.wuxi.app.e.b.e.bn:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345PartLeaderMailboxFragment -> com.wuxi.app.e.b.e.bp:
     int contentType -> f
     int[] radioButtonIds -> g
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
@@ -11341,13 +11442,13 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345PartLeaderMailboxFr
     int getContentFragmentId() -> d
     void init() -> e
     void bindFragment(android.support.v4.app.Fragment) -> a
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPChannelContentListFragment -> com.wuxi.app.e.b.e.bo:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPChannelContentListFragment -> com.wuxi.app.e.b.e.bq:
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPContentFragment -> com.wuxi.app.e.b.e.bp:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPContentFragment -> com.wuxi.app.e.b.e.br:
     com.wuxi.app.listeners.MenuItemInitLayoutListener getMenuItemInitLayoutListener() -> a
     void initializSubFragmentsLayout(java.util.List) -> a
     void redirectFragment$5d6aef39(com.wuxi.domain.MenuItem) -> a
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment -> com.wuxi.app.e.b.e.bq:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment -> com.wuxi.app.e.b.e.bs:
     android.widget.ListView mListView -> f
     com.wuxi.domain.LetterWrapper letterWrapper -> g
     java.util.List letters -> h
@@ -11372,27 +11473,27 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment -> com
     com.wuxi.domain.LetterWrapper access$6(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment) -> f
     void access$7(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment,java.util.List) -> a
     android.os.Handler access$8(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment) -> g
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment$1 -> com.wuxi.app.e.b.e.br:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment$1 -> com.wuxi.app.e.b.e.bt:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment$2 -> com.wuxi.app.e.b.e.bs:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment$2 -> com.wuxi.app.e.b.e.bu:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment$3 -> com.wuxi.app.e.b.e.bt:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment$3 -> com.wuxi.app.e.b.e.bv:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment this$0 -> a
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment$LettersListViewAdapter -> com.wuxi.app.e.b.e.bu:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment$LettersListViewAdapter -> com.wuxi.app.e.b.e.bw:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment this$0 -> a
     int getCount() -> getCount
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment$LettersListViewAdapter$ViewHolder -> com.wuxi.app.e.b.e.bv:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment$LettersListViewAdapter$ViewHolder -> com.wuxi.app.e.b.e.bx:
     android.widget.TextView title_text -> a
     android.widget.TextView code_text -> b
     android.widget.TextView answerDate_text -> c
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment$LettersListViewAdapter this$1 -> d
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineInfoPublicPlatformFragment -> com.wuxi.app.e.b.e.bw:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineInfoPublicPlatformFragment -> com.wuxi.app.e.b.e.by:
     int[] radioButtonIds -> f
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
     int getLayoutId() -> a
@@ -11400,7 +11501,7 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineInfoPublicPlatformFr
     int[] getRadioButtonIds() -> c
     int getContentFragmentId() -> d
     void init() -> e
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineInternetGoverSaloonFragment -> com.wuxi.app.e.b.e.bx:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineInternetGoverSaloonFragment -> com.wuxi.app.e.b.e.bz:
     int[] radioButtonIds -> f
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
     int getLayoutId() -> a
@@ -11408,7 +11509,7 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineInternetGoverSaloonF
     int[] getRadioButtonIds() -> c
     int getContentFragmentId() -> d
     void init() -> e
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMinePublicForumFragment -> com.wuxi.app.e.b.e.by:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMinePublicForumFragment -> com.wuxi.app.e.b.e.ca:
     int[] radioButtonIds -> f
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
     int getLayoutId() -> a
@@ -11416,7 +11517,7 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMinePublicForumFragment 
     int[] getRadioButtonIds() -> c
     int getContentFragmentId() -> d
     void init() -> e
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineSuggestionPlatformFragment -> com.wuxi.app.e.b.e.bz:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineSuggestionPlatformFragment -> com.wuxi.app.e.b.e.cb:
     int[] radioButtonIds -> f
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
     int getLayoutId() -> a
@@ -11424,7 +11525,7 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineSuggestionPlatformFr
     int[] getRadioButtonIds() -> c
     int getContentFragmentId() -> d
     void init() -> e
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment -> com.wuxi.app.e.b.e.ca:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment -> com.wuxi.app.e.b.e.cc:
     android.widget.Spinner chooseYear_spinner -> g
     android.widget.ListView mListView -> h
     android.widget.ProgressBar list_pb -> i
@@ -11454,34 +11555,34 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFrag
     com.wuxi.domain.PoliticsWrapper access$8(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment) -> h
     void access$9(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment,java.util.List) -> a
     android.os.Handler access$10(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment) -> i
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment$1 -> com.wuxi.app.e.b.e.cb:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment$1 -> com.wuxi.app.e.b.e.cd:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment$2 -> com.wuxi.app.e.b.e.cc:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment$2 -> com.wuxi.app.e.b.e.ce:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment this$0 -> a
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment$3 -> com.wuxi.app.e.b.e.cd:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment$3 -> com.wuxi.app.e.b.e.cf:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment this$0 -> a
     java.lang.String val$url -> b
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment$MyAryAdapter -> com.wuxi.app.e.b.e.ce:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment$MyAryAdapter -> com.wuxi.app.e.b.e.cg:
     android.content.Context context -> a
     java.lang.String[] items -> b
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment this$0 -> c
     android.view.View getDropDownView(int,android.view.View,android.view.ViewGroup) -> getDropDownView
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment$PoliticsListViewAdapter -> com.wuxi.app.e.b.e.cf:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment$PoliticsListViewAdapter -> com.wuxi.app.e.b.e.ch:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment this$0 -> a
     int getCount() -> getCount
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment$PoliticsListViewAdapter$ViewHolder -> com.wuxi.app.e.b.e.cg:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment$PoliticsListViewAdapter$ViewHolder -> com.wuxi.app.e.b.e.ci:
     android.widget.TextView title_text -> a
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment$PoliticsListViewAdapter this$1 -> b
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillFragment -> com.wuxi.app.e.b.e.ch:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillFragment -> com.wuxi.app.e.b.e.cj:
     int passed -> f
     int[] radioButtonIds -> g
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
@@ -11491,7 +11592,7 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillFragmen
     int getContentFragmentId() -> d
     void init() -> e
     void gotoListView(int) -> a
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillListFragment -> com.wuxi.app.e.b.e.ci:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillListFragment -> com.wuxi.app.e.b.e.ck:
     android.content.Context context -> a
     android.view.View view -> b
     android.widget.ListView mListView -> c
@@ -11525,15 +11626,15 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillListFra
     int access$5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillListFragment) -> f
     void access$6(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillListFragment,com.wuxi.domain.PoliticsWrapper) -> a
     com.wuxi.domain.PoliticsWrapper access$7(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillListFragment) -> g
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillListFragment$1 -> com.wuxi.app.e.b.e.cj:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillListFragment$1 -> com.wuxi.app.e.b.e.cl:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillListFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillListFragment$2 -> com.wuxi.app.e.b.e.ck:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillListFragment$2 -> com.wuxi.app.e.b.e.cm:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillListFragment this$0 -> a
     int val$startIndex -> b
     int val$endIndex -> c
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyFragment -> com.wuxi.app.e.b.e.cl:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyFragment -> com.wuxi.app.e.b.e.cn:
     int[] radioButtonIds -> f
     int type -> g
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
@@ -11543,7 +11644,7 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyFragment ->
     int getContentFragmentId() -> d
     void init() -> e
     void gotoListView(int) -> a
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyListFragment -> com.wuxi.app.e.b.e.cm:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyListFragment -> com.wuxi.app.e.b.e.co:
     android.content.Context context -> a
     android.view.View view -> b
     android.widget.ListView mListView -> c
@@ -11576,15 +11677,15 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyListFragmen
     int access$5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyListFragment) -> f
     void access$6(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyListFragment,com.wuxi.domain.InternetSurveyWrapper) -> a
     com.wuxi.domain.InternetSurveyWrapper access$7(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyListFragment) -> g
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyListFragment$1 -> com.wuxi.app.e.b.e.cn:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyListFragment$1 -> com.wuxi.app.e.b.e.cp:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyListFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyListFragment$2 -> com.wuxi.app.e.b.e.co:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyListFragment$2 -> com.wuxi.app.e.b.e.cq:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyListFragment this$0 -> a
     int val$startIndex -> b
     int val$endIndex -> c
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeople12345Fragment -> com.wuxi.app.e.b.e.cp:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeople12345Fragment -> com.wuxi.app.e.b.e.cr:
     int[] radioButtonIds -> f
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
     int getLayoutId() -> a
@@ -11592,7 +11693,7 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeople12345Fragme
     int[] getRadioButtonIds() -> c
     int getContentFragmentId() -> d
     void init() -> e
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewFragment -> com.wuxi.app.e.b.e.cq:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewFragment -> com.wuxi.app.e.b.e.cs:
     int HOTREVIEW_TYPE_NOW -> f
     int HOTREVIEW_TYPE_BEFORE -> g
     int reviewType -> h
@@ -11604,7 +11705,7 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewFr
     int getContentFragmentId() -> d
     void init() -> e
     void gotoListView(int) -> a
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewListFragment -> com.wuxi.app.e.b.e.cr:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewListFragment -> com.wuxi.app.e.b.e.ct:
     android.content.Context context -> a
     android.view.View view -> b
     android.widget.ListView mListView -> c
@@ -11638,15 +11739,15 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewLi
     int access$5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewListFragment) -> f
     void access$6(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewListFragment,com.wuxi.domain.HotReviewWrapper) -> a
     com.wuxi.domain.HotReviewWrapper access$7(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewListFragment) -> g
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewListFragment$1 -> com.wuxi.app.e.b.e.cs:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewListFragment$1 -> com.wuxi.app.e.b.e.cu:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewListFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewListFragment$2 -> com.wuxi.app.e.b.e.ct:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewListFragment$2 -> com.wuxi.app.e.b.e.cv:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewListFragment this$0 -> a
     int val$startIndex -> b
     int val$endIndex -> c
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleMineFragment -> com.wuxi.app.e.b.e.cu:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleMineFragment -> com.wuxi.app.e.b.e.cw:
     int[] radioButtonIds -> f
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
     int getLayoutId() -> a
@@ -11654,7 +11755,7 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleMineFragmen
     int[] getRadioButtonIds() -> c
     int getContentFragmentId() -> d
     void init() -> e
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment -> com.wuxi.app.e.b.e.cv:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment -> com.wuxi.app.e.b.e.cx:
     android.widget.ListView mListView -> f
     android.widget.ProgressBar list_pb -> g
     com.wuxi.domain.OpenTelWrapper openTelWrapper -> h
@@ -11675,36 +11776,36 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFrag
     com.wuxi.domain.OpenTelWrapper access$5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment) -> e
     void access$6(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment,java.util.List) -> a
     android.os.Handler access$7(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment) -> f
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment$1 -> com.wuxi.app.e.b.e.cw:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment$1 -> com.wuxi.app.e.b.e.cy:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment$2 -> com.wuxi.app.e.b.e.cx:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment$2 -> com.wuxi.app.e.b.e.cz:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment this$0 -> a
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment$3 -> com.wuxi.app.e.b.e.cy:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment$3 -> com.wuxi.app.e.b.e.da:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment this$0 -> a
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment$ChoiceOnClickListener val$choiceListener -> b
     java.lang.CharSequence[] val$sNum -> c
     void onClick(android.content.DialogInterface,int) -> onClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment$4 -> com.wuxi.app.e.b.e.cz:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment$4 -> com.wuxi.app.e.b.e.db:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment$ChoiceOnClickListener -> com.wuxi.app.e.b.e.da:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment$ChoiceOnClickListener -> com.wuxi.app.e.b.e.dc:
     int which -> b
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
     int getWhich() -> a
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment$OpenTelListViewAdapter -> com.wuxi.app.e.b.e.db:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment$OpenTelListViewAdapter -> com.wuxi.app.e.b.e.dd:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment this$0 -> a
     int getCount() -> getCount
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment$OpenTelListViewAdapter$ViewHolder -> com.wuxi.app.e.b.e.dc:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment$OpenTelListViewAdapter$ViewHolder -> com.wuxi.app.e.b.e.de:
     android.widget.TextView depname_text -> a
     android.widget.TextView tel_text -> b
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment$OpenTelListViewAdapter this$1 -> c
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment -> com.wuxi.app.e.b.e.dd:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment -> com.wuxi.app.e.b.e.df:
     android.content.Context context -> a
     android.view.View view -> b
     android.widget.ListView mListView -> c
@@ -11736,18 +11837,18 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForum
     android.os.Handler access$4(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment) -> e
     void access$5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment,com.wuxi.domain.ForumWrapper) -> a
     com.wuxi.domain.ForumWrapper access$6(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment) -> f
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment$1 -> com.wuxi.app.e.b.e.de:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment$1 -> com.wuxi.app.e.b.e.dg:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment$2 -> com.wuxi.app.e.b.e.df:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment$2 -> com.wuxi.app.e.b.e.dh:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment$3 -> com.wuxi.app.e.b.e.dg:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment$3 -> com.wuxi.app.e.b.e.di:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment this$0 -> a
     int val$startIndex -> b
     int val$endIndex -> c
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment -> com.wuxi.app.e.b.e.dh:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment -> com.wuxi.app.e.b.e.dj:
     android.view.View view -> a
     android.view.LayoutInflater mInflater -> b
     android.content.Context context -> c
@@ -11770,17 +11871,17 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuper
     android.widget.ProgressBar access$0(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment) -> a
     android.content.Context access$1(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment) -> b
     android.os.Handler access$2(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment) -> c
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment$1 -> com.wuxi.app.e.b.e.di:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment$1 -> com.wuxi.app.e.b.e.dk:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment$2 -> com.wuxi.app.e.b.e.dj:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment$2 -> com.wuxi.app.e.b.e.dl:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment this$0 -> a
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleSuggestFragment -> com.wuxi.app.e.b.e.dk:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleSuggestFragment -> com.wuxi.app.e.b.e.dm:
     com.wuxi.app.listeners.MenuItemInitLayoutListener getMenuItemInitLayoutListener() -> a
     void initializSubFragmentsLayout(java.util.List) -> a
     void redirectFragment$5d6aef39(com.wuxi.domain.MenuItem) -> a
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveFragment -> com.wuxi.app.e.b.e.dl:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveFragment -> com.wuxi.app.e.b.e.dn:
     int[] radioBtnIds -> f
     int getLayoutId() -> a
     int getRadioGroupId() -> b
@@ -11788,7 +11889,7 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveFr
     int getContentFragmentId() -> d
     void init() -> e
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeFragment -> com.wuxi.app.e.b.e.dm:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeFragment -> com.wuxi.app.e.b.e.do:
     android.widget.Button home_saybtn -> f
     android.widget.Button home_askbtn -> g
     int type -> h
@@ -11802,13 +11903,13 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHo
     void changeContent(int) -> a
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
     android.content.Context access$0(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeFragment) -> a
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeFragment$1 -> com.wuxi.app.e.b.e.dn:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeFragment$1 -> com.wuxi.app.e.b.e.dp:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeFragment$2 -> com.wuxi.app.e.b.e.do:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeFragment$2 -> com.wuxi.app.e.b.e.dq:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeLiveFragment -> com.wuxi.app.e.b.e.dp:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeLiveFragment -> com.wuxi.app.e.b.e.dr:
     android.view.View view -> a
     android.content.Context context -> b
     android.widget.TextView advance_themeTextView -> c
@@ -11824,13 +11925,13 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHo
     android.content.Context access$0(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeLiveFragment) -> a
     android.widget.TextView access$1(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeLiveFragment) -> b
     android.widget.TextView access$2(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeLiveFragment) -> c
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeLiveFragment$1 -> com.wuxi.app.e.b.e.dq:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeLiveFragment$1 -> com.wuxi.app.e.b.e.ds:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeLiveFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeLiveFragment$2 -> com.wuxi.app.e.b.e.dr:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeLiveFragment$2 -> com.wuxi.app.e.b.e.dt:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeLiveFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleWebFragment -> com.wuxi.app.e.b.e.ds:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleWebFragment -> com.wuxi.app.e.b.e.du:
     android.view.View view -> a
     java.lang.String wapUrl -> b
     android.content.Context context -> c
@@ -11839,10 +11940,10 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleWebFragment
     void setUrl(java.lang.String) -> a
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     android.widget.ProgressBar access$0(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleWebFragment) -> a
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleWebFragment$1 -> com.wuxi.app.e.b.e.dt:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleWebFragment$1 -> com.wuxi.app.e.b.e.dv:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleWebFragment this$0 -> a
     void onProgressChanged(android.webkit.WebView,int) -> onProgressChanged
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment -> com.wuxi.app.e.b.e.du:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment -> com.wuxi.app.e.b.e.dw:
     android.view.View view -> a
     android.view.LayoutInflater mInflater -> b
     com.wuxi.domain.MenuItem parentItem -> c
@@ -11875,28 +11976,28 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment 
     void access$8(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment,java.util.List) -> a
     android.os.Handler access$9(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment) -> h
     void access$10(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment,java.util.List) -> b
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment$1 -> com.wuxi.app.e.b.e.dv:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment$1 -> com.wuxi.app.e.b.e.dx:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment$2 -> com.wuxi.app.e.b.e.dw:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment$2 -> com.wuxi.app.e.b.e.dy:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment$3 -> com.wuxi.app.e.b.e.dx:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment$3 -> com.wuxi.app.e.b.e.dz:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment this$0 -> a
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment$4 -> com.wuxi.app.e.b.e.dy:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment$4 -> com.wuxi.app.e.b.e.ea:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment this$0 -> a
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment$GridViewAdaptger -> com.wuxi.app.e.b.e.dz:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment$GridViewAdaptger -> com.wuxi.app.e.b.e.eb:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment this$0 -> a
     int getCount() -> getCount
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment$GridViewAdaptger$ViewHolder -> com.wuxi.app.e.b.e.ea:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment$GridViewAdaptger$ViewHolder -> com.wuxi.app.e.b.e.ec:
     android.widget.TextView tv_title -> a
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment$GridViewAdaptger this$1 -> b
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewInfoFragment -> com.wuxi.app.e.b.e.eb:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewInfoFragment -> com.wuxi.app.e.b.e.ed:
     android.view.View view -> a
     android.content.Context context -> b
     android.widget.TextView title -> c
@@ -11920,13 +12021,13 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewInfoFragment -> co
     void access$5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewInfoFragment,com.wuxi.domain.HotReviewInfoWrapper) -> a
     com.wuxi.domain.HotReviewInfoWrapper access$6(com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewInfoFragment) -> f
     android.os.Handler access$7(com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewInfoFragment) -> g
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewInfoFragment$1 -> com.wuxi.app.e.b.e.ec:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewInfoFragment$1 -> com.wuxi.app.e.b.e.ee:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewInfoFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewInfoFragment$2 -> com.wuxi.app.e.b.e.ed:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewInfoFragment$2 -> com.wuxi.app.e.b.e.ef:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewInfoFragment this$0 -> a
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewReplyFragment -> com.wuxi.app.e.b.e.ee:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewReplyFragment -> com.wuxi.app.e.b.e.eg:
     android.view.View view -> a
     android.content.Context context -> b
     com.wuxi.domain.HotReviewWrapper$HotReview hotReview -> c
@@ -11959,15 +12060,15 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewReplyFragment -> c
     com.wuxi.domain.HotReviewWrapper$HotReview access$5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewReplyFragment) -> f
     void access$6(com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewReplyFragment,com.wuxi.domain.HotReviewReplyWrapper) -> a
     com.wuxi.domain.HotReviewReplyWrapper access$7(com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewReplyFragment) -> g
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewReplyFragment$1 -> com.wuxi.app.e.b.e.ef:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewReplyFragment$1 -> com.wuxi.app.e.b.e.eh:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewReplyFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewReplyFragment$2 -> com.wuxi.app.e.b.e.eg:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewReplyFragment$2 -> com.wuxi.app.e.b.e.ei:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewReplyFragment this$0 -> a
     int val$start -> b
     int val$end -> c
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment -> com.wuxi.app.e.b.e.eh:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment -> com.wuxi.app.e.b.e.ej:
     android.view.View view -> a
     android.content.Context context -> b
     android.widget.TextView sentpepole_text -> c
@@ -11997,52 +12098,52 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment -> 
     com.wuxi.domain.NoticePostWrapper access$6(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment) -> f
     void access$7(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment,com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper) -> a
     android.os.Handler access$8(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment) -> g
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment$1 -> com.wuxi.app.e.b.e.ei:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment$1 -> com.wuxi.app.e.b.e.ek:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment$2 -> com.wuxi.app.e.b.e.ej:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment$2 -> com.wuxi.app.e.b.e.el:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionInfoFragment this$0 -> a
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment -> com.wuxi.app.e.b.e.ek:
-    com.wuxi.domain.NoticePostWrapper noticePostWrapper -> a
-    com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper noticePostReplyWrapper -> b
-    java.util.List noticePostReplies -> c
-    android.view.View view -> d
-    android.content.Context context -> e
-    android.widget.ProgressBar progressBar -> f
-    android.widget.ListView listView -> g
-    com.wuxi.domain.PoliticsWrapper$Politics politics -> h
-    android.os.Handler handler -> i
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment -> com.wuxi.app.e.b.e.em:
+    com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper noticePostReplyWrapper -> a
+    java.util.List noticePostReplies -> b
+    android.view.View view -> c
+    android.content.Context context -> d
+    android.widget.ProgressBar list_pb -> e
+    android.widget.ListView mListView -> f
+    com.wuxi.domain.PoliticsWrapper$Politics politics -> g
+    com.wuxi.app.adapter.LegidlstionReplyListAdapter adapter -> h
+    int visibleLastIndex -> i
+    int visibleItemCount -> j
+    boolean isFirstLoad -> k
+    boolean isSwitch -> l
+    boolean isLoading -> m
+    android.view.View loadMoreView -> n
+    android.widget.Button loadMoreButton -> o
+    android.widget.ProgressBar pb_loadmoore -> p
+    android.os.Handler handler -> q
     void setPolitics(com.wuxi.domain.PoliticsWrapper$Politics) -> a
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    android.widget.ProgressBar access$0(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment) -> a
-    void access$1(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment) -> b
+    void loadData(int,int) -> a
+    void onScroll(android.widget.AbsListView,int,int,int) -> onScroll
+    void onScrollStateChanged(android.widget.AbsListView,int) -> onScrollStateChanged
+    void onClick(android.view.View) -> onClick
+    void access$0(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment) -> a
+    android.widget.ProgressBar access$1(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment) -> b
     android.content.Context access$2(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment) -> c
-    java.util.List access$3(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment) -> d
-    com.wuxi.domain.PoliticsWrapper$Politics access$4(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment) -> e
-    void access$5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment,com.wuxi.domain.NoticePostWrapper) -> a
-    com.wuxi.domain.NoticePostWrapper access$6(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment) -> f
-    void access$7(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment,com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper) -> a
-    com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper access$8(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment) -> g
-    void access$9(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment,java.util.List) -> a
-    android.os.Handler access$10(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment) -> h
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment$1 -> com.wuxi.app.e.b.e.el:
+    void access$3$4ce060c5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment) -> d
+    android.os.Handler access$4(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment) -> e
+    com.wuxi.domain.PoliticsWrapper$Politics access$5(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment) -> f
+    void access$6(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment,com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper) -> a
+    com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper access$7(com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment) -> g
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment$1 -> com.wuxi.app.e.b.e.en:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment$2 -> com.wuxi.app.e.b.e.em:
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment$2 -> com.wuxi.app.e.b.e.eo:
     com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment this$0 -> a
+    int val$start -> b
+    int val$end -> c
     void run() -> run
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment$OrdinaryReplayListAdapter -> com.wuxi.app.e.b.e.en:
-    com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment this$0 -> a
-    int getCount() -> getCount
-    java.lang.Object getItem(int) -> getItem
-    long getItemId(int) -> getItemId
-    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment$OrdinaryReplayListAdapter$ViewHolder -> com.wuxi.app.e.b.e.eo:
-    android.widget.TextView replay_name_text -> a
-    android.widget.TextView replay_time_text -> b
-    android.widget.TextView replay_content_text -> c
-    com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment$OrdinaryReplayListAdapter this$1 -> d
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.LiveHomeLeaveMessageFragment -> com.wuxi.app.e.b.e.ep:
     android.view.View view -> a
     android.content.Context context -> b
@@ -12477,7 +12578,7 @@ com.wuxi.app.listeners.InitializContentLayoutListner -> com.wuxi.app.f.f:
 com.wuxi.app.listeners.MenuItemInitLayoutListener -> com.wuxi.app.f.g:
     void bindMenuItemLayout(com.wuxi.app.listeners.InitializContentLayoutListner,com.wuxi.domain.MenuItem) -> a
 com.wuxi.app.listeners.OnChangedListener -> com.wuxi.app.f.h:
-    void OnChanged$4cfd3ce3(java.lang.Object) -> a
+    void OnChanged(java.lang.Object,boolean) -> a
 com.wuxi.app.listeners.PublicServiceInitLayoutImpl -> com.wuxi.app.f.i:
     void bindMenuItemLayout(com.wuxi.app.listeners.InitializContentLayoutListner,com.wuxi.domain.MenuItem) -> a
 com.wuxi.app.net.HttpUtils -> com.wuxi.app.g.a:
@@ -12550,6 +12651,8 @@ com.wuxi.app.util.MenuItemChannelIndexUtil -> com.wuxi.app.i.j:
     com.wuxi.app.util.MenuItemChannelIndexUtil getInstance() -> a
     void addMenuItemIndex(java.lang.String,java.util.List) -> a
     void addChannelIndex(java.lang.String,java.util.List) -> b
+    boolean containsKey(java.lang.String,java.lang.String) -> a
+    java.lang.Integer getMenueChannelIndex(java.lang.String,java.lang.String) -> b
 com.wuxi.app.util.SystemUtil -> com.wuxi.app.i.k:
     java.lang.String getLoginUser(android.content.Context) -> a
     java.lang.String getAccessToken(android.content.Context) -> b
@@ -14123,6 +14226,9 @@ com.wuxi.domain.MenuItem -> com.wuxi.domain.MenuItem:
     int WAP_MENU -> WAP_MENU
     int LINK_MENU -> LINK_MENU
     int FRAGMENT_MENU -> FRAGMENT_MENU
+    int LEVEL_ONE -> LEVEL_ONE
+    int LEVEL_TWO -> LEVEL_TWO
+    int LEVEL_THREE -> LEVEL_THREE
     java.lang.String name -> name
     java.lang.String id -> id
     int type -> type
@@ -14148,8 +14254,14 @@ com.wuxi.domain.MenuItem -> com.wuxi.domain.MenuItem:
     java.lang.String pfBuildPath -> pfBuildPath
     boolean isLocalFavorites -> isLocalFavorites
     int level -> level
+    int level_two_p -> level_two_p
+    int level_three_p -> level_three_p
     java.lang.String MENUITEM_KEY -> MENUITEM_KEY
     java.lang.Class contentFragment -> contentFragment
+    int getLevel_three_p() -> getLevel_three_p
+    void setLevel_three_p(int) -> setLevel_three_p
+    int getLevel_two_p() -> getLevel_two_p
+    void setLevel_two_p(int) -> setLevel_two_p
     boolean isLocalFavorites() -> isLocalFavorites
     void setLocalFavorites(boolean) -> setLocalFavorites
     int getLevel() -> getLevel
@@ -14203,6 +14315,8 @@ com.wuxi.domain.MenuItem -> com.wuxi.domain.MenuItem:
     void setPfId(java.lang.String) -> setPfId
     java.lang.String getPfBuildPath() -> getPfBuildPath
     void setPfBuildPath(java.lang.String) -> setPfBuildPath
+    int hashCode() -> hashCode
+    boolean equals(java.lang.Object) -> equals
     int compareTo(java.lang.Object) -> compareTo
 com.wuxi.domain.MyApply -> com.wuxi.domain.MyApply:
     java.lang.String id -> id

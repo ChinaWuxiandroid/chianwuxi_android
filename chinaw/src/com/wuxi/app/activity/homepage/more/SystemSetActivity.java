@@ -17,9 +17,11 @@ import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.AppManager;
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseSlideActivity;
@@ -45,9 +47,8 @@ public class SystemSetActivity extends BaseSlideActivity implements
 
 	private static final String TAG = "SystemSetFragment";
 
-	private RelativeLayout sys_menu_set, sys_clear_cache, sys_score, sys_share,
-			sys_idea, sys_software_update, sys_about_us, sys_site_map,
-			sys_use_help, sys_join_twiiter, sys_log_out;
+	private TableRow sys_menu_set, sys_clear_cache, sys_software_update,
+			sys_about_us, sys_site_map, sys_log_out;
 
 	private TextView tv_verison, tv_cache, tv_user;
 
@@ -67,14 +68,13 @@ public class SystemSetActivity extends BaseSlideActivity implements
 				isLoading = false;
 				break;
 			case NO_UPDATE_APK:
-				Toast.makeText(
-					SystemSetActivity.this, "没有要升级的版本", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(SystemSetActivity.this, "没有要升级的版本",
+						Toast.LENGTH_SHORT).show();
 				isLoading = false;
 				break;
 			case DOWLOAD_ERROR:
-				Toast.makeText(
-					SystemSetActivity.this, "下载出错", Toast.LENGTH_SHORT).show();
+				Toast.makeText(SystemSetActivity.this, "下载出错",
+						Toast.LENGTH_SHORT).show();
 				break;
 			}
 
@@ -84,44 +84,32 @@ public class SystemSetActivity extends BaseSlideActivity implements
 	@Override
 	protected void findMainContentViews(View view) {
 
-		sys_menu_set = (RelativeLayout) view.findViewById(R.id.sys_menu_set);
 		tv_cache = (TextView) view.findViewById(R.id.tv_cache);
 		tv_cache.setText(getCacheSize());// 获取缓存文件大小
-		sys_clear_cache = (RelativeLayout) view.findViewById(R.id.sys_clear_cache);
 
-		// sys_score = (RelativeLayout) view.findViewById(R.id.sys_score);
-		// sys_share = (RelativeLayout) view.findViewById(R.id.sys_share);
-		// sys_idea = (RelativeLayout) view.findViewById(R.id.sys_idea);
-		sys_software_update = (RelativeLayout) view.findViewById(R.id.sys_software_update);
-		sys_about_us = (RelativeLayout) view.findViewById(R.id.sys_about_us);
-		sys_site_map = (RelativeLayout) view.findViewById(R.id.sys_site_map);
-		sys_log_out = (RelativeLayout) view.findViewById(R.id.sys_log_out);
+		sys_menu_set = (TableRow) view.findViewById(R.id.sys_menu_set);
+		sys_clear_cache = (TableRow) view.findViewById(R.id.sys_clear_cache);
+
+		sys_software_update = (TableRow) view
+				.findViewById(R.id.sys_software_update);
+		sys_about_us = (TableRow) view.findViewById(R.id.sys_about_us);
+		sys_site_map = (TableRow) view.findViewById(R.id.sys_site_map);
+		sys_log_out = (TableRow) view.findViewById(R.id.sys_log_out);
+
 		sys_log_out.setOnClickListener(this);
-		// sys_use_help = (RelativeLayout) view.findViewById(R.id.sys_use_help);
-		// sys_join_twiiter = (RelativeLayout) view
-		// .findViewById(R.id.sys_join_twiiter);
+
 		tv_verison = (TextView) view.findViewById(R.id.tv_verison);
 		tv_user = (TextView) view.findViewById(R.id.tv_user);
 
-		// if(System.get)
 		sys_menu_set.setOnClickListener(this);
 
 		sys_clear_cache.setOnClickListener(this);
 
-		/*
-		 * sys_score.setOnClickListener(this);
-		 * sys_share.setOnClickListener(this);
-		 * sys_idea.setOnClickListener(this);
-		 */
 		sys_software_update.setOnClickListener(this);
 		sys_about_us.setOnClickListener(this);
 		sys_site_map.setOnClickListener(this);
-		/*
-		 * sys_use_help.setOnClickListener(this);
-		 * sys_join_twiiter.setOnClickListener(this);
-		 */
 
-		tv_verison.setText(getVersion());
+		tv_verison.setText(AppManager.getInstance(this).getVersion());
 		initLoginUser();
 
 		pd = new ProgressDialog(this);
@@ -143,7 +131,7 @@ public class SystemSetActivity extends BaseSlideActivity implements
 		case R.id.sys_menu_set:// 常用栏设置
 
 			intent = new Intent(SystemSetActivity.this,
-				MenuItemSetActivity.class);
+					MenuItemSetActivity.class);
 			break;
 
 		case R.id.sys_software_update:// 软件升级
@@ -194,7 +182,7 @@ public class SystemSetActivity extends BaseSlideActivity implements
 	private void clearCache() {
 
 		if (Environment.getExternalStorageState().equals(
-			Environment.MEDIA_MOUNTED)) {
+				Environment.MEDIA_MOUNTED)) {
 
 			AlertDialog.Builder builder = new Builder(this);
 			builder.setIcon(R.drawable.logo);
@@ -202,35 +190,35 @@ public class SystemSetActivity extends BaseSlideActivity implements
 			builder.setMessage("确认要清除缓存吗？");
 			builder.setCancelable(false);
 
-			builder.setPositiveButton(
-				"确定", new android.content.DialogInterface.OnClickListener() {
+			builder.setPositiveButton("确定",
+					new android.content.DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
 
-						File file = new File(Constants.APPFiles.CACHE_FILE_PATH);
-						File cacheFiles[] = file.listFiles();
-						for (File cacheFile : cacheFiles) {
-							cacheFile.delete();
+							File file = new File(
+									Constants.APPFiles.CACHE_FILE_PATH);
+							File cacheFiles[] = file.listFiles();
+							for (File cacheFile : cacheFiles) {
+								cacheFile.delete();
+							}
+
+							Toast.makeText(SystemSetActivity.this, "清除完成",
+									Toast.LENGTH_SHORT).show();
+							tv_cache.setText(getCacheSize());// 获取缓存文件大小
+
+						}
+					});
+
+			builder.setNegativeButton("取消",
+					new android.content.DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+
 						}
 
-						Toast.makeText(
-							SystemSetActivity.this, "清除完成", Toast.LENGTH_SHORT)
-								.show();
-						tv_cache.setText(getCacheSize());// 获取缓存文件大小
-
-					}
-				});
-
-			builder.setNegativeButton(
-				"取消", new android.content.DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-
-					}
-
-				});
+					});
 
 			builder.create().show();
 
@@ -249,7 +237,7 @@ public class SystemSetActivity extends BaseSlideActivity implements
 	 */
 	private String getCacheSize() {
 		if (Environment.getExternalStorageState().equals(
-			Environment.MEDIA_MOUNTED)) {
+				Environment.MEDIA_MOUNTED)) {
 			File file = new File(Constants.APPFiles.CACHE_FILE_PATH);
 			File cacheFiles[] = file.listFiles();
 
@@ -258,7 +246,7 @@ public class SystemSetActivity extends BaseSlideActivity implements
 				totalByte += cacheFile.length();
 			}
 
-			return TextFormateUtil.getDataSize(totalByte);
+			return TextFormateUtil.getDataSize(totalByte)+" ";
 
 		}
 
@@ -274,25 +262,6 @@ public class SystemSetActivity extends BaseSlideActivity implements
 
 	/**
 	 * 
-	 * wanglu 泰得利通 获取软件版本
-	 * 
-	 * @return
-	 */
-	private String getVersion() {
-		PackageManager pm = this.getPackageManager();
-		try {
-			PackageInfo paInfo = pm.getPackageInfo(this.getPackageName(), 0);
-			return paInfo.versionName;
-		} catch (NameNotFoundException e) {
-
-			e.printStackTrace();
-			return "未知版本";
-		}
-
-	}
-
-	/**
-	 * 
 	 * wanglu 泰得利通 安装APK
 	 * 
 	 * @param file
@@ -300,40 +269,10 @@ public class SystemSetActivity extends BaseSlideActivity implements
 	private void install(File file) {
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_VIEW);
-		intent.setDataAndType(
-			Uri.fromFile(file), "application/vnd.android.package-archive");
+		intent.setDataAndType(Uri.fromFile(file),
+				"application/vnd.android.package-archive");
 		this.finish();
 		startActivity(intent);
-
-	}
-
-	/**
-	 * 
-	 * wanglu 泰得利通 是否要更新
-	 * 
-	 * @return
-	 */
-	public boolean isUpdate() {
-
-		String oldVerson = getVersion();
-		UpdateInfoService updateInfoService = new UpdateInfoService(this);
-		try {
-			updateInfo = updateInfoService.getUpdateInfo(R.string.updateurl);
-			if (!updateInfo.getVersion().equals(oldVerson)) {
-
-				return true;
-			} else {
-
-				return false;
-			}
-
-		} catch (Exception e) {
-
-			Toast.makeText(this, "监测更新出错", Toast.LENGTH_SHORT).show();
-
-			e.printStackTrace();
-			return false;
-		}
 
 	}
 
@@ -349,8 +288,9 @@ public class SystemSetActivity extends BaseSlideActivity implements
 
 			@Override
 			public void run() {
-
-				boolean update = isUpdate();
+				updateInfo = new UpdateInfo();
+				boolean update = AppManager.getInstance(SystemSetActivity.this)
+						.isUpdate(updateInfo);
 				if (update) {
 					handler.sendEmptyMessage(UPDATE_APK);
 				} else {
@@ -371,46 +311,46 @@ public class SystemSetActivity extends BaseSlideActivity implements
 				+ updateInfo.getDescription());
 		builder.setCancelable(false);
 
-		builder.setPositiveButton(
-			"确定", new android.content.DialogInterface.OnClickListener() {
+		builder.setPositiveButton("确定",
+				new android.content.DialogInterface.OnClickListener() {
 
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
 
-					if (Environment.getExternalStorageState().equals(
-						Environment.MEDIA_MOUNTED)) {
+						if (Environment.getExternalStorageState().equals(
+								Environment.MEDIA_MOUNTED)) {
 
-						File file = new File(
-							Constants.APPFiles.DOWNLOAF_FILE_PATH);
-						if (!file.exists()) {
-							file.mkdirs();
+							File file = new File(
+									Constants.APPFiles.DOWNLOAF_FILE_PATH);
+							if (!file.exists()) {
+								file.mkdirs();
+							}
+							DownLoadThreadTask dowTask = new DownLoadThreadTask(
+									updateInfo.getUrl(),
+									Constants.APPFiles.DOWNLOAF_FILE_PATH
+											+ "chinawuxi.apk");
+
+							new Thread(dowTask).start();
+							pd.show();
+
+						} else {
+							Toast.makeText(SystemSetActivity.this, "SDK不存在", 1)
+									.show();
+
 						}
-						DownLoadThreadTask dowTask = new DownLoadThreadTask(
-							updateInfo.getUrl(),
-							Constants.APPFiles.DOWNLOAF_FILE_PATH
-									+ "chinawuxi.apk");
 
-						new Thread(dowTask).start();
-						pd.show();
+					}
+				});
 
-					} else {
-						Toast.makeText(SystemSetActivity.this, "SDK不存在", 1)
-								.show();
+		builder.setNegativeButton("取消",
+				new android.content.DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
 
 					}
 
-				}
-			});
-
-		builder.setNegativeButton(
-			"取消", new android.content.DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-
-				}
-
-			});
+				});
 
 		builder.create().show();
 

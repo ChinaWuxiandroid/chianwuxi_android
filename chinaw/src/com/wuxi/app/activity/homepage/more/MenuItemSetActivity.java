@@ -11,6 +11,8 @@ import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,6 +28,7 @@ import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.MenuItemChannelIndexUtil;
 import com.wuxi.app.view.SlipButton;
+import com.wuxi.app.view.SwitchButton;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -38,9 +41,7 @@ import com.wuxi.exception.NetException;
 public class MenuItemSetActivity extends BaseSlideActivity {
 	protected static final int LOAD_ERROR = 1;
 	protected static final int LOAD_SUCCESS = 0;
-	private static final int MENUITEM_LEVEL_ONE = 1;// 一级菜单
-	private static final int MENUITEM_LEVEL_TWO = 2;// 二级菜单
-	private static final int MENUITEM_LEVEL_THREE = 3;// 三级菜单
+
 	private List<MenuItem> favaItems;
 	private ListView lv_fava;
 	private ProgressBar pb_fava;
@@ -51,6 +52,8 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 
 	private ProgressDialog pd;
 	private MenuItem checkMenuItem;
+	private List<MenuItem> homeMenuItems;
+	private int currentMenuLevel = MenuItem.LEVEL_ONE;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -84,6 +87,7 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 
 	};
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void findMainContentViews(View view) {
 
@@ -94,6 +98,9 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 		favoriteItemDao = new FavoriteItemDao(this);
 		pd = new ProgressDialog(this);
 		pd.setMessage("正在设置...");
+
+		homeMenuItems = (List<MenuItem>) CacheUtil
+				.get(Constants.CacheKey.HOME_MENUITEM_KEY);
 	}
 
 	/**
@@ -101,10 +108,41 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 	 */
 	protected void saveFaveItem() {
 
+		setMenuItemP();
 		favoriteItemDao.addFavoriteItem(checkMenuItem);// 保存收藏列表到数据库
 		checkMenuItem.setLocalFavorites(true);
+		homeMenuItems.add(checkMenuItem);
 		Toast.makeText(this, "收藏" + checkMenuItem.getName() + "成功!",
 				Toast.LENGTH_SHORT).show();
+
+	}
+
+	/**
+	 * 设置菜单的位置 wanglu 泰得利通
+	 */
+	private void setMenuItemP() {
+
+		switch (currentMenuLevel) {
+		case MenuItem.LEVEL_TWO:// 二级菜单
+			checkMenuItem.setLevel_two_p(MenuItemChannelIndexUtil.getInstance()
+					.getMenueChannelIndex(checkMenuItem.getParentMenuId(),
+							checkMenuItem.getId()));// 设置其索引位置
+			break;
+		case MenuItem.LEVEL_THREE:
+			MenuItem paretMenuItem = (MenuItem) CacheUtil
+					.get(MenuItem.MENUITEM_KEY
+							+ checkMenuItem.getParentMenuId());// 拿到父菜单，二级菜单
+
+			checkMenuItem.setLevel_two_p(MenuItemChannelIndexUtil.getInstance()
+					.getMenueChannelIndex(paretMenuItem.getParentMenuId(),
+							paretMenuItem.getId()));// 设置二级菜单的位置
+
+			checkMenuItem.setLevel_three_p(MenuItemChannelIndexUtil
+					.getInstance().getMenueChannelIndex(paretMenuItem.getId(),
+							checkMenuItem.getId()));// 设置三级菜单的索引位
+
+			break;
+		}
 
 	}
 
@@ -112,6 +150,7 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 
 		public TextView title_text;
 		public SlipButton slipButton;
+		public SwitchButton switchButton;
 	}
 
 	private class MenuSetAdapter extends BaseAdapter implements
@@ -146,17 +185,19 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 
 			ViewHolder viewHolder = null;
 			if (convertView == null) {
+				
 				convertView = View.inflate(MenuItemSetActivity.this,
 						R.layout.menuset_item_layout, null);
-
 				viewHolder = new ViewHolder();
 
 				viewHolder.title_text = (TextView) convertView
 						.findViewById(R.id.menuset_tv_name);
-				SlipButton slipButton = (SlipButton) convertView
-						.findViewById(R.id.slipButton);
+				
+				SwitchButton switchButton = (SwitchButton) convertView
+						.findViewById(R.id.checkbox);
 
-				viewHolder.slipButton = slipButton;
+				
+				viewHolder.switchButton = switchButton;
 
 				convertView.setTag(viewHolder);
 			} else {
@@ -164,14 +205,11 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 			}
 
 			viewHolder.title_text.setText(name);
-
-			if (menuItem.isLocalFavorites()) {
-				viewHolder.slipButton.setChecked(true);
-			} else {
-				viewHolder.slipButton.setChecked(false);
-			}
-
-			viewHolder.slipButton.SetOnChangedListener(menuItem, this);
+			viewHolder.switchButton.setChecked(menuItem.isLocalFavorites());
+			
+			viewHolder.switchButton
+					.setOnCheckedChangeListener(new SwitchOnChangeButton(
+							menuItem));
 			return convertView;
 
 		}
@@ -180,37 +218,35 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 		public void OnChanged(Object o, boolean checkState) {
 
 			checkMenuItem = (MenuItem) o;
-/*
+
 			if (checkState) {// 保存手册列表
 
-				int level = getMenuItemLevel(checkMenuItem);// 获取菜单的级别
+				currentMenuLevel = getMenuItemLevel(checkMenuItem);// 获取菜单的级别
 
-				switch (level) {
-				case MENUITEM_LEVEL_ONE:// 一级菜单
-					checkMenuItem.setLevel(1);
+				switch (currentMenuLevel) {
+				case MenuItem.LEVEL_ONE:// 一级菜单
+					checkMenuItem.setLevel(MenuItem.LEVEL_ONE);
 					saveFaveItem();// 保存收藏项
 					break;
-				case MENUITEM_LEVEL_TWO:// 二级菜单
-					checkMenuItem.setLevel(2);
-					if (CacheUtil.get(checkMenuItem.getId()) == null
-							&& checkMenuItem.getType() == MenuItem.CUSTOM_MENU) {// 看缓存中有没有三级子菜单,没有就加载三级子菜单
-
-						laodMenuItems(checkMenuItem.getId());// 加载二级菜单的子菜单
-
-					} else {
-
-						saveFaveItem();
-					}
-
-				case MENUITEM_LEVEL_THREE:// 三级菜单
-					checkMenuItem.setLevel(3);
+				case MenuItem.LEVEL_TWO:// 二级菜单
+					checkMenuItem.setLevel(MenuItem.LEVEL_TWO);
+					saveFaveItem();
+					break;
+				case MenuItem.LEVEL_THREE:// 三级菜单
+					checkMenuItem.setLevel(MenuItem.LEVEL_THREE);
 					MenuItem paretMenuItem = (MenuItem) CacheUtil
 							.get(MenuItem.MENUITEM_KEY
 									+ checkMenuItem.getParentMenuId());// 拿到父菜单，二级菜单
 
-					if (CacheUtil.get(paretMenuItem.getId()) == null
-							&& paretMenuItem.getType() == MenuItem.CUSTOM_MENU) {// 看缓存中有没有三级子菜单,没有就加载三级子菜单
-						laodMenuItems(paretMenuItem.getId());
+					if (CacheUtil.get(paretMenuItem.getId()) == null) {// 看缓存中有没有三级子菜单,没有就加载三级子菜单
+
+						if (paretMenuItem.getType() == MenuItem.CUSTOM_MENU) {
+							loadMenuItems(paretMenuItem.getId());
+						} else if (paretMenuItem.getType() == MenuItem.CHANNEL_MENU) {// 频道
+							Toast.makeText(MenuItemSetActivity.this,
+									"该数据有误,不可以收藏", Toast.LENGTH_SHORT).show();
+						}
+
 					} else {
 						saveFaveItem();// 保存收藏项
 					}
@@ -221,17 +257,76 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 
 			} else {
 				checkMenuItem.setLocalFavorites(false);
-
 				favoriteItemDao.delFavoriteItem(checkMenuItem.getId());
+				homeMenuItems.remove(checkMenuItem);
 			}
+
+		}
+	}
+
+	private final class SwitchOnChangeButton implements OnCheckedChangeListener {
+
+		private MenuItem menuItem;
+		public SwitchOnChangeButton(MenuItem menuItem) {
+
+			this.menuItem=menuItem;
 			
-			*/
+		}
+
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView,
+				boolean isChecked) {
+			
 
 			
-			  Toast.makeText(MenuItemSetActivity.this, " 该功能在施工中",
-			  Toast.LENGTH_SHORT).show();
-			 
+			checkMenuItem =menuItem;
+
+			if (isChecked) {// 保存手册列表
+
+				currentMenuLevel = getMenuItemLevel(checkMenuItem);// 获取菜单的级别
+
+				switch (currentMenuLevel) {
+				case MenuItem.LEVEL_ONE:// 一级菜单
+					checkMenuItem.setLevel(MenuItem.LEVEL_ONE);
+					saveFaveItem();// 保存收藏项
+					break;
+				case MenuItem.LEVEL_TWO:// 二级菜单
+					checkMenuItem.setLevel(MenuItem.LEVEL_TWO);
+					saveFaveItem();
+					break;
+				case MenuItem.LEVEL_THREE:// 三级菜单
+					checkMenuItem.setLevel(MenuItem.LEVEL_THREE);
+					MenuItem paretMenuItem = (MenuItem) CacheUtil
+							.get(MenuItem.MENUITEM_KEY
+									+ checkMenuItem.getParentMenuId());// 拿到父菜单，二级菜单
+
+					if (CacheUtil.get(paretMenuItem.getId()) == null) {// 看缓存中有没有三级子菜单,没有就加载三级子菜单
+
+						if (paretMenuItem.getType() == MenuItem.CUSTOM_MENU) {
+							loadMenuItems(paretMenuItem.getId());
+						} else if (paretMenuItem.getType() == MenuItem.CHANNEL_MENU) {// 频道
+							Toast.makeText(MenuItemSetActivity.this,
+									"该数据有误,不可以收藏", Toast.LENGTH_SHORT).show();
+						}
+
+					} else {
+						saveFaveItem();// 保存收藏项
+					}
+
+					break;
+
+				}
+
+			} else {
+				checkMenuItem.setLocalFavorites(false);
+				favoriteItemDao.delFavoriteItem(checkMenuItem.getId());
+				homeMenuItems.remove(checkMenuItem);
+			}
+
+			
+		
 		}
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -289,7 +384,7 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 	 * 
 	 * @param id
 	 */
-	public void laodMenuItems(final String parentId) {
+	public void loadMenuItems(final String parentId) {
 		pd.show();
 
 		new Thread(new Runnable() {
@@ -351,16 +446,16 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 		String parentId = menuItem.getParentMenuId();
 		if (parentId == null) {
 
-			return MENUITEM_LEVEL_ONE;
+			return MenuItem.LEVEL_ONE;
 		} else {
 
 			if (MenuItemChannelIndexUtil.getInstance().containsKey(
 					Constants.CacheKey.MAIN_MENUITEM_KEY, parentId)) {
 
-				return MENUITEM_LEVEL_TWO;
+				return MenuItem.LEVEL_TWO;
 			} else {
 
-				return MENUITEM_LEVEL_THREE;
+				return MenuItem.LEVEL_THREE;
 			}
 
 		}

@@ -23,6 +23,7 @@ import com.wuxi.app.fragment.homepage.fantasticwuxi.ChannelContentListFragment;
 import com.wuxi.app.fragment.homepage.fantasticwuxi.CityMapFragment;
 import com.wuxi.app.listeners.InitializContentLayoutListner;
 import com.wuxi.app.util.CacheUtil;
+import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.app.view.TitleScrollLayout;
 import com.wuxi.domain.Channel;
@@ -47,7 +48,7 @@ public class ChannelActivity extends BaseSlideActivity implements
 
 	protected static final String TAG = "ChannelFragment";
 
-	public static final String SHOWCHANNEL_LAYOUT_INDEXKEY = "show_channel_layout_index";
+	public static final String SHOWCHANNEL_LAYOUT_INDEXKEY = Constants.CheckPositionKey.LEVEL_TWO__KEY;
 
 	private ImageButton ib_nextItems;
 
@@ -186,7 +187,7 @@ public class ChannelActivity extends BaseSlideActivity implements
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(MANCOTENT_ID, fragment);// 替换内容界面
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 
 	}
 

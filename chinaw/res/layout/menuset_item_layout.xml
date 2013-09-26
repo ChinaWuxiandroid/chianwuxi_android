@@ -3,32 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    >
+    android:padding="5dip" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/menuset_tv_name"
+        android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginTop="5dip"
-        android:layout_marginBottom="5dip" >
+        android:layout_weight="1"
+        android:text="ss"
+        android:textSize="14sp" />
 
-        <TextView
-            
-            android:id="@+id/menuset_tv_name"
-           
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="5dip"
-            android:text="ss"
-            android:textSize="14sp" />
-
-        <com.wuxi.app.view.SlipButton
-            android:id="@+id/slipButton"
-            android:layout_width="80dip"
-            android:layout_height="25dip"
-            android:layout_alignParentRight="true"
-             />
-    </RelativeLayout>
+    <com.wuxi.app.view.SwitchButton
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right" >
+    </com.wuxi.app.view.SwitchButton>
 
 </LinearLayout>

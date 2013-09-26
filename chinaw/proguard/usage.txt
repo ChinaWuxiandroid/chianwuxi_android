@@ -217,8 +217,8 @@ com.wuxi.app.activity.BaseSlideActivity:
     protected static final int FRAME_CONTENT
     public static final java.lang.String SELECT_MENU_POSITION_KEY
     private static final java.lang.String MENUITEM_CACKE_KEY
-    84:85:public void setLeftSelectPostion(int)
-    257:258:public void setUnTouchableOffset(float,float)
+    85:86:public void setLeftSelectPostion(int)
+    258:259:public void setUnTouchableOffset(float,float)
 com.wuxi.app.activity.MainIndexActivity:
     private static final int MENUITEM_LOAD_SUCESS
     private static final java.lang.String MENUITEM_CACKE_KEY
@@ -254,7 +254,7 @@ com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity:
     private static final int TITLE_LOAD_ERROR
     protected static final java.lang.String TAG
     public static final java.lang.String SHOWCHANNEL_LAYOUT_INDEXKEY
-    194:195:public void setMenuItem(com.wuxi.domain.MenuItem)
+    195:196:public void setMenuItem(com.wuxi.domain.MenuItem)
 com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity:
     private static final long serialVersionUID
 com.wuxi.app.activity.homepage.goversaloon.GoverSaloonActivity:
@@ -263,7 +263,7 @@ com.wuxi.app.activity.homepage.goversaloon.GoverSaloonActivity:
     protected static final int LEFT_CHANNEL_DATA__LOAD_SUCCESS
     protected static final int LEFT_MENUITEM_DATA__LOAD_SUCCESS
     protected static final int LEFT_DATA__LOAD_ERROR
-    289:290:public void setParentMenuItem(com.wuxi.domain.MenuItem)
+    290:291:public void setParentMenuItem(com.wuxi.domain.MenuItem)
 com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailCFActivity:
     protected static final int LOAD_ITEM_DETIAL_SUCCESS
     protected static final int LOAD_ITEM_DETIAL_FAIL
@@ -319,26 +319,15 @@ com.wuxi.app.activity.homepage.logorregister.RegisterActivity:
 com.wuxi.app.activity.homepage.more.MenuItemSetActivity:
     protected static final int LOAD_ERROR
     protected static final int LOAD_SUCCESS
-    private static final int MENUITEM_LEVEL_ONE
-    private static final int MENUITEM_LEVEL_TWO
-    private static final int MENUITEM_LEVEL_THREE
     protected static final int SET_SUCCESS
     protected static final int SET_FAIL
-    293:334:public void laodMenuItems(java.lang.String)
-    351:363:private int getMenuItemLevel(com.wuxi.domain.MenuItem)
-com.wuxi.app.activity.homepage.more.MenuItemSetActivity$3
 com.wuxi.app.activity.homepage.more.SystemSetActivity:
     protected static final int UPDATE_APK
     protected static final int NO_UPDATE_APK
     private static final int DOWLOAD_ERROR
     private static final java.lang.String TAG
-    private android.widget.RelativeLayout sys_score
-    private android.widget.RelativeLayout sys_share
-    private android.widget.RelativeLayout sys_idea
-    private android.widget.RelativeLayout sys_use_help
-    private android.widget.RelativeLayout sys_join_twiiter
 com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumContentActivity:
-    67:68:public void setForum(com.wuxi.domain.ForumWrapper$Forum)
+    68:69:public void setForum(com.wuxi.domain.ForumWrapper$Forum)
 com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345AllMailContentActivity:
     private static final java.lang.String TAG
     private static final int DATA__LOAD_SUCESS
@@ -346,7 +335,7 @@ com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345AllMailContentActiv
 com.wuxi.app.activity.homepage.mygoverinteractpeople.HotReviewContentActivity:
     78:79:public void setHotReview(com.wuxi.domain.HotReviewWrapper$HotReview)
 com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity:
-    70:71:public void setPolitics(com.wuxi.domain.PoliticsWrapper$Politics)
+    72:73:public void setPolitics(com.wuxi.domain.PoliticsWrapper$Politics)
 com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity:
     private static final long serialVersionUID
     private static final int DETAIL_ID
@@ -395,12 +384,12 @@ com.wuxi.app.adapter.SimpleListViewFragmentAdapter
 com.wuxi.app.adapter.SimpleListViewFragmentAdapter$ViewHolder
 com.wuxi.app.db.DataBaseHelper:
     private static final java.lang.String DB_NAME
-    private static final int VERSION
+    public static final int VERSION
     public static final java.lang.String TABLE_FAVORITE
+    public static final java.lang.String TABLE_APPLOG_COUNT
 com.wuxi.app.db.FavoriteItemDao:
-    82:89:public void delFavoriteItem(java.lang.String)
-    98:108:public void updateFavoriteItem(com.wuxi.domain.MenuItem)
-    118:140:public java.util.List getFavoriteItems()
+    101:111:public void updateFavoriteItem(com.wuxi.domain.MenuItem)
+    121:145:public java.util.List getFavoriteItems()
 com.wuxi.app.engine.BBSService
 com.wuxi.app.engine.DownLoadTask:
     16:16:public DownLoadTask()
@@ -408,11 +397,34 @@ com.wuxi.app.engine.HotReviewService:
     143:173:private com.wuxi.domain.HotReviewWrapper$HotReviewContent getHotReviewContent(java.lang.String)
 com.wuxi.app.engine.KindTypeService:
     83:120:public java.util.List getKindtypesByType2(java.lang.String)
+com.wuxi.app.engine.MenuService:
+    55:55:public java.util.List getHomeMenuItems(java.lang.String)
 com.wuxi.app.engine.PepoleCollectService
 com.wuxi.app.engine.PoliticsService:
     36:38:public com.wuxi.domain.PoliticsWrapper getMyPoliticsWrapper(java.lang.String,java.lang.String,int,int,int)
 com.wuxi.app.engine.Service:
     protected static final int TIME_OUT
+com.wuxi.app.engine.TestAnnouncementsService
+com.wuxi.app.engine.TestChannelService
+com.wuxi.app.engine.TestContentService
+com.wuxi.app.engine.TestEffComService
+com.wuxi.app.engine.TestFavoritesService
+com.wuxi.app.engine.TestGoverApplyOnlieService
+com.wuxi.app.engine.TestGoverItemCountService
+com.wuxi.app.engine.TestGoverSaItemService
+com.wuxi.app.engine.TestGoverSaoonWorkFlowImageService
+com.wuxi.app.engine.TestGoverTableDownLoadService
+com.wuxi.app.engine.TestGoversaoonOnlineASKDetailService
+com.wuxi.app.engine.TestImportNewsService
+com.wuxi.app.engine.TestJSON
+com.wuxi.app.engine.TestKindtypeService
+com.wuxi.app.engine.TestLetterQueryService
+com.wuxi.app.engine.TestMenuSevice
+com.wuxi.app.engine.TestMyApplyWapperService
+com.wuxi.app.engine.TestMyConsultWapperService
+com.wuxi.app.engine.TestUpdateInfoService
+com.wuxi.app.engine.TestUserService
+com.wuxi.app.engine.TestgetDeptService
 com.wuxi.app.engine.UpdateParser:
     15:15:public UpdateParser()
 com.wuxi.app.engine.UserService:
@@ -610,6 +622,7 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment
     private static final java.lang.String TAG
     private static final int DATA__LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
+    private static final int PAGE_NUM
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment:
     protected static final java.lang.String TAG
     private static final int ALLCOUNT_LOAD_SUCESS
@@ -663,6 +676,10 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment
     private static final int LOAD_CONTENT_TYPE_FAILED
     private static final int LOAD_MAIL_TYPE_SUCCESS
     private static final int LOAD_MAIL_TYPE_FAILED
+    private static final int SHOW_BEGIN_DATE_PICK
+    private static final int SHOW_END_DATE_PICK
+    private static final int BEGIN_TIME_DIALOG_ID
+    private static final int END_TIME_DIALOG_ID
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailListFragment:
     protected static final java.lang.String TAG
     private static final int DATA__LOAD_SUCESS
@@ -757,6 +774,7 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment:
     private static final java.lang.String TAG
     private static final int DATA__LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
+    private static final int PAGE_NUM
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.LiveHomeLeaveMessageFragment:
     protected static final java.lang.String TAG
     private static final int DATA__LOAD_SUCESS
@@ -834,7 +852,7 @@ com.wuxi.app.util.Constants:
     11:11:public Constants()
 com.wuxi.app.util.Constants$APPFiles:
     public static final java.lang.String GOVERMSG_APPLYOPEN_TABLENAME
-    501:501:public Constants$APPFiles()
+    511:511:public Constants$APPFiles()
 com.wuxi.app.util.Constants$CacheKey
 com.wuxi.app.util.Constants$CheckPositionKey
 com.wuxi.app.util.Constants$ExceptionMessage
@@ -862,15 +880,14 @@ com.wuxi.app.util.MenuItemChanelUtil:
     32:32:public MenuItemChanelUtil()
 com.wuxi.app.util.MenuItemChannelIndexUtil:
     82:82:public boolean containsKey(java.lang.String)
-    93:97:public boolean containsKey(java.lang.String,java.lang.String)
-    111:116:public java.lang.Integer getMenueIndex(java.lang.String,java.lang.String)
 com.wuxi.app.util.StreamTool
 com.wuxi.app.util.SystemUtil:
     public static com.wuxi.app.util.SystemUtil systemUtil
-    9:9:public SystemUtil()
-    14:16:public static synchronized com.wuxi.app.util.SystemUtil getInstance()
-    27:30:public static int getWindowWidth(android.content.Context)
-    40:43:public static int getWindowHeight(android.content.Context)
+    12:12:public SystemUtil()
+    17:19:public static synchronized com.wuxi.app.util.SystemUtil getInstance()
+    30:33:public static int getWindowWidth(android.content.Context)
+    43:46:public static int getWindowHeight(android.content.Context)
+    110:111:public static int getUserAppCount(android.content.Context)
 com.wuxi.app.util.TextFormateUtil:
     11:11:public TextFormateUtil()
 com.wuxi.app.util.TimeFormateUtil:

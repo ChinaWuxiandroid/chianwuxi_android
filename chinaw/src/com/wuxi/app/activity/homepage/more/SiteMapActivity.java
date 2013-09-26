@@ -307,7 +307,7 @@ public class SiteMapActivity extends BaseSlideActivity {
 
 		if (acClass != null) {
 			intent = new Intent(SiteMapActivity.this, acClass);
-			intent.putExtra(Constants.CheckPositionKey.LEVEL_ONE_KEY, position);// 设置选中的一级菜单的序号
+			intent.putExtra(Constants.CheckPositionKey.LEVEL_TWO__KEY, position);// 设置选中的一级菜单的序号
 			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY,
 					parentPosition);// 设置左侧选中的选菜单序号
 			MainTabActivity.instance.addView(intent);

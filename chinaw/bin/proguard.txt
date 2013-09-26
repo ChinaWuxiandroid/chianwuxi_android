@@ -162,8 +162,8 @@
 # view res/layout/systemset_slide_layout.xml #generated:1
 -keep class com.wuxi.app.view.SlideMenuLayout { <init>(...); }
 
-# view res/layout/menuset_item_layout.xml #generated:26
--keep class com.wuxi.app.view.SlipButton { <init>(...); }
+# view res/layout/menuset_item_layout.xml #generated:17
+-keep class com.wuxi.app.view.SwitchButton { <init>(...); }
 
 # view res/layout/title_scroll_action_layout.xml #generated:8
 -keep class com.wuxi.app.view.TitleScrollLayout { <init>(...); }

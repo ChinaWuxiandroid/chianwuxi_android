@@ -53,10 +53,10 @@
     <GridView
         android:id="@+id/gover_guide_gv_kindtype"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dip"
         android:layout_below="@+id/gover_buness_guide_rg"
         android:background="@android:color/white"
-        android:numColumns="7"
+        android:numColumns="5"
         android:stretchMode="columnWidth" >
     </GridView>
 

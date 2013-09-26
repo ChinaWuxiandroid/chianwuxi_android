@@ -428,8 +428,8 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 		case R.id.gover_eff_btn_writemail:
 			Intent intent = new Intent(getActivity(), MainMineActivity.class);
 			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 5);
-			intent.putExtra(Constants.CheckPositionKey.LEVEL_ONE_KEY, 1);// 这个意思让你选中左侧第二个菜单也就是12345办理平台
-			intent.putExtra(Constants.CheckPositionKey.LEVEL_TWO_KEY, 6);// 这个意思让你选中我要写信
+			intent.putExtra(Constants.CheckPositionKey.LEVEL_TWO__KEY, 1);// 这个意思让你选中左侧第二个菜单也就是12345办理平台
+			intent.putExtra(Constants.CheckPositionKey.LEVEL_THREE_KEY, 6);// 这个意思让你选中我要写信
 
 			MainTabActivity.instance.addView(intent);
 			break;

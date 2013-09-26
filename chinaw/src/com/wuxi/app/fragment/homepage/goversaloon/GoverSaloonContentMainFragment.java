@@ -234,12 +234,13 @@ public class GoverSaloonContentMainFragment extends BaseFragment implements
 			} else if (menuItem.getName().equals("效能投诉")) {
 				onTransaction(new EfficacyComplaintFragment(), null);
 			} else if (menuItem.getName().equals("行政事项")) {
-				Bundle bundle = new Bundle();
+				Bundle bundle = getArguments();
 
 				bundle.putSerializable("menuItem", menuItem);
 				onTransaction(new AdministrativeItemFragment(), bundle);
 			} else if (menuItem.getName().equals("办事指南")) {
-				onTransaction(new BusinessGuideFragment(), null);
+				Bundle bundle=getArguments();
+				onTransaction(new BusinessGuideFragment(), bundle);
 			}
 
 		} else if (menuItem.getType() == MenuItem.CHANNEL_MENU) {

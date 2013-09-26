@@ -107,7 +107,7 @@ public class MenuItemChannelIndexUtil {
 	 *             子频道或子菜单的可为名字和ID
 	 * @return
 	 */
-	public Integer getMenueIndex(String parentId, String subkey) {
+	public Integer getMenueChannelIndex(String parentId, String subkey) {
 		if (indexMap.containsKey(parentId)) {
 			Map<String, Integer> subIndex = indexMap.get(parentId);
 
