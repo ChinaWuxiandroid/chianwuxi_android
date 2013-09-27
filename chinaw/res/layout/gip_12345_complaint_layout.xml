@@ -7,17 +7,17 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="30dp"
+        android:gravity="center_horizontal"
         android:orientation="horizontal" >
 
         <Button
             android:id="@+id/gip_12345_complaint_button_queryMail"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="2dp"
-            android:layout_weight="1"
             android:background="@drawable/vedio_home_saybtn"
             android:text="信件查询"
             android:textColor="@android:color/white"
@@ -25,13 +25,12 @@
 
         <Button
             android:id="@+id/gip_12345_complaint_button_statisticMail"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="2dp"
-            android:layout_weight="1"
             android:background="@drawable/vedio_home_saybtn"
             android:text="信件处理统计"
             android:textColor="@android:color/white"

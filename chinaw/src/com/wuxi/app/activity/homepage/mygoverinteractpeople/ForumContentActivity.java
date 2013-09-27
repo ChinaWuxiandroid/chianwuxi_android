@@ -91,7 +91,7 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 	@Override
 	protected void findMainContentViews(View view) {
 		super.findMainContentViews(view);
-		
+
 		initLayout(view);
 
 		ForumOrdinaryPostFragment forumOrdinaryFragment = new ForumOrdinaryPostFragment();
@@ -116,9 +116,10 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 				popWindow = makePopWindow(ForumContentActivity.this);
 				int[] xy = new int[2];
 				comment_btn.getLocationOnScreen(xy);
+
 				popWindow.showAtLocation(comment_btn, Gravity.BOTTOM
-						| Gravity.CENTER_HORIZONTAL, 0,
-						comment_btn.getHeight()*2+50);
+						| Gravity.CENTER_HORIZONTAL, 0, comment_btn.getHeight()
+						* 3-comment_btn.getHeight()/2);
 			}
 		});
 	}
@@ -138,11 +139,12 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 
 		final EditText submitContent = (EditText) popview
 				.findViewById(R.id.forum_popwindow_content_edit);
-		
+
 		popWindowManager = PopWindowManager.getInstance();
 
-		final PopupWindow popupWindow = new PopupWindow(popview, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, true); 
-		
+		final PopupWindow popupWindow = new PopupWindow(popview,
+				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, true);
+
 		popWindowManager.addPopWindow(popupWindow);
 
 		popupWindow.setBackgroundDrawable(getResources().getDrawable(
@@ -151,7 +153,7 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 		popupWindow.setFocusable(true); // 设置PopupWindow可获得焦点
 		popupWindow.setTouchable(true); // 设置PopupWindow可触摸
 		popupWindow.setOutsideTouchable(true); // 设置非PopupWindow区域可触摸
-		
+
 		submitBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -200,7 +202,6 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 				}
 			}
 		});
-
 
 		return popupWindow;
 	}

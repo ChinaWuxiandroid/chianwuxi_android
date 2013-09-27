@@ -72,7 +72,12 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment {
 		bindFragment(gIP12345IWantMailLayoutFragment);
 	}
 
-	public void changeContent(int type) {
+	/**
+	 * @方法： changeContent
+	 * @描述： 更换内容
+	 * @param type
+	 */
+	private void changeContent(int type) {
 		GoverInterPeopleWebFragment goverInterPeopleWebFragment = new GoverInterPeopleWebFragment();
 		switch (type) {
 		case 0:
@@ -80,17 +85,22 @@ public class GIP12345IWantMailFragment extends RadioButtonChangeFragment {
 			break;
 		case 1:
 			goverInterPeopleWebFragment
-					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148280.shtml");
+					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148280.shtml?backurl=false");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		case 2:
 			goverInterPeopleWebFragment
-					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148283.shtml");
+					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148283.shtml?backurl=false");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		}
 	}
 
+	/**
+	 * @方法： bindFragment
+	 * @描述： 绑定碎片
+	 * @param fragment
+	 */
 	private void bindFragment(Fragment fragment) {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();

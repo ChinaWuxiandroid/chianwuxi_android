@@ -359,6 +359,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 			tv.setText(items[position]);
 			tv.setGravity(Gravity.LEFT);
 			tv.setTextColor(Color.BLACK);
+			tv.setPadding(2, 5, 2, 5);
 
 			return convertView;
 		}
@@ -376,7 +377,8 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 			tv.setText(items[position]);
 			tv.setGravity(Gravity.LEFT);
 			tv.setTextColor(Color.BLACK);
-			tv.setTextSize(8);
+			tv.setTextSize(12);
+
 
 			return convertView;
 		}

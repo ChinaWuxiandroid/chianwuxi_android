@@ -65,7 +65,7 @@ public class VedioReviewFragment extends BaseFragment implements
 	private VedioReviewListAdapter adapter;
 
 	// 数据加载成功标志
-	private static final int DATA__LOAD_SUCESS = 0;
+	private static final int DATA_LOAD_SUCESS = 0;
 	// 数据加载失败标志
 	private static final int DATA_LOAD_ERROR = 1;
 
@@ -97,7 +97,7 @@ public class VedioReviewFragment extends BaseFragment implements
 			}
 
 			switch (msg.what) {
-			case DATA__LOAD_SUCESS:
+			case DATA_LOAD_SUCESS:
 
 				showReviewList();
 				break;
@@ -185,7 +185,7 @@ public class VedioReviewFragment extends BaseFragment implements
 					reviewWrapper = reviewService.getVedioReviewWrapper(
 							startIndex, endIndex);
 					if (reviewWrapper != null) {
-						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
+						handler.sendEmptyMessage(DATA_LOAD_SUCESS);
 					} else {
 						message.obj = "error";
 						handler.sendEmptyMessage(DATA_LOAD_ERROR);

@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.content.Context;
+import android.os.Looper;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -26,16 +27,21 @@ import com.wuxi.domain.MyApplyPageWrapper.MyApplyPage;
 import com.wuxi.exception.NetException;
 import com.wuxi.exception.ResultException;
 
+/**
+ * @类名： GoverMsgMyApplyPageFragment
+ * @描述： 政府信息公开 依申请公开 我的依申请公开办件答复 界面
+ * @作者： 罗森
+ * @创建时间： 2013 2013-9-22 上午11:17:49
+ * @修改时间：
+ * @修改描述：
+ */
 public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment {
 
 	private MyApplyPageWrapper myApplyPageWrapper;
 	private MyApplyPageAdapter adapter;
 
-	private LoginDialog loginDialog;
-
 	@Override
 	protected void initUI() {
-		loginDialog = new LoginDialog(context);
 		super.initUI();
 	}
 
@@ -62,7 +68,30 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment {
 	}
 
 	@Override
+	protected CommonDataWrapper getWarpper(int start, int end) {
+
+		myApplyPageWrapper = new MyApplyPageWrapper();
+		MyApplyPageService service = new MyApplyPageService(context);
+		try {
+			myApplyPageWrapper = service.getMyApplyPages(
+					SystemUtil.getAccessToken(context), start, end);
+		} catch (NetException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (ResultException e) {
+			e.printStackTrace();
+		}
+		return myApplyPageWrapper;
+	}
+
+	@Override
 	protected BaseAdapter getAdapter() {
+
+		for (int i = 0; i < myApplyPageWrapper.getData().size(); i++) {
+			System.out.println(myApplyPageWrapper.getData().get(i).getTitle());
+		}
+
 		adapter = new MyApplyPageAdapter(myApplyPageWrapper.getData(), context);
 		return adapter;
 	}
@@ -75,28 +104,6 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment {
 	@Override
 	protected void switchContents() {
 		adapter.setContents(myApplyPageWrapper.getData());
-	}
-
-	@Override
-	protected CommonDataWrapper getWarpper(int start, int end) {
-
-		myApplyPageWrapper = new MyApplyPageWrapper();
-		MyApplyPageService service = new MyApplyPageService(context);
-		try {
-			if (loginDialog.checkLogin()) {
-				myApplyPageWrapper = service.getMyApplyPages(
-						SystemUtil.getAccessToken(context), start, end);
-			} else {
-				loginDialog.showDialog();
-			}
-		} catch (NetException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		} catch (ResultException e) {
-			e.printStackTrace();
-		}
-		return myApplyPageWrapper;
 	}
 
 	public class MyApplyPageAdapter extends BaseAdapter {
@@ -116,7 +123,11 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment {
 
 		@Override
 		public int getCount() {
-			return contents.size();
+			if (contents.size() > 0) {
+				return contents.size();
+			} else {
+				return 0;
+			}
 		}
 
 		@Override

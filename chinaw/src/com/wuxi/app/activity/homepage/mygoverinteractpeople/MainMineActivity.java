@@ -94,16 +94,19 @@ public class MainMineActivity extends BaseSlideActivity implements
 	public void getArgumentsFromOtherFragment() {
 		Bundle bundle = this.getIntent().getExtras();
 
+
 		if (bundle != null && bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY) != null) {
 			defaultCheckPosition = (Integer) bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY);
+
 		}
-		
+
 	}
 
 	@Override
 	protected void findMainContentViews(View view) {
 		loginDialog = new LoginDialog(this);
-		mListView = (ListView) view.findViewById(R.id.gover_interact_people_mainmenu_listview);
+		mListView = (ListView) view
+				.findViewById(R.id.gover_interact_people_mainmenu_listview);
 
 		if ("".equals(SystemUtil.getAccessToken(this))) {
 			defaultCheckPosition = 1;
@@ -142,7 +145,7 @@ public class MainMineActivity extends BaseSlideActivity implements
 				try {
 					listMenus = menuService.getSubMenuItems(id);
 					if (listMenus != null) {
-						
+
 						msg.what = LEFT_MENUITEM_DATA__LOAD_SUCCESS;
 						handler.sendMessage(msg);
 
@@ -175,15 +178,15 @@ public class MainMineActivity extends BaseSlideActivity implements
 	private void showLeftMenuItemData() {
 
 		adapter = new GoverInteractPeopleNevigationAdapter(getLayoutInflater(),
-			listMenus);
+				listMenus);
 		adapter.setSelectedPosition(defaultCheckPosition);
 		mListView.setDividerHeight(0);
 		mListView.setAdapter(adapter);// 设置适配器
 		mListView.setOnItemClickListener(new MainMineOnItemClickListener());
-		
 
 		if (listMenus.size() > 0) {
-			showContentFragment(showMenItemContentFragment(listMenus.get(defaultCheckPosition)));// 默认显示第一个ConentFragment
+			showContentFragment(showMenItemContentFragment(listMenus
+					.get(defaultCheckPosition)));// 默认显示第一个ConentFragment
 		}
 	}
 
@@ -196,9 +199,10 @@ public class MainMineActivity extends BaseSlideActivity implements
 
 	private void showContentFragment(BaseFragment fragment) {
 		if (fragment != null) {
-			Bundle bundle=getIntent().getExtras();
-			fragment.setArguments(bundle);//传递intent
-			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+			Bundle bundle = getIntent().getExtras();
+			fragment.setArguments(bundle);// 传递intent
+			FragmentTransaction ft = getSupportFragmentManager()
+					.beginTransaction();
 			ft.replace(DETAIL_ID, fragment);// 替换视图
 
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -221,17 +225,15 @@ public class MainMineActivity extends BaseSlideActivity implements
 			return menuItem.getName();
 	}
 
-	
-	private class MainMineOnItemClickListener  implements OnItemClickListener{
+	private class MainMineOnItemClickListener implements OnItemClickListener {
 
-	
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long arg3) {
-			if (position == 0) {
-				if (!loginDialog.checkLogin()) {
-					loginDialog.showDialog();
-				}
+			if (position == 0 && !loginDialog.checkLogin()) {
+
+				loginDialog.showDialog();
+
 			} else {
 				Object object = parent.getItemAtPosition(position);
 
@@ -239,9 +241,9 @@ public class MainMineActivity extends BaseSlideActivity implements
 				adapter.notifyDataSetInvalidated();
 				showContentFragment(showMenItemContentFragment((MenuItem) object));
 			}
-			
+
 		}
-		
+
 	}
-	
+
 }

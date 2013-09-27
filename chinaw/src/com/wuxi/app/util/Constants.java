@@ -21,7 +21,7 @@ public class Constants {
 		/**
 		 * 域名地址
 		 */
-		public static final String DOMAIN_URL = "http://3g.wuxi.gov.cn";
+		public static final String DOMAIN_URL = "http://m.wuxi.gov.cn";
 
 		/**
 		 * 根地址
@@ -263,13 +263,19 @@ public class Constants {
 				+ "/interview/{interViewId}/questions.json";
 
 		/**
+		 * 政民互动 视频直播平台 提交留言提问
+		 */
+		public static final String VIDEO_SUBMIT_IDEA_URL = BASIC_URL
+				+ "/interview/{interViewId}/submit.json";
+
+		/**
 		 * 政民互动 视频直播平台 走进直播间 往期回顾
 		 */
 		public static final String VEDIO_REVIEW_CONTENT_URL = BASIC_URL
 				+ "/interview/history.json";
 
 		/**
-		 * 政民互动 征求意见平台 立法征求意见详情  和 民意征集
+		 * 政民互动 征求意见平台 立法征求意见详情 和 民意征集
 		 */
 		public static final String LEGISLATION_CONTENT_URL = BASIC_URL
 				+ "/politics/{id}.json";
@@ -277,13 +283,15 @@ public class Constants {
 		/**
 		 * 政民互动 征求意见平台 民意征集 回复列表 和 立法征求意见
 		 */
-		public static final String LEGISLATION_REPLY_URL = BASIC_URL+"/politics/replylist.json";
-		
+		public static final String LEGISLATION_REPLY_URL = BASIC_URL
+				+ "/politics/replylist.json";
+
 		/**
 		 * 政民互动 征求意见平台 立法征求意见 民意征集 提交评论 URL
 		 */
-		public static final String LEGISLATION_SUBMIT_DATA_URL = BASIC_URL+"/politics/reply.json";
-		
+		public static final String LEGISLATION_SUBMIT_DATA_URL = BASIC_URL
+				+ "/politics/reply.json";
+
 		/**
 		 * 政民互动 网上调查 列表
 		 */
@@ -494,8 +502,7 @@ public class Constants {
 		/**
 		 * 全文检索 URL
 		 * */
-		public static final String SEARCH_URL = DOMAIN_URL
-				+ "/contentsearch/getJson?jsonpCallback=?&query={query}&sitename={sitename}&countperpage={countperpage}&pagenum={pagenum}";
+		public static final String SEARCH_URL = "http://3g.wuxi.gov.cn/contentsearch/getJson?jsonpCallback=?&query={query}&sitename={sitename}&countperpage={countperpage}&pagenum={pagenum}";
 
 		/**
 		 * 全文检索 sitename
@@ -599,8 +606,7 @@ public class Constants {
 		 * 首页六大主模块导航菜单缓存key名称
 		 */
 		public static final String MAIN_MENUITEM_KEY = "man_menu_item";
-		
-		
+
 		/**
 		 * 收藏菜单+首页六大模块 缓存key
 		 */
@@ -630,8 +636,8 @@ public class Constants {
 	public static final class SharepreferenceKey {
 
 		public static final String LAST_LOGIN_TIME = "last_login_time";// 上一次登录时间
-		
-		public static final String USEAPP_COUNT="use_app_count";//使用app次数
+
+		public static final String USEAPP_COUNT = "use_app_count";// 使用app次数
 
 		/**
 		 * shareprefer名称
@@ -653,7 +659,8 @@ public class Constants {
 		/**
 		 * 测试用户 用户名：youngii 密码：123123 的ACCESSTOKEN
 		 * */
-//		public static final String TEST_ACCESSTOKEN = "bd58fcdfe5b54f4c95ed5f2e3a945f7c";
+		// public static final String TEST_ACCESSTOKEN =
+		// "bd58fcdfe5b54f4c95ed5f2e3a945f7c";
 
 	}
 

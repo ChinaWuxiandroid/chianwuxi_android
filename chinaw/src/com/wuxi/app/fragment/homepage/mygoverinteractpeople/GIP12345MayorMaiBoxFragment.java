@@ -1,6 +1,9 @@
 package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONException;
@@ -9,8 +12,10 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,22 +27,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.webkit.WebView.FindListener;
+import android.widget.AdapterView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345AllMailContentActivity;
 import com.wuxi.app.adapter.MailTypeAdapter;
+import com.wuxi.app.adapter.MayorLettersListAdapter;
 import com.wuxi.app.adapter.QueryMailContentTypeAdapter;
+import com.wuxi.app.engine.LetterService;
 import com.wuxi.app.engine.MailTypeService;
 import com.wuxi.app.engine.QueryLetterDepService;
 import com.wuxi.app.engine.QueryMailContentTypeService;
@@ -46,10 +64,13 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.AllCount;
+import com.wuxi.domain.LetterWrapper;
 import com.wuxi.domain.MailTypeWrapper;
+import com.wuxi.domain.LetterWrapper.Letter;
 import com.wuxi.domain.MailTypeWrapper.MailType;
 import com.wuxi.domain.PartLeaderMailWrapper;
 import com.wuxi.domain.PartLeaderMailWrapper.PartLeaderMail;
+import com.wuxi.domain.QueryLetterCondition;
 import com.wuxi.domain.QueryMailContentTypeWrapper;
 import com.wuxi.domain.QueryMailContentTypeWrapper.QueryMailContentType;
 import com.wuxi.exception.NODataException;
@@ -61,7 +82,9 @@ import com.wuxi.exception.NetException;
  * @author 杨宸 智佳
  * */
 
-public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
+@SuppressLint("SimpleDateFormat")
+public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment
+		implements OnScrollListener, OnClickListener, OnItemClickListener {
 
 	private static final String TAG = "GIP12345MayorMaiBoxFragment";
 
@@ -95,7 +118,7 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 	private int byear;
 	private int bmonth;
 	private int bday;
-	
+
 	private int eyear;
 	private int emonth;
 	private int eday;
@@ -123,7 +146,7 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 	private CheckBox questionCheckbox = null;
 
 	// 信件查询按钮
-	private Button queryMailsBtn = null;
+	public Button queryMailsBtn = null;
 
 	// 信箱分类下拉列表
 	private Spinner boxSortSpinner = null;
@@ -136,6 +159,33 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 
 	private LinearLayout linearLayout = null;
 	private LinearLayout radioLayout = null;
+
+	private FrameLayout frameLayout = null;
+
+	private ListView mListView;
+	private ProgressBar list_pb;
+	
+	private LetterWrapper letterWrapper;
+	private List<Letter> letters ;
+	
+	private MayorLettersListAdapter adapter;
+
+	private int visibleLastIndex;
+	private int visibleItemCount;// 当前显示的总条数
+	// 数据加载成功标识
+	private static final int LETTER_LOAD_SUCESS = 10;
+	// 数据加载失败标识
+	private static final int LETTER_LOAD_ERROR = 11;
+
+	private final static int PAGE_NUM = 10;
+
+	private boolean isFirstLoad = true;// 是不是首次加载数据
+	private boolean isSwitch = false;// 切换
+	private boolean isLoading = false;
+
+	private View loadMoreView;// 加载更多视图
+	private Button loadMoreButton;
+	private ProgressBar pb_loadmoore;
 
 	private View popview = null;
 
@@ -158,15 +208,9 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 	private static String DEFAULT_DEPT_FIFTER = "无限制";
 
 	private int contentType = 0; // 内容类型，缺省为0-信件列表 1-写信须知 2-办理规则
-	
-	//信件查询字段
-	private String keyword = null;
-	private String contenttype = null;
-	private String lettertype = null;
-	private long starttime = 0;
-	private long endtime = 0;
-	private String code = null;
-	private int common = 1; //常见问题：-1->选中；1->未选中
+
+	// 信件查询实体类实例
+	private QueryLetterCondition letterCondition = new QueryLetterCondition();
 
 	private final int[] radioButtonIds = {
 			R.id.gip_12345_mayorbox_radioButton_mailList,
@@ -213,13 +257,22 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 			case LOAD_MAIL_TYPE_FAILED:
 				Toast.makeText(context, "信件类型加载失败", Toast.LENGTH_SHORT).show();
 				break;
-				
+
 			case SHOW_BEGIN_DATE_PICK:
 				showDialog(BEGIN_TIME_DIALOG_ID);
 				break;
-				
+
 			case SHOW_END_DATE_PICK:
 				showDialog(END_TIME_DIALOG_ID);
+				break;
+
+			case LETTER_LOAD_SUCESS:
+				showLettersList();
+				break;
+
+			case LETTER_LOAD_ERROR:
+				list_pb.setVisibility(View.VISIBLE);
+				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
 			}
 		}
@@ -261,12 +314,12 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 			break;
 		case 1:
 			goverInterPeopleWebFragment
-					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148280.shtml");
+					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148280.shtml?backurl=false");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		case 2:
 			goverInterPeopleWebFragment
-					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148283.shtml");
+					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148283.shtml?backurl=false");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		}
@@ -310,6 +363,28 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 	 * @描述： 初始化布局控件
 	 */
 	private void initLayout() {
+
+		frameLayout = (FrameLayout) view
+				.findViewById(R.id.mayor_query_letter_fragment);
+
+		mListView = (ListView) view
+				.findViewById(R.id.gip_12345_query_letter_listView);
+		mListView.setOnItemClickListener(this);
+
+		list_pb = (ProgressBar) view
+				.findViewById(R.id.gip_12345_query_letter_listView_pb);
+
+		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+				null);
+		loadMoreButton = (Button) loadMoreView
+				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
+
+		mListView.addFooterView(loadMoreView);// 为listView添加底部视图
+		mListView.setOnScrollListener(this);// 增加滑动监听
+		loadMoreButton.setOnClickListener(this);
+
 		// 关键字输入框
 		keyWordEdit = (EditText) view
 				.findViewById(R.id.query_mail_key_word_edit);
@@ -353,16 +428,6 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 		// 常见问题复选框
 		questionCheckbox = (CheckBox) view
 				.findViewById(R.id.query_mail_question_checkbox);
-
-		// 信件查询按钮
-		queryMailsBtn = (Button) view.findViewById(R.id.query_mail_btn);
-		queryMailsBtn.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(context, "该功能暂未开通", Toast.LENGTH_SHORT).show();
-			}
-		});
 
 		// 信箱分类下拉列表
 		boxSortSpinner = (Spinner) view
@@ -411,12 +476,290 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 				dealMailBtn.getLocationOnScreen(xy);
 				popWindow.showAtLocation(dealMailBtn, Gravity.BOTTOM
 						| Gravity.RIGHT, 0, dealMailBtn.getHeight() * 2 + 31);
+				dealMailBtn.setVisibility(View.GONE);
 			}
 		});
 
 		linearLayout = (LinearLayout) view.findViewById(R.id.query_mail_layout);
 		radioLayout = (LinearLayout) view
 				.findViewById(R.id.mayorbox_radiobtn_linearlayout);
+
+		// 内容类型下拉框监听
+		boxSortSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> adapterView, View view,
+					int position, long arg3) {
+				letterCondition.setContenttype(contentTypes.get(position)
+						.getTypeid());
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+
+			}
+		});
+
+		// 信件类型下拉框监听
+		emailSortSpinner
+				.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+					@Override
+					public void onItemSelected(AdapterView<?> adapterView,
+							View view, int position, long arg3) {
+						letterCondition.setLettertype(mailTypes.get(position)
+								.getTypeid());
+					}
+
+					@Override
+					public void onNothingSelected(AdapterView<?> arg0) {
+
+					}
+				});
+
+		// 受理部门下拉框监听
+		acceptDepartmentSpinner
+				.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+					@Override
+					public void onItemSelected(AdapterView<?> adapterView,
+							View view, int position, long arg3) {
+						letterCondition
+								.setDepid(depts.get(position).getDepid());
+					}
+
+					@Override
+					public void onNothingSelected(AdapterView<?> arg0) {
+
+					}
+				});
+
+		// 答复部门下拉框监听
+		replyDepartmentSpinner
+				.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+					@Override
+					public void onItemSelected(AdapterView<?> adapterView,
+							View view, int position, long arg3) {
+						letterCondition.setDodepid(depts.get(position)
+								.getDepid());
+					}
+
+					@Override
+					public void onNothingSelected(AdapterView<?> arg0) {
+
+					}
+				});
+
+		// 信件查询按钮
+		queryMailsBtn = (Button) view.findViewById(R.id.query_mail_btn);
+		// 信件查询按钮监听
+		queryMailsBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				letterCondition.setKeyword(keyWordEdit.getText().toString());
+				letterCondition.setCode(mailNoEdit.getText().toString());
+
+				if (questionCheckbox.isChecked()) {
+					letterCondition.setCommon(-1);
+				} else {
+					letterCondition.setCommon(1);
+				}
+				
+				loadFirstData(0, PAGE_NUM);
+
+				view.findViewById(R.id.mayor_box_fragment).setVisibility(
+						View.GONE);
+				frameLayout.setVisibility(View.VISIBLE);
+				linearLayout.setVisibility(LinearLayout.GONE);
+				radioLayout.setVisibility(LinearLayout.VISIBLE);
+
+			}
+		});
+
+	}
+
+	/**
+	 * @方法： loadFirstData
+	 * @描述： 首次加载数据
+	 * @param start
+	 * @param end
+	 */
+	private void loadFirstData(int start, int end) {
+		loadData(start, end);
+	}
+
+	/**
+	 * 加载数据
+	 */
+	public void loadData(final int startIndex, final int endIndex) {
+		if (isFirstLoad || isSwitch) {
+			list_pb.setVisibility(View.VISIBLE);
+		} else {
+			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
+		}
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				isLoading = true;// 正在加载数据
+				Message message = handler.obtainMessage();
+				LetterService letterService = new LetterService(context);
+				try {
+					Looper.prepare();
+					String url = "";
+					if (letterCondition.getKeyword().equals("")) {
+						url = Constants.Urls.MAYOR_MAILBOX_URL + "?start="
+								+ startIndex + "&end=" + endIndex + "&keyword="
+								+ letterCondition.getKeyword()
+								+ "&contenttype="
+								+ letterCondition.getContenttype()
+								+ "&lettertype="
+								+ letterCondition.getLettertype()
+								+ "&starttime="
+								+ letterCondition.getStarttime() + "&endtime="
+								+ letterCondition.getEndtime() + "&code="
+								+ letterCondition.getCode() + "&depid="
+								+ letterCondition.getDepid() + "&dodepid="
+								+ letterCondition.getDodepid() + "&common="
+								+ letterCondition.getCommon();
+					} else {
+						url = Constants.Urls.MAYOR_MAILBOX_URL + "?start="
+								+ startIndex + "&end=" + endIndex + "&keyword="
+								+ letterCondition.getKeyword() + "&lettertype="
+								+ letterCondition.getLettertype()
+								+ "&starttime="
+								+ letterCondition.getStarttime() + "&endtime="
+								+ letterCondition.getEndtime() + "&code="
+								+ letterCondition.getCode() + "&depid="
+								+ letterCondition.getDepid() + "&dodepid="
+								+ letterCondition.getDodepid() + "&common="
+								+ letterCondition.getCommon();
+					}
+
+					System.out.println("查询：" + url);
+					
+					letterWrapper = letterService.getLetterLitstWrapper(url);
+					if (null != letterWrapper) {
+						handler.sendEmptyMessage(LETTER_LOAD_SUCESS);
+					} else {
+						message.obj = "error";
+						handler.sendEmptyMessage(LETTER_LOAD_ERROR);
+					}
+					Looper.loop();
+				} catch (NetException e) {
+					LogUtil.i(TAG, "出错");
+					e.printStackTrace();
+					message.obj = e.getMessage();
+					handler.sendEmptyMessage(LETTER_LOAD_ERROR);
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+				} catch (NODataException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+	}
+
+	/**
+	 * @方法： loadMoreData
+	 * @描述： 加载更多数据
+	 * @param view
+	 */
+	public void loadMoreData(View view) {
+		if (isLoading) {
+			return;
+		} else {
+			loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_NUM);
+		}
+	}
+
+	/**
+	 * 显示列表
+	 */
+	public void showLettersList() {
+		
+		letters = letterWrapper.getData();
+		
+		for (int i = 0; i < letters.size(); i++) {
+			System.out.println("打印："+letters.get(i).getTitle());
+		}
+		
+		if (letters != null && letters.size() > 0) {
+			if (isFirstLoad) {
+				adapter = new MayorLettersListAdapter(letters, context);
+				isFirstLoad = false;
+				mListView.setAdapter(adapter);
+				list_pb.setVisibility(View.GONE);
+				isLoading = false;
+			} else {
+				if (isSwitch) {
+					adapter.setLetters(letters);
+					list_pb.setVisibility(View.GONE);
+				} else {
+					for (Letter letter : letters) {
+						adapter.addItem(letter);
+					}
+				}
+
+				adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
+				mListView.setSelection(visibleLastIndex - visibleItemCount + 1); // 设置选中项
+				isLoading = false;
+			}
+		} else {
+			mListView.setVisibility(View.GONE);
+			Toast.makeText(context, "对不起，暂无市长信箱信息", Toast.LENGTH_SHORT).show();
+		}
+
+		if (letterWrapper.isNext()) {
+			pb_loadmoore.setVisibility(ProgressBar.GONE);
+			loadMoreButton.setText("点击加载更多");
+		} else {
+			mListView.removeFooterView(loadMoreView);
+		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> adapterView, View arg1,
+			int position, long arg3) {
+		Letter letter = (Letter) adapterView.getItemAtPosition(position);
+
+		Intent intent = new Intent(getActivity(),
+				GIP12345AllMailContentActivity.class);
+		intent.putExtra("letter", letter);
+
+		MainTabActivity.instance.addView(intent);
+	}
+
+	@Override
+	public void onScroll(AbsListView view, int firstVisibleItem,
+			int visibleItemCount, int totalItemCount) {
+		this.visibleItemCount = visibleItemCount;
+		visibleLastIndex = firstVisibleItem + visibleItemCount - 1;// 最后一条索引号
+	}
+
+	@Override
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+		int itemsLastIndex = adapter.getCount() - 1; // 数据集最后一项的索引
+		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
+	}
+
+	@Override
+	public void onClick(View v) {
+
+		switch (v.getId()) {
+		case R.id.loadMoreButton:
+			if (letterWrapper != null && letterWrapper.isNext()) {// 还有下一条记录
+
+				isSwitch = false;
+				loadMoreButton.setText("loading.....");
+				loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_NUM);
+			}
+			break;
+		}
 	}
 
 	/**
@@ -442,6 +785,20 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 				.append((bmonth + 1) < 10 ? "0" + (bmonth + 1) : (bmonth + 1))
 				.append("-").append((bday < 10) ? "0" + bday : bday);
 		timeBeginEdit.setText(sb);
+
+		// 获取日期格式实例
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		// 时间实例
+		Date date = null;
+		try {
+			// 将字符串按照一定的格式转换成时间对象，即long数据
+			date = format.parse(sb.toString());
+			// 设置查询条件的开始时间的值
+			letterCondition.setStarttime(date.getTime());
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -467,6 +824,21 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 				.append((emonth + 1) < 10 ? "0" + (emonth + 1) : (emonth + 1))
 				.append("-").append((eday < 10) ? "0" + eday : eday);
 		timeEndEdit.setText(sb);
+
+		// 获取日期格式实例
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		// 时间实例
+		Date date = null;
+
+		try {
+			// 将字符串按照一定的格式转换成时间对象，即long数据
+			date = format.parse(sb.toString());
+			// 设置查询条件的结束时间的值
+			letterCondition.setEndtime(date.getTime());
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -495,41 +867,43 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 			GIP12345MayorMaiBoxFragment.this.eyear = year;
 			GIP12345MayorMaiBoxFragment.this.emonth = monthOfYear;
 			GIP12345MayorMaiBoxFragment.this.eday = dayOfMonth;
-			updateBeginDateDisplay();
+			updateEndDateDisplay();
 		}
 	};
-	
+
 	/**
 	 * @方法： onCreateDialog
 	 * @描述： 创建时间选择对话框
 	 * @param id
-	 * @return
+	 * @return Dialog
 	 */
-	private Dialog onCreateDialog(int id){
+	private Dialog onCreateDialog(int id) {
 		switch (id) {
 		case BEGIN_TIME_DIALOG_ID:
-			DatePickerDialog beginDialog = new DatePickerDialog(context, beginDateListener, byear, bmonth, bday);
+			DatePickerDialog beginDialog = new DatePickerDialog(context,
+					beginDateListener, byear, bmonth, bday);
 			beginDialog.setIcon(R.drawable.logo);
 			beginDialog.show();
-			return beginDialog ;
+			return beginDialog;
 		case END_TIME_DIALOG_ID:
-			DatePickerDialog endDialog = new DatePickerDialog(context, endDateListener, eyear, emonth, eday);
+			DatePickerDialog endDialog = new DatePickerDialog(context,
+					endDateListener, eyear, emonth, eday);
 			endDialog.setIcon(R.drawable.logo);
 			endDialog.show();
-			return endDialog ;
+			return endDialog;
 		}
 		return null;
 	}
-	
+
 	/**
 	 * @方法： showDialog
 	 * @描述： 显示日期选择对话框
 	 * @param id
 	 */
-	private void showDialog(int id){
+	private void showDialog(int id) {
 		onCreateDialog(id);
 	}
-	
+
 	/**
 	 * 绑定碎片
 	 * 
@@ -821,7 +1195,7 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment {
 	 * @修改描述：
 	 * 
 	 */
-	public class DeptAdapter extends BaseAdapter{
+	public class DeptAdapter extends BaseAdapter {
 
 		@Override
 		public int getCount() {

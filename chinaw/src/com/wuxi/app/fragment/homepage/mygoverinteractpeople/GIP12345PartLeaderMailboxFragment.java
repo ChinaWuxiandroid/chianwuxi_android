@@ -65,7 +65,6 @@ public class GIP12345PartLeaderMailboxFragment extends RadioButtonChangeFragment
 	@Override
 	protected void init() {
 		PartLeaderBoxListFragment leaderMailListFragment = new PartLeaderBoxListFragment();
-		
 		bindFragment(leaderMailListFragment);
 	}
 	
@@ -81,7 +80,7 @@ public class GIP12345PartLeaderMailboxFragment extends RadioButtonChangeFragment
 			break;
 		case 1:
 			goverInterPeopleWebFragment
-					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148278.shtml");
+					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148278.shtml?backurl=false");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		}

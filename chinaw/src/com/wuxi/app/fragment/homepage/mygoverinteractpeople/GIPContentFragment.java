@@ -2,6 +2,8 @@ package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
 import java.util.List;
 
+import android.widget.Toast;
+
 import com.wuxi.app.listeners.GoverInterPeopleInitLayoutImpl;
 import com.wuxi.app.listeners.MenuItemInitLayoutListener;
 import com.wuxi.domain.MenuItem;
@@ -81,6 +83,8 @@ public class GIPContentFragment extends GoverMenuItemTitleFragment {
 			}else if(menu.getType() == MenuItem.CUSTOM_MENU){//普通菜单
 				if(menu.getName().equals("走进直播间")){
 					menu.setContentFragment(GoverInterPeopleVideoLiveFragment.class);
+				}else if (menu.getName().equals("行风热线")) {
+					Toast.makeText(getActivity(), "该功能暂未实现", Toast.LENGTH_SHORT).show();
 				}
 
 			} 

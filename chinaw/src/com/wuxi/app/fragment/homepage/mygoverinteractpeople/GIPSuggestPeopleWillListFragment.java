@@ -72,7 +72,7 @@ public class GIPSuggestPeopleWillListFragment extends BaseFragment implements
 
 	private SuggestPeopleListAdapter adapter;
 
-	private static final int DATA__LOAD_SUCESS = 0;
+	private static final int DATA_LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
 
 	private final int POLITICS_TYPE = 1; // politics类型，接口里0 为立法征集，1 为民意征集
@@ -108,7 +108,7 @@ public class GIPSuggestPeopleWillListFragment extends BaseFragment implements
 				tip = msg.obj.toString();
 			}
 			switch (msg.what) {
-			case DATA__LOAD_SUCESS:
+			case DATA_LOAD_SUCESS:
 				showPoloticsList();
 				break;
 			case DATA_LOAD_ERROR:
@@ -195,7 +195,7 @@ public class GIPSuggestPeopleWillListFragment extends BaseFragment implements
 				try {
 					politicsWrapper = politicsService.getPoliticsWrapper(url);
 					if (null != politicsWrapper) {
-						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
+						handler.sendEmptyMessage(DATA_LOAD_SUCESS);
 					} else {
 						message.obj = "error";
 						handler.sendEmptyMessage(DATA_LOAD_ERROR);
@@ -223,6 +223,7 @@ public class GIPSuggestPeopleWillListFragment extends BaseFragment implements
 		
 		if (politics == null || politics.size() == 0) {
 			Toast.makeText(context, "对不起，暂无民意征集信息", Toast.LENGTH_SHORT).show();
+			list_pb.setVisibility(View.GONE);
 		} else {
 			if (isFirstLoad) {
 				adapter = new SuggestPeopleListAdapter(context, politics);

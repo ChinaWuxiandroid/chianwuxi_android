@@ -125,7 +125,7 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment
 		mListView = (ListView) view
 				.findViewById(R.id.gip_12345_mayorbox_listView);
 		mListView.setOnItemClickListener(this);
-		
+
 		list_pb = (ProgressBar) view
 				.findViewById(R.id.gip_12345_mayorbox_listView_pb);
 
@@ -170,16 +170,19 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment
 				Message message = handler.obtainMessage();
 				LetterService letterService = new LetterService(context);
 				try {
-					letterWrapper = letterService.getLetterLitstWrapper(
-							Constants.Urls.MAYOR_MAILBOX_URL, startIndex,
-							endIndex);
+
+					String url = "";
+
+					url = Constants.Urls.MAYOR_MAILBOX_URL + "?start="
+							+ startIndex + "&end=" + endIndex;
+
+					letterWrapper = letterService.getLetterLitstWrapper(url);
 					if (null != letterWrapper) {
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
 					} else {
 						message.obj = "error";
 						handler.sendEmptyMessage(DATA_LOAD_ERROR);
 					}
-
 				} catch (NetException e) {
 					LogUtil.i(TAG, "出错");
 					e.printStackTrace();
@@ -224,12 +227,12 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment
 				if (isSwitch) {
 					adapter.setLetters(letters);
 					list_pb.setVisibility(View.GONE);
-				}else{
+				} else {
 					for (Letter letter : letters) {
 						adapter.addItem(letter);
 					}
 				}
-				
+
 				adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
 				mListView.setSelection(visibleLastIndex - visibleItemCount + 1); // 设置选中项
 				isLoading = false;

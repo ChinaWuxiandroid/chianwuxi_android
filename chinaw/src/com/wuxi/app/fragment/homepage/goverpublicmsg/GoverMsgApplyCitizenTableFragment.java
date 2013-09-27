@@ -31,41 +31,47 @@ import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.ApplyDept;
 import com.wuxi.exception.NetException;
 
-public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements OnClickListener{
+public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
+		OnClickListener {
+
 	protected View view;
 	protected LayoutInflater mInflater;
 	private Context context;
 
-	private static final int SUBMIT_SUCCESS=3;
-	private static final int SUBMIT_FAILED=4;
+	private static final int SUBMIT_SUCCESS = 3;
+	private static final int SUBMIT_FAILED = 4;
 	private List<ApplyDept> depts;
 
-	//提交变量
-	String name="",workadd="",papername="",papernum="",address="",postcode="",phone="",fax="",email="",describe="",use="",applydate="";
-	String check_paper="",check_mail="",check_dis="",check_post="",check_express="";
+	// 提交变量
+	String name = "", workadd = "", papername = "", papernum = "",
+			address = "", postcode = "", phone = "", fax = "", email = "",
+			describe = "", use = "", applydate = "";
+	String check_paper = "", check_mail = "", check_dis = "", check_post = "",
+			check_express = "";
 
-	//可选项
+	// 可选项
 	private TextView solveByDept;
-	private CheckBox paper_ckBox,mail_ckBox,dis_ckBox,post_ckBox,express_ckBox;
+	private CheckBox paper_ckBox, mail_ckBox, dis_ckBox, post_ckBox,
+			express_ckBox;
 
-	//必选项
-	private EditText name_et,workadd_et,papername_et,papernum_et,address_et,postcode_et,phone_et,fax_et,email_et,describe_et,use_et;
+	// 必选项
+	private EditText name_et, workadd_et, papername_et, papernum_et,
+			address_et, postcode_et, phone_et, fax_et, email_et, describe_et,
+			use_et;
 	private TextView applyDate_txt;
 
-
-	private ImageButton submit_ibtn,cancel_ibtn;
+	private ImageButton submit_ibtn, cancel_ibtn;
 	private ProgressBar pb;
 
-
 	private Calendar calendar;
-	private int year,month,day;
+	private int year, month, day;
 
 	private ApplyDept applyDept;
-	
+
 	private LoginDialog loginDialog;
 
-	public void setDept(ApplyDept applyDept){
-		this.applyDept=applyDept;
+	public void setDept(ApplyDept applyDept) {
+		this.applyDept = applyDept;
 	}
 
 	@SuppressLint("HandlerLeak")
@@ -95,69 +101,78 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements O
 		return view;
 	}
 
-	public void initView(){
-		
-		loginDialog = new LoginDialog(context);//实例化登录对话框
-		
-		if(!loginDialog.checkLogin()){
+	public void initView() {
+
+		loginDialog = new LoginDialog(context);// 实例化登录对话框
+
+		if (!loginDialog.checkLogin()) {
 			loginDialog.showDialog();
 		}
-		
-		calendar=Calendar.getInstance();
-		year=calendar.get(Calendar.YEAR);
-		month=calendar.get(Calendar.MONTH);
-		day=calendar.get(Calendar.DAY_OF_MONTH);
 
-		pb=(ProgressBar)view.findViewById(R.id.citizen_infosubmit_pb);
-		submit_ibtn=(ImageButton)view.findViewById(R.id.worksuggestbox_imgbtn_submit);
-		cancel_ibtn=(ImageButton)view.findViewById(R.id.worksuggestbox_imgbtn_cancel);
-		//可选项-----------------------------------------------------------
-		solveByDept=(TextView)view.findViewById(R.id.citizen_solve_bydept);
+		calendar = Calendar.getInstance();
+		year = calendar.get(Calendar.YEAR);
+		month = calendar.get(Calendar.MONTH);
+		day = calendar.get(Calendar.DAY_OF_MONTH);
 
-		paper_ckBox=(CheckBox)view.findViewById(R.id.citizen_info_supply_paper_checkbox);
-		mail_ckBox=(CheckBox)view.findViewById(R.id.citizen_info_supply_email_checkbox);
-		dis_ckBox=(CheckBox)view.findViewById(R.id.citizen_info_supply_disk_checkbox);
-		post_ckBox=(CheckBox)view.findViewById(R.id.citizen_info_get_post_checkbox);
-		express_ckBox=(CheckBox)view.findViewById(R.id.citizen_info_get_express_checkbox);
-		//可选项-----------------------------------------------------------
+		pb = (ProgressBar) view.findViewById(R.id.citizen_infosubmit_pb);
+		submit_ibtn = (ImageButton) view
+				.findViewById(R.id.worksuggestbox_imgbtn_submit);
+		cancel_ibtn = (ImageButton) view
+				.findViewById(R.id.worksuggestbox_imgbtn_cancel);
+		// 可选项-----------------------------------------------------------
+		solveByDept = (TextView) view.findViewById(R.id.citizen_solve_bydept);
 
+		paper_ckBox = (CheckBox) view
+				.findViewById(R.id.citizen_info_supply_paper_checkbox);
+		mail_ckBox = (CheckBox) view
+				.findViewById(R.id.citizen_info_supply_email_checkbox);
+		dis_ckBox = (CheckBox) view
+				.findViewById(R.id.citizen_info_supply_disk_checkbox);
+		post_ckBox = (CheckBox) view
+				.findViewById(R.id.citizen_info_get_post_checkbox);
+		express_ckBox = (CheckBox) view
+				.findViewById(R.id.citizen_info_get_express_checkbox);
+		// 可选项-----------------------------------------------------------
 
-		//必选项-----------------------------------------------------------
-		name_et=(EditText)view.findViewById(R.id.citizen_name_edit);
-		workadd_et=(EditText)view.findViewById(R.id.citizen_workadd_edit);
-		papername_et=(EditText)view.findViewById(R.id.citizen_papers_name_edit);
-		papernum_et=(EditText)view.findViewById(R.id.citizen_papers_num_edit);
-		address_et=(EditText)view.findViewById(R.id.citizen_address_edit);
-		postcode_et=(EditText)view.findViewById(R.id.citizen_postcode_edit);
-		phone_et=(EditText)view.findViewById(R.id.citizen_phone_edit);
-		fax_et=(EditText)view.findViewById(R.id.citizen_fax_edit);
-		email_et=(EditText)view.findViewById(R.id.citizen_email_edit);
-		describe_et=(EditText)view.findViewById(R.id.citizen_info_describe_edit);
-		use_et=(EditText)view.findViewById(R.id.citizen_info_use_edit);
+		// 必选项-----------------------------------------------------------
+		name_et = (EditText) view.findViewById(R.id.citizen_name_edit);
+		workadd_et = (EditText) view.findViewById(R.id.citizen_workadd_edit);
+		papername_et = (EditText) view
+				.findViewById(R.id.citizen_papers_name_edit);
+		papernum_et = (EditText) view
+				.findViewById(R.id.citizen_papers_num_edit);
+		address_et = (EditText) view.findViewById(R.id.citizen_address_edit);
+		postcode_et = (EditText) view.findViewById(R.id.citizen_postcode_edit);
+		phone_et = (EditText) view.findViewById(R.id.citizen_phone_edit);
+		fax_et = (EditText) view.findViewById(R.id.citizen_fax_edit);
+		email_et = (EditText) view.findViewById(R.id.citizen_email_edit);
+		describe_et = (EditText) view
+				.findViewById(R.id.citizen_info_describe_edit);
+		use_et = (EditText) view.findViewById(R.id.citizen_info_use_edit);
 
-		applyDate_txt=(TextView)view.findViewById(R.id.citizen_apply_time_txt);
-		applyDate_txt.setText(""+year+"-"+month+"-"+day);
+		applyDate_txt = (TextView) view
+				.findViewById(R.id.citizen_apply_time_txt);
+		applyDate_txt.setText("" + year + "-" + month + "-" + day);
 		solveByDept.setText(applyDept.getDepName());
-		//必选项-----------------------------------------------------------
+		// 必选项-----------------------------------------------------------
 		submit_ibtn.setOnClickListener(this);
 		cancel_ibtn.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
-		switch(v.getId()){
+		switch (v.getId()) {
 		case R.id.worksuggestbox_imgbtn_submit:
-			//关闭软键盘
-			InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE); 
+			// 关闭软键盘
+			InputMethodManager imm = (InputMethodManager) context
+					.getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(submit_ibtn.getWindowToken(), 0);
-			//检测登录状态
-			if(loginDialog.checkLogin()){
+			// 检测登录状态
+			if (loginDialog.checkLogin()) {
 				submitData();
-			}
-			else{
+			} else {
 				loginDialog.showDialog();
 			}
-			
 
 			break;
 		case R.id.worksuggestbox_imgbtn_cancel:
@@ -165,17 +180,17 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements O
 			Toast.makeText(context, "取消提交", Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.citizen_apply_time_txt:
-			//			showDateSelectDialog(applyDate_txt);
+			// showDateSelectDialog(applyDate_txt);
 			break;
 		}
 
 	}
 
 	/**
-	 *提交
+	 * 提交
 	 * */
-	public void submitData(){
-		if(!judgeDataLegal()){
+	public void submitData() {
+		if (!judgeDataLegal()) {
 			getCheckBoxResult();
 			pb.setVisibility(ProgressBar.VISIBLE);
 
@@ -183,17 +198,18 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements O
 
 				@Override
 				public void run() {
-					SubmitListService submitListService=new SubmitListService(context);
+					SubmitListService submitListService = new SubmitListService(
+							context);
 					try {
-						boolean success=false;
-						success=submitListService.submitByUrl(getUrl(Constants.Urls.CITIZEN_APPLY_SUBMIT_URL,
+						boolean success = false;
+						success = submitListService.submitByUrl(getUrl(
+								Constants.Urls.CITIZEN_APPLY_SUBMIT_URL,
 								SystemUtil.getAccessToken(context),
 								applyDept.getDoProjectId(),
 								applyDept.getDepId()));
-						if(success){
+						if (success) {
 							handler.sendEmptyMessage(SUBMIT_SUCCESS);
-						}
-						else{
+						} else {
 							handler.sendEmptyMessage(SUBMIT_FAILED);
 						}
 					} catch (NetException e) {
@@ -206,124 +222,118 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements O
 		}
 	}
 
-	//获取提交公民在线申请 的url
-	public String getUrl(String urlhead,String access_token,String doProjectId,String depid){
-		String url=urlhead+"?access_token="+access_token+"&doprojectid="+doProjectId+"&depid="+depid;
-		url=url+"&username="+name+"&workunit="+workadd+"&certificatetype="+papername+"&certificateno="+papernum
-				+"&address="+address+"&postalcode="+postcode+"&tel="+phone+"&fax="+fax+"&email="+email
-				+"&content="+describe+"&title="+use;
-		url=url+"&offertype="+check_paper+"/"+check_mail+"/"+check_dis;
-		url=url+"&getinfotype="+check_post+"/"+check_express;
+	// 获取提交公民在线申请 的url
+	public String getUrl(String urlhead, String access_token,
+			String doProjectId, String depid) {
+		String url = urlhead + "?access_token=" + access_token
+				+ "&doprojectid=" + doProjectId + "&depid=" + depid;
+		url = url + "&username=" + name + "&workunit=" + workadd
+				+ "&certificatetype=" + papername + "&certificateno="
+				+ papernum + "&address=" + address + "&postalcode=" + postcode
+				+ "&tel=" + phone + "&fax=" + fax + "&email=" + email
+				+ "&content=" + describe + "&title=" + use;
+		url = url + "&offertype=" + check_paper + "/" + check_mail + "/"
+				+ check_dis;
+		url = url + "&getinfotype=" + check_post + "/" + check_express;
 		return url;
 	}
 
-
-	public void getCheckBoxResult(){
-		if(paper_ckBox.isChecked()){
-			check_paper="纸面";
+	public void getCheckBoxResult() {
+		if (paper_ckBox.isChecked()) {
+			check_paper = "纸面";
 		}
-		if(mail_ckBox.isChecked()){
-			check_mail="电子邮件";
+		if (mail_ckBox.isChecked()) {
+			check_mail = "电子邮件";
 		}
-		if(dis_ckBox.isChecked()){
-			check_dis="光盘";
+		if (dis_ckBox.isChecked()) {
+			check_dis = "光盘";
 		}
-		if(post_ckBox.isChecked()){
-			check_post="邮寄";
+		if (post_ckBox.isChecked()) {
+			check_post = "邮寄";
 		}
-		if(express_ckBox.isChecked()){
-			check_express="快递";
+		if (express_ckBox.isChecked()) {
+			check_express = "快递";
 		}
 	}
+
 	/**
 	 * 判断输入 是否为空
 	 * */
-	public boolean judgeDataLegal(){
-		boolean inputError=false;
-		name=name_et.getText().toString();
-		workadd=workadd_et.getText().toString();
-		papername=papername_et.getText().toString();
-		papernum=papernum_et.getText().toString();
-		address=address_et.getText().toString();
-		postcode=postcode_et.getText().toString();
-		phone=phone_et.getText().toString();
-		fax=fax_et.getText().toString();
-		email=email_et.getText().toString();
-		describe=describe_et.getText().toString();
-		use=use_et.getText().toString();
-		applydate=applyDate_txt.getText().toString();
+	public boolean judgeDataLegal() {
+		boolean inputError = false;
+		name = name_et.getText().toString();
+		workadd = workadd_et.getText().toString();
+		papername = papername_et.getText().toString();
+		papernum = papernum_et.getText().toString();
+		address = address_et.getText().toString();
+		postcode = postcode_et.getText().toString();
+		phone = phone_et.getText().toString();
+		fax = fax_et.getText().toString();
+		email = email_et.getText().toString();
+		describe = describe_et.getText().toString();
+		use = use_et.getText().toString();
+		applydate = applyDate_txt.getText().toString();
 
-		if(!inputError&&"".equals(name)){
+		if (!inputError && "".equals(name)) {
 			Toast.makeText(context, "姓名不能为空", Toast.LENGTH_SHORT).show();
-			inputError=true;
-		}
-		else if(!inputError&&"".equals(workadd)){
+			inputError = true;
+		} else if (!inputError && "".equals(workadd)) {
 			Toast.makeText(context, "工作单位不能为空", Toast.LENGTH_SHORT).show();
-			inputError=true;
-		}
-		else if(!inputError&&"".equals(papername)){
+			inputError = true;
+		} else if (!inputError && "".equals(papername)) {
 			Toast.makeText(context, "证件名称不能为空", Toast.LENGTH_SHORT).show();
-			inputError=true;
-		}
-		else if(!inputError&&"".equals(papernum)){
+			inputError = true;
+		} else if (!inputError && "".equals(papernum)) {
 			Toast.makeText(context, "证件号码不能为空", Toast.LENGTH_SHORT).show();
-			inputError=true;
-		}
-		else if(!inputError&&"".equals(address)){
+			inputError = true;
+		} else if (!inputError && "".equals(address)) {
 			Toast.makeText(context, "联系地址不能为空", Toast.LENGTH_SHORT).show();
-			inputError=true;
-		}
-		else if(!inputError&&"".equals(postcode)){
+			inputError = true;
+		} else if (!inputError && "".equals(postcode)) {
 			Toast.makeText(context, "邮政编码不能为空", Toast.LENGTH_SHORT).show();
-			inputError=true;
-		}
-		else if(!inputError&&"".equals(phone)){
+			inputError = true;
+		} else if (!inputError && "".equals(phone)) {
 			Toast.makeText(context, "联系电话不能为空", Toast.LENGTH_SHORT).show();
-			inputError=true;
-		}
-		else if(!inputError&&"".equals(fax)){
+			inputError = true;
+		} else if (!inputError && "".equals(fax)) {
 			Toast.makeText(context, "传真不能为空", Toast.LENGTH_SHORT).show();
-			inputError=true;
-		}
-		else if(!inputError&&"".equals(email)){
+			inputError = true;
+		} else if (!inputError && "".equals(email)) {
 			Toast.makeText(context, "电子邮件不能为空", Toast.LENGTH_SHORT).show();
-			inputError=true;
-		}
-		else if(!inputError&&"".equals(applydate)){
+			inputError = true;
+		} else if (!inputError && "".equals(applydate)) {
 			Toast.makeText(context, "申请时间不能为空", Toast.LENGTH_SHORT).show();
-			inputError=true;
-		}
-		else if(!inputError&&"".equals(describe)){
+			inputError = true;
+		} else if (!inputError && "".equals(describe)) {
 			Toast.makeText(context, "所需内容信息的描述不能为空", Toast.LENGTH_SHORT).show();
-			inputError=true;
-		}
-		else if(!inputError&&"".equals(use)){
+			inputError = true;
+		} else if (!inputError && "".equals(use)) {
 			Toast.makeText(context, "所需信息的用途不能为空", Toast.LENGTH_SHORT).show();
-			inputError=true;
+			inputError = true;
 		}
 
 		return inputError;
 	}
 
-	//	public void showDateSelectDialog(final TextView textview){
-	//		new DatePickerDialog(getActivity(), new OnDateSetListener() {
-	//			@Override
-	//			public void onDateSet(DatePicker view, int year,
-	//					int monthOfYear, int dayOfMonth) {
-	//				monthOfYear=monthOfYear+1;
-	//				String monthStr="",dayStr="";
-	//				if(monthOfYear<10)
-	//					monthStr="0"+monthOfYear;
-	//				else
-	//					monthStr=""+monthOfYear;
-	//				if(dayOfMonth<10)
-	//					dayStr="0"+dayOfMonth;
-	//				else
-	//					dayStr=""+dayOfMonth;
+	// public void showDateSelectDialog(final TextView textview){
+	// new DatePickerDialog(getActivity(), new OnDateSetListener() {
+	// @Override
+	// public void onDateSet(DatePicker view, int year,
+	// int monthOfYear, int dayOfMonth) {
+	// monthOfYear=monthOfYear+1;
+	// String monthStr="",dayStr="";
+	// if(monthOfYear<10)
+	// monthStr="0"+monthOfYear;
+	// else
+	// monthStr=""+monthOfYear;
+	// if(dayOfMonth<10)
+	// dayStr="0"+dayOfMonth;
+	// else
+	// dayStr=""+dayOfMonth;
 	//
-	//				textview.setText(""+year +monthStr+dayStr);
-	//			}
-	//		}, year, month, day).show();
-	//	}
+	// textview.setText(""+year +monthStr+dayStr);
+	// }
+	// }, year, month, day).show();
+	// }
 
 }

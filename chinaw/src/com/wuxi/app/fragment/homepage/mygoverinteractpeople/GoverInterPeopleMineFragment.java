@@ -79,7 +79,7 @@ public class GoverInterPeopleMineFragment extends RadioButtonChangeFragment{
 
 	@Override
 	protected void init() {
-		BaseFragment mine12345Fragment=new GIPMine12345Fragment();
+		GIPMine12345Fragment mine12345Fragment=new GIPMine12345Fragment();
 		onTransaction(mine12345Fragment);
 	}
 }

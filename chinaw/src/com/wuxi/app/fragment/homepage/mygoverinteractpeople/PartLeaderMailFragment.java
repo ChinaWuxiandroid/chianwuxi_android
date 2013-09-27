@@ -17,6 +17,7 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -43,8 +44,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.BaseSlideActivity;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity;
 import com.wuxi.app.adapter.MailTypeAdapter;
 import com.wuxi.app.adapter.QueryMailContentTypeAdapter;
 import com.wuxi.app.engine.MailTypeService;
@@ -52,8 +56,6 @@ import com.wuxi.app.engine.PartLeaderMailService;
 import com.wuxi.app.engine.QueryMailContentTypeService;
 import com.wuxi.app.engine.ReplyStatisticsService;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment.DeptAdapter;
-import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment.DeptAdapter.ViewHolder;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.AllCount;
@@ -100,7 +102,6 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 	private static final int LOAD_MAIL_TYPE_FAILED = 7;
 
 	private static String DEFAULT_DEPT_FIFTER = "无限制";
-	private String deptStrFifter = DEFAULT_DEPT_FIFTER;
 
 	private Button dealMailBtn = null;
 	private Button queryMailBtn = null;
@@ -245,11 +246,16 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 			break;
 		case 1:
 			goverInterPeopleWebFragment
-					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148278.shtml");
+					.setUrl("http://www.wuxi.gov.cn/wap/zmhd/6148278.shtml?backurl=false");
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		case 2:
-			Toast.makeText(context, "该功能暂未实现", Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(getActivity(), MainMineActivity.class);
+			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 5);
+		
+			intent.putExtra(Constants.CheckPositionKey.LEVEL_TWO__KEY, 1);// 这个意思让你选中左侧第二个菜单也就是12345办理平台
+			intent.putExtra(Constants.CheckPositionKey.LEVEL_THREE_KEY, 6);// 这个意思让你选中我要写信
+			MainTabActivity.instance.addView(intent);
 			break;
 		}
 	}
@@ -357,6 +363,7 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 				queryMailBtn.getLocationOnScreen(xy);
 				popWindow.showAtLocation(queryMailBtn, Gravity.BOTTOM
 						| Gravity.RIGHT, 0, queryMailBtn.getHeight() * 2 + 31);
+				dealMailBtn.setVisibility(View.GONE);
 			}
 		});
 
@@ -736,8 +743,6 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 		@Override
 		public void onItemSelected(AdapterView<?> arg0, View arg1,
 				int position, long arg3) {
-			// 设置下拉列表内容
-			deptStrFifter = depts.get(position).getDepname();
 		}
 
 		@Override

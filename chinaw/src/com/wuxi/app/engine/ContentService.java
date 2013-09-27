@@ -138,6 +138,7 @@ public class ContentService extends Service {
 		String url = Constants.Urls.CHANNEL_CONTENT_P_URL.replace("{id}", id)
 				.replace("{start}", start + "")
 				.replace("{end}", end + "");
+		
 		String resultStr = httpUtils.executeGetToString(url, 5000);
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);

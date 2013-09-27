@@ -12,44 +12,46 @@ import com.wuxi.domain.MenuItem;
  * @author 杨宸 智佳
  * */
 public class GoverMsgNaviWithContentFragment extends
-MenuItemNavigatorWithContentFragment {
+		MenuItemNavigatorWithContentFragment {
+
 	@Override
 	protected Fragment showMenItemContentFragment(MenuItem menuItem) {
 
-		if(menuItem.getType() == MenuItem.CUSTOM_MENU||menuItem.getType() == MenuItem.CHANNEL_MENU){
-			NavigatorContentExpandListFragment navigatorContentExpandListFragment=new NavigatorContentExpandListFragment();
-			
+		if (menuItem.getType() == MenuItem.CUSTOM_MENU
+				|| menuItem.getType() == MenuItem.CHANNEL_MENU) {
+			NavigatorContentExpandListFragment navigatorContentExpandListFragment = new NavigatorContentExpandListFragment();
+
 			navigatorContentExpandListFragment.setParentItem(menuItem);
 			return navigatorContentExpandListFragment;
-		}
-		else if (menuItem.getType() == MenuItem.WAP_MENU) {
+		} else if (menuItem.getType() == MenuItem.WAP_MENU) {
 			GoverMsgWebFragment wapFragment = new GoverMsgWebFragment();
 			wapFragment.setParentItem(menuItem);
 			return wapFragment;
-		}
-		else if(menuItem.getType() == MenuItem.APP_MENU){
-			//依申请公开   --各部门依申请公开
-			if(menuItem.getAppUI().equals("Applyopen_dept")){
-				GoverMsgApplyDownloadFragment goverMsgDeptApplyOpenFragment=new GoverMsgApplyDownloadFragment();
-				goverMsgDeptApplyOpenFragment.setType(GoverMsgApplyDownloadFragment.DEPT_TYPE);
-				
+		} else if (menuItem.getType() == MenuItem.APP_MENU) {
+			// 依申请公开 --各部门依申请公开
+			if (menuItem.getAppUI().equals("Applyopen_dept")) {
+				GoverMsgApplyDownloadFragment goverMsgDeptApplyOpenFragment = new GoverMsgApplyDownloadFragment();
+				goverMsgDeptApplyOpenFragment
+						.setType(GoverMsgApplyDownloadFragment.DEPT_TYPE);
+
 				return goverMsgDeptApplyOpenFragment;
 			}
-			//依申请公开   --我的依申请公开办件答复
-			else if(menuItem.getAppUI().equals("myapplypage")){
-				GoverMsgMyApplyPageFragment goverMsgMyApplyPageFragment=new GoverMsgMyApplyPageFragment();
+			// 依申请公开 --我的依申请公开办件答复
+			else if (menuItem.getAppUI().equals("myapplypage")) {
+				GoverMsgMyApplyPageFragment goverMsgMyApplyPageFragment = new GoverMsgMyApplyPageFragment();
 				return goverMsgMyApplyPageFragment;
 			}
-			//依申请公开   --各市(县)区依申请公开
-			else if(menuItem.getAppUI().equals("Applyopen_city")){
-				GoverMsgApplyDownloadFragment goverMsgDeptApplyOpenFragment=new GoverMsgApplyDownloadFragment();
-				
-				goverMsgDeptApplyOpenFragment.setType(GoverMsgApplyDownloadFragment.GOVER_TYPE);
+			// 依申请公开 --各市(县)区依申请公开
+			else if (menuItem.getAppUI().equals("Applyopen_city")) {
+				GoverMsgApplyDownloadFragment goverMsgDeptApplyOpenFragment = new GoverMsgApplyDownloadFragment();
+
+				goverMsgDeptApplyOpenFragment
+						.setType(GoverMsgApplyDownloadFragment.GOVER_TYPE);
 				return goverMsgDeptApplyOpenFragment;
 			}
-			//依申请公开   --网上办件统计
-			else if(menuItem.getAppUI().equals("Online_Handles_Totals")){
-				GoverMsgInterMailStatisticsFragment goverMsgInterMailStatisticsFragment=new GoverMsgInterMailStatisticsFragment();
+			// 依申请公开 --网上办件统计
+			else if (menuItem.getAppUI().equals("Online_Handles_Totals")) {
+				GoverMsgInterMailStatisticsFragment goverMsgInterMailStatisticsFragment = new GoverMsgInterMailStatisticsFragment();
 				return goverMsgInterMailStatisticsFragment;
 			}
 		}
@@ -63,22 +65,22 @@ MenuItemNavigatorWithContentFragment {
 		if (channel.getChannelName().equals("部门年度报告")) {
 			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment = new GoverMsgSearchContentListFragment();
 			goverMsgSearchContentListFragment
-			.setFifterType(GoverMsgSearchContentListFragment.DEPT_TYPE);
-			
+					.setFifterType(GoverMsgSearchContentListFragment.DEPT_TYPE);
+
 			goverMsgSearchContentListFragment.setChannel(channel);
 			return goverMsgSearchContentListFragment;
 		} else if (channel.getChannelName().equals("县区政府年度报告")) {
 
 			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment = new GoverMsgSearchContentListFragment();
 			goverMsgSearchContentListFragment
-			.setFifterType(GoverMsgSearchContentListFragment.ZONE_TYPE);
-			
+					.setFifterType(GoverMsgSearchContentListFragment.ZONE_TYPE);
+
 			goverMsgSearchContentListFragment.setChannel(channel);
 			return goverMsgSearchContentListFragment;
 		} else {
 			GoverMsgContentListFragment goverMsgContentListFragment = new GoverMsgContentListFragment();
 			goverMsgContentListFragment.setChannel(channel);
-		
+
 			return goverMsgContentListFragment;
 		}
 	}

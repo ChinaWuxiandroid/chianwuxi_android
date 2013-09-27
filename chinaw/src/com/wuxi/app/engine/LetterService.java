@@ -33,9 +33,7 @@ public class LetterService extends Service {
 	 * @throws JSONException
 	 * @throws NetException
 	 * */
-	public LetterWrapper getLetterLitstWrapper(String url, int startIndex,
-			int endIndex) throws NetException, JSONException, NODataException {
-		url = url + "?start=" + startIndex + "&end=" + endIndex;
+	public LetterWrapper getLetterLitstWrapper(String url) throws NetException, JSONException, NODataException {
 		return getLettersWrapper(url);
 	}
 

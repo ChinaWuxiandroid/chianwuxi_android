@@ -20,6 +20,7 @@ public class GoverMsgContentListFragment extends ContentListFragment {
 	public void onItemClick(AdapterView<?> adapterView, View arg1,
 			int position, long arg3) {
 		Content content = (Content) adapterView.getItemAtPosition(position);
+		
 		if (super.parentItem != null) {
 
 			Intent intent = new Intent(getActivity(),
