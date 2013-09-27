@@ -10,6 +10,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings.TextSize;
 import android.webkit.WebView;
 import android.webkit.WebSettings.TextSize;
+import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.wuxi.app.BaseFragment;
@@ -69,7 +70,11 @@ public class GoverMsgWebFragment extends BaseFragment{
 			wbView.getSettings().setDefaultTextEncodingName("gb2312");
 			wbView.getSettings().setTextSize(TextSize.NORMAL);
 		}
+		 
 		wbView.loadUrl(parentItem.getWapURI());
 	}
+	
+	
+	
 
 }
