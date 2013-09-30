@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wuxi.app"
+    android:versionCode="4"
+    android:versionName="1.0.5" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+    <!-- 使用网络功能所需权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" >
+    </uses-permission>
+    <!-- SDK离线地图和cache功能需要读写外部存储器 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
+    <!-- 获取设置信息和详情页直接拨打电话需要以下权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.CALL_PHONE" >
+    </uses-permission>
+    <!-- 使用定位功能所需权限,demo已集成百度定位SDK,不使用定位功能可去掉以下6项 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" >
+    </uses-permission>
+
+    <permission android:name="android.permission.BAIDU_LOCATION_SERVICE" >
+    </permission>
+
+    <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_GPS" >
+    </uses-permission>
+
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="com.wuxi.app" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.wuxi.app.MainTabActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.wuxi.app.activity.IndexActivity" />
+        <!-- 首页 -->
+        <activity android:name="com.wuxi.app.activity.MainIndexActivity" />
+        <!-- 资讯中心 -->
+        <activity android:name="com.wuxi.app.activity.homepage.informationcenter.InformationCenterActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.informationcenter.HotTopicContentActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.informationcenter.InfoCenterContentDetailActivity" />
+        <!-- 魅力锡城 -->
+        <activity android:name="com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.fantasticwuxi.WuxiChannelContentDetailActivity" />
+        <!-- 政务大厅 -->
+        <activity android:name="com.wuxi.app.activity.homepage.goversaloon.GoverSaloonActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailCFActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailQTActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailQZActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailXKActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailZSActivtiy" />
+        <activity android:name="com.wuxi.app.activity.homepage.goversaloon.MyOnlineAskActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.goversaloon.GoverSaloonContentDetialActivity" />
+        <!-- 公共服务 -->
+        <activity android:name="com.wuxi.app.activity.homepage.publicservice.PublicServiceActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.publicservice.PublicServiceContentDetailActivity" />
+        <!-- 四个无锡 -->
+        <activity android:name="com.wuxi.app.activity.homepage.FourTopicActivity" />
+        <!-- 首页推荐新闻和推荐公告 -->
+        <activity android:name="com.wuxi.app.activity.homepage.NewsAnnAcountActivitiy" />
+        <activity android:name="com.wuxi.app.activity.homepage.LearActivity" />
+        <!-- 登录注册 -->
+        <activity android:name="com.wuxi.app.activity.homepage.logorregister.LoginActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.logorregister.RegisterActivity" />
+        <!-- 系统设置 -->
+        <activity android:name="com.wuxi.app.activity.homepage.more.SystemSetActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.more.MenuItemSetActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.more.SiteMapActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.more.AboutUsActivity" />
+
+        <!-- 政府信息公开 -->
+        <activity android:name="com.wuxi.app.activity.homepage.goverpublicmsg.GoverMsgContentDetailWebActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity" />
+
+        <!-- 搜索 -->
+        <activity android:name="com.wuxi.app.activity.search.AdvancedSearchActivity" />
+        <activity android:name="com.wuxi.app.activity.search.AdvancedSearchResultListActivity" />
+        <activity android:name="com.wuxi.app.activity.search.SearchResultDetailActivity" />
+        <activity android:name="com.wuxi.app.activity.search.MainSearchActivity" />
+
+        <!-- 政民互动 -->
+
+        <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumContentActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumPostActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345AllMailContentActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPContentDetailWebActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.HotReviewContentActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity" />
+
+        <!-- 公共activity -->
+        <activity android:name="com.wuxi.app.activity.commactivity.ImageViewScaleActivity" />
+
+        <uses-library android:name="android.test.runner" />
+    </application>
+
+</manifest>
