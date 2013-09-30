@@ -11,7 +11,6 @@ import android.content.Context;
 
 import com.wuxi.app.db.FavoriteItemDao;
 import com.wuxi.app.util.Constants;
-import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NetException;
 

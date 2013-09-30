@@ -41,7 +41,8 @@
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.72"
-                android:background="@android:color/white" />
+               
+                 android:background="@drawable/edittext_back" />
 
             <Button
                 android:id="@+id/btn_search_bystate"

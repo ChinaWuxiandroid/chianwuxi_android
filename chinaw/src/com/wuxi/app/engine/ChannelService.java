@@ -46,9 +46,9 @@ public class ChannelService extends Service {
 		String url = Constants.Urls.CHANNEL_URL.replace("{channelId}",
 				channelId);
 		String resultStr = null;
-		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url);
+		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url,false);
 		if (isHasCacheFile) {
-			resultStr = cacheUtil.getCacheStr(url);// 缓存读取
+			resultStr = cacheUtil.getCacheStr(url,false);// 缓存读取
 		} else {
 			resultStr = httpUtils.executeGetToString(url, 5000);
 		}
@@ -83,7 +83,7 @@ public class ChannelService extends Service {
 					}
 
 					if (!isHasCacheFile) {
-						cacheUtil.cacheFile(url, resultStr);// 缓存文件
+						cacheUtil.cacheFile(url, resultStr,false);// 缓存文件
 					}
 
 				}

@@ -8,15 +8,11 @@ import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.RelativeLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +22,6 @@ import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseSlideActivity;
 import com.wuxi.app.engine.DownLoadTask;
-import com.wuxi.app.engine.UpdateInfoService;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.app.util.TextFormateUtil;
@@ -45,7 +40,7 @@ public class SystemSetActivity extends BaseSlideActivity implements
 
 	private static final int DOWLOAD_ERROR = 2;
 
-	private static final String TAG = "SystemSetFragment";
+	
 
 	private TableRow sys_menu_set, sys_clear_cache, sys_software_update,
 			sys_about_us, sys_site_map, sys_log_out;
@@ -196,12 +191,8 @@ public class SystemSetActivity extends BaseSlideActivity implements
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 
-							File file = new File(
-									Constants.APPFiles.CACHE_FILE_PATH);
-							File cacheFiles[] = file.listFiles();
-							for (File cacheFile : cacheFiles) {
-								cacheFile.delete();
-							}
+							AppManager.getInstance(SystemSetActivity.this).clearCacheFile(false);//清楚菜单和频道的缓存
+							
 
 							Toast.makeText(SystemSetActivity.this, "清除完成",
 									Toast.LENGTH_SHORT).show();
@@ -334,7 +325,7 @@ public class SystemSetActivity extends BaseSlideActivity implements
 							pd.show();
 
 						} else {
-							Toast.makeText(SystemSetActivity.this, "SDK不存在", 1)
+							Toast.makeText(SystemSetActivity.this, "SDK不存在", Toast.LENGTH_SHORT)
 									.show();
 
 						}

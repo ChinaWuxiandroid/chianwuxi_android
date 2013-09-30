@@ -1,11 +1,15 @@
 package com.wuxi.app;
 
+import java.io.File;
+
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Environment;
 
 import com.wuxi.app.engine.UpdateInfoService;
+import com.wuxi.app.util.Constants;
 import com.wuxi.domain.UpdateInfo;
 
 /**
@@ -21,7 +25,7 @@ public class AppManager {
 	private AppManager() {
 	}
 
-	public synchronized static  AppManager getInstance(Context context) {
+	public synchronized static AppManager getInstance(Context context) {
 
 		if (instance == null) {
 			instance = new AppManager();
@@ -62,15 +66,15 @@ public class AppManager {
 		String oldVerson = getVersion();
 		UpdateInfoService updateInfoService = new UpdateInfoService(context);
 		try {
-			UpdateInfo  newUpdateInfo = updateInfoService
+			UpdateInfo newUpdateInfo = updateInfoService
 					.getUpdateInfo(R.string.updateurl);
 			if (!newUpdateInfo.getVersion().equals(oldVerson)) {
-				if(updateInfo!=null){
+				if (updateInfo != null) {
 					updateInfo.setUrl(newUpdateInfo.getUrl());
 					updateInfo.setDescription(newUpdateInfo.getDescription());
 					updateInfo.setVersion(newUpdateInfo.getVersion());
 				}
-				
+
 				return true;
 			} else {
 
@@ -82,6 +86,33 @@ public class AppManager {
 			return false;
 		}
 
+	}
+
+	/**
+	 * 
+	 * wanglu 泰得利通 清楚APP缓存文件
+	 * 
+	 * @param isContent
+	 *            是否是内容列表
+	 */
+	public void clearCacheFile(boolean isContent) {
+		if (Environment.getExternalStorageState().equals(
+				Environment.MEDIA_MOUNTED)) {
+			File file;
+			if (isContent) {
+				file = new File(Constants.APPFiles.CAHCE_FILE_CONTENT_PATH);
+			} else {
+				file = new File(Constants.APPFiles.CACHE_FILE_PATH);
+			}
+
+			if (file.exists()) {
+				File cacheFiles[] = file.listFiles();
+				for (File cacheFile : cacheFiles) {
+					cacheFile.delete();
+				}
+			}
+
+		}
 	}
 
 }

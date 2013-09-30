@@ -535,6 +535,10 @@ public class Constants {
 
 		public static final String CACHE_FILE_PATH = DOWNLOAF_FILE_PATH
 				+ "cache/";
+		/**
+		 * 内容列表缓存文件夹
+		 */
+		public static final String CAHCE_FILE_CONTENT_PATH=CACHE_FILE_PATH+"content/";
 
 		/**
 		 * 政府信息公开中 依申请公开 唯一表格 文件名（服务器端未提供字段）

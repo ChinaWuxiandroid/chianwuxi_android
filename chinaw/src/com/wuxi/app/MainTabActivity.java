@@ -196,6 +196,11 @@ public class MainTabActivity extends ActivityGroup implements
 		return stack.size();
 	}
 
+	/**
+	 * 
+	 *wanglu 泰得利通
+	 *APP退出
+	 */
 	private void exit() {
 
 		if ((System.currentTimeMillis() - lastExitTime) > 2000) {
@@ -203,6 +208,7 @@ public class MainTabActivity extends ActivityGroup implements
 					Toast.LENGTH_SHORT).show();
 			lastExitTime = System.currentTimeMillis();
 		} else {
+			AppManager.getInstance(this).clearCacheFile(true);//清楚内容列表缓存文件
 			System.exit(0);
 
 		}

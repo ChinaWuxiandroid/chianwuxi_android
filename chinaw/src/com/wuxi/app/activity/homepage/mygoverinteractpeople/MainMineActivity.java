@@ -94,6 +94,7 @@ public class MainMineActivity extends BaseSlideActivity implements
 	public void getArgumentsFromOtherFragment() {
 		Bundle bundle = this.getIntent().getExtras();
 
+<<<<<<< HEAD
 //<<<<<<< HEAD
 ////<<<<<<< HEAD
 ////		if (bundle != null
@@ -104,10 +105,16 @@ public class MainMineActivity extends BaseSlideActivity implements
 //		if (bundle != null && bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY) != null) {
 //			defaultCheckPosition = (Integer) bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY);
 ////>>>>>>> b774d463e707cd297f1d67594b26bfc9eddf5fcc
+=======
+>>>>>>> f7f58e5acb92becbf340bf6c7c93938cb82bb278
 
 		if (bundle != null && bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY) != null) {
 			defaultCheckPosition = (Integer) bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f7f58e5acb92becbf340bf6c7c93938cb82bb278
 		}
 
 	}

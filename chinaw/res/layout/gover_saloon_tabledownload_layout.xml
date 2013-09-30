@@ -21,22 +21,24 @@
 
         <EditText
             android:id="@+id/et_filename_keywords"
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="0.82"
-            android:background="#ffffff"
-            android:hint="输入关键字         "
+            android:layout_weight="1"
+            android:background="@drawable/edittext_back"
+            android:hint=" 输入关键字         "
             android:maxLength="20"
             android:textSize="12sp" />
 
         <Button
             android:id="@+id/btn_fileSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="20sp"
-            android:layout_marginLeft="3dip"
-            android:background="#DCDCDC"
+            android:layout_width="60dip"
+            android:layout_height="20dip"
+            android:layout_marginLeft="5dip"
+            android:background="@drawable/coustome_btn_bg"
             android:text="检索"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:textColor="#000000"
+            android:padding="2dip" />
     </LinearLayout>
 
     <Spinner
