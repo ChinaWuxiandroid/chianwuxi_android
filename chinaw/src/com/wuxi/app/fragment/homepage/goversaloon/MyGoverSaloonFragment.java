@@ -143,11 +143,7 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 	protected void initUI() {
 		super.initUI();
 
-	/*	SharedPreferences sp = context.getSharedPreferences(
-				Constants.SharepreferenceKey.SHARE_CONFIG, Context.MODE_APPEND);
-		Editor ed = sp.edit();
-		ed.putString(Constants.SharepreferenceKey.ACCESSTOKEN, "");
-		ed.commit();*/
+	
 
 		loginDialog = new LoginDialog(context);// 实例化登录对话框
 		gover_pb_myonlineapply = (ProgressBar) view

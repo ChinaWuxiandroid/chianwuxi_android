@@ -99,8 +99,12 @@ public class GoverMsgWebFragment extends BaseFragment implements KeyEvent.Callba
 			wbView.getSettings().setDefaultTextEncodingName("gb2312");
 			wbView.getSettings().setTextSize(TextSize.NORMAL);
 		}
+		 
 		wbView.loadUrl(parentItem.getWapURI());
 	}
+	
+	
+	
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
