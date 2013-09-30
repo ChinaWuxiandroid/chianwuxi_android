@@ -13,7 +13,7 @@ import com.wuxi.domain.MenuItem;
 
 
 /**
- * 政府信息公开的布局初始化监听类  使用前必须初始化 baseSlideFragment contextc,才能判断 登录与否
+ * 政府信息公开的布局初始化监听类  使用前必须初始化 baseSlideFragment context,才能判断 登录与否
  * */
 public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener {
 

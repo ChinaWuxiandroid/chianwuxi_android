@@ -98,6 +98,7 @@ public class MainMineActivity extends BaseSlideActivity implements
 		if (bundle != null && bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY) != null) {
 			defaultCheckPosition = (Integer) bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY);
 
+
 		}
 
 	}

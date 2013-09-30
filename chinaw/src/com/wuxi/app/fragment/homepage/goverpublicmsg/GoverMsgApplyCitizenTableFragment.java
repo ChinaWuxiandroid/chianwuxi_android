@@ -31,6 +31,14 @@ import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.ApplyDept;
 import com.wuxi.exception.NetException;
 
+/**
+ * @类名： GoverMsgApplyCitizenTableFragment
+ * @描述： 依申请公开公民申请界面
+ * @作者： 罗森
+ * @创建时间： 2013 2013-9-27 下午2:11:09
+ * @修改时间：
+ * @修改描述：
+ */
 public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 		OnClickListener {
 
@@ -79,7 +87,8 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case SUBMIT_SUCCESS:
-				Toast.makeText(context, "提交成功", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "提交成功，正在审核...", Toast.LENGTH_SHORT)
+						.show();
 				pb.setVisibility(ProgressBar.INVISIBLE);
 				break;
 			case SUBMIT_FAILED:
@@ -201,20 +210,18 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 					SubmitListService submitListService = new SubmitListService(
 							context);
 					try {
-						boolean success = false;
-						success = submitListService.submitByUrl(getUrl(
+						submitListService.submitByUrl(getUrl(
 								Constants.Urls.CITIZEN_APPLY_SUBMIT_URL,
 								SystemUtil.getAccessToken(context),
 								applyDept.getDoProjectId(),
 								applyDept.getDepId()));
-						if (success) {
-							handler.sendEmptyMessage(SUBMIT_SUCCESS);
-						} else {
-							handler.sendEmptyMessage(SUBMIT_FAILED);
-						}
+						handler.sendEmptyMessage(SUBMIT_SUCCESS);
+
 					} catch (NetException e) {
+						handler.sendEmptyMessage(SUBMIT_FAILED);
 						e.printStackTrace();
 					} catch (JSONException e) {
+						handler.sendEmptyMessage(SUBMIT_FAILED);
 						e.printStackTrace();
 					}
 				}

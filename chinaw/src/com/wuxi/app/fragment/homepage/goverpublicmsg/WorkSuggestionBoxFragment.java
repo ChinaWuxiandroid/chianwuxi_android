@@ -50,7 +50,7 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 	private WorkSuggestionBoxWrapper boxWrapper;
 	private List<MailBoxParameterItem> parameterItems;
 
-	private static final int DATA__LOAD_SUCESS = 0;
+	private static final int DATA_LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
 	private static final int DATA_SUBMIT_SUCCESS = 2;
 	private static final int DATA_SUBMIT_FAILED = 3;
@@ -73,7 +73,7 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 				tip = msg.obj.toString();
 			}
 			switch (msg.what) {
-			case DATA__LOAD_SUCESS:
+			case DATA_LOAD_SUCESS:
 				processBar.setVisibility(View.GONE);
 				showLayout();
 				break;
@@ -83,11 +83,11 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 				break;
 			case DATA_SUBMIT_SUCCESS:
 				processBar.setVisibility(View.GONE);
-				Toast.makeText(context, "提交成功", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "提交成功,正在审核...", Toast.LENGTH_SHORT).show();
 				break;
 			case DATA_SUBMIT_FAILED:
 				processBar.setVisibility(View.GONE);
-				Toast.makeText(context, "提交失败", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "提交失败！", Toast.LENGTH_SHORT).show();
 				break;
 
 			}
@@ -148,7 +148,7 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 					boxWrapper = boxService
 							.getBoxWrapper(Constants.Urls.GOVERMSG_WORKSUGGESTIONBOX_LAYOUT_URL);
 					if (boxWrapper != null) {
-						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
+						handler.sendEmptyMessage(DATA_LOAD_SUCESS);
 						CacheUtil.put(boxWrapper.getId(), boxWrapper);// 放入缓存
 					} else {
 						Message msg = handler.obtainMessage();
@@ -281,19 +281,18 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 					WorkSuggestionService workSuggestionService = new WorkSuggestionService(
 							context);
 					try {
-						boolean success = false;
-						success = workSuggestionService.submitMailBox(
-								access_token, boxWrapper);
-						if (success) {
-							handler.sendEmptyMessage(DATA_SUBMIT_SUCCESS);
-						} else {
-							handler.sendEmptyMessage(DATA_SUBMIT_FAILED);
-						}
+						workSuggestionService.submitMailBox(access_token,
+								boxWrapper);
+						handler.sendEmptyMessage(DATA_SUBMIT_SUCCESS);
+
 					} catch (NetException e) {
+						handler.sendEmptyMessage(DATA_SUBMIT_FAILED);
 						e.printStackTrace();
 					} catch (JSONException e) {
+						handler.sendEmptyMessage(DATA_SUBMIT_FAILED);
 						e.printStackTrace();
 					} catch (NODataException e) {
+						handler.sendEmptyMessage(DATA_SUBMIT_FAILED);
 						e.printStackTrace();
 					}
 				}

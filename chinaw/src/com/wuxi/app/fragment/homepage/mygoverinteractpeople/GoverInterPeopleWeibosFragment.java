@@ -5,13 +5,6 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 
 public class GoverInterPeopleWeibosFragment  extends RadioButtonChangeFragment{
 
-	/**
-	 * @字段： serialVersionUID
-	 * @类型： long
-	 * @描述： 序列化序号
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@Override
 	protected int getLayoutId() {
 		return R.layout.goverinterpeople_weibos_layout;

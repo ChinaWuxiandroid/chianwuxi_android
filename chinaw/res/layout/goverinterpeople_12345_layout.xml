@@ -26,7 +26,7 @@
                 android:checked="true"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
-                android:text="市长      信箱"
+                android:text="罗森"
                 android:textColor="@android:color/white"
                 android:textSize="10sp" />
 

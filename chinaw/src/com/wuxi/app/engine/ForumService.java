@@ -64,8 +64,7 @@ public class ForumService extends Service {
 			JSONArray jData = jresult.getJSONArray("data");
 			if (jData != null) {
 				// 解析数组
-				forumWrapper.setForums(parseData(jData,
-						forumWrapper.getStart(), forumWrapper.getEnd()));
+				forumWrapper.setForums(parseData(jData));
 			}
 
 			return forumWrapper;
@@ -84,8 +83,7 @@ public class ForumService extends Service {
 	 * @return
 	 * @throws JSONException
 	 */
-	private List<ForumWrapper.Forum> parseData(JSONArray jData, int start,
-			int end) throws JSONException {
+	private List<ForumWrapper.Forum> parseData(JSONArray jData) throws JSONException {
 		if (jData != null) {
 			List<ForumWrapper.Forum> forums = new ArrayList<ForumWrapper.Forum>();
 

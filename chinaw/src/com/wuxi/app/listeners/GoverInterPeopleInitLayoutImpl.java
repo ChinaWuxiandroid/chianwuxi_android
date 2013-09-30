@@ -158,7 +158,7 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 			 */
 			else if(fragment instanceof GIPSuggestLawSuggestionFragment){
 				gIPSuggestLawSuggestionFragment=(GIPSuggestLawSuggestionFragment)fragment;
-				gIPSuggestLawSuggestionFragment.setParentMenuItem(menuItem);
+//				gIPSuggestLawSuggestionFragment.setParentMenuItem(menuItem);
 				initLayoutListner.bindContentLayout(gIPSuggestLawSuggestionFragment);
 			}
 			else if(fragment instanceof GIPSuggestSurveyFragment){

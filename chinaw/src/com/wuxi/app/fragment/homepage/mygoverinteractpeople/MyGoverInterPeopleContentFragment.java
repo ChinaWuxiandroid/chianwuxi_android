@@ -40,7 +40,6 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment {
 		// 普通菜单类型
 		case MenuItem.CUSTOM_MENU:
 			GIPContentFragment gIPMenuItemContentFragment = new GIPContentFragment();
-
 			gIPMenuItemContentFragment.setParentItem(menuItem);
 			onTransaction(gIPMenuItemContentFragment);
 			break;
@@ -57,10 +56,10 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment {
 			if (menuItem.getAppUI().equals("MyPoliticalInteraction")) {
 				onTransaction(new GoverInterPeopleMineFragment());
 			}
-			// 12345来信办理平台*
-			else if (menuItem.getAppUI().equals("Letter12345")) {
-				onTransaction(new GoverInterPeople12345Fragment());
-			}
+//			// 12345来信办理平台*
+//			else if (menuItem.getAppUI().equals("Letter12345")) {
+//				onTransaction(new GoverInterPeople12345Fragment());
+//			}
 			// 征求意见平台*
 			else if (menuItem.getAppUI().equals("QuestionnairePlatform")) {
 				GoverInterPeopleSuggestFragment goverInterPeopleSuggestFragment = new GoverInterPeopleSuggestFragment();

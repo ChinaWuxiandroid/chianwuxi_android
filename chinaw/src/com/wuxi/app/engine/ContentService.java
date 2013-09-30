@@ -137,6 +137,7 @@ public class ContentService extends Service {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 		String url = Constants.Urls.CHANNEL_CONTENT_P_URL.replace("{id}", id)
+
 				.replace("{start}", start + "").replace("{end}", end + "");
 		String resultStr = null;
 		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url, true);//检查是否有缓存文件

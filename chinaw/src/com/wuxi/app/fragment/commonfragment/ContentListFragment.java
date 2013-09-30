@@ -115,6 +115,9 @@ public abstract class ContentListFragment extends BaseFragment implements
 				isLoading = false;
 			}
 
+		}else {
+			Toast.makeText(context, "对不起，没有数据！", Toast.LENGTH_SHORT).show();
+			content_list_pb.setVisibility(ProgressBar.GONE);
 		}
 
 		if (contentWrapper.isNext()) {

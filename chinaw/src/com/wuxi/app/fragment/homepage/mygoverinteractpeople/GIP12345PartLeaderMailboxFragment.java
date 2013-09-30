@@ -9,21 +9,22 @@ import com.wuxi.app.R;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 
 /**
- *12345来信办理平台  主Fragment --部门领导信箱  fragment
+ * 12345来信办理平台 主Fragment --部门领导信箱 fragment
+ * 
  * @author 杨宸 智佳
  * */
 
-public class GIP12345PartLeaderMailboxFragment extends RadioButtonChangeFragment{
-	
+public class GIP12345PartLeaderMailboxFragment extends
+		RadioButtonChangeFragment {
+
 	private int contentType = 0;
-	
+
 	private static final int HIDEN_CONTENT_ID = R.id.gip_12345_leaderbox_fragment;
-	
-	private final  int[] radioButtonIds={
+
+	private final int[] radioButtonIds = {
 			R.id.gip_12345_leaderbox_radioButton_lederBoxList,
-			R.id.gip_12345_leaderbox_radioButton_mustKonwMail
-	};	
-	
+			R.id.gip_12345_leaderbox_radioButton_mustKonwMail };
+
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 
@@ -35,14 +36,15 @@ public class GIP12345PartLeaderMailboxFragment extends RadioButtonChangeFragment
 			init();
 			break;
 
-		case R.id.gip_12345_leaderbox_radioButton_mustKonwMail:	
+		case R.id.gip_12345_leaderbox_radioButton_mustKonwMail:
 			contentType = 1;
 			changeContent(contentType);
 			break;
 
 		}
-		
+
 	}
+
 	@Override
 	protected int getLayoutId() {
 		return R.layout.gip_12345_leadermailbox_layout;
@@ -62,14 +64,16 @@ public class GIP12345PartLeaderMailboxFragment extends RadioButtonChangeFragment
 	protected int getContentFragmentId() {
 		return 0;
 	}
+
 	@Override
 	protected void init() {
 		PartLeaderBoxListFragment leaderMailListFragment = new PartLeaderBoxListFragment();
 		bindFragment(leaderMailListFragment);
 	}
-	
+
 	/**
 	 * 切换界面
+	 * 
 	 * @param type
 	 */
 	public void changeContent(int type) {
@@ -85,9 +89,10 @@ public class GIP12345PartLeaderMailboxFragment extends RadioButtonChangeFragment
 			break;
 		}
 	}
-	
+
 	/**
 	 * 绑定碎片
+	 * 
 	 * @param fragment
 	 */
 	private void bindFragment(Fragment fragment) {

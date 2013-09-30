@@ -311,7 +311,7 @@ public class ForumOrdinaryReplayFragment extends BaseFragment implements
 			postRaplies = postRaplyWrapper.getPostRaplies();
 
 			if (postRaplies == null || postRaplies.size() == 0) {
-				Toast.makeText(context, "对不起，暂无该论坛的回复信息", Toast.LENGTH_SHORT)
+				Toast.makeText(context, "对不起，暂无该贴子的回复信息", Toast.LENGTH_SHORT)
 						.show();
 				list_pb.setVisibility(View.GONE);
 			} else {

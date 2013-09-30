@@ -77,9 +77,6 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 	private int DEFAULT_YEAR_FIFTER = 2013;
 	private int yearFifter = DEFAULT_YEAR_FIFTER; // 2013
 
-	private static final String[] zoneArr = { DEFAULT_ZONE_FIFTER, "江阴", "宜兴",
-			"惠山", "滨湖", "崇安", "南长 ", "北塘", "无锡新区" };
-
 	public static final int DEPT_TYPE = 1;
 	public static final int ZONE_TYPE = 2;
 	private int filterType = DEPT_TYPE; // 检索过滤 类型 1-部门时间型(缺省类型) 2-区县时间型
@@ -192,7 +189,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		partment_sp.setVisibility(View.GONE);
 	}
 
-	public void loadDeptData() {
+	private void loadDeptData() {
 
 		new Thread(new Runnable() {
 
@@ -243,7 +240,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 
 	}
 
-	public void initYearSpinner() {
+	private void initYearSpinner() {
 		List<String> years = TimeFormateUtil
 				.getYears(TimeFormateUtil.START_YEAR);
 

@@ -19,15 +19,12 @@ public class GoverMsgFifterContentListFragment extends
 
 		Content content = (Content) adapterView.getItemAtPosition(position);
 		
-		System.out.println(parentItem);
-		
 		if (parentItem != null) {
 
 			Intent intent = new Intent(context,
 					GoverMsgContentDetailWebActivity.class);
 			intent.putExtra("url", content.getWapUrl());
 			intent.putExtra("fragmentTitle", parentItem.getName());
-			System.out.println("测试1");
 			MainTabActivity.instance.addView(intent);
 
 		} else if (channel != null) {
