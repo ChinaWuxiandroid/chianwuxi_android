@@ -89,9 +89,9 @@ public class MenuService extends Service {
 
 		String url = Constants.Urls.SUB_MENU_URL.replace("{id}", parentId);
 		String reslutStr = null;
-		boolean hasCachFile = cacheUtil.isHasCacheFile(url);
+		boolean hasCachFile = cacheUtil.isHasCacheFile(url,false);
 		if (hasCachFile) {// 存在缓存，从缓存读取
-			reslutStr = cacheUtil.getCacheStr(url);
+			reslutStr = cacheUtil.getCacheStr(url,false);
 		} else {
 			reslutStr = httpUtils.executeGetToString(url, 500);
 		}
@@ -140,7 +140,7 @@ public class MenuService extends Service {
 				}
 
 				if (!hasCachFile) {
-					cacheUtil.cacheFile(url, reslutStr);// 缓存文件
+					cacheUtil.cacheFile(url, reslutStr,false);// 缓存文件
 				}
 
 				Collections.sort(menuItems);// 排序
@@ -192,15 +192,15 @@ public class MenuService extends Service {
 			}
 		}
 		String reslutStr = null;
-		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url);
+		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url,false);
 		if (isHasCacheFile) {
-			reslutStr = cacheUtil.getCacheStr(url);// 从缓存读取
+			reslutStr = cacheUtil.getCacheStr(url,false);// 从缓存读取
 		} else {
 			reslutStr = httpUtils.executeGetToString(url, 500);
 		}
 
 		List<MenuItem> menuItems;
-		// LogUtil.i(TAG, reslutStr);
+		
 		if (null != reslutStr) {
 
 			menuItems = new ArrayList<MenuItem>();
@@ -292,7 +292,7 @@ public class MenuService extends Service {
 			Collections.sort(menuItems);// 排序
 
 			if (!isHasCacheFile) {
-				cacheUtil.cacheFile(url, reslutStr);// 缓存菜单
+				cacheUtil.cacheFile(url, reslutStr,false);// 缓存菜单
 			}
 
 			CacheUtil.put(Constants.CacheKey.MAIN_MENUITEM_KEY, menuItems);// 将导航主菜单放入缓存

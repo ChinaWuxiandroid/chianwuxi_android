@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseSlideActivity;
 import com.wuxi.app.engine.UserService;
-import com.wuxi.app.util.MD5Encoder;
 import com.wuxi.domain.User;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;

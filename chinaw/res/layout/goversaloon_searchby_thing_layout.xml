@@ -13,8 +13,7 @@
         android:layout_marginLeft="5dip"
         android:layout_marginRight="5dip"
         android:background="#E0E0E0"
-        android:orientation="vertical"
-         >
+        android:orientation="vertical" >
 
         <Spinner
             android:id="@+id/sp_item_type"
@@ -28,9 +27,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dip"
             android:layout_marginTop="8dip"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dip" >
+            android:orientation="horizontal" >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -42,23 +41,22 @@
                 android:id="@+id/et_searchbying_content"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
                 android:layout_weight="0.72"
-                android:background="@android:color/white"
-                android:hint="请输入关键字..."
-                android:textSize="12sp"
-                android:layout_marginLeft="5dip" />
+                android:background="@drawable/edittext_back"
+                android:hint="请输入关键字"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/btn_searchbything"
                 android:layout_width="65dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="10dip"
+                android:layout_marginRight="8dip"
                 android:background="@drawable/search_btn_bg"
                 android:text="检索"
                 android:textColor="#207BBE"
-                android:textSize="14sp"
-                android:layout_marginRight="8dip" />
-            
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 

@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
+import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Content;
 import com.wuxi.domain.ContentWrapper;
@@ -70,12 +71,12 @@ public class ContentService extends Service {
 	 *            刷新阅读次数
 	 * @throws NetException
 	 */
-	public void  flushContentBrowsCount(String id) throws NetException {
+	public void flushContentBrowsCount(String id) throws NetException {
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 		String url = Constants.Urls.CONTENT_BROWSECOUNT_URL.replace("{id}", id);
-		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+		httpUtils.executeGetToString(url, TIME_OUT);
 
 	}
 
@@ -136,10 +137,15 @@ public class ContentService extends Service {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 		String url = Constants.Urls.CHANNEL_CONTENT_P_URL.replace("{id}", id)
-				.replace("{start}", start + "")
-				.replace("{end}", end + "");
-		
-		String resultStr = httpUtils.executeGetToString(url, 5000);
+				.replace("{start}", start + "").replace("{end}", end + "");
+		String resultStr = null;
+		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url, true);//检查是否有缓存文件
+		if (isHasCacheFile) {
+			resultStr = cacheUtil.getCacheStr(url,true);// 缓存读取
+		} else {
+			resultStr = httpUtils.executeGetToString(url, 5000);
+		}
+
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
 			JSONObject jresult = jsonObject.getJSONObject("result");
@@ -148,12 +154,16 @@ public class ContentService extends Service {
 			contentWrapper.setStart(jresult.getInt("start"));
 			contentWrapper.setNext(jresult.getBoolean("next"));
 			contentWrapper.setPrevious(jresult.getBoolean("previous"));
-			contentWrapper.setTotalRowsAmount(jresult.getInt("totalRowsAmount"));
+			contentWrapper
+					.setTotalRowsAmount(jresult.getInt("totalRowsAmount"));
 			JSONArray jData = jresult.getJSONArray("data");
 			if (jData != null) {
 				contentWrapper.setContents(parseData(jData));// 解析数组
 			}
 
+			if(!isHasCacheFile){
+				cacheUtil.cacheFile(url, resultStr, true);//缓存内容列表
+			}
 			return contentWrapper;
 
 		} else {
@@ -188,7 +198,8 @@ public class ContentService extends Service {
 			contentWrapper.setStart(jresult.getInt("start"));
 			contentWrapper.setNext(jresult.getBoolean("next"));
 			contentWrapper.setPrevious(jresult.getBoolean("previous"));
-			contentWrapper.setTotalRowsAmount(jresult.getInt("totalRowsAmount"));
+			contentWrapper
+					.setTotalRowsAmount(jresult.getInt("totalRowsAmount"));
 			JSONArray jData = jresult.getJSONArray("data");
 			if (jData != null) {
 				contentWrapper.setContents(parseData(jData));// 解析数组
@@ -226,7 +237,8 @@ public class ContentService extends Service {
 					content.setBrowseCount(jb.getInt("browseCount"));
 					content.setOrderId(jb.getInt("orderId"));
 					content.setBuildTime(jb.getString("buildTime"));
-					content.setHangingParentChannelId(jb.getString("hangingParentChannelId"));
+					content.setHangingParentChannelId(jb
+							.getString("hangingParentChannelId"));
 					content.setLocalUpdateDate(jb.getString("localUpdateDate"));
 					content.setContentSource(jb.getString("contentSource"));
 					content.setUpFile(jb.getString("upFile"));

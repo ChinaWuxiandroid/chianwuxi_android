@@ -3,19 +3,6 @@
  */
 package com.wuxi.app.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.Context;
-
 import com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity;
 import com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity;
 import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonActivity;

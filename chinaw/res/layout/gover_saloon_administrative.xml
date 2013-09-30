@@ -51,7 +51,7 @@
             android:id="@+id/sp_dept_year"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="5dip"
+            android:layout_marginLeft="3dip"
             android:layout_weight="0.35"
             android:background="@drawable/spiner_bg" />
 
@@ -59,7 +59,7 @@
             android:id="@+id/govver_admintrative_ib_search"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="5dip"
+            android:layout_marginLeft="3dip"
             android:layout_weight="0.2"
             android:background="@drawable/search_released" />
     </LinearLayout>

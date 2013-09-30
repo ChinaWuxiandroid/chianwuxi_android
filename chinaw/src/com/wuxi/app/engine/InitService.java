@@ -3,6 +3,7 @@ package com.wuxi.app.engine;
 import java.io.File;
 import java.util.Calendar;
 
+import com.wuxi.app.AppManager;
 import com.wuxi.app.db.AppUseCountDao;
 import com.wuxi.app.db.DataBaseHelper;
 import com.wuxi.app.util.Constants;
@@ -45,7 +46,7 @@ public class InitService extends Service {
 	 *wanglu 泰得利通
 	 *记录软件使用次数
 	 */
-	@SuppressWarnings("unused")
+	
 	public void registCount(){
 		
 		if(DataBaseHelper.VERSION>1){
@@ -78,19 +79,7 @@ public class InitService extends Service {
 				ed.putLong(Constants.SharepreferenceKey.LAST_LOGIN_TIME,
 						nowLoginTime);// 存入登录时间
 				ed.commit();
-				if (Environment.getExternalStorageState().equals(
-						Environment.MEDIA_MOUNTED)) {
-
-					File file = new File(Constants.APPFiles.CACHE_FILE_PATH);
-					if (file.exists()) {
-						File cacheFiles[] = file.listFiles();
-						for (File cacheFile : cacheFiles) {
-							cacheFile.delete();
-						}
-					}
-
-				}
-
+				AppManager.getInstance(context).clearCacheFile(false);//清楚menu和channle的缓存文件
 			}
 
 		} else {// 首次使用APP

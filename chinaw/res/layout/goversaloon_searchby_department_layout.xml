@@ -19,7 +19,7 @@
 
         <Spinner
             android:id="@+id/sp_dept"
-            android:layout_width="180dip"
+            android:layout_width="175dip"
             android:layout_height="wrap_content"
             android:background="@drawable/spiner_bg" 
             android:layout_marginTop="8dip"
@@ -34,15 +34,15 @@
 
             <Spinner
                 android:id="@+id/sp_dept_range"
-                android:layout_width="180dip"
+                android:layout_width="175dip"
                 android:layout_height="wrap_content"
                 android:background="@drawable/spiner_bg" 
                 android:layout_marginLeft="8dip"/>
 
             <Button
                 android:id="@+id/btn_search_bydept"
-                android:layout_width="65dp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="5dip"
                 android:background="@drawable/search_btn_bg"

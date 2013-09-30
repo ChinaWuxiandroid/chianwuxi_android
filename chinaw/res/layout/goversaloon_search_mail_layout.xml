@@ -34,7 +34,7 @@
                 android:id="@+id/et_letter_keyword"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="#ffffff" />
+                android:background="@drawable/edittext_back"/>
         </LinearLayout>
 
         <LinearLayout
@@ -100,7 +100,7 @@
                 android:id="@+id/et_letter_no"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="#ffffff" />
+                   android:background="@drawable/edittext_back" />
         </LinearLayout>
 
         <LinearLayout
@@ -126,7 +126,7 @@
                 android:id="@+id/et_startTime"
                 android:layout_width="80dip"
                 android:layout_height="wrap_content"
-                android:background="#ffffff" />
+                  android:background="@drawable/edittext_back"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -137,7 +137,7 @@
                 android:id="@+id/et_endtime"
                 android:layout_width="80dip"
                 android:layout_height="wrap_content"
-                android:background="#ffffff" />
+                   android:background="@drawable/edittext_back"/>
         </LinearLayout>
 
         <CheckBox
@@ -152,7 +152,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dip"
             android:layout_marginRight="5dip"
-            android:layout_marginTop="10dip"
+            android:layout_marginTop="2dip"
             android:orientation="horizontal" >
 
             <ImageView
