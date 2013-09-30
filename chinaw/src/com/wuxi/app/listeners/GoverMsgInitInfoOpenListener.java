@@ -108,7 +108,7 @@ public class GoverMsgInitInfoOpenListener {
 		else if(menuName.equals("行政许可")||menuName.equals("行政处罚")||
 				menuName.equals("行政征收")||menuName.equals("行政强制")||
 				menuName.equals("其它")){
-			fifterType=1;
+			fifterType=3;
 		}
 		return fifterType;
 	}

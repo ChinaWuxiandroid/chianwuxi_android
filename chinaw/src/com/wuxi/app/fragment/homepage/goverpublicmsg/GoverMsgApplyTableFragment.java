@@ -18,7 +18,16 @@ import com.wuxi.app.R;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
 import com.wuxi.domain.ApplyDept;
 
+/**
+ * @类名： GoverMsgApplyTableFragment
+ * @描述： 依申请公开 申请界面
+ * @作者： 罗森
+ * @创建时间： 2013 2013-9-27 下午2:13:36
+ * @修改时间： 
+ * @修改描述：
+ */
 public class GoverMsgApplyTableFragment extends BaseFragment implements OnCheckedChangeListener,OnClickListener{
+	
 	protected View view;
 	protected LayoutInflater mInflater;
 	private Context context;

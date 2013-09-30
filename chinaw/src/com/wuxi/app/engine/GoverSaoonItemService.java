@@ -51,6 +51,7 @@ public class GoverSaoonItemService extends Service {
 				.replace("{deptid}", deptId).replace("{start}", start + "")
 				.replace("{end}", end + "");
 
+		
 		return getGoverSaoonItemsByURL(url);
 	}
 
@@ -82,6 +83,7 @@ public class GoverSaoonItemService extends Service {
 
 		String url = Constants.Urls.GETITEM_QUERY_URL + "?" + sb.toString();
 
+		
 		return getGoverSaoonItemsByURL(url);
 
 	}
@@ -158,6 +160,7 @@ public class GoverSaoonItemService extends Service {
 				.replace("{type}", type).replace("{kindtype}", kindType)
 				.replace("{start}", start + "").replace("{end}", end + "");
 
+		
 		return getGoverSaoonItemsByURL(url);
 	}
 
@@ -183,6 +186,7 @@ public class GoverSaoonItemService extends Service {
 		String url = Constants.Urls.GETGOVER_ITEMDETIAL_XK_URL.replace("{id}",
 				id);
 
+		
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 		if (resultStr != null) {
 
@@ -315,6 +319,7 @@ public class GoverSaoonItemService extends Service {
 
 		String url = Constants.Urls.GETGOVER_ITEMDETIAL_QZ_URL.replace("{id}",
 				id);
+		
 
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 		if (resultStr != null) {
@@ -361,6 +366,7 @@ public class GoverSaoonItemService extends Service {
 
 		String url = Constants.Urls.GETGOVER_ITEMDETIAL_QT_URL.replace("{id}",
 				id);
+		
 
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 		if (resultStr != null) {
@@ -454,6 +460,7 @@ public class GoverSaoonItemService extends Service {
 
 		String url = Constants.Urls.GETGOVER_ITEMDETIAL_CF_URL.replace("{id}",
 				id);
+		
 
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 		if (resultStr != null) {

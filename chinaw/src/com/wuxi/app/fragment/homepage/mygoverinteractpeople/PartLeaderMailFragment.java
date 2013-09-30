@@ -165,7 +165,7 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 			R.id.gip_12345_mayorbox_radioButton_mailList,
 			R.id.gip_12345_mayorbox_radioButton_mustKonwMail,
 			R.id.gip_12345_mayorbox_radioButton_mayorBoxRule };
-
+	
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -250,12 +250,13 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		case 2:
-			Intent intent = new Intent(getActivity(), MainMineActivity.class);
-			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 5);
-			intent.putExtra(Constants.CheckPositionKey.LEVEL_ONE_KEY, 1);// 这个意思让你选中左侧第二个菜单也就是12345办理平台
-			intent.putExtra(Constants.CheckPositionKey.LEVEL_TWO_KEY, 6);// 这个意思让你选中我要写信
-
-			MainTabActivity.instance.addView(intent);
+//			Intent intent = new Intent(getActivity(), MainMineActivity.class);
+//			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 5);
+//			intent.putExtra(Constants.CheckPositionKey.LEVEL_TWO__KEY, 1);// 这个意思让你选中左侧第二个菜单也就是12345办理平台
+//			intent.putExtra(Constants.CheckPositionKey.LEVEL_THREE_KEY, 6);// 这个意思让你选中我要写信
+//
+//			startActivity(intent);
+			
 			break;
 		}
 	}

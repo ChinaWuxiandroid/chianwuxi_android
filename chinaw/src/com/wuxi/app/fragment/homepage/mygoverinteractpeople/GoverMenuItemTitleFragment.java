@@ -57,7 +57,18 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 	private MenuItem parentItem;
 	private List<MenuItem> titleMenuItems;
 	private List<Channel> titleChannels;
-	private Context context;
+	protected Context context;
+	
+	protected GoverMenuItemTitleFragment titleFragment;
+	
+	
+
+	/**
+	 * @param titleFragment 要设置的  titleFragment 
+	 */
+	public void setTitleFragment(GoverMenuItemTitleFragment titleFragment) {
+		this.titleFragment = titleFragment;
+	}
 
 	private static final int MENUITEM_TITLEDATA__LOAD_SUCESS = 0;
 	private static final int CHANNEL_TITLEDATA__LOAD_SUCESS = 1;
@@ -79,7 +90,7 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 
 			case MENUITEM_TITLEDATA__LOAD_SUCESS:
 				titlePb.setVisibility(View.INVISIBLE);
-				showMenuItemTitle();
+				showMenuItemTitle(0);
 				break;
 			case CHANNEL_TITLEDATA__LOAD_SUCESS:
 				titlePb.setVisibility(View.INVISIBLE);
@@ -124,7 +135,7 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 		if (CacheUtil.get(parentItem.getId()) != null) {// 从缓存中查找子菜单
 			titleMenuItems = (List<MenuItem>) CacheUtil.get(parentItem.getId());
 			titlePb.setVisibility(View.INVISIBLE);
-			showMenuItemTitle();
+			showMenuItemTitle(0);
 			return;
 		}
 
@@ -172,14 +183,14 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 	}
 
 	// 显示普通菜单类型标题条
-	public void showMenuItemTitle() {
+	public void showMenuItemTitle(int key) {
 		checkPoint = 0; // 默认选中第一个
 		Bundle bundle = getArguments();
 		if (bundle != null) {
 			checkPoint = bundle
 					.getInt(Constants.CheckPositionKey.LEVEL_THREE_KEY);
 			
-			bundle.putInt(Constants.CheckPositionKey.LEVEL_THREE_KEY, 0);//回复现场
+			bundle.putInt(Constants.CheckPositionKey.LEVEL_THREE_KEY,key);//回复现场
 			getActivity().getIntent().putExtras(bundle);//回复现场
 		}
 		Titles_gridView = (GridView) view

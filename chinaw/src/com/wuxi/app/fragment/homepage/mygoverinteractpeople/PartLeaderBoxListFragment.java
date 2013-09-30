@@ -58,7 +58,7 @@ public class PartLeaderBoxListFragment extends BaseFragment {
 
 	private static final int DATA__LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
-
+	
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -211,7 +211,6 @@ public class PartLeaderBoxListFragment extends BaseFragment {
 				int position, long arg3) {
 			
 			PartLeaderMailFragment listFragment = new PartLeaderMailFragment();
-		
 			listFragment.setLeaderMail(leaderMails.get(position));
 			bindFragment(listFragment);
 		}

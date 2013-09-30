@@ -51,7 +51,8 @@ import com.wuxi.exception.NetException;
  * @修改时间：
  * @修改描述：
  */
-public class VideoGuestPresenceFragment extends BaseFragment implements OnItemClickListener, OnClickListener, OnScrollListener{
+public class VideoGuestPresenceFragment extends BaseFragment implements
+		OnItemClickListener, OnClickListener, OnScrollListener {
 
 	private static final String TAG = "VideoGuestPresenceFragment";
 
@@ -106,7 +107,7 @@ public class VideoGuestPresenceFragment extends BaseFragment implements OnItemCl
 			}
 		};
 	};
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -116,7 +117,7 @@ public class VideoGuestPresenceFragment extends BaseFragment implements OnItemCl
 		initLayout();
 
 		loadFirstData(START, PAGE_NUM);
-		
+
 		return view;
 	}
 
@@ -130,7 +131,7 @@ public class VideoGuestPresenceFragment extends BaseFragment implements OnItemCl
 
 		progressBar = (ProgressBar) view
 				.findViewById(R.id.video_guest_presence_progressbar);
-		
+
 		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
 				null);
 		loadMoreButton = (Button) loadMoreView
@@ -143,7 +144,7 @@ public class VideoGuestPresenceFragment extends BaseFragment implements OnItemCl
 		loadMoreButton.setOnClickListener(this);
 
 	}
-	
+
 	/**
 	 * @方法： loadFirstData
 	 * @描述： 第一次加载数据
@@ -176,8 +177,7 @@ public class VideoGuestPresenceFragment extends BaseFragment implements OnItemCl
 				Message message = handler.obtainMessage();
 				GuestPresenceService service = new GuestPresenceService(context);
 				try {
-					wrapper = service
-							.getGuestPresenceWrapper(id, start, end);
+					wrapper = service.getGuestPresenceWrapper(id, start, end);
 					if (wrapper != null) {
 						handler.sendEmptyMessage(DATA_LOAD_SUCESS);
 					} else {

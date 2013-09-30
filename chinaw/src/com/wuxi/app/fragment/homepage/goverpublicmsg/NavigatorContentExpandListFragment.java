@@ -33,11 +33,13 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- *市政府信息公开目录 里的 可扩展列表
- *@author 杨宸 智佳
+ * 市政府信息公开目录 里的 可扩展列表
+ * 
+ * @author 杨宸 智佳
  * */
 
-public class NavigatorContentExpandListFragment extends BaseFragment implements OnItemClickListener{
+public class NavigatorContentExpandListFragment extends BaseFragment implements
+		OnItemClickListener {
 	@Override
 	public void onHiddenChanged(boolean hidden) {
 
@@ -60,8 +62,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 	private static final int CHANNEL_DATA_LOAD_SUCESS = 1;
 	private static final int DATA_LOAD_ERROR = 2;
 	private static final int LOAD_CHANNEL_DATA = 3;
-	protected static final int CHANNELCONTENT_ID=R.id.govermsg_custom_content;
-
+	protected static final int CHANNELCONTENT_ID = R.id.govermsg_custom_content;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -101,7 +102,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 			Bundle savedInstanceState) {
 
 		view = inflater.inflate(R.layout.expand_channel_listview_layout, null);
-		mInflater=inflater;
+		mInflater = inflater;
 		context = getActivity();
 		initUI();
 		return view;
@@ -111,21 +112,21 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 	private void initUI() {
 
 		listview = (ListView) view.findViewById(R.id.expand_channel_listview);
-		processBar = (ProgressBar) view.findViewById(R.id.expand_channel_progress);
+		processBar = (ProgressBar) view
+				.findViewById(R.id.expand_channel_progress);
 		listview.setOnItemClickListener(this);
 
 		processBar.setVisibility(View.VISIBLE);
-		if(parentItem.getType()==MenuItem.CUSTOM_MENU){
+		if (parentItem.getType() == MenuItem.CUSTOM_MENU) {
 			loadMenuItemData();
-		}
-		else if(parentItem.getType()==MenuItem.CHANNEL_MENU){
+		} else if (parentItem.getType() == MenuItem.CHANNEL_MENU) {
 			loadChannelData();
 		}
 
 	}
 
 	@SuppressWarnings("unchecked")
-	private void loadMenuItemData(){
+	private void loadMenuItemData() {
 		if (CacheUtil.get(parentItem.getId()) != null) {// 从缓存中查找子菜单
 			menuItems = (List<MenuItem>) CacheUtil.get(parentItem.getId());
 			processBar.setVisibility(View.INVISIBLE);
@@ -140,13 +141,11 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 
 				MenuService menuSevice = new MenuService(context);
 				try {
-					menuItems = menuSevice.getSubMenuItems(parentItem
-							.getId());
+					menuItems = menuSevice.getSubMenuItems(parentItem.getId());
 					if (menuItems != null) {
 						handler.sendEmptyMessage(MENUITEM_DATA_LOAD_SUCESS);
-					
-					}
-					else{
+
+					} else {
 						Message msg = handler.obtainMessage();
 						msg.obj = "暂无信息";
 						msg.what = DATA_LOAD_ERROR;
@@ -177,7 +176,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 	}
 
 	@SuppressWarnings("unchecked")
-	private void loadChannelData(){
+	private void loadChannelData() {
 		if (CacheUtil.get(parentItem.getChannelId()) != null) {// 从缓存中查找子菜单
 			channels = (List<Channel>) CacheUtil.get(parentItem.getChannelId());
 			processBar.setVisibility(View.INVISIBLE);
@@ -193,24 +192,22 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 				ChannelService channelSevice = new ChannelService(context);
 
 				try {
-					if(parentItem.getName().equals("业务工作")){
+					if (parentItem.getName().equals("业务工作")) {
 						handler.sendEmptyMessage(LOAD_CHANNEL_DATA);
 
-					}
-					else{
-						channels = channelSevice.getSubChannels(parentItem.getChannelId());
+					} else {
+						channels = channelSevice.getSubChannels(parentItem
+								.getChannelId());
 						if (channels != null) {
 							handler.sendEmptyMessage(CHANNEL_DATA_LOAD_SUCESS);
-							
-						}
-						else{
+
+						} else {
 							Message msg = handler.obtainMessage();
 							msg.obj = "暂无信息";
 							msg.what = DATA_LOAD_ERROR;
 							handler.sendMessage(msg);
 						}
 					}
-
 
 				} catch (NetException e) {
 					e.printStackTrace();
@@ -222,53 +219,51 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 			}
 		}).start();
 	}
-	public void showChannelData(){
-		//没有子频道列表
-		GoverMsgCustomContentDetailFragment goverMsgCustomContentDetailFragment=new GoverMsgCustomContentDetailFragment();
-		
+
+	public void showChannelData() {
+		// 没有子频道列表
+		GoverMsgCustomContentDetailFragment goverMsgCustomContentDetailFragment = new GoverMsgCustomContentDetailFragment();
+
 		goverMsgCustomContentDetailFragment.setParentMenuItem(parentItem);
-		goverMsgCustomContentDetailFragment.setFifterType(GoverMsgSearchContentListFragment.DEPT_TYPE);
+		goverMsgCustomContentDetailFragment
+				.setFifterType(GoverMsgSearchContentListFragment.DEPT_TYPE);
 		bindFragment(goverMsgCustomContentDetailFragment);
 	}
 
-	private void showMenuItemList(){
-		MenuItemListAdapter adapter=new MenuItemListAdapter();
+	private void showMenuItemList() {
+		MenuItemListAdapter adapter = new MenuItemListAdapter();
 
 		listview.setAdapter(adapter);
 
 	}
 
-	private void showChannelList(){
-		MenuItemListAdapter adapter=new MenuItemListAdapter();
+	private void showChannelList() {
+		MenuItemListAdapter adapter = new MenuItemListAdapter();
 
 		listview.setAdapter(adapter);
 
 	}
 
-	public class MenuItemListAdapter extends BaseAdapter{
+	public class MenuItemListAdapter extends BaseAdapter {
 
 		@Override
 		public int getCount() {
-			if(menuItems!=null){
+			if (menuItems != null) {
 				return menuItems.size();
-			}
-			else if(channels!=null){
+			} else if (channels != null) {
 				return channels.size();
-			}
-			else
+			} else
 				return 0;
 		}
 
 		@Override
 		public Object getItem(int position) {
-			if(menuItems!=null){
+			if (menuItems != null) {
 				return menuItems.get(position);
-			}
-			else if(channels!=null){
+			} else if (channels != null) {
 				return channels.get(position);
-			}
-			else
-				return null;			
+			} else
+				return null;
 
 		}
 
@@ -284,25 +279,25 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder viewHolder = null;
-			if(convertView==null){
+			if (convertView == null) {
 				convertView = mInflater.inflate(
 						R.layout.expand_channel_listview_item, null);
 
 				viewHolder = new ViewHolder();
 
 				viewHolder.title_text = (TextView) convertView
-						.findViewById(R.id.expand_channel_listview_item_title);	
+						.findViewById(R.id.expand_channel_listview_item_title);
 				convertView.setTag(viewHolder);
-			}
-			else {
+			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			if(viewHolder.title_text!=null){
-				if(menuItems!=null){
-					viewHolder.title_text.setText(menuItems.get(position).getName());
-				}
-				else if(channels!=null){
-					viewHolder.title_text.setText(channels.get(position).getChannelName());
+			if (viewHolder.title_text != null) {
+				if (menuItems != null) {
+					viewHolder.title_text.setText(menuItems.get(position)
+							.getName());
+				} else if (channels != null) {
+					viewHolder.title_text.setText(channels.get(position)
+							.getChannelName());
 				}
 			}
 			return convertView;
@@ -310,40 +305,40 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements 
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> adapterView, View arg1, int position, long arg3) {
-		Object object=(Object) adapterView.getItemAtPosition(position);
+	public void onItemClick(AdapterView<?> adapterView, View arg1,
+			int position, long arg3) {
+		Object object = (Object) adapterView.getItemAtPosition(position);
 
-		MenuItem menuItem=null;
-		Channel channel=null;
+		MenuItem menuItem = null;
+		Channel channel = null;
 		if (object instanceof MenuItem) {// 如果是频道
-			menuItem=(MenuItem)object;
+			menuItem = (MenuItem) object;
 		} else if (object instanceof Channel) {
-			channel=(Channel)object;
+			channel = (Channel) object;
 		}
 
-		GoverMsgCustomContentDetailFragment goverMsgCustomContentDetailFragment=new GoverMsgCustomContentDetailFragment();
+		GoverMsgCustomContentDetailFragment goverMsgCustomContentDetailFragment = new GoverMsgCustomContentDetailFragment();
 
-		if(menuItem!=null){
+		if (menuItem != null) {
 			goverMsgCustomContentDetailFragment.setParentMenuItem(menuItem);
 			bindFragment(goverMsgCustomContentDetailFragment);
-		}		
-		else{
-			if(channel.getChildrenChannelsCount()>0){
-				GoverMsgSubChannelsSearchFragment goverMsgSubChannelsSearchFragment=new GoverMsgSubChannelsSearchFragment();
+
+		} else {
+			if (channel.getChildrenChannelsCount() > 0) {
+				GoverMsgSubChannelsSearchFragment goverMsgSubChannelsSearchFragment = new GoverMsgSubChannelsSearchFragment();
 				goverMsgSubChannelsSearchFragment.setParentChannel(channel);
 				bindFragment(goverMsgSubChannelsSearchFragment);
-			}
-			else{
+			} else {
 				goverMsgCustomContentDetailFragment.setParentChannel(channel);
 				bindFragment(goverMsgCustomContentDetailFragment);
 			}
 		}
 	}
 
-	public void bindFragment(BaseFragment fragment){
+	public void bindFragment(BaseFragment fragment) {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
-		
+
 		ft.replace(CHANNELCONTENT_ID, fragment);
 
 		ft.commitAllowingStateLoss();

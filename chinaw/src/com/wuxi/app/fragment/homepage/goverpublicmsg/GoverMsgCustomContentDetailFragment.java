@@ -141,7 +141,27 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 			FragmentTransaction ft = manager.beginTransaction();
 			ft.replace(CONTENT_LIST_ID, goverMsgCustomContentListFragment);
 			ft.commitAllowingStateLoss();
-		} else {
+		} else if (fifterType == 3) {
+			GPMAdministrativeFragment administrativeLicenseFragment = new GPMAdministrativeFragment();
+			//行政事项五个子菜单内容列表
+			if (parentMenuItem.getName().equals("行政许可")) {
+				administrativeLicenseFragment.setType("XK");
+				changeFragment(administrativeLicenseFragment);
+			}else if (parentMenuItem.getName().equals("行政处罚")) {
+				administrativeLicenseFragment.setType("CF");
+				changeFragment(administrativeLicenseFragment);
+			}else if (parentMenuItem.getName().equals("行政征收")) {
+				administrativeLicenseFragment.setType("ZS");
+				changeFragment(administrativeLicenseFragment);
+			}else if (parentMenuItem.getName().equals("行政强制")) {
+				administrativeLicenseFragment.setType("QZ");
+				changeFragment(administrativeLicenseFragment);
+			}else if (parentMenuItem.getName().equals("其它")) {
+				administrativeLicenseFragment.setType("QT");
+				changeFragment(administrativeLicenseFragment);
+			}
+		}
+		else {
 			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment = new GoverMsgSearchContentListFragment();
 		
 			goverMsgSearchContentListFragment.setFifterType(fifterType);
@@ -157,6 +177,15 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 			ft.replace(CONTENT_LIST_ID, goverMsgSearchContentListFragment);
 			ft.commitAllowingStateLoss();
 		}
+		
+	}
+	
+	private void changeFragment(BaseFragment baseFragment){
+		FragmentManager manager = getActivity().getSupportFragmentManager();
+		FragmentTransaction ft = manager.beginTransaction();
+		
+		ft.replace(CONTENT_LIST_ID, baseFragment);
+		ft.commitAllowingStateLoss();
 	}
 
 	@Override

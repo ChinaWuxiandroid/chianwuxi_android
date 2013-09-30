@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wuxi.app"
-<<<<<<< HEAD
-    android:versionCode="3"
-=======
     android:versionCode="4"
->>>>>>> b774d463e707cd297f1d67594b26bfc9eddf5fcc
     android:versionName="1.0.5" >
 
     <uses-sdk

@@ -139,6 +139,8 @@ public class ContentService extends Service {
 				.replace("{start}", start + "")
 				.replace("{end}", end + "");
 		
+		System.out.println("测试:"+url);
+		
 		String resultStr = httpUtils.executeGetToString(url, 5000);
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);

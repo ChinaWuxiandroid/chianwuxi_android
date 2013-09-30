@@ -183,11 +183,16 @@ public class HotReviewContentActivity extends BaseItemContentActivity implements
 				LoginDialog loginDialog = new LoginDialog(con);
 				try {
 					if (loginDialog.checkLogin()) {
-						service.submitComment(hotReview.getId(), submitContent
+						if (submitContent.getText().toString().equals("")) {
+							Toast.makeText(HotReviewContentActivity.this, "请输入您的意见！", Toast.LENGTH_SHORT).show();
+						}else {
+							service.submitComment(hotReview.getId(), submitContent
 								.getText().toString(), SystemUtil
 								.getAccessToken(con));
 						Toast.makeText(con, "提交成功，正在审核...", Toast.LENGTH_SHORT)
 								.show();
+						}
+						
 					} else {
 						loginDialog.showDialog();
 						popupWindow.dismiss();

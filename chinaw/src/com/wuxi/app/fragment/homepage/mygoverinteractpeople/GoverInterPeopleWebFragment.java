@@ -18,6 +18,7 @@ import com.wuxi.app.R;
  * @author 杨宸 智佳
  * */
 public class GoverInterPeopleWebFragment extends BaseFragment{
+	
 	private View view;
 	private String wapUrl;
 	private Context context;

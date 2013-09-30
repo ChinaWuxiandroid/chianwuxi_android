@@ -7,7 +7,7 @@
 
     <include
         android:layout_width="fill_parent"
-        android:layout_height="58sp"
+        android:layout_height="wrap_content"
         layout="@layout/child_fragment_itemcontent_header_layout" />
 
     <ProgressBar

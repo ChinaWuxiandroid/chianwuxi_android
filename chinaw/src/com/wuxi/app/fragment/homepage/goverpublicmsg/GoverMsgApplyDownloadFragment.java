@@ -92,7 +92,7 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 				break;
 			case LOAD_FAILED:
 				progressBar.setVisibility(ProgressBar.INVISIBLE);
-				Toast.makeText(context, "提交失败！", 2000).show();
+				Toast.makeText(context, "提交失败！", Toast.LENGTH_SHORT).show();
 				break;
 			}
 		};
@@ -194,28 +194,24 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 	}
 
 	public void showGoverList() {
-	
+
 		if (govers != null)
-			content_listView
-					.setAdapter(new ApplyGoverAdapter());
+			content_listView.setAdapter(new ApplyGoverAdapter());
 	}
 
 	public void showDeptList() {
 
-		
 		if (depts != null)
-			content_listView
-					.setAdapter(new ApplyDeptAdapter());
+			content_listView.setAdapter(new ApplyDeptAdapter());
 	}
 
 	public class ApplyGoverAdapter extends BaseAdapter implements
 			OnClickListener {
 
-		
 		private ApplyGover gover;
 
 		public ApplyGoverAdapter() {
-			
+
 		}
 
 		@Override
@@ -278,7 +274,9 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 				openBrowser(gover.getZhinanUrl());
 				break;
 			case R.id.govermsg_deptapply_item_apply:
-				openBrowser(gover.getApplyUrl());
+
+				System.out.println("测试");
+				// openBrowser(gover.getApplyUrl());
 				break;
 			}
 		}
@@ -294,11 +292,10 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 	public class ApplyDeptAdapter extends BaseAdapter implements
 			OnClickListener {
 
-		
 		ApplyDept applyDept = null;
 
 		public ApplyDeptAdapter() {
-			
+
 		}
 
 		@Override
@@ -362,13 +359,13 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 				break;
 			case R.id.govermsg_deptapply_item_apply:
 				// 检测登录状态
-				
+
 				if (applyDept != null) {
-					
 
 					Intent intent = new Intent(getActivity(),
 							GoverMsgApplyTableFragment.class);
 					intent.putExtra("applyDept", applyDept);
+					
 					MainTabActivity.instance.addView(intent);
 				}
 
