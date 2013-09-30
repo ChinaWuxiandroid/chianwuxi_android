@@ -137,12 +137,11 @@ public class ContentService extends Service {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 		String url = Constants.Urls.CHANNEL_CONTENT_P_URL.replace("{id}", id)
-
 				.replace("{start}", start + "").replace("{end}", end + "");
 		String resultStr = null;
-		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url, true);//检查是否有缓存文件
+		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url, true);// 检查是否有缓存文件
 		if (isHasCacheFile) {
-			resultStr = cacheUtil.getCacheStr(url,true);// 缓存读取
+			resultStr = cacheUtil.getCacheStr(url, true);// 缓存读取
 		} else {
 			resultStr = httpUtils.executeGetToString(url, 5000);
 		}
@@ -162,8 +161,8 @@ public class ContentService extends Service {
 				contentWrapper.setContents(parseData(jData));// 解析数组
 			}
 
-			if(!isHasCacheFile){
-				cacheUtil.cacheFile(url, resultStr, true);//缓存内容列表
+			if (!isHasCacheFile) {
+				cacheUtil.cacheFile(url, resultStr, true);// 缓存内容列表
 			}
 			return contentWrapper;
 

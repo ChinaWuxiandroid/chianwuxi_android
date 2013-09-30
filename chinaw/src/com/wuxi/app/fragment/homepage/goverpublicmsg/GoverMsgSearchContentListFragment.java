@@ -147,7 +147,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		initFilter(filterType);
 	}
 
-	public void initFilter(int Type) {
+	private void initFilter(int Type) {
 		Calendar c = Calendar.getInstance();
 		DEFAULT_YEAR_FIFTER = c.get(Calendar.YEAR); // 2013
 		yearFifter = DEFAULT_YEAR_FIFTER;
@@ -189,6 +189,10 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		partment_sp.setVisibility(View.GONE);
 	}
 
+	/**
+	 * @方法： loadDeptData
+	 * @描述： 加载部门信息
+	 */
 	private void loadDeptData() {
 
 		new Thread(new Runnable() {
@@ -225,6 +229,10 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 
 	}
 
+	/**
+	 * @方法： showDept
+	 * @描述： 显示部门数据
+	 */
 	private void showDept() {
 		ApplyDept deptDefault = new ApplyDept();
 		deptDefault.setDepId("0");
@@ -240,6 +248,10 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 
 	}
 
+	/**
+	 * @方法： initYearSpinner
+	 * @描述： 初始化年份下拉框
+	 */
 	private void initYearSpinner() {
 		List<String> years = TimeFormateUtil
 				.getYears(TimeFormateUtil.START_YEAR);

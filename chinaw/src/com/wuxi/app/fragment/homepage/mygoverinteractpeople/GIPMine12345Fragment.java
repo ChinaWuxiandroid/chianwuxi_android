@@ -32,7 +32,7 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- * 我的政民互动 主Fragment --12345来信班里平台 fragment
+ * 我的政民互动 主Fragment --12345来信办理平台 fragment
  * 
  * @author 杨宸 智佳
  * */

@@ -255,7 +255,7 @@ public abstract class ContentListFragment extends BaseFragment implements
 
 				isSwitch = false;
 				loadMoreButton.setText("loading.....");
-				loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_SIZE);
+				loadMore(v);
 			}
 			break;
 		}
