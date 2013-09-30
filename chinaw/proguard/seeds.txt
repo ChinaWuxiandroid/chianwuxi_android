@@ -7948,11 +7948,19 @@ com.wuxi.app.view.SlideMenuLayout: SlideMenuLayout(android.content.Context)
 com.wuxi.app.view.SlideMenuLayout: SlideMenuLayout(android.content.Context,android.util.AttributeSet)
 com.wuxi.app.view.SlideMenuLayout: SlideMenuLayout(android.content.Context,android.util.AttributeSet,int)
 com.wuxi.app.view.SlipButton
-com.wuxi.app.view.SlipButton: SlipButton(android.content.Context)
 com.wuxi.app.view.SlipButton: SlipButton(android.content.Context,android.util.AttributeSet)
+com.wuxi.app.view.SwitchButton
+com.wuxi.app.view.SwitchButton: SwitchButton(android.content.Context,android.util.AttributeSet)
+com.wuxi.app.view.SwitchButton: SwitchButton(android.content.Context)
+com.wuxi.app.view.SwitchButton: SwitchButton(android.content.Context,android.util.AttributeSet,int)
 com.wuxi.app.view.TitleScrollLayout
 com.wuxi.app.view.TitleScrollLayout: TitleScrollLayout(android.content.Context,android.util.AttributeSet)
 com.wuxi.app.view.TitleScrollLayout: TitleScrollLayout(android.content.Context,android.util.AttributeSet,int)
+com.wuxi.domain.AdministrativeWrapper
+com.wuxi.domain.AdministrativeWrapper: java.util.List licenses
+com.wuxi.domain.AdministrativeWrapper: AdministrativeWrapper()
+com.wuxi.domain.AdministrativeWrapper: java.util.List getLicenses()
+com.wuxi.domain.AdministrativeWrapper: void setLicenses(java.util.List)
 com.wuxi.domain.AdvancedSearchUtil
 com.wuxi.domain.AdvancedSearchUtil: long serialVersionUID
 com.wuxi.domain.AdvancedSearchUtil: java.lang.String infoType
@@ -9012,6 +9020,24 @@ com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String getSentTime()
 com.wuxi.domain.GoversaoonOnlineASKDetail: void setSentTime(java.lang.String)
 com.wuxi.domain.GoversaoonOnlineASKDetail: java.lang.String getAnswerDate()
 com.wuxi.domain.GoversaoonOnlineASKDetail: void setAnswerDate(java.lang.String)
+com.wuxi.domain.GuestPresenceWrapper
+com.wuxi.domain.GuestPresenceWrapper: java.util.List guestPresences
+com.wuxi.domain.GuestPresenceWrapper: GuestPresenceWrapper()
+com.wuxi.domain.GuestPresenceWrapper: java.util.List getGuestPresences()
+com.wuxi.domain.GuestPresenceWrapper: void setGuestPresences(java.util.List)
+com.wuxi.domain.GuestPresenceWrapper$GuestPresence
+com.wuxi.domain.GuestPresenceWrapper$GuestPresence: long serialVersionUID
+com.wuxi.domain.GuestPresenceWrapper$GuestPresence: java.lang.String docId
+com.wuxi.domain.GuestPresenceWrapper$GuestPresence: java.lang.String recommendPictures
+com.wuxi.domain.GuestPresenceWrapper$GuestPresence: java.lang.String picturesTitle
+com.wuxi.domain.GuestPresenceWrapper$GuestPresence: com.wuxi.domain.GuestPresenceWrapper this$0
+com.wuxi.domain.GuestPresenceWrapper$GuestPresence: GuestPresenceWrapper$GuestPresence(com.wuxi.domain.GuestPresenceWrapper)
+com.wuxi.domain.GuestPresenceWrapper$GuestPresence: java.lang.String getDocId()
+com.wuxi.domain.GuestPresenceWrapper$GuestPresence: void setDocId(java.lang.String)
+com.wuxi.domain.GuestPresenceWrapper$GuestPresence: java.lang.String getRecommendPictures()
+com.wuxi.domain.GuestPresenceWrapper$GuestPresence: void setRecommendPictures(java.lang.String)
+com.wuxi.domain.GuestPresenceWrapper$GuestPresence: java.lang.String getPicturesTitle()
+com.wuxi.domain.GuestPresenceWrapper$GuestPresence: void setPicturesTitle(java.lang.String)
 com.wuxi.domain.HotPostWrapper
 com.wuxi.domain.HotPostWrapper: java.lang.String id
 com.wuxi.domain.HotPostWrapper: java.lang.String content
@@ -10060,6 +10086,35 @@ com.wuxi.domain.PoliticsWrapper$Politics: java.lang.String getBeginTime()
 com.wuxi.domain.PoliticsWrapper$Politics: void setBeginTime(java.lang.String)
 com.wuxi.domain.PoliticsWrapper$Politics: java.lang.String getEndTime()
 com.wuxi.domain.PoliticsWrapper$Politics: void setEndTime(java.lang.String)
+com.wuxi.domain.QueryLetterCondition
+com.wuxi.domain.QueryLetterCondition: java.lang.String keyword
+com.wuxi.domain.QueryLetterCondition: java.lang.String contenttype
+com.wuxi.domain.QueryLetterCondition: java.lang.String lettertype
+com.wuxi.domain.QueryLetterCondition: long starttime
+com.wuxi.domain.QueryLetterCondition: long endtime
+com.wuxi.domain.QueryLetterCondition: java.lang.String code
+com.wuxi.domain.QueryLetterCondition: int common
+com.wuxi.domain.QueryLetterCondition: java.lang.String depid
+com.wuxi.domain.QueryLetterCondition: java.lang.String dodepid
+com.wuxi.domain.QueryLetterCondition: QueryLetterCondition()
+com.wuxi.domain.QueryLetterCondition: java.lang.String getDepid()
+com.wuxi.domain.QueryLetterCondition: void setDepid(java.lang.String)
+com.wuxi.domain.QueryLetterCondition: java.lang.String getDodepid()
+com.wuxi.domain.QueryLetterCondition: void setDodepid(java.lang.String)
+com.wuxi.domain.QueryLetterCondition: java.lang.String getKeyword()
+com.wuxi.domain.QueryLetterCondition: void setKeyword(java.lang.String)
+com.wuxi.domain.QueryLetterCondition: java.lang.String getContenttype()
+com.wuxi.domain.QueryLetterCondition: void setContenttype(java.lang.String)
+com.wuxi.domain.QueryLetterCondition: java.lang.String getLettertype()
+com.wuxi.domain.QueryLetterCondition: void setLettertype(java.lang.String)
+com.wuxi.domain.QueryLetterCondition: long getStarttime()
+com.wuxi.domain.QueryLetterCondition: void setStarttime(long)
+com.wuxi.domain.QueryLetterCondition: long getEndtime()
+com.wuxi.domain.QueryLetterCondition: void setEndtime(long)
+com.wuxi.domain.QueryLetterCondition: java.lang.String getCode()
+com.wuxi.domain.QueryLetterCondition: void setCode(java.lang.String)
+com.wuxi.domain.QueryLetterCondition: int getCommon()
+com.wuxi.domain.QueryLetterCondition: void setCommon(int)
 com.wuxi.domain.QueryMailContentTypeWrapper
 com.wuxi.domain.QueryMailContentTypeWrapper: java.util.List contentTypes
 com.wuxi.domain.QueryMailContentTypeWrapper: QueryMailContentTypeWrapper()

@@ -430,7 +430,7 @@ public class MyGoverSaloonFragment extends GoverSaloonContentFragment implements
 			RadioButton rb = (RadioButton) gover_btn_rg.getChildAt(i);
 			if (rb.isChecked()) {
 				rb.setTextColor(Color.WHITE);
-				rb.setBackgroundResource(R.drawable.goversaloon_menuitem_bg);
+				rb.setBackgroundResource(R.drawable.goversaool_content_bt_selec);
 			} else {
 				rb.setTextColor(Color.BLACK);
 				rb.setBackgroundResource(R.color.content_background);

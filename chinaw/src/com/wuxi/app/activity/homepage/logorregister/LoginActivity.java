@@ -105,6 +105,9 @@ public class LoginActivity extends BaseSlideActivity implements OnClickListener 
 		editor.commit();// tijiao
 
 		Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+		if(MainTabActivity.instance.stack.size()>1){
+			MainTabActivity.instance.pop();
+		}
 
 	}
 
