@@ -94,22 +94,20 @@ public class MainMineActivity extends BaseSlideActivity implements
 	public void getArgumentsFromOtherFragment() {
 		Bundle bundle = this.getIntent().getExtras();
 
-<<<<<<< HEAD
 //<<<<<<< HEAD
-//		if (bundle != null
-//				&& bundle.get(Constants.CheckPositionKey.LEVEL_ONE_KEY) != null) {
-//			defaultCheckPosition = (Integer) bundle
-//					.get(Constants.CheckPositionKey.LEVEL_ONE_KEY);
-//=======
-		if (bundle != null && bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY) != null) {
-			defaultCheckPosition = (Integer) bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY);
-//>>>>>>> b774d463e707cd297f1d67594b26bfc9eddf5fcc
-=======
+////<<<<<<< HEAD
+////		if (bundle != null
+////				&& bundle.get(Constants.CheckPositionKey.LEVEL_ONE_KEY) != null) {
+////			defaultCheckPosition = (Integer) bundle
+////					.get(Constants.CheckPositionKey.LEVEL_ONE_KEY);
+////=======
+//		if (bundle != null && bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY) != null) {
+//			defaultCheckPosition = (Integer) bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY);
+////>>>>>>> b774d463e707cd297f1d67594b26bfc9eddf5fcc
 
 		if (bundle != null && bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY) != null) {
 			defaultCheckPosition = (Integer) bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY);
 
->>>>>>> 2d1e1b1240b4299c64a8cb529dfa46016c17c29b
 		}
 
 	}

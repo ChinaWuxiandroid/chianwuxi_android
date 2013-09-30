@@ -7,10 +7,8 @@ import android.os.Message;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
-import android.webkit.WebSettings.TextSize;
 import android.webkit.WebView;
 import android.webkit.WebSettings.TextSize;
 import android.webkit.WebViewClient;
@@ -109,8 +107,6 @@ public class GoverMsgWebFragment extends BaseFragment implements KeyEvent.Callba
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if ((keyCode == KeyEvent.KEYCODE_BACK)&&wbView.canGoBack()) {
-			
-			System.out.println("测试WebView返回功能");
 			
 			wbView.goBack();
 			

@@ -139,7 +139,7 @@ public class ContentService extends Service {
 				.replace("{start}", start + "")
 				.replace("{end}", end + "");
 		
-		System.out.println("测试:"+url);
+		System.out.println("测试信息公开:"+url);
 		
 		String resultStr = httpUtils.executeGetToString(url, 5000);
 		if (resultStr != null) {

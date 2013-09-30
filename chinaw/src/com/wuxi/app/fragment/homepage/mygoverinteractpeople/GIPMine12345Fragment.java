@@ -32,7 +32,7 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- * 我的政民互动 主Fragment --12345来信班里平台 fragment
+ * 我的政民互动 主Fragment --12345来信办理平台 fragment
  * 
  * @author 杨宸 智佳
  * */
@@ -122,21 +122,12 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 
 			@Override
 			public void onClick(View v) {
-<<<<<<< HEAD
-//				Intent intent = new Intent(getActivity(), MainMineActivity.class);
-//				intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 5);
-//				intent.putExtra(Constants.CheckPositionKey.LEVEL_TWO__KEY, 1);// 这个意思让你选中左侧第二个菜单也就是12345办理平台
-//				intent.putExtra(Constants.CheckPositionKey.LEVEL_THREE_KEY, 6);// 这个意思让你选中我要写信
-//
-//				startActivity(intent);
-=======
 				Intent intent = new Intent(getActivity(), MainMineActivity.class);
 				intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 5);
 				
 				intent.putExtra(Constants.CheckPositionKey.LEVEL_TWO__KEY, 1);// 这个意思让你选中左侧第二个菜单也就是12345办理平台
 				intent.putExtra(Constants.CheckPositionKey.LEVEL_THREE_KEY, 6);// 这个意思让你选中我要写信
 				MainTabActivity.instance.addView(intent);
->>>>>>> 2d1e1b1240b4299c64a8cb529dfa46016c17c29b
 			}
 		});
 
