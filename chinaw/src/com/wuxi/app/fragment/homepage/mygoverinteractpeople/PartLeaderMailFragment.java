@@ -250,6 +250,7 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 			bindFragment(goverInterPeopleWebFragment);
 			break;
 		case 2:
+<<<<<<< HEAD
 //<<<<<<< HEAD
 ////			Intent intent = new Intent(getActivity(), MainMineActivity.class);
 ////			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 5);
@@ -259,6 +260,8 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 ////			startActivity(intent);
 //			
 //=======
+=======
+>>>>>>> bb723faab30d6fdda14cdd2a089de4db117ccd0a
 
 			Intent intent = new Intent(getActivity(), MainMineActivity.class);
 			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 5);
@@ -266,6 +269,10 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 			intent.putExtra(Constants.CheckPositionKey.LEVEL_TWO__KEY, 1);// 这个意思让你选中左侧第二个菜单也就是12345办理平台
 			intent.putExtra(Constants.CheckPositionKey.LEVEL_THREE_KEY, 6);// 这个意思让你选中我要写信
 			MainTabActivity.instance.addView(intent);
+<<<<<<< HEAD
+=======
+
+>>>>>>> bb723faab30d6fdda14cdd2a089de4db117ccd0a
 			break;
 		}
 	}
