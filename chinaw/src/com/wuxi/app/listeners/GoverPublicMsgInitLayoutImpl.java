@@ -79,6 +79,7 @@ public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener 
 			
 			else if (fragment instanceof GoverMsgFifterContentListFragment) {
 				goverMsgFifterContentListFragment = (GoverMsgFifterContentListFragment) fragment;
+				
 				goverMsgFifterContentListFragment.setParentItem(menuItem);
 				initLayoutListner.bindContentLayout(goverMsgFifterContentListFragment);
 			}

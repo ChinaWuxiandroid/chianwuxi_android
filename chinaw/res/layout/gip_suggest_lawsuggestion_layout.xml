@@ -33,6 +33,7 @@
         android:background="@android:color/white" />
 
     <FrameLayout
+        android:id="@+id/gip_suggest_lawsuggest_listView_poloticsList_framelayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 

@@ -141,7 +141,9 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 			FragmentTransaction ft = manager.beginTransaction();
 			ft.replace(CONTENT_LIST_ID, goverMsgCustomContentListFragment);
 			ft.commitAllowingStateLoss();
-		} else if (fifterType == 3) {
+		} 
+		//跳转到行政事项
+		else if (fifterType == 3) {
 			GPMAdministrativeFragment administrativeLicenseFragment = new GPMAdministrativeFragment();
 			//行政事项五个子菜单内容列表
 			if (parentMenuItem.getName().equals("行政许可")) {
@@ -160,6 +162,18 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 				administrativeLicenseFragment.setType("QT");
 				changeFragment(administrativeLicenseFragment);
 			}
+		}
+		//跳转到政府概括
+		else if (fifterType == 4) {
+			GPMGovernmentGeneralizeFragment generalizeFragment = new GPMGovernmentGeneralizeFragment();
+			generalizeFragment.setParentItem(parentMenuItem);
+			changeFragment(generalizeFragment);
+		}
+		//跳转到政策法规
+		else if (fifterType == 5) {
+			GPMPolicieRegulationFragment regulationFragment = new GPMPolicieRegulationFragment();
+			regulationFragment.setParentItem(parentMenuItem);
+			changeFragment(regulationFragment);
 		}
 		else {
 			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment = new GoverMsgSearchContentListFragment();

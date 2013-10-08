@@ -16,6 +16,7 @@ public class GoverMsgFifterContentListFragment extends
 	public void onItemClick(AdapterView<?> adapterView, View arg1,
 			int position, long arg3) {
 		
+		
 
 		Content content = (Content) adapterView.getItemAtPosition(position);
 		

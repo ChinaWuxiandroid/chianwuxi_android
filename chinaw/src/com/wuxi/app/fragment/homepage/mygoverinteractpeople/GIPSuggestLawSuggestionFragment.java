@@ -11,6 +11,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,10 +37,12 @@ import com.wuxi.app.R;
 import com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity;
 import com.wuxi.app.adapter.SuggestLawSuggestionAdapter;
 import com.wuxi.app.engine.PoliticsService;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GPMPolicieRegulationSearchFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.PoliticsWrapper;
 import com.wuxi.domain.PoliticsWrapper.Politics;
+import com.wuxi.domain.SuggestLawSearchCon;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -51,6 +55,10 @@ import com.wuxi.exception.NetException;
 public class GIPSuggestLawSuggestionFragment extends BaseFragment implements
 		OnItemClickListener, OnClickListener, OnScrollListener {
 
+	protected static final String TAG = "GIPSuggestLawSuggestionFragment";
+	
+	private static final int FRAGMENT_ID = R.id.gip_suggest_lawsuggest_listView_poloticsList_framelayout;
+
 	private View view = null;
 	private Context context = null;
 
@@ -58,15 +66,15 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements
 
 	private ListView mListView = null;
 	private ProgressBar list_pb = null;
+
 	private PoliticsWrapper politicsWrapper;
 	private List<Politics> politicss;
-	protected static final String TAG = "GIPSuggestLawSuggestionFragment";
+
 	private static final int DATA_LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
 
 	public final int POLITICS_TYPE = 0; // politics类型，接口里0 为立法征集，1 为民意征集
 	private int startIndex = 0; // 获取话题的起始坐标
-	private String year = "2013"; // 可选参数，用于立法征求的年份查询，默认为当前年份
 
 	private int visibleLastIndex;
 	private int visibleItemCount;// 当前显示的总条数
@@ -80,11 +88,11 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements
 	private Button loadMoreButton;
 	private ProgressBar pb_loadmoore;
 
-	private boolean isSearch = false;
-
 	private SuggestLawSuggestionAdapter adapter = null;
 
-	private String[] yearAlone = { "2013", "2012", "2011", "2010" };
+	private String[] years = { "2013", "2012", "2011", "2010" };
+
+	private SuggestLawSearchCon searchCon = new SuggestLawSearchCon();
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -116,7 +124,7 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements
 
 		initLayout();
 
-		loadFirstData(0, PAGE_NUM);
+		loadFirstData(startIndex, PAGE_NUM);
 
 		return view;
 	}
@@ -151,7 +159,7 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements
 
 		// 年份下拉框适配器实例
 		MyAryAdapter spinner_adapter = new MyAryAdapter(context,
-				android.R.layout.simple_spinner_item, yearAlone);
+				android.R.layout.simple_spinner_item, years);
 		spinner_adapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// 设置年份下拉框适配器
@@ -163,15 +171,8 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements
 					@Override
 					public void onItemSelected(AdapterView<?> adapterView,
 							View view, int position, long arg3) {
-						if (isSearch) {
-							isFirstLoad = true;
-							year = yearAlone[position];
-							loadFirstData(startIndex, PAGE_NUM);
-						}
-
-						isSearch = true;
-
-						System.out.println("年份：" + year);
+						searchCon.setYear(Integer.valueOf(years[position]));
+						search();
 					}
 
 					@Override
@@ -213,20 +214,10 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements
 				Message message = handler.obtainMessage();
 				PoliticsService politicsService = new PoliticsService(context);
 
-				String url = null;
-				if (isSearch) {
-					// 构建征集主题URL
-					url = Constants.Urls.POLITICS_LIST_URL + "?type="
-							+ POLITICS_TYPE + "&start=" + startIndex + "&end="
-							+ end + "&year=" + year;
-				} else {
-					// 构建立法征求意见数据查询URL
-					url = Constants.Urls.POLITICS_LIST_URL + "?type="
-							+ POLITICS_TYPE + "&start=" + startIndex + "&end="
-							+ end + "&year=" + year;
-				}
-
-				System.out.println("测试：" + url);
+				// 构建立法征求意见数据查询URL
+				String url = Constants.Urls.POLITICS_LIST_URL + "?type="
+						+ POLITICS_TYPE + "&start=" + start + "&end="
+						+ end + "&year=" + 2013;
 
 				try {
 					politicsWrapper = politicsService.getPoliticsWrapper(url);
@@ -332,7 +323,7 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements
 
 	/**
 	 * @类名： MyAryAdapter
-	 * @描述： 按年份筛选征集主题下拉框适配器类
+	 * @描述： 按年份筛选征集主题年份下拉框适配器类
 	 * @作者： 罗森
 	 * @创建时间： 2013 2013-9-2 下午4:48:31
 	 * @修改时间：
@@ -399,5 +390,27 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements
 		intent.putExtra("politics", politics);
 
 		MainTabActivity.instance.addView(intent);
+	}
+	
+	/**
+	 * @方法： bindFragment
+	 * @描述： 替换碎片
+	 * @param fragment
+	 */
+	private void bindFragment(BaseFragment fragment) {
+		FragmentManager manager = getActivity().getSupportFragmentManager();
+		FragmentTransaction ft = manager.beginTransaction();
+		ft.replace(FRAGMENT_ID, fragment);
+		ft.commitAllowingStateLoss();
+	}
+	
+	/**
+	 * @方法： search
+	 * @描述： 搜索
+	 */
+	private void search(){
+		GIPSuggestLawSuggestionSearchFragment searchFragment = new GIPSuggestLawSuggestionSearchFragment();
+		searchFragment.setSearchCon(searchCon);
+		bindFragment(searchFragment);
 	}
 }

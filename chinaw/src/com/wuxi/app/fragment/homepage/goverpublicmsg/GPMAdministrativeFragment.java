@@ -21,6 +21,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +53,7 @@ import com.wuxi.app.engine.AdministrativeService;
 import com.wuxi.app.engine.DeptService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
+import com.wuxi.domain.AdministrativeCon;
 import com.wuxi.domain.AdministrativeWrapper;
 import com.wuxi.domain.Dept;
 import com.wuxi.domain.GoverSaoonItem;
@@ -67,6 +70,8 @@ import com.wuxi.exception.NetException;
  */
 public class GPMAdministrativeFragment extends BaseFragment implements
 		OnItemClickListener, OnClickListener, OnScrollListener {
+	
+	private static final int FRAGMENT_ID = R.id.gpm_admini_license_framelayout;
 
 	private Context context;
 	private View view;
@@ -76,8 +81,8 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 
 	private static final int DATA_LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
-	protected static final int LOAD_DEPT_SUCCESS = 4;
-	protected static final int LOAD_DEPT_FAIL = 5;
+	protected static final int LOAD_DEPT_SUCCESS = 2;
+	protected static final int LOAD_DEPT_FAIL = 3;
 
 	private String type;
 
@@ -104,13 +109,10 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 	private Spinner yearSpinner = null;
 	private Button searchBtn = null;
 
-	private String dept = "";
-	private int year = 2013;
+	private AdministrativeCon con = new AdministrativeCon();
 
 	private String[] years = new String[] { "按年份", "2009", "2010", "2011",
 			"2012", "2013" };
-
-	private boolean isSearch = false;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -185,8 +187,7 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 			@Override
 			public void onItemSelected(AdapterView<?> adapterView, View view,
 					int position, long arg3) {
-				isSearch = true;
-				dept = depts.get(position).getId();
+				con.setId(depts.get(position).getId());
 
 			}
 
@@ -205,10 +206,10 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 			@Override
 			public void onItemSelected(AdapterView<?> adapterView, View view,
 					int position, long arg3) {
-				if (years[position].equals("按年份")) {
-					year = 2013;
+				if (position == 0) {
+					con.setYear(-1);
 				} else {
-					year = Integer.valueOf(years[position]);
+					con.setYear(Integer.valueOf(years[position]));
 				}
 
 			}
@@ -221,16 +222,11 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 
 		searchBtn = (Button) view
 				.findViewById(R.id.gpm_admini_license_search_btn);
-		searchBtn.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				isFirstLoad = true;
-				loadFirstData(0, PAGE_NUM);
-			}
-		});
+		searchBtn.setOnClickListener(this);
 	}
 
+	
+	
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
@@ -255,31 +251,41 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 				loadMoreData(v);
 			}
 			break;
+			
+		case R.id.gpm_admini_license_search_btn:
+			search();
+			break;
 		}
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> adapterView, View position, int num, long arg3) {
+	public void onItemClick(AdapterView<?> adapterView, View view, int position,
+			long arg3) {
 		GoverSaoonItem goverSaoonItem = (GoverSaoonItem) adapterView
-				.getItemAtPosition(num);
-		
-		Intent intent=null;
+				.getItemAtPosition(position);
+
+		Intent intent = null;
 		if (goverSaoonItem.getType().equals("XK")) {
-			intent=new Intent(getActivity(),GoverSaloonDetailXKActivity.class);
+			intent = new Intent(getActivity(),
+					GoverSaloonDetailXKActivity.class);
 		} else if (goverSaoonItem.getType().equals("QT")) {
-			
-			intent=new Intent(getActivity(),GoverSaloonDetailQTActivity.class);
+
+			intent = new Intent(getActivity(),
+					GoverSaloonDetailQTActivity.class);
 		} else if (goverSaoonItem.getType().equals("ZS")) {
-			
-			intent=new Intent(getActivity(),GoverSaloonDetailZSActivtiy.class);
+
+			intent = new Intent(getActivity(),
+					GoverSaloonDetailZSActivtiy.class);
 		} else if (goverSaoonItem.getType().equals("QZ")) {
-			
-			intent=new Intent(getActivity(),GoverSaloonDetailQZActivity.class);
+
+			intent = new Intent(getActivity(),
+					GoverSaloonDetailQZActivity.class);
 		} else if (goverSaoonItem.getType().equals("CF")) {
-			intent=new Intent(getActivity(),GoverSaloonDetailCFActivity.class);
+			intent = new Intent(getActivity(),
+					GoverSaloonDetailCFActivity.class);
 		}
-		
-		if(intent!=null){
+
+		if (intent != null) {
 			intent.putExtra("goverSaoonItem", goverSaoonItem);
 			MainTabActivity.instance.addView(intent);
 		}
@@ -312,20 +318,14 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 
 			@Override
 			public void run() {
+				isLoading = true;// 正在加载数据
 				Message msg = handler.obtainMessage();
 				AdministrativeService service = new AdministrativeService(
 						context);
-				String url = null;
-				if (isSearch) {
-					url = Constants.Urls.GETITEM_QUERY_URL + "?qltype="
-							+ getType() + "&deptid=" + dept + "&year=" + year
-							+ "&start=" + startIndex + "&end=" + endIndex;
-				} else {
-					url = Constants.Urls.GETITEM_QUERY_URL + "?qltype="
-							+ getType() + "&start=" + startIndex + "&end="
-							+ endIndex;
-				}
-
+				
+				String url = Constants.Urls.GETITEM_QUERY_URL + "?qltype="
+						+ getType() + "&start=" + startIndex + "&end="
+						+ endIndex;
 				try {
 					licenseWrapper = service.getLicenseWrapper(url);
 					if (licenseWrapper != null) {
@@ -347,7 +347,6 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 					handler.sendMessage(msg);
 				} catch (NODataException e) {
 					e.printStackTrace();
-
 					msg.what = DATA_LOAD_ERROR;
 					msg.obj = e.getMessage();
 					handler.sendMessage(msg);
@@ -356,6 +355,8 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 			}
 		}).start();
 	}
+
+	
 
 	/**
 	 * @方法： loadDept
@@ -478,6 +479,29 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 	 */
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	/**
+	 * @方法： bindFragment
+	 * @描述： 替换碎片
+	 * @param fragment
+	 */
+	private void bindFragment(BaseFragment fragment) {
+		FragmentManager manager = getActivity().getSupportFragmentManager();
+		FragmentTransaction ft = manager.beginTransaction();
+		ft.replace(FRAGMENT_ID, fragment);
+		ft.commitAllowingStateLoss();
+	}
+	
+	/**
+	 * @方法： search
+	 * @描述： 搜索
+	 */
+	private void search(){
+		GPMAdministrativeSearchFragment searchFragment = new GPMAdministrativeSearchFragment();
+		con.setQltype(getType());
+		searchFragment.setCon(con);
+		bindFragment(searchFragment);
 	}
 
 }

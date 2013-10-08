@@ -137,25 +137,16 @@ public class ContentService extends Service {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 		String url = Constants.Urls.CHANNEL_CONTENT_P_URL.replace("{id}", id)
-<<<<<<< HEAD
-				.replace("{start}", start + "")
-				.replace("{end}", end + "");
-		
-		System.out.println("测试信息公开:"+url);
-		
-		String resultStr = httpUtils.executeGetToString(url, 5000);
-=======
-
 				.replace("{start}", start + "").replace("{end}", end + "");
+
 		String resultStr = null;
-		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url, true);//检查是否有缓存文件
+		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url, true);// 检查是否有缓存文件
 		if (isHasCacheFile) {
-			resultStr = cacheUtil.getCacheStr(url,true);// 缓存读取
+			resultStr = cacheUtil.getCacheStr(url, true);// 缓存读取
 		} else {
 			resultStr = httpUtils.executeGetToString(url, 5000);
 		}
 
->>>>>>> f7f58e5acb92becbf340bf6c7c93938cb82bb278
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
 			JSONObject jresult = jsonObject.getJSONObject("result");
@@ -171,8 +162,8 @@ public class ContentService extends Service {
 				contentWrapper.setContents(parseData(jData));// 解析数组
 			}
 
-			if(!isHasCacheFile){
-				cacheUtil.cacheFile(url, resultStr, true);//缓存内容列表
+			if (!isHasCacheFile) {
+				cacheUtil.cacheFile(url, resultStr, true);// 缓存内容列表
 			}
 			return contentWrapper;
 
@@ -199,7 +190,8 @@ public class ContentService extends Service {
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
-		String resultStr = httpUtils.executeGetToString(url, 5000);
+		
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
 			JSONObject jresult = jsonObject.getJSONObject("result");

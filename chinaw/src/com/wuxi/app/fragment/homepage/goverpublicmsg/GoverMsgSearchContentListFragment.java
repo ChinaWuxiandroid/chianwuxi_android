@@ -133,7 +133,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		return view;
 	}
 
-	public void initView() {
+	private void initView() {
 		partment_sp = (Spinner) view
 				.findViewById(R.id.govermsg_search_spinner_partment);
 		year_sp = (Spinner) view
@@ -257,15 +257,16 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 				.getYears(TimeFormateUtil.START_YEAR);
 
 		String[] yearStr = new String[years.size()];
-		
+
 		for (int i = 0; i < years.size(); i++) {
 			yearStr[i] = years.get(i);
-			
+
 		}
-		
+
 		years.add(0, "按年份");
 
-		MyAryAdapter year_Spinner_adapter = new MyAryAdapter(context, android.R.layout.simple_spinner_item, yearStr);
+		MyAryAdapter year_Spinner_adapter = new MyAryAdapter(context,
+				android.R.layout.simple_spinner_item, yearStr);
 		year_Spinner_adapter
 				.setDropDownViewResource(R.layout.my_spinner_medium_dropdown_item);
 		year_sp.setAdapter(year_Spinner_adapter);
@@ -297,7 +298,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			break;
 		}
 	}
-	
+
 	public class MyAryAdapter extends ArrayAdapter<String> {
 
 		Context context;
@@ -325,7 +326,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			tv.setText(items[position]);
 			tv.setGravity(Gravity.LEFT);
 			tv.setTextColor(Color.BLACK);
-			
+
 			return convertView;
 		}
 
@@ -379,9 +380,18 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			break;
 		}
 		goverMsgFifterContentListFragment.setContentFifter(fifter);
+		if (parentMenuItem != null) {
+			goverMsgFifterContentListFragment.setParentItem(parentMenuItem);
+		} else if (channel != null) {
+			goverMsgFifterContentListFragment.setChannel(channel);
+		}
 		bindFragment(goverMsgFifterContentListFragment);
 	}
 
+	/**
+	 * @方法： loadContentList
+	 * @描述： 加载数据
+	 */
 	private void loadContentList() {
 		GoverMsgContentListFragment goverMsgContentListFragment = new GoverMsgContentListFragment();
 
@@ -394,9 +404,13 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		bindFragment(goverMsgContentListFragment);
 	}
 
+	/**
+	 * @方法： bindFragment
+	 * @描述： 替换碎片
+	 * @param fragment
+	 */
 	private void bindFragment(BaseFragment fragment) {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
-
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(CHANNELLIST_CONTENT_ID, fragment);
 		ft.commitAllowingStateLoss();
@@ -439,10 +453,10 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			
+
 			viewHolder.tv_dept.setTextColor(Color.BLACK);
 			viewHolder.tv_dept.setText(dept.getDepName());
-			
+
 			return convertView;
 		}
 
