@@ -33,6 +33,10 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment {
 		return view;
 	}
 
+	/**
+	 * @方法： initUI
+	 * @描述： 初始化布局控件
+	 */
 	private void initUI() {
 
 		switch (menuItem.getType()) {
@@ -103,6 +107,11 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment {
 		this.menuItem = menuItem;
 	}
 
+	/**
+	 * @方法： onTransaction
+	 * @描述： 切换视图
+	 * @param fragment
+	 */
 	private void onTransaction(BaseFragment fragment) {
 		fragment.setArguments(this.getArguments());
 		FragmentManager manager = getActivity().getSupportFragmentManager();

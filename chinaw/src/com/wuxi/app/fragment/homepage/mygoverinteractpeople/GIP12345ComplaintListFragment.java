@@ -188,7 +188,7 @@ public class GIP12345ComplaintListFragment extends BaseFragment implements
 	/**
 	 * 显示列表
 	 */
-	public void showLettersList() {
+	private void showLettersList() {
 		letters = letterWrapper.getData();
 		if (letters == null || letters.size() == 0) {
 			Toast.makeText(context, "对不起，暂无建议咨询投诉信息", Toast.LENGTH_SHORT)

@@ -38,11 +38,13 @@ import com.wuxi.exception.NetException;
  * */
 
 public class GIPMine12345Fragment extends RadioButtonChangeFragment {
+	
+	private static final String TAG = "GIP12345MayorMaiBoxFragment";
 
 	private ListView mListView;
 	private LetterWrapper letterWrapper;
 	private List<LetterWrapper.Letter> letters;
-	protected static final String TAG = "GIP12345MayorMaiBoxFragment";
+	
 	private static final int DATA__LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
 
@@ -136,7 +138,11 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 		loadData();
 	}
 
-	public void loadData() {
+	/**
+	 * @方法： loadData
+	 * @描述： 加载数据
+	 */
+	private void loadData() {
 
 		new Thread(new Runnable() {
 
@@ -177,7 +183,11 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 		}).start();
 	}
 
-	public void showLettersList() {
+	/**
+	 * @方法： showLettersList
+	 * @描述： 显示信件列表
+	 */
+	private void showLettersList() {
 		LettersListViewAdapter adapter = new LettersListViewAdapter();
 		if (letters == null || letters.size() == 0) {
 			Toast.makeText(context, "对不起，暂无信息", Toast.LENGTH_SHORT).show();
@@ -186,6 +196,14 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment {
 		}
 	}
 
+	/**
+	 * @类名： LettersListViewAdapter
+	 * @描述： 信件列表适配器
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-10-11 下午4:35:18
+	 * @修改时间： 
+	 * @修改描述：
+	 */
 	public class LettersListViewAdapter extends BaseAdapter {
 
 		@Override

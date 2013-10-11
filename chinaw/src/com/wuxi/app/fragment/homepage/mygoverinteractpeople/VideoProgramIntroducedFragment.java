@@ -46,9 +46,10 @@ import com.wuxi.exception.NetException;
  * @修改时间：
  * @修改描述：
  */
+@SuppressLint("SetJavaScriptEnabled")
 public class VideoProgramIntroducedFragment extends BaseFragment {
 
-	protected static final String TAG = "VideoProgramIntroducedFragment";
+	private static final String TAG = "VideoProgramIntroducedFragment";
 
 	// 数据加载成功标志
 	private static final int DATA_LOAD_SUCESS = 0;
@@ -109,7 +110,6 @@ public class VideoProgramIntroducedFragment extends BaseFragment {
 	 * @方法： initLayout
 	 * @描述： 初始化布局控件
 	 */
-	@SuppressLint("SetJavaScriptEnabled")
 	private void initLayout() {
 		linearLayout = (LinearLayout) view
 				.findViewById(R.id.video_program_introduced_layout);

@@ -55,7 +55,7 @@ import com.wuxi.exception.NetException;
 public class PartLeaderMailListFragment extends RadioButtonChangeFragment
 		implements OnItemClickListener, OnClickListener, OnScrollListener {
 
-	protected static final String TAG = "PartLeaderMailListFragment";
+	private static final String TAG = "PartLeaderMailListFragment";
 
 	private ListView mListView;
 	private ProgressBar list_pb;
@@ -166,7 +166,7 @@ public class PartLeaderMailListFragment extends RadioButtonChangeFragment
 	/**
 	 * 加载数据
 	 */
-	public void loadData(final int startIndex, final int endIndex) {
+	private void loadData(final int startIndex, final int endIndex) {
 		if (isFirstLoad || isSwitch) {
 			list_pb.setVisibility(View.VISIBLE);
 		} else {
@@ -210,7 +210,7 @@ public class PartLeaderMailListFragment extends RadioButtonChangeFragment
 	/**
 	 * 显示列表
 	 */
-	public void showLettersList() {
+	private void showLettersList() {
 		letters = letterWrapper.getData();
 		if (letters == null || letters.size() == 0) {
 			Toast.makeText(context, "该部门暂无信件", Toast.LENGTH_SHORT).show();
@@ -279,7 +279,7 @@ public class PartLeaderMailListFragment extends RadioButtonChangeFragment
 	 * @描述： 加载更多数据
 	 * @param view
 	 */
-	public void loadMoreData(View view) {
+	private void loadMoreData(View view) {
 		if (isLoading) {
 			return;
 		} else {
@@ -308,7 +308,7 @@ public class PartLeaderMailListFragment extends RadioButtonChangeFragment
 
 				isSwitch = false;
 				loadMoreButton.setText("loading.....");
-				loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_NUM);
+				loadMoreData(v);
 			}
 			break;
 		}

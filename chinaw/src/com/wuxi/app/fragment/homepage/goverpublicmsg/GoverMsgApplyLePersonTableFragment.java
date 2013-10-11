@@ -19,7 +19,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,13 +29,21 @@ import com.wuxi.app.engine.SubmitListService;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.ApplyDept;
-import com.wuxi.domain.ApplyGover;
 import com.wuxi.exception.NetException;
 
+/**
+ * @类名： GoverMsgApplyLePersonTableFragment
+ * @描述： 依申请公开 法人申请界面
+ * @作者： 罗森
+ * @创建时间： 2013 2013-10-10 下午1:44:10
+ * @修改时间： 
+ * @修改描述：
+ */
 public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements
 		OnClickListener {
-	protected View view;
-	protected LayoutInflater mInflater;
+	
+	private View view;
+	private LayoutInflater mInflater;
 	private Context context;
 
 	private static final int SUBMIT_SUCCESS = 3;
@@ -103,7 +110,11 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements
 		return view;
 	}
 
-	public void initView() {
+	/**
+	 * @方法： initView
+	 * @描述： 初始化视图
+	 */
+	private void initView() {
 
 		loginDialog = new LoginDialog(context);// 实例化登录对话框
 
@@ -157,7 +168,9 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements
 		applyDate_txt = (TextView) view
 				.findViewById(R.id.legalperson_apply_applydate);
 		applyDate_txt.setText("" + year + "-" + month + "-" + day);
-		solveByDept.setText(applyDept.getDepName());
+		
+//		solveByDept.setText(applyDept.getDepName());
+		
 		// 必选项-----------------------------------------------------------
 		submit_ibtn.setOnClickListener(this);
 		cancel_ibtn.setOnClickListener(this);
@@ -190,7 +203,7 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements
 	/**
 	 * 提交
 	 * */
-	public void submitData() {
+	private void submitData() {
 		if (!judgeDataLegal()) {
 			getCheckBoxResult();
 
@@ -224,7 +237,7 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements
 	}
 
 	// 获取提交公民在线申请 的url
-	public String getUrl(String urlhead, String access_token,
+	private String getUrl(String urlhead, String access_token,
 			String doProjectId, String depid) {
 		String url = urlhead + "?access_token=" + access_token
 				+ "&doprojectid=" + doProjectId + "&depid=" + depid;
@@ -239,7 +252,11 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements
 		return url;
 	}
 
-	public void getCheckBoxResult() {
+	/**
+	 * @方法： getCheckBoxResult
+	 * @描述： 获取复选框的值
+	 */
+	private void getCheckBoxResult() {
 		if (paper_ckBox.isChecked()) {
 			check_paper = "纸面";
 		}
@@ -260,7 +277,7 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements
 	/**
 	 * 判断输入 是否为空
 	 * */
-	public boolean judgeDataLegal() {
+	private boolean judgeDataLegal() {
 		boolean inputError = false;
 		organname = organname_et.getText().toString();
 		organid = organid_et.getText().toString();

@@ -39,8 +39,8 @@ import com.wuxi.exception.NetException;
 public class GoverInterPeoplePublicSuperviseFragment extends BaseFragment
 		implements OnClickListener {
 
-	protected View view;
-	protected LayoutInflater mInflater;
+	private View view;
+	private LayoutInflater mInflater;
 	private Context context;
 
 	private static final int DATA_SUBMIT_SUCCESS = 2;
@@ -90,7 +90,11 @@ public class GoverInterPeoplePublicSuperviseFragment extends BaseFragment
 		return view;
 	}
 
-	public void initView() {
+	/**
+	 * @方法： initView
+	 * @描述： 初始化布局控件
+	 */
+	private void initView() {
 		loginDialog = new LoginDialog(context);// 实例化登录对话框
 
 		if (!loginDialog.checkLogin()) {
@@ -164,7 +168,11 @@ public class GoverInterPeoplePublicSuperviseFragment extends BaseFragment
 		}
 	}
 
-	public void resetEditInfo() {
+	/**
+	 * @方法： resetEditInfo
+	 * @描述： 设置数据
+	 */
+	private void resetEditInfo() {
 		sentUserName_et.setText("");
 		tel_et.setText("");
 		email_et.setText("");
@@ -174,7 +182,7 @@ public class GoverInterPeoplePublicSuperviseFragment extends BaseFragment
 	/**
 	 * 提交
 	 * */
-	public void submitData() {
+	private void submitData() {
 		if (!judgeDataLegal()) {
 			pb.setVisibility(ProgressBar.VISIBLE);
 			new Thread(new Runnable() {
@@ -201,7 +209,7 @@ public class GoverInterPeoplePublicSuperviseFragment extends BaseFragment
 	}
 
 	// 获取提交公民在线申请 的url
-	public String getUrl(String urlhead, String access_token) {
+	private String getUrl(String urlhead, String access_token) {
 		String url = urlhead + "?access_token=" + access_token;
 		url = url + "&SentUserName=" + sentUserName + "&SentUserTel=" + tel
 				+ "&SentUserEmail=" + email + "&SentContent=" + content;
@@ -211,7 +219,7 @@ public class GoverInterPeoplePublicSuperviseFragment extends BaseFragment
 	/**
 	 * 判断输入 是否为空
 	 * */
-	public boolean judgeDataLegal() {
+	private boolean judgeDataLegal() {
 		boolean inputError = false;
 		sentUserName = sentUserName_et.getText().toString();
 		tel = tel_et.getText().toString();

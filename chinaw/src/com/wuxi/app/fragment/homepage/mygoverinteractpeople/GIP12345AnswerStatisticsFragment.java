@@ -47,6 +47,8 @@ import com.wuxi.exception.NetException;
 
 public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment {
 
+	private static final String TAG = "GIP12345AnswerStatisticsFragment";
+
 	private TextView complaint_txtView; // 咨询投诉
 	private TextView mayorbox_txtView; // 市长信箱
 	private TextView leaderbox_txtView; // 领导信箱
@@ -67,10 +69,8 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 	private ProgressBar list_pb;
 
 	private ListView mListView;
-	
-	private AnswerStatisticsListAdapter adapter;
 
-	protected static final String TAG = "GIP12345AnswerStatisticsFragment";
+	private AnswerStatisticsListAdapter adapter;
 
 	private static final int ALLCOUNT_LOAD_SUCESS = 0; // 答复率总数统计
 	private static final int LETTERSTATISTICS_LOAD_SUCESS = 1; // 各部门答复率统计
@@ -80,7 +80,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 	public static final int REPLY_LETTER_TYPE_LEADERBOX = 3; // 领导信箱
 
 	private List<AllCount> allCounts;
-	
+
 	private List<StatisticsLetter> letters;
 
 	private int letter_type = REPLY_LETTER_TYPE_MAYORBOX; // 默认为市长信箱
@@ -379,7 +379,6 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 			tv.setTextColor(Color.BLACK);
 			tv.setTextSize(12);
 
-
 			return convertView;
 		}
 
@@ -388,7 +387,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 	/**
 	 * 加载所有统计信息
 	 * */
-	public void loadAllCountData() {
+	private void loadAllCountData() {
 
 		new Thread(new Runnable() {
 
@@ -428,8 +427,8 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 
 	/**
 	 * 统计按钮按后加载 各信箱部门回复统计
-	 * */
-	public void loadLettersReplyCountData(final int letter_type,
+	 */
+	private void loadLettersReplyCountData(final int letter_type,
 			final int year, final int month) {
 
 		new Thread(new Runnable() {
@@ -482,7 +481,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 	/**
 	 * 显示所有回复统计信息
 	 */
-	public void showAllCounts() {
+	private void showAllCounts() {
 
 		for (AllCount count : allCounts) {
 			if (count.getName().equals("领导信箱"))
@@ -501,8 +500,8 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 	 * @方法： showReplyLettersList
 	 * @描述： 显示回复统计及列表
 	 */
-	public void showReplyLettersList() {
-		 adapter = new AnswerStatisticsListAdapter(letters,context);
+	private void showReplyLettersList() {
+		adapter = new AnswerStatisticsListAdapter(letters, context);
 
 		if (letters == null || letters.size() == 0) {
 			Toast.makeText(context, "对不起，暂无信息", Toast.LENGTH_SHORT).show();

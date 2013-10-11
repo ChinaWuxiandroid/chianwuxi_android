@@ -134,15 +134,15 @@ public class LegidlstionInfoFragment extends BaseFragment {
 		endtime_text = (TextView) view.findViewById(R.id.ordinary_endtime_text);
 
 		readnum_text = (TextView) view.findViewById(R.id.ordinary_readnum_text);
-//		post_readnum = (TextView) view.findViewById(R.id.post_readnum);
+		// post_readnum = (TextView) view.findViewById(R.id.post_readnum);
 
 		replynum_text = (TextView) view
 				.findViewById(R.id.ordinary_replynum_text);
 
 		content_text = (TextView) view.findViewById(R.id.ordinary_content_text);
 		title_text = (TextView) view.findViewById(R.id.ordinary_title_text);
-//		post_bengintime = (TextView) view.findViewById(R.id.post_bengintime);
-//		post_endtime = (TextView) view.findViewById(R.id.post_endtime);
+		// post_bengintime = (TextView) view.findViewById(R.id.post_bengintime);
+		// post_endtime = (TextView) view.findViewById(R.id.post_endtime);
 
 		post_WebView = (WebView) view.findViewById(R.id.post_webview);
 		post_WebView.getSettings().setJavaScriptEnabled(true);
@@ -159,6 +159,10 @@ public class LegidlstionInfoFragment extends BaseFragment {
 
 	}
 
+	/**
+	 * @方法： setLayoutValue
+	 * @描述： 设置相关控件的值
+	 */
 	private void setLayoutValue() {
 
 		sentpepole_text.setText("版主");
@@ -189,20 +193,21 @@ public class LegidlstionInfoFragment extends BaseFragment {
 			@Override
 			public void run() {
 
-				try{
-				LegislationContentService legislationContentService = new LegislationContentService(context);
-						noticePostWrapper = legislationContentService
-								.getNoticePostWrapper(politics.getId());
+				try {
+					LegislationContentService legislationContentService = new LegislationContentService(
+							context);
+					noticePostWrapper = legislationContentService
+							.getNoticePostWrapper(politics.getId());
 
-						if (noticePostWrapper != null) {
-							noticePostReplyWrapper = noticePostWrapper
-									.getNoticePostReplyWrapper();
-							handler.sendEmptyMessage(DATA__LOAD_SUCESS);
-						} else {
-							Message message = handler.obtainMessage();
-							message.obj = "error";
-							handler.sendEmptyMessage(DATA_LOAD_ERROR);
-						}
+					if (noticePostWrapper != null) {
+						noticePostReplyWrapper = noticePostWrapper
+								.getNoticePostReplyWrapper();
+						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
+					} else {
+						Message message = handler.obtainMessage();
+						message.obj = "error";
+						handler.sendEmptyMessage(DATA_LOAD_ERROR);
+					}
 				} catch (NetException e) {
 					LogUtil.i(TAG, "出错");
 					e.printStackTrace();

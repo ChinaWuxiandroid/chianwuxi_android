@@ -41,6 +41,7 @@ public class GoverMsgSubChannelsSearchFragment extends BaseFragment{
 
 	protected static final int SUBCHANNELS_LOAD_SUCESS = 0;// 子频道获取成功
 	protected static final int SUBCHANNELS_LOAD_FAIL = 1;// 子频道获取失败
+	
 	private static final int CONTENT_LIST_ID = R.id.govermsg_subchannels_iframelayout;
 
 	private int fifterType=0;
@@ -90,7 +91,11 @@ public class GoverMsgSubChannelsSearchFragment extends BaseFragment{
 		return view;
 	}
 
-	public void initUI(){
+	/**
+	 * @方法： initUI
+	 * @描述： 初始化视图
+	 */
+	private void initUI(){
 		title_textView=(TextView)view.findViewById(R.id.govermsg_subchannels_imgview_tv_title);
 		title_textView.setText(parentChannel.getChannelName().toString());
 		
@@ -98,7 +103,11 @@ public class GoverMsgSubChannelsSearchFragment extends BaseFragment{
 		
 	}
 	
-	public void showSubChannelsTitle(){
+	/**
+	 * @方法： showSubChannelsTitle
+	 * @描述： 显示子频道题目
+	 */
+	private void showSubChannelsTitle(){
 		checkPoint=0;  //默认选中第一个
 		channelTitles_gridView=(GridView) view.findViewById(R.id.govermsg_subchannels_gridview_subchannels);
 		channelTitles_gridView.setNumColumns(subChannels.size());
@@ -109,7 +118,11 @@ public class GoverMsgSubChannelsSearchFragment extends BaseFragment{
 		showContentList(subChannels.get(checkPoint));
 	}
 	
-	public void loadSubChannelsTitle(){
+	/**
+	 * @方法： loadSubChannelsTitle
+	 * @描述： 加载子频道题目
+	 */
+	private void loadSubChannelsTitle(){
 		new Thread(new Runnable() {
 
 			@Override
@@ -137,6 +150,11 @@ public class GoverMsgSubChannelsSearchFragment extends BaseFragment{
 		}).start();
 	}
 
+	/**
+	 * @方法： showContentList
+	 * @描述： 显示列表
+	 * @param channel
+	 */
 	private void showContentList(Channel channel) {
 		//在此加载四种类型的菜单
 		fifterType=GoverMsgInitInfoOpenListener.getChannelFragmentType(channel,fifterType);
@@ -161,6 +179,14 @@ public class GoverMsgSubChannelsSearchFragment extends BaseFragment{
 		}
 	}
 
+	/**
+	 * @类名： ChannelGridViewAdaptger
+	 * @描述： 适配器
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-10-11 下午5:46:34
+	 * @修改时间： 
+	 * @修改描述：
+	 */
 	private class ChannelGridViewAdaptger extends BaseAdapter {
 
 		public List<Channel> channels;

@@ -252,7 +252,7 @@ public class GIPSuggestSurveyListFragment extends BaseFragment implements
 	 * @描述： 加载更多数据
 	 * @param view
 	 */
-	public void loadMoreData(View view) {
+	private void loadMoreData(View view) {
 		if (isLoading) {
 			return;
 		} else {
@@ -281,7 +281,7 @@ public class GIPSuggestSurveyListFragment extends BaseFragment implements
 
 				isSwitch = false;
 				loadMoreButton.setText("loading.....");
-				loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_NUM);
+				loadMoreData(v);
 			}
 			break;
 		}

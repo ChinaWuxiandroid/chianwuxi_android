@@ -99,8 +99,8 @@ public class GPMPolicieRegulationFragment extends BaseFragment implements
 	// 数据加载失败标识
 	private static final int DATA_LOAD_ERROR = 1;
 	
-	protected static final int LOAD_DEPT_SUCCESS = 2;
-	protected static final int LOAD_DEPT_FAIL = 3;
+	private static final int LOAD_DEPT_SUCCESS = 2;
+	private static final int LOAD_DEPT_FAIL = 3;
 
 	private int visibleLastIndex;
 	private int visibleItemCount;// 当前显示的总条数
@@ -123,8 +123,8 @@ public class GPMPolicieRegulationFragment extends BaseFragment implements
 	// 检索按钮
 	private Button searchBtn = null;
 	
-	private String[] years = new String[] { "按年份", "2009", "2010", "2011",
-			"2012", "2013" };
+	private String[] years = new String[] { "按年份", "2013", "2012", "2011",
+			"2010", "2009" };
 	
 	private List<Dept> depts;
 

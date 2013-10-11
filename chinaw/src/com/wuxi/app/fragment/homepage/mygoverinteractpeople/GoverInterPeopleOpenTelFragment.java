@@ -40,12 +40,14 @@ import com.wuxi.exception.NetException;
 
 public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment
 		implements OnItemClickListener {
+	
+	private static final String TAG = "GoverInterPeopleOpenTelFragment";
 
 	private ListView mListView;
 	private ProgressBar list_pb;
 	private OpenTelWrapper openTelWrapper;
 	private List<OpenTel> tels;
-	protected static final String TAG = "GoverInterPeopleOpenTelFragment";
+	
 	private static final int DATA__LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
 
@@ -99,7 +101,11 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment
 		loadData();
 	}
 
-	public void loadData() {
+	/**
+	 * @方法： loadData
+	 * @描述： 加载数据
+	 */
+	private void loadData() {
 
 		new Thread(new Runnable() {
 
@@ -140,7 +146,11 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment
 		).start();
 	}
 
-	public void showTels() {
+	/**
+	 * @方法： showTels
+	 * @描述： 显示列表
+	 */
+	private void showTels() {
 		OpenTelListViewAdapter adapter = new OpenTelListViewAdapter();
 		if (tels == null || tels.size() == 0) {
 			Toast.makeText(context, "对不起，暂无公开电话信息", 2000).show();
@@ -150,6 +160,14 @@ public class GoverInterPeopleOpenTelFragment extends RadioButtonChangeFragment
 		}
 	}
 
+	/**
+	 * @类名： OpenTelListViewAdapter
+	 * @描述： 列表适配器
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-10-11 下午5:03:37
+	 * @修改时间： 
+	 * @修改描述：
+	 */
 	public class OpenTelListViewAdapter extends BaseAdapter {
 
 		@Override

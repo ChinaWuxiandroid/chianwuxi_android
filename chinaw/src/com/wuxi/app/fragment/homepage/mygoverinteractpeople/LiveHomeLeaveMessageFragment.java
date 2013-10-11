@@ -43,7 +43,7 @@ import com.wuxi.exception.NetException;
 public class LiveHomeLeaveMessageFragment extends BaseFragment implements
 		OnClickListener, OnScrollListener {
 
-	protected static final String TAG = "LiveHomeLeaveMessageFragment";
+	private static final String TAG = "LiveHomeLeaveMessageFragment";
 
 	private View view = null;
 	private Context context = null;

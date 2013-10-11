@@ -238,7 +238,7 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 	 * 
 	 * @param type
 	 */
-	public void changeContent(int type) {
+	private void changeContent(int type) {
 		GoverInterPeopleWebFragment goverInterPeopleWebFragment = new GoverInterPeopleWebFragment();
 		switch (type) {
 		case 0:
@@ -490,7 +490,7 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 	/**
 	 * 显示所有回复统计信息
 	 */
-	public void showAllCounts() {
+	private void showAllCounts() {
 
 		for (AllCount count : allCounts) {
 			if (count.getName().equals("领导信箱"))

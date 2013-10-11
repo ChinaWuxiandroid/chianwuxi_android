@@ -107,6 +107,7 @@
         <!-- 政府信息公开 -->
         <activity android:name="com.wuxi.app.activity.homepage.goverpublicmsg.GoverMsgContentDetailWebActivity" />
         <activity android:name="com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.goverpublicmsg.GPMApplyActivity"></activity>
 
         <!-- 搜索 -->
         <activity android:name="com.wuxi.app.activity.search.AdvancedSearchActivity" />

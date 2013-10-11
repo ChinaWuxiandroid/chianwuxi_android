@@ -159,6 +159,10 @@ public class PepoleIdeaCollectContentFragment extends BaseFragment {
 
 	}
 
+	/**
+	 * @方法： setLayoutValue
+	 * @描述： 设置相关控件的值
+	 */
 	private void setLayoutValue() {
 
 		sentpepole_text.setText("版主");

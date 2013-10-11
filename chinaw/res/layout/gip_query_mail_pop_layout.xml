@@ -1,250 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/query_mail_layout"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#A9A9A9"
-    android:orientation="vertical"
-    android:visibility="gone">
+    android:layout_height="wrap_content" >
 
     <LinearLayout
+        android:id="@+id/query_mail_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5sp"
-        android:layout_marginRight="5sp"
-        android:layout_marginTop="15sp"
-        android:orientation="horizontal" >
+        android:background="#A9A9A9"
+        android:orientation="vertical"
+        android:visibility="gone" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="12sp"
-            android:gravity="center_vertical"
-            android:text="关键字："
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/query_mail_key_word_edit"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="3dp"
-            android:background="@drawable/worksuggestbox_edit_small_bk" 
-            android:textSize="12sp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5sp"
-        android:layout_marginRight="5sp"
-        android:layout_marginTop="8sp"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="内容分类："
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/query_mail_box_sort_spinner"
-            android:layout_width="130sp"
-            android:layout_height="32sp"
-            android:background="@drawable/spiner_bg" 
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5sp"
-        android:layout_marginRight="5sp"
-        android:layout_marginTop="8sp"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="信件分类："
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/query_mail_email_sort_spinner"
-            android:layout_width="70sp"
-            android:layout_height="32sp"
-            android:background="@drawable/spiner_bg" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5sp"
-        android:layout_marginRight="5sp"
-        android:layout_marginTop="8sp"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="信件编号："
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/query_mail_no_edit"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="3dp"
-            android:background="@drawable/worksuggestbox_edit_small_bk" 
-            android:textSize="12sp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5sp"
-        android:layout_marginRight="5sp"
-        android:layout_marginTop="8sp"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="答复时间：从"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginTop="15sp"
+            android:orientation="horizontal" >
 
-        <EditText
-            android:id="@+id/query_mail_reply_time_begin_edit"
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="0.38"
-            android:layout_marginLeft="3sp"
-            android:background="@drawable/worksuggestbox_edit_small_bk"
-            android:enabled="false"
-            android:paddingLeft="3dp" 
-            android:textSize="12sp"/>
-        
-        <Button 
-            android:id="@+id/query_mail_reply_begin_time_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="30sp"
-            android:text="开始日期"
-            android:textSize="12sp"
-            android:textColor="#ff095ce1"
-            android:background="@drawable/forum_submitbtn_bg"
-            />
-    </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="66sp"
-        android:layout_marginRight="5sp"
-        android:layout_marginTop="8sp"
-        android:orientation="horizontal" >
-        
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="12sp"
-            android:text="到 " />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="12sp"
+                android:gravity="center_vertical"
+                android:text="关键字："
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/query_mail_reply_time_end_edit"
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="0.38"
-            android:paddingLeft="3dp"
-            android:enabled="false"
-            android:background="@drawable/worksuggestbox_edit_small_bk" 
-            android:textSize="12sp"/>
-        
-        <Button 
-            android:id="@+id/query_mail_reply_end_time_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="30sp"
-            android:text="结束日期"
-            android:textSize="12sp"
-            android:textColor="#ff095ce1"
-            android:background="@drawable/forum_submitbtn_bg"
-            />
-        
+            <EditText
+                android:id="@+id/query_mail_key_word_edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/worksuggestbox_edit_small_bk"
+                android:paddingLeft="3dp"
+                android:textSize="12sp" />
         </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5sp"
-        android:layout_marginRight="5sp"
-        android:layout_marginTop="10sp"
-        android:orientation="horizontal" >
 
-        <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginTop="8sp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="内容分类："
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/query_mail_box_sort_spinner"
+                android:layout_width="130sp"
+                android:layout_height="32sp"
+                android:background="@drawable/spiner_bg" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginTop="8sp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="信件分类："
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/query_mail_email_sort_spinner"
+                android:layout_width="70sp"
+                android:layout_height="32sp"
+                android:background="@drawable/spiner_bg" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginTop="8sp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="信件编号："
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/query_mail_no_edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/worksuggestbox_edit_small_bk"
+                android:paddingLeft="3dp"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginTop="8sp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="答复时间：从"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/query_mail_reply_time_begin_edit"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="3sp"
+                android:layout_weight="0.38"
+                android:background="@drawable/worksuggestbox_edit_small_bk"
+                android:enabled="false"
+                android:paddingLeft="3dp"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/query_mail_reply_begin_time_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="30sp"
+                android:background="@drawable/forum_submitbtn_bg"
+                android:text="开始日期"
+                android:textColor="#ff095ce1"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="66sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginTop="8sp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="到 "
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/query_mail_reply_time_end_edit"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="0.38"
+                android:background="@drawable/worksuggestbox_edit_small_bk"
+                android:enabled="false"
+                android:paddingLeft="3dp"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/query_mail_reply_end_time_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="30sp"
+                android:background="@drawable/forum_submitbtn_bg"
+                android:text="结束日期"
+                android:textColor="#ff095ce1"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginTop="10sp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="受理部门："
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/query_mail_accept_department_spinner"
+                android:layout_width="197sp"
+                android:layout_height="32sp"
+                android:background="@drawable/spiner_bg" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginTop="8sp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="答复部门："
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/query_mail_reply_department_spinner"
+                android:layout_width="197sp"
+                android:layout_height="32sp"
+                android:background="@drawable/spiner_bg" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/query_mail_question_checkbox"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="受理部门："
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="61sp"
+            android:layout_marginTop="5sp"
+            android:text="常见问题"
+            android:textSize="12sp" />
 
-        <Spinner
-            android:id="@+id/query_mail_accept_department_spinner"
-            android:layout_width="197sp"
-            android:layout_height="32sp"
-            android:background="@drawable/spiner_bg" />
+        <Button
+            android:id="@+id/query_mail_btn"
+            android:layout_width="120sp"
+            android:layout_height="30sp"
+            android:layout_gravity="right"
+            android:layout_marginBottom="15sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginTop="5sp"
+            android:background="@drawable/forum_submitbtn_bg"
+            android:text="信件查询"
+            android:textColor="#ff095ce1"
+            android:textSize="12sp" />
     </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5sp"
-        android:layout_marginRight="5sp"
-        android:layout_marginTop="8sp"
-        android:orientation="horizontal" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="答复部门："
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/query_mail_reply_department_spinner"
-            android:layout_width="197sp"
-            android:layout_height="32sp"
-            android:background="@drawable/spiner_bg" />
-    </LinearLayout>
-    
-    <CheckBox 
-        android:id="@+id/query_mail_question_checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="61sp"
-        android:layout_marginTop="5sp"
-        android:text="常见问题"
-        android:textSize="12sp"/>
-    
-    <Button
-        android:id="@+id/query_mail_btn"
-        android:layout_width="120sp"
-        android:layout_height="30sp"
-        android:layout_gravity="right"
-        android:layout_marginBottom="15sp"
-        android:layout_marginTop="5sp"
-        android:layout_marginRight="5sp"
-        android:background="@drawable/forum_submitbtn_bg"
-        android:text="信件查询"
-        android:textColor="#ff095ce1"
-        android:textSize="12sp" />
-
-</LinearLayout>
+</ScrollView>

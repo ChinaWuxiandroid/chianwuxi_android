@@ -45,7 +45,7 @@ import com.wuxi.exception.NetException;
 public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment
 		implements OnScrollListener, OnClickListener, OnItemClickListener {
 
-	protected static final String TAG = "GIP12345MayorMailListFragment";
+	private static final String TAG = "GIP12345MayorMailListFragment";
 
 	private ListView mListView;
 	private ProgressBar list_pb;
@@ -155,7 +155,7 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment
 	/**
 	 * 加载数据
 	 */
-	public void loadData(final int startIndex, final int endIndex) {
+	private void loadData(final int startIndex, final int endIndex) {
 		if (isFirstLoad || isSwitch) {
 			list_pb.setVisibility(View.VISIBLE);
 		} else {
@@ -203,7 +203,7 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment
 	 * @描述： 加载更多数据
 	 * @param view
 	 */
-	public void loadMoreData(View view) {
+	private void loadMoreData(View view) {
 		if (isLoading) {
 			return;
 		} else {
@@ -214,7 +214,7 @@ public class GIP12345MayorMailListFragment extends RadioButtonChangeFragment
 	/**
 	 * 显示列表
 	 */
-	public void showLettersList() {
+	private void showLettersList() {
 		letters = letterWrapper.getData();
 		if (letters != null || letters.size() > 0) {
 			if (isFirstLoad) {

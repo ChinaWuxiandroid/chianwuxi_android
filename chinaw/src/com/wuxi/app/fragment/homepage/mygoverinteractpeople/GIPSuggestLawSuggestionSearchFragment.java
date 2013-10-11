@@ -179,7 +179,7 @@ public class GIPSuggestLawSuggestionSearchFragment extends BaseFragment
 	 * @描述： 加载立法征求意见数据
 	 * @param url
 	 */
-	public void loadData(final int start, final int end) {
+	private void loadData(final int start, final int end) {
 		if (isFirstLoad || isSwitch) {
 			list_pb.setVisibility(View.VISIBLE);
 		} else {
@@ -224,7 +224,7 @@ public class GIPSuggestLawSuggestionSearchFragment extends BaseFragment
 	 * @方法： showPoloticsList
 	 * @描述： 显示立法征求意见列表
 	 */
-	public void showPoloticsList() {
+	private void showPoloticsList() {
 		politicss = politicsWrapper.getData();
 		if (politicss == null || politicss.size() == 0) {
 			Toast.makeText(context, "对不起，暂无立法征求意见信息", Toast.LENGTH_SHORT)

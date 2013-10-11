@@ -76,7 +76,7 @@ public class GIP12345PartLeaderMailboxFragment extends
 	 * 
 	 * @param type
 	 */
-	public void changeContent(int type) {
+	private void changeContent(int type) {
 		GoverInterPeopleWebFragment goverInterPeopleWebFragment = new GoverInterPeopleWebFragment();
 		switch (type) {
 		case 0:

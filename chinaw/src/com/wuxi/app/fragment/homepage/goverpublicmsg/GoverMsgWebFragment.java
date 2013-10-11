@@ -45,6 +45,10 @@ public class GoverMsgWebFragment extends BaseFragment implements KeyEvent.Callba
 		return view;
 	}
 
+	/**
+	 * @方法： initUI
+	 * @描述： 初始化视图
+	 */
 	@SuppressLint("SetJavaScriptEnabled")
 	private void initUI() {
 

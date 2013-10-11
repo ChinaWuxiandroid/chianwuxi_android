@@ -55,7 +55,7 @@ import com.wuxi.exception.NetException;
 public class GIPSuggestLawSuggestionFragment extends BaseFragment implements
 		OnItemClickListener, OnClickListener, OnScrollListener {
 
-	protected static final String TAG = "GIPSuggestLawSuggestionFragment";
+	private static final String TAG = "GIPSuggestLawSuggestionFragment";
 	
 	private static final int FRAGMENT_ID = R.id.gip_suggest_lawsuggest_listView_poloticsList_framelayout;
 
@@ -199,7 +199,7 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements
 	 * @描述： 加载立法征求意见数据
 	 * @param url
 	 */
-	public void loadData(final int start, final int end) {
+	private void loadData(final int start, final int end) {
 		if (isFirstLoad || isSwitch) {
 			list_pb.setVisibility(View.VISIBLE);
 		} else {
@@ -245,7 +245,7 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements
 	 * @方法： showPoloticsList
 	 * @描述： 显示立法征求意见列表
 	 */
-	public void showPoloticsList() {
+	private void showPoloticsList() {
 		politicss = politicsWrapper.getData();
 		if (politicss == null || politicss.size() == 0) {
 			Toast.makeText(context, "对不起，暂无立法征求意见信息", Toast.LENGTH_SHORT)

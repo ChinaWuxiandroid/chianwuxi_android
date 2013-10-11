@@ -52,7 +52,7 @@
     <FrameLayout
         android:id="@+id/gip_suggest_peoplewill_fragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent" >
     </FrameLayout>
 
 </LinearLayout>

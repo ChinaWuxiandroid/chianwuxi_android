@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.goverpublicmsg.GPMApplyActivity;
 import com.wuxi.app.engine.ApplyDeptService;
 import com.wuxi.app.engine.ApplyGoverService;
 import com.wuxi.app.engine.GoverSaoonFileService;
@@ -39,9 +40,18 @@ import com.wuxi.domain.ApplyDept;
 import com.wuxi.domain.ApplyGover;
 import com.wuxi.exception.NetException;
 
+/**
+ * @类名： GoverMsgApplyDownloadFragment
+ * @描述： 政府信息公开 依申请公开 各市区依申请公开 和 各部门依申请公开  界面
+ * @作者： 罗森
+ * @创建时间： 2013 2013-10-10 上午9:07:40
+ * @修改时间：
+ * @修改描述：
+ */
 public class GoverMsgApplyDownloadFragment extends BaseFragment {
-	protected View view;
-	protected LayoutInflater mInflater;
+
+	private View view;
+	private LayoutInflater mInflater;
 	private Context context;
 
 	private List<ApplyDept> depts;
@@ -106,10 +116,15 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 		context = getActivity();
 
 		initView();
+
 		return view;
 	}
 
-	public void initView() {
+	/**
+	 * @方法： initView
+	 * @描述： 初始化布局控件
+	 */
+	private void initView() {
 		content_listView = (ListView) view
 				.findViewById(R.id.govermsg_deptapply_listview);
 		progressBar = (ProgressBar) view
@@ -129,7 +144,11 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 
 	}
 
-	public void loadGoverData() {
+	/**
+	 * @方法： loadGoverData
+	 * @描述： 加载市区数据
+	 */
+	private void loadGoverData() {
 		new Thread(new Runnable() {
 
 			@Override
@@ -161,7 +180,11 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 		}).start();
 	}
 
-	public void loadDeptData() {
+	/**
+	 * @方法： loadDeptData
+	 * @描述： 加载部门数据
+	 */
+	private void loadDeptData() {
 		new Thread(new Runnable() {
 
 			@Override
@@ -193,18 +216,32 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 		}).start();
 	}
 
-	public void showGoverList() {
-
+	/**
+	 * @方法： showGoverList
+	 * @描述： 显示市区列表
+	 */
+	private void showGoverList() {
 		if (govers != null)
 			content_listView.setAdapter(new ApplyGoverAdapter());
 	}
 
-	public void showDeptList() {
-
+	/**
+	 * @方法： showDeptList
+	 * @描述： 显示部门列表
+	 */
+	private void showDeptList() {
 		if (depts != null)
 			content_listView.setAdapter(new ApplyDeptAdapter());
 	}
 
+	/**
+	 * @类名： ApplyGoverAdapter
+	 * @描述： 市区列表适配器
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-10-10 上午9:14:37
+	 * @修改时间：
+	 * @修改描述：
+	 */
 	public class ApplyGoverAdapter extends BaseAdapter implements
 			OnClickListener {
 
@@ -256,11 +293,13 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
+			
 			gover = govers.get(position);
 			viewHolder.title_text.setText(gover.getDepName());
 			viewHolder.apply_imgbtn.setOnClickListener(ApplyGoverAdapter.this);
 			viewHolder.download_imgbtn
 					.setOnClickListener(ApplyGoverAdapter.this);
+			
 			return convertView;
 		}
 
@@ -273,22 +312,39 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 			case R.id.govermsg_deptapply_item_guide:
 				openBrowser(gover.getZhinanUrl());
 				break;
+			
+			//申请
 			case R.id.govermsg_deptapply_item_apply:
-
-				System.out.println("测试");
-				// openBrowser(gover.getApplyUrl());
+				
+				Intent intent = new Intent();
+				intent.setClass(getActivity(), GPMApplyActivity.class);
+				MainTabActivity.instance.addView(intent);
+				
 				break;
 			}
 		}
 	}
 
-	public void openBrowser(String url) {
+	/**
+	 * @方法： openBrowser
+	 * @描述： 打开连接
+	 * @param url
+	 */
+	private void openBrowser(String url) {
 		Uri uri = Uri.parse(url);
 		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 		// 建立Intent对象，传入uri
 		getActivity().startActivity(intent);
 	}
 
+	/**
+	 * @类名： ApplyDeptAdapter
+	 * @描述： 部门列表适配器
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-10-10 上午9:16:09
+	 * @修改时间：
+	 * @修改描述：
+	 */
 	public class ApplyDeptAdapter extends BaseAdapter implements
 			OnClickListener {
 
@@ -340,6 +396,7 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
+			
 			applyDept = depts.get(position);
 			viewHolder.title_text.setText(depts.get(position).getDepName());
 			viewHolder.apply_imgbtn.setOnClickListener(ApplyDeptAdapter.this);
@@ -357,14 +414,14 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 			case R.id.govermsg_deptapply_item_guide:
 				openBrowser(applyDept.getZhinanUrl());
 				break;
+				
+			//申请
 			case R.id.govermsg_deptapply_item_apply:
-				// 检测登录状态
 
 				if (applyDept != null) {
 
-					Intent intent = new Intent(getActivity(),
-							GoverMsgApplyTableFragment.class);
-					intent.putExtra("applyDept", applyDept);
+					Intent intent = new Intent();
+					intent.setClass(getActivity(), GPMApplyActivity.class);
 					
 					MainTabActivity.instance.addView(intent);
 				}
@@ -375,13 +432,19 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 	}
 
 	/**
-	 * 下载表格
-	 * */
-	public void downloadTable() {
+	 * @方法： downloadTable
+	 * @描述： 下载表格
+	 */
+	private void downloadTable() {
 
 		showDownloadComfirmDialog(Constants.Urls.GOVERMSG_TABLE_DOWNLOAD_URL);
 	}
 
+	/**
+	 * @方法： showDownloadComfirmDialog
+	 * @描述： 显示下载对话框
+	 * @param url
+	 */
 	private void showDownloadComfirmDialog(final String url) {
 		AlertDialog.Builder builder = new Builder(context);
 		builder.setIcon(R.drawable.logo);
@@ -412,7 +475,7 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 					pd.show();
 
 				} else {
-					Toast.makeText(context, "SDK不存在", 1).show();
+					Toast.makeText(context, "SDK不存在", Toast.LENGTH_SHORT).show();
 
 				}
 
@@ -430,6 +493,14 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 
 	}
 
+	/**
+	 * @类名： DownLoadThreadTask
+	 * @描述： 开辟下载线程
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-10-10 上午9:18:11
+	 * @修改时间：
+	 * @修改描述：
+	 */
 	private class DownLoadThreadTask implements Runnable {
 
 		private String url;

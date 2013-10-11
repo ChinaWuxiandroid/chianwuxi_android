@@ -57,8 +57,8 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment {
 
 	private final static String TAG = "GIP12345IWantMailLayoutFragment";
 
-	protected View view = null;
-	protected LayoutInflater mInflater = null;
+	private View view = null;
+	private LayoutInflater mInflater = null;
 	private Context context = null;
 
 	private final static int SEND_SUCCESS = 1;

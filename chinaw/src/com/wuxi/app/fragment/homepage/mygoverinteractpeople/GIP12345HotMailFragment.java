@@ -39,6 +39,8 @@ import com.wuxi.exception.NetException;
 
 public class GIP12345HotMailFragment extends BaseFragment implements
 		OnClickListener, OnScrollListener {
+	
+	private static final String TAG = "GIP12345HotMailFragment";
 
 	private View view;
 	private Context context;
@@ -49,9 +51,7 @@ public class GIP12345HotMailFragment extends BaseFragment implements
 	private List<Letter> letters;
 
 	private HotLettersListAdapter adapter;
-
-	protected static final String TAG = "GIP12345HotMailFragment";
-
+	
 	private static final int DATA__LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
 

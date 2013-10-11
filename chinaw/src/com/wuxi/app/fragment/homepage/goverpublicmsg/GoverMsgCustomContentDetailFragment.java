@@ -43,8 +43,9 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 	private ListView govermsg_detail_lv_channel;
 	private Button packup_btn;
 
-	protected static final int CHANNEL_LOAD_SUCESS = 0;// 子频道获取成功
-	protected static final int CHANNEL_LOAD_FAIL = 1;// 子频道获取失败
+	private static final int CHANNEL_LOAD_SUCESS = 0;// 子频道获取成功
+	private static final int CHANNEL_LOAD_FAIL = 1;// 子频道获取失败
+	
 	private static final int CONTENT_LIST_ID = R.id.govermsg_detail_contentlist_framelayout;
 
 	private int fifterType = 0;
@@ -95,7 +96,11 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 		return view;
 	}
 
-	public void initUI() {
+	/**
+	 * @方法： initUI
+	 * @描述： 初始化视图
+	 */
+	private void initUI() {
 		pb_govermsg = (ProgressBar) view
 				.findViewById(R.id.govermsg_detail_progressbar);
 		textView_title = (TextView) view
@@ -117,6 +122,10 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 		showContentList();
 	}
 
+	/**
+	 * @方法： showChannelData
+	 * @描述： 显示数据
+	 */
 	private void showChannelData() {
 		pb_govermsg.setVisibility(ProgressBar.GONE);
 
@@ -124,6 +133,10 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 				subChannels, context));
 	}
 
+	/**
+	 * @方法： showContentList
+	 * @描述： 显示列表
+	 */
 	private void showContentList() {
 		// 在此加载四种类型的菜单
 		if (parentMenuItem != null) {
@@ -194,10 +207,14 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 		
 	}
 	
+	/**
+	 * @方法： changeFragment
+	 * @描述： 更改视图
+	 * @param baseFragment
+	 */
 	private void changeFragment(BaseFragment baseFragment){
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
-		
 		ft.replace(CONTENT_LIST_ID, baseFragment);
 		ft.commitAllowingStateLoss();
 	}

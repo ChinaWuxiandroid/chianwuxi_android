@@ -16,7 +16,7 @@ import com.wuxi.app.util.GIPRadioButtonStyleChange;
 public class GoverInterPeopleHotReviewFragment extends
 		RadioButtonChangeFragment {
 
-	protected static final String TAG = "GoverInterPeopleHotReviewFragment";
+	private static final String TAG = "GoverInterPeopleHotReviewFragment";
 
 	private final static int FRAGMENT_ID = R.id.gip_suggest_people_fragment;
 
