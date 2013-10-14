@@ -18,8 +18,9 @@ import com.wuxi.app.popwin.SharePopWindow;
 public abstract class BaseItemContentActivity extends BaseSlideActivity {
 
 	protected ImageView setting_btn, share_btn, download_btn;
-	protected RelativeLayout rl_down,rl_setting,rl_search_share;
+	protected RelativeLayout rl_down, rl_setting, rl_search_share;
 	private SharePopWindow sharePopWindow;
+
 	@Override
 	protected int getLayoutId() {
 
@@ -28,17 +29,18 @@ public abstract class BaseItemContentActivity extends BaseSlideActivity {
 
 	@Override
 	protected void findMainContentViews(View view) {
-		rl_down=(RelativeLayout) view.findViewById(R.id.rl_down);
-		rl_setting=(RelativeLayout) view.findViewById(R.id.rl_setting);
-		rl_search_share=(RelativeLayout) view.findViewById(R.id.rl_search_share);
-		
+		rl_down = (RelativeLayout) view.findViewById(R.id.rl_down);
+		rl_setting = (RelativeLayout) view.findViewById(R.id.rl_setting);
+		rl_search_share = (RelativeLayout) view
+				.findViewById(R.id.rl_search_share);
+
 		setting_btn = (ImageView) view.findViewById(R.id.content_setting);
 		share_btn = (ImageView) view.findViewById(R.id.content_share);
 		download_btn = (ImageView) view.findViewById(R.id.content_download);
 
 		rl_search_share.setOnClickListener(ShareClick);
 		setting_btn.setOnClickListener(SettingClick);
-		
+
 		download_btn.setOnClickListener(DownloadClick);
 
 	}
@@ -57,9 +59,8 @@ public abstract class BaseItemContentActivity extends BaseSlideActivity {
 
 		@Override
 		public void onClick(View v) {
-			Toast.makeText(
-				BaseItemContentActivity.this, "设置，该功能暂未实现", Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText(BaseItemContentActivity.this, "设置，该功能暂未实现",
+					Toast.LENGTH_SHORT).show();
 		}
 	};
 
@@ -67,33 +68,30 @@ public abstract class BaseItemContentActivity extends BaseSlideActivity {
 
 		@Override
 		public void onClick(View v) {
-			
-			if(sharePopWindow!=null){
+
+			if (sharePopWindow != null) {
 				sharePopWindow.dissmissPopWindow();
-				sharePopWindow=null;
-			}else{
-				sharePopWindow=new SharePopWindow(BaseItemContentActivity.this);
-				int location[]=new int [2];
+				sharePopWindow = null;
+			} else {
+				sharePopWindow = new SharePopWindow(
+						BaseItemContentActivity.this);
+				int location[] = new int[2];
 				v.getLocationInWindow(location);
-				sharePopWindow.showPopWindow(v, location[0], location[1]-30);
-				
+				sharePopWindow.showPopWindow(v, location[0], location[1] - 30);
+
 			}
-			
-		
+
 		}
 	};
-	
-	
-	
 
 	@Override
 	protected void onBack() {
-	
+
 		super.onBack();
-		
-		if(sharePopWindow!=null){
+
+		if (sharePopWindow != null) {
 			sharePopWindow.dissmissPopWindow();
-			sharePopWindow=null;
+			sharePopWindow = null;
 		}
 	}
 
@@ -101,9 +99,8 @@ public abstract class BaseItemContentActivity extends BaseSlideActivity {
 
 		@Override
 		public void onClick(View v) {
-			Toast.makeText(
-				BaseItemContentActivity.this, "下载，该功能暂未实现", Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText(BaseItemContentActivity.this, "下载，该功能暂未实现",
+					Toast.LENGTH_SHORT).show();
 		}
 	};
 

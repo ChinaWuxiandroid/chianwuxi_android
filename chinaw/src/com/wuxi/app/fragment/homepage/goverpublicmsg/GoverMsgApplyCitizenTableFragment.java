@@ -10,6 +10,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +26,7 @@ import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.goverpublicmsg.GPMApplyActivity;
 import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.SubmitListService;
 import com.wuxi.app.util.Constants;
@@ -33,7 +36,7 @@ import com.wuxi.exception.NetException;
 
 /**
  * @类名： GoverMsgApplyCitizenTableFragment
- * @描述： 依申请公开公民申请界面
+ * @描述： 依申请公开 公民申请界面
  * @作者： 罗森
  * @创建时间： 2013 2013-9-27 下午2:11:09
  * @修改时间：
@@ -42,13 +45,13 @@ import com.wuxi.exception.NetException;
 public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 		OnClickListener {
 
-	protected View view;
-	protected LayoutInflater mInflater;
+	private View view;
+	private LayoutInflater mInflater;
 	private Context context;
 
 	private static final int SUBMIT_SUCCESS = 3;
 	private static final int SUBMIT_FAILED = 4;
-	private List<ApplyDept> depts;
+//	private List<ApplyDept> depts;
 
 	// 提交变量
 	String name = "", workadd = "", papername = "", papernum = "",
@@ -110,62 +113,73 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 		return view;
 	}
 
-	public void initView() {
+	/**
+	 * @方法： initView
+	 * @描述： 初始化视图
+	 */
+	private void initView() {
 
 		loginDialog = new LoginDialog(context);// 实例化登录对话框
 
 		if (!loginDialog.checkLogin()) {
 			loginDialog.showDialog();
+		} else {
+			calendar = Calendar.getInstance();
+			year = calendar.get(Calendar.YEAR);
+			month = calendar.get(Calendar.MONTH);
+			day = calendar.get(Calendar.DAY_OF_MONTH);
+
+			pb = (ProgressBar) view.findViewById(R.id.citizen_infosubmit_pb);
+			submit_ibtn = (ImageButton) view
+					.findViewById(R.id.worksuggestbox_imgbtn_submit);
+			cancel_ibtn = (ImageButton) view
+					.findViewById(R.id.worksuggestbox_imgbtn_cancel);
+			// 可选项-----------------------------------------------------------
+			solveByDept = (TextView) view
+					.findViewById(R.id.citizen_solve_bydept);
+
+			paper_ckBox = (CheckBox) view
+					.findViewById(R.id.citizen_info_supply_paper_checkbox);
+			mail_ckBox = (CheckBox) view
+					.findViewById(R.id.citizen_info_supply_email_checkbox);
+			dis_ckBox = (CheckBox) view
+					.findViewById(R.id.citizen_info_supply_disk_checkbox);
+			post_ckBox = (CheckBox) view
+					.findViewById(R.id.citizen_info_get_post_checkbox);
+			express_ckBox = (CheckBox) view
+					.findViewById(R.id.citizen_info_get_express_checkbox);
+			// 可选项-----------------------------------------------------------
+
+			// 必选项-----------------------------------------------------------
+			name_et = (EditText) view.findViewById(R.id.citizen_name_edit);
+			workadd_et = (EditText) view
+					.findViewById(R.id.citizen_workadd_edit);
+			papername_et = (EditText) view
+					.findViewById(R.id.citizen_papers_name_edit);
+			papernum_et = (EditText) view
+					.findViewById(R.id.citizen_papers_num_edit);
+			address_et = (EditText) view
+					.findViewById(R.id.citizen_address_edit);
+			postcode_et = (EditText) view
+					.findViewById(R.id.citizen_postcode_edit);
+			phone_et = (EditText) view.findViewById(R.id.citizen_phone_edit);
+			fax_et = (EditText) view.findViewById(R.id.citizen_fax_edit);
+			email_et = (EditText) view.findViewById(R.id.citizen_email_edit);
+			describe_et = (EditText) view
+					.findViewById(R.id.citizen_info_describe_edit);
+			use_et = (EditText) view.findViewById(R.id.citizen_info_use_edit);
+
+			applyDate_txt = (TextView) view
+					.findViewById(R.id.citizen_apply_time_txt);
+			applyDate_txt.setText("" + year + "-" + month + "-" + day);
+
+//			 solveByDept.setText(applyDept.getDepName());
+
+			// 必选项-----------------------------------------------------------
+			submit_ibtn.setOnClickListener(this);
+			cancel_ibtn.setOnClickListener(this);
 		}
 
-		calendar = Calendar.getInstance();
-		year = calendar.get(Calendar.YEAR);
-		month = calendar.get(Calendar.MONTH);
-		day = calendar.get(Calendar.DAY_OF_MONTH);
-
-		pb = (ProgressBar) view.findViewById(R.id.citizen_infosubmit_pb);
-		submit_ibtn = (ImageButton) view
-				.findViewById(R.id.worksuggestbox_imgbtn_submit);
-		cancel_ibtn = (ImageButton) view
-				.findViewById(R.id.worksuggestbox_imgbtn_cancel);
-		// 可选项-----------------------------------------------------------
-		solveByDept = (TextView) view.findViewById(R.id.citizen_solve_bydept);
-
-		paper_ckBox = (CheckBox) view
-				.findViewById(R.id.citizen_info_supply_paper_checkbox);
-		mail_ckBox = (CheckBox) view
-				.findViewById(R.id.citizen_info_supply_email_checkbox);
-		dis_ckBox = (CheckBox) view
-				.findViewById(R.id.citizen_info_supply_disk_checkbox);
-		post_ckBox = (CheckBox) view
-				.findViewById(R.id.citizen_info_get_post_checkbox);
-		express_ckBox = (CheckBox) view
-				.findViewById(R.id.citizen_info_get_express_checkbox);
-		// 可选项-----------------------------------------------------------
-
-		// 必选项-----------------------------------------------------------
-		name_et = (EditText) view.findViewById(R.id.citizen_name_edit);
-		workadd_et = (EditText) view.findViewById(R.id.citizen_workadd_edit);
-		papername_et = (EditText) view
-				.findViewById(R.id.citizen_papers_name_edit);
-		papernum_et = (EditText) view
-				.findViewById(R.id.citizen_papers_num_edit);
-		address_et = (EditText) view.findViewById(R.id.citizen_address_edit);
-		postcode_et = (EditText) view.findViewById(R.id.citizen_postcode_edit);
-		phone_et = (EditText) view.findViewById(R.id.citizen_phone_edit);
-		fax_et = (EditText) view.findViewById(R.id.citizen_fax_edit);
-		email_et = (EditText) view.findViewById(R.id.citizen_email_edit);
-		describe_et = (EditText) view
-				.findViewById(R.id.citizen_info_describe_edit);
-		use_et = (EditText) view.findViewById(R.id.citizen_info_use_edit);
-
-		applyDate_txt = (TextView) view
-				.findViewById(R.id.citizen_apply_time_txt);
-		applyDate_txt.setText("" + year + "-" + month + "-" + day);
-		solveByDept.setText(applyDept.getDepName());
-		// 必选项-----------------------------------------------------------
-		submit_ibtn.setOnClickListener(this);
-		cancel_ibtn.setOnClickListener(this);
 	}
 
 	@Override
@@ -176,12 +190,8 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 			InputMethodManager imm = (InputMethodManager) context
 					.getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(submit_ibtn.getWindowToken(), 0);
-			// 检测登录状态
-			if (loginDialog.checkLogin()) {
-				submitData();
-			} else {
-				loginDialog.showDialog();
-			}
+
+			submitData();
 
 			break;
 		case R.id.worksuggestbox_imgbtn_cancel:
@@ -198,7 +208,7 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 	/**
 	 * 提交
 	 * */
-	public void submitData() {
+	private void submitData() {
 		if (!judgeDataLegal()) {
 			getCheckBoxResult();
 			pb.setVisibility(ProgressBar.VISIBLE);
@@ -230,7 +240,7 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 	}
 
 	// 获取提交公民在线申请 的url
-	public String getUrl(String urlhead, String access_token,
+	private String getUrl(String urlhead, String access_token,
 			String doProjectId, String depid) {
 		String url = urlhead + "?access_token=" + access_token
 				+ "&doprojectid=" + doProjectId + "&depid=" + depid;
@@ -245,7 +255,11 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 		return url;
 	}
 
-	public void getCheckBoxResult() {
+	/**
+	 * @方法： getCheckBoxResult
+	 * @描述： 获取复选框的值
+	 */
+	private void getCheckBoxResult() {
 		if (paper_ckBox.isChecked()) {
 			check_paper = "纸面";
 		}
@@ -266,7 +280,7 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 	/**
 	 * 判断输入 是否为空
 	 * */
-	public boolean judgeDataLegal() {
+	private boolean judgeDataLegal() {
 		boolean inputError = false;
 		name = name_et.getText().toString();
 		workadd = workadd_et.getText().toString();

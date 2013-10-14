@@ -36,18 +36,20 @@ import com.wuxi.exception.NetException;
 
 /**
  * 带有过滤功能 的返回指定频道的内容列表类
- * @author 杨宸  智佳
+ * 
+ * @author 杨宸 智佳
  * 
  */
-public abstract class FifterContentListFragment  extends BaseFragment implements
-OnScrollListener, OnItemClickListener, OnClickListener {
-	
+public abstract class FifterContentListFragment extends BaseFragment implements
+		OnScrollListener, OnItemClickListener, OnClickListener {
+
 	protected static final int CONTENT_LOAD_SUCCESS = 0;
 	protected static final int CONTENT_LOAD_FAIL = 1;
 	private static final int PAGE_SIZE = 10;
 	protected View view;
 	protected ListView content_list_lv;
 	private ProgressBar content_list_pb;
+
 	private ContentWrapper contentWrapper;// 内容
 	private View loadMoreView;// 加载更多视图
 	private Button loadMoreButton;
@@ -59,13 +61,23 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 	private boolean isFirstLoad = true;// 是不是首次加载数据
 	private boolean isLoading = false;
 	private ProgressBar pb_loadmoore;
-	/**
-	 * 过滤包装类
-	 * */
+	// 过滤包装类
 	private FifterContentWrapper fifter;
 
-	public void setContentFifter(FifterContentWrapper fifter){
-		this.fifter=fifter;
+	protected MenuItem parentItem;
+
+	public void setParentItem(MenuItem parentItem) {
+		this.parentItem = parentItem;
+	}
+
+	protected Channel channel;
+
+	public void setChannel(Channel channel) {
+		this.channel = channel;
+	}
+
+	public void setContentFifter(FifterContentWrapper fifter) {
+		this.fifter = fifter;
 	}
 
 	/**
@@ -74,28 +86,29 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 	 * @param fifter
 	 * @return
 	 */
-	private String getURL(FifterContentWrapper fifter){
-		String url = Constants.Urls.CHANNEL_CONTENT_P_URL.replace("{id}", fifter.getId())
+	private String getURL(FifterContentWrapper fifter) {
+		String url = Constants.Urls.CHANNEL_CONTENT_P_URL
+				.replace("{id}", fifter.getId())
 				.replace("{start}", String.valueOf(fifter.getStart()))
 				.replace("{end}", String.valueOf(fifter.getEnd()));
-		String dept=fifter.getDept();
-		String zone=fifter.getZone();
-		String typeword=fifter.getTypeword();
-		int year=fifter.getYear();
+		String dept = fifter.getDept();
+		String zone = fifter.getZone();
+		String typeword = fifter.getTypeword();
+		int year = fifter.getYear();
 
-		if(dept!=null&&!"".equals(dept)){
-			url=url+"&dept="+dept;
+		if (dept != null && !"".equals(dept)) {
+			url = url + "&dept=" + dept;
 		}
-		if(year!=-1){
-			url=url+"&year="+year;
+		if (year != -1) {
+			url = url + "&year=" + year;
 		}
-		if(typeword!=null&&!"".equals(typeword)){
-			url=url+"&typeword="+typeword;
+		if (typeword != null && !"".equals(typeword)) {
+			url = url + "&typeword=" + typeword;
 		}
-		if(zone!=null&&!"".equals(zone)){
-			url=url+"&zone="+zone;
+		if (zone != null && !"".equals(zone)) {
+			url = url + "&zone=" + zone;
 		}
-		
+
 		return url;
 	}
 
@@ -128,19 +141,32 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 	}
 
 	/**
+	 * 
+	 * wanglu 泰得利通 初始化界面
+	 */
+	private void initUI() {
+		content_list_lv = (ListView) view.findViewById(R.id.content_list_lv);
+		content_list_lv.setOnItemClickListener(this);
+
+		content_list_pb = (ProgressBar) view.findViewById(R.id.content_list_pb);
+		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+				null);
+
+		loadMoreButton = (Button) loadMoreView
+				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
+
+		content_list_lv.addFooterView(loadMoreView);// 为listView添加底部视图
+		content_list_lv.setOnScrollListener(this);// 增加滑动监听
+		loadMoreButton.setOnClickListener(this);
+	}
+
+	/**
 	 * @方法： showContentData
 	 * @描述： 显示列表数据
 	 */
 	private void showContentData() {
-
-		if (contentWrapper.isNext()) {
-			loadMoreButton.setText("more");
-
-		} else {
-			//loadMoreButton.setText(" ");
-			//loadMoreButton.setBackgroundColor(Color.TRANSPARENT);
-			content_list_lv.removeFooterView(loadMoreView);
-		}
 
 		List<Content> contents = contentWrapper.getContents();
 		if (contents != null && contents.size() > 0) {
@@ -167,11 +193,12 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 						- visibleItemCount + 1); // 设置选中项
 				isLoading = false;
 			}
-		}else {
+		} else {
 			content_list_pb.setVisibility(ProgressBar.GONE);
-			Toast.makeText(context, "根据您的条件，检索的数据为空，请重新选择条件。", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "根据您的条件，检索的数据为空，请重新选择条件。",
+					Toast.LENGTH_SHORT).show();
 		}
-		
+
 		if (contentWrapper.isNext()) {
 			pb_loadmoore.setVisibility(ProgressBar.GONE);
 			loadMoreButton.setText("点击加载更多");
@@ -186,11 +213,7 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 	 * wanglu 泰得利通 首次加载数据
 	 */
 	private void initData(final int start, final int end) {
-
-		fifter.setStart(start);
-		fifter.setEnd(end);
 		loadData(start, end);
-
 	}
 
 	/**
@@ -213,8 +236,10 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 				Message msg = handler.obtainMessage();
 				ContentService contentService = new ContentService(context);
 				try {
-
-					contentWrapper = contentService.getPageContentsByUrl(getURL(fifter));
+					fifter.setStart(start);
+					fifter.setEnd(end);
+					contentWrapper = contentService
+							.getPageContentsByUrl(getURL(fifter));
 					if (contentWrapper != null) {
 						msg.what = CONTENT_LOAD_SUCCESS;
 
@@ -255,40 +280,6 @@ OnScrollListener, OnItemClickListener, OnClickListener {
 		} else {
 			loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_SIZE);
 		}
-	}
-
-	/**
-	 * 
-	 * wanglu 泰得利通 初始化界面
-	 */
-	private void initUI() {
-		content_list_lv = (ListView) view.findViewById(R.id.content_list_lv);
-		content_list_lv.setOnItemClickListener(this);
-		
-		content_list_pb = (ProgressBar) view.findViewById(R.id.content_list_pb);
-		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
-				null);
-		
-		loadMoreButton = (Button) loadMoreView
-				.findViewById(R.id.loadMoreButton);
-		pb_loadmoore = (ProgressBar) loadMoreView
-				.findViewById(R.id.pb_loadmoore);
-
-		content_list_lv.addFooterView(loadMoreView);// 为listView添加底部视图
-		content_list_lv.setOnScrollListener(this);// 增加滑动监听
-		loadMoreButton.setOnClickListener(this);
-	}
-
-	protected MenuItem parentItem;
-
-	public void setParentItem(MenuItem parentItem) {
-		this.parentItem = parentItem;
-	}
-
-	protected Channel channel;
-
-	public void setChannel(Channel channel) {
-		this.channel = channel;
 	}
 
 	@Override

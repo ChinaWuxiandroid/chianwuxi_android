@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 
- * @author 杨宸  智佳  依申请公告  部门
+ * @author 杨宸  智佳  依申请公开  部门
  */
 
 public class ApplyDept implements Serializable{

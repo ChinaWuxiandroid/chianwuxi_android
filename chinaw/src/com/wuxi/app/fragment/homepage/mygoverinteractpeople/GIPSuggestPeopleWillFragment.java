@@ -19,7 +19,7 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 @SuppressLint("ShowToast")
 public class GIPSuggestPeopleWillFragment extends RadioButtonChangeFragment {
 
-	protected static final String TAG = "GIPSuggestPeopleWillFragment";
+	private static final String TAG = "GIPSuggestPeopleWillFragment";
 
 	private final static int FRAGMENT_ID = R.id.gip_suggest_peoplewill_fragment;
 

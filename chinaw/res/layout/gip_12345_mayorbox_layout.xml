@@ -101,7 +101,7 @@
     <FrameLayout
         android:id="@+id/mayor_query_letter_fragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:visibility="gone" >
 
         <ProgressBar
@@ -124,7 +124,7 @@
     <FrameLayout
         android:id="@+id/mayor_box_fragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent" >
     </FrameLayout>
 
 </LinearLayout>

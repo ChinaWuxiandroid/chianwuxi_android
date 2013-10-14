@@ -16,7 +16,7 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
  * */
 public class GIPSuggestSurveyFragment extends RadioButtonChangeFragment {
 
-	protected static final String TAG = "GIPSuggestSurveyFragment";
+	private static final String TAG = "GIPSuggestSurveyFragment";
 
 	private static final int FRAGMENT_ID = R.id.gip_suggest_survey_fragment;
 

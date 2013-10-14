@@ -47,7 +47,7 @@ import com.wuxi.exception.NetException;
 public class VedioReviewFragment extends BaseFragment implements
 		OnItemClickListener, OnClickListener, OnScrollListener {
 
-	protected static final String TAG = "VedioReviewFragment";
+	private static final String TAG = "VedioReviewFragment";
 
 	private Context context;
 
@@ -83,9 +83,9 @@ public class VedioReviewFragment extends BaseFragment implements
 	private Button loadMoreButton;
 	private ProgressBar pb_loadmoore;
 
-	protected static final int LOAD_VIEDO_URL_SUCCESS = 2;
+	private static final int LOAD_VIEDO_URL_SUCCESS = 2;
 
-	protected static final int LOAD_VIEDO_URL_FAIL = 3;
+	private static final int LOAD_VIEDO_URL_FAIL = 3;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {

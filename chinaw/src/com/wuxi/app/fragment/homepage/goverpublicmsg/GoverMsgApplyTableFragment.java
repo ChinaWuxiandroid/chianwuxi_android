@@ -28,8 +28,8 @@ import com.wuxi.domain.ApplyDept;
  */
 public class GoverMsgApplyTableFragment extends BaseFragment implements OnCheckedChangeListener,OnClickListener{
 	
-	protected View view;
-	protected LayoutInflater mInflater;
+	private View view;
+	private LayoutInflater mInflater;
 	private Context context;
 
 	private ImageView back_imgview;
@@ -56,7 +56,11 @@ public class GoverMsgApplyTableFragment extends BaseFragment implements OnChecke
 		return view;
 	}
 
-	public void initView(){
+	/**
+	 * @方法： initView
+	 * @描述： 初始化视图
+	 */
+	private void initView(){
 		back_imgview=(ImageView)view.findViewById(R.id.govermsg_applytable_back_btn);
 		tablecontent_raidogroup=(RadioGroup)view.findViewById(R.id.govermsg_applytable_radioGroup);
 
@@ -81,32 +85,43 @@ public class GoverMsgApplyTableFragment extends BaseFragment implements OnChecke
 		}
 	}
 
-	public void loadCitizenTable(){
+	/**
+	 * @方法： loadCitizenTable
+	 * @描述： 加载公民表格
+	 */
+	private void loadCitizenTable(){
 		GoverMsgApplyCitizenTableFragment goverMsgApplyCitizenTableFragment=new GoverMsgApplyCitizenTableFragment();
 		goverMsgApplyCitizenTableFragment.setDept(applyDept);
 		onTransaction(goverMsgApplyCitizenTableFragment);
 	}
 
-	public void loadLegalPersonTable(){
+	/**
+	 * @方法： loadLegalPersonTable
+	 * @描述： 加载法人表格
+	 */
+	private void loadLegalPersonTable(){
 		GoverMsgApplyLePersonTableFragment goverMsgApplyLePersonTableFragment=new GoverMsgApplyLePersonTableFragment();
 		goverMsgApplyLePersonTableFragment.setDept(applyDept);
 		onTransaction(goverMsgApplyLePersonTableFragment);
 	}
 
-	/*
-	 * replaceFragment
-	 * */
-	protected void onTransaction(BaseFragment fragment) {
+	/**
+	 * @方法： onTransaction
+	 * @描述： 切换视图
+	 * @param fragment
+	 */
+	private void onTransaction(BaseFragment fragment) {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(TALBE_CONTENT_ID, fragment);
 		ft.commitAllowingStateLoss();
 	}
 
-	/*
-	 * romoveFragment
-	 * */
-	protected void onRomove() {
+	/**
+	 * @方法： onRomove
+	 * @描述： 移除视图
+	 */
+	private void onRomove() {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.remove(GoverMsgApplyTableFragment.this);

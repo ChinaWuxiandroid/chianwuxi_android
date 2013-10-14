@@ -29,12 +29,13 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- *市政府信息公开目录 里的 可扩展列表的列表内容
- *@author 杨宸 智佳
+ * 市政府信息公开目录 里的 可扩展列表的列表内容
+ * 
+ * @author 杨宸 智佳
  * */
 
-public class ExpandListItemContentFragment extends BaseFragment{
-	
+public class ExpandListItemContentFragment extends BaseFragment {
+
 	private View view;
 	private LayoutInflater mInflater;
 	private MenuItem parentItem;
@@ -48,7 +49,8 @@ public class ExpandListItemContentFragment extends BaseFragment{
 
 	private static final int DATA__LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
-	protected static final int CHANNELCONTENT_ID=R.id.govermsg_custom_content;
+
+	private static final int CHANNELCONTENT_ID = R.id.govermsg_custom_content;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -80,25 +82,32 @@ public class ExpandListItemContentFragment extends BaseFragment{
 			Bundle savedInstanceState) {
 
 		view = inflater.inflate(R.layout.expand_channel_listview_layout, null);
-		mInflater=inflater;
+		mInflater = inflater;
 		context = getActivity();
 		initUI();
 		return view;
 	}
 
-	@SuppressLint("SetJavaScriptEnabled")
+	/**
+	 * @方法： initUI
+	 * @描述： 初始化界面控件
+	 */
 	private void initUI() {
 
 		listview = (ListView) view.findViewById(R.id.expand_channel_listview);
-		processBar = (ProgressBar) view.findViewById(R.id.expand_channel_progress);
-		
+		processBar = (ProgressBar) view
+				.findViewById(R.id.expand_channel_progress);
 
 		processBar.setVisibility(View.VISIBLE);
 		loadData();
 	}
 
+	/**
+	 * @方法： loadData
+	 * @描述： 加载数据
+	 */
 	@SuppressWarnings("unchecked")
-	private void loadData(){
+	private void loadData() {
 		if (CacheUtil.get(parentItem.getId()) != null) {// 从缓存中查找子菜单
 			MenuItems = (List<MenuItem>) CacheUtil.get(parentItem.getId());
 			processBar.setVisibility(View.INVISIBLE);
@@ -113,13 +122,11 @@ public class ExpandListItemContentFragment extends BaseFragment{
 
 				MenuService menuSevice = new MenuService(context);
 				try {
-					MenuItems = menuSevice.getSubMenuItems(parentItem
-							.getId());
+					MenuItems = menuSevice.getSubMenuItems(parentItem.getId());
 					if (MenuItems != null) {
 						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
-					
-					}
-					else{
+
+					} else {
 						Message msg = handler.obtainMessage();
 						msg.obj = "暂无信息";
 						msg.what = DATA_LOAD_ERROR;
@@ -149,14 +156,26 @@ public class ExpandListItemContentFragment extends BaseFragment{
 		}).start();
 	}
 
-	private void showChannelList(){
-		ChannelListAdapter adapter=new ChannelListAdapter();
+	/**
+	 * @方法： showChannelList
+	 * @描述： 显示列表
+	 */
+	private void showChannelList() {
+		ChannelListAdapter adapter = new ChannelListAdapter();
 
 		listview.setAdapter(adapter);
-		
+
 	}
 
-	public class ChannelListAdapter extends BaseAdapter{
+	/**
+	 * @类名： ChannelListAdapter
+	 * @描述： 列表适配器
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-10-11 下午5:29:03
+	 * @修改时间： 
+	 * @修改描述：
+	 */
+	public class ChannelListAdapter extends BaseAdapter {
 
 		@Override
 		public int getCount() {
@@ -180,27 +199,27 @@ public class ExpandListItemContentFragment extends BaseFragment{
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder viewHolder = null;
-			if(convertView==null){
+			if (convertView == null) {
 				convertView = mInflater.inflate(
 						R.layout.expand_channel_listview_item, null);
 
 				viewHolder = new ViewHolder();
 
 				viewHolder.title_text = (TextView) convertView
-						.findViewById(R.id.expand_channel_listview_item_title);	
+						.findViewById(R.id.expand_channel_listview_item_title);
 				convertView.setTag(viewHolder);
-			}
-			else {
+			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			if(viewHolder.title_text!=null){
-				viewHolder.title_text.setText(MenuItems.get(position).getName());
+			if (viewHolder.title_text != null) {
+				viewHolder.title_text
+						.setText(MenuItems.get(position).getName());
 				viewHolder.title_text.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 					}
-				});	
+				});
 			}
 			return convertView;
 		}

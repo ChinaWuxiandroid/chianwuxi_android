@@ -1,6 +1,8 @@
 package com.wuxi.app.fragment.homepage.goverpublicmsg;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.JSONException;
 
@@ -43,8 +45,8 @@ import com.wuxi.exception.NetException;
 public class WorkSuggestionBoxFragment extends BaseFragment implements
 		OnClickListener {
 
-	protected View view;
-	protected LayoutInflater mInflater;
+	private View view;
+	private LayoutInflater mInflater;
 	private Context context;
 	private MenuItem parentMenuItem;
 	private WorkSuggestionBoxWrapper boxWrapper;
@@ -54,7 +56,8 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 	private static final int DATA_LOAD_ERROR = 1;
 	private static final int DATA_SUBMIT_SUCCESS = 2;
 	private static final int DATA_SUBMIT_FAILED = 3;
-	protected static final int CHANNELCONTENT_ID = R.id.govermsg_custom_content;
+	
+	private static final int CHANNELCONTENT_ID = R.id.govermsg_custom_content;
 
 	private ProgressBar processBar;
 	private LinearLayout layout;
@@ -243,6 +246,7 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 			if (loginDialog.checkLogin()) {
 				String access_token = SystemUtil.getAccessToken(context);
 				try {
+					
 					submitMail(access_token);
 				} catch (NetException e) {
 					e.printStackTrace();
@@ -303,7 +307,9 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 	}
 
 	/**
-	 * 判断输入情况是否合法
+	 * @方法： judgeIsLegal
+	 * @描述： 判断必填项是否为空
+	 * @return
 	 */
 	private boolean judgeIsLegal() {
 		boolean submitError = false;
@@ -328,4 +334,29 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 		}
 		return submitError;
 	}
+	
+	  private static boolean isPhoneNumberValid(String phoneNumber)
+	  {
+	     boolean isValid = false;
+
+	     String expression = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$";
+
+	     String expression2 ="^\\(?(\\d{2})\\)?[- ]?(\\d{4})[- ]?(\\d{4})$";
+
+	     CharSequence inputStr = phoneNumber;
+
+	     Pattern pattern = Pattern.compile(expression);
+
+	     Matcher matcher = pattern.matcher(inputStr);
+
+	     Pattern pattern2 =Pattern.compile(expression2);
+
+	     Matcher matcher2= pattern2.matcher(inputStr);
+	     if(matcher.matches()||matcher2.matches())
+	     {
+	     isValid = true;
+	     }
+	     return isValid; 
+	   }
+
 }

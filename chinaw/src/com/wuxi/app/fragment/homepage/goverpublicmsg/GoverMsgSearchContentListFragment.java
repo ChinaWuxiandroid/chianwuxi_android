@@ -48,10 +48,11 @@ import com.wuxi.exception.NetException;
 public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		OnClickListener {
 
-	protected View view;
-	protected LayoutInflater mInflater;
+	private View view;
+	private LayoutInflater mInflater;
 	private Context context;
-	protected static final int CHANNELLIST_CONTENT_ID = R.id.govermsg_search_content_framelayout;
+	
+	private static final int CHANNELLIST_CONTENT_ID = R.id.govermsg_search_content_framelayout;
 
 	private static final int LOAD_DEPT_SUCCESS = 1;
 	private static final int LOAD_DEPT_FAILED = 2;
@@ -133,7 +134,11 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		return view;
 	}
 
-	public void initView() {
+	/**
+	 * @方法： initView
+	 * @描述： 初始化布局控件
+	 */
+	private void initView() {
 		partment_sp = (Spinner) view
 				.findViewById(R.id.govermsg_search_spinner_partment);
 		year_sp = (Spinner) view
@@ -147,6 +152,11 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		initFilter(filterType);
 	}
 
+	/**
+	 * @方法： initFilter
+	 * @描述： 初始化筛选控件数据
+	 * @param Type
+	 */
 	private void initFilter(int Type) {
 		Calendar c = Calendar.getInstance();
 		DEFAULT_YEAR_FIFTER = c.get(Calendar.YEAR); // 2013
@@ -166,7 +176,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 	/**
 	 * 初始化区县过滤信息 （已屏蔽）
 	 * */
-	public void initCountrySpinner() {
+	private void initCountrySpinner() {
 
 		// ArrayAdapter<String> country_Spinner_adapter = new
 		// ArrayAdapter<String>(context,
@@ -256,16 +266,18 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		List<String> years = TimeFormateUtil
 				.getYears(TimeFormateUtil.START_YEAR);
 
-		String[] yearStr = new String[years.size()];
-		
-		for (int i = 0; i < years.size(); i++) {
-			yearStr[i] = years.get(i);
-			
-		}
-		
-		years.add(0, "按年份");
+		years.add(years.size(), "按年份");
 
-		MyAryAdapter year_Spinner_adapter = new MyAryAdapter(context, android.R.layout.simple_spinner_item, yearStr);
+		int size = years.size();
+
+		String[] yearStr = new String[size];
+
+		for (int i = size - 1; i >= 0; i--) {
+			yearStr[size - 1 - i] = years.get(i);
+		}
+
+		MyAryAdapter year_Spinner_adapter = new MyAryAdapter(context,
+				android.R.layout.simple_spinner_item, yearStr);
 		year_Spinner_adapter
 				.setDropDownViewResource(R.layout.my_spinner_medium_dropdown_item);
 		year_sp.setAdapter(year_Spinner_adapter);
@@ -297,7 +309,15 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			break;
 		}
 	}
-	
+
+	/**
+	 * @类名： MyAryAdapter
+	 * @描述： 适配器
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-10-11 下午5:45:16
+	 * @修改时间： 
+	 * @修改描述：
+	 */
 	public class MyAryAdapter extends ArrayAdapter<String> {
 
 		Context context;
@@ -325,7 +345,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			tv.setText(items[position]);
 			tv.setGravity(Gravity.LEFT);
 			tv.setTextColor(Color.BLACK);
-			
+
 			return convertView;
 		}
 
@@ -348,7 +368,10 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 
 	}
 
-	// 开始检索
+	/**
+	 * @方法： search
+	 * @描述： 搜索
+	 */
 	private void search() {
 		GoverMsgFifterContentListFragment goverMsgFifterContentListFragment = new GoverMsgFifterContentListFragment();
 		String id = null;
@@ -379,9 +402,18 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			break;
 		}
 		goverMsgFifterContentListFragment.setContentFifter(fifter);
+		if (parentMenuItem != null) {
+			goverMsgFifterContentListFragment.setParentItem(parentMenuItem);
+		} else if (channel != null) {
+			goverMsgFifterContentListFragment.setChannel(channel);
+		}
 		bindFragment(goverMsgFifterContentListFragment);
 	}
 
+	/**
+	 * @方法： loadContentList
+	 * @描述： 加载数据
+	 */
 	private void loadContentList() {
 		GoverMsgContentListFragment goverMsgContentListFragment = new GoverMsgContentListFragment();
 
@@ -394,14 +426,26 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		bindFragment(goverMsgContentListFragment);
 	}
 
+	/**
+	 * @方法： bindFragment
+	 * @描述： 替换碎片
+	 * @param fragment
+	 */
 	private void bindFragment(BaseFragment fragment) {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
-
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(CHANNELLIST_CONTENT_ID, fragment);
 		ft.commitAllowingStateLoss();
 	}
 
+	/**
+	 * @类名： DeptAdapter
+	 * @描述： 部门列表适配器
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-10-11 下午5:45:44
+	 * @修改时间： 
+	 * @修改描述：
+	 */
 	public class DeptAdapter extends BaseAdapter implements
 			OnItemSelectedListener {
 
@@ -439,10 +483,10 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			
+
 			viewHolder.tv_dept.setTextColor(Color.BLACK);
 			viewHolder.tv_dept.setText(dept.getDepName());
-			
+
 			return convertView;
 		}
 

@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
-import com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumContentActivity;
 import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.VideoSubmitIdeaService;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
@@ -41,7 +40,7 @@ import com.wuxi.exception.NetException;
 public class GoverInterPeopleVideoLiveHomeFragment extends
 		RadioButtonChangeFragment {
 
-	protected static final int HOME_CONTENT_ID = R.id.gip_vedio_live_home_fragment;
+	private static final int HOME_CONTENT_ID = R.id.gip_vedio_live_home_fragment;
 
 	// 我来说说按钮
 	private Button home_saybtn = null;

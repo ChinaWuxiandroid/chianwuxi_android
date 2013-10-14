@@ -36,8 +36,8 @@ import com.wuxi.exception.NetException;
  */
 public class GoverMsgInterMailStatisticsFragment extends BaseFragment{
 	
-	protected View view;
-	protected LayoutInflater mInflater;
+	private View view;
+	private LayoutInflater mInflater;
 	private Context context;
 	private static final int LETTERSTATISTICS_LOAD_SUCESS = 1;   //各部门答复率统计
 	private static final int DATA_LOAD_ERROR = 2;
@@ -45,7 +45,7 @@ public class GoverMsgInterMailStatisticsFragment extends BaseFragment{
 	private ListView mListView;// ListView
 	private ProgressBar listview_pb;
 	
-	List<StatisticsLetter> letters;
+	private List<StatisticsLetter> letters;
 	
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -79,7 +79,11 @@ public class GoverMsgInterMailStatisticsFragment extends BaseFragment{
 		return view;
 	}
 
-	public void initView(){
+	/**
+	 * @方法： initView
+	 * @描述： 初始化视图
+	 */
+	private void initView(){
 		mListView = (ListView) view.findViewById(R.id.govermsg_internetstatistics_listview);
 		listview_pb=(ProgressBar)view.findViewById(R.id.govermsg_internetstatistics_progressbar);
 		
@@ -87,7 +91,11 @@ public class GoverMsgInterMailStatisticsFragment extends BaseFragment{
 		loadData();
 	}
 	
-	public void loadData(){
+	/**
+	 * @方法： loadData
+	 * @描述： 加载数据
+	 */
+	private void loadData(){
 		new Thread(new Runnable() {
 
 			@Override
@@ -122,10 +130,22 @@ public class GoverMsgInterMailStatisticsFragment extends BaseFragment{
 				).start();
 	}
 	
-	public void showReplyLettersList(){
+	/**
+	 * @方法： showReplyLettersList
+	 * @描述： 显示回复信件列表
+	 */
+	private void showReplyLettersList(){
 		mListView.setAdapter(new LettersListViewAdapter());
 	}
 	
+	/**
+	 * @类名： LettersListViewAdapter
+	 * @描述： 信件列表适配器
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-10-11 下午5:43:35
+	 * @修改时间： 
+	 * @修改描述：
+	 */
 	public class LettersListViewAdapter extends BaseAdapter{
 
 		@Override

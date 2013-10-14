@@ -57,9 +57,9 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 	private MenuItem parentItem;
 	private List<MenuItem> titleMenuItems;
 	private List<Channel> titleChannels;
-	protected Context context;
+	private Context context;
 	
-	protected GoverMenuItemTitleFragment titleFragment;
+	private GoverMenuItemTitleFragment titleFragment;
 	
 	
 
@@ -73,7 +73,8 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 	private static final int MENUITEM_TITLEDATA__LOAD_SUCESS = 0;
 	private static final int CHANNEL_TITLEDATA__LOAD_SUCESS = 1;
 	private static final int TITLEDATA_LOAD_ERROR = 2;
-	protected static final int RIGHT_CONTENT_ID = R.id.gip_menuitem_content_fragmentlayout;
+	
+	private static final int RIGHT_CONTENT_ID = R.id.gip_menuitem_content_fragmentlayout;
 
 	private ProgressBar titlePb;
 	private GridView Titles_gridView;
@@ -119,7 +120,11 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 		return view;
 	}
 
-	public void initTitleUI() {
+	/**
+	 * @方法： initTitleUI
+	 * @描述： 初始化界面控件
+	 */
+	private void initTitleUI() {
 		titlePb = (ProgressBar) view
 				.findViewById(R.id.gip_menuitem_progressbar);
 		titlePb.setVisibility(View.VISIBLE);
@@ -183,7 +188,7 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 	}
 
 	// 显示普通菜单类型标题条
-	public void showMenuItemTitle(int key) {
+	private void showMenuItemTitle(int key) {
 		checkPoint = 0; // 默认选中第一个
 		Bundle bundle = getArguments();
 		if (bundle != null) {
@@ -244,7 +249,7 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 	}
 
 	// 显示频道菜单类型标题条
-	public void showChannelTitle() {
+	private void showChannelTitle() {
 		checkPoint = 0; // 默认选中第一个
 		Bundle bundle = getArguments();
 		if (bundle != null) {
@@ -281,14 +286,26 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 		bindFragment(fragment);
 	}
 
+	/**
+	 * @方法： bindFragment
+	 * @描述： 绑定碎片视图
+	 * @param fragment
+	 */
 	private void bindFragment(BaseFragment fragment) {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
-
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(RIGHT_CONTENT_ID, fragment);
 		ft.commitAllowingStateLoss();
 	}
 
+	/**
+	 * @类名： GridViewAdaptger
+	 * @描述： 适配器
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-10-11 下午5:12:20
+	 * @修改时间： 
+	 * @修改描述：
+	 */
 	private class GridViewAdaptger extends BaseAdapter {
 
 		@Override
@@ -419,13 +436,22 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 		}
 	};
 
-	public void loadMenuItemListLayout(MenuItem menuItem) {
+	/**
+	 * @方法： loadMenuItemListLayout
+	 * @描述： 加载菜单列表布局
+	 * @param menuItem
+	 */
+	private void loadMenuItemListLayout(MenuItem menuItem) {
 		getMenuItemInitLayoutListener().bindMenuItemLayout(this, menuItem);
 	}
 
-	public void loadChannelContentList(Channel channel) {
+	/**
+	 * @方法： loadChannelContentList
+	 * @描述： 加载频道列表
+	 * @param channel
+	 */
+	private void loadChannelContentList(Channel channel) {
 		GIPChannelContentListFragment gIPContentListFragment = new GIPChannelContentListFragment();
-
 		gIPContentListFragment.setChannel(channel);
 		bindContentLayout(gIPContentListFragment);
 	}

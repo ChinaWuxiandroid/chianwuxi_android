@@ -44,6 +44,7 @@
     </LinearLayout>
 
     <FrameLayout
+        android:id="@+id/gpm_admini_license_framelayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 

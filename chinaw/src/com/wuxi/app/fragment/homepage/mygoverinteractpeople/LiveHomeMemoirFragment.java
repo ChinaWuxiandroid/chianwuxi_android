@@ -44,7 +44,7 @@ import com.wuxi.exception.NetException;
 public class LiveHomeMemoirFragment extends BaseFragment implements
 		OnClickListener, OnScrollListener {
 
-	protected static final String TAG = "LiveHomeMemoirFragment";
+	private static final String TAG = "LiveHomeMemoirFragment";
 
 	private View view = null;
 

@@ -46,7 +46,7 @@ import com.wuxi.exception.NetException;
 public class GoverInterPeoplePublicForumFragment extends BaseFragment implements
 		OnItemClickListener, OnClickListener, OnScrollListener {
 
-	protected static final String TAG = "GoverInterPeoplePublicForumFragment";
+	private static final String TAG = "GoverInterPeoplePublicForumFragment";
 
 	private Context context;
 	private View view;

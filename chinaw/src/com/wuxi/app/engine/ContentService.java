@@ -138,6 +138,7 @@ public class ContentService extends Service {
 		}
 		String url = Constants.Urls.CHANNEL_CONTENT_P_URL.replace("{id}", id)
 				.replace("{start}", start + "").replace("{end}", end + "");
+
 		String resultStr = null;
 		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url, true);// 检查是否有缓存文件
 		if (isHasCacheFile) {
@@ -189,7 +190,8 @@ public class ContentService extends Service {
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
-		String resultStr = httpUtils.executeGetToString(url, 5000);
+		
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
 			JSONObject jresult = jsonObject.getJSONObject("result");

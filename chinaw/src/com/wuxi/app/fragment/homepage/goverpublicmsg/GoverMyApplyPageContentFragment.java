@@ -23,8 +23,8 @@ import com.wuxi.domain.MyApplyPageWrapper.MyApplyPage;
 
 public class GoverMyApplyPageContentFragment extends BaseFragment{
 	
-	protected View view;
-	protected LayoutInflater mInflater;
+	private View view;
+	private LayoutInflater mInflater;
 	private Context context;
 
 	private TextView code_txtView,title_txtView,answerDate_txtView,receiveDate_txtView,ansewerDept_txtView;
@@ -48,7 +48,11 @@ public class GoverMyApplyPageContentFragment extends BaseFragment{
 		return view;
 	}
 
-	public void initView(){
+	/**
+	 * @方法： initView
+	 * @描述： 初始化视图
+	 */
+	private void initView(){
 		code_txtView=(TextView)view.findViewById(R.id.myapplycontent_txtview_code);
 		title_txtView=(TextView)view.findViewById(R.id.myapplycontent_txtview_title);
 		answerDate_txtView=(TextView)view.findViewById(R.id.myapplycontent_txtview_answerdate);
@@ -82,7 +86,11 @@ public class GoverMyApplyPageContentFragment extends BaseFragment{
 		
 	}
 	
-	public void onRemove(){
+	/**
+	 * @方法： onRemove
+	 * @描述： 移除视图
+	 */
+	private void onRemove(){
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.remove(this);

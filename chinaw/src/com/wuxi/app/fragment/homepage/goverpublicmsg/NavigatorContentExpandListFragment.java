@@ -40,13 +40,7 @@ import com.wuxi.exception.NetException;
 
 public class NavigatorContentExpandListFragment extends BaseFragment implements
 		OnItemClickListener {
-	@Override
-	public void onHiddenChanged(boolean hidden) {
-
-		super.onHiddenChanged(hidden);
-		processBar.setVisibility(View.INVISIBLE);
-	}
-
+	
 	private View view;
 	private LayoutInflater mInflater;
 	private MenuItem parentItem;
@@ -55,14 +49,24 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	private ListView listview;
 	private ProgressBar processBar;
 
-	protected List<MenuItem> menuItems;
-	protected List<Channel> channels;
+	private List<MenuItem> menuItems;
+	private List<Channel> channels;
 
 	private static final int MENUITEM_DATA_LOAD_SUCESS = 0;
 	private static final int CHANNEL_DATA_LOAD_SUCESS = 1;
 	private static final int DATA_LOAD_ERROR = 2;
 	private static final int LOAD_CHANNEL_DATA = 3;
-	protected static final int CHANNELCONTENT_ID = R.id.govermsg_custom_content;
+	
+	private static final int CHANNELCONTENT_ID = R.id.govermsg_custom_content;
+	
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+
+		super.onHiddenChanged(hidden);
+		processBar.setVisibility(View.INVISIBLE);
+	}
+
+	
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -220,7 +224,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		}).start();
 	}
 
-	public void showChannelData() {
+	private void showChannelData() {
 		// 没有子频道列表
 		GoverMsgCustomContentDetailFragment goverMsgCustomContentDetailFragment = new GoverMsgCustomContentDetailFragment();
 
@@ -335,12 +339,10 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		}
 	}
 
-	public void bindFragment(BaseFragment fragment) {
+	private void bindFragment(BaseFragment fragment) {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
-
 		ft.replace(CHANNELCONTENT_ID, fragment);
-
 		ft.commitAllowingStateLoss();
 	}
 }

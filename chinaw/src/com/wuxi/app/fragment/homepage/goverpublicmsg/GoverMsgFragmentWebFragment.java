@@ -42,6 +42,10 @@ public class GoverMsgFragmentWebFragment extends BaseFragment{
 		return view;
 	}
 
+	/**
+	 * @方法： initUI
+	 * @描述： 初始化视图
+	 */
 	@SuppressLint("SetJavaScriptEnabled")
 	private void initUI() {
 		System.out.println("init ");

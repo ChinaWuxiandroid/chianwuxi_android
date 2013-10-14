@@ -106,6 +106,14 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment {
 		adapter.setContents(myApplyPageWrapper.getData());
 	}
 
+	/**
+	 * @类名： MyApplyPageAdapter
+	 * @描述： 适配器
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-10-11 下午5:44:02
+	 * @修改时间： 
+	 * @修改描述：
+	 */
 	public class MyApplyPageAdapter extends BaseAdapter {
 
 		private List<MyApplyPage> contents;
@@ -181,7 +189,12 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment {
 		}
 	}
 
-	public void bindFragment(BaseFragment fragment) {
+	/**
+	 * @方法： bindFragment
+	 * @描述： 绑定视图
+	 * @param fragment
+	 */
+	private void bindFragment(BaseFragment fragment) {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 

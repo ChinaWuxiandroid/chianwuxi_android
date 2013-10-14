@@ -18,16 +18,16 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
-            android:layout_weight="1.5" 
-            android:background="@drawable/spiner_bg"/>
+            android:layout_weight="1.5"
+            android:background="@drawable/spiner_bg" />
 
         <Spinner
             android:id="@+id/govermsg_search_spinner_year"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
-            android:layout_weight="1" 
-            android:background="@drawable/spiner_bg"/>
+            android:layout_weight="1"
+            android:background="@drawable/spiner_bg" />
 
         <Button
             android:id="@+id/govermsg_search_button_search"
@@ -35,9 +35,11 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:textSize="15sp"
+            android:background="@drawable/forum_submitbtn_bg"
             android:gravity="center"
-            android:text="检  索" />
+            android:text="检索"
+            android:textColor="#ff095ce1"
+            android:textSize="15sp" />
     </LinearLayout>
 
     <FrameLayout

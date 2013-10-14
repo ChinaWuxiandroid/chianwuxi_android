@@ -12,11 +12,6 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 
 public class GIPMineSuggestionPlatformFragment extends RadioButtonChangeFragment{
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
-	
 	private final  int[] radioButtonIds={
 			R.id.gip_mine_suggestion_radioButton_internetsurvy,
 			R.id.gip_mine_suggestion_radioButton_peoplewill,

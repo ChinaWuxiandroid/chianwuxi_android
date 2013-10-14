@@ -43,7 +43,7 @@ import com.wuxi.exception.NetException;
  */
 public class PartLeaderBoxListFragment extends BaseFragment {
 
-	protected static final String TAG = "PartLeaderMailListFragment";
+	private static final String TAG = "PartLeaderMailListFragment";
 	
 	private static final int HIDEN_CONTENT_ID = R.id.gip_12345_leaderbox_fragment;
 
@@ -107,7 +107,7 @@ public class PartLeaderBoxListFragment extends BaseFragment {
 	/**
 	 * 加载数据
 	 */
-	public void loadData() {
+	private void loadData() {
 		new Thread(new Runnable() {
 
 			@Override
@@ -145,7 +145,7 @@ public class PartLeaderBoxListFragment extends BaseFragment {
 	/**
 	 * 显示列表
 	 */
-	public void showLettersList() {
+	private void showLettersList() {
 		PortLeaderListAdapter adapter = new PortLeaderListAdapter();
 		if (leaderMails == null || leaderMails.size() == 0) {
 			Toast.makeText(context, "对不起，暂无信息", Toast.LENGTH_SHORT).show();

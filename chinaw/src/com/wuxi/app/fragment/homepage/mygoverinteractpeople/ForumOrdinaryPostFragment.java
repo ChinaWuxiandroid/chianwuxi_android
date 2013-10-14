@@ -83,7 +83,7 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 
 	private LinearLayout questionnaire_question_layout = null;
 	private ScrollView questionnaire__scrollview = null;
-	
+
 	private Forum forum;
 
 	private OrdinaryPostWrapper postWrapper = null;
@@ -197,9 +197,6 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 		post_summary_text = (TextView) view
 				.findViewById(R.id.post_summary_text);
 
-		
-		
-		
 		loadData();
 
 	}
@@ -294,17 +291,17 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 		}
 		// 问卷调查类帖子数据显示
 		else if (forum.getViewpath().equals("/SurveryContent")) {
-		
+
 			content_text.setText("该页面还无法显示");
-//			post_scrollview.setVisibility(View.GONE);
+			// post_scrollview.setVisibility(View.GONE);
 
 			sentpepole_text.setText(questionnairePostWrapper.getAuthor());
 			begintime_text.setVisibility(View.GONE);
 			endtime_text.setVisibility(View.GONE);
-			
+
 			post_bengintime.setVisibility(View.GONE);
 			post_endtime.setVisibility(View.GONE);
-			
+
 			readnum_text.setText(questionnairePostWrapper.getReadCount());
 			replynum_text.setText(String.valueOf(questionnaireAnswerWrapper
 					.getTotalRowsAmount()));
@@ -313,35 +310,43 @@ public class ForumOrdinaryPostFragment extends BaseFragment {
 			post_summary_text.setText("\u3000\u3000"
 					+ questionnairePostWrapper.getSummary());
 
-			questionnaire__scrollview = (ScrollView) view.findViewById(R.id.questionnaire__scrollview);
+			questionnaire__scrollview = (ScrollView) view
+					.findViewById(R.id.questionnaire__scrollview);
 			questionnaire__scrollview.setVisibility(View.GONE);
-			questionnaire_question_layout = (LinearLayout) view.findViewById(R.id.questionnaire_question_layout);
-			
-			questionnaireQuestionWrappers = questionnairePostWrapper.getQuestionnaireQuestionWrappers();
-//			for (QuestionnaireQuestionWrapper wrapper:questionnaireQuestionWrappers) {
-//				LinearLayout subLayout = null;
-//				if (wrapper.getQuestionType().equals("RADIO")) {
-//					subLayout = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.forum_post_list_layout, null).findViewById(R.id.forum_post_linearlayout);
-//					TextView textView = (TextView) subLayout.getChildAt(0);
-//					LinearLayout linearLayout = (LinearLayout) subLayout.getChildAt(1);
-//					
-//					textView.setText(wrapper.getDescription());
-//					
-//					RadioGroup radioGroup = new RadioGroup(context);
-//								
-//					questionnaireQuestions= wrapper.getQuestionnaireQuestions();
-//					
-//					for (int i = 0; i < Integer.valueOf(wrapper.getOptionCount()); i++) {
-//						RadioButton radioButton = new RadioButton(context);
-//						radioButton.setText("AAAAA");
-//						radioButton.setTextSize(10);
-//						radioGroup.addView(radioButton);
-//					}
-//					linearLayout.addView(radioGroup);
-//					questionnaire_question_layout.addView(subLayout);
-//				}
-//			}
-			
+			questionnaire_question_layout = (LinearLayout) view
+					.findViewById(R.id.questionnaire_question_layout);
+
+			questionnaireQuestionWrappers = questionnairePostWrapper
+					.getQuestionnaireQuestionWrappers();
+			// for (QuestionnaireQuestionWrapper
+			// wrapper:questionnaireQuestionWrappers) {
+			// LinearLayout subLayout = null;
+			// if (wrapper.getQuestionType().equals("RADIO")) {
+			// subLayout = (LinearLayout)
+			// LayoutInflater.from(context).inflate(R.layout.forum_post_list_layout,
+			// null).findViewById(R.id.forum_post_linearlayout);
+			// TextView textView = (TextView) subLayout.getChildAt(0);
+			// LinearLayout linearLayout = (LinearLayout)
+			// subLayout.getChildAt(1);
+			//
+			// textView.setText(wrapper.getDescription());
+			//
+			// RadioGroup radioGroup = new RadioGroup(context);
+			//
+			// questionnaireQuestions= wrapper.getQuestionnaireQuestions();
+			//
+			// for (int i = 0; i < Integer.valueOf(wrapper.getOptionCount());
+			// i++) {
+			// RadioButton radioButton = new RadioButton(context);
+			// radioButton.setText("AAAAA");
+			// radioButton.setTextSize(10);
+			// radioGroup.addView(radioButton);
+			// }
+			// linearLayout.addView(radioGroup);
+			// questionnaire_question_layout.addView(subLayout);
+			// }
+			// }
+
 		}
 	}
 

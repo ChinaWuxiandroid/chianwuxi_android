@@ -14,12 +14,6 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 
 public class GIPMinePublicForumFragment extends RadioButtonChangeFragment{
 
-	/**
-	 * @字段： serialVersionUID
-	 * @类型： long
-	 * @描述： 序列化序号 
-	 */
-	private static final long serialVersionUID = 1L;
 	private final  int[] radioButtonIds={
 			R.id.gip_mine_publicforum_radioButton_myTheme,
 			R.id.gip_mine_publicforum_radioButton_themeTJoin,

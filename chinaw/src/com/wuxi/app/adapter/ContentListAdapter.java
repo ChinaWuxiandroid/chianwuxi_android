@@ -79,7 +79,7 @@ public class ContentListAdapter extends BaseAdapter {
 		}
 
 		String title = "";
-		title = "." + content.getTitle();
+		title = "·" + content.getTitle();
 		String time = "("
 				+ TimeFormateUtil.formateTime(content.getPublishTime(),
 						TimeFormateUtil.DATE_PATTERN) + ")";
