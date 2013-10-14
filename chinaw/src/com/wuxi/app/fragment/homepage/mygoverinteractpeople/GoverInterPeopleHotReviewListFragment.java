@@ -72,7 +72,7 @@ public class GoverInterPeopleHotReviewListFragment extends BaseFragment
 
 	private HotReviewListAdapter adapter;
 
-	private static final int DATA__LOAD_SUCESS = 0;
+	private static final int DATA_LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
 
 	private int startIndex = 0; // 获取话题的起始坐标
@@ -104,7 +104,7 @@ public class GoverInterPeopleHotReviewListFragment extends BaseFragment
 			}
 
 			switch (msg.what) {
-			case DATA__LOAD_SUCESS:
+			case DATA_LOAD_SUCESS:
 				showHotReviews();
 				break;
 			case DATA_LOAD_ERROR:
@@ -188,7 +188,7 @@ public class GoverInterPeopleHotReviewListFragment extends BaseFragment
 							Constants.Urls.HOTREVIEW_LIST_URL, type,
 							startIndex, endIndex);
 					if (null != hotReviewWrapper) {
-						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
+						handler.sendEmptyMessage(DATA_LOAD_SUCESS);
 					} else {
 						message.obj = "error";
 						handler.sendEmptyMessage(DATA_LOAD_ERROR);

@@ -56,16 +56,10 @@
             android:background="@drawable/iwantwritemail_ibtn_bk" />
     </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/goverinterpeople_mine_12345_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-
-        <ListView
-            android:id="@+id/goverinterpeople_mine_12345_listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" 
-            android:cacheColorHint="@android:color/transparent">
-        </ListView>
-    </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

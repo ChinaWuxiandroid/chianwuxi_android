@@ -28,17 +28,6 @@ public class PoliticsService extends Service {
 	}
 
 	/**
-	 * 获取当前用户参与的立法征求或民意征集
-	 * */
-	public PoliticsWrapper getMyPoliticsWrapper(String url, String accessToken,
-			int type, int startIndex, int endIndex) throws NetException,
-			JSONException, NODataException {
-		url = url + "?access_token=" + accessToken + "&type=" + type
-				+ "&start=" + startIndex + "&end=" + endIndex;
-		return getPoliticsWrapper(url);
-	}
-
-	/**
 	 * 
 	 * 杨宸 智佳
 	 * 
@@ -64,7 +53,7 @@ public class PoliticsService extends Service {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 
-		String resultStr = httpUtils.executeGetToString(url, 5000);
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
