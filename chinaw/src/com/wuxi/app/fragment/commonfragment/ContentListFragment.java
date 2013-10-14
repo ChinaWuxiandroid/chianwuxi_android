@@ -125,7 +125,10 @@ public abstract class ContentListFragment extends BaseFragment implements
 			loadMoreButton.setText("点击加载更多");
 
 		} else {
-			content_list_lv.removeFooterView(loadMoreView);
+			if(adapter!=null){
+				content_list_lv.removeFooterView(loadMoreView);
+			}
+			
 		}
 
 	}
