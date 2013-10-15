@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/mine_sug_sur_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5sp"
+        android:textSize="15sp"
+        android:text="测试" />
+
+    <TextView
+        android:id="@+id/mine_sug_sur_begintime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/mine_sug_sur_title"
+        android:layout_below="@+id/mine_sug_sur_title"
+        android:layout_marginTop="5dp"
+        android:textSize="12sp"
+        android:textColor="#808080"
+        android:text="测试" />
+
+    <TextView
+        android:id="@+id/mine_sug_sur_endtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/mine_sug_sur_begintime"
+        android:layout_toRightOf="@+id/mine_sug_sur_begintime"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5sp"
+        android:textSize="12sp"
+        android:textColor="#808080"
+        android:text="测试" />
+
+    <TextView
+        android:id="@+id/mine_sug_sur_replydept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/mine_sug_sur_begintime"
+        android:layout_below="@+id/mine_sug_sur_begintime"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5sp"
+        android:layout_marginBottom="5sp"
+        android:textSize="12sp"
+        android:textColor="#808080"
+        android:text="测试" />
+
+</RelativeLayout>

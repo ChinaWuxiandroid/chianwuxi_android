@@ -76,7 +76,7 @@ public class GIP12345AllMailContentActivity extends BaseItemContentActivity {
 	private PopWindowManager popWindowManager = null;
 
 	// 数据加载成功标志
-	private static final int DATA__LOAD_SUCESS = 0;
+	private static final int DATA_LOAD_SUCESS = 0;
 	// 数据加载失败标志
 	private static final int DATA_LOAD_ERROR = 1;
 
@@ -94,7 +94,7 @@ public class GIP12345AllMailContentActivity extends BaseItemContentActivity {
 			}
 
 			switch (msg.what) {
-			case DATA__LOAD_SUCESS:
+			case DATA_LOAD_SUCESS:
 				progressBar.setVisibility(View.GONE);
 				layout.setVisibility(View.VISIBLE);
 				commentBtn.setVisibility(View.VISIBLE);
@@ -269,7 +269,7 @@ public class GIP12345AllMailContentActivity extends BaseItemContentActivity {
 				try {
 					wrapper = service.getGipMailInfoWrapper(letter.getId());
 					if (wrapper != null) {
-						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
+						handler.sendEmptyMessage(DATA_LOAD_SUCESS);
 					} else {
 						Message message = handler.obtainMessage();
 						message.obj = "error";

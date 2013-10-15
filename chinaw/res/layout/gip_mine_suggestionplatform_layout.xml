@@ -22,12 +22,12 @@
                 style="@style/goverinterpeople_mine_radiobutton_style"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_weight="1.2"
+                android:layout_weight="1"
                 android:background="@drawable/gip_button_selected_bk"
                 android:checked="true"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="我参与的              网上调查"
+                android:text="我参与的\n网上调查"
                 android:textColor="@android:color/white"
                 android:textSize="12sp" />
 
@@ -39,7 +39,7 @@
                 android:layout_weight="1"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="我参与的      民意征集"
+                android:text="我参与的\n民意征集"
                 android:textColor="@color/gip_second_frame_button_brown"
                 android:textSize="12sp" />
 
@@ -51,22 +51,16 @@
                 android:layout_weight="1"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="我参与的立法征求意见"
+                android:text="我参与的立\n法征求意见"
                 android:textColor="@color/gip_second_frame_button_brown"
                 android:textSize="12sp" />
         </RadioGroup>
     </LinearLayout>
-
-    <LinearLayout
+    
+    <FrameLayout
+        android:id="@+id/gip_mine_suggestion_fragment"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent" >
-
-        <ListView
-            android:id="@+id/goverinterpeople_mine_12345_listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:cacheColorHint="@android:color/transparent" >
-        </ListView>
-    </LinearLayout>
+        android:layout_height="match_parent" >
+    </FrameLayout>
 
 </LinearLayout>

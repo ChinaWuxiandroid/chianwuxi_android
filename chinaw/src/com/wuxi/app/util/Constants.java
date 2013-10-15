@@ -21,7 +21,7 @@ public class Constants {
 		/**
 		 * 域名地址
 		 */
-		public static final String DOMAIN_URL = "http://m.wuxi.gov.cn";
+		public static final String DOMAIN_URL = "http://3g.wuxi.gov.cn";
 
 		/**
 		 * 根地址
@@ -169,6 +169,12 @@ public class Constants {
 		 * */
 		public static final String POLITICS_LIST_URL = BASIC_URL
 				+ "/politics/list.json";
+
+		/**
+		 * 获取 我的征求意见平台信息 URL
+		 */
+		public static final String POLITICS_MY_LIST_URL = BASIC_URL
+				+ "/politics/mylist.json";
 
 		/**
 		 * 获取当前用户 立法征求意见和民意征集 URL
@@ -538,7 +544,8 @@ public class Constants {
 		/**
 		 * 内容列表缓存文件夹
 		 */
-		public static final String CAHCE_FILE_CONTENT_PATH=CACHE_FILE_PATH+"content/";
+		public static final String CAHCE_FILE_CONTENT_PATH = CACHE_FILE_PATH
+				+ "content/";
 
 		/**
 		 * 政府信息公开中 依申请公开 唯一表格 文件名（服务器端未提供字段）
@@ -554,8 +561,6 @@ public class Constants {
 	 */
 	public static final class CheckPositionKey {
 
-		
-		
 		/**
 		 * 一级菜单只首页的6个大大模块的菜单 一级子菜单选中的key值 如：魅力锡城，头部一排菜单，政务大厅，左侧菜单都属于一级子菜单
 		 */
@@ -565,8 +570,6 @@ public class Constants {
 		 * 二级子菜单选中的key值 如：魅力锡城左侧的竖排菜单为二级子菜单
 		 */
 		public static final String LEVEL_THREE_KEY = "LEVEL_THREE_KEY";
-
-	
 
 		/**
 		 * 政民互动我要写信功能

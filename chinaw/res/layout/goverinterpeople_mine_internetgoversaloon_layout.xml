@@ -22,7 +22,7 @@
                 style="@style/goverinterpeople_mine_radiobutton_style"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_weight="1.2"
+                android:layout_weight="1"
                 android:background="@drawable/gip_button_selected_bk"
                 android:checked="true"
                 android:paddingLeft="5dp"

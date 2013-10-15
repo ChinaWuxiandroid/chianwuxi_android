@@ -131,7 +131,7 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements
 
 	/**
 	 * @方法： initLayout
-	 * @描述： TODO
+	 * @描述： 初始化布局控件
 	 * @param view
 	 */
 	private void initLayout() {
@@ -250,6 +250,7 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements
 		if (politicss == null || politicss.size() == 0) {
 			Toast.makeText(context, "对不起，暂无立法征求意见信息", Toast.LENGTH_SHORT)
 					.show();
+			list_pb.setVisibility(View.GONE);
 		} else {
 			if (isFirstLoad) {
 				adapter = new SuggestLawSuggestionAdapter(context, politicss);
