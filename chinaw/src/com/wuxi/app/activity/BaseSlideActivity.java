@@ -27,6 +27,7 @@ import com.wuxi.app.activity.homepage.logorregister.LoginActivity;
 import com.wuxi.app.activity.homepage.logorregister.RegisterActivity;
 import com.wuxi.app.activity.homepage.more.MenuItemSetActivity;
 import com.wuxi.app.activity.homepage.more.SystemSetActivity;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity;
 import com.wuxi.app.adapter.LeftMenuAdapter;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
@@ -123,7 +124,8 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 	 */
 	protected void findMainTitleViews() {
 
-		opearn_btn = (ImageView) mainView.findViewById(R.id.open_close_left_btn);
+		opearn_btn = (ImageView) mainView
+				.findViewById(R.id.open_close_left_btn);
 		member_btnm = (ImageView) mainView.findViewById(R.id.member_btn);
 		title_text = (TextView) mainView.findViewById(R.id.Title_Text);
 		back_btn = (ImageView) mainView.findViewById(R.id.back_btn);
@@ -227,8 +229,9 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 		leftMenuItems = (List<MenuItem>) CacheUtil.get(MENUITEM_CACKE_KEY);// 直接从缓存中取出菜单
 
 		leftMenuAdapter = new LeftMenuAdapter(this,
-			R.layout.slide_navigator_item, new int[] { R.id.tv_left_menu_name,
-					R.id.left_iv_icon }, leftMenuItems, null, leftSelectPostion);
+				R.layout.slide_navigator_item, new int[] {
+						R.id.tv_left_menu_name, R.id.left_iv_icon },
+				leftMenuItems, null, leftSelectPostion);
 		mlvMenu.setAdapter(leftMenuAdapter);
 	}
 
@@ -281,7 +284,8 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 		}
 		if (position == this.leftSelectPostion)
 			return;
-		MenuItem checkMenuItem = (MenuItem) adapterView.getItemAtPosition(position);
+		MenuItem checkMenuItem = (MenuItem) adapterView
+				.getItemAtPosition(position);
 		closeSlideMenu();
 		switchActivity(checkMenuItem, position);
 
@@ -301,8 +305,8 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 		if (acClass != null) {
 			intent = new Intent(BaseSlideActivity.this, acClass);
 
-			intent.putExtra(
-				BaseSlideActivity.SELECT_MENU_POSITION_KEY, position);
+			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY,
+					position);
 
 			MainTabActivity.instance.addView(intent);
 		}
@@ -327,7 +331,7 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 			break;
 		case R.id.right_menu_rb_collect:// 我的收藏
 			intent = new Intent(BaseSlideActivity.this,
-				MenuItemSetActivity.class);
+					MenuItemSetActivity.class);
 
 			break;
 		case R.id.right_menu_rb_mzhd:// 我的政民互动
@@ -337,7 +341,7 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 				intent = new Intent(BaseSlideActivity.this, LoginActivity.class);
 
 			} else {
-
+				intent = new Intent(BaseSlideActivity.this, MainMineActivity.class);
 			}
 
 			break;

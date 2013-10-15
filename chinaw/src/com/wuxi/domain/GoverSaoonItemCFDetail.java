@@ -80,9 +80,10 @@ public class GoverSaoonItemCFDetail {
 		this.ssztxz = ssztxz;
 	}
 	public String getWtjg() {
-		if(wtjg!=null&&wtjg.equals("")){
+		if(wtjg!=null&&wtjg.equals("null")){
 			return "";
 		}else{
+			
 			return wtjg;
 		}
 		

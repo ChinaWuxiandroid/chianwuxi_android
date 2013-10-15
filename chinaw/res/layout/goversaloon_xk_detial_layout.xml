@@ -419,7 +419,7 @@
                                 android:background="@drawable/goversall_content_radiobutton__selector"
                                 android:button="@null"
                                 android:padding="8dip"
-                                android:text="申请才材料"
+                                android:text="申请材料"
                                 android:textSize="12sp" />
 
                             <RadioButton

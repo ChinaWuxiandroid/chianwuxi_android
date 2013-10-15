@@ -71,7 +71,7 @@
             android:drawableLeft="@drawable/login_my_mzhd_icon"
             android:drawablePadding="10dip"
             android:padding="10dip"
-            android:text="我的民政互动" />
+            android:text="我的政民互动" />
 
         <View
             android:layout_width="fill_parent"
