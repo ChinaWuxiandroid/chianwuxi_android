@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.wuxi.app.activity.MainIndexActivity;
@@ -56,7 +57,7 @@ public class MainTabActivity extends ActivityGroup implements
 	private LinearLayout main_tab;
 	private InitService initService;
 
-	private FrameLayout llMain;
+	private RelativeLayout llMain;
 
 	private RadioButton main_tab_index, main_tab_search, main_tab_login_reg,
 			main_tab_mine, main_tab_more;
@@ -100,7 +101,7 @@ public class MainTabActivity extends ActivityGroup implements
 
 		setContentView(R.layout.main_tab_layout);
 		main_tab = (LinearLayout) findViewById(R.id.main_tab);
-		llMain = (FrameLayout) findViewById(R.id.main_content);
+		llMain = (RelativeLayout) findViewById(R.id.main_content);
 		radioGroup = (RadioGroup) findViewById(R.id.main_tab_radiogroup);
 		radioGroup.setOnCheckedChangeListener(this);
 

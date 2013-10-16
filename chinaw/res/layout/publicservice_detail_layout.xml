@@ -107,11 +107,21 @@
         android:layout_below="@+id/publicservice_level3"
         android:background="@android:color/white" />
 
-    <FrameLayout
+     <com.wuxi.app.view.ContentListView
+        android:layout_below="@+id/dev_v_3"
+        android:id="@+id/publicservice_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@android:color/white"
+        android:dividerHeight="1dip"
+        >
+    </com.wuxi.app.view.ContentListView>
+   <!--  <FrameLayout
         android:id="@+id/publicservice_contentlist"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/dev_v_3" >
-    </FrameLayout>
+    </FrameLayout> -->
 
 </RelativeLayout>

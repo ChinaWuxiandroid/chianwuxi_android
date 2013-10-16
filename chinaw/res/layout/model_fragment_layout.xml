@@ -12,7 +12,7 @@
         android:background="#CEDBE7"
         android:layout_alignParentTop="true" />
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_below="@+id/title_scroll"
         android:id="@+id/model_main"
         android:layout_width="match_parent"
