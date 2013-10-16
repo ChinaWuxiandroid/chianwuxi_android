@@ -63,8 +63,8 @@ public class GoverSaoonItemXKDetail {
 	}
 
 	public String getWtjg() {
-		if(wtjg.equals("null")){
-			return "";
+		if((wtjg.trim().equals("null"))||wtjg==null){
+			return "空";
 		}else{
 			return wtjg;	
 		}
@@ -105,7 +105,12 @@ public class GoverSaoonItemXKDetail {
 	}
 
 	public String getSfbz() {
-		return sfbz;
+		if(sfbz.trim().equals("null")){
+			return "空";
+		}else{
+			return sfbz;
+		}
+		
 	}
 
 	public void setSfbz(String sfbz) {

@@ -21,7 +21,7 @@ public class Constants {
 		/**
 		 * 域名地址
 		 */
-		public static final String DOMAIN_URL = "http://3g.wuxi.gov.cn";
+		public static final String DOMAIN_URL = "http://m.wuxi.gov.cn";
 
 		/**
 		 * 根地址

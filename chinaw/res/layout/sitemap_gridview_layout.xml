@@ -7,10 +7,10 @@
         android:id="@+id/sitemap_gv_menuitem"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:columnWidth="60dip"
+        android:columnWidth="80dip"
         android:gravity="center"
         android:horizontalSpacing="2dip"
-        android:numColumns="5"
+        android:numColumns="4"
         android:stretchMode="spacingWidth"
         android:verticalSpacing="5dip" >
     </com.wuxi.app.view.MyGridView>

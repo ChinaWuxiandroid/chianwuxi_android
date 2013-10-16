@@ -92,7 +92,7 @@ public class GoverMsgWebFragment extends BaseFragment implements
 			 */
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				
+
 				Intent intent = new Intent(context,
 						GoverMsgContentDetailWebActivity.class);
 				intent.putExtra("url", url);

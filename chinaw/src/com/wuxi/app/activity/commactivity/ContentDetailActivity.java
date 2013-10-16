@@ -35,7 +35,7 @@ public abstract class ContentDetailActivity extends BaseItemContentActivity {
 
 	private TextView tvbrowcount;// 浏览次数
 
-	private TextView content_author;// 作者
+	
 
 	protected Channel channel;
 
@@ -64,7 +64,7 @@ public abstract class ContentDetailActivity extends BaseItemContentActivity {
 		decontent_wb = (WebView) view.findViewById(R.id.decontent_wb);// 加载数据的webView
 		decontent_tvtime = (TextView) view.findViewById(R.id.decontent_tvtime);// 时间
 		tvbrowcount = (TextView) view.findViewById(R.id.tvbrowcount);// 浏览次数
-		content_author = (TextView) view.findViewById(R.id.content_author);
+	
 
 		content = (Content) bunel.get(CONTENT_KEY);
 
@@ -86,7 +86,7 @@ public abstract class ContentDetailActivity extends BaseItemContentActivity {
 		decontent_tvtime.setText("时间:"
 				+ TimeFormateUtil.formateTime(
 					time, TimeFormateUtil.DATE_PATTERN));// 时间
-		content_author.setText("作者:" + content.getOrganization());// 发布机构
+		//content_author.setText("作者:" + content.getOrganization());// 发布机构
 		tvbrowcount.setText("浏览次数:" + browCount);// 浏览次数
 
 		decontent_wb.getSettings().setJavaScriptEnabled(true);
