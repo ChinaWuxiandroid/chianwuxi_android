@@ -75,6 +75,7 @@
         <activity android:name="com.wuxi.app.activity.homepage.informationcenter.InformationCenterActivity" />
         <activity android:name="com.wuxi.app.activity.homepage.informationcenter.HotTopicContentActivity" />
         <activity android:name="com.wuxi.app.activity.homepage.informationcenter.InfoCenterContentDetailActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.informationcenter.InfoWebActivity" />
         <!-- 魅力锡城 -->
         <activity android:name="com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity" />
         <activity android:name="com.wuxi.app.activity.homepage.fantasticwuxi.WuxiChannelContentDetailActivity" />
