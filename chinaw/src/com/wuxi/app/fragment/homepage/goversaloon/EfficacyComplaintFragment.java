@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,7 +75,7 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 	private int visibleLastIndex;
 	private int visibleItemCount;// 当前显示的总条数
 	private EfficacyComplaintAdapter efficacyComplaintAdapter;
-	private LinearLayout ll_mail;
+	private RelativeLayout ll_mail;
 	private EditText et_letter_keyword, et_startTime, et_endtime, et_letter_no;
 	private Spinner sp_contenttype, sp_lettertype;
 	private CheckBox nomal_question;
@@ -148,8 +149,10 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 			}
 
 		} else {
-
-			gover_eff_lv.removeFooterView(loadMoreView);
+			if(efficacyComplaintAdapter!=null){
+				gover_eff_lv.removeFooterView(loadMoreView);
+			}
+			
 		}
 
 	}
@@ -285,7 +288,7 @@ public class EfficacyComplaintFragment extends GoverSaloonContentFragment
 		gover_eff_lv.addFooterView(getFootView());
 		gover_eff_lv.setOnScrollListener(this);
 		gover_eff_pb = (ProgressBar) view.findViewById(R.id.gover_eff_pb);
-		ll_mail = (LinearLayout) view.findViewById(R.id.ll_mail);
+		ll_mail = (RelativeLayout) view.findViewById(R.id.ll_mail);
 		gover_eff_btn_mail_search.setOnClickListener(this);
 
 		et_letter_keyword = (EditText) view
