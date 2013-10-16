@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/channel_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/content_background" >
+
+    <ProgressBar
+        android:id="@+id/pb_publicserivce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <ListView
+        android:id="@+id/publicservice_lv_channel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@android:color/white"
+        android:dividerHeight="1dip" >
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:padding="5dip"
+        android:visibility="gone" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/publicserice_channel_lv_na" />
+
+        <TextView
+            android:id="@+id/public_detial_tv_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="3dip"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_level1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/ll_title"
+        android:background="@android:color/white"
+        android:visibility="gone" />
+
+    <HorizontalScrollView
+        android:id="@+id/publicservice_level1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_level1"
+        android:scrollbars="none"
+        android:visibility="gone" >
+
+        <RadioGroup
+            android:id="@+id/publicserivce_rb_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dip" >
+        </RadioGroup>
+    </HorizontalScrollView>
+
+    <View
+        android:id="@+id/dev_v_1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/publicservice_level1"
+        android:background="@android:color/white"
+        android:visibility="gone" />
+
+    <HorizontalScrollView
+        android:id="@+id/publicservice_level2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dev_v_1"
+        android:scrollbars="none"
+        android:visibility="gone" >
+
+        <RadioGroup
+            android:id="@+id/publicserivce_rb_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dip" >
+        </RadioGroup>
+    </HorizontalScrollView>
+
+    <View
+        android:id="@+id/dev_v_2"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/publicservice_level2"
+        android:background="@android:color/white"
+        android:visibility="gone" />
+
+    <HorizontalScrollView
+        android:id="@+id/publicservice_level3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dev_v_2"
+        android:orientation="horizontal"
+        android:scrollbars="none"
+        android:visibility="gone" >
+
+        <RadioGroup
+            android:id="@+id/publicserivce_rb_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dip" >
+        </RadioGroup>
+    </HorizontalScrollView>
+
+    <View
+        android:id="@+id/dev_v_3"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/publicservice_level3"
+        android:background="@android:color/white"
+        android:visibility="gone" />
+
+    <com.wuxi.app.view.ContentListView
+        android:id="@+id/publicservice_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/dev_v_3"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@android:color/white"
+        android:dividerHeight="1dip"
+         android:visibility="gone" >
+    </com.wuxi.app.view.ContentListView>
+
+</RelativeLayout>
