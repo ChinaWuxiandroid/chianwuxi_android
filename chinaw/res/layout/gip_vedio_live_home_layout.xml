@@ -7,48 +7,42 @@
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="1dp"
+        android:layout_marginBottom="3dp"
         android:background="#ffffff" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="5sp" >
+    <RadioGroup
+        android:id="@+id/gip_vedio_live_home_radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="35sp"
+        android:layout_marginBottom="3dp"
+        android:orientation="horizontal" >
 
-        <RadioGroup
-            android:id="@+id/gip_vedio_live_home_radioGroup"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="2"
-            android:orientation="horizontal" >
+        <RadioButton
+            android:id="@+id/gip_video_live_home_radioBtn_vediolive"
+            style="@style/goverinterpeople_mine_radiobutton_style"
+            android:layout_weight="1"
+            android:background="@drawable/gip_button_selected_bk"
+            android:checked="true"
+            android:text="节目预告"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
 
-            <RadioButton
-                android:id="@+id/gip_video_live_home_radioBtn_vediolive"
-                style="@style/goverinterpeople_mine_radiobutton_style"
-                android:layout_weight="1"
-                android:background="@drawable/gip_button_selected_bk"
-                android:checked="true"
-                android:text="节目预告"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
+        <RadioButton
+            android:id="@+id/gip_video_live_home_radioBtn_memoir"
+            style="@style/goverinterpeople_mine_radiobutton_style"
+            android:layout_weight="1"
+            android:text="访谈实录"
+            android:textColor="@color/gip_second_frame_button_brown"
+            android:textSize="12sp" />
 
-            <RadioButton
-                android:id="@+id/gip_video_live_home_radioBtn_memoir"
-                style="@style/goverinterpeople_mine_radiobutton_style"
-                android:layout_weight="1"
-                android:text="访谈实录"
-                android:textColor="@color/gip_second_frame_button_brown"
-                android:textSize="12sp" />
-
-            <RadioButton
-                android:id="@+id/gip_video_live_home_radioBtn_message"
-                style="@style/goverinterpeople_mine_radiobutton_style"
-                android:layout_weight="1"
-                android:text="留言提问"
-                android:textColor="@color/gip_second_frame_button_brown"
-                android:textSize="12sp" />
-        </RadioGroup>
-    </LinearLayout>
+        <RadioButton
+            android:id="@+id/gip_video_live_home_radioBtn_message"
+            style="@style/goverinterpeople_mine_radiobutton_style"
+            android:layout_weight="1"
+            android:text="留言提问"
+            android:textColor="@color/gip_second_frame_button_brown"
+            android:textSize="12sp" />
+    </RadioGroup>
 
     <ImageView
         android:layout_width="fill_parent"
@@ -58,7 +52,7 @@
     <FrameLayout
         android:id="@+id/gip_vedio_live_home_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dip"
         android:layout_weight="1.07" >
     </FrameLayout>
 
@@ -74,8 +68,8 @@
             android:layout_height="35sp"
             android:background="@drawable/vedio_home_saybtn"
             android:text="我来说说"
-            android:textColor="#ffffff" 
-            android:visibility="gone"/>
+            android:textColor="#ffffff"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/vedio_live_home_askbtn"

@@ -91,6 +91,10 @@ public class GIPSuggestPeopleWillListFragment extends BaseFragment implements
 	private Button loadMoreButton;
 	private ProgressBar pb_loadmoore;
 
+	private View myconsultloadMoreView;
+	private ProgressBar pb_consultloadmoore;
+	private Button myconsultloadMoreButton;
+
 	/**
 	 * @param type
 	 *            要设置的 type
@@ -141,10 +145,10 @@ public class GIPSuggestPeopleWillListFragment extends BaseFragment implements
 		mListView = (ListView) view
 				.findViewById(R.id.gip_suggest_peoplewill_listview);
 		mListView.setOnItemClickListener(this);
-		
+
 		list_pb = (ProgressBar) view
 				.findViewById(R.id.gip_suggest_peoplewill_listview_pb);
-		
+
 		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
 				null);
 		loadMoreButton = (Button) loadMoreView
@@ -166,14 +170,14 @@ public class GIPSuggestPeopleWillListFragment extends BaseFragment implements
 	private void loadFirstData(int start, int end) {
 		loadData(start, end);
 	}
-	
+
 	/**
 	 * @方法： loadData
 	 * @描述： 加载数据
 	 * @param startIndex
 	 * @param endIndex
 	 */
-	private void loadData(final int startIndex,final int endIndex) {
+	private void loadData(final int startIndex, final int endIndex) {
 		if (isFirstLoad || isSwitch) {
 			list_pb.setVisibility(View.VISIBLE);
 		} else {
@@ -191,7 +195,7 @@ public class GIPSuggestPeopleWillListFragment extends BaseFragment implements
 				String url = Constants.Urls.POLITICS_LIST_URL + "?type="
 						+ POLITICS_TYPE + "&start=" + startIndex + "&end="
 						+ endIndex + "&passed=" + type;
-				
+
 				try {
 					politicsWrapper = politicsService.getPoliticsWrapper(url);
 					if (null != politicsWrapper) {
@@ -220,7 +224,7 @@ public class GIPSuggestPeopleWillListFragment extends BaseFragment implements
 	 */
 	private void showPoloticsList() {
 		politics = politicsWrapper.getData();
-		
+
 		if (politics == null || politics.size() == 0) {
 			Toast.makeText(context, "对不起，暂无民意征集信息", Toast.LENGTH_SHORT).show();
 			list_pb.setVisibility(View.GONE);
@@ -231,7 +235,7 @@ public class GIPSuggestPeopleWillListFragment extends BaseFragment implements
 				mListView.setAdapter(adapter);
 				list_pb.setVisibility(View.GONE);
 				isLoading = false;
-			}else {
+			} else {
 				if (isSwitch) {
 					adapter.setPolitics(politics);
 					list_pb.setVisibility(View.GONE);
@@ -246,15 +250,40 @@ public class GIPSuggestPeopleWillListFragment extends BaseFragment implements
 				isLoading = false;
 			}
 		}
-		
+
 		if (politicsWrapper.isNext()) {
-			pb_loadmoore.setVisibility(ProgressBar.GONE);
-			loadMoreButton.setText("点击加载更多");
+			if (mListView.getFooterViewsCount() != 0) {
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+				loadMoreButton.setText("点击加载更多");
+			} else {
+				mListView.addFooterView(getMyConsultFootView());
+			}
+
 		} else {
-			mListView.removeFooterView(loadMoreView);
+			if (adapter != null) {
+				mListView.removeFooterView(loadMoreView);
+			}
+			
 		}
 	}
-	
+
+	/**
+	 * @方法： getMyConsultFootView
+	 * @描述： 获取我的咨询列表底部视图
+	 * @return
+	 */
+	private View getMyConsultFootView() {
+		myconsultloadMoreView = View.inflate(context,
+				R.layout.list_loadmore_layout, null);
+		pb_consultloadmoore = (ProgressBar) myconsultloadMoreView
+				.findViewById(R.id.pb_loadmoore);
+
+		myconsultloadMoreButton = (Button) myconsultloadMoreView
+				.findViewById(R.id.loadMoreButton);
+		myconsultloadMoreButton.setOnClickListener(this);
+		return myconsultloadMoreView;
+	}
+
 	/**
 	 * @方法： loadMoreData
 	 * @描述： 加载更多数据

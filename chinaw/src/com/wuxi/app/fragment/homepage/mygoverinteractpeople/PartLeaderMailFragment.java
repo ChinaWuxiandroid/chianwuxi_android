@@ -30,28 +30,37 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseSlideActivity;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345AllMailContentActivity;
 import com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity;
+import com.wuxi.app.adapter.LeaderLetterListAdapter;
 import com.wuxi.app.adapter.MailTypeAdapter;
 import com.wuxi.app.adapter.QueryMailContentTypeAdapter;
 import com.wuxi.app.engine.MailTypeService;
+import com.wuxi.app.engine.PartLeaderMailListService;
 import com.wuxi.app.engine.PartLeaderMailService;
 import com.wuxi.app.engine.QueryMailContentTypeService;
 import com.wuxi.app.engine.ReplyStatisticsService;
@@ -59,9 +68,11 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.AllCount;
+import com.wuxi.domain.LetterWrapper;
 import com.wuxi.domain.MailTypeWrapper;
 import com.wuxi.domain.PartLeaderMailWrapper;
 import com.wuxi.domain.QueryMailContentTypeWrapper;
+import com.wuxi.domain.LetterWrapper.Letter;
 import com.wuxi.domain.MailTypeWrapper.MailType;
 import com.wuxi.domain.PartLeaderMailWrapper.PartLeaderMail;
 import com.wuxi.domain.QueryMailContentTypeWrapper.QueryMailContentType;
@@ -77,7 +88,8 @@ import com.wuxi.exception.NetException;
  * @修改描述：
  * 
  */
-public class PartLeaderMailFragment extends RadioButtonChangeFragment {
+public class PartLeaderMailFragment extends RadioButtonChangeFragment implements
+		OnScrollListener, OnClickListener, OnItemClickListener {
 
 	private static final String TAG = "PartLeaderMailListFragment";
 
@@ -135,9 +147,41 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 	private Spinner replyDepartmentSpinner = null;
 
 	private LinearLayout linearLayout = null;
-	private LinearLayout radioLayout = null;
+	private RadioGroup radioLayout = null;
+
+	private FrameLayout notwebFrameLayout = null;
+	private FrameLayout webFrameLayout = null;
 
 	private RadioButton radioBtn = null;
+
+	private ListView mListView;
+	private ProgressBar list_pb;
+
+	private LetterWrapper letterWrapper;
+	private List<Letter> letters;
+
+	private LeaderLetterListAdapter adapter;
+
+	private int visibleLastIndex;
+	private int visibleItemCount;// 当前显示的总条数
+	// 数据加载成功标识
+	private static final int LETTER_LOAD_SUCESS = 10;
+	// 数据加载失败标识
+	private static final int LETTER_LOAD_ERROR = 11;
+
+	private final static int PAGE_NUM = 10;
+
+	private boolean isFirstLoad = true;// 是不是首次加载数据
+	private boolean isSwitch = false;// 切换
+	private boolean isLoading = false;
+
+	private View loadMoreView;// 加载更多视图
+	private Button loadMoreButton;
+	private ProgressBar pb_loadmoore;
+
+	private View myconsultloadMoreView;
+	private ProgressBar pb_consultloadmoore;
+	private Button myconsultloadMoreButton;
 
 	private View popview = null;
 
@@ -165,7 +209,7 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 			R.id.gip_12345_mayorbox_radioButton_mailList,
 			R.id.gip_12345_mayorbox_radioButton_mustKonwMail,
 			R.id.gip_12345_mayorbox_radioButton_mayorBoxRule };
-	
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -206,6 +250,15 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 			case LOAD_MAIL_TYPE_FAILED:
 				Toast.makeText(context, "信件类型加载失败", Toast.LENGTH_SHORT).show();
 				break;
+
+			case LETTER_LOAD_SUCESS:
+				showLettersList();
+				break;
+
+			case LETTER_LOAD_ERROR:
+				list_pb.setVisibility(View.VISIBLE);
+				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
+				break;
 			}
 		}
 	};
@@ -218,17 +271,22 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 
 		case R.id.gip_12345_mayorbox_radioButton_mailList:
 			contentType = 0;
-			init();
+			notwebFrameLayout.setVisibility(View.VISIBLE);
+			webFrameLayout.setVisibility(View.GONE);
 			break;
 
 		case R.id.gip_12345_mayorbox_radioButton_mustKonwMail:
 			contentType = 1;
 			changeContent(contentType);
+			notwebFrameLayout.setVisibility(View.GONE);
+			webFrameLayout.setVisibility(View.VISIBLE);
 			break;
 
 		case R.id.gip_12345_mayorbox_radioButton_mayorBoxRule:
 			contentType = 2;
 			changeContent(contentType);
+			notwebFrameLayout.setVisibility(View.GONE);
+			webFrameLayout.setVisibility(View.VISIBLE);
 			break;
 		}
 	}
@@ -253,7 +311,7 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 
 			Intent intent = new Intent(getActivity(), MainMineActivity.class);
 			intent.putExtra(BaseSlideActivity.SELECT_MENU_POSITION_KEY, 5);
-		
+
 			intent.putExtra(Constants.CheckPositionKey.LEVEL_TWO__KEY, 1);// 这个意思让你选中左侧第二个菜单也就是12345办理平台
 			intent.putExtra(Constants.CheckPositionKey.LEVEL_THREE_KEY, 6);// 这个意思让你选中我要写信
 			MainTabActivity.instance.addView(intent);
@@ -283,9 +341,46 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 
 	@Override
 	protected void init() {
+		initLayout();
+
+		// PartLeaderMailListFragment leaderMailListFragment = new
+		// PartLeaderMailListFragment();
+		//
+		// leaderMailListFragment.setLeaderMail(getLeaderMail());
+		// bindFragment(leaderMailListFragment);
+
+		loadFirstData(0, PAGE_NUM);
+
+		loadAllCountData();
+	}
+
+	private void initLayout() {
+		notwebFrameLayout = (FrameLayout) view
+				.findViewById(R.id.mayor_query_letter_fragment);
+		webFrameLayout = (FrameLayout) view
+				.findViewById(R.id.mayor_box_fragment);
+
+		mListView = (ListView) view
+				.findViewById(R.id.gip_12345_query_letter_listView);
+		mListView.setOnItemClickListener(this);
+
+		list_pb = (ProgressBar) view
+				.findViewById(R.id.gip_12345_query_letter_listView_pb);
+
+		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+				null);
+		loadMoreButton = (Button) loadMoreView
+				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
+
+		mListView.addFooterView(loadMoreView);// 为listView添加底部视图
+		mListView.setOnScrollListener(this);// 增加滑动监听
+		loadMoreButton.setOnClickListener(this);
+
 		linearLayout = (LinearLayout) view.findViewById(R.id.query_mail_layout);
-		radioLayout = (LinearLayout) view
-				.findViewById(R.id.mayorbox_radiobtn_linearlayout);
+		radioLayout = (RadioGroup) view
+				.findViewById(R.id.gip_12345_mayorbox_radioGroup);
 
 		// 关键字输入框
 		keyWordEdit = (EditText) view
@@ -367,13 +462,176 @@ public class PartLeaderMailFragment extends RadioButtonChangeFragment {
 				dealMailBtn.setVisibility(View.GONE);
 			}
 		});
+	}
 
-		PartLeaderMailListFragment leaderMailListFragment = new PartLeaderMailListFragment();
+	/**
+	 * @方法： loadFirstData
+	 * @描述： 首次加载数据
+	 * @param start
+	 * @param end
+	 */
+	private void loadFirstData(int start, int end) {
+		loadData(start, end);
+	}
 
-		leaderMailListFragment.setLeaderMail(getLeaderMail());
-		bindFragment(leaderMailListFragment);
+	/**
+	 * 加载数据
+	 */
+	private void loadData(final int startIndex, final int endIndex) {
+		if (isFirstLoad || isSwitch) {
+			list_pb.setVisibility(View.VISIBLE);
+		} else {
+			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
+		}
 
-		loadAllCountData();
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				isLoading = true;// 正在加载数据
+				Message message = handler.obtainMessage();
+				PartLeaderMailListService partLeaderMailListService = new PartLeaderMailListService(
+						context);
+				try {
+					letterWrapper = partLeaderMailListService
+							.getLeaderLetterWrapper(startIndex, endIndex,
+									getLeaderMail().getDoProjectID());
+					if (null != letterWrapper) {
+						handler.sendEmptyMessage(LETTER_LOAD_SUCESS);
+					} else {
+						message.obj = "error";
+						handler.sendEmptyMessage(LETTER_LOAD_ERROR);
+					}
+
+				} catch (NetException e) {
+					LogUtil.i(TAG, "出错");
+					e.printStackTrace();
+					message.obj = e.getMessage();
+					handler.sendEmptyMessage(LETTER_LOAD_ERROR);
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+				} catch (NODataException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+	}
+
+	/**
+	 * @方法： loadMoreData
+	 * @描述： 加载更多数据
+	 * @param view
+	 */
+	public void loadMoreData(View view) {
+		if (isLoading) {
+			return;
+		} else {
+			loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_NUM);
+		}
+	}
+
+	/**
+	 * 显示列表
+	 */
+	private void showLettersList() {
+		letters = letterWrapper.getData();
+		if (letters == null || letters.size() == 0) {
+			Toast.makeText(context, "该部门暂无信件", Toast.LENGTH_SHORT).show();
+			list_pb.setVisibility(View.GONE);
+		} else {
+			if (isFirstLoad) {
+				adapter = new LeaderLetterListAdapter(letters, context);
+				isFirstLoad = false;
+				mListView.setAdapter(adapter);
+				list_pb.setVisibility(View.GONE);
+				isLoading = false;
+			} else {
+				if (isSwitch) {
+					adapter.setLetters(letters);
+					list_pb.setVisibility(View.GONE);
+				} else {
+					for (Letter letter : letters) {
+						adapter.addItem(letter);
+					}
+				}
+
+				adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
+				mListView.setSelection(visibleLastIndex - visibleItemCount + 1); // 设置选中项
+				isLoading = false;
+			}
+			mListView.setAdapter(adapter);
+		}
+
+		if (letterWrapper.isNext()) {
+			if (mListView.getFooterViewsCount() != 0) {
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+				loadMoreButton.setText("点击加载更多");
+			} else {
+				mListView.addFooterView(getMyConsultFootView());
+			}
+		} else {
+			if (adapter !=null) {
+				mListView.removeFooterView(loadMoreView);
+			}
+			
+		}
+	}
+
+	/**
+	 * @方法： getMyConsultFootView
+	 * @描述： 获取我的咨询列表底部视图
+	 * @return
+	 */
+	private View getMyConsultFootView() {
+		myconsultloadMoreView = View.inflate(context,
+				R.layout.list_loadmore_layout, null);
+		pb_consultloadmoore = (ProgressBar) myconsultloadMoreView
+				.findViewById(R.id.pb_loadmoore);
+
+		myconsultloadMoreButton = (Button) myconsultloadMoreView
+				.findViewById(R.id.loadMoreButton);
+		myconsultloadMoreButton.setOnClickListener(this);
+		return myconsultloadMoreView;
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> adapterView, View arg1,
+			int position, long arg3) {
+		Letter letter = (Letter) adapterView.getItemAtPosition(position);
+
+		Intent intent = new Intent(getActivity(),
+				GIP12345AllMailContentActivity.class);
+		intent.putExtra("letter", letter);
+		MainTabActivity.instance.addView(intent);
+
+	}
+
+	@Override
+	public void onScroll(AbsListView view, int firstVisibleItem,
+			int visibleItemCount, int totalItemCount) {
+		this.visibleItemCount = visibleItemCount;
+		visibleLastIndex = firstVisibleItem + visibleItemCount - 1;// 最后一条索引号
+	}
+
+	@Override
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+		int itemsLastIndex = adapter.getCount() - 1; // 数据集最后一项的索引
+		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.loadMoreButton:
+			if (letterWrapper != null && letterWrapper.isNext()) {// 还有下一条记录
+
+				isSwitch = false;
+				loadMoreButton.setText("loading.....");
+				loadMoreData(v);
+			}
+			break;
+		}
 	}
 
 	/**

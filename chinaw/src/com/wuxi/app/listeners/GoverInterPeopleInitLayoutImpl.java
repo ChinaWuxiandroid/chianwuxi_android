@@ -45,7 +45,7 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 			GIPMine12345Fragment gIPMine12345Fragment=null;
 			GIPMineSuggestionPlatformFragment gIPMineSuggestionPlatformFragment=null;
 			GIPMineInternetGoverSaloonFragment gIPMineInternetGoverSaloonFragment=null;
-//			GIPMineInfoPublicPlatformFragment gIPMineInfoPublicPlatformFragment=null;
+			GIPMineInfoPublicPlatformFragment gIPMineInfoPublicPlatformFragment=null;
 			GIPMinePublicForumFragment gIPMinePublicForumFragment=null;
 
 			/**
@@ -101,10 +101,10 @@ public class GoverInterPeopleInitLayoutImpl implements MenuItemInitLayoutListene
 				initLayoutListner.bindContentLayout(gIPMineInternetGoverSaloonFragment);
 			}
 
-			else if(fragment instanceof GIP12345AnswerStatisticsFragment){
-				gIP12345AnswerStatisticsFragment=(GIP12345AnswerStatisticsFragment)fragment;
-				gIP12345AnswerStatisticsFragment.setParentMenuItem(menuItem);
-				initLayoutListner.bindContentLayout(gIP12345AnswerStatisticsFragment);
+			else if(fragment instanceof GIPMineInfoPublicPlatformFragment){
+				gIPMineInfoPublicPlatformFragment=(GIPMineInfoPublicPlatformFragment)fragment;
+				gIPMineInfoPublicPlatformFragment.setParentMenuItem(menuItem);
+				initLayoutListner.bindContentLayout(gIPMineInfoPublicPlatformFragment);
 			}
 
 			else if(fragment instanceof GIPMinePublicForumFragment){

@@ -15,7 +15,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -157,16 +156,17 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment
 	private Spinner replyDepartmentSpinner = null;
 
 	private LinearLayout linearLayout = null;
-	private LinearLayout radioLayout = null;
+	private RadioGroup radioLayout = null;
 
-	private FrameLayout frameLayout = null;
+	private FrameLayout notwebFrameLayout = null;
+	private FrameLayout webFrameLayout = null;
 
 	private ListView mListView;
 	private ProgressBar list_pb;
-	
+
 	private LetterWrapper letterWrapper;
-	private List<Letter> letters ;
-	
+	private List<Letter> letters;
+
 	private MayorLettersListAdapter adapter;
 
 	private int visibleLastIndex;
@@ -215,6 +215,10 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment
 			R.id.gip_12345_mayorbox_radioButton_mailList,
 			R.id.gip_12345_mayorbox_radioButton_mustKonwMail,
 			R.id.gip_12345_mayorbox_radioButton_mayorBoxRule };
+
+	private View myconsultloadMoreView;
+	private ProgressBar pb_consultloadmoore;
+	private Button myconsultloadMoreButton;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -285,17 +289,22 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment
 
 		case R.id.gip_12345_mayorbox_radioButton_mailList:
 			contentType = 0;
-			init();
+			notwebFrameLayout.setVisibility(View.VISIBLE);
+			webFrameLayout.setVisibility(View.GONE);
 			break;
 
 		case R.id.gip_12345_mayorbox_radioButton_mustKonwMail:
 			contentType = 1;
 			changeContent(contentType);
+			notwebFrameLayout.setVisibility(View.GONE);
+			webFrameLayout.setVisibility(View.VISIBLE);
 			break;
 
 		case R.id.gip_12345_mayorbox_radioButton_mayorBoxRule:
 			contentType = 2;
 			changeContent(contentType);
+			notwebFrameLayout.setVisibility(View.GONE);
+			webFrameLayout.setVisibility(View.VISIBLE);
 			break;
 		}
 	}
@@ -351,8 +360,7 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment
 		setBeginDate();
 		setEndDate();
 
-		GIP12345MayorMailListFragment gip12345MayorMailListFragment = new GIP12345MayorMailListFragment();
-		bindFragment(gip12345MayorMailListFragment);
+		loadFirstData(0, PAGE_NUM);
 
 		loadAllCountData();
 	}
@@ -363,8 +371,10 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment
 	 */
 	private void initLayout() {
 
-		frameLayout = (FrameLayout) view
+		notwebFrameLayout = (FrameLayout) view
 				.findViewById(R.id.mayor_query_letter_fragment);
+		webFrameLayout = (FrameLayout) view
+				.findViewById(R.id.mayor_box_fragment);
 
 		mListView = (ListView) view
 				.findViewById(R.id.gip_12345_query_letter_listView);
@@ -480,8 +490,8 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment
 		});
 
 		linearLayout = (LinearLayout) view.findViewById(R.id.query_mail_layout);
-		radioLayout = (LinearLayout) view
-				.findViewById(R.id.mayorbox_radiobtn_linearlayout);
+		radioLayout = (RadioGroup) view
+				.findViewById(R.id.gip_12345_mayorbox_radioGroup);
 
 		// 内容类型下拉框监听
 		boxSortSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -557,22 +567,24 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment
 
 			@Override
 			public void onClick(View v) {
-				letterCondition.setKeyword(keyWordEdit.getText().toString());
-				letterCondition.setCode(mailNoEdit.getText().toString());
+				// letterCondition.setKeyword(keyWordEdit.getText().toString());
+				// letterCondition.setCode(mailNoEdit.getText().toString());
+				//
+				// if (questionCheckbox.isChecked()) {
+				// letterCondition.setCommon(-1);
+				// } else {
+				// letterCondition.setCommon(1);
+				// }
+				//
+				// // loadFirstData(0, PAGE_NUM);
+				//
+				// view.findViewById(R.id.mayor_box_fragment).setVisibility(
+				// View.GONE);
+				// notwebFrameLayout.setVisibility(View.VISIBLE);
+				// linearLayout.setVisibility(LinearLayout.GONE);
+				// radioLayout.setVisibility(LinearLayout.VISIBLE);
 
-				if (questionCheckbox.isChecked()) {
-					letterCondition.setCommon(-1);
-				} else {
-					letterCondition.setCommon(1);
-				}
-				
-				loadFirstData(0, PAGE_NUM);
-
-				view.findViewById(R.id.mayor_box_fragment).setVisibility(
-						View.GONE);
-				frameLayout.setVisibility(View.VISIBLE);
-				linearLayout.setVisibility(LinearLayout.GONE);
-				radioLayout.setVisibility(LinearLayout.VISIBLE);
+				Toast.makeText(context, "该功能暂未实现！", Toast.LENGTH_SHORT).show();
 
 			}
 		});
@@ -607,39 +619,39 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment
 				Message message = handler.obtainMessage();
 				LetterService letterService = new LetterService(context);
 				try {
-					Looper.prepare();
 					String url = "";
-					if (letterCondition.getKeyword().equals("")) {
-						url = Constants.Urls.MAYOR_MAILBOX_URL + "?start="
-								+ startIndex + "&end=" + endIndex + "&keyword="
-								+ letterCondition.getKeyword()
-								+ "&contenttype="
-								+ letterCondition.getContenttype()
-								+ "&lettertype="
-								+ letterCondition.getLettertype()
-								+ "&starttime="
-								+ letterCondition.getStarttime() + "&endtime="
-								+ letterCondition.getEndtime() + "&code="
-								+ letterCondition.getCode() + "&depid="
-								+ letterCondition.getDepid() + "&dodepid="
-								+ letterCondition.getDodepid() + "&common="
-								+ letterCondition.getCommon();
-					} else {
-						url = Constants.Urls.MAYOR_MAILBOX_URL + "?start="
-								+ startIndex + "&end=" + endIndex + "&keyword="
-								+ letterCondition.getKeyword() + "&lettertype="
-								+ letterCondition.getLettertype()
-								+ "&starttime="
-								+ letterCondition.getStarttime() + "&endtime="
-								+ letterCondition.getEndtime() + "&code="
-								+ letterCondition.getCode() + "&depid="
-								+ letterCondition.getDepid() + "&dodepid="
-								+ letterCondition.getDodepid() + "&common="
-								+ letterCondition.getCommon();
-					}
+					// if (letterCondition.getKeyword().equals("")) {
+					// url = Constants.Urls.MAYOR_MAILBOX_URL + "?start="
+					// + startIndex + "&end=" + endIndex + "&keyword="
+					// + letterCondition.getKeyword()
+					// + "&contenttype="
+					// + letterCondition.getContenttype()
+					// + "&lettertype="
+					// + letterCondition.getLettertype()
+					// + "&starttime="
+					// + letterCondition.getStarttime() + "&endtime="
+					// + letterCondition.getEndtime() + "&code="
+					// + letterCondition.getCode() + "&depid="
+					// + letterCondition.getDepid() + "&dodepid="
+					// + letterCondition.getDodepid() + "&common="
+					// + letterCondition.getCommon();
+					// } else {
+					// url = Constants.Urls.MAYOR_MAILBOX_URL + "?start="
+					// + startIndex + "&end=" + endIndex + "&keyword="
+					// + letterCondition.getKeyword() + "&lettertype="
+					// + letterCondition.getLettertype()
+					// + "&starttime="
+					// + letterCondition.getStarttime() + "&endtime="
+					// + letterCondition.getEndtime() + "&code="
+					// + letterCondition.getCode() + "&depid="
+					// + letterCondition.getDepid() + "&dodepid="
+					// + letterCondition.getDodepid() + "&common="
+					// + letterCondition.getCommon();
+					// }
 
-					System.out.println("查询：" + url);
-					
+					url = Constants.Urls.MAYOR_MAILBOX_URL + "?start="
+							+ startIndex + "&end=" + endIndex;
+
 					letterWrapper = letterService.getLetterLitstWrapper(url);
 					if (null != letterWrapper) {
 						handler.sendEmptyMessage(LETTER_LOAD_SUCESS);
@@ -647,7 +659,6 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment
 						message.obj = "error";
 						handler.sendEmptyMessage(LETTER_LOAD_ERROR);
 					}
-					Looper.loop();
 				} catch (NetException e) {
 					LogUtil.i(TAG, "出错");
 					e.printStackTrace();
@@ -680,13 +691,7 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment
 	 * 显示列表
 	 */
 	public void showLettersList() {
-		
 		letters = letterWrapper.getData();
-		
-		for (int i = 0; i < letters.size(); i++) {
-			System.out.println("打印："+letters.get(i).getTitle());
-		}
-		
 		if (letters != null && letters.size() > 0) {
 			if (isFirstLoad) {
 				adapter = new MayorLettersListAdapter(letters, context);
@@ -714,11 +719,36 @@ public class GIP12345MayorMaiBoxFragment extends RadioButtonChangeFragment
 		}
 
 		if (letterWrapper.isNext()) {
-			pb_loadmoore.setVisibility(ProgressBar.GONE);
-			loadMoreButton.setText("点击加载更多");
+			if (mListView.getFooterViewsCount() != 0) {
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+				loadMoreButton.setText("点击加载更多");
+			} else {
+				mListView.addFooterView(getMyConsultFootView());
+			}
+
 		} else {
-			mListView.removeFooterView(loadMoreView);
+			if (adapter != null) {
+				mListView.removeFooterView(loadMoreView);
+			}
+			
 		}
+	}
+
+	/**
+	 * @方法： getMyConsultFootView
+	 * @描述： 获取我的咨询列表底部视图
+	 * @return
+	 */
+	private View getMyConsultFootView() {
+		myconsultloadMoreView = View.inflate(context,
+				R.layout.list_loadmore_layout, null);
+		pb_consultloadmoore = (ProgressBar) myconsultloadMoreView
+				.findViewById(R.id.pb_loadmoore);
+
+		myconsultloadMoreButton = (Button) myconsultloadMoreView
+				.findViewById(R.id.loadMoreButton);
+		myconsultloadMoreButton.setOnClickListener(this);
+		return myconsultloadMoreView;
 	}
 
 	@Override

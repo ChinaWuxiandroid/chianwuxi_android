@@ -253,7 +253,10 @@ public class VideoRelatedDataFragment extends BaseFragment implements
 			pb_loadmoore.setVisibility(ProgressBar.GONE);
 			loadMoreButton.setText("点击加载更多");
 		} else {
-			listView.removeFooterView(loadMoreView);
+			if (adapter != null) {
+				listView.removeFooterView(loadMoreView);
+			}
+
 		}
 	}
 
@@ -275,7 +278,6 @@ public class VideoRelatedDataFragment extends BaseFragment implements
 		switch (v.getId()) {
 		case R.id.loadMoreButton:
 			if (contentWrapper != null && contentWrapper.isNext()) {// 还有下一条记录
-
 				isSwitch = false;
 				loadMoreButton.setText("loading.....");
 				loadMoreData(v);

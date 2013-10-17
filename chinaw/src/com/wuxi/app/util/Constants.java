@@ -177,6 +177,12 @@ public class Constants {
 				+ "/politics/mylist.json";
 
 		/**
+		 * 获取 我的依申请公开 URL
+		 */
+		public static final String MY_APPLY_OPEN_URL = BASIC_URL
+				+ "/applyopen/myapplypage.json";
+
+		/**
 		 * 获取当前用户 立法征求意见和民意征集 URL
 		 * */
 		public static final String MY_POLITICS_LIST_URL = BASIC_URL
@@ -303,6 +309,12 @@ public class Constants {
 		 */
 		public static final String INTERNET_SURVEY_URL = BASIC_URL
 				+ "/survery/list.json";
+
+		/**
+		 * 政民互动 我参与的网上调查 URL
+		 */
+		public static final String MY_INTERNET_SURVEY_URL = BASIC_URL
+				+ "/survery/mylist.json";
 
 		/**
 		 * 效能投诉列表 {start}开始占位符 {end}结束占位符

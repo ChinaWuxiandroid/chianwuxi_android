@@ -6,7 +6,7 @@ import com.wuxi.app.R;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 
 /**
- * 我的政民互动之视频直播平台之走进直播间
+ * 政民互动之视频直播平台之走进直播间
  * 
  * @author 智佳 罗森
  * 

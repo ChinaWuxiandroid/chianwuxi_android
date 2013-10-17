@@ -6,6 +6,7 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -18,23 +19,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345AllMailContentActivity;
+import com.wuxi.app.adapter.ComplaintLetterListAdapter;
 import com.wuxi.app.adapter.MailTypeAdapter;
 import com.wuxi.app.adapter.QueryMailContentTypeAdapter;
+import com.wuxi.app.engine.LetterService;
 import com.wuxi.app.engine.MailTypeService;
 import com.wuxi.app.engine.PartLeaderMailService;
 import com.wuxi.app.engine.QueryMailContentTypeService;
@@ -43,9 +54,11 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.domain.AllCount;
+import com.wuxi.domain.LetterWrapper;
 import com.wuxi.domain.MailTypeWrapper;
 import com.wuxi.domain.PartLeaderMailWrapper;
 import com.wuxi.domain.QueryMailContentTypeWrapper;
+import com.wuxi.domain.LetterWrapper.Letter;
 import com.wuxi.domain.MailTypeWrapper.MailType;
 import com.wuxi.domain.PartLeaderMailWrapper.PartLeaderMail;
 import com.wuxi.domain.QueryMailContentTypeWrapper.QueryMailContentType;
@@ -58,7 +71,8 @@ import com.wuxi.exception.NetException;
  * @author 杨宸 智佳
  * */
 
-public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
+public class GIP12345ComplaintFragment extends RadioButtonChangeFragment
+		implements OnItemClickListener, OnClickListener, OnScrollListener {
 
 	private static final String TAG = "GIP12345ComplaintFragment";
 
@@ -68,7 +82,32 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 			R.id.gip_12345_complaint_radioButton_mayorBoxRule,
 			R.id.gip_12345_complaint_radioButton_organizationDuty };
 
-	private static final int HIDEN_CONTENT_ID = R.id.complaint_fragment;
+	private static final int HIDEN_CONTENT_ID = R.id.complaint_web_fragment;
+
+	private ListView mListView;
+	private ProgressBar list_pb;
+	private LetterWrapper letterWrapper;
+	private List<Letter> letters;
+
+	private FrameLayout webFrameLayout = null;
+	private FrameLayout notwebFrameLayout = null;
+	
+	private ComplaintLetterListAdapter adapter;
+
+	private static final int LETTER_LOAD_SUCESS = 10;
+	private static final int LETTER_LOAD_ERROR = 11;
+
+	private int visibleLastIndex;
+	private int visibleItemCount;// 当前显示的总条数
+	private final static int PAGE_NUM = 10;
+
+	private boolean isFirstLoad = true;// 是不是首次加载数据
+	private boolean isSwitch = false;// 切换
+	private boolean isLoading = false;
+
+	private View loadMoreView;// 加载更多视图
+	private Button loadMoreButton;
+	private ProgressBar pb_loadmoore;
 
 	private static final int ALLCOUNT_LOAD_SUCESS = 0; // 答复率总数统计
 	private static final int DATA_LOAD_ERROR = 1;
@@ -124,7 +163,7 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 	private Spinner replyDepartmentSpinner = null;
 
 	private LinearLayout linearLayout = null;
-	private LinearLayout radioLayout = null;
+	private RadioGroup radioGroup = null;
 
 	private PartLeaderMailWrapper leaderMailWrapper = null;
 	private List<PartLeaderMail> depts = null;
@@ -144,6 +183,11 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 	private PopWindowManager popWindowManager = null;
 
 	private int contentType = 0; // 内容类型，缺省为0-信件列表 1-写信须知 2-办理规则 3-机构职责
+	
+	
+	private View myconsultloadMoreView;
+	private ProgressBar pb_consultloadmoore;
+	private Button myconsultloadMoreButton;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -185,6 +229,15 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 			case LOAD_MAIL_TYPE_FAILED:
 				Toast.makeText(context, "信件类型加载失败", Toast.LENGTH_SHORT).show();
 				break;
+
+			case LETTER_LOAD_SUCESS:
+				showLettersList();
+				break;
+
+			case LETTER_LOAD_ERROR:
+				list_pb.setVisibility(View.VISIBLE);
+				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
+				break;
 			}
 		};
 	};
@@ -197,22 +250,29 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 
 		case R.id.gip_12345_complaint_radioButton_latestMailList:
 			contentType = 0;
-			init();
+			webFrameLayout.setVisibility(View.GONE);
+			notwebFrameLayout.setVisibility(View.VISIBLE);
 			break;
 
 		case R.id.gip_12345_complaint_radioButton_mustKonwMail:
 			contentType = 1;
 			changeContent(contentType);
+			webFrameLayout.setVisibility(View.VISIBLE);
+			notwebFrameLayout.setVisibility(View.GONE);
 			break;
 
 		case R.id.gip_12345_complaint_radioButton_mayorBoxRule:
 			contentType = 2;
 			changeContent(contentType);
+			webFrameLayout.setVisibility(View.VISIBLE);
+			notwebFrameLayout.setVisibility(View.GONE);
 			break;
 
 		case R.id.gip_12345_complaint_radioButton_organizationDuty:
 			contentType = 3;
 			changeContent(contentType);
+			webFrameLayout.setVisibility(View.VISIBLE);
+			notwebFrameLayout.setVisibility(View.GONE);
 			break;
 		}
 	}
@@ -240,8 +300,11 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 	@Override
 	protected void init() {
 		linearLayout = (LinearLayout) view.findViewById(R.id.query_mail_layout);
-		radioLayout = (LinearLayout) view
-				.findViewById(R.id.gip_12345_complaint_layout);
+		radioGroup = (RadioGroup) view
+				.findViewById(R.id.gip_12345_complaint_radioGroup);
+		
+		webFrameLayout = (FrameLayout) view.findViewById(R.id.complaint_web_fragment);
+		notwebFrameLayout = (FrameLayout) view.findViewById(R.id.complaint_fragment);
 
 		// 关键字输入框
 		keyWordEdit = (EditText) view
@@ -265,7 +328,7 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "该功能暂未开通", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "该功能暂未实现", Toast.LENGTH_SHORT).show();
 			}
 		});
 
@@ -297,10 +360,10 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 			public void onClick(View v) {
 				if (linearLayout.getVisibility() == LinearLayout.GONE) {
 					linearLayout.setVisibility(LinearLayout.VISIBLE);
-					radioLayout.setVisibility(LinearLayout.GONE);
+					radioGroup.setVisibility(LinearLayout.GONE);
 				} else {
 					linearLayout.setVisibility(LinearLayout.GONE);
-					radioLayout.setVisibility(LinearLayout.VISIBLE);
+					radioGroup.setVisibility(LinearLayout.VISIBLE);
 				}
 			}
 		});
@@ -320,11 +383,212 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 			}
 		});
 
-		GIP12345ComplaintListFragment complaintListFragment = new GIP12345ComplaintListFragment();
-		
-		bindFragment(complaintListFragment);
+		// 初始化布局
+		initLayout();
+
+		// 第一次加载数据
+		loadFirstData(0, PAGE_NUM);
 
 		loadAllCountData();
+	}
+
+	/**
+	 * 初始化布局控件
+	 */
+	private void initLayout() {
+		mListView = (ListView) view
+				.findViewById(R.id.gip_12345_complaint_listView);
+		mListView.setOnItemClickListener(this);
+
+		list_pb = (ProgressBar) view
+				.findViewById(R.id.gip_12345_complaint_listView_pb);
+
+		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+				null);
+		loadMoreButton = (Button) loadMoreView
+				.findViewById(R.id.loadMoreButton);
+		pb_loadmoore = (ProgressBar) loadMoreView
+				.findViewById(R.id.pb_loadmoore);
+
+		mListView.addFooterView(loadMoreView);// 为listView添加底部视图
+		mListView.setOnScrollListener(this);// 增加滑动监听
+		loadMoreButton.setOnClickListener(this);
+	}
+
+	/**
+	 * @方法： loadFirstData
+	 * @描述： 第一次加载数据
+	 * @param start
+	 * @param end
+	 */
+	private void loadFirstData(int start, int end) {
+		loadData(start, end);
+	}
+
+	/**
+	 * 加载数据
+	 */
+	private void loadData(final int startIndex, final int endIndex) {
+		if (isFirstLoad || isSwitch) {
+			list_pb.setVisibility(View.VISIBLE);
+		} else {
+			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
+		}
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				isLoading = true;// 正在加载数据
+				Message message = handler.obtainMessage();
+				LetterService letterService = new LetterService(context);
+				try {
+					String url = Constants.Urls.SUGGESTLETTER_URL + "?start="
+							+ startIndex + "&end=" + endIndex;
+					letterWrapper = letterService.getLetterLitstWrapper(url);
+					if (null != letterWrapper) {
+						handler.sendEmptyMessage(LETTER_LOAD_SUCESS);
+
+					} else {
+						message.obj = "error";
+						handler.sendEmptyMessage(LETTER_LOAD_ERROR);
+					}
+
+				} catch (NetException e) {
+					LogUtil.i(TAG, "出错");
+					e.printStackTrace();
+					message.obj = e.getMessage();
+					handler.sendEmptyMessage(LETTER_LOAD_ERROR);
+				} catch (JSONException e) {
+					LogUtil.i(TAG, "出错");
+					e.printStackTrace();
+					message.obj = e.getMessage();
+					handler.sendEmptyMessage(LETTER_LOAD_ERROR);
+					e.printStackTrace();
+				} catch (NODataException e) {
+					LogUtil.i(TAG, "出错");
+					e.printStackTrace();
+					message.obj = e.getMessage();
+					handler.sendEmptyMessage(LETTER_LOAD_ERROR);
+					e.printStackTrace();
+				}
+			}
+		}).start();
+	}
+
+	/**
+	 * 显示列表
+	 */
+	private void showLettersList() {
+		letters = letterWrapper.getData();
+		if (letters == null || letters.size() == 0) {
+			Toast.makeText(context, "对不起，暂无建议咨询投诉信息", Toast.LENGTH_SHORT)
+					.show();
+		} else {
+			if (isFirstLoad) {
+				adapter = new ComplaintLetterListAdapter(letters, context);
+				isFirstLoad = false;
+				mListView.setAdapter(adapter);
+				list_pb.setVisibility(View.GONE);
+				isLoading = false;
+			} else {
+				if (isSwitch) {
+					adapter.setLetters(letters);
+					list_pb.setVisibility(View.GONE);
+				} else {
+					for (Letter letter : letters) {
+						adapter.addItem(letter);
+					}
+				}
+
+				adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
+				mListView.setSelection(visibleLastIndex - visibleItemCount + 1); // 设置选中项
+				isLoading = false;
+			}
+		}
+
+		if (letterWrapper.isNext()) {
+			if (mListView.getFooterViewsCount()!= 0) {
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+				loadMoreButton.setText("点击加载更多");
+			}else {
+				mListView.addFooterView(getMyConsultFootView());
+			}
+			
+		} else {
+			if (adapter != null) {
+				mListView.removeFooterView(loadMoreView);
+			}
+			
+		}
+	}
+
+	/**
+	 * @方法： getMyConsultFootView
+	 * @描述： 获取我的咨询列表底部视图
+	 * @return
+	 */
+	private View getMyConsultFootView() {
+		myconsultloadMoreView = View.inflate(context,
+				R.layout.list_loadmore_layout, null);
+		pb_consultloadmoore = (ProgressBar) myconsultloadMoreView
+				.findViewById(R.id.pb_loadmoore);
+
+		myconsultloadMoreButton = (Button) myconsultloadMoreView
+				.findViewById(R.id.loadMoreButton);
+		myconsultloadMoreButton.setOnClickListener(this);
+		return myconsultloadMoreView;
+	}
+	
+	/**
+	 * @方法： loadMoreData
+	 * @描述： 加载更多数据
+	 * @param view
+	 */
+	private void loadMoreData(View view) {
+		if (isLoading) {
+			return;
+		} else {
+			loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_NUM);
+		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> adapterView, View arg1,
+			int position, long arg3) {
+		Letter letter = (Letter) adapterView.getItemAtPosition(position);
+
+		Intent intent = new Intent(getActivity(),
+				GIP12345AllMailContentActivity.class);
+		intent.putExtra("letter", letter);
+		MainTabActivity.instance.addView(intent);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.loadMoreButton:
+			if (letterWrapper != null && letterWrapper.isNext()) {// 还有下一条记录
+
+				isSwitch = false;
+				loadMoreButton.setText("loading.....");
+				loadMoreData(v);
+			}
+			break;
+		}
+	}
+
+	@Override
+	public void onScroll(AbsListView view, int firstVisibleItem,
+			int visibleItemCount, int totalItemCount) {
+		this.visibleItemCount = visibleItemCount;
+		visibleLastIndex = firstVisibleItem + visibleItemCount - 1;// 最后一条索引号
+	}
+
+	@Override
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+		int itemsLastIndex = adapter.getCount() - 1; // 数据集最后一项的索引
+		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
 	}
 
 	/**
@@ -566,10 +830,10 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment {
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			
+
 			viewHolder.tv_dept.setTextColor(Color.BLACK);
 			viewHolder.tv_dept.setText(dept.getDepname());
-			
+
 			return convertView;
 		}
 
