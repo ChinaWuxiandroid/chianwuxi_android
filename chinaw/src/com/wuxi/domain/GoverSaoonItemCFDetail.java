@@ -71,6 +71,8 @@ public class GoverSaoonItemCFDetail {
 	public String getSsztxz() {
 		if(ssztxz.equals("1")){
 			return "法定";
+		}else if(ssztxz.equals("null")){
+			return "";
 		}else{
 			return ssztxz;
 		}
@@ -80,9 +82,10 @@ public class GoverSaoonItemCFDetail {
 		this.ssztxz = ssztxz;
 	}
 	public String getWtjg() {
-		if(wtjg!=null&&wtjg.equals("")){
-			return "";
+		if((wtjg!=null&&wtjg.trim().equals("null"))||wtjg==null){
+			return "空";
 		}else{
+			
 			return wtjg;
 		}
 		

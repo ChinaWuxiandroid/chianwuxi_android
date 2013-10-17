@@ -103,6 +103,9 @@ public class GoverSaoonItemQZDetail {
 	}
 
 	public String getWtjg() {
+		if((wtjg!=null&&wtjg.trim().equals("null"))||wtjg==null){
+			return "空";
+		}
 		return wtjg;
 	}
 

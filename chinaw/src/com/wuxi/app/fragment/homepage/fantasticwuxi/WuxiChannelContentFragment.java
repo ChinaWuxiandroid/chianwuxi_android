@@ -199,7 +199,7 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 				&& channel.getChildrenContentsCount() == 1) {// 只有一个内容的情况下
 																// //显示内容
 			wucity_channel_hs.setVisibility(HorizontalScrollView.GONE);// 隐藏头部布局
-			// wucity_content_lv.setVisibility(ListView.GONE);// 隐藏列表布局
+			
 			wuxicity_decontent_ll.setVisibility(LinearLayout.VISIBLE);// 显示具体内容布局
 			wucity_content.setVisibility(FrameLayout.GONE);
 			loadContentData(this.channel);
@@ -207,7 +207,7 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 		} else if (channel.getChildrenChannelsCount() == 0
 				&& channel.getChildrenContentsCount() > 1) {// 有很多内容的情况下 显示内容列表
 			wucity_channel_hs.setVisibility(HorizontalScrollView.GONE);// 隐藏头部布局
-			// wucity_content_lv.setVisibility(ListView.VISIBLE);// 隐藏列表布局
+			
 			wucity_content.setVisibility(FrameLayout.VISIBLE);
 			wuxicity_decontent_ll.setVisibility(LinearLayout.GONE);// 显示具体内容布局
 
@@ -216,7 +216,7 @@ public class WuxiChannelContentFragment extends BaseFragment implements
 		} else if (channel.getChildrenChannelsCount() == 0
 				&& channel.getChildrenContentsCount() == 0) {
 			wucity_channel_hs.setVisibility(HorizontalScrollView.GONE);// 隐藏头部布局
-			// wucity_content_lv.setVisibility(ListView.GONE);// 隐藏列表布局
+			
 			wuxicity_decontent_ll.setVisibility(LinearLayout.GONE);// 显示具体内容布局
 			wucity_content.setVisibility(FrameLayout.GONE);
 			return;

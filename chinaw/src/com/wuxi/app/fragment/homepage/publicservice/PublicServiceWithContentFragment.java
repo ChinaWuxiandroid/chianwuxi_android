@@ -18,6 +18,7 @@ public class PublicServiceWithContentFragment extends
 	protected Fragment showChannelContentFragment(Channel channel) {
 
 		if (channel.getChildrenChannelsCount() > 0) {
+			
 			PublicServiceChannelContentFragment ch = new PublicServiceChannelContentFragment();
 			ch.setArguments(this.getArguments());
 			

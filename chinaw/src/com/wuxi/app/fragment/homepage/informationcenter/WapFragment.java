@@ -63,7 +63,6 @@ public class WapFragment extends BaseFragment {
 		mWb_leader.getSettings().setBuiltInZoomControls(true);
 		mWb_leader.getSettings().setLoadWithOverviewMode(true);
 		mWb_leader.loadUrl(parentItem.getWapURI());
-	//	mWb_leader.loadUrl("http://32.63.250.24:10169/wap/zxzx/ldzc/index.shtml");
 
 	}
 

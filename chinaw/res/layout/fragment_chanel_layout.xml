@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/content_background"
     android:orientation="vertical" >
 
-    <include layout="@layout/child_fragmend_header_layout" />
+    <include layout="@layout/child_fragmend_header_layout"
+        android:id="@+id/ll_head" />
 
     <include
+        android:layout_below="@+id/ll_head"
         android:id="@+id/ll_main"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         layout="@layout/model_fragment_layout" />
 
-</LinearLayout>
+</RelativeLayout>

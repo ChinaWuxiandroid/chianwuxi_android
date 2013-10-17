@@ -1,13 +1,16 @@
 package com.wuxi.app.activity.homepage.informationcenter;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
 import com.wuxi.domain.Content;
@@ -61,6 +64,31 @@ public class HotTopicContentActivity extends BaseItemContentActivity {
 		hottopic_wv.getSettings().setUseWideViewPort(true);
 		hottopic_wv.getSettings().setLoadWithOverviewMode(true);
 		hottopic_wv.loadUrl(content.getWapUrl());
+		
+		
+		
+		hottopic_wv.setWebViewClient(new WebViewClient(){
+
+			/* (non-Javadoc)
+			 * @方法： shouldOverrideUrlLoading
+			 * @描述： WebView中存在链接的，希望在该WebView中处理，不用打开系统的浏览器
+			 * @param view
+			 * @param url
+			 * @return 
+			 * @see android.webkit.WebViewClient#shouldOverrideUrlLoading(android.webkit.WebView, java.lang.String)
+			 */
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				Intent intent=new Intent(HotTopicContentActivity.this,InfoWebActivity.class);
+				intent.putExtra("url", url);
+				MainTabActivity.instance.addView(intent);
+				return true;
+			}
+			
+			
+			
+		});
+
 
 	}
 

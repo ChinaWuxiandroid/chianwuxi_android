@@ -220,7 +220,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	private void showDept() {
 
 		if (isFirstLoadGoverItem) {
-			Dept dept = new Dept("按部门赛选");
+			Dept dept = new Dept("按部门筛选");
 			depts.add(0, dept);
 		}
 

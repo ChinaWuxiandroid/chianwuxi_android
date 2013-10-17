@@ -152,7 +152,10 @@ public class ContentListView extends ListView implements OnScrollListener,
 			loadMoreButton.setText("点击加载更多");
 
 		} else {
-			this.removeFooterView(loadMoreView);
+			if(adapter!=null){
+				this.removeFooterView(loadMoreView);
+			}
+			
 		}
 
 	}

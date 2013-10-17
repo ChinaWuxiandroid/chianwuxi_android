@@ -17,55 +17,55 @@
 # view AndroidManifest.xml #generated:73
 -keep class com.wuxi.app.activity.MainIndexActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:130
+# view AndroidManifest.xml #generated:131
 -keep class com.wuxi.app.activity.commactivity.ImageViewScaleActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:94
+# view AndroidManifest.xml #generated:95
 -keep class com.wuxi.app.activity.homepage.FourTopicActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:97
+# view AndroidManifest.xml #generated:98
 -keep class com.wuxi.app.activity.homepage.LearActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:96
+# view AndroidManifest.xml #generated:97
 -keep class com.wuxi.app.activity.homepage.NewsAnnAcountActivitiy { <init>(...); }
 
-# view AndroidManifest.xml #generated:79
+# view AndroidManifest.xml #generated:80
 -keep class com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:80
+# view AndroidManifest.xml #generated:81
 -keep class com.wuxi.app.activity.homepage.fantasticwuxi.WuxiChannelContentDetailActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:110
+# view AndroidManifest.xml #generated:111
 -keep class com.wuxi.app.activity.homepage.goverpublicmsg.GPMApplyActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:108
+# view AndroidManifest.xml #generated:109
 -keep class com.wuxi.app.activity.homepage.goverpublicmsg.GoverMsgContentDetailWebActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:109
+# view AndroidManifest.xml #generated:110
 -keep class com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:82
+# view AndroidManifest.xml #generated:83
 -keep class com.wuxi.app.activity.homepage.goversaloon.GoverSaloonActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:89
+# view AndroidManifest.xml #generated:90
 -keep class com.wuxi.app.activity.homepage.goversaloon.GoverSaloonContentDetialActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:83
+# view AndroidManifest.xml #generated:84
 -keep class com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailCFActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:84
+# view AndroidManifest.xml #generated:85
 -keep class com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailQTActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:85
+# view AndroidManifest.xml #generated:86
 -keep class com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailQZActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:86
+# view AndroidManifest.xml #generated:87
 -keep class com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailXKActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:87
+# view AndroidManifest.xml #generated:88
 -keep class com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailZSActivtiy { <init>(...); }
 
-# view AndroidManifest.xml #generated:88
+# view AndroidManifest.xml #generated:89
 -keep class com.wuxi.app.activity.homepage.goversaloon.MyOnlineAskActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:76
@@ -74,69 +74,74 @@
 # view AndroidManifest.xml #generated:77
 -keep class com.wuxi.app.activity.homepage.informationcenter.InfoCenterContentDetailActivity { <init>(...); }
 
+# view AndroidManifest.xml #generated:78
+-keep class com.wuxi.app.activity.homepage.informationcenter.InfoWebActivity { <init>(...); }
+
 # view AndroidManifest.xml #generated:75
 -keep class com.wuxi.app.activity.homepage.informationcenter.InformationCenterActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:99
+# view AndroidManifest.xml #generated:100
 -keep class com.wuxi.app.activity.homepage.logorregister.LoginActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:100
+# view AndroidManifest.xml #generated:101
 -keep class com.wuxi.app.activity.homepage.logorregister.RegisterActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:105
+# view AndroidManifest.xml #generated:106
 -keep class com.wuxi.app.activity.homepage.more.AboutUsActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:103
+# view AndroidManifest.xml #generated:104
 -keep class com.wuxi.app.activity.homepage.more.MenuItemSetActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:104
+# view AndroidManifest.xml #generated:105
 -keep class com.wuxi.app.activity.homepage.more.SiteMapActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:102
+# view AndroidManifest.xml #generated:103
 -keep class com.wuxi.app.activity.homepage.more.SystemSetActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:120
+# view AndroidManifest.xml #generated:121
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumContentActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:121
+# view AndroidManifest.xml #generated:122
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumPostActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:122
+# view AndroidManifest.xml #generated:123
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345AllMailContentActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:123
+# view AndroidManifest.xml #generated:124
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPContentDetailWebActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:124
+# view AndroidManifest.xml #generated:125
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.HotReviewContentActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:125
+# view AndroidManifest.xml #generated:126
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:127
+# view AndroidManifest.xml #generated:128
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:126
+# view AndroidManifest.xml #generated:127
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:91
+# view AndroidManifest.xml #generated:92
 -keep class com.wuxi.app.activity.homepage.publicservice.PublicServiceActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:92
+# view AndroidManifest.xml #generated:93
 -keep class com.wuxi.app.activity.homepage.publicservice.PublicServiceContentDetailActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:113
+# view AndroidManifest.xml #generated:114
 -keep class com.wuxi.app.activity.search.AdvancedSearchActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:114
+# view AndroidManifest.xml #generated:115
 -keep class com.wuxi.app.activity.search.AdvancedSearchResultListActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:116
+# view AndroidManifest.xml #generated:117
 -keep class com.wuxi.app.activity.search.MainSearchActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:115
+# view AndroidManifest.xml #generated:116
 -keep class com.wuxi.app.activity.search.SearchResultDetailActivity { <init>(...); }
 
+# view res/layout/publicservice_channel_layout.xml #generated:132
+# view res/layout/publicservice_detail_layout.xml #generated:110
 # view res/layout/wuxi_city_content_layout.xml #generated:37
 -keep class com.wuxi.app.view.ContentListView { <init>(...); }
 

@@ -11,18 +11,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="8dip"
         android:adjustViewBounds="true"
-        android:src="@drawable/slide_open_close_btn"
-        android:layout_marginLeft="8dip" />
+        android:src="@drawable/slide_open_close_btn" />
 
     <ImageView
         android:id="@+id/back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="15dip"
         android:layout_toRightOf="@+id/open_close_left_btn"
-        android:src="@drawable/slide_back_btn"
-        android:layout_marginLeft="15dip" />
+        android:src="@drawable/slide_back_btn" />
 
     <TextView
         android:id="@+id/Title_Text"
@@ -30,9 +30,9 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:singleLine="true"
-        android:text="魅力锡城" 
+        android:text="魅力锡城"
         android:textSize="17sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/member_btn"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/slide_member_btn" 
-        android:layout_marginRight="5dip"/>
+        android:layout_marginRight="5dip"
+        android:src="@drawable/slide_member_btn" />
 
 </RelativeLayout>

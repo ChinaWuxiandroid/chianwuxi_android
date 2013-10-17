@@ -1,21 +1,75 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/main_content"
         android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/main_tab"
         android:background="@android:color/transparent"
         android:orientation="horizontal" >
-    </FrameLayout>
+    </RelativeLayout>
 
-    <include
+    <LinearLayout
+        android:id="@+id/main_tab"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/main_footer_layout" />
+        android:layout_height="65dip"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/tab_bg"
+        android:orientation="horizontal" >
 
-</LinearLayout>
+        <RadioGroup
+            android:id="@+id/main_tab_radiogroup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="2dip"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/main_tab_index"
+                style="@style/main_tab_bottom"
+                android:layout_weight="1"
+                android:checked="true"
+                android:drawableTop="@drawable/main_tab_index_style"
+                android:text="     首页     "
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/main_tab_search"
+                style="@style/main_tab_bottom"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/main_tab_search_style"
+                android:text="   搜索   "
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/main_tab_login_reg"
+                style="@style/main_tab_bottom"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/main_tab_login_style"
+                android:text="登录/注册"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/main_tab_mine"
+                style="@style/main_tab_bottom"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/main_tab_mine_style"
+                android:text="我的政民互动"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/main_tab_more"
+                style="@style/main_tab_bottom"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/main_tab_more_style"
+                android:text="设置"
+                android:textSize="12sp" />
+        </RadioGroup>
+    </LinearLayout>
+
+</RelativeLayout>

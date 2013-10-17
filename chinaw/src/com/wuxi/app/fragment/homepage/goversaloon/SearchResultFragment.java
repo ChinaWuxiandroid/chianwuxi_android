@@ -75,6 +75,7 @@ public class SearchResultFragment extends BaseFragment implements
 			case GOVERITEM_LOAD_FIAL:
 				String tip = msg.obj.toString();
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
+				pb_item.setVisibility(ProgressBar.GONE);
 				break;
 
 			}
@@ -211,7 +212,10 @@ public class SearchResultFragment extends BaseFragment implements
 			pb_loadmoore.setVisibility(ProgressBar.GONE);
 
 		} else {
-			gover_search_reasult.removeFooterView(loadMoreView);
+			if(goverOnlineApproveAdapter!=null){
+				gover_search_reasult.removeFooterView(loadMoreView);
+			}
+			
 		}
 
 	}

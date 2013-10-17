@@ -66,9 +66,6 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 
 	protected static final int TITLE_LOAD_FAIL = 1;// 加载失败
 
-	// public static final String ROOTFRAGMENT_KEY="BaseSlideFragment";
-	// public static final String SHOWITEM_LAYOUT_INDEXKEY =
-	// "showitem_layout_index";
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {

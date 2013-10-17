@@ -114,10 +114,14 @@ public class GoverSaoonItemQTDetail {
 	}
 
 	public String getWtjg() {
+		if((wtjg!=null&&wtjg.trim().equals("null"))||wtjg==null){
+			return "空";
+		}
 		return wtjg;
 	}
 
 	public void setWtjg(String wtjg) {
+		
 		this.wtjg = wtjg;
 	}
 
@@ -209,10 +213,15 @@ public class GoverSaoonItemQTDetail {
 	}
 
 	public String getIssf() {
-		if(issf.equals("1")){
+		if(issf==null){
+			return "空";
+		}else if(issf.equals("1")){
 			return "收费";
 		}else if(issf.equals("0")){
 			return "不收费";
+		}else if(issf.trim().equals("null")){
+			return "空";
+			
 		}else{
 			return issf;
 		}
@@ -256,6 +265,9 @@ public class GoverSaoonItemQTDetail {
 	}
 
 	public String getSfbz() {
+		if((sfbz==null)||(sfbz!=null&&sfbz.trim().equals("null"))){
+			return "空";
+		}
 		return sfbz;
 	}
 
