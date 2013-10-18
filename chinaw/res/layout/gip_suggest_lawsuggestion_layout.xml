@@ -7,9 +7,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginBottom="5sp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal" >
 
@@ -17,14 +17,15 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="按年份筛选征集主题：" />
+            android:text="按年份筛选征集主题：" 
+            android:textSize="13sp"/>
 
         <Spinner
             android:id="@+id/gip_suggest_lawsuggest_spinner_chooseYear"
-            android:layout_width="100sp"
+            android:layout_width="90sp"
             android:layout_height="match_parent"
             android:layout_marginLeft="3sp"
-            android:background="@drawable/spiner_bg"/>
+            android:background="@drawable/spiner_bg" />
     </LinearLayout>
 
     <ImageView
@@ -45,13 +46,23 @@
             android:visibility="gone" />
 
         <ListView
-            android:id="@+id/gip_suggest_lawsuggest_listView_poloticsList"
+            android:id="@+id/gip_suggest_lawsuggest_listView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:cacheColorHint="@android:color/transparent"
             android:divider="@android:color/white"
-            android:dividerHeight="1dp" 
-            android:cacheColorHint="@android:color/transparent">
+            android:dividerHeight="1dp" >
         </ListView>
+
+        <!-- <ListView
+            android:id="@+id/gip_suggest_lawsuggest_search_listView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/white"
+            android:dividerHeight="1dp"
+             >
+        </ListView> -->
     </FrameLayout>
 
 </LinearLayout>

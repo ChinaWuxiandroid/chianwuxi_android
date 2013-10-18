@@ -52,7 +52,7 @@ public class GoverInterPeopleVideoLiveHomeLiveFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.gip_vedio_bdroom_home_live_layout,
+		view = inflater.inflate(R.layout.gip_video_home_live_layout,
 				null);
 		context = getActivity();
 

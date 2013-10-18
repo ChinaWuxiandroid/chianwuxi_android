@@ -239,6 +239,9 @@ public class VedioReviewFragment extends BaseFragment implements
 			pb_loadmoore.setVisibility(ProgressBar.GONE);
 			loadMoreButton.setText("点击加载更多");
 		} else {
+			if (adapter != null) {
+				
+			}
 			mListView.removeFooterView(loadMoreView);
 		}
 	}

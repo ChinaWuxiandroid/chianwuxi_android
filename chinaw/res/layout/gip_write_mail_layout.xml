@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        >
+
+        <TextView
+            android:id="@+id/box_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="4sp"
+            android:text="信箱分类："
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/gip_12345_iwantmail_radiogroup_mailType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/box_type"
+            android:layout_toRightOf="@+id/box_type"
+            android:orientation="vertical" >
+
+            <RadioButton
+                android:id="@+id/gip_12345_iwantmail_radiobutton_mayorbox"
+                android:layout_width="wrap_content"
+                android:layout_height="23sp"
+                android:text="市长信箱"
+                android:textSize="10sp" />
+
+            <RadioButton
+                android:id="@+id/gip_12345_iwantmail_radiobutton_suggestAndComplaint"
+                android:layout_width="wrap_content"
+                android:layout_height="23sp"
+                android:text="建议咨询投诉"
+                android:textSize="10sp" />
+
+            <RadioButton
+                android:id="@+id/gip_12345_iwantmail_radiobutton_leaderbox"
+                android:layout_width="wrap_content"
+                android:layout_height="23sp"
+                android:text="部门领导信箱"
+                android:textSize="10sp" />
+        </RadioGroup>
+
+        <Spinner
+            android:id="@+id/gip_12345_iwantmail_spinner_leaderbox"
+            android:layout_width="wrap_content"
+            android:layout_height="25sp"
+            android:layout_alignBottom="@+id/gip_12345_iwantmail_radiogroup_mailType"
+            android:layout_marginLeft="3sp"
+            android:layout_marginRight="5sp"
+            android:layout_toRightOf="@+id/gip_12345_iwantmail_radiogroup_mailType"
+            android:background="@drawable/spiner_bg" />
+
+        <TextView
+            android:id="@+id/mail_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/box_type"
+            android:layout_below="@+id/gip_12345_iwantmail_radiogroup_mailType"
+            android:layout_marginTop="5sp"
+            android:text="信件分类："
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/gip_12345_iwantmail_spinner_type"
+            android:layout_width="70sp"
+            android:layout_height="25sp"
+            android:layout_below="@+id/gip_12345_iwantmail_radiogroup_mailType"
+            android:layout_marginLeft="3sp"
+            android:layout_marginTop="2sp"
+            android:layout_toRightOf="@+id/mail_type"
+            android:background="@drawable/spiner_bg" />
+
+        <TextView
+            android:id="@+id/mail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/gip_12345_iwantmail_spinner_type"
+            android:layout_marginTop="6sp"
+            android:layout_toLeftOf="@+id/gip_12345_iwantmail_spinner_type"
+            android:text="信件标题："
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/gip_12345_iwantmail_editText_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/gip_12345_iwantmail_spinner_type"
+            android:layout_marginLeft="3sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginTop="3sp"
+            android:layout_toRightOf="@+id/mail_title"
+            android:background="@drawable/worksuggestbox_edit_small_bk"
+            android:ems="10"
+            android:paddingLeft="3dp"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/mail_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/gip_12345_iwantmail_editText_title"
+            android:layout_marginTop="6dp"
+            android:layout_toLeftOf="@+id/gip_12345_iwantmail_editText_title"
+            android:gravity="top"
+            android:text="信件内容："
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/gip_12345_iwantmail_editText_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@+id/gip_12345_iwantmail_spinner_type"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/mail_content"
+            android:layout_marginRight="5sp"
+            android:background="@drawable/worksuggestbox_edit_big_bk"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:gravity="left|top"
+            android:lines="6"
+            android:paddingLeft="3dp"
+            android:textSize="12sp" >
+        </EditText>
+
+        <TextView
+            android:id="@+id/mail_open"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@+id/mail_content"
+            android:layout_below="@+id/gip_12345_iwantmail_editText_content"
+            android:layout_marginTop="7dp"
+            android:text="内容是否公开："
+            android:textColor="@color/gip_txt_gray"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/gip_12345_iwantmail_radiogroup_isopen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gip_12345_iwantmail_editText_content"
+            android:layout_marginTop="3sp"
+            android:layout_toRightOf="@+id/mail_open"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/gip_12345_iwantmail_radiobutton_notopen"
+                android:layout_width="wrap_content"
+                android:layout_height="23sp"
+                android:text="不公开"
+                android:textColor="@color/gip_txt_gray"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/gip_12345_iwantmail_radiobutton_open"
+                android:layout_width="wrap_content"
+                android:layout_height="23sp"
+                android:layout_marginLeft="6sp"
+                android:text="公开"
+                android:textColor="@color/gip_txt_gray"
+                android:textSize="12sp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/mail_email"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignRight="@+id/mail_open"
+            android:layout_below="@+id/gip_12345_iwantmail_radiogroup_isopen"
+            android:layout_marginTop="5sp"
+            android:text="邮件回复："
+            android:textColor="@color/gip_txt_gray"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/gip_12345_iwantmail_radiogroup_isNeedMailRaply"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/gip_12345_iwantmail_radiogroup_isopen"
+            android:layout_marginTop="2sp"
+            android:layout_toRightOf="@+id/mail_email"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/gip_12345_iwantmail_radiobutton_notNeedMail"
+                android:layout_width="wrap_content"
+                android:layout_height="23sp"
+                android:text="不需要"
+                android:textColor="@color/gip_txt_gray"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/gip_12345_iwantmail_radiobutton_needMail"
+                android:layout_width="wrap_content"
+                android:layout_height="23sp"
+                android:layout_marginLeft="6sp"
+                android:text="需要"
+                android:textColor="@color/gip_txt_gray"
+                android:textSize="12sp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/mail_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@+id/mail_email"
+            android:layout_below="@+id/gip_12345_iwantmail_radiogroup_isNeedMailRaply"
+            android:layout_marginTop="5sp"
+            android:text="短信回复："
+            android:textColor="@color/gip_txt_gray"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/gip_12345_iwantmail_radiogroup_isNeedMsgRaply"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/gip_12345_iwantmail_radiogroup_isNeedMailRaply"
+            android:layout_marginTop="2sp"
+            android:layout_toRightOf="@+id/mail_msg"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/gip_12345_iwantmail_radiobutton_notNeedMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="23sp"
+                android:text="不需要"
+                android:textColor="@color/gip_txt_gray"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/gip_12345_iwantmail_radiobutton_needMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="23sp"
+                android:layout_marginLeft="6sp"
+                android:text="需要"
+                android:textColor="@color/gip_txt_gray"
+                android:textSize="12sp" />
+        </RadioGroup>
+
+        <ImageButton
+            android:id="@+id/gip_12345_iwantmail_imageBtn_send"
+            android:layout_width="100sp"
+            android:layout_height="30sp"
+            android:layout_below="@+id/gip_12345_iwantmail_radiogroup_isNeedMsgRaply"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/sendmail_selector" />
+        
+    </RelativeLayout>
+
+</ScrollView>

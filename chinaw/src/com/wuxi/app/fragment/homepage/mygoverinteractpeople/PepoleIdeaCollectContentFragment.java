@@ -68,7 +68,7 @@ public class PepoleIdeaCollectContentFragment extends BaseFragment {
 	private PepoleIdeaReplyWrapper pepoleIdeaReplyWrapper = null;
 
 	// 数据加载成功标志
-	private static final int DATA__LOAD_SUCESS = 0;
+	private static final int DATA_LOAD_SUCESS = 0;
 	// 数据加载失败标志
 	private static final int DATA_LOAD_ERROR = 1;
 
@@ -84,7 +84,7 @@ public class PepoleIdeaCollectContentFragment extends BaseFragment {
 			}
 
 			switch (msg.what) {
-			case DATA__LOAD_SUCESS:
+			case DATA_LOAD_SUCESS:
 				progressBar.setVisibility(View.GONE);
 				layout.setVisibility(View.VISIBLE);
 				setLayoutValue();
@@ -202,7 +202,7 @@ public class PepoleIdeaCollectContentFragment extends BaseFragment {
 					if (pepoleIdeaCollectWrapper != null) {
 						pepoleIdeaReplyWrapper = pepoleIdeaCollectWrapper
 								.getPepoleIdeaReplyWrapper();
-						handler.sendEmptyMessage(DATA__LOAD_SUCESS);
+						handler.sendEmptyMessage(DATA_LOAD_SUCESS);
 					} else {
 						Message message = handler.obtainMessage();
 						message.obj = "error";

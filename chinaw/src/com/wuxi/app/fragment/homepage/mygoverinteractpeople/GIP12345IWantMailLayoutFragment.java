@@ -58,7 +58,6 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment {
 	private final static String TAG = "GIP12345IWantMailLayoutFragment";
 
 	private View view = null;
-	private LayoutInflater mInflater = null;
 	private Context context = null;
 
 	private final static int SEND_SUCCESS = 1;
@@ -149,8 +148,7 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.gip_iwantmail_appui_layout, null);
-		mInflater = inflater;
+		view = inflater.inflate(R.layout.gip_write_mail_layout, null);
 		context = getActivity();
 
 		initView();

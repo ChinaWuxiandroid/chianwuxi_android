@@ -253,7 +253,10 @@ public class VideoGuestPresenceFragment extends BaseFragment implements
 			pb_loadmoore.setVisibility(ProgressBar.GONE);
 			loadMoreButton.setText("点击加载更多");
 		} else {
-			listView.removeFooterView(loadMoreView);
+			if (adapter != null) {
+				listView.removeFooterView(loadMoreView);
+			}
+
 		}
 	}
 
@@ -287,7 +290,7 @@ public class VideoGuestPresenceFragment extends BaseFragment implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

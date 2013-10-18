@@ -8,50 +8,51 @@ import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.GIPRadioButtonStyleChange;
 
 /**
- * 我的政民互动  主Fragment  之 我的政民互动   子fragment
+ * 我的政民互动 主Fragment 之 我的政民互动 子fragment
+ * 
  * @author 杨宸 智佳
  * */
 
-public class GoverInterPeopleMineFragment extends RadioButtonChangeFragment{
+public class GoverInterPeopleMineFragment extends RadioButtonChangeFragment {
 
-	private final  int[] radioButtonIds={
+	private final int[] radioButtonIds = {
 			R.id.goverinterpeople_mine_radioButton_12345,
 			R.id.goverinterpeople_mine_radioButton_suggestionPlatform,
 			R.id.goverinterpeople_mine_radioButton_internetGoverSaloon,
 			R.id.goverinterpeople_mine_radioButton_infoPublicPlatform,
-			R.id.goverinterpeople_mine_radioButton_publicForum
-	};
+			R.id.goverinterpeople_mine_radioButton_publicForum };
 
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-		GIPRadioButtonStyleChange radioButtonStyleChange=new GIPRadioButtonStyleChange();
-		radioButtonStyleChange.refreshRadioButtonStyle(view,radioButtonIds,checkedId);
+		GIPRadioButtonStyleChange radioButtonStyleChange = new GIPRadioButtonStyleChange();
+		radioButtonStyleChange.refreshRadioButtonStyle(view, radioButtonIds,
+				checkedId);
 		switch (checkedId) {
 
 		case R.id.goverinterpeople_mine_radioButton_12345:
 			init();
 			break;
 
-		case R.id.goverinterpeople_mine_radioButton_suggestionPlatform:	
-			BaseFragment suggestionPlatformFragment=new GIPMineSuggestionPlatformFragment();
+		case R.id.goverinterpeople_mine_radioButton_suggestionPlatform:
+			BaseFragment suggestionPlatformFragment = new GIPMineSuggestionPlatformFragment();
 			onTransaction(suggestionPlatformFragment);
 			break;
 
 		case R.id.goverinterpeople_mine_radioButton_internetGoverSaloon:
-			BaseFragment internetGoverSaloonFragment=new GIPMineInternetGoverSaloonFragment();
+			BaseFragment internetGoverSaloonFragment = new GIPMineInternetGoverSaloonFragment();
 			onTransaction(internetGoverSaloonFragment);
 			break;
 
 		case R.id.goverinterpeople_mine_radioButton_infoPublicPlatform:
-			BaseFragment infoPublicPlatformFragment=new GIPMineInfoPublicPlatformFragment();
+			BaseFragment infoPublicPlatformFragment = new GIPMineInfoPublicPlatformFragment();
 			onTransaction(infoPublicPlatformFragment);
 
 			break;
 
 		case R.id.goverinterpeople_mine_radioButton_publicForum:
 
-			BaseFragment publicForumFragment=new GIPMinePublicForumFragment();
+			BaseFragment publicForumFragment = new GIPMinePublicForumFragment();
 			onTransaction(publicForumFragment);
 			break;
 		}
@@ -79,7 +80,7 @@ public class GoverInterPeopleMineFragment extends RadioButtonChangeFragment{
 
 	@Override
 	protected void init() {
-		GIPMine12345Fragment mine12345Fragment=new GIPMine12345Fragment();
+		GIPMine12345Fragment mine12345Fragment = new GIPMine12345Fragment();
 		onTransaction(mine12345Fragment);
 	}
 }

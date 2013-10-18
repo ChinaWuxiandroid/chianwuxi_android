@@ -249,7 +249,10 @@ public class VideoDailyRoutineFragment extends BaseFragment implements
 			pb_loadmoore.setVisibility(ProgressBar.GONE);
 			loadMoreButton.setText("点击加载更多");
 		} else {
-			listView.removeFooterView(loadMoreView);
+			if (adapter != null) {
+				listView.removeFooterView(loadMoreView);
+			}
+		
 		}
 	}
 

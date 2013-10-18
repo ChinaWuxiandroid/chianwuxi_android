@@ -12,12 +12,13 @@
 
         <Button
             android:id="@+id/gip_12345_complaint_button_queryMail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="2dp"
+            android:layout_weight="1"
             android:background="@drawable/vedio_home_saybtn"
             android:text="信件查询"
             android:textColor="@android:color/white"
@@ -25,87 +26,81 @@
 
         <Button
             android:id="@+id/gip_12345_complaint_button_statisticMail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="2dp"
+            android:layout_weight="1"
             android:background="@drawable/vedio_home_saybtn"
             android:text="信件处理统计"
             android:textColor="@android:color/white"
             android:textSize="12sp" />
     </LinearLayout>
-    
-     <include
+
+    <include
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         layout="@layout/gip_query_mail_pop_layout" />
 
-    <LinearLayout
-        android:id="@+id/gip_12345_complaint_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp" >
+    <RadioGroup
+        android:id="@+id/gip_12345_complaint_radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal" >
 
-        <RadioGroup
-            android:id="@+id/gip_12345_complaint_radioGroup"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="2"
-            android:orientation="horizontal" >
+        <RadioButton
+            android:id="@+id/gip_12345_complaint_radioButton_latestMailList"
+            style="@style/goverinterpeople_mine_radiobutton_style"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/gip_button_selected_bk"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="最新信件列表"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
 
-            <RadioButton
-                android:id="@+id/gip_12345_complaint_radioButton_latestMailList"
-                style="@style/goverinterpeople_mine_radiobutton_style"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/gip_button_selected_bk"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="最新信件列表"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
+        <RadioButton
+            android:id="@+id/gip_12345_complaint_radioButton_mustKonwMail"
+            style="@style/goverinterpeople_mine_radiobutton_style"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="写信须 知"
+            android:textColor="@color/gip_second_frame_button_brown"
+            android:textSize="12sp" />
 
-            <RadioButton
-                android:id="@+id/gip_12345_complaint_radioButton_mustKonwMail"
-                style="@style/goverinterpeople_mine_radiobutton_style"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="写    信        须    知"
-                android:textColor="@color/gip_second_frame_button_brown"
-                android:textSize="12sp" />
+        <RadioButton
+            android:id="@+id/gip_12345_complaint_radioButton_mayorBoxRule"
+            style="@style/goverinterpeople_mine_radiobutton_style"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="来信办理规则"
+            android:textColor="@color/gip_second_frame_button_brown"
+            android:textSize="12sp" />
 
-            <RadioButton
-                android:id="@+id/gip_12345_complaint_radioButton_mayorBoxRule"
-                style="@style/goverinterpeople_mine_radiobutton_style"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="来信办理规则"
-                android:textColor="@color/gip_second_frame_button_brown"
-                android:textSize="12sp" />
-
-            <RadioButton
-                android:id="@+id/gip_12345_complaint_radioButton_organizationDuty"
-                style="@style/goverinterpeople_mine_radiobutton_style"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="机    构        职   责"
-                android:textColor="@color/gip_second_frame_button_brown"
-                android:textSize="12sp" />
-        </RadioGroup>
-    </LinearLayout>
+        <RadioButton
+            android:id="@+id/gip_12345_complaint_radioButton_organizationDuty"
+            style="@style/goverinterpeople_mine_radiobutton_style"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="机构职 责"
+            android:textColor="@color/gip_second_frame_button_brown"
+            android:textSize="12sp" />
+    </RadioGroup>
 
     <ImageView
         android:layout_width="fill_parent"
@@ -113,9 +108,32 @@
         android:background="@android:color/white" />
 
     <FrameLayout
+        android:id="@+id/complaint_web_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" >
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/complaint_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
+
+        <ProgressBar
+            android:id="@+id/gip_12345_complaint_listView_pb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/gip_12345_complaint_listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/white"
+            android:dividerHeight="1dp" >
+        </ListView>
     </FrameLayout>
 
 </LinearLayout>

@@ -154,7 +154,5 @@ public class MineSugSurWapper extends CommonDataWrapper {
 		public void setSurveryID(String surveryID) {
 			this.surveryID = surveryID;
 		}
-
 	}
-
 }

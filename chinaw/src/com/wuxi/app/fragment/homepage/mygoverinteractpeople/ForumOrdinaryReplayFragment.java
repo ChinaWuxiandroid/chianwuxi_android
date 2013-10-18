@@ -226,7 +226,8 @@ public class ForumOrdinaryReplayFragment extends BaseFragment implements
 						HotPostService hotPostService = new HotPostService(
 								context);
 						hotPostWrapper = hotPostService.getHotPostWrapper(
-								forum.getId(), forum.getViewpath(), startIndex,endIndex);
+								forum.getId(), forum.getViewpath(), startIndex,
+								endIndex);
 						if (hotPostWrapper != null) {
 							hotPostReplyWrapper = hotPostWrapper
 									.getHotPostReplyWrapper();
@@ -345,7 +346,10 @@ public class ForumOrdinaryReplayFragment extends BaseFragment implements
 				pb_loadmoore.setVisibility(ProgressBar.GONE);
 				loadMoreButton.setText("点击加载更多");
 			} else {
-				mListView.removeFooterView(loadMoreView);
+				if (adapter != null) {
+					mListView.removeFooterView(loadMoreView);
+				}
+
 			}
 
 		}
@@ -387,7 +391,10 @@ public class ForumOrdinaryReplayFragment extends BaseFragment implements
 				pb_loadmoore.setVisibility(ProgressBar.GONE);
 				loadMoreButton.setText("点击加载更多");
 			} else {
-				mListView.removeFooterView(loadMoreView);
+				if (adapter != null) {
+					mListView.removeFooterView(loadMoreView);
+				}
+
 			}
 		}
 		// 公告类帖子
@@ -429,7 +436,10 @@ public class ForumOrdinaryReplayFragment extends BaseFragment implements
 				pb_loadmoore.setVisibility(ProgressBar.GONE);
 				loadMoreButton.setText("点击加载更多");
 			} else {
-				mListView.removeFooterView(loadMoreView);
+				if (adapter != null) {
+					mListView.removeFooterView(loadMoreView);
+				}
+
 			}
 		}
 		// 征求意见类帖子
@@ -471,7 +481,10 @@ public class ForumOrdinaryReplayFragment extends BaseFragment implements
 				pb_loadmoore.setVisibility(ProgressBar.GONE);
 				loadMoreButton.setText("点击加载更多");
 			} else {
-				mListView.removeFooterView(loadMoreView);
+				if (adapter != null) {
+					mListView.removeFooterView(loadMoreView);
+				}
+
 			}
 		}
 

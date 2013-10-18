@@ -97,7 +97,6 @@ public class MyOnlineConsultAdapter extends BaseAdapter implements
 		Intent intent = new Intent(context, MyOnlineAskActivity.class);
 		switch (v.getId()) {
 		case R.id.gover_onlineask_view:// 咨询详情
-
 			intent.putExtra("showType", 0);
 			break;
 		case R.id.gover_onlineask_goask:// 继续咨询

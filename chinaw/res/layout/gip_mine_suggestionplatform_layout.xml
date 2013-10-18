@@ -4,63 +4,83 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <RadioGroup
+        android:id="@+id/gip_mine_suggestion_radioGroup"
         android:layout_width="fill_parent"
-        android:layout_height="45dp" >
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal" >
 
-        <RadioGroup
-            android:id="@+id/gip_mine_suggestion_radioGroup"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="2"
-            android:orientation="horizontal" >
+        <RadioButton
+            android:id="@+id/gip_mine_suggestion_radioButton_internetsurvy"
+            style="@style/goverinterpeople_mine_radiobutton_style"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/gip_button_selected_bk"
+            android:checked="true"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="我参与的网上调查"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
 
-            <RadioButton
-                android:id="@+id/gip_mine_suggestion_radioButton_internetsurvy"
-                style="@style/goverinterpeople_mine_radiobutton_style"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/gip_button_selected_bk"
-                android:checked="true"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="我参与的\n网上调查"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
+        <RadioButton
+            android:id="@+id/gip_mine_suggestion_radioButton_peoplewill"
+            style="@style/goverinterpeople_mine_radiobutton_style"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="我参与的民意征集"
+            android:textColor="@color/gip_second_frame_button_brown"
+            android:textSize="12sp" />
 
-            <RadioButton
-                android:id="@+id/gip_mine_suggestion_radioButton_peoplewill"
-                style="@style/goverinterpeople_mine_radiobutton_style"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="我参与的\n民意征集"
-                android:textColor="@color/gip_second_frame_button_brown"
-                android:textSize="12sp" />
+        <RadioButton
+            android:id="@+id/gip_mine_suggestion_radioButton_lawwill"
+            style="@style/goverinterpeople_mine_radiobutton_style"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="我参与的立法征求意见"
+            android:textColor="@color/gip_second_frame_button_brown"
+            android:textSize="12sp" />
+    </RadioGroup>
 
-            <RadioButton
-                android:id="@+id/gip_mine_suggestion_radioButton_lawwill"
-                style="@style/goverinterpeople_mine_radiobutton_style"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="我参与的立\n法征求意见"
-                android:textColor="@color/gip_second_frame_button_brown"
-                android:textSize="12sp" />
-        </RadioGroup>
-    </LinearLayout>
-    
     <FrameLayout
         android:id="@+id/gip_mine_suggestion_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
+
+        <ProgressBar
+            android:id="@+id/gip_mine_suggestion_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/gip_mine_suggestion_survey_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/white"
+            android:dividerHeight="1dp" >
+        </ListView>
+
+        <ListView
+            android:id="@+id/gip_mine_suggestion_law_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/white"
+            android:dividerHeight="1dp"
+            android:visibility="gone" >
+        </ListView>
     </FrameLayout>
 
 </LinearLayout>
