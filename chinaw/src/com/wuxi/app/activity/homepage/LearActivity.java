@@ -1,12 +1,15 @@
 package com.wuxi.app.activity.homepage;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
 
@@ -60,6 +63,29 @@ public class LearActivity extends BaseItemContentActivity {
 
 		wuxicity_decontent_wb
 				.loadUrl("http://www.wuxi.gov.cn/wap/zxzx/hdjj/index.shtml?showtoolbar=false");
+
+		wuxicity_decontent_wb.setWebViewClient(new WebViewClient(){
+
+			/* (non-Javadoc)
+			 * @方法： shouldOverrideUrlLoading
+			 * @描述： WebView中存在链接的，希望在该WebView中处理，不用打开系统的浏览器
+			 * @param view
+			 * @param url
+			 * @return 
+			 * @see android.webkit.WebViewClient#shouldOverrideUrlLoading(android.webkit.WebView, java.lang.String)
+			 */
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				Intent intent=new Intent(LearActivity.this,HomeWebActivity.class);
+				intent.putExtra("url", url);
+				intent.putExtra("title", "领导活动集锦");
+				MainTabActivity.instance.addView(intent);
+				return true;
+			}
+			
+			
+			
+		});
 
 	}
 

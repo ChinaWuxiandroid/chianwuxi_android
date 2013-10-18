@@ -96,6 +96,7 @@
         <!-- 首页推荐新闻和推荐公告 -->
         <activity android:name="com.wuxi.app.activity.homepage.NewsAnnAcountActivitiy" />
         <activity android:name="com.wuxi.app.activity.homepage.LearActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.HomeWebActivity" />
         <!-- 登录注册 -->
         <activity android:name="com.wuxi.app.activity.homepage.logorregister.LoginActivity" />
         <activity android:name="com.wuxi.app.activity.homepage.logorregister.RegisterActivity" />
