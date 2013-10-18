@@ -27,30 +27,27 @@
             android:src="@drawable/iwantwritemail_ibtn_bk" />
     </RelativeLayout>
 
-    <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/btn_rl" >
+    <ProgressBar
+        android:id="@+id/gover_eff_pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center" />
 
-        <ProgressBar
-            android:id="@+id/gover_eff_pb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+    <ListView
+        android:id="@+id/gover_eff_lv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_rl"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@android:color/white"
+        android:dividerHeight="1dip" >
+    </ListView>
 
-        <ListView
-            android:id="@+id/gover_eff_lv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:cacheColorHint="@android:color/transparent"
-            android:divider="@android:color/white"
-            android:dividerHeight="1dip" >
-        </ListView>
-
-        <include
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            layout="@layout/goversaloon_search_mail_layout" />
-    </FrameLayout>
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_rl"
+        layout="@layout/goversaloon_search_mail_layout" />
 
 </RelativeLayout>

@@ -88,6 +88,9 @@ public class InitService extends Service {
 			ed.commit();
 
 		}
+		
+		
+		AppManager.getInstance(context).clearCacheFile(true);//清除content列表缓存
 
 	}
 }
