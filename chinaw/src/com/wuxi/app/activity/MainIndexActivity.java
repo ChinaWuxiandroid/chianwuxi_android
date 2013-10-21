@@ -214,10 +214,10 @@ public class MainIndexActivity extends Activity implements
 		iv_index_zt = (ImageView) findViewById(R.id.iv_index_zt);
 		iv_index_ldhd.setOnClickListener(this);
 		iv_index_zt.setOnClickListener(this);
-		// LoadGrid();
-		LoadGrid2();
+
+		LoadGrid();//加载菜单数据
 		loadNews();// 加载新闻数据
-		loadAnnouncements();
+		loadAnnouncements();//加载公共数据
 
 		pd = new ProgressDialog(this);
 
@@ -236,7 +236,7 @@ public class MainIndexActivity extends Activity implements
 	 * wanglu 泰得利通 加载菜单数据
 	 */
 	@SuppressWarnings("unchecked")
-	private void LoadGrid2() {
+	private void LoadGrid() {
 
 		if (CacheUtil.get(MENUITEM_CACKE_KEY) != null) {// 从缓存加载
 
@@ -357,7 +357,7 @@ public class MainIndexActivity extends Activity implements
 		gridAdapter = new IndexGridAdapter(this,
 				R.layout.index_gridview_item_layout, Grid_viewid, items, null);
 		gridView.setAdapter(gridAdapter);
-		// gridView.setOnItemClickListener(GridviewOnclick);
+
 		gridView.setOnItemClickListener(GridviewOnclick2);
 
 		return gridView;
@@ -455,7 +455,6 @@ public class MainIndexActivity extends Activity implements
 
 	}
 
-	
 	/**
 	 * 菜单点击
 	 */
@@ -780,7 +779,7 @@ public class MainIndexActivity extends Activity implements
 		}
 
 		if (intent != null) {
-			
+
 			MainTabActivity.instance.addView(intent);
 		}
 
@@ -811,7 +810,7 @@ public class MainIndexActivity extends Activity implements
 
 			@Override
 			public void run() {
-				updateInfo=new UpdateInfo();
+				updateInfo = new UpdateInfo();
 				boolean update = AppManager.getInstance(MainIndexActivity.this)
 						.isUpdate(updateInfo);// 检查更新
 				if (update) {

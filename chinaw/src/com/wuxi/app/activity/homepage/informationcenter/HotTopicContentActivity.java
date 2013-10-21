@@ -81,6 +81,7 @@ public class HotTopicContentActivity extends BaseItemContentActivity {
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
 				Intent intent=new Intent(HotTopicContentActivity.this,InfoWebActivity.class);
 				intent.putExtra("url", url);
+				intent.putExtra("title", "热点专题");
 				MainTabActivity.instance.addView(intent);
 				return true;
 			}

@@ -1,10 +1,10 @@
-package com.wuxi.app.activity.homepage.informationcenter;
+package com.wuxi.app.activity.homepage;
 
 import android.content.Intent;
 
 import com.wuxi.app.activity.commactivity.ContentDetailWebActivity;
 
-public class InfoWebActivity extends ContentDetailWebActivity {
+public class HomeWebActivity extends ContentDetailWebActivity {
 
 	@Override
 	protected String getUrl() {
@@ -21,7 +21,7 @@ public class InfoWebActivity extends ContentDetailWebActivity {
 		if(title!=null){
 			return title;
 		}else{
-			return "资讯中心";
+			return "";
 		}
 		
 	}
