@@ -55,7 +55,7 @@ public class GoverInterPeopleVideoLiveFragment extends
 		super.onCheckedChanged(group, checkedId);
 
 		switch (checkedId) {
-		//节目预告
+		//栏目首页
 		case R.id.gip_video_bdroom_radioBtn_home:
 			init();
 			break;

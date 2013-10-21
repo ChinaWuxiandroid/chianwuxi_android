@@ -36,6 +36,5 @@
         android:textColor="#808080"
         android:text="测试"
         />
-    
 
 </LinearLayout>

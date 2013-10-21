@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5sp"
-            android:orientation="horizontal">
+            android:orientation="horizontal" >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -43,8 +43,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" 
-            android:layout_marginTop="5sp">
+            android:layout_marginTop="5sp"
+            android:orientation="horizontal" >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -69,9 +69,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" 
                 android:layout_marginLeft="8sp"
-                >
+                android:orientation="horizontal" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -90,57 +89,51 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="45dp" >
+    <RadioGroup
+        android:id="@+id/gip_12345_answerstati_radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal" >
 
-        <RadioGroup
-            android:id="@+id/gip_12345_answerstati_radioGroup"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="2"
-            android:orientation="horizontal" >
+        <RadioButton
+            android:id="@+id/gip_12345_answerstati_radioButton_mayorBox"
+            style="@style/goverinterpeople_mine_radiobutton_style"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/gip_button_selected_bk"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="市长信箱"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
 
-            <RadioButton
-                android:id="@+id/gip_12345_answerstati_radioButton_mayorBox"
-                style="@style/goverinterpeople_mine_radiobutton_style"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/gip_button_selected_bk"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="市长信箱"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
+        <RadioButton
+            android:id="@+id/gip_12345_answerstati_radioButton_complaint"
+            style="@style/goverinterpeople_mine_radiobutton_style"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="咨询投诉"
+            android:textColor="@color/gip_second_frame_button_brown"
+            android:textSize="12sp" />
 
-            <RadioButton
-                android:id="@+id/gip_12345_answerstati_radioButton_complaint"
-                style="@style/goverinterpeople_mine_radiobutton_style"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="咨询投诉"
-                android:textColor="@color/gip_second_frame_button_brown"
-                android:textSize="12sp" />
-
-            <RadioButton
-                android:id="@+id/gip_12345_answerstati_radioButton_leaderBox"
-                style="@style/goverinterpeople_mine_radiobutton_style"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="领导信箱"
-                android:textColor="@color/gip_second_frame_button_brown"
-                android:textSize="12sp" />
-        </RadioGroup>
-    </LinearLayout>
+        <RadioButton
+            android:id="@+id/gip_12345_answerstati_radioButton_leaderBox"
+            style="@style/goverinterpeople_mine_radiobutton_style"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="领导信箱"
+            android:textColor="@color/gip_second_frame_button_brown"
+            android:textSize="12sp" />
+    </RadioGroup>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -187,9 +180,11 @@
 
                 <Spinner
                     android:id="@+id/gip_12345_answerstati_spinner_yearalone"
-                    android:layout_width="80dp"
-                    android:layout_height="match_parent" 
-                    android:background="@drawable/spiner_bg"/>
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="150sp"
+                    android:layout_weight="1"
+                    android:background="@drawable/spiner_bg" />
             </LinearLayout>
 
             <LinearLayout
@@ -200,22 +195,26 @@
 
                 <Spinner
                     android:id="@+id/gip_12345_answerstati_spinner_yeara"
-                    android:layout_width="80dp"
+                    android:layout_width="0dip"
                     android:layout_height="match_parent"
+                    android:layout_weight="1.8"
                     android:background="@drawable/spiner_bg" />
 
                 <Spinner
                     android:id="@+id/gip_12345_answerstati_spinner_month"
-                    android:layout_width="60dp"
-                    android:layout_height="match_parent" 
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="3sp"
-                    android:background="@drawable/spiner_bg"/>
+                    android:layout_weight="1.2"
+                    android:background="@drawable/spiner_bg" />
 
                 <ImageButton
                     android:id="@+id/gip_12345_answerstati_imagebutton_startstati"
-                    android:layout_width="80dp"
+                    android:layout_width="0dip"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="3sp"
+                    android:layout_marginRight="5sp"
+                    android:layout_weight="1.5"
                     android:src="@drawable/statistics_selector" />
             </LinearLayout>
         </LinearLayout>
@@ -236,8 +235,8 @@
             android:id="@+id/gip_12345_answerstati_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@android:color/white"
             android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/white"
             android:dividerHeight="1dp" >
         </ListView>
     </FrameLayout>

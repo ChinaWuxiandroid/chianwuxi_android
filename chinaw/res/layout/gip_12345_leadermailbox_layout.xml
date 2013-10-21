@@ -4,16 +4,58 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <LinearLayout
+        android:id="@+id/part_btn_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/gip_part_btn_queryMail"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/vedio_home_saybtn"
+            android:text="信件查询"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/gip_part_btn_statisticMail"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/vedio_home_saybtn"
+            android:text="信件处理统计"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/gip_query_mail_pop_layout" />
+
     <RadioGroup
         android:id="@+id/gip_12345_leaderbox_radioGroup"
         android:layout_width="fill_parent"
-        android:layout_height="35sp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
         android:orientation="horizontal" >
 
         <RadioButton
-            android:id="@+id/gip_12345_leaderbox_radioButton_lederBoxList"
+            android:id="@+id/gip_12345_leaderbox_radiobtn_lederBoxList"
             style="@style/goverinterpeople_mine_radiobutton_style"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -26,7 +68,7 @@
             android:textSize="12sp" />
 
         <RadioButton
-            android:id="@+id/gip_12345_leaderbox_radioButton_mustKonwMail"
+            android:id="@+id/gip_12345_leaderbox_radiobtn_mustKonwMail"
             style="@style/goverinterpeople_mine_radiobutton_style"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -36,34 +78,98 @@
             android:text="写信须知"
             android:textColor="@color/gip_second_frame_button_brown"
             android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/gip_12345_partletter_radiobtn_mailList"
+            style="@style/goverinterpeople_mine_radiobutton_style"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/gip_button_selected_bk"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="最新信件列表"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+        <RadioButton
+            android:id="@+id/gip_12345_partletter_radiobtn_mustKonwMail"
+            style="@style/goverinterpeople_mine_radiobutton_style"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="写信须知"
+            android:textColor="@color/gip_second_frame_button_brown"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+        <RadioButton
+            android:id="@+id/gip_12345_partletter_radiobtn_write"
+            style="@style/goverinterpeople_mine_radiobutton_style"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="我要写信"
+            android:textColor="@color/gip_second_frame_button_brown"
+            android:textSize="12sp"
+            android:visibility="gone" />
     </RadioGroup>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
 
     <FrameLayout
         android:id="@+id/gip_12345_leaderbox_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-        
+
         <ProgressBar
             android:id="@+id/gip_12345_leader_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:visibility="gone" />
-        
+
         <ListView
             android:id="@+id/gip_12345_leader_listview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" 
-            android:cacheColorHint="@android:color/transparent">
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent" >
         </ListView>
-        
     </FrameLayout>
-    
-    <FrameLayout 
-        android:id="@+id/gip_leaderbox_web_fragment"
+
+    <FrameLayout
+        android:id="@+id/gip_leaderletter_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        ></FrameLayout>
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:id="@+id/gip_leaderletter_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/gip_leaderletter_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/white"
+            android:dividerHeight="1dp" >
+        </ListView>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/part_web_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" >
+    </FrameLayout>
 
 </LinearLayout>

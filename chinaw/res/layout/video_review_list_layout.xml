@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/vedio_review_list_imageview"
+        android:layout_width="90dp"
+        android:layout_height="63dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="13dp"
+        android:src="@drawable/video_bg" />
+
+    <TextView
+        android:id="@+id/review_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_toRightOf="@+id/vedio_review_list_imageview"
+        android:text="访问主题：无锡地税局长丁源专访---“百姓身边的地税”"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/review_time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/review_title_text"
+        android:layout_below="@+id/review_title_text"
+        android:layout_marginRight="5dp"
+        android:text="访问时间：2013年3月28日 上午10:00--11:00"
+        android:textColor="#808080"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/review_guest_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/review_time_text"
+        android:layout_below="@+id/review_time_text"
+        android:layout_marginRight="5dp"
+        android:text="访问嘉宾：无锡市地税局党组书记、局长 丁源"
+        android:textColor="#808080"
+        android:textSize="12sp" />
+
+</RelativeLayout>

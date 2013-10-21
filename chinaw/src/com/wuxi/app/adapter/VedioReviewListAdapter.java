@@ -28,14 +28,14 @@ import android.widget.TextView;
  * @描述： 往期回顾列表适配器类
  * @作者： 罗森
  * @创建时间： 2013 2013-9-11 上午10:13:05
- * @修改时间： 
- * @修改描述： 
- *
+ * @修改时间：
+ * @修改描述：
+ * 
  */
-public class VedioReviewListAdapter extends BaseAdapter{
-	
+public class VedioReviewListAdapter extends BaseAdapter {
+
 	private Context context;
-	
+
 	private List<VedioReview> reviews;
 
 	/**
@@ -44,24 +44,24 @@ public class VedioReviewListAdapter extends BaseAdapter{
 	 * @param context
 	 * @param reviews
 	 */
-	public VedioReviewListAdapter(Context context,List<VedioReview> reviews){
+	public VedioReviewListAdapter(Context context, List<VedioReview> reviews) {
 		this.context = context;
 		this.reviews = reviews;
 	}
-	
+
 	/**
 	 * @方法： addItem
 	 * @描述： 添加数据到列表
 	 * @param review
 	 */
-	public void addItem(VedioReview review){
+	public void addItem(VedioReview review) {
 		this.reviews.add(review);
 	}
-	
+
 	public void setReviews(List<VedioReview> reviews) {
 		this.reviews = reviews;
 	}
-	
+
 	@Override
 	public int getCount() {
 		return reviews.size();
@@ -95,7 +95,7 @@ public class VedioReviewListAdapter extends BaseAdapter{
 
 		if (convertView == null) {
 			convertView = LayoutInflater.from(context).inflate(
-					R.layout.vedio_review_list_layout, null);
+					R.layout.video_review_list_layout, null);
 
 			holder = new Holder();
 
@@ -111,11 +111,12 @@ public class VedioReviewListAdapter extends BaseAdapter{
 			holder = (Holder) convertView.getTag();
 		}
 
-		holder.review_title_text
-				.setText(reviews.get(position).getSubject());
-		holder.review_time_text
-				.setText(reviews.get(position).getWorkDate());
-		holder.review_guest_text.setText(reviews.get(position).getGuests());
+		holder.review_title_text.setText("访问主题："
+				+ reviews.get(position).getSubject());
+		holder.review_time_text.setText("访问时间："
+				+ reviews.get(position).getWorkDate());
+		holder.review_guest_text.setText("访问嘉宾："
+				+ reviews.get(position).getGuests());
 
 		return convertView;
 	}
