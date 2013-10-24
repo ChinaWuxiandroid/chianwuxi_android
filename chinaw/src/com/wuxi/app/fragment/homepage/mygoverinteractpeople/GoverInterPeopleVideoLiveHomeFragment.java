@@ -11,9 +11,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +20,6 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -46,8 +42,8 @@ import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.LeaveMessageWrapper;
-import com.wuxi.domain.MemoirWrapper;
 import com.wuxi.domain.LeaveMessageWrapper.LeaveMessage;
+import com.wuxi.domain.MemoirWrapper;
 import com.wuxi.domain.MemoirWrapper.Memoir;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -84,8 +80,6 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 	private int questionType = 1;
 
 	private LinearLayout liveLayout;
-	private FrameLayout messageLayout;
-	private FrameLayout memoirLayout;
 
 	// 弹出窗体布局控件
 	private TextView theme;
@@ -119,7 +113,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 			R.id.gip_video_live_home_radioBtn_memoir,
 			R.id.gip_video_live_home_radioBtn_message };
 
-	private ProgressBar messageProgressBar = null;
+	// private ProgressBar messageProgressBar = null;
 
 	private ListView messageListView = null;
 
@@ -146,9 +140,6 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 
 	private View loadMoreMessageView;// 加载更多视图
 	private Button loadMoreMessageButton;
-	private ProgressBar loadMoreMessageProgressBar;
-
-	private ProgressBar list_pb = null;
 
 	private ListView mListView = null;
 
@@ -176,6 +167,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 	private View loadMoreView;// 加载更多视图
 	private Button loadMoreButton;
 	private ProgressBar pb_loadmoore;
+	private ProgressBar pb_load;
 
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -191,7 +183,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 				break;
 
 			case MESSAGE_LOAD_ERROR:
-				messageProgressBar.setVisibility(View.GONE);
+				pb_load.setVisibility(View.GONE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
 
@@ -200,7 +192,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 				break;
 
 			case DATA_LOAD_ERROR:
-				list_pb.setVisibility(View.GONE);
+				pb_load.setVisibility(View.GONE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
 			}
@@ -244,8 +236,8 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 			home_saybtn.setVisibility(View.GONE);
 			home_askbtn.setVisibility(View.GONE);
 			liveLayout.setVisibility(View.VISIBLE);
-			messageLayout.setVisibility(View.GONE);
-			memoirLayout.setVisibility(View.GONE);
+			messageListView.setVisibility(View.GONE);
+			mListView.setVisibility(View.GONE);
 			break;
 
 		case 1:
@@ -253,8 +245,8 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 			home_saybtn.setVisibility(View.GONE);
 			home_askbtn.setVisibility(View.GONE);
 			liveLayout.setVisibility(View.GONE);
-			messageLayout.setVisibility(View.VISIBLE);
-			memoirLayout.setVisibility(View.GONE);
+			messageListView.setVisibility(View.VISIBLE);
+			mListView.setVisibility(View.GONE);
 			break;
 
 		case 2:
@@ -262,8 +254,8 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 			home_saybtn.setVisibility(View.VISIBLE);
 			home_askbtn.setVisibility(View.VISIBLE);
 			liveLayout.setVisibility(View.GONE);
-			messageLayout.setVisibility(View.GONE);
-			memoirLayout.setVisibility(View.VISIBLE);
+			messageListView.setVisibility(View.GONE);
+			mListView.setVisibility(View.VISIBLE);
 			break;
 		}
 	}
@@ -450,7 +442,9 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 	 * @描述： 初始化布局控件
 	 */
 	private void initLayout() {
+
 		home_saybtn = (Button) view.findViewById(R.id.vedio_live_home_saybtn);
+		pb_load = (ProgressBar) view.findViewById(R.id.gip_pb);
 
 		// 我要说说按钮事件监听处理
 		home_saybtn.setOnClickListener(new OnClickListener() {
@@ -490,8 +484,10 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 
 		liveLayout = (LinearLayout) view
 				.findViewById(R.id.gip_home_live_layout);
-		messageLayout = (FrameLayout) view.findViewById(R.id.message_fragment);
-		memoirLayout = (FrameLayout) view.findViewById(R.id.memoir_layout);
+		// messageLayout = (RelativeLayout)
+		// view.findViewById(R.id.message_fragment);
+		// memoirLayout = (RelativeLayout)
+		// view.findViewById(R.id.memoir_layout);
 
 		// 节目预告模块
 		advance_themeTextView = (TextView) view
@@ -547,9 +543,9 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 	 */
 	private void loadMessageData(final int startIndex, final int endIndex) {
 		if (isFirstLoadMessage || isSwitchMessage) {
-			messageProgressBar.setVisibility(View.VISIBLE);
+			pb_load.setVisibility(View.VISIBLE);
 		} else {
-			loadMoreMessageProgressBar.setVisibility(ProgressBar.VISIBLE);
+			pb_load.setVisibility(ProgressBar.VISIBLE);
 		}
 
 		new Thread(new Runnable() {
@@ -600,9 +596,6 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 		messageListView = (ListView) view
 				.findViewById(R.id.gip_live_home_message_listview);
 
-		messageProgressBar = (ProgressBar) view
-				.findViewById(R.id.gip_live_home_message_progressbar);
-
 		messageListView.addFooterView(getMessageListFootView());// 为listView添加底部视图
 		messageListView.setOnScrollListener(new MessageOnScrollListener());// 增加滑动监听
 
@@ -618,8 +611,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 				R.layout.list_loadmore_layout, null);
 		loadMoreMessageButton = (Button) loadMoreMessageView
 				.findViewById(R.id.loadMoreButton);
-		loadMoreMessageProgressBar = (ProgressBar) loadMoreMessageView
-				.findViewById(R.id.pb_loadmoore);
+
 		loadMoreMessageButton.setOnClickListener(this);
 		return loadMoreMessageView;
 	}
@@ -632,19 +624,19 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 
 		if (leaveMessages == null || leaveMessages.size() == 0) {
 			Toast.makeText(context, "对不起，暂无留言提问信息", Toast.LENGTH_SHORT).show();
-			messageProgressBar.setVisibility(View.GONE);
+			pb_load.setVisibility(View.GONE);
 		} else {
 			if (isFirstLoadMessage) {
 				messageAdapter = new LiveHomeLeaveMessageListAdapter(context,
 						leaveMessages);
 				isFirstLoadMessage = false;
 				messageListView.setAdapter(messageAdapter);
-				messageProgressBar.setVisibility(View.GONE);
+				pb_load.setVisibility(View.GONE);
 				isLoadingMessage = false;
 			} else {
 				if (isSwitchMessage) {
 					messageAdapter.setLeaveMessages(leaveMessages);
-					messageProgressBar.setVisibility(View.GONE);
+					pb_load.setVisibility(View.GONE);
 				} else {
 					for (LeaveMessage leaveMessage : leaveMessages) {
 						messageAdapter.addItem(leaveMessage);
@@ -660,7 +652,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 
 		if (messageWrapper.isNext()) {
 			// if (messageListView.getFooterViewsCount() != 0) {
-			loadMoreMessageProgressBar.setVisibility(ProgressBar.GONE);
+			pb_load.setVisibility(ProgressBar.GONE);
 			loadMoreMessageButton.setText("点击加载更多");
 			// } else {
 			// messageListView.addFooterView(getMessageListFootView());
@@ -733,9 +725,6 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 		mListView = (ListView) view
 				.findViewById(R.id.gip_live_home_memoir_listview);
 
-		list_pb = (ProgressBar) view
-				.findViewById(R.id.gip_live_home_memoir_progressbar);
-
 		mListView.addFooterView(getMemoirListFootView());// 为listView添加底部视图
 		mListView.setOnScrollListener(new MemoirOnScrollListner());// 增加滑动监听
 
@@ -767,7 +756,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 	 */
 	private void loadData(final int startIndex, final int endIndex) {
 		if (isFirstLoad || isSwitch) {
-			list_pb.setVisibility(View.VISIBLE);
+			pb_load.setVisibility(View.VISIBLE);
 		} else {
 			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
 		}
@@ -815,12 +804,12 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 				adapter = new LiveHomeMemoirListAdapter(context, memoirs);
 				isFirstLoad = false;
 				mListView.setAdapter(adapter);
-				list_pb.setVisibility(View.GONE);
+				pb_load.setVisibility(View.GONE);
 				isLoading = false;
 			} else {
 				if (isSwitch) {
 					adapter.setMemoirs(memoirs);
-					list_pb.setVisibility(View.GONE);
+					pb_load.setVisibility(View.GONE);
 				} else {
 					for (Memoir memoir : memoirs) {
 						adapter.addItem(memoir);

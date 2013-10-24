@@ -90,11 +90,11 @@ public class GPMApplyActivity extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				legalPersonImageBtn.setBackground(getResources().getDrawable(
-						R.drawable.legal_person_unclick));
 
-				citizenImgaeBtn.setBackground(getResources().getDrawable(
-						R.drawable.citizen_click));
+				legalPersonImageBtn
+						.setBackgroundResource(R.drawable.legal_person_unclick);
+
+				citizenImgaeBtn.setBackgroundResource(R.drawable.citizen_click);
 
 				changeView(0);
 			}
@@ -105,10 +105,12 @@ public class GPMApplyActivity extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				citizenImgaeBtn.setBackground(getResources().getDrawable(
-						R.drawable.citizen_unclick));
-				legalPersonImageBtn.setBackground(getResources().getDrawable(
-						R.drawable.legal_person_click));
+
+				citizenImgaeBtn
+						.setBackgroundResource(R.drawable.citizen_unclick);
+
+				legalPersonImageBtn
+						.setBackgroundResource(R.drawable.legal_person_click);
 
 				changeView(1);
 			}

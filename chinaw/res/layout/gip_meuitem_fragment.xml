@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
     <RelativeLayout
+        android:id="@+id/rl_title"
         android:layout_width="fill_parent"
         android:layout_height="50dip" >
 
@@ -28,9 +29,10 @@
         </GridView>
     </RelativeLayout>
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/gip_menuitem_content_fragmentlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_title" />
 
-</LinearLayout>
+</RelativeLayout>
