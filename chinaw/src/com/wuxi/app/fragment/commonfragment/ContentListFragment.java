@@ -255,7 +255,6 @@ public abstract class ContentListFragment extends BaseFragment implements
 		switch (v.getId()) {
 		case R.id.loadMoreButton:
 			if (contentWrapper != null && contentWrapper.isNext()) {// 还有下一条记录
-
 				isSwitch = false;
 				loadMoreButton.setText("loading.....");
 				loadMore(v);

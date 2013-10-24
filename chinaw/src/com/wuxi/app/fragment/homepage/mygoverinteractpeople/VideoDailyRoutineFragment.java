@@ -128,12 +128,12 @@ public class VideoDailyRoutineFragment extends BaseFragment implements
 		progressBar = (ProgressBar) view
 				.findViewById(R.id.video_daily_routine_progressbar);
 
-		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+		loadMoreView = View.inflate(context, R.layout.list_footer_view_layout,
 				null);
 		loadMoreButton = (Button) loadMoreView
-				.findViewById(R.id.loadMoreButton);
+				.findViewById(R.id.loadMorebtn);
 		pb_loadmoore = (ProgressBar) loadMoreView
-				.findViewById(R.id.pb_loadmoore);
+				.findViewById(R.id.pb_loadMore);
 
 		listView.addFooterView(loadMoreView);// 为listView添加底部视图
 		listView.setOnScrollListener(this);// 增加滑动监听

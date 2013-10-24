@@ -139,6 +139,8 @@ public class ContentService extends Service {
 		String url = Constants.Urls.CHANNEL_CONTENT_P_URL.replace("{id}", id)
 				.replace("{start}", start + "").replace("{end}", end + "");
 
+		System.out.println("cesj:"+url);
+		
 		String resultStr = null;
 		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url, true);// 检查是否有缓存文件
 		if (isHasCacheFile) {

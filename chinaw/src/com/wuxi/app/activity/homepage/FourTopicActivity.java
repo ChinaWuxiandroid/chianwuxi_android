@@ -12,8 +12,6 @@ import android.widget.RelativeLayout;
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.BaseItemContentActivity;
-import com.wuxi.app.activity.homepage.informationcenter.HotTopicContentActivity;
-import com.wuxi.app.activity.homepage.informationcenter.InfoWebActivity;
 
 /**
  * 
