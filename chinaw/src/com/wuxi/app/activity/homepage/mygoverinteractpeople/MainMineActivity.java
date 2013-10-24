@@ -22,6 +22,13 @@ import com.wuxi.app.activity.BaseSlideActivity;
 import com.wuxi.app.adapter.GoverInteractPeopleNevigationAdapter;
 import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.MenuService;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPContentFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleMineFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuperviseFragment;
+import com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleSuggestFragment;
 import com.wuxi.app.fragment.homepage.mygoverinteractpeople.MyGoverInterPeopleContentFragment;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
@@ -94,8 +101,10 @@ public class MainMineActivity extends BaseSlideActivity implements
 	public void getArgumentsFromOtherFragment() {
 		Bundle bundle = this.getIntent().getExtras();
 
-		if (bundle != null && bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY) != null) {
-			defaultCheckPosition = (Integer) bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY);
+		if (bundle != null
+				&& bundle.get(Constants.CheckPositionKey.LEVEL_TWO__KEY) != null) {
+			defaultCheckPosition = (Integer) bundle
+					.get(Constants.CheckPositionKey.LEVEL_TWO__KEY);
 
 		}
 
@@ -190,11 +199,62 @@ public class MainMineActivity extends BaseSlideActivity implements
 	}
 
 	private BaseFragment showMenItemContentFragment(MenuItem menuItem) {
-		MyGoverInterPeopleContentFragment myGoverInterPeopleContentFragment = new MyGoverInterPeopleContentFragment();
-		myGoverInterPeopleContentFragment.setMenuItem(menuItem);
 
-		return myGoverInterPeopleContentFragment;
-	};
+		if (menuItem.getType() == MenuItem.CUSTOM_MENU) {
+			GIPContentFragment gIPMenuItemContentFragment = new GIPContentFragment();
+			gIPMenuItemContentFragment.setParentItem(menuItem);
+			return gIPMenuItemContentFragment;
+		} else if (menuItem.getType() == MenuItem.CHANNEL_MENU) {
+			GIPContentFragment gIPChannelContentFragment = new GIPContentFragment();
+
+			gIPChannelContentFragment.setParentItem(menuItem);
+			return gIPChannelContentFragment;
+		} else if (menuItem.getType() == MenuItem.APP_MENU) {
+
+			if (menuItem.getAppUI().equals("MyPoliticalInteraction")) {
+
+				return new GoverInterPeopleMineFragment();
+			}
+
+			else if (menuItem.getAppUI().equals("QuestionnairePlatform")) {
+				GoverInterPeopleSuggestFragment goverInterPeopleSuggestFragment = new GoverInterPeopleSuggestFragment();
+				goverInterPeopleSuggestFragment.setParentItem(menuItem);
+				return goverInterPeopleSuggestFragment;
+
+			}
+
+			else if (menuItem.getAppUI().equals("PublicBBS")) {
+				GoverInterPeoplePublicForumFragment goverInterPeoplePublicForumFragment = new GoverInterPeoplePublicForumFragment();
+				return goverInterPeoplePublicForumFragment;
+
+			}
+			// 热点话题
+			else if (menuItem.getAppUI().equals("HotTopic")) {
+				GoverInterPeopleHotReviewFragment goverInterPeopleHotReviewFragment = new GoverInterPeopleHotReviewFragment();
+				return goverInterPeopleHotReviewFragment;
+
+			}
+			// 公开电话
+			else if (menuItem.getAppUI().equals("PublicTel")) {
+				return new GoverInterPeopleOpenTelFragment();
+			}
+			// 公众监督*
+			else if (menuItem.getAppUI().equals("PublicOversight")) {
+				return new GoverInterPeoplePublicSuperviseFragment();
+
+			} else {
+				return null;
+			}
+
+		} else if (menuItem.getType() == MenuItem.WAP_MENU) {
+			return null;
+		} else if (menuItem.getType() == MenuItem.LINK_MENU) {
+			return null;
+		} else {
+			return null;
+		}
+
+	}
 
 	private void showContentFragment(BaseFragment fragment) {
 		if (fragment != null) {

@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/content_background"
-    android:orientation="vertical" >
+    android:background="@color/content_background" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/pb_loadmoore"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal" >
+        android:layout_toLeftOf="@+id/loadMoreButton"
+        android:visibility="gone" 
+        android:layout_centerVertical="true"/>
 
+<<<<<<< HEAD
         <ProgressBar
             android:id="@+id/pb_loadmoore"
             style="?android:attr/progressBarStyleSmall"
@@ -29,9 +32,22 @@
             android:textColor="#000000"
             android:textSize="12sp" />
     </LinearLayout>
+=======
+    <Button
+        android:id="@+id/loadMoreButton"
+        android:layout_width="wrap_content"
+        android:layout_height="30dip"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dip"
+        android:background="@color/content_background"
+        android:text="点击加载更多"
+        android:textColor="#000000"
+        android:textSize="12sp" />
+>>>>>>> 6cd6ffe6f2f8299dc8ea7ffc2d1450d6d0fadbc3
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="30dip" />
+        android:layout_height="30dip"
+        android:layout_below="@+id/loadMoreButton" />
 
-</LinearLayout>
+</RelativeLayout>
