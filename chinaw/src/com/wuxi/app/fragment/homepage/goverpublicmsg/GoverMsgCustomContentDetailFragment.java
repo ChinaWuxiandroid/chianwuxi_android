@@ -28,24 +28,24 @@ import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 
 public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
-		OnItemClickListener,OnClickListener{
-	
+		OnItemClickListener, OnClickListener {
+
 	private Context context;
 	private View view;
 
 	// private Channel channel;
 	private MenuItem parentMenuItem;
 	private Channel parentChannel;
-	public List<Channel> subChannels;
+	private List<Channel> subChannels;
 
 	private ProgressBar pb_govermsg;
 	private TextView textView_title;
 	private ListView govermsg_detail_lv_channel;
 	private Button packup_btn;
 
-	private static final int CHANNEL_LOAD_SUCESS = 0;// 子频道获取成功
-	private static final int CHANNEL_LOAD_FAIL = 1;// 子频道获取失败
-	
+	private static final int CHANNEL_LOAD_SUCESS = 2;// 子频道获取成功
+	private static final int CHANNEL_LOAD_FAIL = 3;// 子频道获取失败
+
 	private static final int CONTENT_LIST_ID = R.id.govermsg_detail_contentlist_framelayout;
 
 	private int fifterType = 0;
@@ -109,10 +109,10 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 				.findViewById(R.id.govermsg_detail_listview);
 		packup_btn = (Button) view
 				.findViewById(R.id.govermsg_detail_btn_packup);
-		
+
 		govermsg_detail_lv_channel.setOnItemClickListener(this);
 		packup_btn.setOnClickListener(this);
-		
+
 		if (parentMenuItem != null) {
 			textView_title.setText(parentMenuItem.getName());
 		} else if (parentChannel != null) {
@@ -148,49 +148,48 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 		}
 		if (fifterType == 0) {
 			GoverMsgCustomContentListFragment goverMsgCustomContentListFragment = new GoverMsgCustomContentListFragment();
-			
+
 			goverMsgCustomContentListFragment.setParentItem(parentMenuItem);
 			FragmentManager manager = getActivity().getSupportFragmentManager();
 			FragmentTransaction ft = manager.beginTransaction();
 			ft.replace(CONTENT_LIST_ID, goverMsgCustomContentListFragment);
 			ft.commitAllowingStateLoss();
-		} 
-		//跳转到行政事项
+		}
+		// 跳转到行政事项
 		else if (fifterType == 3) {
 			GPMAdministrativeFragment administrativeLicenseFragment = new GPMAdministrativeFragment();
-			//行政事项五个子菜单内容列表
+			// 行政事项五个子菜单内容列表
 			if (parentMenuItem.getName().equals("行政许可")) {
 				administrativeLicenseFragment.setType("XK");
 				changeFragment(administrativeLicenseFragment);
-			}else if (parentMenuItem.getName().equals("行政处罚")) {
+			} else if (parentMenuItem.getName().equals("行政处罚")) {
 				administrativeLicenseFragment.setType("CF");
 				changeFragment(administrativeLicenseFragment);
-			}else if (parentMenuItem.getName().equals("行政征收")) {
+			} else if (parentMenuItem.getName().equals("行政征收")) {
 				administrativeLicenseFragment.setType("ZS");
 				changeFragment(administrativeLicenseFragment);
-			}else if (parentMenuItem.getName().equals("行政强制")) {
+			} else if (parentMenuItem.getName().equals("行政强制")) {
 				administrativeLicenseFragment.setType("QZ");
 				changeFragment(administrativeLicenseFragment);
-			}else if (parentMenuItem.getName().equals("其它")) {
+			} else if (parentMenuItem.getName().equals("其它")) {
 				administrativeLicenseFragment.setType("QT");
 				changeFragment(administrativeLicenseFragment);
 			}
 		}
-		//跳转到政府概括
+		// 跳转到政府概括
 		else if (fifterType == 4) {
 			GPMGovernmentGeneralizeFragment generalizeFragment = new GPMGovernmentGeneralizeFragment();
 			generalizeFragment.setParentItem(parentMenuItem);
 			changeFragment(generalizeFragment);
 		}
-		//跳转到政策法规
+		// 跳转到政策法规
 		else if (fifterType == 5) {
 			GPMPolicieRegulationFragment regulationFragment = new GPMPolicieRegulationFragment();
 			regulationFragment.setParentItem(parentMenuItem);
 			changeFragment(regulationFragment);
-		}
-		else {
+		} else {
 			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment = new GoverMsgSearchContentListFragment();
-		
+
 			goverMsgSearchContentListFragment.setFifterType(fifterType);
 			if (parentMenuItem != null) {
 				goverMsgSearchContentListFragment
@@ -200,19 +199,19 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 			}
 			FragmentManager manager = getActivity().getSupportFragmentManager();
 			FragmentTransaction ft = manager.beginTransaction();
-			
+
 			ft.replace(CONTENT_LIST_ID, goverMsgSearchContentListFragment);
 			ft.commitAllowingStateLoss();
 		}
-		
+
 	}
-	
+
 	/**
 	 * @方法： changeFragment
 	 * @描述： 更改视图
 	 * @param baseFragment
 	 */
-	private void changeFragment(BaseFragment baseFragment){
+	private void changeFragment(BaseFragment baseFragment) {
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		ft.replace(CONTENT_LIST_ID, baseFragment);
@@ -222,12 +221,12 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View arg1,
 			int position, long arg3) {
-		
+
 	}
 
 	@Override
 	public void onClick(View v) {
-		switch(v.getId()){
+		switch (v.getId()) {
 		case R.id.govermsg_detail_btn_packup:
 			FragmentManager manager = getActivity().getSupportFragmentManager();
 			FragmentTransaction ft = manager.beginTransaction();

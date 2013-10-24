@@ -140,12 +140,12 @@ public class GPMGovernmentGeneralizeFragment extends BaseFragment implements
 		list_pb = (ProgressBar) view
 				.findViewById(R.id.gpm_goverment_gen_progress);
 
-		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+		loadMoreView = View.inflate(context, R.layout.list_footer_view_layout,
 				null);
 		loadMoreButton = (Button) loadMoreView
-				.findViewById(R.id.loadMoreButton);
+				.findViewById(R.id.loadMorebtn);
 		pb_loadmoore = (ProgressBar) loadMoreView
-				.findViewById(R.id.pb_loadmoore);
+				.findViewById(R.id.pb_loadMore);
 
 		mListView.addFooterView(loadMoreView);// 为listView添加底部视图
 		mListView.setOnScrollListener(this);// 增加滑动监听
@@ -289,7 +289,7 @@ public class GPMGovernmentGeneralizeFragment extends BaseFragment implements
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.loadMoreButton:
+		case R.id.loadMorebtn:
 			if (contentWrapper != null && contentWrapper.isNext()) {// 还有下一条记录
 
 				isSwitch = false;

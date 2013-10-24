@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="35sp"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -17,15 +17,14 @@
             android:id="@+id/govermsg_search_spinner_partment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1.5"
+            android:layout_weight="1.8"
             android:background="@drawable/spiner_bg" />
 
         <Spinner
             android:id="@+id/govermsg_search_spinner_year"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:background="@drawable/spiner_bg" />
 
@@ -33,7 +32,7 @@
             android:id="@+id/govermsg_search_button_search"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:background="@drawable/forum_submitbtn_bg"
             android:gravity="center"
@@ -46,6 +45,22 @@
         android:id="@+id/govermsg_search_content_framelayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
+
+        <ProgressBar
+            android:id="@+id/gpm_content_list_pb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/gpm_content_list_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/white"
+            android:dividerHeight="1dip" >
+        </ListView>
     </FrameLayout>
 
 </LinearLayout>

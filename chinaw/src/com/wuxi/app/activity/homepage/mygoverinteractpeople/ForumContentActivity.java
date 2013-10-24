@@ -116,7 +116,6 @@ public class ForumContentActivity extends BaseItemContentActivity implements
 				popWindow = makePopWindow(ForumContentActivity.this);
 				int[] xy = new int[2];
 				comment_btn.getLocationOnScreen(xy);
-
 				popWindow.showAtLocation(comment_btn, Gravity.BOTTOM
 						| Gravity.CENTER_HORIZONTAL, 0, comment_btn.getHeight()
 						* 3-comment_btn.getHeight()/2);

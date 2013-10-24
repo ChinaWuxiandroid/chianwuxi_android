@@ -3,7 +3,6 @@ package com.wuxi.app.listeners;
 import android.support.v4.app.Fragment;
 
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgContentListFragment;
-import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgFifterContentListFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgFragmentWebFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgNaviWithContentFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgSearchContentListFragment;
@@ -40,8 +39,6 @@ public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener 
 			WorkSuggestionBoxFragment workSuggestionBoxFragment = null;
 			GoverMsgFragmentWebFragment goverMsgFragmentWebFragment=null;
 			
-			GoverMsgFifterContentListFragment goverMsgFifterContentListFragment = null;
-
 			if (fragment instanceof GoverMsgNaviWithContentFragment) {
 				contentNavigatorWithContentFragment = (GoverMsgNaviWithContentFragment) fragment;
 				contentNavigatorWithContentFragment.setParentMenuItem(menuItem);
@@ -77,12 +74,12 @@ public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener 
 				initLayoutListner.bindContentLayout(goverMsgFragmentWebFragment);
 			}
 			
-			else if (fragment instanceof GoverMsgFifterContentListFragment) {
-				goverMsgFifterContentListFragment = (GoverMsgFifterContentListFragment) fragment;
-				
-				goverMsgFifterContentListFragment.setParentItem(menuItem);
-				initLayoutListner.bindContentLayout(goverMsgFifterContentListFragment);
-			}
+//			else if (fragment instanceof GoverMsgFifterContentListFragment) {
+//				goverMsgFifterContentListFragment = (GoverMsgFifterContentListFragment) fragment;
+//				
+//				goverMsgFifterContentListFragment.setParentItem(menuItem);
+//				initLayoutListner.bindContentLayout(goverMsgFifterContentListFragment);
+//			}
 
 		} catch (InstantiationException e) {
 			e.printStackTrace();
