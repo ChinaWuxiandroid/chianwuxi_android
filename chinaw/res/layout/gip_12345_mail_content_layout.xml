@@ -11,7 +11,6 @@
         layout="@layout/child_fragment_itemcontent_header_layout" />
 
     <FrameLayout
-        
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="8"

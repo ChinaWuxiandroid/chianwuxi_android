@@ -22,11 +22,11 @@ public class GoverMsgInitInfoOpenListener {
 			fifterType = 1;
 		}
 		// 工作报告
-		else if (channleName.equals("县区政府工作报告")) {
-			fifterType = 2;
-		} else if (channleName.equals("部门工作总结")) {
-			fifterType = 1;
-		}
+//		else if (channleName.equals("县区政府工作报告")) {
+//			fifterType = 2;
+//		} else if (channleName.equals("部门工作总结")) {
+//			fifterType = 1;
+//		}
 		// 业务工作
 		// 财政信息
 		else if (channleName.equals("部门预决算报告") || channleName.equals("专项资金")) {
@@ -103,7 +103,7 @@ public class GoverMsgInitInfoOpenListener {
 				|| menuName.equals("市政府直属部门") || menuName.equals("双重领导单位")
 				|| menuName.equals("市政府派出机构") || menuName.equals("县区政府概况")) {
 
-			fifterType = 4;
+			fifterType = 3;
 
 		}
 
@@ -113,13 +113,13 @@ public class GoverMsgInitInfoOpenListener {
 				|| menuName.equals("市政府文件") || menuName.equals("市政府办公室文件")
 				|| menuName.equals("县区文件") || menuName.equals("部门文件")
 				|| menuName.equals("其它文件") || menuName.equals("政策解读")) {
-			fifterType = 5;
+			fifterType = 4;
 		}
 		// 行政事项
 		else if (menuName.equals("行政许可") || menuName.equals("行政处罚")
 				|| menuName.equals("行政征收") || menuName.equals("行政强制")
 				|| menuName.equals("其它")) {
-			fifterType = 3;
+			fifterType = 5;
 		}
 		return fifterType;
 	}

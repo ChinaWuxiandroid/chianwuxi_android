@@ -176,12 +176,12 @@ public class GoverMsgCustomContentDetailFragment extends BaseFragment implements
 				changeFragment(administrativeLicenseFragment);
 			}
 		}
-		// 跳转到政府概括
-		else if (fifterType == 4) {
-			GPMGovernmentGeneralizeFragment generalizeFragment = new GPMGovernmentGeneralizeFragment();
-			generalizeFragment.setParentItem(parentMenuItem);
-			changeFragment(generalizeFragment);
-		}
+//		// 跳转到政府概括
+//		else if (fifterType == 4) {
+//			GPMGovernmentGeneralizeFragment generalizeFragment = new GPMGovernmentGeneralizeFragment();
+//			generalizeFragment.setParentItem(parentMenuItem);
+//			changeFragment(generalizeFragment);
+//		}
 		// 跳转到政策法规
 		else if (fifterType == 5) {
 			GPMPolicieRegulationFragment regulationFragment = new GPMPolicieRegulationFragment();

@@ -537,7 +537,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		List<String> years = TimeFormateUtil
 				.getYears(TimeFormateUtil.START_YEAR);
 
-		years.add(years.size(), "按年份");
+		years.add(years.size(), "选择年份");
 
 		int size = years.size();
 
@@ -626,7 +626,8 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			tv.setText(items[position]);
 			tv.setGravity(Gravity.LEFT);
 			tv.setTextColor(Color.BLACK);
-			tv.setTextSize(14);
+			tv.setTextSize(16);
+			tv.setPadding(1, 3, 5, 3);
 			
 
 			return convertView;
@@ -772,6 +773,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			tv.setGravity(Gravity.LEFT);
 			tv.setTextColor(Color.BLACK);
 			tv.setTextSize(14);
+			tv.setPadding(1, 8, 5, 8);
 
 			return convertView;
 		}

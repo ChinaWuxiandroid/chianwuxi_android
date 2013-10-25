@@ -84,6 +84,17 @@
         android:dividerHeight="1dp"
         android:visibility="gone" >
     </ListView>
+    
+    <ListView
+        android:id="@+id/gpm_detail_xingzheng_listview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@android:color/white"
+        android:dividerHeight="1dp"
+        android:visibility="gone" >
+    </ListView>
 
     <Button
         android:id="@+id/gpm_detail_btn_packup"
