@@ -88,6 +88,7 @@ public class MenuService extends Service {
 		}
 
 		String url = Constants.Urls.SUB_MENU_URL.replace("{id}", parentId);
+		
 		String reslutStr = null;
 		boolean hasCachFile = cacheUtil.isHasCacheFile(url,false);
 		if (hasCachFile) {// 存在缓存，从缓存读取

@@ -49,15 +49,10 @@ public class DeptService extends Service {
 					dept.setName(jb.getString("name"));
 					dept.setNull(jb.getBoolean("null"));
 					depts.add(dept);
-
 				}
-
 				return depts;
-
 			}
-
 		}
-
 		return null;
 	}
 

@@ -45,6 +45,7 @@ public class ChannelService extends Service {
 
 		String url = Constants.Urls.CHANNEL_URL.replace("{channelId}",
 				channelId);
+		
 		String resultStr = null;
 		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url,false);
 		if (isHasCacheFile) {

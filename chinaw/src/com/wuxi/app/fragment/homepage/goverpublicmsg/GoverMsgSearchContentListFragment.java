@@ -36,8 +36,10 @@ import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
 import com.wuxi.app.activity.homepage.goverpublicmsg.GoverMsgContentDetailWebActivity;
 import com.wuxi.app.adapter.ContentListAdapter;
+import com.wuxi.app.adapter.OpenInfoDeptAdapter;
 import com.wuxi.app.engine.ApplyDeptService;
 import com.wuxi.app.engine.ContentService;
+import com.wuxi.app.engine.OpenInfoDeptService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
@@ -47,6 +49,7 @@ import com.wuxi.domain.Content;
 import com.wuxi.domain.ContentWrapper;
 import com.wuxi.domain.FifterContentWrapper;
 import com.wuxi.domain.MenuItem;
+import com.wuxi.domain.OpenInfoDept;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -61,74 +64,74 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 
 	private View view;
 	private Context context;
-	
-	//部门数据加载成功
+
+	// 部门数据加载成功
 	private static final int LOAD_DEPT_SUCCESS = 1;
-	//部门数据加载失败
+	// 部门数据加载失败
 	private static final int LOAD_DEPT_FAILED = 2;
-	//年份数据加载成功
+	// 年份数据加载成功
 	private static final int LOAD_YEAR_SUCCESS = 3;
-	//年份数据加载失败
+	// 年份数据加载失败
 	private static final int LOAD_YEAR_FAILED = 4;
-	//搜索成功
+	// 搜索成功
 	private static final int CONTENT_LOAD_SUCCESS = 5;
-	//搜搜失败
+	// 搜搜失败
 	private static final int CONTENT_LOAD_FAIL = 6;
-	//加载列表数据成功
+	// 加载列表数据成功
 	private static final int INFO_LOAD_SUCCESS = 7;
-	//加载列表数据失败
+	// 加载列表数据失败
 	private static final int INFO_LOAD_FAIL = 8;
-	//每页显示数据条数
+	// 每页显示数据条数
 	private static final int PAGE_SIZE = 10;
-	
-	//列表控件对象
+
+	// 列表控件对象
 	private ListView content_list_lv;
-	//进度条对象
+	// 进度条对象
 	private ProgressBar content_list_pb;
 
-	//内容
-	private ContentWrapper contentWrapper; 
+	// 内容
+	private ContentWrapper contentWrapper;
 	// 加载更多视图
 	private View loadMoreView;
-	//加载更多按钮
+	// 加载更多按钮
 	private Button loadMoreButton;
-	//最后一条索引
+	// 最后一条索引
 	private int visibleLastIndex;
 	// 当前显示的总条数
 	private int visibleItemNum;
-	//列表适配器
+	// 列表适配器
 	private ContentListAdapter adapter;
 	// 切换
 	private boolean isSwitch = false;
 	// 是不是首次加载数据
 	private boolean isFirstLoad = true;
-	//是否正在加载
+	// 是否正在加载
 	private boolean isLoading = false;
-	//加载更多进度条
+	// 加载更多进度条
 	private ProgressBar pb_loadmoore;
-	
+
 	// 过滤包装类
 	private FifterContentWrapper fifter;
 
-	//子菜单项对象
+	// 子菜单项对象
 	private MenuItem parentItem;
-	//子频道对象
+	// 子频道对象
 	private Channel subchannel;
 
-	//菜单对象
+	// 菜单对象
 	private MenuItem parentMenuItem;
-	//频道对象
+	// 频道对象
 	private Channel channel;
 
-	//部门数据列表
-	private List<ApplyDept> depts;
+	// 部门数据列表
+	private List<OpenInfoDept> depts;
 
-	//搜索相关控件
+	// 搜索相关控件
 	private Spinner partment_sp;
 	private Spinner year_sp;
 	private Button search_imbtn;
 
-	//搜索相关字段
+	// 搜索相关字段
 	private static String DEFAULT_DEPT_FIFTER = "按部门筛选";
 	private static String DEFAULT_ZONE_FIFTER = "按县区筛选";
 	private String deptStrFifter = DEFAULT_DEPT_FIFTER;
@@ -148,9 +151,9 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
-			
+
 			switch (msg.what) {
-			
+
 			case LOAD_DEPT_SUCCESS:
 				showDept();
 				break;
@@ -163,20 +166,20 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			case LOAD_YEAR_FAILED:
 				Toast.makeText(context, "下载出错，稍后再试", Toast.LENGTH_SHORT).show();
 				break;
-				
-			case INFO_LOAD_SUCCESS:		
-				
+
+			case INFO_LOAD_SUCCESS:
+
 			case CONTENT_LOAD_SUCCESS:
 				showContentData();
 				break;
-				
+
 			case INFO_LOAD_FAIL:
 			case CONTENT_LOAD_FAIL:
 				String tip1 = msg.obj.toString();
 				content_list_pb.setVisibility(ProgressBar.GONE);
 				Toast.makeText(context, tip1, Toast.LENGTH_SHORT).show();
 				break;
-				
+
 			}
 
 		}
@@ -218,7 +221,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 
 		initFilter(filterType);
 	}
-	
+
 	/**
 	 * @方法： initSearchUI
 	 * @描述： 初始化搜索布局
@@ -231,14 +234,16 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			id = parentMenuItem.getChannelId();
 		}
 		fifter = new FifterContentWrapper(id);
-		
-		content_list_lv = (ListView) view.findViewById(R.id.gpm_content_list_lv);
+
+		content_list_lv = (ListView) view
+				.findViewById(R.id.gpm_content_list_lv);
 		content_list_lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> adapterView, View arg1, int position,
-					long arg3) {
-				Content content = (Content) adapterView.getItemAtPosition(position);
+			public void onItemClick(AdapterView<?> adapterView, View arg1,
+					int position, long arg3) {
+				Content content = (Content) adapterView
+						.getItemAtPosition(position);
 
 				if (parentItem != null) {
 
@@ -253,15 +258,17 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 					Intent intent = new Intent(context,
 							GoverMsgContentDetailWebActivity.class);
 					intent.putExtra("url", content.getWapUrl());
-					intent.putExtra("fragmentTitle", subchannel.getChannelName());
+					intent.putExtra("fragmentTitle",
+							subchannel.getChannelName());
 
 					MainTabActivity.instance.addView(intent);
 				}
 			}
 		});
 
-		content_list_pb = (ProgressBar) view.findViewById(R.id.gpm_content_list_pb);
-		
+		content_list_pb = (ProgressBar) view
+				.findViewById(R.id.gpm_content_list_pb);
+
 		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
 				null);
 
@@ -272,13 +279,13 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 
 		content_list_lv.addFooterView(loadMoreView);// 为listView添加底部视图
 		content_list_lv.setOnScrollListener(new OnScrollListener() {
-			
+
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
 				int itemsLastIndex = adapter.getCount() - 1; // 数据集最后一项的索引
 				int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
 			}
-			
+
 			@Override
 			public void onScroll(AbsListView view, int firstVisibleItem,
 					int visibleItemCount, int totalItemCount) {
@@ -288,7 +295,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		});// 增加滑动监听
 		loadMoreButton.setOnClickListener(this);
 	}
-	
+
 	/**
 	 * @方法： changeChannelOrMenItem
 	 * @描述： 切换频道和菜单
@@ -301,7 +308,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		this.parentItem = menuItem;
 		loadData(0, PAGE_SIZE);
 	}
-	
+
 	/**
 	 * @方法： initData
 	 * @描述： 初次加载数据
@@ -377,7 +384,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_SIZE);
 		}
 	}
-	
+
 	/**
 	 * @方法： showContentData
 	 * @描述： 显示列表数据
@@ -404,8 +411,8 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 				}
 
 				adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
-				content_list_lv.setSelection(visibleLastIndex
-						- visibleItemNum + 1); // 设置选中项
+				content_list_lv.setSelection(visibleLastIndex - visibleItemNum
+						+ 1); // 设置选中项
 				isLoading = false;
 			}
 		} else {
@@ -481,11 +488,11 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			@Override
 			public void run() {
 				Message msg = handler.obtainMessage();
-				ApplyDeptService applyDeptService = new ApplyDeptService(
+				OpenInfoDeptService infoDeptService = new OpenInfoDeptService(
 						context);
 				try {
-					depts = applyDeptService
-							.getDepts(Constants.Urls.APPLYDEPT_URL);
+					depts = infoDeptService
+							.getOpenInfoDepts(Constants.Urls.OPEN_INFO_DEPT_URL);
 					if (depts != null) {
 						msg.what = LOAD_DEPT_SUCCESS;
 						CacheUtil.put(Constants.CacheKey.DEPT_KEY, depts);// 放入缓存
@@ -515,15 +522,27 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 	 * @描述： 显示部门数据
 	 */
 	private void showDept() {
-		ApplyDept deptDefault = new ApplyDept();
-		deptDefault.setDepId("0");
-		deptDefault.setDepName(DEFAULT_DEPT_FIFTER);
+		OpenInfoDept deptDefault = new OpenInfoDept();
+		deptDefault.setId("0");
+		deptDefault.setName(DEFAULT_DEPT_FIFTER);
 		depts.add(0, deptDefault);
 
-		DeptAdapter partment_Spinner_adapter = new DeptAdapter();
+		OpenInfoDeptAdapter partment_Spinner_adapter = new OpenInfoDeptAdapter(
+				context, depts);
 		if (partment_sp.getVisibility() == View.VISIBLE) {
 			partment_sp.setAdapter(partment_Spinner_adapter);
-			partment_sp.setOnItemSelectedListener(partment_Spinner_adapter);
+			partment_sp.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+				@Override
+				public void onItemSelected(AdapterView<?> arg0, View arg1,
+						int position, long arg3) {
+					deptStrFifter = depts.get(position).getName();
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {
+				}
+			});
 			partment_sp.setVisibility(View.VISIBLE);
 		}
 
@@ -579,7 +598,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			isSwitch = true;
 			search();
 			break;
-		
+
 		case R.id.loadMoreButton:
 			if (contentWrapper != null && contentWrapper.isNext()) {// 还有下一条记录
 
@@ -587,7 +606,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 				loadMoreButton.setText("loading.....");
 				loadMore(v);
 			}
-			break;	
+			break;
 		}
 	}
 
@@ -596,7 +615,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 	 * @描述： 年份下拉框适配器
 	 * @作者： 罗森
 	 * @创建时间： 2013 2013-10-11 下午5:45:16
-	 * @修改时间： 
+	 * @修改时间：
 	 * @修改描述：
 	 */
 	public class MyAryAdapter extends ArrayAdapter<String> {
@@ -627,8 +646,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			tv.setGravity(Gravity.LEFT);
 			tv.setTextColor(Color.BLACK);
 			tv.setTextSize(16);
-			tv.setPadding(1, 3, 5, 3);
-			
+			tv.setPadding(3, 5, 5, 5);
 
 			return convertView;
 		}
@@ -679,13 +697,13 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 			break;
 		}
 		if (parentMenuItem != null) {
-			
+
 			this.setParentItem(parentMenuItem);
-			
+
 		} else if (channel != null) {
-			
+
 			this.setSubChannel(channel);
-			
+
 		}
 		initData(0, PAGE_SIZE);
 	}
@@ -705,96 +723,9 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		loadData(0, PAGE_SIZE);
 	}
 
-	/**
-	 * @类名： DeptAdapter
-	 * @描述： 部门列表适配器
-	 * @作者： 罗森
-	 * @创建时间： 2013 2013-10-11 下午5:45:44
-	 * @修改时间： 
-	 * @修改描述：
-	 */
-	public class DeptAdapter extends BaseAdapter implements
-			OnItemSelectedListener {
-
-		@Override
-		public int getCount() {
-			return depts.size();
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return depts.get(position);
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		public class ViewHolder {
-			TextView tv_dept;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ApplyDept dept = depts.get(position);
-			ViewHolder viewHolder = null;
-
-			if (convertView == null) {
-				convertView = View.inflate(context,
-						R.layout.comstuom_spinner_item_layout, null);
-				viewHolder = new ViewHolder();
-				TextView tv = (TextView) convertView.findViewById(R.id.sp_tv);
-				viewHolder.tv_dept = tv;
-				convertView.setTag(viewHolder);
-			} else {
-				viewHolder = (ViewHolder) convertView.getTag();
-			}
-
-			viewHolder.tv_dept.setTextColor(Color.BLACK);
-			viewHolder.tv_dept.setTextSize(10);
-			viewHolder.tv_dept.setText(dept.getDepName());
-
-			return convertView;
-		}
-		
-		@Override
-		public View getDropDownView(int position, View convertView,
-				ViewGroup parent) {
-			if (convertView == null) {
-				LayoutInflater inflater = LayoutInflater.from(context);
-				convertView = inflater.inflate(
-						android.R.layout.simple_spinner_item, parent, false);
-			}
-
-			TextView tv = (TextView) convertView
-					.findViewById(android.R.id.text1);
-			tv.setText(depts.get(position).getDepName());
-			tv.setGravity(Gravity.LEFT);
-			tv.setTextColor(Color.BLACK);
-			tv.setTextSize(14);
-			tv.setPadding(1, 8, 5, 8);
-
-			return convertView;
-		}
-
-		@Override
-		public void onItemSelected(AdapterView<?> arg0, View arg1,
-				int position, long arg3) {
-			deptStrFifter = depts.get(position).getDepName();
-		}
-
-		@Override
-		public void onNothingSelected(AdapterView<?> arg0) {
-		}
-	}
-	
-	
-
 	public void setParentItem(MenuItem parentItem) {
 		this.parentItem = parentItem;
 	}
-
 
 	public void setSubChannel(Channel channel) {
 		this.subchannel = channel;
@@ -828,7 +759,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		if (zone != null && !"".equals(zone)) {
 			url = url + "&zone=" + zone;
 		}
-
+		
 		return url;
 	}
 }

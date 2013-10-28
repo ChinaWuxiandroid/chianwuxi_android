@@ -119,7 +119,7 @@ public class GovernmentGeneralizeAdapter extends BaseAdapter {
 						.getPublishTime(), DATA_STYLE));
 
 		if (contents.get(position).getBuildTime().equals("null")) {
-			viewHolder.buildTime.setText("生成日期：" + "null");
+			viewHolder.buildTime.setText("生成日期：");
 		} else {
 			viewHolder.buildTime.setText("生成日期："
 					+ TimeFormateUtil.formateTime(contents.get(position)
@@ -127,7 +127,7 @@ public class GovernmentGeneralizeAdapter extends BaseAdapter {
 		}
 
 		if (contents.get(position).getUpdateTime().equals("null")) {
-			viewHolder.changeTime.setText("修改日期：" + "null");
+			viewHolder.changeTime.setText("修改日期：");
 		} else {
 			viewHolder.changeTime.setText("修改日期："
 					+ TimeFormateUtil.formateTime(contents.get(position)

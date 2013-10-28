@@ -19,10 +19,17 @@ public class GoverMsgNaviWithContentFragment extends
 
 		if (menuItem.getType() == MenuItem.CUSTOM_MENU
 				|| menuItem.getType() == MenuItem.CHANNEL_MENU) {
-			NavigatorContentExpandListFragment navigatorContentExpandListFragment = new NavigatorContentExpandListFragment();
-
-			navigatorContentExpandListFragment.setParentItem(menuItem);
-			return navigatorContentExpandListFragment;
+			if (menuItem.getChannelName().equals("业务工作")) {
+				GoverMsgSearchContentListFragment searchContentListFragment = new GoverMsgSearchContentListFragment();
+				searchContentListFragment.setParentMenuItem(menuItem);
+				searchContentListFragment.setFifterType(GoverMsgSearchContentListFragment.DEPT_TYPE);
+				return searchContentListFragment;
+			}else {
+				NavigatorContentExpandListFragment navigatorContentExpandListFragment = new NavigatorContentExpandListFragment();
+				navigatorContentExpandListFragment.setParentItem(menuItem);
+				return navigatorContentExpandListFragment;
+			}
+			
 		} else if (menuItem.getType() == MenuItem.WAP_MENU) {
 			GoverMsgWebFragment wapFragment = new GoverMsgWebFragment();
 			wapFragment.setParentItem(menuItem);

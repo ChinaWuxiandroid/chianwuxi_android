@@ -6,9 +6,11 @@ import org.json.JSONException;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,13 +20,16 @@ import android.view.ViewGroup;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.AbsListView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,22 +43,31 @@ import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailQZActivity;
 import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailXKActivity;
 import com.wuxi.app.activity.homepage.goversaloon.GoverSaloonDetailZSActivtiy;
 import com.wuxi.app.adapter.AdministrativeAdapter;
-import com.wuxi.app.adapter.ContentListAdapter;
+import com.wuxi.app.adapter.CityGoverInfoContentListAdapter;
+import com.wuxi.app.adapter.DeptSpinnerAdapter;
 import com.wuxi.app.adapter.GovernmentGeneralizeAdapter;
+import com.wuxi.app.adapter.OpenInfoDeptAdapter;
 import com.wuxi.app.adapter.PolicieRegulationAdapter;
 import com.wuxi.app.engine.AdministrativeService;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.engine.ContentService;
+import com.wuxi.app.engine.DeptService;
 import com.wuxi.app.engine.MenuService;
+import com.wuxi.app.engine.OpenInfoDeptService;
 import com.wuxi.app.listeners.GoverMsgInitInfoOpenListener;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.TimeFormateUtil;
+import com.wuxi.domain.AdministrativeCon;
 import com.wuxi.domain.AdministrativeWrapper;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.Content;
 import com.wuxi.domain.ContentWrapper;
+import com.wuxi.domain.Dept;
 import com.wuxi.domain.GoverSaoonItem;
 import com.wuxi.domain.MenuItem;
+import com.wuxi.domain.OpenInfoDept;
+import com.wuxi.domain.OpenInfoSearchCondition;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -110,6 +124,26 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	// 父菜单布局
 	private FrameLayout channleFrameLayout;
 
+	/**
+	 * 搜索相关控件变量及字段
+	 */
+	private LinearLayout searchLayout;
+	private Spinner deptSpinner;
+	private Spinner yearSpinner;
+	private Button searchBtn;
+	// 搜索相关字段
+	private static String DEFAULT_DEPT_FIFTER = "按部门筛选";
+	// 部门数据加载成功
+	private static final int LOAD_DEPT_SUCCESS = 9;
+	// 部门数据加载失败
+	private static final int LOAD_DEPT_FAILED = 10;
+	private String deptStrFifter = DEFAULT_DEPT_FIFTER;
+	// 年份默认今年
+	private String DEFAULT_YEAR_FIFTER = "2013";
+	private String yearFifter = DEFAULT_YEAR_FIFTER; // 2013
+	private List<OpenInfoDept> depts;
+	private OpenInfoSearchCondition searchCondition = new OpenInfoSearchCondition();
+
 	// 加载菜单数据成功
 	private static final int MENUITEM_DATA_LOAD_SUCESS = 0;
 	// 加载频道数据成功
@@ -131,8 +165,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	/**
 	 * 除政府概括和政策法规意外的列表分页加载相关变量
 	 */
-
-	private ContentListAdapter contentListAdapter;
+	private CityGoverInfoContentListAdapter contentListAdapter;
 	private int ggVisibleLastIndex;
 	private int ggVisibleItemCount;
 	private boolean isFirstLoadgg = true;// 是不是首次加载数据
@@ -161,6 +194,16 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	private View loadMoreViewXZ;// 加载更多视图
 	private Button loadMoreButtonXZ;
 	private ProgressBar pb_loadmoorexz;
+	private LinearLayout xingzhengsearchLayout;
+	private Spinner xingzhengDeptSpinner;
+	private Spinner xingzhengYearSpinner;
+	private Button xingzhengsearchbtn;
+	private static final int XZ_SEARCH_DEPT_SUCESS = 13;
+	private static final int XZ_SEARCH_DEPT_FAILED = 14;
+	private AdministrativeCon con = new AdministrativeCon();
+	private String[] years = new String[] { "按年份", "2013", "2012", "2011",
+			"2010", "2009" };
+	private List<Dept> deptList;
 
 	/**
 	 * @return type
@@ -234,6 +277,21 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 				subProgressBar.setVisibility(View.GONE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
+
+			case LOAD_DEPT_SUCCESS:
+				showSearchDept();
+				break;
+			case LOAD_DEPT_FAILED:
+				Toast.makeText(context, "加载部门数据失败！", Toast.LENGTH_SHORT).show();
+				break;
+
+			case XZ_SEARCH_DEPT_SUCESS:
+				showDept();
+				break;
+
+			case XZ_SEARCH_DEPT_FAILED:
+				Toast.makeText(context, "加载部门数据失败！", Toast.LENGTH_SHORT).show();
+				break;
 			}
 		};
 	};
@@ -252,6 +310,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		initUI();
 		initSubLayoutUI();
 		initXingzhengLayout();
+		initSearchLayout();
 		return view;
 	}
 
@@ -288,6 +347,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 					if (getType() == 5) {
 						channleFrameLayout.setVisibility(View.GONE);
 						titleLayout.setVisibility(View.VISIBLE);
+						xingzhengsearchLayout.setVisibility(View.VISIBLE);
 
 						if (getParentMenuItem().getName().equals("行政许可")) {
 							setXinzhengType("XK");
@@ -306,15 +366,23 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 						channleFrameLayout.setVisibility(View.GONE);
 						subProgressBar.setVisibility(View.VISIBLE);
 						titleLayout.setVisibility(View.VISIBLE);
+						xingzhengsearchLayout.setVisibility(View.GONE);
 						loadMenuListData(0, 10);
 					}
 
 				} else if (channel != null) {
 					setParentChannel(channel);
-					
+
+					if (getType() == 1) {
+						searchLayout.setVisibility(View.VISIBLE);
+					} else {
+						searchLayout.setVisibility(View.GONE);
+					}
+
 					channleFrameLayout.setVisibility(View.GONE);
 					titleLayout.setVisibility(View.VISIBLE);
-					
+					xingzhengsearchLayout.setVisibility(View.GONE);
+
 					isSwitchgg = true;
 					loadChannelData(0, PAGE_NUM);
 				}
@@ -453,10 +521,130 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	}
 
 	/**
+	 * @方法： initSearchLayout
+	 * @描述： 初始化搜索相关控件
+	 */
+	private void initSearchLayout() {
+		searchLayout = (LinearLayout) view.findViewById(R.id.gmp_search_layout);
+
+		deptSpinner = (Spinner) view.findViewById(R.id.gmp_search_dept_spinner);
+
+		yearSpinner = (Spinner) view.findViewById(R.id.gmp_search_year_spinner);
+
+		deptSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				if (position != 0) {
+					deptStrFifter = depts.get(position).getName();
+					searchCondition.setDept(deptStrFifter);
+				}
+
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+			}
+		});
+
+		yearSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View view,
+					int position, long arg3) {
+				String buffYearStr = ((TextView) view).getText().toString();
+				if (position != 0) {
+					yearFifter = buffYearStr;
+					searchCondition.setYear(yearFifter);
+				}
+
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+			}
+		});
+
+		searchBtn = (Button) view.findViewById(R.id.gmp_search_btn);
+		searchBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				isSwitchgg = true;
+				loadChannelData(0, PAGE_NUM);
+				channelListView.setVisibility(View.GONE);
+
+			}
+		});
+
+		loadDeptData();
+		initYearSpinner();
+	}
+
+	/**
 	 * @方法： initXingzhengLayout
-	 * @描述： TODO
+	 * @描述： 初始化行政事项相关布局控件
 	 */
 	private void initXingzhengLayout() {
+		xingzhengsearchLayout = (LinearLayout) view
+				.findViewById(R.id.gmp_xingzheng_search_layout);
+
+		xingzhengDeptSpinner = (Spinner) view
+				.findViewById(R.id.gmp_xingzheng_search_dept_spinner);
+		xingzhengYearSpinner = (Spinner) view
+				.findViewById(R.id.gmp_xingzheng_search_year_spinner);
+		xingzhengYearSpinner.setAdapter(new ArrayAdapter<String>(context,
+				R.layout.my_simple_spinner_item_layout, years));
+		
+		xingzhengsearchbtn = (Button) view
+				.findViewById(R.id.gmp_xingzheng_search_btn);
+
+		xingzhengDeptSpinner
+				.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+					@Override
+					public void onItemSelected(AdapterView<?> arg0, View arg1,
+							int position, long arg3) {
+						if (position != 0) {
+							con.setId(deptList.get(position).getId());
+						}
+
+					}
+
+					@Override
+					public void onNothingSelected(AdapterView<?> arg0) {
+					}
+				});
+
+		xingzhengYearSpinner
+				.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+					@Override
+					public void onItemSelected(AdapterView<?> arg0, View view,
+							int position, long arg3) {
+						if (position == 0) {
+							con.setYear(-1);
+						} else {
+							con.setYear(Integer.valueOf(years[position]));
+						}
+					}
+
+					@Override
+					public void onNothingSelected(AdapterView<?> arg0) {
+					}
+				});
+
+		xingzhengsearchbtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				isSwitchXZ = true;
+				loadXingzhengData(0, PAGE_NUM);
+				xinzhengListView.setVisibility(View.GONE);
+			}
+		});
+
 		xinzhengListView = (ListView) view
 				.findViewById(R.id.gpm_detail_xingzheng_listview);
 		xinzhengListView.setOnItemClickListener(new OnItemClickListener() {
@@ -521,11 +709,28 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		});// 增加滑动监听
 
 		loadMoreButtonXZ.setOnClickListener(this);
+		
+		loadDept();
+	}
+
+	/**
+	 * @方法： showDept
+	 * @描述： 显示部门数据
+	 */
+	private void showDept() {
+
+		Dept dept = new Dept("按部门筛选");
+		deptList.add(0, dept);
+
+		DeptSpinnerAdapter adapter = new DeptSpinnerAdapter(deptList, context);
+
+		xingzhengDeptSpinner.setAdapter(adapter);
+
 	}
 
 	/**
 	 * @方法： loadData
-	 * @描述： 加载数据
+	 * @描述： 加载行政事项数据
 	 * @param startIndex
 	 * @param endIndex
 	 */
@@ -545,13 +750,14 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 				AdministrativeService service = new AdministrativeService(
 						context);
 
-				String url = Constants.Urls.GETITEM_QUERY_URL + "?qltype="
-						+ getXinzhengType() + "&start=" + startIndex + "&end="
-						+ endIndex;
+				con.setStart(startIndex);
+				con.setEnd(endIndex);
+
 				try {
-					licenseWrapper = service.getLicenseWrapper(url);
+					licenseWrapper = service.getLicenseWrapper(getXZUrl(con));
 					if (licenseWrapper != null) {
 						msg.what = XINGZHENG_LOAD_SUCESS;
+						licenses = licenseWrapper.getLicenses();
 					} else {
 						msg.what = XINGZHENG_LOAD_ERROR;
 						msg.obj = "加载办件信息失败";
@@ -579,6 +785,131 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	}
 
 	/**
+	 * @方法： loadDept
+	 * @描述： 加载部门数据
+	 */
+	private void loadDept() {
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				Message msg = handler.obtainMessage();
+				DeptService deptService = new DeptService(context);
+				try {
+					deptList = deptService.getDepts();
+					if (deptList != null) {
+						msg.what = XZ_SEARCH_DEPT_SUCESS;
+					} else {
+						msg.what = XZ_SEARCH_DEPT_FAILED;
+						msg.obj = "没有获取到数据";
+					}
+					handler.sendMessage(msg);
+				} catch (NetException e) {
+					e.printStackTrace();
+					msg.what = XZ_SEARCH_DEPT_FAILED;
+					msg.obj = e.getMessage();
+					handler.sendMessage(msg);
+				} catch (JSONException e) {
+					e.printStackTrace();
+					msg.what = XZ_SEARCH_DEPT_FAILED;
+					msg.obj = "数据格式错误";
+					handler.sendMessage(msg);
+				}
+
+			}
+		}).start();
+
+	}
+
+	/**
+	 * @方法： loadDeptData
+	 * @描述： 加载部门信息
+	 */
+	private void loadDeptData() {
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				Message msg = handler.obtainMessage();
+				OpenInfoDeptService infoDeptService = new OpenInfoDeptService(
+						context);
+				try {
+					depts = infoDeptService
+							.getOpenInfoDepts(Constants.Urls.OPEN_INFO_DEPT_URL);
+					if (depts != null) {
+						msg.what = LOAD_DEPT_SUCCESS;
+					} else {
+						msg.what = LOAD_DEPT_FAILED;
+						msg.obj = "没有获取到数据";
+					}
+					handler.sendMessage(msg);
+				} catch (NetException e) {
+					e.printStackTrace();
+					msg.what = LOAD_DEPT_FAILED;
+					msg.obj = e.getMessage();
+					handler.sendMessage(msg);
+				} catch (JSONException e) {
+					e.printStackTrace();
+					msg.what = LOAD_DEPT_SUCCESS;
+					msg.obj = "数据格式错误";
+					handler.sendMessage(msg);
+				}
+			}
+		}).start();
+
+	}
+
+	/**
+	 * @方法： showDept
+	 * @描述： 显示部门数据
+	 */
+	private void showSearchDept() {
+		OpenInfoDept deptDefault = new OpenInfoDept();
+		deptDefault.setId("0");
+		deptDefault.setName(DEFAULT_DEPT_FIFTER);
+		depts.add(0, deptDefault);
+
+		OpenInfoDeptAdapter partment_Spinner_adapter = new OpenInfoDeptAdapter(
+				context, depts);
+		if (deptSpinner.getVisibility() == View.VISIBLE) {
+			deptSpinner.setAdapter(partment_Spinner_adapter);
+			deptSpinner.setVisibility(View.VISIBLE);
+		}
+
+	}
+
+	/**
+	 * @方法： initYearSpinner
+	 * @描述： 初始化年份下拉框
+	 */
+	private void initYearSpinner() {
+		List<String> years = TimeFormateUtil
+				.getYears(TimeFormateUtil.START_YEAR);
+
+		years.add(years.size(), "选择年份");
+
+		int size = years.size();
+
+		String[] yearStr = new String[size];
+
+		for (int i = size - 1; i >= 0; i--) {
+			yearStr[size - 1 - i] = years.get(i);
+		}
+
+		MyAryAdapter year_Spinner_adapter = new MyAryAdapter(context,
+				android.R.layout.simple_spinner_item, yearStr);
+		year_Spinner_adapter
+				.setDropDownViewResource(R.layout.my_spinner_medium_dropdown_item);
+		if (yearSpinner.getVisibility() == View.VISIBLE) {
+			yearSpinner.setAdapter(year_Spinner_adapter);
+			yearSpinner.setVisibility(View.VISIBLE);
+		}
+
+	}
+
+	/**
 	 * @方法： getType
 	 * @描述： 获取菜单类型
 	 * @return
@@ -595,6 +926,56 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 
 		return fifterType;
 
+	}
+
+	/**
+	 * @方法： getURL
+	 * @描述： 构建搜索URL
+	 * @param fifter
+	 * @return
+	 */
+	private String getURL(String id) {
+		String url = Constants.Urls.CHANNEL_CONTENT_P_URL.replace("{id}", id)
+				.replace("{start}", String.valueOf(searchCondition.getStart()))
+				.replace("{end}", String.valueOf(searchCondition.getEnd()));
+		String dept = searchCondition.getDept();
+		String year = searchCondition.getYear();
+
+		if (dept != null && !"".equals(dept)) {
+			url = url + "&dept=" + dept;
+		}
+		if (year != null && !"".equals(year)) {
+			url = url + "&year=" + year;
+		}
+
+		return url;
+	}
+
+	/**
+	 * @方法： getUrl
+	 * @描述： 获取URL
+	 * @param con
+	 * @return
+	 */
+	private String getXZUrl(AdministrativeCon con) {
+
+		String url = Constants.Urls.GETITEM_QUERY_URL + "?qltype="
+				+ getXinzhengType() + "&start=" + con.getStart() + "&end="
+				+ con.getEnd();
+
+		String id = con.getId();
+		int year = con.getYear();
+
+		if (id != null && !"".equals(id)) {
+			url = url + "&deptid=" + id;
+		}
+		if (year != -1) {
+			url = url + "&year=" + year;
+		}
+		
+		System.out.println("ashoisa:"+url);
+
+		return url;
 	}
 
 	/**
@@ -633,16 +1014,20 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	 */
 	private void showChannelContentData() {
 		contents = contentWrapper.getContents();
+
 		govermsg_detail_lv_channel.setVisibility(View.GONE);
 		packup_btn.setVisibility(View.VISIBLE);
 		channleFrameLayout.setVisibility(View.GONE);
 		channelListView.setVisibility(View.VISIBLE);
 		xinzhengListView.setVisibility(View.GONE);
-		if (contents == null && contents.size() == 0) {
+		if (contents == null && contents.size() == 0
+				&& contents.get(0).equals("[") && contents.get(0).equals("]")) {
 			Toast.makeText(context, "数据为空！", Toast.LENGTH_SHORT).show();
 		} else {
 			if (isFirstLoadgg) {
-				contentListAdapter = new ContentListAdapter(contents, context);
+				contentListAdapter = new CityGoverInfoContentListAdapter(
+						contents, context);
+				contentListAdapter.setChannel(getParentChannel());
 				channelListView.setAdapter(contentListAdapter);
 				isFirstLoadgg = false;
 				subProgressBar.setVisibility(ProgressBar.GONE);
@@ -677,10 +1062,10 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 
 	/**
 	 * @方法： showPoloticsList
-	 * @描述： 显示列表数据
+	 * @描述： 显示行政事项列表数据
 	 */
 	private void showXingzhengList() {
-		licenses = licenseWrapper.getLicenses();
+		
 		govermsg_detail_lv_channel.setVisibility(View.GONE);
 		packup_btn.setVisibility(View.VISIBLE);
 		channleFrameLayout.setVisibility(View.GONE);
@@ -718,7 +1103,10 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 			pb_loadmoorexz.setVisibility(ProgressBar.GONE);
 			loadMoreButtonXZ.setText("点击加载更多");
 		} else {
-			xinzhengListView.removeFooterView(loadMoreViewXZ);
+			if (administrativeAdapter!=null) {
+				xinzhengListView.removeFooterView(loadMoreViewXZ);
+			}
+			
 		}
 	}
 
@@ -968,7 +1356,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 
 	/**
 	 * @方法： loadMoreMenuListData
-	 * @描述： 加载更多子菜单数据
+	 * @描述： 加载更多子频道数据
 	 * @param view
 	 */
 	private void loadMoreChannelListData(View view) {
@@ -1000,15 +1388,21 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 				Message msg = handler.obtainMessage();
 				ContentService contentService = new ContentService(context);
 				try {
-
 					String channelId = "";
 					if (parentChannel != null) {
 						channelId = parentChannel.getChannelId();
 					} else if (parentItem != null) {
 						channelId = parentItem.getChannelId();
 					}
-					contentWrapper = contentService.getPageContentsById(
-							channelId, start, end);
+
+					searchCondition.setStart(start);
+					searchCondition.setEnd(end);
+
+					System.out.println("起始和结束：" + searchCondition.getStart()
+							+ ";" + searchCondition.getEnd());
+
+					contentWrapper = contentService
+							.getPageContentsByUrl(getURL(channelId));
 					if (contentWrapper != null) {
 						msg.what = CHANNEL_LOAD_SUCESS;
 					} else {
@@ -1048,6 +1442,10 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 			channleFrameLayout.setVisibility(View.VISIBLE);
 			channelListView.setVisibility(View.GONE);
 			xinzhengListView.setVisibility(View.GONE);
+			searchLayout.setVisibility(View.GONE);
+			xingzhengsearchLayout.setVisibility(View.GONE);
+			searchCondition.setDept("");
+			searchCondition.setYear("");
 			break;
 
 		case R.id.loadMoreButton:
@@ -1070,7 +1468,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 
 	/**
 	 * @方法： loadMoreData
-	 * @描述： 加载更多数据
+	 * @描述： 加载更多行政事项数据
 	 * @param view
 	 */
 	private void loadMoreXingzhengData(View view) {
@@ -1080,6 +1478,67 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 			loadXingzhengData(xingzhengLastIndex + 1, xingzhengLastIndex + 1
 					+ PAGE_NUM);
 		}
+	}
+
+	/**
+	 * @类名： MyAryAdapter
+	 * @描述： 年份下拉框适配器
+	 * @作者： 罗森
+	 * @创建时间： 2013 2013-10-11 下午5:45:16
+	 * @修改时间：
+	 * @修改描述：
+	 */
+	public class MyAryAdapter extends ArrayAdapter<String> {
+
+		Context context;
+		String[] items = new String[] {};
+
+		public MyAryAdapter(final Context context,
+				final int textViewResourceId, final String[] objects) {
+			super(context, textViewResourceId, objects);
+
+			this.items = objects;
+			this.context = context;
+		}
+
+		@Override
+		public View getDropDownView(int position, View convertView,
+				ViewGroup parent) {
+			if (convertView == null) {
+				LayoutInflater inflater = LayoutInflater.from(context);
+				convertView = inflater.inflate(
+						android.R.layout.simple_spinner_item, parent, false);
+			}
+
+			TextView tv = (TextView) convertView
+					.findViewById(android.R.id.text1);
+			tv.setText(items[position]);
+			tv.setGravity(Gravity.LEFT);
+			tv.setTextColor(Color.BLACK);
+			tv.setTextSize(16);
+			tv.setPadding(3, 5, 5, 5);
+
+			return convertView;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				LayoutInflater inflater = LayoutInflater.from(context);
+				convertView = inflater.inflate(
+						android.R.layout.simple_spinner_item, parent, false);
+			}
+
+			TextView tv = (TextView) convertView
+					.findViewById(android.R.id.text1);
+			tv.setText(items[position]);
+			tv.setGravity(Gravity.LEFT);
+			tv.setTextColor(Color.BLACK);
+			tv.setTextSize(12);
+
+			return convertView;
+		}
+
 	}
 
 }
