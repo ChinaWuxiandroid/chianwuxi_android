@@ -91,7 +91,7 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment
 
 	private FrameLayout webFrameLayout = null;
 	private FrameLayout notwebFrameLayout = null;
-	
+
 	private ComplaintLetterListAdapter adapter;
 
 	private static final int LETTER_LOAD_SUCESS = 10;
@@ -183,8 +183,7 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment
 	private PopWindowManager popWindowManager = null;
 
 	private int contentType = 0; // 内容类型，缺省为0-信件列表 1-写信须知 2-办理规则 3-机构职责
-	
-	
+
 	private View myconsultloadMoreView;
 	private ProgressBar pb_consultloadmoore;
 	private Button myconsultloadMoreButton;
@@ -302,9 +301,11 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment
 		linearLayout = (LinearLayout) view.findViewById(R.id.query_mail_layout);
 		radioGroup = (RadioGroup) view
 				.findViewById(R.id.gip_12345_complaint_radioGroup);
-		
-		webFrameLayout = (FrameLayout) view.findViewById(R.id.complaint_web_fragment);
-		notwebFrameLayout = (FrameLayout) view.findViewById(R.id.complaint_fragment);
+
+		webFrameLayout = (FrameLayout) view
+				.findViewById(R.id.complaint_web_fragment);
+		notwebFrameLayout = (FrameLayout) view
+				.findViewById(R.id.complaint_fragment);
 
 		// 关键字输入框
 		keyWordEdit = (EditText) view
@@ -508,18 +509,18 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment
 		}
 
 		if (letterWrapper.isNext()) {
-			if (mListView.getFooterViewsCount()!= 0) {
+			if (mListView.getFooterViewsCount() != 0) {
 				pb_loadmoore.setVisibility(ProgressBar.GONE);
 				loadMoreButton.setText("点击加载更多");
-			}else {
+			} else {
 				mListView.addFooterView(getMyConsultFootView());
 			}
-			
+
 		} else {
 			if (adapter != null) {
 				mListView.removeFooterView(loadMoreView);
 			}
-			
+
 		}
 	}
 
@@ -539,7 +540,7 @@ public class GIP12345ComplaintFragment extends RadioButtonChangeFragment
 		myconsultloadMoreButton.setOnClickListener(this);
 		return myconsultloadMoreView;
 	}
-	
+
 	/**
 	 * @方法： loadMoreData
 	 * @描述： 加载更多数据
