@@ -18,7 +18,7 @@ import com.wuxi.domain.MenuItem;
  */
 public class MenuItemChanelUtil {
 
-	private static final String TAG = "MenuItemChanelUtil";
+	//private static final String TAG = "MenuItemChanelUtil";
 
 	/**
 	 * 

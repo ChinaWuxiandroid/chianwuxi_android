@@ -14,7 +14,6 @@ import android.widget.ProgressBar;
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
-import com.wuxi.app.activity.homepage.informationcenter.HotTopicContentActivity;
 import com.wuxi.app.activity.homepage.informationcenter.InfoWebActivity;
 import com.wuxi.domain.MenuItem;
 

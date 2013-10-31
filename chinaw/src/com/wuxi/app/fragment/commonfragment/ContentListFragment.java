@@ -243,8 +243,8 @@ public abstract class ContentListFragment extends BaseFragment implements
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		int itemsLastIndex = adapter.getCount() - 1; // 数据集最后一项的索引
-		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
+		
+	
 		
 		
 	}
