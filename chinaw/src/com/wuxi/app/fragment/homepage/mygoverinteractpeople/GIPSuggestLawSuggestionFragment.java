@@ -11,8 +11,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,17 +49,17 @@ import com.wuxi.exception.NetException;
  * @author 杨宸 智佳
  * */
 
-public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnClickListener {
+public class GIPSuggestLawSuggestionFragment extends BaseFragment implements
+		OnClickListener {
 
 	private static final String TAG = "GIPSuggestLawSuggestionFragment";
-	
+
 	private View view = null;
 	private Context context = null;
 
 	private Spinner chooseYear_spinner = null;
 
 	private ListView mListView = null;
-	private ListView searchListView = null;
 	private ProgressBar list_pb = null;
 
 	private PoliticsWrapper politicsWrapper;
@@ -69,16 +67,12 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 
 	private static final int DATA_LOAD_SUCESS = 0;
 	private static final int DATA_LOAD_ERROR = 1;
-	private static final int SEARCH_DATA_LOAD_SUCESS = 2;
-	private static final int SEARCH_DATA_LOAD_ERROR = 3;
 
 	private static final int POLITICS_TYPE = 0; // politics类型，接口里0 为立法征集，1 为民意征集
 	private static final int START = 0; // 获取话题的起始坐标
 
 	private int visibleLastIndex;
 	private int visibleItemCount;// 当前显示的总条数
-	private int searchVisibleLastIndex;
-	private int searchVisibleItemCount;// 当前显示的总条数
 	private final static int PAGE_NUM = 10;
 
 	private boolean isFirstLoad = true;// 是不是首次加载数据
@@ -90,21 +84,11 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 	private ProgressBar pb_loadmoore;
 
 	private SuggestLawSuggestionAdapter adapter = null;
-	
-	private boolean isFirstLoadSearch = true;// 是不是首次加载数据
-	private boolean isSwitchSearch = false;// 切换
-	private boolean isLoadingSearch = false;
-
-	private View loadSearchMoreView;// 加载更多视图
-	private Button searchLoadMoreButton;
-	private ProgressBar searchpb_loadmoore;
-
-	private SuggestLawSuggestionAdapter searchAdapter = null;
 
 	private String[] years = { "2013", "2012", "2011", "2010" };
 
 	private SuggestLawSearchCon searchCon = new SuggestLawSearchCon();
-	
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -118,21 +102,11 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 				showPoloticsList();
 				list_pb.setVisibility(View.INVISIBLE);
 				break;
-				
-//			case SEARCH_DATA_LOAD_SUCESS:
-//				showPoloticsSearchList();
-//				
-//				break;
-				
+
 			case DATA_LOAD_ERROR:
 				list_pb.setVisibility(View.INVISIBLE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
-				
-			case SEARCH_DATA_LOAD_ERROR:
-				list_pb.setVisibility(View.INVISIBLE);
-				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
-				break;	
 			}
 		};
 	};
@@ -147,13 +121,9 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 
 		initLayout();
 
-		
-//		loadFirstData(START, PAGE_NUM);
-
-		
 		return view;
 	}
-	
+
 	/**
 	 * @方法： initLayout
 	 * @描述： 初始化布局控件
@@ -166,15 +136,16 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 
 		list_pb = (ProgressBar) view
 				.findViewById(R.id.gip_suggest_lawsuggest_listView_poloticsList_pb);
-		
+
 		mListView = (ListView) view
 				.findViewById(R.id.gip_suggest_lawsuggest_listView);
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int position,
-					long arg3) {
-				Politics politics = (Politics) adapterView.getItemAtPosition(position);
+			public void onItemClick(AdapterView<?> adapterView, View view,
+					int position, long arg3) {
+				Politics politics = (Politics) adapterView
+						.getItemAtPosition(position);
 
 				Intent intent = new Intent(getActivity(),
 						LegislationContentActivity.class);
@@ -185,25 +156,7 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 		});
 		mListView.addFooterView(getFootView());// 为listView添加底部视图
 		mListView.setOnScrollListener(new LawOnScrollListener());// 增加滑动监听
-		
-//		searchListView = (ListView) view.findViewById(R.id.gip_suggest_lawsuggest_search_listView);
-//		searchListView.setOnItemClickListener(new OnItemClickListener() {
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> adapterView, View view, int position,
-//					long arg3) {
-//				Politics politics = (Politics) adapterView.getItemAtPosition(position);
-//
-//				Intent intent = new Intent(getActivity(),
-//						LegislationContentActivity.class);
-//				intent.putExtra("politics", politics);
-//
-//				MainTabActivity.instance.addView(intent);
-//			}
-//		});
-//		searchListView.addFooterView(getSearchFootView());// 为listView添加底部视图
-//		searchListView.setOnScrollListener(new SearchOnScrollListener());// 增加滑动监听
-		
+
 		// 年份下拉框适配器实例
 		MyAryAdapter spinner_adapter = new MyAryAdapter(context,
 				android.R.layout.simple_spinner_item, years);
@@ -219,10 +172,8 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 					public void onItemSelected(AdapterView<?> adapterView,
 							View view, int position, long arg3) {
 						searchCon.setYear(Integer.valueOf(years[position]));
-//							loadFirstSearchData(START, PAGE_NUM);
-//							mListView.setVisibility(View.GONE);
-//							searchListView.setVisibility(View.VISIBLE);
 						list_pb.setVisibility(View.VISIBLE);
+						isSwitch = true;
 						loadFirstData(START, PAGE_NUM);
 					}
 
@@ -233,7 +184,7 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 				});
 
 	}
-	
+
 	/**
 	 * @方法： getUrl
 	 * @描述： 获取URL
@@ -246,17 +197,15 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 				+ POLITICS_TYPE + "&start=" + con.getStart() + "&end="
 				+ con.getEnd() + "&year=" + con.getYear();
 
-		System.out.println("搜索URL："+url);
-		
 		return url;
 	}
-	
+
 	/**
 	 * @方法： getFootView
-	 * @描述： TODO
+	 * @描述： 获取列表底部视图
 	 * @return
 	 */
-	private View getFootView(){
+	private View getFootView() {
 		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
 				null);
 		loadMoreButton = (Button) loadMoreView
@@ -266,22 +215,6 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 		loadMoreButton.setOnClickListener(this);
 		return loadMoreView;
 	}
-	
-//	/**
-//	 * @方法： getSearchFootView
-//	 * @描述： TODO
-//	 * @return
-//	 */
-//	private View getSearchFootView(){
-//		loadSearchMoreView = View.inflate(context, R.layout.myapply_list_loadmore_layout,
-//				null);
-//		searchLoadMoreButton = (Button) loadSearchMoreView
-//				.findViewById(R.id.loadapply_MoreButton);
-//		searchpb_loadmoore = (ProgressBar) loadSearchMoreView
-//				.findViewById(R.id.pb_applyloadmoore);
-//		searchLoadMoreButton.setOnClickListener(this);
-//		return loadSearchMoreView;
-//	}
 
 	/**
 	 * @方法： loadFirstData
@@ -313,16 +246,12 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 				Message message = handler.obtainMessage();
 				PoliticsService politicsService = new PoliticsService(context);
 
-//				// 构建立法征求意见数据查询URL
-//				String url = Constants.Urls.POLITICS_LIST_URL + "?type="
-//						+ POLITICS_TYPE + "&start=" + start + "&end="
-//						+ end + "&year=" + 2013;
-
 				searchCon.setStart(start);
 				searchCon.setEnd(end);
-				
+
 				try {
-					politicsWrapper = politicsService.getPoliticsWrapper(getSearchUrl(searchCon));
+					politicsWrapper = politicsService
+							.getPoliticsWrapper(getSearchUrl(searchCon));
 					if (null != politicsWrapper) {
 						handler.sendEmptyMessage(DATA_LOAD_SUCESS);
 					} else {
@@ -348,11 +277,12 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 	 * @描述： 显示立法征求意见列表
 	 */
 	private void showPoloticsList() {
-		
+
 		politicss = politicsWrapper.getData();
 		if (politicss == null || politicss.size() == 0) {
-			Toast.makeText(context, "对不起，暂无"+searchCon.getYear()+"年的立法征求意见信息", Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText(context,
+					"对不起，暂无" + searchCon.getYear() + "年的立法征求意见信息",
+					Toast.LENGTH_SHORT).show();
 			list_pb.setVisibility(View.GONE);
 		} else {
 			if (isFirstLoad) {
@@ -381,19 +311,17 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 			if (mListView.getFooterViewsCount() != 0) {
 				pb_loadmoore.setVisibility(ProgressBar.GONE);
 				loadMoreButton.setText("点击加载更多");
-			}else {
+			} else {
 				mListView.addFooterView(getFootView());
 			}
-			
+
 		} else {
 			if (adapter != null) {
 				mListView.removeFooterView(loadMoreView);
 			}
-			
+
 		}
-		
-		System.out.println("显示1");
-		
+
 	}
 
 	/**
@@ -408,121 +336,6 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 			loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_NUM);
 		}
 	}
-	
-//	/**
-//	 * @方法： loadFirstData
-//	 * @描述： 第一次加载数据
-//	 * @param start
-//	 * @param end
-//	 */
-//	private void loadFirstSearchData(int start, int end) {
-//		loadSearchData(start, end);
-//	}
-//
-//	/**
-//	 * @方法： loadData
-//	 * @描述： 加载立法征求意见数据
-//	 * @param url
-//	 */
-//	private void loadSearchData(final int start, final int end) {
-//		if (isFirstLoadSearch || isSwitchSearch) {
-//			list_pb.setVisibility(View.VISIBLE);
-//		} else {
-//			searchpb_loadmoore.setVisibility(ProgressBar.VISIBLE);
-//		}
-//
-//		new Thread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				isLoadingSearch = true;// 正在加载数据
-//				Message message = handler.obtainMessage();
-//				PoliticsService politicsService = new PoliticsService(context);
-//
-//				searchCon.setStart(start);
-//				searchCon.setEnd(end);
-//
-//				try {
-//					politicsWrapper = politicsService
-//							.getPoliticsWrapper(getSearchUrl(searchCon));
-//					if (null != politicsWrapper) {
-//						handler.sendEmptyMessage(SEARCH_DATA_LOAD_SUCESS);
-//					} else {
-//						message.obj = "error";
-//						handler.sendEmptyMessage(SEARCH_DATA_LOAD_ERROR);
-//					}
-//				} catch (NetException e) {
-//					LogUtil.i(TAG, "出错");
-//					e.printStackTrace();
-//					message.obj = e.getMessage();
-//					handler.sendEmptyMessage(SEARCH_DATA_LOAD_ERROR);
-//				} catch (JSONException e) {
-//					e.printStackTrace();
-//				} catch (NODataException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}).start();
-//	}
-//	
-//	/**
-//	 * @方法： showPoloticsList
-//	 * @描述： 显示立法征求意见列表
-//	 */
-//	private void showPoloticsSearchList() {
-//		
-//		politicss = politicsWrapper.getData();
-//		if (politicss == null || politicss.size() == 0) {
-//			Toast.makeText(context, "对不起，暂无立法征求意见信息", Toast.LENGTH_SHORT)
-//					.show();
-//		} else {
-//			if (isFirstLoadSearch) {
-//				searchAdapter = new SuggestLawSuggestionAdapter(context, politicss);
-//				isFirstLoadSearch = false;
-//				mListView.setAdapter(searchAdapter);
-//				list_pb.setVisibility(View.GONE);
-//				isLoadingSearch = false;
-//			} else {
-//				if (isSwitchSearch) {
-//					searchAdapter.setPolitics(politicss);
-//					list_pb.setVisibility(View.GONE);
-//				} else {
-//					for (Politics pol : politicss) {
-//						searchAdapter.addItem(pol);
-//					}
-//				}
-//
-//				searchAdapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
-//				mListView.setSelection(searchVisibleLastIndex - searchVisibleItemCount + 1); // 设置选中项
-//				isLoadingSearch = false;
-//			}
-//		}
-//
-//		if (politicsWrapper.isNext()) {
-//			searchpb_loadmoore.setVisibility(ProgressBar.GONE);
-//			searchLoadMoreButton.setText("点击加载更多");
-//		} else {
-//			if (searchAdapter != null) {
-//				mListView.removeFooterView(loadSearchMoreView);
-//			}
-//			
-//		}
-//		
-//		System.out.println("显示2");
-//	}
-//
-//	/**
-//	 * @方法： loadMoreData
-//	 * @描述： 加载更多数据
-//	 * @param view
-//	 */
-//	private void loadMoreSearcgData(View view) {
-//		if (isLoadingSearch) {
-//			return;
-//		} else {
-//			loadSearchData(searchVisibleLastIndex + 1, searchVisibleLastIndex + 1 + PAGE_NUM);
-//		}
-//	}
 
 	@Override
 	public void onClick(View v) {
@@ -534,14 +347,6 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 				loadMoreData(v);
 			}
 			break;
-//			
-//		case R.id.loadapply_MoreButton:
-//			if (politicsWrapper != null && politicsWrapper.isNext()) {// 还有下一条记录
-//				isSwitchSearch = false;
-//				searchLoadMoreButton.setText("loading.....");
-//				loadMoreSearcgData(v);
-//			}
-//			break;
 		}
 	}
 
@@ -606,19 +411,19 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 
 	/**
 	 * @类名： LawOnScrollListener
-	 * @描述： TODO
+	 * @描述： 分页加载数据监听类
 	 * @作者： 罗森
 	 * @创建时间： 2013 2013-10-17 下午3:58:44
-	 * @修改时间： 
+	 * @修改时间：
 	 * @修改描述：
 	 */
-	private class LawOnScrollListener implements OnScrollListener{
+	private class LawOnScrollListener implements OnScrollListener {
 
 		@Override
 		public void onScroll(AbsListView view, int firstVisibleItem,
 				int visibleItemNum, int totalItemCount) {
 			visibleItemCount = visibleItemNum;
-			visibleLastIndex = firstVisibleItem + visibleItemCount - 1;// 最后一条索引号
+			visibleLastIndex = firstVisibleItem + visibleItemNum - 1;// 最后一条索引号
 		}
 
 		@Override
@@ -627,29 +432,5 @@ public class GIPSuggestLawSuggestionFragment extends BaseFragment implements OnC
 			int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
 		}
 	}
-	
-//	/**
-//	 * @类名： SearchOnScrollListener
-//	 * @描述： TODO
-//	 * @作者： 罗森
-//	 * @创建时间： 2013 2013-10-17 下午4:28:12
-//	 * @修改时间： 
-//	 * @修改描述：
-//	 */
-//	private class SearchOnScrollListener implements OnScrollListener{
-//
-//		@Override
-//		public void onScroll(AbsListView view, int firstVisibleItem,
-//				int visibleItemCount, int totalItemCount) {
-//			searchVisibleItemCount = visibleItemCount;
-//			searchVisibleLastIndex = firstVisibleItem + visibleItemCount - 1;// 最后一条索引号
-//		}
-//
-//		@Override
-//		public void onScrollStateChanged(AbsListView view, int scrollState) {
-//			int itemsLastIndex = searchAdapter.getCount() - 1; // 数据集最后一项的索引
-//			int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-//		}
-//		
-//	}
+
 }

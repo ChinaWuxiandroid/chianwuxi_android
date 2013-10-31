@@ -56,6 +56,84 @@
         android:layout_height="1dp"
         android:background="#ffffff" />
 
+    <LinearLayout
+        android:id="@+id/gmp_search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="3dp"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <Spinner
+            android:id="@+id/gmp_search_dept_spinner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.8"
+            android:background="@drawable/spiner_bg" />
+
+        <Spinner
+            android:id="@+id/gmp_search_year_spinner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/spiner_bg" />
+
+        <Button
+            android:id="@+id/gmp_search_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/forum_submitbtn_bg"
+            android:gravity="center"
+            android:text="检索"
+            android:textColor="#ff095ce1"
+            android:textSize="15sp" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/gmp_xingzheng_search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="3dp"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <Spinner
+            android:id="@+id/gmp_xingzheng_search_dept_spinner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.8"
+            android:background="@drawable/spiner_bg" />
+
+        <Spinner
+            android:id="@+id/gmp_xingzheng_search_year_spinner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/spiner_bg" />
+
+        <Button
+            android:id="@+id/gmp_xingzheng_search_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/forum_submitbtn_bg"
+            android:gravity="center"
+            android:text="检索"
+            android:textColor="#ff095ce1"
+            android:textSize="15sp" />
+    </LinearLayout>
+
     <ProgressBar
         android:id="@+id/gmp_detail_progressbar"
         android:layout_width="wrap_content"
@@ -73,9 +151,20 @@
         android:dividerHeight="1dp"
         android:visibility="gone" >
     </ListView>
-    
+
     <ListView
         android:id="@+id/gpm_detail_channel_listview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@android:color/white"
+        android:dividerHeight="1dp"
+        android:visibility="gone" >
+    </ListView>
+
+    <ListView
+        android:id="@+id/gpm_detail_xingzheng_listview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8"
@@ -92,5 +181,5 @@
         android:layout_weight="1.2"
         android:text="收   起"
         android:visibility="gone" />
-    
+
 </LinearLayout>

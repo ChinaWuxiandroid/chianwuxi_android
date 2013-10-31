@@ -79,29 +79,29 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 	private ListView mListView;
 	private ProgressBar list_pb;
 
-	private static final int DATA_LOAD_SUCESS = 0;
-	private static final int DATA_LOAD_ERROR = 1;
+	private static final int XINGZHENG_LOAD_SUCESS = 0;
+	private static final int XINGZHENG_LOAD_ERROR = 1;
 	private static final int LOAD_DEPT_SUCCESS = 2;
 	private static final int LOAD_DEPT_FAIL = 3;
 
-	private String type;
+	private String xingzhengtype;
 
 	private AdministrativeWrapper licenseWrapper;
 	private List<GoverSaoonItem> licenses;
 
-	private int visibleLastIndex;
-	private int visibleItemCount;// 当前显示的总条数
+	private int xingzhengLastIndex;
+	private int xingzhengItemCount;// 当前显示的总条数
 	private final static int PAGE_NUM = 10;
 
 	private AdministrativeAdapter adapter;
 
-	private boolean isFirstLoad = true;// 是不是首次加载数据
-	private boolean isSwitch = false;// 切换
-	private boolean isLoading = false;
+	private boolean isFirstLoadXZ = true;// 是不是首次加载数据
+	private boolean isSwitchXZ = false;// 切换
+	private boolean isLoadingXZ = false;
 
-	private View loadMoreView;// 加载更多视图
-	private Button loadMoreButton;
-	private ProgressBar pb_loadmoore;
+	private View loadMoreViewXZ;// 加载更多视图
+	private Button loadMoreButtonXZ;
+	private ProgressBar pb_loadmoorexz;
 
 	private List<Dept> depts;
 
@@ -123,10 +123,10 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 				tip = msg.obj.toString();
 			}
 			switch (msg.what) {
-			case DATA_LOAD_SUCESS:
-				showPoloticsList();
+			case XINGZHENG_LOAD_SUCESS:
+				showXingzhengList();
 				break;
-			case DATA_LOAD_ERROR:
+			case XINGZHENG_LOAD_ERROR:
 				list_pb.setVisibility(View.INVISIBLE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
@@ -169,16 +169,16 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 		list_pb = (ProgressBar) view
 				.findViewById(R.id.gpm_admini_license_progressbar);
 
-		loadMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+		loadMoreViewXZ = View.inflate(context, R.layout.myapply_list_loadmore_layout,
 				null);
-		loadMoreButton = (Button) loadMoreView
-				.findViewById(R.id.loadMoreButton);
-		pb_loadmoore = (ProgressBar) loadMoreView
-				.findViewById(R.id.pb_loadmoore);
+		loadMoreButtonXZ = (Button) loadMoreViewXZ
+				.findViewById(R.id.loadapply_MoreButton);
+		pb_loadmoorexz = (ProgressBar) loadMoreViewXZ
+				.findViewById(R.id.pb_applyloadmoore);
 
-		mListView.addFooterView(loadMoreView);// 为listView添加底部视图
+		mListView.addFooterView(loadMoreViewXZ);// 为listView添加底部视图
 		mListView.setOnScrollListener(this);// 增加滑动监听
-		loadMoreButton.setOnClickListener(this);
+		loadMoreButtonXZ.setOnClickListener(this);
 
 		deptSpinner = (Spinner) view
 				.findViewById(R.id.gpm_admini_license_dept_spinner);
@@ -230,8 +230,8 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
-		this.visibleItemCount = visibleItemCount;
-		visibleLastIndex = firstVisibleItem + visibleItemCount - 1;// 最后一条索引号
+		this.xingzhengItemCount = visibleItemCount;
+		xingzhengLastIndex = firstVisibleItem + visibleItemCount - 1;// 最后一条索引号
 	}
 
 	@Override
@@ -243,12 +243,11 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.loadMoreButton:
+		case R.id.loadapply_MoreButton:
 			if (licenseWrapper != null && licenseWrapper.isNext()) {// 还有下一条记录
-
-				isSwitch = false;
-				loadMoreButton.setText("loading.....");
-				loadMoreData(v);
+				isSwitchXZ = false;
+				loadMoreButtonXZ.setText("loading.....");
+				loadMoreXingzhengData(v);
 			}
 			break;
 			
@@ -298,7 +297,7 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 	 * @param end
 	 */
 	private void loadFirstData(int start, int end) {
-		loadData(start, end);
+		loadXingzhengData(start, end);
 	}
 
 	/**
@@ -307,18 +306,18 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 	 * @param startIndex
 	 * @param endIndex
 	 */
-	private void loadData(final int startIndex, final int endIndex) {
-		if (isFirstLoad || isSwitch) {
+	private void loadXingzhengData(final int startIndex, final int endIndex) {
+		if (isFirstLoadXZ || isSwitchXZ) {
 			list_pb.setVisibility(View.VISIBLE);
 		} else {
-			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
+			pb_loadmoorexz.setVisibility(ProgressBar.VISIBLE);
 		}
 
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
-				isLoading = true;// 正在加载数据
+				isLoadingXZ = true;// 正在加载数据
 				Message msg = handler.obtainMessage();
 				AdministrativeService service = new AdministrativeService(
 						context);
@@ -329,25 +328,25 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 				try {
 					licenseWrapper = service.getLicenseWrapper(url);
 					if (licenseWrapper != null) {
-						msg.what = DATA_LOAD_SUCESS;
+						msg.what = XINGZHENG_LOAD_SUCESS;
 					} else {
-						msg.what = DATA_LOAD_ERROR;
+						msg.what = XINGZHENG_LOAD_ERROR;
 						msg.obj = "加载办件信息失败";
 					}
 					handler.sendMessage(msg);
 				} catch (JSONException e) {
 					e.printStackTrace();
-					msg.what = DATA_LOAD_ERROR;
+					msg.what = XINGZHENG_LOAD_ERROR;
 					msg.obj = "数据格式错误";
 					handler.sendMessage(msg);
 				} catch (NetException e) {
 					e.printStackTrace();
-					msg.what = DATA_LOAD_ERROR;
+					msg.what = XINGZHENG_LOAD_ERROR;
 					msg.obj = e.getMessage();
 					handler.sendMessage(msg);
 				} catch (NODataException e) {
 					e.printStackTrace();
-					msg.what = DATA_LOAD_ERROR;
+					msg.what = XINGZHENG_LOAD_ERROR;
 					msg.obj = e.getMessage();
 					handler.sendMessage(msg);
 				}
@@ -401,21 +400,21 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 	 * @方法： showPoloticsList
 	 * @描述： 显示列表数据
 	 */
-	private void showPoloticsList() {
+	private void showXingzhengList() {
 		licenses = licenseWrapper.getLicenses();
 
 		if (licenses == null || licenses.size() == 0) {
 			Toast.makeText(context, "对不起，暂无行政事项信息", Toast.LENGTH_SHORT).show();
 			list_pb.setVisibility(View.GONE);
 		} else {
-			if (isFirstLoad) {
+			if (isFirstLoadXZ) {
 				adapter = new AdministrativeAdapter(context, licenses);
-				isFirstLoad = false;
+				isFirstLoadXZ = false;
 				mListView.setAdapter(adapter);
 				list_pb.setVisibility(View.GONE);
-				isLoading = false;
+				isLoadingXZ = false;
 			} else {
-				if (isSwitch) {
+				if (isSwitchXZ) {
 					adapter.setAdministratives(licenses);
 					list_pb.setVisibility(View.GONE);
 				} else {
@@ -425,16 +424,16 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 				}
 
 				adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
-				mListView.setSelection(visibleLastIndex - visibleItemCount + 1); // 设置选中项
-				isLoading = false;
+				mListView.setSelection(xingzhengLastIndex - xingzhengItemCount + 1); // 设置选中项
+				isLoadingXZ = false;
 			}
 		}
 
 		if (licenseWrapper.isNext()) {
-			pb_loadmoore.setVisibility(ProgressBar.GONE);
-			loadMoreButton.setText("点击加载更多");
+			pb_loadmoorexz.setVisibility(ProgressBar.GONE);
+			loadMoreButtonXZ.setText("点击加载更多");
 		} else {
-			mListView.removeFooterView(loadMoreView);
+			mListView.removeFooterView(loadMoreViewXZ);
 		}
 	}
 
@@ -458,11 +457,11 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 	 * @描述： 加载更多数据
 	 * @param view
 	 */
-	private void loadMoreData(View view) {
-		if (isLoading) {
+	private void loadMoreXingzhengData(View view) {
+		if (isLoadingXZ) {
 			return;
 		} else {
-			loadData(visibleLastIndex + 1, visibleLastIndex + 1 + PAGE_NUM);
+			loadXingzhengData(xingzhengLastIndex + 1, xingzhengLastIndex + 1 + PAGE_NUM);
 		}
 	}
 
@@ -470,7 +469,7 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 	 * @return type
 	 */
 	public String getType() {
-		return type;
+		return xingzhengtype;
 	}
 
 	/**
@@ -478,7 +477,7 @@ public class GPMAdministrativeFragment extends BaseFragment implements
 	 *            要设置的 type
 	 */
 	public void setType(String type) {
-		this.type = type;
+		this.xingzhengtype = type;
 	}
 	
 	/**

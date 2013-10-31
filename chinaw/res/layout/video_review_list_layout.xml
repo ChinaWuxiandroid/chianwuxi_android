@@ -43,6 +43,7 @@
         android:layout_alignLeft="@+id/review_time_text"
         android:layout_below="@+id/review_time_text"
         android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
         android:text="访问嘉宾：无锡市地税局党组书记、局长 丁源"
         android:textColor="#808080"
         android:textSize="12sp" />

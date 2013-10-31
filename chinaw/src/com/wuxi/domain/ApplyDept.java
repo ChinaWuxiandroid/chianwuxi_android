@@ -8,10 +8,12 @@ import java.io.Serializable;
  */
 
 public class ApplyDept implements Serializable{
+	
 	/**
-	 * 
+	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private String doProjectId;
 	private String depId;
 	private String depName;

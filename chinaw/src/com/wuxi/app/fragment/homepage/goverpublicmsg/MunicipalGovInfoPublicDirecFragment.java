@@ -2,15 +2,12 @@ package com.wuxi.app.fragment.homepage.goverpublicmsg;
 
 import java.util.List;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
@@ -28,18 +25,10 @@ import com.wuxi.domain.MenuItem;
 public class MunicipalGovInfoPublicDirecFragment extends BaseFragment implements
 		InitializContentLayoutListner {
 
-	private static final String TAG = "ChannelFragment";
-
 	private View view;
 
-	private static final int TITLE__LOAD_SUCESS = 66;
-	private static final int TITLE_LOAD_ERROR = 88;
-
-	private LayoutInflater inflater;
-	private ImageButton ib_nextItems;
 	private MenuItem menuItem;// 菜单项
 	private List<MenuItem> titleMenus;// 头部菜单选项
-	private Context context;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,8 +38,6 @@ public class MunicipalGovInfoPublicDirecFragment extends BaseFragment implements
 						R.layout.fragment_publicgovermsg_municipalgovinfopublicdirec_layout,
 						null);
 
-		this.inflater = inflater;
-		context = this.getActivity();
 		initUI();
 		return view;
 	}

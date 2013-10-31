@@ -132,7 +132,7 @@ public class PolicieRegulationAdapter extends BaseAdapter {
 				|| menuItem.getName().endsWith("省级法规规章")) {
 			viewHolder.publishDept.setVisibility(View.GONE);
 			if (contents.get(position).getBuildTime().equals("null")) {
-				viewHolder.buildTime.setText("生成日期：" + "null");
+				viewHolder.buildTime.setText("生成日期：");
 			} else {
 				viewHolder.buildTime.setText("生成日期："
 						+ TimeFormateUtil.formateTime(contents.get(position)
@@ -142,7 +142,7 @@ public class PolicieRegulationAdapter extends BaseAdapter {
 			viewHolder.openTime.setVisibility(View.GONE);
 		} else {
 			if (contents.get(position).getOrganization().equals("null")) {
-				viewHolder.publishDept.setText("发布机构：" + "null");
+				viewHolder.publishDept.setText("发布机构：");
 			} else {
 				viewHolder.publishDept.setText("发布机构："
 						+ contents.get(position).getOrganization());

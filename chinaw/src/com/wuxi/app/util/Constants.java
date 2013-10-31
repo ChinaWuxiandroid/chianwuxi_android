@@ -487,6 +487,18 @@ public class Constants {
 				+ "/applyopen/deps.json";
 
 		/**
+		 * 政府信息公开部门下拉框数据加载URL
+		 */
+		public static final String OPEN_INFO_DEPT_URL = BASIC_URL
+				+ "/openinfo/depts.json";
+
+		/**
+		 * 政府信息公开年份下拉框数据加载URL
+		 */
+		public static final String OPEN_INFO_YEAR_URL = BASIC_URL
+				+ "/openinfo/years.json";
+
+		/**
 		 * 政府信息公开 依申请公开网上办件统计
 		 * */
 		public static final String INTERNET_LETTERS_STATISTICS_URL = BASIC_URL
