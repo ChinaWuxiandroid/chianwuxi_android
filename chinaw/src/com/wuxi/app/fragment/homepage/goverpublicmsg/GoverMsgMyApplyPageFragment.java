@@ -75,6 +75,7 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment {
 		try {
 			myApplyPageWrapper = service.getMyApplyPages(
 					SystemUtil.getAccessToken(context), start, end);
+
 		} catch (NetException e) {
 			e.printStackTrace();
 		} catch (JSONException e) {
@@ -111,7 +112,7 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment {
 	 * @描述： 适配器
 	 * @作者： 罗森
 	 * @创建时间： 2013 2013-10-11 下午5:44:02
-	 * @修改时间： 
+	 * @修改时间：
 	 * @修改描述：
 	 */
 	public class MyApplyPageAdapter extends BaseAdapter {

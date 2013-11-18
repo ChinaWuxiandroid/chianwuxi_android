@@ -33,7 +33,8 @@ public class LetterService extends Service {
 	 * @throws JSONException
 	 * @throws NetException
 	 * */
-	public LetterWrapper getLetterLitstWrapper(String url) throws NetException, JSONException, NODataException {
+	public LetterWrapper getLetterLitstWrapper(String url) throws NetException,
+			JSONException, NODataException {
 		return getLettersWrapper(url);
 	}
 
@@ -79,23 +80,34 @@ public class LetterService extends Service {
 		}
 
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+
 		if (resultStr != null) {
+
 			JSONObject jsonObject = new JSONObject(resultStr);
-			JSONObject jresult = jsonObject.getJSONObject("result");
+			boolean success = jsonObject.getBoolean("success");
 
 			LetterWrapper letterWrapper = new LetterWrapper();
 
-			letterWrapper.setEnd(jresult.getInt("end"));
-			letterWrapper.setStart(jresult.getInt("start"));
-			letterWrapper.setNext(jresult.getBoolean("next"));
-			letterWrapper.setPrevious(jresult.getBoolean("previous"));
-			letterWrapper.setTotalRowsAmount(jresult.getInt("totalRowsAmount"));
+			// 判断是否读取到了数据
+			if (success) {
 
-			JSONArray jData = jresult.getJSONArray("data");
-			if (jData != null) {
-				letterWrapper.setData(parseData(jData));// 解析数组
+				JSONObject jresult = jsonObject.getJSONObject("result");
+
+				letterWrapper.setEnd(jresult.getInt("end"));
+				letterWrapper.setStart(jresult.getInt("start"));
+				letterWrapper.setNext(jresult.getBoolean("next"));
+				letterWrapper.setPrevious(jresult.getBoolean("previous"));
+				letterWrapper.setTotalRowsAmount(jresult
+						.getInt("totalRowsAmount"));
+
+				JSONArray jData = jresult.getJSONArray("data");
+				if (jData != null) {
+					letterWrapper.setData(parseData(jData));// 解析数组
+				}
+
+			} else if (!success) {
+				letterWrapper.setData(success);
 			}
-
 			return letterWrapper;
 
 		} else {

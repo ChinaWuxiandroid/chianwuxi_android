@@ -32,7 +32,6 @@ public class DeptService extends Service {
 
 		String url = Constants.Urls.DEPT_URL;
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
-
 		if (null != resultStr) {
 
 			JSONObject jsonObject = new JSONObject(resultStr);

@@ -59,6 +59,9 @@ public class MyApplyOpenService extends Service {
 
 		// 提交请求并返回结果
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+
+		System.out.println("数据是否为空：" + resultStr);
+
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
 			JSONObject jresult = jsonObject.getJSONObject("result");

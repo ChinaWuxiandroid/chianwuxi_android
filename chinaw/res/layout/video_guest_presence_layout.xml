@@ -7,18 +7,17 @@
         android:id="@+id/video_guest_presence_progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_centerInParent="true"
+        android:layout_gravity="center"
         android:visibility="gone" />
 
     <ListView
         android:id="@+id/video_guest_presence_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-          android:cacheColorHint="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
         android:divider="@android:color/white"
-        android:dividerHeight="1dip"
-         >
+        android:dividerHeight="1dip" >
     </ListView>
 
 </RelativeLayout>

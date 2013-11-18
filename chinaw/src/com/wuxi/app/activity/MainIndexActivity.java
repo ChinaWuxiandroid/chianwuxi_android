@@ -215,9 +215,9 @@ public class MainIndexActivity extends Activity implements
 		iv_index_ldhd.setOnClickListener(this);
 		iv_index_zt.setOnClickListener(this);
 
-		LoadGrid();//加载菜单数据
+		LoadGrid();// 加载菜单数据
 		loadNews();// 加载新闻数据
-		loadAnnouncements();//加载公共数据
+		loadAnnouncements();// 加载公共数据
 
 		pd = new ProgressDialog(this);
 
@@ -674,9 +674,12 @@ public class MainIndexActivity extends Activity implements
 						MainIndexActivity.this);
 				try {
 					announcements = announcementsService.getAnnouncements();
+					
 					if (announcements != null) {
+						
 						handler.sendEmptyMessage(ANNOUNCE_LOAD_SUCCESS);
 						CacheUtil.put(ANNOUNCE_CACHE_KEY, announcements);// 放入缓存
+						
 					} else {
 						Message msg = handler.obtainMessage();
 						msg.obj = "获取公告列表失败";

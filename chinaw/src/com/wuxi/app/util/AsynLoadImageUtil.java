@@ -11,6 +11,11 @@
  */
 package com.wuxi.app.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,10 +24,12 @@ import java.util.Map;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 /**
  * @类名： AsynLoadImageUtil
@@ -37,7 +44,7 @@ public class AsynLoadImageUtil {
 	private static final String TAG = "AsynLoadImageUtil";
 
 	// 缓存下载过的图片的Map
-	private Map<String, SoftReference<Bitmap>> caches;
+	private static Map<String, SoftReference<Bitmap>> caches;
 
 	// 任务队列
 	private List<Task> taskQueue;
@@ -67,11 +74,18 @@ public class AsynLoadImageUtil {
 	 *            图片加载过程中显示的图片资源
 	 */
 	public void showImageAsyn(ImageView imageView, String url, int resId) {
-		imageView.setTag(url);
-		Bitmap bitmap = loadImageAsyn(url, getImageCallback(imageView, resId));
 
+		Bitmap bitmap = null;
+
+		bitmap = loadImg(url);
 		if (bitmap == null) {
-			imageView.setImageResource(resId);
+			imageView.setTag(url);
+			bitmap = loadImageAsyn(url, getImageCallback(imageView, resId));
+			if (bitmap == null) {
+				imageView.setImageResource(resId);
+			} else {
+				imageView.setImageBitmap(bitmap);
+			}
 		} else {
 			imageView.setImageBitmap(bitmap);
 		}
@@ -132,7 +146,11 @@ public class AsynLoadImageUtil {
 			@Override
 			public void loadImage(String path, Bitmap bitmap) {
 				if (path.equals(imageView.getTag().toString())) {
+					System.out.println("图片的下载路径：" + path);
 					imageView.setImageBitmap(bitmap);
+					if (bitmap != null) {
+						saveImageToFile(fileUrl, bitmap);
+					}
 				} else {
 					imageView.setImageResource(resId);
 				}
@@ -206,4 +224,100 @@ public class AsynLoadImageUtil {
 			return task.path.equals(path);
 		}
 	}
+
+	/**
+	 * 从本地加载图片
+	 * 
+	 * @param url
+	 * @return
+	 */
+	public static Bitmap LoadImageFromLocal(String url) {
+		try {
+			System.out.println("加载本地图片");
+			FileInputStream fis = new FileInputStream(url);
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			// 越大压的越狠
+			options.inSampleSize = 0;
+			return BitmapFactory.decodeStream(fis, null, options);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * 把bitmap存储到file中
+	 * 
+	 * @param file
+	 * @param bitmap
+	 */
+	public static void saveImageToFile(File file, Bitmap bitmap) {
+
+		FileOutputStream fos = null;
+		System.out.println("保存在本地,保存的路径：" + file);
+		try {
+			if (file.createNewFile()) {
+				fos = new FileOutputStream(file);
+				// 越小图片越模糊
+				bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} finally {
+			if (fos != null) {
+				try {
+					fos.flush();
+					fos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	/**
+	 * 加载图片 如果本地SD卡中存在，则直接从本地读取，否者，先从网上下下来，再转存到SD卡中
+	 * 
+	 * @param url
+	 *            图片路径
+	 * @return
+	 */
+
+	File fileUrl = null;
+
+	public Bitmap loadImg(String url) {
+		System.out.println("从SD卡上查找");
+		String sDStateString = android.os.Environment.getExternalStorageState();// 判断SD卡状态
+		// 有SD卡
+		if (sDStateString.equals(android.os.Environment.MEDIA_MOUNTED)) {
+			// SD卡存在并可以进行写操作
+			String path = Constants.APPFiles.APP_PATH;
+			File dir = new File(path);
+			if (!dir.exists()) {
+				System.out.println(dir.mkdirs());
+				dir.mkdirs();
+			}
+			path = Constants.APPFiles.CAHCE_FILE_CONTENT_PATH;
+			File dir2 = new File(path);
+			if (!dir2.exists()) {
+				System.out.println(dir2.mkdirs());
+				dir2.mkdirs();
+			}
+			String filename = url.substring(url.lastIndexOf("/") + 1,
+					url.length());
+			String imagepath = path + "/" + filename;
+			fileUrl = new File(imagepath);
+			if (fileUrl.exists()) {
+				// SD卡中已存在该图片
+				return LoadImageFromLocal(imagepath);
+			} else {
+				return null;
+			}
+
+		} else {// 无SD卡, 从网络上下载
+
+			return null;
+		}
+	}
+
 }

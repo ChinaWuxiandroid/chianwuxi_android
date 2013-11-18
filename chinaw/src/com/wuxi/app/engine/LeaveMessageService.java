@@ -15,6 +15,7 @@ import android.content.Context;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.LeaveMessageWrapper;
+import com.wuxi.domain.VideoPreviewInfo;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -33,6 +34,25 @@ public class LeaveMessageService extends Service {
 	 */
 	public LeaveMessageService(Context context) {
 		super(context);
+	}
+
+	public VideoPreviewInfo getVideoPreview(int start, int end)
+			throws NetException, JSONException, NODataException {
+
+		// 检查网络连接状态
+		if (!checkNet()) {
+			throw new NetException(Constants.ExceptionMessage.NO_NET);
+		}
+
+		String url = Constants.Urls.VEDIO_PREVIEW_URL + "start=" + start
+				+ "&end=" + end;
+
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+
+		if (resultStr != null) {
+		}
+
+		return null;
 	}
 
 	/**

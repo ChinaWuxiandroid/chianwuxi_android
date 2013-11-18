@@ -17,6 +17,7 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,7 +35,9 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.wuxi.app.BaseFragment;
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumContentActivity;
 import com.wuxi.app.adapter.InternetPoliticsListAdapter;
 import com.wuxi.app.engine.InternetSurveySerivce;
 import com.wuxi.app.util.LogUtil;
@@ -281,7 +284,6 @@ public class GIPSuggestSurveyListFragment extends BaseFragment implements
 		switch (v.getId()) {
 		case R.id.loadMoreButton:
 			if (internetSurveyWrapper != null && internetSurveyWrapper.isNext()) {// 还有下一条记录
-
 				isSwitch = false;
 				loadMoreButton.setText("loading.....");
 				loadMoreData(v);
@@ -293,6 +295,9 @@ public class GIPSuggestSurveyListFragment extends BaseFragment implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		Toast.makeText(context, "该功能暂未开通", Toast.LENGTH_SHORT).show();
+//		Intent intent = new Intent(getActivity(), ForumContentActivity.class);
+//	
+//		MainTabActivity.instance.addView(intent);
 	}
 
 }

@@ -28,37 +28,38 @@ import android.widget.TextView;
  * @描述： 政民互动 我的政民互动 12345 我的回信 列表适配器
  * @作者： 罗森
  * @创建时间： 2013 2013-10-14 上午11:14:05
- * @修改时间： 
- * @修改描述： 
+ * @修改时间：
+ * @修改描述：
  */
-public class MineReplyLetterAdapter extends BaseAdapter{
-	
+public class MineReplyLetterAdapter extends BaseAdapter {
+
 	private List<Letter> letters;
-	
+
 	private Context context;
-	
+
 	/**
 	 * @方法： MineReplyLetterAdapter
 	 * @描述： 构造方法
 	 * @param context
 	 * @param letters
 	 */
-	public MineReplyLetterAdapter(Context context,List<Letter> letters){
+	public MineReplyLetterAdapter(Context context, List<Letter> letters) {
 		this.context = context;
 		this.letters = letters;
 	}
-	
+
 	/**
 	 * @方法： addItem
 	 * @描述： 添加数据到列表
 	 * @param letter
 	 */
-	public void addItem(Letter letter){
+	public void addItem(Letter letter) {
 		this.letters.add(letter);
 	}
-	
+
 	/**
-	 * @param letters 要设置的  letters 
+	 * @param letters
+	 *            要设置的 letters
 	 */
 	public void setLetters(List<Letter> letters) {
 		this.letters = letters;
@@ -93,6 +94,8 @@ public class MineReplyLetterAdapter extends BaseAdapter{
 			convertView = LayoutInflater.from(context).inflate(
 					R.layout.gip_mine_12345_listview_item, null);
 
+			System.out.println("初始化控件");
+
 			viewHolder = new ViewHolder();
 
 			viewHolder.title_text = (TextView) convertView
@@ -106,17 +109,19 @@ public class MineReplyLetterAdapter extends BaseAdapter{
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		
+
+		System.out.println("绑定数据");
+
 		String title_str = (position + 1) + "." + "["
 				+ letters.get(position).getType() + "]"
 				+ letters.get(position).getTitle();
 		viewHolder.title_text.setText(title_str);
 		viewHolder.code_text.setText(letters.get(position).getCode());
 
-		 viewHolder.answerDate_text.setText(letters.get(position).getAnswerdate());
+		viewHolder.answerDate_text.setText(letters.get(position)
+				.getAnswerdate());
 
 		return convertView;
 	}
-	
 
 }

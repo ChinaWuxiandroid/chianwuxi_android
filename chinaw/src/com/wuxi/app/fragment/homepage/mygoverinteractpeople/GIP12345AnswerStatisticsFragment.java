@@ -320,6 +320,7 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 		list_pb = (ProgressBar) view
 				.findViewById(R.id.gip_12345_answerstati_listview_pb);
 
+		loadLettersReplyCountData(letter_type, 2013, 1);
 		loadAllCountData();
 	}
 
@@ -399,10 +400,9 @@ public class GIP12345AnswerStatisticsFragment extends RadioButtonChangeFragment 
 				try {
 					allCounts = replyStatisticsService
 							.getAllCount(Constants.Urls.LETTERS_ALLCOUNT_URL);
+
 					if (null != allCounts) {
-
 						handler.sendEmptyMessage(ALLCOUNT_LOAD_SUCESS);
-
 					} else {
 						Message message = handler.obtainMessage();
 						message.obj = "error";

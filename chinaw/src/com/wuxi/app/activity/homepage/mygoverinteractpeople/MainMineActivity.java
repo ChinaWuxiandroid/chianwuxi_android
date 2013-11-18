@@ -206,13 +206,11 @@ public class MainMineActivity extends BaseSlideActivity implements
 			return gIPMenuItemContentFragment;
 		} else if (menuItem.getType() == MenuItem.CHANNEL_MENU) {
 			GIPContentFragment gIPChannelContentFragment = new GIPContentFragment();
-
 			gIPChannelContentFragment.setParentItem(menuItem);
 			return gIPChannelContentFragment;
 		} else if (menuItem.getType() == MenuItem.APP_MENU) {
 
 			if (menuItem.getAppUI().equals("MyPoliticalInteraction")) {
-
 				return new GoverInterPeopleMineFragment();
 			}
 
@@ -290,9 +288,7 @@ public class MainMineActivity extends BaseSlideActivity implements
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long arg3) {
 			if (position == 0 && !loginDialog.checkLogin()) {
-
 				loginDialog.showDialog();
-
 			} else {
 				Object object = parent.getItemAtPosition(position);
 
@@ -300,7 +296,6 @@ public class MainMineActivity extends BaseSlideActivity implements
 				adapter.notifyDataSetInvalidated();
 				showContentFragment(showMenItemContentFragment((MenuItem) object));
 			}
-
 		}
 
 	}

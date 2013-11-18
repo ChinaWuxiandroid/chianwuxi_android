@@ -9,15 +9,14 @@
         android:id="@+id/left_silde_select_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/left_silde_select_logo"
-         />
+        android:background="@drawable/left_silde_select_logo" />
 
     <ListView
         android:id="@+id/lv_menu"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/login_item_bg" 
-        android:cacheColorHint="@android:color/transparent">
+        android:background="@drawable/login_item_bg"
+        android:cacheColorHint="@android:color/transparent" >
     </ListView>
 
 </LinearLayout>

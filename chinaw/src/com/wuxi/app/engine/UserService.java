@@ -48,6 +48,7 @@ public class UserService extends Service {
 				.replace("{pwd}", password);
 
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+
 		if (resultStr != null) {
 
 			JSONObject jsonObject = new JSONObject(resultStr);

@@ -76,6 +76,7 @@ public class TitleScrollLayout extends ViewGroup {
 		return menuItemInitLayoutListener;
 	}
 
+	///
 	public void setMenuItemInitLayoutListener(
 			MenuItemInitLayoutListener menuItemInitLayoutListener) {
 		this.menuItemInitLayoutListener = menuItemInitLayoutListener;

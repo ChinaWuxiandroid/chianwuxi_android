@@ -1,7 +1,6 @@
 package com.wuxi.app.fragment.homepage.goverpublicmsg;
 
 import java.util.Calendar;
-import java.util.List;
 
 import org.json.JSONException;
 
@@ -10,8 +9,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,7 +23,6 @@ import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.activity.homepage.goverpublicmsg.GPMApplyActivity;
 import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.SubmitListService;
 import com.wuxi.app.util.Constants;
@@ -46,7 +42,7 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 		OnClickListener {
 
 	private View view;
-	private LayoutInflater mInflater;
+//	private LayoutInflater mInflater;
 	private Context context;
 
 	private static final int SUBMIT_SUCCESS = 3;
@@ -106,7 +102,7 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.onlineapply_citizentable_layout, null);
-		mInflater = inflater;
+//		mInflater = inflater;
 		context = getActivity();
 
 		initView();

@@ -139,8 +139,8 @@ public class ContentService extends Service {
 		String url = Constants.Urls.CHANNEL_CONTENT_P_URL.replace("{id}", id)
 				.replace("{start}", start + "").replace("{end}", end + "");
 
-		System.out.println("cesj:"+url);
-		
+		System.out.println("cesj:" + url);
+
 		String resultStr = null;
 		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url, true);// 检查是否有缓存文件
 		if (isHasCacheFile) {
@@ -149,7 +149,10 @@ public class ContentService extends Service {
 			resultStr = httpUtils.executeGetToString(url, 5000);
 		}
 
+		System.out.println("ContentWrapper========>" + resultStr);
+
 		if (resultStr != null) {
+			
 			JSONObject jsonObject = new JSONObject(resultStr);
 			JSONObject jresult = jsonObject.getJSONObject("result");
 			ContentWrapper contentWrapper = new ContentWrapper();
@@ -159,7 +162,9 @@ public class ContentService extends Service {
 			contentWrapper.setPrevious(jresult.getBoolean("previous"));
 			contentWrapper
 					.setTotalRowsAmount(jresult.getInt("totalRowsAmount"));
+			
 			JSONArray jData = jresult.getJSONArray("data");
+			
 			if (jData != null) {
 				contentWrapper.setContents(parseData(jData));// 解析数组
 			}
@@ -192,8 +197,9 @@ public class ContentService extends Service {
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
-		
+
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
 			JSONObject jresult = jsonObject.getJSONObject("result");

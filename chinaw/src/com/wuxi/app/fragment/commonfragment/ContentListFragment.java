@@ -40,7 +40,7 @@ import com.wuxi.exception.NetException;
 @SuppressLint("HandlerLeak")
 public abstract class ContentListFragment extends BaseFragment implements
 		OnScrollListener, OnItemClickListener, OnClickListener {
-	
+
 	protected static final int CONTENT_LOAD_SUCCESS = 0;
 	protected static final int CONTENT_LOAD_FAIL = 1;
 	private static final int PAGE_SIZE = 10;
@@ -115,7 +115,7 @@ public abstract class ContentListFragment extends BaseFragment implements
 				isLoading = false;
 			}
 
-		}else {
+		} else {
 			Toast.makeText(context, "对不起，没有数据！", Toast.LENGTH_SHORT).show();
 			content_list_pb.setVisibility(ProgressBar.GONE);
 		}
@@ -125,10 +125,10 @@ public abstract class ContentListFragment extends BaseFragment implements
 			loadMoreButton.setText("点击加载更多");
 
 		} else {
-			if(adapter!=null){
+			if (adapter != null) {
 				content_list_lv.removeFooterView(loadMoreView);
 			}
-			
+
 		}
 
 	}
@@ -138,12 +138,12 @@ public abstract class ContentListFragment extends BaseFragment implements
 	 * wanglu 泰得利通 首次加载数据
 	 */
 	private void initData(final int start, final int end) {
-
 		loadData(start, end);
 
 	}
 
 	public void loadData(final int start, final int end) {
+
 		if (isFirstLoad || isSwitch) {
 			content_list_pb.setVisibility(ProgressBar.VISIBLE);
 		} else {
@@ -164,8 +164,10 @@ public abstract class ContentListFragment extends BaseFragment implements
 					} else if (parentItem != null) {
 						channelId = parentItem.getChannelId();
 					}
+
 					contentWrapper = contentService.getPageContentsById(
 							channelId, start, end);
+
 					if (contentWrapper != null) {
 						msg.what = CONTENT_LOAD_SUCCESS;
 
@@ -222,13 +224,9 @@ public abstract class ContentListFragment extends BaseFragment implements
 		loadMoreButton.setOnClickListener(this);
 	}
 
-	
-
 	public void setParentItem(MenuItem parentItem) {
 		this.parentItem = parentItem;
 	}
-
-	
 
 	public void setChannel(Channel channel) {
 		this.channel = channel;
@@ -245,8 +243,7 @@ public abstract class ContentListFragment extends BaseFragment implements
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		int itemsLastIndex = adapter.getCount() - 1; // 数据集最后一项的索引
 		int lastIndex = itemsLastIndex + 1; // 加上底部的loadMoreView项
-		
-		
+
 	}
 
 	@Override

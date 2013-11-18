@@ -51,16 +51,15 @@ public class AdministrativeService extends Service {
 	 * @throws JSONException
 	 * @throws NODataException
 	 */
-	public AdministrativeWrapper getLicenseWrapper(String url) throws NetException, JSONException,
-			NODataException {
+	public AdministrativeWrapper getLicenseWrapper(String url)
+			throws NetException, JSONException, NODataException {
 		// 检查网络连接状态
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
-		
+
 		// 提交请求并返回结果
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
-
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
 			JSONObject jresult = jsonObject.getJSONObject("result");
@@ -78,9 +77,9 @@ public class AdministrativeService extends Service {
 			if (jData != null) {
 				wrapper.setLicenses(getAdministrativeLicenses(jData));
 			}
-			
+
 			return wrapper;
-		}else {
+		} else {
 			// 没有获取到数据异常
 			throw new NODataException(Constants.ExceptionMessage.NODATA_MEG);
 		}
@@ -93,8 +92,8 @@ public class AdministrativeService extends Service {
 	 * @return
 	 * @throws JSONException
 	 */
-	private List<GoverSaoonItem> getAdministrativeLicenses(
-			JSONArray jData) throws JSONException {
+	private List<GoverSaoonItem> getAdministrativeLicenses(JSONArray jData)
+			throws JSONException {
 		if (jData != null) {
 			List<GoverSaoonItem> licenses = new ArrayList<GoverSaoonItem>();
 			for (int i = 0; i < jData.length(); i++) {
@@ -103,14 +102,14 @@ public class AdministrativeService extends Service {
 				GoverSaoonItem license = new GoverSaoonItem();
 
 				license.setType(jb.getString("type"));
-//				license.setBm(jb.getString("bm"));
+				// license.setBm(jb.getString("bm"));
 				license.setNum(jb.getInt("num"));
 				license.setKindtype(jb.getInt("kindtype"));
 				license.setSubkindtype(jb.getInt("subkindtype"));
 				license.setKindname(jb.getString("kindname"));
-//				license.setSubkindname(jb.getString("subkindname"));
+				// license.setSubkindname(jb.getString("subkindname"));
 				license.setTypename(jb.getString("typename"));
-//				license.setBladdress(jb.getString("bladdress"));
+				// license.setBladdress(jb.getString("bladdress"));
 				license.setName(jb.getString("name"));
 				license.setId(jb.getString("id"));
 				license.setDeptid(jb.getString("deptid"));

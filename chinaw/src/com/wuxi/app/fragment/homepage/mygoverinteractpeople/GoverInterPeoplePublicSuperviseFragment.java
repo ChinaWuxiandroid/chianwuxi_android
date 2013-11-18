@@ -120,31 +120,31 @@ public class GoverInterPeoplePublicSuperviseFragment extends BaseFragment
 		submit_ibtn.setOnClickListener(this);
 		reset_ibtn.setOnClickListener(this);
 
-//		phoneTextWatcher = new TextWatcher() {
-//
-//			@Override
-//			public void onTextChanged(CharSequence s, int start, int before,
-//					int count) {
-//
-//			}
-//
-//			@Override
-//			public void beforeTextChanged(CharSequence s, int start, int count,
-//					int after) {
-//
-//			}
-//
-//			@Override
-//			public void afterTextChanged(Editable s) {
-//				String phoneNumber = tel_et.getText().toString();
-//				if (!isPhoneNumberValid(phoneNumber)) {
-//					Toast.makeText(context, "您输入的电话号码格式不对，请重新输入！",
-//							Toast.LENGTH_SHORT).show();
-//					tel_et.setText("");
-//				}
-//			}
-//		};
-//		tel_et.addTextChangedListener(phoneTextWatcher);
+		// phoneTextWatcher = new TextWatcher() {
+		//
+		// @Override
+		// public void onTextChanged(CharSequence s, int start, int before,
+		// int count) {
+		//
+		// }
+		//
+		// @Override
+		// public void beforeTextChanged(CharSequence s, int start, int count,
+		// int after) {
+		//
+		// }
+		//
+		// @Override
+		// public void afterTextChanged(Editable s) {
+		// String phoneNumber = tel_et.getText().toString();
+		// if (!isPhoneNumberValid(phoneNumber)) {
+		// Toast.makeText(context, "您输入的电话号码格式不对，请重新输入！",
+		// Toast.LENGTH_SHORT).show();
+		// tel_et.setText("");
+		// }
+		// }
+		// };
+		// tel_et.addTextChangedListener(phoneTextWatcher);
 	}
 
 	@Override
@@ -161,6 +161,7 @@ public class GoverInterPeoplePublicSuperviseFragment extends BaseFragment
 			} else {
 				loginDialog.showDialog();
 			}
+			submitData();
 			break;
 		case R.id.gip_publicsupervise_et_reset:
 			resetEditInfo();
@@ -195,8 +196,9 @@ public class GoverInterPeoplePublicSuperviseFragment extends BaseFragment
 						submitListService.submitByUrl(getUrl(
 								Constants.Urls.CITIZEN_APPLY_SUBMIT_URL,
 								SystemUtil.getAccessToken(context)));
-						Toast.makeText(context, "提交成功，正在审核...", Toast.LENGTH_SHORT).show();
-							handler.sendEmptyMessage(DATA_SUBMIT_SUCCESS);
+						Toast.makeText(context, "提交成功，正在审核...",
+								Toast.LENGTH_SHORT).show();
+						handler.sendEmptyMessage(DATA_SUBMIT_SUCCESS);
 					} catch (NetException e) {
 						handler.sendEmptyMessage(DATA_SUBMIT_FAILED);
 						e.printStackTrace();
@@ -226,14 +228,41 @@ public class GoverInterPeoplePublicSuperviseFragment extends BaseFragment
 		email = email_et.getText().toString();
 		content = content_et.getText().toString();
 
+		// 检查电话
+		Pattern pattern = Pattern
+				.compile("1([\\d]{10})|((\\+[0-9]{2,4})?\\(?[0-9]+\\)?-?)?[0-9]{7,8}");
+
+		Matcher matcher = pattern.matcher(tel);
+		StringBuffer bf = new StringBuffer(64);
+		while (matcher.find()) {
+			bf.append(matcher.group());
+		}
+		int tel_len = bf.length();
+
+		// 检查邮箱
+		Pattern pattern1 = Pattern
+				.compile("[a-zA-Z_]{1,}[0-9]{0,}@(([a-zA-z0-9]-*){1,}\\.){1,3}[a-zA-z\\-]{1,}");
+		Matcher matcher1 = pattern1.matcher(email);
+		StringBuffer bf1 = new StringBuffer(64);
+		while (matcher1.find()) {
+			bf1.append(matcher1.group());
+		}
+		int email_len = bf1.length();
+
 		if (!inputError && "".equals(sentUserName)) {
 			Toast.makeText(context, "姓名 不能为空", Toast.LENGTH_SHORT).show();
 			inputError = true;
 		} else if (!inputError && "".equals(tel)) {
 			Toast.makeText(context, "联系电话 不能为空", Toast.LENGTH_SHORT).show();
 			inputError = true;
+		} else if (tel_len < 1) {
+			Toast.makeText(context, "请输入正确的联系电话", Toast.LENGTH_SHORT).show();
+			inputError = true;
 		} else if (!inputError && "".equals(email)) {
 			Toast.makeText(context, "E-mail 不能为空", Toast.LENGTH_SHORT).show();
+			inputError = true;
+		} else if (email_len < 1) {
+			Toast.makeText(context, "请输入正确的邮箱", Toast.LENGTH_SHORT).show();
 			inputError = true;
 		} else if (!inputError && "".equals(content)) {
 			Toast.makeText(context, "问题 不能为空", Toast.LENGTH_SHORT).show();
@@ -241,58 +270,57 @@ public class GoverInterPeoplePublicSuperviseFragment extends BaseFragment
 		}
 		return inputError;
 	}
-
-//	/**
-//	 * 检查字符串是否为电话号码的方法,并返回true or false的判断值
-//	 */
-//	public static boolean isPhoneNumberValid(String phoneNumber) {
-//		boolean isValid = false;
-//		/**
-//		 * 可接受的电话格式有: ^//(? : 可以使用 "(" 作为开头 (//d{3}): 紧接着三个数字 //)? : 可以使用")"接续
-//		 * [- ]? : 在上述格式后可以使用具选择性的 "-". (//d{3}) : 再紧接着三个数字 [- ]? : 可以使用具选择性的
-//		 * "-" 接续. (//d{5})$: 以五个数字结束. 可以比较下列数字格式: (123)456-7890, 123-456-7890,
-//		 * 1234567890, (123)-456-7890
-//		 */
-//		String expression = "^//(?(//d{3})//)?[- ]?(//d{3})[- ]?(//d{5})$";
-//
-//		/**
-//		 * 可接受的电话格式有: ^//(? : 可以使用 "(" 作为开头 (//d{3}): 紧接着三个数字 //)? : 可以使用")"接续
-//		 * [- ]? : 在上述格式后可以使用具选择性的 "-". (//d{4}) : 再紧接着四个数字 [- ]? : 可以使用具选择性的
-//		 * "-" 接续. (//d{4})$: 以四个数字结束. 可以比较下列数字格式: (02)3456-7890, 02-3456-7890,
-//		 * 0234567890, (02)-3456-7890
-//		 */
-//		String expression2 = "^//(?(//d{3})//)?[- ]?(//d{4})[- ]?(//d{4})$";
-//
-//		CharSequence inputStr = phoneNumber;
-//		/* 创建Pattern */
-//		Pattern pattern = Pattern.compile(expression);
-//		/* 将Pattern 以参数传入Matcher作Regular expression */
-//		Matcher matcher = pattern.matcher(inputStr);
-//		/* 创建Pattern2 */
-//		Pattern pattern2 = Pattern.compile(expression2);
-//		/* 将Pattern2 以参数传入Matcher2作Regular expression */
-//		Matcher matcher2 = pattern2.matcher(inputStr);
-//		if (matcher.matches())// || matcher2.matches())
-//		{
-//			isValid = true;
-//		}
-//		return isValid;
-//	}
-//
-//	@Override
-//	public void onResume() {
-//		super.onResume();
-//		Timer timer = new Timer();
-//		timer.schedule(new TimerTask() {
-//
-//			@Override
-//			public void run() {
-//				imm = (InputMethodManager) context.getSystemService(
-//						Context.INPUT_METHOD_SERVICE);
-//				imm.showSoftInput(tel_et, 0);
-//			}
-//
-//		}, 1000);
-//	}
+	// /**
+	// * 检查字符串是否为电话号码的方法,并返回true or false的判断值
+	// */
+	// public static boolean isPhoneNumberValid(String phoneNumber) {
+	// boolean isValid = false;
+	// /**
+	// * 可接受的电话格式有: ^//(? : 可以使用 "(" 作为开头 (//d{3}): 紧接着三个数字 //)? : 可以使用")"接续
+	// * [- ]? : 在上述格式后可以使用具选择性的 "-". (//d{3}) : 再紧接着三个数字 [- ]? : 可以使用具选择性的
+	// * "-" 接续. (//d{5})$: 以五个数字结束. 可以比较下列数字格式: (123)456-7890, 123-456-7890,
+	// * 1234567890, (123)-456-7890
+	// */
+	// String expression = "^//(?(//d{3})//)?[- ]?(//d{3})[- ]?(//d{5})$";
+	//
+	// /**
+	// * 可接受的电话格式有: ^//(? : 可以使用 "(" 作为开头 (//d{3}): 紧接着三个数字 //)? : 可以使用")"接续
+	// * [- ]? : 在上述格式后可以使用具选择性的 "-". (//d{4}) : 再紧接着四个数字 [- ]? : 可以使用具选择性的
+	// * "-" 接续. (//d{4})$: 以四个数字结束. 可以比较下列数字格式: (02)3456-7890, 02-3456-7890,
+	// * 0234567890, (02)-3456-7890
+	// */
+	// String expression2 = "^//(?(//d{3})//)?[- ]?(//d{4})[- ]?(//d{4})$";
+	//
+	// CharSequence inputStr = phoneNumber;
+	// /* 创建Pattern */
+	// Pattern pattern = Pattern.compile(expression);
+	// /* 将Pattern 以参数传入Matcher作Regular expression */
+	// Matcher matcher = pattern.matcher(inputStr);
+	// /* 创建Pattern2 */
+	// Pattern pattern2 = Pattern.compile(expression2);
+	// /* 将Pattern2 以参数传入Matcher2作Regular expression */
+	// Matcher matcher2 = pattern2.matcher(inputStr);
+	// if (matcher.matches())// || matcher2.matches())
+	// {
+	// isValid = true;
+	// }
+	// return isValid;
+	// }
+	//
+	// @Override
+	// public void onResume() {
+	// super.onResume();
+	// Timer timer = new Timer();
+	// timer.schedule(new TimerTask() {
+	//
+	// @Override
+	// public void run() {
+	// imm = (InputMethodManager) context.getSystemService(
+	// Context.INPUT_METHOD_SERVICE);
+	// imm.showSoftInput(tel_et, 0);
+	// }
+	//
+	// }, 1000);
+	// }
 
 }

@@ -105,7 +105,7 @@ public class LoginActivity extends BaseSlideActivity implements OnClickListener 
 		editor.commit();// tijiao
 
 		Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-		if(MainTabActivity.instance.stack.size()>1){
+		if (MainTabActivity.instance.stack.size() > 1) {
 			MainTabActivity.instance.pop();
 		}
 
@@ -147,8 +147,10 @@ public class LoginActivity extends BaseSlideActivity implements OnClickListener 
 
 					String userName = login_et_username.getText().toString();
 					String password = login_et_pwd.getText().toString();
+
 					UserService userService = new UserService(
 							LoginActivity.this);
+					
 					user = userService.login(userName, password);
 
 					if (user != null) {

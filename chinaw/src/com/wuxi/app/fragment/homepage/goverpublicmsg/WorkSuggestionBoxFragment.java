@@ -11,6 +11,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -56,7 +57,7 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 	private static final int DATA_LOAD_ERROR = 1;
 	private static final int DATA_SUBMIT_SUCCESS = 2;
 	private static final int DATA_SUBMIT_FAILED = 3;
-	
+
 	private static final int CHANNELCONTENT_ID = R.id.govermsg_custom_content;
 
 	private ProgressBar processBar;
@@ -86,7 +87,8 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 				break;
 			case DATA_SUBMIT_SUCCESS:
 				processBar.setVisibility(View.GONE);
-				Toast.makeText(context, "提交成功,正在审核...", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "提交成功,正在审核...", Toast.LENGTH_SHORT)
+						.show();
 				break;
 			case DATA_SUBMIT_FAILED:
 				processBar.setVisibility(View.GONE);
@@ -210,10 +212,17 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 					TextView title_tv = (TextView) subLayout.getChildAt(0);
 					EditText content_et = (EditText) subLayout.getChildAt(1);
 
+					if (item.getAlias().equals("您的电话")) {
+						content_et.setInputType(InputType.TYPE_CLASS_PHONE);
+					} else if (item.getAlias().equals("您的邮箱")) {
+						content_et
+								.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+					}
 					title_tv.setText(item.getAlias() + ":");
 					content_et.setText(item.getValueList());
 
 					layout.addView(subLayout);
+
 				}
 			}
 		}
@@ -246,7 +255,6 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 			if (loginDialog.checkLogin()) {
 				String access_token = SystemUtil.getAccessToken(context);
 				try {
-					
 					submitMail(access_token);
 				} catch (NetException e) {
 					e.printStackTrace();
@@ -258,7 +266,6 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 			} else {
 				loginDialog.showDialog();
 			}
-
 			break;
 		case R.id.worksuggestbox_imgbutton_cancel:
 			break;
@@ -275,11 +282,9 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 	 */
 	private void submitMail(final String access_token) throws NetException,
 			JSONException, NODataException {
-
 		if (!judgeIsLegal()) {
 			processBar.setVisibility(View.VISIBLE);
 			new Thread(new Runnable() {
-
 				@Override
 				public void run() {
 					WorkSuggestionService workSuggestionService = new WorkSuggestionService(
@@ -319,14 +324,58 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 			EditText content_et = (EditText) subLayout.getChildAt(1);
 
 			item.setValueList(content_et.getText().toString());
-
+			
 			// 对必填选项进行空值判断
 			if (item.getRequiredForm() == 1) {
 				if (content_et.getText().toString().equals("")) {
 					Toast.makeText(context, item.getAlias() + "  不能为空！",
 							Toast.LENGTH_SHORT).show();
 					submitError = true;
-					break;
+				}
+			}
+			
+			// 如果用户输入了电话号码，则检查用户输入的是否为电话号码
+			if (item.getAlias().equals("您的电话")) {
+				if (content_et.getText().toString().trim().length() > 0) {
+					Pattern pattern = Pattern
+							.compile("1([\\d]{10})|((\\+[0-9]{2,4})?\\(?[0-9]+\\)?-?)?[0-9]{7,8}");
+
+					Matcher matcher = pattern.matcher(content_et.getText()
+							.toString());
+					StringBuffer bf = new StringBuffer(64);
+					while (matcher.find()) {
+						bf.append(matcher.group());
+					}
+					int len = bf.length();
+					if (len > 0) {
+						submitError = false;
+					} else {
+						Toast.makeText(context, "请输入正确的电话号码",
+								Toast.LENGTH_SHORT).show();
+						submitError = true;
+					}
+				}
+			}
+
+			// 如果用户输入了邮箱，则检查用户输入的邮箱是否标准
+			if (item.getAlias().equals("您的邮箱")) {
+				if (content_et.getText().toString().trim().length() > 0) {
+					Pattern pattern = Pattern
+							.compile("[a-zA-Z_]{1,}[0-9]{0,}@(([a-zA-z0-9]-*){1,}\\.){1,3}[a-zA-z\\-]{1,}");
+					Matcher matcher = pattern.matcher(content_et.getText()
+							.toString());
+					StringBuffer bf = new StringBuffer(64);
+					while (matcher.find()) {
+						bf.append(matcher.group());
+					}
+					int len = bf.length();
+					if (len > 0) {
+						submitError = false;
+					} else {
+						Toast.makeText(context, "请输入正确的邮箱", Toast.LENGTH_SHORT)
+								.show();
+						submitError = true;
+					}
 				}
 			}
 
@@ -334,29 +383,27 @@ public class WorkSuggestionBoxFragment extends BaseFragment implements
 		}
 		return submitError;
 	}
-	
-	  private static boolean isPhoneNumberValid(String phoneNumber)
-	  {
-	     boolean isValid = false;
 
-	     String expression = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$";
+	private static boolean isPhoneNumberValid(String phoneNumber) {
+		boolean isValid = false;
 
-	     String expression2 ="^\\(?(\\d{2})\\)?[- ]?(\\d{4})[- ]?(\\d{4})$";
+		String expression = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$";
 
-	     CharSequence inputStr = phoneNumber;
+		String expression2 = "^\\(?(\\d{2})\\)?[- ]?(\\d{4})[- ]?(\\d{4})$";
 
-	     Pattern pattern = Pattern.compile(expression);
+		CharSequence inputStr = phoneNumber;
 
-	     Matcher matcher = pattern.matcher(inputStr);
+		Pattern pattern = Pattern.compile(expression);
 
-	     Pattern pattern2 =Pattern.compile(expression2);
+		Matcher matcher = pattern.matcher(inputStr);
 
-	     Matcher matcher2= pattern2.matcher(inputStr);
-	     if(matcher.matches()||matcher2.matches())
-	     {
-	     isValid = true;
-	     }
-	     return isValid; 
-	   }
+		Pattern pattern2 = Pattern.compile(expression2);
+
+		Matcher matcher2 = pattern2.matcher(inputStr);
+		if (matcher.matches() || matcher2.matches()) {
+			isValid = true;
+		}
+		return isValid;
+	}
 
 }

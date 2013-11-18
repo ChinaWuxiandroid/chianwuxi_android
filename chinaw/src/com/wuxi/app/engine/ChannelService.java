@@ -45,11 +45,11 @@ public class ChannelService extends Service {
 
 		String url = Constants.Urls.CHANNEL_URL.replace("{channelId}",
 				channelId);
-		
+
 		String resultStr = null;
-		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url,false);
+		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url, false);
 		if (isHasCacheFile) {
-			resultStr = cacheUtil.getCacheStr(url,false);// 缓存读取
+			resultStr = cacheUtil.getCacheStr(url, false);// 缓存读取
 		} else {
 			resultStr = httpUtils.executeGetToString(url, 5000);
 		}
@@ -78,13 +78,15 @@ public class ChannelService extends Service {
 						channel.setChildrenContentsCount(jb
 								.getInt("childrenContentsCount"));
 
-						CacheUtil.put(Channel.CHANNEL_KEY+channel.getChannelId(), channel);// 将该屏道菜单单放入缓存
+						CacheUtil.put(
+								Channel.CHANNEL_KEY + channel.getChannelId(),
+								channel);// 将该屏道菜单单放入缓存
 						channels.add(channel);
 
 					}
 
 					if (!isHasCacheFile) {
-						cacheUtil.cacheFile(url, resultStr,false);// 缓存文件
+						cacheUtil.cacheFile(url, resultStr, false);// 缓存文件
 					}
 
 				}

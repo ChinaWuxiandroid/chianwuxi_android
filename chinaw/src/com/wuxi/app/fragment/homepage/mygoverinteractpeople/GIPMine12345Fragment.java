@@ -79,14 +79,12 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment implements
 	private Button loadMoreButton;
 	private ProgressBar pb_loadmoore;
 
+	private String tip = null;
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
-			String tip = "";
 
-			if (msg.obj != null) {
-				tip = msg.obj.toString();
-			}
 			switch (msg.what) {
 			case DATA_LOAD_SUCESS:
 				showLettersList();
@@ -101,17 +99,16 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment implements
 
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
-
 		super.onCheckedChanged(group, checkedId);
-
 		switch (checkedId) {
-
+		// 我的回信
 		case R.id.gip_mine_12345_radioButton_backmail:
 			init();
 			break;
-
+		// 我收藏的回信
 		case R.id.gip_mine_12345_radioButton_mybackmail:
 			Toast.makeText(context, "该功能暂未实现！", Toast.LENGTH_SHORT).show();
+
 			break;
 		}
 	}
@@ -141,6 +138,7 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment implements
 
 		writeLetterImageBtn = (ImageButton) view
 				.findViewById(R.id.gip_mine_12345_imageButton_writemail);
+		// 我要写信，切换页面
 		writeLetterImageBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -202,6 +200,9 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment implements
 	 * @描述： 加载数据
 	 */
 	private void loadData(final int start, final int end) {
+
+		System.out.println("读取数据start===》" + start + "   end===>" + end);
+
 		if (isFirstLoad || isSwitch) {
 			list_pb.setVisibility(View.VISIBLE);
 		} else {
@@ -219,10 +220,14 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment implements
 					letterWrapper = letterService.getMyLettersList(
 							Constants.Urls.MY_LETTER_URL,
 							SystemUtil.getAccessToken(context), start, end);
-					if (null != letterWrapper) {
+					if (null != letterWrapper && letterWrapper.isData()) {
 						handler.sendEmptyMessage(DATA_LOAD_SUCESS);
+					} else if (letterWrapper != null
+							&& letterWrapper.isData() == false) {
+						tip = "没有数据";
+						handler.sendEmptyMessage(DATA_LOAD_ERROR);
 					} else {
-						message.obj = "error";
+						tip = "error";
 						handler.sendEmptyMessage(DATA_LOAD_ERROR);
 					}
 				} catch (NetException e) {
@@ -245,10 +250,14 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment implements
 	 */
 	private void showLettersList() {
 		letters = letterWrapper.getData();
+
+		System.out.println("读取的数据的长度:" + letters.size());
+
 		if (letters == null || letters.size() == 0) {
 			Toast.makeText(context, "对不起，暂无您的回信!", Toast.LENGTH_SHORT).show();
 		} else {
 			if (isFirstLoad) {
+				System.out.println("第一次");
 				adapter = new MineReplyLetterAdapter(context, letters);
 				isFirstLoad = false;
 				mListView.setAdapter(adapter);
@@ -256,9 +265,11 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment implements
 				isLoading = false;
 			} else {
 				if (isSwitch) {
+					System.out.println("切换页面");
 					adapter.setLetters(letters);
 					list_pb.setVisibility(View.GONE);
 				} else {
+					System.out.println("集合添加数据");
 					for (Letter letter : letters) {
 						adapter.addItem(letter);
 					}

@@ -88,7 +88,6 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 	private ListView content_list_lv;
 	// 进度条对象
 	private ProgressBar content_list_pb;
-
 	// 内容
 	private ContentWrapper contentWrapper;
 	// 加载更多视图
@@ -143,6 +142,12 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 	public static final int DEPT_TYPE = 1;
 	public static final int ZONE_TYPE = 2;
 	private int filterType = DEPT_TYPE; // 检索过滤 类型 1-部门时间型(缺省类型) 2-区县时间型
+
+	private int buttonCount = 0;
+
+	private boolean isNull = false;
+
+	private boolean isfirstsearch = true;
 
 	public void setFifterType(int type) {
 		this.filterType = type;
@@ -199,6 +204,8 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		view = inflater.inflate(R.layout.govermsg_search_contentlist_layout,
 				null);
 		context = getActivity();
+
+		buttonCount = 0;
 
 		initView();
 		initSearchUI();
@@ -276,6 +283,10 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 				.findViewById(R.id.loadMoreButton);
 		pb_loadmoore = (ProgressBar) loadMoreView
 				.findViewById(R.id.pb_loadmoore);
+
+		isNull = false;
+		buttonCount = 0;
+		isfirstsearch = true;
 
 		content_list_lv.addFooterView(loadMoreView);// 为listView添加底部视图
 		content_list_lv.setOnScrollListener(new OnScrollListener() {
@@ -390,8 +401,13 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 	 * @描述： 显示列表数据
 	 */
 	private void showContentData() {
+
 		List<Content> contents = contentWrapper.getContents();
+
+		boolean isMore = true;
+
 		if (contents != null && contents.size() > 0) {
+
 			if (isFirstLoad) {
 				adapter = new ContentListAdapter(contents, context);
 				isFirstLoad = false;
@@ -416,17 +432,54 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 				isLoading = false;
 			}
 		} else {
+			isNull = true;
 			content_list_pb.setVisibility(ProgressBar.GONE);
 			Toast.makeText(context, "根据您的条件，检索的数据为空，请重新选择条件。",
 					Toast.LENGTH_SHORT).show();
+			if (isMore) {
+				loadMoreButton.setOnClickListener(this);
+			}
 		}
+
+		System.out.println("buttonCount====>" + buttonCount);
+		System.out.println("isNull=========>" + isNull);
 
 		if (contentWrapper.isNext()) {
 			pb_loadmoore.setVisibility(ProgressBar.GONE);
 			loadMoreButton.setText("点击加载更多");
-
 		} else {
-			content_list_lv.removeFooterView(loadMoreView);
+			if (isfirstsearch) {
+				if (buttonCount == 0 && isNull == false
+						&& !contentWrapper.isNext()) {
+					content_list_lv.removeFooterView(loadMoreView);
+					System.out.println("4444444444");
+					isMore = false;
+				}
+			}
+			if (!isfirstsearch) {
+				if (buttonCount < 0 && isNull == true) {
+					content_list_lv.removeFooterView(loadMoreView);
+					isMore = false;
+					System.out.println("222222222");
+				}
+				if (buttonCount == 0 && isNull == false) {
+					content_list_lv.removeFooterView(loadMoreView);
+					isMore = false;
+					System.out.println("111111111111");
+				}
+				if (buttonCount > 0 && isNull == true
+						&& !contentWrapper.isNext()) {
+					content_list_lv.removeFooterView(loadMoreView);
+					isMore = false;
+					System.out.println("555555555555");
+				}
+			}
+			if (buttonCount == 0 && isNull == false && isfirstsearch == true
+					&& !contentWrapper.isNext()) {
+				content_list_lv.removeFooterView(loadMoreView);
+				isMore = false;
+				System.out.println("333333333333");
+			}
 		}
 	}
 
@@ -596,6 +649,9 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		switch (v.getId()) {
 		case R.id.govermsg_search_button_search:
 			isSwitch = true;
+			isNull = false;
+			// buttonCount = 0;
+			isfirstsearch = false;
 			search();
 			break;
 
@@ -604,6 +660,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 
 				isSwitch = false;
 				loadMoreButton.setText("loading.....");
+				buttonCount += 1;
 				loadMore(v);
 			}
 			break;
@@ -685,6 +742,9 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 				yearFifter = -1;
 			fifter.setDept(deptStrFifter);
 			fifter.setYear(yearFifter);
+
+			System.out.println("按部门 时间 检索");
+
 			break;
 		// 按区县 时间 检索
 		case ZONE_TYPE:
@@ -694,16 +754,14 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 				yearFifter = -1;
 			fifter.setZone(zoneStrFifter);
 			fifter.setYear(yearFifter);
+
 			break;
 		}
+
 		if (parentMenuItem != null) {
-
 			this.setParentItem(parentMenuItem);
-
 		} else if (channel != null) {
-
 			this.setSubChannel(channel);
-
 		}
 		initData(0, PAGE_SIZE);
 	}
@@ -759,7 +817,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		if (zone != null && !"".equals(zone)) {
 			url = url + "&zone=" + zone;
 		}
-		
+
 		return url;
 	}
 }

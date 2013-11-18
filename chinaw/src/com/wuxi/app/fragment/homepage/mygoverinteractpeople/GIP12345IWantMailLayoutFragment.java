@@ -24,9 +24,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
@@ -39,9 +39,9 @@ import com.wuxi.app.engine.PartLeaderMailService;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.MailTypeWrapper;
+import com.wuxi.domain.MailTypeWrapper.MailType;
 import com.wuxi.domain.MyLetter;
 import com.wuxi.domain.PartLeaderMailWrapper;
-import com.wuxi.domain.MailTypeWrapper.MailType;
 import com.wuxi.domain.PartLeaderMailWrapper.PartLeaderMail;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -113,6 +113,8 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment {
 
 	private MailTypeWrapper mailTypeWrapper = null;
 	private List<MailType> mailTypes = null;
+
+	private boolean isChBumen = false;
 
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
@@ -223,9 +225,14 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment {
 					public void onCheckedChanged(RadioGroup group, int checkedId) {
 						if (mayorboxRadioBtn.isChecked()) {
 							myLetter.setDoprojectid(DOPROJECTID_MAYORBOX);
+							isChBumen = false;
 						} else if (suggestboxRadioBtn.isChecked()) {
 							myLetter.setDoprojectid(DOPROJECTID_SUGGEST_AND_COMPLAINT);
+							isChBumen = false;
 						} else if (leaderboxRadioBtn.isChecked()) {
+							isChBumen = true;
+							myLetter.setDoprojectid("");
+							// 部门领导信箱
 							partLeaderMailBoxSpinner
 									.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -234,8 +241,18 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment {
 												AdapterView<?> adapterView,
 												View view, int position,
 												long arg3) {
-											myLetter.setDoprojectid(depts.get(
-													position).getDoProjectID());
+											if (isChBumen) {
+												myLetter.setDoprojectid(depts
+														.get(position)
+														.getDoProjectID());
+											} else {
+												Toast.makeText(context,
+														"只有选择部门领导信箱后才能选择部门",
+														Toast.LENGTH_SHORT)
+														.show();
+												partLeaderMailBoxSpinner
+														.setSelection(0);
+											}
 										}
 
 										@Override
@@ -321,18 +338,21 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment {
 					myLetter.setAccess_token(SystemUtil.getAccessToken(context));
 					myLetter.setTitle(title_editText.getText().toString());
 					myLetter.setContent(content_editText.getText().toString());
-
 					if (myLetter.getTitle().equals("")) {
 						Toast.makeText(context, "信件标题不能为空！", Toast.LENGTH_LONG)
 								.show();
 					} else if (myLetter.getContent().equals("")) {
 						Toast.makeText(context, "信件内容不能为空！", Toast.LENGTH_LONG)
 								.show();
+					} else if (myLetter.getDoprojectid().equals("")) {
+						if (isChBumen) {
+							Toast.makeText(context, "请选择信件发送的部门！",
+									Toast.LENGTH_LONG).show();
+						}
 					} else {
 						submitMyLetter(myLetter);
 					}
 				}
-
 			}
 		});
 
@@ -350,11 +370,10 @@ public class GIP12345IWantMailLayoutFragment extends BaseFragment {
 		depts.add(0, leaderMail);
 
 		DeptAdapter partment_Spinner_adapter = new DeptAdapter();
-
 		partLeaderMailBoxSpinner.setAdapter(partment_Spinner_adapter);
 		partLeaderMailBoxSpinner
 				.setOnItemSelectedListener(partment_Spinner_adapter);
-
+		partLeaderMailBoxSpinner.setSelection(0);
 	}
 
 	/**

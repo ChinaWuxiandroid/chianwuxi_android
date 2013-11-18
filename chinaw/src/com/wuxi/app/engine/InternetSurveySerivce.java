@@ -38,7 +38,6 @@ public class InternetSurveySerivce extends Service {
 
 		String url = Constants.Urls.INTERNET_SURVEY_URL + "?type=" + type
 				+ "&start=" + start + "&end=" + end;
-		
 		String resultStr = httpUtils.executeGetToString(url, 5000);
 
 		if (resultStr != null) {

@@ -63,7 +63,7 @@ public class MenuService extends Service {
 		List<MenuItem> mainMenuItems = getMainMenuItems(url);// 启动六大主模块菜单获取
 
 		List<MenuItem> homeMenuItems = favoriteItemDao
-				.getFavoriteItems(mainMenuItems);//合并导航菜单和收藏菜单
+				.getFavoriteItems(mainMenuItems);// 合并导航菜单和收藏菜单
 
 		CacheUtil.put(Constants.CacheKey.HOME_MENUITEM_KEY, homeMenuItems);
 
@@ -88,14 +88,16 @@ public class MenuService extends Service {
 		}
 
 		String url = Constants.Urls.SUB_MENU_URL.replace("{id}", parentId);
-		
 		String reslutStr = null;
-		boolean hasCachFile = cacheUtil.isHasCacheFile(url,false);
+		boolean hasCachFile = cacheUtil.isHasCacheFile(url, false);
 		if (hasCachFile) {// 存在缓存，从缓存读取
-			reslutStr = cacheUtil.getCacheStr(url,false);
+			reslutStr = cacheUtil.getCacheStr(url, false);
 		} else {
 			reslutStr = httpUtils.executeGetToString(url, 500);
 		}
+
+		System.out.println("路径：" + url);
+		System.out.println("读取结果：" + reslutStr);
 
 		if (reslutStr != null) {
 
@@ -141,7 +143,7 @@ public class MenuService extends Service {
 				}
 
 				if (!hasCachFile) {
-					cacheUtil.cacheFile(url, reslutStr,false);// 缓存文件
+					cacheUtil.cacheFile(url, reslutStr, false);// 缓存文件
 				}
 
 				Collections.sort(menuItems);// 排序
@@ -193,15 +195,15 @@ public class MenuService extends Service {
 			}
 		}
 		String reslutStr = null;
-		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url,false);
+		boolean isHasCacheFile = cacheUtil.isHasCacheFile(url, false);
 		if (isHasCacheFile) {
-			reslutStr = cacheUtil.getCacheStr(url,false);// 从缓存读取
+			reslutStr = cacheUtil.getCacheStr(url, false);// 从缓存读取
 		} else {
 			reslutStr = httpUtils.executeGetToString(url, 500);
 		}
 
 		List<MenuItem> menuItems;
-		
+
 		if (null != reslutStr) {
 
 			menuItems = new ArrayList<MenuItem>();
@@ -249,12 +251,12 @@ public class MenuService extends Service {
 						new SubMenuItemsTask(menu).getSubMenuItem();
 
 					}
-/*
-					if (SystemUtil.getUserAppCount(context) == 1
-							&& menu.isFavorites()) {// 如果是首次启动将首次的菜单放入数据库
-						menu.setLevel(MenuItem.LEVEL_ONE);
-						favoriteItemDao.addFavoriteItem(menu);// 保存到数据库
-					}*/
+					/*
+					 * if (SystemUtil.getUserAppCount(context) == 1 &&
+					 * menu.isFavorites()) {// 如果是首次启动将首次的菜单放入数据库
+					 * menu.setLevel(MenuItem.LEVEL_ONE);
+					 * favoriteItemDao.addFavoriteItem(menu);// 保存到数据库 }
+					 */
 
 					// 图标处理
 					String iconUrl = jb.getString("icon");
@@ -293,7 +295,7 @@ public class MenuService extends Service {
 			Collections.sort(menuItems);// 排序
 
 			if (!isHasCacheFile) {
-				cacheUtil.cacheFile(url, reslutStr,false);// 缓存菜单
+				cacheUtil.cacheFile(url, reslutStr, false);// 缓存菜单
 			}
 
 			CacheUtil.put(Constants.CacheKey.MAIN_MENUITEM_KEY, menuItems);// 将导航主菜单放入缓存

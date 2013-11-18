@@ -4,14 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include
-       
-        layout="@layout/child_fragmend_header_layout" />
+    <include layout="@layout/child_fragmend_header_layout" />
 
     <include
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-     
         layout="@layout/normal_search_layout" />
 
 </LinearLayout>

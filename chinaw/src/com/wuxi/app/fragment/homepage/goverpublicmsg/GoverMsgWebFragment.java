@@ -26,6 +26,7 @@ import com.wuxi.domain.MenuItem;
  * 
  * @author 杨宸 智佳
  * */
+@SuppressWarnings("deprecation")
 public class GoverMsgWebFragment extends BaseFragment implements
 		KeyEvent.Callback {
 
@@ -149,17 +150,5 @@ public class GoverMsgWebFragment extends BaseFragment implements
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		return false;
 	}
-
-	// @Override
-	// public boolean onKey(View v, int keyCode, KeyEvent event) {
-	// if ((keyCode == KeyEvent.KEYCODE_BACK)&&wbView.canGoBack()) {
-	//
-	// System.out.println("测试WebView返回功能");
-	//
-	// wbView.goBack();
-	// return true;
-	// }
-	// return false;
-	// }
 
 }

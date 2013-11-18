@@ -169,6 +169,16 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 	private ProgressBar pb_loadmoore;
 	private ProgressBar pb_load;
 
+	private boolean isMore = false;
+
+	private boolean isMoreLeave = false;
+
+	private int isFalg = 0;
+
+	private int isShowMore = 0;
+
+	private boolean isInit = false;
+
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			String tip = "";
@@ -224,6 +234,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 		initLayout();
 		initMessageLayout();
 		initMemoirLayout();
+		loadVideoInfo();
 	}
 
 	/**
@@ -233,6 +244,16 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 		switch (type) {
 		case 0:
 			init();
+			if (!isFirstLoadMessage || !isFirstLoad) {
+				if (isFirstLoadMessage) {
+					messageListView.removeFooterView(loadMoreMessageView);
+				}
+				if (isFirstLoad) {
+					mListView.removeFooterView(loadMoreView);
+				}
+			}
+			isInit = true;
+			isShowMore = 0;
 			home_saybtn.setVisibility(View.GONE);
 			home_askbtn.setVisibility(View.GONE);
 			liveLayout.setVisibility(View.VISIBLE);
@@ -241,7 +262,23 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 			break;
 
 		case 1:
-			loadFirstMessageData(START, MESSAGE_PAGE_NUM);
+			if (isFirstLoadMessage) {
+				loadFirstMessageData(START, MESSAGE_PAGE_NUM);
+			} else {
+				if (isShowMore == 0) {
+					messageListView.removeFooterView(loadMoreMessageView);
+				}
+				mListView.removeFooterView(loadMoreView);
+			}
+			isFalg += 1;
+			if (isFalg == 2) {
+				isShowMore = 1;
+			} else {
+				if (isInit) {
+					isShowMore = 0;
+				}
+			}
+			isInit = false;
 			home_saybtn.setVisibility(View.GONE);
 			home_askbtn.setVisibility(View.GONE);
 			liveLayout.setVisibility(View.GONE);
@@ -250,7 +287,23 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 			break;
 
 		case 2:
-			loadFirstData(startIndex, PAGE_NUM);
+			if (isFirstLoad) {
+				loadFirstData(startIndex, PAGE_NUM);
+			} else {
+				if (isShowMore == 0) {
+					mListView.removeFooterView(loadMoreView);
+				}
+				messageListView.removeFooterView(loadMoreMessageView);
+			}
+			isFalg += 1;
+			if (isFalg == 2) {
+				isShowMore = 2;
+			} else {
+				if (isInit) {
+					isShowMore = 0;
+				}
+			}
+			isInit = false;
 			home_saybtn.setVisibility(View.VISIBLE);
 			home_askbtn.setVisibility(View.VISIBLE);
 			liveLayout.setVisibility(View.GONE);
@@ -502,7 +555,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "正在完善该功能...", Toast.LENGTH_SHORT)
+				Toast.makeText(context, "跳转到列表页面...", Toast.LENGTH_SHORT)
 						.show();
 				advance_moreTextView.setTextColor(Color.BLUE);
 			}
@@ -521,11 +574,40 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "正在完善该功能...", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(context, "开始直播...", Toast.LENGTH_SHORT).show();
 				live_watchTextView.setTextColor(Color.BLUE);
 			}
 		});
+	}
+
+	/**
+	 * 
+	 * 获取数据--节目预告
+	 * 
+	 * @方法： load
+	 * @描述： TODO
+	 */
+	private void loadVideoInfo() {
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				Message message = handler.obtainMessage();
+				LeaveMessageService messageService = new LeaveMessageService(
+						context);
+				try {
+					messageService.getVideoPreview(0, 10);
+				} catch (NetException e) {
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				} catch (NODataException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+
 	}
 
 	/**
@@ -561,7 +643,6 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 							"32480e19-76b8-45d9-b7d1-a6c54933f9f7", startIndex,
 							endIndex);
 					if (messageWrapper != null) {
-
 						handler.sendEmptyMessage(MESSAGE_LOAD_SUCESS);
 					} else {
 						message.obj = "error";
@@ -636,12 +717,13 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 			} else {
 				if (isSwitchMessage) {
 					messageAdapter.setLeaveMessages(leaveMessages);
-					pb_load.setVisibility(View.GONE);
 				} else {
 					for (LeaveMessage leaveMessage : leaveMessages) {
 						messageAdapter.addItem(leaveMessage);
 					}
 				}
+
+				pb_load.setVisibility(View.GONE);
 
 				messageAdapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
 				messageListView.setSelection(messagevisibleLastIndex
@@ -650,20 +732,36 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 			}
 		}
 
-		if (messageWrapper.isNext()) {
-			// if (messageListView.getFooterViewsCount() != 0) {
-			pb_load.setVisibility(ProgressBar.GONE);
-			loadMoreMessageButton.setText("点击加载更多");
-			// } else {
-			// messageListView.addFooterView(getMessageListFootView());
-			// }
+		isMore = messageWrapper.isNext();
 
+		if (!isFirstLoadMessage) {
+			if (leaveMessages != null && leaveMessages.size() > 0
+					&& messageWrapper.isNext()) {
+				// if (messageListView.getFooterViewsCount() != 0) {
+				if (isMore) {
+					// messageListView.removeFooterView(loadMoreMessageView);
+					pb_load.setVisibility(ProgressBar.GONE);
+					loadMoreMessageButton.setText("点击加载更多");
+				}
+				// } else {
+				// messageListView.addFooterView(getMessageListFootView());
+				// }
+
+			} else {
+				if (messageAdapter != null) {
+					messageListView.removeFooterView(loadMoreMessageView);
+				}
+
+			}
 		} else {
-			if (messageAdapter != null) {
+			if (isMore) {
+				pb_load.setVisibility(ProgressBar.GONE);
+				loadMoreMessageButton.setText("点击加载更多");
+			} else {
 				messageListView.removeFooterView(loadMoreMessageView);
 			}
-
 		}
+
 	}
 
 	/**
@@ -700,6 +798,8 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+
+		// 加载更多访谈实录
 		case R.id.loadMoreButton:
 			if (messageWrapper != null && messageWrapper.isNext()) {// 还有下一条记录
 				isSwitchMessage = false;
@@ -708,6 +808,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 			}
 			break;
 
+		// 留言提问
 		case R.id.loadapply_MoreButton:
 			if (memoirWrapper != null && memoirWrapper.isNext()) {// 还有下一条记录
 				isSwitch = false;
@@ -796,6 +897,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 	 * 显示实录列表
 	 */
 	private void showMemoirList() {
+
 		memoirs = memoirWrapper.getMemoirs();
 		if (memoirs == null || memoirs.size() == 0) {
 			Toast.makeText(context, "对不起，暂无访谈实录信息", Toast.LENGTH_SHORT).show();
@@ -816,6 +918,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 					}
 				}
 
+				pb_load.setVisibility(View.GONE);
 				adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
 				mListView.setSelection(visibleLastIndex
 						- memoirvisibleItemCount + 1); // 设置选中项
@@ -823,15 +926,31 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 			}
 		}
 
-		if (memoirWrapper.isNext()) {
-			pb_loadmoore.setVisibility(ProgressBar.GONE);
-			loadMoreButton.setText("点击加载更多");
-		} else {
-			if (adapter != null) {
+		isMoreLeave = memoirWrapper.isNext();
+
+		// if (memoirWrapper.isNext()) {
+
+		if (!isFirstLoad) {
+			if (isMoreLeave) {
+
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+				loadMoreButton.setText("点击加载更多");
+			} else {
 				mListView.removeFooterView(loadMoreView);
 			}
-
+		} else {
+			if (isMoreLeave) {
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+				loadMoreButton.setText("点击加载更多");
+			} else {
+				mListView.removeFooterView(loadMoreView);
+			}
 		}
+		// } else {
+		// if (adapter != null) {
+		// mListView.removeFooterView(loadMoreView);
+		// }
+		// }
 	}
 
 	/**
