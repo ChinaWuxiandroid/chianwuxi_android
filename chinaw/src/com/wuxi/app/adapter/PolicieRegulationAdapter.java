@@ -11,6 +11,7 @@
  */
 package com.wuxi.app.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.wuxi.app.R;
@@ -34,13 +35,13 @@ import android.widget.TextView;
  */
 public class PolicieRegulationAdapter extends BaseAdapter {
 
-	//时间显示格式
+	// 时间显示格式
 	private static final String DATA_STYLE = "yyyy年MM月dd日";
 
-	//内容列表对象
+	// 内容列表对象
 	private List<Content> contents;
 
-	//菜单对象
+	// 菜单对象
 	private MenuItem menuItem;
 
 	/**
@@ -93,7 +94,7 @@ public class PolicieRegulationAdapter extends BaseAdapter {
 	 * @描述： 列表布局控件类
 	 * @作者： 罗森
 	 * @创建时间： 2013 2013-9-30 下午4:35:07
-	 * @修改时间： 
+	 * @修改时间：
 	 * @修改描述：
 	 */
 	static class ViewHolder {
@@ -125,7 +126,7 @@ public class PolicieRegulationAdapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		//设置标题
+		// 设置标题
 		viewHolder.title.setText("标题：" + contents.get(position).getTitle());
 		if (menuItem.getName().endsWith("国家法律")
 				|| menuItem.getName().endsWith("国家行政法规规章")

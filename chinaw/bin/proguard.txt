@@ -17,7 +17,7 @@
 # view AndroidManifest.xml #generated:73
 -keep class com.wuxi.app.activity.MainIndexActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:133
+# view AndroidManifest.xml #generated:134
 -keep class com.wuxi.app.activity.commactivity.ImageViewScaleActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:95
@@ -112,6 +112,9 @@
 
 # view AndroidManifest.xml #generated:126
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPContentDetailWebActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:131
+-keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPSuggestSurveyDetailActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:127
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.HotReviewContentActivity { <init>(...); }

@@ -1,5 +1,6 @@
 package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
@@ -21,12 +22,14 @@ import android.widget.Toast;
 
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.MyApplyOpenAdapter;
+import com.wuxi.app.adapter.MyOpinionOpenAdapter;
 import com.wuxi.app.engine.MyApplyOpenService;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.MyApplyOpenWrapper;
+import com.wuxi.domain.MyOpinionOpenWrapper;
 import com.wuxi.domain.MyApplyOpenWrapper.MyApplyOpen;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -46,8 +49,8 @@ public class GIPMineInfoPublicPlatformFragment extends
 			R.id.gip_mine_infopublic_radioButton_declaration,
 			R.id.gip_mine_infopublic_radioButton_worksuggestion };
 
-	private ListView applyListView ;
-	private ProgressBar progressBar ;
+	private ListView applyListView;
+	private ProgressBar progressBar;
 
 	private MyApplyOpenWrapper applyOpenWrapper;
 	private List<MyApplyOpen> applyOpens;
@@ -71,6 +74,13 @@ public class GIPMineInfoPublicPlatformFragment extends
 
 	private MyApplyOpenAdapter applyOpenAdapter;
 
+	private ListView opinionListView;
+
+	private ArrayList<MyOpinionOpenWrapper> mOpinionOpenList = null;
+	private ArrayList<MyOpinionOpenWrapper> mOpinionOpenListAll = null;
+
+	private MyOpinionOpenAdapter mOpinionOpenAdapter = null;
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -87,6 +97,9 @@ public class GIPMineInfoPublicPlatformFragment extends
 				progressBar.setVisibility(View.INVISIBLE);
 				Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
 				break;
+			case 100:
+				showOpinionData();
+				break;
 			}
 		};
 	};
@@ -94,11 +107,13 @@ public class GIPMineInfoPublicPlatformFragment extends
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		super.onCheckedChanged(group, checkedId);
+
 		switch (checkedId) {
 		case R.id.gip_mine_infopublic_radioButton_declaration:
 			init();
 			break;
 		case R.id.gip_mine_infopublic_radioButton_worksuggestion:
+			loadFirstOpinionData(START, PAGE_NUM);
 			break;
 
 		}
@@ -136,10 +151,11 @@ public class GIPMineInfoPublicPlatformFragment extends
 	 * @描述： 初始化布局控件
 	 */
 	private void initLayout() {
-//		progressBar = (ProgressBar) view
-//				.findViewById(R.id.gip_mine_infopublic_list_progressbar);
-		
-		progressBar = (ProgressBar) view.findViewById(R.id.gip_mine_infopublic_list_progressbar);
+		// progressBar = (ProgressBar) view
+		// .findViewById(R.id.gip_mine_infopublic_list_progressbar);
+
+		progressBar = (ProgressBar) view
+				.findViewById(R.id.gip_mine_infopublic_list_progressbar);
 
 		applyListView = (ListView) view
 				.findViewById(R.id.gip_mine_infopublic_apply_listview);
@@ -154,11 +170,13 @@ public class GIPMineInfoPublicPlatformFragment extends
 		applyListView.addFooterView(getApplyListFootView());// 为listView添加底部视图
 		applyListView.setOnScrollListener(new ApplyonScrollListener());// 增加滑动监听
 
+		opinionListView = (ListView) view
+				.findViewById(R.id.gip_mine_infopublic_opinion_listview);
+
 	}
 
 	/**
 	 * @方法： getApplyListFootView
-	 * @描述： TODO
 	 * @return
 	 */
 	private View getApplyListFootView() {
@@ -170,6 +188,99 @@ public class GIPMineInfoPublicPlatformFragment extends
 				.findViewById(R.id.pb_loadmoore);
 		loadMoreButton.setOnClickListener(this);
 		return loadMoreView;
+	}
+
+	/**
+	 * 第一次加载我的信息公开意见
+	 * 
+	 * @方法： loadFirstOpinionData
+	 * @param start
+	 * @param end
+	 */
+	private void loadFirstOpinionData(int start, int end) {
+		loadOpinionData(start, end);
+	}
+
+	/**
+	 * 加载我的信息公开意见
+	 * 
+	 * @方法： loadOpinionData
+	 * @param start
+	 * @param end
+	 */
+	private void loadOpinionData(final int start, final int end) {
+		if (isFirstLoadApply || isSwitchApply) {
+			progressBar.setVisibility(View.VISIBLE);
+		} else {
+			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
+		}
+
+		if (mOpinionOpenList != null) {
+			mOpinionOpenList.clear();
+		}
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+
+				isLoadingApply = true;
+				Message message = handler.obtainMessage();
+
+				MyApplyOpenService service = new MyApplyOpenService(context);
+
+				String url = Constants.Urls.DOMAIN_URL
+						+ "/api/applyopen/myapplybox.json?access_token=c33611d7d42042539b4102251a9dd113";
+				try {
+					mOpinionOpenList = service.getMyOpinionOpenWrapper(url);
+					if (mOpinionOpenList != null) {
+						handler.sendEmptyMessage(100);
+					} else {
+						message.obj = "error";
+						handler.sendEmptyMessage(APPLY_LOAD_ERROR);
+					}
+				} catch (NetException e) {
+					e.printStackTrace();
+					message.obj = e.getMessage();
+					handler.sendEmptyMessage(APPLY_LOAD_ERROR);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				} catch (NODataException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+	}
+
+	/**
+	 * 显示我的信息公开意见
+	 * 
+	 * @方法： showOpinionData
+	 */
+	private void showOpinionData() {
+		if (mOpinionOpenListAll == null) {
+			mOpinionOpenListAll = new ArrayList<MyOpinionOpenWrapper>();
+		}
+
+		if (mOpinionOpenList.size() > 0) {
+			mOpinionOpenListAll.addAll(mOpinionOpenList);
+			if (mOpinionOpenAdapter == null) {
+				mOpinionOpenAdapter = new MyOpinionOpenAdapter(context,
+						mOpinionOpenListAll);
+				opinionListView.setAdapter(mOpinionOpenAdapter);
+			} else {
+				mOpinionOpenAdapter.addListItem(mOpinionOpenListAll);
+			}
+
+			// 判断是否还有下一页
+			if (mOpinionOpenListAll.get(mOpinionOpenListAll.size()).isNext()) {
+
+			}
+
+		} else {
+
+		}
+
 	}
 
 	/**
@@ -237,9 +348,7 @@ public class GIPMineInfoPublicPlatformFragment extends
 	private void showApplyList() {
 		applyOpens = applyOpenWrapper.getMyApplyOpens();
 		if (applyOpens == null || applyOpens.size() == 0) {
-
 			Toast.makeText(context, "您还没有申请任何事项！", Toast.LENGTH_SHORT).show();
-
 			progressBar.setVisibility(View.GONE);
 		} else {
 			if (isFirstLoadApply) {

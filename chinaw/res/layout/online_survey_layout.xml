@@ -10,29 +10,60 @@
         android:layout_height="wrap_content"
         layout="@layout/child_fragment_itemcontent_header_layout" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
-        android:paddingLeft="17dp"
-        android:paddingRight="10dp"
-        android:text="企业工资协商建制质量与工作成效调查问卷之四（填写对象为未开展工资协商企业的工会主席） "
-        android:textColor="@color/tab_selectbg" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="3sp"
-        android:layout_marginTop="10dp"
-        android:background="#ffffff" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="13dp"
-        android:paddingRight="3dp"
-        android:text="根据全市企业类型和行业分布的结构状况，近年来，无锡积极在中小企业、非公企业相对集中的区域开展区域性、行业性工资集体协商工作，形成了具有无锡特色的工资集体协商模式。请您就《无锡市工资协商建制质量和工作成效调查问" />
+            <TextView
+                android:id="@+id/online_survey_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:paddingLeft="17dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/tab_selectbg" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="3sp"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff" />
+
+            <TextView
+                android:id="@+id/online_survey_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="13dp"
+                android:paddingRight="3dp" />
+
+            <LinearLayout
+                android:id="@+id/online_survey_controls_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/online_survey_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/brown_button_sq"
+                android:gravity="center"
+                android:text="提交答卷"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

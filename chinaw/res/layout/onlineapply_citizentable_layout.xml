@@ -27,8 +27,8 @@
                     android:text="受理部门："
                     android:textSize="12sp" />
 
-               <TextView
-                   android:id="@+id/citizen_solve_bydept"
+                <Spinner
+                    android:id="@+id/citizen_solve_bydept"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -188,6 +188,7 @@
                     android:layout_marginTop="7dp"
                     android:background="@drawable/worksuggestbox_edit_small_bk"
                     android:gravity="center_vertical"
+                    android:inputType="number"
                     android:paddingLeft="3dp"
                     android:textSize="10sp" />
             </LinearLayout>
@@ -214,6 +215,7 @@
                     android:layout_marginTop="7dp"
                     android:background="@drawable/worksuggestbox_edit_small_bk"
                     android:gravity="center_vertical"
+                    android:inputType="number"
                     android:paddingLeft="3dp"
                     android:textSize="10sp" />
             </LinearLayout>
@@ -240,6 +242,7 @@
                     android:layout_marginTop="7dp"
                     android:background="@drawable/worksuggestbox_edit_small_bk"
                     android:gravity="center_vertical"
+                    android:inputType="number"
                     android:paddingLeft="3dp"
                     android:textSize="10sp" />
             </LinearLayout>
@@ -292,6 +295,7 @@
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="7dp"
                     android:background="@drawable/worksuggestbox_edit_small_bk"
+                    android:focusable="false"
                     android:gravity="center_vertical"
                     android:paddingLeft="3dp"
                     android:textSize="10sp" />

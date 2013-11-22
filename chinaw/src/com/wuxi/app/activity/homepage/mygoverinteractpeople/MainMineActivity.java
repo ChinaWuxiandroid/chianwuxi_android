@@ -287,15 +287,15 @@ public class MainMineActivity extends BaseSlideActivity implements
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long arg3) {
-			if (position == 0 && !loginDialog.checkLogin()) {
-				loginDialog.showDialog();
-			} else {
-				Object object = parent.getItemAtPosition(position);
+			// if (position == 0 && !loginDialog.checkLogin()) {
+			// loginDialog.showDialog();
+			// } else {
+			Object object = parent.getItemAtPosition(position);
 
-				adapter.setSelectedPosition(position); // 刷新左侧导航listView背景
-				adapter.notifyDataSetInvalidated();
-				showContentFragment(showMenItemContentFragment((MenuItem) object));
-			}
+			adapter.setSelectedPosition(position); // 刷新左侧导航listView背景
+			adapter.notifyDataSetInvalidated();
+			showContentFragment(showMenItemContentFragment((MenuItem) object));
+			// }
 		}
 
 	}

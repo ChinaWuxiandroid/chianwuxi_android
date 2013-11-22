@@ -220,6 +220,10 @@ public class GIPMine12345Fragment extends RadioButtonChangeFragment implements
 					letterWrapper = letterService.getMyLettersList(
 							Constants.Urls.MY_LETTER_URL,
 							SystemUtil.getAccessToken(context), start, end);
+
+					System.out
+							.println("政民互动页面：" + Constants.Urls.MY_LETTER_URL);
+
 					if (null != letterWrapper && letterWrapper.isData()) {
 						handler.sendEmptyMessage(DATA_LOAD_SUCESS);
 					} else if (letterWrapper != null

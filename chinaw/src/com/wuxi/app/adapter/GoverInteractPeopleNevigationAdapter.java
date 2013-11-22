@@ -11,16 +11,17 @@ import android.widget.TextView;
 import com.wuxi.app.R;
 import com.wuxi.domain.MenuItem;
 
-public class GoverInteractPeopleNevigationAdapter extends BaseAdapter{
+public class GoverInteractPeopleNevigationAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
 	private List<MenuItem> listMenus;
-	
-	private int selectedPosition = 0;// 选中的位置  
-	
-	public GoverInteractPeopleNevigationAdapter(LayoutInflater mInflater,List<MenuItem> listMenus){
-		this.mInflater=mInflater;
-		this.listMenus=listMenus;
-		
+
+	private int selectedPosition = 0;// 选中的位置
+
+	public GoverInteractPeopleNevigationAdapter(LayoutInflater mInflater,
+			List<MenuItem> listMenus) {
+		this.mInflater = mInflater;
+		this.listMenus = listMenus;
+
 	}
 
 	@Override
@@ -37,23 +38,25 @@ public class GoverInteractPeopleNevigationAdapter extends BaseAdapter{
 	public long getItemId(int position) {
 		return position;
 	}
+
 	class ViewHolder {
 
 		public TextView menu_textView;
 	}
 
-	public void setSelectedPosition(int position) {  
-		selectedPosition = position;  
-	} 
-
+	public void setSelectedPosition(int position) {
+		selectedPosition = position;
+	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder viewHolder = null;
 
 		if (convertView == null) {
-			convertView = mInflater.inflate(
-					R.layout.goverinteractpeople_nevigation_listview_item, null);
+			convertView = mInflater
+					.inflate(
+							R.layout.goverinteractpeople_nevigation_listview_item,
+							null);
 			viewHolder = new ViewHolder();
 
 			viewHolder.menu_textView = (TextView) convertView
@@ -62,11 +65,14 @@ public class GoverInteractPeopleNevigationAdapter extends BaseAdapter{
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
+
 		viewHolder.menu_textView.setText(listMenus.get(position).getName());
-		if(selectedPosition==position)
-			viewHolder.menu_textView.setBackgroundResource(R.drawable.listview_item_selected);
+		if (selectedPosition == position)
+			viewHolder.menu_textView
+					.setBackgroundResource(R.drawable.listview_item_selected);
 		else
-			viewHolder.menu_textView.setBackgroundResource(R.drawable.listview_item_textview_back);
+			viewHolder.menu_textView
+					.setBackgroundResource(R.drawable.listview_item_textview_back);
 		return convertView;
 
 	}

@@ -1,5 +1,6 @@
 package com.wuxi.app.fragment.homepage.goverpublicmsg;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
@@ -210,9 +211,12 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	// 加载更多
 	private ProgressBar moreProgressBar;
 	private Button mButtonLoadMore;
-	private View loadListViewMoreView;
+	private View loadListMoreView;
 	private int moreIndex = 10;
 	private boolean isFirstLoad = true;
+	private ProgressBar morePrBar;
+	private Button mBLoadMore;
+	private View loadListViewMoreView;
 
 	/**
 	 * @return type
@@ -322,6 +326,10 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		initSubLayoutUI();
 		initXingzhengLayout();
 		initSearchLayout();
+
+		// govermsg_detail_lv_channel.addFooterView(getFootListView());
+		// govermsg_detail_lv_channel.removeFooterView(loadListMoreView);
+
 		return view;
 	}
 
@@ -422,42 +430,45 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 			loadChannelData();
 		}
 
-		loadListViewMoreView = View.inflate(context,
-				R.layout.list_loadmore_layout, null);
-		moreProgressBar = (ProgressBar) loadListViewMoreView
+		loadListMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+				null);
+		moreProgressBar = (ProgressBar) loadListMoreView
 				.findViewById(R.id.pb_loadmoore);
-		mButtonLoadMore = (Button) loadListViewMoreView
-				.findViewById(R.id.loadMoreButton);
-		// mButtonLoadMore.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// if (contentWrapper.isNext()) {
-		// mButtonLoadMore.setVisibility(View.VISIBLE);
-		// mButtonLoadMore.setText("loading.....");
-		// moreProgressBar.setVisibility(View.VISIBLE);
-		// loadMoreData();
-		// }
-		// }
-		// });
-
-	}
-
-	private View getFootListView() {
-		loadListViewMoreView = View.inflate(context,
-				R.layout.list_loadmore_layout, null);
-		moreProgressBar = (ProgressBar) loadListViewMoreView
-				.findViewById(R.id.pb_loadmoore);
-		mButtonLoadMore = (Button) loadListViewMoreView
+		mButtonLoadMore = (Button) loadListMoreView
 				.findViewById(R.id.loadMoreButton);
 		mButtonLoadMore.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				if (contentWrapper.isNext()) {
-					mButtonLoadMore.setVisibility(View.VISIBLE);
 					mButtonLoadMore.setText("loading.....");
 					moreProgressBar.setVisibility(View.VISIBLE);
+					loadMoreData();
+				}
+			}
+		});
+
+		getFootListView();
+	}
+
+	private View getFootListView() {
+		System.out.println("初始化控件");
+		loadListViewMoreView = View.inflate(context,
+				R.layout.list_loadmore_layout, null);
+		morePrBar = (ProgressBar) loadListViewMoreView
+				.findViewById(R.id.pb_loadmoore);
+		morePrBar.setVisibility(View.GONE);
+		mBLoadMore = (Button) loadListViewMoreView
+				.findViewById(R.id.loadMoreButton);
+		System.out.println("点击加载更多");
+		mBLoadMore.setText("点击加载更多");
+		mBLoadMore.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (contentWrapper.isNext()) {
+					mBLoadMore.setText("loading.....");
+					morePrBar.setVisibility(View.VISIBLE);
 					loadMoreData();
 				}
 			}
@@ -1046,8 +1057,13 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	 * @方法： showContentData
 	 * @描述： 显示子菜单列表数据
 	 */
+	List<Content> list = new ArrayList<Content>();
+
 	private void showMenuContentData() {
 		contents = contentWrapper.getContents();
+
+		System.out.println("放入集合前的长度：" + contents.size());
+
 		govermsg_detail_lv_channel.setVisibility(View.VISIBLE);
 		channleFrameLayout.setVisibility(View.GONE);
 		channelListView.setVisibility(View.GONE);
@@ -1059,39 +1075,53 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		} else {
 			if (isFirstLoad) {
 				isFirstLoad = false;
-				if (getType() == 3) {
+				if (contentWrapper.isNext()) {
+					if (govermsg_detail_lv_channel.getFooterViewsCount() != 0) {
+						morePrBar.setVisibility(View.GONE);
+						mBLoadMore.setText("点击加载更多");
+					} else {
+						govermsg_detail_lv_channel
+								.addFooterView(getFootListView());
+					}
+					govermsg_detail_lv_channel
+							.removeFooterView(loadListMoreView);
+				}
+			}
+
+			if (getType() == 3) {
+				if (generalizeAdapter == null) {
 					generalizeAdapter = new GovernmentGeneralizeAdapter(
 							contents, context);
-					govermsg_detail_lv_channel.setAdapter(generalizeAdapter);
+				}
+				govermsg_detail_lv_channel.setAdapter(generalizeAdapter);
+			} else if (getType() == 4) {
 
-				} else if (getType() == 4) {
-					regulationAdapter = new PolicieRegulationAdapter(contents,
+				list.addAll(contents);
+
+				System.out.println("放入集合后的长度：" + list.size());
+
+				if (regulationAdapter == null) {
+					regulationAdapter = new PolicieRegulationAdapter(list,
 							context);
-					regulationAdapter.setMenuItem(getParentMenuItem());
 					govermsg_detail_lv_channel.setAdapter(regulationAdapter);
+				} else {
+					regulationAdapter.setContents(list);
+					regulationAdapter.notifyDataSetChanged();
 				}
-			} else {
-				if (getType() == 3) {
+				regulationAdapter.setMenuItem(getParentMenuItem());
 
-					govermsg_detail_lv_channel.setAdapter(generalizeAdapter);
-
-				} else if (getType() == 4) {
-					regulationAdapter.setMenuItem(getParentMenuItem());
-					govermsg_detail_lv_channel.setAdapter(regulationAdapter);
-				}
-				govermsg_detail_lv_channel
-						.removeFooterView(loadListViewMoreView);
 			}
 		}
 
 		if (contentWrapper.isNext()) {
-			Toast.makeText(context, "加载更多", Toast.LENGTH_SHORT).show();
-			moreProgressBar.setVisibility(View.GONE);
-			mButtonLoadMore.setText("点击加载更多");
-			mButtonLoadMore.setVisibility(View.VISIBLE);
-			govermsg_detail_lv_channel.addFooterView(getFootListView());
+			if (govermsg_detail_lv_channel.getFooterViewsCount() != 0) {
+				morePrBar.setVisibility(View.GONE);
+				mBLoadMore.setText("点击加载更多");
+			} else {
+				govermsg_detail_lv_channel.addFooterView(getFootListView());
+			}
 		} else {
-			govermsg_detail_lv_channel.removeFooterView(loadListViewMoreView);
+			govermsg_detail_lv_channel.removeFooterView(loadListMoreView);
 		}
 
 	}
@@ -1400,8 +1430,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		loadMenuListData(moreIndex, moreIndex + 10);
 		moreIndex += 10;
 		if (!isFirstLoad) {
-			Toast.makeText(context, "移除底部", Toast.LENGTH_SHORT).show();
-			govermsg_detail_lv_channel.removeFooterView(loadListViewMoreView);
+			govermsg_detail_lv_channel.removeFooterView(loadListMoreView);
 		}
 	}
 
@@ -1428,6 +1457,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 				try {
 					contentWrapper = contentService.getPageContentsById(
 							parentMenuItem.getChannelId(), startIndex, endIndex);
+
 					if (contentWrapper != null) {
 						contents = contentWrapper.getContents();
 						msg.what = DATA_LOAD_SUCESS;
@@ -1539,9 +1569,8 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		switch (v.getId()) {
 		// 收起按钮事件监听
 		case R.id.gpm_detail_btn_packup:
-
 			isFirstLoad = true;
-
+			moreIndex = 10;
 			listview.setVisibility(View.VISIBLE);
 			govermsg_detail_lv_channel.setVisibility(View.GONE);
 			packup_btn.setVisibility(View.GONE);
@@ -1555,6 +1584,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 			searchCondition.setYear("");
 			con.setId(null);
 			con.setYear(-1);
+			list.clear();
 			break;
 
 		case R.id.loadMoreButton:

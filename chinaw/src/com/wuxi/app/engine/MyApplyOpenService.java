@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.MyApplyOpenWrapper;
+import com.wuxi.domain.MyOpinionOpenWrapper;
 import com.wuxi.domain.MyApplyOpenWrapper.MyApplyOpen;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
@@ -59,8 +60,6 @@ public class MyApplyOpenService extends Service {
 
 		// 提交请求并返回结果
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
-
-		System.out.println("数据是否为空：" + resultStr);
 
 		if (resultStr != null) {
 			JSONObject jsonObject = new JSONObject(resultStr);
@@ -130,6 +129,38 @@ public class MyApplyOpenService extends Service {
 			return opens;
 		}
 		return null;
+	}
+
+	/**
+	 * 数据数据，并解析
+	 * 
+	 * @方法： getMyOpinionOpenWrapper
+	 * @param url
+	 */
+	public ArrayList<MyOpinionOpenWrapper> getMyOpinionOpenWrapper(String url)
+			throws NetException, JSONException, NODataException {
+		// 检查网络连接状态
+		if (!checkNet()) {
+			throw new NetException(Constants.ExceptionMessage.NO_NET);
+		}
+		ArrayList<MyOpinionOpenWrapper> mArrayList = null;
+		// 提交请求并返回结果
+		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+
+		if (resultStr != null) {
+			JSONObject object = new JSONObject(resultStr);
+			boolean success = object.getBoolean("success");
+			if (success) {
+				String result = object.getString("result");
+				if (result != null) {
+					String data = object.getString("data");
+					boolean next = object.getBoolean("next");
+					mArrayList = new MyOpinionOpenWrapper()
+							.getMyOpinionOpenWrapper(data, next);
+				}
+			}
+		}
+		return mArrayList;
 	}
 
 }

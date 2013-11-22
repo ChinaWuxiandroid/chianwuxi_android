@@ -674,12 +674,12 @@ public class MainIndexActivity extends Activity implements
 						MainIndexActivity.this);
 				try {
 					announcements = announcementsService.getAnnouncements();
-					
+
 					if (announcements != null) {
-						
+
 						handler.sendEmptyMessage(ANNOUNCE_LOAD_SUCCESS);
 						CacheUtil.put(ANNOUNCE_CACHE_KEY, announcements);// 放入缓存
-						
+
 					} else {
 						Message msg = handler.obtainMessage();
 						msg.obj = "获取公告列表失败";

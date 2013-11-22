@@ -1,11 +1,18 @@
 package com.wuxi.app.fragment.homepage.goverpublicmsg;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +23,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -36,12 +44,12 @@ import com.wuxi.exception.NetException;
  * @描述： 依申请公开 法人申请界面
  * @作者： 罗森
  * @创建时间： 2013 2013-10-10 下午1:44:10
- * @修改时间： 
+ * @修改时间：
  * @修改描述：
  */
 public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements
 		OnClickListener {
-	
+
 	private View view;
 	private LayoutInflater mInflater;
 	private Context context;
@@ -87,7 +95,8 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case SUBMIT_SUCCESS:
-				Toast.makeText(context, "提交成功，正在审核...", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "提交成功，正在审核...", Toast.LENGTH_SHORT)
+						.show();
 				pb.setVisibility(ProgressBar.INVISIBLE);
 				break;
 			case SUBMIT_FAILED:
@@ -124,7 +133,7 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements
 
 		calendar = Calendar.getInstance();
 		year = calendar.get(Calendar.YEAR);
-		month = calendar.get(Calendar.MONTH);
+		month = calendar.get(Calendar.MONTH) + 1;
 		day = calendar.get(Calendar.DAY_OF_MONTH);
 
 		pb = (ProgressBar) view.findViewById(R.id.legalperson_infosubmit_pb);
@@ -168,12 +177,73 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements
 		applyDate_txt = (TextView) view
 				.findViewById(R.id.legalperson_apply_applydate);
 		applyDate_txt.setText("" + year + "-" + month + "-" + day);
-		
-//		solveByDept.setText(applyDept.getDepName());
-		
+
+		applyDate_txt.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				onCreateDialog();
+			}
+		});
+
+		// solveByDept.setText(applyDept.getDepName());
+
 		// 必选项-----------------------------------------------------------
 		submit_ibtn.setOnClickListener(this);
 		cancel_ibtn.setOnClickListener(this);
+	}
+
+	/**
+	 * @方法： onCreateDialog
+	 * @描述： 创建时间选择对话框
+	 * @param id
+	 * @return Dialog
+	 */
+	private Dialog onCreateDialog() {
+		DatePickerDialog beginDialog = new DatePickerDialog(context,
+				beginDateListener, year, month - 1, day);
+		beginDialog.setIcon(R.drawable.logo);
+		beginDialog.show();
+		return beginDialog;
+	}
+
+	/**
+	 * 申请日期对话框监听器
+	 */
+	private DatePickerDialog.OnDateSetListener beginDateListener = new DatePickerDialog.OnDateSetListener() {
+
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear,
+				int dayOfMonth) {
+			GoverMsgApplyLePersonTableFragment.this.year = year;
+			GoverMsgApplyLePersonTableFragment.this.month = monthOfYear;
+			GoverMsgApplyLePersonTableFragment.this.day = dayOfMonth;
+			updateBeginDateDisplay();
+		}
+	};
+
+	/**
+	 * @方法： updateBeginDateDisplay
+	 * @描述： 更新开始日期显示
+	 */
+	private void updateBeginDateDisplay() {
+		StringBuffer sb = new StringBuffer().append(year).append("-")
+				.append((month + 1) < 10 ? "0" + (month + 1) : (month + 1))
+				.append("-").append((day < 10) ? "0" + day : day);
+		// timeBeginEdit.setText(sb);
+		applyDate_txt.setText(sb);
+		// 获取日期格式实例
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		// 时间实例
+		Date date = null;
+		try {
+			// 将字符串按照一定的格式转换成时间对象，即long数据
+			date = format.parse(sb.toString());
+			// 设置查询条件的开始时间的值
+			// letterCondition.setStarttime(date.getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -317,8 +387,89 @@ public class GoverMsgApplyLePersonTableFragment extends BaseFragment implements
 		} else if (!inputError && "".equals(use)) {
 			Toast.makeText(context, "所需信息的用途不能为空", Toast.LENGTH_SHORT).show();
 			inputError = true;
+		} else if (!isPhone(tel_et.getText().toString())) {
+			inputError = true;
+		} else if (!isEmail(email_et.getText().toString())) {
+			inputError = true;
 		}
 
 		return inputError;
 	}
+
+	/**
+	 * 
+	 * 检查用户输入的电话号码,是电话号码返回true
+	 * 
+	 * @方法： isPhone
+	 * @描述： TODO
+	 * @param phoneText
+	 * @return
+	 */
+	private boolean isPhone(String phoneText) {
+		Pattern pattern = Pattern
+				.compile("1([\\d]{10})|((\\+[0-9]{2,4})?\\(?[0-9]+\\)?-?)?[0-9]{7,8}");
+
+		Matcher matcher = pattern.matcher(phoneText);
+		StringBuffer bf = new StringBuffer(64);
+		while (matcher.find()) {
+			bf.append(matcher.group());
+		}
+		int len = bf.length();
+		if (len > 0) {
+			return true;
+		} else {
+			Toast.makeText(context, "请输入正确的电话号码", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+	}
+
+	/**
+	 * 检查用户输入的邮箱，如果是邮箱返回true
+	 * 
+	 * @方法： isEmail
+	 * @描述： TODO
+	 * @param emailText
+	 * @return
+	 */
+	private boolean isEmail(String emailText) {
+		Pattern pattern = Pattern
+				.compile("[a-zA-Z_]{1,}[0-9]{0,}@(([a-zA-z0-9]-*){1,}\\.){1,3}[a-zA-z\\-]{1,}");
+		Matcher matcher = pattern.matcher(emailText);
+		StringBuffer bf = new StringBuffer(64);
+		while (matcher.find()) {
+			bf.append(matcher.group());
+		}
+		int len = bf.length();
+		if (len > 0) {
+			return true;
+		} else {
+			Toast.makeText(context, "请输入正确的邮箱", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+	}
+
+	/**
+	 * 检查用户输入的邮编，正确返回true
+	 * 
+	 * @方法： isPostcode
+	 * @描述： TODO
+	 * @param postcodeText
+	 * @return
+	 */
+	private boolean isPostcode(String postcodeText) {
+		Pattern pattern = Pattern.compile("^[1-9]\\d{5}$");
+		Matcher matcher = pattern.matcher(postcodeText);
+		StringBuffer bf = new StringBuffer(64);
+		while (matcher.find()) {
+			bf.append(matcher.group());
+		}
+		int len = bf.length();
+		if (len > 0) {
+			return true;
+		} else {
+			Toast.makeText(context, "请输入正确的邮编", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+	}
+
 }

@@ -96,11 +96,7 @@ public class MenuService extends Service {
 			reslutStr = httpUtils.executeGetToString(url, 500);
 		}
 
-		System.out.println("路径：" + url);
-		System.out.println("读取结果：" + reslutStr);
-
 		if (reslutStr != null) {
-
 			JSONObject jsonObject = new JSONObject(reslutStr);
 			JSONArray jresult = jsonObject.getJSONArray("result");
 			if (null != jresult && jresult.length() > 0) {

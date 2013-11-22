@@ -16,10 +16,11 @@ import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
- * 回复统计业务类  包括答复率总数统计 和 各信箱答复率统计
- * @author 杨宸  智佳
+ * 回复统计业务类 包括答复率总数统计 和 各信箱答复率统计
+ * 
+ * @author 杨宸 智佳
  * */
-public class ReplyStatisticsService extends Service{
+public class ReplyStatisticsService extends Service {
 
 	public ReplyStatisticsService(Context context) {
 		super(context);
@@ -27,12 +28,13 @@ public class ReplyStatisticsService extends Service{
 
 	/**
 	 * 获取答复率总数统计
-	 * @throws NODataException 
-	 * @throws JSONException 
-	 * @throws NetException 
+	 * 
+	 * @throws NODataException
+	 * @throws JSONException
+	 * @throws NetException
 	 * */
-	public List<AllCount> getAllCount(String url) 
-			throws NetException, JSONException, NODataException{
+	public List<AllCount> getAllCount(String url) throws NetException,
+			JSONException, NODataException {
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
@@ -46,10 +48,10 @@ public class ReplyStatisticsService extends Service{
 				for (int i = 0; i < jresult.length(); i++) {
 					JSONObject jb = jresult.getJSONObject(i);
 					AllCount allCount = new AllCount();
-					allCount.setName(jb.getString("name"));	
+					allCount.setName(jb.getString("name"));
 					allCount.setCount(jb.getInt("count"));
 					allCount.setNull(jb.getBoolean("null"));
-					allCounts.add(allCount);	
+					allCounts.add(allCount);
 				}
 				return allCounts;
 
@@ -62,20 +64,21 @@ public class ReplyStatisticsService extends Service{
 
 	/**
 	 * 获取各信箱部门答复率总数统计
-	 * @throws NODataException 
-	 * @throws JSONException 
-	 * @throws NetException 
+	 * 
+	 * @throws NODataException
+	 * @throws JSONException
+	 * @throws NetException
 	 * */
-	public List<StatisticsLetter> getLettersStatistics(int letter_type,int year,int month) 
-			throws JSONException, NetException, NODataException {
+	public List<StatisticsLetter> getLettersStatistics(int letter_type,
+			int year, int month) throws JSONException, NetException,
+			NODataException {
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 
-		String url=Constants.Urls.LETTERS_STATISTICS_URL+"?type="+letter_type+"&year="+year+"&month="+month;	
-		
-		System.out.println("--->"+url);
-		
+		String url = Constants.Urls.LETTERS_STATISTICS_URL + "?type="
+				+ letter_type + "&year=" + year + "&month=" + month;
+
 		String reslutStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (reslutStr != null) {
@@ -86,27 +89,28 @@ public class ReplyStatisticsService extends Service{
 				for (int i = 0; i < jresult.length(); i++) {
 					JSONObject jb = jresult.getJSONObject(i);
 					StatisticsLetter letter = new StatisticsLetter();
-	
-					letter.setDepname(jb.getString("depname"));	
+
+					letter.setDepname(jb.getString("depname"));
 					letter.setAcceptedNum(jb.getInt("acceptedNum"));
 					letter.setReplyNum(jb.getInt("replyNum"));
-					letter.setReplyRate(jb.getString("replyRate"));	
-					letter.setReplyDay(jb.getString("replyDay"));	
+					letter.setReplyRate(jb.getString("replyRate"));
+					letter.setReplyDay(jb.getString("replyDay"));
 					letter.setNull(jb.getBoolean("null"));
-					letters.add(letter);	
+					letters.add(letter);
 				}
 				return letters;
 			}
 		}
 		return null;
 	}
-	
+
 	/**
-	 * 政府信息公开  网上办件统计 获取所有列表
+	 * 政府信息公开 网上办件统计 获取所有列表
+	 * 
 	 * @author 杨宸 智佳
 	 * */
-	
-	public List<StatisticsLetter> getAllLettersStatistics(String url) 
+
+	public List<StatisticsLetter> getAllLettersStatistics(String url)
 			throws JSONException, NetException, NODataException {
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
@@ -122,14 +126,14 @@ public class ReplyStatisticsService extends Service{
 				for (int i = 0; i < jresult.length(); i++) {
 					JSONObject jb = jresult.getJSONObject(i);
 					StatisticsLetter letter = new StatisticsLetter();
-	
-					letter.setDepname(jb.getString("depname"));	
+
+					letter.setDepname(jb.getString("depname"));
 					letter.setAcceptedNum(jb.getInt("acceptedNum"));
 					letter.setReplyNum(jb.getInt("replyNum"));
-					letter.setReplyRate(jb.getString("replyRate"));	
-					letter.setReplyDay(jb.getString("replyDay"));	
+					letter.setReplyRate(jb.getString("replyRate"));
+					letter.setReplyDay(jb.getString("replyDay"));
 					letter.setNull(jb.getBoolean("null"));
-					letters.add(letter);	
+					letters.add(letter);
 				}
 				return letters;
 

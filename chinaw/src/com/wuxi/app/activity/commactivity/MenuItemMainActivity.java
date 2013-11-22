@@ -199,7 +199,6 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 		case R.id.btn_next_screen:// 下一屏
 			mtitleScrollLayout.goNextScreen();
 			break;
-
 		}
 
 	}

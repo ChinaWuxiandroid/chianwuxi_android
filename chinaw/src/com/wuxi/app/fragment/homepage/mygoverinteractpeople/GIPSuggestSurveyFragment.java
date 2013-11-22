@@ -66,7 +66,7 @@ public class GIPSuggestSurveyFragment extends RadioButtonChangeFragment {
 
 	@Override
 	protected void init() {
-		gotoListView(type);	
+		gotoListView(type);
 	}
 
 	/**
