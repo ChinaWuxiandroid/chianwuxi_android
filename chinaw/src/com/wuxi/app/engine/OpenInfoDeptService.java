@@ -18,11 +18,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.OpenInfoDept;
 import com.wuxi.exception.NetException;
-
-import android.content.Context;
 
 /**
  * @类名： OpenInfoDeptService

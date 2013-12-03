@@ -29,7 +29,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 /**
  * @类名： AsynLoadImageUtil
@@ -76,10 +75,12 @@ public class AsynLoadImageUtil {
 	public void showImageAsyn(ImageView imageView, String url, int resId) {
 
 		Bitmap bitmap = null;
-
+		System.out.println("读取的图片的路径：" + url);
 		bitmap = loadImg(url);
+		System.out.println("loadImg======>" + bitmap);
 		if (bitmap == null) {
 			imageView.setTag(url);
+			System.out.println("232323");
 			bitmap = loadImageAsyn(url, getImageCallback(imageView, resId));
 			if (bitmap == null) {
 				imageView.setImageResource(resId);
@@ -148,7 +149,9 @@ public class AsynLoadImageUtil {
 				if (path.equals(imageView.getTag().toString())) {
 					System.out.println("图片的下载路径：" + path);
 					imageView.setImageBitmap(bitmap);
+					System.out.println("不为空，就保存：" + bitmap);
 					if (bitmap != null) {
+						System.out.println("保存图片到本地：" + fileUrl);
 						saveImageToFile(fileUrl, bitmap);
 					}
 				} else {
@@ -294,23 +297,39 @@ public class AsynLoadImageUtil {
 			String path = Constants.APPFiles.APP_PATH;
 			File dir = new File(path);
 			if (!dir.exists()) {
-				System.out.println(dir.mkdirs());
 				dir.mkdirs();
+				System.out.println("是否创建：" + dir.mkdirs() + "，创建的路径：" + path);
 			}
-			path = Constants.APPFiles.CAHCE_FILE_CONTENT_PATH;
-			File dir2 = new File(path);
-			if (!dir2.exists()) {
-				System.out.println(dir2.mkdirs());
-				dir2.mkdirs();
+			if (dir.exists()) {
+				System.out.println("文件夹dir已经创建========================>"
+						+ dir.getPath());
 			}
+
+			// path = Constants.APPFiles.CAHCE_FILE_CONTENT_PATH;
+			// File dir2 = new File(path);
+			// if (!dir2.exists()) {
+			// dir2.mkdirs();
+			// System.out.println("dir2是否创建：" + dir2.mkdirs() + "，创建的路径：" +
+			// path);
+			// }
+			//
+			// if (dir2.exists()) {
+			// System.out.println("文件夹dir2已经创建========================>"
+			// + dir2.getPath());
+			// }
+
 			String filename = url.substring(url.lastIndexOf("/") + 1,
 					url.length());
+			System.out.println("图片的名称：" + filename);
 			String imagepath = path + "/" + filename;
 			fileUrl = new File(imagepath);
+			System.out.println("图片imagepath=====>" + imagepath);
 			if (fileUrl.exists()) {
+				System.out.println("SD卡中已存在该图片");
 				// SD卡中已存在该图片
 				return LoadImageFromLocal(imagepath);
 			} else {
+				System.out.println("SD卡中不存在该图片");
 				return null;
 			}
 

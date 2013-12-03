@@ -3,11 +3,11 @@ package com.wuxi.app.db;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.wuxi.domain.MenuItem;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.wuxi.domain.MenuItem;
 
 /**
  * 

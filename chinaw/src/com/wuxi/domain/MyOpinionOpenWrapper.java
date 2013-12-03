@@ -256,8 +256,8 @@ public class MyOpinionOpenWrapper {
 		ArrayList<MyOpinionOpenWrapper> mArrayList = new ArrayList<MyOpinionOpenWrapper>();
 
 		JSONArray array = null;
-
 		try {
+
 			array = new JSONArray(json);
 
 			for (int i = 0; i < array.length(); i++) {
@@ -285,5 +285,4 @@ public class MyOpinionOpenWrapper {
 		}
 		return mArrayList;
 	}
-
 }

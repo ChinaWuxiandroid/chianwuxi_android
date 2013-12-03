@@ -9,7 +9,6 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
-import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.Content;
 import com.wuxi.domain.ContentWrapper;

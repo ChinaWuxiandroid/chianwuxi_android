@@ -2,8 +2,6 @@ package com.wuxi.app.view;
 
 
 
-import com.wuxi.app.R;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -19,6 +17,8 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.view.ViewParent;
 import android.widget.CheckBox;
+
+import com.wuxi.app.R;
 
 
 

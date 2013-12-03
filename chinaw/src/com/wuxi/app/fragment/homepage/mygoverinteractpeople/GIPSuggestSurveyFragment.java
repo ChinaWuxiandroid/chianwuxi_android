@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.widget.RadioGroup;
 
 import com.wuxi.app.R;
-
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
 
 /**

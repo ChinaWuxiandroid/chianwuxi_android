@@ -13,9 +13,6 @@ package com.wuxi.app.adapter;
 
 import java.util.List;
 
-import com.wuxi.app.R;
-import com.wuxi.domain.OpenInfoDept;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
@@ -24,6 +21,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.wuxi.app.R;
+import com.wuxi.domain.OpenInfoDept;
 
 /**
  * @类名： OpenInfoDeptAdapter

@@ -18,15 +18,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.MyApplyOpenWrapper;
-import com.wuxi.domain.MyOpinionOpenWrapper;
 import com.wuxi.domain.MyApplyOpenWrapper.MyApplyOpen;
+import com.wuxi.domain.MyOpinionOpenWrapper;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
-
-import android.content.Context;
 
 /**
  * @类名： MyApplyOpenService
@@ -147,19 +147,29 @@ public class MyApplyOpenService extends Service {
 		// 提交请求并返回结果
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
-		if (resultStr != null) {
-			JSONObject object = new JSONObject(resultStr);
-			boolean success = object.getBoolean("success");
-			if (success) {
-				String result = object.getString("result");
-				if (result != null) {
-					String data = object.getString("data");
-					boolean next = object.getBoolean("next");
-					mArrayList = new MyOpinionOpenWrapper()
-							.getMyOpinionOpenWrapper(data, next);
+		try {
+			if (resultStr != null) {
+				JSONObject object = new JSONObject(resultStr);
+				boolean success = object.getBoolean("success");
+				if (success) {
+					String result = object.getString("result");
+					if (result != null) {
+
+						JSONObject object2 = new JSONObject(result);
+
+						String data = object2.getString("data");
+
+						boolean next = object2.getBoolean("next");
+
+						mArrayList = new MyOpinionOpenWrapper()
+								.getMyOpinionOpenWrapper(data, next);
+					}
 				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+
 		return mArrayList;
 	}
 

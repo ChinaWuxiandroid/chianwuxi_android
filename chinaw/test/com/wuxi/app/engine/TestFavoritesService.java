@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import android.test.AndroidTestCase;
+
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NetException;
-
-import android.test.AndroidTestCase;
 
 public class TestFavoritesService extends AndroidTestCase {
 

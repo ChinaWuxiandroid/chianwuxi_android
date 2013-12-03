@@ -25,16 +25,16 @@
         android:id="@+id/my_opinion_open_list_statue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/my_opinion_open_list_time"
-        android:layout_marginRight="5dp"
+        android:layout_below="@+id/my_opinion_open_list_time"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
         android:text="状态"
         android:textColor="@color/gip_txt_gray" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/my_opinion_open_list_time"
+        android:layout_below="@+id/my_opinion_open_list_statue"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:text="> 查看详细" />

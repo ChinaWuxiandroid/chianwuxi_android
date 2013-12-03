@@ -26,7 +26,7 @@
                 android:background="@drawable/gip_button_selected_bk"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="我的       主题"
+                android:text="我的主题"
                 android:textColor="@android:color/white"
                 android:textSize="12sp" />
 
@@ -38,21 +38,21 @@
                 android:layout_weight="1"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="我参与的 主题"
+                android:text="我参与的主题"
                 android:textColor="@color/gip_second_frame_button_brown"
                 android:textSize="12sp" />
 
-            <RadioButton
-                android:id="@+id/gip_mine_publicforum_radioButton_collectTheme"
-                style="@style/goverinterpeople_mine_radiobutton_style"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="我收藏的主题"
-                android:textColor="@color/gip_second_frame_button_brown"
-                android:textSize="12sp" />
+            <!-- <RadioButton -->
+            <!-- android:id="@+id/gip_mine_publicforum_radioButton_collectTheme" -->
+            <!-- style="@style/goverinterpeople_mine_radiobutton_style" -->
+            <!-- android:layout_marginLeft="10dp" -->
+            <!-- android:layout_marginRight="10dp" -->
+            <!-- android:layout_weight="1" -->
+            <!-- android:paddingLeft="5dp" -->
+            <!-- android:paddingRight="5dp" -->
+            <!-- android:text="我收藏的主题" -->
+            <!-- android:textColor="@color/gip_second_frame_button_brown" -->
+            <!-- android:textSize="12sp" /> -->
 
             <RadioButton
                 android:id="@+id/gip_mine_radioButton_suggestionPlatform"

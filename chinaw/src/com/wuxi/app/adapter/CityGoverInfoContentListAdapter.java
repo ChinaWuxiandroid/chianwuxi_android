@@ -13,23 +13,16 @@ package com.wuxi.app.adapter;
 
 import java.util.List;
 
-import com.wuxi.app.R;
-import com.wuxi.app.adapter.ContentListAdapter.ViewHolder;
-import com.wuxi.app.util.TimeFormateUtil;
-import com.wuxi.domain.Channel;
-import com.wuxi.domain.Content;
-
 import android.content.Context;
-import android.graphics.Color;
-import android.text.Spannable;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.TextView.BufferType;
+
+import com.wuxi.app.R;
+import com.wuxi.app.util.TimeFormateUtil;
+import com.wuxi.domain.Channel;
+import com.wuxi.domain.Content;
 
 /**
  * @类名： CityGoverInfoContentListAdapter

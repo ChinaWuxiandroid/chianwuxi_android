@@ -10,15 +10,15 @@ import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgWebFragment;
 import com.wuxi.app.fragment.homepage.goverpublicmsg.WorkSuggestionBoxFragment;
 import com.wuxi.domain.MenuItem;
 
-
 /**
- * 政府信息公开的布局初始化监听类  使用前必须初始化 baseSlideFragment context,才能判断 登录与否
+ * 政府信息公开的布局初始化监听类 使用前必须初始化 baseSlideFragment context,才能判断 登录与否
  * */
 public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener {
 
 	@Override
 	public void bindMenuItemLayout(
 			InitializContentLayoutListner initLayoutListner, MenuItem menuItem) {
+
 		Class<? extends Fragment> fragmentClass = menuItem.getContentFragment();
 		Fragment fragment;
 		if (fragmentClass == null) {
@@ -35,51 +35,51 @@ public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener 
 			GoverMsgWebFragment leaderWindowFragment = null;
 			GoverMsgContentListFragment contentListFragment = null;
 			GoverMsgNaviWithContentFragment contentNavigatorWithContentFragment = null;
-			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment=null;
+			GoverMsgSearchContentListFragment goverMsgSearchContentListFragment = null;
 			WorkSuggestionBoxFragment workSuggestionBoxFragment = null;
-			GoverMsgFragmentWebFragment goverMsgFragmentWebFragment=null;
-			
+			GoverMsgFragmentWebFragment goverMsgFragmentWebFragment = null;
+
 			if (fragment instanceof GoverMsgNaviWithContentFragment) {
 				contentNavigatorWithContentFragment = (GoverMsgNaviWithContentFragment) fragment;
 				contentNavigatorWithContentFragment.setParentMenuItem(menuItem);
 
 				initLayoutListner
-				.bindContentLayout(contentNavigatorWithContentFragment);
+						.bindContentLayout(contentNavigatorWithContentFragment);
 			} else if (fragment instanceof GoverMsgContentListFragment) {
 				contentListFragment = (GoverMsgContentListFragment) fragment;
 
 				contentListFragment.setParentItem(menuItem);
 				initLayoutListner.bindContentLayout(contentListFragment);
-				
+
 			} else if (fragment instanceof GoverMsgWebFragment) {
 				leaderWindowFragment = (GoverMsgWebFragment) fragment;
 				leaderWindowFragment.setParentItem(menuItem);
 				initLayoutListner.bindContentLayout(leaderWindowFragment);
-			}
-			else if (fragment instanceof GoverMsgSearchContentListFragment) {
+			} else if (fragment instanceof GoverMsgSearchContentListFragment) {
 				goverMsgSearchContentListFragment = (GoverMsgSearchContentListFragment) fragment;
-				//在此设置搜索类型
+				// 在此设置搜索类型
 				goverMsgSearchContentListFragment.setParentMenuItem(menuItem);
-				initLayoutListner.bindContentLayout(goverMsgSearchContentListFragment);
-			}
-			else if (fragment instanceof WorkSuggestionBoxFragment) {
+				initLayoutListner
+						.bindContentLayout(goverMsgSearchContentListFragment);
+			} else if (fragment instanceof WorkSuggestionBoxFragment) {
 				workSuggestionBoxFragment = (WorkSuggestionBoxFragment) fragment;
 				workSuggestionBoxFragment.setParentMenuItem(menuItem);
 				initLayoutListner.bindContentLayout(workSuggestionBoxFragment);
 
-			}
-			else if (fragment instanceof GoverMsgFragmentWebFragment) {
+			} else if (fragment instanceof GoverMsgFragmentWebFragment) {
 				goverMsgFragmentWebFragment = (GoverMsgFragmentWebFragment) fragment;
 				goverMsgFragmentWebFragment.setParentMenuItem(menuItem);
-				initLayoutListner.bindContentLayout(goverMsgFragmentWebFragment);
+				initLayoutListner
+						.bindContentLayout(goverMsgFragmentWebFragment);
 			}
-			
-//			else if (fragment instanceof GoverMsgFifterContentListFragment) {
-//				goverMsgFifterContentListFragment = (GoverMsgFifterContentListFragment) fragment;
-//				
-//				goverMsgFifterContentListFragment.setParentItem(menuItem);
-//				initLayoutListner.bindContentLayout(goverMsgFifterContentListFragment);
-//			}
+
+			// else if (fragment instanceof GoverMsgFifterContentListFragment) {
+			// goverMsgFifterContentListFragment =
+			// (GoverMsgFifterContentListFragment) fragment;
+			//
+			// goverMsgFifterContentListFragment.setParentItem(menuItem);
+			// initLayoutListner.bindContentLayout(goverMsgFifterContentListFragment);
+			// }
 
 		} catch (InstantiationException e) {
 			e.printStackTrace();
@@ -88,5 +88,4 @@ public class GoverPublicMsgInitLayoutImpl implements MenuItemInitLayoutListener 
 		}
 
 	}
-
 }

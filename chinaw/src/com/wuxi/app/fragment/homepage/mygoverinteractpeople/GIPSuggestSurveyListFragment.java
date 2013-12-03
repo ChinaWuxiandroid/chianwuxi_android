@@ -23,21 +23,20 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import android.widget.AbsListView.OnScrollListener;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
-import com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumContentActivity;
 import com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPSuggestSurveyDetailActivity;
 import com.wuxi.app.adapter.InternetPoliticsListAdapter;
 import com.wuxi.app.engine.InternetSurveySerivce;
@@ -298,15 +297,6 @@ public class GIPSuggestSurveyListFragment extends BaseFragment implements
 
 		InternetSurvey internetSurveyWrapper = (InternetSurvey) arg0
 				.getItemAtPosition(arg2);
-		//
-		// System.out.println("internetSurveyWrapper.getDepId()====>"
-		// + internetSurveyWrapper.getDepId());
-		// System.out.println("internetSurveyWrapper.getDoProjectId()====>"
-		// + internetSurveyWrapper.getDoProjectId());
-		// System.out.println("internetSurveyWrapper.getOrderId()====>"
-		// + internetSurveyWrapper.getOrderId());
-		// System.out.println("internetSurveyWrapper.getSurveryId()====>"
-		// + internetSurveyWrapper.getSurveryId());
 
 		Intent intent = new Intent(getActivity(),
 				GIPSuggestSurveyDetailActivity.class);

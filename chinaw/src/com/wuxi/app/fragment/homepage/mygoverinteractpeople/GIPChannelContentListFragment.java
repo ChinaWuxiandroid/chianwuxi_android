@@ -1,15 +1,12 @@
 package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 
 import android.content.Intent;
-
 import android.view.View;
 import android.widget.AdapterView;
 
 import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPContentDetailWebActivity;
-
 import com.wuxi.app.fragment.commonfragment.ContentListFragment;
-
 import com.wuxi.domain.Content;
 
 public class GIPChannelContentListFragment extends ContentListFragment {

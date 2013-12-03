@@ -21,7 +21,6 @@ import com.wuxi.app.fragment.index.InitializContentLayout;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.MenuItemChannelIndexUtil;
-import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.Channel;
 import com.wuxi.domain.MenuItem;
 import com.wuxi.exception.NODataException;

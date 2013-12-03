@@ -6,7 +6,6 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.content.Context;
-import android.os.Looper;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.MyApplyPageService;
 import com.wuxi.app.fragment.commonfragment.PagingLoadListFragment;
 import com.wuxi.app.util.SystemUtil;

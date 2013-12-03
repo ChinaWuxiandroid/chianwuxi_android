@@ -6,9 +6,13 @@ package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 import java.util.List;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Gravity;
@@ -29,6 +33,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.LiveHomeLeaveMessageListAdapter;
@@ -38,6 +43,8 @@ import com.wuxi.app.engine.LeaveMessageService;
 import com.wuxi.app.engine.MemoirService;
 import com.wuxi.app.engine.VideoSubmitIdeaService;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
+import com.wuxi.app.net.HttpUtils;
+import com.wuxi.app.net.NetworkUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.app.util.SystemUtil;
@@ -555,8 +562,9 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "跳转到列表页面...", Toast.LENGTH_SHORT)
-						.show();
+				Intent intent = new Intent(getActivity(),
+						PromoMoreVideoActivity.class);
+				MainTabActivity.instance.addView(intent);
 				advance_moreTextView.setTextColor(Color.BLUE);
 			}
 		});
@@ -574,10 +582,77 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "开始直播...", Toast.LENGTH_SHORT).show();
+				new getVideoPlayer().execute();
 				live_watchTextView.setTextColor(Color.BLUE);
 			}
 		});
+	}
+
+	private class getVideoPlayer extends AsyncTask<String, Integer, String> {
+
+		@Override
+		protected String doInBackground(String... params) {
+
+			String url = Constants.Urls.DOMAIN_URL
+					+ "/api/interview/32480e19-76b8-45d9-b7d1-a6c54933f9f7/video.json";
+
+			NetworkUtil mUtil = NetworkUtil.getInstance();
+			String data = null;
+			if (mUtil.isConnet(context)) {
+				HttpUtils mHttpUtils = HttpUtils.getInstance();
+				data = mHttpUtils.executeGetToString(url, 5000);
+			} else {
+				Toast.makeText(context, "连接网络失败", Toast.LENGTH_SHORT).show();
+			}
+			return data;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			if (result.length() > 5) {
+				try {
+					JSONObject object = new JSONObject(result);
+					String url = object.getString("result");
+					if (url.length() > 5) {
+						boadcastVoide(url);
+						// Intent intent = new Intent();
+						// intent.setClass(getActivity(),
+						// PromoVideoPlayerActivity.class);
+						// intent.putExtra("videoUrl", url);
+						// startActivity(intent);
+					} else {
+						Toast.makeText(context, "暂无视频", Toast.LENGTH_SHORT)
+								.show();
+					}
+				} catch (Exception e) {
+					Toast.makeText(context, "解析数据失败", Toast.LENGTH_SHORT)
+							.show();
+				}
+			} else {
+				Toast.makeText(context, "获取数据失败", Toast.LENGTH_SHORT).show();
+			}
+		}
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+		}
+	}
+
+	/**
+	 * 播放视频
+	 * 
+	 * @方法： boadcastVoide
+	 */
+	private void boadcastVoide(String path) {
+		Intent it = new Intent();
+		it.setAction(Intent.ACTION_VIEW);
+		it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		Uri uri = Uri.parse(path);
+		it.setType("video/mp4");
+		it.setDataAndType(uri, "video/mp4");
+		startActivity(it);
 	}
 
 	/**
@@ -701,6 +776,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 	 * 显示列表数据
 	 */
 	private void showLeaveMessageList() {
+
 		leaveMessages = messageWrapper.getLeaveMessages();
 
 		if (leaveMessages == null || leaveMessages.size() == 0) {

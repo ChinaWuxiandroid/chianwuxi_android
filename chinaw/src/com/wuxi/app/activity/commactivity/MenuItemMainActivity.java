@@ -66,7 +66,6 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 
 	protected static final int TITLE_LOAD_FAIL = 1;// 加载失败
 
-
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -93,7 +92,11 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 		Bundle bundle = this.getIntent().getExtras();
 		int showIndex = 0;
 		if (bundle != null) {
-			showIndex = bundle.getInt(Constants.CheckPositionKey.LEVEL_TWO__KEY);// 头部选中的菜单序号
+			showIndex = bundle
+					.getInt(Constants.CheckPositionKey.LEVEL_TWO__KEY);// 头部选中的菜单序号
+			System.out.println("showIndex====>" + showIndex);
+			System.out.println("Constants.CheckPositionKey.LEVEL_TWO__KEY===>"
+					+ Constants.CheckPositionKey.LEVEL_TWO__KEY);
 		}
 		mtitleScrollLayout = (TitleScrollLayout) view
 				.findViewById(R.id.title_scroll_action);// 头部控件
@@ -209,7 +212,7 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 	}
 
 	private void bindFragment(BaseFragment fragment) {
-		fragment.setArguments(getIntent().getExtras());//传递intent数据
+		fragment.setArguments(getIntent().getExtras());// 传递intent数据
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(MANCOTENT_ID, fragment);// 替换内容界面
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

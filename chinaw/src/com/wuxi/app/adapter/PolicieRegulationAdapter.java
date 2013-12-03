@@ -11,19 +11,18 @@
  */
 package com.wuxi.app.adapter;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import com.wuxi.app.R;
-import com.wuxi.app.util.TimeFormateUtil;
-import com.wuxi.domain.Content;
-import com.wuxi.domain.MenuItem;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.wuxi.app.R;
+import com.wuxi.app.util.TimeFormateUtil;
+import com.wuxi.domain.Content;
+import com.wuxi.domain.MenuItem;
 
 /**
  * @类名： PolicieRegulationAdapter

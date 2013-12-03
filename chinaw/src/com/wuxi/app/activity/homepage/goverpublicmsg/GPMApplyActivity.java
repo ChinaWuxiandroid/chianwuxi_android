@@ -11,13 +11,6 @@
  */
 package com.wuxi.app.activity.homepage.goverpublicmsg;
 
-import com.wuxi.app.BaseFragment;
-import com.wuxi.app.MainTabActivity;
-import com.wuxi.app.R;
-import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyCitizenTableFragment;
-import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyLePersonTableFragment;
-import com.wuxi.domain.ApplyDept;
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -27,6 +20,13 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import com.wuxi.app.BaseFragment;
+import com.wuxi.app.MainTabActivity;
+import com.wuxi.app.R;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyCitizenTableFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyLePersonTableFragment;
+import com.wuxi.domain.ApplyDept;
 
 /**
  * @类名： GPMApplyActivity

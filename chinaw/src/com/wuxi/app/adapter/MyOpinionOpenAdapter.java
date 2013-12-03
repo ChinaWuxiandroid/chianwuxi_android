@@ -65,12 +65,22 @@ public class MyOpinionOpenAdapter extends BaseAdapter {
 
 		MyOpinionOpenWrapper mWrapper = mList.get(position);
 
-		holder.mTextTitle.setText(position + ".标题：" + mWrapper.getTitle());
+		holder.mTextTitle
+				.setText((position + 1) + ".标题：" + mWrapper.getTitle());
 
-		holder.mTextTime.setText("提交时间：" + getDate(mWrapper.getSendTime()));
+		if (mWrapper.getSendTime() != null && mWrapper.getSendTime() != ""
+				&& !mWrapper.getSendTime().equals("")
+				&& !mWrapper.getSendTime().equals(null)
+				&& mWrapper.getSendTime().length() > 5) {
+			holder.mTextTime.setText("提交时间：" + getDate(mWrapper.getSendTime()));
+		} else {
+			holder.mTextTime.setText("提交时间：");
+		}
 
 		if (mWrapper.getState().equals("0")) {
 			holder.mTextStatus.setText("办理状态：处理中");
+		} else {
+			holder.mTextStatus.setText("办理状态：已处理");
 		}
 
 		return convertView;

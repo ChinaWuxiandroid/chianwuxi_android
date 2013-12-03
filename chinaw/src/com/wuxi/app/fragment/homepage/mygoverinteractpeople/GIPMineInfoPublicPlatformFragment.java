@@ -29,8 +29,8 @@ import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.MyApplyOpenWrapper;
-import com.wuxi.domain.MyOpinionOpenWrapper;
 import com.wuxi.domain.MyApplyOpenWrapper.MyApplyOpen;
+import com.wuxi.domain.MyOpinionOpenWrapper;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
@@ -81,6 +81,18 @@ public class GIPMineInfoPublicPlatformFragment extends
 
 	private MyOpinionOpenAdapter mOpinionOpenAdapter = null;
 
+	// private Button mButtonSubmit;
+
+	private boolean opinionFirst = true;
+
+	private View loadMoreOpinion;
+
+	private ProgressBar opinionMoreBar;
+	private Button opinionMoreButton;
+
+	private int opinionStart = 0;
+	private int opinionEnd = 10;
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -100,6 +112,9 @@ public class GIPMineInfoPublicPlatformFragment extends
 			case 100:
 				showOpinionData();
 				break;
+			case 200:
+				Toast.makeText(context, "没有数据", Toast.LENGTH_SHORT).show();
+				break;
 			}
 		};
 	};
@@ -111,11 +126,47 @@ public class GIPMineInfoPublicPlatformFragment extends
 		switch (checkedId) {
 		case R.id.gip_mine_infopublic_radioButton_declaration:
 			init();
+			opinionListView.setVisibility(View.GONE);
+			applyListView.setVisibility(View.VISIBLE);
 			break;
 		case R.id.gip_mine_infopublic_radioButton_worksuggestion:
-			loadFirstOpinionData(START, PAGE_NUM);
-			break;
+			if (mOpinionOpenListAll == null) {
+				mOpinionOpenListAll = new ArrayList<MyOpinionOpenWrapper>();
+			} else {
+				showOpinionData();
+				// mButtonSubmit.setVisibility(View.VISIBLE);
+			}
+			opinionListView = (ListView) view
+					.findViewById(R.id.gip_mine_infopublic_opinion_listview);
 
+			// mButtonSubmit.setOnClickListener(new OnClickListener() {
+			//
+			// @Override
+			// public void onClick(View v) {
+			// // Intent intent = new Intent(getActivity(),
+			// // MenuItemMainActivity.class);
+			// // intent.putExtra(Constants.CheckPositionKey.LEVEL_TWO__KEY,
+			// // Constants.CheckPositionKey.LEVEL_TWO__KEY);
+			// // //
+			// // //
+			// // intent.putExtra(Constants.CheckPositionKey.LEVEL_TWO__KEY,
+			// // // 1);// 这个意思让你选中左侧第二个菜单也就是12345办理平台
+			// // //
+			// // intent.putExtra(Constants.CheckPositionKey.LEVEL_THREE_KEY,
+			// // // 6);// 这个意思让你选中我要写信
+			// // MainTabActivity.instance.addView(intent);
+			// }
+			// });
+
+			opinionListView.setVisibility(View.VISIBLE);
+			applyListView.setVisibility(View.GONE);
+			if (opinionFirst) {
+				loadFirstOpinionData(opinionStart, opinionEnd);
+				opinionFirst = false;
+				opinionListView.addFooterView(getOpinionListFootView());
+			}
+
+			break;
 		}
 	}
 
@@ -141,8 +192,10 @@ public class GIPMineInfoPublicPlatformFragment extends
 
 	@Override
 	protected void init() {
+		// mButtonSubmit = (Button) view
+		// .findViewById(R.id.my_opinion_open_list_buttom_button);
+		// mButtonSubmit.setVisibility(View.GONE);
 		initLayout();
-
 		loadFirstApplyData(START, PAGE_NUM);
 	}
 
@@ -156,7 +209,7 @@ public class GIPMineInfoPublicPlatformFragment extends
 
 		progressBar = (ProgressBar) view
 				.findViewById(R.id.gip_mine_infopublic_list_progressbar);
-
+		progressBar.setVisibility(View.GONE);
 		applyListView = (ListView) view
 				.findViewById(R.id.gip_mine_infopublic_apply_listview);
 		applyListView.setOnItemClickListener(new OnItemClickListener() {
@@ -167,11 +220,9 @@ public class GIPMineInfoPublicPlatformFragment extends
 
 			}
 		});
+
 		applyListView.addFooterView(getApplyListFootView());// 为listView添加底部视图
 		applyListView.setOnScrollListener(new ApplyonScrollListener());// 增加滑动监听
-
-		opinionListView = (ListView) view
-				.findViewById(R.id.gip_mine_infopublic_opinion_listview);
 
 	}
 
@@ -188,6 +239,38 @@ public class GIPMineInfoPublicPlatformFragment extends
 				.findViewById(R.id.pb_loadmoore);
 		loadMoreButton.setOnClickListener(this);
 		return loadMoreView;
+	}
+
+	/**
+	 * 
+	 * @方法： getOpinionListFootView
+	 * @return
+	 */
+	private View getOpinionListFootView() {
+		loadMoreOpinion = View.inflate(context, R.layout.list_loadmore_layout,
+				null);
+		opinionMoreButton = (Button) loadMoreOpinion
+				.findViewById(R.id.loadMoreButton);
+		opinionMoreButton.setVisibility(View.GONE);
+		opinionMoreBar = (ProgressBar) loadMoreOpinion
+				.findViewById(R.id.pb_loadmoore);
+		opinionMoreBar.setVisibility(View.GONE);
+		opinionMoreButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				opinionMoreBar.setVisibility(View.VISIBLE);
+				opinionMoreButton.setVisibility(View.VISIBLE);
+				opinionMoreButton.setText("Load...");
+
+				opinionStart = opinionStart + opinionEnd;
+				opinionEnd += opinionEnd;
+				loadOpinionData(opinionStart, opinionEnd);
+			}
+		});
+
+		return loadMoreOpinion;
 	}
 
 	/**
@@ -209,15 +292,12 @@ public class GIPMineInfoPublicPlatformFragment extends
 	 * @param end
 	 */
 	private void loadOpinionData(final int start, final int end) {
-		if (isFirstLoadApply || isSwitchApply) {
-			progressBar.setVisibility(View.VISIBLE);
-		} else {
-			pb_loadmoore.setVisibility(ProgressBar.VISIBLE);
-		}
 
 		if (mOpinionOpenList != null) {
 			mOpinionOpenList.clear();
 		}
+
+		progressBar.setVisibility(View.VISIBLE);
 
 		new Thread(new Runnable() {
 
@@ -230,14 +310,16 @@ public class GIPMineInfoPublicPlatformFragment extends
 				MyApplyOpenService service = new MyApplyOpenService(context);
 
 				String url = Constants.Urls.DOMAIN_URL
-						+ "/api/applyopen/myapplybox.json?access_token=c33611d7d42042539b4102251a9dd113";
+						+ "/api/applyopen/myapplybox.json?access_token=c33611d7d42042539b4102251a9dd113&start="
+						+ start + "&end=" + end;
 				try {
 					mOpinionOpenList = service.getMyOpinionOpenWrapper(url);
+
 					if (mOpinionOpenList != null) {
+						mOpinionOpenListAll.addAll(mOpinionOpenList);
 						handler.sendEmptyMessage(100);
 					} else {
-						message.obj = "error";
-						handler.sendEmptyMessage(APPLY_LOAD_ERROR);
+						handler.sendEmptyMessage(200);
 					}
 				} catch (NetException e) {
 					e.printStackTrace();
@@ -258,29 +340,29 @@ public class GIPMineInfoPublicPlatformFragment extends
 	 * @方法： showOpinionData
 	 */
 	private void showOpinionData() {
-		if (mOpinionOpenListAll == null) {
-			mOpinionOpenListAll = new ArrayList<MyOpinionOpenWrapper>();
-		}
 
-		if (mOpinionOpenList.size() > 0) {
-			mOpinionOpenListAll.addAll(mOpinionOpenList);
-			if (mOpinionOpenAdapter == null) {
-				mOpinionOpenAdapter = new MyOpinionOpenAdapter(context,
-						mOpinionOpenListAll);
-				opinionListView.setAdapter(mOpinionOpenAdapter);
-			} else {
-				mOpinionOpenAdapter.addListItem(mOpinionOpenListAll);
-			}
-
-			// 判断是否还有下一页
-			if (mOpinionOpenListAll.get(mOpinionOpenListAll.size()).isNext()) {
-
-			}
-
+		if (mOpinionOpenAdapter == null) {
+			mOpinionOpenAdapter = new MyOpinionOpenAdapter(context,
+					mOpinionOpenListAll);
+			opinionListView.setAdapter(mOpinionOpenAdapter);
 		} else {
-
+			mOpinionOpenAdapter.addListItem(mOpinionOpenListAll);
 		}
 
+		// 判断是否还有下一页
+		if (mOpinionOpenList.get(mOpinionOpenList.size() - 1).isNext()) {
+			opinionMoreBar.setVisibility(View.GONE);
+			opinionMoreButton.setVisibility(View.VISIBLE);
+			opinionMoreButton.setText("点击加载更多");
+		} else {
+			// applyListView.removeFooterView(loadMoreOpinion);
+			opinionMoreBar.setVisibility(View.GONE);
+			opinionMoreButton.setVisibility(View.GONE);
+		}
+
+		progressBar.setVisibility(View.GONE);
+		opinionMoreBar.setVisibility(View.GONE);
+		// mButtonSubmit.setVisibility(View.VISIBLE);
 	}
 
 	/**
@@ -352,6 +434,7 @@ public class GIPMineInfoPublicPlatformFragment extends
 			progressBar.setVisibility(View.GONE);
 		} else {
 			if (isFirstLoadApply) {
+
 				applyOpenAdapter = new MyApplyOpenAdapter(context, applyOpens);
 				isFirstLoadApply = false;
 				applyListView.setAdapter(applyOpenAdapter);
@@ -428,4 +511,5 @@ public class GIPMineInfoPublicPlatformFragment extends
 			break;
 		}
 	}
+
 }

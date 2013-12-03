@@ -1,9 +1,9 @@
 package com.wuxi.app.engine;
 
+import android.test.AndroidTestCase;
+
 import com.wuxi.app.R;
 import com.wuxi.domain.UpdateInfo;
-
-import android.test.AndroidTestCase;
 
 public class TestUpdateInfoService extends AndroidTestCase {
 

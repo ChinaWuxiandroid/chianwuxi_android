@@ -13,15 +13,15 @@ package com.wuxi.app.adapter;
 
 import java.util.List;
 
-import com.wuxi.app.R;
-import com.wuxi.domain.LeaveMessageWrapper.LeaveMessage;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.wuxi.app.R;
+import com.wuxi.domain.LeaveMessageWrapper.LeaveMessage;
 
 /**
  * @类名： LiveHomeLeaveMessageListAdapter
