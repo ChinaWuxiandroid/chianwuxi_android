@@ -42,7 +42,7 @@ import com.wuxi.exception.NetException;
 
 /**
  * @类名： GoverMsgApplyDownloadFragment
- * @描述： 政府信息公开 依申请公开 各市区依申请公开 和 各部门依申请公开  界面
+ * @描述： 政府信息公开 依申请公开 各市区依申请公开 和 各部门依申请公开 界面
  * @作者： 罗森
  * @创建时间： 2013 2013-10-10 上午9:07:40
  * @修改时间：
@@ -293,13 +293,13 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			
+
 			gover = govers.get(position);
 			viewHolder.title_text.setText(gover.getDepName());
 			viewHolder.apply_imgbtn.setOnClickListener(ApplyGoverAdapter.this);
 			viewHolder.download_imgbtn
 					.setOnClickListener(ApplyGoverAdapter.this);
-			
+
 			return convertView;
 		}
 
@@ -312,14 +312,15 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 			case R.id.govermsg_deptapply_item_guide:
 				openBrowser(gover.getZhinanUrl());
 				break;
-			
-			//申请
+
+			// 申请
 			case R.id.govermsg_deptapply_item_apply:
-				
+
 				Intent intent = new Intent();
+				intent.putExtra("doprojectid", gover.getDoProjectId());
 				intent.setClass(getActivity(), GPMApplyActivity.class);
 				MainTabActivity.instance.addView(intent);
-				
+
 				break;
 			}
 		}
@@ -396,7 +397,7 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			
+
 			applyDept = depts.get(position);
 			viewHolder.title_text.setText(depts.get(position).getDepName());
 			viewHolder.apply_imgbtn.setOnClickListener(ApplyDeptAdapter.this);
@@ -414,15 +415,15 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 			case R.id.govermsg_deptapply_item_guide:
 				openBrowser(applyDept.getZhinanUrl());
 				break;
-				
-			//申请
+
+			// 申请
 			case R.id.govermsg_deptapply_item_apply:
 
 				if (applyDept != null) {
-
 					Intent intent = new Intent();
+					intent.putExtra("doprojectid", applyDept.getDoProjectId());
 					intent.setClass(getActivity(), GPMApplyActivity.class);
-					
+
 					MainTabActivity.instance.addView(intent);
 				}
 
@@ -475,7 +476,8 @@ public class GoverMsgApplyDownloadFragment extends BaseFragment {
 					pd.show();
 
 				} else {
-					Toast.makeText(context, "SDK不存在", Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, "SDK不存在", Toast.LENGTH_SHORT)
+							.show();
 
 				}
 

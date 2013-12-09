@@ -94,9 +94,6 @@ public abstract class MenuItemMainActivity extends BaseSlideActivity implements
 		if (bundle != null) {
 			showIndex = bundle
 					.getInt(Constants.CheckPositionKey.LEVEL_TWO__KEY);// 头部选中的菜单序号
-			System.out.println("showIndex====>" + showIndex);
-			System.out.println("Constants.CheckPositionKey.LEVEL_TWO__KEY===>"
-					+ Constants.CheckPositionKey.LEVEL_TWO__KEY);
 		}
 		mtitleScrollLayout = (TitleScrollLayout) view
 				.findViewById(R.id.title_scroll_action);// 头部控件

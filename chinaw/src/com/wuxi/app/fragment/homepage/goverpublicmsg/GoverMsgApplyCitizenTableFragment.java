@@ -2,17 +2,22 @@ package com.wuxi.app.fragment.homepage.goverpublicmsg;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,6 +26,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -32,11 +40,16 @@ import android.widget.Toast;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.goverpublicmsg.GPMApplyActivity;
 import com.wuxi.app.dialog.LoginDialog;
+import com.wuxi.app.engine.QueryLetterDepService;
 import com.wuxi.app.engine.SubmitListService;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.SystemUtil;
 import com.wuxi.domain.ApplyDept;
+import com.wuxi.domain.PartLeaderMailWrapper;
+import com.wuxi.domain.PartLeaderMailWrapper.PartLeaderMail;
+import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 
 /**
@@ -47,6 +60,7 @@ import com.wuxi.exception.NetException;
  * @修改时间：
  * @修改描述：
  */
+@SuppressLint("ValidFragment")
 public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 		OnClickListener {
 
@@ -90,6 +104,16 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 		this.applyDept = applyDept;
 	}
 
+	private List<PartLeaderMail> depts = null;
+
+	private PartLeaderMailWrapper leaderMailWrapper = null;
+
+	private static String DEFAULT_DEPT_FIFTER = "无限制";
+
+	private String depId = null;
+
+	private String doprojectid = null;
+
 	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -103,9 +127,31 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 				Toast.makeText(context, "提交失败", Toast.LENGTH_SHORT).show();
 				pb.setVisibility(ProgressBar.INVISIBLE);
 				break;
+
+			case 100:
+				PartLeaderMailWrapper mailWrapper = new PartLeaderMailWrapper();
+				PartLeaderMail leaderMail = mailWrapper.new PartLeaderMail();
+				leaderMail.setDepid("0");
+				leaderMail.setDepname(DEFAULT_DEPT_FIFTER);
+				depts.add(0, leaderMail);
+				DeptAdapter partment_Spinner_adapter = new DeptAdapter();
+				solveByDept.setAdapter(partment_Spinner_adapter);
+				break;
+
+			case 200:
+
+				break;
+
+			case 300:
+				break;
+
 			}
 		}
 	};
+
+	public GoverMsgApplyCitizenTableFragment(String doprojectid) {
+		this.doprojectid = doprojectid;
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -188,13 +234,129 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 				}
 			});
 
-			// solveByDept.setText(applyDept.getDepName());
+			// 获取部门
+			loadDeptData();
+
+			solveByDept.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+				@Override
+				public void onItemSelected(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					depId = depts.get(arg2).getDepid().toString();
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {
+
+				}
+			});
 
 			// 必选项-----------------------------------------------------------
 			submit_ibtn.setOnClickListener(this);
 			cancel_ibtn.setOnClickListener(this);
 		}
 
+	}
+
+	/**
+	 * @类名： DeptAdapter
+	 * @描述： 受理部门及答复部门下拉列表适配器
+	 * @作者： 罗森
+	 * @创建时间： 2013-8-27 上午9:27:35
+	 * @修改时间：
+	 * @修改描述：
+	 * 
+	 */
+	public class DeptAdapter extends BaseAdapter {
+
+		@Override
+		public int getCount() {
+			return depts.size();
+		}
+
+		@Override
+		public Object getItem(int position) {
+			return depts.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		/**
+		 * @类名： ViewHolder
+		 * @描述： 下拉列表布局
+		 * @作者： 罗森
+		 * @创建时间： 2013 2013-8-27 上午9:28:24
+		 * @修改时间：
+		 * @修改描述：
+		 * 
+		 */
+		public class ViewHolder {
+			TextView tv_dept;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			PartLeaderMail dept = depts.get(position);
+			ViewHolder viewHolder = null;
+
+			if (convertView == null) {
+				// 加载下拉列表布局文件
+				convertView = View.inflate(context,
+						R.layout.comstuom_spinner_item_layout, null);
+				viewHolder = new ViewHolder();
+				TextView tv = (TextView) convertView.findViewById(R.id.sp_tv);
+				viewHolder.tv_dept = tv;
+				convertView.setTag(viewHolder);
+			} else {
+				viewHolder = (ViewHolder) convertView.getTag();
+			}
+
+			viewHolder.tv_dept.setTextColor(Color.BLACK);
+			viewHolder.tv_dept.setTextSize(12);
+			viewHolder.tv_dept.setText(dept.getDepname());
+
+			return convertView;
+		}
+
+	}
+
+	/**
+	 * @方法： loadDeptData
+	 * @描述： 加载受理部门和答复部门数据
+	 */
+	private void loadDeptData() {
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				Message msg = handler.obtainMessage();
+				QueryLetterDepService depService = new QueryLetterDepService(
+						context);
+				try {
+					leaderMailWrapper = depService.getPartLeaderMailWrapper();
+
+					if (leaderMailWrapper != null) {
+						depts = leaderMailWrapper.getPartLeaderMails();
+						handler.sendEmptyMessage(100);
+					} else {
+						// handler.sendEmptyMessage(200);
+						Toast.makeText(context, "没有获取到部门数据", Toast.LENGTH_SHORT)
+								.show();
+					}
+					handler.sendMessage(msg);
+				} catch (NetException e) {
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				} catch (NODataException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
 	}
 
 	@Override
@@ -291,11 +453,49 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 					SubmitListService submitListService = new SubmitListService(
 							context);
 					try {
-						submitListService.submitByUrl(getUrl(
-								Constants.Urls.CITIZEN_APPLY_SUBMIT_URL,
-								SystemUtil.getAccessToken(context),
-								applyDept.getDoProjectId(),
-								applyDept.getDepId()));
+
+						List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+						pairs.add(new BasicNameValuePair("access_token",
+								SystemUtil.getAccessToken(context)));
+						pairs.add(new BasicNameValuePair("doprojectid",
+								doprojectid));
+						pairs.add(new BasicNameValuePair("depid", depId));
+						pairs.add(new BasicNameValuePair("username", name));
+						pairs.add(new BasicNameValuePair("workunit", workadd));
+						pairs.add(new BasicNameValuePair("certificatetype",
+								papername));
+						pairs.add(new BasicNameValuePair("certificateno",
+								papernum));
+						pairs.add(new BasicNameValuePair("address", address));
+						pairs.add(new BasicNameValuePair("postalcode", postcode));
+						pairs.add(new BasicNameValuePair("tel", phone));
+						pairs.add(new BasicNameValuePair("fax", fax));
+						pairs.add(new BasicNameValuePair("email", email));
+						pairs.add(new BasicNameValuePair("content", describe));
+						pairs.add(new BasicNameValuePair("title", use));
+						String offertype = null;
+						for (int i = 0; i < list1.size(); i++) {
+							if (i == 0) {
+								offertype += list1.get(i);
+							} else {
+								offertype += "/" + list1.get(i);
+							}
+						}
+						pairs.add(new BasicNameValuePair("offertype", offertype));
+						String getinfotype = null;
+						for (int i = 0; i < list2.size(); i++) {
+							if (i == 0) {
+								getinfotype += list2.get(i);
+							} else {
+								getinfotype += "/" + list2.get(i);
+							}
+						}
+						pairs.add(new BasicNameValuePair("getinfotype",
+								getinfotype));
+
+						submitListService.submitByUrlPost(
+								Constants.Urls.CITIZEN_APPLY_SUBMIT_URL, pairs);
+
 						handler.sendEmptyMessage(SUBMIT_SUCCESS);
 
 					} catch (NetException e) {
@@ -311,20 +511,28 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 	}
 
 	// 获取提交公民在线申请 的url
-	private String getUrl(String urlhead, String access_token,
-			String doProjectId, String depid) {
-		String url = urlhead + "?access_token=" + access_token
-				+ "&doprojectid=" + doProjectId + "&depid=" + depid;
-		url = url + "&username=" + name + "&workunit=" + workadd
-				+ "&certificatetype=" + papername + "&certificateno="
-				+ papernum + "&address=" + address + "&postalcode=" + postcode
-				+ "&tel=" + phone + "&fax=" + fax + "&email=" + email
-				+ "&content=" + describe + "&title=" + use;
-		url = url + "&offertype=" + check_paper + "/" + check_mail + "/"
-				+ check_dis;
-		url = url + "&getinfotype=" + check_post + "/" + check_express;
-		return url;
-	}
+	// private String getUrl(String urlhead, String access_token,
+	// String doProjectId, String depid) {
+	//
+	// String url = urlhead + "?access_token=" + access_token
+	// + "&doprojectid=" + doProjectId + "&depid=" + depid;
+	//
+	// url = url + "&username=" + name + "&workunit=" + workadd
+	// + "&certificatetype=" + papername + "&certificateno="
+	// + papernum + "&address=" + address + "&postalcode=" + postcode
+	// + "&tel=" + phone + "&fax=" + fax + "&email=" + email
+	// + "&content=" + describe + "&title=" + use;
+	//
+	// url = url + "&offertype=" + check_paper + "/" + check_mail + "/"
+	// + check_dis;
+	//
+	// url = url + "&getinfotype=" + check_post + "/" + check_express;
+	//
+	// return url;
+	// }
+
+	ArrayList<String> list1 = new ArrayList<String>();
+	ArrayList<String> list2 = new ArrayList<String>();
 
 	/**
 	 * @方法： getCheckBoxResult
@@ -333,18 +541,23 @@ public class GoverMsgApplyCitizenTableFragment extends BaseFragment implements
 	private void getCheckBoxResult() {
 		if (paper_ckBox.isChecked()) {
 			check_paper = "纸面";
+			list1.add(check_paper);
 		}
 		if (mail_ckBox.isChecked()) {
 			check_mail = "电子邮件";
+			list1.add(check_mail);
 		}
 		if (dis_ckBox.isChecked()) {
 			check_dis = "光盘";
+			list1.add(check_dis);
 		}
 		if (post_ckBox.isChecked()) {
 			check_post = "邮寄";
+			list2.add(check_post);
 		}
 		if (express_ckBox.isChecked()) {
 			check_express = "快递";
+			list2.add(check_express);
 		}
 	}
 

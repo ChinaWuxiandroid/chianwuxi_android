@@ -15,7 +15,8 @@ import com.wuxi.exception.NetException;
 
 /**
  * 依申请展开 回复部门 业务类
- *@author 杨宸 智佳  
+ * 
+ * @author 杨宸 智佳
  * */
 
 public class ApplyDeptService extends Service {
@@ -24,12 +25,13 @@ public class ApplyDeptService extends Service {
 		super(context);
 	}
 
-	public List<ApplyDept> getDepts(String url) throws NetException, JSONException {
+	public List<ApplyDept> getDepts(String url) throws NetException,
+			JSONException {
 
 		if (!checkNet()) {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
-	
+
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (null != resultStr) {
