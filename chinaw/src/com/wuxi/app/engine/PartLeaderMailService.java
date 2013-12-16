@@ -10,13 +10,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.PartLeaderMailWrapper;
 import com.wuxi.domain.PartLeaderMailWrapper.PartLeaderMail;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
-
-import android.content.Context;
 
 /**
  * 政民互动 12345来信办理平台 部门领导信箱 各部门领导信箱业务类

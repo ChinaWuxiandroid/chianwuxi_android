@@ -58,6 +58,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/worksuggestbox_edit_small_bk"
                 android:gravity="center_vertical"
+                android:inputType="phone"
                 android:paddingLeft="3dp" />
         </LinearLayout>
 
@@ -84,6 +85,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/worksuggestbox_edit_small_bk"
                 android:gravity="center_vertical"
+                android:inputType="textEmailAddress"
                 android:paddingLeft="3dp" />
         </LinearLayout>
 
@@ -146,7 +148,7 @@
         android:id="@+id/gip_publicsupervise_pb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        android:visibility="invisible" />
 
 </RelativeLayout>

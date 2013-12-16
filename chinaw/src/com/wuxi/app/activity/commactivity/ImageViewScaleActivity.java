@@ -1,14 +1,14 @@
 package com.wuxi.app.activity.commactivity;
 
-import com.polites.android.GestureImageView;
-import com.wuxi.app.MainTabActivity;
-import com.wuxi.app.R;
-
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Window;
+
+import com.polites.android.GestureImageView;
+import com.wuxi.app.MainTabActivity;
+import com.wuxi.app.R;
 
 /**
  * 

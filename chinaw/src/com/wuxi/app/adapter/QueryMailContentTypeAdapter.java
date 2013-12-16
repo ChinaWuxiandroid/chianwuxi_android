@@ -13,17 +13,17 @@ package com.wuxi.app.adapter;
 
 import java.util.List;
 
-import com.wuxi.app.R;
-import com.wuxi.domain.QueryMailContentTypeWrapper.QueryMailContentType;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.wuxi.app.R;
+import com.wuxi.domain.QueryMailContentTypeWrapper.QueryMailContentType;
 
 /**
  * @类名： QueryMailContentTypeAdapter

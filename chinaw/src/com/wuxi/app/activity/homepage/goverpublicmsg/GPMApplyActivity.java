@@ -11,13 +11,6 @@
  */
 package com.wuxi.app.activity.homepage.goverpublicmsg;
 
-import com.wuxi.app.BaseFragment;
-import com.wuxi.app.MainTabActivity;
-import com.wuxi.app.R;
-import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyCitizenTableFragment;
-import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyLePersonTableFragment;
-import com.wuxi.domain.ApplyDept;
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -27,6 +20,13 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import com.wuxi.app.BaseFragment;
+import com.wuxi.app.MainTabActivity;
+import com.wuxi.app.R;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyCitizenTableFragment;
+import com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyLePersonTableFragment;
+import com.wuxi.domain.ApplyDept;
 
 /**
  * @类名： GPMApplyActivity
@@ -47,10 +47,13 @@ public class GPMApplyActivity extends FragmentActivity {
 
 	private ApplyDept applyDept;
 
+	private String doprojectid = null;
+
 	/**
 	 * @return applyDept
 	 */
 	public ApplyDept getApplyDept() {
+
 		return applyDept;
 	}
 
@@ -59,6 +62,7 @@ public class GPMApplyActivity extends FragmentActivity {
 	 *            要设置的 applyDept
 	 */
 	public void setApplyDept(ApplyDept applyDept) {
+
 		this.applyDept = applyDept;
 	}
 
@@ -69,6 +73,8 @@ public class GPMApplyActivity extends FragmentActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		this.setContentView(R.layout.gpm_apply_layout);
+
+		doprojectid = getIntent().getStringExtra("doprojectid");
 
 		initLayout();
 
@@ -148,13 +154,15 @@ public class GPMApplyActivity extends FragmentActivity {
 		switch (type) {
 		// 公民申请界面
 		case 0:
-			GoverMsgApplyCitizenTableFragment applyCitizenTableFragment = new GoverMsgApplyCitizenTableFragment();
+			GoverMsgApplyCitizenTableFragment applyCitizenTableFragment = new GoverMsgApplyCitizenTableFragment(
+					doprojectid);
 			bindFragmnet(applyCitizenTableFragment);
 			break;
 
 		// 法人申请界面
 		case 1:
-			GoverMsgApplyLePersonTableFragment applyLePersonTableFragment = new GoverMsgApplyLePersonTableFragment();
+			GoverMsgApplyLePersonTableFragment applyLePersonTableFragment = new GoverMsgApplyLePersonTableFragment(
+					doprojectid);
 			bindFragmnet(applyLePersonTableFragment);
 			break;
 		}

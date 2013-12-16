@@ -6,9 +6,13 @@ package com.wuxi.app.fragment.homepage.mygoverinteractpeople;
 import java.util.List;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Gravity;
@@ -29,6 +33,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.PopWindowManager;
 import com.wuxi.app.R;
 import com.wuxi.app.adapter.LiveHomeLeaveMessageListAdapter;
@@ -38,6 +43,8 @@ import com.wuxi.app.engine.LeaveMessageService;
 import com.wuxi.app.engine.MemoirService;
 import com.wuxi.app.engine.VideoSubmitIdeaService;
 import com.wuxi.app.fragment.commonfragment.RadioButtonChangeFragment;
+import com.wuxi.app.net.HttpUtils;
+import com.wuxi.app.net.NetworkUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.LogUtil;
 import com.wuxi.app.util.SystemUtil;
@@ -169,6 +176,16 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 	private ProgressBar pb_loadmoore;
 	private ProgressBar pb_load;
 
+	private boolean isMore = false;
+
+	private boolean isMoreLeave = false;
+
+	private int isFalg = 0;
+
+	private int isShowMore = 0;
+
+	private boolean isInit = false;
+
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			String tip = "";
@@ -224,6 +241,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 		initLayout();
 		initMessageLayout();
 		initMemoirLayout();
+		loadVideoInfo();
 	}
 
 	/**
@@ -233,6 +251,16 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 		switch (type) {
 		case 0:
 			init();
+			if (!isFirstLoadMessage || !isFirstLoad) {
+				if (isFirstLoadMessage) {
+					messageListView.removeFooterView(loadMoreMessageView);
+				}
+				if (isFirstLoad) {
+					mListView.removeFooterView(loadMoreView);
+				}
+			}
+			isInit = true;
+			isShowMore = 0;
 			home_saybtn.setVisibility(View.GONE);
 			home_askbtn.setVisibility(View.GONE);
 			liveLayout.setVisibility(View.VISIBLE);
@@ -241,7 +269,23 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 			break;
 
 		case 1:
-			loadFirstMessageData(START, MESSAGE_PAGE_NUM);
+			if (isFirstLoadMessage) {
+				loadFirstMessageData(START, MESSAGE_PAGE_NUM);
+			} else {
+				if (isShowMore == 0) {
+					messageListView.removeFooterView(loadMoreMessageView);
+				}
+				mListView.removeFooterView(loadMoreView);
+			}
+			isFalg += 1;
+			if (isFalg == 2) {
+				isShowMore = 1;
+			} else {
+				if (isInit) {
+					isShowMore = 0;
+				}
+			}
+			isInit = false;
 			home_saybtn.setVisibility(View.GONE);
 			home_askbtn.setVisibility(View.GONE);
 			liveLayout.setVisibility(View.GONE);
@@ -250,7 +294,23 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 			break;
 
 		case 2:
-			loadFirstData(startIndex, PAGE_NUM);
+			if (isFirstLoad) {
+				loadFirstData(startIndex, PAGE_NUM);
+			} else {
+				if (isShowMore == 0) {
+					mListView.removeFooterView(loadMoreView);
+				}
+				messageListView.removeFooterView(loadMoreMessageView);
+			}
+			isFalg += 1;
+			if (isFalg == 2) {
+				isShowMore = 2;
+			} else {
+				if (isInit) {
+					isShowMore = 0;
+				}
+			}
+			isInit = false;
 			home_saybtn.setVisibility(View.VISIBLE);
 			home_askbtn.setVisibility(View.VISIBLE);
 			liveLayout.setVisibility(View.GONE);
@@ -502,8 +562,9 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "正在完善该功能...", Toast.LENGTH_SHORT)
-						.show();
+				Intent intent = new Intent(getActivity(),
+						PromoMoreVideoActivity.class);
+				MainTabActivity.instance.addView(intent);
 				advance_moreTextView.setTextColor(Color.BLUE);
 			}
 		});
@@ -521,11 +582,107 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "正在完善该功能...", Toast.LENGTH_SHORT)
-						.show();
+				new getVideoPlayer().execute();
 				live_watchTextView.setTextColor(Color.BLUE);
 			}
 		});
+	}
+
+	private class getVideoPlayer extends AsyncTask<String, Integer, String> {
+
+		@Override
+		protected String doInBackground(String... params) {
+
+			String url = Constants.Urls.DOMAIN_URL
+					+ "/api/interview/32480e19-76b8-45d9-b7d1-a6c54933f9f7/video.json";
+
+			NetworkUtil mUtil = NetworkUtil.getInstance();
+			String data = null;
+			if (mUtil.isConnet(context)) {
+				HttpUtils mHttpUtils = HttpUtils.getInstance();
+				data = mHttpUtils.executeGetToString(url, 5000);
+			} else {
+				Toast.makeText(context, "连接网络失败", Toast.LENGTH_SHORT).show();
+			}
+			return data;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			if (result.length() > 5) {
+				try {
+					JSONObject object = new JSONObject(result);
+					String url = object.getString("result");
+					if (url.length() > 5) {
+						boadcastVoide(url);
+						// Intent intent = new Intent();
+						// intent.setClass(getActivity(),
+						// PromoVideoPlayerActivity.class);
+						// intent.putExtra("videoUrl", url);
+						// startActivity(intent);
+					} else {
+						Toast.makeText(context, "暂无视频", Toast.LENGTH_SHORT)
+								.show();
+					}
+				} catch (Exception e) {
+					Toast.makeText(context, "解析数据失败", Toast.LENGTH_SHORT)
+							.show();
+				}
+			} else {
+				Toast.makeText(context, "获取数据失败", Toast.LENGTH_SHORT).show();
+			}
+		}
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+		}
+	}
+
+	/**
+	 * 播放视频
+	 * 
+	 * @方法： boadcastVoide
+	 */
+	private void boadcastVoide(String path) {
+		Intent it = new Intent();
+		it.setAction(Intent.ACTION_VIEW);
+		it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		Uri uri = Uri.parse(path);
+		it.setType("video/mp4");
+		it.setDataAndType(uri, "video/mp4");
+		startActivity(it);
+	}
+
+	/**
+	 * 
+	 * 获取数据--节目预告
+	 * 
+	 * @方法： load
+	 * @描述： TODO
+	 */
+	private void loadVideoInfo() {
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				Message message = handler.obtainMessage();
+				LeaveMessageService messageService = new LeaveMessageService(
+						context);
+				try {
+					messageService.getVideoPreview(0, 10);
+				} catch (NetException e) {
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				} catch (NODataException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+
 	}
 
 	/**
@@ -561,7 +718,6 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 							"32480e19-76b8-45d9-b7d1-a6c54933f9f7", startIndex,
 							endIndex);
 					if (messageWrapper != null) {
-
 						handler.sendEmptyMessage(MESSAGE_LOAD_SUCESS);
 					} else {
 						message.obj = "error";
@@ -620,6 +776,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 	 * 显示列表数据
 	 */
 	private void showLeaveMessageList() {
+
 		leaveMessages = messageWrapper.getLeaveMessages();
 
 		if (leaveMessages == null || leaveMessages.size() == 0) {
@@ -636,12 +793,13 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 			} else {
 				if (isSwitchMessage) {
 					messageAdapter.setLeaveMessages(leaveMessages);
-					pb_load.setVisibility(View.GONE);
 				} else {
 					for (LeaveMessage leaveMessage : leaveMessages) {
 						messageAdapter.addItem(leaveMessage);
 					}
 				}
+
+				pb_load.setVisibility(View.GONE);
 
 				messageAdapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
 				messageListView.setSelection(messagevisibleLastIndex
@@ -650,20 +808,36 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 			}
 		}
 
-		if (messageWrapper.isNext()) {
-			// if (messageListView.getFooterViewsCount() != 0) {
-			pb_load.setVisibility(ProgressBar.GONE);
-			loadMoreMessageButton.setText("点击加载更多");
-			// } else {
-			// messageListView.addFooterView(getMessageListFootView());
-			// }
+		isMore = messageWrapper.isNext();
 
+		if (!isFirstLoadMessage) {
+			if (leaveMessages != null && leaveMessages.size() > 0
+					&& messageWrapper.isNext()) {
+				// if (messageListView.getFooterViewsCount() != 0) {
+				if (isMore) {
+					// messageListView.removeFooterView(loadMoreMessageView);
+					pb_load.setVisibility(ProgressBar.GONE);
+					loadMoreMessageButton.setText("点击加载更多");
+				}
+				// } else {
+				// messageListView.addFooterView(getMessageListFootView());
+				// }
+
+			} else {
+				if (messageAdapter != null) {
+					messageListView.removeFooterView(loadMoreMessageView);
+				}
+
+			}
 		} else {
-			if (messageAdapter != null) {
+			if (isMore) {
+				pb_load.setVisibility(ProgressBar.GONE);
+				loadMoreMessageButton.setText("点击加载更多");
+			} else {
 				messageListView.removeFooterView(loadMoreMessageView);
 			}
-
 		}
+
 	}
 
 	/**
@@ -700,6 +874,8 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+
+		// 加载更多访谈实录
 		case R.id.loadMoreButton:
 			if (messageWrapper != null && messageWrapper.isNext()) {// 还有下一条记录
 				isSwitchMessage = false;
@@ -708,6 +884,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 			}
 			break;
 
+		// 留言提问
 		case R.id.loadapply_MoreButton:
 			if (memoirWrapper != null && memoirWrapper.isNext()) {// 还有下一条记录
 				isSwitch = false;
@@ -796,6 +973,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 	 * 显示实录列表
 	 */
 	private void showMemoirList() {
+
 		memoirs = memoirWrapper.getMemoirs();
 		if (memoirs == null || memoirs.size() == 0) {
 			Toast.makeText(context, "对不起，暂无访谈实录信息", Toast.LENGTH_SHORT).show();
@@ -816,6 +994,7 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 					}
 				}
 
+				pb_load.setVisibility(View.GONE);
 				adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
 				mListView.setSelection(visibleLastIndex
 						- memoirvisibleItemCount + 1); // 设置选中项
@@ -823,15 +1002,31 @@ public class GoverInterPeopleVideoLiveHomeFragment extends
 			}
 		}
 
-		if (memoirWrapper.isNext()) {
-			pb_loadmoore.setVisibility(ProgressBar.GONE);
-			loadMoreButton.setText("点击加载更多");
-		} else {
-			if (adapter != null) {
+		isMoreLeave = memoirWrapper.isNext();
+
+		// if (memoirWrapper.isNext()) {
+
+		if (!isFirstLoad) {
+			if (isMoreLeave) {
+
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+				loadMoreButton.setText("点击加载更多");
+			} else {
 				mListView.removeFooterView(loadMoreView);
 			}
-
+		} else {
+			if (isMoreLeave) {
+				pb_loadmoore.setVisibility(ProgressBar.GONE);
+				loadMoreButton.setText("点击加载更多");
+			} else {
+				mListView.removeFooterView(loadMoreView);
+			}
 		}
+		// } else {
+		// if (adapter != null) {
+		// mListView.removeFooterView(loadMoreView);
+		// }
+		// }
 	}
 
 	/**

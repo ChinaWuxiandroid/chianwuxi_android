@@ -15,15 +15,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
@@ -46,25 +46,24 @@ import com.wuxi.exception.NetException;
 
 public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 		InitializContentLayoutListner, OnClickListener, Serializable {
-	
+
 	/**
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private View view;
 	private LayoutInflater mInflater;
 	private MenuItem parentItem;
 	private List<MenuItem> titleMenuItems;
 	private List<Channel> titleChannels;
 	private Context context;
-	
+
 	private GoverMenuItemTitleFragment titleFragment;
-	
-	
 
 	/**
-	 * @param titleFragment 要设置的  titleFragment 
+	 * @param titleFragment
+	 *            要设置的 titleFragment
 	 */
 	public void setTitleFragment(GoverMenuItemTitleFragment titleFragment) {
 		this.titleFragment = titleFragment;
@@ -73,7 +72,7 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 	private static final int MENUITEM_TITLEDATA__LOAD_SUCESS = 0;
 	private static final int CHANNEL_TITLEDATA__LOAD_SUCESS = 1;
 	private static final int TITLEDATA_LOAD_ERROR = 2;
-	
+
 	private static final int RIGHT_CONTENT_ID = R.id.gip_menuitem_content_fragmentlayout;
 
 	private ProgressBar titlePb;
@@ -154,9 +153,8 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 					titleMenuItems = menuSevice.getSubMenuItems(parentItem
 							.getId());
 					if (titleMenuItems != null) {
-						
 						handler.sendEmptyMessage(MENUITEM_TITLEDATA__LOAD_SUCESS);
-						
+
 					} else {
 						Message msg = handler.obtainMessage();
 						msg.obj = "暂无信息";
@@ -194,9 +192,9 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 		if (bundle != null) {
 			checkPoint = bundle
 					.getInt(Constants.CheckPositionKey.LEVEL_THREE_KEY);
-			
-			bundle.putInt(Constants.CheckPositionKey.LEVEL_THREE_KEY,key);//回复现场
-			getActivity().getIntent().putExtras(bundle);//回复现场
+
+			bundle.putInt(Constants.CheckPositionKey.LEVEL_THREE_KEY, key);// 回复现场
+			getActivity().getIntent().putExtras(bundle);// 回复现场
 		}
 		Titles_gridView = (GridView) view
 				.findViewById(R.id.gip_menuitem_gridview_title);
@@ -233,9 +231,9 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 					titleChannels = channelService.getSubChannels(parentItem
 							.getChannelId());
 					if (titleChannels != null) {
-						
+
 						handler.sendEmptyMessage(CHANNEL_TITLEDATA__LOAD_SUCESS);
-						
+
 					}
 				} catch (NetException e) {
 					e.printStackTrace();
@@ -255,8 +253,8 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 		if (bundle != null) {
 			checkPoint = bundle
 					.getInt(Constants.CheckPositionKey.LEVEL_THREE_KEY);
-			bundle.putInt(Constants.CheckPositionKey.LEVEL_THREE_KEY, 0);//回复现场
-			getActivity().getIntent().putExtras(bundle);//回复现场
+			bundle.putInt(Constants.CheckPositionKey.LEVEL_THREE_KEY, 0);// 回复现场
+			getActivity().getIntent().putExtras(bundle);// 回复现场
 		}
 		Titles_gridView = (GridView) view
 				.findViewById(R.id.gip_menuitem_gridview_title);
@@ -303,7 +301,7 @@ public abstract class GoverMenuItemTitleFragment extends BaseFragment implements
 	 * @描述： 适配器
 	 * @作者： 罗森
 	 * @创建时间： 2013 2013-10-11 下午5:12:20
-	 * @修改时间： 
+	 * @修改时间：
 	 * @修改描述：
 	 */
 	private class GridViewAdaptger extends BaseAdapter {

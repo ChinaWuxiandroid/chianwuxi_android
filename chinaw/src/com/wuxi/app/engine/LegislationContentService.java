@@ -10,6 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.TimeFormateUtil;
 import com.wuxi.domain.NoticePostWrapper;
@@ -17,8 +19,6 @@ import com.wuxi.domain.NoticePostWrapper.NoticePostReplyWrapper;
 import com.wuxi.domain.NoticePostWrapper.NoticePostReplyWrapper.NoticePostReply;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
-
-import android.content.Context;
 
 /**
  * 政民互动 征求意见平台 立法征求意见详情内容 业务类

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/gip_mine_publicforum_list_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="3dp"
+        android:text="锡沪路新车站路段车辆违停载客，秩序太乱，如何魅力无锡？" />
+
+    <TextView
+        android:id="@+id/gip_mine_publicforum_createTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="3dp"
+        android:text="发布时间" />
+
+    <TextView
+        android:id="@+id/gip_mine_publicforum_list_updateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="3dp"
+        android:text="修改时间" />
+
+    <!-- <LinearLayout -->
+    <!-- android:layout_width="fill_parent" -->
+    <!-- android:layout_height="45dp" > -->
+
+
+    <!-- <RadioGroup -->
+    <!-- android:id="@+id/gip_mine_publicforum_radioGroup" -->
+    <!-- android:layout_width="0dp" -->
+    <!-- android:layout_height="match_parent" -->
+    <!-- android:layout_marginBottom="5dp" -->
+    <!-- android:layout_marginTop="5dp" -->
+    <!-- android:layout_weight="2" -->
+    <!-- android:orientation="horizontal" > -->
+
+
+    <!-- <RadioButton -->
+    <!-- android:id="@+id/gip_mine_publicforum_radioButton_myTheme" -->
+    <!-- style="@style/goverinterpeople_mine_radiobutton_style" -->
+    <!-- android:layout_marginLeft="10dp" -->
+    <!-- android:layout_marginRight="10dp" -->
+    <!-- android:layout_weight="1" -->
+    <!-- android:background="@drawable/gip_button_selected_bk" -->
+    <!-- android:paddingLeft="5dp" -->
+    <!-- android:paddingRight="5dp" -->
+    <!-- android:text="我的       主题" -->
+    <!-- android:textColor="@android:color/white" -->
+    <!-- android:textSize="12sp" /> -->
+
+
+    <!-- <RadioButton -->
+    <!-- android:id="@+id/gip_mine_publicforum_radioButton_themeTJoin" -->
+    <!-- style="@style/goverinterpeople_mine_radiobutton_style" -->
+    <!-- android:layout_marginLeft="10dp" -->
+    <!-- android:layout_marginRight="10dp" -->
+    <!-- android:layout_weight="1" -->
+    <!-- android:paddingLeft="5dp" -->
+    <!-- android:paddingRight="5dp" -->
+    <!-- android:text="我参与的 主题" -->
+    <!-- android:textColor="@color/gip_second_frame_button_brown" -->
+    <!-- android:textSize="12sp" /> -->
+
+
+    <!-- <RadioButton -->
+    <!-- android:id="@+id/gip_mine_publicforum_radioButton_collectTheme" -->
+    <!-- style="@style/goverinterpeople_mine_radiobutton_style" -->
+    <!-- android:layout_marginLeft="10dp" -->
+    <!-- android:layout_marginRight="10dp" -->
+    <!-- android:layout_weight="1" -->
+    <!-- android:paddingLeft="5dp" -->
+    <!-- android:paddingRight="5dp" -->
+    <!-- android:text="我收藏的主题" -->
+    <!-- android:textColor="@color/gip_second_frame_button_brown" -->
+    <!-- android:textSize="12sp" /> -->
+
+
+    <!-- <RadioButton -->
+    <!-- android:id="@+id/gip_mine_radioButton_suggestionPlatform" -->
+    <!-- style="@style/goverinterpeople_mine_radiobutton_style" -->
+    <!-- android:layout_marginLeft="10dp" -->
+    <!-- android:layout_marginRight="10dp" -->
+    <!-- android:layout_weight="1" -->
+    <!-- android:paddingLeft="5dp" -->
+    <!-- android:paddingRight="5dp" -->
+    <!-- android:text="我参与的热点" -->
+    <!-- android:textColor="@color/gip_second_frame_button_brown" -->
+    <!-- android:textSize="12sp" /> -->
+    <!-- </RadioGroup> -->
+    <!-- </LinearLayout> -->
+
+
+    <!-- <LinearLayout -->
+    <!-- android:layout_width="match_parent" -->
+    <!-- android:layout_height="match_parent" > -->
+
+
+    <!-- <ListView -->
+    <!-- android:id="@+id/goverinterpeople_mine_12345_listview" -->
+    <!-- android:layout_width="match_parent" -->
+    <!-- android:layout_height="match_parent" -->
+    <!-- android:cacheColorHint="@android:color/transparent" > -->
+    <!-- </ListView> -->
+    <!-- </LinearLayout> -->
+
+</LinearLayout>

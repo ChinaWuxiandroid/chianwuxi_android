@@ -13,19 +13,19 @@ package com.wuxi.app.adapter;
 
 import java.util.List;
 
-import com.wuxi.app.R;
-import com.wuxi.domain.ForumWrapper.Forum;
-import com.wuxi.domain.HotPostWrapper.HotPostReplyWrapper.HotPostReply;
-import com.wuxi.domain.NoticePostWrapper.NoticePostReplyWrapper.NoticePostReply;
-import com.wuxi.domain.OpinionPostWrapper.OpinionPostReplyWrapper.OpinionPostReply;
-import com.wuxi.domain.OrdinaryPostWrapper.OrdinaryPostRaplyWrapper.OrdinaryPostRaply;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.wuxi.app.R;
+import com.wuxi.domain.ForumWrapper.Forum;
+import com.wuxi.domain.HotPostWrapper.HotPostReplyWrapper.HotPostReply;
+import com.wuxi.domain.NoticePostWrapper.NoticePostReplyWrapper.NoticePostReply;
+import com.wuxi.domain.OpinionPostWrapper.OpinionPostReplyWrapper.OpinionPostReply;
+import com.wuxi.domain.OrdinaryPostWrapper.OrdinaryPostRaplyWrapper.OrdinaryPostRaply;
 
 /**
  * @类名： OrdinaryReplayListAdapter

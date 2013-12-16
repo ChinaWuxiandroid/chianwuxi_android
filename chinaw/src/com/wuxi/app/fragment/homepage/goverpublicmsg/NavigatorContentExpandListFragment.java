@@ -1,9 +1,11 @@
 package com.wuxi.app.fragment.homepage.goverpublicmsg;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,14 +16,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -77,6 +79,7 @@ import com.wuxi.exception.NetException;
  * @author 杨宸 智佳
  * */
 
+@SuppressLint("HandlerLeak")
 public class NavigatorContentExpandListFragment extends BaseFragment implements
 		OnClickListener {
 
@@ -205,6 +208,16 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 			"2010", "2009" };
 	private List<Dept> deptList;
 
+	// 加载更多
+	private ProgressBar moreProgressBar;
+	private Button mButtonLoadMore;
+	private View loadListMoreView;
+	private int moreIndex = 10;
+	private boolean isFirstLoad = true;
+	private ProgressBar morePrBar;
+	private Button mBLoadMore;
+	private View loadListViewMoreView;
+
 	/**
 	 * @return type
 	 */
@@ -286,11 +299,12 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 				break;
 
 			case XZ_SEARCH_DEPT_SUCESS:
-				showDept();
+				showXZDept();
 				break;
 
 			case XZ_SEARCH_DEPT_FAILED:
-				Toast.makeText(context, "加载部门数据失败！", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "加载行政事项部门数据失败！", Toast.LENGTH_SHORT)
+						.show();
 				break;
 			}
 		};
@@ -308,9 +322,14 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		mInflater = inflater;
 		context = getActivity();
 		initUI();
+		getFootListView();
 		initSubLayoutUI();
 		initXingzhengLayout();
 		initSearchLayout();
+
+		// govermsg_detail_lv_channel.addFooterView(getFootListView());
+		// govermsg_detail_lv_channel.removeFooterView(loadListMoreView);
+
 		return view;
 	}
 
@@ -330,6 +349,9 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View arg1,
 					int position, long arg3) {
+
+				System.out.println("列表的点击");
+
 				Object object = (Object) adapterView
 						.getItemAtPosition(position);
 
@@ -342,9 +364,11 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 				}
 
 				if (menuItem != null) {
+					System.out.println("是否为空");
 					setParentMenuItem(menuItem);
 
 					if (getType() == 5) {
+						System.out.println("===========5==========");
 						channleFrameLayout.setVisibility(View.GONE);
 						titleLayout.setVisibility(View.VISIBLE);
 						xingzhengsearchLayout.setVisibility(View.VISIBLE);
@@ -363,6 +387,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 						isSwitchXZ = true;
 						loadXingzhengData(0, PAGE_NUM);
 					} else {
+						System.out.println("读取四");
 						channleFrameLayout.setVisibility(View.GONE);
 						subProgressBar.setVisibility(View.VISIBLE);
 						titleLayout.setVisibility(View.VISIBLE);
@@ -384,6 +409,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 					xingzhengsearchLayout.setVisibility(View.GONE);
 
 					isSwitchgg = true;
+					System.out.println("读取333333333");
 					loadChannelData(0, PAGE_NUM);
 				}
 
@@ -397,11 +423,57 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 
 		processBar.setVisibility(View.VISIBLE);
 		if (parentItem.getType() == MenuItem.CUSTOM_MENU) {
+			System.out.println("读取1111111111111");
 			loadMenuItemData();
 		} else if (parentItem.getType() == MenuItem.CHANNEL_MENU) {
+			System.out.println("读取2222222222222");
 			loadChannelData();
 		}
 
+		loadListMoreView = View.inflate(context, R.layout.list_loadmore_layout,
+				null);
+		moreProgressBar = (ProgressBar) loadListMoreView
+				.findViewById(R.id.pb_loadmoore);
+		mButtonLoadMore = (Button) loadListMoreView
+				.findViewById(R.id.loadMoreButton);
+		mButtonLoadMore.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (contentWrapper.isNext()) {
+					mButtonLoadMore.setText("loading.....");
+					moreProgressBar.setVisibility(View.VISIBLE);
+					loadMoreData();
+				}
+			}
+		});
+
+		getFootListView();
+	}
+
+	private View getFootListView() {
+		System.out.println("初始化控件");
+		loadListViewMoreView = View.inflate(context,
+				R.layout.list_loadmore_layout, null);
+		morePrBar = (ProgressBar) loadListViewMoreView
+				.findViewById(R.id.pb_loadmoore);
+		morePrBar.setVisibility(View.GONE);
+		mBLoadMore = (Button) loadListViewMoreView
+				.findViewById(R.id.loadMoreButton);
+		System.out.println("点击加载更多");
+		mBLoadMore.setText("点击加载更多");
+		mBLoadMore.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (contentWrapper.isNext()) {
+					mBLoadMore.setText("loading.....");
+					morePrBar.setVisibility(View.VISIBLE);
+					loadMoreData();
+				}
+			}
+		});
+		return loadListViewMoreView;
 	}
 
 	/**
@@ -446,7 +518,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 									parentChannel.getChannelName());
 
 							Animation animation = AnimationUtils.loadAnimation(
-									getActivity(), R.anim.rbm_in_from_right);
+									context, R.anim.rbm_in_from_right);
 							MainTabActivity.instance.addView(intent, animation);
 
 						}
@@ -495,6 +567,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		});
 		channelListView.setOnScrollListener(new OnScrollListener() {
 
+			@SuppressWarnings("unused")
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
 				int itemsLastIndex = contentListAdapter.getCount() - 1; // 数据集最后一项的索引
@@ -596,7 +669,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 				.findViewById(R.id.gmp_xingzheng_search_year_spinner);
 		xingzhengYearSpinner.setAdapter(new ArrayAdapter<String>(context,
 				R.layout.my_simple_spinner_item_layout, years));
-		
+
 		xingzhengsearchbtn = (Button) view
 				.findViewById(R.id.gmp_xingzheng_search_btn);
 
@@ -694,6 +767,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		xinzhengListView.addFooterView(loadMoreViewXZ);// 为listView添加底部视图
 		xinzhengListView.setOnScrollListener(new OnScrollListener() {
 
+			@SuppressWarnings("unused")
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
 				int itemsLastIndex = administrativeAdapter.getCount() - 1; // 数据集最后一项的索引
@@ -709,15 +783,15 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		});// 增加滑动监听
 
 		loadMoreButtonXZ.setOnClickListener(this);
-		
-		loadDept();
+
+		loadXZDept();
 	}
 
 	/**
-	 * @方法： showDept
-	 * @描述： 显示部门数据
+	 * @方法： showXZDept
+	 * @描述： 显示行政事项搜索部门下拉框数据
 	 */
-	private void showDept() {
+	private void showXZDept() {
 
 		Dept dept = new Dept("按部门筛选");
 		deptList.add(0, dept);
@@ -735,6 +809,9 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	 * @param endIndex
 	 */
 	private void loadXingzhengData(final int startIndex, final int endIndex) {
+
+		System.out.println("进来没有loadXingzhengData");
+
 		if (isFirstLoadXZ || isSwitchXZ) {
 			subProgressBar.setVisibility(View.VISIBLE);
 		} else {
@@ -786,9 +863,9 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 
 	/**
 	 * @方法： loadDept
-	 * @描述： 加载部门数据
+	 * @描述： 加载行政事项部门下拉框数据
 	 */
-	private void loadDept() {
+	private void loadXZDept() {
 
 		new Thread(new Runnable() {
 
@@ -952,8 +1029,8 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	}
 
 	/**
-	 * @方法： getUrl
-	 * @描述： 获取URL
+	 * @方法： getXZUrl
+	 * @描述： 获取行政事项URL
 	 * @param con
 	 * @return
 	 */
@@ -972,8 +1049,6 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		if (year != -1) {
 			url = url + "&year=" + year;
 		}
-		
-		System.out.println("ashoisa:"+url);
 
 		return url;
 	}
@@ -982,8 +1057,13 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	 * @方法： showContentData
 	 * @描述： 显示子菜单列表数据
 	 */
+	List<Content> list = new ArrayList<Content>();
+
 	private void showMenuContentData() {
 		contents = contentWrapper.getContents();
+
+		System.out.println("放入集合前的长度：" + contents.size());
+
 		govermsg_detail_lv_channel.setVisibility(View.VISIBLE);
 		channleFrameLayout.setVisibility(View.GONE);
 		channelListView.setVisibility(View.GONE);
@@ -993,17 +1073,55 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 			Toast.makeText(context, "数据为空！", Toast.LENGTH_SHORT).show();
 			subProgressBar.setVisibility(ProgressBar.GONE);
 		} else {
-			if (getType() == 3) {
-				generalizeAdapter = new GovernmentGeneralizeAdapter(contents,
-						context);
-				govermsg_detail_lv_channel.setAdapter(generalizeAdapter);
-
-			} else if (getType() == 4) {
-				regulationAdapter = new PolicieRegulationAdapter(contents,
-						context);
-				regulationAdapter.setMenuItem(getParentMenuItem());
-				govermsg_detail_lv_channel.setAdapter(regulationAdapter);
+			if (isFirstLoad) {
+				isFirstLoad = false;
+				if (contentWrapper.isNext()) {
+					if (govermsg_detail_lv_channel.getFooterViewsCount() != 0) {
+						morePrBar.setVisibility(View.GONE);
+						mBLoadMore.setText("点击加载更多");
+					} else {
+						govermsg_detail_lv_channel
+								.addFooterView(getFootListView());
+					}
+					govermsg_detail_lv_channel
+							.removeFooterView(loadListMoreView);
+				}
 			}
+
+			if (getType() == 3) {
+				if (generalizeAdapter == null) {
+					generalizeAdapter = new GovernmentGeneralizeAdapter(
+							contents, context);
+				}
+				govermsg_detail_lv_channel.setAdapter(generalizeAdapter);
+			} else if (getType() == 4) {
+
+				list.addAll(contents);
+
+				System.out.println("放入集合后的长度：" + list.size());
+
+				if (regulationAdapter == null) {
+					regulationAdapter = new PolicieRegulationAdapter(list,
+							context);
+					govermsg_detail_lv_channel.setAdapter(regulationAdapter);
+				} else {
+					regulationAdapter.setContents(list);
+					regulationAdapter.notifyDataSetChanged();
+				}
+				regulationAdapter.setMenuItem(getParentMenuItem());
+
+			}
+		}
+
+		if (contentWrapper.isNext()) {
+			if (govermsg_detail_lv_channel.getFooterViewsCount() != 0) {
+				morePrBar.setVisibility(View.GONE);
+				mBLoadMore.setText("点击加载更多");
+			} else {
+				govermsg_detail_lv_channel.addFooterView(getFootListView());
+			}
+		} else {
+			govermsg_detail_lv_channel.removeFooterView(loadListMoreView);
 		}
 
 	}
@@ -1065,7 +1183,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	 * @描述： 显示行政事项列表数据
 	 */
 	private void showXingzhengList() {
-		
+
 		govermsg_detail_lv_channel.setVisibility(View.GONE);
 		packup_btn.setVisibility(View.VISIBLE);
 		channleFrameLayout.setVisibility(View.GONE);
@@ -1103,10 +1221,10 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 			pb_loadmoorexz.setVisibility(ProgressBar.GONE);
 			loadMoreButtonXZ.setText("点击加载更多");
 		} else {
-			if (administrativeAdapter!=null) {
+			if (administrativeAdapter != null) {
 				xinzhengListView.removeFooterView(loadMoreViewXZ);
 			}
-			
+
 		}
 	}
 
@@ -1114,6 +1232,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	 * @方法： loadMenuItemData
 	 * @描述： 加载父菜单数据
 	 */
+	@SuppressWarnings("unchecked")
 	private void loadMenuItemData() {
 		if (CacheUtil.get(parentItem.getId()) != null) {// 从缓存中查找子菜单
 			menuItems = (List<MenuItem>) CacheUtil.get(parentItem.getId());
@@ -1167,6 +1286,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	 * @方法： loadChannelData
 	 * @描述： 加载频道菜单
 	 */
+	@SuppressWarnings("unchecked")
 	private void loadChannelData() {
 		if (CacheUtil.get(parentItem.getChannelId()) != null) {// 从缓存中查找子菜单
 			channels = (List<Channel>) CacheUtil.get(parentItem.getChannelId());
@@ -1217,7 +1337,6 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	 */
 	private void showMenuItemList() {
 		MenuItemListAdapter adapter = new MenuItemListAdapter();
-
 		listview.setAdapter(adapter);
 
 	}
@@ -1302,6 +1421,20 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	}
 
 	/**
+	 * 加载更多
+	 * 
+	 * @方法： loadMoreData
+	 * @描述： TODO
+	 */
+	private void loadMoreData() {
+		loadMenuListData(moreIndex, moreIndex + 10);
+		moreIndex += 10;
+		if (!isFirstLoad) {
+			govermsg_detail_lv_channel.removeFooterView(loadListMoreView);
+		}
+	}
+
+	/**
 	 * @方法： loadData
 	 * @描述： 加载子菜单数据
 	 * @param startIndex
@@ -1324,6 +1457,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 				try {
 					contentWrapper = contentService.getPageContentsById(
 							parentMenuItem.getChannelId(), startIndex, endIndex);
+
 					if (contentWrapper != null) {
 						contents = contentWrapper.getContents();
 						msg.what = DATA_LOAD_SUCESS;
@@ -1435,6 +1569,8 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		switch (v.getId()) {
 		// 收起按钮事件监听
 		case R.id.gpm_detail_btn_packup:
+			isFirstLoad = true;
+			moreIndex = 10;
 			listview.setVisibility(View.VISIBLE);
 			govermsg_detail_lv_channel.setVisibility(View.GONE);
 			packup_btn.setVisibility(View.GONE);
@@ -1446,6 +1582,9 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 			xingzhengsearchLayout.setVisibility(View.GONE);
 			searchCondition.setDept("");
 			searchCondition.setYear("");
+			con.setId(null);
+			con.setYear(-1);
+			list.clear();
 			break;
 
 		case R.id.loadMoreButton:

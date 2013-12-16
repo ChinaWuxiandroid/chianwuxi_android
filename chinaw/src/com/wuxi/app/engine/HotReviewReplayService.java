@@ -10,13 +10,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+
 import com.wuxi.app.util.Constants;
 import com.wuxi.domain.HotReviewReplyWrapper;
 import com.wuxi.domain.HotReviewReplyWrapper.HotReviewReply;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
-
-import android.content.Context;
 
 /**
  * 政民互动 热点话题 回复列表数据解析业务类

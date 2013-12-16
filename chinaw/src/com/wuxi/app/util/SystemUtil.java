@@ -1,13 +1,13 @@
 package com.wuxi.app.util;
 
-import com.wuxi.app.db.AppUseCountDao;
-import com.wuxi.app.db.DataBaseHelper;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.DisplayMetrics;
+
+import com.wuxi.app.db.AppUseCountDao;
+import com.wuxi.app.db.DataBaseHelper;
 
 public class SystemUtil {
 

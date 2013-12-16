@@ -94,7 +94,7 @@
             android:textColor="#ff095ce1"
             android:textSize="15sp" />
     </LinearLayout>
-    
+
     <LinearLayout
         android:id="@+id/gmp_xingzheng_search_layout"
         android:layout_width="match_parent"
@@ -179,6 +179,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.2"
+        android:background="@drawable/brown_button_sq"
         android:text="收   起"
         android:visibility="gone" />
 

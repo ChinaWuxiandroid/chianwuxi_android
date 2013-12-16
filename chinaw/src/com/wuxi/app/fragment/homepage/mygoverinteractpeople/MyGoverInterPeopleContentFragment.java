@@ -38,7 +38,6 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment {
 	 * @描述： 初始化布局控件
 	 */
 	private void initUI() {
-
 		switch (menuItem.getType()) {
 
 		// 普通菜单类型
@@ -51,7 +50,6 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment {
 		// 频道菜单类型
 		case MenuItem.CHANNEL_MENU:
 			GIPContentFragment gIPChannelContentFragment = new GIPContentFragment();
-
 			gIPChannelContentFragment.setParentItem(menuItem);
 			onTransaction(gIPChannelContentFragment);
 			break;
@@ -84,7 +82,6 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment {
 			else if (menuItem.getAppUI().equals("HotTopic")) {
 				GoverInterPeopleHotReviewFragment goverInterPeopleHotReviewFragment = new GoverInterPeopleHotReviewFragment();
 				onTransaction(goverInterPeopleHotReviewFragment);
-
 			}
 			// 公开电话
 			else if (menuItem.getAppUI().equals("PublicTel")) {
@@ -116,9 +113,7 @@ public class MyGoverInterPeopleContentFragment extends BaseFragment {
 		fragment.setArguments(this.getArguments());
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
-
 		ft.replace(CONTENT_MAIN_ID, fragment);
-
 		ft.commitAllowingStateLoss();
 
 	}

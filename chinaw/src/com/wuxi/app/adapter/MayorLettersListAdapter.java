@@ -13,15 +13,15 @@ package com.wuxi.app.adapter;
 
 import java.util.List;
 
-import com.wuxi.app.R;
-import com.wuxi.domain.LetterWrapper.Letter;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.wuxi.app.R;
+import com.wuxi.domain.LetterWrapper.Letter;
 
 /**
  * @类名： LettersListViewAdapter
@@ -35,11 +35,11 @@ import android.widget.TextView;
 public class MayorLettersListAdapter extends BaseAdapter {
 
 	private Context context;
-	
-	//信件列表
+
+	// 信件列表
 	private List<Letter> letters;
-	
-	public MayorLettersListAdapter(List<Letter> letters,Context context){
+
+	public MayorLettersListAdapter(List<Letter> letters, Context context) {
 		this.letters = letters;
 		this.context = context;
 	}
@@ -58,7 +58,7 @@ public class MayorLettersListAdapter extends BaseAdapter {
 	public void setLetters(List<Letter> letters) {
 		this.letters = letters;
 	}
-	
+
 	/**
 	 * @方法： addItem
 	 * @描述： 添加信件到列表
@@ -66,6 +66,16 @@ public class MayorLettersListAdapter extends BaseAdapter {
 	 */
 	public void addItem(Letter letter) {
 		this.letters.add(letter);
+	}
+
+	/**
+	 * 清空集合
+	 * 
+	 * @方法： clear
+	 * @描述： TODO
+	 */
+	public void clear() {
+		this.letters.clear();
 	}
 
 	@Override
@@ -88,9 +98,9 @@ public class MayorLettersListAdapter extends BaseAdapter {
 	 * @描述： 市长信箱列表布局控件
 	 * @作者： 罗森
 	 * @创建时间： 2013 2013-9-6 下午2:46:22
-	 * @修改时间： 
-	 * @修改描述： 
-	 *
+	 * @修改时间：
+	 * @修改描述：
+	 * 
 	 */
 	class ViewHolder {
 		public TextView title_text;
@@ -126,6 +136,7 @@ public class MayorLettersListAdapter extends BaseAdapter {
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
+
 		}
 
 		viewHolder.title_text.setText(letters.get(position).getTitle());

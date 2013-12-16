@@ -26,6 +26,7 @@ public class GIPContentFragment extends GoverMenuItemTitleFragment {
 		for (final MenuItem menu : items) {
 
 			if (menu.getType() == MenuItem.APP_MENU) {
+
 				// 我的政民互动 里面的appui
 				if (menu.getAppUI().endsWith("Letter12345_C")) {
 					menu.setContentFragment(GIPMine12345Fragment.class);
@@ -40,17 +41,15 @@ public class GIPContentFragment extends GoverMenuItemTitleFragment {
 					menu.setContentFragment(GIPMinePublicForumFragment.class);
 				}
 				// 12345来信办理平台
-				else if (menu.getAppUI().endsWith("市长信箱")) {
+				else if (menu.getAppUI().equals("市长信箱")) {
 					menu.setContentFragment(GIP12345MayorMaiBoxFragment.class);
 				} else if (menu.getAppUI().endsWith("建议咨询投诉")) {
 					menu.setContentFragment(GIP12345ComplaintFragment.class);
 				} else if (menu.getAppUI().endsWith("部门领导信箱")) {
 					menu.setContentFragment(GIP12345PartLeaderMailboxFragment.class);
-				}
-				// else if(menu.getAppUI().endsWith("区市长信箱")){
-				// menu.setContentFragment(GIP12345CMayorMailBoxFragment.class);
-				// }
-				else if (menu.getAppUI().endsWith("热门信件选登")) {
+				} else if (menu.getAppUI().equals("区市长信箱")) {
+					menu.setContentFragment(GIP12345CMayorMailBoxFragment.class);
+				} else if (menu.getAppUI().endsWith("热门信件选登")) {
 					menu.setContentFragment(GIP12345HotMailFragment.class);
 				} else if (menu.getAppUI().endsWith("答复率统计")) {
 					menu.setContentFragment(GIP12345AnswerStatisticsFragment.class);
@@ -67,12 +66,10 @@ public class GIPContentFragment extends GoverMenuItemTitleFragment {
 						.endsWith("Public_opinion_collection")) {
 					menu.setContentFragment(GIPSuggestPeopleWillFragment.class);
 				}
-//				 //视频直播平台
-//				 else if(menu.getAppUI().endsWith("走进直播间")){
-//				 menu.setContentFragment(GoverInterPeopleVideoLiveFragment.class);
-//				 }
-
-				// else if(menu.getAppUI().endsWith("行风热线")){
+				// 视频直播平台
+				// else if (menu.getAppUI().endsWith("走进直播间")) {
+				// menu.setContentFragment(GoverInterPeopleVideoLiveFragment.class);
+				// } else if (menu.getAppUI().endsWith("行风热线")) {
 				// menu.setContentFragment(GoverInterPeopleVideoLiveFragment.class);
 				// }
 				// 公众监督
@@ -80,15 +77,16 @@ public class GIPContentFragment extends GoverMenuItemTitleFragment {
 					menu.setContentFragment(GoverInterPeoplePublicSuperviseFragment.class);
 				}
 
-			}else if(menu.getType() == MenuItem.CUSTOM_MENU){//普通菜单
-				if(menu.getName().equals("走进直播间")){
+			} else if (menu.getType() == MenuItem.CUSTOM_MENU) {// 普通菜单
+				if (menu.getName().equals("走进直播间")) {
 					menu.setContentFragment(GoverInterPeopleVideoLiveFragment.class);
-				}else if (menu.getName().equals("行风热线")) {
-					Toast.makeText(getActivity(), "该功能暂未实现", Toast.LENGTH_SHORT).show();
+				} else if (menu.getName().equals("行风热线")) {
+					Toast.makeText(getActivity(), "该功能暂未实现", Toast.LENGTH_SHORT)
+							.show();
 				}
 
-			} 
-			
+			}
+
 		}
 	}
 

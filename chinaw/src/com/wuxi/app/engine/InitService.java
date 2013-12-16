@@ -1,17 +1,15 @@
 package com.wuxi.app.engine;
 
-import java.io.File;
 import java.util.Calendar;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 
 import com.wuxi.app.AppManager;
 import com.wuxi.app.db.AppUseCountDao;
 import com.wuxi.app.db.DataBaseHelper;
 import com.wuxi.app.util.Constants;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.os.Environment;
 
 /**
  * 

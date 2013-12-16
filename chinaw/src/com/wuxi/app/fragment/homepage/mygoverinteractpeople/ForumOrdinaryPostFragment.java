@@ -40,10 +40,10 @@ import com.wuxi.domain.OpinionPostWrapper;
 import com.wuxi.domain.OpinionPostWrapper.OpinionPostReplyWrapper;
 import com.wuxi.domain.OrdinaryPostWrapper;
 import com.wuxi.domain.OrdinaryPostWrapper.OrdinaryPostRaplyWrapper;
+import com.wuxi.domain.QuestionnairePostWrapper;
 import com.wuxi.domain.QuestionnairePostWrapper.QuestionnaireAnswerWrapper;
 import com.wuxi.domain.QuestionnairePostWrapper.QuestionnaireQuestionWrapper;
 import com.wuxi.domain.QuestionnairePostWrapper.QuestionnaireQuestionWrapper.QuestionnaireQuestion;
-import com.wuxi.domain.QuestionnairePostWrapper;
 import com.wuxi.exception.NODataException;
 import com.wuxi.exception.NetException;
 

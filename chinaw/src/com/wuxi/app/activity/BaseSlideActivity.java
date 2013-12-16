@@ -310,7 +310,6 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 
 			MainTabActivity.instance.addView(intent);
 		}
-
 	}
 
 	@Override
@@ -341,7 +340,8 @@ public abstract class BaseSlideActivity extends FragmentActivity implements
 				intent = new Intent(BaseSlideActivity.this, LoginActivity.class);
 
 			} else {
-				intent = new Intent(BaseSlideActivity.this, MainMineActivity.class);
+				intent = new Intent(BaseSlideActivity.this,
+						MainMineActivity.class);
 			}
 
 			break;

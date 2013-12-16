@@ -16,7 +16,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:background="@drawable/worksuggestbox_back"
                 android:orientation="horizontal" >
 
@@ -27,7 +27,7 @@
                     android:text="受理部门："
                     android:textSize="12sp" />
 
-                <TextView
+                <Spinner
                     android:id="@+id/legalperson_solve_bydept"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -188,6 +188,7 @@
                     android:layout_marginTop="7dp"
                     android:background="@drawable/worksuggestbox_edit_small_bk"
                     android:gravity="center_vertical"
+                    android:inputType="number"
                     android:paddingLeft="3dp"
                     android:textSize="10sp" />
             </LinearLayout>
@@ -214,6 +215,7 @@
                     android:layout_marginTop="7dp"
                     android:background="@drawable/worksuggestbox_edit_small_bk"
                     android:gravity="center_vertical"
+                    android:inputType="number"
                     android:paddingLeft="3dp"
                     android:textSize="10sp" />
             </LinearLayout>
@@ -240,6 +242,7 @@
                     android:layout_marginTop="7dp"
                     android:background="@drawable/worksuggestbox_edit_small_bk"
                     android:gravity="center_vertical"
+                    android:inputType="textEmailAddress"
                     android:paddingLeft="3dp"
                     android:textSize="10sp" />
             </LinearLayout>
@@ -266,6 +269,7 @@
                     android:layout_marginTop="7dp"
                     android:background="@drawable/worksuggestbox_edit_small_bk"
                     android:editable="false"
+                    android:focusable="true"
                     android:gravity="center_vertical"
                     android:paddingLeft="3dp"
                     android:textSize="10sp" />

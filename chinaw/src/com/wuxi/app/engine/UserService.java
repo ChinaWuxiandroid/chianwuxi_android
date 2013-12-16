@@ -48,6 +48,10 @@ public class UserService extends Service {
 				.replace("{pwd}", password);
 
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+
+		System.out.println("登陆的URL：" + url);
+		System.out.println("登陆返回的数据：" + resultStr);
+
 		if (resultStr != null) {
 
 			JSONObject jsonObject = new JSONObject(resultStr);
@@ -95,6 +99,9 @@ public class UserService extends Service {
 		String url = Constants.Urls.REGIST_URL + "?" + sb.toString();
 		LogUtil.i(TAG, url);
 		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+
+		System.out.println("注册的url：" + url);
+		System.out.println("注册返回的数据：" + resultStr);
 
 		if (resultStr != null) {
 

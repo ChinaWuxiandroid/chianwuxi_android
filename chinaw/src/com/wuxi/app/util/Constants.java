@@ -287,6 +287,12 @@ public class Constants {
 				+ "/interview/history.json";
 
 		/**
+		 * 获取视频的节目预告
+		 */
+		public static final String VEDIO_PREVIEW_URL = BASIC_URL
+				+ "interview/notice.json?";
+
+		/**
 		 * 政民互动 征求意见平台 立法征求意见详情 和 民意征集
 		 */
 		public static final String LEGISLATION_CONTENT_URL = BASIC_URL

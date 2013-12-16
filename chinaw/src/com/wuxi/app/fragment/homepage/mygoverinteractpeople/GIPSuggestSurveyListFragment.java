@@ -17,24 +17,27 @@ import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import android.widget.AbsListView.OnScrollListener;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.wuxi.app.BaseFragment;
+import com.wuxi.app.MainTabActivity;
 import com.wuxi.app.R;
+import com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPSuggestSurveyDetailActivity;
 import com.wuxi.app.adapter.InternetPoliticsListAdapter;
 import com.wuxi.app.engine.InternetSurveySerivce;
 import com.wuxi.app.util.LogUtil;
@@ -246,7 +249,7 @@ public class GIPSuggestSurveyListFragment extends BaseFragment implements
 			if (adapter != null) {
 				mListView.removeFooterView(loadMoreView);
 			}
-			
+
 		}
 	}
 
@@ -281,7 +284,6 @@ public class GIPSuggestSurveyListFragment extends BaseFragment implements
 		switch (v.getId()) {
 		case R.id.loadMoreButton:
 			if (internetSurveyWrapper != null && internetSurveyWrapper.isNext()) {// 还有下一条记录
-
 				isSwitch = false;
 				loadMoreButton.setText("loading.....");
 				loadMoreData(v);
@@ -292,7 +294,16 @@ public class GIPSuggestSurveyListFragment extends BaseFragment implements
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		Toast.makeText(context, "该功能暂未开通", Toast.LENGTH_SHORT).show();
+
+		InternetSurvey internetSurveyWrapper = (InternetSurvey) arg0
+				.getItemAtPosition(arg2);
+
+		Intent intent = new Intent(getActivity(),
+				GIPSuggestSurveyDetailActivity.class);
+
+		intent.putExtra("surveryId", "" + internetSurveyWrapper.getSurveryId());
+
+		MainTabActivity.instance.addView(intent);
 	}
 
 }

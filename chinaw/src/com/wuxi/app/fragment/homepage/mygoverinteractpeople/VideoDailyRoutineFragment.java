@@ -21,14 +21,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import android.widget.AbsListView.OnScrollListener;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
@@ -130,8 +130,7 @@ public class VideoDailyRoutineFragment extends BaseFragment implements
 
 		loadMoreView = View.inflate(context, R.layout.list_footer_view_layout,
 				null);
-		loadMoreButton = (Button) loadMoreView
-				.findViewById(R.id.loadMorebtn);
+		loadMoreButton = (Button) loadMoreView.findViewById(R.id.loadMorebtn);
 		pb_loadmoore = (ProgressBar) loadMoreView
 				.findViewById(R.id.pb_loadMore);
 
@@ -252,7 +251,7 @@ public class VideoDailyRoutineFragment extends BaseFragment implements
 			if (adapter != null) {
 				listView.removeFooterView(loadMoreView);
 			}
-		
+
 		}
 	}
 
@@ -272,9 +271,8 @@ public class VideoDailyRoutineFragment extends BaseFragment implements
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.loadMoreButton:
+		case R.id.loadMorebtn:
 			if (contentWrapper != null && contentWrapper.isNext()) {// 还有下一条记录
-
 				isSwitch = false;
 				loadMoreButton.setText("loading.....");
 				loadMoreData(v);

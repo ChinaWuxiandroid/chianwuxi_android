@@ -55,31 +55,31 @@ public class GoverInterPeopleVideoLiveFragment extends
 		super.onCheckedChanged(group, checkedId);
 
 		switch (checkedId) {
-		//栏目首页
+		// 栏目首页
 		case R.id.gip_video_bdroom_radioBtn_home:
 			init();
 			break;
-		//往期回顾
+		// 往期回顾
 		case R.id.gip_video_bdroom_radioBtn_review:
 			VedioReviewFragment reviewFragment = new VedioReviewFragment();
 			onTransaction(reviewFragment);
 			break;
-		//嘉宾风采
+		// 嘉宾风采
 		case R.id.gip_video_bdroom_radioBtn_guest:
 			VideoGuestPresenceFragment videoGuestPresenceFragment = new VideoGuestPresenceFragment();
 			onTransaction(videoGuestPresenceFragment);
 			break;
-		//相关资料
+		// 相关资料
 		case R.id.gip_video_bdroom_radioBtn_relative_info:
 			VideoRelatedDataFragment videoRelatedDataFragment = new VideoRelatedDataFragment();
 			onTransaction(videoRelatedDataFragment);
 			break;
-		//节目介绍
+		// 节目介绍
 		case R.id.gip_video_bdroom_radioBtn_program:
 			VideoProgramIntroducedFragment programIntroducedFragment = new VideoProgramIntroducedFragment();
 			onTransaction(programIntroducedFragment);
 			break;
-		//日常安排
+		// 日常安排
 		case R.id.gip_video_bdroom_radioBtn_schedule:
 			VideoDailyRoutineFragment videoDailyRoutineFragment = new VideoDailyRoutineFragment();
 			onTransaction(videoDailyRoutineFragment);

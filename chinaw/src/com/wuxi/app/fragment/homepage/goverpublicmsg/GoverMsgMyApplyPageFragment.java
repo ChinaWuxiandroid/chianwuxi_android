@@ -6,7 +6,6 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.content.Context;
-import android.os.Looper;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 
 import com.wuxi.app.BaseFragment;
 import com.wuxi.app.R;
-import com.wuxi.app.dialog.LoginDialog;
 import com.wuxi.app.engine.MyApplyPageService;
 import com.wuxi.app.fragment.commonfragment.PagingLoadListFragment;
 import com.wuxi.app.util.SystemUtil;
@@ -75,6 +73,7 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment {
 		try {
 			myApplyPageWrapper = service.getMyApplyPages(
 					SystemUtil.getAccessToken(context), start, end);
+
 		} catch (NetException e) {
 			e.printStackTrace();
 		} catch (JSONException e) {
@@ -111,7 +110,7 @@ public class GoverMsgMyApplyPageFragment extends PagingLoadListFragment {
 	 * @描述： 适配器
 	 * @作者： 罗森
 	 * @创建时间： 2013 2013-10-11 下午5:44:02
-	 * @修改时间： 
+	 * @修改时间：
 	 * @修改描述：
 	 */
 	public class MyApplyPageAdapter extends BaseAdapter {

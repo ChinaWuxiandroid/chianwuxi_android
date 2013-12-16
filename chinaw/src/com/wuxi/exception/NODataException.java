@@ -8,7 +8,7 @@ package com.wuxi.exception;
 public class NODataException extends Exception {
 
 	/**
-	 * 
+	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
 

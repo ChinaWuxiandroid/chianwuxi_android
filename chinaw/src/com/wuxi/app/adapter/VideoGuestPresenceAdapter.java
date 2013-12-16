@@ -119,13 +119,18 @@ public class VideoGuestPresenceAdapter extends BaseAdapter {
 		}
 
 		if (presences.get(position).getRecommendPictures() != null) {
+			
 			String url = URL + presences.get(position).getRecommendPictures();
+			
 			//异步加载图片
 			AsynLoadImageUtil util = new AsynLoadImageUtil();
+			
 			util.showImageAsyn(holder.imageView, url, R.drawable.video_bg);
+			
 		}else {
 			holder.imageView.setImageResource(R.drawable.video_bg);
 		}
+		
 		holder.textView.setText(presences.get(position).getTitle());
 
 		return convertView;
