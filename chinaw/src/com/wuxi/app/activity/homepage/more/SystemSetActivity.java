@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,12 +41,11 @@ public class SystemSetActivity extends BaseSlideActivity implements
 
 	private static final int DOWLOAD_ERROR = 2;
 
-	
-
 	private TableRow sys_menu_set, sys_clear_cache, sys_software_update,
-			sys_about_us, sys_site_map, sys_log_out;
+			sys_about_us, sys_site_map;
 
-	private TextView tv_verison, tv_cache, tv_user;
+	private TextView tv_verison, tv_cache;
+	private Button soft_btn_login_out;
 
 	private UpdateInfo updateInfo;
 
@@ -89,12 +89,12 @@ public class SystemSetActivity extends BaseSlideActivity implements
 				.findViewById(R.id.sys_software_update);
 		sys_about_us = (TableRow) view.findViewById(R.id.sys_about_us);
 		sys_site_map = (TableRow) view.findViewById(R.id.sys_site_map);
-		sys_log_out = (TableRow) view.findViewById(R.id.sys_log_out);
 
-		sys_log_out.setOnClickListener(this);
+		soft_btn_login_out = (Button) view
+				.findViewById(R.id.soft_btn_login_out);
+		soft_btn_login_out.setOnClickListener(this);
 
 		tv_verison = (TextView) view.findViewById(R.id.tv_verison);
-		tv_user = (TextView) view.findViewById(R.id.tv_user);
 
 		sys_menu_set.setOnClickListener(this);
 
@@ -143,7 +143,8 @@ public class SystemSetActivity extends BaseSlideActivity implements
 
 			intent = new Intent(SystemSetActivity.this, SiteMapActivity.class);
 			break;
-		case R.id.sys_log_out:// 注销
+
+		case R.id.soft_btn_login_out:// 注销
 			if (SystemUtil.getLoginUser(this).equals("")) {
 				Toast.makeText(this, "您还未登录 ", Toast.LENGTH_SHORT).show();
 				return;
@@ -164,9 +165,10 @@ public class SystemSetActivity extends BaseSlideActivity implements
 	private void initLoginUser() {
 		String loginUser = SystemUtil.getLoginUser(this);
 		if (!loginUser.equals("")) {
-			tv_user.setText(loginUser);
+
 		} else {
-			tv_user.setText("未登录");
+
+			soft_btn_login_out.setText("未登录");
 		}
 	}
 
@@ -191,8 +193,8 @@ public class SystemSetActivity extends BaseSlideActivity implements
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 
-							AppManager.getInstance(SystemSetActivity.this).clearCacheFile(false);//清楚菜单和频道的缓存
-							
+							AppManager.getInstance(SystemSetActivity.this)
+									.clearCacheFile(false);// 清楚菜单和频道的缓存
 
 							Toast.makeText(SystemSetActivity.this, "清除完成",
 									Toast.LENGTH_SHORT).show();
@@ -237,7 +239,7 @@ public class SystemSetActivity extends BaseSlideActivity implements
 				totalByte += cacheFile.length();
 			}
 
-			return TextFormateUtil.getDataSize(totalByte)+" ";
+			return TextFormateUtil.getDataSize(totalByte) + " ";
 
 		}
 
@@ -325,8 +327,8 @@ public class SystemSetActivity extends BaseSlideActivity implements
 							pd.show();
 
 						} else {
-							Toast.makeText(SystemSetActivity.this, "SDK不存在", Toast.LENGTH_SHORT)
-									.show();
+							Toast.makeText(SystemSetActivity.this, "SDK不存在",
+									Toast.LENGTH_SHORT).show();
 
 						}
 

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffefebe7"
+    android:background="@drawable/login_shape_bg"
     android:orientation="vertical" >
 
     <include layout="@layout/child_fragmend_header_layout" />
@@ -86,10 +86,10 @@
                             android:id="@+id/tv_cache"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="left"
                             android:text="1.0M"
                             android:textColor="#646464"
-                            android:textSize="14sp"
-                            android:layout_gravity="left" />
+                            android:textSize="14sp" />
                     </TableRow>
 
                     <TableRow
@@ -179,36 +179,21 @@
                             android:src="@drawable/ic_arrow" />
                     </TableRow>
 
-                    <TableRow
-                        android:id="@+id/sys_log_out "
-                        android:layout_width="fill_parent"
-                        android:layout_marginLeft="2.0dip"
-                        android:layout_marginRight="2.0dip"
-                        android:background="@drawable/more_itembottom_press"
-                        android:paddingBottom="16.0dip"
-                        android:paddingTop="16.0dip" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:drawablePadding="10.0dip"
-                            android:gravity="center_vertical"
-                            android:includeFontPadding="false"
-                            android:paddingLeft="16.0dip"
-                            android:text="注销账号"
-                            android:textColor="#ff333333"
-                            android:textSize="16.0sp" />
-
-                        <TextView
-                            android:id="@+id/tv_user"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="未登录"
-                            android:textColor="#646464"
-                            android:textSize="14sp" />
-                    </TableRow>
+                   
                 </TableLayout>
             </LinearLayout>
+
+            <Button
+                android:id="@+id/soft_btn_login_out"
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:layout_marginTop="10dip"
+                android:background="@drawable/loginout_bg_selector"
+                android:gravity="center"
+                android:text="退出当前账号"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
 

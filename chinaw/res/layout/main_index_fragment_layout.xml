@@ -2,15 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#ffffff" >
+    android:background="#ffffff"
+    android:orientation="vertical" >
 
     <RelativeLayout
+        android:id="@+id/main_rl_head_logo"
         android:layout_width="fill_parent"
         android:layout_height="55dip"
         android:background="@drawable/title" >
     </RelativeLayout>
-
 
     <com.wuxi.app.view.PagerScrollView
         android:layout_width="match_parent"
@@ -55,6 +55,7 @@
                 android:background="#C7C7C7" />
 
             <LinearLayout
+                android:id="@+id/ll_foot_iv"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="#E1E1E1"
@@ -77,7 +78,6 @@
                     android:background="@drawable/index_bottom_test2" />
             </LinearLayout>
         </LinearLayout>
-      
     </com.wuxi.app.view.PagerScrollView>
 
 </LinearLayout>

@@ -1,4 +1,6 @@
-# view res/layout/index_news_layout.xml #generated:31
+# view land\res/layout-land/index_news_layout.xml #generated:32
+# view land\res/layout-land/main_index_fragment_layout.xml #generated:40
+# view res/layout/index_news_layout.xml #generated:32
 # view res/layout/main_index_fragment_layout.xml #generated:40
 -keep class android.support.v4.view.ViewPager { <init>(...); }
 
@@ -163,6 +165,7 @@
 # view res/layout/city_map_layout.xml #generated:204
 -keep class com.wuxi.app.view.MyMapView { <init>(...); }
 
+# view land\res/layout-land/main_index_fragment_layout.xml #generated:15
 # view res/layout/main_index_fragment_layout.xml #generated:15
 -keep class com.wuxi.app.view.PagerScrollView { <init>(...); }
 
@@ -179,7 +182,7 @@
 # view res/layout/systemset_slide_layout.xml #generated:1
 -keep class com.wuxi.app.view.SlideMenuLayout { <init>(...); }
 
-# view res/layout/menuset_item_layout.xml #generated:17
+# view res/layout/menuset_item_layout.xml #generated:19
 -keep class com.wuxi.app.view.SwitchButton { <init>(...); }
 
 # view res/layout/title_scroll_action_layout.xml #generated:8

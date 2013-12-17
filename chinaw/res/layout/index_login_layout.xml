@@ -5,102 +5,117 @@
     android:background="@drawable/login_shape_bg"
     android:orientation="vertical" >
 
-    <include
-     
-        layout="@layout/child_fragmend_header_layout" />
+    <include layout="@layout/child_fragmend_header_layout" />
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical" >
+            android:id="@+id/login_ll_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dip"
+            android:orientation="horizontal" >
 
-            <LinearLayout
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dip"
-                android:orientation="horizontal" >
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/login_log_icon" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/login_log_icon" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dip"
-                    android:background="@drawable/login_chian_wuxi" />
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="20dip"
-                android:layout_marginRight="20dip"
-                android:layout_marginTop="20dip"
-                android:background="@drawable/login_form_bg" >
-
-                <EditText
-                    android:id="@+id/login_et_username"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dip"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="50dip"
-                    android:background="@null"
-                    android:maxLength="10" />
-
-                <EditText
-                    android:id="@+id/login_et_pwd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dip"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/login_et_username"
-                    android:layout_marginLeft="50dip"
-                    android:layout_marginTop="1dip"
-                    android:background="@null"
-                    android:hint="  请输入密码"
-                    android:inputType="textPassword" />
-            </RelativeLayout>
-
-            <LinearLayout
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dip"
-                android:layout_marginRight="20dip"
-                android:layout_marginTop="15dip"
-                android:orientation="horizontal" >
-
-                <Button
-                    android:id="@+id/login_btn_login"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/login_btn_bg"
-                    android:text="登录"
-                    android:textColor="#ffffff" />
-
-                <Button
-                    android:id="@+id/login_btn_regist"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/login_btn_bg"
-                    android:text="新用户注册"
-                    android:textColor="#ffffff" />
-            </LinearLayout>
+                android:background="@drawable/login_chian_wuxi" />
         </LinearLayout>
-    </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/main_rl_loginform"
+            android:layout_width="fill_parent"
+            android:layout_height="88.0dip"
+            android:layout_below="@+id/login_ll_logo"
+            android:layout_marginLeft="15.0dip"
+            android:layout_marginRight="15.0dip"
+            android:layout_marginTop="15.0dip"
+            android:background="@drawable/g_round_box_bg" >
+
+            <TextView
+                android:id="@+id/main_tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="43dip"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10.0dip"
+                android:gravity="center_vertical"
+                android:text="账号"
+                android:textColor="@color/tv_nomal_color" />
+
+            <EditText
+                android:id="@+id/login_et_username"
+                android:layout_width="fill_parent"
+                android:layout_height="43dip"
+                android:layout_marginLeft="3dip"
+                android:layout_toRightOf="@+id/main_tv_username"
+                android:background="@android:color/transparent" />
+
+            <View
+                android:id="@+id/main_horizontal_devider"
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E4" />
+
+            <TextView
+                android:id="@+id/login_tv_password"
+                android:layout_width="wrap_content"
+                android:layout_height="43dip"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/main_horizontal_devider"
+                android:layout_marginLeft="10.0dip"
+                android:gravity="center_vertical"
+                android:text="密码"
+                android:textColor="@color/tv_nomal_color" />
+
+            <EditText
+                android:id="@+id/login_et_pwd"
+                android:layout_width="fill_parent"
+                android:layout_height="43dip"
+                android:layout_below="@+id/main_horizontal_devider"
+                android:layout_marginLeft="3dip"
+                android:layout_toRightOf="@+id/login_tv_password"
+                android:background="@android:color/transparent"
+                android:inputType="textWebPassword" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/login_btn_regist"
+            android:layout_width="wrap_content"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/main_rl_loginform"
+            android:layout_marginRight="15dip"
+            android:layout_marginTop="15dip"
+            android:textSize="14sp"
+            android:background="@drawable/login_regist_bg_selector"
+            android:text="新用户注册"
+            android:textColor="@color/bule_text" />
+
+        <Button
+            android:id="@+id/login_btn_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_btn_regist"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:layout_marginTop="15dip"
+            android:background="@drawable/main_login_bg_selector"
+            android:text="登录"
+            android:textColor="#ffffff" />
+     
+    </RelativeLayout>
 
 </LinearLayout>

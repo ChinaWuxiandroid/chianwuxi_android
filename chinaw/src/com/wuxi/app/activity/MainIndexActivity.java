@@ -27,13 +27,16 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.wuxi.app.AppManager;
@@ -52,6 +55,7 @@ import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
 import com.wuxi.app.util.Constants.CacheKey;
+import com.wuxi.app.util.DisplayUtil;
 import com.wuxi.app.util.MenuItemChanelUtil;
 import com.wuxi.domain.Content;
 import com.wuxi.domain.MenuItem;
@@ -183,7 +187,8 @@ public class MainIndexActivity extends Activity implements
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_index_fragment_layout);
-
+		int height=getWindowManager().getDefaultDisplay().getHeight();
+		int weight=getWindowManager().getDefaultDisplay().getWidth();
 		initUI();
 
 	}
@@ -214,11 +219,12 @@ public class MainIndexActivity extends Activity implements
 		iv_index_zt = (ImageView) findViewById(R.id.iv_index_zt);
 		iv_index_ldhd.setOnClickListener(this);
 		iv_index_zt.setOnClickListener(this);
-
+		
+	
 		LoadGrid();// 加载菜单数据
 		loadNews();// 加载新闻数据
 		loadAnnouncements();// 加载公共数据
-
+	
 		pd = new ProgressDialog(this);
 
 		pd.setMessage("正在下载");
@@ -427,17 +433,21 @@ public class MainIndexActivity extends Activity implements
 				newslist_dataName);
 		listView.setAdapter(listAdapter);
 
-		setListViewHeight(listView);
+		index_title_news_page.getLayoutParams().height=setListViewHeight(listView);
+		//setGridMenuHeight();//设置gridView高度
+		
+		
 
 	}
 
+	
 	/**
 	 * 
 	 * wanglu 泰得利通 计算listView高度
 	 * 
 	 * @param listView
 	 */
-	public void setListViewHeight(ListView listView) {
+	public int  setListViewHeight(ListView listView) {
 		IndexNewsListAdapter listAdapter = (IndexNewsListAdapter) listView
 				.getAdapter();
 
@@ -450,8 +460,48 @@ public class MainIndexActivity extends Activity implements
 		ViewGroup.LayoutParams params = listView.getLayoutParams();
 		params.height = totalHeight
 				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1))
-				- 50;
+				;
 		listView.setLayoutParams(params);
+		
+		return params.height;
+
+	}
+	
+	
+	/**
+	 * 获取gridView高度
+	 *wanglu 泰得利通 
+	 * @param gridView
+	 * @return
+	 */
+	private int getGridViewHeight(GridView gridView) {
+
+		if (gridView == null) {
+			return 0;
+		}
+		BaseAdapter gridAdapter = (BaseAdapter) gridView
+				.getAdapter();
+
+		int totalHeight = 0;
+
+		if (gridAdapter != null) {
+			View listItem = gridAdapter.getView(0, null, gridView);
+			listItem.measure(0, 0);
+			int itemHeight = listItem.getMeasuredHeight();
+			int totalItemCount = gridAdapter.getCount();
+			int rowCount = 0;
+			if (totalItemCount % 3 == 0) {
+				rowCount = totalItemCount / 3;
+			} else {
+				rowCount = totalItemCount / 3 + 1;
+			}
+			int verticalSpacing = (rowCount - 1)
+					* (DisplayUtil.dip2px(this, 3));
+			totalHeight = rowCount * itemHeight + verticalSpacing;
+
+		}
+
+		return totalHeight;
 
 	}
 

@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -26,6 +27,7 @@ import com.wuxi.app.engine.MenuService;
 import com.wuxi.app.listeners.OnChangedListener;
 import com.wuxi.app.util.CacheUtil;
 import com.wuxi.app.util.Constants;
+import com.wuxi.app.util.DisplayUtil;
 import com.wuxi.app.util.MenuItemChannelIndexUtil;
 import com.wuxi.app.view.SlipButton;
 import com.wuxi.app.view.SwitchButton;
@@ -198,6 +200,20 @@ public class MenuItemSetActivity extends BaseSlideActivity {
 
 				
 				viewHolder.switchButton = switchButton;
+				
+				
+				
+				// 解决SwitchButton显示bug
+				if (convertView.getLayoutParams() != null) {
+					convertView.getLayoutParams().height = DisplayUtil.dip2px(
+							MenuItemSetActivity.this, 55);
+				} else {
+					AbsListView.LayoutParams params = new AbsListView.LayoutParams(
+							AbsListView.LayoutParams.MATCH_PARENT,
+							DisplayUtil.dip2px(MenuItemSetActivity.this, 55));
+					convertView.setLayoutParams(params);
+				}
+				
 
 				convertView.setTag(viewHolder);
 			} else {

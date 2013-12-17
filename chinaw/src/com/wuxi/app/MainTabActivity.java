@@ -244,6 +244,7 @@ public class MainTabActivity extends ActivityGroup implements
 		super.onDestroy();
 	}
 
+	/*
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 
@@ -256,7 +257,7 @@ public class MainTabActivity extends ActivityGroup implements
 			}
 		} catch (Exception ex) {
 		}
-	}
+	}*/
 
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {

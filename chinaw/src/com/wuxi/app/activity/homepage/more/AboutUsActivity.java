@@ -2,6 +2,7 @@ package com.wuxi.app.activity.homepage.more;
 
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.wuxi.app.R;
@@ -15,13 +16,13 @@ import com.wuxi.app.activity.BaseSlideActivity;
 public class AboutUsActivity extends BaseSlideActivity {
 
 	
-	private TextView tv_about;
 	
+	private WebView wb_about_us;
 	
 	@Override
 	protected void findMainContentViews(View view) {
-		tv_about=(TextView) view.findViewById(R.id.tv_about);
-		tv_about.setMovementMethod(ScrollingMovementMethod.getInstance());
+		wb_about_us=(WebView) view.findViewById(R.id.wb_about_us);
+		wb_about_us.loadUrl("file:///android_asset/soft_about.html");//加载关于我们html文件
 		
 	}
 
