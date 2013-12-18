@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/index_gridview_selector">
+
+    <ImageView
+        android:id="@+id/index_gridview_image"
+        android:layout_width="100dip"
+        android:layout_height="100dip"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="25dip"
+        android:src="@drawable/index_meili_wuxi"
+        
+         />
+
+    <TextView
+        android:id="@+id/index_gridview_texttitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/index_gridview_image"
+        android:layout_centerHorizontal="true"
+        android:singleLine="true"
+        android:text="魅力锡城"
+        android:paddingTop="4dip"
+        android:paddingBottom="5dip" />
+
+</RelativeLayout>

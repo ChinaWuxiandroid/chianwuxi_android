@@ -1,5 +1,7 @@
 # view land\res/layout-land/index_news_layout.xml #generated:32
 # view land\res/layout-land/main_index_fragment_layout.xml #generated:40
+# view large\res/layout-large/index_news_layout.xml #generated:32
+# view large\res/layout-large/main_index_fragment_layout.xml #generated:40
 # view res/layout/index_news_layout.xml #generated:32
 # view res/layout/main_index_fragment_layout.xml #generated:40
 -keep class android.support.v4.view.ViewPager { <init>(...); }
@@ -166,6 +168,7 @@
 -keep class com.wuxi.app.view.MyMapView { <init>(...); }
 
 # view land\res/layout-land/main_index_fragment_layout.xml #generated:15
+# view large\res/layout-large/main_index_fragment_layout.xml #generated:15
 # view res/layout/main_index_fragment_layout.xml #generated:15
 -keep class com.wuxi.app.view.PagerScrollView { <init>(...); }
 

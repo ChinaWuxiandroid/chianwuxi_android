@@ -21,6 +21,7 @@ import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -187,8 +188,17 @@ public class MainIndexActivity extends Activity implements
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_index_fragment_layout);
+		/*
 		int height=getWindowManager().getDefaultDisplay().getHeight();
 		int weight=getWindowManager().getDefaultDisplay().getWidth();
+		
+		
+		DisplayMetrics metric = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metric);
+		int densityDpi = metric.densityDpi;
+		int heightPiexls=metric.heightPixels;
+		int weightPiexls=metric.widthPixels;
+	*/
 		initUI();
 
 	}
