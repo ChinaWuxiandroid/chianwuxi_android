@@ -58,7 +58,7 @@
             android:layout_marginLeft="3sp"
             android:layout_marginRight="5sp"
             android:layout_toRightOf="@+id/gip_12345_iwantmail_radiogroup_mailType"
-            android:background="@drawable/spiner_bg" />
+            android:background="@drawable/spinner_bg" />
 
         <TextView
             android:id="@+id/mail_type"
@@ -79,7 +79,7 @@
             android:layout_marginLeft="3sp"
             android:layout_marginTop="2sp"
             android:layout_toRightOf="@+id/mail_type"
-            android:background="@drawable/spiner_bg" />
+            android:background="@drawable/spinner_bg" />
 
         <TextView
             android:id="@+id/mail_title"

@@ -16,6 +16,7 @@
             android:id="@+id/search_bything"
             android:layout_width="80dip"
             android:layout_height="wrap_content"
+           
             android:layout_marginLeft="2dip"
             android:background="@drawable/goversaloon_search_bg"
             android:button="@null"

@@ -25,7 +25,7 @@
             android:layout_width="90sp"
             android:layout_height="match_parent"
             android:layout_marginLeft="3sp"
-            android:background="@drawable/spiner_bg" />
+            android:background="@drawable/spinner_bg" />
     </LinearLayout>
 
     <ImageView

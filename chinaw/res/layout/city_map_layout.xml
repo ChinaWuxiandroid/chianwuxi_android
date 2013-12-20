@@ -132,13 +132,14 @@
 
                 <EditText
                     android:id="@+id/city_map_et_start"
-                    android:layout_width="80dip"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
                     android:layout_height="25dip"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dip"
                    	android:paddingLeft="5dip"
                     android:background="@drawable/edittext_back"
-                    android:hint="   输入起点"
+                    android:hint="  输入起点"
                     android:maxLength="10"
                     android:textSize="12sp" />
 
@@ -151,17 +152,20 @@
 
                 <EditText
                     android:id="@+id/city_map_et_end"
-                    android:layout_width="80dip"
+                   android:layout_width="0dip"
+                    android:layout_weight="1"
                     android:layout_height="25dip"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
                     android:background="@drawable/edittext_back"
-                    android:hint="   输入终点"
+                    android:hint="  输入终点"
                     android:maxLength="10"
                     android:textSize="12sp" />
             </LinearLayout>
 
             <View
+                
                 android:layout_width="2dip"
                 android:layout_height="fill_parent"
                 android:background="@drawable/city_map_search_divide" />

@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:background="@drawable/spiner_bg" />
+            android:background="@drawable/spinner_bg" />
 
         <Spinner
             android:id="@+id/gpm_goverment_gen_year_spinner"
@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="5sp"
             android:layout_weight="1"
-            android:background="@drawable/spiner_bg" />
+            android:background="@drawable/spinner_bg" />
 
         <Button
             android:id="@+id/gpm_goverment_gen_search_btn"

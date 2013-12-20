@@ -4,16 +4,12 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <FrameLayout
-        android:id="@+id/fl_title_item"
-        android:layout_width="match_parent"
-        android:layout_height="40dip"
-        android:layout_marginTop="8dip"
-        android:orientation="horizontal" >
+
 
         <HorizontalScrollView
+            android:id="@+id/hs_title_item"
             android:layout_width="fill_parent"
-            android:layout_height="50dip" >
+            android:layout_height="wrap_content" >
 
             <RadioGroup
                 android:id="@+id/administrative_rg_channel"
@@ -24,20 +20,14 @@
             </RadioGroup>
         </HorizontalScrollView>
 
-        <ImageView
-            android:id="@+id/gover_mange_iv_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="5dip"
-            android:background="@drawable/gover_manger_next" />
-    </FrameLayout>
+    
 
     <LinearLayout
+        android:layout_marginTop="5dip"
         android:id="@+id/ll_filter"
         android:layout_width="fill_parent"
         android:layout_height="35dip"
-        android:layout_below="@+id/fl_title_item"
+        android:layout_below="@+id/hs_title_item"
         android:orientation="horizontal" >
 
         <Spinner
@@ -45,7 +35,7 @@
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="0.45"
-            android:background="@drawable/spiner_bg" />
+            android:background="@drawable/spinner_bg" />
 
         <Spinner
             android:id="@+id/sp_dept_year"
@@ -53,7 +43,7 @@
             android:layout_height="fill_parent"
             android:layout_marginLeft="3dip"
             android:layout_weight="0.35"
-            android:background="@drawable/spiner_bg" />
+            android:background="@drawable/spinner_bg" />
 
         <ImageButton
             android:id="@+id/govver_admintrative_ib_search"
@@ -64,12 +54,10 @@
             android:background="@drawable/search_released" />
     </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_filter" >
+    
 
         <ListView
+            android:layout_below="@+id/ll_filter"
             android:id="@+id/gover_mange_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -82,7 +70,7 @@
             android:id="@+id/pb_mange"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-    </FrameLayout>
+            android:layout_centerInParent="true" />
+  
 
 </RelativeLayout>

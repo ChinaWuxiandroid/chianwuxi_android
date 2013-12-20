@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dip"
             android:layout_toRightOf="@+id/tv_content_type"
-            android:background="@drawable/spiner_bg" />
+            android:background="@drawable/spinner_bg" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dip"
             android:layout_toRightOf="@+id/letter_type"
-            android:background="@drawable/spiner_bg" />
+            android:background="@drawable/spinner_bg" />
     </RelativeLayout>
 
     <LinearLayout

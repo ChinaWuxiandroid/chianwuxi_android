@@ -4,40 +4,26 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <FrameLayout
-        android:id="@+id/fl_title_item"
-        android:layout_width="match_parent"
-        android:layout_height="35dip"
-        android:layout_marginTop="5dip"
-        android:orientation="horizontal" >
+    <HorizontalScrollView
+        android:id="@+id/hs_channel"
+        android:layout_width="fill_parent"
+        android:layout_height="60dip"
+        android:layout_marginTop="5dip" >
 
-        <HorizontalScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="50dip" >
-
-            <RadioGroup
-                android:id="@+id/mange_rg_channel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:orientation="horizontal" >
-            </RadioGroup>
-        </HorizontalScrollView>
-
-        <ImageView
-            android:id="@+id/gover_mange_iv_next"
+        <RadioGroup
+            android:id="@+id/mange_rg_channel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="3dip"
-            android:background="@drawable/gover_manger_next" />
-    </FrameLayout>
+            android:layout_marginTop="10dip"
+            android:orientation="horizontal" >
+        </RadioGroup>
+    </HorizontalScrollView>
 
     <HorizontalScrollView
         android:id="@+id/hs_subchannel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/fl_title_item"
+        android:layout_below="@+id/hs_channel"
         android:layout_marginTop="5dip" >
 
         <LinearLayout
@@ -49,25 +35,23 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <FrameLayout
-        android:layout_width="fill_parent"
+    <ListView
+        android:id="@+id/gover_mange_lv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/hs_subchannel" >
+        android:layout_below="@+id/hs_subchannel"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@android:color/white"
+        android:dividerHeight="1dip" 
+        android:layout_marginBottom="20dip"
+        >
+    </ListView>
 
-        <ListView
-            android:id="@+id/gover_mange_lv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:cacheColorHint="@android:color/transparent"
-            android:divider="@android:color/white"
-            android:dividerHeight="1dip" >
-        </ListView>
-
-        <ProgressBar
-            android:id="@+id/pb_mange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-    </FrameLayout>
+    <ProgressBar
+        android:id="@+id/pb_mange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center" />
 
 </RelativeLayout>

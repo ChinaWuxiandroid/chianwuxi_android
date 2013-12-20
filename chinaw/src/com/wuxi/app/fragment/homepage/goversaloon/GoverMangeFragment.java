@@ -17,7 +17,6 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -53,7 +52,7 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 
 	private ListView gover_mange_lv;
 
-	private ImageView gover_mange_iv_next;
+	
 
 	protected static final int LOAD_CHANNEL_SUCCESS = 1;
 
@@ -136,11 +135,10 @@ public class GoverMangeFragment extends GoverSaloonContentFragment implements
 				.findViewById(R.id.mange_rg_channel);
 		mange_rg_channel.setOnCheckedChangeListener(this);
 
-		gover_mange_iv_next = (ImageView) view
-				.findViewById(R.id.gover_mange_iv_next);
+		
 		ll_subchannel = (LinearLayout) view.findViewById(R.id.ll_subchannel);
 
-		gover_mange_iv_next.setOnClickListener(this);
+		
 
 		gover_mange_lv.addFooterView(getFootView());
 		gover_mange_lv.setOnScrollListener(this);

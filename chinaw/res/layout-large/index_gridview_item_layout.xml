@@ -7,10 +7,10 @@
 
     <ImageView
         android:id="@+id/index_gridview_image"
-        android:layout_width="100dip"
-        android:layout_height="100dip"
+        android:layout_width="125dip"
+        android:layout_height="125dip"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="25dip"
+        android:layout_marginBottom="50dip"
         android:src="@drawable/index_meili_wuxi"
         
          />
@@ -24,6 +24,6 @@
         android:singleLine="true"
         android:text="魅力锡城"
         android:paddingTop="4dip"
-        android:paddingBottom="5dip" />
+        android:paddingBottom="10dip" />
 
 </RelativeLayout>

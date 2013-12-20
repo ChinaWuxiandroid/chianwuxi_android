@@ -7,7 +7,7 @@
     android:layout_marginRight="5dip"
     android:background="@android:color/transparent"
     android:orientation="vertical"
-    android:visibility="gone" >
+    android:visibility="visible" >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -21,7 +21,7 @@
             android:id="@+id/sp_dept"
             android:layout_width="175dip"
             android:layout_height="wrap_content"
-            android:background="@drawable/spiner_bg" 
+            android:background="@drawable/spinner_bg" 
             android:layout_marginTop="8dip"
             android:layout_marginLeft="8dip"/>
 
@@ -29,26 +29,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dip"
-            android:orientation="horizontal"
-             >
+            android:orientation="horizontal" >
 
             <Spinner
                 android:id="@+id/sp_dept_range"
                 android:layout_width="175dip"
                 android:layout_height="wrap_content"
-                android:background="@drawable/spiner_bg" 
-                android:layout_marginLeft="8dip"/>
+                android:layout_marginLeft="8dip"
+                android:background="@drawable/spinner_bg" />
 
             <Button
                 android:id="@+id/btn_search_bydept"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dip"
+                android:layout_height="30dip"
                 android:layout_gravity="bottom"
-                android:layout_marginLeft="5dip"
-                android:background="@drawable/search_btn_bg"
+                android:layout_marginLeft="2dip"
+                android:layout_weight="0.41"
+                android:background="@drawable/seartch_btn_bg"
                 android:text="检索"
                 android:textColor="#207BBE"
                 android:textSize="14sp" />
         </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>

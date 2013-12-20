@@ -66,7 +66,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 
 	private ListView gover_mange_lv;
 
-	private ImageView gover_mange_iv_next;
+	
 
 	private RadioGroup administrative_rg_channel;
 	protected static final int TITLE_ITEM_LOADSUCCESS = 0;
@@ -129,15 +129,14 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 				.findViewById(R.id.administrative_rg_channel);
 		administrative_rg_channel.setOnCheckedChangeListener(this);
 		pb_mange = (ProgressBar) view.findViewById(R.id.pb_mange);
-		gover_mange_iv_next = (ImageView) view
-				.findViewById(R.id.gover_mange_iv_next);
+		
 		sp_dept = (Spinner) view.findViewById(R.id.sp_dept);// 时间
 		sp_dept_year = (Spinner) view.findViewById(R.id.sp_dept_year);// 年
 		govver_admintrative_ib_search = (ImageButton) view
 				.findViewById(R.id.govver_admintrative_ib_search);
 		sp_dept.setOnItemSelectedListener(this);
 
-		gover_mange_iv_next.setOnClickListener(this);
+	
 		govver_admintrative_ib_search.setOnClickListener(this);
 
 		gover_mange_lv.addFooterView(getFootView());
@@ -429,9 +428,7 @@ public class AdministrativeItemFragment extends GoverSaloonContentFragment
 	public void onClick(View v) {
 
 		switch (v.getId()) {
-		case R.id.gover_mange_iv_next:
-
-			break;
+		
 		case R.id.govver_admintrative_ib_search:
 			isSwitch = true;
 			Map<String, String> paMap = buildParams(null, qltype, deptid, year,

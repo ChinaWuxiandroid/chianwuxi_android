@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_searchby_dept"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dip"
+    android:layout_marginRight="5dip"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    android:visibility="gone" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:background="#E0E0E0"
+        android:orientation="vertical" >
+
+        <Spinner
+            android:id="@+id/sp_dept"
+            android:layout_width="400dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dip"
+            android:layout_marginTop="8dip"
+            android:background="@drawable/spinner_bg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dip"
+            android:orientation="horizontal" >
+
+            <Spinner
+                android:id="@+id/sp_dept_range"
+                android:layout_width="400dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:background="@drawable/spinner_bg" />
+
+            <Button
+                android:id="@+id/btn_search_bydept"
+                android:layout_width="65dip"
+                android:layout_height="40dip"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="5dip"
+                android:background="@drawable/seartch_btn_bg"
+                android:text="检索"
+                android:textColor="#207BBE"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

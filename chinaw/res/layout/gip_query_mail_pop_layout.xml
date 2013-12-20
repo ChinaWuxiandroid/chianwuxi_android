@@ -57,7 +57,7 @@
                 android:id="@+id/query_mail_box_sort_spinner"
                 android:layout_width="130sp"
                 android:layout_height="32sp"
-                android:background="@drawable/spiner_bg" />
+                android:background="@drawable/spinner_bg" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,7 +80,7 @@
                 android:id="@+id/query_mail_email_sort_spinner"
                 android:layout_width="70sp"
                 android:layout_height="32sp"
-                android:background="@drawable/spiner_bg" />
+                android:background="@drawable/spinner_bg" />
         </LinearLayout>
 
         <LinearLayout
@@ -199,7 +199,7 @@
                 android:id="@+id/query_mail_accept_department_spinner"
                 android:layout_width="197sp"
                 android:layout_height="32sp"
-                android:background="@drawable/spiner_bg" />
+                android:background="@drawable/spinner_bg" />
         </LinearLayout>
 
         <LinearLayout
@@ -222,7 +222,7 @@
                 android:id="@+id/query_mail_reply_department_spinner"
                 android:layout_width="197sp"
                 android:layout_height="32sp"
-                android:background="@drawable/spiner_bg" />
+                android:background="@drawable/spinner_bg" />
         </LinearLayout>
 
         <CheckBox

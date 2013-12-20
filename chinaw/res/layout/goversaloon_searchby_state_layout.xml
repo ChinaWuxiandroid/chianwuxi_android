@@ -22,12 +22,13 @@
             android:layout_marginLeft="8dip"
             android:layout_marginRight="8dip"
             android:layout_marginTop="8dip"
-            android:background="@drawable/spiner_bg" />
+            android:background="@drawable/spinner_bg" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dip"
+            android:layout_marginBottom="8dip"
             android:orientation="horizontal" >
 
             <TextView
@@ -46,11 +47,11 @@
 
             <Button
                 android:id="@+id/btn_search_bystate"
-                android:layout_width="65dp"
-                android:layout_height="30dp"
+               android:layout_width="65dp"
+                android:layout_height="40dip"
                 android:layout_marginLeft="5dip"
                 android:layout_marginRight="8dip"
-                android:background="@drawable/search_btn_bg"
+                android:background="@drawable/seartch_btn_bg"
                 android:text="检索"
                 android:textColor="#207BBE"
                 android:textSize="14sp" />

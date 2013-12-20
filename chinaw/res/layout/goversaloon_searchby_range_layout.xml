@@ -27,17 +27,17 @@
                 android:id="@+id/sp_range"
                 android:layout_width="175dip"
                 android:layout_height="wrap_content"
-                android:background="@drawable/spiner_bg"
+                android:background="@drawable/spinner_bg"
                 android:layout_marginLeft="8dip" 
                />
 
             <Button
                 android:id="@+id/btn_searchbyrange"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="55dp"
+                android:layout_height="30dip"
                 android:layout_gravity="bottom"
-                android:layout_marginLeft="5dip"
-                android:background="@drawable/search_btn_bg"
+                android:layout_marginLeft="3dip"
+                android:background="@drawable/seartch_btn_bg"
                 android:text="检索"
                 android:textColor="#207BBE"
                 android:textSize="14sp"

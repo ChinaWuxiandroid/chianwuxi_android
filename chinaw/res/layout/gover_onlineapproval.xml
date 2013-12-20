@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
-        android:background="@drawable/spiner_bg" />
+        android:background="@drawable/spinner_bg" />
 
     <FrameLayout
         android:layout_width="fill_parent"
