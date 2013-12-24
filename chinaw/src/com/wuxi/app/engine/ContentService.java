@@ -97,7 +97,9 @@ public class ContentService extends Service {
 			throw new NetException(Constants.ExceptionMessage.NO_NET);
 		}
 
-		String resultStr = httpUtils.executeGetToString(url, TIME_OUT);
+		String resultStr = null;
+
+		resultStr = httpUtils.executeGetToString(url, TIME_OUT);
 
 		if (resultStr != null) {
 

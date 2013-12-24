@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <ProgressBar 
+    <ProgressBar
         android:id="@+id/video_program_introduced_progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        />
-    
+        android:layout_centerInParent="true" />
+
     <LinearLayout
         android:id="@+id/video_program_introduced_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:orientation="vertical" >
 
         <ImageView
@@ -44,35 +43,36 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#808080"
-                android:text="发布日期:" />
+                android:text="发布日期:"
+                android:textColor="#808080" />
 
             <TextView
                 android:id="@+id/video_program_introduced_begintime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#808080"
-                android:text="测试" />
+                android:text="测试"
+                android:textColor="#808080" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp"
-                android:textColor="#808080"
-                android:text="浏览次数:" />
+                android:text="浏览次数:"
+                android:textColor="#808080" />
 
             <TextView
                 android:id="@+id/video_program_introduced_readnum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#808080"
-                android:text="测试" />
+                android:text="测试"
+                android:textColor="#808080" />
         </LinearLayout>
-
-        <WebView
-            android:id="@+id/video_program_introduced_webview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </LinearLayout>
 
-</FrameLayout>
+    <WebView
+        android:id="@+id/video_program_introduced_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/video_program_introduced_layout" />
+
+</RelativeLayout>

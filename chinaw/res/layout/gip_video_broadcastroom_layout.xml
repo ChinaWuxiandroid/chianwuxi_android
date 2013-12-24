@@ -13,13 +13,13 @@
     <LinearLayout
         android:layout_below="@+id/iv_device"
         android:layout_width="fill_parent"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:id="@+id/rl_btn_group" >
 
         <RadioGroup
             android:id="@+id/gip_vedio_bdroom_radioGroup"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
             android:layout_weight="2"

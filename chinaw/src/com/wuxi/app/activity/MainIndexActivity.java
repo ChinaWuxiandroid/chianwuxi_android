@@ -445,7 +445,7 @@ public class MainIndexActivity extends Activity implements
 
 		index_title_news_page.getLayoutParams().height=setListViewHeight(listView);
 		//setGridMenuHeight();//设置gridView高度
-		
+		pb.setVisibility(ProgressBar.GONE);
 		
 
 	}
@@ -652,10 +652,13 @@ public class MainIndexActivity extends Activity implements
 			return;
 		} else if ((CacheUtil.get(NEW_CACHE_KEY)) != null) {// 看缓存中有没有
 			news = (List<Content>) CacheUtil.get(NEW_CACHE_KEY);
+			pb.setVisibility(ProgressBar.GONE);
 			showNews();
 			return;
 
 		}
+		
+		pb.setVisibility(ProgressBar.VISIBLE);
 		new Thread(new Runnable() {
 
 			@Override
@@ -723,8 +726,10 @@ public class MainIndexActivity extends Activity implements
 		} else if ((CacheUtil.get(ANNOUNCE_CACHE_KEY)) != null) {// 查看缓存数据
 			announcements = (List<Content>) CacheUtil.get(ANNOUNCE_CACHE_KEY);
 			showAnnouncements();
+			pb.setVisibility(ProgressBar.GONE);
 			return;
 		}
+		pb.setVisibility(ProgressBar.VISIBLE);
 		new Thread(new Runnable() {
 
 			@Override
