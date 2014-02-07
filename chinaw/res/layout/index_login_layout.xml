@@ -64,7 +64,9 @@
                     android:layout_height="43dip"
                     android:layout_marginLeft="3dip"
                     android:layout_toRightOf="@+id/main_tv_username"
-                    android:background="@android:color/transparent" />
+                    android:background="@android:color/transparent"
+                    android:inputType="text"
+                     />
 
                 <View
                     android:id="@+id/main_horizontal_devider"
@@ -92,7 +94,7 @@
                     android:layout_marginLeft="3dip"
                     android:layout_toRightOf="@+id/login_tv_password"
                     android:background="@android:color/transparent"
-                    android:inputType="textWebPassword" />
+                    android:inputType="textPassword" />
             </RelativeLayout>
 
             <Button
