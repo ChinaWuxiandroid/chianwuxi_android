@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/ll_search"
         android:layout_width="match_parent"
         android:layout_height="35sp"
         android:layout_marginBottom="5dp"
@@ -41,19 +42,19 @@
             android:textSize="15sp" />
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/govermsg_search_content_framelayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+ 
 
         <ProgressBar
             android:id="@+id/gpm_content_list_pb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+             />
 
         <ListView
+            android:layout_below="@+id/ll_search"
             android:id="@+id/gpm_content_list_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -61,6 +62,6 @@
             android:divider="@android:color/white"
             android:dividerHeight="1dip" >
         </ListView>
-    </FrameLayout>
+   
 
-</LinearLayout>
+</RelativeLayout>

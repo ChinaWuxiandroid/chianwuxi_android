@@ -7,7 +7,7 @@
     android:layout_marginRight="5dip"
     android:background="@android:color/transparent"
     android:orientation="vertical"
-    android:visibility="visible" >
+    android:visibility="gone" >
 
     <LinearLayout
         android:layout_width="fill_parent"

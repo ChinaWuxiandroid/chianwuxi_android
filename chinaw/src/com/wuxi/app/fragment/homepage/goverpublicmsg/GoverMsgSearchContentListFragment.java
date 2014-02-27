@@ -97,7 +97,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 	private int visibleItemNum;
 	// 列表适配器
 	private ContentListAdapter adapter;
-	// 切换
+	// 是不是加载更多
 	private boolean isSwitch = false;
 	// 是不是首次加载数据
 	private boolean isFirstLoad = true;
@@ -108,6 +108,8 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 
 	// 过滤包装类
 	private FifterContentWrapper fifter;
+	
+	
 
 	// 子菜单项对象
 	private MenuItem parentItem;
@@ -401,8 +403,6 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 
 		List<Content> contents = contentWrapper.getContents();
 
-		boolean isMore = true;
-
 		if (contents != null && contents.size() > 0) {
 
 			if (isFirstLoad) {
@@ -428,55 +428,64 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 						+ 1); // 设置选中项
 				isLoading = false;
 			}
+			
+			isNull = false;
 		} else {
 			isNull = true;
+			
 			content_list_pb.setVisibility(ProgressBar.GONE);
 			Toast.makeText(context, "根据您的条件，检索的数据为空，请重新选择条件。",
 					Toast.LENGTH_SHORT).show();
-			if (isMore) {
-				loadMoreButton.setOnClickListener(this);
-			}
+			adapter.setContents(contents);
+			adapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
+			
 		}
 
-		System.out.println("buttonCount====>" + buttonCount);
-		System.out.println("isNull=========>" + isNull);
-
+	
 		if (contentWrapper.isNext()) {
 			pb_loadmoore.setVisibility(ProgressBar.GONE);
 			loadMoreButton.setText("点击加载更多");
+			
+			if(content_list_lv.getFooterViewsCount()==0){
+				content_list_lv.addFooterView(loadMoreView);
+			}
 		} else {
+			
+			if(adapter!=null){
+				content_list_lv.removeFooterView(loadMoreView);
+			}
+			
+			
+			/*
+			
 			if (isfirstsearch) {
 				if (buttonCount == 0 && isNull == false
 						&& !contentWrapper.isNext()) {
 					content_list_lv.removeFooterView(loadMoreView);
 					System.out.println("4444444444");
-					isMore = false;
+
 				}
 			}
 			if (!isfirstsearch) {
 				if (buttonCount < 0 && isNull == true) {
 					content_list_lv.removeFooterView(loadMoreView);
-					isMore = false;
-					System.out.println("222222222");
+
 				}
 				if (buttonCount == 0 && isNull == false) {
 					content_list_lv.removeFooterView(loadMoreView);
-					isMore = false;
-					System.out.println("111111111111");
+
 				}
 				if (buttonCount > 0 && isNull == true
 						&& !contentWrapper.isNext()) {
 					content_list_lv.removeFooterView(loadMoreView);
-					isMore = false;
-					System.out.println("555555555555");
+
 				}
 			}
 			if (buttonCount == 0 && isNull == false && isfirstsearch == true
 					&& !contentWrapper.isNext()) {
 				content_list_lv.removeFooterView(loadMoreView);
-				isMore = false;
-				System.out.println("333333333333");
-			}
+
+			}*/
 		}
 	}
 
@@ -646,6 +655,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 		switch (v.getId()) {
 		case R.id.govermsg_search_button_search:
 			isSwitch = true;
+
 			isNull = false;
 			// buttonCount = 0;
 			isfirstsearch = false;
@@ -654,8 +664,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 
 		case R.id.loadMoreButton:
 			if (contentWrapper != null && contentWrapper.isNext()) {// 还有下一条记录
-
-				isSwitch = false;
+				isSwitch=false;
 				loadMoreButton.setText("loading.....");
 				buttonCount += 1;
 				loadMore(v);
@@ -739,7 +748,8 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 				yearFifter = -1;
 			fifter.setDept(deptStrFifter);
 			fifter.setYear(yearFifter);
-
+			
+			
 			System.out.println("按部门 时间 检索");
 
 			break;
@@ -751,7 +761,7 @@ public class GoverMsgSearchContentListFragment extends BaseFragment implements
 				yearFifter = -1;
 			fifter.setZone(zoneStrFifter);
 			fifter.setYear(yearFifter);
-
+			
 			break;
 		}
 

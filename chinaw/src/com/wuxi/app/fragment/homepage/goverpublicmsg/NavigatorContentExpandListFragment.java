@@ -209,9 +209,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	private List<Dept> deptList;
 
 	// 加载更多
-	private ProgressBar moreProgressBar;
-	private Button mButtonLoadMore;
-	private View loadListMoreView;
+
 	private int moreIndex = 10;
 	private boolean isFirstLoad = true;
 	private ProgressBar morePrBar;
@@ -322,7 +320,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		mInflater = inflater;
 		context = getActivity();
 		initUI();
-		getFootListView();
+		initMenuFootView();
 		initSubLayoutUI();
 		initXingzhengLayout();
 		initSearchLayout();
@@ -364,11 +362,11 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 				}
 
 				if (menuItem != null) {
-					System.out.println("是否为空");
+
 					setParentMenuItem(menuItem);
 
 					if (getType() == 5) {
-						System.out.println("===========5==========");
+
 						channleFrameLayout.setVisibility(View.GONE);
 						titleLayout.setVisibility(View.VISIBLE);
 						xingzhengsearchLayout.setVisibility(View.VISIBLE);
@@ -387,7 +385,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 						isSwitchXZ = true;
 						loadXingzhengData(0, PAGE_NUM);
 					} else {
-						System.out.println("读取四");
+
 						channleFrameLayout.setVisibility(View.GONE);
 						subProgressBar.setVisibility(View.VISIBLE);
 						titleLayout.setVisibility(View.VISIBLE);
@@ -430,29 +428,10 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 			loadChannelData();
 		}
 
-		loadListMoreView = View.inflate(context, R.layout.list_loadmore_layout,
-				null);
-		moreProgressBar = (ProgressBar) loadListMoreView
-				.findViewById(R.id.pb_loadmoore);
-		mButtonLoadMore = (Button) loadListMoreView
-				.findViewById(R.id.loadMoreButton);
-		mButtonLoadMore.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				if (contentWrapper.isNext()) {
-					mButtonLoadMore.setText("loading.....");
-					moreProgressBar.setVisibility(View.VISIBLE);
-					loadMoreData();
-				}
-			}
-		});
-
-		getFootListView();
 	}
 
-	private View getFootListView() {
-		System.out.println("初始化控件");
+	private void initMenuFootView() {
+
 		loadListViewMoreView = View.inflate(context,
 				R.layout.list_loadmore_layout, null);
 		morePrBar = (ProgressBar) loadListViewMoreView
@@ -460,7 +439,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		morePrBar.setVisibility(View.GONE);
 		mBLoadMore = (Button) loadListViewMoreView
 				.findViewById(R.id.loadMoreButton);
-		System.out.println("点击加载更多");
+
 		mBLoadMore.setText("点击加载更多");
 		mBLoadMore.setOnClickListener(new OnClickListener() {
 
@@ -473,7 +452,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 				}
 			}
 		});
-		return loadListViewMoreView;
+
 	}
 
 	/**
@@ -1060,8 +1039,8 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	List<Content> list = new ArrayList<Content>();
 
 	private void showMenuContentData() {
-		contents = contentWrapper.getContents();
 
+		contents = contentWrapper.getContents();
 		System.out.println("放入集合前的长度：" + contents.size());
 
 		govermsg_detail_lv_channel.setVisibility(View.VISIBLE);
@@ -1069,59 +1048,66 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		channelListView.setVisibility(View.GONE);
 		xinzhengListView.setVisibility(View.GONE);
 		packup_btn.setVisibility(View.VISIBLE);
-		if (contents == null && contents.size() == 0) {
+
+		if (contents != null && contents.size() == 0) {
 			Toast.makeText(context, "数据为空！", Toast.LENGTH_SHORT).show();
 			subProgressBar.setVisibility(ProgressBar.GONE);
-		} else {
-			if (isFirstLoad) {
-				isFirstLoad = false;
-				if (contentWrapper.isNext()) {
-					if (govermsg_detail_lv_channel.getFooterViewsCount() != 0) {
-						morePrBar.setVisibility(View.GONE);
-						mBLoadMore.setText("点击加载更多");
-					} else {
-						govermsg_detail_lv_channel
-								.addFooterView(getFootListView());
-					}
-					govermsg_detail_lv_channel
-							.removeFooterView(loadListMoreView);
-				}
+		}
+
+		if (isFirstLoad) {
+			if (govermsg_detail_lv_channel.getFooterViewsCount() != 0) {
+				govermsg_detail_lv_channel
+						.removeFooterView(loadListViewMoreView);
 			}
 
-			if (getType() == 3) {
-				if (generalizeAdapter == null) {
-					generalizeAdapter = new GovernmentGeneralizeAdapter(
-							contents, context);
-				}
-				govermsg_detail_lv_channel.setAdapter(generalizeAdapter);
-			} else if (getType() == 4) {
+			isFirstLoad = false;
+			if (contentWrapper.isNext()) {
 
-				list.addAll(contents);
-
-				System.out.println("放入集合后的长度：" + list.size());
-
-				if (regulationAdapter == null) {
-					regulationAdapter = new PolicieRegulationAdapter(list,
-							context);
-					govermsg_detail_lv_channel.setAdapter(regulationAdapter);
-				} else {
-					regulationAdapter.setContents(list);
-					regulationAdapter.notifyDataSetChanged();
-				}
-				regulationAdapter.setMenuItem(getParentMenuItem());
+				morePrBar.setVisibility(View.GONE);
+				mBLoadMore.setText("点击加载更多");
+				loadListViewMoreView.setVisibility(View.VISIBLE);
+				govermsg_detail_lv_channel.addFooterView(loadListViewMoreView);
 
 			}
 		}
 
-		if (contentWrapper.isNext()) {
-			if (govermsg_detail_lv_channel.getFooterViewsCount() != 0) {
+		if (getType() == 3) {
+			if (generalizeAdapter == null) {
+				generalizeAdapter = new GovernmentGeneralizeAdapter(contents,
+						context);
+				govermsg_detail_lv_channel.setAdapter(generalizeAdapter);
+			} else {
+				generalizeAdapter.setContents(contents);
+			}
+			generalizeAdapter.notifyDataSetChanged();
+		} else if (getType() == 4) {
+			list.clear();
+			list.addAll(contents);
+
+			if (regulationAdapter == null) {
+				regulationAdapter = new PolicieRegulationAdapter(contents,
+						context);
+				govermsg_detail_lv_channel.setAdapter(regulationAdapter);
+			} else {
+				regulationAdapter.setContents(contents);
+				regulationAdapter.notifyDataSetChanged();
+			}
+			regulationAdapter.setMenuItem(getParentMenuItem());
+
+		}
+
+		if (!isFirstLoad) {
+			if (contentWrapper.isNext()) {
 				morePrBar.setVisibility(View.GONE);
 				mBLoadMore.setText("点击加载更多");
+
 			} else {
-				govermsg_detail_lv_channel.addFooterView(getFootListView());
+				if (govermsg_detail_lv_channel.getFooterViewsCount() != 0) {
+					govermsg_detail_lv_channel
+							.removeFooterView(loadListViewMoreView);
+				}
+
 			}
-		} else {
-			govermsg_detail_lv_channel.removeFooterView(loadListMoreView);
 		}
 
 	}
@@ -1132,42 +1118,45 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	 */
 	private void showChannelContentData() {
 		contents = contentWrapper.getContents();
-
 		govermsg_detail_lv_channel.setVisibility(View.GONE);
 		packup_btn.setVisibility(View.VISIBLE);
 		channleFrameLayout.setVisibility(View.GONE);
 		channelListView.setVisibility(View.VISIBLE);
 		xinzhengListView.setVisibility(View.GONE);
-		if (contents == null && contents.size() == 0
-				&& contents.get(0).equals("[") && contents.get(0).equals("]")) {
-			Toast.makeText(context, "数据为空！", Toast.LENGTH_SHORT).show();
-		} else {
-			if (isFirstLoadgg) {
-				contentListAdapter = new CityGoverInfoContentListAdapter(
-						contents, context);
-				contentListAdapter.setChannel(getParentChannel());
-				channelListView.setAdapter(contentListAdapter);
-				isFirstLoadgg = false;
-				subProgressBar.setVisibility(ProgressBar.GONE);
-				isLoadinggg = false;
-			} else {
-				if (isSwitchgg) {
-					contentListAdapter.setContents(contents);
-					subProgressBar.setVisibility(ProgressBar.GONE);
-				} else {
-					for (Content content : contents) {
-						contentListAdapter.addItem(content);
-					}
-				}
-				contentListAdapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
-				channelListView.setSelection(ggVisibleLastIndex
-						- ggVisibleItemCount + 1); // 设置选中项
-				isLoadinggg = false;
+
+		if (isFirstLoadgg) {
+			contentListAdapter = new CityGoverInfoContentListAdapter(contents,
+					context);
+			contentListAdapter.setChannel(getParentChannel());
+			channelListView.setAdapter(contentListAdapter);
+			isFirstLoadgg = false;
+			if (contents != null && contents.size() == 0) {
+				Toast.makeText(context, "没有数据！", Toast.LENGTH_SHORT).show();
 			}
+			subProgressBar.setVisibility(ProgressBar.GONE);
+			isLoadinggg = false;
+		} else {
+			if (isSwitchgg) {
+				contentListAdapter.setContents(contents);
+				subProgressBar.setVisibility(ProgressBar.GONE);
+			} else {
+				for (Content content : contents) {
+					contentListAdapter.addItem(content);
+				}
+			}
+			contentListAdapter.notifyDataSetChanged(); // 数据集变化后,通知adapter
+			channelListView.setSelection(ggVisibleLastIndex
+					- ggVisibleItemCount + 1); // 设置选中项
+			isLoadinggg = false;
 		}
+
 		if (contentWrapper.isNext()) {
+
 			pb_loadmooregg.setVisibility(ProgressBar.GONE);
 			loadMoreButtongg.setText("点击加载更多");
+			if (channelListView.getFooterViewsCount() == 0) {
+				channelListView.addFooterView(loadMoreViewgg);
+			}
 
 		} else {
 			if (contentListAdapter != null) {
@@ -1429,9 +1418,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	private void loadMoreData() {
 		loadMenuListData(moreIndex, moreIndex + 10);
 		moreIndex += 10;
-		if (!isFirstLoad) {
-			govermsg_detail_lv_channel.removeFooterView(loadListMoreView);
-		}
+
 	}
 
 	/**

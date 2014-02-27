@@ -7808,6 +7808,27 @@ com.google.gson.FieldNamingPolicy: com.google.gson.FieldNamingPolicy[] values()
 com.google.gson.FieldNamingPolicy: com.google.gson.FieldNamingPolicy valueOf(java.lang.String)
 com.google.gson.LongSerializationPolicy: com.google.gson.LongSerializationPolicy[] values()
 com.google.gson.LongSerializationPolicy: com.google.gson.LongSerializationPolicy valueOf(java.lang.String)
+com.google.gson.reflect.TypeToken: java.lang.Class rawType
+com.google.gson.reflect.TypeToken: java.lang.reflect.Type type
+com.google.gson.reflect.TypeToken: int hashCode
+com.google.gson.reflect.TypeToken: TypeToken()
+com.google.gson.reflect.TypeToken: TypeToken(java.lang.reflect.Type)
+com.google.gson.reflect.TypeToken: java.lang.reflect.Type getSuperclassTypeParameter(java.lang.Class)
+com.google.gson.reflect.TypeToken: java.lang.Class getRawType()
+com.google.gson.reflect.TypeToken: java.lang.reflect.Type getType()
+com.google.gson.reflect.TypeToken: boolean isAssignableFrom(java.lang.Class)
+com.google.gson.reflect.TypeToken: boolean isAssignableFrom(java.lang.reflect.Type)
+com.google.gson.reflect.TypeToken: boolean isAssignableFrom(com.google.gson.reflect.TypeToken)
+com.google.gson.reflect.TypeToken: boolean isAssignableFrom(java.lang.reflect.Type,java.lang.reflect.GenericArrayType)
+com.google.gson.reflect.TypeToken: boolean isAssignableFrom(java.lang.reflect.Type,java.lang.reflect.ParameterizedType,java.util.Map)
+com.google.gson.reflect.TypeToken: boolean typeEquals(java.lang.reflect.ParameterizedType,java.lang.reflect.ParameterizedType,java.util.Map)
+com.google.gson.reflect.TypeToken: java.lang.AssertionError buildUnexpectedTypeError(java.lang.reflect.Type,java.lang.Class[])
+com.google.gson.reflect.TypeToken: boolean matches(java.lang.reflect.Type,java.lang.reflect.Type,java.util.Map)
+com.google.gson.reflect.TypeToken: int hashCode()
+com.google.gson.reflect.TypeToken: boolean equals(java.lang.Object)
+com.google.gson.reflect.TypeToken: java.lang.String toString()
+com.google.gson.reflect.TypeToken: com.google.gson.reflect.TypeToken get(java.lang.reflect.Type)
+com.google.gson.reflect.TypeToken: com.google.gson.reflect.TypeToken get(java.lang.Class)
 com.google.gson.stream.JsonScope: com.google.gson.stream.JsonScope[] values()
 com.google.gson.stream.JsonScope: com.google.gson.stream.JsonScope valueOf(java.lang.String)
 com.google.gson.stream.JsonToken: com.google.gson.stream.JsonToken[] values()
@@ -7838,6 +7859,8 @@ com.wuxi.app.activity.commactivity.MenuItemMainActivity: MenuItemMainActivity()
 com.wuxi.app.activity.commactivity.MenuItemMainActivity: void onClick(android.view.View)
 com.wuxi.app.activity.homepage.FourTopicActivity
 com.wuxi.app.activity.homepage.FourTopicActivity: FourTopicActivity()
+com.wuxi.app.activity.homepage.HomeWebActivity
+com.wuxi.app.activity.homepage.HomeWebActivity: HomeWebActivity()
 com.wuxi.app.activity.homepage.LearActivity
 com.wuxi.app.activity.homepage.LearActivity: LearActivity()
 com.wuxi.app.activity.homepage.NewsAnnAcountActivitiy
@@ -7847,6 +7870,8 @@ com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity: ChannelActivity()
 com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity: void onClick(android.view.View)
 com.wuxi.app.activity.homepage.fantasticwuxi.WuxiChannelContentDetailActivity
 com.wuxi.app.activity.homepage.fantasticwuxi.WuxiChannelContentDetailActivity: WuxiChannelContentDetailActivity()
+com.wuxi.app.activity.homepage.goverpublicmsg.GPMApplyActivity
+com.wuxi.app.activity.homepage.goverpublicmsg.GPMApplyActivity: GPMApplyActivity()
 com.wuxi.app.activity.homepage.goverpublicmsg.GoverMsgContentDetailWebActivity
 com.wuxi.app.activity.homepage.goverpublicmsg.GoverMsgContentDetailWebActivity: GoverMsgContentDetailWebActivity()
 com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity
@@ -7877,6 +7902,8 @@ com.wuxi.app.activity.homepage.informationcenter.HotTopicContentActivity
 com.wuxi.app.activity.homepage.informationcenter.HotTopicContentActivity: HotTopicContentActivity()
 com.wuxi.app.activity.homepage.informationcenter.InfoCenterContentDetailActivity
 com.wuxi.app.activity.homepage.informationcenter.InfoCenterContentDetailActivity: InfoCenterContentDetailActivity()
+com.wuxi.app.activity.homepage.informationcenter.InfoWebActivity
+com.wuxi.app.activity.homepage.informationcenter.InfoWebActivity: InfoWebActivity()
 com.wuxi.app.activity.homepage.informationcenter.InformationCenterActivity
 com.wuxi.app.activity.homepage.informationcenter.InformationCenterActivity: InformationCenterActivity()
 com.wuxi.app.activity.homepage.logorregister.LoginActivity
@@ -7902,6 +7929,8 @@ com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345AllMailContentActiv
 com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345AllMailContentActivity: GIP12345AllMailContentActivity()
 com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPContentDetailWebActivity
 com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPContentDetailWebActivity: GIPContentDetailWebActivity()
+com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPSuggestSurveyDetailActivity
+com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPSuggestSurveyDetailActivity: GIPSuggestSurveyDetailActivity()
 com.wuxi.app.activity.homepage.mygoverinteractpeople.HotReviewContentActivity
 com.wuxi.app.activity.homepage.mygoverinteractpeople.HotReviewContentActivity: HotReviewContentActivity()
 com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity
@@ -7926,6 +7955,9 @@ com.wuxi.app.activity.search.MainSearchActivity: void findView(android.view.View
 com.wuxi.app.activity.search.MainSearchActivity: void onClick(android.view.View)
 com.wuxi.app.activity.search.SearchResultDetailActivity
 com.wuxi.app.activity.search.SearchResultDetailActivity: SearchResultDetailActivity()
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterOnlineSurveyFragment
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.PromoMoreVideoActivity
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.PromoMoreVideoActivity: PromoMoreVideoActivity()
 com.wuxi.app.view.ContentListView
 com.wuxi.app.view.ContentListView: ContentListView(android.content.Context,android.util.AttributeSet)
 com.wuxi.app.view.ContentListView: ContentListView(android.content.Context)
@@ -7956,6 +7988,23 @@ com.wuxi.app.view.SwitchButton: SwitchButton(android.content.Context,android.uti
 com.wuxi.app.view.TitleScrollLayout
 com.wuxi.app.view.TitleScrollLayout: TitleScrollLayout(android.content.Context,android.util.AttributeSet)
 com.wuxi.app.view.TitleScrollLayout: TitleScrollLayout(android.content.Context,android.util.AttributeSet,int)
+com.wuxi.domain.AdministrativeCon
+com.wuxi.domain.AdministrativeCon: java.lang.String id
+com.wuxi.domain.AdministrativeCon: int year
+com.wuxi.domain.AdministrativeCon: int start
+com.wuxi.domain.AdministrativeCon: int end
+com.wuxi.domain.AdministrativeCon: java.lang.String qltype
+com.wuxi.domain.AdministrativeCon: AdministrativeCon()
+com.wuxi.domain.AdministrativeCon: java.lang.String getId()
+com.wuxi.domain.AdministrativeCon: void setId(java.lang.String)
+com.wuxi.domain.AdministrativeCon: int getYear()
+com.wuxi.domain.AdministrativeCon: void setYear(int)
+com.wuxi.domain.AdministrativeCon: int getStart()
+com.wuxi.domain.AdministrativeCon: void setStart(int)
+com.wuxi.domain.AdministrativeCon: int getEnd()
+com.wuxi.domain.AdministrativeCon: void setEnd(int)
+com.wuxi.domain.AdministrativeCon: java.lang.String getQltype()
+com.wuxi.domain.AdministrativeCon: void setQltype(java.lang.String)
 com.wuxi.domain.AdministrativeWrapper
 com.wuxi.domain.AdministrativeWrapper: java.util.List licenses
 com.wuxi.domain.AdministrativeWrapper: AdministrativeWrapper()
@@ -8106,7 +8155,10 @@ com.wuxi.domain.CommonDataWrapper: int end
 com.wuxi.domain.CommonDataWrapper: boolean previous
 com.wuxi.domain.CommonDataWrapper: int totalRowsAmount
 com.wuxi.domain.CommonDataWrapper: boolean next
+com.wuxi.domain.CommonDataWrapper: boolean isData
 com.wuxi.domain.CommonDataWrapper: CommonDataWrapper()
+com.wuxi.domain.CommonDataWrapper: boolean isData()
+com.wuxi.domain.CommonDataWrapper: void setData(boolean)
 com.wuxi.domain.CommonDataWrapper: int getStart()
 com.wuxi.domain.CommonDataWrapper: void setStart(int)
 com.wuxi.domain.CommonDataWrapper: int getEnd()
@@ -8409,6 +8461,57 @@ com.wuxi.domain.GIPMailInfoWrapper: java.lang.String getDoprojectid()
 com.wuxi.domain.GIPMailInfoWrapper: void setDoprojectid(java.lang.String)
 com.wuxi.domain.GIPMailInfoWrapper: java.lang.String getDodepname()
 com.wuxi.domain.GIPMailInfoWrapper: void setDodepname(java.lang.String)
+com.wuxi.domain.GIPMinePublicForumInfo
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String politicsMainID
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String title
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String readCount
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String top
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String sentUser
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String doProjectID
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String dataNo
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String begintime
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String viewpath
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String resultCount
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String end
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String start
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String previous
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String totalRowsAmount
+com.wuxi.domain.GIPMinePublicForumInfo: boolean next
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String createDate
+com.wuxi.domain.GIPMinePublicForumInfo: GIPMinePublicForumInfo()
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String getPoliticsMainID()
+com.wuxi.domain.GIPMinePublicForumInfo: void setPoliticsMainID(java.lang.String)
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String getTitle()
+com.wuxi.domain.GIPMinePublicForumInfo: void setTitle(java.lang.String)
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String getReadCount()
+com.wuxi.domain.GIPMinePublicForumInfo: void setReadCount(java.lang.String)
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String getTop()
+com.wuxi.domain.GIPMinePublicForumInfo: void setTop(java.lang.String)
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String getSentUser()
+com.wuxi.domain.GIPMinePublicForumInfo: void setSentUser(java.lang.String)
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String getDoProjectID()
+com.wuxi.domain.GIPMinePublicForumInfo: void setDoProjectID(java.lang.String)
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String getDataNo()
+com.wuxi.domain.GIPMinePublicForumInfo: void setDataNo(java.lang.String)
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String getBegintime()
+com.wuxi.domain.GIPMinePublicForumInfo: void setBegintime(java.lang.String)
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String getViewpath()
+com.wuxi.domain.GIPMinePublicForumInfo: void setViewpath(java.lang.String)
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String getResultCount()
+com.wuxi.domain.GIPMinePublicForumInfo: void setResultCount(java.lang.String)
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String getEnd()
+com.wuxi.domain.GIPMinePublicForumInfo: void setEnd(java.lang.String)
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String getStart()
+com.wuxi.domain.GIPMinePublicForumInfo: void setStart(java.lang.String)
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String getPrevious()
+com.wuxi.domain.GIPMinePublicForumInfo: void setPrevious(java.lang.String)
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String getTotalRowsAmount()
+com.wuxi.domain.GIPMinePublicForumInfo: void setTotalRowsAmount(java.lang.String)
+com.wuxi.domain.GIPMinePublicForumInfo: boolean isNext()
+com.wuxi.domain.GIPMinePublicForumInfo: void setNext(boolean)
+com.wuxi.domain.GIPMinePublicForumInfo: java.lang.String getCreateDate()
+com.wuxi.domain.GIPMinePublicForumInfo: void setCreateDate(java.lang.String)
+com.wuxi.domain.GIPMinePublicForumInfo: java.util.ArrayList resolveData(java.lang.String)
 com.wuxi.domain.GoverApplyOnlie
 com.wuxi.domain.GoverApplyOnlie: java.lang.String address
 com.wuxi.domain.GoverApplyOnlie: java.lang.String id
@@ -9556,6 +9659,33 @@ com.wuxi.domain.MenuItem: void setPfBuildPath(java.lang.String)
 com.wuxi.domain.MenuItem: int hashCode()
 com.wuxi.domain.MenuItem: boolean equals(java.lang.Object)
 com.wuxi.domain.MenuItem: int compareTo(java.lang.Object)
+com.wuxi.domain.MineSugSurWapper
+com.wuxi.domain.MineSugSurWapper: java.util.List mineSugSurs
+com.wuxi.domain.MineSugSurWapper: MineSugSurWapper()
+com.wuxi.domain.MineSugSurWapper: java.util.List getMineSugSurs()
+com.wuxi.domain.MineSugSurWapper: void setMineSugSurs(java.util.List)
+com.wuxi.domain.MineSugSurWapper$MineSugSur
+com.wuxi.domain.MineSugSurWapper$MineSugSur: long serialVersionUID
+com.wuxi.domain.MineSugSurWapper$MineSugSur: java.lang.String id
+com.wuxi.domain.MineSugSurWapper$MineSugSur: java.lang.String title
+com.wuxi.domain.MineSugSurWapper$MineSugSur: java.lang.String starttime
+com.wuxi.domain.MineSugSurWapper$MineSugSur: java.lang.String endtime
+com.wuxi.domain.MineSugSurWapper$MineSugSur: java.lang.String replydept
+com.wuxi.domain.MineSugSurWapper$MineSugSur: java.lang.String surveryID
+com.wuxi.domain.MineSugSurWapper$MineSugSur: com.wuxi.domain.MineSugSurWapper this$0
+com.wuxi.domain.MineSugSurWapper$MineSugSur: MineSugSurWapper$MineSugSur(com.wuxi.domain.MineSugSurWapper)
+com.wuxi.domain.MineSugSurWapper$MineSugSur: java.lang.String getId()
+com.wuxi.domain.MineSugSurWapper$MineSugSur: void setId(java.lang.String)
+com.wuxi.domain.MineSugSurWapper$MineSugSur: java.lang.String getTitle()
+com.wuxi.domain.MineSugSurWapper$MineSugSur: void setTitle(java.lang.String)
+com.wuxi.domain.MineSugSurWapper$MineSugSur: java.lang.String getStarttime()
+com.wuxi.domain.MineSugSurWapper$MineSugSur: void setStarttime(java.lang.String)
+com.wuxi.domain.MineSugSurWapper$MineSugSur: java.lang.String getEndtime()
+com.wuxi.domain.MineSugSurWapper$MineSugSur: void setEndtime(java.lang.String)
+com.wuxi.domain.MineSugSurWapper$MineSugSur: java.lang.String getReplydept()
+com.wuxi.domain.MineSugSurWapper$MineSugSur: void setReplydept(java.lang.String)
+com.wuxi.domain.MineSugSurWapper$MineSugSur: java.lang.String getSurveryID()
+com.wuxi.domain.MineSugSurWapper$MineSugSur: void setSurveryID(java.lang.String)
 com.wuxi.domain.MyApply
 com.wuxi.domain.MyApply: java.lang.String id
 com.wuxi.domain.MyApply: java.lang.String title
@@ -9567,6 +9697,45 @@ com.wuxi.domain.MyApply: java.lang.String getTitle()
 com.wuxi.domain.MyApply: void setTitle(java.lang.String)
 com.wuxi.domain.MyApply: java.lang.String getStatue()
 com.wuxi.domain.MyApply: void setStatue(java.lang.String)
+com.wuxi.domain.MyApplyOpenWrapper
+com.wuxi.domain.MyApplyOpenWrapper: java.util.List myApplyOpens
+com.wuxi.domain.MyApplyOpenWrapper: MyApplyOpenWrapper()
+com.wuxi.domain.MyApplyOpenWrapper: java.util.List getMyApplyOpens()
+com.wuxi.domain.MyApplyOpenWrapper: void setMyApplyOpens(java.util.List)
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: long serialVersionUID
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String id
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String content
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String code
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String title
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String applyDate
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: int readCount
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String answerDep
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String answerDate
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String answerUser
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String answerContent
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: com.wuxi.domain.MyApplyOpenWrapper this$0
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: MyApplyOpenWrapper$MyApplyOpen(com.wuxi.domain.MyApplyOpenWrapper)
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String getId()
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: void setId(java.lang.String)
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String getContent()
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: void setContent(java.lang.String)
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String getCode()
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: void setCode(java.lang.String)
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String getTitle()
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: void setTitle(java.lang.String)
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String getApplyDate()
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: void setApplyDate(java.lang.String)
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: int getReadCount()
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: void setReadCount(int)
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String getAnswerDep()
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: void setAnswerDep(java.lang.String)
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String getAnswerDate()
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: void setAnswerDate(java.lang.String)
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String getAnswerUser()
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: void setAnswerUser(java.lang.String)
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: java.lang.String getAnswerContent()
+com.wuxi.domain.MyApplyOpenWrapper$MyApplyOpen: void setAnswerContent(java.lang.String)
 com.wuxi.domain.MyApplyPageWrapper
 com.wuxi.domain.MyApplyPageWrapper: java.util.List data
 com.wuxi.domain.MyApplyPageWrapper: MyApplyPageWrapper()
@@ -9625,6 +9794,27 @@ com.wuxi.domain.MyApplyWrapper: boolean isNext()
 com.wuxi.domain.MyApplyWrapper: void setNext(boolean)
 com.wuxi.domain.MyApplyWrapper: int getTotalRowsAmount()
 com.wuxi.domain.MyApplyWrapper: void setTotalRowsAmount(int)
+com.wuxi.domain.MyJoinTopicInfo
+com.wuxi.domain.MyJoinTopicInfo: java.lang.String id
+com.wuxi.domain.MyJoinTopicInfo: java.lang.String endTime
+com.wuxi.domain.MyJoinTopicInfo: java.lang.String title
+com.wuxi.domain.MyJoinTopicInfo: java.lang.String beginTime
+com.wuxi.domain.MyJoinTopicInfo: java.lang.String createDate
+com.wuxi.domain.MyJoinTopicInfo: boolean next
+com.wuxi.domain.MyJoinTopicInfo: MyJoinTopicInfo()
+com.wuxi.domain.MyJoinTopicInfo: java.lang.String getId()
+com.wuxi.domain.MyJoinTopicInfo: void setId(java.lang.String)
+com.wuxi.domain.MyJoinTopicInfo: java.lang.String getEndTime()
+com.wuxi.domain.MyJoinTopicInfo: void setEndTime(java.lang.String)
+com.wuxi.domain.MyJoinTopicInfo: java.lang.String getTitle()
+com.wuxi.domain.MyJoinTopicInfo: void setTitle(java.lang.String)
+com.wuxi.domain.MyJoinTopicInfo: java.lang.String getBeginTime()
+com.wuxi.domain.MyJoinTopicInfo: void setBeginTime(java.lang.String)
+com.wuxi.domain.MyJoinTopicInfo: java.lang.String getCreateDate()
+com.wuxi.domain.MyJoinTopicInfo: void setCreateDate(java.lang.String)
+com.wuxi.domain.MyJoinTopicInfo: boolean isNext()
+com.wuxi.domain.MyJoinTopicInfo: void setNext(boolean)
+com.wuxi.domain.MyJoinTopicInfo: java.util.ArrayList resolveData(java.lang.String)
 com.wuxi.domain.MyLetter
 com.wuxi.domain.MyLetter: java.lang.String access_token
 com.wuxi.domain.MyLetter: java.lang.String doprojectid
@@ -9651,6 +9841,51 @@ com.wuxi.domain.MyLetter: int getSentMailBack()
 com.wuxi.domain.MyLetter: void setSentMailBack(int)
 com.wuxi.domain.MyLetter: int getMsgStatus()
 com.wuxi.domain.MyLetter: void setMsgStatus(int)
+com.wuxi.domain.MyOpinionOpenWrapper
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String id
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String state
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String content
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String username
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String title
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String answer
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String deptid
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String deptname
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String sendTime
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String doTime
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String useremail
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String usertel
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String searchkey
+com.wuxi.domain.MyOpinionOpenWrapper: boolean next
+com.wuxi.domain.MyOpinionOpenWrapper: MyOpinionOpenWrapper()
+com.wuxi.domain.MyOpinionOpenWrapper: boolean isNext()
+com.wuxi.domain.MyOpinionOpenWrapper: void setNext(boolean)
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String getId()
+com.wuxi.domain.MyOpinionOpenWrapper: void setId(java.lang.String)
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String getState()
+com.wuxi.domain.MyOpinionOpenWrapper: void setState(java.lang.String)
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String getContent()
+com.wuxi.domain.MyOpinionOpenWrapper: void setContent(java.lang.String)
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String getUsername()
+com.wuxi.domain.MyOpinionOpenWrapper: void setUsername(java.lang.String)
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String getTitle()
+com.wuxi.domain.MyOpinionOpenWrapper: void setTitle(java.lang.String)
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String getAnswer()
+com.wuxi.domain.MyOpinionOpenWrapper: void setAnswer(java.lang.String)
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String getDeptid()
+com.wuxi.domain.MyOpinionOpenWrapper: void setDeptid(java.lang.String)
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String getDeptname()
+com.wuxi.domain.MyOpinionOpenWrapper: void setDeptname(java.lang.String)
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String getSendTime()
+com.wuxi.domain.MyOpinionOpenWrapper: void setSendTime(java.lang.String)
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String getDoTime()
+com.wuxi.domain.MyOpinionOpenWrapper: void setDoTime(java.lang.String)
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String getUseremail()
+com.wuxi.domain.MyOpinionOpenWrapper: void setUseremail(java.lang.String)
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String getUsertel()
+com.wuxi.domain.MyOpinionOpenWrapper: void setUsertel(java.lang.String)
+com.wuxi.domain.MyOpinionOpenWrapper: java.lang.String getSearchkey()
+com.wuxi.domain.MyOpinionOpenWrapper: void setSearchkey(java.lang.String)
+com.wuxi.domain.MyOpinionOpenWrapper: java.util.ArrayList getMyOpinionOpenWrapper(java.lang.String,boolean)
 com.wuxi.domain.Myconsult
 com.wuxi.domain.Myconsult: long serialVersionUID
 com.wuxi.domain.Myconsult: java.lang.String id
@@ -9765,6 +10000,244 @@ com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.l
 com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setMainid(java.lang.String)
 com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: java.lang.String getAnswerman()
 com.wuxi.domain.NoticePostWrapper$NoticePostReplyWrapper$NoticePostReply: void setAnswerman(java.lang.String)
+com.wuxi.domain.OnlineSurveyDetailsInfo
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.lang.String state
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.lang.String userName
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.lang.String optionValue
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.lang.String resultId
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.lang.String orderId
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.lang.String optionText
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.lang.String submitDate
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.lang.String questionsId
+com.wuxi.domain.OnlineSurveyDetailsInfo: OnlineSurveyDetailsInfo()
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.lang.String getState()
+com.wuxi.domain.OnlineSurveyDetailsInfo: void setState(java.lang.String)
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.lang.String getUserName()
+com.wuxi.domain.OnlineSurveyDetailsInfo: void setUserName(java.lang.String)
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.lang.String getOptionValue()
+com.wuxi.domain.OnlineSurveyDetailsInfo: void setOptionValue(java.lang.String)
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.lang.String getResultId()
+com.wuxi.domain.OnlineSurveyDetailsInfo: void setResultId(java.lang.String)
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.lang.String getOrderId()
+com.wuxi.domain.OnlineSurveyDetailsInfo: void setOrderId(java.lang.String)
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.lang.String getOptionText()
+com.wuxi.domain.OnlineSurveyDetailsInfo: void setOptionText(java.lang.String)
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.lang.String getSubmitDate()
+com.wuxi.domain.OnlineSurveyDetailsInfo: void setSubmitDate(java.lang.String)
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.lang.String getQuestionsId()
+com.wuxi.domain.OnlineSurveyDetailsInfo: void setQuestionsId(java.lang.String)
+com.wuxi.domain.OnlineSurveyDetailsInfo: java.util.ArrayList resolveData(java.lang.String)
+com.wuxi.domain.OnlineSurveyDetailsInfo$1
+com.wuxi.domain.OnlineSurveyDetailsInfo$1: com.wuxi.domain.OnlineSurveyDetailsInfo this$0
+com.wuxi.domain.OnlineSurveyDetailsInfo$1: OnlineSurveyDetailsInfo$1(com.wuxi.domain.OnlineSurveyDetailsInfo)
+com.wuxi.domain.OnlineSurveyInfo
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String json
+com.wuxi.domain.OnlineSurveyInfo: android.content.Context mContext
+com.wuxi.domain.OnlineSurveyInfo: com.wuxi.domain.OnlineSurveyInfo mInfo
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String createDate
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_createDate
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_title
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_doProjectId
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_depId
+com.wuxi.domain.OnlineSurveyInfo: int res_readCount
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_endDate
+com.wuxi.domain.OnlineSurveyInfo: int res_isAnonymous
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_orderId
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_isTop
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_summary
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_surveryId
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_author
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_isEnabled
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_updateDate
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_isViewSurveryResult
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_isAuditingInputText
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_isRootDisplay
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_isCenterData
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_isOnlyShowNo
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String res_questions
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String re_null
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String re_end
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String re_start
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String re_previous
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String re_totalRowsAmount
+com.wuxi.domain.OnlineSurveyInfo: boolean re_next
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String data_userName
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String data_resultId
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String data_surveryId
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String data_submitDate
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String data_userHostAddress
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String data_details
+com.wuxi.domain.OnlineSurveyInfo: OnlineSurveyInfo()
+com.wuxi.domain.OnlineSurveyInfo: OnlineSurveyInfo(java.lang.String,android.content.Context)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getCreateDate()
+com.wuxi.domain.OnlineSurveyInfo: void setCreateDate(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: void resolveJson(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_createDate()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_createDate(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_title()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_title(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_doProjectId()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_doProjectId(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_depId()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_depId(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: int getRes_readCount()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_readCount(int)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_endDate()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_endDate(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: int getRes_isAnonymous()
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_orderId()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_orderId(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_isTop()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_isTop(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: void setRes_isAnonymous(int)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_summary()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_summary(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_surveryId()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_surveryId(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_author()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_author(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_isEnabled()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_isEnabled(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_updateDate()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_updateDate(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_isViewSurveryResult()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_isViewSurveryResult(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_isAuditingInputText()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_isAuditingInputText(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_isRootDisplay()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_isRootDisplay(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_isCenterData()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_isCenterData(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_isOnlyShowNo()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_isOnlyShowNo(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRes_questions()
+com.wuxi.domain.OnlineSurveyInfo: void setRes_questions(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: void resolveResultData(org.json.JSONObject)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRe_null()
+com.wuxi.domain.OnlineSurveyInfo: void setRe_null(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRe_end()
+com.wuxi.domain.OnlineSurveyInfo: void setRe_end(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRe_start()
+com.wuxi.domain.OnlineSurveyInfo: void setRe_start(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRe_previous()
+com.wuxi.domain.OnlineSurveyInfo: void setRe_previous(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getRe_totalRowsAmount()
+com.wuxi.domain.OnlineSurveyInfo: void setRe_totalRowsAmount(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: boolean isRe_next()
+com.wuxi.domain.OnlineSurveyInfo: void setRe_next(boolean)
+com.wuxi.domain.OnlineSurveyInfo: void resolveResultsData(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getData_userName()
+com.wuxi.domain.OnlineSurveyInfo: void setData_userName(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getData_resultId()
+com.wuxi.domain.OnlineSurveyInfo: void setData_resultId(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getData_surveryId()
+com.wuxi.domain.OnlineSurveyInfo: void setData_surveryId(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getData_submitDate()
+com.wuxi.domain.OnlineSurveyInfo: void setData_submitDate(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getData_userHostAddress()
+com.wuxi.domain.OnlineSurveyInfo: void setData_userHostAddress(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: java.lang.String getData_details()
+com.wuxi.domain.OnlineSurveyInfo: void setData_details(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: void resolveDataData(java.lang.String)
+com.wuxi.domain.OnlineSurveyInfo: com.wuxi.domain.OnlineSurveyInfo getData()
+com.wuxi.domain.OnlineSurveyInfo: boolean isNULL(java.lang.String)
+com.wuxi.domain.OnlineSurveyOptionesInfo
+com.wuxi.domain.OnlineSurveyOptionesInfo: java.lang.String serialNumber
+com.wuxi.domain.OnlineSurveyOptionesInfo: java.lang.String optionValue
+com.wuxi.domain.OnlineSurveyOptionesInfo: java.lang.String questionId
+com.wuxi.domain.OnlineSurveyOptionesInfo: java.lang.String optionId
+com.wuxi.domain.OnlineSurveyOptionesInfo: java.lang.String clickCount
+com.wuxi.domain.OnlineSurveyOptionesInfo: java.lang.String linkUrl
+com.wuxi.domain.OnlineSurveyOptionesInfo: java.util.Comparator comparator
+com.wuxi.domain.OnlineSurveyOptionesInfo: OnlineSurveyOptionesInfo()
+com.wuxi.domain.OnlineSurveyOptionesInfo: java.lang.String getSerialNumber()
+com.wuxi.domain.OnlineSurveyOptionesInfo: void setSerialNumber(java.lang.String)
+com.wuxi.domain.OnlineSurveyOptionesInfo: java.lang.String getOptionValue()
+com.wuxi.domain.OnlineSurveyOptionesInfo: void setOptionValue(java.lang.String)
+com.wuxi.domain.OnlineSurveyOptionesInfo: java.lang.String getQuestionId()
+com.wuxi.domain.OnlineSurveyOptionesInfo: void setQuestionId(java.lang.String)
+com.wuxi.domain.OnlineSurveyOptionesInfo: java.lang.String getOptionId()
+com.wuxi.domain.OnlineSurveyOptionesInfo: void setOptionId(java.lang.String)
+com.wuxi.domain.OnlineSurveyOptionesInfo: java.lang.String getClickCount()
+com.wuxi.domain.OnlineSurveyOptionesInfo: void setClickCount(java.lang.String)
+com.wuxi.domain.OnlineSurveyOptionesInfo: java.lang.String getLinkUrl()
+com.wuxi.domain.OnlineSurveyOptionesInfo: void setLinkUrl(java.lang.String)
+com.wuxi.domain.OnlineSurveyOptionesInfo: java.util.ArrayList resolveData(java.lang.String)
+com.wuxi.domain.OnlineSurveyOptionesInfo$1
+com.wuxi.domain.OnlineSurveyOptionesInfo$1: com.wuxi.domain.OnlineSurveyOptionesInfo this$0
+com.wuxi.domain.OnlineSurveyOptionesInfo$1: OnlineSurveyOptionesInfo$1(com.wuxi.domain.OnlineSurveyOptionesInfo)
+com.wuxi.domain.OnlineSurveyOptionesInfo$1: int compare(com.wuxi.domain.OnlineSurveyOptionesInfo,com.wuxi.domain.OnlineSurveyOptionesInfo)
+com.wuxi.domain.OnlineSurveyOptionesInfo$1: int compare(java.lang.Object,java.lang.Object)
+com.wuxi.domain.OnlineSurveyOptionesInfo$2
+com.wuxi.domain.OnlineSurveyOptionesInfo$2: com.wuxi.domain.OnlineSurveyOptionesInfo this$0
+com.wuxi.domain.OnlineSurveyOptionesInfo$2: OnlineSurveyOptionesInfo$2(com.wuxi.domain.OnlineSurveyOptionesInfo)
+com.wuxi.domain.OnlineSurveyQuestionsInfo
+com.wuxi.domain.OnlineSurveyQuestionsInfo: android.content.Context mContext
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String description
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String questionId
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String orderId
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String questionType
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String surveryId
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String optionCount
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String hasOther
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String isForce
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String minSelect
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String maxSelect
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String colspan
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String optiones
+com.wuxi.domain.OnlineSurveyQuestionsInfo: OnlineSurveyQuestionsInfo(android.content.Context)
+com.wuxi.domain.OnlineSurveyQuestionsInfo: OnlineSurveyQuestionsInfo()
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String getDescription()
+com.wuxi.domain.OnlineSurveyQuestionsInfo: void setDescription(java.lang.String)
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String getQuestionId()
+com.wuxi.domain.OnlineSurveyQuestionsInfo: void setQuestionId(java.lang.String)
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String getOrderId()
+com.wuxi.domain.OnlineSurveyQuestionsInfo: void setOrderId(java.lang.String)
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String getQuestionType()
+com.wuxi.domain.OnlineSurveyQuestionsInfo: void setQuestionType(java.lang.String)
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String getSurveryId()
+com.wuxi.domain.OnlineSurveyQuestionsInfo: void setSurveryId(java.lang.String)
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String getOptionCount()
+com.wuxi.domain.OnlineSurveyQuestionsInfo: void setOptionCount(java.lang.String)
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String getHasOther()
+com.wuxi.domain.OnlineSurveyQuestionsInfo: void setHasOther(java.lang.String)
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String getIsForce()
+com.wuxi.domain.OnlineSurveyQuestionsInfo: void setIsForce(java.lang.String)
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String getMinSelect()
+com.wuxi.domain.OnlineSurveyQuestionsInfo: void setMinSelect(java.lang.String)
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String getMaxSelect()
+com.wuxi.domain.OnlineSurveyQuestionsInfo: void setMaxSelect(java.lang.String)
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String getColspan()
+com.wuxi.domain.OnlineSurveyQuestionsInfo: void setColspan(java.lang.String)
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.lang.String getOptiones()
+com.wuxi.domain.OnlineSurveyQuestionsInfo: void setOptiones(java.lang.String)
+com.wuxi.domain.OnlineSurveyQuestionsInfo: java.util.ArrayList resolveData(java.lang.String)
+com.wuxi.domain.OpenInfoDept
+com.wuxi.domain.OpenInfoDept: long serialVersionUID
+com.wuxi.domain.OpenInfoDept: java.lang.String name
+com.wuxi.domain.OpenInfoDept: java.lang.String id
+com.wuxi.domain.OpenInfoDept: java.lang.String isnull
+com.wuxi.domain.OpenInfoDept: OpenInfoDept()
+com.wuxi.domain.OpenInfoDept: java.lang.String getName()
+com.wuxi.domain.OpenInfoDept: void setName(java.lang.String)
+com.wuxi.domain.OpenInfoDept: java.lang.String getId()
+com.wuxi.domain.OpenInfoDept: void setId(java.lang.String)
+com.wuxi.domain.OpenInfoDept: java.lang.String getIsnull()
+com.wuxi.domain.OpenInfoDept: void setIsnull(java.lang.String)
+com.wuxi.domain.OpenInfoSearchCondition
+com.wuxi.domain.OpenInfoSearchCondition: int start
+com.wuxi.domain.OpenInfoSearchCondition: int end
+com.wuxi.domain.OpenInfoSearchCondition: java.lang.String dept
+com.wuxi.domain.OpenInfoSearchCondition: java.lang.String year
+com.wuxi.domain.OpenInfoSearchCondition: OpenInfoSearchCondition()
+com.wuxi.domain.OpenInfoSearchCondition: int getStart()
+com.wuxi.domain.OpenInfoSearchCondition: void setStart(int)
+com.wuxi.domain.OpenInfoSearchCondition: int getEnd()
+com.wuxi.domain.OpenInfoSearchCondition: void setEnd(int)
+com.wuxi.domain.OpenInfoSearchCondition: java.lang.String getDept()
+com.wuxi.domain.OpenInfoSearchCondition: void setDept(java.lang.String)
+com.wuxi.domain.OpenInfoSearchCondition: java.lang.String getYear()
+com.wuxi.domain.OpenInfoSearchCondition: void setYear(java.lang.String)
 com.wuxi.domain.OpenTel
 com.wuxi.domain.OpenTel: java.lang.String tel
 com.wuxi.domain.OpenTel: java.lang.String depname
@@ -10062,6 +10535,20 @@ com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply:
 com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: void setMainid(java.lang.String)
 com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: java.lang.String getAnswerman()
 com.wuxi.domain.PepoleIdeaCollectWrapper$PepoleIdeaReplyWrapper$PepoleIdeaReply: void setAnswerman(java.lang.String)
+com.wuxi.domain.PolicieRegulationCon
+com.wuxi.domain.PolicieRegulationCon: java.lang.String dept
+com.wuxi.domain.PolicieRegulationCon: int year
+com.wuxi.domain.PolicieRegulationCon: int start
+com.wuxi.domain.PolicieRegulationCon: int end
+com.wuxi.domain.PolicieRegulationCon: PolicieRegulationCon()
+com.wuxi.domain.PolicieRegulationCon: java.lang.String getDept()
+com.wuxi.domain.PolicieRegulationCon: void setDept(java.lang.String)
+com.wuxi.domain.PolicieRegulationCon: int getYear()
+com.wuxi.domain.PolicieRegulationCon: void setYear(int)
+com.wuxi.domain.PolicieRegulationCon: int getStart()
+com.wuxi.domain.PolicieRegulationCon: void setStart(int)
+com.wuxi.domain.PolicieRegulationCon: int getEnd()
+com.wuxi.domain.PolicieRegulationCon: void setEnd(int)
 com.wuxi.domain.PoliticsWrapper
 com.wuxi.domain.PoliticsWrapper: java.util.List data
 com.wuxi.domain.PoliticsWrapper: PoliticsWrapper()
@@ -10086,6 +10573,35 @@ com.wuxi.domain.PoliticsWrapper$Politics: java.lang.String getBeginTime()
 com.wuxi.domain.PoliticsWrapper$Politics: void setBeginTime(java.lang.String)
 com.wuxi.domain.PoliticsWrapper$Politics: java.lang.String getEndTime()
 com.wuxi.domain.PoliticsWrapper$Politics: void setEndTime(java.lang.String)
+com.wuxi.domain.PromoMoreVideoInfo
+com.wuxi.domain.PromoMoreVideoInfo: android.content.Context context
+com.wuxi.domain.PromoMoreVideoInfo: java.lang.String id
+com.wuxi.domain.PromoMoreVideoInfo: java.lang.String subject
+com.wuxi.domain.PromoMoreVideoInfo: java.lang.String guests
+com.wuxi.domain.PromoMoreVideoInfo: java.lang.String workDate
+com.wuxi.domain.PromoMoreVideoInfo: java.lang.String subjectContent
+com.wuxi.domain.PromoMoreVideoInfo: java.lang.String beginTime
+com.wuxi.domain.PromoMoreVideoInfo: java.lang.String endTime
+com.wuxi.domain.PromoMoreVideoInfo: boolean next
+com.wuxi.domain.PromoMoreVideoInfo: PromoMoreVideoInfo(android.content.Context)
+com.wuxi.domain.PromoMoreVideoInfo: PromoMoreVideoInfo()
+com.wuxi.domain.PromoMoreVideoInfo: java.lang.String getId()
+com.wuxi.domain.PromoMoreVideoInfo: void setId(java.lang.String)
+com.wuxi.domain.PromoMoreVideoInfo: java.lang.String getSubject()
+com.wuxi.domain.PromoMoreVideoInfo: void setSubject(java.lang.String)
+com.wuxi.domain.PromoMoreVideoInfo: java.lang.String getGuests()
+com.wuxi.domain.PromoMoreVideoInfo: void setGuests(java.lang.String)
+com.wuxi.domain.PromoMoreVideoInfo: java.lang.String getWorkDate()
+com.wuxi.domain.PromoMoreVideoInfo: void setWorkDate(java.lang.String)
+com.wuxi.domain.PromoMoreVideoInfo: java.lang.String getSubjectContent()
+com.wuxi.domain.PromoMoreVideoInfo: void setSubjectContent(java.lang.String)
+com.wuxi.domain.PromoMoreVideoInfo: java.lang.String getBeginTime()
+com.wuxi.domain.PromoMoreVideoInfo: void setBeginTime(java.lang.String)
+com.wuxi.domain.PromoMoreVideoInfo: java.lang.String getEndTime()
+com.wuxi.domain.PromoMoreVideoInfo: void setEndTime(java.lang.String)
+com.wuxi.domain.PromoMoreVideoInfo: boolean isNext()
+com.wuxi.domain.PromoMoreVideoInfo: void setNext(boolean)
+com.wuxi.domain.PromoMoreVideoInfo: java.util.ArrayList resolveData(java.lang.String)
 com.wuxi.domain.QueryLetterCondition
 com.wuxi.domain.QueryLetterCondition: java.lang.String keyword
 com.wuxi.domain.QueryLetterCondition: java.lang.String contenttype
@@ -10436,6 +10952,17 @@ com.wuxi.domain.StatisticsLetter: void setReplyDay(java.lang.String)
 com.wuxi.domain.SubmitLetter
 com.wuxi.domain.SubmitLetter: java.lang.String id
 com.wuxi.domain.SubmitLetter: SubmitLetter()
+com.wuxi.domain.SuggestLawSearchCon
+com.wuxi.domain.SuggestLawSearchCon: int year
+com.wuxi.domain.SuggestLawSearchCon: int start
+com.wuxi.domain.SuggestLawSearchCon: int end
+com.wuxi.domain.SuggestLawSearchCon: SuggestLawSearchCon()
+com.wuxi.domain.SuggestLawSearchCon: int getYear()
+com.wuxi.domain.SuggestLawSearchCon: void setYear(int)
+com.wuxi.domain.SuggestLawSearchCon: int getStart()
+com.wuxi.domain.SuggestLawSearchCon: void setStart(int)
+com.wuxi.domain.SuggestLawSearchCon: int getEnd()
+com.wuxi.domain.SuggestLawSearchCon: void setEnd(int)
 com.wuxi.domain.TitleItemAction
 com.wuxi.domain.TitleItemAction: java.lang.String actionName
 com.wuxi.domain.TitleItemAction: com.wuxi.app.BaseFragment baseFragment
@@ -10564,6 +11091,44 @@ com.wuxi.domain.VedioReviewWrapper$VedioReview: java.lang.String getBeginTime()
 com.wuxi.domain.VedioReviewWrapper$VedioReview: void setBeginTime(java.lang.String)
 com.wuxi.domain.VedioReviewWrapper$VedioReview: java.lang.String getEndTime()
 com.wuxi.domain.VedioReviewWrapper$VedioReview: void setEndTime(java.lang.String)
+com.wuxi.domain.VideoPreviewInfo
+com.wuxi.domain.VideoPreviewInfo: java.lang.String id
+com.wuxi.domain.VideoPreviewInfo: java.lang.String subject
+com.wuxi.domain.VideoPreviewInfo: java.lang.String guests
+com.wuxi.domain.VideoPreviewInfo: java.lang.String workDate
+com.wuxi.domain.VideoPreviewInfo: java.lang.String subjectContent
+com.wuxi.domain.VideoPreviewInfo: java.util.Date beginTime
+com.wuxi.domain.VideoPreviewInfo: java.util.Date endTime
+com.wuxi.domain.VideoPreviewInfo: int end
+com.wuxi.domain.VideoPreviewInfo: int start
+com.wuxi.domain.VideoPreviewInfo: boolean previous
+com.wuxi.domain.VideoPreviewInfo: long totalRowsAmount
+com.wuxi.domain.VideoPreviewInfo: boolean next
+com.wuxi.domain.VideoPreviewInfo: VideoPreviewInfo()
+com.wuxi.domain.VideoPreviewInfo: java.lang.String getId()
+com.wuxi.domain.VideoPreviewInfo: void setId(java.lang.String)
+com.wuxi.domain.VideoPreviewInfo: java.lang.String getSubject()
+com.wuxi.domain.VideoPreviewInfo: void setSubject(java.lang.String)
+com.wuxi.domain.VideoPreviewInfo: java.lang.String getGuests()
+com.wuxi.domain.VideoPreviewInfo: void setGuests(java.lang.String)
+com.wuxi.domain.VideoPreviewInfo: java.lang.String getWorkDate()
+com.wuxi.domain.VideoPreviewInfo: void setWorkDate(java.lang.String)
+com.wuxi.domain.VideoPreviewInfo: java.lang.String getSubjectContent()
+com.wuxi.domain.VideoPreviewInfo: void setSubjectContent(java.lang.String)
+com.wuxi.domain.VideoPreviewInfo: java.util.Date getBeginTime()
+com.wuxi.domain.VideoPreviewInfo: void setBeginTime(java.util.Date)
+com.wuxi.domain.VideoPreviewInfo: java.util.Date getEndTime()
+com.wuxi.domain.VideoPreviewInfo: void setEndTime(java.util.Date)
+com.wuxi.domain.VideoPreviewInfo: int getEnd()
+com.wuxi.domain.VideoPreviewInfo: void setEnd(int)
+com.wuxi.domain.VideoPreviewInfo: int getStart()
+com.wuxi.domain.VideoPreviewInfo: void setStart(int)
+com.wuxi.domain.VideoPreviewInfo: boolean isPrevious()
+com.wuxi.domain.VideoPreviewInfo: void setPrevious(boolean)
+com.wuxi.domain.VideoPreviewInfo: long getTotalRowsAmount()
+com.wuxi.domain.VideoPreviewInfo: void setTotalRowsAmount(long)
+com.wuxi.domain.VideoPreviewInfo: boolean isNext()
+com.wuxi.domain.VideoPreviewInfo: void setNext(boolean)
 com.wuxi.domain.WorkSuggestionBoxWrapper
 com.wuxi.domain.WorkSuggestionBoxWrapper: java.lang.String id
 com.wuxi.domain.WorkSuggestionBoxWrapper: java.util.List parameters

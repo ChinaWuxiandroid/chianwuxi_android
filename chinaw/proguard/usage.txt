@@ -1,158 +1,170 @@
 com.google.gson.DefaultDateTypeAdapter
-com.google.gson.ExclusionStrategy
-com.google.gson.FieldAttributes
-com.google.gson.FieldNamingPolicy
-com.google.gson.FieldNamingPolicy$1
-com.google.gson.FieldNamingPolicy$2
-com.google.gson.FieldNamingPolicy$3
-com.google.gson.FieldNamingPolicy$4
-com.google.gson.FieldNamingPolicy$5
-com.google.gson.FieldNamingStrategy
-com.google.gson.Gson
-com.google.gson.Gson$1
-com.google.gson.Gson$2
-com.google.gson.Gson$3
-com.google.gson.Gson$4
-com.google.gson.Gson$5
-com.google.gson.Gson$6
-com.google.gson.Gson$FutureTypeAdapter
+com.google.gson.FieldAttributes:
+    53:53:public java.lang.Class getDeclaringClass()
+    60:60:public java.lang.String getName()
+    80:80:public java.lang.reflect.Type getDeclaredType()
+    100:100:public java.lang.Class getDeclaredClass()
+    111:111:public java.lang.annotation.Annotation getAnnotation(java.lang.Class)
+    121:121:public java.util.Collection getAnnotations()
+    135:135:public boolean hasModifier(int)
+    146:146:java.lang.Object get(java.lang.Object)
+    155:155:boolean isSynthetic()
+com.google.gson.Gson:
+    static final boolean DEFAULT_JSON_NON_EXECUTABLE
+    private static final java.lang.String JSON_NON_EXECUTABLE_PREFIX
+    455:458:public com.google.gson.JsonElement toJsonTree(java.lang.Object)
+    478:480:public com.google.gson.JsonElement toJsonTree(java.lang.Object,java.lang.reflect.Type)
+    497:500:public java.lang.String toJson(java.lang.Object)
+    519:521:public java.lang.String toJson(java.lang.Object,java.lang.reflect.Type)
+    539:544:public void toJson(java.lang.Object,java.lang.Appendable)
+    564:569:public void toJson(java.lang.Object,java.lang.reflect.Type,java.lang.Appendable)
+    578:594:public void toJson(java.lang.Object,java.lang.reflect.Type,com.google.gson.stream.JsonWriter)
+    604:606:public java.lang.String toJson(com.google.gson.JsonElement)
+    619:624:public void toJson(com.google.gson.JsonElement,java.lang.Appendable)
+    631:639:private com.google.gson.stream.JsonWriter newJsonWriter(java.io.Writer)
+    647:662:public void toJson(com.google.gson.JsonElement,com.google.gson.stream.JsonWriter)
+    682:683:public java.lang.Object fromJson(java.lang.String,java.lang.Class)
+    733:736:public java.lang.Object fromJson(java.io.Reader,java.lang.Class)
+    832:833:public java.lang.Object fromJson(com.google.gson.JsonElement,java.lang.Class)
+    856:859:public java.lang.Object fromJson(com.google.gson.JsonElement,java.lang.reflect.Type)
+com.google.gson.Gson$2:
+    131:131:public java.lang.Object deserialize(com.google.gson.JsonElement,java.lang.reflect.Type)
+com.google.gson.Gson$3:
+    137:137:public com.google.gson.JsonElement serialize(java.lang.Object)
+    140:140:public com.google.gson.JsonElement serialize(java.lang.Object,java.lang.reflect.Type)
 com.google.gson.GsonBuilder
-com.google.gson.InstanceCreator
-com.google.gson.JsonArray
-com.google.gson.JsonDeserializationContext
+com.google.gson.JsonArray:
+    61:62:public void addAll(com.google.gson.JsonArray)
+    70:70:public int size()
+    92:92:public com.google.gson.JsonElement get(int)
+    154:157:public java.math.BigDecimal getAsBigDecimal()
+    171:174:public java.math.BigInteger getAsBigInteger()
+    187:190:public float getAsFloat()
+    227:230:public byte getAsByte()
+    235:238:public char getAsCharacter()
+    251:254:public short getAsShort()
+com.google.gson.JsonDeserializationContext:
+    public abstract java.lang.Object deserialize(com.google.gson.JsonElement,java.lang.reflect.Type)
 com.google.gson.JsonDeserializer
-com.google.gson.JsonElement
-com.google.gson.JsonIOException
-com.google.gson.JsonNull
-com.google.gson.JsonObject
-com.google.gson.JsonParseException
+com.google.gson.JsonElement:
+    130:133:public com.google.gson.JsonNull getAsJsonNull()
+    211:211:public float getAsFloat()
+    251:251:public byte getAsByte()
+    265:265:public char getAsCharacter()
+    279:279:public java.math.BigDecimal getAsBigDecimal()
+    293:293:public java.math.BigInteger getAsBigInteger()
+    306:306:public short getAsShort()
+com.google.gson.JsonIOException:
+    private static final long serialVersionUID
+    33:34:public JsonIOException(java.lang.String,java.lang.Throwable)
+com.google.gson.JsonObject:
+    68:68:public com.google.gson.JsonElement remove(java.lang.String)
+    79:80:public void addProperty(java.lang.String,java.lang.String)
+    90:91:public void addProperty(java.lang.String,java.lang.Number)
+    101:102:public void addProperty(java.lang.String,java.lang.Boolean)
+    112:113:public void addProperty(java.lang.String,java.lang.Character)
+    122:122:private com.google.gson.JsonElement createJsonElement(java.lang.Object)
+    142:142:public boolean has(java.lang.String)
+    152:156:public com.google.gson.JsonElement get(java.lang.String)
+    166:166:public com.google.gson.JsonPrimitive getAsJsonPrimitive(java.lang.String)
+    176:176:public com.google.gson.JsonArray getAsJsonArray(java.lang.String)
+    186:186:public com.google.gson.JsonObject getAsJsonObject(java.lang.String)
+com.google.gson.JsonParseException:
+    static final long serialVersionUID
 com.google.gson.JsonParser
-com.google.gson.JsonPrimitive
-com.google.gson.JsonSerializationContext
+com.google.gson.JsonPrimitive:
+    74:76:public JsonPrimitive(java.lang.Character)
+    84:86:JsonPrimitive(java.lang.Object)
+    199:199:public java.math.BigDecimal getAsBigDecimal()
+    210:210:public java.math.BigInteger getAsBigInteger()
+    222:222:public float getAsFloat()
+    244:244:public short getAsShort()
+    260:260:public byte getAsByte()
+    265:265:public char getAsCharacter()
+com.google.gson.JsonSerializationContext:
+    public abstract com.google.gson.JsonElement serialize(java.lang.Object)
+    public abstract com.google.gson.JsonElement serialize(java.lang.Object,java.lang.reflect.Type)
 com.google.gson.JsonSerializer
 com.google.gson.JsonStreamParser
-com.google.gson.JsonSyntaxException
-com.google.gson.LongSerializationPolicy
-com.google.gson.LongSerializationPolicy$1
-com.google.gson.LongSerializationPolicy$2
+com.google.gson.JsonSyntaxException:
+    private static final long serialVersionUID
+com.google.gson.LongSerializationPolicy:
+    public abstract com.google.gson.JsonElement serialize(java.lang.Long)
+com.google.gson.LongSerializationPolicy$1:
+    36:36:public com.google.gson.JsonElement serialize(java.lang.Long)
+com.google.gson.LongSerializationPolicy$2:
+    47:47:public com.google.gson.JsonElement serialize(java.lang.Long)
 com.google.gson.TreeTypeAdapter
 com.google.gson.TreeTypeAdapter$1
 com.google.gson.TreeTypeAdapter$SingleTypeFactory
-com.google.gson.TypeAdapter
+com.google.gson.TypeAdapter:
+    141:143:public final void toJson(java.io.Writer,java.lang.Object)
+    186:186:public final com.google.gson.TypeAdapter nullSafe()
+    215:217:public final java.lang.String toJson(java.lang.Object)
+    255:256:public final java.lang.Object fromJson(java.io.Reader)
+    269:269:public final java.lang.Object fromJson(java.lang.String)
+    280:283:public final java.lang.Object fromJsonTree(com.google.gson.JsonElement)
 com.google.gson.TypeAdapter$1
-com.google.gson.TypeAdapterFactory
-com.google.gson.annotations.Expose
-com.google.gson.annotations.SerializedName
-com.google.gson.annotations.Since
-com.google.gson.annotations.Until
-com.google.gson.internal.$Gson$Preconditions
-com.google.gson.internal.$Gson$Types
-com.google.gson.internal.$Gson$Types$GenericArrayTypeImpl
-com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl
-com.google.gson.internal.$Gson$Types$WildcardTypeImpl
-com.google.gson.internal.ConstructorConstructor
-com.google.gson.internal.ConstructorConstructor$1
-com.google.gson.internal.ConstructorConstructor$2
-com.google.gson.internal.ConstructorConstructor$3
-com.google.gson.internal.ConstructorConstructor$4
-com.google.gson.internal.ConstructorConstructor$5
-com.google.gson.internal.ConstructorConstructor$6
-com.google.gson.internal.ConstructorConstructor$7
-com.google.gson.internal.ConstructorConstructor$8
-com.google.gson.internal.Excluder
-com.google.gson.internal.Excluder$1
-com.google.gson.internal.JsonReaderInternalAccess
-com.google.gson.internal.LazilyParsedNumber
-com.google.gson.internal.ObjectConstructor
-com.google.gson.internal.Primitives
-com.google.gson.internal.Streams
+com.google.gson.internal.$Gson$Preconditions:
+    32:32:public $Gson$Preconditions()
+com.google.gson.internal.$Gson$Types:
+    45:45:private $Gson$Types()
+com.google.gson.internal.$Gson$Types$GenericArrayTypeImpl:
+    private static final long serialVersionUID
+com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl:
+    private static final long serialVersionUID
+com.google.gson.internal.$Gson$Types$WildcardTypeImpl:
+    private static final long serialVersionUID
+com.google.gson.internal.Excluder:
+    private static final double IGNORE_VERSIONS
+    70:72:public com.google.gson.internal.Excluder withVersion(double)
+    76:81:public varargs com.google.gson.internal.Excluder withModifiers(int[])
+    85:87:public com.google.gson.internal.Excluder disableInnerClassSerialization()
+    91:93:public com.google.gson.internal.Excluder excludeFieldsWithoutExposeAnnotation()
+    98:108:public com.google.gson.internal.Excluder withExclusionStrategy(com.google.gson.ExclusionStrategy,boolean,boolean)
+com.google.gson.internal.Primitives:
+    32:32:private Primitives()
+    80:80:public static boolean isWrapperType(java.lang.reflect.Type)
+    96:98:public static java.lang.Class wrap(java.lang.Class)
+    113:115:public static java.lang.Class unwrap(java.lang.Class)
+com.google.gson.internal.Streams:
+    35:79:public Streams()
+    40:60:public static com.google.gson.JsonElement parse(com.google.gson.stream.JsonReader)
+    72:72:public static java.io.Writer writerForAppendable(java.lang.Appendable)
 com.google.gson.internal.Streams$1
 com.google.gson.internal.Streams$AppendableWriter
 com.google.gson.internal.Streams$AppendableWriter$CurrentWrite
-com.google.gson.internal.StringMap
-com.google.gson.internal.StringMap$1
-com.google.gson.internal.StringMap$EntrySet
-com.google.gson.internal.StringMap$EntrySet$1
-com.google.gson.internal.StringMap$KeySet
-com.google.gson.internal.StringMap$KeySet$1
-com.google.gson.internal.StringMap$LinkedEntry
-com.google.gson.internal.StringMap$LinkedHashIterator
-com.google.gson.internal.StringMap$Values
-com.google.gson.internal.StringMap$Values$1
-com.google.gson.internal.UnsafeAllocator
-com.google.gson.internal.UnsafeAllocator$1
-com.google.gson.internal.UnsafeAllocator$2
-com.google.gson.internal.UnsafeAllocator$3
-com.google.gson.internal.UnsafeAllocator$4
-com.google.gson.internal.bind.ArrayTypeAdapter
-com.google.gson.internal.bind.ArrayTypeAdapter$1
-com.google.gson.internal.bind.CollectionTypeAdapterFactory
-com.google.gson.internal.bind.CollectionTypeAdapterFactory$Adapter
-com.google.gson.internal.bind.DateTypeAdapter
-com.google.gson.internal.bind.DateTypeAdapter$1
-com.google.gson.internal.bind.JsonTreeReader
-com.google.gson.internal.bind.JsonTreeReader$1
-com.google.gson.internal.bind.JsonTreeWriter
-com.google.gson.internal.bind.JsonTreeWriter$1
-com.google.gson.internal.bind.MapTypeAdapterFactory
-com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter
-com.google.gson.internal.bind.ObjectTypeAdapter
-com.google.gson.internal.bind.ObjectTypeAdapter$1
-com.google.gson.internal.bind.ObjectTypeAdapter$2
-com.google.gson.internal.bind.ReflectiveTypeAdapterFactory
-com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$1
-com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter
-com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$BoundField
-com.google.gson.internal.bind.SqlDateTypeAdapter
-com.google.gson.internal.bind.SqlDateTypeAdapter$1
-com.google.gson.internal.bind.TimeTypeAdapter
-com.google.gson.internal.bind.TimeTypeAdapter$1
-com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper
-com.google.gson.internal.bind.TypeAdapters
-com.google.gson.internal.bind.TypeAdapters$1
-com.google.gson.internal.bind.TypeAdapters$10
-com.google.gson.internal.bind.TypeAdapters$11
-com.google.gson.internal.bind.TypeAdapters$12
-com.google.gson.internal.bind.TypeAdapters$13
-com.google.gson.internal.bind.TypeAdapters$14
-com.google.gson.internal.bind.TypeAdapters$15
-com.google.gson.internal.bind.TypeAdapters$16
-com.google.gson.internal.bind.TypeAdapters$17
-com.google.gson.internal.bind.TypeAdapters$18
-com.google.gson.internal.bind.TypeAdapters$19
-com.google.gson.internal.bind.TypeAdapters$2
-com.google.gson.internal.bind.TypeAdapters$20
-com.google.gson.internal.bind.TypeAdapters$21
-com.google.gson.internal.bind.TypeAdapters$22
-com.google.gson.internal.bind.TypeAdapters$22$1
-com.google.gson.internal.bind.TypeAdapters$23
-com.google.gson.internal.bind.TypeAdapters$24
-com.google.gson.internal.bind.TypeAdapters$25
-com.google.gson.internal.bind.TypeAdapters$26
+com.google.gson.internal.StringMap:
+    private static final int MINIMUM_CAPACITY
+    private static final int MAXIMUM_CAPACITY
+com.google.gson.internal.bind.JsonTreeReader:
+    53:55:public JsonTreeReader(com.google.gson.JsonElement)
+com.google.gson.internal.bind.JsonTreeWriter:
+    163:167:public com.google.gson.stream.JsonWriter value(double)
+com.google.gson.internal.bind.TypeAdapters:
+    58:58:private TypeAdapters()
+    760:760:public static com.google.gson.TypeAdapterFactory newFactory(com.google.gson.reflect.TypeToken,com.google.gson.TypeAdapter)
+com.google.gson.internal.bind.TypeAdapters$23:
+    private static final java.lang.String YEAR
+    private static final java.lang.String MONTH
+    private static final java.lang.String DAY_OF_MONTH
+    private static final java.lang.String HOUR_OF_DAY
+    private static final java.lang.String MINUTE
+    private static final java.lang.String SECOND
 com.google.gson.internal.bind.TypeAdapters$27
-com.google.gson.internal.bind.TypeAdapters$28
-com.google.gson.internal.bind.TypeAdapters$29
-com.google.gson.internal.bind.TypeAdapters$3
-com.google.gson.internal.bind.TypeAdapters$30
-com.google.gson.internal.bind.TypeAdapters$31
-com.google.gson.internal.bind.TypeAdapters$32
-com.google.gson.internal.bind.TypeAdapters$4
-com.google.gson.internal.bind.TypeAdapters$5
-com.google.gson.internal.bind.TypeAdapters$6
-com.google.gson.internal.bind.TypeAdapters$7
-com.google.gson.internal.bind.TypeAdapters$8
-com.google.gson.internal.bind.TypeAdapters$9
-com.google.gson.internal.bind.TypeAdapters$EnumTypeAdapter
-com.google.gson.reflect.TypeToken
-com.google.gson.stream.JsonReader
-com.google.gson.stream.JsonReader$1
-com.google.gson.stream.JsonReader$2
-com.google.gson.stream.JsonScope
-com.google.gson.stream.JsonToken
-com.google.gson.stream.JsonWriter
-com.google.gson.stream.JsonWriter$1
-com.google.gson.stream.MalformedJsonException
-com.google.gson.stream.StringPool
+com.google.gson.stream.JsonReader:
+    private static final java.lang.String TRUE
+    private static final java.lang.String FALSE
+com.google.gson.stream.JsonWriter:
+    206:213:public final void setIndent(java.lang.String)
+    246:247:public final void setHtmlSafe(boolean)
+    254:254:public final boolean isHtmlSafe()
+    262:263:public final void setSerializeNulls(boolean)
+    447:453:public com.google.gson.stream.JsonWriter value(double)
+com.google.gson.stream.MalformedJsonException:
+    private static final long serialVersionUID
+    33:37:public MalformedJsonException(java.lang.String,java.lang.Throwable)
+    39:43:public MalformedJsonException(java.lang.Throwable)
 com.polites.android.FlingAnimation:
     68:69:public void setFactor(float)
 com.polites.android.GestureImageView:
@@ -217,8 +229,8 @@ com.wuxi.app.activity.BaseSlideActivity:
     protected static final int FRAME_CONTENT
     public static final java.lang.String SELECT_MENU_POSITION_KEY
     private static final java.lang.String MENUITEM_CACKE_KEY
-    85:86:public void setLeftSelectPostion(int)
-    258:259:public void setUnTouchableOffset(float,float)
+    86:87:public void setLeftSelectPostion(int)
+    261:262:public void setUnTouchableOffset(float,float)
 com.wuxi.app.activity.MainIndexActivity:
     private static final int MENUITEM_LOAD_SUCESS
     private static final java.lang.String MENUITEM_CACKE_KEY
@@ -233,6 +245,7 @@ com.wuxi.app.activity.MainIndexActivity:
     protected static final int UPDATE_APK
     protected static final int NO_UPDATE_APK
     public static final int DOWLOAD_ERROR
+    489:514:private int getGridViewHeight(android.widget.GridView)
 com.wuxi.app.activity.commactivity.ContentDetailActivity:
     public static final java.lang.String CHANNEL_KEY
     public static final java.lang.String MENUITEM_KEY
@@ -255,6 +268,11 @@ com.wuxi.app.activity.homepage.fantasticwuxi.ChannelActivity:
     protected static final java.lang.String TAG
     public static final java.lang.String SHOWCHANNEL_LAYOUT_INDEXKEY
     195:196:public void setMenuItem(com.wuxi.domain.MenuItem)
+com.wuxi.app.activity.homepage.goverpublicmsg.GPMApplyActivity:
+    private static final int FRAGMENT_ID
+    private com.wuxi.domain.ApplyDept applyDept
+    57:57:public com.wuxi.domain.ApplyDept getApplyDept()
+    66:67:public void setApplyDept(com.wuxi.domain.ApplyDept)
 com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity:
     private static final long serialVersionUID
 com.wuxi.app.activity.homepage.goversaloon.GoverSaloonActivity:
@@ -331,8 +349,12 @@ com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumContentActivity:
     68:69:public void setForum(com.wuxi.domain.ForumWrapper$Forum)
 com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345AllMailContentActivity:
     private static final java.lang.String TAG
-    private static final int DATA__LOAD_SUCESS
+    private static final int DATA_LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
+com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPSuggestSurveyDetailActivity:
+    898:934:public java.lang.String HttpConnGet(java.lang.String)
+com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPSuggestSurveyDetailActivity$SubmitData:
+    674:674:public java.lang.String getResults()
 com.wuxi.app.activity.homepage.mygoverinteractpeople.HotReviewContentActivity:
     78:79:public void setHotReview(com.wuxi.domain.HotReviewWrapper$HotReview)
 com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity:
@@ -353,7 +375,7 @@ com.wuxi.app.activity.search.AdvancedSearchResultListActivity:
     protected static final int RESULTS_LOAD_SUCESS
     protected static final int RESULTS_LOAD_FAIL
     protected static final int PAGE_COUNT
-    77:78:public void setSearchUtil(com.wuxi.domain.AdvancedSearchUtil)
+    76:77:public void setSearchUtil(com.wuxi.domain.AdvancedSearchUtil)
 com.wuxi.app.activity.search.MainSearchActivity:
     protected static final int RESULTS_LOAD_SUCESS
     protected static final int RESULTS_LOAD_FAIL
@@ -363,14 +385,20 @@ com.wuxi.app.adapter.AnswerStatisticsListAdapter:
     67:68:public void setLetters(java.util.List)
 com.wuxi.app.adapter.BasicAdapter:
     44:44:protected java.lang.String[] getDataName()
-com.wuxi.app.adapter.ContentChannelAdapter:
-    28:31:public ContentChannelAdapter(java.util.List,android.content.Context)
+com.wuxi.app.adapter.CityGoverInfoContentListAdapter:
+    private static final java.lang.String DATA_STYLE
+com.wuxi.app.adapter.ContentChannelAdapter
+com.wuxi.app.adapter.ContentChannelAdapter$ViewHolder
 com.wuxi.app.adapter.ContentListAdapter$ViewHolder:
     android.widget.TextView title_time
 com.wuxi.app.adapter.ContentNavigatorAdapter:
     30:30:public int getSelectedPosition()
 com.wuxi.app.adapter.DynamicTitleAdapter
 com.wuxi.app.adapter.DynamicTitleAdapter$ViewHolder
+com.wuxi.app.adapter.GovernmentGeneralizeAdapter:
+    private static final java.lang.String DATA_STYLE
+    47:48:public void setContents(java.util.List)
+    146:147:public void addItem(com.wuxi.domain.Content)
 com.wuxi.app.adapter.IndexNewsListAdapter$ViewHolder:
     public android.widget.ImageView image
 com.wuxi.app.adapter.LeftMenuAdapter:
@@ -379,6 +407,11 @@ com.wuxi.app.adapter.LeftMenuAdapter$ViewHolder:
     public android.widget.ImageView iv_select_logo
 com.wuxi.app.adapter.MayorLettersListAdapter:
     51:51:public java.util.List getLetters()
+com.wuxi.app.adapter.MyJoinTopicAdapter:
+    38:42:public void clear()
+com.wuxi.app.adapter.PolicieRegulationAdapter:
+    private static final java.lang.String DATA_STYLE
+    166:167:public void addItem(com.wuxi.domain.Content)
 com.wuxi.app.adapter.SearchResultListAdapter
 com.wuxi.app.adapter.SearchSpinnerAdapter
 com.wuxi.app.adapter.SimpleListViewFragmentAdapter
@@ -401,10 +434,8 @@ com.wuxi.app.engine.HotReviewService:
 com.wuxi.app.engine.KindTypeService:
     83:120:public java.util.List getKindtypesByType2(java.lang.String)
 com.wuxi.app.engine.MenuService:
-    55:55:public java.util.List getHomeMenuItems(java.lang.String)
+    54:54:public java.util.List getHomeMenuItems(java.lang.String)
 com.wuxi.app.engine.PepoleCollectService
-com.wuxi.app.engine.PoliticsService:
-    36:38:public com.wuxi.domain.PoliticsWrapper getMyPoliticsWrapper(java.lang.String,java.lang.String,int,int,int)
 com.wuxi.app.engine.Service:
     protected static final int TIME_OUT
 com.wuxi.app.engine.TestAnnouncementsService
@@ -437,13 +468,7 @@ com.wuxi.app.fragment.commonfragment.ContentListFragment:
     protected static final int CONTENT_LOAD_SUCCESS
     protected static final int CONTENT_LOAD_FAIL
     private static final int PAGE_SIZE
-    266:270:public void changeChannelOrMenItem(com.wuxi.domain.Channel,com.wuxi.domain.MenuItem)
-com.wuxi.app.fragment.commonfragment.FifterContentListFragment:
-    protected static final int CONTENT_LOAD_SUCCESS
-    protected static final int CONTENT_LOAD_FAIL
-    private static final int PAGE_SIZE
-    291:292:public void setChannel(com.wuxi.domain.Channel)
-    309:313:public void changeChannelOrMenItem(com.wuxi.domain.Channel,com.wuxi.domain.MenuItem)
+    263:267:public void changeChannelOrMenItem(com.wuxi.domain.Channel,com.wuxi.domain.MenuItem)
 com.wuxi.app.fragment.commonfragment.MenuItemNavigatorWithContentFragment:
     private static final int DETAIL_ID
     protected static final int LEFT_CHANNEL_DATA__LOAD_SUCCESS
@@ -456,8 +481,8 @@ com.wuxi.app.fragment.commonfragment.NavigatorWithContentFragment:
     protected static final int LEFT_DATA__LOAD_ERROR
     public static final int DATA_TPYE_MENUITEM
     public static final int DATA_TYPE_CHANNEL
-    278:279:public void setParentMenuItem(com.wuxi.domain.MenuItem)
-    282:283:public void setDataType(int)
+    277:278:public void setParentMenuItem(com.wuxi.domain.MenuItem)
+    281:282:public void setDataType(int)
 com.wuxi.app.fragment.commonfragment.PagingLoadListFragment:
     protected static final int FRAMELAYOUT_ID
     protected static final int LIST_LOAD_SUCCESS
@@ -465,10 +490,10 @@ com.wuxi.app.fragment.commonfragment.PagingLoadListFragment:
     private static final int PAGE_SIZE
     protected com.wuxi.domain.MenuItem parentItem
     protected com.wuxi.domain.Channel channel
-    167:172:public void loadMore(android.view.View)
-    197:198:public void setParentItem(com.wuxi.domain.MenuItem)
-    203:204:public void setChannel(com.wuxi.domain.Channel)
-    307:311:public void changeChannelOrMenItem(com.wuxi.domain.Channel,com.wuxi.domain.MenuItem)
+    166:171:public void loadMore(android.view.View)
+    196:197:public void setParentItem(com.wuxi.domain.MenuItem)
+    202:203:public void setChannel(com.wuxi.domain.Channel)
+    306:310:public void changeChannelOrMenItem(com.wuxi.domain.Channel,com.wuxi.domain.MenuItem)
 com.wuxi.app.fragment.commonfragment.SimpleListViewFragment
 com.wuxi.app.fragment.homepage.fantasticwuxi.CityMapFragment:
     private static final java.lang.String KEY
@@ -482,23 +507,21 @@ com.wuxi.app.fragment.homepage.fantasticwuxi.WuxiChannelContentFragment:
     protected static final int CHANNEL_LOAD_FAIL
     protected static final int COTENT_LOAD_SUCCESS
     protected static final int COTENT_LOAD_FAIL
-    370:370:public com.wuxi.domain.Channel getChannel()
-com.wuxi.app.fragment.homepage.goverpublicmsg.ExpandListItemContentFragment
-com.wuxi.app.fragment.homepage.goverpublicmsg.ExpandListItemContentFragment$1
-com.wuxi.app.fragment.homepage.goverpublicmsg.ExpandListItemContentFragment$2
-com.wuxi.app.fragment.homepage.goverpublicmsg.ExpandListItemContentFragment$ChannelListAdapter
-com.wuxi.app.fragment.homepage.goverpublicmsg.ExpandListItemContentFragment$ChannelListAdapter$1
-com.wuxi.app.fragment.homepage.goverpublicmsg.ExpandListItemContentFragment$ChannelListAdapter$ViewHolder
-com.wuxi.app.fragment.homepage.goverpublicmsg.GPMAdministrativeFragment:
-    private static final int DATA_LOAD_SUCESS
-    private static final int DATA_LOAD_ERROR
-    protected static final int LOAD_DEPT_SUCCESS
-    protected static final int LOAD_DEPT_FAIL
-    private static final int PAGE_NUM
+    381:381:public com.wuxi.domain.Channel getChannel()
+com.wuxi.app.fragment.homepage.goverpublicmsg.GPMPolicieRegulationFragment
+com.wuxi.app.fragment.homepage.goverpublicmsg.GPMPolicieRegulationFragment$1
+com.wuxi.app.fragment.homepage.goverpublicmsg.GPMPolicieRegulationFragment$2
+com.wuxi.app.fragment.homepage.goverpublicmsg.GPMPolicieRegulationFragment$3
+com.wuxi.app.fragment.homepage.goverpublicmsg.GPMPolicieRegulationFragment$4
+com.wuxi.app.fragment.homepage.goverpublicmsg.GPMPolicieRegulationFragment$5
+com.wuxi.app.fragment.homepage.goverpublicmsg.GPMPolicieRegulationSearchFragment
+com.wuxi.app.fragment.homepage.goverpublicmsg.GPMPolicieRegulationSearchFragment$1
+com.wuxi.app.fragment.homepage.goverpublicmsg.GPMPolicieRegulationSearchFragment$2
 com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyCitizenTableFragment:
     private static final int SUBMIT_SUCCESS
     private static final int SUBMIT_FAILED
-    private java.util.List depts
+    private com.wuxi.domain.ApplyDept applyDept
+    104:105:public void setDept(com.wuxi.domain.ApplyDept)
 com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyDownloadFragment:
     private static final int LOAD_GOVER_SUCCESS
     private static final int LOAD_DEPT_SUCCESS
@@ -511,48 +534,56 @@ com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyLePersonTableFragment
     private static final int SUBMIT_SUCCESS
     private static final int SUBMIT_FAILED
     private java.util.List depts
-com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyTableFragment:
-    private android.widget.RadioButton citizen_btn
-    private android.widget.RadioButton legalPerson_btn
-    private static final int TALBE_CONTENT_ID
-com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgCustomContentDetailFragment:
-    protected static final int CHANNEL_LOAD_SUCESS
-    protected static final int CHANNEL_LOAD_FAIL
-    private static final int CONTENT_LIST_ID
-    73:73:public com.wuxi.domain.MenuItem getParentMenuItem()
-    81:81:public com.wuxi.domain.Channel getParentChannel()
+    private com.wuxi.domain.ApplyDept applyDept
+    108:109:public void setDept(com.wuxi.domain.ApplyDept)
+    662:673:private boolean isPostcode(java.lang.String)
+com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgApplyTableFragment
+com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgCustomContentListFragment
 com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgInterMailStatisticsFragment:
     private static final int LETTERSTATISTICS_LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
 com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgSearchContentListFragment:
-    protected static final int CHANNELLIST_CONTENT_ID
     private static final int LOAD_DEPT_SUCCESS
     private static final int LOAD_DEPT_FAILED
     private static final int LOAD_YEAR_SUCCESS
     private static final int LOAD_YEAR_FAILED
-    private static final int LOAD_CONTENTLIST_SUCCESS
-    private static final int LOAD_CONTENTLIST_FAILED
+    private static final int CONTENT_LOAD_SUCCESS
+    private static final int CONTENT_LOAD_FAIL
+    private static final int INFO_LOAD_SUCCESS
+    private static final int INFO_LOAD_FAIL
+    private static final int PAGE_SIZE
     public static final int DEPT_TYPE
     public static final int ZONE_TYPE
-com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgSubChannelsSearchFragment:
-    protected static final int SUBCHANNELS_LOAD_SUCESS
-    protected static final int SUBCHANNELS_LOAD_FAIL
-    private static final int CONTENT_LIST_ID
-    71:72:public void setFifterType(int)
-    75:75:public com.wuxi.domain.Channel getParentChannel()
+    314:318:public void changeChannelOrMenItem(com.wuxi.domain.Channel,com.wuxi.domain.MenuItem)
+com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgSubChannelsSearchFragment
+com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgSubChannelsSearchFragment$1
+com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgSubChannelsSearchFragment$2
+com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgSubChannelsSearchFragment$3
+com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgSubChannelsSearchFragment$ChannelGridViewAdaptger
+com.wuxi.app.fragment.homepage.goverpublicmsg.GoverMsgSubChannelsSearchFragment$ChannelGridViewAdaptger$ViewHolder
 com.wuxi.app.fragment.homepage.goverpublicmsg.MunicipalGovInfoPublicDirecFragment
 com.wuxi.app.fragment.homepage.goverpublicmsg.NavigatorContentExpandListFragment:
+    private static final int LOAD_DEPT_SUCCESS
+    private static final int LOAD_DEPT_FAILED
     private static final int MENUITEM_DATA_LOAD_SUCESS
     private static final int CHANNEL_DATA_LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
     private static final int LOAD_CHANNEL_DATA
-    protected static final int CHANNELCONTENT_ID
+    private static final int CHANNEL_LOAD_SUCESS
+    private static final int CHANNEL_LOAD_FAIL
+    private static final int DATA_LOAD_SUCESS
+    private static final int XINGZHENG_LOAD_SUCESS
+    private static final int XINGZHENG_LOAD_ERROR
+    private static final int PAGE_NUM
+    private static final int XZ_SEARCH_DEPT_SUCESS
+    private static final int XZ_SEARCH_DEPT_FAILED
 com.wuxi.app.fragment.homepage.goverpublicmsg.WorkSuggestionBoxFragment:
     private static final int DATA_LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
     private static final int DATA_SUBMIT_SUCCESS
     private static final int DATA_SUBMIT_FAILED
-    protected static final int CHANNELCONTENT_ID
+    private static final int CHANNELCONTENT_ID
+    388:406:private static boolean isPhoneNumberValid(java.lang.String)
 com.wuxi.app.fragment.homepage.goversaloon.AdministrativeItemFragment:
     protected static final int TITLE_ITEM_LOADSUCCESS
     protected static final int TITLE_ITEM_LOADFAIL
@@ -630,7 +661,7 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.ForumOrdinaryReplayFragment
     private static final int DATA_LOAD_ERROR
     private static final int PAGE_NUM
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFragment:
-    protected static final java.lang.String TAG
+    private static final java.lang.String TAG
     private static final int ALLCOUNT_LOAD_SUCESS
     private static final int LETTERSTATISTICS_LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
@@ -640,6 +671,9 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345AnswerStatisticsFra
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment:
     private static final java.lang.String TAG
     private static final int HIDEN_CONTENT_ID
+    private static final int LETTER_LOAD_SUCESS
+    private static final int LETTER_LOAD_ERROR
+    private static final int PAGE_NUM
     private static final int ALLCOUNT_LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
     private static final int LOAD_DEPT_SUCCESS
@@ -648,18 +682,13 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintFragment:
     private static final int LOAD_CONTENT_TYPE_FAILED
     private static final int LOAD_MAIL_TYPE_SUCCESS
     private static final int LOAD_MAIL_TYPE_FAILED
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345ComplaintListFragment:
-    protected static final java.lang.String TAG
-    private static final int DATA__LOAD_SUCESS
-    private static final int DATA_LOAD_ERROR
-    private static final int PAGE_NUM
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345HotMailFragment:
-    protected static final java.lang.String TAG
+    private static final java.lang.String TAG
     private static final int DATA__LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
     private static final int PAGE_NUM
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailFragment:
-    protected static final int HIDEN_CONTENT_ID
+    private static final int HIDEN_CONTENT_ID
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345IWantMailLayoutFragment:
     private static final java.lang.String TAG
     private static final int SEND_SUCCESS
@@ -689,36 +718,62 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMaiBoxFragment
     private static final int LETTER_LOAD_SUCESS
     private static final int LETTER_LOAD_ERROR
     private static final int PAGE_NUM
-    673:678:public void loadMoreData(android.view.View)
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345MayorMailListFragment:
-    protected static final java.lang.String TAG
-    private static final int DATA__LOAD_SUCESS
-    private static final int DATA_LOAD_ERROR
-    private static final int PAGE_NUM
-    207:212:public void loadMoreData(android.view.View)
+    723:728:public void loadMoreData(android.view.View)
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIP12345PartLeaderMailboxFragment:
+    private static final java.lang.String TAG
     private static final int HIDEN_CONTENT_ID
+    private static final int DATA_LOAD_SUCESS
+    private static final int DATA_LOAD_ERROR
+    private static final int LOAD_DEPT_SUCCESS
+    private static final int LOAD_DEPT_FAILED
+    private static final int LOAD_CONTENT_TYPE_SUCCESS
+    private static final int LOAD_CONTENT_TYPE_FAILED
+    private static final int LOAD_MAIL_TYPE_SUCCESS
+    private static final int LOAD_MAIL_TYPE_FAILED
+    private static final int ALLCOUNT_LOAD_SUCESS
+    private static final int ALLCOUNT_LOAD_ERROR
+    private static final int LETTER_LOAD_SUCESS
+    private static final int LETTER_LOAD_ERROR
+    private static final int PAGE_NUM
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPContentFragment:
     private static final long serialVersionUID
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMine12345Fragment:
-    protected static final java.lang.String TAG
-    private static final int DATA__LOAD_SUCESS
-    private static final int DATA_LOAD_ERROR
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineInfoPublicPlatformFragment:
-    private static final long serialVersionUID
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineInternetGoverSaloonFragment:
-    private static final long serialVersionUID
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMinePublicForumFragment:
-    private static final long serialVersionUID
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineSuggestionPlatformFragment:
-    private static final long serialVersionUID
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment:
-    protected static final java.lang.String TAG
+    private static final java.lang.String TAG
     private static final int DATA_LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
+    private static final int START
+    private static final int PAGE_NUM
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineInfoPublicPlatformFragment:
+    private static final java.lang.String TAG
+    private static final int APPLY_LOAD_SUCESS
+    private static final int APPLY_LOAD_ERROR
+    private static final int START
+    private static final int PAGE_NUM
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineInternetGoverSaloonFragment:
+    private static final int PAGE_SIZE
+    protected static final int MYCONSULT_LOADSUCCESS
+    protected static final int MYCONSULT_LOADFAIL
+    protected static final int MYAPP_LOADSUCCESS
+    protected static final int MYAPP_LOADFAIL
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMinePublicForumFragment:
+    private android.widget.RadioButton mRadioButton_collectTheme
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPMineSuggestionPlatformFragment:
+    private static final java.lang.String TAG
+    private static final int SURVEY_LOAD_SUCESS
+    private static final int SURVEY_LOAD_ERROR
+    private static final int LAW_LOAD_SUCESS
+    private static final int LAW_LOAD_ERROR
+    private static final int START
+    private static final int PAGE_NUM
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestLawSuggestionFragment:
+    private static final java.lang.String TAG
+    private static final int DATA_LOAD_SUCESS
+    private static final int DATA_LOAD_ERROR
+    private static final int POLITICS_TYPE
+    private static final int START
     private static final int PAGE_NUM
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillFragment:
-    protected static final java.lang.String TAG
+    private static final java.lang.String TAG
     private static final int FRAGMENT_ID
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillListFragment:
     private static final java.lang.String TAG
@@ -726,29 +781,28 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestPeopleWillListFra
     private static final int DATA_LOAD_ERROR
     private static final int PAGE_NUM
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyFragment:
-    protected static final java.lang.String TAG
+    private static final java.lang.String TAG
     private static final int FRAGMENT_ID
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GIPSuggestSurveyListFragment:
     private static final java.lang.String TAG
     private static final int DATA__LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
     private static final int PAGE_NUM
-    256:261:public void loadMoreData(android.view.View)
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeople12345Fragment
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewFragment:
-    protected static final java.lang.String TAG
+    private static final java.lang.String TAG
     private static final int FRAGMENT_ID
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleHotReviewListFragment:
     private static final java.lang.String TAG
-    private static final int DATA__LOAD_SUCESS
+    private static final int DATA_LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
     private static final int PAGE_NUM
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleOpenTelFragment:
-    protected static final java.lang.String TAG
+    private static final java.lang.String TAG
     private static final int DATA__LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicForumFragment:
-    protected static final java.lang.String TAG
+    private static final java.lang.String TAG
     private static final int DATA__LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
     private static final int PAGE_NUM
@@ -760,16 +814,23 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeoplePublicSuper
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleSuggestFragment:
     private static final long serialVersionUID
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleVideoLiveHomeFragment:
-    protected static final int HOME_CONTENT_ID
+    private static final java.lang.String TAG
+    private static final int MESSAGE_LOAD_SUCESS
+    private static final int MESSAGE_LOAD_ERROR
+    private static final int START
+    private static final int MESSAGE_PAGE_NUM
+    private static final int DATA_LOAD_SUCESS
+    private static final int DATA_LOAD_ERROR
+    private static final int PAGE_NUM
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverInterPeopleWeibosFragment
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment:
     private static final long serialVersionUID
-    protected com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment titleFragment
+    private com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment titleFragment
     private static final int MENUITEM_TITLEDATA__LOAD_SUCESS
     private static final int CHANNEL_TITLEDATA__LOAD_SUCESS
     private static final int TITLEDATA_LOAD_ERROR
-    protected static final int RIGHT_CONTENT_ID
-    70:71:public void setTitleFragment(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment)
+    private static final int RIGHT_CONTENT_ID
+    69:70:public void setTitleFragment(com.wuxi.app.fragment.homepage.mygoverinteractpeople.GoverMenuItemTitleFragment)
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.HotReviewInfoFragment:
     private static final java.lang.String TAG
     private static final int DATA__LOAD_SUCESS
@@ -788,50 +849,17 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.LegidlstionReplyFragment:
     private static final int DATA__LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
     private static final int PAGE_NUM
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.LiveHomeLeaveMessageFragment:
-    protected static final java.lang.String TAG
-    private static final int DATA__LOAD_SUCESS
-    private static final int DATA_LOAD_ERROR
-    private static final int PAGE_NUM
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.LiveHomeMemoirFragment:
-    protected static final java.lang.String TAG
-    private static final int DATA__LOAD_SUCESS
-    private static final int DATA_LOAD_ERROR
-    private static final int PAGE_NUM
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.MyGoverInterPeopleContentFragment:
-    private static final int CONTENT_MAIN_ID
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.PartLeaderBoxListFragment:
-    protected static final java.lang.String TAG
-    private static final int HIDEN_CONTENT_ID
-    private static final int DATA__LOAD_SUCESS
-    private static final int DATA_LOAD_ERROR
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.PartLeaderMailFragment:
-    private static final java.lang.String TAG
-    private static final int HIDEN_CONTENT_ID
-    private static final int ALLCOUNT_LOAD_SUCESS
-    private static final int DATA_LOAD_ERROR
-    private static final int LOAD_DEPT_SUCCESS
-    private static final int LOAD_DEPT_FAILED
-    private static final int LOAD_CONTENT_TYPE_SUCCESS
-    private static final int LOAD_CONTENT_TYPE_FAILED
-    private static final int LOAD_MAIL_TYPE_SUCCESS
-    private static final int LOAD_MAIL_TYPE_FAILED
-com.wuxi.app.fragment.homepage.mygoverinteractpeople.PartLeaderMailListFragment:
-    protected static final java.lang.String TAG
-    private static final int DATA__LOAD_SUCESS
-    private static final int DATA_LOAD_ERROR
-    private static final int PAGE_NUM
-    283:288:public void loadMoreData(android.view.View)
+com.wuxi.app.fragment.homepage.mygoverinteractpeople.MyGoverInterPeopleContentFragment
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.PepoleIdeaCollectContentFragment
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.PepoleIdeaCollectContentFragment$1
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.PepoleIdeaCollectContentFragment$2
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.VedioReviewFragment:
-    protected static final java.lang.String TAG
+    private static final java.lang.String TAG
     private static final int DATA_LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
     private static final int PAGE_NUM
-    protected static final int LOAD_VIEDO_URL_SUCCESS
-    protected static final int LOAD_VIEDO_URL_FAIL
+    private static final int LOAD_VIEDO_URL_SUCCESS
+    private static final int LOAD_VIEDO_URL_FAIL
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.VideoDailyRoutineFragment:
     private static final java.lang.String TAG
     private static final int START
@@ -845,7 +873,7 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.VideoGuestPresenceFragment:
     private static final int DATA_LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.VideoProgramIntroducedFragment:
-    protected static final java.lang.String TAG
+    private static final java.lang.String TAG
     private static final int DATA_LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
 com.wuxi.app.fragment.homepage.mygoverinteractpeople.VideoRelatedDataFragment:
@@ -854,25 +882,20 @@ com.wuxi.app.fragment.homepage.mygoverinteractpeople.VideoRelatedDataFragment:
     private static final int PAGE_NUM
     private static final int DATA_LOAD_SUCESS
     private static final int DATA_LOAD_ERROR
-com.wuxi.app.fragment.homepage.publicservice.PublicServiceChannelContentDetailFragment:
-    private static final int CONTENT_LIST_ID
-    protected static final int LOAD_CHANNEL_SUCCESS
-    protected static final int LOAD_CHANNEL_FAIL
 com.wuxi.app.fragment.homepage.publicservice.PublicServiceChannelContentFragment:
     protected static final int CHANNEL_LOAD_SUCESS
     protected static final int CHANNEL_LOAD_FAIL
-    protected static final int CHANNELCONTENT_ID
-    142:142:public com.wuxi.domain.Channel getChannel()
+    protected static final int LOAD_CHANNEL_SUCCESS
+    protected static final int LOAD_CHANNEL_FAIL
+    259:259:public com.wuxi.domain.Channel getChannel()
 com.wuxi.app.fragment.index.InitializContentLayout:
     30:30:public InitializContentLayout()
     176:181:public static void initChannelContentLayout(com.wuxi.domain.Channel)
 com.wuxi.app.listeners.GoverMsgInitInfoOpenListener:
-    10:10:public GoverMsgInitInfoOpenListener()
+    11:11:public GoverMsgInitInfoOpenListener()
 com.wuxi.app.listeners.GoverMsgInitLayoutImpl
 com.wuxi.app.net.HttpUtils:
     107:121:public java.io.InputStream executePost(java.lang.String,java.util.List,int,java.lang.String)
-    126:139:public java.lang.String executePostTostring(java.lang.String,java.util.List,int)
-    161:196:public java.lang.String readLine(java.io.InputStream)
     217:217:private java.lang.Object readResolve()
     221:240:public java.lang.String postData(java.lang.String,java.util.List)
 com.wuxi.app.net.NetworkUtil:
@@ -889,12 +912,15 @@ com.wuxi.app.util.Constants:
     11:11:public Constants()
 com.wuxi.app.util.Constants$APPFiles:
     public static final java.lang.String GOVERMSG_APPLYOPEN_TABLENAME
-    518:518:public Constants$APPFiles()
+    554:554:public Constants$APPFiles()
 com.wuxi.app.util.Constants$CacheKey
 com.wuxi.app.util.Constants$CheckPositionKey
 com.wuxi.app.util.Constants$ExceptionMessage
 com.wuxi.app.util.Constants$SharepreferenceKey
 com.wuxi.app.util.Constants$Urls
+com.wuxi.app.util.DisplayUtil:
+    5:5:public DisplayUtil()
+    26:27:public static int px2dip(android.content.Context,float)
 com.wuxi.app.util.GIPRadioButtonStyleChange:
     35:36:public void setSelectedDrawable(int)
     39:40:public void setNoSelectedDrawable(int)
@@ -913,13 +939,13 @@ com.wuxi.app.util.MD5Encoder:
     11:11:public MD5Encoder()
     50:62:public static java.lang.String getLoginPWDMD5(java.lang.String,java.lang.String)
 com.wuxi.app.util.MenuItemChanelUtil:
-    private static final java.lang.String TAG
     19:19:public MenuItemChanelUtil()
 com.wuxi.app.util.MenuItemChannelIndexUtil:
-    82:82:public boolean containsKey(java.lang.String)
+    81:81:public boolean containsKey(java.lang.String)
 com.wuxi.app.util.PicUtil:
     private static final java.lang.String TAG
-    31:31:public PicUtil()
+    32:32:public PicUtil()
+com.wuxi.app.util.Player
 com.wuxi.app.util.StreamTool
 com.wuxi.app.util.SystemUtil:
     public static com.wuxi.app.util.SystemUtil systemUtil
@@ -940,8 +966,8 @@ com.wuxi.app.view.ContentListView:
     protected static final int CONTENT_LOAD_FAIL
     private static final int PAGE_SIZE
     protected android.view.View view
-    246:247:public void setParentItem(com.wuxi.domain.MenuItem)
-    250:251:public void setChannel(com.wuxi.domain.Channel)
+    249:250:public void setParentItem(com.wuxi.domain.MenuItem)
+    253:254:public void setChannel(com.wuxi.domain.Channel)
 com.wuxi.app.view.DynamicTitleLayout:
     private static final int PERSCREEN_ITEM_COUNT
     private int mCurScreen
@@ -979,11 +1005,11 @@ com.wuxi.app.view.SlideMenuLayout:
     private float mDownMotionX
     private float mDownMotionY
     private android.view.GestureDetector mGestureDetector
-    111:113:public void setUnTouchableOffset(float,float)
-    116:118:public void setLeftMenuWidth(float)
-    121:123:public void setLeftMenuWidthPixels(int)
-    134:136:public void setRightMenuWidth(float)
-    139:141:public void setRightMenuWidthPixels(int)
+    108:110:public void setUnTouchableOffset(float,float)
+    113:115:public void setLeftMenuWidth(float)
+    118:120:public void setLeftMenuWidthPixels(int)
+    131:133:public void setRightMenuWidth(float)
+    136:138:public void setRightMenuWidthPixels(int)
 com.wuxi.app.view.SlipButton:
     39:41:public SlipButton(android.content.Context)
     49:58:public void setChecked(boolean)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/govermsg_custom_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,6 +7,7 @@
     android:orientation="vertical" >
 
     <FrameLayout
+        android:layout_alignParentTop="true"
         android:id="@+id/expand_channel_prog_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -29,6 +30,7 @@
     </FrameLayout>
 
     <LinearLayout
+        android:layout_below="@+id/expand_channel_prog_layout"
         android:id="@+id/gpm_detail_tv_title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,11 +54,14 @@
     </LinearLayout>
 
     <ImageView
+        android:layout_below="@+id/gpm_detail_tv_title_layout"
+        android:id="@+id/iv_dev"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#ffffff" />
 
     <LinearLayout
+        android:layout_below="@+id/iv_dev"
         android:id="@+id/gmp_search_layout"
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -96,6 +101,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_below="@+id/gmp_search_layout"
         android:id="@+id/gmp_xingzheng_search_layout"
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -138,14 +144,16 @@
         android:id="@+id/gmp_detail_progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+       android:layout_centerInParent="true"
         android:visibility="gone" />
 
     <ListView
+           android:layout_below="@+id/gmp_xingzheng_search_layout"
+        android:layout_above="@+id/gpm_detail_btn_packup"
         android:id="@+id/gpm_detail_listview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"
+      
         android:cacheColorHint="@android:color/transparent"
         android:divider="@android:color/white"
         android:dividerHeight="1dp"
@@ -153,10 +161,12 @@
     </ListView>
 
     <ListView
+           android:layout_below="@+id/gmp_xingzheng_search_layout"
+        android:layout_above="@+id/gpm_detail_btn_packup"
         android:id="@+id/gpm_detail_channel_listview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"
+        
         android:cacheColorHint="@android:color/transparent"
         android:divider="@android:color/white"
         android:dividerHeight="1dp"
@@ -164,10 +174,12 @@
     </ListView>
 
     <ListView
+        android:layout_below="@+id/gmp_xingzheng_search_layout"
+        android:layout_above="@+id/gpm_detail_btn_packup"
         android:id="@+id/gpm_detail_xingzheng_listview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"
+       
         android:cacheColorHint="@android:color/transparent"
         android:divider="@android:color/white"
         android:dividerHeight="1dp"
@@ -175,6 +187,7 @@
     </ListView>
 
     <Button
+        android:layout_alignParentBottom="true"
         android:id="@+id/gpm_detail_btn_packup"
         android:layout_width="match_parent"
         android:layout_height="50dip"
@@ -182,4 +195,4 @@
         android:text="收   起"
         android:visibility="gone" />
 
-</LinearLayout>
+</RelativeLayout>
