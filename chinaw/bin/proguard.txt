@@ -21,7 +21,7 @@
 # view AndroidManifest.xml #generated:76
 -keep class com.wuxi.app.activity.MainIndexActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:143
+# view AndroidManifest.xml #generated:144
 -keep class com.wuxi.app.activity.commactivity.ImageViewScaleActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:98
@@ -50,6 +50,9 @@
 
 # view AndroidManifest.xml #generated:114
 -keep class com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:116
+-keep class com.wuxi.app.activity.homepage.goverpublicmsg.PublicMsgTypeActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:86
 -keep class com.wuxi.app.activity.homepage.goversaloon.GoverSaloonActivity { <init>(...); }
@@ -105,31 +108,31 @@
 # view AndroidManifest.xml #generated:107
 -keep class com.wuxi.app.activity.homepage.more.SystemSetActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:125
+# view AndroidManifest.xml #generated:126
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumContentActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:126
+# view AndroidManifest.xml #generated:127
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.ForumPostActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:127
+# view AndroidManifest.xml #generated:128
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.GIP12345AllMailContentActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:128
+# view AndroidManifest.xml #generated:129
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPContentDetailWebActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:133
+# view AndroidManifest.xml #generated:134
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.GIPSuggestSurveyDetailActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:129
+# view AndroidManifest.xml #generated:130
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.HotReviewContentActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:130
+# view AndroidManifest.xml #generated:131
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.LegislationContentActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:132
+# view AndroidManifest.xml #generated:133
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.MainMineActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:131
+# view AndroidManifest.xml #generated:132
 -keep class com.wuxi.app.activity.homepage.mygoverinteractpeople.PepoleIdeaCollectActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:95
@@ -138,19 +141,19 @@
 # view AndroidManifest.xml #generated:96
 -keep class com.wuxi.app.activity.homepage.publicservice.PublicServiceContentDetailActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:118
+# view AndroidManifest.xml #generated:119
 -keep class com.wuxi.app.activity.search.AdvancedSearchActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:119
+# view AndroidManifest.xml #generated:120
 -keep class com.wuxi.app.activity.search.AdvancedSearchResultListActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:121
+# view AndroidManifest.xml #generated:122
 -keep class com.wuxi.app.activity.search.MainSearchActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:120
+# view AndroidManifest.xml #generated:121
 -keep class com.wuxi.app.activity.search.SearchResultDetailActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:134
+# view AndroidManifest.xml #generated:135
 -keep class com.wuxi.app.fragment.homepage.mygoverinteractpeople.PromoMoreVideoActivity { <init>(...); }
 
 # view res/layout/publicservice_channel_layout.xml #generated:132
@@ -191,7 +194,7 @@
 # view res/layout/title_scroll_action_layout.xml #generated:8
 -keep class com.wuxi.app.view.TitleScrollLayout { <init>(...); }
 
-# view AndroidManifest.xml #generated:135
+# view AndroidManifest.xml #generated:136
 -keep class io.vov.vitamio.activity.InitActivity { <init>(...); }
 
 # view res/layout/videobuffer.xml #generated:7

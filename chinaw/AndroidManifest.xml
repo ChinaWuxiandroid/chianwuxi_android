@@ -113,6 +113,7 @@
         <activity android:name="com.wuxi.app.activity.homepage.goverpublicmsg.GoverMsgContentDetailWebActivity" />
         <activity android:name="com.wuxi.app.activity.homepage.goverpublicmsg.PublicGoverMsgActivity" />
         <activity android:name="com.wuxi.app.activity.homepage.goverpublicmsg.GPMApplyActivity" />
+        <activity android:name="com.wuxi.app.activity.homepage.goverpublicmsg.PublicMsgTypeActivity" />
 
         <!-- 搜索 -->
         <activity android:name="com.wuxi.app.activity.search.AdvancedSearchActivity" />

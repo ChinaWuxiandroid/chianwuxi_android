@@ -311,7 +311,12 @@ public class Content implements Serializable {
 
 	public String getWapUrl() {
 		
-		return wapUrl+"?backurl=false&showtoolbar=false";
+		if(wapUrl.indexOf('?')!=-1){
+			return wapUrl+"&backurl=false&showtoolbar=false";	
+		}else{
+			return wapUrl+"?backurl=false&showtoolbar=false";	
+		}
+		
 	
 	}
 

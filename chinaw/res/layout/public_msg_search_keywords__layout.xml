@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_shape_bg"
+    android:orientation="vertical" >
+
+    <include 
+        android:id="@+id/header"
+        layout="@layout/child_fragment_itemcontent_header_layout" />
+    
+     <LinearLayout
+        android:id="@+id/ll_search_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        android:background="@android:color/black"
+        android:orientation="vertical"
+         >
+
+        <TextView
+            android:id="@+id/search_tv_range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查询范围:"
+            android:textColor="#ffffff" 
+            android:layout_marginTop="5dip"
+            />
+
+        <TextView
+            android:id="@+id/search_tv_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="搜索方式:"
+            android:layout_marginTop="5dip"
+            android:textColor="#ffffff" />
+        
+          <TextView
+            android:id="@+id/search_tv_keywords"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关键字:"
+            android:layout_marginTop="5dip"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+    <ListView
+        android:layout_below="@+id/ll_search_title"
+        android:id="@+id/public_type_search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@android:color/white"
+        android:dividerHeight="1dip" >
+    </ListView>
+
+    <ProgressBar
+        android:id="@+id/pb_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center" />
+
+</RelativeLayout>

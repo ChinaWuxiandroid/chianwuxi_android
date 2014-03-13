@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -50,6 +51,8 @@ import com.wuxi.app.adapter.DeptSpinnerAdapter;
 import com.wuxi.app.adapter.GovernmentGeneralizeAdapter;
 import com.wuxi.app.adapter.OpenInfoDeptAdapter;
 import com.wuxi.app.adapter.PolicieRegulationAdapter;
+import com.wuxi.app.dialog.PublisMsgKeyWordsDialog;
+import com.wuxi.app.dialog.PublisMsgTypeSearchDialog;
 import com.wuxi.app.engine.AdministrativeService;
 import com.wuxi.app.engine.ChannelService;
 import com.wuxi.app.engine.ContentService;
@@ -211,10 +214,17 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	// 加载更多
 
 	private int moreIndex = 10;
-	private boolean isFirstLoad = true;
+	private boolean isFisrtLoadM = true;
+	private boolean isLoadMore=false;
 	private ProgressBar morePrBar;
 	private Button mBLoadMore;
 	private View loadListViewMoreView;
+
+	
+	private LinearLayout ll_channel_search;
+	private TextView tv_type_search;//分类查询
+	private TextView tv_info_search;//信息检索
+	private String channelId;
 
 	/**
 	 * @return type
@@ -320,15 +330,55 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		mInflater = inflater;
 		context = getActivity();
 		initUI();
+		initChannelSearch();
 		initMenuFootView();
 		initSubLayoutUI();
 		initXingzhengLayout();
 		initSearchLayout();
 
-		// govermsg_detail_lv_channel.addFooterView(getFootListView());
-		// govermsg_detail_lv_channel.removeFooterView(loadListMoreView);
+	
 
 		return view;
+	}
+
+	/**
+	 * 
+	 初始化检索
+	 */
+	private void initChannelSearch() {
+		ll_channel_search=(LinearLayout) view.findViewById(R.id.ll_channel_search);
+		tv_type_search=(TextView) view.findViewById(R.id.tv_type_search);
+		tv_info_search=(TextView) view.findViewById(R.id.tv_info_search);
+		ll_channel_search.setVisibility(View.GONE);
+		
+		tv_type_search.setOnClickListener(new OnClickListener() {//分类查询
+			
+			@Override
+			public void onClick(View v) {
+			
+				
+				
+				
+				PublisMsgTypeSearchDialog publisMsgTypeSearchDialog=new PublisMsgTypeSearchDialog(context,channelId);
+				publisMsgTypeSearchDialog.show();
+				
+			}
+		});
+		
+		
+		tv_info_search.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+			
+				
+				PublisMsgKeyWordsDialog publisMsgKeyWordsDialog=new PublisMsgKeyWordsDialog(context,channelId);
+				
+				publisMsgKeyWordsDialog.show();
+				
+			}
+		});
+		
 	}
 
 	/**
@@ -357,8 +407,10 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 				Channel channel = null;
 				if (object instanceof MenuItem) {// 如果是频道
 					menuItem = (MenuItem) object;
+					channelId=menuItem.getChannelId();
 				} else if (object instanceof Channel) {
 					channel = (Channel) object;
+					channelId=channel.getChannelId();
 				}
 
 				if (menuItem != null) {
@@ -407,7 +459,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 					xingzhengsearchLayout.setVisibility(View.GONE);
 
 					isSwitchgg = true;
-					System.out.println("读取333333333");
+					
 					loadChannelData(0, PAGE_NUM);
 				}
 
@@ -448,6 +500,8 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 				if (contentWrapper.isNext()) {
 					mBLoadMore.setText("loading.....");
 					morePrBar.setVisibility(View.VISIBLE);
+					isFisrtLoadM=false;
+					isLoadMore=true;
 					loadMoreData();
 				}
 			}
@@ -1040,6 +1094,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 
 	private void showMenuContentData() {
 
+		ll_channel_search.setVisibility(View.VISIBLE);
 		contents = contentWrapper.getContents();
 		System.out.println("放入集合前的长度：" + contents.size());
 
@@ -1054,32 +1109,28 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 			subProgressBar.setVisibility(ProgressBar.GONE);
 		}
 
-		if (isFirstLoad) {
-			if (govermsg_detail_lv_channel.getFooterViewsCount() != 0) {
-				govermsg_detail_lv_channel
-						.removeFooterView(loadListViewMoreView);
-			}
-
-			isFirstLoad = false;
-			if (contentWrapper.isNext()) {
-
-				morePrBar.setVisibility(View.GONE);
-				mBLoadMore.setText("点击加载更多");
-				loadListViewMoreView.setVisibility(View.VISIBLE);
-				govermsg_detail_lv_channel.addFooterView(loadListViewMoreView);
-
-			}
-		}
+		govermsg_detail_lv_channel.addFooterView(loadListViewMoreView);
 
 		if (getType() == 3) {
 			if (generalizeAdapter == null) {
 				generalizeAdapter = new GovernmentGeneralizeAdapter(contents,
 						context);
 				govermsg_detail_lv_channel.setAdapter(generalizeAdapter);
-			} else {
+			} 
+			
+			if(isFisrtLoadM&&!isLoadMore){
 				generalizeAdapter.setContents(contents);
 			}
+			
+			if(!isFisrtLoadM&&isLoadMore){//加载更多
+				
+				for(Content content : contents){
+					generalizeAdapter.addItem(content);
+				}
+			}
+			
 			generalizeAdapter.notifyDataSetChanged();
+
 		} else if (getType() == 4) {
 			list.clear();
 			list.addAll(contents);
@@ -1088,26 +1139,33 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 				regulationAdapter = new PolicieRegulationAdapter(contents,
 						context);
 				govermsg_detail_lv_channel.setAdapter(regulationAdapter);
-			} else {
+			} 
+			
+			
+			if(isFisrtLoadM&&!isLoadMore){
 				regulationAdapter.setContents(contents);
-				regulationAdapter.notifyDataSetChanged();
+				
 			}
+			
+			if(!isFisrtLoadM&&isLoadMore){//加载更多
+				
+				for(Content content : list){
+					regulationAdapter.addItem(content);
+				}
+			}
+			
+			regulationAdapter.notifyDataSetChanged();
 			regulationAdapter.setMenuItem(getParentMenuItem());
 
 		}
 
-		if (!isFirstLoad) {
-			if (contentWrapper.isNext()) {
-				morePrBar.setVisibility(View.GONE);
-				mBLoadMore.setText("点击加载更多");
+		if (contentWrapper.isNext()) {
 
-			} else {
-				if (govermsg_detail_lv_channel.getFooterViewsCount() != 0) {
-					govermsg_detail_lv_channel
-							.removeFooterView(loadListViewMoreView);
-				}
+			morePrBar.setVisibility(View.GONE);
+			mBLoadMore.setText("点击加载更多");
 
-			}
+		} else {
+			govermsg_detail_lv_channel.removeFooterView(loadListViewMoreView);
 		}
 
 	}
@@ -1117,6 +1175,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	 * @描述： 显示子频道列表菜单
 	 */
 	private void showChannelContentData() {
+		ll_channel_search.setVisibility(View.VISIBLE);
 		contents = contentWrapper.getContents();
 		govermsg_detail_lv_channel.setVisibility(View.GONE);
 		packup_btn.setVisibility(View.VISIBLE);
@@ -1428,12 +1487,11 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 	 * @param endIndex
 	 */
 	private void loadMenuListData(final int startIndex, final int endIndex) {
-		// if (isFirstLoadgg || isSwitchgg) {
-		// subProgressBar.setVisibility(View.VISIBLE);
-		// } else {
-		// pb_loadmooregg.setVisibility(ProgressBar.VISIBLE);
-		// }
-
+		
+		if(isFisrtLoadM){
+			subProgressBar.setVisibility(View.VISIBLE);
+		}
+	
 		new Thread(new Runnable() {
 
 			@Override
@@ -1556,7 +1614,8 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 		switch (v.getId()) {
 		// 收起按钮事件监听
 		case R.id.gpm_detail_btn_packup:
-			isFirstLoad = true;
+			isFisrtLoadM = true;
+			isLoadMore=false;
 			moreIndex = 10;
 			listview.setVisibility(View.VISIBLE);
 			govermsg_detail_lv_channel.setVisibility(View.GONE);
@@ -1572,6 +1631,7 @@ public class NavigatorContentExpandListFragment extends BaseFragment implements
 			con.setId(null);
 			con.setYear(-1);
 			list.clear();
+			ll_channel_search.setVisibility(View.GONE);
 			break;
 
 		case R.id.loadMoreButton:

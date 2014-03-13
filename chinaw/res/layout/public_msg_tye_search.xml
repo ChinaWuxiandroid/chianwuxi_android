@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#2B2B2B"
+    android:orientation="vertical"
+    android:paddingBottom="10dip"
+    android:paddingTop="10dip" >
+
+    <LinearLayout
+        android:id="@+id/ll_searchType_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查询范围:"
+            android:textColor="#ffffff" />
+
+        <RadioGroup
+           android:id="@+id/rg_channeltype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dip"
+                android:background="#8E2B2B2B"
+                android:button="@null"
+                android:text="当前栏目"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:id="@+id/rb_current_chan"
+                 />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dip"
+                android:background="#8E2B2B2B"
+                android:button="@null"
+                android:text="信息公开目录"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:id="@+id/rb_public"
+                
+                 />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dip"
+                android:background="#8E2B2B2B"
+                android:button="@null"
+                android:text="政策法规"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:id="@+id/rb_zzfg"
+                 />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_searchType_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_searchType_title"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查询类别:"
+            android:textColor="#ffffff" />
+
+        <GridView
+            android:id="@+id/gv_type_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="2dip"
+            android:numColumns="5"
+            android:verticalSpacing="2dip" >
+        </GridView>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/type_btn_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_searchType_list"
+        android:layout_marginLeft="5dip"
+        android:background="@drawable/public_msg_type_btn_icon" />
+
+</RelativeLayout>

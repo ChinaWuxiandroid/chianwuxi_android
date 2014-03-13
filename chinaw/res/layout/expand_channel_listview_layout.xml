@@ -7,10 +7,10 @@
     android:orientation="vertical" >
 
     <FrameLayout
-        android:layout_alignParentTop="true"
         android:id="@+id/expand_channel_prog_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" >
 
         <ProgressBar
             android:id="@+id/expand_channel_progress"
@@ -30,10 +30,10 @@
     </FrameLayout>
 
     <LinearLayout
-        android:layout_below="@+id/expand_channel_prog_layout"
         android:id="@+id/gpm_detail_tv_title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/expand_channel_prog_layout"
         android:orientation="horizontal"
         android:padding="5dip"
         android:visibility="gone" >
@@ -53,18 +53,71 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <ImageView
+    <LinearLayout
+        android:id="@+id/ll_channel_search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/gpm_detail_tv_title_layout"
+        android:orientation="horizontal" >
+
+        <ImageView
+             android:layout_marginLeft="5dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/public_type_search_icon" />
+
+        <TextView
+            android:id="@+id/tv_type_search"
+            android:layout_marginLeft="5dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分类词查询"
+            android:textColor="#787878"
+             />
+        
+          <ImageView
+               android:layout_marginLeft="2dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/public_search_down_icon" 
+            android:layout_gravity="center_vertical"/>
+        
+          <ImageView
+               android:layout_marginLeft="2dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/public_info_search_icon" />
+
+        <TextView
+              android:id="@+id/tv_info_search"
+             android:layout_marginLeft="2dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="信息搜索"
+            android:textColor="#787878"
+             />
+        
+         <ImageView
+              android:layout_marginLeft="2dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/public_search_down_icon" 
+            android:layout_gravity="center_vertical"
+            />
+    </LinearLayout>
+
+    <ImageView
         android:id="@+id/iv_dev"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_below="@+id/ll_channel_search"
         android:background="#ffffff" />
 
     <LinearLayout
-        android:layout_below="@+id/iv_dev"
         android:id="@+id/gmp_search_layout"
         android:layout_width="match_parent"
         android:layout_height="35dp"
+        android:layout_below="@+id/iv_dev"
         android:layout_marginBottom="3dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -101,10 +154,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_below="@+id/gmp_search_layout"
         android:id="@+id/gmp_xingzheng_search_layout"
         android:layout_width="match_parent"
         android:layout_height="35dp"
+        android:layout_below="@+id/gmp_search_layout"
         android:layout_marginBottom="3dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -144,16 +197,15 @@
         android:id="@+id/gmp_detail_progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       android:layout_centerInParent="true"
+        android:layout_centerInParent="true"
         android:visibility="gone" />
 
     <ListView
-           android:layout_below="@+id/gmp_xingzheng_search_layout"
-        android:layout_above="@+id/gpm_detail_btn_packup"
         android:id="@+id/gpm_detail_listview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-      
+        android:layout_above="@+id/gpm_detail_btn_packup"
+        android:layout_below="@+id/gmp_xingzheng_search_layout"
         android:cacheColorHint="@android:color/transparent"
         android:divider="@android:color/white"
         android:dividerHeight="1dp"
@@ -161,12 +213,11 @@
     </ListView>
 
     <ListView
-           android:layout_below="@+id/gmp_xingzheng_search_layout"
-        android:layout_above="@+id/gpm_detail_btn_packup"
         android:id="@+id/gpm_detail_channel_listview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        
+        android:layout_above="@+id/gpm_detail_btn_packup"
+        android:layout_below="@+id/gmp_xingzheng_search_layout"
         android:cacheColorHint="@android:color/transparent"
         android:divider="@android:color/white"
         android:dividerHeight="1dp"
@@ -174,12 +225,11 @@
     </ListView>
 
     <ListView
-        android:layout_below="@+id/gmp_xingzheng_search_layout"
-        android:layout_above="@+id/gpm_detail_btn_packup"
         android:id="@+id/gpm_detail_xingzheng_listview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-       
+        android:layout_above="@+id/gpm_detail_btn_packup"
+        android:layout_below="@+id/gmp_xingzheng_search_layout"
         android:cacheColorHint="@android:color/transparent"
         android:divider="@android:color/white"
         android:dividerHeight="1dp"
@@ -187,10 +237,10 @@
     </ListView>
 
     <Button
-        android:layout_alignParentBottom="true"
         android:id="@+id/gpm_detail_btn_packup"
         android:layout_width="match_parent"
         android:layout_height="50dip"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/brown_button_sq"
         android:text="收   起"
         android:visibility="gone" />
